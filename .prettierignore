@@ -1,0 +1,12 @@
+# Prettier Ignore
+# https://prettier.io/docs/en/ignore.html
+
+!.storybook/
+
+.vercel/
+build/
+dist/
+packages/app/.next
+public/
+
+package-lock.json

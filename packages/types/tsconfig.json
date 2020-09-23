@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "isolatedModules": false,
+    "paths": {}
+  },
+  "extends": "../../tsconfig.json",
+  "include": [
+    "lib"
+  ]
+}

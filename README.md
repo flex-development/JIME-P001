@@ -2,6 +2,7 @@
 
 [Storybook][8] design system and Shopify storefront powered by [Next.js][4]
 
+[![Code Style: Google](https://img.shields.io/badge/code%20style-google-blueviolet.svg)](https://github.com/google/gts)
 [![emoji-log](https://cdn.rawgit.com/ahmadawais/stuff/ca97874/emoji-log/non-flat-round.svg)](https://github.com/ahmadawais/Emoji-Log/)
 [![TypeScript](https://badgen.net/badge/-/typescript?icon=typescript&label)](https://www.typescriptlang.org/)
 [![Storybook](https://cdn.jsdelivr.net/gh/storybookjs/brand@master/badge/badge-storybook.svg)](https://storybook.js.org/)
@@ -37,16 +38,19 @@ TODO: Update documentation
 
 ## Built With
 
-- [Cloud Firestore][1] - Scalable database for mobile, web, and server development
+- [Cloud Firestore][1] - Scalable database for mobile, web, and server
+  development
 - [Lerna][2] - Package management tool
 - [MusicKitJS][3] - Stream songs from Apple Music
 - [Next.js][4] - Framework for building React applications
 - [React][5] - JavaScript library for building user interfaces
-- [Shopify JavaScript Buy SDK][6] - JavaScript library for Shopify ecommerce functionality
+- [Shopify JavaScript Buy SDK][6] - JavaScript library for Shopify ecommerce
+  functionality
 - [Shopify API Node][7] - Official Shopify API bindings for Node.js
 - [Storybook][8] - UI development and documentation tool
 - [TypeScript][9] - JavaScript extension
-- [Vercel][10] - Hosting platform for static sites and [Serverless Functions][11]
+- [Vercel][10] - Hosting platform for static sites and [Serverless
+  Functions][11]
 
 [1]: https://firebase.google.com/docs/firestore
 [2]: https://lerna.js.org/

@@ -1,0 +1,68 @@
+{
+  "vsicons.associations.files": [
+    {
+      "extensions": [".sassrc.js", ".sassrc.json"],
+      "format": "svg",
+      "icon": "sass"
+    },
+    {
+      "extensions": ["jest.setup.js"],
+      "format": "svg",
+      "icon": "jest"
+    },
+    {
+      "extensions": ["stories.mdx"],
+      "format": "svg",
+      "icon": "storybook"
+    },
+    {
+      "extensions": ["vercel", "vercel.json", "vercelignore"],
+      "format": "svg",
+      "icon": "zeit"
+    }
+  ],
+  "vsicons.associations.folders": [
+    {
+      "extensions": ["block", "blocks"],
+      "format": "svg",
+      "icon": "bloc"
+    },
+    {
+      "extensions": [
+        "atoms",
+        "hoc",
+        "molecules",
+        "organisms",
+        "system",
+        "templates"
+      ],
+      "format": "svg",
+      "icon": "component"
+    },
+    {
+      "extensions": ["_config"],
+      "format": "svg",
+      "icon": "config"
+    },
+    {
+      "extensions": ["_database"],
+      "format": "svg",
+      "icon": "db"
+    },
+    {
+      "extensions": ["_middleware"],
+      "format": "svg",
+      "icon": "middleware"
+    },
+    {
+      "extensions": ["_modules"],
+      "format": "svg",
+      "icon": "module"
+    },
+    {
+      "extensions": ["_mixins", "_utils", "hooks", "mixins"],
+      "format": "svg",
+      "icon": "tools"
+    }
+  ]
+}

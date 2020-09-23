@@ -30,8 +30,7 @@ install Yarn, view the
 Copy the snippet below to get your development environment setup:
 
 ```zsh
-git clone https://github.com/flex-development/JIME-P001.git
-cd JIME-P001
+git clone https://github.com/flex-development/JIME-P001.git; cd JIME-P001
 yarn
 ```
 

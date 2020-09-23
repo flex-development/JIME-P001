@@ -1,0 +1,23 @@
+{
+  "command": {
+    "publish": {
+      "ignoreChanges": [
+        "*.md"
+      ],
+      "message": "🚀 RELEASE: (chore) publish",
+      "registry": "https://npm.pkg.github.com",
+      "allowBranch": "main"
+    }
+  },
+  "npmClient": "yarn",
+  "npmClientArgs": [
+    "--ignore-engines"
+  ],
+  "packages": [
+    "packages/*"
+  ],
+  "parallel": true,
+  "stream": true,
+  "useWorkspaces": true,
+  "version": "independent"
+}

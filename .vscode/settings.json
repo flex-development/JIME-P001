@@ -50,6 +50,13 @@
       "icon": "db"
     },
     {
+      "extensions": [
+        "_lib"
+      ],
+      "format": "svg",
+      "icon": "library"
+    },
+    {
       "extensions": ["_middleware"],
       "format": "svg",
       "icon": "middleware"
@@ -60,9 +67,16 @@
       "icon": "module"
     },
     {
-      "extensions": ["_mixins", "_utils", "hooks", "mixins"],
+      "extensions": ["_utils"],
       "format": "svg",
       "icon": "tools"
+    },
+    {
+      "extensions": [
+        "types"
+      ],
+      "format": "svg",
+      "icon": "typings"
     }
   ]
 }

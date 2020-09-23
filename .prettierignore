@@ -1,9 +1,10 @@
 # Prettier Ignore
-# https://prettier.io/docs/en/ignore.html
+# See: https://prettier.io/docs/en/ignore.html
 
 !.storybook/
 
 .vercel/
+.vscode/
 build/
 dist/
 packages/app/.next

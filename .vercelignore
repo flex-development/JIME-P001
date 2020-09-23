@@ -1,0 +1,15 @@
+# Directories and files to ignore when deploying
+
+# GitHub
+.github
+
+# Linting / formatting should be handled by GitHub Actions
+.eslintignore
+.eslintrc.json
+.prettierignore
+
+# Package distribution files
+README.md
+
+# Force Vercel to use Yarn
+package-lock.json

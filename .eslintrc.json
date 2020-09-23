@@ -2,15 +2,15 @@
   "env": {
     "browser": true,
     "es6": true,
-    "jest": false,
+    "jest": true,
     "jquery": true,
     "node": true
   },
   "extends": [
+    "nextjs",
     "plugin:@typescript-eslint/recommended",
     "plugin:jest/recommended",
-    "plugin:prettier/recommended",
-    "react-app"
+    "plugin:prettier/recommended"
   ],
   "globals": {},
   "parser": "@typescript-eslint/parser",
@@ -88,8 +88,12 @@
     ],
     "react/jsx-fragments": 0,
     "react/jsx-pascal-case": 0,
-    "react/prop-types": 0,
     "react-hooks/rules-of-hooks": 1,
+    "prettier/prettier": ["error",
+      {
+        "singleQuote": true
+      }
+    ],
     "space-before-function-paren": 0,
     "sort-keys": [
       1,

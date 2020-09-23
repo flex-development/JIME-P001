@@ -1,0 +1,69 @@
+{
+  "name": "@flex-development/jime-p001",
+  "description": "Storybook design system and Shopify storefront powered by Next.js for Morenas Kustomz.",
+  "keywords": [
+    "design system",
+    "lerna",
+    "musickitjs",
+    "nextjs",
+    "react",
+    "sass",
+    "shopify",
+    "shopify api node",
+    "shopify buy sdk",
+    "storybook",
+    "typescript",
+    "vercel"
+  ],
+  "homepage": "https://github.com/flex-development/JIME-P001",
+  "repository": "git://github.com/flex-development/JIME-P001.git",
+  "bugs": {
+    "url": "https://github.com/flex-development/JIME-P001/issues",
+    "email": "developers@flexdevelopment.llc"
+  },
+  "license": "UNLICENSED",
+  "author": {
+    "name": "Lexus Drumgold",
+    "email": "lex@flexdevlopment.llc",
+    "url": "https://flexdevelopment.llc"
+  },
+  "scripts": {
+    "prepare": "lerna run prepare",
+    "postinstall": "lerna bootstrap",
+    "clean": "lerna clean --yes && rm -rf yarn.lock node_modules/ && yarn",
+    "format": "prettier --write \"./\"",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
+    "dev:app": "lerna run dev --scope @flex-development/morenaskustomz",
+    "dev:ui": "lerna run dev --scope @flex-development/kustomz",
+    "start": "lerna run start"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@babel/plugin-proposal-decorators": "^7.10.5",
+    "@babel/plugin-proposal-export-default-from": "^7.10.4",
+    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.10.4",
+    "@babel/plugin-proposal-optional-chaining": "^7.11.0",
+    "@babel/plugin-proposal-throw-expressions": "^7.10.4",
+    "@types/jest": "^24.0.0",
+    "@typescript-eslint/eslint-plugin": "^3.7.1",
+    "@typescript-eslint/parser": "^3.1.0",
+    "eslint-loader": "^4.0.2",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-jest": "^23.19.0",
+    "eslint-plugin-jsx-a11y": "^6.3.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-react-hooks": "^4.0.8",
+    "lerna": "3.20.2",
+    "npm": "^6.14.7",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.0.5",
+    "regenerator-runtime": "^0.13.5",
+    "shx": "^0.3.2",
+    "typescript": "^4.0.3"
+  },
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ]
+}

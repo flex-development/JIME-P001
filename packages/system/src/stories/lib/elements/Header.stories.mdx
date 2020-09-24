@@ -1,0 +1,11 @@
+import {excludePropKeys} from '@kustomz-config'
+import {Footer, FooterProps} from '@kustomz'
+import {Description, Meta, Props} from '@storybook/addon-docs/blocks'
+
+<Meta title='Elements/Footer' component={Footer} />
+
+# Footer
+
+<Description markdown={Footer.__docgenInfo.description} />
+
+<Props exclude={excludePropKeys} of={Footer} />

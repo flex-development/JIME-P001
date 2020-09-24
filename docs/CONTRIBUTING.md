@@ -8,16 +8,21 @@ request.
 
 [Getting Started](#getting-started)  
 [Coding Guidelines](#coding-guidlines)  
+[Testing](#testing)  
 [Creating a Pull Request](#creating-a-pull-request)
 
 ## Getting Started
 
 ### Git Configuration
 
-Copy the [starter Git global configuration](.gitconfig) to keep inline with our
-coding guidelines, as well as begin extending your own Git workflow.
+Copy the [starter Git global configuration](.gitconfig) to stay inline with our
+coding guidelines, as well as begin extending your own workflow.
 
-**Note: The examples below will uses aliases from the starter config.**
+**Note**:
+
+- The examples below will uses aliases from the starter config
+- The examples below require you to
+  [install Git Flow](https://github.com/nvie/gitflow/wiki/Installation)
 
 ### Yarn
 
@@ -34,8 +39,8 @@ git clone https://github.com/flex-development/JIME-P001.git; cd JIME-P001
 yarn
 ```
 
-- `yarn dev:app`: Start Next.js app on port 3000
-- `yarn dev:ui`: Start Storyboook app on port 3000
+- `yarn dev:app`: Start Next.js app on port `3001`
+- `yarn dev:ui`: Start Storyboook app on port `3000`
 
 ## Coding Guidelines
 
@@ -122,6 +127,12 @@ For example:
 will create a new branch titled `feature/repo-setup` and tell Git to set up
 tracking information for the branch.
 
+## Testing
+
+This project uses [Jest](https://jestjs.io/) as its test runner.
+
+To run the tests in this project, run `lerna run test`.
+
 ## Creating a Pull Request
 
 If you need help, make note of any issues in their respective files. If
@@ -135,6 +146,6 @@ files for style errors.
 ### Submit for Review
 
 - Use [**this template**](./pull_request_template.md)
-- Label your pull request as `pull request` and `needs review`
-- Prefix your pull request title with `PR -`
+- Label your pull request appropriately
+- Prefix your pull request title with `[PR]`
 - Assign the task to yourself and the appropriate reviewer

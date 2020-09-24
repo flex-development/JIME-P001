@@ -1,0 +1,11 @@
+import {excludePropKeys} from '@kustomz-config'
+import {Spacer} from '@kustomz'
+import {Description, Meta, Props} from '@storybook/addon-docs/blocks'
+
+<Meta title='Elements/Spacer' component={Spacer} />
+
+# Spacer
+
+<Description markdown={Spacer.__docgenInfo.description} />
+
+<Props exclude={excludePropKeys} of={Spacer} />

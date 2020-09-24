@@ -1,0 +1,16 @@
+/// ----------------------------------------------------------------------------
+/// @group elements-option
+/// ----------------------------------------------------------------------------
+
+option {
+  @include event {
+    background-color: $secondary;
+  }
+
+  @include padding-x($form-select-padding-x);
+
+  @include padding-y($form-select-padding-y);
+
+  background-color: $form-select-bg;
+  color: $form-select-color;
+}

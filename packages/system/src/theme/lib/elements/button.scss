@@ -1,0 +1,22 @@
+/// ----------------------------------------------------------------------------
+/// @group elements-button
+/// @link http://css-tricks.com/slightly-careful-sub-elements-clickable-things/
+/// ----------------------------------------------------------------------------
+
+.btn {
+  color: $btn-color;
+
+  &[data-icon]:not(.navbar-toggler) {
+    @include flex(center, null);
+  }
+
+  &-dark {
+    color: $body-color;
+  }
+
+  &-ghost {
+    @include remove-padding;
+
+    color: $primary;
+  }
+}

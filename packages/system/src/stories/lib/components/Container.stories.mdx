@@ -1,0 +1,11 @@
+import {excludePropKeys} from '@kustomz-config'
+import {Container} from '@kustomz'
+import {Description, Meta, Props} from '@storybook/addon-docs/blocks'
+
+<Meta title='Components/Container' component={Container} />
+
+# Container
+
+<Description markdown={Container.__docgenInfo.description} />
+
+<Props exclude={excludePropKeys} of={Container} />

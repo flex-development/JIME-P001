@@ -221,6 +221,9 @@ firebase-credentials-dev.json
 # Next.js
 !packages/app/public
 
+# Storybook
+public
+
 # Vercel
 .now
 .vercel

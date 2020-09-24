@@ -6,9 +6,9 @@ request.
 
 ## Overview
 
-[Getting Started](../../../docs/CONTRIBUTING.md)  
 [Development Environment](#development-environment)  
 [Making Changes](#making-changes)
+[Documentation](../../../docs/CONTRIBUTING.md#documentation)
 
 ## Development Environment
 

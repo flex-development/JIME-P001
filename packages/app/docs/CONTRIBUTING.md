@@ -1,14 +1,14 @@
 # Contributing
 
 These instructions will help you install the project on your local machine, as
-well follow our coding guidelines. You'll also find information on making a pull
-request.
+well as develop, document, and test features.
 
 ## Overview
 
-[Getting Started](../../../docs/CONTRIBUTING.md)  
 [Development Environment](#development-environment)  
+[Coding Guidelines](../../../docs/CONTRIBUTING.md#coding-guidlines)  
 [Making Changes](#making-changes)  
+[Documentation](../../../docs/CONTRIBUTING.md#documentation)  
 [Testing](#testing)
 
 ## Development Environment
@@ -53,6 +53,6 @@ TODO: Update documentation.
 
 TODO: Update documentation.
 
-## Testing
+## 🚧 Testing
 
 TODO: Update documentation.

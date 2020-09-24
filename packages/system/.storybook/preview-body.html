@@ -1,0 +1,63 @@
+<!-- 
+Sometimes, you may need to add different tags to the HTML body. This is useful for adding some custom content roots.
+  
+You can accomplish this by creating a file called preview-body.html inside the
+Storybook config directory and adding your tags below.
+See: https://storybook.js.org/docs/configurations/add-custom-body/
+-->
+
+<style>
+  /*
+    How to make dynamic div overflow without fixed height:
+    https://stackoverflow.com/questions/53472719/how-to-make-dynamic-div-overflow-without-fixed-height
+  */
+
+  .sb-show-main #root {
+    height: 100vh;
+  }
+
+  .sb-show-main #root {
+    overflow-y: scroll;
+  }
+
+  /* Allow horizontal scrolling */
+
+  .sb-show-main {
+    background-color: transparent;
+    overflow-x: scroll;
+    padding: 0 !important;
+  }
+
+  /* Fix docs background color */
+  #docs-root {
+    background-color: var(--bs-white);
+    height: 100vh;
+  }
+
+  /* Fix text overflow in ArgsTable */
+
+  .docblock-argstable-body tr td>div {
+    flex-direction: column;
+  }
+
+  .docblock-argstable-body tr td>div span {
+    white-space: normal;
+  }
+
+  .docblock-argstable-body tr td>div:last-of-type div span {
+    white-space: nowrap;
+  }
+
+  /* Fix Usage section in docs */
+  .sbdocs-subtitle {
+    margin-bottom: 12px !important;
+  }
+
+  .sbdocs-subtitle+.sbdocs.sbdocs-preview {
+    margin-top: 0 !important;
+  }
+
+  .sbdocs-subtitle+.sbdocs.sbdocs-preview>div>div {
+    margin: unset !important;
+  }
+</style>

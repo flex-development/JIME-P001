@@ -8,7 +8,9 @@ Shared type definitions for Morenas Kustomz
 ## Overview
 
 [Getting Started](#getting-started)  
-[Usage](#usage)
+[Usage](#usage)  
+[Contributing](docs/CONTRIBUTING.md)  
+[Distribution](docs/DISTRIBUTION.md)
 
 ## Getting Started
 
@@ -22,18 +24,17 @@ grinders, and rolling trays, or have them custom made.
 
 ## Usage
 
-1. Copy the snippet below to get the project running on your local machine.
+### Local
 
-   If you're coming from the
-   [root Contributing Guide](../../../docs/CONTRIBUTING.md), skip the first
-   step.
+1. Be sure the package is built before attempting to install it
 
-   ```zsh
-    git clone https://github.com/flex-development/JIME-P001.git; cd JIME-P001; yarn
-    cd packages/types
-   ```
+   If the script you're using doesn't already build the package, run
+   `lerna run prepare --scope @flex-development/kustomtypez`
 
-2. Run the project in development or production mode
+2. Add `"@flex-development/kustomtypez": "*"` to your project `dependencies`
 
-   - `yarn dev`: Compile types in watch mode
-   - `yarn build`: Compile types for distribution
+3. Run `yarn` to re-install the project dependencies (if needed)
+
+### 🚧 Production
+
+TODO: Update documentation.

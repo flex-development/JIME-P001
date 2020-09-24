@@ -1,0 +1,13 @@
+/// ----------------------------------------------------------------------------
+/// @group elements-select
+/// ----------------------------------------------------------------------------
+
+select.form-control {
+  background-color: $form-select-bg;
+  color: $form-select-color;
+
+  &:focus {
+    background-color: $form-select-focus-bg;
+    color: $form-select-focus-color;
+  }
+}

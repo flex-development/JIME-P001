@@ -1,0 +1,538 @@
+/// ----------------------------------------------------------------------------
+/// Mixins
+/// @group mixins
+/// ----------------------------------------------------------------------------
+
+// -----------------------------------------------------------------------------
+// Animations & Transitions
+// -----------------------------------------------------------------------------
+
+/// Wrapper for animation property
+/// @param {String} $name - animation-name
+/// @param {Number} $duration [1.25s] - animation-duration
+/// @param {String} $timing [ease] - animation-timing-function
+/// @param {Number} $delay [0s] - animation-delay
+@mixin animation($name, $duration: 1.25s, $timing: ease, $delay: 0s) {
+  animation: $name $duration $timing $delay;
+}
+
+/// Wrapper for transition property
+/// @param {String} $property [all] - transition-property
+/// @param {Number} $duration [.25s] - transition-duration
+/// @param {String} $timing [ease] - transition-timing
+/// @param {Number} $delay [0s] - transition-delay
+// @mixin transition($property: all, $duration: .5s, $timing: ease, $delay: 0s) {
+//   transition: $property $duration $timing $delay;
+// }
+
+// -----------------------------------------------------------------------------
+// Borders & Outlines
+// -----------------------------------------------------------------------------
+
+/// Creates an element outline
+/// @require {variable} $border-width
+/// @require {variable} $border-radius
+/// @param {Color} $color - Border color
+/// @param {Number} $width [$border-width] - Outline border width
+/// @param {Number} $radius [$border-radius] - Outline border radius
+@mixin outline($color, $width: $border-width, $radius: $border-radius) {
+  border: $width solid $color;
+  border-radius: $radius;
+}
+
+// -----------------------------------------------------------------------------
+// Colors
+// -----------------------------------------------------------------------------
+
+/// Sets the background color as one of theme colors.
+/// @require {variable} $colors
+/// @require {variable} $theme-colors
+/// @param {String} $key - Key from $theme-colors or $colors map
+/// @param {Boolean} $important [false] - If true, add !important
+@mixin background-color($key, $important: false) {
+  $color: map-get(map-merge($theme-colors, $colors), $key);
+
+  background-color: if($important, $color !important, $color);
+}
+
+/// Sets the text color as one of theme colors.
+/// @require {variable} $colors
+/// @require {variable} $theme-colors
+/// @param {String} $key - Key from $theme-colors or $colors map
+/// @param {Boolean} $important [false] - If true, add !important
+@mixin color($key: 'dark', $important: false) {
+  $color: map-get(map-merge($theme-colors, $colors), $key);
+
+  color: if($important, $color !important, $color);
+}
+
+/// ----------------------------------------------------------------------------
+/// Flexbox
+/// ----------------------------------------------------------------------------
+
+/// Defines the element as a flex container.
+/// It enables a flex context for all its direct children.
+/// @param {String} $display [flex] - display
+@mixin display-flex($display: flex) {
+  display: $display;
+
+  flex-wrap: wrap;
+
+  @content;
+}
+
+/// Flexbox properties
+/// @require {mixin} display-flex
+/// @require {mixin} flex-position
+/// @param {String} $align [stretch] - align-items value
+/// @param {String} $justify [null] - justify-content value
+/// @param {String} $direction - justify-content value
+/// @param {String} $display [flex] - Flexbox display
+@mixin flex(
+  $align: stretch, 
+  $justify: flex-start, 
+  $direction: null, 
+  $display: flex
+) {
+  @include display-flex($display);
+
+  @include flex-position($align, $justify);
+
+  @if $direction {
+    flex-direction: $direction;
+  }
+}
+
+/// Defines how flex items are laid out along the cross axis.
+/// @param {String} $alignment [stretch] - Flexbox alignment
+/// @param {Boolean} $self [false] - If true, use align-self
+/// @param {Boolean} $important [false], If true add !important
+@mixin flex-align($alignment: stretch, $self: false, $important: false) {
+  $align: if($important, $alignment !important, $alignment);
+
+  @if $self == false {
+    align-items: $align;
+  } @else {
+    align-self: $align;
+  }
+}
+
+/// Center flexbox items on both axes.
+/// @require {mixin} flex-align
+/// @require {mixin} flex-justify
+@mixin flex-center {
+  @include flex-align(center);
+
+  @include flex-justify(center);
+
+  @content;
+}
+
+/// Layout flexbox items top to bottom.
+/// @require {mixin} flex-direction
+/// @param {Boolean} $reverse [false] - If true, set direction to column-reverse
+/// @param {Boolean} $important [false], If true add !important
+@mixin flex-column($reverse: false, $important: false) {
+  $direction: if($reverse, column-reverse, column);
+
+  @include flex-direction($direction, $important);
+
+  @content;
+}
+
+/// This establishes the main-axis, thus defining the direction flex items are
+/// placed in the flex container.
+/// @param {String} $direction - flex-direction
+/// @param {Boolean} $important [false], If true add !important
+@mixin flex-direction($direction, $important: false) {
+  flex-direction: if($important, $direction !important, $direction);
+
+  @content;
+}
+
+/// Defines how flex items are laid out along the main axis.
+/// @param {String} $justify [stretch] - justify-content
+/// @param {Boolean} $important [false], If true add !important
+@mixin flex-justify($justify: stretch, $important: false) {
+  $justify: if($important, $justify !important, $justify);
+
+  justify-content: $justify;
+}
+
+/// Sets align-items and justify-content.
+/// @require {mixin} flex-align
+/// @require {mixin} flex-justify
+/// @param {Boolean} $ai [false], If true add !important to align-items
+/// @param {Boolean} $ji [false], If true add !important to justify-content
+@mixin flex-position($align: center, $justify: center, $ai: false, $ji: false) {
+  @if $align {
+    @include flex-align($align, false, $ai);
+  }
+
+  @if $justify {
+    @include flex-justify($justify, $ji);
+  }
+
+  @content;
+}
+
+/// Layout flexbox items left to right.
+/// @require {mixin} flex-direction
+/// @param {Boolean} $reverse [false] - If true, set direction to row-reverse
+/// @param {Boolean} $important [false], If true add !important
+@mixin flex-row($reverse: false, $important: false) {
+  $direction: if($reverse, row-reverse, row);
+
+  @include flex-direction($direction, $important);
+
+  @content;
+}
+
+/// Center flexbox items on main axis and distrbute space between elements.
+/// @require {mixin} flex-align
+/// @require {mixin} flex-justify
+@mixin flex-spread {
+  @include flex-align(center);
+
+  @include flex-justify(space-between);
+
+  @content;
+}
+
+// -----------------------------------------------------------------------------
+// Media
+// -----------------------------------------------------------------------------
+
+/// Background image helper
+/// @requires {function} image
+/// @param {String} $filename - Filename (including extension)
+/// @param {String} $size [cover] - background-size
+/// @param {List} $pos [center center] - background-position
+/// @param {String} $repeat [no-repeat] - background-repeat
+@mixin set-bkg-img(
+  $filename,
+  $size: cover,
+  $pos: center center,
+  $repeat: no-repeat
+) {
+  @if $filename {
+    background-image: $filename;
+  }
+  
+  background-position: $pos;
+  background-repeat: $repeat;
+  background-size: $size;
+
+  @content;
+}
+
+// -----------------------------------------------------------------------------
+// Media Queries
+// -----------------------------------------------------------------------------
+
+/// Handles device height.
+/// @param {Number} $breakpoint - Breakpoint value
+/// @param {String} $bound [max] - Target max or min height
+@mixin respond-to-height($breakpoint, $bound: max) {
+  @if $bound == min {
+    @media screen and (min-height: $breakpoint) {
+      @content;
+    }
+  } @else {
+    @media screen and (max-height: $breakpoint) {
+      @content;
+    }
+  }
+}
+
+/// Handles device width.
+/// @param {Number} $breakpoint - Breakpoint value
+/// @param {String} $bound [max] - Target max or min width
+/// @param {String} $dimension [width] - Target width or height
+@mixin respond-to-width($breakpoint, $bound: max) {
+  @if $bound == min {
+    @media screen and (min-width: $breakpoint) {
+      @content;
+    }
+  } @else {
+    @media screen and (max-width: $breakpoint) {
+      @content;
+    }
+  }
+}
+
+/// Handles device height and width.
+/// @require {mixin} respond-to-height
+/// @require {mixin} respond-to-width
+/// @param {Number} $breakpoint - Breakpoint value
+/// @param {String} $bound [max] - Target max or min width/height
+/// @param {String} $dimension [width] - Target width or height
+@mixin respond-to($breakpoint, $bound: max, $dimension: width) {
+  @if $dimension == width {
+    @include respond-to-width(convert-px-value($breakpoint), $bound) {
+      @content;
+    }
+  } @else {
+    @include respond-to-height(convert-px-value($breakpoint), $bound) {
+      @content;
+    }
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Positioning
+// -----------------------------------------------------------------------------
+
+/// Shorthand for absolute positioning.
+/// @require {mixin} position
+/// @param {List} $args - Offsets
+@mixin absolute($args...) {
+  @if $args {
+    @include position(absolute, $args...);
+  } @else {
+    @include position(absolute);
+  }
+}
+
+/// Shorthand for fixed positioning.
+/// @require {mixin} position
+/// @param {List} $args - Offsets
+@mixin fixed($args...) {
+  @if $args {
+    @include position(fixed, $args...);
+  } @else {
+    @include position(fixed);
+  }
+}
+
+/// Center items in container using margin properties
+/// @param {Boolean} $important [false] - If true, add !important
+@mixin is-centered($important: false) {
+  $margin: 0 auto;
+
+  margin: if($important, $margin !important, $margin);
+}
+
+/// Shorthand for positioning.
+/// @access private
+/// @param {String} $position - Position type - `absolute` |`fixed` | `relative`
+/// @param {Length} $top [null] - Top offset
+/// @param {Length} $right [null] - Right offset
+/// @param {Length} $bottom [null] - Bottom offset
+/// @param {Length} $left [null] - Left offset
+@mixin position(
+  $position,
+  $top: null,
+  $right: null,
+  $bottom: null,
+  $left: null
+) {
+  bottom: $bottom;
+  left: $left;
+  position: $position;
+  right: $right;
+  top: $top;
+}
+
+/// Shorthand for relative positioning.
+/// @require {mixin} position
+/// @param {List} $args - Offsets
+@mixin relative($args...) {
+  @if $args {
+    @include position(relative, $args...);
+  } @else {
+    @include position(relative);
+  }
+}
+
+/// Shorthand for sticky positioning.
+/// @require {mixin} position
+/// @param {List} $args - Offsets
+@mixin sticky($args...) {
+  @if $args {
+    @include position(sticky, $args...);
+  } @else {
+    @include position(sticky);
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Spacing
+// -----------------------------------------------------------------------------
+
+/// Set an element's left and right margin values
+/// @require {mixin} margin-left
+/// @require {mixin} margin-right
+/// @param {Number | String} $left - Left margin value
+/// @param {Number | String} $right [$left] - Right margin value
+@mixin margin-x($left, $right: $left) {
+  @include margin-left($left);
+  @include margin-right($right);
+}
+
+/// Set an element's top and bottom margin values
+/// @require {mixin} margin-bottom
+/// @require {mixin} margin-top
+/// @param {Number | String} $top - Top margin value
+/// @param {Number | String} $bottom [$top] - Bottom margin value
+@mixin margin-y($top, $bottom: $top) {
+  @include margin-top($top);
+  @include margin-bottom($bottom);
+}
+
+/// Set an element's left and right padding
+/// @require {mixin} padding-left
+/// @require {mixin} padding-right
+/// @param {Number | String} $left - Left padding value
+/// @param {Number | String} $right [$left] - Right padding value
+@mixin padding-x($left, $right: $left) {
+  @include padding-left($left);
+  @include padding-right($right);
+}
+
+/// Set an element's top and bottom padding values
+/// @require {mixin} padding-bottom
+/// @require {mixin} padding-top
+/// @param {Number | String} $top - Top padding value
+/// @param {Number | String} $bottom [$top] - Bottom padding value
+@mixin padding-y($top, $bottom: $top) {
+  @include padding-top($top);
+  @include padding-bottom($bottom);
+}
+
+/// Removes margin
+/// @param {Boolean} $important [false] - If true, add !important
+@mixin remove-margin($important: false) {
+  margin: if($important, 0 !important, 0);
+}
+
+/// Removes padding
+/// @param {Boolean} $important [false] - If true, add !important
+@mixin remove-padding($important: false) {
+  padding: if($important, 0 !important, 0);
+}
+
+// -----------------------------------------------------------------------------
+// Size
+// -----------------------------------------------------------------------------
+
+/// Sets the height or width of an element
+/// @param {Number | String} $size - height
+/// @param {Number | String} $key [width] - Dimension to set
+/// @param {Number | String} $min-size [unset] - min-height
+/// @param {Number | String} $max-size [none] - max-height
+@mixin element-size($size, $key: width, $min-size: unset, $max-size: none) {
+  #{$key}: $size;
+  max-#{$key}: $max-size;
+  min-#{$key}: $min-size;
+}
+
+/// Set an element's height and width
+/// @param {Number} $width - Element width
+/// @param {Number} $height [$width] - Element height
+/// @param {Boolean} $w-important [false] - If true, add !important to width
+/// @param {Boolean} $h-important [false] - If true, add !important to height
+@mixin set-element-dimensions(
+  $width, $height: $width, 
+  $w-important: false, 
+  $h-important: false
+) {
+  height: if($h-important, $height !important, $height);
+  width: if($w-important, $width !important, $width);
+}
+
+// -----------------------------------------------------------------------------
+// Typography
+// -----------------------------------------------------------------------------
+
+/// Prevents a text element from breaking onto the next line
+/// @param {Boolean} $important [false] - If true, add !important
+@mixin no-breaking($important: false) {
+  white-space: if($important, nowrap !important, $space);
+}
+
+// -----------------------------------------------------------------------------
+// UI States
+// -----------------------------------------------------------------------------
+
+/// Event wrapper for &:hover, &:active, &:focus
+/// @param {Bool} $self [false] - Whether or not to include current selector
+@mixin event($self: false) {
+  @if $self {
+    &,
+    &:hover,
+    &:active,
+    &:focus {
+      @content;
+    }
+  } @else {
+    &:hover,
+    &:active,
+    &:focus {
+      @content;
+    }
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Typography
+// -----------------------------------------------------------------------------
+
+/// Adds an after effect to text.
+/// @require {function} size
+/// @require {function} absolute
+/// @require {variable} $magic-number
+/// @require {variable} $pp-sustainability
+/// @param {Color} $color - Background color of ::after element
+/// @param {Number} $height - Height of ::after element
+/// @param {Number} $padding-bottom - Bottom padding of main element
+/// @param {Number} $padding-bottom - Bottom margin of main element
+/// @param {Number} $width - Width of ::after element
+@mixin after-effects($color, $height, $padding-bottom, $margin-bottom, $width) {
+  margin-bottom: $margin-bottom;
+  padding-bottom: $padding-bottom;
+  position: relative;
+
+  &::after {
+    @include absolute(null, null, 0, 0);
+
+    background-color: $color;
+    content: ' ';
+    display: inline-block;
+    height: $height;
+    width: $width;
+
+    @content;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Visibility
+// -----------------------------------------------------------------------------
+
+/// Hides an element
+/// @param {Boolean} $collapse [false] - If true, use visibility:collapse
+/// @param {Boolean} $important [false] - If true, add !important
+@mixin is-hidden($collapse: false, $important: false) {
+  @if $collapse {
+    visibility: if($important, collapse !important, collapse);
+  } @else {
+    display: if($important, none !important, none);
+  }
+}
+
+/// Remove the content from before or after an element
+/// @param {String} $pos [after] - Position to remove content
+@mixin no-content($pos: after) {
+  &::#{$pos} {
+    content: none;
+  }
+}
+
+/// Mixin for cross-browser opacity (IE 8).
+/// Clamps the value between 0 and 1.
+/// @require {function} clamp
+/// @param {Number} $opacity - Opacity level, between 0 and 1
+@mixin opacity($opacity) {
+  opacity: clamp($opacity, 0, 1);
+}

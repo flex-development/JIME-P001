@@ -1,0 +1,242 @@
+/// ----------------------------------------------------------------------------
+/// Utilities
+/// @group config-utilities
+/// @link https://v5.getbootstrap.com/docs/5.0/utilities/api/
+/// ----------------------------------------------------------------------------
+
+@use '~bootstrap/scss/bootstrap-utilities' as bootstrap;
+
+// -----------------------------------------------------------------------------
+// Backgrounds
+// -----------------------------------------------------------------------------
+
+$bg-positions: (
+  bottom: bottom,
+  center: center,
+  left: left,
+  lb: left bottom,
+  lt: left top,
+  right: right,
+  rb: right bottom,
+  rt: right top,
+  top: top
+);
+
+$bg-repeats: no-repeat, repeat, repeat-x, repeat-y;
+
+$bg-sizes: auto, contain, cover;
+
+// -----------------------------------------------------------------------------
+// Colors
+// -----------------------------------------------------------------------------
+
+$theme-colors: (
+  dark: $dark,
+  dark-25: $dark-25,
+  darker: $darker,
+  ghost: $ghost,
+  light: $light,
+  light-5: $light-5,
+  primary: $primary,
+  primary-25: $primary-25,
+  secondary: $secondary
+);
+
+// -----------------------------------------------------------------------------
+// Grid Items
+// -----------------------------------------------------------------------------
+
+$grid-item-order: (
+  first: -9999,
+  last: 9999,
+
+  0: 0,
+  1: 1,
+  2: 2,
+  3: 3,
+  4: 4,
+  5: 5,
+  6: 6,
+  7: 7,
+  8: 8,
+  9: 9,
+  10: 10,
+  11: 11,
+  12: 12
+);
+
+$grid-item-positions: auto, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13;
+
+$grid-item-sizes: (
+  auto: auto,
+  1: span 1 / span 1,
+  2: span 2 / span 2,
+  3: span 3 / span 3,
+  4: span 4 / span 4,
+  5: span 5 / span 5,
+  6: span 6 / span 6,
+  7: span 7 / span 7,
+  8: span 8 / span 8,
+  9: span 9 / span 9,
+  10: span 10 / span 10,
+  11: span 11 / span 11,
+  12: span 12 / span 12
+);
+
+// -----------------------------------------------------------------------------
+// Grid Templates
+// -----------------------------------------------------------------------------
+
+$grid-template-columns: (
+  0: none,
+  1: repeat(1, minmax(0, 1fr)),
+  2: repeat(2, minmax(0, 1fr)),
+  3: repeat(3, minmax(0, 1fr)),
+  4: repeat(4, minmax(0, 1fr)),
+  5: repeat(5, minmax(0, 1fr)),
+  6: repeat(6, minmax(0, 1fr)),
+  7: repeat(7, minmax(0, 1fr)),
+  8: repeat(8, minmax(0, 1fr)),
+  9: repeat(9, minmax(0, 1fr)),
+  10: repeat(10, minmax(0, 1fr)),
+  11: repeat(11, minmax(0, 1fr)),
+  12: repeat(12, minmax(0, 1fr))
+);
+
+// -----------------------------------------------------------------------------
+// Opacity
+// -----------------------------------------------------------------------------
+
+$opacities: (
+  0: 0,
+  25: .25,
+  50: .5,
+  60: .6,
+  75: .75,
+  100: 1
+);
+
+// -----------------------------------------------------------------------------
+// Sizes
+// -----------------------------------------------------------------------------
+
+$sizes: (
+  full: 100%,
+
+  8: 8.333333%,
+  16: 16.666667%,
+  20: 20%,
+  33: 33.333333%,
+  40: 40%,
+  41: 41.666667%,
+  58: 58.333333%,
+  60: 60%,
+  66: 66.666667%,
+  80: 80%,
+  83: 83.333333%,
+  91: 91.666667%,
+  95: 95%
+);
+
+// -----------------------------------------------------------------------------
+// Typography
+// -----------------------------------------------------------------------------
+
+$font-families: (
+  sans: $font-family-sans-serif, 
+  special: $font-family-sans-serif-special
+);
+
+$font-sizes: (
+  xs: $font-size-xs,
+  sm: bootstrap.$font-size-sm,
+  lg: bootstrap.$font-size-lg,
+  xl: $font-size-xl
+);
+
+$font-weights: (
+  'hairline': $font-weight-hairline,
+  'thin': $font-weight-thin,
+  'light': bootstrap.$font-weight-light,
+  'normal': bootstrap.$font-weight-normal,
+  'medium': $font-weight-medium,
+  'semibold': $font-weight-semibold,
+  'bold': bootstrap.$font-weight-bold,
+  'extrabold': $font-weight-extrabold,
+  'black': $font-weight-black
+);
+
+// -----------------------------------------------------------------------------
+// Merge utilities
+// -----------------------------------------------------------------------------
+
+$utilities: (
+  'background-position': (
+    property: background-position,
+    class: bg,
+    responsive: true,
+    values: $bg-positions
+  ),
+  'background-repeat': (
+    property: background-repeat,
+    class: bg,
+    values: $bg-repeats
+  ),
+  'background-size': (
+    property: background-size,
+    class: bg,
+    responsive: true,
+    values: $bg-sizes
+  ),
+  'font-family': (
+    property: font-family,
+    class: font,
+    values: $font-families
+  ),
+  'font-size': (
+    property: font-size,
+    class: text,
+    values: $font-sizes
+  ),
+  'font-weight': (
+    property: font-weight,
+    class: font,
+    responsive: true,
+    values: $font-weights
+  ),
+  'height': (
+    property: height,
+    class: h,
+    responsive: true,
+    values: $sizes
+  ),
+  'opacity': (
+    property: opacity,
+    class: o,
+    responsive: true,
+    values: $opacities
+  ),
+  'order': (
+    property: order,
+    responsive: true,
+    values: $grid-item-order
+  ),
+  'max-height': (
+    property: max-height,
+    class: mh,
+    responsive: true,
+    values: $sizes
+  ),
+  'max-width': (
+    property: max-width,
+    class: mw,
+    responsive: true,
+    values: $sizes
+  ),
+  'width': (
+    property: width,
+    class: w,
+    responsive: true,
+    values: $sizes
+  )
+);

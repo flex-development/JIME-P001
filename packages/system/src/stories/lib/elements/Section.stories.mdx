@@ -1,0 +1,11 @@
+import {excludePropKeys} from '@kustomz-config'
+import {Section, SectionProps} from '@kustomz'
+import {Description, Meta, Props} from '@storybook/addon-docs/blocks'
+
+<Meta title='Elements/Section' component={Section} />
+
+# Section
+
+<Description markdown={Section.__docgenInfo.description} />
+
+<Props exclude={excludePropKeys} of={Section} />

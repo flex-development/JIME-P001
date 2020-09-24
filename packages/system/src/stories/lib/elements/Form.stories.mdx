@@ -1,0 +1,11 @@
+import {box_variant as variant, excludePropKeys} from '@kustomz-config'
+import {Form, FormProps} from '@kustomz'
+import {Description, Meta, Props} from '@storybook/addon-docs/blocks'
+
+<Meta title='Elements/Form' component={Form} />
+
+# Form
+
+<Description markdown={Form.__docgenInfo.description} />
+
+<Props exclude={excludePropKeys} of={Form} />

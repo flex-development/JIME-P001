@@ -29,19 +29,22 @@
     "directory": "packages/app"
   },
   "scripts": {
-    "dev:types": "lerna run dev --scope @flex-development/kustomtypes",
-    "dev:app": "next dev -p 3000",
-    "predev": "NODE_ENV=development yarn bundle:ui",
+    "predev": "NODE_ENV=development yarn build:ui",
+    "dev:types": "lerna run dev --scope @flex-development/kustomtypez",
+    "dev:app": "next dev -p 3001",
     "dev": "run-p dev:*",
-    "bundle:types": "lerna run build --scope @flex-development/kustomtypez",
-    "bundle:ui": "lerna run build:bundle --scope @flex-development/kustomz",
-    "prestart": "NODE_ENV=production run-p bundle:*",
+    "pretest": "dotenv -e .env.test.local -- echo \"Loaded test environment.\"",
+    "test": "jest --detectOpenHandles --passWithNoTests",
+    "prestart": "dotenv -e .env.production.local -- echo \"Loaded production environment.\"",
     "start": "next start",
-    "prebuild": "run-p bundle:*",
+    "build:types": "lerna run build --scope @flex-development/kustomtypez",
+    "build:ui": "lerna run build:bundle --scope @flex-development/kustomz",
+    "prebuild": "run-p build:*",
     "build": "next build"
   },
   "dependencies": {
     "@feathersjs/errors": "^4.5.3",
+    "@flex-development/kustomz": "*",
     "@flex-development/kustomtypez": "*",
     "@types/cors": "^2.8.7",
     "@types/crypto-js": "^3.1.47",
@@ -74,6 +77,8 @@
     "urijs": "^1.19.2",
     "validator": "^13.1.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "dotenv-cli": "^4.0.0"
+  },
   "peerDependencies": {}
 }

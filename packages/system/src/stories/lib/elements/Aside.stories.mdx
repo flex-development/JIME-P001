@@ -1,0 +1,11 @@
+import {excludePropKeys} from '@kustomz-config'
+import {Aside, AsideProps} from '@kustomz'
+import {Description, Meta, Props} from '@storybook/addon-docs/blocks'
+
+<Meta title='Elements/Aside' component={Aside} />
+
+# Aside
+
+<Description markdown={Aside.__docgenInfo.description} />
+
+<Props exclude={excludePropKeys} of={Aside} />

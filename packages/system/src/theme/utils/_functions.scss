@@ -1,0 +1,22 @@
+/// ----------------------------------------------------------------------------
+/// Functions
+/// @group functions
+/// ----------------------------------------------------------------------------
+
+/// Converts a value in px to an em or rem value
+/// @param {Number} $px - Value to convert
+/// @param {String} $unit [rem] - Unit to convert to
+@function convert-px-value($px, $unit: 'rem') {
+  @return #{strip-unit($px) / 16}#{$unit};
+}
+
+/// Remove the unit of a length
+/// @param {Number} $value - Number to remove unit from
+/// @return {Number} - Unitless number
+@function strip-unit($value) {
+  @if type-of($value) == 'number' and not unitless($value) {
+    @return $value / ($value * 0 + 1);
+  }
+
+  @return $value;
+}

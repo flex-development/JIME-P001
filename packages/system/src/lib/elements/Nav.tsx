@@ -1,11 +1,11 @@
 import React, {
   forwardRef,
   ForwardRefExoticComponent as FREC,
-  PropsWithoutRef
+  PropsWithoutRef,
 } from 'react'
-import { BoxProps } from '.'
-import { HTMLElementRefAttributes } from '../declarations'
-import { useMutatedProps, useTextContentDictionary } from '../modules/hooks'
+import {BoxProps} from '.'
+import {HTMLElementRefAttributes} from '../declarations'
+import {useMutatedProps, useTextContentDictionary} from '../modules/hooks'
 
 /**
  * @module lib/elements/Nav
@@ -60,9 +60,9 @@ export type NavRefProps = ReflessNavProps & HTMLElementRefAttributes
  * - **https://v5.getbootstrap.com/docs/5.0/components/navs/**
  */
 export const Nav: FREC<NavRefProps> = forwardRef((props, ref) => {
-  const { fill, pills, tabs, ...rest } = props
+  const {fill, pills, tabs, ...rest} = props
 
-  const { dictionary, sanitized } = useTextContentDictionary<typeof rest>(
+  const {dictionary, sanitized} = useTextContentDictionary<typeof rest>(
     rest,
     'nav'
   )
@@ -74,7 +74,7 @@ export const Nav: FREC<NavRefProps> = forwardRef((props, ref) => {
     ...dictionary,
     'nav-fill': fill,
     'nav-pills': pills,
-    'nav-tabs': tabs
+    'nav-tabs': tabs,
   })
 
   return <nav {...mutatedProps} ref={ref} />
@@ -83,5 +83,5 @@ export const Nav: FREC<NavRefProps> = forwardRef((props, ref) => {
 Nav.defaultProps = {
   fill: false,
   pills: false,
-  tabs: false
+  tabs: false,
 }

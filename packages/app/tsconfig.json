@@ -3,15 +3,7 @@
     "jsx": "preserve"
   },
   "extends": "../../tsconfig.json",
-  "files": [
-    "next-env.d.ts"
-  ],
-  "include": [
-    "components",
-    "lib",
-    "pages"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "files": ["next-env.d.ts"],
+  "include": ["components", "lib", "pages"],
+  "exclude": ["node_modules"]
 }

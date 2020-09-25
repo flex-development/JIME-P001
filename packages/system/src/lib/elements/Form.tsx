@@ -2,14 +2,10 @@ import React, {
   forwardRef,
   ForwardRefExoticComponent as FREC,
   PropsWithoutRef,
-  RefAttributes
+  RefAttributes,
 } from 'react'
-import {
-  GlobalProps,
-
-  ThemeColor, ThemeOutline
-} from '../declarations'
-import { useMutatedProps } from '../modules/hooks'
+import {GlobalProps, ThemeColor, ThemeOutline} from '../declarations'
+import {useMutatedProps} from '../modules/hooks'
 
 /**
  * @module lib/elements/Form

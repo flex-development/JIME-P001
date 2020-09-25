@@ -1,4 +1,4 @@
-import { addons } from '@storybook/addons'
+import {addons} from '@storybook/addons'
 
 /**
  * @file Storybook UI Configuration
@@ -9,5 +9,5 @@ addons.setConfig({
   /**
    * Where to show the addon panel.
    */
-  panelPosition: 'bottom'
+  panelPosition: 'bottom',
 })

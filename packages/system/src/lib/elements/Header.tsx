@@ -1,13 +1,10 @@
 import React, {
   forwardRef,
   ForwardRefExoticComponent as FREC,
-  PropsWithoutRef
+  PropsWithoutRef,
 } from 'react'
-import {
-  ContentSectionProps,
-  HTMLElementRefAttributes
-} from '../declarations'
-import { useMutatedProps } from '../modules/hooks'
+import {ContentSectionProps, HTMLElementRefAttributes} from '../declarations'
+import {useMutatedProps} from '../modules/hooks'
 
 /**
  * @module lib/elements/Header

@@ -12,4 +12,3 @@ export declare interface DatabaseQuery {
   limit?: number
   single?: boolean
 }
-

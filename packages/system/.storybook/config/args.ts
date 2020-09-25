@@ -1,4 +1,4 @@
-import { cloneDeep } from 'lodash'
+import {cloneDeep} from 'lodash'
 
 /**
  * @file Storybook Args
@@ -62,50 +62,50 @@ export const autoComplete = {
       'tel-extension',
       'impp',
       'url',
-      'photo'
-    ]
-  }
+      'photo',
+    ],
+  },
 }
 
 export const background_size = {
   control: {
     type: 'select',
-    options: ['auto', 'contain', 'cover']
-  }
+    options: ['auto', 'contain', 'cover'],
+  },
 }
 
 export const booleanish = {
   control: {
     type: 'select',
-    options: [false, 'false', true, 'true']
-  }
+    options: [false, 'false', true, 'true'],
+  },
 }
 
 export const button_size = {
   control: {
     type: 'select',
-    options: [false, 'sm', 'lg']
-  }
+    options: [false, 'sm', 'lg'],
+  },
 }
 
 export const color = {
   control: {
     type: 'select',
-    options: [false].concat([
+    options: [false].concat(([
       'darker',
       'dark',
       'light',
       'primary',
-      'secondary'
-    ] as unknown as boolean[])
-  }
+      'secondary',
+    ] as unknown) as boolean[]),
+  },
 }
 
 export const container_size = {
   control: {
     type: 'select',
-    options: [false, 'xs', 'sm', 'md', 'lg', 'xl', 'xxl']
-  }
+    options: [false, 'xs', 'sm', 'md', 'lg', 'xl', 'xxl'],
+  },
 }
 
 export const variant = {
@@ -118,16 +118,16 @@ export const variant = {
       'ghost',
       'light',
       'primary',
-      'secondary'
+      'secondary',
     ].concat([
       'outline-primary',
       'outline-secondary',
       'outline-dark',
       'outline-darker',
       'outline-ghost',
-      'outline-light'
-    ])
-  }
+      'outline-light',
+    ]),
+  },
 }
 
 export const box_variant = {
@@ -135,29 +135,28 @@ export const box_variant = {
     type: 'select',
     options: cloneDeep(booleanish.control.options).concat(
       variant.control.options
-    )
-  }
+    ),
+  },
 }
 
 export const button_variant = {
   control: {
     type: 'select',
-    options: cloneDeep(variant.control.options).concat('link')
-  }
+    options: cloneDeep(variant.control.options).concat('link'),
+  },
 }
-
 
 export const form_control = {
   control: {
     type: 'select',
-    options: ['input', 'select', 'textarea']
-  }
+    options: ['input', 'select', 'textarea'],
+  },
 }
 
 export const obj = {
   control: {
-    type: 'object'
-  }
+    type: 'object',
+  },
 }
 
 export const ligatures = {
@@ -1095,26 +1094,20 @@ export const ligatures = {
       'youtube_searched_for',
       'zoom_in',
       'zoom_out',
-      'zoom_out_map'
-    ]
-  }
+      'zoom_out_map',
+    ],
+  },
 }
 
 export const placeholder = {
   control: {
-    type: 'text'
-  }
+    type: 'text',
+  },
 }
 
 export const size = {
   control: {
     type: 'select',
-    options: [
-      false,
-      'xs',
-      'sm',
-      'lg',
-      'xl'
-    ]
-  }
+    options: [false, 'xs', 'sm', 'lg', 'xl'],
+  },
 }

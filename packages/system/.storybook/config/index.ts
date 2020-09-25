@@ -1,5 +1,5 @@
-import { Args, Parameters } from '@storybook/api'
-import { FC } from 'react'
+import {Args, Parameters} from '@storybook/api'
+import {FC} from 'react'
 
 /**
  * @file Storybook Config
@@ -19,4 +19,3 @@ export * from './colors'
 export * from './components'
 export * from './typography'
 export * from './viewports'
-

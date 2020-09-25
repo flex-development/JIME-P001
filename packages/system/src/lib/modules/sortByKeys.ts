@@ -1,4 +1,4 @@
-import { fromPairs, map, sortBy } from 'lodash'
+import {fromPairs, map, sortBy} from 'lodash'
 
 /**
  * @file Put the keys of an object in alphabetical order

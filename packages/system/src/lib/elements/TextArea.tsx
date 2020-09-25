@@ -2,10 +2,10 @@ import React, {
   forwardRef,
   ForwardRefExoticComponent as FREC,
   PropsWithoutRef,
-  RefAttributes
+  RefAttributes,
 } from 'react'
-import { PropsForFormElement } from '../declarations'
-import { useMutatedProps } from '../modules/hooks'
+import {PropsForFormElement} from '../declarations'
+import {useMutatedProps} from '../modules/hooks'
 
 /**
  * @module lib/elements/TextArea
@@ -112,5 +112,5 @@ export const TextArea: FREC<TextAreaRefProps> = forwardRef((props, ref) => {
 })
 
 TextArea.defaultProps = {
-  placeholder: 'A hint to the user of what can be entered in the control'
+  placeholder: 'A hint to the user of what can be entered in the control',
 }

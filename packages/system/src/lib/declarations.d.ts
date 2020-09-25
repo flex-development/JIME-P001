@@ -1,11 +1,11 @@
-import { Booleanish } from '@flex-development/kustomtypez'
+import {Booleanish} from '@flex-development/kustomtypez'
 import {
   AriaAttributes,
   CSSProperties,
   DOMAttributes,
-  RefAttributes
+  RefAttributes,
 } from 'react'
-import { ContainerProps, IconProps } from './elements'
+import {ContainerProps, IconProps} from './elements'
 
 /**
  * @file Global Component Library Declarations
@@ -17,7 +17,7 @@ import { ContainerProps, IconProps } from './elements'
  */
 export declare type Attributes<E = HTMLElement> = AriaAttributes &
   DOMAttributes<E> &
-  RefAttributes<E> & { forwardedRef?: RefAttributes<E>['ref'] }
+  RefAttributes<E> & {forwardedRef?: RefAttributes<E>['ref']}
 
 /**
  * Background size options.
@@ -54,7 +54,7 @@ export declare interface ContentSectionProps<E = HTMLElement>
 /**
  * Font weights.
  */
-export declare type FontWeight = (
+export declare type FontWeight =
   | 'hairline'
   | 'thin'
   | 'light'
@@ -64,7 +64,6 @@ export declare type FontWeight = (
   | 'bold'
   | 'extrabold'
   | 'black'
-)
 
 /* eslint-enable */
 
@@ -152,8 +151,8 @@ export declare interface GlobalProps<E = HTMLElement> extends Attributes<E> {
    * Used primarily on `<input>` elements, but is usable on any element while
    * in contenteditable mode.
    */
-  inputMode?: (
-    'none'
+  inputMode?:
+    | 'none'
     | 'text'
     | 'decimal'
     | 'numeric'
@@ -161,7 +160,6 @@ export declare interface GlobalProps<E = HTMLElement> extends Attributes<E> {
     | 'search'
     | 'email'
     | 'url'
-  )
 
   /* eslint-enable prettier/prettier */
 
@@ -262,10 +260,10 @@ export declare interface GlobalProps<E = HTMLElement> extends Attributes<E> {
 
 /**
  * {@link GridBox} component order options.
- * 
+ *
  * @see {@link https://react-bootstrap-v5.netlify.app/layout/grid/}
  */
-export declare type GridBoxOrder = (
+export declare type GridBoxOrder =
   | '1'
   | '2'
   | '3'
@@ -278,11 +276,10 @@ export declare type GridBoxOrder = (
   | '10'
   | '11'
   | '12'
-)
 
 /**
  * {@link GridBox} component span options.
- * 
+ *
  * @see {@link https://react-bootstrap-v5.netlify.app/layout/grid/}
  */
 export declare type GridBoxSpan = GridBoxOrder
@@ -300,7 +297,8 @@ export declare type HTMLElementRefAttributes = RefAttributes<HTMLElement>
  *
  * **https://developer.mozilla.org/docs/Web/HTML/Global_attributes**
  */
-export declare type HTMLGlobalProps = Omit<GlobalProps,
+export declare type HTMLGlobalProps = Omit<
+  GlobalProps,
   'flex' | 'icon' | 'variant'
 >
 
@@ -320,7 +318,8 @@ export declare type NativeProps<HTMLElementProps, Props> = {
 /**
  * Common `Form` (button, input, select) element props.
  */
-export declare interface PropsForFormElement<E = HTMLElement> extends GlobalProps<E> {
+export declare interface PropsForFormElement<E = HTMLElement>
+  extends GlobalProps<E> {
   /**
    * Specifies that a form control should have input focus when the page
    * loads.
@@ -374,11 +373,7 @@ export declare type PropsForVoidElementTag<E = HTMLElement> = Omit<
 /**
  * Text sizes.
  */
-export declare type Size =
-  | 'xs'
-  | 'sm'
-  | 'lg'
-  | 'xl'
+export declare type Size = 'xs' | 'sm' | 'lg' | 'xl'
 
 /**
  * Keys of `scss` `$spacers` map.
@@ -409,7 +404,8 @@ export declare type SpacerKey =
  *
  * @see {@link https://websitesetup.org/html5-periodical-table/}
  */
-export declare interface TextContentProps<E = HTMLElement> extends GlobalProps<E> {
+export declare interface TextContentProps<E = HTMLElement>
+  extends GlobalProps<E> {
   /**
    * Text content color.
    *

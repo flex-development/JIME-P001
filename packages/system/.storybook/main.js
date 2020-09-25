@@ -1,5 +1,5 @@
 const path = require('path')
-const { merge } = require('lodash')
+const {merge} = require('lodash')
 const sassOptions = require('../.sassrc.js')
 
 /**
@@ -21,12 +21,12 @@ module.exports = {
     {
       name: '@storybook/addon-docs',
       options: {
-        configureJSX: true
-      }
+        configureJSX: true,
+      },
     },
     '@storybook/addon-controls',
     '@storybook/addon-a11y',
-    '@storybook/addon-actions'
+    '@storybook/addon-actions',
   ],
 
   /**
@@ -39,14 +39,14 @@ module.exports = {
     '../src/stories/blocks/*.stories.mdx',
     '../src/stories/lib/templates/*.stories.@(mdx|tsx)',
     '../src/stories/lib/components/*.stories.@(mdx|tsx)',
-    '../src/stories/lib/elements/*.stories.@(mdx|tsx)'
+    '../src/stories/lib/elements/*.stories.@(mdx|tsx)',
   ],
 
   /**
    * TypeScript configuration.
-   * 
+   *
    * @see {@link https://github.com/TypeStrong/fork-ts-checker-webpack-plugin}
-   * 
+   *
    * @property {object} typescript
    * @property {boolean} typescript.check - Run `fork-ts-checker-webpack-plugin`
    * @property {object} typescript.checkOptions - Options to pass to
@@ -59,7 +59,7 @@ module.exports = {
     checkOptions: {},
     reactDocgen: 'react-docgen-typescript',
     reactDocgenTypescriptOptions: {
-      propFilter: ({ parent = {} }) => {
+      propFilter: ({parent = {}}) => {
         const lib = /system\/src/.test(parent.fileName)
         const storybook = /system\/.storybook/.test(parent.fileName)
 
@@ -67,8 +67,8 @@ module.exports = {
       },
       shouldExtractLiteralValuesFromEnum: true,
       shouldRemoveUndefinedFromOptional: true,
-      tsconfigPath: path.join(__dirname, './tsconfig.json')
-    }
+      tsconfigPath: path.join(__dirname, './tsconfig.json'),
+    },
   },
 
   /**
@@ -82,40 +82,38 @@ module.exports = {
    * @param {string} param1.configType - Storybook development environment
    * @returns {object} Webpack configuration
    */
-  webpackFinal: async (config, { configType }) => {
+  webpackFinal: async (config, {configType}) => {
     config.resolve.alias = merge(config.resolve.alias, {
       '@kustomz': path.join(__dirname, '../src/lib'),
-      '@kustomz-config': path.join(__dirname, './config')
+      '@kustomz-config': path.join(__dirname, './config'),
     })
 
     config.module.rules.push({
       test: /\.s[ac]ss$/i,
       use: [
-        { loader: 'style-loader' },
-        { loader: 'css-loader' },
+        {loader: 'style-loader'},
+        {loader: 'css-loader'},
         {
           loader: 'postcss-loader',
           options: {
             config: {
-              path: path.join(__dirname, '../.postcssrc.json')
-            }
-          }
+              path: path.join(__dirname, '../.postcssrc.json'),
+            },
+          },
         },
         {
           loader: 'sass-loader',
-          options: sassOptions
-        }
-      ]
+          options: sassOptions,
+        },
+      ],
     })
 
     config.module.rules.push({
       test: /\.(ts|tsx)$/,
       include: [path.join(__dirname, '../src')],
-      use: [
-        { loader: 'awesome-typescript-loader' }
-      ]
+      use: [{loader: 'awesome-typescript-loader'}],
     })
 
     return config
-  }
+  },
 }

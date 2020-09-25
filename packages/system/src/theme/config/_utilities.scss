@@ -19,7 +19,7 @@ $bg-positions: (
   right: right,
   rb: right bottom,
   rt: right top,
-  top: top
+  top: top,
 );
 
 $bg-repeats: no-repeat, repeat, repeat-x, repeat-y;
@@ -39,7 +39,7 @@ $theme-colors: (
   light-5: $light-5,
   primary: $primary,
   primary-25: $primary-25,
-  secondary: $secondary
+  secondary: $secondary,
 );
 
 // -----------------------------------------------------------------------------
@@ -49,7 +49,6 @@ $theme-colors: (
 $grid-item-order: (
   first: -9999,
   last: 9999,
-
   0: 0,
   1: 1,
   2: 2,
@@ -62,7 +61,7 @@ $grid-item-order: (
   9: 9,
   10: 10,
   11: 11,
-  12: 12
+  12: 12,
 );
 
 $grid-item-positions: auto, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13;
@@ -80,7 +79,7 @@ $grid-item-sizes: (
   9: span 9 / span 9,
   10: span 10 / span 10,
   11: span 11 / span 11,
-  12: span 12 / span 12
+  12: span 12 / span 12,
 );
 
 // -----------------------------------------------------------------------------
@@ -100,7 +99,7 @@ $grid-template-columns: (
   9: repeat(9, minmax(0, 1fr)),
   10: repeat(10, minmax(0, 1fr)),
   11: repeat(11, minmax(0, 1fr)),
-  12: repeat(12, minmax(0, 1fr))
+  12: repeat(12, minmax(0, 1fr)),
 );
 
 // -----------------------------------------------------------------------------
@@ -109,11 +108,11 @@ $grid-template-columns: (
 
 $opacities: (
   0: 0,
-  25: .25,
-  50: .5,
-  60: .6,
-  75: .75,
-  100: 1
+  25: 0.25,
+  50: 0.5,
+  60: 0.6,
+  75: 0.75,
+  100: 1,
 );
 
 // -----------------------------------------------------------------------------
@@ -122,7 +121,6 @@ $opacities: (
 
 $sizes: (
   full: 100%,
-
   8: 8.333333%,
   16: 16.666667%,
   20: 20%,
@@ -135,7 +133,7 @@ $sizes: (
   80: 80%,
   83: 83.333333%,
   91: 91.666667%,
-  95: 95%
+  95: 95%,
 );
 
 // -----------------------------------------------------------------------------
@@ -143,15 +141,15 @@ $sizes: (
 // -----------------------------------------------------------------------------
 
 $font-families: (
-  sans: $font-family-sans-serif, 
-  special: $font-family-sans-serif-special
+  sans: $font-family-sans-serif,
+  special: $font-family-sans-serif-special,
 );
 
 $font-sizes: (
   xs: $font-size-xs,
   sm: bootstrap.$font-size-sm,
   lg: bootstrap.$font-size-lg,
-  xl: $font-size-xl
+  xl: $font-size-xl,
 );
 
 $font-weights: (
@@ -163,7 +161,7 @@ $font-weights: (
   'semibold': $font-weight-semibold,
   'bold': bootstrap.$font-weight-bold,
   'extrabold': $font-weight-extrabold,
-  'black': $font-weight-black
+  'black': $font-weight-black,
 );
 
 // -----------------------------------------------------------------------------
@@ -175,68 +173,68 @@ $utilities: (
     property: background-position,
     class: bg,
     responsive: true,
-    values: $bg-positions
+    values: $bg-positions,
   ),
   'background-repeat': (
     property: background-repeat,
     class: bg,
-    values: $bg-repeats
+    values: $bg-repeats,
   ),
   'background-size': (
     property: background-size,
     class: bg,
     responsive: true,
-    values: $bg-sizes
+    values: $bg-sizes,
   ),
   'font-family': (
     property: font-family,
     class: font,
-    values: $font-families
+    values: $font-families,
   ),
   'font-size': (
     property: font-size,
     class: text,
-    values: $font-sizes
+    values: $font-sizes,
   ),
   'font-weight': (
     property: font-weight,
     class: font,
     responsive: true,
-    values: $font-weights
+    values: $font-weights,
   ),
   'height': (
     property: height,
     class: h,
     responsive: true,
-    values: $sizes
+    values: $sizes,
   ),
   'opacity': (
     property: opacity,
     class: o,
     responsive: true,
-    values: $opacities
+    values: $opacities,
   ),
   'order': (
     property: order,
     responsive: true,
-    values: $grid-item-order
+    values: $grid-item-order,
   ),
   'max-height': (
     property: max-height,
     class: mh,
     responsive: true,
-    values: $sizes
+    values: $sizes,
   ),
   'max-width': (
     property: max-width,
     class: mw,
     responsive: true,
-    values: $sizes
+    values: $sizes,
   ),
   'width': (
     property: width,
     class: w,
     responsive: true,
-    values: $sizes
-  )
+    values: $sizes,
+  ),
 );

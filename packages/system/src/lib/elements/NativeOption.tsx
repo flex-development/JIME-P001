@@ -2,10 +2,10 @@ import React, {
   forwardRef,
   ForwardRefExoticComponent as FREC,
   PropsWithoutRef,
-  RefAttributes
+  RefAttributes,
 } from 'react'
-import { GlobalProps, PropsForFormElement } from '../declarations'
-import { useMutatedProps, useTextContentDictionary } from '../modules/hooks'
+import {GlobalProps, PropsForFormElement} from '../declarations'
+import {useMutatedProps, useTextContentDictionary} from '../modules/hooks'
 
 /**
  * @module lib/elements/NativeOption
@@ -63,7 +63,7 @@ export type NativeOptionRefProps = ReflessNativeOptionProps &
  */
 export const NativeOption: FREC<NativeOptionRefProps> = forwardRef(
   (props, ref) => {
-    const { dictionary, sanitized } = useTextContentDictionary<typeof props>(
+    const {dictionary, sanitized} = useTextContentDictionary<typeof props>(
       props
     )
 

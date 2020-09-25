@@ -1,12 +1,12 @@
-import { isBoolean, isString } from 'lodash'
+import {isBoolean, isString} from 'lodash'
 import React, {
   forwardRef,
   ForwardRefExoticComponent as FREC,
   PropsWithoutRef,
-  RefAttributes
+  RefAttributes,
 } from 'react'
-import { FontWeight, TextContentProps } from '../declarations'
-import { useMutatedProps, useTextContentDictionary } from '../modules/hooks'
+import {FontWeight, TextContentProps} from '../declarations'
+import {useMutatedProps, useTextContentDictionary} from '../modules/hooks'
 
 /**
  * @module lib/elements/Paragraph
@@ -62,9 +62,9 @@ export type ParagraphRefProps = ReflessParagraphProps & ParagraphRefAttributes
  * - **https://v5.getbootstrap.com/docs/5.0/utilities/text/**
  */
 export const Paragraph: FREC<ParagraphRefProps> = forwardRef((props, ref) => {
-  const { card, form, weight, ...rest } = props
+  const {card, form, weight, ...rest} = props
 
-  const { dictionary, sanitized } = useTextContentDictionary<typeof rest>(
+  const {dictionary, sanitized} = useTextContentDictionary<typeof rest>(
     rest,
     'text'
   )
@@ -77,7 +77,7 @@ export const Paragraph: FREC<ParagraphRefProps> = forwardRef((props, ref) => {
     'card-text': isBoolean(card) && card,
     'card-title': isString(card) && card === 'title',
     'form-text': form,
-    [`font-${weight}`]: weight
+    [`font-${weight}`]: weight,
   })
 
   return <p {...mutatedProps} ref={ref} />
@@ -90,5 +90,5 @@ Paragraph.defaultProps = {
   color: false,
   form: false,
   size: false,
-  weight: false
+  weight: false,
 }

@@ -11,6 +11,6 @@ module.exports = {
   sassOptions: {
     includePaths: ['src/theme/'],
     indentedSyntax: false,
-    outputStyle: 'expanded'
-  }
+    outputStyle: 'expanded',
+  },
 }

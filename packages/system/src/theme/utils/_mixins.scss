@@ -89,9 +89,9 @@
 /// @param {String} $direction - justify-content value
 /// @param {String} $display [flex] - Flexbox display
 @mixin flex(
-  $align: stretch, 
-  $justify: flex-start, 
-  $direction: null, 
+  $align: stretch,
+  $justify: flex-start,
+  $direction: null,
   $display: flex
 ) {
   @include display-flex($display);
@@ -218,7 +218,7 @@
   @if $filename {
     background-image: $filename;
   }
-  
+
   background-position: $pos;
   background-repeat: $repeat;
   background-size: $size;
@@ -433,8 +433,9 @@
 /// @param {Boolean} $w-important [false] - If true, add !important to width
 /// @param {Boolean} $h-important [false] - If true, add !important to height
 @mixin set-element-dimensions(
-  $width, $height: $width, 
-  $w-important: false, 
+  $width,
+  $height: $width,
+  $w-important: false,
   $h-important: false
 ) {
   height: if($h-important, $height !important, $height);

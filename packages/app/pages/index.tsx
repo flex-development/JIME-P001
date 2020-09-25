@@ -2,11 +2,10 @@ import {
   GetStaticProps,
   InferGetStaticPropsType,
   NextComponentType,
-  NextPageContext
+  NextPageContext,
 } from 'next'
 import Head from 'next/head'
 import React from 'react'
-
 
 /**
  * Renders the homepage.
@@ -17,7 +16,7 @@ const Index: NextComponentType<
   NextPageContext,
   InferGetStaticPropsType<typeof getStaticProps>,
   InferGetStaticPropsType<typeof getStaticProps>
-> = (props) => {
+> = props => {
   return (
     <div className='container'>
       <Head>
@@ -215,7 +214,7 @@ const Index: NextComponentType<
  */
 export const getStaticProps: GetStaticProps = async ctx => {
   try {
-    return { props: { preview: ctx.preview || false } }
+    return {props: {preview: ctx.preview || false}}
   } catch (error) {
     throw error
   }

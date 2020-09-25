@@ -4,7 +4,6 @@
  */
 
 export * from './getCurrentTime'
-export { default as logger } from './logger'
-
+export {default as logger} from './logger'
 
 /* eslint-disable prettier/prettier */

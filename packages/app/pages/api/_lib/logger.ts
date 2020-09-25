@@ -16,6 +16,6 @@ export default pino({
     errorProps: 'className,code,data,errors,message,name',
     ignore: 'hostname,pid',
     levelFirst: true,
-    translateTime: true
-  }
+    translateTime: true,
+  },
 })

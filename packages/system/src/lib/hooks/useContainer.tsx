@@ -1,3 +1,4 @@
+import { AnyObject } from '@flex-development/kustomtypez'
 import { GlobalProps } from '@kustomz/types'
 import { isBoolean, omit } from 'lodash'
 import React, { useEffect, useState } from 'react'
@@ -19,7 +20,7 @@ import { Container, ContainerProps } from '../components/Container'
  * @param props.container - Boolean or Container component properties
  */
 export const useContainer = (props: GlobalProps): GlobalProps => {
-  const { children, container: initialContainer = false } = props
+  const { children, container: initialContainer = false } = props as AnyObject
 
   const containerProps = isBoolean(initialContainer) ? {} : initialContainer
 

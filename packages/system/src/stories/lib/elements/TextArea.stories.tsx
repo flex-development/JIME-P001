@@ -1,5 +1,5 @@
-import { TextArea, TextAreaProps } from '@kustomz'
-import { StoryFN } from '@kustomz-config'
+import {TextArea, TextAreaProps} from '@kustomz'
+import {StoryFN} from '@kustomz-config'
 import React from 'react'
 
 /**
@@ -9,7 +9,7 @@ import React from 'react'
 
 export default {
   component: TextArea,
-  title: 'Elements/TextArea'
+  title: 'Elements/TextArea',
 }
 
 /**

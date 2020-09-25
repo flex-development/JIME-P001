@@ -1,13 +1,13 @@
-import { Booleanish } from '@flex-development/kustomtypez'
+import {Booleanish} from '@flex-development/kustomtypez'
 import React, {
   forwardRef,
   ForwardRefExoticComponent as FREC,
   PropsWithoutRef,
-  RefAttributes
+  RefAttributes,
 } from 'react'
-import { ContentSectionProps } from '../declarations'
-import { useMutatedProps, useTextContentDictionary } from '../modules/hooks'
-import { InputValue } from './Input'
+import {ContentSectionProps} from '../declarations'
+import {useMutatedProps, useTextContentDictionary} from '../modules/hooks'
+import {InputValue} from './Input'
 
 /**
  * @module lib/elements/Item
@@ -62,9 +62,9 @@ export type ItemRefProps = ReflessItemProps & ItemRefAttributes
  * - **https://v5.getbootstrap.com/docs/5.0/components/navs/**
  */
 export const Item: FREC<ItemRefProps> = forwardRef((props, ref) => {
-  const { dropdown, nav, ...rest } = props
+  const {dropdown, nav, ...rest} = props
 
-  const { dictionary, sanitized } = useTextContentDictionary<typeof rest>(rest)
+  const {dictionary, sanitized} = useTextContentDictionary<typeof rest>(rest)
 
   const mutatedProps = useMutatedProps<
     typeof sanitized,
@@ -72,7 +72,7 @@ export const Item: FREC<ItemRefProps> = forwardRef((props, ref) => {
   >(sanitized, {
     ...dictionary,
     'dropdown-item': dropdown,
-    'nav-item': nav
+    'nav-item': nav,
   })
 
   return <li {...mutatedProps} ref={ref} />
@@ -80,5 +80,5 @@ export const Item: FREC<ItemRefProps> = forwardRef((props, ref) => {
 
 Item.defaultProps = {
   dropdown: false,
-  nav: false
+  nav: false,
 }

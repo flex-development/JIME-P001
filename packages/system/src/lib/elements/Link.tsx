@@ -2,10 +2,10 @@ import React, {
   forwardRef,
   ForwardRefExoticComponent as FREC,
   PropsWithoutRef,
-  RefAttributes
+  RefAttributes,
 } from 'react'
-import { TextContentProps } from '../declarations'
-import { useMutatedProps, useTextContentDictionary } from '../modules/hooks'
+import {TextContentProps} from '../declarations'
+import {useMutatedProps, useTextContentDictionary} from '../modules/hooks'
 
 /**
  * @module lib/elements/Link
@@ -18,7 +18,6 @@ import { useMutatedProps, useTextContentDictionary } from '../modules/hooks'
  * {@link Link} component properties.
  */
 export interface LinkProps extends TextContentProps<HTMLAnchorElement> {
-
   /* eslint-enable prettier/prettier */
 
   /**
@@ -145,9 +144,9 @@ export type LinkRefProps = ReflessLinkProps & LinkRefAttributes
  * - **https://nextjs.org/docs/api-reference/next/link**
  */
 export const Link: FREC<LinkRefProps> = forwardRef((props, ref) => {
-  const { active, card, dropdown, nav, stretched, toggle, ...rest } = props
+  const {active, card, dropdown, nav, stretched, toggle, ...rest} = props
 
-  const { dictionary, sanitized } = useTextContentDictionary<typeof rest>(
+  const {dictionary, sanitized} = useTextContentDictionary<typeof rest>(
     rest,
     nav ? 'nav-link' : 'link'
   )
@@ -162,7 +161,7 @@ export const Link: FREC<LinkRefProps> = forwardRef((props, ref) => {
     disabled: rest.disabled && rest.disabled,
     'dropdown-item': dropdown,
     'dropdown-toggle': toggle,
-    'stretched-link': stretched
+    'stretched-link': stretched,
   })
 
   if (toggle) {
@@ -184,5 +183,5 @@ Link.defaultProps = {
   dropdown: false,
   href: '#',
   nav: false,
-  size: false
+  size: false,
 }

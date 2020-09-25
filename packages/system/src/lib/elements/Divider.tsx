@@ -2,10 +2,10 @@ import React, {
   forwardRef,
   ForwardRefExoticComponent as FREC,
   PropsWithoutRef,
-  RefAttributes
+  RefAttributes,
 } from 'react'
-import { PropsForVoidElementTag } from '../declarations'
-import { useMutatedProps } from '../modules/hooks'
+import {PropsForVoidElementTag} from '../declarations'
+import {useMutatedProps} from '../modules/hooks'
 
 /**
  * @module lib/elements/Divider

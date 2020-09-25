@@ -15,9 +15,9 @@ import {
   Timeout,
   TooManyRequests,
   Unavailable,
-  Unprocessable
+  Unprocessable,
 } from '@feathersjs/errors'
-import { AnyObject } from '@flex-development/kustomtypez'
+import {AnyObject} from '@flex-development/kustomtypez'
 
 /**
  * @file Creates a new Feathers error

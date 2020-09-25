@@ -1,5 +1,5 @@
-import { Image, ImageProps } from '@kustomz'
-import { StoryFN } from '@kustomz-config'
+import {Image, ImageProps} from '@kustomz'
+import {StoryFN} from '@kustomz-config'
 import React from 'react'
 
 /**
@@ -9,7 +9,7 @@ import React from 'react'
 
 export default {
   component: Image,
-  title: 'Elements/Image'
+  title: 'Elements/Image',
 }
 
 /**
@@ -21,7 +21,7 @@ export const Fluid: StoryFN<ImageProps> = (args: ImageProps) => (
 
 Fluid.args = {
   fluid: true,
-  src: 'https://picsum.photos/1920/1080'
+  src: 'https://picsum.photos/1920/1080',
 }
 
 /**
@@ -34,7 +34,7 @@ export const Rounded: StoryFN<ImageProps> = (args: ImageProps) => (
 Rounded.args = {
   alt: 'Random Picsum photo',
   rounded: true,
-  src: 'https://picsum.photos/350/400'
+  src: 'https://picsum.photos/350/400',
 }
 
 /**
@@ -47,5 +47,5 @@ export const Thumbnail: StoryFN<ImageProps> = (args: ImageProps) => (
 Thumbnail.args = {
   alt: 'Picsum thumbnail image',
   src: 'https://picsum.photos/400',
-  thumbnail: true
+  thumbnail: true,
 }

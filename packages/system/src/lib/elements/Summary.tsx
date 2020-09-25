@@ -1,13 +1,10 @@
 import React, {
   forwardRef,
   ForwardRefExoticComponent as FREC,
-  PropsWithoutRef
+  PropsWithoutRef,
 } from 'react'
-import {
-  ContentSectionProps,
-  HTMLElementRefAttributes
-} from '../declarations'
-import { useMutatedProps, useTextContentDictionary } from '../modules/hooks'
+import {ContentSectionProps, HTMLElementRefAttributes} from '../declarations'
+import {useMutatedProps, useTextContentDictionary} from '../modules/hooks'
 
 /**
  * @module lib/elements/Summary
@@ -35,9 +32,7 @@ export type SummaryRefProps = ReflessSummaryProps & HTMLElementRefAttributes
  * - **https://developer.mozilla.org/docs/Web/HTML/Element/summary**
  */
 export const Summary: FREC<SummaryRefProps> = forwardRef((props, ref) => {
-  const { dictionary, sanitized } = useTextContentDictionary<typeof props>(
-    props
-  )
+  const {dictionary, sanitized} = useTextContentDictionary<typeof props>(props)
 
   const mutatedProps = useMutatedProps<
     typeof sanitized,

@@ -1,5 +1,5 @@
-import { Details, DetailsProps } from '@kustomz'
-import { box_variant as variant, color, size, StoryFN } from '@kustomz-config'
+import {Details, DetailsProps} from '@kustomz'
+import {box_variant as variant, color, size, StoryFN} from '@kustomz-config'
 import React from 'react'
 
 /**
@@ -8,9 +8,9 @@ import React from 'react'
  */
 
 export default {
-  argTypes: { color, size, variant },
+  argTypes: {color, size, variant},
   component: Details,
-  title: 'Elements/Details'
+  title: 'Elements/Details',
 }
 
 /**
@@ -22,5 +22,5 @@ export const Default: StoryFN<DetailsProps> = (args: DetailsProps) => (
 
 Default.args = {
   children: 'Something small enough to escape casual notice.',
-  summary: { children: 'Details' }
+  summary: {children: 'Details'},
 }

@@ -9,7 +9,7 @@
 .bg {
   @each $key, $color in $theme-colors {
     &-#{$key} {
-      @if $key == 'white'  {
+      @if $key == 'white' {
         color: $dark;
       } @else if $key == 'accent' or $key == 'yellow' {
         color: $black !important;
@@ -59,7 +59,7 @@
     .#{$event}\:bg-#{$key}:#{$event} {
       background-color: $color !important;
 
-      @if $key == 'white'  {
+      @if $key == 'white' {
         color: $dark;
       } @else if $key == 'accent' or $key == 'yellow' {
         color: $black !important;
@@ -85,7 +85,7 @@
     @include media-breakpoint-up($breakpoint) {
       $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
 
-      &#{$infix}-center { 
+      &#{$infix}-center {
         @include flex-center;
       }
     }
@@ -95,7 +95,7 @@
     @include media-breakpoint-up($breakpoint) {
       $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
 
-      &#{$infix}-spread { 
+      &#{$infix}-spread {
         @include flex-spread;
       }
     }
@@ -114,7 +114,7 @@
           $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
 
           .#{$abbr}#{$direction}-0 {
-            &-#{$pos}#{$infix} > *:#{$pos}-child { 
+            &-#{$pos}#{$infix} > *:#{$pos}-child {
               #{$value}-#{$dir}: map-get($spacers, 0) !important;
             }
           }
@@ -124,7 +124,6 @@
   }
 }
 
-
 @each $abbr, $dimension in (h: height, w: width) {
   @each $key, $space in $spacers {
     .#{$abbr}-spacer {
@@ -132,15 +131,15 @@
         @include element-size($space, $dimension, $space, $space);
       }
 
-        @each $breakpoint in map-keys($grid-breakpoints) {
-          @include media-breakpoint-up($breakpoint) {
-            $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+      @each $breakpoint in map-keys($grid-breakpoints) {
+        @include media-breakpoint-up($breakpoint) {
+          $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
 
-            &#{$infix}-#{$key} { 
-              @include element-size($space, $dimension, $space, $space);
-            }
+          &#{$infix}-#{$key} {
+            @include element-size($space, $dimension, $space, $space);
           }
         }
+      }
     }
   }
 }

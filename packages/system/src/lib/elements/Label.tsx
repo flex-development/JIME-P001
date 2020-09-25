@@ -2,10 +2,10 @@ import React, {
   forwardRef,
   ForwardRefExoticComponent as FREC,
   PropsWithoutRef,
-  RefAttributes
+  RefAttributes,
 } from 'react'
-import { TextContentProps } from '../declarations'
-import { useMutatedProps, useTextContentDictionary } from '../modules/hooks'
+import {TextContentProps} from '../declarations'
+import {useMutatedProps, useTextContentDictionary} from '../modules/hooks'
 
 /**
  * @module lib/elements/Label
@@ -55,9 +55,9 @@ export type LabelRefProps = ReflessLabelProps & LabelRefAttributes
  * - **https://v5.getbootstrap.com/docs/5.0/forms/overview/#form-text**
  */
 export const Label: FREC<LabelRefProps> = forwardRef((props, ref) => {
-  const { col, required, ...rest } = props
+  const {col, required, ...rest} = props
 
-  const { dictionary, sanitized } = useTextContentDictionary<typeof rest>(rest)
+  const {dictionary, sanitized} = useTextContentDictionary<typeof rest>(rest)
 
   if (required) sanitized['data-required'] = required
 
@@ -67,7 +67,7 @@ export const Label: FREC<LabelRefProps> = forwardRef((props, ref) => {
   >(sanitized, {
     ...dictionary,
     'col-form-label': col,
-    'form-label': !col
+    'form-label': !col,
   })
 
   /* eslint-disable jsx-a11y/label-has-associated-control */
@@ -79,5 +79,5 @@ export const Label: FREC<LabelRefProps> = forwardRef((props, ref) => {
 
 Label.defaultProps = {
   col: false,
-  required: false
+  required: false,
 }

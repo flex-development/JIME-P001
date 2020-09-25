@@ -2,15 +2,15 @@ import React, {
   forwardRef,
   ForwardRefExoticComponent as FREC,
   PropsWithoutRef,
-  RefAttributes
+  RefAttributes,
 } from 'react'
 import {
   ButtonVariant,
   FormControlSize,
   PropsForFormElement,
-  ThemeColor
+  ThemeColor,
 } from '../declarations'
-import { useMutatedProps } from '../modules/hooks'
+import {useMutatedProps} from '../modules/hooks'
 
 /**
  * @module lib/elements/Button
@@ -123,7 +123,7 @@ export type ButtonRefProps = ReflessButtonProps & ButtonRefAttributes
  * - **https://v5.getbootstrap.com/docs/5.0/components/buttons/**
  */
 export const Button: FREC<ButtonRefProps> = forwardRef((props, ref) => {
-  const { color, size, ...rest } = props
+  const {color, size, ...rest} = props
 
   if (rest.icon && !rest.children) rest.variant = 'ghost'
 
@@ -134,7 +134,7 @@ export const Button: FREC<ButtonRefProps> = forwardRef((props, ref) => {
     btn: true,
     disabled: rest.disabled && rest.disabled,
     [`btn-${size}`]: size,
-    [`text-${color}`]: color
+    [`text-${color}`]: color,
   })
 
   return <button {...mutatedProps} ref={ref} />
@@ -144,5 +144,5 @@ Button.defaultProps = {
   color: false,
   size: false,
   type: 'button',
-  variant: false
+  variant: false,
 }

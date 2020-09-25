@@ -1,5 +1,5 @@
-import { Icon, IconProps } from '@kustomz'
-import { color, size, StoryFN } from '@kustomz-config'
+import {Icon, IconProps} from '@kustomz'
+import {color, size, StoryFN} from '@kustomz-config'
 import React from 'react'
 
 /**
@@ -8,9 +8,9 @@ import React from 'react'
  */
 
 export default {
-  argTypes: { color, size },
+  argTypes: {color, size},
   component: Icon,
-  title: 'Elements/Icon'
+  title: 'Elements/Icon',
 }
 
 /**
@@ -23,7 +23,7 @@ export const FontAwesome: StoryFN<IconProps> = (args: IconProps) => (
 FontAwesome.args = {
   className: 'fas fa-spinner fa-spin',
   color: 'light',
-  size: '2xl'
+  size: '2xl',
 }
 
 /**
@@ -36,5 +36,5 @@ export const MaterialUI: StoryFN<IconProps> = (args: IconProps) => (
 MaterialUI.args = {
   children: 'shopping_cart',
   color: 'primary',
-  size: '4xl'
+  size: '4xl',
 }

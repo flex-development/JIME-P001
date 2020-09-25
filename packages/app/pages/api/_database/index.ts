@@ -6,6 +6,6 @@ import './config'
  */
 
 export * from './models'
-export { default as repositories } from './repositories'
+export {default as repositories} from './repositories'
 
 /* eslint-disable prettier/prettier */

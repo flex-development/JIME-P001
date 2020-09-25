@@ -1,4 +1,4 @@
-import { NextApiRequest, NextApiResponse } from 'next'
+import {NextApiRequest, NextApiResponse} from 'next'
 
 /**
  * @file API Middleware

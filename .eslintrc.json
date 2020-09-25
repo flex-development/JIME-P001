@@ -1,3 +1,6 @@
+// ESLint Configuration
+// See: https://eslint.org/docs/user-guide/configuring
+
 {
   "env": {
     "browser": true,
@@ -10,7 +13,8 @@
     "./node_modules/gts",
     "google",
     "nextjs",
-    "plugin:jest/recommended"
+    "plugin:jest/recommended",
+    "plugin:mdx/recommended"
   ],
   "globals": {},
   "parser": "@typescript-eslint/parser",

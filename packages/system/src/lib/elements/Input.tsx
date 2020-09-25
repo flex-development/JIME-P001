@@ -2,10 +2,10 @@ import React, {
   forwardRef,
   ForwardRefExoticComponent as FREC,
   PropsWithoutRef,
-  RefAttributes
+  RefAttributes,
 } from 'react'
-import { PropsForFormElement } from '../declarations'
-import { useMutatedProps } from '../modules/hooks'
+import {PropsForFormElement} from '../declarations'
+import {useMutatedProps} from '../modules/hooks'
 
 /**
  * @module lib/elements/Input
@@ -45,8 +45,8 @@ export interface InputProps
    * assistance in filling out form field values, as well as tells the browser
    * what type of information expected in the field.
    */
-  autoComplete?: (
-    'off'
+  autoComplete?:
+    | 'off'
     | 'on'
     | 'name'
     | 'honorific-prefix'
@@ -100,7 +100,6 @@ export interface InputProps
     | 'impp'
     | 'url'
     | 'photo'
-  )
 
   /* eslint-enable prettier/prettier */
 
@@ -282,11 +281,11 @@ export interface InputProps
    *
    * If omitted (or an unknown value is specified), the input type `text` is
    * used, creating a plaintext input field.
-   * 
+   *
    * @default 'text'
    */
-  type?: (
-    'button'
+  type?:
+    | 'button'
     | 'checkbox'
     | 'color'
     | 'date'
@@ -308,7 +307,6 @@ export interface InputProps
     | 'time'
     | 'url'
     | 'week'
-  )
 
   /* eslint-enable prettier/prettier */
 }
@@ -348,7 +346,7 @@ export type InputRefProps = ReflessInputProps & InputRefAttributes
 export const Input: FREC<InputRefProps> = forwardRef((props, ref) => {
   const checkInputTypes = ['checkbox', 'radio']
 
-  const { type = '' } = props
+  const {type = ''} = props
 
   const mutatedProps = useMutatedProps<
     typeof props,
@@ -356,12 +354,12 @@ export const Input: FREC<InputRefProps> = forwardRef((props, ref) => {
   >(props, {
     'form-check-input': checkInputTypes.includes(type),
     'form-control': !checkInputTypes.includes(type),
-    'form-file-input': type === 'file'
+    'form-file-input': type === 'file',
   })
 
   return <input {...mutatedProps} ref={ref} />
 })
 
 Input.defaultProps = {
-  type: 'text'
+  type: 'text',
 }

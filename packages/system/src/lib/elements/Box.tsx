@@ -2,10 +2,10 @@ import React, {
   forwardRef,
   ForwardRefExoticComponent as FREC,
   PropsWithoutRef,
-  RefAttributes
+  RefAttributes,
 } from 'react'
-import { ContentSectionProps } from '../declarations'
-import { useMutatedProps, useTextContentDictionary } from '../modules/hooks'
+import {ContentSectionProps} from '../declarations'
+import {useMutatedProps, useTextContentDictionary} from '../modules/hooks'
 
 /**
  * @module lib/elements/Box
@@ -38,7 +38,7 @@ export type BoxRefProps = ReflessBoxProps & BoxRefAttributes
  * - **https://developer.mozilla.org/docs/Web/HTML/Element/div**
  */
 export const Box: FREC<BoxRefProps> = forwardRef((props, ref) => {
-  const { dictionary, sanitized } = useTextContentDictionary<typeof props>(
+  const {dictionary, sanitized} = useTextContentDictionary<typeof props>(
     props,
     'box'
   )

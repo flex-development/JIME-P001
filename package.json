@@ -32,7 +32,7 @@
     "postinstall": "lerna bootstrap",
     "clean": "lerna clean --yes && rm -rf yarn.lock node_modules/ && yarn",
     "format": "prettier --write \"./\"",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
+    "lint": "eslint . --ext .js,.jsx,mdx,.ts,.tsx --fix",
     "dev:app": "lerna run dev --scope @flex-development/morenaskustomz",
     "dev:ui": "lerna run dev --scope @flex-development/kustomz",
     "start": "lerna run start"
@@ -53,6 +53,7 @@
     "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-jest": "^24.0.2",
     "eslint-plugin-jsx-a11y": "^6.3.1",
+    "eslint-plugin-mdx": "^1.8.2",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-react-hooks": "^4.0.8",

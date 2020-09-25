@@ -1,13 +1,10 @@
 import React, {
   forwardRef,
   ForwardRefExoticComponent as FREC,
-  PropsWithoutRef
+  PropsWithoutRef,
 } from 'react'
-import {
-  ContentSectionProps,
-  HTMLElementRefAttributes
-} from '../declarations'
-import { useMutatedProps, useTextContentDictionary } from '../modules/hooks'
+import {ContentSectionProps, HTMLElementRefAttributes} from '../declarations'
+import {useMutatedProps, useTextContentDictionary} from '../modules/hooks'
 
 /**
  * @module lib/elements/Section
@@ -35,9 +32,7 @@ export type SectionRefProps = ReflessSectionProps & HTMLElementRefAttributes
  * - **https://developer.mozilla.org/en-US/docs/Web/HTML/Element/section**
  */
 export const Section: FREC<SectionRefProps> = forwardRef((props, ref) => {
-  const { dictionary, sanitized } = useTextContentDictionary<typeof props>(
-    props
-  )
+  const {dictionary, sanitized} = useTextContentDictionary<typeof props>(props)
 
   const mutatedProps = useMutatedProps<
     typeof sanitized,

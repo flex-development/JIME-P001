@@ -1,5 +1,5 @@
-import { Paragraph, ParagraphProps } from '@kustomz'
-import { color, size, StoryFN, variant } from '@kustomz-config'
+import {Paragraph, ParagraphProps} from '@kustomz'
+import {color, size, StoryFN, variant} from '@kustomz-config'
 import React from 'react'
 
 /**
@@ -8,9 +8,9 @@ import React from 'react'
  */
 
 export default {
-  argTypes: { color, size, variant },
+  argTypes: {color, size, variant},
   component: Paragraph,
-  title: 'Elements/Paragraph'
+  title: 'Elements/Paragraph',
 }
 
 /**
@@ -25,10 +25,12 @@ Default.args = {}
 /**
  * {@link Form} {@link Paragraph} story.
  */
-export const Form: StoryFN<ParagraphProps> = (args: ParagraphProps) => <Paragraph {...args} />
+export const Form: StoryFN<ParagraphProps> = (args: ParagraphProps) => (
+  <Paragraph {...args} />
+)
 
 Form.args = {
   children:
     'Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.',
-  form: true
+  form: true,
 }

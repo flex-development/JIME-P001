@@ -1,5 +1,5 @@
-import { Span, SpanProps } from '@kustomz'
-import { box_variant as variant, color, size, StoryFN } from '@kustomz-config'
+import {Span, SpanProps} from '@kustomz'
+import {box_variant as variant, color, size, StoryFN} from '@kustomz-config'
 import React from 'react'
 
 /**
@@ -8,9 +8,9 @@ import React from 'react'
  */
 
 export default {
-  argTypes: { color, size, variant },
+  argTypes: {color, size, variant},
   component: Span,
-  title: 'Elements/Span'
+  title: 'Elements/Span',
 }
 
 /**
@@ -21,5 +21,5 @@ export const Default: StoryFN<SpanProps> = (args: SpanProps) => (
 )
 
 Default.args = {
-  children: 'Span text'
+  children: 'Span text',
 }

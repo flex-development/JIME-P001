@@ -2,11 +2,11 @@ import React, {
   forwardRef,
   ForwardRefExoticComponent as FREC,
   PropsWithoutRef,
-  RefAttributes
+  RefAttributes,
 } from 'react'
-import { GlobalProps } from '../declarations'
-import { Item, ItemProps } from '../elements'
-import { useMutatedProps } from '../modules/hooks'
+import {GlobalProps} from '../declarations'
+import {Item, ItemProps} from '../elements'
+import {useMutatedProps} from '../modules/hooks'
 
 /**
  * @module lib/elements/List
@@ -65,8 +65,8 @@ export type ListRefProps = ReflessListProps & ListRefAttributes
  * - **https://developer.mozilla.org/docs/Web/HTML/Element/ol**
  * - **https://developer.mozilla.org/docs/Web/HTML/Element/ul**
  */
-export const List: FREC<ListRefProps> = forwardRef(({ is, ...props }, ref) => {
-  const { items, ...rest } = props
+export const List: FREC<ListRefProps> = forwardRef(({is, ...props}, ref) => {
+  const {items, ...rest} = props
 
   const mutatedProps = useMutatedProps<typeof rest, InstrinsicListProps>(rest)
 
@@ -90,5 +90,5 @@ export const List: FREC<ListRefProps> = forwardRef(({ is, ...props }, ref) => {
 
 List.defaultProps = {
   is: 'ul',
-  items: []
+  items: [],
 }

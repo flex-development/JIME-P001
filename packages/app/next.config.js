@@ -3,11 +3,7 @@
  * @see {@link https://nextjs.org/docs/api-reference/next.config.js/introduction}
  */
 
-const {
-  GOOGLE_ANALYTICS_MEASUREMENT_ID,
-  SITE_URL,
-  VERCEL_URL
-} = process.env
+const {GOOGLE_ANALYTICS_MEASUREMENT_ID, SITE_URL, VERCEL_URL} = process.env
 
 module.exports = {
   /**
@@ -21,7 +17,7 @@ module.exports = {
    */
   env: {
     GOOGLE_ANALYTICS_MEASUREMENT_ID,
-    SITE_URL: SITE_URL | VERCEL_URL | 'http://localhost:3000'
+    SITE_URL: SITE_URL | VERCEL_URL | 'http://localhost:3000',
   },
 
   /**
@@ -64,5 +60,5 @@ module.exports = {
    * @param {object} helpers.webpack - Webpack
    * @returns {object} Altered Webpack configuration
    */
-  webpack: (config, helpers) => config
+  webpack: (config, helpers) => config,
 }

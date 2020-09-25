@@ -1,11 +1,11 @@
-import { AnyObject } from '@flex-development/kustomtypez'
+import {AnyObject} from '@flex-development/kustomtypez'
 import classnames from 'classnames'
-import { ClassValue } from 'classnames/types'
-import { isObject, isString, omit, uniq } from 'lodash'
-import { HTMLAttributes } from 'react'
-import { GlobalProps } from '../../declarations'
-import { useContainer } from './useContainer'
-import { useIcon } from './useIcon'
+import {ClassValue} from 'classnames/types'
+import {isObject, isString, omit, uniq} from 'lodash'
+import {HTMLAttributes} from 'react'
+import {GlobalProps} from '../../declarations'
+import {useContainer} from './useContainer'
+import {useIcon} from './useIcon'
 
 /**
  * @file Add global mutations to incoming props
@@ -45,14 +45,14 @@ export function useMutatedProps<
   keys = keys || []
 
   if (withContainer.innerHTML) {
-    withContainer.dangerouslySetInnerHTML = { __html: withContainer.innerHTML }
+    withContainer.dangerouslySetInnerHTML = {__html: withContainer.innerHTML}
 
     keys.push('innerHTML')
     keys.push('children')
   }
 
   if (withContainer.flex) {
-    const { flex } = withContainer
+    const {flex} = withContainer
 
     injectClass = isObject(injectClass) ? injectClass : {}
     injectClass[`d-${isString(flex) ? 'inline-' : ''}flex`] = flex
@@ -61,7 +61,7 @@ export function useMutatedProps<
   }
 
   if ((withContainer as AnyObject).variant) {
-    const { variant } = withContainer as AnyObject
+    const {variant} = withContainer as AnyObject
 
     injectClass = isObject(injectClass) ? injectClass : {}
     injectClass[`${injectClass.btn ? 'btn' : 'bg'}-${variant}`] = variant
@@ -73,7 +73,7 @@ export function useMutatedProps<
 
   const mutatedProps = {
     ...withContainer,
-    children: globalProps.icon ? withIcon.children : withContainer.children
+    children: globalProps.icon ? withIcon.children : withContainer.children,
   }
 
   return omit(mutatedProps, uniq(keys)) as Mask

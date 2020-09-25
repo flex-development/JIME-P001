@@ -1,11 +1,11 @@
+import { GlobalProps, SpacerKey } from '@kustomz/types'
 import React, {
   forwardRef,
   ForwardRefExoticComponent as FREC,
-  PropsWithoutRef,
+  PropsWithoutRef
 } from 'react'
-import {GlobalProps, SpacerKey} from '../declarations'
-import {useMutatedProps} from '../modules/hooks'
-import {BoxRefAttributes} from './Box'
+import { useMutatedProps } from '../hooks'
+import { BoxRefAttributes } from './Box'
 
 /**
  * @module lib/elements/Spacer
@@ -40,16 +40,16 @@ export type SpacerRefProps = ReflessSpacerProps & BoxRefAttributes
  * - **https://developer.mozilla.org/docs/Web/HTML/Element/div**
  */
 export const Spacer: FREC<SpacerRefProps> = forwardRef((props, ref) => {
-  const {spacer, ...rest} = props
+  const { spacer, ...rest } = props
 
   const mutatedProps = useMutatedProps<
     typeof rest,
     JSX.IntrinsicElements['div']
-  >(rest, {[`h-spacer-${spacer}`]: true})
+  >(rest, { [`h-spacer-${spacer}`]: true })
 
   return <div {...mutatedProps} ref={ref} />
 })
 
 Spacer.defaultProps = {
-  spacer: 0,
+  spacer: 0
 }

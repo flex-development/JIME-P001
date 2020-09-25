@@ -1,12 +1,12 @@
+import { GlobalProps, ThemeColor, ThemeOutline } from '@kustomz/types'
 import React, {
   forwardRef,
   ForwardRefExoticComponent as FREC,
   PropsWithoutRef,
-  RefAttributes,
+  RefAttributes
 } from 'react'
-import {Summary, SummaryProps} from '.'
-import {GlobalProps, ThemeColor, ThemeOutline} from '../declarations'
-import {useMutatedProps} from '../modules/hooks'
+import { Summary, SummaryProps } from '.'
+import { useMutatedProps } from '../hooks'
 
 /**
  * @module lib/elements/Details
@@ -59,7 +59,7 @@ export type DetailsRefProps = ReflessDetailsProps & DetailsRefAttributes
  * - **https://developer.mozilla.org/docs/Web/HTML/Element/details**
  */
 export const Details: FREC<DetailsRefProps> = forwardRef((props, ref) => {
-  const {children, summary, ...rest} = props
+  const { children, summary, ...rest } = props
 
   const mutatedProps = useMutatedProps<
     typeof rest,
@@ -75,5 +75,5 @@ export const Details: FREC<DetailsRefProps> = forwardRef((props, ref) => {
 })
 
 Details.defaultProps = {
-  open: false,
+  open: false
 }

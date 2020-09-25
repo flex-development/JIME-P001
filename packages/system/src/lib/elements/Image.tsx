@@ -1,11 +1,11 @@
+import { PropsForVoidElementTag } from '@kustomz/types'
 import React, {
   forwardRef,
   ForwardRefExoticComponent as FREC,
   PropsWithoutRef,
-  RefAttributes,
+  RefAttributes
 } from 'react'
-import {PropsForVoidElementTag} from '../declarations'
-import {useMutatedProps} from '../modules/hooks'
+import { useMutatedProps } from '../hooks'
 
 /**
  * @module lib/elements/Image
@@ -126,7 +126,7 @@ export type ImageRefProps = ReflessImageProps & ImageRefAttributes
  * - **https://v5.getbootstrap.com/docs/5.0/content/images/**
  */
 export const Image: FREC<ImageRefProps> = forwardRef((props, ref) => {
-  const {fluid, rounded, thumbnail, ...rest} = props
+  const { fluid, rounded, thumbnail, ...rest } = props
 
   const mutatedProps = useMutatedProps<
     typeof rest,
@@ -135,7 +135,7 @@ export const Image: FREC<ImageRefProps> = forwardRef((props, ref) => {
     img: true,
     'img-fluid': fluid,
     'img-thumbnail': thumbnail,
-    rounded,
+    rounded
   })
 
   /* eslint-disable jsx-a11y/alt-text */

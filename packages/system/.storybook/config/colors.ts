@@ -11,24 +11,24 @@ import _ from 'lodash'
 export const colors = {
   dark: {
     name: 'Dark',
-    value: '#232946',
+    value: '#232946'
   },
   darker: {
     name: 'Darker',
-    value: '#121629',
+    value: '#121629'
   },
   light: {
     name: 'Light',
-    value: '#fffffe',
+    value: '#fffffe'
   },
   primary: {
     name: 'Primary',
-    value: '#eebbc3',
+    value: '#eebbc3'
   },
   secondary: {
     name: 'Secondary',
-    value: '#b8c1ec',
-  },
+    value: '#b8c1ec'
+  }
 }
 
 /**
@@ -42,13 +42,13 @@ export const colors = {
 export const getThemeColor = (path: string, docs = true) => {
   if (!_.isString(path)) return {}
 
-  const color = _.get(colors, path, {title: '', subtitle: '', colors: []})
+  const color = _.get(colors, path, { title: '', subtitle: '', colors: [] })
 
   if (!docs) return color
 
   return {
     colors: [color.value],
     title: color.name,
-    subtitle: `var(--bs-${path})`,
+    subtitle: `var(--bs-${path})`
   }
 }

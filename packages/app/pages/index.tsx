@@ -2,10 +2,22 @@ import {
   GetStaticProps,
   InferGetStaticPropsType,
   NextComponentType,
-  NextPageContext,
+  NextPageContext
 } from 'next'
 import Head from 'next/head'
 import React from 'react'
+
+/**
+ * Pre-renders the homepage with data from the internal CMS.
+ *
+ * @param ctx - Page context
+ * @param ctx.params - Route parameters for pages using dynamic routes
+ * @param ctx.preview - `true` if in the preview mode, `undefined` otherwise
+ * @param ctx.previewData - Preview data set by `setPreviewData`
+ */
+export const getStaticProps: GetStaticProps = async ctx => {
+  return { props: { preview: ctx.preview || false } }
+}
 
 /**
  * Renders the homepage.
@@ -202,22 +214,6 @@ const Index: NextComponentType<
       `}</style>
     </div>
   )
-}
-
-/**
- * Pre-renders the homepage with data from the internal CMS.
- *
- * @param ctx - Page context
- * @param ctx.params - Route parameters for pages using dynamic routes
- * @param ctx.preview - `true` if in the preview mode, `undefined` otherwise
- * @param ctx.previewData - Preview data set by `setPreviewData`
- */
-export const getStaticProps: GetStaticProps = async ctx => {
-  try {
-    return {props: {preview: ctx.preview || false}}
-  } catch (error) {
-    throw error
-  }
 }
 
 export default Index

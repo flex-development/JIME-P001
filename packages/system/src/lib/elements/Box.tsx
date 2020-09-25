@@ -1,11 +1,11 @@
+import { ContentSectionProps } from '@kustomz/types'
 import React, {
   forwardRef,
   ForwardRefExoticComponent as FREC,
   PropsWithoutRef,
-  RefAttributes,
+  RefAttributes
 } from 'react'
-import {ContentSectionProps} from '../declarations'
-import {useMutatedProps, useTextContentDictionary} from '../modules/hooks'
+import { useMutatedProps, useTextUtilities } from '../hooks'
 
 /**
  * @module lib/elements/Box
@@ -38,10 +38,7 @@ export type BoxRefProps = ReflessBoxProps & BoxRefAttributes
  * - **https://developer.mozilla.org/docs/Web/HTML/Element/div**
  */
 export const Box: FREC<BoxRefProps> = forwardRef((props, ref) => {
-  const {dictionary, sanitized} = useTextContentDictionary<typeof props>(
-    props,
-    'box'
-  )
+  const { dictionary, sanitized } = useTextUtilities<typeof props>(props, 'box')
 
   const mutatedProps = useMutatedProps<
     typeof sanitized,

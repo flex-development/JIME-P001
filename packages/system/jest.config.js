@@ -16,18 +16,18 @@ module.exports = {
   moduleFileExtensions: ['js', 'json', 'ts', 'tsx'],
   moduleNameMapper: {
     [media]: 'identity-obj-proxy',
-    [stylesheets]: 'identity-obj-proxy',
+    [stylesheets]: 'identity-obj-proxy'
   },
   setupFilesAfterEnv: [
     '@testing-library/jest-dom/extend-expect',
-    'jest.setup.ts',
+    'jest.setup.ts'
   ],
   testMatch: ['__tests__/*.spec.ts'],
   testPathIgnorePatterns: ['/build/', '/dist/', '/node_modules/'],
   transform: {
     '^.+\\.[tj]sx?$': 'babel-jest',
-    '^.+\\.mdx$': '@storybook/addon-docs/jest-transform-mdx',
+    '^.+\\.mdx$': '@storybook/addon-docs/jest-transform-mdx'
   },
   transformIgnorePatterns: ['<rootDir>/node_modules/'],
-  verbose: true,
+  verbose: true
 }

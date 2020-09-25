@@ -1,5 +1,5 @@
-import {Input, InputProps} from '@kustomz'
-import {StoryFN} from '@kustomz-config'
+import { StoryFN } from '@kustomz-config'
+import { Input, InputProps } from '@kustomz/lib'
 import React from 'react'
 
 /**
@@ -9,7 +9,7 @@ import React from 'react'
 
 export default {
   component: Input,
-  title: 'Elements/Input',
+  title: 'Elements/Input'
 }
 
 /**
@@ -20,7 +20,7 @@ export const Default: StoryFN<InputProps> = (args: InputProps) => (
 )
 
 Default.args = {
-  placeholder: 'Placeholder text',
+  placeholder: 'Placeholder text'
 }
 
 /**
@@ -31,7 +31,7 @@ export const Checkbox: StoryFN<InputProps> = (args: InputProps) => (
 )
 
 Checkbox.args = {
-  type: 'checkbox',
+  type: 'checkbox'
 }
 
 /**
@@ -43,18 +43,18 @@ export const Email: StoryFN<InputProps> = (args: InputProps) => (
 
 Email.args = {
   placeholder: 'you@email.com',
-  type: 'email',
+  type: 'email'
 }
 
 /**
  * Number {@link Input} story.
  */
 export const Number: StoryFN<InputProps> = (args: InputProps) => (
-  <Input {...Number} />
+  <Input {...args} />
 )
 
 Number.args = {
-  type: 'number',
+  type: 'number'
 }
 
 /**
@@ -65,7 +65,7 @@ export const Radio: StoryFN<InputProps> = (args: InputProps) => (
 )
 
 Radio.args = {
-  type: 'radio',
+  type: 'radio'
 }
 
 /**
@@ -77,5 +77,5 @@ export const Search: StoryFN<InputProps> = (args: InputProps) => (
 
 Search.args = {
   placeholder: 'Looking for something?',
-  type: 'search',
+  type: 'search'
 }

@@ -7,6 +7,6 @@ export * from './useBoolean'
 export * from './useDocumentTitle'
 export * from './useIcon'
 export * from './useMutatedProps'
-export * from './useTextContentDictionary'
+export * from './useTextUtilities'
 
 /* eslint-disable prettier/prettier */

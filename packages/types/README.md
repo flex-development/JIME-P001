@@ -2,8 +2,7 @@
 
 Shared type definitions for Morenas Kustomz
 
-[![TypeScript](https://badgen.net/badge/-/typescript?icon=typescript&label)](https://www.typescriptlang.org/)
-[![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lerna.js.org/)
+[![TypeScript](https://badgen.net/badge/-/typescript?icon=typescript&label)](https://www.typescriptlang.org/) [![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lerna.js.org/)
 
 ## Overview
 
@@ -14,13 +13,9 @@ Shared type definitions for Morenas Kustomz
 
 ## Getting Started
 
-This project is used to support the development of `@flex-development/kustomz`
-and `@flex-development/morenaskustomz`, the design system and storefront
-projects for Morenas Kustomz.
+This project is used to support the development of `@flex-development/kustomz` and `@flex-development/morenaskustomz`, the design system and storefront projects for Morenas Kustomz.
 
-Morenas Kustomz is an online store that specializes in "pot head" necessesities.
-While enjoying a MySpace inspired UI, users can shop premade ash trays,
-grinders, and rolling trays, or have them custom made.
+Morenas Kustomz is an online store that specializes in "pot head" necessesities. While enjoying a MySpace inspired UI, users can shop premade ash trays, grinders, and rolling trays, or have them custom made.
 
 ## Usage
 
@@ -28,8 +23,7 @@ grinders, and rolling trays, or have them custom made.
 
 1. Be sure the package is built before attempting to install it
 
-   If the script you're using doesn't already build the package, run
-   `lerna run prepare --scope @flex-development/kustomtypez`
+   If the script you're using doesn't already build the package, run `lerna run prepare --scope @flex-development/kustomtypez`
 
 2. Add `"@flex-development/kustomtypez": "*"` to your project `dependencies`
 

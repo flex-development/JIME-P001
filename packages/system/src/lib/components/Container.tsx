@@ -1,11 +1,11 @@
+import { ContainerSize } from '@kustomz/types'
 import React, {
   forwardRef,
   ForwardRefExoticComponent as FREC,
-  PropsWithoutRef,
+  PropsWithoutRef
 } from 'react'
-import {ContainerSize} from '../declarations'
-import {BoxProps, BoxRefAttributes} from '../elements'
-import {useMutatedProps} from '../modules/hooks'
+import { BoxProps, BoxRefAttributes } from '../elements'
+import { useMutatedProps } from '../hooks'
 
 /**
  * @module lib/elements/Container
@@ -46,7 +46,7 @@ export type ContainerRefProps = ReflessContainerProps & BoxRefAttributes
  * - **https://v5.getbootstrap.com/docs/5.0/layout/containers/**
  */
 export const Container: FREC<ContainerRefProps> = forwardRef((props, ref) => {
-  const {fluid, size, ...rest} = props
+  const { fluid, size, ...rest } = props
 
   const mutatedProps = useMutatedProps<
     typeof rest,
@@ -54,12 +54,12 @@ export const Container: FREC<ContainerRefProps> = forwardRef((props, ref) => {
   >(rest, {
     container: true,
     'container-fluid': fluid,
-    [`container-${size}`]: size ? true : false,
+    [`container-${size}`]: !!size
   })
 
   return <div {...mutatedProps} ref={ref} />
 })
 
 Container.defaultProps = {
-  fluid: false,
+  fluid: false
 }

@@ -1,14 +1,14 @@
+import { GlobalProps, ThemeColor, ThemeOutline } from '@kustomz/types'
 import React, {
   FC,
   forwardRef,
   ForwardRefExoticComponent as FREC,
   PropsWithoutRef,
   ReactNodeArray,
-  RefAttributes,
+  RefAttributes
 } from 'react'
-import {GlobalProps, ThemeColor, ThemeOutline} from '../declarations'
-import {NativeOption, NativeOptionProps} from '../elements'
-import {useMutatedProps} from '../modules/hooks'
+import { NativeOption, NativeOptionProps } from '.'
+import { useMutatedProps } from '../hooks'
 
 /**
  * @module lib/elements/NativeSelect
@@ -64,7 +64,7 @@ export type ReflessNativeSelectProps = PropsWithoutRef<NativeSelectProps>
  */
 export const NativeSelect: FREC<NativeSelectRefProps> = forwardRef(
   (props, ref) => {
-    const {options, ...rest} = props
+    const { options, ...rest } = props
 
     const mutatedProps = useMutatedProps<
       typeof rest,
@@ -89,5 +89,5 @@ export const NativeSelect: FREC<NativeSelectRefProps> = forwardRef(
 )
 
 NativeSelect.defaultProps = {
-  options: [],
+  options: []
 }

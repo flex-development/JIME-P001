@@ -1,5 +1,5 @@
-import {Heading, HeadingProps} from '@kustomz'
-import {color, StoryFN} from '@kustomz-config'
+import { color, StoryFN } from '@kustomz-config'
+import { Heading, HeadingProps } from '@kustomz/lib'
 import React from 'react'
 
 /**
@@ -8,9 +8,9 @@ import React from 'react'
  */
 
 export default {
-  argTypes: {color},
+  argTypes: { color },
   component: Heading,
-  title: 'Elements/Heading',
+  title: 'Elements/Heading'
 }
 
 /**

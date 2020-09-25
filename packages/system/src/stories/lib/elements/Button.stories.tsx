@@ -1,10 +1,10 @@
-import {Button, ButtonProps} from '@kustomz'
 import {
   button_size as size,
   button_variant as variant,
   color,
-  StoryFN,
+  StoryFN
 } from '@kustomz-config'
+import { Button, ButtonProps } from '@kustomz/lib'
 import React from 'react'
 
 /**
@@ -13,9 +13,9 @@ import React from 'react'
  */
 
 export default {
-  argTypes: {color, size, variant},
+  argTypes: { color, size, variant },
   component: Button,
-  title: 'Elements/Button',
+  title: 'Elements/Button'
 }
 
 export const Close: StoryFN<ButtonProps> = (args: ButtonProps) => (
@@ -23,7 +23,7 @@ export const Close: StoryFN<ButtonProps> = (args: ButtonProps) => (
 )
 
 Close.args = {
-  icon: {children: 'close'},
+  icon: { children: 'close' }
 }
 
 export const ThemeColor: StoryFN<ButtonProps> = (args: ButtonProps) => (
@@ -32,5 +32,5 @@ export const ThemeColor: StoryFN<ButtonProps> = (args: ButtonProps) => (
 
 ThemeColor.args = {
   children: 'Add to Cart',
-  variant: 'primary',
+  variant: 'primary'
 }

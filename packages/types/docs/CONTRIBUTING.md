@@ -1,22 +1,17 @@
 # Contributing
 
-These instructions will help you install the project on your local machine, as
-well follow our coding guidelines. You'll also find information on making a pull
-request.
+These instructions will help you install the project on your local machine, as well follow our coding guidelines. You'll also find information on making a pull request.
 
 ## Overview
 
 [Development Environment](#development-environment)  
-[Making Changes](#making-changes)
-[Documentation](../../../docs/CONTRIBUTING.md#documentation)
+[Making Changes](#making-changes) [Documentation](../../../docs/CONTRIBUTING.md#documentation)
 
 ## Development Environment
 
 1. Copy the snippet below to get the project running on your local machine.
 
-   If you're coming from the
-   [root Contributing Guide](../../../docs/CONTRIBUTING.md), skip the first
-   step.
+   If you're coming from the [root Contributing Guide](../../../docs/CONTRIBUTING.md), skip the first step.
 
    ```zsh
     git clone https://github.com/flex-development/JIME-P001.git; cd JIME-P001; yarn
@@ -30,7 +25,4 @@ request.
 
 ## Making Changes
 
-Type declarations used by **both**
-[`@flex-development/morenaskustomz`](../../app/README.md) and
-[`@flex-development/kustomz`](../../system/README.md) should be added to the
-[`lib`](../lib) directory.
+Type declarations used by **both** [`@flex-development/morenaskustomz`](../../app/README.md) and [`@flex-development/kustomz`](../../system/README.md) should be added to the [`lib`](../lib) directory.

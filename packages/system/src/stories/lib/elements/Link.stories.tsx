@@ -1,5 +1,5 @@
-import {Link, LinkProps} from '@kustomz'
-import {color, size, StoryFN} from '@kustomz-config'
+import { color, size, StoryFN } from '@kustomz-config'
+import { Link, LinkProps } from '@kustomz/lib'
 import React from 'react'
 
 /**
@@ -8,9 +8,9 @@ import React from 'react'
  */
 
 export default {
-  argTypes: {color, size},
+  argTypes: { color, size },
   component: Link,
-  title: 'Elements/Link',
+  title: 'Elements/Link'
 }
 
 /**
@@ -21,7 +21,7 @@ export const Default: StoryFN<LinkProps> = (args: LinkProps) => (
 )
 
 Default.args = {
-  children: 'Link text',
+  children: 'Link text'
 }
 
 /**
@@ -33,7 +33,7 @@ export const ButtonStyle: StoryFN<LinkProps> = (args: LinkProps) => (
 
 ButtonStyle.args = {
   children: 'Learn More',
-  className: 'btn btn-primary',
+  className: 'btn btn-primary'
 }
 
 /**
@@ -45,5 +45,5 @@ export const Dropdown: StoryFN<LinkProps> = (args: LinkProps) => (
 
 Dropdown.args = {
   children: 'Dropdown Link',
-  dropdown: true,
+  dropdown: true
 }

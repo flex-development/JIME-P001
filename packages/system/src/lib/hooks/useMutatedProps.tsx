@@ -1,11 +1,9 @@
-import {AnyObject} from '@flex-development/kustomtypez'
+import { AnyObject } from '@flex-development/kustomtypez'
+import { GlobalProps } from '@kustomz/types'
 import classnames from 'classnames'
-import {ClassValue} from 'classnames/types'
-import {isObject, isString, omit, uniq} from 'lodash'
-import {HTMLAttributes} from 'react'
-import {GlobalProps} from '../../declarations'
-import {useContainer} from './useContainer'
-import {useIcon} from './useIcon'
+import { ClassValue } from 'classnames/types'
+import { isObject, isString, omit, uniq } from 'lodash'
+import { HTMLAttributes } from 'react'
 
 /**
  * @file Add global mutations to incoming props
@@ -17,8 +15,6 @@ import {useIcon} from './useIcon'
  *
  * Mutations (in order, if props are defined):
  *
- * - {@param props.icon} will be used to render an {@link Icon} (if defined)
- * - {@param props.children} will wrapped in a {@link Container} component
  * - {@param props.innerHTML} will be converted into `dangerouslySetInnerHTML`
  * - {@param props.flex} (if defined) will be used to update flexbox classes
  * - {@param props.variant} (if defined) will be used to update the `bg-` class
@@ -28,7 +24,6 @@ import {useIcon} from './useIcon'
  * @param props - Component properties
  * @param props.children - Component children
  * @param props.flex - Append flexbox classes
- * @param props.icon - Icon component properties
  * @param props.variant - Append `bg-` classes
  * @param inject - Classes to inject before {@param props.className}
  * @param keys - Array of keys to remove from {@param props}
@@ -39,20 +34,17 @@ export function useMutatedProps<
 >(props: T1, injectClass?: ClassValue, keys?: string[]): Mask {
   const globalProps = props as GlobalProps
 
-  const withIcon = useIcon(globalProps)
-  const withContainer = useContainer(withIcon)
-
   keys = keys || []
 
-  if (withContainer.innerHTML) {
-    withContainer.dangerouslySetInnerHTML = {__html: withContainer.innerHTML}
+  if (globalProps.innerHTML) {
+    globalProps.dangerouslySetInnerHTML = { __html: globalProps.innerHTML }
 
     keys.push('innerHTML')
     keys.push('children')
   }
 
-  if (withContainer.flex) {
-    const {flex} = withContainer
+  if (globalProps.flex) {
+    const { flex } = globalProps
 
     injectClass = isObject(injectClass) ? injectClass : {}
     injectClass[`d-${isString(flex) ? 'inline-' : ''}flex`] = flex
@@ -60,8 +52,8 @@ export function useMutatedProps<
     keys.push('flex')
   }
 
-  if ((withContainer as AnyObject).variant) {
-    const {variant} = withContainer as AnyObject
+  if ((globalProps as AnyObject).variant) {
+    const { variant } = globalProps as AnyObject
 
     injectClass = isObject(injectClass) ? injectClass : {}
     injectClass[`${injectClass.btn ? 'btn' : 'bg'}-${variant}`] = variant
@@ -69,14 +61,9 @@ export function useMutatedProps<
     keys.push('variant')
   }
 
-  withContainer.className = classnames(injectClass, withContainer.className)
+  globalProps.className = classnames(injectClass, globalProps.className)
 
-  const mutatedProps = {
-    ...withContainer,
-    children: globalProps.icon ? withIcon.children : withContainer.children,
-  }
-
-  return omit(mutatedProps, uniq(keys)) as Mask
+  return omit(globalProps, uniq(keys)) as Mask
 }
 
 export default useMutatedProps

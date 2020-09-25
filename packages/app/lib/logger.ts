@@ -7,13 +7,13 @@ import pino from 'pino'
  */
 
 export default pino({
-  browser: {asObject: true},
+  browser: { asObject: true },
   level: 'debug',
   prettyPrint: {
     colorize: true,
     errorProps: 'className,code,data,errors,message,name',
     ignore: 'hostname,pid',
     levelFirst: true,
-    translateTime: true,
-  },
+    translateTime: true
+  }
 })

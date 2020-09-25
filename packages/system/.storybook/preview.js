@@ -1,13 +1,13 @@
-import {withConsole} from '@storybook/addon-console'
-import {DocsContainer} from '@storybook/addon-docs/blocks'
-import {omit} from 'lodash'
+import { withConsole } from '@storybook/addon-console'
+import { DocsContainer } from '@storybook/addon-docs/blocks'
+import { omit } from 'lodash'
 import React from 'react'
 import '../src/theme/theme.scss'
 import {
   AdobeXDArtboards,
   Documentation,
   excludePropKeys,
-  getThemeColor,
+  getThemeColor
 } from './config'
 
 /**
@@ -16,7 +16,7 @@ import {
 
 export const parameters = {
   a11y: {},
-  actions: {argTypesRegex: '^on.*'},
+  actions: { argTypesRegex: '^on.*' },
   backgrounds: {
     default: 'Dark',
     values: [
@@ -24,15 +24,15 @@ export const parameters = {
       getThemeColor('darker', false),
       getThemeColor('light', false),
       getThemeColor('primary', false),
-      getThemeColor('secondary', false),
-    ],
+      getThemeColor('secondary', false)
+    ]
   },
-  controls: {expanded: false},
+  controls: { expanded: false },
   docs: {
     container: DocsContainer,
-    page: Documentation,
+    page: Documentation
   },
-  viewport: {viewports: AdobeXDArtboards},
+  viewport: { viewports: AdobeXDArtboards }
 }
 
 export const decorators = [
@@ -50,7 +50,7 @@ export const decorators = [
   // Receive console outputs as a console, warn and error in the actions panel
   (Story, context) => {
     return withConsole({
-      consoleInclude: [new URLSearchParams(window.location.search).get('id')],
+      consoleInclude: [new URLSearchParams(window.location.search).get('id')]
     })(Story)(context)
-  },
+  }
 ]

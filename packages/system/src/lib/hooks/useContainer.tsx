@@ -1,7 +1,7 @@
-import {isBoolean, omit} from 'lodash'
-import React, {useEffect, useState} from 'react'
-import {Container, ContainerProps} from '../../components'
-import {GlobalProps} from '../../declarations'
+import { GlobalProps } from '@kustomz/types'
+import { isBoolean, omit } from 'lodash'
+import React, { useEffect, useState } from 'react'
+import { Container, ContainerProps } from '../components/Container'
 
 /**
  * @file Render props.children in a Container component
@@ -19,7 +19,7 @@ import {GlobalProps} from '../../declarations'
  * @param props.container - Boolean or Container component properties
  */
 export const useContainer = (props: GlobalProps): GlobalProps => {
-  const {children, container: initialContainer = false} = props
+  const { children, container: initialContainer = false } = props
 
   const containerProps = isBoolean(initialContainer) ? {} : initialContainer
 
@@ -38,5 +38,5 @@ export const useContainer = (props: GlobalProps): GlobalProps => {
     setMutatedChildren(<Container {...containerParsed}>{children}</Container>)
   }, [children, container, skip])
 
-  return {...omit(props, ['container']), children: mutatedChildren}
+  return { ...omit(props, ['container']), children: mutatedChildren }
 }

@@ -1,45 +1,27 @@
-import {Booleanish} from '@flex-development/kustomtypez'
+import { Booleanish } from '@flex-development/kustomtypez'
 import {
   AriaAttributes,
   CSSProperties,
   DOMAttributes,
-  RefAttributes,
+  RefAttributes
 } from 'react'
-import {ContainerProps, IconProps} from './elements'
-
-/**
- * @file Global Component Library Declarations
- * @module lib/declarations
- */
+import { Size, ThemeColor, ThemeOutline } from './theme'
 
 /**
  * Aria attributes and event handlers.
  */
-export declare type Attributes<E = HTMLElement> = AriaAttributes &
+export type Attributes<E = HTMLElement> = AriaAttributes &
   DOMAttributes<E> &
-  RefAttributes<E> & {forwardedRef?: RefAttributes<E>['ref']}
-
-/**
- * Background size options.
- */
-export declare type BackgroundSize = 'auto' | 'contain' | 'cover'
-
-/**
- * {@link Button} component variants.
- */
-export declare type ButtonVariant = ThemeColor | ThemeOutline | 'link'
-
-/**
- * Possible {@link Container} component sizes.
- */
-export declare type ContainerSize = 'sm' | 'md' | 'lg' | 'xl' | 'xxl'
+  RefAttributes<E> & {
+    forwardedRef?: RefAttributes<E>['ref']
+  }
 
 /**
  * Common content-sectioning component properties.
  *
  * @see {@link https://websitesetup.org/html5-periodical-table/}
  */
-export declare interface ContentSectionProps<E = HTMLElement>
+export interface ContentSectionProps<E = HTMLElement>
   extends TextContentProps<E> {
   /**
    * Background color or outline variant.
@@ -49,44 +31,16 @@ export declare interface ContentSectionProps<E = HTMLElement>
   variant?: boolean | ThemeColor | ThemeOutline
 }
 
-/* eslint-disable */
-
-/**
- * Font weights.
- */
-export declare type FontWeight =
-  | 'hairline'
-  | 'thin'
-  | 'light'
-  | 'normal'
-  | 'medium'
-  | 'semibold'
-  | 'bold'
-  | 'extrabold'
-  | 'black'
-
-/* eslint-enable */
-
-/**
- * Possible {@link Button} component sizes.
- */
-export declare type FormControlSize = Pick<Size, 'sm' | 'lg'>
-
 /**
  * Properties common to all components.
  */
-export declare interface GlobalProps<E = HTMLElement> extends Attributes<E> {
+export interface GlobalProps<E = HTMLElement> extends Attributes<E> {
   /**
    * Content to render inside the component.
    *
    * If defined, `innerHTML` must be omitted.
    */
   children?: DOMAttributes<E>['children']
-
-  /**
-   * If defined, wrap inner content in a `Container` component.
-   */
-  container?: true | ContainerProps<E>
 
   /**
    * A space-separated list of the classes of the element.
@@ -122,11 +76,6 @@ export declare interface GlobalProps<E = HTMLElement> extends Attributes<E> {
    * be shown.
    */
   hidden?: boolean
-
-  /**
-   * Icon to render beside the element text.
-   */
-  icon?: IconProps
 
   /**
    * Defines a unique identifier (ID) which must be unique in the whole
@@ -201,11 +150,6 @@ export declare interface GlobalProps<E = HTMLElement> extends Attributes<E> {
   role?: string
 
   /**
-   * If true, skip the logic in the `useIcon` hook.
-   */
-  skipUseIcon?: boolean
-
-  /**
    * Contains CSS styling declarations to be applied to the element. Note that
    * it is recommended for styles to be defined in a separate file or files.
    *
@@ -256,38 +200,10 @@ export declare interface GlobalProps<E = HTMLElement> extends Attributes<E> {
   translate?: 'no' | 'yes'
 }
 
-/* eslint-disable */
-
-/**
- * {@link GridBox} component order options.
- *
- * @see {@link https://react-bootstrap-v5.netlify.app/layout/grid/}
- */
-export declare type GridBoxOrder =
-  | '1'
-  | '2'
-  | '3'
-  | '4'
-  | '5'
-  | '6'
-  | '7'
-  | '8'
-  | '9'
-  | '10'
-  | '11'
-  | '12'
-
-/**
- * {@link GridBox} component span options.
- *
- * @see {@link https://react-bootstrap-v5.netlify.app/layout/grid/}
- */
-export declare type GridBoxSpan = GridBoxOrder
-
 /**
  * Ref attributes for HTML elements.
  */
-export declare type HTMLElementRefAttributes = RefAttributes<HTMLElement>
+export type HTMLElementRefAttributes = RefAttributes<HTMLElement>
 
 /**
  * Global properties are attributes common to all HTML elements; they can be
@@ -297,29 +213,12 @@ export declare type HTMLElementRefAttributes = RefAttributes<HTMLElement>
  *
  * **https://developer.mozilla.org/docs/Web/HTML/Global_attributes**
  */
-export declare type HTMLGlobalProps = Omit<
-  GlobalProps,
-  'flex' | 'icon' | 'variant'
->
-
-/**
- * Pulls the common properties from both types, but only maps the values from
- * the first argument.
- *
- * @example NativeProps<JSX.IntrinsicElements['button'], ButtonProps>
- *
- * @see
- * {@link https://stackoverflow.com/questions/47375916/typescript-how-to-create-type-with-common-properties-of-two-types}
- */
-export declare type NativeProps<HTMLElementProps, Props> = {
-  [HTMLProp in keyof HTMLElementProps & keyof Props]: typeof A[HTMLProp]
-}
+export type HTMLGlobalProps = Omit<GlobalProps, 'flex'>
 
 /**
  * Common `Form` (button, input, select) element props.
  */
-export declare interface PropsForFormElement<E = HTMLElement>
-  extends GlobalProps<E> {
+export interface PropsForFormElement<E = HTMLElement> extends GlobalProps<E> {
   /**
    * Specifies that a form control should have input focus when the page
    * loads.
@@ -365,47 +264,17 @@ export declare interface PropsForFormElement<E = HTMLElement>
 /**
  * Component properties for HTML elements that do not accept inner content.
  */
-export declare type PropsForVoidElementTag<E = HTMLElement> = Omit<
+export type PropsForVoidElementTag<E = HTMLElement> = Omit<
   GlobalProps<E>,
   'children' | 'dangerouslySetInnerHTML'
 >
-
-/**
- * Text sizes.
- */
-export declare type Size = 'xs' | 'sm' | 'lg' | 'xl'
-
-/**
- * Keys of `scss` `$spacers` map.
- */
-export declare type SpacerKey =
-  | 0
-  | 1
-  | 2
-  | 3
-  | 4
-  | 5
-  | 6
-  | 8
-  | 9
-  | 10
-  | 12
-  | 14
-  | 16
-  | 18
-  | 20
-  | 24
-  | 48
-  | 56
-  | 64
 
 /**
  * Common text content component properties.
  *
  * @see {@link https://websitesetup.org/html5-periodical-table/}
  */
-export declare interface TextContentProps<E = HTMLElement>
-  extends GlobalProps<E> {
+export interface TextContentProps<E = HTMLElement> extends GlobalProps<E> {
   /**
    * Text content color.
    *
@@ -420,25 +289,3 @@ export declare interface TextContentProps<E = HTMLElement>
    */
   size?: Size | boolean
 }
-
-/**
- * Theme colors.
- */
-export declare type ThemeColor =
-  | 'dark'
-  | 'darker'
-  | 'ghost'
-  | 'light'
-  | 'primary'
-  | 'secondary'
-
-/**
- * Theme outline classes.
- */
-export declare type ThemeOutline =
-  | 'outline-dark'
-  | 'outline-darker'
-  | 'outline-ghost'
-  | 'outline-light'
-  | 'outline-primary'
-  | 'outline-secondary'

@@ -222,7 +222,7 @@ firebase-credentials-dev.json
 !packages/app/public
 
 # Storybook
-public
+public/
 
 # Vercel
 .now

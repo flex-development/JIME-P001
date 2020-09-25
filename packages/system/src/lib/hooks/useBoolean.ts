@@ -1,5 +1,5 @@
-import {isBoolean} from 'lodash'
-import {useCallback, useState} from 'react'
+import { isBoolean } from 'lodash'
+import { useCallback, useState } from 'react'
 
 /**
  * @file Boolean value hook
@@ -24,7 +24,7 @@ export const useBoolean = (initialValue: any): any => {
     setBoolean: (value: boolean): void => setBoolean(bool(value)),
     setFalse: (): void => setBoolean(false),
     setTrue: (): void => setBoolean(true),
-    toggle: useCallback(() => setBoolean(bool => !bool), []),
+    toggle: useCallback(() => setBoolean(bool => !bool), [])
   }
 }
 

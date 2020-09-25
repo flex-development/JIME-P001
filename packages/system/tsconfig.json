@@ -18,7 +18,7 @@
     "noEmit": false,
     "outDir": "./dist",
     "paths": {
-      "@kustomz/*": ["src/lib/*"],
+      "@kustomz/*": ["src/*"],
       "@kustomz-config/*": [".storybook/config/*"]
     },
     "rootDir": "./src",
@@ -26,6 +26,6 @@
     "target": "esnext"
   },
   "extends": "../../tsconfig.json",
-  "files": ["src/lib/declarations.d.ts"],
+  "files": ["src/types/index.d.ts"],
   "include": ["src"]
 }

@@ -1,11 +1,11 @@
+import { TextContentProps } from '@kustomz/types'
 import React, {
   forwardRef,
   ForwardRefExoticComponent as FREC,
   PropsWithoutRef,
-  RefAttributes,
+  RefAttributes
 } from 'react'
-import {TextContentProps} from '../declarations'
-import {useMutatedProps, useTextContentDictionary} from '../modules/hooks'
+import { useMutatedProps, useTextUtilities } from '../hooks'
 
 /**
  * @module lib/elements/Link
@@ -144,9 +144,9 @@ export type LinkRefProps = ReflessLinkProps & LinkRefAttributes
  * - **https://nextjs.org/docs/api-reference/next/link**
  */
 export const Link: FREC<LinkRefProps> = forwardRef((props, ref) => {
-  const {active, card, dropdown, nav, stretched, toggle, ...rest} = props
+  const { active, card, dropdown, nav, stretched, toggle, ...rest } = props
 
-  const {dictionary, sanitized} = useTextContentDictionary<typeof rest>(
+  const { dictionary, sanitized } = useTextUtilities<typeof rest>(
     rest,
     nav ? 'nav-link' : 'link'
   )
@@ -161,13 +161,13 @@ export const Link: FREC<LinkRefProps> = forwardRef((props, ref) => {
     disabled: rest.disabled && rest.disabled,
     'dropdown-item': dropdown,
     'dropdown-toggle': toggle,
-    'stretched-link': stretched,
+    'stretched-link': stretched
   })
 
   if (toggle) {
     mutatedProps['aria-expanded'] = false
     mutatedProps['data-toggle'] = 'dropdown'
-    mutatedProps['role'] = 'button'
+    mutatedProps.role = 'button'
   }
 
   return (
@@ -183,5 +183,5 @@ Link.defaultProps = {
   dropdown: false,
   href: '#',
   nav: false,
-  size: false,
+  size: false
 }

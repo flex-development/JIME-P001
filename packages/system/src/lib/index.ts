@@ -6,6 +6,7 @@
 export * from './components'
 export * from './elements'
 export * from './modules'
+/* eslint-disable import/export */
 export * from './templates'
 
 /* eslint-disable prettier/prettier */

@@ -1,11 +1,11 @@
+import { PropsForFormElement } from '@kustomz/types'
 import React, {
   forwardRef,
   ForwardRefExoticComponent as FREC,
   PropsWithoutRef,
-  RefAttributes,
+  RefAttributes
 } from 'react'
-import {PropsForFormElement} from '../declarations'
-import {useMutatedProps} from '../modules/hooks'
+import { useMutatedProps } from '../hooks'
 
 /**
  * @module lib/elements/Input
@@ -346,7 +346,7 @@ export type InputRefProps = ReflessInputProps & InputRefAttributes
 export const Input: FREC<InputRefProps> = forwardRef((props, ref) => {
   const checkInputTypes = ['checkbox', 'radio']
 
-  const {type = ''} = props
+  const { type = '' } = props
 
   const mutatedProps = useMutatedProps<
     typeof props,
@@ -354,12 +354,12 @@ export const Input: FREC<InputRefProps> = forwardRef((props, ref) => {
   >(props, {
     'form-check-input': checkInputTypes.includes(type),
     'form-control': !checkInputTypes.includes(type),
-    'form-file-input': type === 'file',
+    'form-file-input': type === 'file'
   })
 
   return <input {...mutatedProps} ref={ref} />
 })
 
 Input.defaultProps = {
-  type: 'text',
+  type: 'text'
 }

@@ -1,11 +1,11 @@
-import {omit} from 'lodash'
+import { omit } from 'lodash'
 import React, {
   forwardRef,
   ForwardRefExoticComponent as FREC,
-  PropsWithoutRef,
+  PropsWithoutRef
 } from 'react'
-import {useMutatedProps, useTextContentDictionary} from '../modules/hooks'
-import {Span, SpanProps, SpanRefAttributes} from './Span'
+import { Span, SpanProps, SpanRefAttributes } from '../elements'
+import { useMutatedProps, useTextUtilities } from '../hooks'
 
 /**
  * @module lib/elements/Icon
@@ -44,18 +44,18 @@ export type IconRefProps = ReflessIconProps & SpanRefAttributes
  * - **https://fontawesome.com/icons?d=gallery&m=free**
  */
 export const Icon: FREC<IconRefProps> = forwardRef((props, ref) => {
-  const {position, ...rest} = props
+  const { position, ...rest } = props
 
   const fontAwesomeIcon = rest.className?.includes('fa')
 
-  const {dictionary, sanitized} = useTextContentDictionary<typeof rest>(
+  const { dictionary, sanitized } = useTextUtilities<typeof rest>(
     omit(rest, ['icon']),
     'icon'
   )
 
   const mutatedProps = useMutatedProps<typeof sanitized, SpanProps>(sanitized, {
     ...dictionary,
-    'material-icons-outlined': !fontAwesomeIcon,
+    'material-icons-outlined': !fontAwesomeIcon
   })
 
   mutatedProps['aria-hidden'] = rest.children ? rest?.['aria-hidden'] : false

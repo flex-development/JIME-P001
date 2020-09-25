@@ -1,4 +1,4 @@
-/// <reference path='fireorm/types' />
+// / <reference path='fireorm/types' />
 
 /**
  * Firestore database query.

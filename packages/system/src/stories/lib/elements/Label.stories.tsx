@@ -1,5 +1,5 @@
-import {Label, LabelProps} from '@kustomz'
-import {color, size, StoryFN} from '@kustomz-config'
+import { color, size, StoryFN } from '@kustomz-config'
+import { Label, LabelProps } from '@kustomz/lib'
 import React from 'react'
 
 /**
@@ -8,9 +8,9 @@ import React from 'react'
  */
 
 export default {
-  argTypes: {color, size},
+  argTypes: { color, size },
   component: Label,
-  title: 'Elements/Label',
+  title: 'Elements/Label'
 }
 
 /**
@@ -21,5 +21,5 @@ export const Default: StoryFN<LabelProps> = (args: LabelProps) => (
 )
 
 Default.args = {
-  children: 'Email address',
+  children: 'Email address'
 }

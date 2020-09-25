@@ -1,5 +1,5 @@
-import {Item, ItemProps} from '@kustomz'
-import {color, size, StoryFN, variant} from '@kustomz-config'
+import { color, size, StoryFN, variant } from '@kustomz-config'
+import { Item, ItemProps } from '@kustomz/lib'
 import React from 'react'
 
 /**
@@ -8,9 +8,9 @@ import React from 'react'
  */
 
 export default {
-  argTypes: {color, size, variant},
+  argTypes: { color, size, variant },
   component: Item,
-  title: 'Elements/Item',
+  title: 'Elements/Item'
 }
 
 /**
@@ -21,5 +21,5 @@ export const Default: StoryFN<ItemProps> = (args: ItemProps) => (
 )
 
 Default.args = {
-  children: 'Item text',
+  children: 'Item text'
 }

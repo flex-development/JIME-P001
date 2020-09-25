@@ -1,5 +1,5 @@
-import {Divider, DividerProps} from '@kustomz'
-import {StoryFN} from '@kustomz-config'
+import { StoryFN } from '@kustomz-config'
+import { Divider, DividerProps } from '@kustomz/lib'
 import React from 'react'
 
 /**
@@ -9,7 +9,7 @@ import React from 'react'
 
 export default {
   component: Divider,
-  title: 'Elements/Divider',
+  title: 'Elements/Divider'
 }
 
 export const Default: StoryFN<DividerProps> = (args: DividerProps) => (

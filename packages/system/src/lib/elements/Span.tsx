@@ -1,11 +1,11 @@
+import { ContentSectionProps } from '@kustomz/types'
 import React, {
   forwardRef,
   ForwardRefExoticComponent as FREC,
   PropsWithoutRef,
-  RefAttributes,
+  RefAttributes
 } from 'react'
-import {ContentSectionProps} from '../declarations'
-import {useMutatedProps, useTextContentDictionary} from '../modules/hooks'
+import { useMutatedProps, useTextUtilities } from '../hooks'
 
 /**
  * @module lib/elements/Span
@@ -38,7 +38,7 @@ export type SpanRefProps = ReflessSpanProps & SpanRefAttributes
  * - **https://developer.mozilla.org/docs/Web/HTML/Element/span**
  */
 export const Span: FREC<SpanRefProps> = forwardRef((props, ref) => {
-  const {dictionary, sanitized} = useTextContentDictionary<typeof props>(props)
+  const { dictionary, sanitized } = useTextUtilities<typeof props>(props)
 
   const mutatedProps = useMutatedProps<
     typeof props,

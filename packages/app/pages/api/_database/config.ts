@@ -1,4 +1,4 @@
-import admin, {ServiceAccount} from 'firebase-admin'
+import admin, { ServiceAccount } from 'firebase-admin'
 import * as fireorm from 'fireorm'
 
 /**
@@ -15,29 +15,29 @@ const {
   FIREBASE_PRIVATE_KEY = '',
   FIREBASE_PRIVATE_KEY_ID,
   FIREBASE_PROJECT_ID,
-  FIREBASE_TOKEN_URI,
+  FIREBASE_TOKEN_URI
 } = process.env
 
 const serviceAccount = {
-  type: 'service_account',
-  project_id: FIREBASE_PROJECT_ID,
-  private_key_id: FIREBASE_PRIVATE_KEY_ID,
-  private_key: FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n'),
+  auth_provider_x509_cert_url: FIREBASE_AUTH_PROVIDER_X509_CERT_URL,
+  auth_uri: FIREBASE_AUTH_URI,
   client_email: FIREBASE_CLIENT_EMAIL,
   client_id: FIREBASE_CLIENT_ID,
-  auth_uri: FIREBASE_AUTH_URI,
-  token_uri: FIREBASE_TOKEN_URI,
-  auth_provider_x509_cert_url: FIREBASE_AUTH_PROVIDER_X509_CERT_URL,
   client_x509_cert_url: FIREBASE_CLIENT_X509_CERT_URL,
+  private_key: FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n'),
+  private_key_id: FIREBASE_PRIVATE_KEY_ID,
+  project_id: FIREBASE_PROJECT_ID,
+  token_uri: FIREBASE_TOKEN_URI,
+  type: 'service_account'
 }
 
 if (!admin.apps.length) {
   admin.initializeApp({
     credential: admin.credential.cert(serviceAccount as ServiceAccount),
-    databaseURL: `https://${serviceAccount.project_id}.firebaseio.com`,
+    databaseURL: `https://${serviceAccount.project_id}.firebaseio.com`
   })
 }
 
 const firestore = admin.firestore()
 
-fireorm.initialize(firestore, {validateModels: true})
+fireorm.initialize(firestore, { validateModels: true })

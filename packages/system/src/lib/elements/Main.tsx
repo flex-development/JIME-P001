@@ -1,10 +1,10 @@
+import { ContentSectionProps, HTMLElementRefAttributes } from '@kustomz/types'
 import React, {
   forwardRef,
   ForwardRefExoticComponent as FREC,
-  PropsWithoutRef,
+  PropsWithoutRef
 } from 'react'
-import {ContentSectionProps, HTMLElementRefAttributes} from '../declarations'
-import {useMutatedProps} from '../modules/hooks'
+import { useMutatedProps } from '../hooks'
 
 /**
  * @module lib/elements/Main

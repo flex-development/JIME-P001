@@ -1,5 +1,5 @@
-import {NextComponentType} from 'next'
-import {AppContext, AppInitialProps, AppProps} from 'next/app'
+import { NextComponentType } from 'next'
+import { AppContext, AppInitialProps, AppProps } from 'next/app'
 import React from 'react'
 
 /**
@@ -21,7 +21,7 @@ import React from 'react'
  */
 const App: NextComponentType<AppContext, AppInitialProps, AppProps> = ({
   Component,
-  pageProps,
+  pageProps
 }: AppProps) => {
   return <Component {...pageProps} />
 }

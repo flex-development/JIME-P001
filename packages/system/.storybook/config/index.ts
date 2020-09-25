@@ -1,5 +1,5 @@
-import {Args, Parameters} from '@storybook/api'
-import {FC} from 'react'
+import { Args, Parameters } from '@storybook/api'
+import { FC } from 'react'
 
 /**
  * @file Storybook Config

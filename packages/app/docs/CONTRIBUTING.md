@@ -1,7 +1,6 @@
 # Contributing
 
-These instructions will help you install the project on your local machine, as
-well as develop, document, and test features.
+These instructions will help you install the project on your local machine, as well as develop, document, and test features.
 
 ## Overview
 
@@ -15,9 +14,7 @@ well as develop, document, and test features.
 
 1. Copy the snippet below to get the project running on your local machine.
 
-   If you're coming from the
-   [root Contributing Guide](../../../docs/CONTRIBUTING.md), skip the first
-   step.
+   If you're coming from the [root Contributing Guide](../../../docs/CONTRIBUTING.md), skip the first step.
 
    ```zsh
     git clone https://github.com/flex-development/JIME-P001.git; cd JIME-P001; yarn

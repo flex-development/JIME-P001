@@ -1,16 +1,17 @@
-import React, {
-  forwardRef,
-  ForwardRefExoticComponent as FREC,
-  PropsWithoutRef,
-  RefAttributes,
-} from 'react'
+import { AnyObject } from '@flex-development/kustomtypez'
 import {
   ButtonVariant,
   FormControlSize,
   PropsForFormElement,
-  ThemeColor,
-} from '../declarations'
-import {useMutatedProps} from '../modules/hooks'
+  ThemeColor
+} from '@kustomz/types'
+import React, {
+  forwardRef,
+  ForwardRefExoticComponent as FREC,
+  PropsWithoutRef,
+  RefAttributes
+} from 'react'
+import { useMutatedProps } from '../hooks'
 
 /**
  * @module lib/elements/Button
@@ -123,9 +124,9 @@ export type ButtonRefProps = ReflessButtonProps & ButtonRefAttributes
  * - **https://v5.getbootstrap.com/docs/5.0/components/buttons/**
  */
 export const Button: FREC<ButtonRefProps> = forwardRef((props, ref) => {
-  const {color, size, ...rest} = props
+  const { color, size, ...rest } = props
 
-  if (rest.icon && !rest.children) rest.variant = 'ghost'
+  if ((rest as AnyObject).icon && !rest.children) rest.variant = 'ghost'
 
   const mutatedProps = useMutatedProps<
     typeof rest,
@@ -134,9 +135,10 @@ export const Button: FREC<ButtonRefProps> = forwardRef((props, ref) => {
     btn: true,
     disabled: rest.disabled && rest.disabled,
     [`btn-${size}`]: size,
-    [`text-${color}`]: color,
+    [`text-${color}`]: color
   })
 
+  /* eslint-disable react/button-has-type */
   return <button {...mutatedProps} ref={ref} />
 })
 
@@ -144,5 +146,5 @@ Button.defaultProps = {
   color: false,
   size: false,
   type: 'button',
-  variant: false,
+  variant: false
 }

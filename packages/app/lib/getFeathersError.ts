@@ -15,9 +15,9 @@ import {
   Timeout,
   TooManyRequests,
   Unavailable,
-  Unprocessable,
+  Unprocessable
 } from '@feathersjs/errors'
-import {AnyObject} from '@flex-development/kustomtypez'
+import { AnyObject } from '@flex-development/kustomtypez'
 
 /**
  * @file Creates a new Feathers error
@@ -33,7 +33,7 @@ import {AnyObject} from '@flex-development/kustomtypez'
  * @param data.errors - Typically validation errors or if you want to group
  * multiple errors together
  * @param status - Error status code. Defaults to 500
- * @returns {FeathersError}
+ * @return {FeathersError}
  */
 export const getFeathersError = (
   error?: string | Error,

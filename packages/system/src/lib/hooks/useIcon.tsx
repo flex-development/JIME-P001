@@ -1,8 +1,8 @@
+import { GlobalProps } from '@kustomz/types'
 import classnames from 'classnames'
-import {isNull, isUndefined, omit} from 'lodash'
-import React, {useEffect, useState} from 'react'
-import {GlobalProps} from '../../declarations'
-import {Icon, IconProps} from '../../elements'
+import { isNull, isUndefined, omit } from 'lodash'
+import React, { useEffect, useState } from 'react'
+import { Icon, IconProps } from '../components/Icon'
 
 /**
  * @file Render icon with props.children
@@ -24,7 +24,11 @@ import {Icon, IconProps} from '../../elements'
  * @param props.icon.position - String indication where to position icon
  */
 export const useIcon = (props: GlobalProps): GlobalProps => {
-  const {children, className: initialClassName = '', icon: initialIcon} = props
+  const {
+    children,
+    className: initialClassName = '',
+    icon: initialIcon
+  } = props
 
   const [className, setClassName] = useState(initialClassName)
   const [skip] = useState(!initialIcon)
@@ -43,7 +47,7 @@ export const useIcon = (props: GlobalProps): GlobalProps => {
     const component: JSX.Element = <Icon {...iconParsed} key='icon' />
 
     // Position icon
-    const {position} = iconParsed
+    const { position } = iconParsed
 
     if (!children) {
       setMutatedChildren(component)
@@ -58,7 +62,7 @@ export const useIcon = (props: GlobalProps): GlobalProps => {
             [`${classes}`]: true,
             'd-flex': true,
             'flex-column': position === 'bottom',
-            'flex-column-reverse': position === 'top',
+            'flex-column-reverse': position === 'top'
           })
         })
       }
@@ -67,7 +71,7 @@ export const useIcon = (props: GlobalProps): GlobalProps => {
     // Set data attributes
     setDataAttrs({
       'data-icon': true,
-      'data-icon-only': isNull(children) || isUndefined(children),
+      'data-icon-only': isNull(children) || isUndefined(children)
     })
   }, [children, icon, skip])
 
@@ -75,6 +79,6 @@ export const useIcon = (props: GlobalProps): GlobalProps => {
     ...omit(props, ['icon']),
     ...dataAttrs,
     children: mutatedChildren,
-    className,
+    className
   }
 }

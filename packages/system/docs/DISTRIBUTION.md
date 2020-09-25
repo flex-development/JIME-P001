@@ -1,7 +1,6 @@
 # Distribution
 
-Below you'll find instructions on distributing this project locally using Lerna,
-and how to publish the package to the Github Package Registry.
+Below you'll find instructions on distributing this project locally using Lerna, and how to publish the package to the Github Package Registry.
 
 ## Overview
 
@@ -12,8 +11,7 @@ and how to publish the package to the Github Package Registry.
 
 1. Be sure the package is built before attempting to install it
 
-   If the script you're using doesn't already build the package, run
-   `lerna run prepare --scope @flex-development/kustomz`
+   If the script you're using doesn't already build the package, run `lerna run prepare --scope @flex-development/kustomz`
 
 2. Add `"@flex-development/kustomz": "*"` to your project `dependencies`
 

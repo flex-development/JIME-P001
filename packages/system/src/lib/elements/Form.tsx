@@ -1,11 +1,11 @@
+import { GlobalProps, ThemeColor, ThemeOutline } from '@kustomz/types'
 import React, {
   forwardRef,
   ForwardRefExoticComponent as FREC,
   PropsWithoutRef,
-  RefAttributes,
+  RefAttributes
 } from 'react'
-import {GlobalProps, ThemeColor, ThemeOutline} from '../declarations'
-import {useMutatedProps} from '../modules/hooks'
+import { useMutatedProps } from '../hooks'
 
 /**
  * @module lib/elements/Form

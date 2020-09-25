@@ -1,13 +1,13 @@
+import { GlobalProps, ThemeColor } from '@kustomz/types'
 import React, {
   DetailedHTMLProps,
   forwardRef,
   ForwardRefExoticComponent as FREC,
   HTMLAttributes,
   PropsWithoutRef,
-  RefAttributes,
+  RefAttributes
 } from 'react'
-import {GlobalProps, ThemeColor} from '../declarations'
-import {useMutatedProps, useTextContentDictionary} from '../modules/hooks'
+import { useMutatedProps, useTextUtilities } from '../hooks'
 
 /**
  * @module lib/elements/Heading
@@ -57,9 +57,9 @@ export type HeadingRefProps = ReflessHeadingProps & HeadingRefAttributes
  * - **https://developer.mozilla.org/docs/Web/HTML/Element/Heading_Elements**
  */
 export const Heading: FREC<HeadingRefProps> = forwardRef((props, ref) => {
-  const {size, ...rest} = props
+  const { size, ...rest } = props
 
-  const {dictionary, sanitized} = useTextContentDictionary<typeof rest>(
+  const { dictionary, sanitized } = useTextUtilities<typeof rest>(
     rest,
     'heading'
   )
@@ -67,7 +67,7 @@ export const Heading: FREC<HeadingRefProps> = forwardRef((props, ref) => {
   const mutatedProps = useMutatedProps<
     typeof sanitized,
     DetailedHTMLProps<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement>
-  >({...sanitized, ref}, dictionary)
+  >({ ...sanitized, ref }, dictionary)
 
   /* eslint-disable jsx-a11y/heading-has-content */
 
@@ -92,5 +92,5 @@ export const Heading: FREC<HeadingRefProps> = forwardRef((props, ref) => {
 Heading.defaultProps = {
   children: 'The quick brown fox jumps over the lazy dog',
   color: false,
-  size: 1,
+  size: 1
 }

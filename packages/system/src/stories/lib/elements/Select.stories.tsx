@@ -1,5 +1,5 @@
-import {NativeOption, NativeSelect, NativeSelectProps} from '@kustomz'
-import {StoryFN} from '@kustomz-config'
+import { StoryFN } from '@kustomz-config'
+import { NativeOption, NativeSelect, NativeSelectProps } from '@kustomz/lib'
 import React from 'react'
 
 /**
@@ -9,8 +9,8 @@ import React from 'react'
 
 export default {
   component: NativeSelect,
-  subcomponents: {NativeOption},
-  title: 'Elements/Select',
+  subcomponents: { NativeOption },
+  title: 'Elements/Select'
 }
 
 /**
@@ -25,18 +25,18 @@ Native.args = {
     {
       children: 'Ketchup',
       label: 'Ketchup',
-      value: 'ketchup',
+      value: 'ketchup'
     },
     {
       children: 'Mustard',
       label: 'Mustard',
       selected: true,
-      value: 'mustard',
+      value: 'mustard'
     },
     {
       children: 'Relish',
       label: 'Relish',
-      value: 'relish',
-    },
-  ],
+      value: 'relish'
+    }
+  ]
 }

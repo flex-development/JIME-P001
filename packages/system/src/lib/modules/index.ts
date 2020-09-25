@@ -1,9 +1,8 @@
 /**
- * @file Library Utilities
+ * @file Utility Functions
  * @module lib/modules
  */
 
-export * from './hooks'
 export * from './sortByKeys'
 
 /* eslint-disable */

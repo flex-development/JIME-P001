@@ -1,11 +1,11 @@
+import { PropsForVoidElementTag } from '@kustomz/types'
 import React, {
   forwardRef,
   ForwardRefExoticComponent as FREC,
   PropsWithoutRef,
-  RefAttributes,
+  RefAttributes
 } from 'react'
-import {PropsForVoidElementTag} from '../declarations'
-import {useMutatedProps} from '../modules/hooks'
+import { useMutatedProps } from '../hooks'
 
 /**
  * @module lib/elements/Divider

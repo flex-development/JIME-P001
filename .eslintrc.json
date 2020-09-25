@@ -2,95 +2,76 @@
 // See: https://eslint.org/docs/user-guide/configuring
 
 {
-  "env": {
-    "browser": true,
-    "es6": true,
-    "jest": true,
-    "jquery": true,
-    "node": true
-  },
   "extends": [
-    "./node_modules/gts",
-    "google",
-    "nextjs",
-    "plugin:jest/recommended",
-    "plugin:mdx/recommended"
+    "eslint:recommended",
+    "plugin:node/recommended",
+    "prettier"
   ],
   "globals": {},
-  "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaFeatures": {
       "impliedStrict": true,
       "jsx": true
     },
     "ecmaVersion": 2020,
-    "project": [
-      "./tsconfig.json",
-      "./packages/**/tsconfig.json"
-    ],
     "sourceType": "module"
   },
   "plugins": [
-    "@typescript-eslint",
-    "jest",
-    "jsx-a11y",
-    "react-hooks"
+    "import",
+    "node",
+    "prettier"
   ],
   "rules": {
-    // "@typescript-eslint/ban-ts-comment": 1,
-    // "@typescript-eslint/member-delimiter-style": 0,
-    // "@typescript-eslint/no-empty-interface": [
-    //   1,
-    //   {
-    //     "allowSingleExtends": true
-    //   }
-    // ],
-    // "@typescript-eslint/no-explicit-any": 0,
-    // "@typescript-eslint/no-return-assign": 0,
-    // "@typescript-eslint/no-useless-constructor": 0,
-    // "@typescript-eslint/no-var-requires": 1,
-    // "@typescript-eslint/space-before-function-paren": 0,
-    // "@typescript-eslint/triple-slash-reference": 1,
-    "jest/no-mocks-import": 1,
-    // "jsx-a11y/accessible-emoji": 1,
-    // "jsx-a11y/alt-text": 1,
-    // "jsx-a11y/anchor-has-content": 1,
-    // "jsx-a11y/aria-activedescendant-has-tabindex": 1,
-    // "jsx-a11y/aria-props": 1,
-    // "jsx-a11y/aria-proptypes": 1,
-    // "jsx-a11y/aria-role": 1,
-    // "jsx-a11y/aria-unsupported-elements": 1,
-    // "jsx-a11y/click-events-have-key-events": 1,
-    // "jsx-a11y/heading-has-content": 1,
-    // "jsx-a11y/html-has-lang": 1,
-    // "jsx-a11y/iframe-has-title": 1,
-    // "jsx-a11y/img-redundant-alt": 1,
-    // "jsx-a11y/interactive-supports-focus": 1,
-    // "jsx-a11y/label-has-associated-control": 1,
-    // "jsx-a11y/lang": 1,
-    // "jsx-a11y/media-has-caption": 1,
-    // "jsx-a11y/mouse-events-have-key-events": 1,
-    // "jsx-a11y/no-access-key": 1,
-    // "jsx-a11y/no-autofocus": 1,
-    // "jsx-a11y/no-distracting-elements": 1,
-    // "jsx-a11y/no-interactive-element-to-noninteractive-role": 1,
-    // "jsx-a11y/no-noninteractive-element-interactions": 1,
-    // "jsx-a11y/no-noninteractive-element-to-interactive-role": 1,
-    // "jsx-a11y/no-noninteractive-tabindex": 1,
-    // "jsx-a11y/no-onchange": 1,
-    // "jsx-a11y/no-redundant-roles": 1,
-    // "jsx-a11y/no-static-element-interactions": 1,
-    // "jsx-a11y/role-has-required-aria-props": 1,
-    // "jsx-a11y/role-supports-aria-props": 1,
-    // "jsx-a11y/scope": 1,
-    // "jsx-a11y/tabindex-no-positive": 1,
-    // "jsx-quotes": [
-    //   2,
-    //   "prefer-single"
-    // ],
-    "react/jsx-fragments": 0,
-    // "react/jsx-pascal-case": 0,
-    "react-hooks/rules-of-hooks": 1,
+    "block-scoped-var": 2,
+    "camelcase": 0,
+    "eol-last": 2,
+    "eqeqeq": 2,
+    "import/extensions": [
+      1,
+      {
+        "js": "never",
+        "jsx": "never",
+        "json": "always",
+        "mdx": "always",
+        "ts": "never",
+        "tsx": "never"
+      }
+    ],
+    "import/no-extraneous-dependencies": [
+      2,
+      {
+        "devDependencies": true
+      }
+    ],
+    "import/no-unresolved": 0,
+    "import/prefer-default-export": 0,
+    "no-param-reassign": 0,
+    "no-return-assign": 0,
+    "no-shadow": 1,
+    "no-unused-expressions": [
+      2,
+      {
+        "allowTernary": true
+      } 
+    ],
+    "no-trailing-spaces": 2,
+    "no-unused-vars": 1,
+    "no-var": 2,
+    "prefer-const": 2,
+    "prefer-arrow-callback": 2,
+    "prettier/prettier": [
+      2,
+      { "endOfLine": "auto" }
+    ],
+    "quotes": [
+      2,
+      "single",
+      {
+        "avoidEscape": true
+      }
+    ],
+    "require-jsdoc": 1,
+    "semi": 0,
     "sort-keys": [
       1,
       "asc",
@@ -99,8 +80,137 @@
         "minKeys": 2,
         "natural": true
       }
-    ]
+    ],
+    "space-before-function-paren": [
+      2,
+      {
+        "anonymous": "never",
+        "asyncArrow": "always",
+        "named": "never"
+      }
+    ],
+    "valid-jsdoc": 2
   },
+  "overrides": [
+    {
+      "files": ["**/__tests__/*"],
+      "env": {
+        "jest": true
+      },
+      "extends": [
+        "plugin:jest/recommended"
+      ],
+      "rules": {
+        "jest/no-mocks-import": 1
+      }
+    },
+    {
+      "files": [
+        "**/*.jsx",
+        "**/*.tsx"
+      ],
+      "env": {
+        "browser": true,
+        "es6": true
+      },
+      "extends": [
+        "plugin:react/recommended",
+        "prettier/react"
+      ],
+      "plugins": [
+        "jsx-a11y",
+        "react",
+        "react-hooks"
+      ],
+      "rules": {
+        "import/no-cycle": 1,
+        "react/destructuring-assignment": 0,
+        "react/display-name": 0,
+        "react/jsx-filename-extension": [
+          1,
+          {
+            "extensions": [
+              ".mdx",
+              ".tsx"
+            ]
+          }
+        ],
+        "react/jsx-fragments": 0,
+        "react/jsx-props-no-spreading": 0,
+        "react/prop-types": 0,
+        "react/self-closing-comp": 1,
+        "react-hooks/rules-of-hooks": 1
+      }
+    },
+    {
+      "files": [
+        "**/*.stories.mdx"
+      ],
+      "extends": [
+        "plugin:mdx/recommended",
+        "plugin:mdx/overrides",
+        "plugin:react/recommended"
+      ],
+      "plugins": [
+        "react"
+      ],
+      "rules": {
+        "node/no-missing-import": 0,
+        "node/no-unsupported-features/es-syntax": 0
+      }
+    },
+    {
+      "files": [
+        "**/*.ts",
+        "**/*.tsx"
+      ],
+      "extends": [
+        "plugin:@typescript-eslint/recommended"
+      ],
+      "parserOptions": {
+        "parser": "@typescript-eslint/parser",
+        "project": [
+          "./tsconfig.json",
+          "./packages/**/tsconfig.json"
+        ]
+      },
+      "plugins": ["@typescript-eslint"],
+      "rules": {
+        "@typescript-eslint/ban-ts-comment": 0,
+        "@typescript-eslint/ban-types": 0,
+        "@typescript-eslint/camelcase": 0,
+        "@typescript-eslint/explicit-function-return-type": 0,
+        "@typescript-eslint/explicit-module-boundary-types": 0,
+        "@typescript-eslint/member-delimiter-style": [
+          2,
+          {
+            "multiline": {
+              "delimiter": "none",
+              "requireLast": false
+            }
+          }
+        ],
+        "@typescript-eslint/no-empty-function": 0,
+        "@typescript-eslint/no-empty-interface": [
+          1,
+          {
+            "allowSingleExtends": true
+          }
+        ],
+        "@typescript-eslint/no-explicit-any": 1,
+        "@typescript-eslint/no-non-null-assertion": 0,
+        "@typescript-eslint/no-use-before-define": 0,
+        "@typescript-eslint/no-warning-comments": 0,
+        "@typescript-eslint/no-useless-constructor": 1,
+        "node/no-empty-function": 0,
+        "node/no-missing-import": 0,
+        "node/no-missing-require": 0,
+        "node/no-unsupported-features/es-syntax": 0,
+        "require-jsdoc": 0,
+        "valid-jsdoc": 0
+      }
+    }
+  ],
   "settings": {
     "react": {
       "version": "detect"

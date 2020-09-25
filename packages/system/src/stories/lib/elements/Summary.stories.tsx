@@ -1,5 +1,5 @@
-import {Summary, SummaryProps} from '@kustomz'
-import {color, size, StoryFN} from '@kustomz-config'
+import { color, size, StoryFN } from '@kustomz-config'
+import { Summary, SummaryProps } from '@kustomz/lib'
 import React from 'react'
 
 /**
@@ -8,9 +8,9 @@ import React from 'react'
  */
 
 export default {
-  argTypes: {color, size},
+  argTypes: { color, size },
   component: Summary,
-  title: 'Elements/Summary',
+  title: 'Elements/Summary'
 }
 
 /**
@@ -21,5 +21,5 @@ export const Default: StoryFN<SummaryProps> = (args: SummaryProps) => (
 )
 
 Default.args = {
-  children: 'Summary text',
+  children: 'Summary text'
 }

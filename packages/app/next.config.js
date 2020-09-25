@@ -3,7 +3,7 @@
  * @see {@link https://nextjs.org/docs/api-reference/next.config.js/introduction}
  */
 
-const {GOOGLE_ANALYTICS_MEASUREMENT_ID, SITE_URL, VERCEL_URL} = process.env
+const { GOOGLE_ANALYTICS_MEASUREMENT_ID, SITE_URL, VERCEL_URL } = process.env
 
 module.exports = {
   /**
@@ -17,13 +17,13 @@ module.exports = {
    */
   env: {
     GOOGLE_ANALYTICS_MEASUREMENT_ID,
-    SITE_URL: SITE_URL | VERCEL_URL | 'http://localhost:3000',
+    SITE_URL: SITE_URL || VERCEL_URL || 'http://localhost:3000'
   },
 
   /**
    * Headers allow you to set custom HTTP headers for an incoming request path.
    *
-   * @returns {object[]}
+   * @return {object[]} Headers configuration
    */
   headers() {
     return []
@@ -41,7 +41,7 @@ module.exports = {
    * Redirects are only available on the Node.js environment and do not affect
    * client-side routing.
    *
-   * @returns {object[]}
+   * @return {object[]} Redirects configuration
    */
   redirects() {
     return []
@@ -58,7 +58,7 @@ module.exports = {
    * @param {boolean} helpers.dev - True if the compiling in development mode
    * @param {boolean} helpers.isServer - `true` for server-side compilation
    * @param {object} helpers.webpack - Webpack
-   * @returns {object} Altered Webpack configuration
+   * @return {object} Altered Webpack configuration
    */
-  webpack: (config, helpers) => config,
+  webpack: (config, helpers) => config
 }

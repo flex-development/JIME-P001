@@ -1,7 +1,7 @@
-import {AnyObject} from '@flex-development/kustomtypez'
-import Axios, {AxiosError, AxiosRequestConfig, AxiosResponse} from 'axios'
-import {pick} from 'lodash'
-import {getFeathersError} from '../../../lib'
+import { AnyObject } from '@flex-development/kustomtypez'
+import Axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios'
+import { pick } from 'lodash'
+import { getFeathersError } from '../../../lib'
 
 /**
  * @file Axios Configuration
@@ -16,19 +16,21 @@ import {getFeathersError} from '../../../lib'
  * @throws {FeathersError}
  */
 export const handleErrorResponse = (error: AxiosError): void => {
-  const {config, message, request, response, stack} = error
+  const { config, message, request, response, stack } = error
 
   let feathersError = {} as ReturnType<typeof getFeathersError>
 
   if (response) {
     // The request was made and the server responded with a status code
-    const {data, status} = response as AxiosResponse<AnyObject>
+    const { data, status } = response as AxiosResponse<AnyObject>
 
     if (config.url?.includes('api.linkedin')) {
-      const {message, status, ...restOfData} = data
+      const { message, status, ...restOfData } = data
 
       if (status === 401) {
-        restOfData.errors = [{headers: pick(config.headers, ['authorization'])}]
+        restOfData.errors = [
+          { headers: pick(config.headers, ['authorization']) }
+        ]
       }
 
       feathersError = getFeathersError(message, restOfData, status)
@@ -40,14 +42,14 @@ export const handleErrorResponse = (error: AxiosError): void => {
     feathersError = getFeathersError('No response received.')
   } else {
     // Something happened in setting up the request that triggered an error
-    feathersError = getFeathersError(message, {errors: stack})
+    feathersError = getFeathersError(message, { errors: stack })
   }
 
   feathersError.data.config = pick(config, [
     'url',
     'method',
     'params',
-    'headers',
+    'headers'
   ])
 
   throw feathersError
@@ -73,9 +75,5 @@ Axios.interceptors.response.use(handleSuccessResponse, handleErrorResponse)
  * @throws {FeathersError}
  */
 export async function axios<T = any>(config: AxiosRequestConfig): Promise<T> {
-  try {
-    return ((await Axios(config)) as unknown) as Promise<T>
-  } catch (error) {
-    throw error
-  }
+  return ((await Axios(config)) as unknown) as Promise<T>
 }

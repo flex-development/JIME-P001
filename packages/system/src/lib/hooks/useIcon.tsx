@@ -1,3 +1,4 @@
+import { AnyObject } from '@flex-development/kustomtypez'
 import { GlobalProps } from '@kustomz/types'
 import classnames from 'classnames'
 import { isNull, isUndefined, omit } from 'lodash'
@@ -28,7 +29,7 @@ export const useIcon = (props: GlobalProps): GlobalProps => {
     children,
     className: initialClassName = '',
     icon: initialIcon
-  } = props
+  } = props as AnyObject
 
   const [className, setClassName] = useState(initialClassName)
   const [skip] = useState(!initialIcon)

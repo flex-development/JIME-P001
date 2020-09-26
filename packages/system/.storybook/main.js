@@ -60,7 +60,7 @@ module.exports = {
     reactDocgen: 'react-docgen-typescript',
     reactDocgenTypescriptOptions: {
       propFilter: ({ parent = {} }) => {
-        const lib = /system\/src/.test(parent.fileName)
+        const lib = /system\/src\/types/.test(parent.fileName)
         const storybook = /system\/.storybook/.test(parent.fileName)
 
         return lib || storybook

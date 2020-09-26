@@ -1,4 +1,4 @@
-import { GlobalProps } from '@kustomz/types'
+import { MutatedProps } from '@kustomz/types'
 import React, {
   forwardRef,
   ForwardRefExoticComponent as FREC,
@@ -15,7 +15,7 @@ import { useMutatedProps, useTextUtilities } from '../hooks'
 /**
  * {@link Span} component properties.
  */
-export type SpanProps = GlobalProps<HTMLSpanElement>
+export type SpanProps = MutatedProps<HTMLSpanElement>
 
 /**
  * {@link Span} component properties without the `ref` property.

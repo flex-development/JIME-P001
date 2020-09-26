@@ -1,4 +1,4 @@
-import { GlobalProps, SpacerKey } from '@kustomz/types'
+import { MutatedProps, SpacerKey } from '@kustomz/types'
 import React, {
   forwardRef,
   ForwardRefExoticComponent as FREC,
@@ -15,7 +15,7 @@ import { BoxRefAttributes } from './Box'
 /**
  * {@link Spacer} component properties.
  */
-export interface SpacerProps extends GlobalProps {
+export interface SpacerProps extends MutatedProps {
   /**
    * Key of `scss` `$spacers` map.
    *

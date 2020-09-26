@@ -1,5 +1,5 @@
 import { AnyObject } from '@flex-development/kustomtypez'
-import { GlobalProps } from '@kustomz/types'
+import { MutatedProps } from '@kustomz/types'
 import classnames from 'classnames'
 import { ClassValue } from 'classnames/types'
 import { isObject, isString, omit, uniq } from 'lodash'
@@ -29,10 +29,10 @@ import { HTMLAttributes } from 'react'
  * @param keys - Array of keys to remove from {@param props}
  */
 export function useMutatedProps<
-  T1 = GlobalProps,
+  T1 = MutatedProps,
   Mask = HTMLAttributes<HTMLElement>
 >(props: T1, injectClass?: ClassValue, keys?: string[]): Mask {
-  const globalProps = props as GlobalProps
+  const globalProps = props as MutatedProps
 
   keys = keys || []
 

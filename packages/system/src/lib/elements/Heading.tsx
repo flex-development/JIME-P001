@@ -1,4 +1,4 @@
-import { GlobalProps, ThemeColor } from '@kustomz/types'
+import { MutatedProps, ThemeColor } from '@kustomz/types'
 import React, {
   DetailedHTMLProps,
   forwardRef,
@@ -18,7 +18,7 @@ import { useMutatedProps, useTextUtilities } from '../hooks'
 /**
  * {@link Heading} component properties.
  */
-export interface HeadingProps extends GlobalProps<HTMLHeadingElement> {
+export interface HeadingProps extends MutatedProps<HTMLHeadingElement> {
   /**
    * Heading color.
    *

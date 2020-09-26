@@ -1,5 +1,5 @@
 import { Booleanish } from '@flex-development/kustomtypez'
-import { GlobalProps } from '@kustomz/types'
+import { MutatedProps } from '@kustomz/types'
 import React, {
   forwardRef,
   ForwardRefExoticComponent as FREC,
@@ -17,7 +17,7 @@ import { InputValue } from './Input'
 /**
  * {@link Item} component properties.
  */
-export interface ItemProps<E = HTMLLIElement> extends GlobalProps<E> {
+export interface ItemProps<E = HTMLLIElement> extends MutatedProps<E> {
   /**
    * If true, add the class `dropdown-item`.
    *

@@ -1,4 +1,4 @@
-import { GlobalProps, PropsForFormElement } from '@kustomz/types'
+import { MutatedProps, PropsForFormElement } from '@kustomz/types'
 import React, {
   forwardRef,
   ForwardRefExoticComponent as FREC,
@@ -15,7 +15,7 @@ import { useMutatedProps, useTextUtilities } from '../hooks'
 /**
  * {@link NativeOption} component properties.
  */
-export interface NativeOptionProps extends GlobalProps<HTMLOptionElement> {
+export interface NativeOptionProps extends MutatedProps<HTMLOptionElement> {
   /**
    * If true, make option uncheckable.
    */

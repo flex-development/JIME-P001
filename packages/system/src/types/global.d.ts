@@ -19,7 +19,7 @@ export type Attributes<E = HTMLElement> = AriaAttributes &
 /**
  * Properties common to all components.
  */
-export interface GlobalProps<E = HTMLElement> extends Attributes<E> {
+export interface MutatedProps<E = HTMLElement> extends Attributes<E> {
   /**
    * Content to render inside the component.
    *
@@ -205,12 +205,12 @@ export type HTMLElementRefAttributes = RefAttributes<HTMLElement>
  *
  * **https://developer.mozilla.org/docs/Web/HTML/Global_attributes**
  */
-export type HTMLGlobalProps = Omit<GlobalProps, 'flex'>
+export type HTMLMutatedProps = Omit<MutatedProps, 'flex'>
 
 /**
  * Common `Form` (button, input, select) element props.
  */
-export interface PropsForFormElement<E = HTMLElement> extends GlobalProps<E> {
+export interface PropsForFormElement<E = HTMLElement> extends MutatedProps<E> {
   /**
    * Specifies that a form control should have input focus when the page
    * loads.
@@ -257,7 +257,7 @@ export interface PropsForFormElement<E = HTMLElement> extends GlobalProps<E> {
  * Component properties for HTML elements that do not accept inner content.
  */
 export type PropsForVoidElementTag<E = HTMLElement> = Omit<
-  GlobalProps<E>,
+  MutatedProps<E>,
   'children' | 'dangerouslySetInnerHTML'
 >
 
@@ -266,7 +266,7 @@ export type PropsForVoidElementTag<E = HTMLElement> = Omit<
  *
  * @see {@link https://websitesetup.org/html5-periodical-table/}
  */
-export interface TextContentProps<E = HTMLElement> extends GlobalProps<E> {
+export interface TextContentProps<E = HTMLElement> extends MutatedProps<E> {
   /**
    * Text content color.
    *

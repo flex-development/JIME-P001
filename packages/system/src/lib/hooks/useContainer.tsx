@@ -1,5 +1,5 @@
 import { AnyObject } from '@flex-development/kustomtypez'
-import { GlobalProps } from '@kustomz/types'
+import { MutatedProps } from '@kustomz/types'
 import { isBoolean, omit } from 'lodash'
 import React, { useEffect, useState } from 'react'
 import { Container, ContainerProps } from '../components/Container'
@@ -19,7 +19,7 @@ import { Container, ContainerProps } from '../components/Container'
  * @param props.children - Inner content
  * @param props.container - Boolean or Container component properties
  */
-export const useContainer = (props: GlobalProps): GlobalProps => {
+export const useContainer = (props: MutatedProps): MutatedProps => {
   const { children, container: initialContainer = false } = props as AnyObject
 
   const containerProps = isBoolean(initialContainer) ? {} : initialContainer

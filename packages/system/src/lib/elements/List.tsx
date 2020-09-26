@@ -1,4 +1,4 @@
-import { GlobalProps } from '@kustomz/types'
+import { MutatedProps } from '@kustomz/types'
 import React, {
   forwardRef,
   ForwardRefExoticComponent as FREC,
@@ -21,7 +21,7 @@ export type HTMLListElement = HTMLDListElement &
 /**
  * {@link List} component properties.
  */
-export interface ListProps extends GlobalProps<HTMLListElement> {
+export interface ListProps extends MutatedProps<HTMLListElement> {
   /**
    * JSON array of items to render.
    *

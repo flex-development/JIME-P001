@@ -1,5 +1,5 @@
 import { AnyObject } from '@flex-development/kustomtypez'
-import { GlobalProps } from '@kustomz/types'
+import { MutatedProps } from '@kustomz/types'
 import classnames from 'classnames'
 import { isNull, isUndefined, omit } from 'lodash'
 import React, { useEffect, useState } from 'react'
@@ -24,7 +24,7 @@ import { Icon, IconProps } from '../components/Icon'
  * @param props.icon - Icon component properties
  * @param props.icon.position - String indication where to position icon
  */
-export const useIcon = (props: GlobalProps): GlobalProps => {
+export const useIcon = (props: MutatedProps): MutatedProps => {
   const {
     children,
     className: initialClassName = '',

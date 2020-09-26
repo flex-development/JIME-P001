@@ -4,5 +4,6 @@
  */
 
 export * from './sortByKeys'
+export * from './utilityclassnames'
 
 /* eslint-disable */

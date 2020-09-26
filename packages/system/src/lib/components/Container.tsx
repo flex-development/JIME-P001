@@ -1,10 +1,10 @@
-import { ContainerSize } from '@kustomz/types'
+import { ContainerSize, MutatedProps } from '@kustomz/types'
 import React, {
   forwardRef,
   ForwardRefExoticComponent as FREC,
   PropsWithoutRef
 } from 'react'
-import { BoxProps, BoxRefAttributes } from '../elements'
+import { BoxRefAttributes } from '../elements'
 import { useMutatedProps } from '../hooks'
 
 /**
@@ -15,7 +15,7 @@ import { useMutatedProps } from '../hooks'
 /**
  * {@link Container} component properties.
  */
-export interface ContainerProps extends Omit<BoxProps, 'size'> {
+export interface ContainerProps extends MutatedProps<HTMLDivElement> {
   /**
    * Allow the Container to fill all of its available horizontal space.
    *

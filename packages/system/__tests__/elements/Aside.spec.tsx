@@ -11,7 +11,6 @@ it('renders an <aside> element', () => {
   const { container } = render(<Aside />)
 
   expect(container.firstChild).toMatchInlineSnapshot('<aside />')
-  expect(container.firstChild).toBeEmptyDOMElement()
 })
 
 it('renders <aside class="bg-dark" />', () => {

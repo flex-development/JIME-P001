@@ -33,12 +33,12 @@ export type BoxRefAttributes = RefAttributes<HTMLDivElement>
 export type BoxRefProps = ReflessBoxProps & BoxRefAttributes
 
 /**
- * Renders a `<div>` element with the class `box`.
+ * Renders a `<div>` element.
  *
  * - **https://developer.mozilla.org/docs/Web/HTML/Element/div**
  */
 export const Box: FREC<BoxRefProps> = forwardRef((props, ref) => {
-  const { dictionary, sanitized } = useTextUtilities<typeof props>(props, 'box')
+  const { dictionary, sanitized } = useTextUtilities<typeof props>(props)
 
   const mutatedProps = useMutatedProps<
     typeof sanitized,

@@ -10,7 +10,7 @@
   ar = "!f() { git remote add \"$0\" \"$1\"; }; f"
 
   # Checkout and push new branch to origin
-  b = "!f() { git checkout -b \"$@\"; git push -u origin \"$@\"; }; f"
+  b = "!f() { git checkout -b \"$@\"; git puo \"$@\"; }; f"
 
   # Delete a branch locally
   bdel= "!f() { git branch -D $@; }; f"
@@ -28,10 +28,13 @@
   chp = "!f() { git ch $@; git pull; }; f"
 
   # Create new local repo, perform initial commit, and push to Github
-  launch = "!f() { git local; git rao $@; git push -u origin main; }; f"
+  launch = "!f() { git local; git rao $@; git puo next; }; f"
 
   # Start a new local repository and perform initial commit
-  local = "!f() { git init; git add -A; git commit -m \"first commit\"; git branch -M main; }; f"
+  local = "!f() { git init; git add -A; git commit -m \"first commit\"; git branch -M next; }; f"
+
+  # Tell Git to start tracking branch and push to origin
+  puo = "!f() { git push -u origin $@; }; f"
 
   # Add new remote origin
   rao = "!f() { git remote add origin $@; }; f"
@@ -64,19 +67,19 @@
 # See: https://jeffkreeftmeijer.com/git-flow/
 [alias]
   # Create a new feature branch and push upstream
-  feature = "!f() { git flow feature start $@; git push -u feature/$@; }; f"
+  feature = "!f() { git flow feature start $@; git puo feature/$@; }; f"
 
   # Finish a feature, release, hotfix, or support branch
   finish = "!f() { git flow $0 finish $1; }; f"
 
   # Create a new hotfix branch and push upstream
-  hotfix = "!f() { git flow hotfix start $@; git push -u hotfix/$@; }; f"
+  hotfix = "!f() { git flow hotfix start $@; git puo hotfix/$@; }; f"
 
   # Create a new release branch and push upstream
-  release = "!f() { git flow release start $@; git push -u release/$@; }; f"
+  release = "!f() { git flow release start $@; git puo release/$@; }; f"
 
   # Create a new support branch and push upstream
-  support = "!f() { git flow support start $@; git push -u support/$@; }; f"
+  support = "!f() { git flow support start $@; git puo support/$@; }; f"
 
 # Helper Aliases
 [alias]
@@ -88,6 +91,9 @@
 
   # Generate a secret signing key
   signingkey = "!f() { openssl rand -base64 32; }; f"
+
+[core]
+  ignorecase = false
 
 [gitflow "prefix"]
 	feature = feature/

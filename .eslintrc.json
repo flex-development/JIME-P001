@@ -38,7 +38,7 @@
       }
     ],
     "import/no-extraneous-dependencies": [
-      2,
+      1,
       {
         "devDependencies": true
       }
@@ -93,15 +93,25 @@
   },
   "overrides": [
     {
-      "files": ["**/__tests__/*"],
+      "files": [
+        "**/*.spec.ts", 
+        "**/*.spec.tsx",
+        "**/jest.setup.ts"
+      ],
       "env": {
         "jest": true
       },
       "extends": [
         "plugin:jest/recommended"
       ],
+      "plugins": [
+        "import",
+        "jest"
+      ],
       "rules": {
-        "jest/no-mocks-import": 1
+        "import/no-extraneous-dependencies": 0,
+        "jest/no-mocks-import": 1,
+        "node/no-extraneous-import": 0
       }
     },
     {

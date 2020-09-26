@@ -1,6 +1,0 @@
-{
-  "./": [
-    "yarn format",
-    "yarn lint"
-  ]
-}

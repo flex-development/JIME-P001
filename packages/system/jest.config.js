@@ -1,28 +1,23 @@
+const path = require('path')
+
 /**
  * @file Jest Configuration
  * @see {@link https://jestjs.io/docs/en/configuration}
  */
 
-/* eslint-disable prettier/prettier */
-
-const media =
-  '\\.(jpg|ico|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$'
-
-/* eslint-enable prettier/prettier */
-
-const stylesheets = '^.+\\.(css|sass|scss|less)$'
-
 module.exports = {
   moduleFileExtensions: ['js', 'json', 'ts', 'tsx'],
   moduleNameMapper: {
-    [media]: 'identity-obj-proxy',
-    [stylesheets]: 'identity-obj-proxy'
+    '\\.(jpg|ico|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
+      'identity-obj-proxy',
+    '^.+\\.(css|sass|scss|less)$': 'identity-obj-proxy',
+    '^@kustomz/(.*)$': '<rootDir>/src/$1'
   },
+  prettierPath: path.join(__dirname, '../../node_modules/prettier'),
   setupFilesAfterEnv: [
     '@testing-library/jest-dom/extend-expect',
-    'jest.setup.ts'
+    './jest.setup.ts'
   ],
-  testMatch: ['__tests__/*.spec.ts'],
   testPathIgnorePatterns: ['/build/', '/dist/', '/node_modules/'],
   transform: {
     '^.+\\.[tj]sx?$': 'babel-jest',

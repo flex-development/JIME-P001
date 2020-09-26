@@ -9,23 +9,18 @@
   },
   "compilerOptions": {
     "baseUrl": "./",
-    "declaration": true,
-    "declarationDir": "./dist/types",
     "downlevelIteration": true,
     "isolatedModules": false,
     "jsx": "react",
     "lib": ["dom", "dom.iterable", "esnext"],
-    "noEmit": false,
-    "outDir": "./dist",
     "paths": {
       "@kustomz/*": ["src/*"],
       "@kustomz-config/*": [".storybook/config/*"]
     },
-    "rootDir": "./src",
     "sourceMap": false,
     "target": "esnext"
   },
   "extends": "../../tsconfig.json",
   "files": ["src/types/index.d.ts"],
-  "include": ["src"]
+  "include": ["__tests__", "src"]
 }

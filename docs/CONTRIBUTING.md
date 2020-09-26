@@ -105,7 +105,7 @@ For example:
   git feature repo-setup
 ```
 
-will create a new branch titled `feature/repo-setup` and tell Git to set up tracking information for the branch.
+will create a new branch titled `feature/repo-setup` and push it to `origin`.
 
 ## Testing
 

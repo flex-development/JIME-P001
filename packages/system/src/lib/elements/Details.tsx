@@ -1,4 +1,4 @@
-import { GlobalProps } from '@kustomz/types'
+import { MutatedProps } from '@kustomz/types'
 import React, {
   forwardRef,
   ForwardRefExoticComponent as FREC,
@@ -16,7 +16,7 @@ import { useMutatedProps } from '../hooks'
 /**
  * {@link Details} component properties.
  */
-export interface DetailsProps extends GlobalProps<HTMLDetailsElement> {
+export interface DetailsProps extends MutatedProps<HTMLDetailsElement> {
   /**
    * Indicates whether or not the contents of the `<details>` element is
    * currently visible.

@@ -1,4 +1,4 @@
-import { GlobalProps } from '@kustomz/types'
+import { MutatedProps } from '@kustomz/types'
 import React, {
   FC,
   forwardRef,
@@ -19,7 +19,7 @@ import { useMutatedProps } from '../hooks'
 /**
  * {@link NativeSelect} component properties.
  */
-export interface NativeSelectProps extends GlobalProps<HTMLSelectElement> {
+export interface NativeSelectProps extends MutatedProps<HTMLSelectElement> {
   /**
    * Array of `NativeOption` components to render.
    */

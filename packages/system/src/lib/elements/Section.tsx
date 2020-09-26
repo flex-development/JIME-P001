@@ -1,4 +1,4 @@
-import { GlobalProps, HTMLElementRefAttributes } from '@kustomz/types'
+import { HTMLElementRefAttributes, MutatedProps } from '@kustomz/types'
 import React, {
   forwardRef,
   ForwardRefExoticComponent as FREC,
@@ -14,7 +14,7 @@ import { useMutatedProps, useTextUtilities } from '../hooks'
 /**
  * {@link Section} component properties.
  */
-export type SectionProps = Omit<GlobalProps, 'icon'>
+export type SectionProps = Omit<MutatedProps, 'icon'>
 
 /**
  * {@link Section} component properties without the `ref` property.

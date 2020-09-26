@@ -1,4 +1,4 @@
-import { GlobalProps } from '@kustomz/types'
+import { MutatedProps } from '@kustomz/types'
 import React, {
   forwardRef,
   ForwardRefExoticComponent as FREC,
@@ -16,7 +16,7 @@ import { useMutatedProps } from '../hooks'
 /**
  * {@link Form} component properties.
  */
-export interface FormProps extends GlobalProps<HTMLFormElement> {
+export interface FormProps extends MutatedProps<HTMLFormElement> {
   /**
    * Space-separated character encodings the server accepts. The browser uses
    * them in the order in which they are listed. The default value means the

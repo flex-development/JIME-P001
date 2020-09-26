@@ -1,37 +1,21 @@
-import { HTMLElementRefAttributes, MutatedProps } from '@kustomz/types'
+import { RefProps } from '@kustomz/types'
 import React, {
   forwardRef,
-  ForwardRefExoticComponent as FREC,
-  PropsWithoutRef
+  ForwardRefExoticComponent as FREC
 } from 'react'
 import { useMutatedProps } from '../hooks'
 
 /**
+ * @file Render a `<header>` element
  * @module lib/elements/Header
- * @see {@link https://developer.mozilla.org/docs/Web/HTML/Element/header}
  */
-
-/**
- * {@link Header} component properties.
- */
-export type HeaderProps = MutatedProps
-
-/**
- * {@link Header} component properties without the `ref` property.
- */
-export type ReflessHeaderProps = PropsWithoutRef<HeaderProps>
-
-/**
- * {@link Header} component forward ref properties.
- */
-export type HeaderRefProps = ReflessHeaderProps & HTMLElementRefAttributes
 
 /**
  * Renders a `<header>` element.
  *
  * - **https://developer.mozilla.org/en-US/docs/Web/HTML/Element/header**
  */
-export const Header: FREC<HeaderRefProps> = forwardRef((props, ref) => {
+export const Header: FREC<RefProps> = forwardRef((props, ref) => {
   const mutatedProps = useMutatedProps<
     typeof props,
     JSX.IntrinsicElements['header']

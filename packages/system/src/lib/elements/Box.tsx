@@ -8,8 +8,8 @@ import React, {
 import { useMutatedProps, useTextUtilities } from '../hooks'
 
 /**
+ * @file Render a `<div>` element
  * @module lib/elements/Box
- * @see {@link https://developer.mozilla.org/docs/Web/HTML/Element/div}
  */
 
 /**

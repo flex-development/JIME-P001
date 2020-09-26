@@ -1,21 +1,20 @@
-import { HTMLElementRefAttributes } from '@kustomz/types'
+import { HTMLElementRefAttributes, MutatedProps } from '@kustomz/types'
 import React, {
   forwardRef,
   ForwardRefExoticComponent as FREC,
   PropsWithoutRef
 } from 'react'
-import { BoxProps } from '.'
 import { useMutatedProps, useTextUtilities } from '../hooks'
 
 /**
+ * @file Render a `<nav>` element
  * @module lib/elements/Nav
- * @see {@link https://v5.getbootstrap.com/docs/5.0/components/navs/}
  */
 
 /**
  * {@link Nav} component properties.
  */
-export interface NavProps extends BoxProps<HTMLElement> {
+export interface NavProps extends MutatedProps {
   /**
    * Add the class `nav-fill` to create a pills navigation.
    *

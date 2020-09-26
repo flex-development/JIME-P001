@@ -1,6 +1,4 @@
-import {
-  ForwardRefProps
-} from '@kustomz/types'
+import { RefProps } from '@kustomz/types'
 import React, {
   forwardRef,
   ForwardRefExoticComponent as FREC
@@ -17,7 +15,7 @@ import { useMutatedProps } from '../hooks'
  *
  * - **https://developer.mozilla.org/en-US/docs/Web/HTML/Element/aside**
  */
-export const Aside: FREC<ForwardRefProps> = forwardRef((props, ref) => {
+export const Aside: FREC<RefProps> = forwardRef((props, ref) => {
   const mutatedProps = useMutatedProps<
     typeof props,
     JSX.IntrinsicElements['aside']

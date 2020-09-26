@@ -1,4 +1,4 @@
-import { GlobalProps, ThemeColor, ThemeOutline } from '@kustomz/types'
+import { GlobalProps } from '@kustomz/types'
 import React, {
   forwardRef,
   ForwardRefExoticComponent as FREC,
@@ -29,13 +29,6 @@ export interface DetailsProps extends GlobalProps<HTMLDetailsElement> {
    * Properties to pass to the inner `Summary` component.
    */
   summary?: SummaryProps
-
-  /**
-   * Background color or outline variant.
-   *
-   * @default false
-   */
-  variant?: boolean | ThemeColor | ThemeOutline
 }
 
 /**

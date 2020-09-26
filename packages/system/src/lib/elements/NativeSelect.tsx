@@ -1,4 +1,4 @@
-import { GlobalProps, ThemeColor, ThemeOutline } from '@kustomz/types'
+import { GlobalProps } from '@kustomz/types'
 import React, {
   FC,
   forwardRef,
@@ -31,13 +31,6 @@ export interface NativeSelectProps extends GlobalProps<HTMLSelectElement> {
    * @default []
    */
   options?: NativeOptionProps[]
-
-  /**
-   * Background color or outline variant.
-   *
-   * @default false
-   */
-  variant?: boolean | ThemeColor | ThemeOutline
 }
 
 /**

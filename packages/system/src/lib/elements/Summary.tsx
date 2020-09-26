@@ -1,4 +1,4 @@
-import { ContentSectionProps, HTMLElementRefAttributes } from '@kustomz/types'
+import { GlobalProps, HTMLElementRefAttributes } from '@kustomz/types'
 import React, {
   forwardRef,
   ForwardRefExoticComponent as FREC,
@@ -14,7 +14,7 @@ import { useMutatedProps, useTextUtilities } from '../hooks'
 /**
  * {@link Summary} component properties.
  */
-export type SummaryProps = ContentSectionProps<HTMLElement>
+export type SummaryProps = GlobalProps<HTMLElement>
 
 /**
  * {@link Summary} component properties without the `ref` property.

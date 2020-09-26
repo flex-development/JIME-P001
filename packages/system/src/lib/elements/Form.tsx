@@ -1,4 +1,4 @@
-import { GlobalProps, ThemeColor, ThemeOutline } from '@kustomz/types'
+import { GlobalProps } from '@kustomz/types'
 import React, {
   forwardRef,
   ForwardRefExoticComponent as FREC,
@@ -101,13 +101,6 @@ export interface FormProps extends GlobalProps<HTMLFormElement> {
    * @default '_self'
    */
   target?: string
-
-  /**
-   * Background color or outline variant.
-   *
-   * @default false
-   */
-  variant?: boolean | ThemeColor | ThemeOutline
 }
 
 /**

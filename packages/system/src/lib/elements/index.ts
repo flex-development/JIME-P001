@@ -3,7 +3,6 @@
  * @module lib/atoms
  */
 
-export * from './Article'
 export * from './Aside'
 export * from './Box'
 export * from './Button'

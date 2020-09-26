@@ -1,4 +1,4 @@
-import { ContentSectionProps } from '@kustomz/types'
+import { GlobalProps } from '@kustomz/types'
 import React, {
   forwardRef,
   ForwardRefExoticComponent as FREC,
@@ -15,7 +15,7 @@ import { useMutatedProps, useTextUtilities } from '../hooks'
 /**
  * {@link Box} component properties.
  */
-export type BoxProps<E = HTMLDivElement> = ContentSectionProps<E>
+export type BoxProps<E = HTMLDivElement> = GlobalProps<E>
 
 /**
  * {@link Box} component properties without the `ref` property.

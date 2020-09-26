@@ -1,4 +1,4 @@
-import { ContentSectionProps, HTMLElementRefAttributes } from '@kustomz/types'
+import { GlobalProps, HTMLElementRefAttributes } from '@kustomz/types'
 import React, {
   forwardRef,
   ForwardRefExoticComponent as FREC,
@@ -7,14 +7,14 @@ import React, {
 import { useMutatedProps } from '../hooks'
 
 /**
+ * @file Renders an `<aside>` element
  * @module lib/elements/Aside
- * @see {@link https://developer.mozilla.org/docs/Web/HTML/Element/aside}
  */
 
 /**
  * {@link Aside} component properties.
  */
-export type AsideProps = ContentSectionProps
+export type AsideProps = GlobalProps
 
 /**
  * {@link Aside} component properties without the `ref` property.
@@ -27,7 +27,7 @@ export type ReflessAsideProps = PropsWithoutRef<AsideProps>
 export type AsideRefProps = ReflessAsideProps & HTMLElementRefAttributes
 
 /**
- * Renders a `<aside>` element.
+ * Renders an `<aside>` element.
  *
  * - **https://developer.mozilla.org/en-US/docs/Web/HTML/Element/aside**
  */

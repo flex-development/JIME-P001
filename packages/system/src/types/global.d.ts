@@ -17,21 +17,6 @@ export type Attributes<E = HTMLElement> = AriaAttributes &
   }
 
 /**
- * Common content-sectioning component properties.
- *
- * @see {@link https://websitesetup.org/html5-periodical-table/}
- */
-export interface ContentSectionProps<E = HTMLElement>
-  extends TextContentProps<E> {
-  /**
-   * Background color or outline variant.
-   *
-   * @default false
-   */
-  variant?: boolean | ThemeColor | ThemeOutline
-}
-
-/**
  * Properties common to all components.
  */
 export interface GlobalProps<E = HTMLElement> extends Attributes<E> {
@@ -101,14 +86,14 @@ export interface GlobalProps<E = HTMLElement> extends Attributes<E> {
    * in contenteditable mode.
    */
   inputMode?:
-    | 'none'
-    | 'text'
-    | 'decimal'
-    | 'numeric'
-    | 'tel'
-    | 'search'
-    | 'email'
-    | 'url'
+  | 'none'
+  | 'text'
+  | 'decimal'
+  | 'numeric'
+  | 'tel'
+  | 'search'
+  | 'email'
+  | 'url'
 
   /* eslint-enable prettier/prettier */
 
@@ -198,6 +183,13 @@ export interface GlobalProps<E = HTMLElement> extends Attributes<E> {
    * - no, which indicates that the element will not be translated.
    */
   translate?: 'no' | 'yes'
+
+  /**
+   * Background color or outline variant.
+   *
+   * @default false
+   */
+  variant?: false | ThemeColor | ThemeOutline
 }
 
 /**

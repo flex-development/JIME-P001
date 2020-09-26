@@ -174,11 +174,6 @@ export interface GlobalAttributes<E = HTMLElement> extends Attributes<E> {
 }
 
 /**
- * {@link MutatedProps} type forward ref properties.
- */
-export type ForwardRefProps = ReflessMutatedProps & HTMLElementRefAttributes
-
-/**
  * Ref attributes for HTML elements.
  */
 export type HTMLElementRefAttributes = RefAttributes<HTMLElement>
@@ -286,6 +281,11 @@ export type PropsForVoidElementTag<E = HTMLElement> = Omit<
  * {@link MutatedProps} type without the `ref` property.
  */
 export type ReflessMutatedProps = PropsWithoutRef<MutatedProps>
+
+/**
+ * {@link MutatedProps} type forward ref properties.
+ */
+export type RefProps = ReflessMutatedProps & HTMLElementRefAttributes
 
 /**
  * Common text content component properties.

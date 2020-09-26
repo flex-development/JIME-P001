@@ -1,37 +1,21 @@
-import { HTMLElementRefAttributes, MutatedProps } from '@kustomz/types'
+import { RefProps } from '@kustomz/types'
 import React, {
   forwardRef,
-  ForwardRefExoticComponent as FREC,
-  PropsWithoutRef
+  ForwardRefExoticComponent as FREC
 } from 'react'
 import { useMutatedProps, useTextUtilities } from '../hooks'
 
 /**
+ * @file Render a `<section>` element
  * @module lib/elements/Section
- * @see {@link https://developer.mozilla.org/docs/Web/HTML/Element/section}
  */
-
-/**
- * {@link Section} component properties.
- */
-export type SectionProps = Omit<MutatedProps, 'icon'>
-
-/**
- * {@link Section} component properties without the `ref` property.
- */
-export type ReflessSectionProps = PropsWithoutRef<SectionProps>
-
-/**
- * {@link Section} component forward ref properties.
- */
-export type SectionRefProps = ReflessSectionProps & HTMLElementRefAttributes
 
 /**
  * Renders a `<section>` element.
  *
  * - **https://developer.mozilla.org/en-US/docs/Web/HTML/Element/section**
  */
-export const Section: FREC<SectionRefProps> = forwardRef((props, ref) => {
+export const Section: FREC<RefProps> = forwardRef((props, ref) => {
   const { dictionary, sanitized } = useTextUtilities<typeof props>(props)
 
   const mutatedProps = useMutatedProps<

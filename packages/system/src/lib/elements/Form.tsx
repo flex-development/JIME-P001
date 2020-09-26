@@ -8,9 +8,8 @@ import React, {
 import { useMutatedProps } from '../hooks'
 
 /**
+ * @file Render a `<footer>` element
  * @module lib/elements/Form
- * @see {@link https://developer.mozilla.org/docs/Web/HTML/Element/form}
- * @see {@link https://v5.getbootstrap.com/docs/5.0/forms/overview/}
  */
 
 /**

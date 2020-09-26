@@ -1,37 +1,21 @@
-import { HTMLElementRefAttributes, MutatedProps } from '@kustomz/types'
+import { RefProps } from '@kustomz/types'
 import React, {
   forwardRef,
-  ForwardRefExoticComponent as FREC,
-  PropsWithoutRef
+  ForwardRefExoticComponent as FREC
 } from 'react'
 import { useMutatedProps } from '../hooks'
 
 /**
+ * @file Render a `<footer>` element
  * @module lib/elements/Footer
- * @see {@link https://developer.mozilla.org/docs/Web/HTML/Element/footer}
  */
-
-/**
- * {@link Footer} component properties.
- */
-export type FooterProps = MutatedProps
-
-/**
- * {@link Footer} component properties without the `ref` property.
- */
-export type ReflessFooterProps = PropsWithoutRef<FooterProps>
-
-/**
- * {@link Footer} component forward ref properties.
- */
-export type FooterRefProps = ReflessFooterProps & HTMLElementRefAttributes
 
 /**
  * Renders a `<footer>` element.
  *
  * - **https://developer.mozilla.org/en-US/docs/Web/HTML/Element/footer**
  */
-export const Footer: FREC<FooterRefProps> = forwardRef((props, ref) => {
+export const Footer: FREC<RefProps> = forwardRef((props, ref) => {
   const mutatedProps = useMutatedProps<
     typeof props,
     JSX.IntrinsicElements['footer']

@@ -219,10 +219,10 @@ firebase-credentials-dev.json
 *.lerna_backup
 
 # Next.js
-!packages/app/public
+!packages/app/public/
 
 # Storybook
-public/
+packages/system/public/
 
 # Vercel
 .now

@@ -51,7 +51,7 @@
     "build:bundle": "microbundle --jsx React.createElement",
     "build:storybook": "build-storybook -o public",
     "postbuild:bundle": "shx cp -R src/theme/* dist/style",
-    "postbuild:storybook": "shx cp -R ../app/public/assets/* public",
+    "postbuild:storybook": "shx cp -R ../app/public/assets/** public",
     "build": "run-p build:*"
   },
   "dependencies": {

@@ -4,7 +4,7 @@ import React, {
   ForwardRefExoticComponent as FREC,
   PropsWithoutRef
 } from 'react'
-import { useMutatedProps, useTextUtilities } from '../hooks'
+import { useMutatedProps } from '../hooks'
 
 /**
  * @file Render a `<nav>` element
@@ -61,13 +61,11 @@ export type NavRefProps = ReflessNavProps & HTMLElementRefAttributes
 export const Nav: FREC<NavRefProps> = forwardRef((props, ref) => {
   const { fill, pills, tabs, ...rest } = props
 
-  const { dictionary, sanitized } = useTextUtilities<typeof rest>(rest, 'nav')
-
   const mutatedProps = useMutatedProps<
-    typeof sanitized,
+    typeof rest,
     JSX.IntrinsicElements['nav']
-  >(sanitized, {
-    ...dictionary,
+  >(rest, {
+    nav: true,
     'nav-fill': fill,
     'nav-pills': pills,
     'nav-tabs': tabs

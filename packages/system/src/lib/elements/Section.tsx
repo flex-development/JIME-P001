@@ -1,6 +1,6 @@
 import { RefProps } from '@kustomz/types'
 import React, { forwardRef, ForwardRefExoticComponent as FREC } from 'react'
-import { useMutatedProps, useTextUtilities } from '../hooks'
+import { useMutatedProps } from '../hooks'
 
 /**
  * @file Render a `<section>` element
@@ -13,12 +13,10 @@ import { useMutatedProps, useTextUtilities } from '../hooks'
  * - **https://developer.mozilla.org/en-US/docs/Web/HTML/Element/section**
  */
 export const Section: FREC<RefProps> = forwardRef((props, ref) => {
-  const { dictionary, sanitized } = useTextUtilities<typeof props>(props)
-
   const mutatedProps = useMutatedProps<
-    typeof sanitized,
+    typeof props,
     JSX.IntrinsicElements['section']
-  >(sanitized, dictionary)
+  >(props)
 
   return <section {...mutatedProps} ref={ref} />
 })

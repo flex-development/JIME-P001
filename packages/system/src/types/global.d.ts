@@ -214,6 +214,15 @@ export interface MutatedProps<E = HTMLElement> extends GlobalAttributes<E> {
   innerHTML?: string
 
   /**
+   * An array of string values to turn into text utility classes. Each string in
+   * the array of will prefixed with `text-` or `link-`.
+   *
+   * See: **https://v5.getbootstrap.com/docs/5.0/utilities/text/**
+   * See: **https://v5.getbootstrap.com/docs/5.0/utilities/colors/#color**
+   */
+  text?: string[]
+
+  /**
    * Used to work with background and outline color utility classes.
    *
    * See: **https://v5.getbootstrap.com/docs/5.0/utilities/colors/#background-color**

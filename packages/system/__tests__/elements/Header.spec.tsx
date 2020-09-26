@@ -1,0 +1,14 @@
+import { Header } from '@kustomz/lib'
+import { render } from '@testing-library/react'
+import React from 'react'
+
+/**
+ * @file Unit Tests - Header
+ * @module tests/elements/Header
+ */
+
+it('renders a <header> element', () => {
+  const { container } = render(<Header />)
+
+  expect(container.firstChild).toMatchInlineSnapshot('<header />')
+})

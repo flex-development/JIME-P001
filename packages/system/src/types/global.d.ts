@@ -3,6 +3,7 @@ import {
   AriaAttributes,
   CSSProperties,
   DOMAttributes,
+  PropsWithoutRef,
   RefAttributes
 } from 'react'
 import { Size, ThemeColor, ThemeOutline } from './theme'
@@ -12,14 +13,17 @@ import { Size, ThemeColor, ThemeOutline } from './theme'
  */
 export type Attributes<E = HTMLElement> = AriaAttributes &
   DOMAttributes<E> &
-  RefAttributes<E> & {
-    forwardedRef?: RefAttributes<E>['ref']
-  }
+  RefAttributes<E> & { forwardedRef?: RefAttributes<E>['ref'] }
 
 /**
- * Properties common to all components.
+ * Global properties are attributes common to all HTML elements. Even though
+ * they can be used on all elements, they may have no effect.
+ *
+ * The properties defined are the ones to be used by this application.
+ *
+ * @see {@link https://developer.mozilla.org/docs/Web/HTML/Global_attributes}
  */
-export interface MutatedProps<E = HTMLElement> extends Attributes<E> {
+export interface GlobalAttributes<E = HTMLElement> extends Attributes<E> {
   /**
    * Content to render inside the component.
    *
@@ -43,13 +47,6 @@ export interface MutatedProps<E = HTMLElement> extends Attributes<E> {
   contentEditable?: Booleanish | 'inherit'
 
   /**
-   * Add the class "d-flex" or "d-inline-flex".
-   *
-   * @default false
-   */
-  flex?: boolean | 'inline'
-
-  /**
    * A Boolean attribute indicates that the element is not yet, or is no longer,
    * relevant.
    *
@@ -68,13 +65,6 @@ export interface MutatedProps<E = HTMLElement> extends Attributes<E> {
    * fragment identifier), scripting, or styling (with CSS).
    */
   id?: string
-
-  /**
-   * HTML string to render inside the component.
-   *
-   * If defined, `children` must be omitted.
-   */
-  innerHTML?: string
 
   /* eslint-disable prettier/prettier */
 
@@ -122,10 +112,8 @@ export interface MutatedProps<E = HTMLElement> extends Attributes<E> {
    *
    * It may have the following values:
    *
-   * - true, which indicates that the element should be, if possible, checked
-   *   for spelling errors;
-   * - false, which indicates that the element should not be checked for
-   *   spelling errors.
+   * - `true`: element should be, if possible, checked for spelling errors
+   * - `false`: element should not be checked for spelling errors.
    */
   spellCheck?: Booleanish
 
@@ -183,14 +171,12 @@ export interface MutatedProps<E = HTMLElement> extends Attributes<E> {
    * - no, which indicates that the element will not be translated.
    */
   translate?: 'no' | 'yes'
-
-  /**
-   * Background color or outline variant.
-   *
-   * @default false
-   */
-  variant?: false | ThemeColor | ThemeOutline
 }
+
+/**
+ * {@link MutatedProps} type forward ref properties.
+ */
+export type ForwardRefProps = ReflessMutatedProps & HTMLElementRefAttributes
 
 /**
  * Ref attributes for HTML elements.
@@ -198,14 +184,49 @@ export interface MutatedProps<E = HTMLElement> extends Attributes<E> {
 export type HTMLElementRefAttributes = RefAttributes<HTMLElement>
 
 /**
- * Global properties are attributes common to all HTML elements; they can be
- * used on all elements, though they may have no effect on some elements.
- *
- * The properties defined are the ones to be used by this application.
- *
- * **https://developer.mozilla.org/docs/Web/HTML/Global_attributes**
+ * Properties used to add additional functionality to React's prop handling API.
+ * 
+ * @see {@link https://v5.getbootstrap.com/docs/5.0/utilities}
  */
-export type HTMLMutatedProps = Omit<MutatedProps, 'flex'>
+export interface MutatedProps<E = HTMLElement> extends GlobalAttributes<E> {
+  /**
+   * Used to work with flexbox utility classes.
+   * 
+   * Possible values:
+   * 
+   * - `false`: Remove flexbox classes
+   * - `true`: Apply the class `d-flex`
+   * - `inline`: Apply the class `d-inline-flex`
+   * 
+   * **TODO**
+   *
+   * - Handle responsive variations
+   *
+   * See: **https://v5.getbootstrap.com/docs/5.0/utilities/flex/**
+   * 
+   * @default false
+   */
+  flex?: boolean | 'inline'
+
+  /**
+   * String containing HTML markup. This value will be used to set the value of
+   * `props.dangerouslySetInnerHTML.__html`.
+   *
+   * If defined, `children` must be omitted.
+   * 
+   * See: **https://reactjs.org/docs/dom-elements.html#dangerouslysetinnerhtml**
+   */
+  innerHTML?: string
+
+  /**
+   * Used to work with background and outline color utility classes.
+   * 
+   * See: **https://v5.getbootstrap.com/docs/5.0/utilities/colors/#background-color**
+   * 
+   * @default false
+   */
+  variant?: false | ThemeColor | ThemeOutline
+}
 
 /**
  * Common `Form` (button, input, select) element props.
@@ -260,6 +281,11 @@ export type PropsForVoidElementTag<E = HTMLElement> = Omit<
   MutatedProps<E>,
   'children' | 'dangerouslySetInnerHTML'
 >
+
+/**
+ * {@link MutatedProps} type without the `ref` property.
+ */
+export type ReflessMutatedProps = PropsWithoutRef<MutatedProps>
 
 /**
  * Common text content component properties.

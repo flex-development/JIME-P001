@@ -3,7 +3,6 @@
  * @module hooks
  */
 
-export * from './useBoolean'
 export * from './useDocumentTitle'
 export * from './useIcon'
 export * from './useMutatedProps'

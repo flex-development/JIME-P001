@@ -5,7 +5,7 @@ assignees: ''
 ---
 
 **Describe your changes**  
-A clear and concise description of your changes. Label your PR as `feature`, `hotfix`, or `release`.
+A clear and concise description of your changes.
 
 **Tests**  
 What did you test?

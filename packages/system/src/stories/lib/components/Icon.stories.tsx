@@ -4,13 +4,13 @@ import React from 'react'
 
 /**
  * @file Stories - Icon
- * @module stories/lib/elements/Icon
+ * @module stories/lib/components/Icon
  */
 
 export default {
   argTypes: { color, size },
   component: Icon,
-  title: 'Elements/Icon'
+  title: 'Components/Icon'
 }
 
 /**

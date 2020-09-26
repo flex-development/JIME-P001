@@ -5,6 +5,7 @@
 
 export * from './components'
 export * from './elements'
+export * from './hooks'
 export * from './modules'
 /* eslint-disable import/export */
 export * from './templates'

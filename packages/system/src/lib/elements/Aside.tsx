@@ -1,8 +1,5 @@
 import { RefProps } from '@kustomz/types'
-import React, {
-  forwardRef,
-  ForwardRefExoticComponent as FREC
-} from 'react'
+import React, { forwardRef, ForwardRefExoticComponent as FREC } from 'react'
 import { useMutatedProps } from '../hooks'
 
 /**

@@ -76,14 +76,14 @@ export interface GlobalAttributes<E = HTMLElement> extends Attributes<E> {
    * in contenteditable mode.
    */
   inputMode?:
-  | 'none'
-  | 'text'
-  | 'decimal'
-  | 'numeric'
-  | 'tel'
-  | 'search'
-  | 'email'
-  | 'url'
+    | 'none'
+    | 'text'
+    | 'decimal'
+    | 'numeric'
+    | 'tel'
+    | 'search'
+    | 'email'
+    | 'url'
 
   /* eslint-enable prettier/prettier */
 
@@ -180,25 +180,25 @@ export type HTMLElementRefAttributes = RefAttributes<HTMLElement>
 
 /**
  * Properties used to add additional functionality to React's prop handling API.
- * 
+ *
  * @see {@link https://v5.getbootstrap.com/docs/5.0/utilities}
  */
 export interface MutatedProps<E = HTMLElement> extends GlobalAttributes<E> {
   /**
    * Used to work with flexbox utility classes.
-   * 
+   *
    * Possible values:
-   * 
+   *
    * - `false`: Remove flexbox classes
    * - `true`: Apply the class `d-flex`
    * - `inline`: Apply the class `d-inline-flex`
-   * 
+   *
    * **TODO**
    *
    * - Handle responsive variations
    *
    * See: **https://v5.getbootstrap.com/docs/5.0/utilities/flex/**
-   * 
+   *
    * @default false
    */
   flex?: boolean | 'inline'
@@ -208,16 +208,16 @@ export interface MutatedProps<E = HTMLElement> extends GlobalAttributes<E> {
    * `props.dangerouslySetInnerHTML.__html`.
    *
    * If defined, `children` must be omitted.
-   * 
+   *
    * See: **https://reactjs.org/docs/dom-elements.html#dangerouslysetinnerhtml**
    */
   innerHTML?: string
 
   /**
    * Used to work with background and outline color utility classes.
-   * 
+   *
    * See: **https://v5.getbootstrap.com/docs/5.0/utilities/colors/#background-color**
-   * 
+   *
    * @default false
    */
   variant?: false | ThemeColor | ThemeOutline

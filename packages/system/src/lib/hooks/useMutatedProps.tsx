@@ -32,19 +32,24 @@ export function useMutatedProps<
   T1 = MutatedProps,
   Mask = HTMLAttributes<HTMLElement>
 >(props: T1, injectClass?: ClassValue, keys?: string[]): Mask {
-  const globalProps = props as MutatedProps
+  // Props are read-only so we need a copy
+  const mutatedProps = Object.assign({}, props) as MutatedProps
 
+  // Initialize array containing properties to remove
   keys = keys || []
 
-  if (globalProps.innerHTML) {
-    globalProps.dangerouslySetInnerHTML = { __html: globalProps.innerHTML }
+  // Handle dangerouslySetInnerHTML
+  if (mutatedProps.innerHTML) {
+    mutatedProps.dangerouslySetInnerHTML = { __html: mutatedProps.innerHTML }
 
     keys.push('innerHTML')
     keys.push('children')
   }
 
-  if (globalProps.flex) {
-    const { flex } = globalProps
+  // Handle flexbox utility classes
+  // TODO: Move to separate hook
+  if (mutatedProps.flex) {
+    const { flex } = mutatedProps
 
     injectClass = isObject(injectClass) ? injectClass : {}
     injectClass[`d-${isString(flex) ? 'inline-' : ''}flex`] = flex
@@ -52,8 +57,10 @@ export function useMutatedProps<
     keys.push('flex')
   }
 
-  if ((globalProps as AnyObject).variant) {
-    const { variant } = globalProps as AnyObject
+  // Handle background and outline color utility classes
+  // TODO: Move to separate hook
+  if ((mutatedProps as AnyObject).variant) {
+    const { variant } = mutatedProps as AnyObject
 
     injectClass = isObject(injectClass) ? injectClass : {}
     injectClass[`${injectClass.btn ? 'btn' : 'bg'}-${variant}`] = variant
@@ -61,9 +68,12 @@ export function useMutatedProps<
     keys.push('variant')
   }
 
-  globalProps.className = classnames(injectClass, globalProps.className)
+  // Merge injection classes and original classes
+  if (injectClass) {
+    mutatedProps.className = classnames(injectClass, mutatedProps.className)
+  }
 
-  return omit(globalProps, uniq(keys)) as Mask
+  return omit(mutatedProps, uniq(keys)) as Mask
 }
 
 export default useMutatedProps

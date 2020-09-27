@@ -1,0 +1,11 @@
+import { excludePropKeys } from '../../../config'
+import { Footer } from '@kustomz/lib'
+import { ArgsTable, Description, Meta } from '@storybook/addon-docs/blocks'
+
+<Meta title='Library/Atoms/Footer' component={Footer} />
+
+# Footer
+
+<Description markdown={Footer.__docgenInfo.description} />
+
+<ArgsTable exclude={excludePropKeys} of={Footer} />

@@ -122,14 +122,14 @@ export interface GlobalAttributes<E = HTMLElement> extends Attributes<E> {
    * in contenteditable mode.
    */
   inputMode?:
-  | 'none'
-  | 'text'
-  | 'decimal'
-  | 'numeric'
-  | 'tel'
-  | 'search'
-  | 'email'
-  | 'url'
+    | 'none'
+    | 'text'
+    | 'decimal'
+    | 'numeric'
+    | 'tel'
+    | 'search'
+    | 'email'
+    | 'url'
 
   /* eslint-enable prettier/prettier */
 

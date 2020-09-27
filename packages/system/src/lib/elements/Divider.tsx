@@ -8,8 +8,8 @@ import React, {
 import { useMutatedProps } from '../hooks'
 
 /**
+ * @file Render a `<hr>` element
  * @module lib/elements/Divider
- * @see {@link https://developer.mozilla.org/docs/Web/HTML/Element/hr}
  */
 
 /**
@@ -46,7 +46,7 @@ export const Divider: FREC<DividerProps> = forwardRef((props, ref) => {
   const mutatedProps = useMutatedProps<
     typeof props,
     JSX.IntrinsicElements['hr']
-  >(props, 'divider')
+  >(props)
 
   return <hr {...mutatedProps} ref={ref} />
 })

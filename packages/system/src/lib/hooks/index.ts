@@ -6,6 +6,5 @@
 export * from './useDocumentTitle'
 export * from './useIcon'
 export * from './useMutatedProps'
-export * from './useTextUtilities'
 
 /* eslint-disable prettier/prettier */

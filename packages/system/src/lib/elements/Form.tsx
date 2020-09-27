@@ -8,7 +8,7 @@ import React, {
 import { useMutatedProps } from '../hooks'
 
 /**
- * @file Render a `<footer>` element
+ * @file Render a `<form>` element
  * @module lib/elements/Form
  */
 

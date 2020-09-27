@@ -5,7 +5,7 @@ import React, {
   PropsWithoutRef,
   RefAttributes
 } from 'react'
-import { useMutatedProps, useTextUtilities } from '../hooks'
+import { useMutatedProps } from '../hooks'
 
 /**
  * @file Render a `<div>` element
@@ -38,12 +38,10 @@ export type BoxRefProps = ReflessBoxProps & BoxRefAttributes
  * - **https://developer.mozilla.org/docs/Web/HTML/Element/div**
  */
 export const Box: FREC<BoxRefProps> = forwardRef((props, ref) => {
-  const { dictionary, sanitized } = useTextUtilities<typeof props>(props)
-
   const mutatedProps = useMutatedProps<
-    typeof sanitized,
+    typeof props,
     JSX.IntrinsicElements['div']
-  >(sanitized, dictionary)
+  >(props)
 
   return <div {...mutatedProps} ref={ref} />
 })

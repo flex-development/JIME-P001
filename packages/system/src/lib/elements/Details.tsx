@@ -5,12 +5,11 @@ import React, {
   PropsWithoutRef,
   RefAttributes
 } from 'react'
-import { Summary, SummaryProps } from '.'
 import { useMutatedProps } from '../hooks'
 
 /**
+ * @file Render a `<details>` element
  * @module lib/elements/Details
- * @see {@link https://developer.mozilla.org/docs/Web/HTML/Element/details}
  */
 
 /**
@@ -24,11 +23,6 @@ export interface DetailsProps extends MutatedProps<HTMLDetailsElement> {
    * @default false
    */
   open?: boolean
-
-  /**
-   * Properties to pass to the inner `Summary` component.
-   */
-  summary?: SummaryProps
 }
 
 /**
@@ -52,7 +46,7 @@ export type DetailsRefProps = ReflessDetailsProps & DetailsRefAttributes
  * - **https://developer.mozilla.org/docs/Web/HTML/Element/details**
  */
 export const Details: FREC<DetailsRefProps> = forwardRef((props, ref) => {
-  const { children, summary, ...rest } = props
+  const { children, ...rest } = props
 
   const mutatedProps = useMutatedProps<
     typeof rest,
@@ -61,7 +55,6 @@ export const Details: FREC<DetailsRefProps> = forwardRef((props, ref) => {
 
   return (
     <details {...mutatedProps} ref={ref}>
-      {summary && <Summary {...summary} />}
       {children}
     </details>
   )

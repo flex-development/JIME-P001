@@ -5,11 +5,11 @@ import React, {
   PropsWithoutRef,
   RefAttributes
 } from 'react'
-import { useMutatedProps, useTextUtilities } from '../hooks'
+import { useMutatedProps } from '../hooks'
 
 /**
+ * @file Render a `<span>` element
  * @module lib/elements/Span
- * @see {@link https://developer.mozilla.org/docs/Web/HTML/Element/span}
  */
 
 /**
@@ -38,12 +38,10 @@ export type SpanRefProps = ReflessSpanProps & SpanRefAttributes
  * - **https://developer.mozilla.org/docs/Web/HTML/Element/span**
  */
 export const Span: FREC<SpanRefProps> = forwardRef((props, ref) => {
-  const { dictionary, sanitized } = useTextUtilities<typeof props>(props)
-
   const mutatedProps = useMutatedProps<
     typeof props,
     JSX.IntrinsicElements['span']
-  >(sanitized, dictionary)
+  >(props)
 
   return <span {...mutatedProps} ref={ref} />
 })

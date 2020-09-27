@@ -1,10 +1,4 @@
-import { AnyObject } from '@flex-development/kustomtypez'
-import {
-  ButtonVariant,
-  FormControlSize,
-  PropsForFormElement,
-  ThemeColor
-} from '@kustomz/types'
+import { ButtonVariant, FormControlProps } from '@kustomz/types'
 import React, {
   forwardRef,
   ForwardRefExoticComponent as FREC,
@@ -22,7 +16,7 @@ import { useMutatedProps } from '../hooks'
  * {@link Button} component properties.
  */
 export interface ButtonProps
-  extends Omit<PropsForFormElement<HTMLButtonElement>, 'variant'> {
+  extends Omit<FormControlProps<HTMLButtonElement>, 'variant'> {
   /**
    * This attribute on a `<button>` is nonstandard and Firefox-specific.
    *
@@ -32,13 +26,6 @@ export interface ButtonProps
    * Setting `autoComplete="off"` on the button disables this feature.
    */
   autoComplete?: 'off'
-
-  /**
-   * Text color.
-   *
-   * @default false
-   */
-  color?: boolean | ThemeColor
 
   /**
    * The URL to which to submit the form's data; overrides the parent form's
@@ -72,13 +59,6 @@ export interface ButtonProps
   formTarget?: string
 
   /**
-   * Button text size.
-   *
-   * @default false
-   */
-  size?: boolean | FormControlSize
-
-  /**
    * Default behavior of the button. Possible values:
    *
    * - `submit`: The button submits the form data to the server. This is the
@@ -96,8 +76,6 @@ export interface ButtonProps
 
   /**
    * Button variant.
-   *
-   * @default false
    */
   variant?: false | ButtonVariant
 }
@@ -124,18 +102,12 @@ export type ButtonRefProps = ReflessButtonProps & ButtonRefAttributes
  * - **https://v5.getbootstrap.com/docs/5.0/components/buttons/**
  */
 export const Button: FREC<ButtonRefProps> = forwardRef((props, ref) => {
-  const { color, size, ...rest } = props
-
-  if ((rest as AnyObject).icon && !rest.children) rest.variant = 'ghost'
-
   const mutatedProps = useMutatedProps<
-    typeof rest,
+    typeof props,
     JSX.IntrinsicElements['button']
-  >(rest, {
+  >(props, {
     btn: true,
-    disabled: rest.disabled && rest.disabled,
-    [`btn-${size}`]: size,
-    [`text-${color}`]: color
+    disabled: props.disabled
   })
 
   /* eslint-disable react/button-has-type */
@@ -143,8 +115,5 @@ export const Button: FREC<ButtonRefProps> = forwardRef((props, ref) => {
 })
 
 Button.defaultProps = {
-  color: false,
-  size: false,
-  type: 'button',
-  variant: false
+  type: 'button'
 }

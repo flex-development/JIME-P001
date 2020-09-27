@@ -1,4 +1,4 @@
-import { PropsForFormElement } from '@kustomz/types'
+import { FormControlProps } from '@kustomz/types'
 import React, {
   forwardRef,
   ForwardRefExoticComponent as FREC,
@@ -16,7 +16,7 @@ import { useMutatedProps } from '../hooks'
  * {@link Input} component properties.
  */
 export interface InputProps
-  extends Omit<PropsForFormElement<HTMLInputElement>, 'children'> {
+  extends Omit<FormControlProps<HTMLInputElement>, 'children'> {
   /**
    * Valid for the `file` input type only, the accept property defines which
    * file types are selectable in a file upload control.

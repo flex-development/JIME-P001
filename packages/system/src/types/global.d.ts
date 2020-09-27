@@ -6,7 +6,7 @@ import {
   PropsWithoutRef,
   RefAttributes
 } from 'react'
-import { Size, ThemeColor, ThemeOutline } from './theme'
+import { ThemeColor, ThemeOutline } from './theme'
 
 /**
  * Aria attributes and event handlers.
@@ -14,6 +14,52 @@ import { Size, ThemeColor, ThemeOutline } from './theme'
 export type Attributes<E = HTMLElement> = AriaAttributes &
   DOMAttributes<E> &
   RefAttributes<E> & { forwardedRef?: RefAttributes<E>['ref'] }
+
+/**
+ * Common `Form` (button, input, select) element props.
+ */
+export interface FormControlProps<E = HTMLElement> extends MutatedProps<E> {
+  /**
+   * Specifies that a form control should have input focus when the page
+   * loads.
+   *
+   * Only one form-associated element in a document can have this attribute
+   * specified.
+   */
+  autoFocus?: boolean
+
+  /**
+   * Indicates that the user cannot interact with the control.
+   *
+   * If this attribute is not specified, the control inherits its setting from
+   * the containing element, for example `<fieldset>`; if there is no containing
+   * element when the `disabled` attribute is set, the control is enabled.
+   */
+  disabled?: boolean
+
+  /**
+   * The `id` of the `<form>` element that the element is associated with.
+   *
+   * If this attribute is not specified, the element must be a descendant of a
+   * form element.
+   *
+   * This attribute enables you to place elements anywhere within a document,
+   * not just as descendants of form elements.
+   */
+  form?: string
+
+  /**
+   * The name of the control.
+   */
+  name?: string
+
+  /**
+   * Current value of the form control.
+   *
+   * Submitted with the form as part of a name/value pair.
+   */
+  value?: string | ReadonlyArray<string> | number
+}
 
 /**
  * Global properties are attributes common to all HTML elements. Even though
@@ -220,7 +266,7 @@ export interface MutatedProps<E = HTMLElement> extends GlobalAttributes<E> {
    * See: **https://v5.getbootstrap.com/docs/5.0/utilities/text/**
    * See: **https://v5.getbootstrap.com/docs/5.0/utilities/colors/#color**
    */
-  text?: string[]
+  text?: TextUtilityValue[]
 
   /**
    * Used to work with background and outline color utility classes.
@@ -230,52 +276,6 @@ export interface MutatedProps<E = HTMLElement> extends GlobalAttributes<E> {
    * @default false
    */
   variant?: false | ThemeColor | ThemeOutline
-}
-
-/**
- * Common `Form` (button, input, select) element props.
- */
-export interface PropsForFormElement<E = HTMLElement> extends MutatedProps<E> {
-  /**
-   * Specifies that a form control should have input focus when the page
-   * loads.
-   *
-   * Only one form-associated element in a document can have this attribute
-   * specified.
-   */
-  autoFocus?: boolean
-
-  /**
-   * Indicates that the user cannot interact with the control.
-   *
-   * If this attribute is not specified, the control inherits its setting from
-   * the containing element, for example `<fieldset>`; if there is no containing
-   * element when the `disabled` attribute is set, the control is enabled.
-   */
-  disabled?: boolean
-
-  /**
-   * The `id` of the `<form>` element that the element is associated with.
-   *
-   * If this attribute is not specified, the element must be a descendant of a
-   * form element.
-   *
-   * This attribute enables you to place elements anywhere within a document,
-   * not just as descendants of form elements.
-   */
-  form?: string
-
-  /**
-   * The name of the control.
-   */
-  name?: string
-
-  /**
-   * Current value of the form control.
-   *
-   * Submitted with the form as part of a name/value pair.
-   */
-  value?: string | ReadonlyArray<string> | number
 }
 
 /**
@@ -295,24 +295,3 @@ export type ReflessMutatedProps = PropsWithoutRef<MutatedProps>
  * {@link MutatedProps} type forward ref properties.
  */
 export type RefProps = ReflessMutatedProps & HTMLElementRefAttributes
-
-/**
- * Common text content component properties.
- *
- * @see {@link https://websitesetup.org/html5-periodical-table/}
- */
-export interface TextContentProps<E = HTMLElement> extends MutatedProps<E> {
-  /**
-   * Text content color.
-   *
-   * @default false
-   */
-  color?: ThemeColor | boolean
-
-  /**
-   * Text content size.
-   *
-   * @default false
-   */
-  size?: Size | boolean
-}

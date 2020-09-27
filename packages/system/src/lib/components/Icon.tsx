@@ -1,11 +1,10 @@
-import { omit } from 'lodash'
 import React, {
   forwardRef,
   ForwardRefExoticComponent as FREC,
   PropsWithoutRef
 } from 'react'
 import { Span, SpanProps, SpanRefAttributes } from '../elements'
-import { useMutatedProps, useTextUtilities } from '../hooks'
+import { useMutatedProps } from '../hooks'
 
 /**
  * @module lib/elements/Icon
@@ -48,13 +47,7 @@ export const Icon: FREC<IconRefProps> = forwardRef((props, ref) => {
 
   const fontAwesomeIcon = rest.className?.includes('fa')
 
-  const { dictionary, sanitized } = useTextUtilities<typeof rest>(
-    omit(rest, ['icon']),
-    'icon'
-  )
-
-  const mutatedProps = useMutatedProps<typeof sanitized, SpanProps>(sanitized, {
-    ...dictionary,
+  const mutatedProps = useMutatedProps<typeof rest, SpanProps>(rest, {
     'material-icons-outlined': !fontAwesomeIcon
   })
 

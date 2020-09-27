@@ -1,5 +1,5 @@
 import { color, size, StoryFN } from '@kustomz-config'
-import { NativeOption, NativeOptionProps } from '@kustomz/lib'
+import { Option, OptionProps } from '@kustomz/lib'
 import React from 'react'
 
 /**
@@ -9,15 +9,15 @@ import React from 'react'
 
 export default {
   argTypes: { color, size },
-  component: NativeOption,
+  component: Option,
   title: 'Elements/Option'
 }
 
 /**
  * Native {@link Option} story.
  */
-export const Native: StoryFN<NativeOptionProps> = (args: NativeOptionProps) => (
-  <NativeOption {...args} />
+export const Native: StoryFN<OptionProps> = (args: OptionProps) => (
+  <Option {...args} />
 )
 
 Native.args = {

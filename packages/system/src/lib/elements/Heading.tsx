@@ -1,4 +1,4 @@
-import { MutatedProps, ThemeColor } from '@kustomz/types'
+import { MutatedProps } from '@kustomz/types'
 import React, {
   DetailedHTMLProps,
   forwardRef,
@@ -7,7 +7,7 @@ import React, {
   PropsWithoutRef,
   RefAttributes
 } from 'react'
-import { useMutatedProps, useTextUtilities } from '../hooks'
+import { useMutatedProps } from '../hooks'
 
 /**
  * @module lib/elements/Heading
@@ -19,13 +19,6 @@ import { useMutatedProps, useTextUtilities } from '../hooks'
  * {@link Heading} component properties.
  */
 export interface HeadingProps extends MutatedProps<HTMLHeadingElement> {
-  /**
-   * Heading color.
-   *
-   * @default false
-   */
-  color?: ThemeColor | boolean
-
   /**
    * Heading size.
    *
@@ -59,15 +52,10 @@ export type HeadingRefProps = ReflessHeadingProps & HeadingRefAttributes
 export const Heading: FREC<HeadingRefProps> = forwardRef((props, ref) => {
   const { size, ...rest } = props
 
-  const { dictionary, sanitized } = useTextUtilities<typeof rest>(
-    rest,
-    'heading'
-  )
-
   const mutatedProps = useMutatedProps<
-    typeof sanitized,
+    typeof rest,
     DetailedHTMLProps<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement>
-  >({ ...sanitized, ref }, dictionary)
+  >({ ...rest, ref })
 
   /* eslint-disable jsx-a11y/heading-has-content */
 
@@ -91,6 +79,5 @@ export const Heading: FREC<HeadingRefProps> = forwardRef((props, ref) => {
 
 Heading.defaultProps = {
   children: 'The quick brown fox jumps over the lazy dog',
-  color: false,
   size: 1
 }

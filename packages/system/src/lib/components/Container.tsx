@@ -1,4 +1,4 @@
-import { ContainerSize, MutatedProps } from '@kustomz/types'
+import { Breakpoint, MutatedProps } from '@kustomz/types'
 import React, {
   forwardRef,
   ForwardRefExoticComponent as FREC,
@@ -27,7 +27,7 @@ export interface ContainerProps extends MutatedProps<HTMLDivElement> {
    * Allow the Container to fill all of its available horizontal space until the
    * specified breakpoint is reached.
    */
-  size?: ContainerSize
+  size?: Breakpoint
 }
 
 /**

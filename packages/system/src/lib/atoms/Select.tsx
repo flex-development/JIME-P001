@@ -1,12 +1,13 @@
-import { MutatedProps } from '@kustomz/types'
+import { useMutatedProps } from '@kustomz/hooks'
+import { FormControlSize, MutatedProps } from '@kustomz/types'
 import React, {
   FC,
   forwardRef,
   ForwardRefExoticComponent as FREC,
   PropsWithoutRef,
+  ReactNodeArray,
   RefAttributes
 } from 'react'
-import { useMutatedProps } from '../../hooks'
 import { Option, OptionProps } from './Option'
 
 /**
@@ -22,6 +23,20 @@ export interface SelectProps extends MutatedProps<HTMLSelectElement> {
    * Array of `Option` components to render.
    */
   children?: Array<typeof Option | FC<OptionProps>>
+
+  /**
+   * JSON array of options to render.
+   *
+   * @default []
+   */
+  options?: OptionProps[]
+
+  /**
+   * Make the control smaller or larger.
+   *
+   * See: https://v5.getbootstrap.com/docs/5.0/forms/form-control/#sizing
+   */
+  size?: false | FormControlSize
 }
 
 /**
@@ -46,12 +61,30 @@ export type ReflessSelectProps = PropsWithoutRef<SelectProps>
  * - **https://v5.getbootstrap.com/docs/5.0/forms/select/**
  */
 export const Select: FREC<SelectRefProps> = forwardRef((props, ref) => {
-  const mutatedProps = useMutatedProps<
-    typeof props,
-    JSX.IntrinsicElements['select']
-  >(props, 'form-control')
+  const { options = [], size, ...rest } = props
 
-  return <select {...mutatedProps} ref={ref} />
+  const mutatedProps = useMutatedProps<
+    typeof rest,
+    JSX.IntrinsicElements['select']
+  >(rest, {
+    'form-control': true,
+    [`form-control-${size}`]: size
+  })
+
+  return (
+    <select {...mutatedProps} ref={ref}>
+      {((): ReactNodeArray => {
+        if (rest.children) return rest.children
+
+        return options.map((option: OptionProps, i: number) => {
+          const key = option['data-key'] || option.id || `item-${i}`
+          return <Option {...option} key={key} />
+        })
+      })()}
+    </select>
+  )
 })
 
-Select.defaultProps = {}
+Select.defaultProps = {
+  options: []
+}

@@ -1,4 +1,4 @@
-import { color, size, StoryFN } from '@kustomz-config'
+import { StoryFN } from '@kustomz-config'
 import { Label, LabelProps } from '@kustomz/lib'
 import React from 'react'
 
@@ -8,7 +8,6 @@ import React from 'react'
  */
 
 export default {
-  argTypes: { color, size },
   component: Label,
   title: 'Library/Atoms/Label'
 }

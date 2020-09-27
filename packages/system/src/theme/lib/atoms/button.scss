@@ -1,22 +1,29 @@
 /// ----------------------------------------------------------------------------
-/// @group elements-button
+/// @group atoms-button
 /// @link http://css-tricks.com/slightly-careful-sub-elements-clickable-things/
 /// ----------------------------------------------------------------------------
 
 .btn {
-  color: $btn-color;
+  font-weight: $font-weight-semibold;
+  text-transform: uppercase;
 
   &[data-icon]:not(.navbar-toggler) {
     @include flex(center, null);
   }
 
-  &-dark {
-    color: $body-color;
+  &[data-icon-only] {
+    @include remove-padding;
   }
 
-  &-ghost {
-    @include remove-padding;
+  @each $key, $color in $theme-colors {
+    $dark-btn: $key == 'dark' or $key == 'darker' or $key == 'dark-25';
 
-    color: $primary;
+    &-#{$key} {
+      @if $dark-btn or $key == 'ghost' {
+        color: $body-color;
+      } @else {
+        color: $btn-color;
+      }
+    }
   }
 }

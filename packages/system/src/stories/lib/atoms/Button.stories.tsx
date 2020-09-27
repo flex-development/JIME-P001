@@ -1,7 +1,6 @@
 import {
-  button_size as size,
   button_variant as variant,
-  color,
+  form_control_size as size,
   StoryFN
 } from '@kustomz-config'
 import { Button, ButtonProps } from '@kustomz/lib'
@@ -13,17 +12,9 @@ import React from 'react'
  */
 
 export default {
-  argTypes: { color, size, variant },
+  argTypes: { size, variant },
   component: Button,
   title: 'Library/Atoms/Button'
-}
-
-export const Close: StoryFN<ButtonProps> = (args: ButtonProps) => (
-  <Button {...args} />
-)
-
-Close.args = {
-  icon: { children: 'close' }
 }
 
 export const ThemeColor: StoryFN<ButtonProps> = (args: ButtonProps) => (

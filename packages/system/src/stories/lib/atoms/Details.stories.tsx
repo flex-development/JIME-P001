@@ -1,4 +1,4 @@
-import { box_variant as variant, color, size, StoryFN } from '@kustomz-config'
+import { StoryFN, variant } from '@kustomz-config'
 import { Details, DetailsProps } from '@kustomz/lib'
 import React from 'react'
 
@@ -8,7 +8,7 @@ import React from 'react'
  */
 
 export default {
-  argTypes: { color, size, variant },
+  argTypes: { variant },
   component: Details,
   title: 'Library/Atoms/Details'
 }

@@ -1,4 +1,4 @@
-import { StoryFN } from '@kustomz-config'
+import { form_control_size as size, StoryFN } from '@kustomz-config'
 import { Input, InputProps } from '@kustomz/lib'
 import React from 'react'
 
@@ -8,6 +8,7 @@ import React from 'react'
  */
 
 export default {
+  argTypes: { size },
   component: Input,
   title: 'Library/Atoms/Input'
 }
@@ -44,17 +45,6 @@ export const Email: StoryFN<InputProps> = (args: InputProps) => (
 Email.args = {
   placeholder: 'you@email.com',
   type: 'email'
-}
-
-/**
- * Number {@link Input} story.
- */
-export const Number: StoryFN<InputProps> = (args: InputProps) => (
-  <Input {...args} />
-)
-
-Number.args = {
-  type: 'number'
 }
 
 /**

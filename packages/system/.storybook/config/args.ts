@@ -81,26 +81,6 @@ export const booleanish = {
   }
 }
 
-export const button_size = {
-  control: {
-    type: 'select',
-    options: [false, 'sm', 'lg']
-  }
-}
-
-export const color = {
-  control: {
-    type: 'select',
-    options: [false].concat(([
-      'darker',
-      'dark',
-      'light',
-      'primary',
-      'secondary'
-    ] as unknown) as boolean[])
-  }
-}
-
 export const container_size = {
   control: {
     type: 'select',
@@ -130,15 +110,6 @@ export const variant = {
   }
 }
 
-export const box_variant = {
-  control: {
-    type: 'select',
-    options: cloneDeep(booleanish.control.options).concat(
-      variant.control.options
-    )
-  }
-}
-
 export const button_variant = {
   control: {
     type: 'select',
@@ -150,6 +121,13 @@ export const form_control = {
   control: {
     type: 'select',
     options: ['input', 'select', 'textarea']
+  }
+}
+
+export const form_control_size = {
+  control: {
+    type: 'select',
+    options: [false, 'sm', 'lg']
   }
 }
 
@@ -1102,12 +1080,5 @@ export const ligatures = {
 export const placeholder = {
   control: {
     type: 'text'
-  }
-}
-
-export const size = {
-  control: {
-    type: 'select',
-    options: [false, 'xs', 'sm', 'lg', 'xl']
   }
 }

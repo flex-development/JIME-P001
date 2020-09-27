@@ -19,6 +19,7 @@ $secondary: #b8c1ec;
 $light-75: rgba($light, 0.75);
 
 $dark-25: rgba($dark, 0.25);
+$light-25: rgba($light, 0.25);
 $primary-25: rgba($primary, 0.25);
 $secondary-25: rgba($secondary, 0.25);
 
@@ -36,51 +37,28 @@ $ghost: transparent;
 
 $spacer: 1rem;
 
-$spacer-0: 0;
-$spacer-1: 0.25rem;
-$spacer-2: 0.5rem;
-$spacer-3: 0.75rem;
-$spacer-4: $spacer;
-$spacer-5: 1.25rem;
-$spacer-6: 1.5rem;
-$spacer-8: 2rem;
-$spacer-9: 2.25rem;
-$spacer-10: 2.5rem;
-$spacer-12: 3rem;
-$spacer-14: 3.5rem;
-$spacer-16: 4rem;
-$spacer-18: 4.5rem;
-$spacer-20: 5rem;
-$spacer-24: 6rem;
-$spacer-40: 10rem;
-$spacer-48: 12rem;
-$spacer-56: 14rem;
-$spacer-64: 16rem;
+$spacers-0: 0;
+$spacers-1: 0.25rem;
+$spacers-2: 0.5rem;
+$spacers-3: 0.75rem;
+$spacers-4: $spacer;
+$spacers-5: 1.25rem;
+$spacers-6: 1.5rem;
+$spacers-8: 2rem;
+$spacers-9: 2.25rem;
+$spacers-10: 2.5rem;
+$spacers-12: 3rem;
+$spacers-14: 3.5rem;
+$spacers-16: 4rem;
+$spacers-18: 4.5rem;
+$spacers-20: 5rem;
+$spacers-24: 6rem;
+$spacers-40: 10rem;
+$spacers-48: 12rem;
+$spacers-56: 14rem;
+$spacers-64: 16rem;
 
-$spacers: (
-  0: $spacer-0,
-  1: $spacer-1,
-  2: $spacer-2,
-  3: $spacer-3,
-  4: $spacer-4,
-  5: $spacer-5,
-  6: $spacer-6,
-  8: $spacer-8,
-  9: $spacer-9,
-  10: $spacer-10,
-  12: $spacer-12,
-  14: $spacer-14,
-  16: $spacer-16,
-  18: $spacer-18,
-  20: $spacer-20,
-  24: $spacer-24,
-  40: $spacer-40,
-  48: $spacer-48,
-  56: $spacer-56,
-  64: $spacer-64
-);
-
-$icon-pos-spacer: map-get($spacers, 1);
+$icon-pos-spacer: $spacers-1;
 
 // -----------------------------------------------------------------------------
 // Body
@@ -116,7 +94,7 @@ $link-decoration: none;
 // Container Padding
 // -----------------------------------------------------------------------------
 
-$border-radius: map-get($spacers, 0);
+$border-radius: $spacers-0;
 $border-radius-sm: $border-radius;
 $border-radius-lg: $border-radius;
 
@@ -160,11 +138,15 @@ $hr-color: $light;
 // Button & Forms
 // -----------------------------------------------------------------------------
 
+$input-btn-padding-y-lg: $spacers-3;
+$input-btn-padding-x-lg: $spacers-5;
+
 // -----------------------------------------------------------------------------
 // Buttons
 // -----------------------------------------------------------------------------
 
 $btn-color: $dark;
+$btn-color-inverse: $light;
 
 $btn-font-weight: $font-weight-base;
 
@@ -172,7 +154,7 @@ $btn-font-weight: $font-weight-base;
 // Forms
 // -----------------------------------------------------------------------------
 
-$form-text-color: $light-75;
+$form-text-color: $light;
 
 $input-bg: $ghost;
 $input-disabled-bg: $input-bg;
@@ -184,6 +166,10 @@ $input-border-color: $primary;
 $input-focus-border-color: $input-border-color;
 
 $input-placeholder-color: $secondary;
+
+$input-placeholder-size: bootstrap.$font-size-base * 0.875;
+
+$input-placeholder-text-transform: uppercase;
 
 $form-check-input-bg: $light;
 

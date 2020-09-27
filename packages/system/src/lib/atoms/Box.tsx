@@ -1,3 +1,4 @@
+import { useMutatedProps } from '@kustomz/hooks'
 import { MutatedProps } from '@kustomz/types'
 import React, {
   forwardRef,
@@ -5,7 +6,6 @@ import React, {
   PropsWithoutRef,
   RefAttributes
 } from 'react'
-import { useMutatedProps } from '../../hooks'
 
 /**
  * @file Render a `<div>` element

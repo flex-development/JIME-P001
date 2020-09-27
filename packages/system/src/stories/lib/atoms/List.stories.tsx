@@ -1,5 +1,5 @@
 import { StoryFN } from '@kustomz-config'
-import { List, ListProps } from '@kustomz/lib'
+import { Item, List, ListProps } from '@kustomz/lib'
 import React from 'react'
 
 /**
@@ -9,6 +9,7 @@ import React from 'react'
 
 export default {
   component: List,
+  subcomponents: { Item },
   title: 'Library/Atoms/List'
 }
 

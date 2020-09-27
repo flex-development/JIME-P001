@@ -1,4 +1,4 @@
-import { color, StoryFN } from '@kustomz-config'
+import { StoryFN } from '@kustomz-config'
 import { Heading, HeadingProps } from '@kustomz/lib'
 import React from 'react'
 
@@ -8,7 +8,6 @@ import React from 'react'
  */
 
 export default {
-  argTypes: { color },
   component: Heading,
   title: 'Library/Atoms/Heading'
 }

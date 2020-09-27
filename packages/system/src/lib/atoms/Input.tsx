@@ -1,11 +1,11 @@
-import { FormControlProps } from '@kustomz/types'
+import { useMutatedProps } from '@kustomz/hooks'
+import { FormControlProps, FormControlSize } from '@kustomz/types'
 import React, {
   forwardRef,
   ForwardRefExoticComponent as FREC,
   PropsWithoutRef,
   RefAttributes
 } from 'react'
-import { useMutatedProps } from '../../hooks'
 
 /**
  * @module lib/elements/Input
@@ -16,7 +16,7 @@ import { useMutatedProps } from '../../hooks'
  * {@link Input} component properties.
  */
 export interface InputProps
-  extends Omit<FormControlProps<HTMLInputElement>, 'children'> {
+  extends Omit<FormControlProps<HTMLInputElement>, 'children' | 'size'> {
   /**
    * Valid for the `file` input type only, the accept property defines which
    * file types are selectable in a file upload control.
@@ -46,60 +46,60 @@ export interface InputProps
    * what type of information expected in the field.
    */
   autoComplete?:
-    | 'off'
-    | 'on'
-    | 'name'
-    | 'honorific-prefix'
-    | 'given-name'
-    | 'additional-name'
-    | 'family-name'
-    | 'honorific-suffix'
-    | 'nickname'
-    | 'email'
-    | 'username'
-    | 'new-password'
-    | 'current-password'
-    | 'one-time-code'
-    | 'organization-title'
-    | 'organization'
-    | 'street-address'
-    | 'address-line1'
-    | 'address-line2'
-    | 'address-line3'
-    | 'address-level4'
-    | 'address-level3'
-    | 'address-level2'
-    | 'address-level1'
-    | 'country'
-    | 'country-name'
-    | 'postal-code'
-    | 'cc-name'
-    | 'cc-given-name'
-    | 'cc-additional-name'
-    | 'cc-family-name'
-    | 'cc-number'
-    | 'cc-exp'
-    | 'cc-exp-month'
-    | 'cc-exp-year'
-    | 'cc-csc'
-    | 'cc-type'
-    | 'transaction-currency'
-    | 'transaction-amount'
-    | 'language'
-    | 'bday'
-    | 'bday-day'
-    | 'bday-month'
-    | 'bday-year'
-    | 'sex'
-    | 'tel'
-    | 'tel-country-code'
-    | 'tel-national'
-    | 'tel-area-code'
-    | 'tel-local'
-    | 'tel-extension'
-    | 'impp'
-    | 'url'
-    | 'photo'
+  | 'off'
+  | 'on'
+  | 'name'
+  | 'honorific-prefix'
+  | 'given-name'
+  | 'additional-name'
+  | 'family-name'
+  | 'honorific-suffix'
+  | 'nickname'
+  | 'email'
+  | 'username'
+  | 'new-password'
+  | 'current-password'
+  | 'one-time-code'
+  | 'organization-title'
+  | 'organization'
+  | 'street-address'
+  | 'address-line1'
+  | 'address-line2'
+  | 'address-line3'
+  | 'address-level4'
+  | 'address-level3'
+  | 'address-level2'
+  | 'address-level1'
+  | 'country'
+  | 'country-name'
+  | 'postal-code'
+  | 'cc-name'
+  | 'cc-given-name'
+  | 'cc-additional-name'
+  | 'cc-family-name'
+  | 'cc-number'
+  | 'cc-exp'
+  | 'cc-exp-month'
+  | 'cc-exp-year'
+  | 'cc-csc'
+  | 'cc-type'
+  | 'transaction-currency'
+  | 'transaction-amount'
+  | 'language'
+  | 'bday'
+  | 'bday-day'
+  | 'bday-month'
+  | 'bday-year'
+  | 'sex'
+  | 'tel'
+  | 'tel-country-code'
+  | 'tel-national'
+  | 'tel-area-code'
+  | 'tel-local'
+  | 'tel-extension'
+  | 'impp'
+  | 'url'
+  | 'photo'
 
   /* eslint-enable prettier/prettier */
 
@@ -247,10 +247,11 @@ export interface InputProps
   required?: boolean
 
   /**
-   * Valid for `email`, `password`, `tel`, and `text` input types only.
-   * Specifies how much of the input is shown.
+   * Make the control smaller or larger.
+   *
+   * See: https://v5.getbootstrap.com/docs/5.0/forms/form-control/#sizing
    */
-  size?: number | string
+  size?: false | FormControlSize
 
   /**
    * Valid for the numeric input types, including number, date/time input types,
@@ -285,28 +286,28 @@ export interface InputProps
    * @default 'text'
    */
   type?:
-    | 'button'
-    | 'checkbox'
-    | 'color'
-    | 'date'
-    | 'datetime-local'
-    | 'email'
-    | 'file'
-    | 'hidden'
-    | 'image'
-    | 'month'
-    | 'number'
-    | 'password'
-    | 'radio'
-    | 'range'
-    | 'reset'
-    | 'search'
-    | 'submit'
-    | 'tel'
-    | 'text'
-    | 'time'
-    | 'url'
-    | 'week'
+  | 'button'
+  | 'checkbox'
+  | 'color'
+  | 'date'
+  | 'datetime-local'
+  | 'email'
+  | 'file'
+  | 'hidden'
+  | 'image'
+  | 'month'
+  | 'number'
+  | 'password'
+  | 'radio'
+  | 'range'
+  | 'reset'
+  | 'search'
+  | 'submit'
+  | 'tel'
+  | 'text'
+  | 'time'
+  | 'url'
+  | 'week'
 
   /* eslint-enable prettier/prettier */
 }
@@ -346,15 +347,16 @@ export type InputRefProps = ReflessInputProps & InputRefAttributes
 export const Input: FREC<InputRefProps> = forwardRef((props, ref) => {
   const checkInputTypes = ['checkbox', 'radio']
 
-  const { type = '' } = props
+  const { size, ...rest } = props
 
   const mutatedProps = useMutatedProps<
-    typeof props,
+    typeof rest,
     JSX.IntrinsicElements['input']
-  >(props, {
-    'form-check-input': checkInputTypes.includes(type),
-    'form-control': !checkInputTypes.includes(type),
-    'form-file-input': type === 'file'
+  >(rest, {
+    'form-check-input': checkInputTypes.includes(rest.type || ''),
+    'form-control': !checkInputTypes.includes(rest.type || ''),
+    [`form-control-${size}`]: size,
+    'form-file-input': rest.type === 'file'
   })
 
   return <input {...mutatedProps} ref={ref} />

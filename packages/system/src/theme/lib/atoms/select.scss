@@ -1,10 +1,12 @@
 /// ----------------------------------------------------------------------------
-/// @group elements-select
+/// @group atoms-select
 /// ----------------------------------------------------------------------------
 
 select.form-control {
   background-color: $form-select-bg;
   color: $form-select-color;
+  font-weight: $font-weight-semibold;
+  text-transform: uppercase;
 
   &:focus {
     background-color: $form-select-focus-bg;

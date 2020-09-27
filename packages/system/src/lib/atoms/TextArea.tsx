@@ -1,11 +1,11 @@
-import { FormControlProps } from '@kustomz/types'
+import { useMutatedProps } from '@kustomz/hooks'
+import { FormControlProps, FormControlSize } from '@kustomz/types'
 import React, {
   forwardRef,
   ForwardRefExoticComponent as FREC,
   PropsWithoutRef,
   RefAttributes
 } from 'react'
-import { useMutatedProps } from '../../hooks'
 
 /**
  * @file Render a `<textarea>` element
@@ -63,6 +63,13 @@ export interface TextAreaProps
   rows?: number
 
   /**
+   * Make the control smaller or larger.
+   *
+   * See: https://v5.getbootstrap.com/docs/5.0/forms/form-control/#sizing
+   */
+  size?: false | FormControlSize
+
+  /**
    * Indicates how the control wraps text.
    *
    * Possible values are:
@@ -103,10 +110,15 @@ export type TextAreaRefProps = ReflessTextAreaProps & TextAreaRefAttributes
  * - **https://v5.getbootstrap.com/docs/5.0/forms/form-control/**
  */
 export const TextArea: FREC<TextAreaRefProps> = forwardRef((props, ref) => {
+  const { size, ...rest } = props
+
   const mutatedProps = useMutatedProps<
-    typeof props,
+    typeof rest,
     JSX.IntrinsicElements['textarea']
-  >(props, 'form-control')
+  >(rest, {
+    'form-control': true,
+    [`form-control-${size}`]: size
+  })
 
   return <textarea {...mutatedProps} ref={ref} />
 })

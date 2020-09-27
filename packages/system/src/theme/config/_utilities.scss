@@ -32,14 +32,16 @@ $bg-sizes: auto, contain, cover;
 
 $theme-colors: (
   dark: $dark,
-  dark-25: $dark-25,
   darker: $darker,
+  dark-25: $dark-25,
   ghost: $ghost,
   light: $light,
   light-5: $light-5,
+  light-25: $light-25,
   primary: $primary,
   primary-25: $primary-25,
-  secondary: $secondary
+  secondary: $secondary,
+  secondary-25: $secondary-25
 );
 
 // -----------------------------------------------------------------------------
@@ -114,6 +116,34 @@ $opacities: (
   75: 0.75,
   100: 1
 );
+
+// -----------------------------------------------------------------------------
+// Spacing
+// -----------------------------------------------------------------------------
+
+$spacers: (
+  0: $spacers-0,
+  1: $spacers-1,
+  2: $spacers-2,
+  3: $spacers-3,
+  4: $spacers-4,
+  5: $spacers-5,
+  6: $spacers-6,
+  8: $spacers-8,
+  9: $spacers-9,
+  10: $spacers-10,
+  12: $spacers-12,
+  14: $spacers-14,
+  16: $spacers-16,
+  18: $spacers-18,
+  20: $spacers-20,
+  24: $spacers-24,
+  40: $spacers-40,
+  48: $spacers-48,
+  56: $spacers-56,
+  64: $spacers-64,
+);
+
 
 // -----------------------------------------------------------------------------
 // Sizes

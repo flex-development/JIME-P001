@@ -1,15 +1,14 @@
+import { useMutatedProps } from '@kustomz/hooks'
 import React, {
   forwardRef,
   ForwardRefExoticComponent as FREC,
   PropsWithoutRef
 } from 'react'
-import { useMutatedProps } from '../../hooks'
 import { Span, SpanProps, SpanRefAttributes } from './Span'
 
 /**
- * @module lib/elements/Icon
- * @see {@link https://material.io/resources/icons/?style=outline}
- * @see {@link https://fontawesome.com/icons?d=gallery&m=free}
+ * @file Render a Material UI icon
+ * @module lib/atoms/Icon
  */
 
 /**
@@ -17,10 +16,19 @@ import { Span, SpanProps, SpanRefAttributes } from './Span'
  */
 export interface IconProps extends SpanProps {
   /**
+   * Get the outlined version of the Material UI icon.
+   *
+   * See: https://material.io/resources/icons/?style=outline
+   *
+   * @default true
+   */
+  outlined?: boolean
+
+  /**
    * If rendering inside of another component, this value determines where the
    * `Icon` will be placed.
    *
-   * https://developer.mozilla.org/docs/Web/HTML/Global_attributes/data-*
+   * See: https://developer.mozilla.org/docs/Web/HTML/Global_attributes/data-*
    */
   position?: 'bottom' | 'left' | 'right' | 'top'
 }
@@ -36,25 +44,27 @@ export type ReflessIconProps = PropsWithoutRef<IconProps>
 export type IconRefProps = ReflessIconProps & SpanRefAttributes
 
 /**
- * Renders a `<Span>` component with the class `icon`. A Material UI or Font
- * Awesome icon can be rendered.
+ * Renders a `<Span>` component as a Material UI icon.
  *
  * - **https://material.io/resources/icons/?style=outline**
- * - **https://fontawesome.com/icons?d=gallery&m=free**
+ * - **https://material.io/resources/icons/?style=solid**
  */
 export const Icon: FREC<IconRefProps> = forwardRef((props, ref) => {
-  const { position, ...rest } = props
-
-  const fontAwesomeIcon = rest.className?.includes('fa')
+  const { outlined, position, ...rest } = props
 
   const mutatedProps = useMutatedProps<typeof rest, SpanProps>(rest, {
-    'material-icons-outlined': !fontAwesomeIcon
+    icon: true,
+    'material-icons': !outlined,
+    'material-icons-outlined': outlined
   })
 
   mutatedProps['aria-hidden'] = rest.children ? rest?.['aria-hidden'] : false
+  mutatedProps['data-ligature'] = mutatedProps.children
   mutatedProps['data-position'] = position
-
-  if (!fontAwesomeIcon) mutatedProps['data-ligature'] = mutatedProps.children
 
   return <Span {...mutatedProps} ref={ref} />
 })
+
+Icon.defaultProps = {
+  outlined: true
+}

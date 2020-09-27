@@ -1,4 +1,4 @@
-import { color, size, StoryFN, variant } from '@kustomz-config'
+import { StoryFN, variant } from '@kustomz-config'
 import { Item, ItemProps } from '@kustomz/lib'
 import React from 'react'
 
@@ -8,7 +8,7 @@ import React from 'react'
  */
 
 export default {
-  argTypes: { color, size, variant },
+  argTypes: { variant },
   component: Item,
   title: 'Library/Atoms/Item'
 }

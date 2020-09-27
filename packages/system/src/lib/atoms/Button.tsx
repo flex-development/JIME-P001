@@ -1,11 +1,16 @@
-import { ButtonVariant, FormControlProps } from '@kustomz/types'
+import { useIcon, useMutatedProps } from '@kustomz/hooks'
+import {
+  ButtonVariant,
+  FormControlProps,
+  FormControlSize
+} from '@kustomz/types'
 import React, {
   forwardRef,
   ForwardRefExoticComponent as FREC,
   PropsWithoutRef,
   RefAttributes
 } from 'react'
-import { useMutatedProps } from '../../hooks'
+import { IconProps } from './Icon'
 
 /**
  * @module lib/elements/Button
@@ -26,6 +31,13 @@ export interface ButtonProps
    * Setting `autoComplete="off"` on the button disables this feature.
    */
   autoComplete?: 'off'
+
+  /**
+   * Create a block level button.
+   *
+   * See: https://v5.getbootstrap.com/docs/5.0/components/buttons/#sizes
+   */
+  block?: boolean
 
   /**
    * The URL to which to submit the form's data; overrides the parent form's
@@ -57,6 +69,18 @@ export interface ButtonProps
    * if any.
    */
   formTarget?: string
+
+  /**
+   * Icon to render beside the element text.
+   */
+  icon?: IconProps
+
+  /**
+   * Make a button smaller or larger.
+   *
+   * See: https://v5.getbootstrap.com/docs/5.0/components/buttons/#sizes
+   */
+  size?: false | FormControlSize
 
   /**
    * Default behavior of the button. Possible values:
@@ -102,12 +126,18 @@ export type ButtonRefProps = ReflessButtonProps & ButtonRefAttributes
  * - **https://v5.getbootstrap.com/docs/5.0/components/buttons/**
  */
 export const Button: FREC<ButtonRefProps> = forwardRef((props, ref) => {
+  const { block, size, ...rest } = props
+
+  const withIcon = useIcon<HTMLButtonElement, ButtonProps>(rest)
+
   const mutatedProps = useMutatedProps<
-    typeof props,
+    typeof withIcon,
     JSX.IntrinsicElements['button']
-  >(props, {
+  >(withIcon, {
     btn: true,
-    disabled: props.disabled
+    'btn-block': block,
+    [`btn-${size}`]: size,
+    disabled: rest.disabled
   })
 
   /* eslint-disable react/button-has-type */

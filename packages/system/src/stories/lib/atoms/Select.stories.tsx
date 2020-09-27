@@ -1,4 +1,4 @@
-import { StoryFN } from '@kustomz-config'
+import { form_control_size as size, StoryFN } from '@kustomz-config'
 import { Option, Select, SelectProps } from '@kustomz/lib'
 import React from 'react'
 
@@ -8,19 +8,20 @@ import React from 'react'
  */
 
 export default {
+  argTypes: { size },
   component: Select,
   subcomponents: { Option },
   title: 'Library/Atoms/Select'
 }
 
 /**
- * Native {@link Select} story.
+ * Default {@link Select} story.
  */
-export const Native: StoryFN<SelectProps> = (args: SelectProps) => (
+export const Default: StoryFN<SelectProps> = (args: SelectProps) => (
   <Select {...args} />
 )
 
-Native.args = {
+Default.args = {
   options: [
     {
       children: 'Ketchup',

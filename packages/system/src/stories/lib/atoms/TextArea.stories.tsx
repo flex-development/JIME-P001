@@ -1,6 +1,9 @@
-import { form_control_size as size, StoryFN } from '@kustomz-config'
 import { TextArea, TextAreaProps } from '@kustomz/lib'
 import React from 'react'
+import {
+  form_control_size as size,
+  StoryFN
+} from '../../../../.storybook/config'
 
 /**
  * @file Stories - TextArea

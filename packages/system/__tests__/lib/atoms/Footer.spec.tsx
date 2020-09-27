@@ -4,7 +4,7 @@ import React from 'react'
 
 /**
  * @file Unit Tests - Footer
- * @module tests/elements/Footer
+ * @module tests/lib/atoms/Footer
  */
 
 it('renders a <footer> element', () => {

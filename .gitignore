@@ -208,12 +208,15 @@ dist/
 .env.local
 .env.*.local
 
-# GitHub Package Registry
-.yarnrc
-
 # Firebase
 firebase-credentials.json
 firebase-credentials-dev.json
+
+# GitHub Package Registry
+.yarnrc
+
+# Jest
+**/__tests__/jest-test-results.json
 
 # Lerna
 *.lerna_backup

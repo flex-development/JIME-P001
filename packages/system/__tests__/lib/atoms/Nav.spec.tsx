@@ -4,7 +4,7 @@ import React from 'react'
 
 /**
  * @file Unit Tests - Nav
- * @module tests/elements/Nav
+ * @module tests/lib/atoms/Nav
  */
 
 it('renders <nav class="nav" />', () => {

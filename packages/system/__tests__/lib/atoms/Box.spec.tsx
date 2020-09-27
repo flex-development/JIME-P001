@@ -4,7 +4,7 @@ import React from 'react'
 
 /**
  * @file Unit Tests - Box
- * @module tests/elements/Box
+ * @module tests/lib/atoms/Box
  */
 
 it('renders <div />', () => {

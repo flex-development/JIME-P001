@@ -1,6 +1,6 @@
-import { color, size, StoryFN } from '@kustomz-config'
 import { Summary, SummaryProps } from '@kustomz/lib'
 import React from 'react'
+import { color, size, StoryFN } from '../../../../.storybook/config'
 
 /**
  * @file Stories - Summary

@@ -4,7 +4,7 @@ import React from 'react'
 
 /**
  * @file Unit Tests - Section
- * @module tests/elements/Section
+ * @module tests/lib/atoms/Section
  */
 
 it('renders a <section> element', () => {

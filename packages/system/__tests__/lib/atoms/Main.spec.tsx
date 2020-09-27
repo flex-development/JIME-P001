@@ -4,7 +4,7 @@ import React from 'react'
 
 /**
  * @file Unit Tests - Main
- * @module tests/elements/Main
+ * @module tests/lib/atoms/Main
  */
 
 it('renders a <main> element', () => {

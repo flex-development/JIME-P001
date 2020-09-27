@@ -1,6 +1,8 @@
 /// ----------------------------------------------------------------------------
-/// Pattern Library Styles
+/// Component Library Styles
 /// ----------------------------------------------------------------------------
 
-@import 'elements/elements';
-@import 'components/components';
+@import 'atoms/atoms';
+@import 'molecules/molecules';
+@import 'organisms/organisms';
+@import 'templates/templates';

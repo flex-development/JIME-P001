@@ -1,0 +1,11 @@
+import { excludePropKeys } from '@kustomz-config'
+import { Header } from '@kustomz/lib'
+import { Description, Meta, Props } from '@storybook/addon-docs/blocks'
+
+<Meta title='Library/Atoms/Header' component={Header} />
+
+# Header
+
+<Description markdown={Header.__docgenInfo.description} />
+
+<Props exclude={excludePropKeys} of={Header} />

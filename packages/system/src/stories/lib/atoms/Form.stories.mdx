@@ -1,0 +1,11 @@
+import { excludePropKeys } from '@kustomz-config'
+import { Form } from '@kustomz/lib'
+import { Description, Meta, Props } from '@storybook/addon-docs/blocks'
+
+<Meta title='Library/Atoms/Form' component={Form} />
+
+# Form
+
+<Description markdown={Form.__docgenInfo.description} />
+
+<Props exclude={excludePropKeys} of={Form} />

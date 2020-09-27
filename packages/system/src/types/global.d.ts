@@ -122,14 +122,14 @@ export interface GlobalAttributes<E = HTMLElement> extends Attributes<E> {
    * in contenteditable mode.
    */
   inputMode?:
-    | 'none'
-    | 'text'
-    | 'decimal'
-    | 'numeric'
-    | 'tel'
-    | 'search'
-    | 'email'
-    | 'url'
+  | 'none'
+  | 'text'
+  | 'decimal'
+  | 'numeric'
+  | 'tel'
+  | 'search'
+  | 'email'
+  | 'url'
 
   /* eslint-enable prettier/prettier */
 
@@ -140,17 +140,6 @@ export interface GlobalAttributes<E = HTMLElement> extends Attributes<E> {
    * - https://html.spec.whatwg.org/multipage/custom-elements.html#attr-is
    */
   is?: string
-
-  /**
-   * Helps define the language of an element?: the language that non-editable
-   * elements are in, or the language that editable elements should be written
-   * in by the user.
-   *
-   * The attribute contains one “language tag” (made of hyphen-separated
-   * “language subtags”) in the format defined in Tags for Identifying
-   * Languages (BCP47). xml:lang has priority over it.
-   */
-  lang?: string
 
   /**
    * An enumerated attribute defines whether the element may be checked for
@@ -258,15 +247,6 @@ export interface MutatedProps<E = HTMLElement> extends GlobalAttributes<E> {
    * See: **https://reactjs.org/docs/dom-elements.html#dangerouslysetinnerhtml**
    */
   innerHTML?: string
-
-  /**
-   * An array of string values to turn into text utility classes. Each string in
-   * the array of will prefixed with `text-` or `link-`.
-   *
-   * See: **https://v5.getbootstrap.com/docs/5.0/utilities/text/**
-   * See: **https://v5.getbootstrap.com/docs/5.0/utilities/colors/#color**
-   */
-  text?: TextUtilityValue[]
 
   /**
    * Used to work with background and outline color utility classes.

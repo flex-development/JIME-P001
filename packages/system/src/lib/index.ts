@@ -1,13 +1,12 @@
 /**
  * @file Component Library
- * @module lib
+ * @module lib/components
  */
 
-export * from './components'
-export * from './elements'
-export * from './hooks'
-export * from './modules'
+export * from './atoms'
 /* eslint-disable import/export */
+export * from './molecules'
+export * from './organisms'
 export * from './templates'
 
 /* eslint-disable prettier/prettier */

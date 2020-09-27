@@ -120,12 +120,12 @@ export const variant = {
       'primary',
       'secondary'
     ].concat([
-      'outline-primary',
-      'outline-secondary',
       'outline-dark',
       'outline-darker',
       'outline-ghost',
-      'outline-light'
+      'outline-light',
+      'outline-primary',
+      'outline-secondary'
     ])
   }
 }

@@ -22,5 +22,5 @@
   },
   "extends": "../../tsconfig.json",
   "files": ["src/types/index.d.ts"],
-  "include": ["__tests__", "src"]
+  "include": ["__tests__", "src", "stories"]
 }

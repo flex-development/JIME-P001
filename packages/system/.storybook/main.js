@@ -37,9 +37,10 @@ module.exports = {
   stories: [
     '../src/stories/index.stories.mdx',
     '../src/stories/blocks/*.stories.mdx',
-    '../src/stories/lib/templates/*.stories.@(mdx|tsx)',
-    '../src/stories/lib/components/*.stories.@(mdx|tsx)',
-    '../src/stories/lib/elements/*.stories.@(mdx|tsx)'
+    '../src/stories/lib/atoms/*.stories.@(mdx|tsx)',
+    '../src/stories/lib/molecules/*.stories.@(mdx|tsx)',
+    '../src/stories/lib/organisms/*.stories.@(mdx|tsx)',
+    '../src/stories/lib/templates/*.stories.@(mdx|tsx)'
   ],
 
   /**

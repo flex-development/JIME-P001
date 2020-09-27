@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
     "declaration": true,
-    "declarationDir": "./dist/types",
     "noEmit": false,
     "outDir": "./dist",
     "rootDir": "./src"

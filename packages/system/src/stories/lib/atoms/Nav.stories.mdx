@@ -1,0 +1,11 @@
+import { excludePropKeys } from '@kustomz-config'
+import { Nav } from '@kustomz/lib'
+import { Description, Meta, Props } from '@storybook/addon-docs/blocks'
+
+<Meta title='Library/Atoms/Nav' component={Nav} />
+
+# Nav
+
+<Description markdown={Nav.__docgenInfo.description} />
+
+<Props exclude={excludePropKeys} of={Nav} />

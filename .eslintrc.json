@@ -154,23 +154,6 @@
     },
     {
       "files": [
-        "**/*.stories.mdx"
-      ],
-      "extends": [
-        "plugin:mdx/recommended",
-        "plugin:mdx/overrides",
-        "plugin:react/recommended"
-      ],
-      "plugins": [
-        "react"
-      ],
-      "rules": {
-        "node/no-missing-import": 0,
-        "node/no-unsupported-features/es-syntax": 0
-      }
-    },
-    {
-      "files": [
         "**/*.ts",
         "**/*.tsx"
       ],

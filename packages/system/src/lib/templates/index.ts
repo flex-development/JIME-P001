@@ -1,6 +1,6 @@
 /**
  * @file Templates
- * @module lib/templates
+ * @module lib/components/templates
  */
 
 export default {}

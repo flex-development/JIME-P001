@@ -1,4 +1,5 @@
 import { Booleanish } from '@flex-development/kustomtypez'
+import { useMutatedProps } from '@kustomz/hooks'
 import { MutatedProps } from '@kustomz/types'
 import React, {
   forwardRef,
@@ -6,7 +7,6 @@ import React, {
   PropsWithoutRef,
   RefAttributes
 } from 'react'
-import { useMutatedProps } from '../../hooks'
 import { InputValue } from './Input'
 
 /**

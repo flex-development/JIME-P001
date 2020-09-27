@@ -1,3 +1,4 @@
+import { useMutatedProps } from '@kustomz/hooks'
 import { MutatedProps } from '@kustomz/types'
 import React, {
   forwardRef,
@@ -5,7 +6,7 @@ import React, {
   PropsWithoutRef,
   RefAttributes
 } from 'react'
-import { useMutatedProps } from '../../hooks'
+import { Summary, SummaryProps } from './Summary'
 
 /**
  * @file Render a `<details>` element
@@ -23,6 +24,11 @@ export interface DetailsProps extends MutatedProps<HTMLDetailsElement> {
    * @default false
    */
   open?: boolean
+
+  /**
+   * Properties to pass to the inner `Summary` component.
+   */
+  summary?: SummaryProps
 }
 
 /**
@@ -46,7 +52,7 @@ export type DetailsRefProps = ReflessDetailsProps & DetailsRefAttributes
  * - **https://developer.mozilla.org/docs/Web/HTML/Element/details**
  */
 export const Details: FREC<DetailsRefProps> = forwardRef((props, ref) => {
-  const { children, ...rest } = props
+  const { children, summary, ...rest } = props
 
   const mutatedProps = useMutatedProps<
     typeof rest,
@@ -55,6 +61,7 @@ export const Details: FREC<DetailsRefProps> = forwardRef((props, ref) => {
 
   return (
     <details {...mutatedProps} ref={ref}>
+      {summary && <Summary {...summary} />}
       {children}
     </details>
   )

@@ -1,10 +1,10 @@
+import { useMutatedProps } from '@kustomz/hooks'
 import { HTMLElementRefAttributes, MutatedProps } from '@kustomz/types'
 import React, {
   forwardRef,
   ForwardRefExoticComponent as FREC,
   PropsWithoutRef
 } from 'react'
-import { useMutatedProps } from '../../hooks'
 
 /**
  * @file Render a `<nav>` element

@@ -1,6 +1,6 @@
 import { excludePropKeys } from '@kustomz-config'
 import { Form } from '@kustomz/lib'
-import { Description, Meta, Props } from '@storybook/addon-docs/blocks'
+import { ArgsTable, Description, Meta } from '@storybook/addon-docs/blocks'
 
 <Meta title='Library/Atoms/Form' component={Form} />
 
@@ -8,4 +8,4 @@ import { Description, Meta, Props } from '@storybook/addon-docs/blocks'
 
 <Description markdown={Form.__docgenInfo.description} />
 
-<Props exclude={excludePropKeys} of={Form} />
+<ArgsTable exclude={excludePropKeys} of={Form} />

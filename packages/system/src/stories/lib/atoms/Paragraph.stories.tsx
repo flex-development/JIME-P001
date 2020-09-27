@@ -1,4 +1,4 @@
-import { color, size, StoryFN, variant } from '@kustomz-config'
+import { StoryFN, variant } from '@kustomz-config'
 import { Paragraph, ParagraphProps } from '@kustomz/lib'
 import React from 'react'
 
@@ -8,7 +8,7 @@ import React from 'react'
  */
 
 export default {
-  argTypes: { color, size, variant },
+  argTypes: { variant },
   component: Paragraph,
   title: 'Library/Atoms/Paragraph'
 }
@@ -20,7 +20,10 @@ export const Default: StoryFN<ParagraphProps> = (args: ParagraphProps) => (
   <Paragraph {...args} />
 )
 
-Default.args = {}
+Default.args = {
+  children:
+    'The quick brown fox jumps over the lazy dog. How vexingly quick daft zebras jump! Sphinx of black quartz, judge my vow. The five boxing wizards jump quickly. Jackdaws love my big sphinx of quartz. Pack my box with five dozen liquor jugs. Jived fox nymph grabs quick waltz. Glib jocks quiz nymph to vex dwarf.'
+}
 
 /**
  * {@link Form} {@link Paragraph} story.
@@ -32,5 +35,5 @@ export const Form: StoryFN<ParagraphProps> = (args: ParagraphProps) => (
 Form.args = {
   children:
     'Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.',
-  form: true
+  className: 'form-text'
 }

@@ -25,19 +25,6 @@ Fluid.args = {
 }
 
 /**
- * Rounded {@link Image} story.
- */
-export const Rounded: StoryFN<ImageProps> = (args: ImageProps) => (
-  <Image {...args} />
-)
-
-Rounded.args = {
-  alt: 'Random Picsum photo',
-  rounded: true,
-  src: 'https://picsum.photos/350/400'
-}
-
-/**
  * Thumbnail {@link Image} story.
  */
 export const Thumbnail: StoryFN<ImageProps> = (args: ImageProps) => (

@@ -24,7 +24,7 @@ import { Icon, IconProps } from '../lib/atoms/Icon'
  * @param props.icon - Icon component properties
  * @param props.icon.position - String indication where to position icon
  */
-export const useIcon = (props: MutatedProps): MutatedProps => {
+export function useIcon<E = HTMLElement, P = MutatedProps<E>>(props: P): P {
   const {
     children,
     className: initialClassName = '',
@@ -76,10 +76,10 @@ export const useIcon = (props: MutatedProps): MutatedProps => {
     })
   }, [children, icon, skip])
 
-  return {
-    ...omit(props, ['icon']),
+  return ({
+    ...omit(props as AnyObject, ['icon']),
     ...dataAttrs,
     children: mutatedChildren,
     className
-  }
+  } as unknown) as P
 }

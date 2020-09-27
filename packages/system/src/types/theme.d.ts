@@ -35,7 +35,7 @@ export type FontWeight =
 /**
  * Possible {@link Button} component sizes.
  */
-export type FormControlSize = Pick<Size, 'sm' | 'lg'>
+export type FormControlSize = 'sm' | 'lg'
 
 /**
  * Text sizes.

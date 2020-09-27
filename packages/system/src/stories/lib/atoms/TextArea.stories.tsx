@@ -1,4 +1,4 @@
-import { StoryFN } from '@kustomz-config'
+import { form_control_size as size, StoryFN } from '@kustomz-config'
 import { TextArea, TextAreaProps } from '@kustomz/lib'
 import React from 'react'
 
@@ -8,6 +8,7 @@ import React from 'react'
  */
 
 export default {
+  argTypes: { size },
   component: TextArea,
   title: 'Library/Atoms/TextArea'
 }

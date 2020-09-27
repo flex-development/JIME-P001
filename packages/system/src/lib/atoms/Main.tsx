@@ -1,6 +1,6 @@
+import { useMutatedProps } from '@kustomz/hooks'
 import { RefProps } from '@kustomz/types'
 import React, { forwardRef, ForwardRefExoticComponent as FREC } from 'react'
-import { useMutatedProps } from '../../hooks'
 
 /**
  * @file Render a `<main>` element

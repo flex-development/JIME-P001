@@ -1,4 +1,4 @@
-import { color, size, StoryFN } from '@kustomz-config'
+import { StoryFN } from '@kustomz-config'
 import { Icon, IconProps } from '@kustomz/lib'
 import React from 'react'
 
@@ -8,33 +8,41 @@ import React from 'react'
  */
 
 export default {
-  argTypes: { color, size },
   component: Icon,
   title: 'Library/Atoms/Icon'
 }
 
 /**
- * Font Awesome {@link Icon} story.
+ * Menu {@link Icon} story.
  */
-export const FontAwesome: StoryFN<IconProps> = (args: IconProps) => (
-  <Icon {...args} />
-)
+export const Menu: StoryFN<IconProps> = (args: IconProps) => <Icon {...args} />
 
-FontAwesome.args = {
-  className: 'fas fa-spinner fa-spin',
-  color: 'light',
-  size: '2xl'
+Menu.args = {
+  children: 'menu',
+  className: 'text-light'
 }
 
 /**
- * Material UI {@link Icon} story.
+ * Person {@link Icon} story.
  */
-export const MaterialUI: StoryFN<IconProps> = (args: IconProps) => (
+export const Person: StoryFN<IconProps> = (args: IconProps) => (
   <Icon {...args} />
 )
 
-MaterialUI.args = {
-  children: 'shopping_cart',
-  color: 'primary',
-  size: '4xl'
+Person.args = {
+  children: 'person',
+  className: 'text-light-25',
+  outlined: false
+}
+
+/**
+ * Search {@link Icon} story.
+ */
+export const Search: StoryFN<IconProps> = (args: IconProps) => (
+  <Icon {...args} />
+)
+
+Search.args = {
+  children: 'search',
+  className: 'text-light'
 }

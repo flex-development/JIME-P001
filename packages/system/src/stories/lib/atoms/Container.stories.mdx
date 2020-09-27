@@ -1,6 +1,6 @@
 import { excludePropKeys } from '@kustomz-config'
 import { Container } from '@kustomz/lib'
-import { Description, Meta, Props } from '@storybook/addon-docs/blocks'
+import { ArgsTable, Description, Meta } from '@storybook/addon-docs/blocks'
 
 <Meta title='Library/Atoms/Container' component={Container} />
 
@@ -8,4 +8,4 @@ import { Description, Meta, Props } from '@storybook/addon-docs/blocks'
 
 <Description markdown={Container.__docgenInfo.description} />
 
-<Props exclude={excludePropKeys} of={Container} />
+<ArgsTable exclude={excludePropKeys} of={Container} />

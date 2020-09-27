@@ -1,3 +1,4 @@
+import { useMutatedProps } from '@kustomz/hooks'
 import { MutatedProps } from '@kustomz/types'
 import React, {
   DetailedHTMLProps,
@@ -7,7 +8,6 @@ import React, {
   PropsWithoutRef,
   RefAttributes
 } from 'react'
-import { useMutatedProps } from '../../hooks'
 
 /**
  * @module lib/elements/Heading

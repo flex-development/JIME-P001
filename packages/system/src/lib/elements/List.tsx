@@ -1,33 +1,29 @@
 import { MutatedProps } from '@kustomz/types'
 import React, {
+  FC,
   forwardRef,
   ForwardRefExoticComponent as FREC,
   PropsWithoutRef,
   RefAttributes
 } from 'react'
-import { Item, ItemProps } from '.'
 import { useMutatedProps } from '../hooks'
+import { Item, ItemProps } from './Item'
 
 /**
+ * @file Render a <ol> or <ul> element
  * @module lib/elements/List
- * @see {@link https://developer.mozilla.org/docs/Web/HTML/Element/ol}
- * @see {@link https://developer.mozilla.org/docs/Web/HTML/Element/ul}
  */
 
-export type HTMLListElement = HTMLDListElement &
-  HTMLOListElement &
-  HTMLUListElement
+export type HTMLListElement = HTMLOListElement & HTMLUListElement
 
 /**
  * {@link List} component properties.
  */
 export interface ListProps extends MutatedProps<HTMLListElement> {
   /**
-   * JSON array of items to render.
-   *
-   * @default []
+   * Array of `Option` components to render.
    */
-  items?: ItemProps[]
+  children?: Array<typeof Item | FC<ItemProps>>
 
   /**
    * Type of list element to render.
@@ -66,19 +62,7 @@ export type ListRefProps = ReflessListProps & ListRefAttributes
  * - **https://developer.mozilla.org/docs/Web/HTML/Element/ul**
  */
 export const List: FREC<ListRefProps> = forwardRef(({ is, ...props }, ref) => {
-  const { items, ...rest } = props
-
-  const mutatedProps = useMutatedProps<typeof rest, InstrinsicListProps>(rest)
-
-  mutatedProps.children = ((): ListProps['children'] => {
-    if (rest.children) return rest.children
-
-    return (items as ItemProps[]).map((props: ItemProps, i: number) => {
-      const key = props['data-key'] || props.id || `item-${i}`
-
-      return <Item {...props} key={key} />
-    })
-  })()
+  const mutatedProps = useMutatedProps<typeof props, InstrinsicListProps>(props)
 
   switch (is) {
     case 'ol':
@@ -89,6 +73,5 @@ export const List: FREC<ListRefProps> = forwardRef(({ is, ...props }, ref) => {
 })
 
 List.defaultProps = {
-  is: 'ul',
-  items: []
+  is: 'ul'
 }

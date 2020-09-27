@@ -1,13 +1,14 @@
-import { TextContentProps } from '@kustomz/types'
+import { MutatedProps, ThemeColor } from '@kustomz/types'
 import React, {
   forwardRef,
   ForwardRefExoticComponent as FREC,
   PropsWithoutRef,
   RefAttributes
 } from 'react'
-import { useMutatedProps, useTextUtilities } from '../hooks'
+import { useMutatedProps } from '../hooks'
 
 /**
+ * @file Render an <a> element
  * @module lib/elements/Link
  * @see {@link https://developer.mozilla.org/docs/Web/HTML/Element/a}
  */
@@ -17,9 +18,7 @@ import { useMutatedProps, useTextUtilities } from '../hooks'
 /**
  * {@link Link} component properties.
  */
-export interface LinkProps extends TextContentProps<HTMLAnchorElement> {
-  /* eslint-enable prettier/prettier */
-
+export interface LinkProps extends MutatedProps<HTMLAnchorElement> {
   /**
    * If true, add the class `active`.
    *
@@ -28,24 +27,20 @@ export interface LinkProps extends TextContentProps<HTMLAnchorElement> {
    */
   active?: boolean
 
-  /* eslint-enable prettier/prettier */
-
   /**
-   * If true, style link for `Card` component.
+   * If true, add the class `card-link`.
    *
-   * - https://v5.getbootstrap.com/docs/5.0/components/card/#titles-text-and-links
+   * See: https://v5.getbootstrap.com/docs/5.0/components/card/#titles-text-and-links
    *
    */
   card?: boolean
 
   /**
-   * Link color.
+   * Add a colorized link class.
    *
-   * - https://v5.getbootstrap.com/docs/5.0/helpers/colored-links/
-   *
-   * @default false
+   * See: https://v5.getbootstrap.com/docs/5.0/helpers/colored-links/
    */
-  color?: TextContentProps['color']
+  color?: false | ThemeColor
 
   /**
    * Indicates that the user cannot interact with the link.
@@ -54,47 +49,33 @@ export interface LinkProps extends TextContentProps<HTMLAnchorElement> {
 
   /**
    * If true, add the class `dropdown-item`.
-   *
-   * @default false
    */
   dropdown?: boolean
 
   /**
-   * Path to page to render to URL object.
+   * The URL that the hyperlink points to. Links are not restricted to
+   * HTTP-based URLs — they can use any URL scheme supported by browsers:
    *
-   * - https://nodejs.org/api/url.html#url_url_strings_and_url_objects
+   * - Sections of a page with fragment URLs
+   * - Pieces of media files with media fragments
+   * - Telephone numbers with `tel:` URLs
+   * - Email addresses with `mailto:` URLs
    *
    * @default '#'
    */
   href?: string
 
   /**
-   * Menu links to render.
-   *
-   * @default []
-   */
-  links?: Partial<LinkProps>[]
-
-  /**
    * If true, add the class `nav-link`.
    *
-   * - https://v5.getbootstrap.com/docs/5.0/components/navs/
+   * See: https://v5.getbootstrap.com/docs/5.0/components/navs/
    */
   nav?: boolean
 
   /**
-   * Link size.
-   *
-   * @default false
-   */
-  size?: TextContentProps['size']
-
-  /**
    * If true, add the class `stretched-link`.
    *
-   * - https://v5.getbootstrap.com/docs/5.0/helpers/stretched-link/
-   *
-   * @default false
+   * See: https://v5.getbootstrap.com/docs/5.0/helpers/stretched-link/
    */
   stretched?: boolean
 
@@ -116,8 +97,6 @@ export interface LinkProps extends TextContentProps<HTMLAnchorElement> {
 
   /**
    * If true, add the class `dropdown-toggle`.
-   *
-   * @default false
    */
   toggle?: boolean
 }
@@ -141,28 +120,32 @@ export type LinkRefProps = ReflessLinkProps & LinkRefAttributes
  * Renders an `<a>` element with the class `link`.
  *
  * - **https://developer.mozilla.org/docs/Web/HTML/Element/a**
- * - **https://nextjs.org/docs/api-reference/next/link**
  */
 export const Link: FREC<LinkRefProps> = forwardRef((props, ref) => {
-  const { active, card, dropdown, nav, stretched, toggle, ...rest } = props
-
-  const { dictionary, sanitized } = useTextUtilities<typeof rest>(
-    rest,
-    nav ? 'nav-link' : 'link'
-  )
-
-  const mutatedProps = useMutatedProps<
-    typeof sanitized,
-    JSX.IntrinsicElements['a']
-  >(sanitized, {
-    ...dictionary,
+  const {
     active,
-    'card-link': card,
-    disabled: rest.disabled && rest.disabled,
-    'dropdown-item': dropdown,
-    'dropdown-toggle': toggle,
-    'stretched-link': stretched
-  })
+    card,
+    color,
+    dropdown,
+    nav,
+    stretched,
+    toggle,
+    ...rest
+  } = props
+
+  const mutatedProps = useMutatedProps<typeof rest, JSX.IntrinsicElements['a']>(
+    rest,
+    {
+      active,
+      'card-link': card,
+      disabled: rest.disabled && rest.disabled,
+      'dropdown-item': dropdown,
+      'dropdown-toggle': toggle,
+      [`link-${color}`]: color,
+      'nav-link': nav,
+      'stretched-link': stretched
+    }
+  )
 
   if (toggle) {
     mutatedProps['aria-expanded'] = false
@@ -178,10 +161,5 @@ export const Link: FREC<LinkRefProps> = forwardRef((props, ref) => {
 })
 
 Link.defaultProps = {
-  card: false,
-  color: false,
-  dropdown: false,
-  href: '#',
-  nav: false,
-  size: false
+  href: '#'
 }

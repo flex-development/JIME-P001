@@ -6,7 +6,7 @@ import React, {
   PropsWithoutRef,
   RefAttributes
 } from 'react'
-import { useMutatedProps, useTextUtilities } from '../hooks'
+import { useMutatedProps } from '../hooks'
 import { InputValue } from './Input'
 
 /**
@@ -20,15 +20,11 @@ import { InputValue } from './Input'
 export interface ItemProps<E = HTMLLIElement> extends MutatedProps<E> {
   /**
    * If true, add the class `dropdown-item`.
-   *
-   * @default false
    */
   dropdown?: Booleanish
 
   /**
    * If true, add the class `nav-item`.
-   *
-   * @default false
    */
   nav?: Booleanish
 
@@ -64,13 +60,10 @@ export type ItemRefProps = ReflessItemProps & ItemRefAttributes
 export const Item: FREC<ItemRefProps> = forwardRef((props, ref) => {
   const { dropdown, nav, ...rest } = props
 
-  const { dictionary, sanitized } = useTextUtilities<typeof rest>(rest)
-
   const mutatedProps = useMutatedProps<
-    typeof sanitized,
+    typeof rest,
     JSX.IntrinsicElements['li']
-  >(sanitized, {
-    ...dictionary,
+  >(rest, {
     'dropdown-item': dropdown,
     'nav-item': nav
   })
@@ -78,7 +71,4 @@ export const Item: FREC<ItemRefProps> = forwardRef((props, ref) => {
   return <li {...mutatedProps} ref={ref} />
 })
 
-Item.defaultProps = {
-  dropdown: false,
-  nav: false
-}
+Item.defaultProps = {}

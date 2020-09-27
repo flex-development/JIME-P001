@@ -1,6 +1,6 @@
 /**
- * @file Atoms
- * @module lib/atoms
+ * @file Elements
+ * @module lib/elements
  */
 
 export * from './Aside'
@@ -19,11 +19,11 @@ export * from './Label'
 export * from './Link'
 export * from './List'
 export * from './Main'
-export * from './NativeOption'
-export * from './NativeSelect'
 export * from './Nav'
+export * from './Option'
 export * from './Paragraph'
 export * from './Section'
+export * from './Select'
 export * from './Span'
 export * from './Summary'
 export * from './TextArea'

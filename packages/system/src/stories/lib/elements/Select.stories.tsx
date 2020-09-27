@@ -1,5 +1,5 @@
 import { StoryFN } from '@kustomz-config'
-import { NativeOption, NativeSelect, NativeSelectProps } from '@kustomz/lib'
+import { Option, Select, SelectProps } from '@kustomz/lib'
 import React from 'react'
 
 /**
@@ -8,16 +8,16 @@ import React from 'react'
  */
 
 export default {
-  component: NativeSelect,
-  subcomponents: { NativeOption },
+  component: Select,
+  subcomponents: { Option },
   title: 'Elements/Select'
 }
 
 /**
  * Native {@link Select} story.
  */
-export const Native: StoryFN<NativeSelectProps> = (args: NativeSelectProps) => (
-  <NativeSelect {...args} />
+export const Native: StoryFN<SelectProps> = (args: SelectProps) => (
+  <Select {...args} />
 )
 
 Native.args = {

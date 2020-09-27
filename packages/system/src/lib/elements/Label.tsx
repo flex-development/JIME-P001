@@ -1,21 +1,21 @@
-import { TextContentProps } from '@kustomz/types'
+import { MutatedProps } from '@kustomz/types'
 import React, {
   forwardRef,
   ForwardRefExoticComponent as FREC,
   PropsWithoutRef,
   RefAttributes
 } from 'react'
-import { useMutatedProps, useTextUtilities } from '../hooks'
+import { useMutatedProps } from '../hooks'
 
 /**
+ * @file Render a <label> element
  * @module lib/elements/Label
- * @see {@link https://developer.mozilla.org/docs/Web/HTML/Element/label}
  */
 
 /**
  * {@link Label} component properties.
  */
-export interface LabelProps extends TextContentProps<HTMLLabelElement> {
+export interface LabelProps extends MutatedProps<HTMLLabelElement> {
   /**
    * If true, apply the class `col-form-label` instead of `form-label`.
    *
@@ -26,7 +26,7 @@ export interface LabelProps extends TextContentProps<HTMLLabelElement> {
   col?: boolean
 
   /**
-   * True if labelling a form element where `required=true`.
+   * True if labelling a form control element where `required=true`.
    *
    * @default false
    */
@@ -57,15 +57,12 @@ export type LabelRefProps = ReflessLabelProps & LabelRefAttributes
 export const Label: FREC<LabelRefProps> = forwardRef((props, ref) => {
   const { col, required, ...rest } = props
 
-  const { dictionary, sanitized } = useTextUtilities<typeof rest>(rest)
-
-  if (required) sanitized['data-required'] = required
+  if (required) rest['data-required'] = required
 
   const mutatedProps = useMutatedProps<
-    typeof sanitized,
+    typeof rest,
     JSX.IntrinsicElements['label']
-  >(sanitized, {
-    ...dictionary,
+  >(rest, {
     'col-form-label': col,
     'form-label': !col
   })

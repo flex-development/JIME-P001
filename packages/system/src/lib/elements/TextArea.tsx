@@ -1,4 +1,4 @@
-import { PropsForFormElement } from '@kustomz/types'
+import { FormControlProps } from '@kustomz/types'
 import React, {
   forwardRef,
   ForwardRefExoticComponent as FREC,
@@ -8,15 +8,15 @@ import React, {
 import { useMutatedProps } from '../hooks'
 
 /**
+ * @file Render a `<textarea>` element
  * @module lib/elements/TextArea
- * @see {@link https://developer.mozilla.org/docs/Web/HTML/Element/textarea}
  */
 
 /**
  * {@link TextArea} component properties.
  */
 export interface TextAreaProps
-  extends Omit<PropsForFormElement<HTMLTextAreaElement>, 'children'> {
+  extends Omit<FormControlProps<HTMLTextAreaElement>, 'children'> {
   /**
    * The visible width of the text control, in average character widths. If it
    * is specified, it must be a positive integer.

@@ -46,7 +46,7 @@
     "dev": "run-p dev:*",
     "pretest": "cross-env NODE_ENV=test",
     "test": "jest --detectOpenHandles --passWithNoTests",
-    "prebuild:bundle": "rm -rf dist && mkdir dist dist/style",
+    "prebuild:bundle": "rm -rf dist && mkdir dist dist/theme",
     "prebuild:storybook": "rm -rf public && mkdir public",
     "build:bundle": "microbundle --tsconfig tsconfig.prod.json --jsx React.createElement",
     "build:storybook": "build-storybook -o public",

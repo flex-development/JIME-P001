@@ -41,7 +41,7 @@
   "scripts": {
     "predev": "cross-env NODE_ENV=development",
     "dev:types": "lerna run dev --scope @flex-development/kustomtypez",
-    "dev:storybook": "start-storybook -p 3000 -s ../app/public --ci",
+    "dev:storybook": "start-storybook -p 3000 -c storybook -s ../app/public --ci",
     "dev:storybook:docs": "yarn dev:storybook --docs",
     "dev": "run-p dev:*",
     "pretest": "cross-env NODE_ENV=test",

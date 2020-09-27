@@ -5,7 +5,7 @@
     "outDir": "./dist",
     "rootDir": "./src"
   },
-  "exclude": ["__tests__", "src/stories"],
+  "exclude": ["__tests__", "storybook"],
   "extends": "./tsconfig.json",
   "include": ["src"]
 }

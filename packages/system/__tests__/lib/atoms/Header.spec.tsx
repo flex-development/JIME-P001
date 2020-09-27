@@ -4,7 +4,7 @@ import React from 'react'
 
 /**
  * @file Unit Tests - Header
- * @module tests/elements/Header
+ * @module tests/lib/atoms/Header
  */
 
 it('renders a <header> element', () => {

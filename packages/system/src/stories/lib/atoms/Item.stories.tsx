@@ -1,6 +1,6 @@
-import { StoryFN, variant } from '@kustomz-config'
 import { Item, ItemProps } from '@kustomz/lib'
 import React from 'react'
+import { StoryFN, variant } from '../../../../.storybook/config'
 
 /**
  * @file Stories - Item

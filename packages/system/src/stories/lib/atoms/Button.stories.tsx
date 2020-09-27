@@ -1,10 +1,10 @@
+import { Button, ButtonProps } from '@kustomz/lib'
+import React from 'react'
 import {
   button_variant as variant,
   form_control_size as size,
   StoryFN
-} from '@kustomz-config'
-import { Button, ButtonProps } from '@kustomz/lib'
-import React from 'react'
+} from '../../../../.storybook/config'
 
 /**
  * @file Stories - Button
@@ -24,4 +24,8 @@ export const ThemeColor: StoryFN<ButtonProps> = (args: ButtonProps) => (
 ThemeColor.args = {
   children: 'Add to Cart',
   variant: 'primary'
+}
+
+ThemeColor.parameters = {
+  jest: ['Button']
 }

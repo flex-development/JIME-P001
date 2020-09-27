@@ -4,7 +4,7 @@ import React from 'react'
 
 /**
  * @file Unit Tests - Form
- * @module tests/elements/Form
+ * @module tests/lib/atoms/Form
  */
 
 it('renders <form class="form" />', () => {

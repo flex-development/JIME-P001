@@ -1,6 +1,6 @@
-import { StoryFN } from '@kustomz-config'
 import { Link, LinkProps } from '@kustomz/lib'
 import React from 'react'
+import { StoryFN } from '../../../../.storybook/config'
 
 /**
  * @file Stories - Link

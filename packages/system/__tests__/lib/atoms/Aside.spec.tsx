@@ -4,7 +4,7 @@ import React from 'react'
 
 /**
  * @file Unit Tests - Aside
- * @module tests/elements/Aside
+ * @module tests/lib/atoms/Aside
  */
 
 it('renders an <aside> element', () => {

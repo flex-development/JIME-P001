@@ -1,8 +1,10 @@
 import { withConsole } from '@storybook/addon-console'
 import { DocsContainer } from '@storybook/addon-docs/blocks'
+import { withTests } from '@storybook/addon-jest'
 import { omit } from 'lodash'
 import React from 'react'
 import '../src/theme/theme.scss'
+import results from '../__tests__/jest-test-results.json'
 import {
   AdobeXDArtboards,
   Documentation,
@@ -52,5 +54,8 @@ export const decorators = [
     return withConsole({
       consoleInclude: [new URLSearchParams(window.location.search).get('id')]
     })(Story)(context)
-  }
+  },
+
+  // Add Jest output to stories
+  withTests({ results })
 ]

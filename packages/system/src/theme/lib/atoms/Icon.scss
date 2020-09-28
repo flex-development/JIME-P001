@@ -1,0 +1,17 @@
+/// ----------------------------------------------------------------------------
+/// @group atoms-icon
+/// ----------------------------------------------------------------------------
+
+.icon {
+  &[data-position]:not(&.navbar-toggler-icon) {
+    font-size: map-get($font-sizes, xl);
+  }
+
+  &[data-position='left'] {
+    margin-right: $icon-pos-spacer;
+  }
+
+  &[data-position='right'] {
+    margin-left: $icon-pos-spacer;
+  }
+}

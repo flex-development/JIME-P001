@@ -1,0 +1,8 @@
+/// ----------------------------------------------------------------------------
+/// @group atoms-label
+/// ----------------------------------------------------------------------------
+
+.form-label[data-required],
+.col-form-label[data-required] {
+  font-weight: $font-weight-semibold;
+}

@@ -1,0 +1,25 @@
+/// ----------------------------------------------------------------------------
+/// @group atoms-link
+/// ----------------------------------------------------------------------------
+
+a {
+  @include event {
+    cursor: pointer;
+  }
+}
+
+.link[data-icon] {
+  @include flex(center, null);
+}
+
+.link-muted {
+  color: map-get($theme-colors, muted);
+}
+
+.nav-link {
+  @include event {
+    font-weight: map-get($font-weights, bold);
+  }
+
+  text-transform: uppercase;
+}

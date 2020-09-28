@@ -103,6 +103,14 @@
   "overrides": [
     {
       "files": [
+        "**/*.d.ts"
+      ],
+      "rules": {
+        "prettier/prettier": 0
+      }
+    },
+    {
+      "files": [
         "**/*.spec.ts", 
         "**/*.spec.tsx",
         "**/jest.setup.ts",

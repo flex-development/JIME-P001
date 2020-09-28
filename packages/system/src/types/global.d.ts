@@ -65,8 +65,6 @@ export interface GlobalAttributes<E = HTMLElement> extends Attributes<E> {
    */
   id?: string
 
-  /* eslint-disable prettier/prettier */
-
   /**
    * Provides a hint to browsers as to the type of virtual keyboard
    * configuration to use when editing this element or its contents.
@@ -75,16 +73,14 @@ export interface GlobalAttributes<E = HTMLElement> extends Attributes<E> {
    * in contenteditable mode.
    */
   inputMode?:
-    | 'none'
-    | 'text'
-    | 'decimal'
-    | 'numeric'
-    | 'tel'
-    | 'search'
-    | 'email'
-    | 'url'
-
-  /* eslint-enable prettier/prettier */
+  | 'none'
+  | 'text'
+  | 'decimal'
+  | 'numeric'
+  | 'tel'
+  | 'search'
+  | 'email'
+  | 'url'
 
   /**
    * Specify that a standard HTML element should behave like a defined custom

@@ -11,3 +11,5 @@ packages/app/.next
 public/
 
 package-lock.json
+
+*.d.ts

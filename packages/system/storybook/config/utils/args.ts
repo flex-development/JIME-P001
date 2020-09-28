@@ -1,4 +1,3 @@
-
 /**
  * @file Storybook Args
  * @module storybook/config/args
@@ -6,7 +5,6 @@
 
 export const autoComplete = {
   control: {
-    type: 'select',
     options: [
       'off',
       'on',
@@ -62,63 +60,36 @@ export const autoComplete = {
       'impp',
       'url',
       'photo'
-    ]
-  }
-}
-
-export const background_size = {
-  control: {
-    type: 'select',
-    options: ['auto', 'contain', 'cover']
-  }
-}
-
-export const booleanish = {
-  control: {
-    type: 'select',
-    options: [false, 'false', true, 'true']
-  }
-}
-
-export const container_size = {
-  control: {
-    type: 'select',
-    options: [false, 'xs', 'sm', 'md', 'lg', 'xl', 'xxl']
+    ],
+    type: 'select'
   }
 }
 
 export const button_variant = {
   control: {
-    type: 'select',
-    options: [
-      false,
-      'dark',
-      'darker',
-      'ghost',
-      'light',
-      'primary',
-      'secondary'
-    ].concat([
-      'outline-dark',
-      'outline-darker',
-      'outline-ghost',
-      'outline-light',
-      'outline-primary',
-      'outline-secondary'
-    ]).concat('link')
+    options: [false, 'dark', 'darker', 'ghost', 'light', 'primary', 'secondary']
+      .concat([
+        'outline-dark',
+        'outline-darker',
+        'outline-ghost',
+        'outline-light',
+        'outline-primary',
+        'outline-secondary'
+      ])
+      .concat('link'),
+    type: 'select'
   }
 }
 
 export const form_control_size = {
   control: {
-    type: 'select',
-    options: [false, 'sm', 'lg']
+    options: [false, 'sm', 'lg'],
+    type: 'select'
   }
 }
 
 export const ligatures = {
   control: {
-    type: 'select',
     options: [
       '3d_rotation',
       'ac_unit',
@@ -1052,7 +1023,8 @@ export const ligatures = {
       'zoom_in',
       'zoom_out',
       'zoom_out_map'
-    ]
+    ],
+    type: 'select'
   }
 }
 

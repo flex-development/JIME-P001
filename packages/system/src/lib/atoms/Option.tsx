@@ -1,5 +1,5 @@
 import { useMutatedProps } from '@kustomz/hooks'
-import { FormControlProps, MutatedProps } from '@kustomz/types'
+import { MutatedFormControlProps, MutatedProps } from '@kustomz/types'
 import React, {
   forwardRef,
   ForwardRefExoticComponent as FREC,
@@ -37,7 +37,7 @@ export interface OptionProps extends MutatedProps<HTMLOptionElement> {
    * this attribute is omitted, the value is taken from the text content of the
    * option element.
    */
-  value?: FormControlProps['value']
+  value?: MutatedFormControlProps['value']
 }
 
 /**

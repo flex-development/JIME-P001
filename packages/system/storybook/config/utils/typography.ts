@@ -3,6 +3,8 @@
  * @module storybook/config/typography
  */
 
+/* eslint-disable sort-keys */
+
 /**
  * Font sizes used in this project.
  */
@@ -10,15 +12,8 @@ export const fontSizes = {
   xs: '0.75rem',
   sm: '0.875rem',
   md: '1rem',
-  lg: '1.125rem',
-  xl: '1.25rem',
-  '2xl': '1.5rem',
-  '3xl': '1.75rem',
-  '4xl': '2rem',
-  '5xl': '2.5rem',
-  '6xl': '3rem',
-  '7xl': '3.5rem',
-  '8xl': '4rem'
+  lg: '1.25',
+  xl: '1.5rem'
 }
 
 /**

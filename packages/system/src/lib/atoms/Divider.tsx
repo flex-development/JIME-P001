@@ -1,5 +1,5 @@
 import { useMutatedProps } from '@kustomz/hooks'
-import { PropsForVoidElementTag } from '@kustomz/types'
+import { MutatedVoidElementProps } from '@kustomz/types'
 import React, {
   forwardRef,
   ForwardRefExoticComponent as FREC,
@@ -15,7 +15,7 @@ import React, {
 /**
  * {@link Divider} component properties.
  */
-export interface DividerProps extends PropsForVoidElementTag<HTMLHRElement> {
+export interface DividerProps extends MutatedVoidElementProps<HTMLHRElement> {
   /**
    * Sets the color of the rule through color name or hexadecimal value.
    */

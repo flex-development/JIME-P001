@@ -56,9 +56,7 @@ DropdownToggle.args = {
   toggle: true
 }
 
-export const Nav: StoryFN<LinkProps> = (args: LinkProps) => (
-  <Link {...args} />
-)
+export const Nav: StoryFN<LinkProps> = (args: LinkProps) => <Link {...args} />
 
 Nav.args = {
   children: 'Nav link',

@@ -18,12 +18,7 @@ module.exports = {
     '@testing-library/jest-dom/extend-expect',
     './jest.setup.ts'
   ],
-  testPathIgnorePatterns: [
-    'build/',
-    'dist/',
-    'node_modules/',
-    "(.*).d.ts"
-  ],
+  testPathIgnorePatterns: ['build/', 'dist/', 'node_modules/', '(.*).d.ts'],
   transform: {
     '^.+\\.[tj]sx?$': 'babel-jest',
     '^.+\\.mdx$': '@storybook/addon-docs/jest-transform-mdx'

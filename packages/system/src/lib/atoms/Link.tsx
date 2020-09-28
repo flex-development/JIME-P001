@@ -112,15 +112,7 @@ export type LinkRefProps = ReflessLinkProps & LinkRefAttributes
  * - **https://developer.mozilla.org/docs/Web/HTML/Element/a**
  */
 export const Link: FREC<LinkRefProps> = forwardRef((props, ref) => {
-  const {
-    active,
-    color,
-    dropdown,
-    nav,
-    stretched,
-    toggle,
-    ...rest
-  } = props
+  const { active, color, dropdown, nav, stretched, toggle, ...rest } = props
 
   const mutatedProps = useMutatedProps<typeof rest, JSX.IntrinsicElements['a']>(
     rest,

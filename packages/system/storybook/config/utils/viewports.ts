@@ -4,6 +4,8 @@
  * @see {@link https://www.npmjs.com/package/@storybook/addon-viewport}
  */
 
+/* eslint-disable sort-keys */
+
 /**
  * Adobe XD artboard sizes formatted for the Storybook Viewports addon.
  *

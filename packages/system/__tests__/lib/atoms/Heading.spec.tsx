@@ -1,8 +1,6 @@
 import { render } from '@testing-library/react'
 import React from 'react'
-import {
-  Default
-} from '../../../storybook/stories/lib/atoms/Heading.stories'
+import { Default } from '../../../storybook/stories/lib/atoms/Heading.stories'
 import { ArgsMatcher } from '../../jest-env'
 
 /**

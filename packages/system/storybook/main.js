@@ -4,7 +4,10 @@ const sassOptions = require('../.sassrc.js')
 
 /**
  * @file Storybook Configuration
+ * @see {@link https://storybook.js.org/docs/react/configure/overview}
  */
+
+/* eslint-disable sort-keys */
 
 module.exports = {
   /**
@@ -77,12 +80,12 @@ module.exports = {
   /**
    * Alters the Storybook Webpack configuration.
    *
-   * @param param1.configType has a value of 'DEVELOPMENT' or 'PRODUCTION'.
+   * {@param param1.configType} has a value of 'DEVELOPMENT' or 'PRODUCTION'.
    * 'PRODUCTION' is used when building the static version of storybook.
    *
    * @param {object} config - Base Webpack config
-   * @param {object} param1 - Storybook config
-   * @param {string} param1.configType - Storybook development environment
+   * @param {object} storybookConfig - Storybook config
+   * @param {string} storybookConfig.configType - Storybook environment
    * @returns {object} Webpack configuration
    */
   webpackFinal: async (config, { configType }) => {

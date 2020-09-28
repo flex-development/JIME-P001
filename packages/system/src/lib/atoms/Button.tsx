@@ -1,8 +1,8 @@
 import { useIcon, useMutatedProps } from '@kustomz/hooks'
 import {
   ButtonVariant,
-  FormControlProps,
-  FormControlSize
+  FormControlSize,
+  MutatedFormControlProps
 } from '@kustomz/types'
 import React, {
   forwardRef,
@@ -21,7 +21,7 @@ import { IconProps } from './Icon'
  * {@link Button} component properties.
  */
 export interface ButtonProps
-  extends Omit<FormControlProps<HTMLButtonElement>, 'variant'> {
+  extends Omit<MutatedFormControlProps<HTMLButtonElement>, 'variant'> {
   /**
    * This attribute on a `<button>` is nonstandard and Firefox-specific.
    *
@@ -100,7 +100,7 @@ export interface ButtonProps
 
   /**
    * Button variant.
-   * 
+   *
    * @default 'primary'
    */
   variant?: false | ButtonVariant

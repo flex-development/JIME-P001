@@ -1,8 +1,6 @@
 import { render } from '@testing-library/react'
 import React from 'react'
-import {
-  Default
-} from '../../../storybook/stories/lib/atoms/Select.stories'
+import { Default } from '../../../storybook/stories/lib/atoms/Select.stories'
 import { ArgsMatcher } from '../../jest-env'
 
 /**
@@ -11,9 +9,12 @@ import { ArgsMatcher } from '../../jest-env'
  */
 
 it('renders a <select> element with nested <option> elements', () => {
-  const args: ArgsMatcher = Object.assign({
-    'data-testid': 'select'
-  }, Default.args as ArgsMatcher)
+  const args: ArgsMatcher = Object.assign(
+    {
+      'data-testid': 'select'
+    },
+    Default.args as ArgsMatcher
+  )
 
   const { getByTestId } = render(<Default {...args} />)
 

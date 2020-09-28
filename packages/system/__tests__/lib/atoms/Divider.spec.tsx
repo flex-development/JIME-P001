@@ -1,8 +1,6 @@
 import { render } from '@testing-library/react'
 import React from 'react'
-import {
-  Default
-} from '../../../storybook/stories/lib/atoms/Divider.stories'
+import { Default } from '../../../storybook/stories/lib/atoms/Divider.stories'
 
 /**
  * @file Tests - Divider

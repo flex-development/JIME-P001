@@ -42,13 +42,13 @@ export const colors = {
 export const getThemeColor = (path: string, docs = true) => {
   if (!_.isString(path)) return {}
 
-  const color = _.get(colors, path, { title: '', subtitle: '', colors: [] })
+  const color = _.get(colors, path, { colors: [], subtitle: '', title: '' })
 
   if (!docs) return color
 
   return {
     colors: [color.value],
-    title: color.name,
-    subtitle: `var(--bs-${path})`
+    subtitle: `var(--bs-${path})`,
+    title: color.name
   }
 }

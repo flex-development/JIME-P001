@@ -1,6 +1,7 @@
 # Distribution
 
-Below you'll find instructions on distributing this project locally using Lerna, and how to publish the package to the Github Package Registry.
+Below you'll find instructions on distributing this project locally using Lerna,
+and how to publish the package to the Github Package Registry.
 
 ## Overview
 
@@ -11,7 +12,8 @@ Below you'll find instructions on distributing this project locally using Lerna,
 
 1. Be sure the package is built before attempting to install it
 
-   If the script you're using doesn't already build the package, run `lerna run prepare --scope @flex-development/kustomtypez`
+   If the script you're using doesn't already build the package, run
+   `lerna run prepare --scope @flex-development/kustomtypez`
 
 2. Add `"@flex-development/kustomtypez": "*"` to your project `dependencies`
 

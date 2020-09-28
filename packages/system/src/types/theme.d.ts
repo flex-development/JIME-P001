@@ -4,11 +4,6 @@
  */
 
 /**
- * Background size options.
- */
-export type BackgroundSize = 'auto' | 'contain' | 'cover'
-
-/**
  * Responsive breakpoints.
  */
 export type Breakpoint = 'sm' | 'md' | 'lg' | 'xl' | 'xxl'
@@ -19,52 +14,9 @@ export type Breakpoint = 'sm' | 'md' | 'lg' | 'xl' | 'xxl'
 export type ButtonVariant = ThemeColor | ThemeOutline | 'link'
 
 /**
- * Font weights.
- */
-export type FontWeight =
-  | 'hairline'
-  | 'thin'
-  | 'light'
-  | 'normal'
-  | 'medium'
-  | 'semibold'
-  | 'bold'
-  | 'extrabold'
-  | 'black'
-
-/**
  * Possible {@link Button} component sizes.
  */
 export type FormControlSize = 'sm' | 'lg'
-
-/**
- * Text sizes.
- */
-export type Size = 'xs' | 'sm' | 'lg' | 'xl'
-
-/**
- * Keys of `scss` `$spacers` map.
- */
-export type SpacerKey =
-  | 0
-  | 1
-  | 2
-  | 3
-  | 4
-  | 5
-  | 6
-  | 8
-  | 9
-  | 10
-  | 12
-  | 14
-  | 16
-  | 18
-  | 20
-  | 24
-  | 48
-  | 56
-  | 64
 
 /**
  * Theme colors.

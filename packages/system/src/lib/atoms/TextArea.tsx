@@ -1,5 +1,5 @@
 import { useMutatedProps } from '@kustomz/hooks'
-import { FormControlProps, FormControlSize } from '@kustomz/types'
+import { FormControlSize, MutatedFormControlProps } from '@kustomz/types'
 import React, {
   forwardRef,
   ForwardRefExoticComponent as FREC,
@@ -16,7 +16,7 @@ import React, {
  * {@link TextArea} component properties.
  */
 export interface TextAreaProps
-  extends Omit<FormControlProps<HTMLTextAreaElement>, 'children'> {
+  extends Omit<MutatedFormControlProps<HTMLTextAreaElement>, 'children'> {
   /**
    * The visible width of the text control, in average character widths. If it
    * is specified, it must be a positive integer.

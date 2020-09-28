@@ -1,5 +1,5 @@
 import { useMutatedProps } from '@kustomz/hooks'
-import { FormControlSize, MutatedProps } from '@kustomz/types'
+import { FormControlSize, MutatedFormControlProps } from '@kustomz/types'
 import React, {
   FC,
   forwardRef,
@@ -18,11 +18,17 @@ import { Option, OptionProps } from './Option'
 /**
  * {@link Select} component properties.
  */
-export interface SelectProps extends MutatedProps<HTMLSelectElement> {
+export interface SelectProps
+  extends MutatedFormControlProps<HTMLSelectElement> {
   /**
    * Array of `Option` components to render.
    */
   children?: Array<typeof Option | FC<OptionProps>>
+
+  /**
+   * Value of currently selected option.
+   */
+  defaultValue?: MutatedFormControlProps['value']
 
   /**
    * JSON array of options to render.
@@ -37,6 +43,11 @@ export interface SelectProps extends MutatedProps<HTMLSelectElement> {
    * See: https://v5.getbootstrap.com/docs/5.0/forms/form-control/#sizing
    */
   size?: false | FormControlSize
+
+  /**
+   * Value of currently selected option.
+   */
+  value?: MutatedFormControlProps['value']
 }
 
 /**

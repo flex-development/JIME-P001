@@ -25,6 +25,7 @@ export const Default: StoryFN<SelectProps> = (args: SelectProps) => (
 )
 
 Default.args = {
+  defaultValue: 'mustard',
   options: [
     {
       children: 'Ketchup',
@@ -34,7 +35,6 @@ Default.args = {
     {
       children: 'Mustard',
       label: 'Mustard',
-      selected: true,
       value: 'mustard'
     },
     {

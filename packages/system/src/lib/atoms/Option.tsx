@@ -28,11 +28,6 @@ export interface OptionProps extends MutatedProps<HTMLOptionElement> {
   label?: string
 
   /**
-   * If true, indicates that the option is initially selected.
-   */
-  selected?: boolean
-
-  /**
    * Value to be submitted with the form, should this option be selected. If
    * this attribute is omitted, the value is taken from the text content of the
    * option element.

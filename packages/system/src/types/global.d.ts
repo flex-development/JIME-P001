@@ -226,6 +226,11 @@ export interface MutatedFormControlProps<E = HTMLElement>
   disabled?: Booleanish
 
   /**
+   * Default form control value.
+   */
+  defaultValue?: MutatedFormControlProps['value']
+
+  /**
    * The `id` of the `<form>` element that the element is associated with.
    *
    * If this attribute is not specified, the element must be a descendant of a

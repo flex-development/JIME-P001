@@ -16,12 +16,15 @@ Storybook design system
 
 ## Getting Started
 
-This project is a [Storybook](https://storybook.js.org/) design system for
-Morenas Kustomz.
+This project is a [Storybook](https://storybook.js.org/docs/react) design system
+built with [React](https://reactjs.org). Storybook is a development environment
+and documentation tool for UI components that allows developers to build and
+test components independently, as well as showcase them interactively in an
+isolated environment.
 
-Morenas Kustomz is an online store that specializes in "pot head" necessesities.
-While enjoying a MySpace inspired UI, users can shop premade ash trays,
-grinders, and rolling trays, or have them custom made.
+For more information about building design systems with Storybook, visit
+[Design Systems for Developers](https://www.learnstorybook.com/design-systems-for-developers)
+from the [Learn Storybook](https://www.learnstorybook.com) docs.
 
 ## Usage
 
@@ -30,7 +33,7 @@ grinders, and rolling trays, or have them custom made.
 1. Be sure the package is built before attempting to install it
 
    If the script you're using doesn't already build the package, run
-   `lerna run prepare --scope @flex-development/kustomz`
+   `lerna run build:bundle --scope @flex-development/kustomz`
 
 2. Add `"@flex-development/kustomz": "*"` to your project `dependencies`
 

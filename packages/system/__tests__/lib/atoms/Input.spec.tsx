@@ -26,6 +26,20 @@ it('adds the class "form-control" to non <input type="checkbox"> and <input type
   expect(element).not.toHaveClass('form-file-input')
 })
 
+it('does not add the class "form-control-lg" to <input type="checkbox"> and <input type="radio"> elements', () => {
+  const args = Object.assign(
+    {
+      'data-testid': 'checkbox',
+      size: 'lg'
+    },
+    Checkbox.args
+  )
+
+  const { getByTestId } = render(<Checkbox {...args} />)
+
+  expect(getByTestId(args['data-testid'])).not.toHaveClass('form-control-lg')
+})
+
 it('adds the class "form-check-input" to <input type="checkbox"> and <input type="radio"> elements, not "form-control"', () => {
   let args = Object.assign({ 'data-testid': 'checkbox' }, Checkbox.args)
 

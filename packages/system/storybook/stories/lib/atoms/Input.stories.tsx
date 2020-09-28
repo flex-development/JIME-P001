@@ -1,6 +1,10 @@
 import { Input, InputProps } from '@kustomz/lib'
 import React from 'react'
-import { form_control_size as size, StoryFN } from '../../../config'
+import {
+  form_control_size as size,
+  input_type as type,
+  StoryFN
+} from '../../../config'
 
 /**
  * @file Stories - Input
@@ -8,7 +12,7 @@ import { form_control_size as size, StoryFN } from '../../../config'
  */
 
 export default {
-  argTypes: { size },
+  argTypes: { size, type },
   component: Input,
   parameters: {
     jest: ['Input']

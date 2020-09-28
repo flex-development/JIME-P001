@@ -35,6 +35,7 @@
     "lint": "eslint . --fix --ext js,jsx,ts,tsx",
     "dev:app": "lerna run dev --scope @flex-development/morenaskustomz",
     "dev:ui": "lerna run dev --scope @flex-development/kustomz",
+    "test": "lerna run test",
     "start": "lerna run start"
   },
   "dependencies": {},

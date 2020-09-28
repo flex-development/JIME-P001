@@ -6,7 +6,6 @@ import {
   PropsWithoutRef,
   RefAttributes
 } from 'react'
-import { ThemeColor, ThemeOutline } from './theme'
 
 /**
  * Aria attributes and event handlers.
@@ -122,14 +121,14 @@ export interface GlobalAttributes<E = HTMLElement> extends Attributes<E> {
    * in contenteditable mode.
    */
   inputMode?:
-    | 'none'
-    | 'text'
-    | 'decimal'
-    | 'numeric'
-    | 'tel'
-    | 'search'
-    | 'email'
-    | 'url'
+  | 'none'
+  | 'text'
+  | 'decimal'
+  | 'numeric'
+  | 'tel'
+  | 'search'
+  | 'email'
+  | 'url'
 
   /* eslint-enable prettier/prettier */
 
@@ -247,15 +246,6 @@ export interface MutatedProps<E = HTMLElement> extends GlobalAttributes<E> {
    * See: **https://reactjs.org/docs/dom-elements.html#dangerouslysetinnerhtml**
    */
   innerHTML?: string
-
-  /**
-   * Used to work with background and outline color utility classes.
-   *
-   * See: **https://v5.getbootstrap.com/docs/5.0/utilities/colors/#background-color**
-   *
-   * @default false
-   */
-  variant?: false | ThemeColor | ThemeOutline
 }
 
 /**

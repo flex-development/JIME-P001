@@ -55,7 +55,7 @@ export const Heading: FREC<HeadingRefProps> = forwardRef((props, ref) => {
   const mutatedProps = useMutatedProps<
     typeof rest,
     DetailedHTMLProps<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement>
-  >({ ...rest, ref })
+  >({ ...rest, ref }, 'heading')
 
   /* eslint-disable jsx-a11y/heading-has-content */
 
@@ -78,6 +78,5 @@ export const Heading: FREC<HeadingRefProps> = forwardRef((props, ref) => {
 })
 
 Heading.defaultProps = {
-  children: 'The quick brown fox jumps over the lazy dog',
   size: 1
 }

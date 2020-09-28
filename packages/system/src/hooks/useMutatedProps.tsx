@@ -1,4 +1,3 @@
-import { AnyObject } from '@flex-development/kustomtypez'
 import { MutatedProps } from '@kustomz/types'
 import classnames from 'classnames'
 import { ClassValue } from 'classnames/types'
@@ -16,24 +15,23 @@ import { HTMLAttributes } from 'react'
  * Mutations (in order, if props are defined):
  *
  * - {@param props.innerHTML} will be converted into `dangerouslySetInnerHTML`
- * - {@param props.flex} (if defined) will be used to update flexbox classes
- * - {@param props.variant} (if defined) will be used to update the `bg-` class
+ * - {@param props.flex} (if defined) will be used to add flexbox classes
  * - {@param inject} will be passed to `classnames` function
+ * - If the resulting class name is an empty string, it'll be set to undefined
  * - Keys specified in {@param keys} will be removed {@param props}
  *
  * @param props - Component properties
  * @param props.children - Component children
  * @param props.flex - Append flexbox classes
- * @param props.variant - Append `bg-` classes
  * @param inject - Classes to inject before {@param props.className}
  * @param keys - Array of keys to remove from {@param props}
  */
 export function useMutatedProps<
-  T1 = MutatedProps,
+  T1 extends MutatedProps = MutatedProps,
   Mask = HTMLAttributes<HTMLElement>
 >(props: T1, injectClass?: ClassValue, keys?: string[]): Mask {
   // Props are read-only so we need a copy
-  const mutatedProps = Object.assign({}, props) as MutatedProps
+  const mutatedProps = Object.assign({}, props)
 
   // Initialize array containing properties to remove
   keys = keys || []
@@ -47,7 +45,6 @@ export function useMutatedProps<
   }
 
   // Handle flexbox utility classes
-  // TODO: Move to separate hook
   if (mutatedProps.flex) {
     const { flex } = mutatedProps
 
@@ -57,22 +54,15 @@ export function useMutatedProps<
     keys.push('flex')
   }
 
-  // Handle background and outline color utility classes
-  // TODO: Move to separate hook
-  if ((mutatedProps as AnyObject).variant) {
-    const { variant } = mutatedProps as AnyObject
-
-    injectClass = isObject(injectClass) ? injectClass : {}
-    injectClass[`${injectClass.btn ? 'btn' : 'bg'}-${variant}`] = variant
-
-    keys.push('variant')
-  }
-
   // Merge injection classes and original classes
-  if (injectClass) {
+  if (mutatedProps.className || injectClass) {
     mutatedProps.className = classnames(injectClass, mutatedProps.className)
   }
 
+  // Remove class attribute if empty
+  if (!mutatedProps.className?.length) mutatedProps.className = undefined
+
+  // Remove keys and return mutated props
   return omit(mutatedProps, uniq(keys)) as Mask
 }
 

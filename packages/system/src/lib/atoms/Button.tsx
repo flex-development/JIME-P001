@@ -100,6 +100,8 @@ export interface ButtonProps
 
   /**
    * Button variant.
+   * 
+   * @default 'primary'
    */
   variant?: false | ButtonVariant
 }
@@ -126,7 +128,7 @@ export type ButtonRefProps = ReflessButtonProps & ButtonRefAttributes
  * - **https://v5.getbootstrap.com/docs/5.0/components/buttons/**
  */
 export const Button: FREC<ButtonRefProps> = forwardRef((props, ref) => {
-  const { block, size, ...rest } = props
+  const { block, size, variant, ...rest } = props
 
   const withIcon = useIcon<HTMLButtonElement, ButtonProps>(rest)
 
@@ -137,13 +139,16 @@ export const Button: FREC<ButtonRefProps> = forwardRef((props, ref) => {
     btn: true,
     'btn-block': block,
     [`btn-${size}`]: size,
-    disabled: rest.disabled
+    [`btn-${variant}`]: variant
   })
+
+  if (rest.disabled) mutatedProps['aria-disabled'] = true
 
   /* eslint-disable react/button-has-type */
   return <button {...mutatedProps} ref={ref} />
 })
 
 Button.defaultProps = {
-  type: 'button'
+  type: 'button',
+  variant: 'primary'
 }

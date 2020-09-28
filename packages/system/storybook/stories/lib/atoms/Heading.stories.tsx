@@ -9,6 +9,9 @@ import { StoryFN } from '../../../config'
 
 export default {
   component: Heading,
+  parameters: {
+    jest: ['Heading']
+  },
   title: 'Library/Atoms/Heading'
 }
 
@@ -19,4 +22,6 @@ export const Default: StoryFN<HeadingProps> = (args: HeadingProps) => (
   <Heading {...args} />
 )
 
-Default.args = {}
+Default.args = {
+  children: 'The quick brown fox jumps over the lazy dog'
+}

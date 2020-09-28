@@ -2,7 +2,7 @@ import { useMutatedProps } from '@kustomz/hooks'
 import { renderHook } from '@testing-library/react-hooks'
 
 /**
- * @file Unit Tests - useMutatedProps
+ * @file Tests - useMutatedProps
  * @module tests/hooks/useMutatedProps
  */
 
@@ -33,21 +33,8 @@ it('adds the class "d-inline-flex" using the `flex` property', () => {
   expect(hook.result.current).toMatchObject({ className: 'd-inline-flex' })
 })
 
-it('adds the class "bg-dark" using the `variant` property', () => {
-  const hook = renderHook(() => useMutatedProps({ variant: 'dark' }))
+it('removes the "class" property if it is an empty string', () => {
+  const hook = renderHook(() => useMutatedProps({ className: '' }))
 
-  expect(hook.result.current).toMatchObject({ className: 'bg-dark' })
-})
-
-it('adds the classes "btn btn-primary" using the `variant` property', () => {
-  const hook = renderHook(() =>
-    useMutatedProps(
-      { variant: 'primary' },
-      {
-        btn: true
-      }
-    )
-  )
-
-  expect(hook.result.current).toMatchObject({ className: 'btn btn-primary' })
+  expect(hook.result.current).toMatchObject({})
 })

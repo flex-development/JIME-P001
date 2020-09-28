@@ -9,8 +9,6 @@
 # Linting / formatting should be handled by GitHub Actions
 .eslintignore
 .eslintrc.json
-.prettierignore
-.prettierrc.js
 
 # Package distribution files
 README.md

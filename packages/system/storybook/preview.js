@@ -1,8 +1,10 @@
 import { withConsole } from '@storybook/addon-console'
 import { DocsContainer } from '@storybook/addon-docs/blocks'
 import { withTests } from '@storybook/addon-jest'
+import { withHTML } from '@whitespace/storybook-addon-html/react'
 import { omit } from 'lodash'
 import React from 'react'
+import prettier from '../../../.prettierrc.json'
 import '../src/theme/theme.scss'
 import results from '../__tests__/jest-test-results.json'
 import {
@@ -55,6 +57,9 @@ export const decorators = [
       consoleInclude: [new URLSearchParams(window.location.search).get('id')]
     })(Story)(context)
   },
+
+  // Display compiled HTML for each story and format with Prettier
+  withHTML({ prettier }),
 
   // Add Jest output to stories
   withTests({ results })

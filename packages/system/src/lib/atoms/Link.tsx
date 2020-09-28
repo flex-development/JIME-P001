@@ -28,14 +28,6 @@ export interface LinkProps extends MutatedProps<HTMLAnchorElement> {
   active?: boolean
 
   /**
-   * If true, add the class `card-link`.
-   *
-   * See: https://v5.getbootstrap.com/docs/5.0/components/card/#titles-text-and-links
-   *
-   */
-  card?: boolean
-
-  /**
    * Add a colorized link class.
    *
    * See: https://v5.getbootstrap.com/docs/5.0/helpers/colored-links/
@@ -83,15 +75,13 @@ export interface LinkProps extends MutatedProps<HTMLAnchorElement> {
    * Where to display the linked URL, as the name for a browsing context.
    * The following keywords have special meanings for where to load the URL:
    *
-   * - `_self`: the current browsing context
+   * - `_self`: the current browsing context (HTML default)
    * - `_blank`: usually a new tab, but users can configure browsers to open a
    *   new window instead
    * - `_parent`: the parent browsing context of the current one. If no parent,
    *   behaves as `_self`
    * - `_top`: he topmost browsing context (the "highest" context that’s an
    *   ancestor of the current one). If no ancestors, behaves as `_self`
-   *
-   * @default '_self'
    */
   target?: '_self' | '_blank' | '_parent' | '_top'
 
@@ -124,7 +114,6 @@ export type LinkRefProps = ReflessLinkProps & LinkRefAttributes
 export const Link: FREC<LinkRefProps> = forwardRef((props, ref) => {
   const {
     active,
-    card,
     color,
     dropdown,
     nav,
@@ -137,8 +126,7 @@ export const Link: FREC<LinkRefProps> = forwardRef((props, ref) => {
     rest,
     {
       active,
-      'card-link': card,
-      disabled: rest.disabled && rest.disabled,
+      disabled: rest.disabled,
       'dropdown-item': dropdown,
       'dropdown-toggle': toggle,
       [`link-${color}`]: color,

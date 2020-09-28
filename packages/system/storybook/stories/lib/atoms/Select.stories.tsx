@@ -13,6 +13,9 @@ import {
 export default {
   argTypes: { size },
   component: Select,
+  parameters: {
+    jest: ['Select']
+  },
   subcomponents: { Option },
   title: 'Library/Atoms/Select'
 }

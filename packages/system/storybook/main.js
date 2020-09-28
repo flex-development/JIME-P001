@@ -25,9 +25,10 @@ module.exports = {
       }
     },
     '@storybook/addon-controls',
+    '@whitespace/storybook-addon-html',
+    '@storybook/addon-jest',
     '@storybook/addon-a11y',
-    '@storybook/addon-actions',
-    '@storybook/addon-jest'
+    '@storybook/addon-actions'
   ],
 
   /**
@@ -87,8 +88,8 @@ module.exports = {
   webpackFinal: async (config, { configType }) => {
     config.resolve.alias = merge(config.resolve.alias, {
       '@kustomz': path.join(__dirname, '../src'),
-      'storybook': path.join(__dirname, './config'),
-      'storybook': path.join(__dirname, './stories')
+      '@kustomz-config': path.join(__dirname, './config'),
+      '@kustomz-stories': path.join(__dirname, './stories')
     })
 
     config.module.rules.push({
@@ -113,7 +114,11 @@ module.exports = {
 
     config.module.rules.push({
       test: /\.(ts|tsx)$/,
-      include: [path.join(__dirname, '../src')],
+      include: [
+        path.join(__dirname, '../src'),
+        path.join(__dirname, './config'),
+        path.join(__dirname, './stories')
+      ],
       use: [{ loader: 'awesome-typescript-loader' }]
     })
 

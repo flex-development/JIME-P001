@@ -1,6 +1,6 @@
 import { Span, SpanProps } from '@kustomz/lib'
 import React from 'react'
-import { StoryFN, variant } from '../../../config'
+import { StoryFN } from '../../../config'
 
 /**
  * @file Stories - Span
@@ -8,8 +8,10 @@ import { StoryFN, variant } from '../../../config'
  */
 
 export default {
-  argTypes: { variant },
   component: Span,
+  parameters: {
+    jest: ['Span']
+  },
   title: 'Library/Atoms/Span'
 }
 

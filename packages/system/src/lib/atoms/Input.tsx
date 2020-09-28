@@ -349,14 +349,17 @@ export const Input: FREC<InputRefProps> = forwardRef((props, ref) => {
 
   const { size, ...rest } = props
 
+  const checks = checkInputTypes.includes(rest.type as string)
+  const file = rest.type === 'file'
+
   const mutatedProps = useMutatedProps<
     typeof rest,
     JSX.IntrinsicElements['input']
   >(rest, {
-    'form-check-input': checkInputTypes.includes(rest.type || ''),
-    'form-control': !checkInputTypes.includes(rest.type || ''),
+    'form-check-input': checks,
+    'form-control': !checks && !file,
     [`form-control-${size}`]: size,
-    'form-file-input': rest.type === 'file'
+    'form-file-input': file
   })
 
   return <input {...mutatedProps} ref={ref} />

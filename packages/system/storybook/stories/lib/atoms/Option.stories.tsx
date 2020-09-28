@@ -9,6 +9,9 @@ import { StoryFN } from '../../../config'
 
 export default {
   component: Option,
+  parameters: {
+    jest: ['Option']
+  },
   title: 'Library/Atoms/Option'
 }
 

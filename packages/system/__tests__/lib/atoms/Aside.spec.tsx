@@ -12,9 +12,3 @@ it('renders an <aside> element', () => {
 
   expect(container.firstChild).toMatchInlineSnapshot('<aside />')
 })
-
-it('renders <aside class="bg-dark" />', () => {
-  const { container } = render(<Aside variant='dark' />)
-
-  expect(container.firstChild).toHaveClass('bg-dark')
-})

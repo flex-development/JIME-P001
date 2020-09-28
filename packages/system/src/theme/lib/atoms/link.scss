@@ -20,4 +20,6 @@ a {
   @include event {
     font-weight: map-get($font-weights, bold);
   }
+
+  text-transform: uppercase;
 }

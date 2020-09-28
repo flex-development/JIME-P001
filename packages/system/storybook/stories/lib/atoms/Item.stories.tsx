@@ -1,6 +1,6 @@
 import { Item, ItemProps } from '@kustomz/lib'
 import React from 'react'
-import { StoryFN, variant } from '../../../config'
+import { StoryFN } from '../../../config'
 
 /**
  * @file Stories - Item
@@ -8,8 +8,10 @@ import { StoryFN, variant } from '../../../config'
  */
 
 export default {
-  argTypes: { variant },
   component: Item,
+  parameters: {
+    jest: ['Item']
+  },
   title: 'Library/Atoms/Item'
 }
 

@@ -215,6 +215,9 @@ firebase-credentials-dev.json
 # GitHub Package Registry
 .yarnrc
 
+# Jest
+**/__tests__/jest-test-results.json
+
 # Lerna
 *.lerna_backup
 

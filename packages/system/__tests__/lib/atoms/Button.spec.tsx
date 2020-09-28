@@ -52,4 +52,3 @@ it('renders a small button', () => {
 
   expect(getByText(children)).toHaveClass('btn btn-sm')
 })
-

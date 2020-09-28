@@ -1,5 +1,5 @@
 import { useMutatedProps } from '@kustomz/hooks'
-import { PropsForVoidElementTag } from '@kustomz/types'
+import { MutatedVoidElementProps } from '@kustomz/types'
 import React, {
   forwardRef,
   ForwardRefExoticComponent as FREC,
@@ -15,7 +15,7 @@ import React, {
 /**
  * {@link Image} component properties.
  */
-export interface ImageProps extends PropsForVoidElementTag<HTMLImageElement> {
+export interface ImageProps extends MutatedVoidElementProps<HTMLImageElement> {
   /**
    * Defines an alternative text description of the image.
    *

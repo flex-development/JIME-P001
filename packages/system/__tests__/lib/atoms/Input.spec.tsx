@@ -2,7 +2,9 @@ import { Input, InputProps } from '@kustomz/lib'
 import { render } from '@testing-library/react'
 import React from 'react'
 import {
-  Checkbox, Default, Radio
+  Checkbox,
+  Default,
+  Radio
 } from '../../../storybook/stories/lib/atoms/Input.stories'
 import { ArgsMatcher } from '../../jest-env'
 
@@ -46,7 +48,6 @@ it('adds the class "form-check-input" to <input type="checkbox"> and <input type
 
   expect(element).toHaveClass('form-check-input')
 })
-
 
 it('adds the class "form-file-input" to <input type="file"> elements, not "form-control"', () => {
   const args = { 'data-testid': 'file', type: 'file' } as InputProps

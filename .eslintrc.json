@@ -2,6 +2,10 @@
 // See: https://eslint.org/docs/user-guide/configuring
 
 {
+  "env": {
+    "browser": true,
+    "es6": true
+  },
   "extends": [
     "eslint:recommended",
     "plugin:node/recommended",
@@ -33,6 +37,7 @@
         "jsx": "never",
         "json": "always",
         "mdx": "always",
+        "stories": "always",
         "ts": "never",
         "tsx": "never"
       }
@@ -45,6 +50,10 @@
     ],
     "import/no-unresolved": 0,
     "import/prefer-default-export": 0,
+    "node/no-extraneous-import": 1,
+    "node/no-missing-import": 1,
+    "node/no-unsupported-features/es-syntax": 0,
+    "node/no-unsupported-features/node-builtins": 1,
     "no-param-reassign": 0,
     "no-return-assign": 0,
     "no-shadow": 1,
@@ -96,7 +105,8 @@
       "files": [
         "**/*.spec.ts", 
         "**/*.spec.tsx",
-        "**/jest.setup.ts"
+        "**/jest.setup.ts",
+        "jest-env.d.ts"
       ],
       "env": {
         "jest": true
@@ -117,12 +127,9 @@
     {
       "files": [
         "**/*.jsx",
-        "**/*.tsx"
+        "**/*.tsx",
+        "storybook/preview.js"
       ],
-      "env": {
-        "browser": true,
-        "es6": true
-      },
       "extends": [
         "plugin:react/recommended",
         "prettier/react"
@@ -140,6 +147,8 @@
           1,
           {
             "extensions": [
+              ".js",
+              ".jsx",
               ".mdx",
               ".tsx"
             ]

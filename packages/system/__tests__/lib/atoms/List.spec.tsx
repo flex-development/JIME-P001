@@ -12,9 +12,12 @@ import { ArgsMatcher } from '../../jest-env'
  */
 
 it('renders an <ol> element with nested <li> elements', () => {
-  const args: ArgsMatcher = Object.assign({
-    'data-testid': 'ordered'
-  }, Ordered.args as ArgsMatcher)
+  const args: ArgsMatcher = Object.assign(
+    {
+      'data-testid': 'ordered'
+    },
+    Ordered.args as ArgsMatcher
+  )
 
   const { getByTestId } = render(<Ordered {...args} />)
 
@@ -22,9 +25,12 @@ it('renders an <ol> element with nested <li> elements', () => {
 })
 
 it('renders an <ul> element with nested <li> elements', () => {
-  const args: ArgsMatcher = Object.assign({
-    'data-testid': 'unordered'
-  }, Ordered.args as ArgsMatcher)
+  const args: ArgsMatcher = Object.assign(
+    {
+      'data-testid': 'unordered'
+    },
+    Ordered.args as ArgsMatcher
+  )
 
   const { getByTestId } = render(<Unordered {...args} />)
 

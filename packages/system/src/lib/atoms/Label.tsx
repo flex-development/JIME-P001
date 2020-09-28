@@ -71,7 +71,8 @@ export const Label: FREC<LabelRefProps> = forwardRef((props, ref) => {
 
   return (
     <label {...mutatedProps} ref={ref}>
-      {required && '*'}{mutatedProps.children}
+      {required && '*'}
+      {mutatedProps.children}
     </label>
   )
 

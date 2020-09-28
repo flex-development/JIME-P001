@@ -20,9 +20,12 @@ it('renders <a href="#">', () => {
 })
 
 it('adds the class "active" when props.active is true', () => {
-  const args: ArgsMatcher = Object.assign({
-    active: true
-  }, Default.args as ArgsMatcher)
+  const args: ArgsMatcher = Object.assign(
+    {
+      active: true
+    },
+    Default.args as ArgsMatcher
+  )
 
   const { getByText } = render(<Default {...args} />)
 
@@ -30,9 +33,12 @@ it('adds the class "active" when props.active is true', () => {
 })
 
 it('adds the class "disabled" when props.disabled is true', () => {
-  const args: ArgsMatcher = Object.assign({
-    disabled: true
-  }, Default.args as ArgsMatcher)
+  const args: ArgsMatcher = Object.assign(
+    {
+      disabled: true
+    },
+    Default.args as ArgsMatcher
+  )
 
   const { getByText } = render(<Default {...args} />)
 

@@ -12,10 +12,10 @@ addons.setConfig({
   panelPosition: 'bottom',
 
   /**
-   * ID of addon panel to show by default. 
-   * 
+   * ID of addon panel to show by default.
+   *
    * The panel for Storybook Addon HTML will be shown.
-   * 
+   *
    * @see {@link https://github.com/whitespace-se/storybook-addon-html}
    */
   selectedPanel: 'markup/panel'

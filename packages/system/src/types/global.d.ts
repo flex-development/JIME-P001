@@ -15,52 +15,6 @@ export type Attributes<E = HTMLElement> = AriaAttributes &
   RefAttributes<E> & { forwardedRef?: RefAttributes<E>['ref'] }
 
 /**
- * Common `Form` (button, input, select) element props.
- */
-export interface FormControlProps<E = HTMLElement> extends MutatedProps<E> {
-  /**
-   * Specifies that a form control should have input focus when the page
-   * loads.
-   *
-   * Only one form-associated element in a document can have this attribute
-   * specified.
-   */
-  autoFocus?: boolean
-
-  /**
-   * Indicates that the user cannot interact with the control.
-   *
-   * If this attribute is not specified, the control inherits its setting from
-   * the containing element, for example `<fieldset>`; if there is no containing
-   * element when the `disabled` attribute is set, the control is enabled.
-   */
-  disabled?: boolean
-
-  /**
-   * The `id` of the `<form>` element that the element is associated with.
-   *
-   * If this attribute is not specified, the element must be a descendant of a
-   * form element.
-   *
-   * This attribute enables you to place elements anywhere within a document,
-   * not just as descendants of form elements.
-   */
-  form?: string
-
-  /**
-   * The name of the control.
-   */
-  name?: string
-
-  /**
-   * Current value of the form control.
-   *
-   * Submitted with the form as part of a name/value pair.
-   */
-  value?: string | ReadonlyArray<string> | number
-}
-
-/**
  * Global properties are attributes common to all HTML elements. Even though
  * they can be used on all elements, they may have no effect.
  *
@@ -102,7 +56,7 @@ export interface GlobalAttributes<E = HTMLElement> extends Attributes<E> {
    * This attribute must not be used to hide content that could legitimately
    * be shown.
    */
-  hidden?: boolean
+  hidden?: Booleanish
 
   /**
    * Defines a unique identifier (ID) which must be unique in the whole
@@ -121,14 +75,14 @@ export interface GlobalAttributes<E = HTMLElement> extends Attributes<E> {
    * in contenteditable mode.
    */
   inputMode?:
-  | 'none'
-  | 'text'
-  | 'decimal'
-  | 'numeric'
-  | 'tel'
-  | 'search'
-  | 'email'
-  | 'url'
+    | 'none'
+    | 'text'
+    | 'decimal'
+    | 'numeric'
+    | 'tel'
+    | 'search'
+    | 'email'
+    | 'url'
 
   /* eslint-enable prettier/prettier */
 
@@ -235,7 +189,7 @@ export interface MutatedProps<E = HTMLElement> extends GlobalAttributes<E> {
    *
    * @default false
    */
-  flex?: boolean | 'inline'
+  flex?: Booleanish | 'inline'
 
   /**
    * String containing HTML markup. This value will be used to set the value of
@@ -249,9 +203,56 @@ export interface MutatedProps<E = HTMLElement> extends GlobalAttributes<E> {
 }
 
 /**
+ * Common `Form` (button, input, select) element props.
+ */
+export interface MutatedFormControlProps<E = HTMLElement>
+  extends MutatedProps<E> {
+  /**
+   * Specifies that a form control should have input focus when the page
+   * loads.
+   *
+   * Only one form-associated element in a document can have this attribute
+   * specified.
+   */
+  autoFocus?: Booleanish
+
+  /**
+   * Indicates that the user cannot interact with the control.
+   *
+   * If this attribute is not specified, the control inherits its setting from
+   * the containing element, for example `<fieldset>`; if there is no containing
+   * element when the `disabled` attribute is set, the control is enabled.
+   */
+  disabled?: Booleanish
+
+  /**
+   * The `id` of the `<form>` element that the element is associated with.
+   *
+   * If this attribute is not specified, the element must be a descendant of a
+   * form element.
+   *
+   * This attribute enables you to place elements anywhere within a document,
+   * not just as descendants of form elements.
+   */
+  form?: string
+
+  /**
+   * The name of the control.
+   */
+  name?: string
+
+  /**
+   * Current value of the form control.
+   *
+   * Submitted with the form as part of a name/value pair.
+   */
+  value?: string | ReadonlyArray<string> | number
+}
+
+/**
  * Component properties for HTML elements that do not accept inner content.
  */
-export type PropsForVoidElementTag<E = HTMLElement> = Omit<
+export type MutatedVoidElementProps<E = HTMLElement> = Omit<
   MutatedProps<E>,
   'children' | 'dangerouslySetInnerHTML'
 >

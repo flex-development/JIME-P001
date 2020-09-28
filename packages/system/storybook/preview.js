@@ -3,7 +3,7 @@ import { DocsContainer } from '@storybook/addon-docs/blocks'
 import { withTests } from '@storybook/addon-jest'
 import { withHTML } from '@whitespace/storybook-addon-html/react'
 import { omit } from 'lodash'
-import React from 'react'
+import React, { Fragment } from 'react'
 import prettier from '../../../.prettierrc.json'
 import '../src/theme/theme.scss'
 import results from '../__tests__/jest-test-results.json'
@@ -48,7 +48,7 @@ export const decorators = [
     context.parameters.args = context.args
     context.parameters.argTypes = context.argTypes
 
-    return <>{Story(context)}</>
+    return <Fragment>{Story(context)}</Fragment>
   },
 
   // Receive console outputs as a console, warn and error in the actions panel

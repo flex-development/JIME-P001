@@ -136,8 +136,8 @@ This project uses [Jest](https://jestjs.io/) as its test runner. To run the
 tests in this project, run `yarn test`.
 
 [Husky](https://github.com/typicode/husky) is configured to run tests before
-every push. If a PR concerning a failed test is needed, you'll be able to push
-your code even if a test fails.
+every push. If a bug report concerning a failed test is needed, you'll be able
+to push your code even if a test fails.
 
 ## Creating a Pull Request
 

@@ -84,10 +84,17 @@ All other documentation should follow [JSDoc](https://jsdoc.app) format.
 
 ## Testing
 
+Unit and interaction tests are conducted while implementing a new component or
+feature. Unit tests are used to verify the output of a component, hook, or
+function against a fixed input value. Interaction tests render components in the
+browser and assert qualities about the way the component renders or changes.
+
 [CSF format](https://storybook.js.org/docs/react/api/csf) stories are reusable
 components that can be rendered outside of Storybook, making them available to
-use when writing tests. Test results are displayed in Storybook using
-[Storybook Addon Jest](https://github.com/storybookjs/storybook/tree/master/addons/jest).
+use when writing tests. For more information, visit
+[Unit testing](https://storybook.js.org/docs/react/workflows/unit-testing) and
+[Interaction testing](https://storybook.js.org/docs/react/workflows/interaction-testing)
+from the Storybook docs.
 
 This project uses the following testing libraries:
 
@@ -95,6 +102,11 @@ This project uses the following testing libraries:
 - [React Hooks Testing Library](https://react-hooks-testing-library.com/)
 - [React Testing Library](https://testing-library.com/react)
 
-For more information, visit
-[Testing with Storybook](https://storybook.js.org/docs/react/workflows/testing-with-storybook)
-from the Storybook docs.
+Test results for components are displayed in Storybook using
+[Storybook Addon Jest](https://github.com/storybookjs/storybook/tree/master/addons/jest).
+Before running or building the project, `__tests__/jest-test-results.json` must
+be generated. The Jest addon uses this file to display test results. Failing
+tests will not hinder builds, but be displayed in the addon panel.
+
+The `dev` and `build` scripts for this project are configured to run the test
+suite before starting or building the project.

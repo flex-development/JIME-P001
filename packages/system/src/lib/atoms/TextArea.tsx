@@ -26,6 +26,18 @@ export interface TextAreaProps
   cols?: number
 
   /**
+   * In the React rendering lifecycle, the `value` attribute on form elements
+   * will override the value in the DOM.
+   *
+   * With an uncontrolled component, you often want React to specify the initial
+   * value, but leave subsequent updates uncontrolled. To handle this case, you
+   * can specify a `defaultValue` attribute instead of `value`.
+   *
+   * See: https://reactjs.org/docs/uncontrolled-components.html#default-values
+   */
+  defaultValue?: MutatedFormControlProps['value']
+
+  /**
    * The maximum number of characters (UTF-16 code units) that the user can
    * enter. If this value isn't specified, the user can enter an unlimited
    * number of characters.

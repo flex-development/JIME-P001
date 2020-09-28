@@ -1,0 +1,27 @@
+/// ----------------------------------------------------------------------------
+/// @group LabeledInput
+/// ----------------------------------------------------------------------------
+
+.labeled-input[data-type='number'] {
+  @include flex(center, center, null, inline-flex);
+
+  border: $border-color solid $border-width;
+
+  span {
+    font-weight: $font-weight-semibold;
+    text-transform: uppercase;
+  }
+
+  .form-control {
+    @include remove-padding;
+
+    appearance: textfield;
+    border: none;
+    color: $primary;
+    text-align: right;
+  
+    &:focus {
+      box-shadow: none;
+    }
+  }
+}

@@ -1,11 +1,7 @@
 /// ----------------------------------------------------------------------------
-/// @group atoms-section
+/// @group Section
 /// ----------------------------------------------------------------------------
 
 section {
   @include padding-y(map-get($spacers, 48));
-
-  .heading + .text:not(.hero-text) {
-    @include font-size(map-get($font-sizes, lg));
-  }
 }

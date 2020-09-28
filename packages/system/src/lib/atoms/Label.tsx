@@ -17,13 +17,22 @@ import React, {
  */
 export interface LabelProps extends MutatedProps<HTMLLabelElement> {
   /**
-   * If true, apply the class `col-form-label` instead of `form-label`.
+   * If true, add the class `col-form-label`.
    *
    * - https://v5.getbootstrap.com/docs/5.0/forms/overview/#form-text
    *
    * @default false
    */
   col?: boolean
+
+  /**
+   * If true, add the class `form-label`.
+   *
+   * - https://v5.getbootstrap.com/docs/5.0/forms/overview/#form-text
+   *
+   * @default false
+   */
+  form?: boolean
 
   /**
    * True if labelling a form control element where `required=true`.
@@ -49,13 +58,13 @@ export type LabelRefAttributes = RefAttributes<HTMLLabelElement>
 export type LabelRefProps = ReflessLabelProps & LabelRefAttributes
 
 /**
- * Renders a `<label>` element with the class `form-label` or `col-form-label`.
+ * Renders a `<label>` element.
  *
  * - **https://developer.mozilla.org/docs/Web/HTML/Element/label**
  * - **https://v5.getbootstrap.com/docs/5.0/forms/overview/#form-text**
  */
 export const Label: FREC<LabelRefProps> = forwardRef((props, ref) => {
-  const { col, required, ...rest } = props
+  const { col, form, required, ...rest } = props
 
   if (required) rest['data-required'] = required
 
@@ -64,7 +73,7 @@ export const Label: FREC<LabelRefProps> = forwardRef((props, ref) => {
     JSX.IntrinsicElements['label']
   >(rest, {
     'col-form-label': col,
-    'form-label': !col
+    'form-label': form
   })
 
   /* eslint-disable jsx-a11y/label-has-associated-control */

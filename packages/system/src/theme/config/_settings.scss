@@ -113,7 +113,9 @@ $font-family-sans-serif: ibm-plex-sans, sans-serif;
 $font-family-sans-serif-special: quimby-gubernatorial, sans-serif;
 
 $font-size-xs: bootstrap.$font-size-base * 0.75;
-$font-size-xl: bootstrap.$font-size-base * 1.5;
+$font-size-lg: bootstrap.$font-size-base * 1.125;
+$font-size-xl: bootstrap.$font-size-lg;
+$font-size-xxl: bootstrap.$font-size-base * 1.5;
 
 $font-weight-hairline: 100;
 $font-weight-thin: 200;

@@ -9,6 +9,9 @@ import { StoryFN } from '../../../config'
 
 export default {
   component: Label,
+  parameters: {
+    jest: ['Label']
+  },
   title: 'Library/Atoms/Label'
 }
 

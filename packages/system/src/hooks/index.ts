@@ -3,7 +3,7 @@
  * @module hooks
  */
 
-export * from './useDocumentTitle'
+export * from './useContainer'
 export * from './useIcon'
 export * from './useMutatedProps'
 

@@ -13,6 +13,9 @@ import {
 export default {
   argTypes: { size },
   component: Input,
+  parameters: {
+    jest: ['Input']
+  },
   title: 'Library/Atoms/Input'
 }
 
@@ -59,16 +62,4 @@ export const Radio: StoryFN<InputProps> = (args: InputProps) => (
 
 Radio.args = {
   type: 'radio'
-}
-
-/**
- * Search {@link Input} story.
- */
-export const Search: StoryFN<InputProps> = (args: InputProps) => (
-  <Input {...args} />
-)
-
-Search.args = {
-  placeholder: 'Looking for something?',
-  type: 'search'
 }

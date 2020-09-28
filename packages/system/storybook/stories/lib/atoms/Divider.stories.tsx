@@ -9,6 +9,9 @@ import { StoryFN } from '../../../config'
 
 export default {
   component: Divider,
+  parameters: {
+    jest: ['Divider']
+  },
   title: 'Library/Atoms/Divider'
 }
 

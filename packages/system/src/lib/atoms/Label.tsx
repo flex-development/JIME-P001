@@ -69,7 +69,11 @@ export const Label: FREC<LabelRefProps> = forwardRef((props, ref) => {
 
   /* eslint-disable jsx-a11y/label-has-associated-control */
 
-  return <label {...mutatedProps} ref={ref} />
+  return (
+    <label {...mutatedProps} ref={ref}>
+      {required && '*'}{mutatedProps.children}
+    </label>
+  )
 
   /* eslint-enable jsx-a11y/label-has-associated-control */
 })

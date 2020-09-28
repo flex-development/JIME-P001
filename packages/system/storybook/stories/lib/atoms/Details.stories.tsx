@@ -1,6 +1,6 @@
 import { Details, DetailsProps } from '@kustomz/lib'
 import React from 'react'
-import { StoryFN, variant } from '../../../config'
+import { StoryFN } from '../../../config'
 
 /**
  * @file Stories - Details
@@ -8,19 +8,18 @@ import { StoryFN, variant } from '../../../config'
  */
 
 export default {
-  argTypes: { variant },
   component: Details,
+  parameters: {
+    jest: ['Details']
+  },
   title: 'Library/Atoms/Details'
 }
 
-/**
- * Main menu {@link Details} story.
- */
-export const Default: StoryFN<DetailsProps> = (args: DetailsProps) => (
+export const WithSummary: StoryFN<DetailsProps> = (args: DetailsProps) => (
   <Details {...args} />
 )
 
-Default.args = {
+WithSummary.args = {
   children: 'Something small enough to escape casual notice.',
   summary: { children: 'Details' }
 }

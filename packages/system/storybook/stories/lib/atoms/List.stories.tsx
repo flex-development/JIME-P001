@@ -9,6 +9,9 @@ import { StoryFN } from '../../../config'
 
 export default {
   component: List,
+  parameters: {
+    jest: ['List']
+  },
   subcomponents: { Item },
   title: 'Library/Atoms/List'
 }

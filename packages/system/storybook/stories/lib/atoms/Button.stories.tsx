@@ -14,18 +14,44 @@ import {
 export default {
   argTypes: { size, variant },
   component: Button,
+  parameters: {
+    jest: ['Button']
+  },
   title: 'Library/Atoms/Button'
 }
 
-export const ThemeColor: StoryFN<ButtonProps> = (args: ButtonProps) => (
+export const Block: StoryFN<ButtonProps> = (args: ButtonProps) => (
   <Button {...args} />
 )
 
-ThemeColor.args = {
-  children: 'Add to Cart',
-  variant: 'primary'
+Block.args = {
+  block: true,
+  children: 'Block level button'
 }
 
-ThemeColor.parameters = {
-  jest: ['Button']
+export const Disabled: StoryFN<ButtonProps> = (args: ButtonProps) => (
+  <Button {...args} />
+)
+
+Disabled.args = {
+  children: 'Disabled button',
+  disabled: true
+}
+
+export const Large: StoryFN<ButtonProps> = (args: ButtonProps) => (
+  <Button {...args} />
+)
+
+Large.args = {
+  children: 'Large button',
+  size: 'lg'
+}
+
+export const Small: StoryFN<ButtonProps> = (args: ButtonProps) => (
+  <Button {...args} />
+)
+
+Small.args = {
+  children: 'Small button',
+  size: 'sm'
 }

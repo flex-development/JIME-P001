@@ -1,6 +1,6 @@
 import { Icon, IconProps } from '@kustomz/lib'
 import React from 'react'
-import { StoryFN } from '../../../config'
+import { ligatures as children, StoryFN } from '../../../config'
 
 /**
  * @file Stories - Icon
@@ -8,7 +8,11 @@ import { StoryFN } from '../../../config'
  */
 
 export default {
+  argTypes: { children },
   component: Icon,
+  parameters: {
+    jest: ['Icon']
+  },
   title: 'Library/Atoms/Icon'
 }
 

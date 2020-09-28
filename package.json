@@ -29,7 +29,7 @@
   },
   "scripts": {
     "prepare": "lerna run prepare",
-    "postinstall": "lerna bootstrap; husky install",
+    "postinstall": "lerna bootstrap",
     "clean": "lerna clean --yes && rm -rf yarn.lock node_modules/ && yarn",
     "format": "prettier --write \"./\"",
     "lint": "eslint . --fix --ext js,jsx,ts,tsx",

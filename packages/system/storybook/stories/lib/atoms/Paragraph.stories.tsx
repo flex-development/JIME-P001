@@ -1,6 +1,6 @@
 import { Paragraph, ParagraphProps } from '@kustomz/lib'
 import React from 'react'
-import { StoryFN, variant } from '../../../config'
+import { StoryFN } from '../../../config'
 
 /**
  * @file Stories - Paragraph
@@ -8,8 +8,10 @@ import { StoryFN, variant } from '../../../config'
  */
 
 export default {
-  argTypes: { variant },
   component: Paragraph,
+  parameters: {
+    jest: ['Paragraph']
+  },
   title: 'Library/Atoms/Paragraph'
 }
 

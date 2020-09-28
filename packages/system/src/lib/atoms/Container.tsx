@@ -52,7 +52,7 @@ export const Container: FREC<ContainerRefProps> = forwardRef((props, ref) => {
     typeof rest,
     JSX.IntrinsicElements['div']
   >(rest, {
-    container: true,
+    container: !fluid && !size,
     'container-fluid': fluid,
     [`container-${size}`]: !!size
   })

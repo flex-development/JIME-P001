@@ -4,9 +4,5 @@
 
 .form-label[data-required],
 .col-form-label[data-required] {
-  &:before {
-    content: '*';
-  }
-
-  color: $danger;
+  font-weight: $font-weight-semibold;
 }

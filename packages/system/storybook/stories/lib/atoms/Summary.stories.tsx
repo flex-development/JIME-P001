@@ -9,6 +9,9 @@ import { StoryFN } from '../../../config'
 
 export default {
   component: Summary,
+  parameters: {
+    jest: ['Summary']
+  },
   title: 'Library/Atoms/Summary'
 }
 

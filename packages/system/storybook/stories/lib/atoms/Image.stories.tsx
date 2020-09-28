@@ -9,6 +9,9 @@ import { StoryFN } from '../../../config'
 
 export default {
   component: Image,
+  parameters: {
+    jest: ['Image']
+  },
   title: 'Library/Atoms/Image'
 }
 
@@ -20,6 +23,7 @@ export const Fluid: StoryFN<ImageProps> = (args: ImageProps) => (
 )
 
 Fluid.args = {
+  alt: 'Picsum fluid image',
   fluid: true,
   src: 'https://picsum.photos/1920/1080'
 }

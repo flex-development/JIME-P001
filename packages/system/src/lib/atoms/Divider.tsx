@@ -38,7 +38,7 @@ export type DividerRefAttributes = RefAttributes<HTMLHRElement>
 export type DividerRefProps = ReflessDividerProps & DividerRefAttributes
 
 /**
- * Renders a `<hr>` element.
+ * Renders a `<hr>` element with the class `divider`.
  *
  * - **https://developer.mozilla.org/docs/Web/HTML/Element/hr**
  */
@@ -46,7 +46,7 @@ export const Divider: FREC<DividerProps> = forwardRef((props, ref) => {
   const mutatedProps = useMutatedProps<
     typeof props,
     JSX.IntrinsicElements['hr']
-  >(props)
+  >(props, 'divider')
 
   return <hr {...mutatedProps} ref={ref} />
 })

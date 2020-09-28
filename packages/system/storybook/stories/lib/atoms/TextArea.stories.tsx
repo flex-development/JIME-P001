@@ -13,6 +13,9 @@ import {
 export default {
   argTypes: { size },
   component: TextArea,
+  parameters: {
+    jest: ['TextArea']
+  },
   title: 'Library/Atoms/TextArea'
 }
 
@@ -23,4 +26,6 @@ export const Default: StoryFN<TextAreaProps> = (args: TextAreaProps) => (
   <TextArea {...args} />
 )
 
-Default.args = {}
+Default.args = {
+  placeholder: 'A hint to the user of what can be entered in the control'
+}

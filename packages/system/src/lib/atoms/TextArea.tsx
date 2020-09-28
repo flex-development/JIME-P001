@@ -43,8 +43,6 @@ export interface TextAreaProps
    *
    * Carriage returns or line-feeds within the placeholder text must be treated
    * as line breaks when rendering the hint.
-   *
-   * @default 'A hint to the user of what can be entered in the control'
    */
   placeholder?: string
 
@@ -123,6 +121,4 @@ export const TextArea: FREC<TextAreaRefProps> = forwardRef((props, ref) => {
   return <textarea {...mutatedProps} ref={ref} />
 })
 
-TextArea.defaultProps = {
-  placeholder: 'A hint to the user of what can be entered in the control'
-}
+TextArea.defaultProps = {}

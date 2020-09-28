@@ -1,4 +1,3 @@
-import { cloneDeep } from 'lodash'
 
 /**
  * @file Storybook Args
@@ -88,7 +87,7 @@ export const container_size = {
   }
 }
 
-export const variant = {
+export const button_variant = {
   control: {
     type: 'select',
     options: [
@@ -106,21 +105,7 @@ export const variant = {
       'outline-light',
       'outline-primary',
       'outline-secondary'
-    ])
-  }
-}
-
-export const button_variant = {
-  control: {
-    type: 'select',
-    options: cloneDeep(variant.control.options).concat('link')
-  }
-}
-
-export const form_control = {
-  control: {
-    type: 'select',
-    options: ['input', 'select', 'textarea']
+    ]).concat('link')
   }
 }
 
@@ -128,12 +113,6 @@ export const form_control_size = {
   control: {
     type: 'select',
     options: [false, 'sm', 'lg']
-  }
-}
-
-export const obj = {
-  control: {
-    type: 'object'
   }
 }
 

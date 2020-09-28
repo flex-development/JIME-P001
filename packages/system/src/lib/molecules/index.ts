@@ -3,6 +3,6 @@
  * @module lib/components/molecules
  */
 
-export default {}
+export * from './LabeledInput'
 
 /* eslint-disable prettier/prettier */

@@ -46,60 +46,60 @@ export interface InputProps
    * what type of information expected in the field.
    */
   autoComplete?:
-    | 'off'
-    | 'on'
-    | 'name'
-    | 'honorific-prefix'
-    | 'given-name'
-    | 'additional-name'
-    | 'family-name'
-    | 'honorific-suffix'
-    | 'nickname'
-    | 'email'
-    | 'username'
-    | 'new-password'
-    | 'current-password'
-    | 'one-time-code'
-    | 'organization-title'
-    | 'organization'
-    | 'street-address'
-    | 'address-line1'
-    | 'address-line2'
-    | 'address-line3'
-    | 'address-level4'
-    | 'address-level3'
-    | 'address-level2'
-    | 'address-level1'
-    | 'country'
-    | 'country-name'
-    | 'postal-code'
-    | 'cc-name'
-    | 'cc-given-name'
-    | 'cc-additional-name'
-    | 'cc-family-name'
-    | 'cc-number'
-    | 'cc-exp'
-    | 'cc-exp-month'
-    | 'cc-exp-year'
-    | 'cc-csc'
-    | 'cc-type'
-    | 'transaction-currency'
-    | 'transaction-amount'
-    | 'language'
-    | 'bday'
-    | 'bday-day'
-    | 'bday-month'
-    | 'bday-year'
-    | 'sex'
-    | 'tel'
-    | 'tel-country-code'
-    | 'tel-national'
-    | 'tel-area-code'
-    | 'tel-local'
-    | 'tel-extension'
-    | 'impp'
-    | 'url'
-    | 'photo'
+  | 'off'
+  | 'on'
+  | 'name'
+  | 'honorific-prefix'
+  | 'given-name'
+  | 'additional-name'
+  | 'family-name'
+  | 'honorific-suffix'
+  | 'nickname'
+  | 'email'
+  | 'username'
+  | 'new-password'
+  | 'current-password'
+  | 'one-time-code'
+  | 'organization-title'
+  | 'organization'
+  | 'street-address'
+  | 'address-line1'
+  | 'address-line2'
+  | 'address-line3'
+  | 'address-level4'
+  | 'address-level3'
+  | 'address-level2'
+  | 'address-level1'
+  | 'country'
+  | 'country-name'
+  | 'postal-code'
+  | 'cc-name'
+  | 'cc-given-name'
+  | 'cc-additional-name'
+  | 'cc-family-name'
+  | 'cc-number'
+  | 'cc-exp'
+  | 'cc-exp-month'
+  | 'cc-exp-year'
+  | 'cc-csc'
+  | 'cc-type'
+  | 'transaction-currency'
+  | 'transaction-amount'
+  | 'language'
+  | 'bday'
+  | 'bday-day'
+  | 'bday-month'
+  | 'bday-year'
+  | 'sex'
+  | 'tel'
+  | 'tel-country-code'
+  | 'tel-national'
+  | 'tel-area-code'
+  | 'tel-local'
+  | 'tel-extension'
+  | 'impp'
+  | 'url'
+  | 'photo'
 
   /* eslint-enable prettier/prettier */
 
@@ -111,7 +111,7 @@ export interface InputProps
   capture?: string
 
   /**
-   * Valid for both `radio` and `checkbox` types.
+   * Valid for `<input type="checkbox">` and `<input type="radio">` types.
    *
    * If present on a `radio` type, it indicates that that radio button is the
    * currently selected one in the group of same-named radio buttons.
@@ -122,6 +122,24 @@ export interface InputProps
    * content attribute does not reflect the change.
    */
   checked?: boolean
+
+  /**
+   * See description for `defaultValue`; valid for `<input type="checkbox">` and
+   * `<input type="radio">` types.
+   */
+  defaultChecked?: boolean
+
+  /**
+   * In the React rendering lifecycle, the `value` attribute on form elements
+   * will override the value in the DOM.
+   *
+   * With an uncontrolled component, you often want React to specify the initial
+   * value, but leave subsequent updates uncontrolled. To handle this case, you
+   * can specify a `defaultValue` attribute instead of `value`.
+   *
+   * See: https://reactjs.org/docs/uncontrolled-components.html#default-values
+   */
+  defaultValue?: MutatedFormControlProps['value']
 
   /**
    * The values of the list attribute is the id of a `<datalist>` element
@@ -286,28 +304,28 @@ export interface InputProps
    * @default 'text'
    */
   type?:
-    | 'button'
-    | 'checkbox'
-    | 'color'
-    | 'date'
-    | 'datetime-local'
-    | 'email'
-    | 'file'
-    | 'hidden'
-    | 'image'
-    | 'month'
-    | 'number'
-    | 'password'
-    | 'radio'
-    | 'range'
-    | 'reset'
-    | 'search'
-    | 'submit'
-    | 'tel'
-    | 'text'
-    | 'time'
-    | 'url'
-    | 'week'
+  | 'button'
+  | 'checkbox'
+  | 'color'
+  | 'date'
+  | 'datetime-local'
+  | 'email'
+  | 'file'
+  | 'hidden'
+  | 'image'
+  | 'month'
+  | 'number'
+  | 'password'
+  | 'radio'
+  | 'range'
+  | 'reset'
+  | 'search'
+  | 'submit'
+  | 'tel'
+  | 'text'
+  | 'time'
+  | 'url'
+  | 'week'
 
   /* eslint-enable prettier/prettier */
 }

@@ -76,8 +76,6 @@
 @mixin display-flex($display: flex) {
   display: $display;
 
-  flex-wrap: wrap;
-
   @content;
 }
 

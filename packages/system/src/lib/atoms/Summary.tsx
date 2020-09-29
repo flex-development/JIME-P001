@@ -13,12 +13,12 @@ import React, {
  */
 
 /**
- * {@link Summary} component properties.
+ * Summary component properties.
  */
 export type SummaryProps = MutatedProps<HTMLElement>
 
 /**
- * {@link Summary} component properties without the `ref` property.
+ * Summary component properties without the `ref` property.
  */
 export type ReflessSummaryProps = PropsWithoutRef<SummaryProps>
 

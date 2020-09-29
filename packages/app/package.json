@@ -44,8 +44,8 @@
   },
   "dependencies": {
     "@feathersjs/errors": "^4.5.3",
-    "@flex-development/kustomz": "*",
     "@flex-development/kustomtypez": "*",
+    "@flex-development/kustomz": "*",
     "@types/cors": "^2.8.7",
     "@types/crypto-js": "^3.1.47",
     "@types/feathersjs__errors": "^3.3.2",
@@ -66,6 +66,7 @@
     "front-matter": "^4.0.2",
     "lodash": "^4.17.15",
     "next": "^9.5.3",
+    "node-fetch": "^2.6.1",
     "pino": "^6.4.1",
     "pino-pretty": "^4.1.0",
     "react": "^16.13.1",

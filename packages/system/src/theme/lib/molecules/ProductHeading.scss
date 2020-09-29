@@ -1,0 +1,10 @@
+/// ----------------------------------------------------------------------------
+/// @group ProductHeading
+/// ----------------------------------------------------------------------------
+
+.product-heading {
+  @include flex(center, space-between, null, inline-flex);
+
+  text-transform: uppercase;
+  width: map-get($sizes, full);
+}

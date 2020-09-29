@@ -8,9 +8,9 @@ import { ArgsMatcher } from '../../jest-env'
  * @module tests/lib/atoms/Heading
  */
 
-it('renders <h1 class="heading">', () => {
+it('renders a heading element', () => {
   const { getByText } = render(<Default {...Default.args} />)
   const { children } = (Default.args || {}) as ArgsMatcher
 
-  expect(getByText(children)).toHaveClass('heading')
+  expect(getByText(children)).toBeInTheDocument()
 })

@@ -9,7 +9,7 @@ import { Input, InputRefProps, Label, LabelProps, Span } from '../atoms'
  */
 
 /**
- * {@link LabeledInput} component properties.
+ * LabeledInput component properties.
  */
 export interface LabeledInputProps extends LabelProps {
   /**

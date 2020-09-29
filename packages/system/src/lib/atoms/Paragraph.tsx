@@ -13,12 +13,12 @@ import React, {
  */
 
 /**
- * {@link Paragraph} component properties.
+ * Paragraph component properties.
  */
 export type ParagraphProps = MutatedProps<HTMLParagraphElement>
 
 /**
- * {@link Paragraph} component properties without the `ref` property.
+ * Paragraph component properties without the `ref` property.
  */
 export type ReflessParagraphProps = PropsWithoutRef<ParagraphProps>
 

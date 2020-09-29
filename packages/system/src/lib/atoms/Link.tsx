@@ -16,7 +16,7 @@ import React, {
 /* eslint-disable prettier/prettier */
 
 /**
- * {@link Link} component properties.
+ * Link component properties.
  */
 export interface LinkProps extends MutatedProps<HTMLAnchorElement> {
   /**
@@ -92,7 +92,7 @@ export interface LinkProps extends MutatedProps<HTMLAnchorElement> {
 }
 
 /**
- * {@link Link} component properties without the `ref` property.
+ * Link component properties without the `ref` property.
  */
 export type ReflessLinkProps = PropsWithoutRef<LinkProps>
 

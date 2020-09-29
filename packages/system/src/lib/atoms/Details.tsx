@@ -14,7 +14,7 @@ import { Summary, SummaryProps } from './Summary'
  */
 
 /**
- * {@link Details} component properties.
+ * Details component properties.
  */
 export interface DetailsProps extends MutatedProps<HTMLDetailsElement> {
   /**
@@ -32,7 +32,7 @@ export interface DetailsProps extends MutatedProps<HTMLDetailsElement> {
 }
 
 /**
- * {@link Details} component properties without the `ref` property.
+ * Details component properties without the `ref` property.
  */
 export type ReflessDetailsProps = PropsWithoutRef<DetailsProps>
 

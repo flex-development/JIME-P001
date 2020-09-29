@@ -13,12 +13,12 @@ import React, {
  */
 
 /**
- * {@link Span} component properties.
+ * Span component properties.
  */
 export type SpanProps = MutatedProps<HTMLSpanElement>
 
 /**
- * {@link Span} component properties without the `ref` property.
+ * Span component properties without the `ref` property.
  */
 export type ReflessSpanProps = PropsWithoutRef<SpanProps>
 

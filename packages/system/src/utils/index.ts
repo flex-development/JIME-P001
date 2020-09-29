@@ -1,8 +1,8 @@
 /**
  * @file Utility Functions
- * @module lib/modules
+ * @module lib/utils
  */
 
 export * from './sortByKeys'
 
-/* eslint-disable */
+/* eslint-disable prettier/prettier */

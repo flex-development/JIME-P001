@@ -18,7 +18,7 @@ import { IconProps } from './Icon'
  */
 
 /**
- * {@link Button} component properties.
+ * Button component properties.
  */
 export interface ButtonProps
   extends Omit<MutatedFormControlProps<HTMLButtonElement>, 'variant'> {
@@ -107,7 +107,7 @@ export interface ButtonProps
 }
 
 /**
- * {@link Button} component properties without the `ref` property.
+ * Button component properties without the `ref` property.
  */
 export type ReflessButtonProps = PropsWithoutRef<ButtonProps>
 

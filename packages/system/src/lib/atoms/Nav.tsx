@@ -12,7 +12,7 @@ import React, {
  */
 
 /**
- * {@link Nav} component properties.
+ * Nav component properties.
  */
 export interface NavProps extends MutatedProps {
   /**
@@ -44,7 +44,7 @@ export interface NavProps extends MutatedProps {
 }
 
 /**
- * {@link Nav} component properties without the `ref` property.
+ * Nav component properties without the `ref` property.
  */
 export type ReflessNavProps = PropsWithoutRef<NavProps>
 

@@ -13,7 +13,7 @@ import React, {
  */
 
 /**
- * {@link Image} component properties.
+ * Image component properties.
  */
 export interface ImageProps extends MutatedVoidElementProps<HTMLImageElement> {
   /**
@@ -105,7 +105,7 @@ export interface ImageProps extends MutatedVoidElementProps<HTMLImageElement> {
 }
 
 /**
- * {@link Image} component properties without the `ref` property.
+ * Image component properties without the `ref` property.
  */
 export type ReflessImageProps = PropsWithoutRef<ImageProps>
 

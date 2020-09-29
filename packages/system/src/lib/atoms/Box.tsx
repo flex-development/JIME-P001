@@ -13,12 +13,12 @@ import React, {
  */
 
 /**
- * {@link Box} component properties.
+ * Box component properties.
  */
 export type BoxProps<E = HTMLDivElement> = MutatedProps<E>
 
 /**
- * {@link Box} component properties without the `ref` property.
+ * Box component properties without the `ref` property.
  */
 export type ReflessBoxProps = PropsWithoutRef<BoxProps>
 

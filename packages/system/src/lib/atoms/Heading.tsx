@@ -16,7 +16,7 @@ import React, {
  */
 
 /**
- * {@link Heading} component properties.
+ * Heading component properties.
  */
 export interface HeadingProps extends MutatedProps<HTMLHeadingElement> {
   /**
@@ -28,7 +28,7 @@ export interface HeadingProps extends MutatedProps<HTMLHeadingElement> {
 }
 
 /**
- * {@link Heading} component properties without the `ref` property.
+ * Heading component properties without the `ref` property.
  */
 export type ReflessHeadingProps = PropsWithoutRef<HeadingProps>
 
@@ -44,8 +44,7 @@ export type HeadingRefAttributes = RefAttributes<HTMLHeadingElement>
 export type HeadingRefProps = ReflessHeadingProps & HeadingRefAttributes
 
 /**
- * Renders a `<h1>`, `<h2>`, `<h3>`, `<h4>`, `<h5>`, or `<h6>` element with the
- * class `heading`.
+ * Renders a `<h1>`, `<h2>`, `<h3>`, `<h4>`, `<h5>`, or `<h6>` element.
  *
  * - **https://developer.mozilla.org/docs/Web/HTML/Element/Heading_Elements**
  */
@@ -55,7 +54,7 @@ export const Heading: FREC<HeadingRefProps> = forwardRef((props, ref) => {
   const mutatedProps = useMutatedProps<
     typeof rest,
     DetailedHTMLProps<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement>
-  >({ ...rest, ref }, 'heading')
+  >({ ...rest, ref })
 
   /* eslint-disable jsx-a11y/heading-has-content */
 

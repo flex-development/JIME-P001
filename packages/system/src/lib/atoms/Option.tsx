@@ -13,7 +13,7 @@ import React, {
  */
 
 /**
- * {@link Option} component properties.
+ * Option component properties.
  */
 export interface OptionProps extends MutatedProps<HTMLOptionElement> {
   /**
@@ -36,7 +36,7 @@ export interface OptionProps extends MutatedProps<HTMLOptionElement> {
 }
 
 /**
- * {@link Option} component properties without the `ref` property.
+ * Option component properties without the `ref` property.
  */
 export type ReflessOptionProps = PropsWithoutRef<OptionProps>
 

@@ -12,7 +12,7 @@ import { Span, SpanProps, SpanRefAttributes } from './Span'
  */
 
 /**
- * {@link Icon} component properties.
+ * Icon component properties.
  */
 export interface IconProps extends SpanProps {
   /**
@@ -34,7 +34,7 @@ export interface IconProps extends SpanProps {
 }
 
 /**
- * {@link Icon} component properties without the `ref` property.
+ * Icon component properties without the `ref` property.
  */
 export type ReflessIconProps = PropsWithoutRef<IconProps>
 

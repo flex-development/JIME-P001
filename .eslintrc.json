@@ -4,73 +4,148 @@
 {
   "env": {
     "browser": true,
-    "es6": true
+    "es6": true,
+    "jest/globals": true,
+    "node": true
   },
   "extends": [
     "eslint:recommended",
-    "plugin:node/recommended",
-    "prettier"
+    "plugin:jest/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "prettier",
+    "prettier/@typescript-eslint",
+    "plugin:react/recommended",
+    "prettier/react"
   ],
   "globals": {},
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaFeatures": {
       "impliedStrict": true,
       "jsx": true
     },
     "ecmaVersion": 2020,
+    "project": [
+      "./tsconfig.json",
+      "./packages/**/tsconfig.json"
+    ],
     "sourceType": "module"
   },
   "plugins": [
+    "@typescript-eslint",
     "import",
-    "node",
-    "prettier"
+    "jest",
+    "jsx-a11y",
+    "json",
+    "html",
+    "prettier",
+    "react",
+    "react-hooks"
   ],
   "rules": {
-    "block-scoped-var": 2,
-    "camelcase": 0,
-    "eol-last": 2,
-    "eqeqeq": 2,
-    "import/extensions": [
-      1,
+    "@typescript-eslint/ban-ts-comment": 1,
+    "@typescript-eslint/ban-ts-ignore": 0,
+    "@typescript-eslint/ban-types": 0,
+    "@typescript-eslint/camelcase": 0,
+    "@typescript-eslint/explicit-function-return-type": 0,
+    "@typescript-eslint/explicit-member-accessibility": 0,
+    "@typescript-eslint/member-delimiter-style": [
+      2,
       {
-        "js": "never",
-        "jsx": "never",
-        "json": "always",
-        "mdx": "always",
-        "stories": "always",
-        "ts": "never",
-        "tsx": "never"
+        "multiline": {
+          "delimiter": "none",
+          "requireLast": false
+        }
       }
     ],
-    "import/no-extraneous-dependencies": [
+    "@typescript-eslint/no-empty-function": 1,
+    "@typescript-eslint/no-empty-interface": [
       1,
       {
+        "allowSingleExtends": true
+      }
+    ],
+    "@typescript-eslint/no-explicit-any": 1,
+    "@typescript-eslint/no-non-null-assertion": 0,
+    "@typescript-eslint/no-use-before-define": 0,
+    "@typescript-eslint/no-warning-comments": 0,
+    "@typescript-eslint/no-useless-constructor": 1,
+    "eol-last": 2,
+    "eqeqeq": 1,
+    "import/extensions": [
+      2,
+      {
+        "ignorePackages": true,
+        "json": "always",
+        "md": "always",
+        "mdx": "always",
+        "stories": "always",
+        "svg": "always"
+      }
+    ],
+    "import/named": 2,
+    "import/namespace": 2,
+    "import/no-extraneous-dependencies": [
+      2,
+      {
+        "bundledDependencies": true,
         "devDependencies": true
       }
     ],
-    "import/no-unresolved": 0,
-    "import/prefer-default-export": 0,
-    "node/no-extraneous-import": 1,
-    "node/no-missing-import": 1,
-    "node/no-unsupported-features/es-syntax": 0,
-    "node/no-unsupported-features/node-builtins": 1,
-    "no-param-reassign": 0,
-    "no-return-assign": 0,
-    "no-shadow": 1,
-    "no-unused-expressions": [
+    "import/no-unresolved": [
       2,
       {
-        "allowTernary": true
-      } 
+        "ignore": [
+          "@flex-development/kustomtypez",
+          "@kustomz",
+          "@kustomz-config",
+          "@kustomz-stories",
+          "@storybook"
+        ]
+      }
     ],
-    "no-trailing-spaces": 2,
-    "no-unused-vars": 1,
-    "no-var": 2,
-    "prefer-const": 2,
-    "prefer-arrow-callback": 2,
+    "import/prefer-default-export": 0,
+    "jest/no-mocks-import": 1,
+    "json/*": [2, "allowComments"],
+    "jsx-a11y/accessible-emoji": 0,
+    "jsx-a11y/anchor-is-valid": [
+      2,
+      {
+        "components": [
+          "A", 
+          "Link",
+          "LinkTo"
+        ],
+        "specialLink": [
+          "kind", 
+          "overrideParams", 
+          "story",
+          "to"
+        ]
+      }
+    ],
+    "jsx-a11y/label-has-associated-control": [
+      2,
+      {
+        "labelComponents": [
+          "Label"
+        ],
+        "labelAttributes": [
+          "label"
+        ],
+        "controlComponents": [
+          "Input"
+        ],
+        "depth": 3
+      }
+    ],
+    // Deprecated in eslint-plugin-jsx-a11y@6.1.0
+    "jsx-a11y/label-has-for": 0,
     "prettier/prettier": [
       2,
-      { "endOfLine": "auto" }
+      { 
+        "endOfLine": "auto" 
+      }
     ],
     "quotes": [
       2,
@@ -79,8 +154,60 @@
         "avoidEscape": true
       }
     ],
-    "require-jsdoc": 1,
-    "semi": 0,
+    "react/destructuring-assignment": 0,
+    "react/display-name": 0,
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [
+          ".mdx",
+          ".tsx"
+        ]
+      }
+    ],
+    "react/jsx-fragments": 0,
+    "react/jsx-no-bind": [
+      2,
+      {
+        "allowArrowFunctions": true,
+        "allowBind": true,
+        "allowFunctions": true,
+        "ignoreDOMComponents": true,
+        "ignoreRefs": true
+      }
+    ],
+    "react/jsx-props-no-spreading": 0,
+    "react/no-unescaped-entities": 0,
+    "react/prop-types": 0,
+    "react/self-closing-comp": 1,
+    "react/sort-comp": [
+      2,
+      {
+        "groups": {
+          "staticLifecycle": [
+            "displayName", 
+            "propTypes", 
+            "defaultProps", 
+            "getDerivedStateFromProps"
+          ]
+        },
+        "order": [
+          "staticLifecycle",
+          "static-methods",
+          "instance-variables",
+          "lifecycle",
+          "/^on.+$/",
+          "/^(get|set)(?!(DerivedStateFromProps|SnapshotBeforeUpdate$)).+$/",
+          "instance-methods",
+          "instance-variables",
+          "everything-else",
+          "render"
+        ]
+      }
+    ],
+    "react/state-in-constructor": 0,
+    "react/static-property-placement": 0,
+    "react-hooks/rules-of-hooks": 1,
     "sort-keys": [
       1,
       "asc",
@@ -97,10 +224,21 @@
         "asyncArrow": "always",
         "named": "never"
       }
-    ],
-    "valid-jsdoc": 2
+    ]
   },
   "overrides": [
+    {
+      "files": [
+        "**/*.js"
+      ],
+      "parser": "babel-eslint",
+      "rules": {
+        "@typescript-eslint/explicit-module-boundary-types": 0,
+        "@typescript-eslint/no-var-requires": 0,
+       "require-jsdoc": 1,
+       "valid-jsdoc": 2
+      }
+    },
     {
       "files": [
         "**/*.d.ts"
@@ -108,120 +246,17 @@
       "rules": {
         "prettier/prettier": 0
       }
-    },
-    {
-      "files": [
-        "**/*.spec.ts", 
-        "**/*.spec.tsx",
-        "**/jest.setup.ts",
-        "jest-env.d.ts"
-      ],
-      "env": {
-        "jest": true
-      },
-      "extends": [
-        "plugin:jest/recommended"
-      ],
-      "plugins": [
-        "import",
-        "jest"
-      ],
-      "rules": {
-        "import/no-extraneous-dependencies": 0,
-        "jest/no-mocks-import": 1,
-        "node/no-extraneous-import": 0
-      }
-    },
-    {
-      "files": [
-        "**/*.jsx",
-        "**/*.tsx",
-        "storybook/preview.js"
-      ],
-      "extends": [
-        "plugin:react/recommended",
-        "prettier/react"
-      ],
-      "plugins": [
-        "jsx-a11y",
-        "react",
-        "react-hooks"
-      ],
-      "rules": {
-        "import/no-cycle": 1,
-        "react/destructuring-assignment": 0,
-        "react/display-name": 0,
-        "react/jsx-filename-extension": [
-          1,
-          {
-            "extensions": [
-              ".js",
-              ".jsx",
-              ".mdx",
-              ".tsx"
-            ]
-          }
-        ],
-        "react/jsx-fragments": 0,
-        "react/jsx-props-no-spreading": 0,
-        "react/prop-types": 0,
-        "react/self-closing-comp": 1,
-        "react-hooks/rules-of-hooks": 1
-      }
-    },
-    {
-      "files": [
-        "**/*.ts",
-        "**/*.tsx"
-      ],
-      "extends": [
-        "plugin:@typescript-eslint/recommended"
-      ],
-      "parserOptions": {
-        "parser": "@typescript-eslint/parser",
-        "project": [
-          "./tsconfig.json",
-          "./packages/**/tsconfig.json"
-        ]
-      },
-      "plugins": ["@typescript-eslint"],
-      "rules": {
-        "@typescript-eslint/ban-ts-comment": 0,
-        "@typescript-eslint/ban-types": 0,
-        "@typescript-eslint/camelcase": 0,
-        "@typescript-eslint/explicit-function-return-type": 0,
-        "@typescript-eslint/explicit-module-boundary-types": 0,
-        "@typescript-eslint/member-delimiter-style": [
-          2,
-          {
-            "multiline": {
-              "delimiter": "none",
-              "requireLast": false
-            }
-          }
-        ],
-        "@typescript-eslint/no-empty-function": 0,
-        "@typescript-eslint/no-empty-interface": [
-          1,
-          {
-            "allowSingleExtends": true
-          }
-        ],
-        "@typescript-eslint/no-explicit-any": 1,
-        "@typescript-eslint/no-non-null-assertion": 0,
-        "@typescript-eslint/no-use-before-define": 0,
-        "@typescript-eslint/no-warning-comments": 0,
-        "@typescript-eslint/no-useless-constructor": 1,
-        "node/no-empty-function": 0,
-        "node/no-missing-import": 0,
-        "node/no-missing-require": 0,
-        "node/no-unsupported-features/es-syntax": 0,
-        "require-jsdoc": 0,
-        "valid-jsdoc": 0
-      }
     }
   ],
   "settings": {
+    "html/html-extensions": [".html"],
+    "import/ignore": ["node_modules\\/(?!@storybook)"],
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".ts", ".tsx", ".mjs", ".d.ts"],
+        "paths": ["node_modules/", "node_modules/@types/"]
+      }
+    },
     "react": {
       "version": "detect"
     }

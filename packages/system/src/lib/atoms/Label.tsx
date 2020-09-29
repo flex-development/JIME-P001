@@ -35,6 +35,17 @@ export interface LabelProps extends MutatedProps<HTMLLabelElement> {
   form?: boolean
 
   /**
+   * The `id` of a labelable form-related element in the same document as the
+   * `<label>` element. If this attribute is missing, the form-related element
+   * should be nested within the `Label` instead.
+   *
+   * Because `for` is a reserved keyword in JavaScript, React uses `htmlFor`
+   * instead.
+   *
+   */
+  htmlFor?: string
+
+  /**
    * True if labelling a form control element where `required=true`.
    *
    * @default false
@@ -64,7 +75,7 @@ export type LabelRefProps = ReflessLabelProps & LabelRefAttributes
  * - **https://v5.getbootstrap.com/docs/5.0/forms/overview/#form-text**
  */
 export const Label: FREC<LabelRefProps> = forwardRef((props, ref) => {
-  const { col, form, required, ...rest } = props
+  const { col, form, htmlFor, required, ...rest } = props
 
   if (required) rest['data-required'] = required
 
@@ -79,7 +90,7 @@ export const Label: FREC<LabelRefProps> = forwardRef((props, ref) => {
   /* eslint-disable jsx-a11y/label-has-associated-control */
 
   return (
-    <label {...mutatedProps} ref={ref}>
+    <label {...mutatedProps} htmlFor={htmlFor} ref={ref}>
       {required && '*'}
       {mutatedProps.children}
     </label>

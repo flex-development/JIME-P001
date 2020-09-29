@@ -8,7 +8,7 @@ import { Default } from '../../../storybook/stories/lib/atoms/Divider.stories'
  */
 
 it('renders <hr class="divider">', () => {
-  const args = Object.assign({ 'data-testid': 'divider' }, Default.args)
+  const args = { 'data-testid': 'divider', ...Default.args }
 
   const { getByTestId } = render(<Default {...args} />)
 

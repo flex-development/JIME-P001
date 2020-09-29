@@ -1,3 +1,4 @@
+import { ImageProps } from '@kustomz/lib'
 import { render } from '@testing-library/react'
 import React from 'react'
 import {
@@ -12,16 +13,17 @@ import { ArgsMatcher } from '../../jest-env'
  */
 
 it('renders a fluid image', () => {
-  // @ts-expect-error
-  const { getByAltText } = render(<Fluid {...Fluid.args} />)
+  const { getByAltText } = render(<Fluid {...(Fluid.args as ImageProps)} />)
   const { alt } = (Fluid.args || {}) as ArgsMatcher
 
   expect(getByAltText(alt)).toHaveClass('img-fluid')
 })
 
 it('renders a thumbnail image', () => {
-  // @ts-expect-error
-  const { getByAltText } = render(<Thumbnail {...Thumbnail.args} />)
+  const { getByAltText } = render(
+    <Thumbnail {...(Thumbnail.args as ImageProps)} />
+  )
+
   const { alt } = (Thumbnail.args || {}) as ArgsMatcher
 
   expect(getByAltText(alt)).toHaveClass('img-thumbnail')

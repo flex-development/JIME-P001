@@ -10,7 +10,7 @@ import { fromPairs, map, sortBy } from 'lodash'
  *
  * @param unsorted - Object with keys to sort
  */
-export const sortByKeys = (unsorted: {}) => {
+export const sortByKeys = (unsorted: {}): ReturnType<typeof fromPairs> => {
   const keys = Object.keys(unsorted)
   const sortedKeys = sortBy(keys)
 

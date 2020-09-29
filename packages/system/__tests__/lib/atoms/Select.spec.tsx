@@ -9,12 +9,10 @@ import { ArgsMatcher } from '../../jest-env'
  */
 
 it('renders a <select> element with nested <option> elements', () => {
-  const args: ArgsMatcher = Object.assign(
-    {
-      'data-testid': 'select'
-    },
-    Default.args as ArgsMatcher
-  )
+  const args: ArgsMatcher = {
+    'data-testid': 'select',
+    ...(Default.args as ArgsMatcher)
+  }
 
   const { getByTestId } = render(<Default {...args} />)
 

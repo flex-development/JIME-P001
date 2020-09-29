@@ -20,8 +20,7 @@ module.exports = {
   ],
   testPathIgnorePatterns: ['build/', 'dist/', 'node_modules/', '(.*).d.ts'],
   transform: {
-    '^.+\\.[tj]sx?$': 'babel-jest',
-    '^.+\\.mdx$': '@storybook/addon-docs/jest-transform-mdx'
+    '^.+\\.[tj]sx?$': 'babel-jest'
   },
   transformIgnorePatterns: ['<rootDir>/node_modules/'],
   verbose: true

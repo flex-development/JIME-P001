@@ -2,17 +2,10 @@ import { withConsole } from '@storybook/addon-console'
 import { DocsContainer } from '@storybook/addon-docs/blocks'
 import { withTests } from '@storybook/addon-jest'
 import { withHTML } from '@whitespace/storybook-addon-html/react'
-import { omit } from 'lodash'
-import React, { Fragment } from 'react'
 import prettier from '../../../.prettierrc.json'
 import '../src/theme/theme.scss'
 import results from '../__tests__/jest-test-results.json'
-import {
-  AdobeXDArtboards,
-  Documentation,
-  excludePropKeys,
-  getThemeColor
-} from './config'
+import { AdobeXDArtboards, Documentation, getThemeColor } from './config'
 
 /**
  * @file Storybook Configuration
@@ -41,15 +34,15 @@ export const parameters = {
 
 export const decorators = [
   // Remove extraneous keys from story context
-  (Story, context) => {
-    context.args = omit(context.args, excludePropKeys)
-    context.argTypes = omit(context.argTypes, excludePropKeys)
+  // (Story, context) => {
+  //   context.args = omit(context.args, excludePropKeys)
+  //   context.argTypes = omit(context.argTypes, excludePropKeys)
 
-    context.parameters.args = context.args
-    context.parameters.argTypes = context.argTypes
+  //   context.parameters.args = context.args
+  //   context.parameters.argTypes = context.argTypes
 
-    return <Fragment>{Story(context)}</Fragment>
-  },
+  //   return <Fragment>{Story(context)}</Fragment>
+  // },
 
   // Receive console outputs as a console, warn and error in the actions panel
   (Story, context) => {

@@ -5,6 +5,25 @@ import _ from 'lodash'
  * @module storybook/config/colors
  */
 
+/* eslint-disable prettier/prettier */
+
+export type ColorItemProps = {
+  title: string
+  subtitle: string
+  colors:
+  | string[]
+  | {
+    [key: string]: string
+  }
+}
+
+/* eslint-disable prettier/prettier */
+
+export type StorybookBackgroundColorConfig = {
+  name: string
+  value: string
+}
+
 /**
  * Theme colors.
  */
@@ -39,10 +58,17 @@ export const colors = {
  * @param docs - If true, format color object for use with Storybook Docs.
  * Otherwise format for use with Storybook Backgrounds addon
  */
-export const getThemeColor = (path: string, docs = true) => {
-  if (!_.isString(path)) return {}
+export const getThemeColor = (
+  path: string,
+  docs = true
+): StorybookBackgroundColorConfig | ColorItemProps => {
+  if (!_.isString(path)) return {} as ColorItemProps
 
-  const color = _.get(colors, path, { colors: [], subtitle: '', title: '' })
+  const color: StorybookBackgroundColorConfig = _.get(colors, path, {
+    colors: [],
+    subtitle: '',
+    title: ''
+  })
 
   if (!docs) return color
 

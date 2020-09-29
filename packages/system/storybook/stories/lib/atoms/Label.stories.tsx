@@ -19,7 +19,7 @@ export default {
  * Default {@link Label} story.
  */
 export const Default: StoryFN<LabelProps> = (args: LabelProps) => (
-  <Label {...args} />
+  <Label {...args} htmlFor='#' />
 )
 
 Default.args = {

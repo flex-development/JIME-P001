@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "checkJs": false,
     "jsx": "preserve"
   },
   "extends": "../../tsconfig.json",

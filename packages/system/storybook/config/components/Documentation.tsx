@@ -8,7 +8,7 @@ import {
   Subtitle,
   Title
 } from '@storybook/addon-docs/blocks'
-import React from 'react'
+import React, { FC } from 'react'
 import { excludePropKeys } from '..'
 import { sortByKeys } from '../../../src'
 
@@ -17,7 +17,7 @@ import { sortByKeys } from '../../../src'
  * @module storybook/config/components/Documentation
  */
 
-export const Documentation = () => {
+export const Documentation: FC<typeof DocsContext> = () => {
   return (
     <DocsContext.Consumer>
       {ctx => {
@@ -44,8 +44,7 @@ export const Documentation = () => {
               return (
                 <>
                   <Subtitle>{name}</Subtitle>
-                  {/* @ts-expect-error */}
-                  <Canvas id={id}>
+                  <Canvas>
                     <Story id={id} />
                   </Canvas>
                 </>

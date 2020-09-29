@@ -31,7 +31,7 @@ export function useMutatedProps<
   Mask = HTMLAttributes<HTMLElement>
 >(props: T1, injectClass?: ClassValue, keys?: string[]): Mask {
   // Props are read-only so we need a copy
-  const mutatedProps = Object.assign({}, props)
+  const mutatedProps = { ...props }
 
   // Initialize array containing properties to remove
   keys = keys || []

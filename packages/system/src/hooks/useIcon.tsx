@@ -33,7 +33,7 @@ export function useIcon<E = HTMLElement, P = MutatedProps<E>>(props: P): P {
 
   const [className, setClassName] = useState(initialClassName)
   const [skip] = useState(!initialIcon)
-  const [dataAttrs, setDataAttrs] = useState<Record<string, any>>({})
+  const [dataAttrs, setDataAttrs] = useState<AnyObject>({})
   const [mutatedChildren, setMutatedChildren] = useState(children)
   const [icon] = useState(JSON.stringify(initialIcon || ''))
 

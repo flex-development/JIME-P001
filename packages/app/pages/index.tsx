@@ -8,18 +8,6 @@ import Head from 'next/head'
 import React from 'react'
 
 /**
- * Pre-renders the homepage with data from the internal CMS.
- *
- * @param ctx - Page context
- * @param ctx.params - Route parameters for pages using dynamic routes
- * @param ctx.preview - `true` if in the preview mode, `undefined` otherwise
- * @param ctx.previewData - Preview data set by `setPreviewData`
- */
-export const getStaticProps: GetStaticProps = async ctx => {
-  return { props: { preview: ctx.preview || false } }
-}
-
-/**
  * Renders the homepage.
  *
  * @param props - Page component props
@@ -28,7 +16,7 @@ const Index: NextComponentType<
   NextPageContext,
   InferGetStaticPropsType<typeof getStaticProps>,
   InferGetStaticPropsType<typeof getStaticProps>
-> = props => {
+> = () => {
   return (
     <div className='container'>
       <Head>
@@ -214,6 +202,18 @@ const Index: NextComponentType<
       `}</style>
     </div>
   )
+}
+
+/**
+ * Pre-renders the homepage with data from the internal CMS.
+ *
+ * @param ctx - Page context
+ * @param ctx.params - Route parameters for pages using dynamic routes
+ * @param ctx.preview - `true` if in the preview mode, `undefined` otherwise
+ * @param ctx.previewData - Preview data set by `setPreviewData`
+ */
+export const getStaticProps: GetStaticProps = async ctx => {
+  return { props: { preview: ctx.preview || false } }
 }
 
 export default Index

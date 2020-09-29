@@ -8,7 +8,7 @@ import { Default } from '../../../storybook/stories/lib/atoms/Option.stories'
  */
 
 it('renders an <option> element', () => {
-  const args = Object.assign({ 'data-testid': 'option' }, Default.args)
+  const args = { 'data-testid': 'option', ...Default.args }
 
   const { getByTestId } = render(<Default {...args} />)
 

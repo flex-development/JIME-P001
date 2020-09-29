@@ -80,15 +80,10 @@ module.exports = {
   /**
    * Alters the Storybook Webpack configuration.
    *
-   * {@param param1.configType} has a value of 'DEVELOPMENT' or 'PRODUCTION'.
-   * 'PRODUCTION' is used when building the static version of storybook.
-   *
    * @param {object} config - Base Webpack config
-   * @param {object} storybookConfig - Storybook config
-   * @param {string} storybookConfig.configType - Storybook environment
    * @returns {object} Webpack configuration
    */
-  webpackFinal: async (config, { configType }) => {
+  webpackFinal: async config => {
     config.resolve.alias = merge(config.resolve.alias, {
       '@kustomz': path.join(__dirname, '../src'),
       '@kustomz-config': path.join(__dirname, './config'),

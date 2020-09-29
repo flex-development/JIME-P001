@@ -20,29 +20,17 @@ it('renders <a href="#">', () => {
 })
 
 it('adds the class "active" when props.active is true', () => {
-  const args: ArgsMatcher = Object.assign(
-    {
-      active: true
-    },
-    Default.args as ArgsMatcher
-  )
+  const { getByText } = render(<Default {...Default.args} active />)
+  const { children } = (Default.args || {}) as ArgsMatcher
 
-  const { getByText } = render(<Default {...args} />)
-
-  expect(getByText(args.children)).toHaveClass('active')
+  expect(getByText(children)).toHaveClass('active')
 })
 
 it('adds the class "disabled" when props.disabled is true', () => {
-  const args: ArgsMatcher = Object.assign(
-    {
-      disabled: true
-    },
-    Default.args as ArgsMatcher
-  )
+  const { getByText } = render(<Default {...Default.args} disabled />)
+  const { children } = (Default.args || {}) as ArgsMatcher
 
-  const { getByText } = render(<Default {...args} />)
-
-  expect(getByText(args.children)).toHaveClass('disabled')
+  expect(getByText(children)).toHaveClass('disabled')
 })
 
 it('creates a dropdown toggle link when props.toggle is true', () => {

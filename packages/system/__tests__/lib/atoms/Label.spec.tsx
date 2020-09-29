@@ -8,17 +8,17 @@ import { ArgsMatcher } from '../../jest-env'
  * @module tests/lib/atoms/Label
  */
 
-it('adds the class "form-label"', () => {
-  const { getByText } = render(<Default {...Default.args} />)
+it('adds the class "form-label" when props.form is true', () => {
+  const { getByText } = render(<Default {...Default.args} form />)
   const { children } = (Default.args || {}) as ArgsMatcher
 
   expect(getByText(children)).toHaveClass('form-label')
 })
 
 it('adds the attribute data-required and renders text with an asterisk when props.required is true', () => {
-  const args = Object.assign({ required: true }, Default.args)
+  const { getByText } = render(<Default {...Default.args} required />)
 
-  const { getByText } = render(<Default {...args} />)
-
-  expect(getByText(`*${args.children}`)).toHaveAttribute('data-required')
+  expect(getByText(`*${Default.args?.children}`)).toHaveAttribute(
+    'data-required'
+  )
 })

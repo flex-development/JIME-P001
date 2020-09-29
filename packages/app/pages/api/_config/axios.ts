@@ -24,19 +24,7 @@ export const handleErrorResponse = (error: AxiosError): void => {
     // The request was made and the server responded with a status code
     const { data, status } = response as AxiosResponse<AnyObject>
 
-    if (config.url?.includes('api.linkedin')) {
-      const { message, status, ...restOfData } = data
-
-      if (status === 401) {
-        restOfData.errors = [
-          { headers: pick(config.headers, ['authorization']) }
-        ]
-      }
-
-      feathersError = getFeathersError(message, restOfData, status)
-    } else {
-      feathersError = getFeathersError(message, data, status)
-    }
+    feathersError = getFeathersError(message, data, status)
   } else if (request) {
     // The request was made but no response was received
     feathersError = getFeathersError('No response received.')
@@ -54,6 +42,8 @@ export const handleErrorResponse = (error: AxiosError): void => {
 
   throw feathersError
 }
+
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 /**
  * Returns the data from a successful request.
@@ -77,3 +67,5 @@ Axios.interceptors.response.use(handleSuccessResponse, handleErrorResponse)
 export async function axios<T = any>(config: AxiosRequestConfig): Promise<T> {
   return ((await Axios(config)) as unknown) as Promise<T>
 }
+
+/* eslint-enable @typescript-eslint/no-explicit-any */

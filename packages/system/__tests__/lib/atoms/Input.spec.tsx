@@ -1,4 +1,3 @@
-import { Input, InputProps } from '@kustomz/lib'
 import { render } from '@testing-library/react'
 import React from 'react'
 import {
@@ -27,36 +26,36 @@ it('adds the class "form-control" to non <input type="checkbox"> and <input type
 })
 
 it('does not add the class "form-control-lg" to <input type="checkbox"> and <input type="radio"> elements', () => {
-  const args = Object.assign(
-    {
-      'data-testid': 'checkbox',
-      size: 'lg'
-    },
-    Checkbox.args
+  const testid = 'checkbox'
+
+  const { getByTestId } = render(
+    <Checkbox {...Checkbox.args} data-testid={testid} size='lg' />
   )
 
-  const { getByTestId } = render(<Checkbox {...args} />)
-
-  expect(getByTestId(args['data-testid'])).not.toHaveClass('form-control-lg')
+  expect(getByTestId(testid)).not.toHaveClass('form-control-lg')
 })
 
 it('adds the class "form-check-input" to <input type="checkbox"> and <input type="radio"> elements, not "form-control"', () => {
-  let args = Object.assign({ 'data-testid': 'checkbox' }, Checkbox.args)
+  let testid = 'checkbox'
 
-  const { getByTestId: getCheckbox } = render(<Checkbox {...args} />)
+  const { getByTestId: getCheckbox } = render(
+    <Checkbox {...Checkbox.args} data-testid={testid} />
+  )
 
-  let element = getCheckbox(args['data-testid'])
+  let element = getCheckbox(testid)
 
   expect(element).toHaveAttribute('type', 'checkbox')
 
   expect(element).toHaveClass('form-check-input')
   expect(element).not.toHaveClass('form-control')
 
-  args = Object.assign({ 'data-testid': 'radio' }, Radio.args)
+  testid = 'radio'
 
-  const { getByTestId: getRadio } = render(<Radio {...args} />)
+  const { getByTestId: getRadio } = render(
+    <Radio {...Radio.args} data-testid={testid} />
+  )
 
-  element = getRadio(args['data-testid'])
+  element = getRadio(testid)
 
   expect(element).toHaveAttribute('type', 'radio')
 
@@ -64,11 +63,13 @@ it('adds the class "form-check-input" to <input type="checkbox"> and <input type
 })
 
 it('adds the class "form-file-input" to <input type="file"> elements, not "form-control"', () => {
-  const args = { 'data-testid': 'file', type: 'file' } as InputProps
+  const testid = 'file'
 
-  const { getByTestId } = render(<Input {...args} />)
+  const { getByTestId } = render(
+    <Default {...Default.args} data-testid={testid} type='file' />
+  )
 
-  const element = getByTestId(args['data-testid'])
+  const element = getByTestId(testid)
 
   expect(element).toHaveClass('form-file-input')
   expect(element).not.toHaveClass('form-control')

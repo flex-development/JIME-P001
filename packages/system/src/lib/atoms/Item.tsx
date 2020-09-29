@@ -15,7 +15,7 @@ import { InputValue } from './Input'
  */
 
 /**
- * {@link Item} component properties.
+ * Item component properties.
  */
 export interface ItemProps<E = HTMLLIElement> extends MutatedProps<E> {
   /**
@@ -37,7 +37,7 @@ export interface ItemProps<E = HTMLLIElement> extends MutatedProps<E> {
 }
 
 /**
- * {@link Item} component properties without the `ref` property.
+ * Item component properties without the `ref` property.
  */
 export type ReflessItemProps = PropsWithoutRef<ItemProps>
 

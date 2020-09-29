@@ -5,6 +5,6 @@
   },
   "extends": "../../tsconfig.json",
   "files": ["next-env.d.ts"],
-  "include": ["components", "lib", "pages"],
+  "include": ["__tests__", "components", "lib", "pages"],
   "exclude": ["node_modules"]
 }

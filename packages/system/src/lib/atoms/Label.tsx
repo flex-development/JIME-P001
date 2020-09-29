@@ -13,7 +13,7 @@ import React, {
  */
 
 /**
- * {@link Label} component properties.
+ * Label component properties.
  */
 export interface LabelProps extends MutatedProps<HTMLLabelElement> {
   /**
@@ -54,7 +54,7 @@ export interface LabelProps extends MutatedProps<HTMLLabelElement> {
 }
 
 /**
- * {@link Label} component properties without the `ref` property.
+ * Label component properties without the `ref` property.
  */
 export type ReflessLabelProps = PropsWithoutRef<LabelProps>
 

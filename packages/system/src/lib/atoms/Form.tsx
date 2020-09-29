@@ -13,7 +13,7 @@ import React, {
  */
 
 /**
- * {@link Form} component properties.
+ * Form component properties.
  */
 export interface FormProps extends MutatedProps<HTMLFormElement> {
   /**
@@ -103,7 +103,7 @@ export interface FormProps extends MutatedProps<HTMLFormElement> {
 }
 
 /**
- * {@link Form} component properties without the `ref` property.
+ * Form component properties without the `ref` property.
  */
 export type ReflessFormProps = PropsWithoutRef<FormProps>
 

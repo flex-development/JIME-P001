@@ -45,7 +45,7 @@
     "dev:storybook:docs": "yarn dev:storybook --docs",
     "dev": "run-p dev:*",
     "pretest": "cross-env NODE_ENV=test",
-    "test": "jest --json --outputFile=__tests__/jest-test-results.json",
+    "test": "jest --detectOpenHandles --json --outputFile=__tests__/jest-test-results.json",
     "prebuild:bundle": "rm -rf dist && mkdir dist dist/theme",
     "prebuild:storybook": "yarn test || true && rm -rf public && mkdir public",
     "build:bundle": "microbundle --tsconfig tsconfig.prod.json --jsx React.createElement",

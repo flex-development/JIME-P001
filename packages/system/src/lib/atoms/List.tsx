@@ -18,7 +18,7 @@ import { Item, ItemProps } from './Item'
 export type HTMLListElement = HTMLOListElement & HTMLUListElement
 
 /**
- * {@link List} component properties.
+ * List component properties.
  */
 export interface ListProps extends MutatedProps<HTMLListElement> {
   /**
@@ -49,7 +49,7 @@ type InstrinsicListProps = JSX.IntrinsicElements['dl'] &
   JSX.IntrinsicElements['ul']
 
 /**
- * {@link List} component properties without the `ref` property.
+ * List component properties without the `ref` property.
  */
 export type ReflessListProps = PropsWithoutRef<ListProps>
 

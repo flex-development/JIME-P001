@@ -16,7 +16,7 @@ import { Option, OptionProps } from './Option'
  */
 
 /**
- * {@link Select} component properties.
+ * Select component properties.
  */
 export interface SelectProps
   extends MutatedFormControlProps<HTMLSelectElement> {
@@ -68,7 +68,7 @@ export type SelectRefAttributes = RefAttributes<HTMLSelectElement>
 export type SelectRefProps = ReflessSelectProps & SelectRefAttributes
 
 /**
- * {@link Select} component properties without the `ref` property.
+ * Select component properties without the `ref` property.
  */
 export type ReflessSelectProps = PropsWithoutRef<SelectProps>
 

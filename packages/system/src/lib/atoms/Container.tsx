@@ -13,7 +13,7 @@ import { BoxRefAttributes } from './Box'
  */
 
 /**
- * {@link Container} component properties.
+ * Container component properties.
  */
 export interface ContainerProps extends MutatedProps<HTMLDivElement> {
   /**
@@ -31,7 +31,7 @@ export interface ContainerProps extends MutatedProps<HTMLDivElement> {
 }
 
 /**
- * {@link Container} component properties without the `ref` property.
+ * Container component properties without the `ref` property.
  */
 export type ReflessContainerProps = PropsWithoutRef<ContainerProps>
 

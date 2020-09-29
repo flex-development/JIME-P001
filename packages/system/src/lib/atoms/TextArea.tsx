@@ -13,7 +13,7 @@ import React, {
  */
 
 /**
- * {@link TextArea} component properties.
+ * TextArea component properties.
  */
 export interface TextAreaProps
   extends Omit<MutatedFormControlProps<HTMLTextAreaElement>, 'children'> {
@@ -99,7 +99,7 @@ export interface TextAreaProps
 }
 
 /**
- * {@link TextArea} component properties without the `ref` property.
+ * TextArea component properties without the `ref` property.
  */
 export type ReflessTextAreaProps = PropsWithoutRef<TextAreaProps>
 

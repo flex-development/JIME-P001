@@ -13,7 +13,7 @@ import React, {
  */
 
 /**
- * {@link Divider} component properties.
+ * Divider component properties.
  */
 export interface DividerProps extends MutatedVoidElementProps<HTMLHRElement> {
   /**
@@ -23,7 +23,7 @@ export interface DividerProps extends MutatedVoidElementProps<HTMLHRElement> {
 }
 
 /**
- * {@link Divider} component properties without the `ref` property.
+ * Divider component properties without the `ref` property.
  */
 export type ReflessDividerProps = PropsWithoutRef<DividerProps>
 

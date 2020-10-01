@@ -176,6 +176,7 @@ export const AddToCartForm: FC<AddToCartFormProps> = (
 
         <LabeledInput
           input={{
+            'aria-label': 'Product quantity',
             min: 0,
             onChange: updateQuantity,
             type: 'number',
@@ -207,7 +208,6 @@ export const AddToCartForm: FC<AddToCartFormProps> = (
             className='float-sm-right w-sm-auto w-100'
             disabled={!selected.available}
             onClick={createLineItem}
-            name='line_item'
             type='submit'
           />
         </Box>

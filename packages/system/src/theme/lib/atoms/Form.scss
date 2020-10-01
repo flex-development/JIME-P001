@@ -1,0 +1,20 @@
+/// ----------------------------------------------------------------------------
+/// @group Form
+/// @see 'bootstrap/scss/forms/_forms.scss'
+/// ----------------------------------------------------------------------------
+
+.form {
+  // Inner form container with main form controls
+  &-body {
+    @include element-size(100%);
+  }
+
+  // Form controls - <button>, <input>, <select>, <textarea>
+  &-control {
+    cursor: pointer;
+
+    &:disabled {
+      cursor: not-allowed;
+    }
+  }
+}

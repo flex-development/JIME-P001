@@ -3,11 +3,13 @@
 /// @group functions
 /// ----------------------------------------------------------------------------
 
-/// Converts a value in px to an em or rem value
-/// @param {Number} $px - Value to convert
+@use '~bootstrap/scss/bootstrap-utilities' as bootstrap;
+
+/// Converts a value into px, em, or rem
+/// @param {Number} $val - Value to convert
 /// @param {String} $unit [rem] - Unit to convert to
-@function convert-px-value($px, $unit: 'rem') {
-  @return #{strip-unit($px) / 16}#{$unit};
+@function strip-convert($val, $unit: 'rem', $base: bootstrap.$font-size-base) {
+  @return strip-unit($val) * $base;
 }
 
 /// Remove the unit of a length

@@ -6,5 +6,3 @@
 export * from './getFeathersError'
 export { default as logger } from './logger'
 export * from './mock'
-
-/* eslint-disable prettier/prettier */

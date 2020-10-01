@@ -1,0 +1,73 @@
+/// ----------------------------------------------------------------------------
+/// @group AddToCartForm
+/// ----------------------------------------------------------------------------
+
+.add-to-cart-form {
+  @include flex-center(column);
+
+  .product-heading {
+    @include media-breakpoint-up(md) {
+      font-size: rfs-value(48px);
+    }
+
+    margin-bottom: $spacers-3;
+  }
+
+  // Form rows
+  .row-fluid {
+    &:first-of-type {
+      @include display-flex;
+
+      @include flex-column;
+
+      @include media-breakpoint-up(sm) {
+        @include flex-row;
+
+        @include flex-spread;
+      }
+    }
+  }
+
+  .form {
+    // Form control elements - <select>, <textarea>
+    &-control {
+      &[name='variantId'] {
+        @include media-breakpoint-down(sm) {
+          border-bottom: none;
+        }
+
+        @include media-breakpoint-up(sm) {
+          border-right: none;
+        }
+      }
+
+      &[name='kustom'] {
+        @include element-size($spacers-30, height);
+      }
+    }
+
+    &-text {
+      @include font-size($font-size-base-em);
+
+      color: $secondary;
+    }
+  }
+
+  // Add to cart button
+  .btn[type='submit'] {
+    // `selected.available ? 'Add to Cart' : 'Out of Stock'` didn't work
+    &::after {
+      content: 'Add to Cart';
+    }
+
+    &:disabled {
+      @include opacity(map-get($opacities, 0.25));
+
+      pointer-events: unset;
+
+      &::after {
+        content: 'Out of Stock';
+      }
+    }
+  }
+}

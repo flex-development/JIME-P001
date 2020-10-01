@@ -36,9 +36,8 @@ export const LabeledInput: FC<LabeledInputProps> = (
   const { children, input = {}, size, ...rest } = props
 
   const mutatedProps = useMutatedProps<typeof rest, LabelProps>(rest, {
-    'form-control': true,
-    [`form-control-${size}`]: size,
-    'labeled-input': true
+    'labeled-input': true,
+    [`labeled-input-${size}`]: size
   })
 
   mutatedProps['data-disabled'] = input.disabled

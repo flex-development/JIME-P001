@@ -5,19 +5,15 @@ import _ from 'lodash'
  * @module storybook/config/colors
  */
 
-/* eslint-disable prettier/prettier */
-
 export type ColorItemProps = {
   title: string
   subtitle: string
   colors:
-  | string[]
-  | {
-    [key: string]: string
-  }
+    | string[]
+    | {
+        [key: string]: string
+      }
 }
-
-/* eslint-disable prettier/prettier */
 
 export type StorybookBackgroundColorConfig = {
   name: string

@@ -3,6 +3,5 @@
  * @module lib/utils
  */
 
+export * from './findVariantByID'
 export * from './sortByKeys'
-
-/* eslint-disable prettier/prettier */

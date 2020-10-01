@@ -28,6 +28,6 @@ export const AshTray: StoryFN<ProductHeadingProps> = (
 ) => <ProductHeading {...args} />
 
 AshTray.args = {
-  price: '10.00',
+  price: '$10.00',
   title: 'Ash Tray'
 }

@@ -13,9 +13,8 @@
     "plugin:jest/recommended",
     "plugin:@typescript-eslint/recommended",
     "prettier",
-    "prettier/@typescript-eslint",
-    "plugin:react/recommended",
-    "prettier/react"
+    "prettier/react",
+    "prettier/@typescript-eslint"
   ],
   "globals": {},
   "parser": "@typescript-eslint/parser",
@@ -38,7 +37,6 @@
     "jsx-a11y",
     "json",
     "html",
-    "prettier",
     "react",
     "react-hooks"
   ],
@@ -105,6 +103,7 @@
       }
     ],
     "import/prefer-default-export": 0,
+    "indent": 0,
     "jest/no-mocks-import": 1,
     "json/*": [2, "allowComments"],
     "jsx-a11y/accessible-emoji": 0,
@@ -141,12 +140,12 @@
     ],
     // Deprecated in eslint-plugin-jsx-a11y@6.1.0
     "jsx-a11y/label-has-for": 0,
-    "prettier/prettier": [
-      2,
-      { 
-        "endOfLine": "auto" 
-      }
-    ],
+    // "prettier/prettier": [
+    //   2,
+    //   { 
+    //     "endOfLine": "auto" 
+    //   }
+    // ],
     "quotes": [
       2,
       "single",
@@ -207,6 +206,7 @@
     ],
     "react/state-in-constructor": 0,
     "react/static-property-placement": 0,
+    "react-hooks/exhaustive-deps": 1,
     "react-hooks/rules-of-hooks": 1,
     "sort-keys": [
       1,

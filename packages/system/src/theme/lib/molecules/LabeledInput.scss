@@ -2,26 +2,38 @@
 /// @group LabeledInput
 /// ----------------------------------------------------------------------------
 
-.labeled-input[data-type='number'] {
-  @include flex(center, center, null, inline-flex);
+.labeled-input {
+  @include form-control;
 
-  border: $border-color solid $border-width;
-
-  span {
-    font-weight: $font-weight-semibold;
-    text-transform: uppercase;
+  @each $size in sm, lg {
+    &-#{$size} {
+      @include form-control($size);
+    }
   }
 
-  .form-control {
-    @include remove-padding;
+  // <label><input type="number"></label>
+  &[data-type='number'] {
+    @include flex(center, space-between, null, inline-flex);
+    // border: $border-color solid $border-width;
 
-    appearance: textfield;
-    border: none;
-    color: $primary;
-    text-align: right;
+    span {
+      font-weight: $font-weight-semibold;
+      text-transform: uppercase;
+    }
 
-    &:focus {
-      box-shadow: none;
+    .form-control {
+      @include remove-padding;
+
+      appearance: textfield;
+      border: none;
+      color: $primary;
+      max-width: 60%;
+      min-height: unset;
+      text-align: right;
+
+      &:focus {
+        box-shadow: none;
+      }
     }
   }
 }

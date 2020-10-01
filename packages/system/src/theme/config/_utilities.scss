@@ -27,6 +27,15 @@ $bg-repeats: no-repeat, repeat, repeat-x, repeat-y;
 $bg-sizes: auto, contain, cover;
 
 // -----------------------------------------------------------------------------
+// Borders
+// -----------------------------------------------------------------------------
+
+$borders: (
+  null: $border-width solid $border-color,
+  0: 0
+);
+
+// -----------------------------------------------------------------------------
 // Colors
 // -----------------------------------------------------------------------------
 
@@ -217,6 +226,31 @@ $utilities: (
     responsive: true,
     values: $bg-sizes
   ),
+  'border': (
+    property: border,
+    responsive: true,
+    values: $borders
+  ),
+  'border-bottom': (
+    property: border-bottom,
+    responsive: true,
+    values: $borders
+  ),
+  'border-left': (
+    property: border-left,
+    responsive: true,
+    values: $borders
+  ),
+  'border-right': (
+    property: border-right,
+    responsive: true,
+    values: $borders
+  ),
+  'border-top': (
+    property: border-top,
+    responsive: true,
+    values: $borders
+  ),
   'font-family': (
     property: font-family,
     class: text,
@@ -260,7 +294,15 @@ $utilities: (
     property: max-width,
     class: mw,
     responsive: true,
-    values: $sizes
+    values:
+      map-merge(
+        $sizes,
+        (
+          25: 25%,
+          50: 50%,
+          75: 75%
+        )
+      )
   ),
   'width': (
     property: width,

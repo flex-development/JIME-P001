@@ -1,3 +1,4 @@
+import { NullishString } from '@flex-development/kustomtypez'
 import { useMutatedProps } from '@kustomz/hooks'
 import { MutatedVoidElementProps } from '@kustomz/types'
 import React, {
@@ -32,7 +33,7 @@ export interface ImageProps extends MutatedVoidElementProps<HTMLImageElement> {
    * This attribute is also used when copying and pasting the image to text, or
    * saving a linked image to a bookmark.
    */
-  alt?: string
+  alt?: NullishString
 
   /**
    * Make an image responsive.

@@ -1,6 +1,7 @@
 import { Booleanish } from '@flex-development/kustomtypez'
 import {
   AriaAttributes,
+  ChangeEvent,
   CSSProperties,
   DOMAttributes,
   PropsWithoutRef,
@@ -13,6 +14,26 @@ import {
 export type Attributes<E = HTMLElement> = AriaAttributes &
   DOMAttributes<E> &
   RefAttributes<E> & { forwardedRef?: RefAttributes<E>['ref'] }
+
+/**
+ * `<button>` element click event.
+ */
+export type HTMLButtonClickEvent = MouseEvent<HTMLButtonElement>
+
+/**
+ * `<input>` element change event.
+ */
+export type HTMLInputChangeEvent = ChangeEvent<HTMLInputElement>
+
+/**
+ * `<select>` element change event.
+ */
+export type HTMLSelectChangeEvent = ChangeEvent<HTMLSelectElement>
+
+/**
+ * `<textarea>` element change event.
+ */
+export type HTMLTextAreaChangeEvent = ChangeEvent<HTMLTextAreaElement>
 
 /**
  * Global properties are attributes common to all HTML elements. Even though

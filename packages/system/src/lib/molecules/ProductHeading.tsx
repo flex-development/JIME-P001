@@ -1,3 +1,4 @@
+import { ProductVariantObject } from '@flex-development/kustomtypez'
 import React, { FC } from 'react'
 import { Heading, HeadingProps, Span } from '../atoms'
 
@@ -13,7 +14,7 @@ export type ProductHeadingProps = {
   /**
    * The price of the product variant.
    */
-  price: string
+  price: ProductVariantObject['price']
 
   /**
    * Size of the heading.
@@ -23,7 +24,7 @@ export type ProductHeadingProps = {
   /**
    * The product variant’s title.
    */
-  title: string
+  title: ProductVariantObject['title']
 }
 
 /**
@@ -40,7 +41,9 @@ export const ProductHeading: FC<ProductHeadingProps> = (
   return (
     <Heading className='product-heading' size={size}>
       <Span className='product-heading-title'>{title}</Span>
-      <Span className='product-heading-price'>${price}</Span>
+      <Span className='product-heading-price'>
+        {price.length && `${price}`}
+      </Span>
     </Heading>
   )
 }

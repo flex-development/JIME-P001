@@ -6,5 +6,3 @@
 export * from './useContainer'
 export * from './useIcon'
 export * from './useMutatedProps'
-
-/* eslint-disable prettier/prettier */

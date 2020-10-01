@@ -4,5 +4,3 @@
  */
 
 export * from './axios'
-
-/* eslint-disable prettier/prettier */

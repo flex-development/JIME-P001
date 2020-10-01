@@ -118,10 +118,14 @@
 /// Center flexbox items on both axes.
 /// @require {mixin} flex-align
 /// @require {mixin} flex-justify
-@mixin flex-center {
+@mixin flex-center($direction: null) {
   @include flex-align(center);
 
   @include flex-justify(center);
+
+  @if $direction {
+    @include flex-direction($direction);
+  }
 
   @content;
 }
@@ -198,6 +202,92 @@
 }
 
 // -----------------------------------------------------------------------------
+// Forms
+// -----------------------------------------------------------------------------
+
+@mixin form-control($size: null) {
+  // Has no effect on <select>s in some browsers,
+  // due to the limited stylability of `<select>`s in CSS.
+  @include border-radius($input-border-radius, 0);
+
+  @include box-shadow($input-box-shadow);
+
+  @include element-size(100%);
+
+  @include element-size(null, height, $input-height);
+
+  @include font-size($input-font-size);
+
+  @include transition($input-transition);
+
+  appearance: none; // Fix appearance for date inputs in Safari
+  background-color: $input-bg;
+  background-clip: padding-box;
+  border: $input-border-width solid $input-border-color;
+  color: $input-color;
+  display: block;
+  font-family: $input-font-family;
+  font-weight: $input-font-weight;
+  line-height: $input-line-height;
+  padding: $input-padding-y $input-padding-x;
+
+  // Customize the `:focus` state to imitate native WebKit styles.
+  &:focus {
+    background-color: $input-focus-bg;
+    border-color: $input-focus-border-color;
+    color: $input-focus-color;
+    outline: 0;
+
+    @if $enable-shadows {
+      @include box-shadow($input-box-shadow, $input-focus-box-shadow);
+    } @else {
+      // Avoid using mixin so we can pass custom focus shadow properly
+      box-shadow: $input-focus-box-shadow;
+    }
+  }
+
+  // Customize placeholder
+  &::placeholder {
+    color: $input-placeholder-color;
+
+    // Override Firefox's unusual default opacity;
+    // see https://github.com/twbs/bootstrap/pull/11526.
+    opacity: 1;
+  }
+
+  // Disabled and read-only inputs
+  // HTML5 says that controls under a fieldset > legend:first-child won't be
+  // disabled if the fieldset is disabled. Due to implementation difficulty, we
+  // don't honor that edge case; we style them as disabled anyway.
+  &:disabled,
+  &[readonly] {
+    background-color: $input-disabled-bg;
+    border-color: $input-disabled-border-color;
+
+    // iOS fix for unreadable disabled content;
+    // see https://github.com/twbs/bootstrap/issues/11655.
+    opacity: 1;
+  }
+
+  // Handle size argument
+  @if $size == lg {
+    @include border-radius($input-border-radius-lg);
+    @include font-size($input-font-size-lg);
+
+    min-height: $input-height-lg;
+    padding: $input-padding-y-lg $input-padding-x-lg;
+  }
+
+  @if $size == sm {
+    @include border-radius($input-border-radius-sm);
+    @include font-size($input-font-size-sm);
+
+    min-height: $input-height-sm;
+    padding: $input-padding-y-sm $input-padding-x-sm;
+  }
+}
+
+// -----------------------------------------------------------------------------
 // Media
 // -----------------------------------------------------------------------------
 
@@ -267,11 +357,11 @@
 /// @param {String} $dimension [width] - Target width or height
 @mixin respond-to($breakpoint, $bound: max, $dimension: width) {
   @if $dimension == width {
-    @include respond-to-width(convert-px-value($breakpoint), $bound) {
+    @include respond-to-width(strip-convert($breakpoint), $bound) {
       @content;
     }
   } @else {
-    @include respond-to-height(convert-px-value($breakpoint), $bound) {
+    @include respond-to-height(strip-convert($breakpoint), $bound) {
       @content;
     }
   }

@@ -45,6 +45,11 @@ export interface SelectProps
   options?: OptionProps[]
 
   /**
+   * Placeholder text.
+   */
+  placeholder?: string
+
+  /**
    * Make the control smaller or larger.
    *
    * See: https://v5.getbootstrap.com/docs/5.0/forms/form-control/#sizing

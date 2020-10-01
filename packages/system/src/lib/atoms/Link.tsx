@@ -13,8 +13,6 @@ import React, {
  * @see {@link https://developer.mozilla.org/docs/Web/HTML/Element/a}
  */
 
-/* eslint-disable prettier/prettier */
-
 /**
  * Link component properties.
  */

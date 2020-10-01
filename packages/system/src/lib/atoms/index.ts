@@ -29,5 +29,3 @@ export * from './Select'
 export * from './Span'
 export * from './Summary'
 export * from './TextArea'
-
-/* eslint-disable prettier/prettier */

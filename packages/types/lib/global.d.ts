@@ -32,6 +32,21 @@ export type FIXME = any
 export type NonExistent = '' | null | undefined
 
 /**
+ * Type representing any boolean that can also be null.
+ */
+export type NullishBoolean = boolean | null
+
+/**
+ * Type representing any number that can also be null.
+ */
+export type NullishNumber = number | null
+
+/**
+ * Type representing any `Primitive` that can also be null.
+ */
+export type NullishPrimitive = Primitive | null
+
+/**
  * Type representing any string that can also be null.
  */
 export type NullishString = string | null

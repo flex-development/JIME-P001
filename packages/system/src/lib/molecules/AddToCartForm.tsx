@@ -193,7 +193,7 @@ export const AddToCartForm: FC<AddToCartFormProps> = (
           <TextArea
             aria-label='Kustom product description'
             onChange={addKustomDescription}
-            name='kustom'
+            name='kpd'
             placeholder='Describe your kustom ash or rolling tray'
             value={item.customAttributes?.[0]?.value}
           />

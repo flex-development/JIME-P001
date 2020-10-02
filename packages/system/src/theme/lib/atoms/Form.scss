@@ -16,5 +16,9 @@
     &:disabled {
       cursor: not-allowed;
     }
+
+    &:read-only {
+      cursor: unset;
+    }
   }
 }

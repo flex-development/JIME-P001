@@ -18,8 +18,8 @@ import {
 // ! Keep in sync with Select placeholder property in AddToCartForm component
 const SELECT_PLACEHOLDER = 'Select an option'
 
-// ! Keep in sync with TextArea aria-label property in AddToCartForm component
-const TEXTAREA_LABEL = 'Kustom product description'
+// ! Keep in sync with TextArea placeholder property in AddToCartForm component
+const TEXTAREA_PLACEHOLDER = 'Describe your kustom ash or rolling tray'
 
 it('renders <form class="add-to-cart-form">', () => {
   const testid = 'ash-tray'
@@ -32,11 +32,11 @@ it('renders <form class="add-to-cart-form">', () => {
 })
 
 it('only displays a <textarea> element for "KUSTOMZ" product', () => {
-  const { getByLabelText } = render(
+  const { getByPlaceholderText } = render(
     <AshTray {...(AshTray.args as AddToCartFormProps)} />
   )
 
-  expect(() => getByLabelText(TEXTAREA_LABEL)).toThrowError()
+  expect(() => getByPlaceholderText(TEXTAREA_PLACEHOLDER)).toThrowError()
 })
 
 it('updates the selected variant', () => {

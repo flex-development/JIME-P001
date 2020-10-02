@@ -1,4 +1,5 @@
 import { ProductVariantObject } from '@flex-development/kustomtypez'
+import { useMutatedProps } from '@kustomz/hooks'
 import React, { FC } from 'react'
 import { Heading, HeadingProps, Span } from '../atoms'
 
@@ -10,16 +11,11 @@ import { Heading, HeadingProps, Span } from '../atoms'
 /**
  * ProductHeading component properties.
  */
-export type ProductHeadingProps = {
+export interface ProductHeadingProps extends HeadingProps {
   /**
    * The price of the product variant.
    */
   price: ProductVariantObject['price']
-
-  /**
-   * Size of the heading.
-   */
-  size?: HeadingProps['size']
 
   /**
    * The product variant’s title.
@@ -36,10 +32,12 @@ export type ProductHeadingProps = {
 export const ProductHeading: FC<ProductHeadingProps> = (
   props: ProductHeadingProps
 ) => {
-  const { price, size, title } = props
+  const { price, title, ...rest } = props
+
+  const mutatedProps = useMutatedProps(rest, 'product-heading')
 
   return (
-    <Heading className='product-heading' size={size}>
+    <Heading {...mutatedProps}>
       <Span className='product-heading-title'>{title}</Span>
       <Span className='product-heading-price'>
         {price.length && `${price}`}

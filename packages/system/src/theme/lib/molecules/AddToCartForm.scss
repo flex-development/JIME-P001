@@ -16,7 +16,7 @@
   // Form rows
   .row-fluid {
     &:first-of-type {
-      @include display-flex;
+      @include display-flex(flex, false);
 
       @include flex-column;
 

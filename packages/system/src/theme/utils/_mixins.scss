@@ -73,8 +73,11 @@
 /// Defines the element as a flex container.
 /// It enables a flex context for all its direct children.
 /// @param {String} $display [flex] - display
-@mixin display-flex($display: flex) {
+/// @param {String} $wrap [true] - Set flex-wrap to 'wrap'
+@mixin display-flex($display: flex, $wrap: true) {
   display: $display;
+  
+  flex-wrap: if($wrap, wrap, nowrap);
 
   @content;
 }

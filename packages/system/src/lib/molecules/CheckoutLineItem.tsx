@@ -1,8 +1,10 @@
 import { ANYTHING } from '@flex-development/kustomtypez'
-import { HTMLButtonClickEvent } from '@kustomz/types'
+import { HTMLButtonClickEvent, HTMLInputChangeEvent } from '@kustomz/types'
+import { sanitizeQuantity } from '@kustomz/utils'
 import classnames from 'classnames'
 import React, { FC, Fragment } from 'react'
-import { CustomAttribute } from 'shopify-buy'
+import { useSetState } from 'react-hanger'
+import { CustomAttribute, LineItemToAdd } from 'shopify-buy'
 import {
   Box,
   BoxProps,
@@ -39,6 +41,16 @@ export interface CheckoutLineItemProps extends BoxProps {
   formattedPrice: string
 
   /**
+   * `onChange` handler to pass to the `<Input>` component nested in the
+   * `<LabeledInput`. This function will be fired when the user updates the
+   * product quantity.
+   * 
+   * `@param item - Update line item`
+   * `@param event - change event from quantity input`
+   */
+  handleQuantity?(item: LineItemToAdd, event?: HTMLInputChangeEvent): ANYTHING
+
+  /**
    * Product variant image properties. If this attribute is undefined, a
    * placeholder image will be displayed instead.
    */
@@ -66,12 +78,13 @@ export interface CheckoutLineItemProps extends BoxProps {
    * `@param variantId - ID of variant to remove`
    * `@param event - click event from remove button`
    */
-  remove?(variantId: string | number, event: HTMLButtonClickEvent): ANYTHING
+  remove?(variantId: string | number, event?: HTMLButtonClickEvent): ANYTHING
 
   /**
    * Title of the product variant to order.
    */
   title: string
+
 
   /**
    * ID of line item variant.
@@ -96,16 +109,58 @@ export const CheckoutLineItem: FC<CheckoutLineItemProps> = (
 ) => {
   const {
     customAttributes = [],
-    formattedPrice,
+    formattedPrice = '$X.XX',
+    handleQuantity = item => {
+      console.log(`New quantity for ${item.variantId}: ${item.quantity}`)
+    },
     image = {} as ImageProps,
     productTitle,
     quantity,
-    remove = (id) => console.info(`Removed ${id}`),
+    remove = variantId => console.log(`Removed ${variantId}`),
     title,
     variantId,
     ...rest
   } = props
 
+  // Initialize line item state
+  const { state: item, setState: updateLineItem } = useSetState({
+    customAttributes,
+    quantity,
+    variantId
+  })
+
+  /**
+   * Updates the number of products to add to the cart.
+   *
+   * @param event - `change` event from `<input>` element
+   */
+  const updateQuantity = (event: HTMLInputChangeEvent) => {
+    const { target } = event
+
+    // Get updated line item data
+    const updatedItem = { ...item, quantity: sanitizeQuantity(target.value) }
+
+    // Update line item state
+    updateLineItem({ quantity: updatedItem.quantity })
+
+    // Pass line item state and event back to handler
+    return handleQuantity(updatedItem, event)
+  }
+
+  /**
+   * Sets the product quantity to 0 and hides the rendered output.
+   *
+   * @param event - `click` event from `<button>` element
+   */
+  const removeItem = (event: HTMLButtonClickEvent) => {
+    // Update line item state
+    updateLineItem({ quantity: 0 })
+
+    // Pass variant ID and event back to handler
+    return remove(variantId, event)
+  }
+
+  // Update component and subcomponent classes
   rest.className = classnames('line-item', rest.className)
   image.className = classnames('line-item-img', image.className)
 
@@ -150,9 +205,9 @@ export const CheckoutLineItem: FC<CheckoutLineItemProps> = (
                 'aria-label': 'Line item quantity',
                 min: 0,
                 name: 'quantity',
-                readOnly: true,
+                onChange: updateQuantity,
                 type: 'number',
-                value: quantity
+                value: item.quantity
               }}
             >
               Quantity
@@ -161,7 +216,7 @@ export const CheckoutLineItem: FC<CheckoutLineItemProps> = (
 
           <Button
             className='mt-md-0 mt-6 px-5'
-            onClick={(event: HTMLButtonClickEvent) => remove(variantId, event)}
+            onClick={(event: HTMLButtonClickEvent) => removeItem(event)}
             name='remove'
           >
             Remove

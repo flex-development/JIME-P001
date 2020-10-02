@@ -1,6 +1,6 @@
 import { AnyObject } from '@flex-development/kustomtypez'
 import { AddToCartFormProps } from '@kustomz/lib'
-import { render } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import User from '@testing-library/user-event'
 import React from 'react'
 import {
@@ -24,28 +24,26 @@ const TEXTAREA_PLACEHOLDER = 'Describe your kustom ash or rolling tray'
 it('renders <form class="add-to-cart-form">', () => {
   const testid = 'ash-tray'
 
-  const { getByTestId } = render(
+  render(
     <AshTray {...(AshTray.args as AddToCartFormProps)} data-testid={testid} />
   )
 
-  expect(getByTestId(testid)).toHaveClass('add-to-cart-form')
+  expect(screen.getByTestId(testid)).toHaveClass('add-to-cart-form')
 })
 
 it('only displays a <textarea> element for "KUSTOMZ" product', () => {
-  const { getByPlaceholderText } = render(
-    <AshTray {...(AshTray.args as AddToCartFormProps)} />
-  )
+  render(<AshTray {...(AshTray.args as AddToCartFormProps)} />)
 
-  expect(() => getByPlaceholderText(TEXTAREA_PLACEHOLDER)).toThrowError()
+  expect(() => {
+    screen.getByPlaceholderText(TEXTAREA_PLACEHOLDER)
+  }).toThrowError()
 })
 
 it('updates the selected variant', () => {
-  const { getByPlaceholderText } = render(
-    <AshTray {...(AshTray.args as AddToCartFormProps)} />
-  )
+  render(<AshTray {...(AshTray.args as AddToCartFormProps)} />)
 
   // Get <select> element
-  const select = getByPlaceholderText(SELECT_PLACEHOLDER)
+  const select = screen.getByPlaceholderText(SELECT_PLACEHOLDER)
 
   // Expect <select> element to be rendered
   expect(select).toBeInTheDocument()
@@ -61,9 +59,7 @@ it('updates the selected variant', () => {
 })
 
 it('disables the add to cart button when an unavailable product variant is selected', () => {
-  const { getByPlaceholderText, getByRole } = render(
-    <AshTray {...(AshTray.args as AddToCartFormProps)} />
-  )
+  render(<AshTray {...(AshTray.args as AddToCartFormProps)} />)
 
   // Get unavailable product variant
   const variant: AnyObject = AshTrayData.variants.find(v => {
@@ -71,23 +67,26 @@ it('disables the add to cart button when an unavailable product variant is selec
   }) || {}
 
   // Mock user selection
-  User.selectOptions(getByPlaceholderText(SELECT_PLACEHOLDER), [variant.id])
+  User.selectOptions(
+    screen.getByPlaceholderText(SELECT_PLACEHOLDER),
+    [variant.id]
+  )
 
   // Expect add to cart button to be disabled
-  expect(getByRole('button')).toBeDisabled()
+  expect(screen.getByRole('button')).toBeDisabled()
 })
 
 // FIXME: Component passes tests manually, but interaction test
 it('updates the product quantity', () => {
-  const { getByDisplayValue, getByText } = render(
-    <AshTray {...(AshTray.args as AddToCartFormProps)} />
-  )
+  const {
+    getByText
+  } = render(<AshTray {...(AshTray.args as AddToCartFormProps)} />)
 
   // Mock updated product quantity
   const NEW_QUANITY = '2'
 
   // Get input element
-  const input = getByDisplayValue('1') as HTMLInputElement
+  const input = screen.getByDisplayValue('1') as HTMLInputElement
 
   // Mock product quantity update
   User.type(input, '{selectall}{backspace}' + NEW_QUANITY)
@@ -98,9 +97,9 @@ it('updates the product quantity', () => {
 })
 
 it('updates the display price if the selected option has a different price than the previous option', () => {
-  const { getByPlaceholderText, getByText } = render(
-    <Kustomz {...(Kustomz.args as AddToCartFormProps)} />
-  )
+  const {
+    getByText
+  } = render(<Kustomz {...(Kustomz.args as AddToCartFormProps)} />)
 
   // Get default product variant
   const variant = KustomzData.variants[0]
@@ -114,22 +113,25 @@ it('updates the display price if the selected option has a different price than 
   }) || {}
 
   // Mock user selection
-  User.selectOptions(getByPlaceholderText(SELECT_PLACEHOLDER), [variant2.id])
+  User.selectOptions(
+    screen.getByPlaceholderText(SELECT_PLACEHOLDER),
+    [variant2.id]
+  )
 
   // Expect new price to be displayed
   expect(getByText(variant2.formattedPrice)).toBeInTheDocument()
 })
 
 it('updates the kustom product description', () => {
-  const { getByLabelText } = render(
-    <Kustomz {...(Kustomz.args as AddToCartFormProps)} />
-  )
+  render(<Kustomz {...(Kustomz.args as AddToCartFormProps)} />)
 
   // Mock kustom product description
   const KUSTOM_PRODUCT_DESCRIPTION = 'Kustom product description'
 
   // Get textarea element
-  const textarea = getByLabelText(TEXTAREA_LABEL) as HTMLTextAreaElement
+  const textarea = screen.getByPlaceholderText(
+    TEXTAREA_PLACEHOLDER
+  ) as HTMLTextAreaElement
 
   // Mock user entering description
   User.type(textarea, KUSTOM_PRODUCT_DESCRIPTION)

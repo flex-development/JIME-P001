@@ -1,6 +1,8 @@
-import { render } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import React from 'react'
-import { Quantity } from '../../../storybook/stories/lib/molecules/LabeledInput.stories'
+import {
+  Quantity
+} from '../../../storybook/stories/lib/molecules/LabeledInput.stories'
 
 /**
  * @file Tests - LabeledInput
@@ -14,10 +16,10 @@ it('renders a nested <input type="number"> element', () => {
     input: { ...Quantity.args?.input, 'data-testid': 'input' }
   }
 
-  const { getByTestId } = render(<Quantity {...args} />)
+  render(<Quantity {...args} />)
 
-  const ancestor = getByTestId(args['data-testid'])
-  const descendent = getByTestId(args.input?.['data-testid'])
+  const ancestor = screen.getByTestId(args['data-testid'])
+  const descendent = screen.getByTestId(args.input?.['data-testid'])
 
   expect(ancestor).toContainElement(descendent)
   expect(descendent).toHaveAttribute('type', 'number')

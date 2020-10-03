@@ -2,7 +2,8 @@ import { addons } from '@storybook/addons'
 
 /**
  * @file Storybook UI Configuration
- * @see {@link https://storybook.js.org/docs/configurations/options-parameter/}
+ * @module storybook/manager
+ * @see https://storybook.js.org/docs/configurations/options-parameter/
  */
 
 addons.setConfig({
@@ -16,7 +17,7 @@ addons.setConfig({
    *
    * The panel for Storybook Addon HTML will be shown.
    *
-   * @see {@link https://github.com/whitespace-se/storybook-addon-html}
+   * @see https://github.com/whitespace-se/storybook-addon-html
    */
   selectedPanel: 'markup/panel'
 })

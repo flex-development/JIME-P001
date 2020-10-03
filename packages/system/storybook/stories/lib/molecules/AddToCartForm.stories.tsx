@@ -1,5 +1,6 @@
 import { AddToCartForm, AddToCartFormProps } from '@kustomz/lib'
 import React from 'react'
+import { ProductVariant } from 'shopify-buy'
 import products from '../../../../__mocks__/products.mock.json'
 import { StoryFN } from '../../../config'
 
@@ -34,7 +35,7 @@ AshTray.args = {
   style: {
     maxWidth: '900px'
   },
-  variants: AshTrayData.variants
+  variants: (AshTrayData.variants as unknown) as Partial<ProductVariant>[]
 }
 
 export const Kustomz: StoryFN<AddToCartFormProps> = (
@@ -55,7 +56,7 @@ Kustomz.args = {
   style: {
     maxWidth: '900px'
   },
-  variants: KustomzData.variants
+  variants: (KustomzData.variants as unknown) as Partial<ProductVariant>[]
 }
 
 export const RollingTray: StoryFN<AddToCartFormProps> = (
@@ -75,5 +76,5 @@ RollingTray.args = {
   style: {
     maxWidth: '900px'
   },
-  variants: RollingTrayData.variants
+  variants: (RollingTrayData.variants as unknown) as Partial<ProductVariant>[]
 }

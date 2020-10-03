@@ -3,7 +3,7 @@ const implementation = require('sass')
 
 /**
  * @file Webpack Sass Loader Options
- * @see {@link https://webpack.js.org/loaders/sass-loader/}
+ * @see https://webpack.js.org/loaders/sass-loader/
  */
 
 module.exports = {

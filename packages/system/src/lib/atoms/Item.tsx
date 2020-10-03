@@ -11,7 +11,7 @@ import { InputValue } from './Input'
 
 /**
  * @module lib/elements/Item
- * @see {@link https://developer.mozilla.org/docs/Web/HTML/Element/li}
+ * @see https://developer.mozilla.org/docs/Web/HTML/Element/li
  */
 
 /**

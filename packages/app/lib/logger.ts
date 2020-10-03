@@ -3,7 +3,7 @@ import pino from 'pino'
 /**
  * @file Pino Configuration (Client Side)
  * @module lib/logger
- * @see {@link https://getpino.io/#/docs/browser}
+ * @see https://getpino.io/#/docs/browser
  */
 
 export default pino({

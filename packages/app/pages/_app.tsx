@@ -6,7 +6,7 @@ import React from 'react'
  * @file Next.js Custom App
  * @module pages/app
  *
- * @see {@link https://nextjs.org/docs/advanced-features/custom-app}
+ * @see https://nextjs.org/docs/advanced-features/custom-app
  */
 
 /**

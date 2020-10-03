@@ -4,9 +4,9 @@ import pino from 'pino'
  * @file Pino Configuration (Server Side)
  * @module pages/api/utils/logger
  *
- * @see {@link https://getpino.io/}
- * @see {@link https://github.com/pinojs/pino-pretty}
- * @see {@link https://docs.feathersjs.com/api/errors.html}
+ * @see https://getpino.io/
+ * @see https://github.com/pinojs/pino-pretty
+ * @see https://docs.feathersjs.com/api/errors.html
  */
 
 export default pino({

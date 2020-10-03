@@ -1,12 +1,12 @@
-import { Button } from '@kustomz/lib'
-import { render } from '@testing-library/react'
-import React from 'react'
 import {
   Block,
   Disabled,
   Large,
   Small
-} from '../../../storybook/stories/lib/atoms/Button.stories'
+} from '@kustomz-stories/atoms/Button.stories'
+import { Button } from '@kustomz/lib'
+import { render } from '@testing-library/react'
+import React from 'react'
 import { ArgsMatcher } from '../../jest-env'
 
 /**

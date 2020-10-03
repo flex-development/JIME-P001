@@ -4,7 +4,7 @@ import { NextApiRequest, NextApiResponse } from 'next'
 /**
  * @file API Middleware
  * @module middleware
- * @see {@link https://nextjs.org/docs/api-routes/api-middlewares}
+ * @see https://nextjs.org/docs/api-routes/api-middlewares
  */
 
 // TODO: Remove disable rule when middleware functions are added

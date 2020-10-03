@@ -1,10 +1,10 @@
-import { render } from '@testing-library/react'
-import React from 'react'
 import {
   Menu,
   Person,
   Search
-} from '../../../storybook/stories/lib/atoms/Icon.stories'
+} from '@kustomz-stories/atoms/Icon.stories'
+import { render } from '@testing-library/react'
+import React from 'react'
 import { ArgsMatcher } from '../../jest-env'
 
 /**

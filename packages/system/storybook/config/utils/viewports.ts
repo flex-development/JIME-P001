@@ -1,7 +1,7 @@
 /**
  * @file Custom viewports for @storybook/addon-viewport
  * @module storybook/config/viewports
- * @see {@link https://www.npmjs.com/package/@storybook/addon-viewport}
+ * @see https://www.npmjs.com/package/@storybook/addon-viewport
  */
 
 /* eslint-disable sort-keys */

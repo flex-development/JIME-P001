@@ -73,11 +73,12 @@
     "import/extensions": [
       2,
       {
-        "ignorePackages": true,
+        "css": "always",
         "json": "always",
         "md": "always",
         "mdx": "always",
         "stories": "always",
+        "scss": "always",
         "svg": "always"
       }
     ],

@@ -1,10 +1,10 @@
-import { ImageProps } from '@kustomz/lib'
-import { render } from '@testing-library/react'
-import React from 'react'
 import {
   Fluid,
   Thumbnail
-} from '../../../storybook/stories/lib/atoms/Image.stories'
+} from '@kustomz-stories/atoms/Image.stories'
+import { ImageProps } from '@kustomz/lib'
+import { render } from '@testing-library/react'
+import React from 'react'
 import { ArgsMatcher } from '../../jest-env'
 
 /**

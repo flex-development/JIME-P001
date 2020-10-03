@@ -39,15 +39,16 @@
     "dist"
   ],
   "scripts": {
-    "predev": "yarn test || true && cross-env NODE_ENV=development",
+    "predev": "yarn test:quiet && cross-env NODE_ENV=development",
     "dev:types": "lerna run dev --scope @flex-development/kustomtypez",
     "dev:storybook": "start-storybook -p 3000 -c storybook -s ../app/public --ci",
     "dev:storybook:docs": "yarn dev:storybook --docs",
     "dev": "run-p dev:*",
     "pretest": "cross-env NODE_ENV=test",
     "test": "jest --detectOpenHandles --passWithNoTests --json --outputFile=__tests__/jest-test-results.json",
+    "test:quiet": "yarn test || true",
     "prebuild:bundle": "rm -rf dist && mkdir dist dist/theme",
-    "prebuild:storybook": "yarn test || true && rm -rf public && mkdir public",
+    "prebuild:storybook": "yarn test:quiet && rm -rf public && mkdir public",
     "build:bundle": "microbundle --tsconfig tsconfig.prod.json --jsx React.createElement",
     "build:storybook": "build-storybook -c storybook -o public",
     "postbuild:bundle": "shx cp -R src/theme/* dist/theme",
@@ -113,7 +114,8 @@
     "next": "^9.5.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "regenerator-runtime": "^0.13.7"
+    "regenerator-runtime": "^0.13.7",
+    "shopify-buy": "^2.11.0"
   },
   "browserslist": {
     "production": [

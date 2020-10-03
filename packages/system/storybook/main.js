@@ -4,7 +4,8 @@ const sassOptions = require('../.sassrc.js')
 
 /**
  * @file Storybook Configuration
- * @see {@link https://storybook.js.org/docs/react/configure/overview}
+ * @module storybook/main
+ * @see https://storybook.js.org/docs/react/configure/overview
  */
 
 /* eslint-disable sort-keys */
@@ -13,7 +14,7 @@ module.exports = {
   /**
    * Project addons.
    *
-   * @see {@link https://storybook.js.org/docs/addons/introduction/}
+   * @see https://storybook.js.org/docs/addons/introduction/
    *
    * @property {Array<Object, String>} addons
    */
@@ -51,7 +52,7 @@ module.exports = {
   /**
    * TypeScript configuration.
    *
-   * @see {@link https://github.com/TypeStrong/fork-ts-checker-webpack-plugin}
+   * @see https://github.com/TypeStrong/fork-ts-checker-webpack-plugin
    *
    * @property {object} typescript
    * @property {boolean} typescript.check - Run `fork-ts-checker-webpack-plugin`

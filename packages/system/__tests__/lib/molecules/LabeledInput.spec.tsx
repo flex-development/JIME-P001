@@ -1,8 +1,6 @@
+import { Quantity } from '@kustomz-stories/molecules/LabeledInput.stories'
 import { render, screen } from '@testing-library/react'
 import React from 'react'
-import {
-  Quantity
-} from '../../../storybook/stories/lib/molecules/LabeledInput.stories'
 
 /**
  * @file Tests - LabeledInput

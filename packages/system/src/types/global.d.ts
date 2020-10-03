@@ -41,7 +41,7 @@ export type HTMLTextAreaChangeEvent = ChangeEvent<HTMLTextAreaElement>
  *
  * The properties defined are the ones to be used by this application.
  *
- * @see {@link https://developer.mozilla.org/docs/Web/HTML/Global_attributes}
+ * @see https://developer.mozilla.org/docs/Web/HTML/Global_attributes
  */
 export interface GlobalAttributes<E = HTMLElement> extends Attributes<E> {
   /**
@@ -186,7 +186,7 @@ export type HTMLElementRefAttributes = RefAttributes<HTMLElement>
 /**
  * Properties used to add additional functionality to React's prop handling API.
  *
- * @see {@link https://v5.getbootstrap.com/docs/5.0/utilities}
+ * @see https://v5.getbootstrap.com/docs/5.0/utilities
  */
 export interface MutatedProps<E = HTMLElement> extends GlobalAttributes<E> {
   /**

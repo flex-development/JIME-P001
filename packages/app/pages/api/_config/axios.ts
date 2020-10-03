@@ -6,7 +6,7 @@ import { getFeathersError } from '../../../lib'
 /**
  * @file Axios Configuration
  * @module pages/api/config/axios
- * @see {@link https://github.com/axios/axios}
+ * @see https://github.com/axios/axios
  */
 
 /**

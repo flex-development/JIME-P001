@@ -14,7 +14,7 @@ import { IconProps } from './Icon'
 
 /**
  * @module lib/elements/Button
- * @see {@link https://developer.mozilla.org/docs/Web/HTML/Element/button}
+ * @see https://developer.mozilla.org/docs/Web/HTML/Element/button
  */
 
 /**

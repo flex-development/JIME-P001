@@ -9,8 +9,8 @@ import { Icon, IconProps } from '../lib/atoms/Icon'
  * @file Render icon with props.children
  * @module hooks/useIcon
  *
- * @see {@link https://reactjs.org/docs/hooks-reference.html#usestate}
- * @see {@link https://reactjs.org/docs/hooks-reference.html#useeffect}
+ * @see https://reactjs.org/docs/hooks-reference.html#usestate
+ * @see https://reactjs.org/docs/hooks-reference.html#useeffect
  */
 
 /**

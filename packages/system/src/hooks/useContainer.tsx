@@ -8,8 +8,8 @@ import { Container, ContainerProps } from '../lib/atoms/Container'
  * @file Render props.children in a Container component
  * @module hooks/useContainer
  *
- * @see {@link https://reactjs.org/docs/hooks-reference.html#usestate}
- * @see {@link https://reactjs.org/docs/hooks-reference.html#useeffect}
+ * @see https://reactjs.org/docs/hooks-reference.html#usestate
+ * @see https://reactjs.org/docs/hooks-reference.html#useeffect
  */
 
 /**

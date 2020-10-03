@@ -10,7 +10,7 @@ import React, {
 
 /**
  * @module lib/elements/Image
- * @see {@link https://developer.mozilla.org/docs/Web/HTML/Element/img}
+ * @see https://developer.mozilla.org/docs/Web/HTML/Element/img
  */
 
 /**

@@ -76,7 +76,7 @@
 /// @param {String} $wrap [true] - Set flex-wrap to 'wrap'
 @mixin display-flex($display: flex, $wrap: true) {
   display: $display;
-  
+
   flex-wrap: if($wrap, wrap, nowrap);
 
   @content;

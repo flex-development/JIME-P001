@@ -1,6 +1,6 @@
+import { Default } from '@kustomz-stories/atoms/Item.stories'
 import { render } from '@testing-library/react'
 import React from 'react'
-import { Default } from '../../../storybook/stories/lib/atoms/Item.stories'
 import { ArgsMatcher } from '../../jest-env'
 
 /**

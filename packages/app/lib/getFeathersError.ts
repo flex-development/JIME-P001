@@ -22,7 +22,7 @@ import { AnyObject } from '@flex-development/kustomtypez'
 /**
  * @file Creates a new Feathers error
  * @module utils/getFeathersError
- * @see {@link https://docs.feathersjs.com/api/errors.html}
+ * @see https://docs.feathersjs.com/api/errors.html
  */
 
 /**

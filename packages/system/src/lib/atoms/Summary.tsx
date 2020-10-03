@@ -9,7 +9,7 @@ import React, {
 /**
  * @file Render a `<summary>` element
  * @module lib/elements/Summary
- * @see {@link https://developer.mozilla.org/docs/Web/HTML/Element/summary}
+ * @see https://developer.mozilla.org/docs/Web/HTML/Element/summary
  */
 
 /**

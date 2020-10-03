@@ -1,9 +1,7 @@
+import { AshTray } from '@kustomz-stories/molecules/ProductHeading.stories'
 import { ProductHeadingProps } from '@kustomz/lib'
 import { render } from '@testing-library/react'
 import React from 'react'
-import {
-  AshTray
-} from '../../../storybook/stories/lib/molecules/ProductHeading.stories'
 import { ArgsMatcher } from '../../jest-env'
 
 /**

@@ -1,6 +1,6 @@
 /**
  * @file Type declarations related to UI theme
- * @see {@link https://v5.getbootstrap.com/}
+ * @see https://v5.getbootstrap.com/
  */
 
 /**

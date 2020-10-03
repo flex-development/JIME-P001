@@ -9,7 +9,7 @@ import { BoxRefAttributes } from './Box'
 
 /**
  * @module lib/elements/Container
- * @see {@link https://v5.getbootstrap.com/docs/5.0/layout/containers/}
+ * @see https://v5.getbootstrap.com/docs/5.0/layout/containers/
  */
 
 /**

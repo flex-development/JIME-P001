@@ -1,9 +1,9 @@
-import { render } from '@testing-library/react'
-import React from 'react'
 import {
   Ordered,
   Unordered
-} from '../../../storybook/stories/lib/atoms/List.stories'
+} from '@kustomz-stories/atoms/List.stories'
+import { render } from '@testing-library/react'
+import React from 'react'
 import { ArgsMatcher } from '../../jest-env'
 
 /**

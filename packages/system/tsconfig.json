@@ -17,7 +17,7 @@
     "paths": {
       "@kustomz/*": ["src/*"],
       "@kustomz-config/*": ["storybook/config/*"],
-      "@kustomz-stories/*": ["storybook/stories/*"]
+      "@kustomz-stories/*": ["storybook/stories/lib/*"]
     },
     "sourceMap": false,
     "target": "esnext"

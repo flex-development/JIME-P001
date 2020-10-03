@@ -2,12 +2,14 @@ import { withConsole } from '@storybook/addon-console'
 import { DocsContainer } from '@storybook/addon-docs/blocks'
 import { withTests } from '@storybook/addon-jest'
 import { withHTML } from '@whitespace/storybook-addon-html/react'
+import prettier from '../../../.prettierrc.json'
 import '../src/theme/theme.scss'
 import results from '../__tests__/jest-test-results.json'
 import { AdobeXDArtboards, Documentation, getThemeColor } from './config'
 
 /**
  * @file Storybook Configuration
+ * @module storybook/preview
  */
 
 export const parameters = {
@@ -40,22 +42,7 @@ export const decorators = [
   },
 
   // Display compiled HTML for each story and format with Prettier
-  withHTML({
-    prettier: {
-      arrowParens: 'avoid',
-      bracketSpacing: true,
-      htmlWhitespaceSensitivity: 'css',
-      jsxBracketSameLine: false,
-      jsxSingleQuote: true,
-      printWidth: 80,
-      proseWrap: 'always',
-      quoteProps: 'as-needed',
-      semi: false,
-      singleQuote: true,
-      tabWidth: 2,
-      trailingComma: 'none'
-    }
-  }),
+  withHTML({ prettier }),
 
   // Add Jest output to stories
   withTests({ results })

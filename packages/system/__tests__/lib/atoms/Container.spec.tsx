@@ -5,7 +5,7 @@ import React from 'react'
 /**
  * @file Tests - Container
  * @module tests/lib/atoms/Container
- * @see {@link https://v5.getbootstrap.com/docs/5.0/layout/containers/}
+ * @see https://v5.getbootstrap.com/docs/5.0/layout/containers/
  */
 
 it('renders <div class="container">', () => {

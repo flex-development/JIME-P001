@@ -1,13 +1,12 @@
-import { AnyObject, ANYTHING } from '@flex-development/kustomtypez'
+import { ANYTHING } from '@flex-development/kustomtypez'
+import { useLineItemInput, useProductVariants } from '@kustomz/hooks'
 import {
   HTMLButtonClickEvent,
   HTMLInputChangeEvent,
   HTMLSelectChangeEvent,
   HTMLTextAreaChangeEvent
 } from '@kustomz/types'
-import { findVariantByID } from '@kustomz/utils'
-import React, { FC, useState } from 'react'
-import { useSetState } from 'react-hanger'
+import React, { FC } from 'react'
 import { LineItemToAdd, Product, ProductVariant } from 'shopify-buy'
 import {
   Box,
@@ -34,8 +33,8 @@ export interface AddToCartFormProps extends FormProps {
    * Form submission handler. If a submit handler isn't passed the result will
    * be logged to the console.
    *
-   * `@param item - Line item to add to cart`
-   * `@param event - `<button>` onClick event`
+   * @param item - Line item to add to cart
+   * @param event - `<button>` onClick event
    */
   addToCart?(item: LineItemToAdd, event: HTMLButtonClickEvent): ANYTHING
 
@@ -51,7 +50,7 @@ export interface AddToCartFormProps extends FormProps {
    *
    * @default []
    */
-  variants: ProductVariant[]
+  variants: Partial<ProductVariant>[]
 }
 
 /**
@@ -60,95 +59,34 @@ export interface AddToCartFormProps extends FormProps {
  *
  * - https://shopify.dev/docs/storefront-api/reference/object/product
  * - https://shopify.dev/docs/storefront-api/reference/object/productvariant
+ * 
+ * **TODO**:
+ * 
+ * - Add `ImageCarousel` to display product images
  */
 export const AddToCartForm: FC<AddToCartFormProps> = (
   props: AddToCartFormProps
 ) => {
-  const { description, addToCart, variants: initialVariants, ...rest } = props
+  const {
+    addToCart = (item: LineItemToAdd, event: HTMLButtonClickEvent) => {
+      event.preventDefault()
+      console.log(`${item.variantId} added to cart`, item)
+    },
+    description,
+    variants: initialVariants,
+    ...rest
+  } = props
 
-  // Initial variants state
-  const [variants] = useState(initialVariants || [])
-
-  // Get product variants as `OptionProps` for `<Select />` component
-  const options = variants.map(({ available, id, title }: ProductVariant) => {
-    return { 'data-available': available, label: title, value: id }
-  })
-
-  // Initialize selected variant state
-  // The default option will be the first object in the array or null
-  const [selected, setSelected] = useState<ProductVariant | AnyObject>(
-    variants[0] || {}
+  // Use product variants as options
+  const { options, selectVariant, selected = {} } = useProductVariants(
+    initialVariants
   )
-
-  // Initialize kustom product description state
-  // ! Keep in sync with product title in Shopify
-  const [kustom] = useState(selected.productTitle === 'KUSTOMZ')
 
   // Initialize line item state
   // This object will be passed to props.addToCart if the fn is defined
-  const { state: item, setState: updateLineItem } = useSetState<LineItemToAdd>({
-    customAttributes: [],
-    quantity: 1,
-    variantId: selected.id
-  })
-
-  /**
-   * Updates the selected variant.
-   *
-   * @param event - `change` event from `<select>` element
-   */
-  const selectProductVariant = (event: HTMLSelectChangeEvent) => {
-    let newVariant = findVariantByID(variants, event.target.value)
-
-    if (newVariant?.id) {
-      newVariant = newVariant as ProductVariant
-
-      updateLineItem({ quantity: 1, variantId: newVariant.id })
-
-      return setSelected(newVariant)
-    }
-  }
-
-  /**
-   * Updates the number of products to add to the cart.
-   *
-   * @param event - `change` event from `<input>` element
-   */
-  const updateQuantity = (event: HTMLInputChangeEvent) => {
-    const { value } = event.target
-
-    const quantity = JSON.parse(value || '0')
-
-    return updateLineItem({ quantity: quantity < 0 ? 0 : quantity })
-  }
-
-  /**
-   * Adds the `kustom` product description as a custom attribute.
-   *
-   * @param event - `change` event from `<textarea>` element
-   */
-  const addKustomDescription = (event: HTMLTextAreaChangeEvent) => {
-    const { name: key, value } = event.target
-
-    return updateLineItem({ customAttributes: [{ key, value }] })
-  }
-
-  /**
-   * If an `addToCart` function was provided, the form state, a line item
-   * object, will be passed to the function. The `click` event from form submit
-   * button will also be passed.
-   *
-   * @param event - `click` event from submit button
-   */
-  const createLineItem = (event: HTMLButtonClickEvent) => {
-    event.preventDefault && event.preventDefault()
-
-    const log = process.env.NODE_ENV === 'production' ? 'debug' : 'log'
-
-    console[log](`${selected.title} added to cart`, item)
-
-    if (addToCart) return addToCart(item, event)
-  }
+  const { input: item, updateAttribute, updateQuantity } = useLineItemInput(
+    selected.id
+  )
 
   return (
     <Form {...rest} className='add-to-cart-form'>
@@ -168,7 +106,7 @@ export const AddToCartForm: FC<AddToCartFormProps> = (
           aria-label='Product variant selection'
           data-selected={selected.title}
           name='variantId'
-          onChange={selectProductVariant}
+          onChange={(e: HTMLSelectChangeEvent) => selectVariant(e.target.value)}
           options={options}
           placeholder='Select an option'
           value={selected.id}
@@ -178,7 +116,9 @@ export const AddToCartForm: FC<AddToCartFormProps> = (
           input={{
             'aria-label': 'Product quantity',
             min: 0,
-            onChange: updateQuantity,
+            onChange: ({ target: { value } }: HTMLInputChangeEvent) => {
+              return updateQuantity(value)
+            },
             type: 'number',
             value: item.quantity
           }}
@@ -187,12 +127,14 @@ export const AddToCartForm: FC<AddToCartFormProps> = (
         </LabeledInput>
       </Box>
 
-      {/* Only visible for "KUSTOMZ" product */}
-      {kustom && (
+      {/* Only visible for "KUSTOMZ" product - sync with Shopify */}
+      {selected.productTitle === 'KUSTOMZ' && (
         <Box className='row-fluid mt-3'>
           <TextArea
             aria-label='Kustom product description'
-            onChange={addKustomDescription}
+            onChange={({ target }: HTMLTextAreaChangeEvent) => {
+              return updateAttribute(target.name, target.value)
+            }}
             name='kpd'
             placeholder='Describe your kustom ash or rolling tray'
             value={item.customAttributes?.[0]?.value}
@@ -207,7 +149,7 @@ export const AddToCartForm: FC<AddToCartFormProps> = (
             aria-label='Add product to cart'
             className='float-sm-right w-sm-auto w-100'
             disabled={!selected.available}
-            onClick={createLineItem}
+            onClick={(event: HTMLButtonClickEvent) => addToCart(item, event)}
             type='submit'
           />
         </Box>

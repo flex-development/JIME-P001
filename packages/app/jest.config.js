@@ -2,7 +2,7 @@ const path = require('path')
 
 /**
  * @file Jest Configuration
- * @see {@link https://jestjs.io/docs/en/configuration}
+ * @see https://jestjs.io/docs/en/configuration
  */
 
 module.exports = {

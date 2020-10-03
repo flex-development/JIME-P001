@@ -1,6 +1,6 @@
 /**
  * @file Next.js Configuration
- * @see {@link https://nextjs.org/docs/api-reference/next.config.js/introduction}
+ * @see https://nextjs.org/docs/api-reference/next.config.js/introduction
  */
 
 const {

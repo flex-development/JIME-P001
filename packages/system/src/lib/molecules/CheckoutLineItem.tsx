@@ -1,16 +1,16 @@
 import { ANYTHING } from '@flex-development/kustomtypez'
+import { useLineItemInput } from '@kustomz/hooks'
 import { HTMLButtonClickEvent, HTMLInputChangeEvent } from '@kustomz/types'
 import { sanitizeQuantity } from '@kustomz/utils'
 import classnames from 'classnames'
 import React, { FC, Fragment } from 'react'
-import { useSetState } from 'react-hanger'
-import { CustomAttribute, LineItemToAdd } from 'shopify-buy'
+import { AttributeInput, CustomAttribute, LineItem } from 'shopify-buy'
 import {
   Box,
   BoxProps,
   Button,
   Image,
-  ImageProps,
+
   Input,
   Paragraph,
   Span
@@ -29,164 +29,129 @@ import { ProductHeading } from './ProductHeading'
 export interface CheckoutLineItemProps extends BoxProps {
   /**
    * Additional line item properties.
-   * 
+   *
    * @default []
    */
   customAttributes?: CustomAttribute[]
 
   /**
-   * Price of variant, formatted according to shop currency format string. For
-   * example, "$10.00".
+   * Line item ID.
    */
-  formattedPrice: string
+  id: string
 
   /**
-   * `onChange` handler to pass to the `<Input>` component nested in the
-   * `<LabeledInput`. This function will be fired when the user updates the
-   * product quantity.
-   * 
-   * `@param item - Update line item`
-   * `@param event - change event from quantity input`
+   * The total price of the line item.
    */
-  handleQuantity?(item: LineItemToAdd, event?: HTMLInputChangeEvent): ANYTHING
+  linePrice: LineItem['linePrice']
 
   /**
    * Product variant image properties. If this attribute is undefined, a
    * placeholder image will be displayed instead.
    */
-  image?: ImageProps
+  image: Partial<LineItem['image']>
+
+  /**
+   * Number of variants to order.
+   *
+   * @default 1
+   */
+  quantity?: LineItem['quantity']
+
+  /**
+   * `onClick` handler that's fired when the user clicks the "REMOVE" button.
+   * 
+   * @param event - `click` event from remove button
+   * @param event.target - <button name="remove"> element
+   * @param event.target.value - ID of the line item to remove
+   */
+  remove?(event?: HTMLButtonClickEvent): ANYTHING
 
   /**
    * Title of variant's parent product.
    */
-  productTitle: string
+  title: LineItem['title']
 
   /**
-   * Number of variants to order. If `0`, the line item will be hidden.
-   * 
-   * @default 1
+   * `onChange` handler that's fired when the user updates the line item
+   * quantity.
+   *
+   * @param updates - Updated line item values
+   * @param updates.key - Name of a custom attribute
+   * @param updates.quantity - Number of variants to order
+   * @param updates.value - Value of {@param updates.key}
+   * @param updates.variantId - ID of the variant the 
+   * @param event - `change` event from quantity input
    */
-  quantity?: number
-
-  /**
-   * `onClick` handler to pass to the remove button. The ID of the variant to
-   * remove, as well as the `click` event, will be passed to the function.
-   * 
-   * When a variant is removed, it's quantity will be set to 0 and the item will
-   * disappear.
-   * 
-   * `@param variantId - ID of variant to remove`
-   * `@param event - click event from remove button`
-   */
-  remove?(variantId: string | number, event?: HTMLButtonClickEvent): ANYTHING
-
-  /**
-   * Title of the product variant to order.
-   */
-  title: string
-
+  update?(item: AttributeInput, event?: HTMLInputChangeEvent): ANYTHING
 
   /**
    * ID of line item variant.
    */
-  variantId: string | number
+  variantId: LineItem['variantId']
+
+  /**
+   * Title of the product variant to order.
+   */
+  variantTitle: LineItem['variantTitle']
 }
 
 /**
- * Renders a `Box` component containing a product or product variant image, the
- * product title, selected variant, variant price, and quantity.
+ * Renders a `Box` component containing a product image, the product title,
+ * selected variant, variant price, and quantity.
  *
  * The user will be able to update the product quantity, as well as remove the
  * item from their cart.
- * 
+ *
  * **TODO**:
- * 
- * - Handle product quantity update
- * - Reset state and hide output when "remove" button is clicked
+ *
+ * - ? Allow users to update custom attributes for line item
  */
 export const CheckoutLineItem: FC<CheckoutLineItemProps> = (
   props: CheckoutLineItemProps
 ) => {
   const {
     customAttributes = [],
-    formattedPrice = '$X.XX',
-    handleQuantity = item => {
-      console.log(`New quantity for ${item.variantId}: ${item.quantity}`)
-    },
-    image = {} as ImageProps,
-    productTitle,
+    image,
+    linePrice,
     quantity,
-    remove = variantId => console.log(`Removed ${variantId}`),
+    remove = lineItemId => console.log(`Removed ${lineItemId}`),
     title,
+    update = updates => {
+      console.log(`Updated ${item.variantId}`, updates)
+    },
     variantId,
+    variantTitle,
     ...rest
   } = props
 
   // Initialize line item state
-  const { state: item, setState: updateLineItem } = useSetState({
-    customAttributes,
-    quantity,
-    variantId
-  })
-
-  /**
-   * Updates the number of products to add to the cart.
-   *
-   * @param event - `change` event from `<input>` element
-   */
-  const updateQuantity = (event: HTMLInputChangeEvent) => {
-    const { target } = event
-
-    // Get updated line item data
-    const updatedItem = { ...item, quantity: sanitizeQuantity(target.value) }
-
-    // Update line item state
-    updateLineItem({ quantity: updatedItem.quantity })
-
-    // Pass line item state and event back to handler
-    return handleQuantity(updatedItem, event)
-  }
-
-  /**
-   * Sets the product quantity to 0 and hides the rendered output.
-   *
-   * @param event - `click` event from `<button>` element
-   */
-  const removeItem = (event: HTMLButtonClickEvent) => {
-    // Update line item state
-    updateLineItem({ quantity: 0 })
-
-    // Pass variant ID and event back to handler
-    return remove(variantId, event)
-  }
-
-  // Update component and subcomponent classes
-  rest.className = classnames('line-item', rest.className)
-  image.className = classnames('line-item-img', image.className)
+  const {
+    input: item,
+    updateQuantity
+  } = useLineItemInput(variantId, quantity, customAttributes)
 
   return (
-    <Box {...rest} id={`${variantId}`}>
+    <Box {...rest} className={classnames('line-item', rest.className)}>
       <Box className='col-md-3 col-12 mb-md-0 mb-6'>
-        <Image {...image as ImageProps} fluid />
+        <Image alt={`${title}`} fluid src={image.src as string} />
       </Box>
       <Box className='col pl-md-6 pl-0'>
         <ProductHeading
           className='line-item-heading'
-          price={formattedPrice}
+          price={`$${linePrice}`}
           size={3}
-          title={productTitle}
+          title={title}
         />
 
         <Paragraph className='line-item-attribute'>
-          {
-            customAttributes[0]?.value
-              ? (
-                <Fragment>
-                  Kustom product description:&nbsp;
-                  <Span>{customAttributes[0]?.value}</Span>
-                </Fragment>
-              )
-              : 'No Kustomizations.'
+          {customAttributes[0]?.value
+            ? (
+              <Fragment>
+                Kustom product description:&nbsp;
+                <Span>{customAttributes[0]?.value}</Span>
+              </Fragment>
+            )
+            : 'No Kustomizations.'
           }
         </Paragraph>
 
@@ -196,7 +161,7 @@ export const CheckoutLineItem: FC<CheckoutLineItemProps> = (
               className='line-item-title'
               name='title'
               readOnly
-              value={title}
+              value={variantTitle}
             />
 
             <LabeledInput
@@ -205,7 +170,16 @@ export const CheckoutLineItem: FC<CheckoutLineItemProps> = (
                 'aria-label': 'Line item quantity',
                 min: 0,
                 name: 'quantity',
-                onChange: updateQuantity,
+                onChange: (event: HTMLInputChangeEvent) => {
+                  const updated_item: AttributeInput = {
+                    quantity: sanitizeQuantity(event.target.value),
+                    variantId: item.variantId as string
+                  }
+
+                  updateQuantity(updated_item.quantity)
+
+                  return update(updated_item, event)
+                },
                 type: 'number',
                 value: item.quantity
               }}
@@ -216,8 +190,9 @@ export const CheckoutLineItem: FC<CheckoutLineItemProps> = (
 
           <Button
             className='mt-md-0 mt-6 px-5'
-            onClick={(event: HTMLButtonClickEvent) => removeItem(event)}
+            onClick={(e: HTMLButtonClickEvent) => remove(e.target.value)}
             name='remove'
+            value={rest.id}
           >
             Remove
           </Button>
@@ -228,9 +203,5 @@ export const CheckoutLineItem: FC<CheckoutLineItemProps> = (
 }
 
 CheckoutLineItem.defaultProps = {
-  image: {
-    alt: 'Product placeholder image',
-    src: 'https://cdn.shopify.com/s/files/1/0470/4790/1339/files/img-placeholder.png?v=1601594431'
-  },
   quantity: 1
 }

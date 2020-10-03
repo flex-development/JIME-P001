@@ -1,7 +1,7 @@
 import { AnyObject } from '@flex-development/kustomtypez'
+import { WithSummary } from '@kustomz-stories/atoms/Details.stories'
 import { render } from '@testing-library/react'
 import React from 'react'
-import { WithSummary } from '../../../storybook/stories/lib/atoms/Details.stories'
 import { ArgsMatcher } from '../../jest-env'
 
 /**

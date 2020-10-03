@@ -10,7 +10,7 @@ import React, {
 /**
  * @file Render an <a> element
  * @module lib/elements/Link
- * @see {@link https://developer.mozilla.org/docs/Web/HTML/Element/a}
+ * @see https://developer.mozilla.org/docs/Web/HTML/Element/a
  */
 
 /**

@@ -8,13 +8,13 @@ import { isBoolean, isNumber, isString } from 'lodash'
 
 /**
  * Converts a value into a product quantity.
- * 
+ *
  * `0` will be returned if:
- * 
+ *
  * - `value` is `null`, `undefined`, or `false`
  * - `value` isn't a number or a string containing a number
  * - `value` is less than 0 after being parsed with `JSON.parse`
- * 
+ *
  * @param value - Quantity value to sanitize
  */
 export const sanitizeQuantity = (value?: ANYTHING): number => {

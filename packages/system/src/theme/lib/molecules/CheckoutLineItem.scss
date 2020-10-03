@@ -10,7 +10,7 @@
   @include media-breakpoint-up(md) {
     @include flex-spread;
   }
-  
+
   &-attribute,
   &-heading {
     margin-bottom: $spacers-0;

@@ -1,3 +1,4 @@
+import { useMutatedProps } from '@kustomz/hooks'
 import React, { FC } from 'react'
 import useBoolean from 'react-hanger/array/useBoolean'
 import { Box, BoxProps, Item, Link, LinkProps, List } from '../atoms'
@@ -43,13 +44,16 @@ export const Dropdown: FC<DropdownProps> = (
   const {
     expanded: initialExpanded = false,
     links = [],
-    title
+    title,
+    ...rest
   } = props
+
+  const mutatedProps = useMutatedProps<typeof rest, BoxProps>(rest, 'dropdown')
 
   const [expanded, { toggle }] = useBoolean(initialExpanded)
 
   return (
-    <Box className='dropdown'>
+    <Box {...mutatedProps}>
       {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
       <Link
         aria-expanded={expanded}

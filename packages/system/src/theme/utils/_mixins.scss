@@ -360,11 +360,11 @@
 /// @param {String} $dimension [width] - Target width or height
 @mixin respond-to($breakpoint, $bound: max, $dimension: width) {
   @if $dimension == width {
-    @include respond-to-width(strip-convert($breakpoint), $bound) {
+    @include respond-to-width($breakpoint, $bound) {
       @content;
     }
   } @else {
-    @include respond-to-height(strip-convert($breakpoint), $bound) {
+    @include respond-to-height($breakpoint, $bound) {
       @content;
     }
   }

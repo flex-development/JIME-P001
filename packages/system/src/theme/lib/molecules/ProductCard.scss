@@ -1,0 +1,44 @@
+/// ----------------------------------------------------------------------------
+/// @group ProductCard
+/// ----------------------------------------------------------------------------
+
+.product-card {
+  border: none;
+
+  .dropdown-toggle {
+    border-bottom: none;
+    font-weight: $font-weight-medium;
+  }
+
+  &-price {
+    color: $light;
+  }
+
+  .card-title {
+    color: $secondary;
+    letter-spacing: $spacers-1 / 3;
+    margin-bottom: $spacers-0;
+  }
+
+  .card-footer {
+    @include media-breakpoint-up(sm) {
+      @include flex-spread;
+
+      flex-direction: row;
+    }
+
+    @include padding-x($spacers-6);
+
+    @include padding-y($spacers-4);
+
+    background-color: $darker;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &-price,
+  .card-title {
+    font-size: $font-size-lg;
+    font-weight: $font-weight-semibold;    
+  }
+}

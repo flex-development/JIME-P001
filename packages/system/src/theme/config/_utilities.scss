@@ -186,7 +186,7 @@ $font-families: (
 
 $font-sizes: (
   xs: $font-size-xs,
-  sm: bootstrap.$font-size-sm,
+  sm: $font-size-sm,
   lg: $font-size-lg,
   xl: $font-size-xl,
   xxl: $font-size-xxl

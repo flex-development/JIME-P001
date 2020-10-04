@@ -139,7 +139,7 @@ export const Image: FREC<ImageRefProps> = forwardRef((props, ref) => {
     rounded
   })
 
-  /* eslint-disable jsx-a11y/alt-text */
+  /* eslint-disable-next-line jsx-a11y/alt-text */
 
   return <img {...mutatedProps} ref={ref} />
 

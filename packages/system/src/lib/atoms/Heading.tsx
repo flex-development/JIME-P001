@@ -56,7 +56,7 @@ export const Heading: FREC<HeadingRefProps> = forwardRef((props, ref) => {
     DetailedHTMLProps<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement>
   >({ ...rest, ref })
 
-  /* eslint-disable jsx-a11y/heading-has-content */
+  /* eslint-disable-next-line jsx-a11y/heading-has-content */
 
   switch (size) {
     case 2:

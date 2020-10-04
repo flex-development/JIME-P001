@@ -1,0 +1,55 @@
+/// ----------------------------------------------------------------------------
+/// @group Dropdown
+/// ----------------------------------------------------------------------------
+
+.dropdown {
+  &-menu,
+  &-toggle {
+    @include element-size(100%);
+  }
+
+  &-header {
+    @include event {
+      color: $dropdown-header-hover-color;
+    }
+  }
+
+  &-menu {
+    @include absolute($spacers-9 !important);
+
+    @include padding-y($spacers-0);
+
+    background-color: $ghost;
+    margin-top: $spacers-0;
+    transform: none !important;
+
+    &.nav {
+      display: none;
+
+      &.show {
+        @include display-flex;
+
+        flex-wrap: wrap;
+      }
+    }
+  }
+
+  &-item {
+    @include event {
+      background-color: $dropdown-item-hover-bg;
+    }
+
+    background-color: $dropdown-item-bg;
+    color: $dropdown-item-color;
+
+    a {
+      color: $dropdown-item-color;
+    }
+  }
+
+  &-toggle {
+    border-bottom: $border-width-sm solid $light-25;
+    font-size: $dropdown-font-size;
+    text-transform: uppercase;
+  }
+}

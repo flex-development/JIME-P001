@@ -3,7 +3,7 @@
  * @module storybook/config/typography
  */
 
-/* eslint-disable sort-keys */
+/* eslint-disable-next-line sort-keys */
 
 /**
  * Font sizes used in this project.

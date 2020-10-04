@@ -126,7 +126,7 @@ export const Link: FREC<LinkRefProps> = forwardRef((props, ref) => {
   )
 
   if (toggle) {
-    mutatedProps['aria-expanded'] = false
+    mutatedProps['aria-expanded'] = rest['aria-expanded'] || false
     mutatedProps['data-toggle'] = 'dropdown'
     mutatedProps.role = 'button'
   }

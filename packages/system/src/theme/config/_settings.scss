@@ -124,7 +124,10 @@ $border-radius-lg: $border-radius;
 // -----------------------------------------------------------------------------
 
 $border-color: $darker;
+
 $border-width: 2px;
+$border-width-sm: 1px;
+$border-width-xs: .5px;
 
 // -----------------------------------------------------------------------------
 // Typography
@@ -137,6 +140,7 @@ $font-family-sans-serif-special: quimby-gubernatorial, sans-serif;
 $font-size-base-em: 1em;
 
 $font-size-xs: $font-size-base-em * 0.75;
+$font-size-sm: $font-size-base-em * 0.875;
 $font-size-lg: $font-size-base-em * 1.125;
 $font-size-xl: $font-size-base-em * 1.25;
 $font-size-xxl: $font-size-base-em * 1.5;
@@ -240,12 +244,28 @@ $navbar-brand-font-size: strip-unit($font-size-lg) * 1rem;
 // Dropdowns
 // -----------------------------------------------------------------------------
 
+$dropdown-font-size: $font-size-sm;
+
+$dropdown-border-color: $ghost;
+$dropdown-border-width: $spacers-0;
+
 $dropdown-link-color: $link-color;
 $dropdown-link-hover-color: $dark;
 $dropdown-link-hover-bg: $primary;
 
 $dropdown-link-active-color: $dropdown-link-hover-color;
 $dropdown-link-active-bg: $dropdown-link-hover-bg;
+
+$dropdown-item-padding-y: $spacers-2;
+$dropdown-item-padding-x: $spacers-3;
+
+$dropdown-item-bg: $ghost;
+$dropdown-item-hover-bg: $primary;
+$dropdown-item-color: $primary;
+$dropdown-item-font-size: $font-size-xs;
+
+$dropdown-header-color: $primary;
+$dropdown-header-hover-color: $dropdown-header-color;
 
 // -----------------------------------------------------------------------------
 // Pagination

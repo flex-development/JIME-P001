@@ -1,7 +1,6 @@
 import { useMutatedProps } from '@kustomz/hooks'
 import { MutatedProps } from '@kustomz/types'
 import React, {
-  FC,
   forwardRef,
   ForwardRefExoticComponent as FREC,
   PropsWithoutRef,
@@ -21,11 +20,6 @@ export type HTMLListElement = HTMLOListElement & HTMLUListElement
  * List component properties.
  */
 export interface ListProps extends MutatedProps<HTMLListElement> {
-  /**
-   * Array of `Option` components to render.
-   */
-  children?: Array<typeof Item | FC<ItemProps>>
-
   /**
    * Type of list element to render.
    *

@@ -144,7 +144,7 @@ export const Button: FREC<ButtonRefProps> = forwardRef((props, ref) => {
 
   if (rest.disabled) mutatedProps['aria-disabled'] = true
 
-  /* eslint-disable react/button-has-type */
+  /* eslint-disable-next-line react/button-has-type */
   return <button {...mutatedProps} ref={ref} />
 })
 

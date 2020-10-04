@@ -8,7 +8,7 @@ import { NextApiRequest, NextApiResponse } from 'next'
  */
 
 // TODO: Remove disable rule when middleware functions are added
-/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable-next-line @typescript-eslint/no-unused-vars */
 
 export default (req: NextApiRequest, res: NextApiResponse): ANYTHING => {
   // Functions to run before every request

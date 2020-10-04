@@ -87,7 +87,7 @@ export const Label: FREC<LabelRefProps> = forwardRef((props, ref) => {
     'form-label': form
   })
 
-  /* eslint-disable jsx-a11y/label-has-associated-control */
+  /* eslint-disable-next-line jsx-a11y/label-has-associated-control */
 
   return (
     <label {...mutatedProps} htmlFor={htmlFor} ref={ref}>

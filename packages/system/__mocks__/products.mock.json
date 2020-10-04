@@ -23,6 +23,16 @@
         "updated_at": "2020-09-29T11:14:56-04:00"
       }
     ],
+    "options": [
+      {
+        "name": "Style",
+        "values": [
+          "FUNFETTI",
+          "JELLY $LIDES",
+          "LA $ONRISA"
+        ]
+      }
+    ],
     "variants": [
       {
         "available": true,
@@ -107,6 +117,16 @@
         "src": "https://cdn.shopify.com/s/files/1/0470/4790/1339/products/rolling-tray-la-sonrisa.jpg?v=1601392991"
       }
     ],
+    "options": [
+      {
+        "name": "Style",
+        "values": [
+          "FUNFETTI",
+          "JELLY $LIDES",
+          "LA $ONRISA"
+        ]
+      }
+    ],
     "variants": [
       {
         "available": true,
@@ -179,6 +199,17 @@
         "alt": null,
         "id": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0SW1hZ2UvMTk0MDA0Mjc1MDM3NzE=",
         "src": "https://cdn.shopify.com/s/files/1/0470/4790/1339/products/kustomz_23be575c-354d-4c08-98c7-eb5b07413198.jpg?v=1601404585"
+      }
+    ],
+    "options": [
+      {
+        "name": "Style",
+        "values": [
+          "Rolling Tray",
+          "♡ Ash Tray",
+          "▢ Ash Tray",
+          "◯ Ash Tray"
+        ]
       }
     ],
     "variants": [

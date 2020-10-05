@@ -1,12 +1,11 @@
 import { ANYTHING } from '@flex-development/kustomtypez'
 import { useLineItemInput } from '@kustomz/hooks'
 import { HTMLButtonClickEvent, HTMLInputChangeEvent } from '@kustomz/types'
-import { sanitizeQuantity } from '@kustomz/utils'
 import classnames from 'classnames'
 import React, { FC, Fragment } from 'react'
 import { AttributeInput, CustomAttribute, LineItem } from 'shopify-buy'
 import { Box, BoxProps, Button, Image, Input, Paragraph, Span } from '../atoms'
-import { LabeledInput } from './LabeledInput'
+import { LabeledFormControl } from './LabeledFormControl'
 import { ProductHeading } from './ProductHeading'
 
 /**
@@ -155,15 +154,15 @@ export const CheckoutLineItem: FC<CheckoutLineItemProps> = (
               value={variantTitle}
             />
 
-            <LabeledInput
+            <LabeledFormControl
               className='line-item-quantity'
-              input={{
+              control={{
                 'aria-label': 'Line item quantity',
                 min: 0,
                 name: 'quantity',
                 onChange: (event: HTMLInputChangeEvent) => {
                   const updated_item: AttributeInput = {
-                    quantity: sanitizeQuantity(event.target.value),
+                    quantity: (event.target.value as unknown) as number,
                     variantId: item.variantId as string
                   }
 
@@ -176,7 +175,7 @@ export const CheckoutLineItem: FC<CheckoutLineItemProps> = (
               }}
             >
               Quantity
-            </LabeledInput>
+            </LabeledFormControl>
           </Box>
 
           <Button

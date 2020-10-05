@@ -250,7 +250,7 @@ export interface InputProps
    * Supported by `text`, `search`, `url`, `tel`, `email`, `date`, `month`,
    * `week`, `time`, `datetime-local`, `number`, and `password` input types.
    */
-  readOnly?: boolean
+  readOnly?: Booleanish
 
   /**
    * A `Boolean` attribute which, if present, indicates that the user must
@@ -358,7 +358,7 @@ export type InputRefProps = ReflessInputProps & InputRefAttributes
 export const Input: FREC<InputRefProps> = forwardRef((props, ref) => {
   const checkInputTypes = ['checkbox', 'radio']
 
-  const { size, ...rest } = props
+  const { invalid, size, ...rest } = props
 
   const checks = checkInputTypes.includes(rest.type as string)
   const file = rest.type === 'file'
@@ -374,7 +374,8 @@ export const Input: FREC<InputRefProps> = forwardRef((props, ref) => {
     'form-check-input': checks,
     'form-control': !checks && !file,
     [`form-control-${size}`]: !checks && size,
-    'form-file-input': file
+    'form-file-input': file,
+    'is-invalid': invalid
   })
 
   return <input {...mutatedProps} ref={ref} />

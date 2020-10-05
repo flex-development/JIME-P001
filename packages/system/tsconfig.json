@@ -25,5 +25,5 @@
   },
   "extends": "../../tsconfig.json",
   "files": ["__tests__/jest-env.d.ts", "src/types/index.d.ts"],
-  "include": ["__tests__", "storybook", "src"]
+  "include": ["__tests__", "storybook", "src", "jest.setup.ts"]
 }

@@ -59,7 +59,8 @@ export const LabeledFormControl: FC<LabeledFormControlProps> = (
     }
   }
 
-  rest['aria-label'] = rest['aria-label'] || children
+  if (!control['aria-label']) control['aria-label'] = children
+
   rest['data-required'] = control.required
 
   const mutatedProps = useMutatedProps<typeof rest, LabelProps>(rest, {

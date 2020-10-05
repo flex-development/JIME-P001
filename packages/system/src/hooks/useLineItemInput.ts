@@ -74,7 +74,7 @@ export const useLineItemInput = (
   return {
     input,
     removeAttribute,
-    updateQuantity,
-    updateAttribute
+    updateAttribute,
+    updateQuantity
   }
 }

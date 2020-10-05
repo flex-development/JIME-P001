@@ -248,6 +248,11 @@ export interface MutatedFormControlProps<E = HTMLElement>
   disabled?: Booleanish
 
   /**
+   * If `true`, add the class `is-invalid`.
+   */
+  invalid?: Booleanish
+
+  /**
    * Indicates that the user must fill in a value before submitting a form.
    */
   required?: Booleanish

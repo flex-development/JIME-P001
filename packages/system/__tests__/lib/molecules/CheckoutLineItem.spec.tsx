@@ -3,7 +3,7 @@ import {
   Kustomz
 } from '@kustomz-stories/molecules/CheckoutLineItem.stories'
 import { CheckoutLineItemProps } from '@kustomz/lib'
-import { fireEvent, Matcher, render, screen } from '@testing-library/react'
+import { fireEvent, render, screen } from '@testing-library/react'
 import User from '@testing-library/user-event'
 import React from 'react'
 
@@ -11,6 +11,9 @@ import React from 'react'
  * @file Tests - CheckoutLineItem
  * @module tests/lib/molecules/CheckoutLineItem
  */
+
+// ! Keep in sync with CheckoutLineItem implementation
+const QUANTITY_LABEL = 'Line item quantity'
 
 it('renders <div class="line-item">', () => {
   const args = AshTray.args as CheckoutLineItemProps
@@ -20,24 +23,19 @@ it('renders <div class="line-item">', () => {
   expect(screen.getByTestId(args.id)).toHaveClass('line-item')
 })
 
-it('updates the product quantity', () => {
+// FIXME: Component passes tests manually (check state), but fails otherwise
+it('[FALSE ALARM] updates the product quantity', () => {
   const args = Kustomz.args as CheckoutLineItemProps
 
-  render(<Kustomz {...args} data-testid={args.id} />)
+  render(<Kustomz {...args} />)
 
-  // Initial quantity
-  const initial_quantity = args.quantity || 1
-
-  // Get input element
-  const input_matcher = (initial_quantity as unknown) as Matcher
-
-  // FIXME: TypeError: matcher.test is not a function
-  const input = screen.getByDisplayValue(input_matcher) as HTMLInputElement
+  // Get quantity <input> element
+  const input = screen.getByLabelText(QUANTITY_LABEL)
 
   // Mock product quantity update
   User.click(input)
   fireEvent.keyPress(input, { key: 'ArrowUp' })
 
   // Expect element with new quanity as value to be in the document
-  expect(input.value).toBe(`${initial_quantity + 1}`)
+  expect((input as HTMLInputElement).value).toBe(`${(args.quantity || 1) + 1}`)
 })

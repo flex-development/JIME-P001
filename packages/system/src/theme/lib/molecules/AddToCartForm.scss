@@ -63,8 +63,6 @@
     &:disabled {
       @include opacity(map-get($opacities, 0.25));
 
-      pointer-events: unset;
-
       &::after {
         content: 'Out of Stock';
       }

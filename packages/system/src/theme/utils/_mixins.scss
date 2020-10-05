@@ -288,6 +288,7 @@
     // see https://github.com/twbs/bootstrap/pull/11526.
     opacity: 1;
 
+    padding-left: $spacers-2;
     text-transform: $input-placeholder-text-transform;
   }
 
@@ -303,6 +304,12 @@
     // iOS fix for unreadable disabled content;
     // see https://github.com/twbs/bootstrap/issues/11655.
     opacity: 1;
+  }
+
+  // Hide box shadow in Firefox
+  &:-moz-ui-invalid,
+  &.is-invalid:focus {
+    box-shadow: none;
   }
 
   // Handle size argument

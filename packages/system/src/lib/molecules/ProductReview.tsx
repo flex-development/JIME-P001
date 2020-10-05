@@ -17,12 +17,12 @@ export interface ProductReviewProps extends BoxProps {
    * 
    * @default ''
    */
-  content?: ProductReviewEntity['content']
+  body: ProductReviewEntity['body']
 
   /**
    * Unique product review ID.
    */
-  id: ProductReviewEntity['content']
+  id: ProductReviewEntity['id']
 
   /**
    * Name of the customer who posted the review.
@@ -36,7 +36,7 @@ export interface ProductReviewProps extends BoxProps {
 export const ProductReview: FC<ProductReviewProps> = (
   props: ProductReviewProps
 ) => {
-  const { content, name, ...rest } = props
+  const { body, name, ...rest } = props
 
   const mutatedProps = useMutatedProps<typeof rest>(rest, 'product-review')
 
@@ -51,7 +51,7 @@ export const ProductReview: FC<ProductReviewProps> = (
       </Box>
       <Box className='product-review-text col-sm-10 col-12'>
         <Paragraph className='product-review-name'>{name}</Paragraph>
-        <Paragraph className='product-review-content'>{content}</Paragraph>
+        <Paragraph className='product-review-body'>{body}</Paragraph>
       </Box>
     </Box>
   )

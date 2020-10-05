@@ -1,6 +1,6 @@
+import { form_control_size as size, StoryFN } from '@kustomz-config/index'
 import { Option, Select, SelectProps } from '@kustomz/lib'
 import React from 'react'
-import { form_control_size as size, StoryFN } from '../../../config'
 
 /**
  * @file Stories - Select

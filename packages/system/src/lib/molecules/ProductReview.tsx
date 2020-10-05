@@ -14,7 +14,7 @@ import { Box, BoxProps, Image, Paragraph } from '../atoms'
 export interface ProductReviewProps extends BoxProps {
   /**
    * Product review text.
-   * 
+   *
    * @default ''
    */
   body: ProductReviewEntity['body']

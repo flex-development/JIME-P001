@@ -1,8 +1,8 @@
+import { StoryFN } from '@kustomz-config/index'
 import { ProductCard, ProductCardProps } from '@kustomz/lib'
 import { omit } from 'lodash'
 import React from 'react'
 import products from '../../../../__mocks__/products.mock.json'
-import { StoryFN } from '../../../config'
 
 /**
  * @file Stories - ProductCard

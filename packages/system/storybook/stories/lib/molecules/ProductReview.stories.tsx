@@ -1,6 +1,6 @@
+import { StoryFN } from '@kustomz-config/index'
 import { ProductReview, ProductReviewProps } from '@kustomz/lib'
 import React from 'react'
-import { StoryFN } from '../../../config'
 
 /**
  * @file Stories - ProductReview
@@ -20,7 +20,8 @@ export const Default: StoryFN<ProductReviewProps> = (
 ) => <ProductReview {...args} />
 
 Default.args = {
-  body: 'Gastropub pork belly deserunt veniam four dollar toast, occaecat master cleanse copper mug heirloom excepteur austin asymmetrical deep v sint kickstarter. Lumbersexual hoodie succulents, yuccie drinking vinegar cupidatat enim.',
+  body:
+    'Gastropub pork belly deserunt veniam four dollar toast, occaecat master cleanse copper mug heirloom excepteur austin asymmetrical deep v sint kickstarter. Lumbersexual hoodie succulents, yuccie drinking vinegar cupidatat enim.',
   id: 'customer-review-0',
   name: 'Customer Name',
   style: {

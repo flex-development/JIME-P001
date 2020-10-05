@@ -17,6 +17,7 @@
     "paths": {
       "@kustomz/*": ["src/*"],
       "@kustomz-config/*": ["storybook/config/*"],
+      "@kustomz-mocks/*": ["__mocks__/*"],
       "@kustomz-stories/*": ["storybook/stories/lib/*"]
     },
     "sourceMap": false,

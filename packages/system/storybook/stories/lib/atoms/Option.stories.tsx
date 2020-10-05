@@ -1,6 +1,6 @@
+import { StoryFN } from '@kustomz-config/index'
 import { Option, OptionProps } from '@kustomz/lib'
 import React from 'react'
-import { StoryFN } from '../../../config'
 
 /**
  * @file Stories - Option

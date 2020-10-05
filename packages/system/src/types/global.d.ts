@@ -248,6 +248,11 @@ export interface MutatedFormControlProps<E = HTMLElement>
   disabled?: Booleanish
 
   /**
+   * Indicates that the user must fill in a value before submitting a form.
+   */
+  required?: Booleanish
+
+  /**
    * The `id` of the `<form>` element that the element is associated with.
    *
    * If this attribute is not specified, the element must be a descendant of a

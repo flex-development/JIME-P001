@@ -1,10 +1,10 @@
-import { Button, ButtonProps } from '@kustomz/lib'
-import React from 'react'
 import {
   button_variant as variant,
   form_control_size as size,
   StoryFN
-} from '../../../config'
+} from '@kustomz-config/index'
+import { Button, ButtonProps } from '@kustomz/lib'
+import React from 'react'
 
 /**
  * @file Stories - Button

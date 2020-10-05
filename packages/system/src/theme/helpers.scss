@@ -83,7 +83,8 @@
 .form-control {
   &::placeholder {
     font-size: $input-placeholder-size;
-    text-transform: uppercase;
+    padding-left: $spacers-2;
+    text-transform: $input-placeholder-text-transform;
   }
 }
 

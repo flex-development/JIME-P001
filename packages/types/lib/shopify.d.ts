@@ -30,6 +30,7 @@ export type ProductResource = {
   id: string
   images: ImageResource[]
   options: ProductOptionResource[]
+  variants: ProductVariantResource[]
   title: string
 }
 

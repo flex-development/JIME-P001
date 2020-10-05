@@ -3,7 +3,7 @@
 /// ----------------------------------------------------------------------------
 
 textarea.form-control {
-  @include element-size($spacers-24, height);
+  @include element-size($spacers-23, height);
 
   border-color: $primary;
 }

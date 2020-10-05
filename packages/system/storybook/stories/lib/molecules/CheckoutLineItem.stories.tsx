@@ -1,7 +1,7 @@
+import { StoryFN } from '@kustomz-config/index'
 import { CheckoutLineItem, CheckoutLineItemProps } from '@kustomz/lib'
 import React from 'react'
 import items from '../../../../__mocks__/items.mock.json'
-import { StoryFN } from '../../../config'
 
 /**
  * @file Stories - CheckoutLineItem

@@ -1,6 +1,6 @@
+import { StoryFN } from '@kustomz-config/index'
 import { Item, List, ListProps } from '@kustomz/lib'
 import React from 'react'
-import { StoryFN } from '../../../config'
 
 /**
  * @file Stories - List

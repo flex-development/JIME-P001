@@ -1,10 +1,10 @@
-import { Input, InputProps } from '@kustomz/lib'
-import React from 'react'
 import {
   form_control_size as size,
   input_type as type,
   StoryFN
-} from '../../../config'
+} from '@kustomz-config/index'
+import { Input, InputProps } from '@kustomz/lib'
+import React from 'react'
 
 /**
  * @file Stories - Input

@@ -1,7 +1,4 @@
-import {
-  Fluid,
-  Thumbnail
-} from '@kustomz-stories/atoms/Image.stories'
+import { Fluid, Thumbnail } from '@kustomz-stories/atoms/Image.stories'
 import { ImageProps } from '@kustomz/lib'
 import { render } from '@testing-library/react'
 import React from 'react'

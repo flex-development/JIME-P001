@@ -39,7 +39,7 @@
     "dist"
   ],
   "scripts": {
-    "predev": "yarn test:quiet && cross-env NODE_ENV=development",
+    "predev": "vc env pull --yes && yarn test:quiet",
     "dev:types": "lerna run dev --scope @flex-development/kustomtypez",
     "dev:storybook": "start-storybook -p 3000 -c storybook -s ../app/public --ci",
     "dev:storybook:docs": "yarn dev:storybook --docs",
@@ -104,7 +104,7 @@
     "regenerator-runtime": "^0.13.7",
     "sass": "^1.26.10",
     "sass-loader": "^9.0.3",
-    "shopify-buy": "^2.11.0",
+    "shopify-buy": "2.11.0",
     "style-loader": "^1.2.1",
     "url-loader": "^4.1.0"
   },

@@ -15,9 +15,9 @@ export default {
   title: 'Library/Molecules/Dropdown'
 }
 
-export const ProductOptions: StoryFN<DropdownProps> = (
-  args: DropdownProps
-) => <Dropdown {...args} />
+export const ProductOptions: StoryFN<DropdownProps> = (args: DropdownProps) => (
+  <Dropdown {...args} />
+)
 
 ProductOptions.args = {
   links: [

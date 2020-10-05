@@ -5,10 +5,7 @@ import {
   useCustomAttributes,
   UseCustomAttributesActions
 } from './useCustomAttributes'
-import {
-  useQuantity,
-  UseQuantityActions
-} from './useQuantity'
+import { useQuantity, UseQuantityActions } from './useQuantity'
 
 /**
  * @file Specify the input fields to create a line item on a checkout
@@ -18,9 +15,8 @@ import {
 /**
  * Functions to mutate `useLineItemInput` state.
  */
-export type UseLineItemInputActions = (
-  UseCustomAttributesActions & UseQuantityActions
-)
+export type UseLineItemInputActions = UseCustomAttributesActions &
+  UseQuantityActions
 
 /**
  * Internal `useLineItemInput` state.
@@ -40,10 +36,10 @@ export type UseLineItemInput = UseLineItemInputActions & UseLineItemInputState
 
 /**
  * Specify the input fields to create a checkout line item.
- * 
+ *
  * @see
  * https://shopify.dev/docs/storefront-api/reference/mutation/input-object/checkoutlineiteminput
- * 
+ *
  * @param variantId - ID of the product variant to add to a checkout
  * @param initialQuantity - Initial number of variants to add
  * @param initialAttributes - Custom line item properties
@@ -66,10 +62,9 @@ export const useLineItemInput = (
   // Initialize line item input state
   const initialInput = { customAttributes, quantity, variantId }
 
-  const {
-    state: input,
-    setState: setInput
-  } = useSetState<UseLineItemInputState['input']>(initialInput)
+  const { state: input, setState: setInput } = useSetState<
+    UseLineItemInputState['input']
+  >(initialInput)
 
   // Update line item state
   useEffect(() => {

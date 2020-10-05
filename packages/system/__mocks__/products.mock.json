@@ -1,297 +1,210 @@
 [
   {
     "id": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0LzU2NjQ2MDk1MzQxMDc=",
-    "title": "Ash Tray",
+    "available": true,
     "description": "",
+    "handle": "ash-tray",
+    "title": "Ash Tray",
+    "options": [
+      {
+        "id": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0T3B0aW9uLzcyMjE4MjA0NTcxMTU=",
+        "name": "Style",
+        "values": ["FUNFETTI", "JELLY $LIDES", "LA $ONRISA"]
+      }
+    ],
     "images": [
       {
         "alt": null,
-        "created_at": "2020-09-29T11:14:55-04:00",
-        "id": 19397218205851,
-        "position": 1,
-        "product_id": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0LzU2NjQ2MDk1MzQxMDc=",
-        "src": "https://cdn.shopify.com/s/files/1/0470/4790/1339/products/ash-tray-funfetti.jpg?v=1601392495",
-        "updated_at": "2020-09-29T11:14:55-04:00"
+        "id": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0SW1hZ2UvMTkzOTcyMTgyMDU4NTE=",
+        "src": "https://cdn.shopify.com/s/files/1/0470/4790/1339/products/ash-tray-funfetti.jpg?v=1601392495"
       },
       {
         "alt": null,
-        "created_at": "2020-09-29T11:14:56-04:00",
-        "id": 19397218238619,
-        "position": 2,
-        "product_id": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0LzU2NjQ2MDk1MzQxMDc=",
-        "src": "https://cdn.shopify.com/s/files/1/0470/4790/1339/products/ash-tray-jelly-slides.jpg?v=1601392496",
-        "updated_at": "2020-09-29T11:14:56-04:00"
-      }
-    ],
-    "options": [
+        "id": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0SW1hZ2UvMTkzOTcyMTgyMzg2MTk=",
+        "src": "https://cdn.shopify.com/s/files/1/0470/4790/1339/products/ash-tray-jelly-slides.jpg?v=1601392496"
+      },
       {
-        "name": "Style",
-        "values": [
-          "FUNFETTI",
-          "JELLY $LIDES",
-          "LA $ONRISA"
-        ]
+        "alt": null,
+        "id": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0SW1hZ2UvMTk0NTE3NDk1MzE4MDM=",
+        "src": "https://cdn.shopify.com/s/files/1/0470/4790/1339/products/img-placeholder.png?v=1601760311"
       }
     ],
     "variants": [
       {
-        "available": true,
-        "formattedPrice": "$10.00",
         "id": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0LzU2NjQ2MzkwOTA4NDM=",
-        "image": {
-          "alt": null,
-          "id": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0SW1hZ2UvMTkzOTcyMTgyMDU4NTE=",
-          "src": "https://cdn.shopify.com/s/files/1/0470/4790/1339/products/ash-tray-funfetti.jpg?v=1601392495"
-        },
-        "optionValues": [
-          {
-            "name": "Style",
-            "value": "FUNFETTI"
-          }
-        ],
+        "title": "FUNFETTI",
         "price": "10.00",
-        "productId": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0LzU2NjQ2MDk1MzQxMDc=",
-        "productTitle": "Ash Tray",
-        "title": "FUNFETTI"
-      },
-      {
         "available": true,
-        "formattedPrice": "$10.00",
-        "id": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0VmFyaWFudC8zNjE5NzczMjk0MTk3OQ==",
+        "sku": "ash-tray-funfetti",
         "image": {
           "alt": null,
-          "id": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0SW1hZ2UvMTkzOTcyMTgyMzg2MTk=",
-          "src": "https://cdn.shopify.com/s/files/1/0470/4790/1339/products/ash-tray-jelly-slides.jpg?v=1601392496"
-        },
-        "optionValues": [
-          {
-            "name": "Style",
-            "value": "JELLY $LIDES"
-          }
-        ],
-        "price": "10.00",
-        "productId": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0LzU2NjQ2MDk1MzQxMDc=",
-        "productTitle": "Ash Tray",
-        "title": "JELLY $LIDES"
+          "id": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0SW1hZ2UvMTk0OTgwODA2OTg1MjM=",
+          "src": "https://cdn.shopify.com/s/files/1/0470/4790/1339/products/ash-tray-funfetti.png?v=1601847412"
+        }
       },
       {
-        "available": false,
-        "formattedPrice": "$10.00",
-        "id": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0VmFyaWFudC8zNjE5NzczMjk3NDc0Nw==",
+        "id": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0VmFyaWFudC8zNjE5NzczMjk0MTk3OQ==",
+        "title": "JELLY $LIDES",
+        "price": "10.00",
+        "available": true,
+        "sku": "ash-tray-jelly-slides",
         "image": {
           "alt": null,
-          "id": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0SW1hZ2UvMTkzOTcyMTgyMDU4NTE=",
-          "src": "https://cdn.shopify.com/s/files/1/0470/4790/1339/products/img-placeholder.png?v=1601594411"
-        },
-        "optionValues": [
-          {
-            "name": "Style",
-            "value": "LA $ONRISA"
-          }
-        ],
+          "id": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0SW1hZ2UvMTk0OTgwODI3NjI5MDc=",
+          "src": "https://cdn.shopify.com/s/files/1/0470/4790/1339/products/ash-tray-jelly-slides.png?v=1601847440"
+        }
+      },
+      {
+        "id": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0VmFyaWFudC8zNjE5NzczMjk3NDc0Nw==",
+        "title": "LA $ONRISA",
         "price": "10.00",
-        "productId": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0LzU2NjQ2MDk1MzQxMDc=",
-        "productTitle": "Ash Tray",
-        "title": "LA $ONRISA"
+        "available": false,
+        "sku": "ash-tray-la-sonrisa",
+        "image": {
+          "alt": null,
+          "id": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0SW1hZ2UvMTk0OTgwODY5MjQ0NDM=",
+          "src": "https://cdn.shopify.com/s/files/1/0470/4790/1339/products/img-placeholder.png?v=1601847468"
+        }
       }
     ]
   },
   {
     "id": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0LzU2NjQ2MzkwOTA4NDM=",
+    "available": true,
     "description": "",
+    "handle": "rolling-tray",
     "title": "Rolling Tray",
+    "options": [
+      {
+        "id": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0T3B0aW9uLzcyMjE4NTQ1MDMwNjc=",
+        "name": "Style",
+        "values": ["FUNFETTI", "JELLY $LIDES", "LA $ONRISA"]
+      }
+    ],
     "images": [
       {
         "alt": null,
         "id": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0SW1hZ2UvMTkzOTczNDk1Mzk5OTU=",
-        "src": "https://cdn.shopify.com/s/files/1/0470/4790/1339/products/rolling-tray-funfetti.jpg?v=1601392991"
+        "src": "https://cdn.shopify.com/s/files/1/0470/4790/1339/products/rolling-tray-funfetti.png?v=1601847554"
       },
       {
         "alt": null,
         "id": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0SW1hZ2UvMTkzOTczNDk2MDU1MzE=",
-        "src": "https://cdn.shopify.com/s/files/1/0470/4790/1339/products/rolling-tray-jelly-slides.jpg?v=1601392991"
+        "src": "https://cdn.shopify.com/s/files/1/0470/4790/1339/products/rolling-tray-jelly-slides.png?v=1601847554"
       },
       {
         "alt": null,
         "id": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0SW1hZ2UvMTkzOTczNDk0NzQ0NTk=",
-        "src": "https://cdn.shopify.com/s/files/1/0470/4790/1339/products/rolling-tray-la-sonrisa.jpg?v=1601392991"
-      }
-    ],
-    "options": [
-      {
-        "name": "Style",
-        "values": [
-          "FUNFETTI",
-          "JELLY $LIDES",
-          "LA $ONRISA"
-        ]
+        "src": "https://cdn.shopify.com/s/files/1/0470/4790/1339/products/rolling-tray-la-sonrisa.png?v=1601847554"
       }
     ],
     "variants": [
       {
-        "available": true,
-        "formattedPrice": "$25.00",
         "id": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0VmFyaWFudC8zNjE5NzkwNTk4OTc4Nw==",
+        "title": "FUNFETTI",
+        "price": "25.00",
+        "available": true,
+        "sku": "rolling-tray-funfetti",
         "image": {
           "alt": null,
           "id": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0SW1hZ2UvMTkzOTczNDk1Mzk5OTU=",
           "src": "https://cdn.shopify.com/s/files/1/0470/4790/1339/products/rolling-tray-funfetti.jpg?v=1601392991"
-        },
-        "optionValues": [
-          {
-            "name": "Style",
-            "value": "FUNFETTI"
-          }
-        ],
-        "price": "25.00",
-        "productId": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0LzU2NjQ2MzkwOTA4NDM=",
-        "productTitle": "Rolling Tray",
-        "title": "FUNFETTI"
+        }
       },
       {
-        "available": true,
-        "formattedPrice": "$25.00",
         "id": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0VmFyaWFudC8zNjE5NzkwNjAyMjU1NQ==",
+        "title": "JELLY $LIDES",
+        "price": "25.00",
+        "available": true,
+        "sku": "rolling-tray-jelly-slides",
         "image": {
           "alt": null,
           "id": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0SW1hZ2UvMTkzOTczNDk2MDU1MzE=",
           "src": "https://cdn.shopify.com/s/files/1/0470/4790/1339/products/rolling-tray-jelly-slides.jpg?v=1601392991"
-        },
-        "optionValues": [
-          {
-            "name": "Style",
-            "value": "JELLY $LIDES"
-          }
-        ],
-        "price": "25.00",
-        "productId": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0LzU2NjQ2MzkwOTA4NDM=",
-        "productTitle": "Rolling Tray",
-        "title": "JELLY $LIDES"
+        }
       },
       {
-        "available": true,
-        "formattedPrice": "$25.00",
         "id": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0VmFyaWFudC8zNjE5NzkwNjA1NTMyMw==",
+        "title": "LA $ONRISA",
+        "price": "25.00",
+        "available": true,
+        "sku": "rolling-tray-la-sonrisa",
         "image": {
           "alt": null,
           "id": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0SW1hZ2UvMTkzOTczNDk0NzQ0NTk=",
           "src": "https://cdn.shopify.com/s/files/1/0470/4790/1339/products/rolling-tray-la-sonrisa.jpg?v=1601392991"
-        },
-        "optionValues": [
-          {
-            "name": "Style",
-            "value": "LA $ONRISA"
-          }
-        ],
-        "price": "25.00",
-        "productId": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0LzU2NjQ2MzkwOTA4NDM=",
-        "productTitle": "Rolling Tray",
-        "title": "LA $ONRISA"
+        }
       }
     ]
   },
   {
     "id": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0LzU2NjUxOTc0MjQ3OTU=",
     "title": "KUSTOMZ",
+    "available": true,
     "description": "",
+    "handle": "kustomz",
     "images": [
       {
         "alt": null,
         "id": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0SW1hZ2UvMTk0MDA0Mjc1MDM3NzE=",
-        "src": "https://cdn.shopify.com/s/files/1/0470/4790/1339/products/kustomz_23be575c-354d-4c08-98c7-eb5b07413198.jpg?v=1601404585"
+        "src": "https://cdn.shopify.com/s/files/1/0470/4790/1339/products/kustomz.png?v=1601847493"
       }
     ],
     "options": [
       {
+        "id": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0T3B0aW9uLzcyMjI1MDQyNTk3Mzk=",
         "name": "Style",
-        "values": [
-          "Rolling Tray",
-          "♡ Ash Tray",
-          "▢ Ash Tray",
-          "◯ Ash Tray"
-        ]
+        "values": ["Rolling Tray", "♡ Ash Tray", "▢ Ash Tray", "◯ Ash Tray"]
       }
     ],
     "variants": [
       {
-        "available": true,
-        "formattedPrice": "$35.00",
         "id": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0VmFyaWFudC8zNjIwMDY4MzE3NjA5MQ==",
+        "title": "Rolling Tray",
+        "price": "35.00",
+        "available": true,
+        "sku": "kustom-rolling-tray",
         "image": {
           "alt": null,
           "id": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0SW1hZ2UvMTk0MDA0Mjc1MDM3NzE=",
           "src": "https://cdn.shopify.com/s/files/1/0470/4790/1339/products/kustomz_23be575c-354d-4c08-98c7-eb5b07413198.jpg?v=1601404585"
-        },
-        "optionValues": [
-          {
-            "name": "Title",
-            "value": "Rolling Tray"
-          }
-        ],
-        "price": "25.00",
-        "productId": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0LzU2NjUxOTc0MjQ3OTU=",
-        "productTitle": "KUSTOMZ",
-        "title": "Rolling Tray"
+        }
       },
       {
-        "available": true,
-        "formattedPrice": "$20.00",
         "id": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0VmFyaWFudC8zNjIwMDY2OTQ0NjI5OQ==",
+        "title": "♡ Ash Tray",
+        "price": "20.00",
+        "available": true,
+        "sku": "kustom-ash-tray-heart",
         "image": {
           "alt": null,
           "id": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0SW1hZ2UvMTk0MDA0Mjc1MDM3NzE=",
           "src": "https://cdn.shopify.com/s/files/1/0470/4790/1339/products/kustomz_23be575c-354d-4c08-98c7-eb5b07413198.jpg?v=1601404585"
-        },
-        "optionValues": [
-          {
-            "name": "Title",
-            "value": "♡ Ash Tray"
-          }
-        ],
-        "price": "20.00",
-        "productId": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0LzU2NjUxOTc0MjQ3OTU=",
-        "productTitle": "KUSTOMZ",
-        "title": "♡ Ash Tray"
+        }
       },
       {
-        "available": true,
-        "formattedPrice": "$20.00",
         "id": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0VmFyaWFudC8zNjIwMDY3NjY1NTI1OQ==",
+        "title": "▢ Ash Tray",
+        "price": "20.00",
+        "available": true,
+        "sku": "kustom-ash-tray-square",
         "image": {
           "alt": null,
           "id": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0SW1hZ2UvMTk0MDA0Mjc1MDM3NzE=",
           "src": "https://cdn.shopify.com/s/files/1/0470/4790/1339/products/kustomz_23be575c-354d-4c08-98c7-eb5b07413198.jpg?v=1601404585"
-        },
-        "optionValues": [
-          {
-            "name": "Title",
-            "value": "▢ Ash Tray"
-          }
-        ],
-        "price": "20.00",
-        "productId": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0LzU2NjUxOTc0MjQ3OTU=",
-        "productTitle": "KUSTOMZ",
-        "title": "▢ Ash Tray"
+        }
       },
       {
-        "available": true,
-        "formattedPrice": "$20.00",
         "id": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0VmFyaWFudC8zNjIwMDM5Nzk5NjE4Nw==",
+        "title": "◯ Ash Tray",
+        "price": "20.00",
+        "available": true,
+        "sku": "kustom-ash-tray-circle",
         "image": {
           "alt": null,
           "id": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0SW1hZ2UvMTk0MDA0Mjc1MDM3NzE=",
           "src": "https://cdn.shopify.com/s/files/1/0470/4790/1339/products/kustomz_23be575c-354d-4c08-98c7-eb5b07413198.jpg?v=1601404585"
-        },
-        "optionValues": [
-          {
-            "name": "Title",
-            "value": "◯ Ash Tray"
-          }
-        ],
-        "price": "20.00",
-        "productId": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0LzU2NjUxOTc0MjQ3OTU=",
-        "productTitle": "KUSTOMZ",
-        "title": "◯ Ash Tray"
+        }
       }
     ]
   }

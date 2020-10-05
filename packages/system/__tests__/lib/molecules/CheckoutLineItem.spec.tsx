@@ -29,7 +29,7 @@ it('updates the product quantity', () => {
   const initial_quantity = args.quantity || 1
 
   // Get input element
-  const input_matcher = initial_quantity as unknown as Matcher
+  const input_matcher = (initial_quantity as unknown) as Matcher
 
   // FIXME: TypeError: matcher.test is not a function
   const input = screen.getByDisplayValue(input_matcher) as HTMLInputElement

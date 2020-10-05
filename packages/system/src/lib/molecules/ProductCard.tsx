@@ -1,84 +1,143 @@
-import { useMutatedProps } from '@kustomz/hooks'
-import React, { FC } from 'react'
+import {
+  ProductResource,
+  ProductVariantResource
+} from '@flex-development/kustomtypez'
+import { useMutatedProps, useProductVariants } from '@kustomz/hooks'
+import { HTMLAnchorClickEvent } from '@kustomz/types'
+import React, { FC, useEffect, useState } from 'react'
 import useBoolean from 'react-hanger/array/useBoolean'
-import { Image, Product, ProductVariant } from 'shopify-buy'
-import { Box, BoxProps, Item, Link, List, Paragraph } from '../atoms'
+import {
+  Box,
+  BoxProps,
+  Image,
+  Item,
+  Link,
+  LinkProps,
+  List,
+  Paragraph
+} from '../atoms'
 
 /**
- * @file Render a Product preview
+ * @file Render a `ProductResource` preview card
  * @module lib/molecules/ProductCard
+ *
+ * @todo Update documentation
  */
 
 /**
  * `ProductCard` component properties.
  */
-export interface ProductCardProps extends Omit<BoxProps, 'id'> {
+export interface ProductCardProps extends BoxProps {
+  /**
+   * Product handle.
+   */
+  handle: ProductResource['handle']
+
   /**
    * Unique product id.
    */
-  id: Product['id']
-
-  /**
-   * All product images.
-   * 
-   * @default []
-   */
-  images?: Image[]
+  id: ProductResource['id']
 
   /**
    * The product title.
    */
-  title: Product['title']
+  title: ProductResource['title']
 
   /**
    * Product variants.
-   * 
+   *
    * @default []
    */
-  variants?: Partial<ProductVariant>[]
+  variants?: ProductVariantResource[]
 }
 
 /**
  * Renders a `Box` component featuring a product image, title, and price.
  */
 export const ProductCard: FC<ProductCardProps> = (props: ProductCardProps) => {
-  const { id, images = [], title, variants = [], ...rest } = props
+  const { handle, title, variants = [], ...rest } = props
 
   const mutatedProps = useMutatedProps<typeof rest, BoxProps>(rest, {
     card: true,
     'product-card': true
   })
 
+  // Use product variants as options
+  const { selectVariant, selected = {} } = useProductVariants(variants)
+
+  // Toggle dropdown menu visibility
   const [expanded, { toggle }] = useBoolean(false)
 
-  const dropdownLinks = variants.map(({ title }) => ({ children: title }))
+  // Maintain product URL state
+  const [url, setURL] = useState(`products/${handle}`)
+
+  useEffect(() => {
+    if (!selected?.sku) return
+
+    const default_selected = selected.sku === variants[0].sku
+    const base = `products/${handle}`
+
+    setURL(default_selected ? base : `${base}?style=${selected.sku}`)
+  }, [handle, selected.sku, variants])
+
+  const ProductLink: FC<LinkProps> = ({ children, className }) => (
+    <Link className={className} href={url} target='_blank'>
+      {children}
+    </Link>
+  )
 
   return (
-    <Box {...mutatedProps} id={id as string}>
+    <Box {...mutatedProps}>
+      <Box>
+        <ProductLink>
+          <Image
+            {...selected.image}
+            alt={selected.image?.alt || `${title} - ${selected.title}`}
+            className='product-card-img card-img-top'
+            fluid
+          />
+        </ProductLink>
+      </Box>
       <Box className='card-footer'>
-        <Box className='flex-column text-uppercase' flex>
-          <Paragraph className='card-title product-card-title'>
+        <Box className='flex-column' flex>
+          <ProductLink className='card-title product-card-title'>
             {title}
-          </Paragraph>
+          </ProductLink>
 
           {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
           <Link
             aria-expanded={expanded}
-            onClick={() => toggle()}
+            onClick={(event: HTMLAnchorClickEvent) => {
+              event.preventDefault()
+              return toggle()
+            }}
             toggle
           >
-            Options
+            {selected.title}
           </Link>
         </Box>
 
         <Paragraph className='card-text product-card-price'>
-          {variants[0].formattedPrice}
+          {selected.available ? `$${selected.price}` : 'Out of Stock'}
         </Paragraph>
       </Box>
 
       {expanded && (
-        <List className='dropdown-menu'>
-          {dropdownLinks.map(link => <Item><Link {...link} dropdown /></Item>)}
+        <List className='dropdown-menu show'>
+          {variants.map(({ id, title }) => {
+            if (title === selected.title) return null
+
+            return (
+              <Item
+                dropdown
+                className='dropdown-item'
+                key={id}
+                onClick={() => selectVariant(id) && toggle()}
+              >
+                {title}
+              </Item>
+            )
+          })}
         </List>
       )}
     </Box>
@@ -86,6 +145,5 @@ export const ProductCard: FC<ProductCardProps> = (props: ProductCardProps) => {
 }
 
 ProductCard.defaultProps = {
-  images: [],
   variants: []
 }

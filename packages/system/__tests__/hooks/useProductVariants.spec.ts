@@ -1,6 +1,5 @@
 import { useProductVariants } from '@kustomz/hooks'
 import { act, renderHook } from '@testing-library/react-hooks'
-import { ProductVariant } from 'shopify-buy'
 import products from '../../__mocks__/products.mock.json'
 
 /**
@@ -20,9 +19,7 @@ it('selected variant is an empty object ({}) when `initialVariants` is an empty 
 })
 
 it('creates an `OptionProps` array from `initialVariants`', () => {
-  const variants = (products[0].variants as unknown) as ProductVariant[]
-
-  const { result } = renderHook(() => useProductVariants(variants))
+  const { result } = renderHook(() => useProductVariants(products[0].variants))
 
   const options = [
     {
@@ -46,7 +43,7 @@ it('creates an `OptionProps` array from `initialVariants`', () => {
 })
 
 it('updates the selected variant', () => {
-  const variants = (products[0].variants as unknown) as ProductVariant[]
+  const variants = products[0].variants
 
   const { result } = renderHook(() => useProductVariants(variants))
 

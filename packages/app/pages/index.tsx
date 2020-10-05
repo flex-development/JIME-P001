@@ -6,6 +6,7 @@ import {
 } from 'next'
 import Head from 'next/head'
 import React from 'react'
+import shopify from '../lib/config/shopify'
 
 /**
  * Renders the homepage.
@@ -213,7 +214,11 @@ const Index: NextComponentType<
  * @param ctx.previewData - Preview data set by `setPreviewData`
  */
 export const getStaticProps: GetStaticProps = async ctx => {
-  return { props: { preview: ctx.preview || false } }
+  const products = await shopify.product.fetchAll().then(products => {
+    return JSON.parse(JSON.stringify(products))
+  })
+
+  return { props: { preview: ctx.preview || false, products } }
 }
 
 export default Index

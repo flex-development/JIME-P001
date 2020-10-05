@@ -8,16 +8,15 @@ import { CustomAttribute } from 'shopify-buy'
  * @module hooks/useCustomAttributes
  */
 
-
 /**
  * Functions to mutate the `useCustomAttributes` state.
- * 
+ *
  * @see https://shopify.dev/docs/storefront-api/reference/object/attribute
  */
 export type UseCustomAttributesActions = {
   /**
    * Adds or updates a custom attribute.
-   * 
+   *
    * @param key - Name of the attribute
    * @param value - Value of the attribute
    */
@@ -25,7 +24,7 @@ export type UseCustomAttributesActions = {
 
   /**
    * Removes a custom attribute.
-   * 
+   *
    * @param key - `key` of attribute to remove
    */
   removeAttribute(key?: string): void
@@ -44,17 +43,16 @@ export type UseCustomAttributesState = {
 /**
  * `useCustomAttributes` return type.
  */
-export type UseCustomAttributes =
-  UseCustomAttributesActions
-  & UseCustomAttributesState
+export type UseCustomAttributes = UseCustomAttributesActions &
+  UseCustomAttributesState
 
 /**
  * Add extra information about a line item.
- * 
+ *
  * @see
  * - https://shopify.dev/docs/storefront-api/reference/object/attribute
  * - https://shopify.dev/docs/storefront-api/reference/object/checkoutlineitem
- * 
+ *
  * @param initialAttributes - Initial state value
  */
 export const useCustomAttributes = (
@@ -69,23 +67,31 @@ export const useCustomAttributes = (
   return {
     customAttributes,
 
-    removeAttribute: useCallback((key: string) => {
-      setValue(customAttributes.filter(attr => attr.key !== key))
-    }, [customAttributes, setValue]),
+    removeAttribute: useCallback(
+      (key: string) => {
+        setValue(customAttributes.filter(attr => attr.key !== key))
+      },
+      [customAttributes, setValue]
+    ),
 
-    updateAttribute: useCallback((key: string, value: string) => {
-      // Check if attribute with matching key exists
-      const exists = customAttributes.find(attr => attr.key === key)
+    updateAttribute: useCallback(
+      (key: string, value: string) => {
+        // Check if attribute with matching key exists
+        const exists = customAttributes.find(attr => attr.key === key)
 
-      // If it doesn't exist, add a new attribute
-      if (!exists) return push({ key, value })
+        // If it doesn't exist, add a new attribute
+        if (!exists) return push({ key, value })
 
-      // Filter state and add updated attribute to filtered array
-      const filtered = customAttributes.filter(attr => attr.key !== exists.key)
-      filtered.push({ key, value })
+        // Filter state and add updated attribute to filtered array
+        const filtered = customAttributes.filter(
+          attr => attr.key !== exists.key
+        )
+        filtered.push({ key, value })
 
-      // Update customAttributes state
-      setValue(filtered)
-    }, [customAttributes, push, setValue])
+        // Update customAttributes state
+        setValue(filtered)
+      },
+      [customAttributes, push, setValue]
+    )
   }
 }

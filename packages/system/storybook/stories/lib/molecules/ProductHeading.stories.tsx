@@ -1,5 +1,6 @@
-import { ProductHeading, ProductHeadingProps } from '@kustomz/lib'
+import { Heading, ProductHeading, ProductHeadingProps } from '@kustomz/lib'
 import React from 'react'
+import products from '../../../../__mocks__/products.mock.json'
 import { StoryFN } from '../../../config'
 
 /**
@@ -20,6 +21,7 @@ export default {
   parameters: {
     jest: ['ProductHeading']
   },
+  subcomponents: { Heading },
   title: 'Library/Molecules/ProductHeading'
 }
 
@@ -27,7 +29,12 @@ export const AshTray: StoryFN<ProductHeadingProps> = (
   args: ProductHeadingProps
 ) => <ProductHeading {...args} />
 
+const { variants, title } = Object.assign(
+  {},
+  products.find(p => p.handle === 'ash-tray')
+)
+
 AshTray.args = {
-  price: '$10.00',
-  title: 'Ash Tray'
+  price: variants[0].price,
+  title: title
 }

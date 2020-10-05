@@ -1,4 +1,4 @@
-/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 /**
  * To be used in cases where `any` is a valid type.
@@ -17,7 +17,7 @@ export type AnyObject = Record<string, Any>
  */
 export type Booleanish = boolean | 'true' | 'false'
 
-/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 /**
  * Helper type indicating a type that needs a better type declaration.

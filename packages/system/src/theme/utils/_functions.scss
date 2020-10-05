@@ -7,7 +7,7 @@
 /// @param {Number} $val - Value to convert
 /// @param {String} $unit [em] - Unit to convert to
 @function strip-convert($val, $unit: em) {
-  @return strip-unit($val)#{$unit};
+  @return strip-unit($val) #{$unit};
 }
 
 /// Remove the unit of a length

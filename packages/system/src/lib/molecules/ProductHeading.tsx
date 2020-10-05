@@ -1,31 +1,29 @@
-import { ProductVariantObject } from '@flex-development/kustomtypez'
 import { useMutatedProps } from '@kustomz/hooks'
 import React, { FC } from 'react'
 import { Heading, HeadingProps, Span } from '../atoms'
 
 /**
- * @file Render a ProductVariant title and price
+ * @file Displays the title and price of a product (variant)
  * @module lib/molecules/ProductHeading
  */
 
 /**
- * ProductHeading component properties.
+ * `ProductHeading` component properties.
  */
 export interface ProductHeadingProps extends HeadingProps {
   /**
    * The price of the product variant.
    */
-  price: ProductVariantObject['price']
+  price: string
 
   /**
-   * The product variant’s title.
+   * The title of the product or product variant.
    */
-  title: ProductVariantObject['title']
+  title: string
 }
 
 /**
- * Renders the title and price of a product or product variant inside of a
- * `Heading` component.
+ * Displays the title and price of a product (variant).
  *
  * - https://shopify.dev/docs/storefront-api/reference/object/productvariant
  */
@@ -40,7 +38,7 @@ export const ProductHeading: FC<ProductHeadingProps> = (
     <Heading {...mutatedProps}>
       <Span className='product-heading-title'>{title}</Span>
       <Span className='product-heading-price'>
-        {price.length && `${price}`}
+        {price?.length && `$${price}`}
       </Span>
     </Heading>
   )

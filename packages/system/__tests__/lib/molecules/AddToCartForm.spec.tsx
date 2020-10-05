@@ -1,9 +1,10 @@
-import { AnyObject } from '@flex-development/kustomtypez'
+import {
+  AnyObject,
+  ProductVariantResource
+} from '@flex-development/kustomtypez'
 import {
   AshTray,
-  AshTrayData,
-  Kustomz,
-  KustomzData
+  Kustomz
 } from '@kustomz-stories/molecules/AddToCartForm.stories'
 import { AddToCartFormProps } from '@kustomz/lib'
 import { render, screen } from '@testing-library/react'
@@ -38,7 +39,9 @@ it('only displays a <textarea> element for "KUSTOMZ" product', () => {
 })
 
 it('updates the selected variant', () => {
-  render(<AshTray {...(AshTray.args as AddToCartFormProps)} />)
+  const args = AshTray.args as AddToCartFormProps
+
+  render(<AshTray {...args} />)
 
   // Get <select> element
   const select = screen.getByPlaceholderText(SELECT_PLACEHOLDER)
@@ -47,7 +50,7 @@ it('updates the selected variant', () => {
   expect(select).toBeInTheDocument()
 
   // Get last product variant
-  const variant = AshTrayData.variants[AshTrayData.variants.length - 1]
+  const variant = args.variants[args.variants.length - 1]
 
   // Mock product variant selection
   User.selectOptions(select, [variant.id])
@@ -57,17 +60,16 @@ it('updates the selected variant', () => {
 })
 
 it('disables the add to cart button when an unavailable product variant is selected', () => {
-  render(<AshTray {...(AshTray.args as AddToCartFormProps)} />)
+  const args = AshTray.args as AddToCartFormProps
+
+  render(<AshTray {...args} />)
 
   // Get unavailable product variant
-  const variant: AnyObject =
-    AshTrayData.variants.find(v => {
-      return v.available === false
-    }) || {}
+  const variant = args.variants.find(v => v.available === false) || {}
 
   // Mock user selection
   User.selectOptions(screen.getByPlaceholderText(SELECT_PLACEHOLDER), [
-    variant.id
+    (variant as ProductVariantResource).id
   ])
 
   // Expect add to cart button to be disabled
@@ -76,9 +78,9 @@ it('disables the add to cart button when an unavailable product variant is selec
 
 // FIXME: Component passes tests manually, but interaction test
 it('updates the product quantity', () => {
-  const { getByText } = render(
-    <AshTray {...(AshTray.args as AddToCartFormProps)} />
-  )
+  const args = AshTray.args as AddToCartFormProps
+
+  const { getByText } = render(<AshTray {...args} />)
 
   // Mock updated product quantity
   const NEW_QUANITY = '2'
@@ -88,36 +90,36 @@ it('updates the product quantity', () => {
 
   // Mock product quantity update
   User.type(input, '{selectall}{backspace}' + NEW_QUANITY)
-  User.click(getByText(AshTrayData.title))
+  User.click(getByText(args.title as string))
 
   // Expect element with new quanity as value to be in the document
   expect(input.value).toBe(NEW_QUANITY)
 })
 
 it('updates the display price if the selected option has a different price than the previous option', () => {
-  const { getByText } = render(
-    <Kustomz {...(Kustomz.args as AddToCartFormProps)} />
-  )
+  const args = Kustomz.args as AddToCartFormProps
+
+  const { getByText } = render(<Kustomz {...args} />)
 
   // Get default product variant
-  const variant = KustomzData.variants[0]
+  const variant = args.variants[0]
 
   // Expect price of default variant is shown
-  expect(getByText(variant.formattedPrice)).toBeInTheDocument()
+  expect(getByText(`$${variant.price}`)).toBeInTheDocument()
 
   // Get product variant with different price than default option
   const variant2: AnyObject =
-    KustomzData.variants.find(v => {
-      return v.formattedPrice !== variant.formattedPrice
+    args.variants.find(v => {
+      return v.price !== variant.price
     }) || {}
 
   // Mock user selection
   User.selectOptions(screen.getByPlaceholderText(SELECT_PLACEHOLDER), [
-    variant2.id
+    (variant2 as ProductVariantResource).id
   ])
 
   // Expect new price to be displayed
-  expect(getByText(variant2.formattedPrice)).toBeInTheDocument()
+  expect(getByText(`$${variant2.price}`)).toBeInTheDocument()
 })
 
 it('updates the kustom product description', () => {

@@ -5,16 +5,7 @@ import { sanitizeQuantity } from '@kustomz/utils'
 import classnames from 'classnames'
 import React, { FC, Fragment } from 'react'
 import { AttributeInput, CustomAttribute, LineItem } from 'shopify-buy'
-import {
-  Box,
-  BoxProps,
-  Button,
-  Image,
-
-  Input,
-  Paragraph,
-  Span
-} from '../atoms'
+import { Box, BoxProps, Button, Image, Input, Paragraph, Span } from '../atoms'
 import { LabeledInput } from './LabeledInput'
 import { ProductHeading } from './ProductHeading'
 
@@ -59,7 +50,7 @@ export interface CheckoutLineItemProps extends BoxProps {
 
   /**
    * `onClick` handler that's fired when the user clicks the "REMOVE" button.
-   * 
+   *
    * @param event - `click` event from remove button
    * @param event.target - <button name="remove"> element
    * @param event.target.value - ID of the line item to remove
@@ -79,7 +70,7 @@ export interface CheckoutLineItemProps extends BoxProps {
    * @param updates.key - Name of a custom attribute
    * @param updates.quantity - Number of variants to order
    * @param updates.value - Value of {@param updates.key}
-   * @param updates.variantId - ID of the variant the 
+   * @param updates.variantId - ID of the variant the
    * @param event - `change` event from quantity input
    */
   update?(item: AttributeInput, event?: HTMLInputChangeEvent): ANYTHING
@@ -125,10 +116,11 @@ export const CheckoutLineItem: FC<CheckoutLineItemProps> = (
   } = props
 
   // Initialize line item state
-  const {
-    input: item,
-    updateQuantity
-  } = useLineItemInput(variantId, quantity, customAttributes)
+  const { input: item, updateQuantity } = useLineItemInput(
+    variantId,
+    quantity,
+    customAttributes
+  )
 
   return (
     <Box {...rest} className={classnames('line-item', rest.className)}>
@@ -138,21 +130,20 @@ export const CheckoutLineItem: FC<CheckoutLineItemProps> = (
       <Box className='col pl-md-6 pl-0'>
         <ProductHeading
           className='line-item-heading'
-          price={`$${linePrice}`}
+          price={linePrice}
           size={3}
           title={title}
         />
 
         <Paragraph className='line-item-attribute'>
-          {customAttributes[0]?.value
-            ? (
-              <Fragment>
-                Kustom product description:&nbsp;
-                <Span>{customAttributes[0]?.value}</Span>
-              </Fragment>
-            )
-            : 'No Kustomizations.'
-          }
+          {customAttributes[0]?.value ? (
+            <Fragment>
+              Kustom product description:&nbsp;
+              <Span>{customAttributes[0]?.value}</Span>
+            </Fragment>
+          ) : (
+            'No Kustomizations.'
+          )}
         </Paragraph>
 
         <Box className='flex-md-row flex-md-spread flex-column' flex>

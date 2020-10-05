@@ -21,6 +21,7 @@
 
     background-color: $ghost;
     margin-top: $spacers-0;
+    text-transform: uppercase;
     transform: none !important;
 
     &.nav {
@@ -50,10 +51,9 @@
   &-toggle {
     border-bottom: $border-width-sm solid $light-25;
     font-size: $dropdown-font-size;
-    text-transform: uppercase;
 
     &::after {
-      margin-left: .75em;
+      margin-left: 0.75em;
     }
   }
 }

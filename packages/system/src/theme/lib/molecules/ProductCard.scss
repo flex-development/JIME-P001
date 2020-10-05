@@ -2,43 +2,67 @@
 /// @group ProductCard
 /// ----------------------------------------------------------------------------
 
+$product-card-bg: $ghost;
+
+$product-card-footer-text-color: $light;
+$product-card-footer-title-color: $secondary;
+$product-card-footer-title-font-size: $font-size-lg;
+
+$product-card-footer-bg: $darker;
+
+$product-card-footer-padding-y: $spacers-4;
+$product-card-footer-padding-x: $spacers-6;
+
 .product-card {
+  background-color: $product-card-bg;
   border: none;
 
-  .dropdown-toggle {
-    border-bottom: none;
-    font-weight: $font-weight-medium;
-  }
-
   &-price {
-    color: $light;
+    color: $product-card-footer-text-color;
   }
 
   .card-title {
-    color: $secondary;
+    color: $product-card-footer-title-color;
     letter-spacing: $spacers-1 / 3;
     margin-bottom: $spacers-0;
   }
 
   .card-footer {
-    @include media-breakpoint-up(sm) {
-      @include flex-spread;
+    @include flex-spread;
 
-      flex-direction: row;
+    @include padding-x($product-card-footer-padding-x);
+
+    @include padding-y($product-card-footer-padding-x);
+
+    background-color: $product-card-footer-bg;
+    display: flex;
+    flex-direction: row;
+  }
+
+  .dropdown {
+    &-menu {
+      position: unset !important;
     }
 
-    @include padding-x($spacers-6);
+    &-item {
+      @include padding-x($product-card-footer-padding-x);
+    }
 
-    @include padding-y($spacers-4);
-
-    background-color: $darker;
-    display: flex;
-    flex-direction: column;
+    &-toggle {
+      border-bottom: none;
+      font-weight: $font-weight-medium;
+    }
   }
 
   &-price,
   .card-title {
-    font-size: $font-size-lg;
-    font-weight: $font-weight-semibold;    
+    font-size: $product-card-footer-title-font-size;
+    font-weight: $font-weight-semibold;
+  }
+
+  &-price,
+  .card-title,
+  .dropdown-toggle {
+    text-transform: uppercase;
   }
 }

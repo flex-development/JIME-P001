@@ -17,19 +17,29 @@ export default {
   title: 'Library/Molecules/ProductCard'
 }
 
-export const AshTray: StoryFN<ProductCardProps> = (
-  args: ProductCardProps
-) => <ProductCard {...args} />
+const exclude_from_product = ['available', 'description', 'images', 'options']
 
-const ashtray_data = Object.assign({}, omit(products[0], [
-  'description',
-  'options'
-]))
+const ashtray_data = Object.assign({}, omit(products[0], exclude_from_product))
+const kustomz_data = Object.assign({}, omit(products[2], exclude_from_product))
+
+export const AshTray: StoryFN<ProductCardProps> = (args: ProductCardProps) => (
+  <ProductCard {...args} />
+)
 
 AshTray.args = {
-  ...(ashtray_data as unknown as ProductCardProps),
+  ...ashtray_data,
   style: {
-    maxHeight: '438px',
+    maxWidth: '438px'
+  }
+}
+
+export const Kustomz: StoryFN<ProductCardProps> = (args: ProductCardProps) => (
+  <ProductCard {...args} />
+)
+
+Kustomz.args = {
+  ...kustomz_data,
+  style: {
     maxWidth: '438px'
   }
 }

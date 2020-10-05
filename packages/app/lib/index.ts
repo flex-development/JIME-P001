@@ -1,8 +1,8 @@
 /**
- * @file Client Side Utilities
- * @module lib/utils
+ * @file Client Side Library
+ * @module lib
  */
 
-export * from './getFeathersError'
-export { default as logger } from './logger'
-export * from './mock'
+export * from './components'
+export * from './config'
+export * from './utils'

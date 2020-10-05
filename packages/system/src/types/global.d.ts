@@ -16,6 +16,11 @@ export type Attributes<E = HTMLElement> = AriaAttributes &
   RefAttributes<E> & { forwardedRef?: RefAttributes<E>['ref'] }
 
 /**
+ * `<a>` element click event.
+ */
+export type HTMLAnchorClickEvent = MouseEvent<HTMLAnchorElement>
+
+/**
  * `<button>` element click event.
  */
 export type HTMLButtonClickEvent = MouseEvent<HTMLButtonElement>

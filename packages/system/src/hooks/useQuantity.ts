@@ -13,7 +13,7 @@ import useNumber from 'react-hanger/array/useNumber'
 export type UseQuantityActions = {
   /**
    * Updates the `quantity` state.
-   * 
+   *
    * @param value - New quantity
    */
   updateQuantity(value?: number | string): void
@@ -36,7 +36,7 @@ export type UseQuantity = UseQuantityActions & UseQuantityState
 
 /**
  * Maintains product quantity state.
- * 
+ *
  * @param initialQuantity - Initial product quantity
  */
 export const useQuantity = (initialQuantity = 1): UseQuantity => {

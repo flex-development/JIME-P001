@@ -1,4 +1,4 @@
-import { ANYTHING } from '@flex-development/kustomtypez'
+import { ANYTHING, ProductVariantResource } from '@flex-development/kustomtypez'
 import { useLineItemInput, useProductVariants } from '@kustomz/hooks'
 import {
   HTMLButtonClickEvent,
@@ -7,7 +7,7 @@ import {
   HTMLTextAreaChangeEvent
 } from '@kustomz/types'
 import React, { FC } from 'react'
-import { LineItemToAdd, Product, ProductVariant } from 'shopify-buy'
+import { LineItemToAdd } from 'shopify-buy'
 import {
   Box,
   Button,
@@ -43,14 +43,21 @@ export interface AddToCartFormProps extends FormProps {
    *
    * @default ''
    */
-  description: Product['description']
+  description?: string
+
+  /**
+   * Product title.
+   *
+   * @default ''
+   */
+  product_title: string
 
   /**
    * Array of product variant data.
    *
    * @default []
    */
-  variants: Partial<ProductVariant>[]
+  variants: ProductVariantResource[]
 }
 
 /**
@@ -59,9 +66,9 @@ export interface AddToCartFormProps extends FormProps {
  *
  * - https://shopify.dev/docs/storefront-api/reference/object/product
  * - https://shopify.dev/docs/storefront-api/reference/object/productvariant
- * 
+ *
  * **TODO**:
- * 
+ *
  * - Add `ImageCarousel` to display product images
  */
 export const AddToCartForm: FC<AddToCartFormProps> = (
@@ -73,6 +80,7 @@ export const AddToCartForm: FC<AddToCartFormProps> = (
       console.log(`${item.variantId} added to cart`, item)
     },
     description,
+    product_title,
     variants: initialVariants,
     ...rest
   } = props
@@ -91,11 +99,7 @@ export const AddToCartForm: FC<AddToCartFormProps> = (
   return (
     <Form {...rest} className='add-to-cart-form'>
       {/* Product title and variant price */}
-      <ProductHeading
-        price={selected.formattedPrice}
-        title={selected.productTitle}
-        size={2}
-      />
+      <ProductHeading price={selected.price} title={product_title} size={2} />
 
       {/* Product description */}
       <Paragraph className='form-text mb-6'>{description}</Paragraph>

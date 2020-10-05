@@ -21,12 +21,14 @@ it('adds, updates, and removes a custom attribute', () => {
 
   expect(result.current.customAttributes.length).toBe(1)
 
-  expect(result.current.customAttributes).toEqual(expect.arrayContaining([
-    {
-      key: 'key',
-      value: 'value'
-    }
-  ]))
+  expect(result.current.customAttributes).toEqual(
+    expect.arrayContaining([
+      {
+        key: 'key',
+        value: 'value'
+      }
+    ])
+  )
 
   act(() => {
     result.current.updateAttribute('key', 'new value')

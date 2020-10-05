@@ -14,14 +14,14 @@ import { Box, BoxProps, Item, Link, LinkProps, List } from '../atoms'
 export interface DropdownProps extends BoxProps {
   /**
    * If `true`, make dropdown menu visible.
-   * 
+   *
    * @default false
    */
   expanded?: boolean
 
   /**
    * Array of links to render.
-   * 
+   *
    * @default []
    */
   links?: LinkProps[]
@@ -35,12 +35,10 @@ export interface DropdownProps extends BoxProps {
 /**
  * Renders a `Fragment` component with a dropdown link and menu. The visibility
  * of the menu can be toggled by clicking the dropdown link.
- * 
+ *
  * - https://v5.getbootstrap.com/docs/5.0/components/navs/#using-dropdowns
  */
-export const Dropdown: FC<DropdownProps> = (
-  props: DropdownProps
-) => {
+export const Dropdown: FC<DropdownProps> = (props: DropdownProps) => {
   const {
     expanded: initialExpanded = false,
     links = [],
@@ -65,7 +63,11 @@ export const Dropdown: FC<DropdownProps> = (
       </Link>
 
       <List className='dropdown-menu'>
-        {links.map(link => <Item><Link {...link} dropdown /></Item>)}
+        {links.map(link => (
+          <Item>
+            <Link {...link} dropdown />
+          </Item>
+        ))}
       </List>
     </Box>
   )

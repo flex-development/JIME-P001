@@ -29,5 +29,5 @@ it('displays a customer review', () => {
 
   const { getByText } = render(<Default {...args} />)
 
-  expect(getByText(args?.content ?? '')).toHaveClass('product-review-content')
+  expect(getByText(args.body)).toHaveClass('product-review-body')
 })

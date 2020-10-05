@@ -20,7 +20,7 @@ export const Default: StoryFN<ProductReviewProps> = (
 ) => <ProductReview {...args} />
 
 Default.args = {
-  content: 'Gastropub pork belly deserunt veniam four dollar toast, occaecat master cleanse copper mug heirloom excepteur austin asymmetrical deep v sint kickstarter. Lumbersexual hoodie succulents, yuccie drinking vinegar cupidatat enim.',
+  body: 'Gastropub pork belly deserunt veniam four dollar toast, occaecat master cleanse copper mug heirloom excepteur austin asymmetrical deep v sint kickstarter. Lumbersexual hoodie succulents, yuccie drinking vinegar cupidatat enim.',
   id: 'customer-review-0',
   name: 'Customer Name',
   style: {

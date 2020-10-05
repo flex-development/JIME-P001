@@ -40,7 +40,7 @@ $product-review-name-weight: $font-weight-bold;
   border: $product-review-border;
   flex-wrap: nowrap;
 
-  &-content {
+  &-body {
     font-size: $font-size-sm;
   }
 
@@ -67,7 +67,7 @@ $product-review-name-weight: $font-weight-bold;
     font-size: $product-review-font-size;
   }
 
-  &-content,
+  &-body,
   &-name {
     margin-bottom: $spacers-0;
   }

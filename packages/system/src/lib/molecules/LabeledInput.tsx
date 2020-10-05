@@ -1,5 +1,4 @@
 import { useMutatedProps } from '@kustomz/hooks'
-import { FormControlSize } from '@kustomz/types'
 import React, { FC } from 'react'
 import { Input, InputRefProps, Label, LabelProps, Span } from '../atoms'
 
@@ -9,22 +8,20 @@ import { Input, InputRefProps, Label, LabelProps, Span } from '../atoms'
  */
 
 /**
- * LabeledInput component properties.
+ * `LabeledInput` component properties.
  */
 export interface LabeledInputProps extends LabelProps {
+  /**
+   * Label text.
+   */
+  children?: string
+
   /**
    * Properties to pass to the inner `Input` component.
    *
    * @default {}
    */
   input?: InputRefProps
-
-  /**
-   * Make the control smaller or larger.
-   *
-   * See: https://v5.getbootstrap.com/docs/5.0/forms/form-control/#sizing
-   */
-  size?: false | FormControlSize
 }
 
 /**
@@ -33,16 +30,16 @@ export interface LabeledInputProps extends LabelProps {
 export const LabeledInput: FC<LabeledInputProps> = (
   props: LabeledInputProps
 ) => {
-  const { children, input = {}, size, ...rest } = props
+  const { children, input = {}, ...rest } = props
 
   const mutatedProps = useMutatedProps<typeof rest, LabelProps>(rest, {
-    'labeled-input': true,
-    [`labeled-input-${size}`]: size
+    'labeled-input': true
   })
 
   mutatedProps['data-disabled'] = input.disabled
   mutatedProps['data-required'] = input.required
-  mutatedProps['data-type'] = input.type
+
+  input['aria-label'] = input['aria-label'] || children
 
   return (
     <Label {...mutatedProps}>

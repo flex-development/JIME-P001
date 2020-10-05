@@ -40,7 +40,7 @@ export interface ProductReviewEntity extends IEntity {
   /**
    * ID of the product the review is for.
    */
-  product_id: string = ''
+  product: string = ''
 
   /**
    * Product rating, on a scale of 0 to 5. 
@@ -55,5 +55,5 @@ export interface ProductReviewEntity extends IEntity {
   /**
    * Title of the product variant the review is for.
    */
-  variant_title: string = ''
+  variant: string = ''
 }

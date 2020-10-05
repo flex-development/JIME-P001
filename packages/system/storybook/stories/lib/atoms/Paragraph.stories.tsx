@@ -1,6 +1,6 @@
+import { StoryFN } from '@kustomz-config/index'
 import { Paragraph, ParagraphProps } from '@kustomz/lib'
 import React from 'react'
-import { StoryFN } from '../../../config'
 
 /**
  * @file Stories - Paragraph

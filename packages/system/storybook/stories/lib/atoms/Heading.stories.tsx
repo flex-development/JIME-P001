@@ -1,6 +1,6 @@
+import { StoryFN } from '@kustomz-config/index'
 import { Heading, HeadingProps } from '@kustomz/lib'
 import React from 'react'
-import { StoryFN } from '../../../config'
 
 /**
  * @file Stories - Heading

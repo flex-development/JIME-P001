@@ -1,0 +1,111 @@
+/// ----------------------------------------------------------------------------
+/// @group LabeledFormControl
+/// ----------------------------------------------------------------------------
+
+/// ----------------------------------------------------------------------------
+/// Variables
+/// ----------------------------------------------------------------------------
+
+$inner-control-font-size: $font-size-sm - 0.075;
+
+/// ----------------------------------------------------------------------------
+/// Mixins
+/// ----------------------------------------------------------------------------
+
+@mixin labeled-form-control-flex($direction: column-reverse) {
+  @include flex(stretch, flex-start, $direction);
+
+  > span {
+    margin-#{if($direction == column-reverse, top, bottom)}: $spacers-1;
+  }
+
+  .form-control {
+    @include border($ghost);
+
+    @include border(
+      $light-25,
+      $border-width-thin,
+      if($direction == column-reverse, bottom, top)
+    );
+  }
+
+  @content;
+}
+
+/// ----------------------------------------------------------------------------
+/// Styles
+/// ----------------------------------------------------------------------------
+
+.labeled-form-control {
+  @include labeled-form-control-flex;
+
+  &.flex-column {
+    @include labeled-form-control-flex(column);
+  }
+
+  &[data-control='input'] {
+    &[data-type='number'] {
+      @include flex(center, space-between, row, inline-flex !important);
+
+      @include form-control;
+
+      border: $input-border-width solid $input-border-color;
+
+      > span {
+        font-size: $font-size-sm;
+      }
+
+      .form-control {
+        @include border($ghost);
+
+        @include remove-padding;
+
+        appearance: textfield;
+        color: $primary;
+        max-width: 60%;
+        min-height: unset;
+        text-align: right;
+
+        &:focus {
+          box-shadow: none;
+        }
+      }
+    }
+  }
+
+  > span {
+    display: inline-block;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-semibold;
+    text-transform: uppercase;
+  }
+
+  .form-control {
+    @include padding-x($spacers-0);
+
+    color: $light;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    min-height: unset;
+    // text-transform: uppercase;
+
+    &::placeholder {
+      font-size: $font-size-sm;
+      font-weight: $font-weight-semibold;
+      text-transform: none;
+    }
+
+    &:not(select) {
+      padding-left: 0.375em;
+    }
+  }
+
+  select.form-control {
+    background-color: $ghost;
+    color: $primary;
+
+    option {
+      background-color: $ghost;
+    }
+  }
+}

@@ -88,6 +88,7 @@ module.exports = {
     config.resolve.alias = merge(config.resolve.alias, {
       '@kustomz': path.join(__dirname, '../src'),
       '@kustomz-config': path.join(__dirname, './config'),
+      '@kustomz-mocks': path.join(__dirname, '../__mocks__'),
       '@kustomz-stories': path.join(__dirname, './stories')
     })
 

@@ -1,7 +1,7 @@
+import { StoryFN } from '@kustomz-config/index'
 import { AddToCartForm, AddToCartFormProps } from '@kustomz/lib'
 import React from 'react'
 import products from '../../../../__mocks__/products.mock.json'
-import { StoryFN } from '../../../config'
 
 /**
  * @file Stories - AddToCartForm

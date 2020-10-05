@@ -18,6 +18,9 @@ $secondary: #b8c1ec;
 
 $light-75: rgba($light, 0.75);
 
+$light-50: rgba($light, 0.5);
+$secondary-50: rgba($secondary, 0.5);
+
 $dark-25: rgba($dark, 0.25);
 $light-25: rgba($light, 0.25);
 $primary-25: rgba($primary, 0.25);
@@ -126,8 +129,10 @@ $border-radius-lg: $border-radius;
 $border-color: $darker;
 
 $border-width: 2px;
-$border-width-sm: 1px;
-$border-width-xs: 0.5px;
+
+$border-width-light: 0.5px;
+$border-width-thin: 1px;
+$border-width-thick: 4px;
 
 // -----------------------------------------------------------------------------
 // Typography
@@ -203,11 +208,14 @@ $input-border-color: $border-color;
 
 $input-focus-border-color: $input-border-color;
 
-$input-placeholder-color: $secondary;
+$input-placeholder-color: $secondary-50;
 
-$input-placeholder-size: bootstrap.$font-size-base * 0.875;
+$input-placeholder-size: $font-size-xs;
 
 $input-placeholder-text-transform: uppercase;
+
+$form-control-border: bootstrap.$input-border-width solid
+  bootstrap.$input-border-color;
 
 $form-check-input-bg: $light;
 

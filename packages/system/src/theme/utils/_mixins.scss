@@ -29,14 +29,32 @@
 // Borders & Outlines
 // -----------------------------------------------------------------------------
 
+/// Add a border around an element.
+/// @require {variable} $border-width
+/// @require {variable} $border-radius
+/// @param {Color} $color - Border color
+/// @param {Number} $width [$border-width] - Outline border width
+/// @param {Number} $pos [null] - Where to place border
+@mixin border($color: $border-color, $width: $border-width, $pos: null) {
+  $element-border: if($color == transparent, $spacers-0, $width) solid $color;
+  $suffix: if($pos, '-#{$pos}', '');
+
+  border#{$suffix}: $element-border;
+}
+
 /// Creates an element outline
 /// @require {variable} $border-width
 /// @require {variable} $border-radius
 /// @param {Color} $color - Border color
 /// @param {Number} $width [$border-width] - Outline border width
 /// @param {Number} $radius [$border-radius] - Outline border radius
-@mixin outline($color, $width: $border-width, $radius: $border-radius) {
-  border: $width solid $color;
+@mixin outline(
+  $color: $border-color,
+  $width: $border-width,
+  $radius: $border-radius
+) {
+  @include border($color, $border-width);
+
   border-radius: $radius;
 }
 
@@ -89,13 +107,15 @@
 /// @param {String} $justify [null] - justify-content value
 /// @param {String} $direction - justify-content value
 /// @param {String} $display [flex] - Flexbox display
+/// @param {String} $wrap [true] - Add flex-wrap:wrap
 @mixin flex(
   $align: stretch,
   $justify: flex-start,
   $direction: null,
-  $display: flex
+  $display: flex,
+  $wrap: true
 ) {
-  @include display-flex($display);
+  @include display-flex($display, $wrap);
 
   @include flex-position($align, $justify);
 
@@ -194,12 +214,22 @@
 }
 
 /// Center flexbox items on main axis and distrbute space between elements.
+/// To make the styles responsive, supply a key from the $grid-breakpoints map.
 /// @require {mixin} flex-align
 /// @require {mixin} flex-justify
-@mixin flex-spread {
-  @include flex-align(center);
+/// @param {String} $breakpoint [null] Breakpoint key
+@mixin flex-spread($breakpoint: null) {
+  @if $breakpoint {
+    @include media-breakpoint-up($breakpoint) {
+      @include flex-align(center);
 
-  @include flex-justify(space-between);
+      @include flex-justify(space-between);
+    }
+  } @else {
+    @include flex-align(center);
+
+    @include flex-justify(space-between);
+  }
 
   @content;
 }
@@ -252,10 +282,13 @@
   // Customize placeholder
   &::placeholder {
     color: $input-placeholder-color;
+    font-size: $input-placeholder-size;
 
     // Override Firefox's unusual default opacity;
     // see https://github.com/twbs/bootstrap/pull/11526.
     opacity: 1;
+
+    text-transform: $input-placeholder-text-transform;
   }
 
   // Disabled and read-only inputs

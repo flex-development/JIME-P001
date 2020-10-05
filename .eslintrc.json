@@ -98,6 +98,7 @@
           "@flex-development/kustomtypez",
           "@kustomz",
           "@kustomz-config",
+          "@kustomz-mocks",
           "@kustomz-stories",
           "@storybook"
         ]

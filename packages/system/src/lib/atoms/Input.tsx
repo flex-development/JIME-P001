@@ -1,3 +1,4 @@
+import { Booleanish } from '@flex-development/kustomtypez'
 import { useMutatedProps } from '@kustomz/hooks'
 import { FormControlSize, MutatedFormControlProps } from '@kustomz/types'
 import React, {
@@ -258,7 +259,7 @@ export interface InputProps
    * Supported by `text`, `search`, `url`, `tel`, `email`, `date`, `month`,
    * `week`, `time`, `datetime-local`, `number`, and `file` input types.
    */
-  required?: boolean
+  required?: Booleanish
 
   /**
    * Make the control smaller or larger.
@@ -361,6 +362,10 @@ export const Input: FREC<InputRefProps> = forwardRef((props, ref) => {
 
   const checks = checkInputTypes.includes(rest.type as string)
   const file = rest.type === 'file'
+
+  if (!rest.placeholder && rest.type === 'email') {
+    rest.placeholder = 'you@email.com'
+  }
 
   const mutatedProps = useMutatedProps<
     typeof rest,

@@ -1,6 +1,6 @@
+import { ligatures as children, StoryFN } from '@kustomz-config/index'
 import { Icon, IconProps } from '@kustomz/lib'
 import React from 'react'
-import { ligatures as children, StoryFN } from '../../../config'
 
 /**
  * @file Stories - Icon

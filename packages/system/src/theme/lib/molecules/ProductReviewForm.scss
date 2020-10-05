@@ -13,6 +13,8 @@ $product-review-form-spacer: $spacers-3;
 /// ----------------------------------------------------------------------------
 
 .product-review-form {
+  @include flex(stretch, center, column);
+
   @include padding-x($input-padding-x);
 
   @include padding-y($product-review-form-spacer * 2);
@@ -21,9 +23,9 @@ $product-review-form-spacer: $spacers-3;
     @include element-size(100%);
 
     @include media-breakpoint-up(sm) {
-      @include element-size(auto);
+      @include flex-align(flex-end, self);
 
-      float: right;
+      @include element-size(auto);
     }
 
     font-size: $font-size-sm;

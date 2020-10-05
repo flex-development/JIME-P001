@@ -45,7 +45,7 @@ export interface ProductReviewEntity extends IEntity {
   /**
    * Product rating, on a scale of 0 to 5. 
    */
-  rating: 0 | 1 | 2 | 3 | 4 | 5
+  rating?: 0 | 1 | 2 | 3 | 4 | 5
 
   /**
    * Title of review.
@@ -57,3 +57,8 @@ export interface ProductReviewEntity extends IEntity {
    */
   variant: string = ''
 }
+
+/**
+ * User-populated fields needed to create a product review.
+ */
+export type ProductReviewInput = Omit<ProductReviewEntity, 'id' | 'name'>

@@ -1,25 +1,29 @@
 import {
+  AnyObject,
   ANYTHING,
   ProductResource,
-  ProductReviewEntity
+  ProductReviewEntity,
+  ProductReviewInput
 } from '@flex-development/kustomtypez'
 import { useMutatedProps, useProductVariants } from '@kustomz/hooks'
-import { HTMLButtonClickEvent, HTMLSelectChangeEvent } from '@kustomz/types'
-import React, { FC } from 'react'
 import {
-  Box,
-  Button,
-  Form,
-  FormProps,
-  Heading,
-  Paragraph,
-  Span
-} from '../atoms'
+  HTMLButtonClickEvent,
+  HTMLInputChangeEvent,
+  HTMLSelectChangeEvent,
+  HTMLTextAreaChangeEvent
+} from '@kustomz/types'
+import { isEmpty } from 'lodash'
+import React, { FC } from 'react'
+import { useSetState } from 'react-hanger'
+import isEmail from 'validator/lib/isEmail'
+import { Button, Form, FormProps, Heading, Paragraph, Span } from '../atoms'
 import { LabeledFormControl } from './LabeledFormControl'
 
 /**
  * @file Allow users to submit product reviews
  * @module lib/molecules/ProductReviewForm
+ *
+ * @todo Update documentation
  */
 
 /**
@@ -40,10 +44,10 @@ export interface ProductReviewFormProps extends FormProps {
    * Form submission handler. This function will be fired when the user clicks
    * the `submit` button.
    *
-   * @param review - Product review entity
+   * @param review - User-populated product review fields
    * @param event - `click` event from submit button
    */
-  submit?(review: ProductReviewEntity, event: HTMLButtonClickEvent): ANYTHING
+  submit?(review: ProductReviewInput, event: HTMLButtonClickEvent): ANYTHING
 
   /**
    * The title of the product the user is submitting a review for.
@@ -63,8 +67,7 @@ export interface ProductReviewFormProps extends FormProps {
  *
  * **TODO**:
  *
- * - Implement form state and validation
- * - Disable submit button when form fields are invalid
+ * - Update documentation
  */
 export const ProductReviewForm: FC<ProductReviewFormProps> = (
   props: ProductReviewFormProps
@@ -72,7 +75,10 @@ export const ProductReviewForm: FC<ProductReviewFormProps> = (
   const {
     description,
     id,
-    submit = review => console.log('Submitted product review', review),
+    submit = (review: ProductReviewEntity, event: HTMLButtonClickEvent) => {
+      event.preventDefault()
+      console.log('Submitted product review', review)
+    },
     title,
     variants,
     ...rest
@@ -82,6 +88,20 @@ export const ProductReviewForm: FC<ProductReviewFormProps> = (
 
   // Get product variants as options
   const { options, selectVariant, selected = {} } = useProductVariants(variants)
+
+  // Product review entity state
+  const { state: review, setState: updateReview } = useSetState<
+    ProductReviewInput
+  >({
+    body: '',
+    email: '',
+    product: id,
+    title: '',
+    variant: selected.id
+  })
+
+  // Track form errors
+  const { state: errors, setState: setErrors } = useSetState<AnyObject>({})
 
   return (
     <Form {...mutatedProps} id={`product-review-form-${id}`}>
@@ -97,65 +117,89 @@ export const ProductReviewForm: FC<ProductReviewFormProps> = (
         {description}
       </Paragraph>
 
-      <Box className='form-body product-review-form-body'>
-        <LabeledFormControl
-          data-selected={selected.title}
-          control={{
-            name: 'variant',
-            onChange: (e: HTMLSelectChangeEvent) => {
-              selectVariant(e.target.value)
-            },
-            options,
-            placeholder: 'Select the product variant you purchased',
-            value: selected.id
-          }}
-          name='select'
-        >
-          Style
-        </LabeledFormControl>
+      <LabeledFormControl
+        data-selected={selected.title}
+        control={{
+          name: 'variant',
+          onChange: ({ target: { value } }: HTMLSelectChangeEvent) => {
+            selectVariant(value)
+            updateReview({ variant: value })
+          },
+          options,
+          placeholder: 'Select the product variant you purchased',
+          required: true,
+          value: selected.id
+        }}
+        name='select'
+      >
+        Style
+      </LabeledFormControl>
 
-        <LabeledFormControl
-          control={{
-            name: 'email',
-            required: true,
-            type: 'email'
-          }}
-        >
-          Email address
-        </LabeledFormControl>
+      <LabeledFormControl
+        control={{
+          invalid: errors?.email,
+          name: 'email',
+          onChange: ({ target: { value } }: HTMLInputChangeEvent) => {
+            const valid = isEmail(value)
 
-        <LabeledFormControl
-          control={{
-            name: 'title',
-            placeholder: 'A smoke worthy product',
-            required: true
-          }}
-        >
-          Review Title
-        </LabeledFormControl>
+            if (valid) updateReview({ email: value })
 
-        <LabeledFormControl
-          control={{
-            name: 'body',
-            placeholder:
-              'Blue bottle single-origin coffee next level taxidermy four loko seitan cupidatat flannel. Cred asymmetrical literally vexillologist cliche do distillery hashtag raw denim crucifix everyday carry affogato austin. Williamsburg jean shorts raclette, aesthetic quinoa dolore hammock echo park taxidermy messenger bag.'
-          }}
-          name='textarea'
-        >
-          Review Body
-        </LabeledFormControl>
-      </Box>
+            setErrors({ email: !valid })
+          },
+          required: true,
+          type: 'email'
+        }}
+      >
+        Email address
+      </LabeledFormControl>
 
-      <Box className='form-footer'>
-        {/* TODO: Disable button when form fields are invalid */}
-        <Button
-          aria-label='Submit product review'
-          className='product-review-form-btn'
-          type='submit'
-        >
-          Submit Review
-        </Button>
-      </Box>
+      <LabeledFormControl
+        control={{
+          invalid: errors?.title,
+          name: 'title',
+          onChange: ({ target: { value } }: HTMLInputChangeEvent) => {
+            const valid = value.length >= 3
+
+            if (valid) updateReview({ title: value })
+
+            setErrors({ title: !valid })
+          },
+          placeholder: 'A smoke worthy product',
+          required: true
+        }}
+      >
+        Review Title
+      </LabeledFormControl>
+
+      <LabeledFormControl
+        control={{
+          invalid: errors?.body,
+          name: 'body',
+          onChange: ({ target: { value } }: HTMLTextAreaChangeEvent) => {
+            const valid = value.length >= 3
+
+            if (valid) updateReview({ body: value })
+
+            setErrors({ body: !valid })
+          },
+          placeholder:
+            'Blue bottle single-origin coffee next level taxidermy four loko seitan cupidatat flannel. Cred asymmetrical literally vexillologist cliche do distillery hashtag raw denim crucifix everyday carry affogato austin. Williamsburg jean shorts raclette, aesthetic quinoa dolore hammock echo park taxidermy messenger bag.',
+          required: true
+        }}
+        name='textarea'
+      >
+        Review Body
+      </LabeledFormControl>
+
+      <Button
+        aria-label='Submit product review'
+        className='product-review-form-btn'
+        disabled={isEmpty(errors) || Object.values(errors).includes(true)}
+        onClick={(event: HTMLButtonClickEvent) => submit(review, event)}
+        type='submit'
+      >
+        Submit Review
+      </Button>
     </Form>
   )
 }

@@ -17,7 +17,7 @@ import {
   Select,
   TextArea
 } from '../atoms'
-import { LabeledInput } from './LabeledInput'
+import { LabeledFormControl } from './LabeledFormControl'
 import { ProductHeading } from './ProductHeading'
 
 /**
@@ -116,8 +116,8 @@ export const AddToCartForm: FC<AddToCartFormProps> = (
           value={selected.id}
         />
 
-        <LabeledInput
-          input={{
+        <LabeledFormControl
+          control={{
             'aria-label': 'Product quantity',
             min: 0,
             onChange: ({ target: { value } }: HTMLInputChangeEvent) => {
@@ -128,7 +128,7 @@ export const AddToCartForm: FC<AddToCartFormProps> = (
           }}
         >
           Quantity
-        </LabeledInput>
+        </LabeledFormControl>
       </Box>
 
       {/* Only visible for "KUSTOMZ" product - sync with Shopify */}

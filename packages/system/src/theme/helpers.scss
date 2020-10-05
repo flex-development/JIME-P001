@@ -81,11 +81,7 @@
 // -----------------------------------------------------------------------------
 
 .form-control {
-  &::placeholder {
-    font-size: $input-placeholder-size;
-    padding-left: $spacers-2;
-    text-transform: $input-placeholder-text-transform;
-  }
+  @include form-control;
 }
 
 // -----------------------------------------------------------------------------

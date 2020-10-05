@@ -10,6 +10,7 @@
   // Disabled buttons
   &:disabled {
     cursor: not-allowed;
+    pointer-events: unset;
   }
 
   // Align icons inside of <button> elements

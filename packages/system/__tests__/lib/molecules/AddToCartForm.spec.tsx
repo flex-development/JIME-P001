@@ -7,7 +7,7 @@ import {
   Kustomz
 } from '@kustomz-stories/molecules/AddToCartForm.stories'
 import { AddToCartFormProps } from '@kustomz/lib'
-import { render, screen } from '@testing-library/react'
+import { fireEvent, render, screen } from '@testing-library/react'
 import User from '@testing-library/user-event'
 import React from 'react'
 
@@ -17,6 +17,7 @@ import React from 'react'
  */
 
 // ! Keep in sync with AddToCartForm implementation
+const QUANTITY_LABEL = 'Product quantity'
 const SELECT_PLACEHOLDER = 'Select an option'
 const TEXTAREA_PLACEHOLDER = 'Describe your kustom ash or rolling tray'
 
@@ -76,24 +77,20 @@ it('disables the add to cart button when an unavailable product variant is selec
   expect(screen.getByRole('button')).toBeDisabled()
 })
 
-// FIXME: Component passes tests manually, but interaction test
-it('updates the product quantity', () => {
+// FIXME: Component passes tests manually (check state), but fails otherwise
+it('[FALSE ALARM] updates the product quantity', () => {
   const args = AshTray.args as AddToCartFormProps
 
-  const { getByText } = render(<AshTray {...args} />)
+  render(<AshTray {...args} />)
 
-  // Mock updated product quantity
-  const NEW_QUANITY = '2'
-
-  // Get input element
-  const input = screen.getByDisplayValue('1') as HTMLInputElement
+  const input = screen.getByLabelText(QUANTITY_LABEL)
 
   // Mock product quantity update
-  User.type(input, '{selectall}{backspace}' + NEW_QUANITY)
-  User.click(getByText(args.product_title))
+  User.click(input)
+  fireEvent.keyPress(input, { key: 'ArrowUp' })
 
   // Expect element with new quanity as value to be in the document
-  expect(input.value).toBe(NEW_QUANITY)
+  expect((input as HTMLInputElement).value).toBe('2')
 })
 
 it('updates the display price if the selected option has a different price than the previous option', () => {

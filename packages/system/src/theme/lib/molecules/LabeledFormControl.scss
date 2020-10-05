@@ -52,6 +52,8 @@ $inner-control-font-size: $font-size-sm - 0.075;
       border: $input-border-width solid $input-border-color;
 
       > span {
+        @include margin-y($spacers-0);
+
         font-size: $font-size-sm;
       }
 
@@ -97,6 +99,10 @@ $inner-control-font-size: $font-size-sm - 0.075;
 
     &:not(select) {
       padding-left: 0.375em;
+    }
+
+    &.is-invalid {
+      border-bottom-color: $danger;
     }
   }
 

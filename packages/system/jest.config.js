@@ -13,6 +13,7 @@ module.exports = {
     '^.+\\.(css|sass|scss|less)$': 'identity-obj-proxy',
     '^@kustomz/(.*)$': '<rootDir>/src/$1',
     '^@kustomz-config/(.*)$': '<rootDir>/storybook/config/$1',
+    '^@kustomz-mocks/(.*)$': '<rootDir>/__mocks__/$1',
     '^@kustomz-stories/(.*)$': '<rootDir>/storybook/stories/lib/$1'
   },
   prettierPath: path.join(__dirname, '../../node_modules/prettier'),

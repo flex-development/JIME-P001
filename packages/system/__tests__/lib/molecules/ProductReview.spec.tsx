@@ -6,6 +6,8 @@ import React from 'react'
 /**
  * @file Tests - ProductReview
  * @module tests/lib/molecules/ProductReview
+ *
+ * @todo Add unit tests for invalid form state and form submission
  */
 
 it('renders <div class="product-review">', () => {

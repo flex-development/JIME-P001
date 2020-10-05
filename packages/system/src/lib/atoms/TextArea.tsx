@@ -120,14 +120,15 @@ export type TextAreaRefProps = ReflessTextAreaProps & TextAreaRefAttributes
  * - **https://v5.getbootstrap.com/docs/5.0/forms/form-control/**
  */
 export const TextArea: FREC<TextAreaRefProps> = forwardRef((props, ref) => {
-  const { size, ...rest } = props
+  const { invalid, size, ...rest } = props
 
   const mutatedProps = useMutatedProps<
     typeof rest,
     JSX.IntrinsicElements['textarea']
   >(rest, {
     'form-control': true,
-    [`form-control-${size}`]: size
+    [`form-control-${size}`]: size,
+    'is-invalid': invalid
   })
 
   return <textarea {...mutatedProps} ref={ref} />

@@ -9,10 +9,11 @@ import { FC } from 'react'
 export const excludePropKeys = []
 
 export type StoryFN<T = Args> = FC<T> & {
-  args?: T | Partial<T>
+  args?: T
   parameters?: Parameters
   storyName?: string
 }
 
 export * from './components'
 export * from './utils'
+

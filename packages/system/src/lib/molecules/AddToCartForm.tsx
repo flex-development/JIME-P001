@@ -132,7 +132,7 @@ export const AddToCartForm: FC<AddToCartFormProps> = (
       </Box>
 
       {/* Only visible for "KUSTOMZ" product - sync with Shopify */}
-      {selected.productTitle === 'KUSTOMZ' && (
+      {product_title === 'KUSTOMZ' && (
         <Box className='row-fluid mt-3'>
           <TextArea
             aria-label='Kustom product description'

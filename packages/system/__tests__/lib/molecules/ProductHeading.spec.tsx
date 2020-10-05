@@ -15,6 +15,6 @@ it('renders the title and price of a product', () => {
   )
   const { price, title } = (AshTray.args || {}) as ArgsMatcher
 
-  expect(getByText(price)).toBeInTheDocument()
+  expect(getByText(`$${price}`)).toBeInTheDocument()
   expect(getByText(title)).toBeInTheDocument()
 })

@@ -1,4 +1,4 @@
-import { IFireOrmQueryLine, IOrderByParams } from 'fireorm'
+import { IEntity, IFireOrmQueryLine, IOrderByParams } from 'fireorm'
 
 /**
  * Firestore database query.
@@ -11,4 +11,29 @@ export interface DatabaseQuery {
   queries?: IFireOrmQueryLine[]
   limit?: number
   single?: boolean
+}
+
+/**
+ * Represents a product review submitted by a customer.
+ */
+export interface ProductReviewEntity extends IEntity {
+  /**
+   * Product review text.
+   */
+  content: string = ''
+
+  /**
+   * Email address of the customer who posted the review.
+   */
+  email: string = ''
+
+  /**
+   * Unique product review ID.
+   */
+  id: string = ''
+
+  /**
+   * Name of the customer who posted the review.
+   */
+  name: string = ''
 }

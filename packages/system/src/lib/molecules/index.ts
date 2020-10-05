@@ -9,3 +9,5 @@ export * from './Dropdown'
 export * from './LabeledInput'
 export * from './ProductCard'
 export * from './ProductHeading'
+export * from './ProductReview'
+

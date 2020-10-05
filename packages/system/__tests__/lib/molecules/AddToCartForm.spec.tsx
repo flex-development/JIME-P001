@@ -90,7 +90,7 @@ it('updates the product quantity', () => {
 
   // Mock product quantity update
   User.type(input, '{selectall}{backspace}' + NEW_QUANITY)
-  User.click(getByText(args.title as string))
+  User.click(getByText(args.product_title))
 
   // Expect element with new quanity as value to be in the document
   expect(input.value).toBe(NEW_QUANITY)

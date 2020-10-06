@@ -1,6 +1,6 @@
 
 /**
- * @file Type Definitions for Morenas Kustomz
+ * @file Type Definitions for Morena's Kustomz
  * @module lib
  */
 

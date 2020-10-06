@@ -22,7 +22,7 @@ export const mock = async (
   let data = {} as AnyObject
 
   try {
-    data = (await import(`../../__tests__/__mocks__/data/${filename}`)).default
+    data = (await import(`../../__tests__/__mocks__/${filename}`)).default
     if (data?.code) throw data
   } catch (err) {
     data = getFeathersError('Mock data not found.', { filename }, 404)

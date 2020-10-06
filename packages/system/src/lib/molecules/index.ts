@@ -12,4 +12,3 @@ export * from './ProductHeading'
 export * from './ProductReview'
 export * from './ProductReviewForm'
 export * from './SearchBar'
-

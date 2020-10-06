@@ -1,4 +1,4 @@
-# 🚧 Morenas Kustomz
+# 🚧 Morena's Kustomz
 
 [Storybook][8] design system and Shopify storefront powered by [Next.js][4]
 
@@ -18,8 +18,8 @@
 
 ## Getting Started
 
-Morenas Kustomz is an online store that specializes in "pot head" necessesities.
-While enjoying a MySpace inspired UI, users can shop premade ash trays,
+Morena's Kustomz is an online store that specializes in "pot head" necessities.
+While enjoying a MySpace inspired UI, users can shop pre-made ash trays,
 grinders, and rolling trays, or have them custom made.
 
 This project is formatted as a monorepo with packages for a [Storybook][8]

@@ -1,0 +1,30 @@
+/// ----------------------------------------------------------------------------
+/// @group SearchBar
+/// ----------------------------------------------------------------------------
+
+.searchbar {
+  @include flex(center, flex-start, row, flex, false);
+
+  &-btn {
+    color: $light;
+    height: max-content;
+
+    .icon {
+      font-size: $font-size-xl;
+    }
+  }
+
+  &-input {
+    @include padding-x($spacers-1);
+
+    @include padding-y($spacers-0);
+
+    border: none;
+    font-size: $font-size-sm;
+    text-transform: $input-placeholder-text-transform;
+
+    &::placeholder {
+      font-size: $font-size-base-em;
+    }
+  }
+}

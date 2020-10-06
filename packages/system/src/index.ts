@@ -6,5 +6,3 @@
 export * from './hooks'
 export * from './lib'
 export * from './utils'
-
-/* eslint-disable-next-line */

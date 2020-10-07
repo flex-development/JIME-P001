@@ -147,7 +147,7 @@ export const Carousel: FC<CarouselProps> & {
   } = props
 
   // Handle props and inject class
-  const mutatedProps = useMutatedProps<typeof rest>(rest, 'carousel')
+  const mutatedProps = useMutatedProps<typeof rest>(rest, 'carousel slide')
 
   // Bootstrap carousels require an ID
   mutatedProps.id = mutatedProps.id || uid('carousel')
@@ -159,7 +159,7 @@ export const Carousel: FC<CarouselProps> & {
   const ref = useRef<HTMLDivElement | null>(null)
 
   // Initialize Bootstrap Carousel plugin
-  const { getActiveIndex } = useCarouselPlugin<HTMLDivElement>(
+  const { isActive, setActive } = useCarouselPlugin<HTMLDivElement>(
     ref,
     { interval, keyboard, pause, ride, slide, touch, wrap },
     position && position >= 0 && position <= items.length - 1 ? position : null
@@ -169,13 +169,21 @@ export const Carousel: FC<CarouselProps> & {
     <Box {...mutatedProps} ref={ref}>
       <List className='carousel-indicators' is='ol'>
         {items.map((child: ReactElement, i: number) => (
-          <CarouselIndicator active={getActiveIndex(i)} key={uuid()} />
+          <CarouselIndicator
+            active={isActive(i)}
+            key={uuid()}
+            onClick={() => setActive(i)}
+          />
         ))}
       </List>
 
       <Box className='carousel-inner'>
         {items.map((child: ReactElement, i: number) => (
-          <CarouselItem active={getActiveIndex(i)} key={uuid()}>
+          <CarouselItem
+            active={isActive(i)}
+            key={uuid()}
+            onClick={() => setActive(i)}
+          >
             {child}
           </CarouselItem>
         ))}

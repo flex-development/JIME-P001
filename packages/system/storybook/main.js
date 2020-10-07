@@ -8,7 +8,7 @@ const sassOptions = require('../.sassrc.js')
  * @see https://storybook.js.org/docs/react/configure/overview
  */
 
-/* eslint-disable-next-line sort-keys */
+/* eslint-disable sort-keys */
 
 module.exports = {
   /**

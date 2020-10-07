@@ -1,11 +1,13 @@
 import { NullishNumber } from '@flex-development/kustomtypez'
 import { CarouselEventHandler, CarouselOption } from 'bootstrap'
 import CarouselPlugin from 'bootstrap/js/dist/carousel'
-import { Dispatch, RefObject, SetStateAction, useEffect, useState } from 'react'
+import { Dispatch, RefObject, SetStateAction, useCallback, useEffect, useState } from 'react'
 
 /**
  * @file Create a Bootstrap carousel instance
  * @module hooks/useCarouselPlugin
+ * 
+ * @todo Add declaration file for 'bootstrap/js/dist/carousel'
  */
 
 /**
@@ -25,9 +27,9 @@ export type UseCarouselPlugin = {
   /**
    * Determines the active item index.
    *
-   * @param index - Current array index
+   * @param curr - Current array index
    */
-  getActiveIndex(index: number): boolean
+  isActive(curr: number): boolean
 
   /**
    * Updates the active index state.
@@ -55,6 +57,15 @@ export function useCarouselPlugin<E = HTMLElement>(
     initialPosition || 0
   )
 
+  /**
+   * Determines the active item index.
+   *
+   * @param index - Current array index
+   */
+  const isActive = useCallback((index: number): boolean => {
+    return active !== 0 ? active === index : index === 0
+  }, [active])
+
   useEffect(() => {
     // If missing HTML element, do nothing
     if (!ref.current || carousel) return
@@ -62,26 +73,18 @@ export function useCarouselPlugin<E = HTMLElement>(
     // Create carousel w/ Bootstrap JS API
     setCarousel(new CarouselPlugin(ref.current, options))
 
+    // Update active state when `carousel.slide` instance method is invoked
     const element = (ref.current as unknown) as HTMLElement
-
     element.addEventListener('slide.bs.carousel', event => {
       const slide = (event as unknown) as CarouselEventHandler<HTMLDivElement>
       setActive(slide.to)
     })
 
     return () => {
+      // If defined, destroy carousel
       carousel && carousel.dispose()
     }
   }, [carousel, options, ref])
 
-  /**
-   * Determines the active item index.
-   *
-   * @param index - Current array index
-   */
-  const getActiveIndex = (index: number): boolean => {
-    return active !== 0 ? active === index : index === 0
-  }
-
-  return { active, carousel, getActiveIndex, setActive }
+  return { active, carousel, isActive, setActive }
 }

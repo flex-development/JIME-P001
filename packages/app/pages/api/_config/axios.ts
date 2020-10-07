@@ -1,4 +1,4 @@
-import { AnyObject } from '@flex-development/kustomtypez'
+import { AnyObject, ANYTHING } from '@flex-development/kustomtypez'
 import Axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios'
 import { pick } from 'lodash'
 import { getFeathersError } from '../../../lib'
@@ -43,15 +43,13 @@ export const handleErrorResponse = (error: AxiosError): void => {
   throw feathersError
 }
 
-/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
-
 /**
  * Returns the data from a successful request.
  *
  * @param response - Success response
  * @throws {FeathersError}
  */
-export const handleSuccessResponse = (res: AxiosResponse): any => {
+export const handleSuccessResponse = (res: AxiosResponse): ANYTHING => {
   return res?.data ?? res
 }
 
@@ -64,8 +62,8 @@ Axios.interceptors.response.use(handleSuccessResponse, handleErrorResponse)
  * @param response - Success response
  * @throws {FeathersError}
  */
-export async function axios<T = any>(config: AxiosRequestConfig): Promise<T> {
+export async function axios<T = ANYTHING>(
+  config: AxiosRequestConfig
+): Promise<T> {
   return ((await Axios(config)) as unknown) as Promise<T>
 }
-
-/* eslint-enable @typescript-eslint/no-explicit-any */

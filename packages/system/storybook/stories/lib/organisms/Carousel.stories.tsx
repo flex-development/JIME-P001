@@ -8,18 +8,18 @@ import React from 'react'
  */
 
 export default {
+  argTypes: {
+    children: { control: 'array' }
+  },
   args: {
     style: {
       maxHeight: '600px',
       maxWidth: '438px'
     }
   },
-  argTypes: {
-    children: { control: 'array' }
-  },
   component: Carousel,
   parameters: {
-    jest: ['Carousel']
+    jest: ['Carousel', 'useCarouselPlugin']
   },
   title: 'Library/Organisms/Carousel'
 }

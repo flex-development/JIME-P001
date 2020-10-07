@@ -3,6 +3,7 @@
  * @module hooks
  */
 
+export * from './useCarouselPlugin'
 export * from './useCustomAttributes'
 export * from './useIcon'
 export * from './useLineItemInput'

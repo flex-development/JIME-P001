@@ -117,6 +117,7 @@ export const input_type = {
     type: 'select'
   }
 }
+
 export const ligatures = {
   control: {
     options: [
@@ -1055,6 +1056,10 @@ export const ligatures = {
     ],
     type: 'select'
   }
+}
+
+export const obj = {
+  control: 'object'
 }
 
 export const placeholder = {

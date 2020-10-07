@@ -1,5 +1,6 @@
 import { useMutatedProps } from '@kustomz/hooks'
 import { MutatedVoidElementProps } from '@kustomz/types'
+import { omit } from 'lodash'
 import React, {
   forwardRef,
   ForwardRefExoticComponent as FREC,
@@ -48,5 +49,5 @@ export const Divider: FREC<DividerProps> = forwardRef((props, ref) => {
     JSX.IntrinsicElements['hr']
   >(props, 'divider')
 
-  return <hr {...mutatedProps} ref={ref} />
+  return <hr {...omit(mutatedProps, ['children'])} ref={ref} />
 })

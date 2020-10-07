@@ -38,14 +38,14 @@
     "prestart": "dotenv -e .env.production.local -- echo \"Loaded production environment.\"",
     "start": "next start",
     "build:types": "lerna run build --scope @flex-development/kustomtypez",
-    "build:ui": "lerna run build:bundle --scope @flex-development/kustomz",
+    "build:ui": "lerna run build:bundle --scope @flex-development/kustomzdesign",
     "prebuild": "run-p build:*",
     "build": "next build"
   },
   "dependencies": {
     "@feathersjs/errors": "^4.5.3",
     "@flex-development/kustomtypez": "*",
-    "@flex-development/kustomz": "*",
+    "@flex-development/kustomzdesign": "*",
     "@types/cors": "^2.8.7",
     "@types/crypto-js": "^3.1.47",
     "@types/feathersjs__errors": "^3.3.2",

@@ -43,11 +43,7 @@ export const ProductReview: FC<ProductReviewProps> = (
   return (
     <Box {...mutatedProps}>
       <Box className='col'>
-        <Image
-          className='product-review-img'
-          fluid
-          src='/customer.svg'
-        />
+        <Image className='product-review-img' fluid src='/customer.svg' />
       </Box>
       <Box className='product-review-text col-sm-10 col-12'>
         <Paragraph className='product-review-name'>{name}</Paragraph>

@@ -46,7 +46,7 @@ export const ProductReview: FC<ProductReviewProps> = (
         <Image
           className='product-review-img'
           fluid
-          src='/assets/customer.svg'
+          src='/customer.svg'
         />
       </Box>
       <Box className='product-review-text col-sm-10 col-12'>

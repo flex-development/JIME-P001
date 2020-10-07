@@ -80,7 +80,7 @@ export interface ImageProps extends MutatedVoidElementProps<HTMLImageElement> {
    * descriptor is already defined in `srcSet`, or unless `srcSet` contains w
    * descriptors.
    *
-   * @default 'assets/img-placeholder.png'
+   * @default 'img-placeholder.png'
    */
   src?: string
 
@@ -148,5 +148,5 @@ export const Image: FREC<ImageRefProps> = forwardRef((props, ref) => {
 })
 
 Image.defaultProps = {
-  src: 'assets/img-placeholder.png'
+  src: 'img-placeholder.png'
 }

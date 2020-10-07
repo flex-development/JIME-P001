@@ -1,0 +1,50 @@
+/// ----------------------------------------------------------------------------
+/// @group Hero
+/// ----------------------------------------------------------------------------
+
+/// ----------------------------------------------------------------------------
+/// Variables
+/// ----------------------------------------------------------------------------
+
+$hero-title-font-family: $font-family-sans-serif-special;
+$hero-title-font-size-lg: $font-size-base-em * 6;
+$hero-title-font-size-sm-lg: $font-size-base-em * 3;
+$hero-title-font-size: $font-size-base-em * 2;
+
+$hero-subtitle-color: $secondary;
+$hero-subtitle-font-size-sm: $font-size-xxl;
+$hero-subtitle-font-size: $font-size-sm;
+
+/// ----------------------------------------------------------------------------
+/// Styles
+/// ----------------------------------------------------------------------------
+
+.hero {
+  @include flex(center, center, column);
+
+  text-align: center;
+
+  &-subtitle {
+    @include media-breakpoint-up(sm) {
+      font-size: $hero-subtitle-font-size-sm;
+    }
+
+    color: $hero-subtitle-color;
+    font-size: $hero-subtitle-font-size;
+    font-weight: $font-weight-bold;
+    text-transform: uppercase;
+  }
+
+  &-title {
+    @include media-breakpoint-between(sm, lg) {
+      font-size: $hero-title-font-size-sm-lg;
+    }
+
+    @include media-breakpoint-up(lg) {
+      font-size: $hero-title-font-size-lg;
+    }
+
+    font-family: $hero-title-font-family;
+    font-size: $hero-title-font-size;
+  }
+}

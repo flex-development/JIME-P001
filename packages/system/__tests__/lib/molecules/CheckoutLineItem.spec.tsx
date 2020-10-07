@@ -2,7 +2,6 @@ import {
   AshTray,
   Kustomz
 } from '@kustomz-stories/molecules/CheckoutLineItem.stories'
-import { CheckoutLineItemProps } from '@kustomz/lib'
 import { fireEvent, render, screen } from '@testing-library/react'
 import User from '@testing-library/user-event'
 import React from 'react'
@@ -16,18 +15,14 @@ import React from 'react'
 const QUANTITY_LABEL = 'Line item quantity'
 
 it('renders <div class="line-item">', () => {
-  const args = AshTray.args as CheckoutLineItemProps
+  const { container } = render(<AshTray {...AshTray.args} />)
 
-  render(<AshTray {...args} data-testid={args.id} />)
-
-  expect(screen.getByTestId(args.id)).toHaveClass('line-item')
+  expect(container.firstChild).toHaveClass('line-item')
 })
 
 // FIXME: Component passes tests manually (check state), but fails otherwise
 it('[FALSE ALARM] updates the product quantity', () => {
-  const args = Kustomz.args as CheckoutLineItemProps
-
-  render(<Kustomz {...args} />)
+  render(<Kustomz {...Kustomz.args} />)
 
   // Get quantity <input> element
   const input = screen.getByLabelText(QUANTITY_LABEL)
@@ -37,5 +32,6 @@ it('[FALSE ALARM] updates the product quantity', () => {
   fireEvent.keyPress(input, { key: 'ArrowUp' })
 
   // Expect element with new quanity as value to be in the document
-  expect((input as HTMLInputElement).value).toBe(`${(args.quantity || 1) + 1}`)
+  const initial_quantity = Kustomz.args.quantity || 1
+  expect((input as HTMLInputElement).value).toBe(`${initial_quantity + 1}`)
 })

@@ -1,5 +1,4 @@
 import { AshTray } from '@kustomz-stories/molecules/ProductHeading.stories'
-import { ProductHeadingProps } from '@kustomz/lib'
 import { render } from '@testing-library/react'
 import React from 'react'
 
@@ -9,9 +8,8 @@ import React from 'react'
  */
 
 it('renders the title and price of a product', () => {
-  const { getByText } = render(
-    <AshTray {...(AshTray.args as ProductHeadingProps)} />
-  )
+  const { getByText } = render(<AshTray {...AshTray.args} />)
+
   const { price, title } = AshTray.args
 
   expect(getByText(`$${price}`)).toBeInTheDocument()

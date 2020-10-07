@@ -2,8 +2,7 @@ import {
   AshTray,
   Kustomz
 } from '@kustomz-stories/molecules/ProductCard.stories'
-import { ProductCardProps } from '@kustomz/lib'
-import { fireEvent, render, screen } from '@testing-library/react'
+import { fireEvent, render } from '@testing-library/react'
 import React from 'react'
 
 /**
@@ -12,26 +11,22 @@ import React from 'react'
  */
 
 it('renders <div class="product-card">', () => {
-  const args = AshTray.args as ProductCardProps
+  const { container } = render(<AshTray {...AshTray.args} />)
 
-  render(<AshTray {...args} data-testid={args.id} />)
-
-  expect(screen.getByTestId(args.id)).toHaveClass('product-card')
+  expect(container.firstChild).toHaveClass('product-card')
 })
 
 it('opens and closes the product option menu', () => {
-  const args = AshTray.args as ProductCardProps
-
-  const { getByText } = render(<AshTray {...args} data-testid={args.id} />)
+  const { getByText } = render(<AshTray {...AshTray.args} />)
 
   // Get visible product option in dropdown header
-  const first_option = getByText((args.variants || [])[0].title)
+  const first_option = getByText((AshTray.args.variants || [])[0].title)
 
   // Open dropdown menu
   fireEvent.click(first_option)
 
   // First option in newly visible dropdown menu
-  const second_option = getByText((args.variants || [])[1].title)
+  const second_option = getByText((AshTray.args.variants || [])[1].title)
 
   // Expect dropdown menu to be open
   expect(second_option).toBeInTheDocument()
@@ -44,33 +39,29 @@ it('opens and closes the product option menu', () => {
 })
 
 it('updates the product display image when an option is selected', () => {
-  const args = AshTray.args as ProductCardProps
+  const { getByAltText, getByText } = render(<AshTray {...AshTray.args} />)
 
-  const { getByAltText, getByText } = render(
-    <AshTray {...args} data-testid={args.id} />
-  )
+  const { title, variants = [] } = AshTray.args
 
-  const variant = (args.variants || [])[0]
-  const variant2 = (args.variants || [])[2]
+  const variant = variants[0]
+  const variant2 = variants[2]
 
   // Expect default product image to be visible
-  expect(getByAltText(`${args.title} - ${variant.title}`)).toBeInTheDocument()
+  expect(getByAltText(`${title} - ${variant.title}`)).toBeInTheDocument()
 
   // Open dropdown menu and click second option
   fireEvent.click(getByText(variant.title))
   fireEvent.click(getByText(variant2.title))
 
   // Expect image for second option to be shown
-  expect(getByAltText(`${args.title} - ${variant2.title}`)).toBeInTheDocument()
+  expect(getByAltText(`${title} - ${variant2.title}`)).toBeInTheDocument()
 })
 
 it('updates the product display price when an option is selected', () => {
-  const args = Kustomz.args as ProductCardProps
+  const { getByText } = render(<Kustomz {...Kustomz.args} />)
 
-  const { getByText } = render(<Kustomz {...args} data-testid={args.id} />)
-
-  const variant = (args.variants || [])[0]
-  const variant2 = (args.variants || [])[2]
+  const variant = (Kustomz.args.variants || [])[0]
+  const variant2 = (Kustomz.args.variants || [])[2]
 
   // Expect default product variant price to be visible
   expect(getByText(`$${variant.price}`)).toBeInTheDocument()
@@ -84,24 +75,22 @@ it('updates the product display price when an option is selected', () => {
 })
 
 it('updates the product link when an option is selected', () => {
-  const args = Kustomz.args as ProductCardProps
+  const { getByText } = render(<Kustomz {...Kustomz.args} />)
 
-  const { getByText } = render(<Kustomz {...args} data-testid={args.id} />)
+  const variant = (Kustomz.args.variants || [])[0]
+  const variant2 = (Kustomz.args.variants || [])[2]
 
-  const variant = (args.variants || [])[0]
-  const variant2 = (args.variants || [])[2]
-
-  const product_link = `products/${args.handle}`
+  const product_link = `products/${Kustomz.args.handle}`
 
   // Expect default product title to be visible
-  expect(getByText(args.title)).toHaveAttribute('href', product_link)
+  expect(getByText(Kustomz.args.title)).toHaveAttribute('href', product_link)
 
   // Open dropdown menu and click second option
   fireEvent.click(getByText(variant.title))
   fireEvent.click(getByText(variant2.title))
 
   // Expect product URL to be updated
-  expect(getByText(args.title)).toHaveAttribute(
+  expect(getByText(Kustomz.args.title)).toHaveAttribute(
     'href',
     `${product_link}?style=${variant2.sku}`
   )

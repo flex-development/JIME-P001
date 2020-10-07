@@ -14,28 +14,28 @@ import { ArgsMatcher } from '../../jest-env'
 
 it('renders <a href="#">', () => {
   const { getByText } = render(<Default {...Default.args} />)
-  const { children } = (Default.args || {}) as ArgsMatcher
+  const { children } = Default.args as ArgsMatcher
 
   expect(getByText(children)).toHaveAttribute('href', '#')
 })
 
 it('adds the class "active" when props.active is true', () => {
   const { getByText } = render(<Default {...Default.args} active />)
-  const { children } = (Default.args || {}) as ArgsMatcher
+  const { children } = Default.args as ArgsMatcher
 
   expect(getByText(children)).toHaveClass('active')
 })
 
 it('adds the class "disabled" when props.disabled is true', () => {
   const { getByText } = render(<Default {...Default.args} disabled />)
-  const { children } = (Default.args || {}) as ArgsMatcher
+  const { children } = Default.args as ArgsMatcher
 
   expect(getByText(children)).toHaveClass('disabled')
 })
 
 it('creates a dropdown toggle link when props.toggle is true', () => {
   const { getByText } = render(<DropdownToggle {...DropdownToggle.args} />)
-  const { children } = (DropdownToggle.args || {}) as ArgsMatcher
+  const { children } = DropdownToggle.args as ArgsMatcher
 
   const element = getByText(children)
 
@@ -47,7 +47,7 @@ it('creates a dropdown toggle link when props.toggle is true', () => {
 
 it('adds the class "nav-link" when props.nav is true', () => {
   const { getByText } = render(<Nav {...Nav.args} />)
-  const { children } = (Nav.args || {}) as ArgsMatcher
+  const { children } = Nav.args as ArgsMatcher
 
   expect(getByText(children)).toHaveClass('nav-link')
 })

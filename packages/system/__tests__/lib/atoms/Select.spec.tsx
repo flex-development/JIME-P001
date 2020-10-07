@@ -1,7 +1,6 @@
 import { Default } from '@kustomz-stories/atoms/Select.stories'
 import { render } from '@testing-library/react'
 import React from 'react'
-import { ArgsMatcher } from '../../jest-env'
 
 /**
  * @file Tests - Select
@@ -9,12 +8,7 @@ import { ArgsMatcher } from '../../jest-env'
  */
 
 it('renders a <select> element with nested <option> elements', () => {
-  const args: ArgsMatcher = {
-    'data-testid': 'select',
-    ...(Default.args as ArgsMatcher)
-  }
+  const { container } = render(<Default {...Default.args} />)
 
-  const { getByTestId } = render(<Default {...args} />)
-
-  expect(getByTestId(args['data-testid'])).not.toBeEmptyDOMElement()
+  expect(container.firstChild).not.toBeEmptyDOMElement()
 })

@@ -8,12 +8,7 @@ import React from 'react'
  */
 
 it('renders <hr class="divider">', () => {
-  const args = { 'data-testid': 'divider', ...Default.args }
+  const { container } = render(<Default {...Default.args} />)
 
-  const { getByTestId } = render(<Default {...args} />)
-
-  const element = getByTestId(args['data-testid'])
-
-  expect(element).toBeInTheDocument()
-  expect(element).toHaveClass('divider')
+  expect(container.firstChild).toHaveClass('divider')
 })

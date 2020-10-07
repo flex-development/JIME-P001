@@ -10,7 +10,7 @@ import { ArgsMatcher } from '../../jest-env'
 
 it('adds the class "form-label" when props.form is true', () => {
   const { getByText } = render(<Default {...Default.args} form />)
-  const { children } = (Default.args || {}) as ArgsMatcher
+  const { children } = Default.args as ArgsMatcher
 
   expect(getByText(children)).toHaveClass('form-label')
 })

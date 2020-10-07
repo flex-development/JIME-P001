@@ -1,5 +1,4 @@
 import { Default } from '@kustomz-stories/molecules/ProductReview.stories'
-import { ProductReviewProps } from '@kustomz/lib'
 import { render } from '@testing-library/react'
 import React from 'react'
 
@@ -11,25 +10,19 @@ import React from 'react'
  */
 
 it('renders <div class="product-review">', () => {
-  const args = Default.args as ProductReviewProps
-
-  const { container } = render(<Default {...args} />)
+  const { container } = render(<Default {...Default.args} />)
 
   expect(container.firstChild).toHaveClass('product-review')
 })
 
 it('displays a customer name', () => {
-  const args = Default.args as ProductReviewProps
+  const { getByText } = render(<Default {...Default.args} />)
 
-  const { getByText } = render(<Default {...args} />)
-
-  expect(getByText(args.name)).toHaveClass('product-review-name')
+  expect(getByText(Default.args.name)).toHaveClass('product-review-name')
 })
 
 it('displays a customer review', () => {
-  const args = Default.args as ProductReviewProps
+  const { getByText } = render(<Default {...Default.args} />)
 
-  const { getByText } = render(<Default {...args} />)
-
-  expect(getByText(args.body)).toHaveClass('product-review-body')
+  expect(getByText(Default.args.body)).toHaveClass('product-review-body')
 })

@@ -1,12 +1,19 @@
 import { NullishNumber } from '@flex-development/kustomtypez'
 import { CarouselEventHandler, CarouselOption } from 'bootstrap'
 import CarouselPlugin from 'bootstrap/js/dist/carousel'
-import { Dispatch, RefObject, SetStateAction, useCallback, useEffect, useState } from 'react'
+import {
+  Dispatch,
+  RefObject,
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useState
+} from 'react'
 
 /**
  * @file Create a Bootstrap carousel instance
  * @module hooks/useCarouselPlugin
- * 
+ *
  * @todo Add declaration file for 'bootstrap/js/dist/carousel'
  */
 
@@ -62,9 +69,12 @@ export function useCarouselPlugin<E = HTMLElement>(
    *
    * @param index - Current array index
    */
-  const isActive = useCallback((index: number): boolean => {
-    return active !== 0 ? active === index : index === 0
-  }, [active])
+  const isActive = useCallback(
+    (index: number): boolean => {
+      return active !== 0 ? active === index : index === 0
+    },
+    [active]
+  )
 
   useEffect(() => {
     // If missing HTML element, do nothing

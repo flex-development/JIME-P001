@@ -11,7 +11,7 @@ import { ArgsMatcher } from '../../jest-env'
 
 it('renders a nested <summary> element', () => {
   const { getByText } = render(<WithSummary {...WithSummary.args} />)
-  const { children, summary } = (WithSummary.args || {}) as ArgsMatcher
+  const { children, summary } = WithSummary.args as ArgsMatcher
 
   const ancestor = getByText(children)
   const descendant = getByText((summary as AnyObject).children)

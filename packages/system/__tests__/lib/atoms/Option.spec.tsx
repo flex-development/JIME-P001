@@ -1,5 +1,5 @@
 import { Default } from '@kustomz-stories/atoms/Option.stories'
-import { render } from '@testing-library/react'
+import { Matcher, render } from '@testing-library/react'
 import React from 'react'
 
 /**
@@ -8,9 +8,7 @@ import React from 'react'
  */
 
 it('renders an <option> element', () => {
-  const args = { 'data-testid': 'option', ...Default.args }
+  const { getByLabelText } = render(<Default {...Default.args} />)
 
-  const { getByTestId } = render(<Default {...args} />)
-
-  expect(getByTestId(args['data-testid'])).toBeInTheDocument()
+  expect(getByLabelText(Default.args.label as Matcher)).toBeInTheDocument()
 })

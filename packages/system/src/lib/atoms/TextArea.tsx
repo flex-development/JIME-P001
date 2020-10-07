@@ -1,5 +1,6 @@
 import { useMutatedProps } from '@kustomz/hooks'
 import { FormControlSize, MutatedFormControlProps } from '@kustomz/types'
+import { omit } from 'lodash'
 import React, {
   forwardRef,
   ForwardRefExoticComponent as FREC,
@@ -131,7 +132,7 @@ export const TextArea: FREC<TextAreaRefProps> = forwardRef((props, ref) => {
     'is-invalid': invalid
   })
 
-  return <textarea {...mutatedProps} ref={ref} />
+  return <textarea {...omit(mutatedProps, 'children')} ref={ref} />
 })
 
 TextArea.defaultProps = {}

@@ -24,7 +24,7 @@ export interface CarouselProps extends BoxProps, CarouselOption {
    * The amount of time to delay between automatically cycling an item. If
    * false, carousel will not automatically cycle.
    *
-   * @default 5000
+   * @default false
    */
   interval?: false | number
 
@@ -147,7 +147,7 @@ export const Carousel: FC<CarouselProps> & {
   } = props
 
   // Handle props and inject class
-  const mutatedProps = useMutatedProps<typeof rest>(rest, 'carousel slide')
+  const mutatedProps = useMutatedProps<typeof rest>(rest, 'carousel')
 
   // Bootstrap carousels require an ID
   mutatedProps.id = mutatedProps.id || uid('carousel')
@@ -167,16 +167,6 @@ export const Carousel: FC<CarouselProps> & {
 
   return (
     <Box {...mutatedProps} ref={ref}>
-      <List className='carousel-indicators' is='ol'>
-        {items.map((child: ReactElement, i: number) => (
-          <CarouselIndicator
-            active={isActive(i)}
-            key={uuid()}
-            onClick={() => setActive(i)}
-          />
-        ))}
-      </List>
-
       <Box className='carousel-inner'>
         {items.map((child: ReactElement, i: number) => (
           <CarouselItem
@@ -188,6 +178,15 @@ export const Carousel: FC<CarouselProps> & {
           </CarouselItem>
         ))}
       </Box>
+      <List className='carousel-indicators' is='ol'>
+        {items.map((child: ReactElement, i: number) => (
+          <CarouselIndicator
+            active={isActive(i)}
+            key={uuid()}
+            onClick={() => setActive(i)}
+          />
+        ))}
+      </List>
     </Box>
   )
 }
@@ -197,7 +196,7 @@ Carousel.CarouselItem = CarouselItem
 
 Carousel.defaultProps = {
   children: [],
-  interval: 5000,
+  interval: false,
   keyboard: true,
   pause: 'hover',
   ride: 'carousel',

@@ -1,0 +1,44 @@
+/// ----------------------------------------------------------------------------
+/// @group Carousel
+/// ----------------------------------------------------------------------------
+
+/// ----------------------------------------------------------------------------
+/// Variables
+/// ----------------------------------------------------------------------------
+
+$carousel-indicator-bg: $primary-25;
+$carousel-indicator-active-bg: $primary;
+$carousel-indicator-size: $font-size-sm;
+$carousel-indicator-spacing: $spacers-3;
+
+/// ----------------------------------------------------------------------------
+/// Styles
+/// ----------------------------------------------------------------------------
+
+.carousel {
+  // Individual indicator / control
+  &-indicator {
+    @include circle($carousel-indicator-size !important);
+
+    background-color: $carousel-indicator-bg;
+
+    &.active {
+      background-color: $carousel-indicator-active-bg;
+    }
+  }
+
+  // Indicators container
+  &-indicators {
+    @include element-size(100%);
+
+    @include margin-x($spacers-0);
+
+    @include margin-y($spacers-2, $spacers-0);
+
+    position: unset;
+
+    .carousel-indicator:not(:last-of-type) {
+      margin-right: $carousel-indicator-spacing;
+    }
+  }
+}

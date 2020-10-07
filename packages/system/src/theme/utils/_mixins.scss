@@ -16,15 +16,6 @@
   animation: $name $duration $timing $delay;
 }
 
-/// Wrapper for transition property
-/// @param {String} $property [all] - transition-property
-/// @param {Number} $duration [.25s] - transition-duration
-/// @param {String} $timing [ease] - transition-timing
-/// @param {Number} $delay [0s] - transition-delay
-// @mixin transition($property: all, $duration: .5s, $timing: ease, $delay: 0s) {
-//   transition: $property $duration $timing $delay;
-// }
-
 // -----------------------------------------------------------------------------
 // Borders & Outlines
 // -----------------------------------------------------------------------------
@@ -485,6 +476,19 @@
   } @else {
     @include position(sticky);
   }
+}
+
+// -----------------------------------------------------------------------------
+// Shapes
+// -----------------------------------------------------------------------------
+
+/// Turns an element into a circle
+/// @require {mixin} set-element-dimensions
+/// @param {Number | String} $size - Circle size
+@mixin circle($size) {
+  @include set-element-dimensions($size);
+
+  border-radius: 50%;
 }
 
 // -----------------------------------------------------------------------------

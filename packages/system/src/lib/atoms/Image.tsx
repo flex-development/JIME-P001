@@ -1,6 +1,7 @@
 import { NullishString } from '@flex-development/kustomtypez'
 import { useMutatedProps } from '@kustomz/hooks'
 import { MutatedVoidElementProps } from '@kustomz/types'
+import { omit } from 'lodash'
 import React, {
   forwardRef,
   ForwardRefExoticComponent as FREC,
@@ -79,9 +80,9 @@ export interface ImageProps extends MutatedVoidElementProps<HTMLImageElement> {
    * descriptor is already defined in `srcSet`, or unless `srcSet` contains w
    * descriptors.
    *
-   * @default '#'
+   * @default 'assets/img-placeholder.png'
    */
-  src: string
+  src?: string
 
   /**
    * One or more strings separated by commas, indicating possible image sources
@@ -141,7 +142,11 @@ export const Image: FREC<ImageRefProps> = forwardRef((props, ref) => {
 
   /* eslint-disable-next-line jsx-a11y/alt-text */
 
-  return <img {...mutatedProps} ref={ref} />
+  return <img {...omit(mutatedProps, 'children')} ref={ref} />
 
   /* eslint-enable jsx-a11y/alt-text */
 })
+
+Image.defaultProps = {
+  src: 'assets/img-placeholder.png'
+}

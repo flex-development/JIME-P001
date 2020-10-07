@@ -2,7 +2,7 @@ import { MutatedProps } from '@kustomz/types'
 import classnames from 'classnames'
 import { ClassValue } from 'classnames/types'
 import { isObject, isString, omit, uniq } from 'lodash'
-import { HTMLAttributes } from 'react'
+import { Children, HTMLAttributes } from 'react'
 
 /**
  * @file Add global mutations to incoming props
@@ -14,6 +14,7 @@ import { HTMLAttributes } from 'react'
  *
  * Mutations (in order, if props are defined):
  *
+ * - Convert {@param props.children} into an array
  * - {@param props.innerHTML} will be converted into `dangerouslySetInnerHTML`
  * - {@param props.flex} (if defined) will be used to add flexbox classes
  * - {@param inject} will be passed to `classnames` function
@@ -35,6 +36,13 @@ export function useMutatedProps<
 
   // Initialize array containing properties to remove
   keys = keys || []
+
+  // Convert children into array
+  if (mutatedProps.children) {
+    mutatedProps.children = Children.toArray(mutatedProps.children)
+  } else {
+    mutatedProps.children = []
+  }
 
   // Handle dangerouslySetInnerHTML
   if (mutatedProps.innerHTML) {

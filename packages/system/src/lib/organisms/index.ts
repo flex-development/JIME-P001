@@ -3,4 +3,4 @@
  * @module lib/components/organisms
  */
 
-export default {}
+export * from './Carousel'

@@ -57,12 +57,15 @@
   },
   "dependencies": {
     "@flex-development/kustomtypez": "*",
+    "@types/bootstrap": "^4.5.0",
     "@types/classnames": "^2.2.10",
     "@types/lodash": "^4.14.158",
     "bootstrap": "^5.0.0-alpha1",
     "classnames": "^2.2.6",
     "lodash": "^4.17.19",
+    "popper": "^1.0.1",
     "react-hanger": "^2.2.1",
+    "react-uuid": "^1.0.2",
     "validator": "^13.1.1"
   },
   "devDependencies": {

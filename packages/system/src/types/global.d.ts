@@ -2,7 +2,6 @@ import { Booleanish } from '@flex-development/kustomtypez'
 import {
   AriaAttributes,
   ChangeEvent,
-  CSSProperties,
   DOMAttributes,
   PropsWithoutRef,
   RefAttributes

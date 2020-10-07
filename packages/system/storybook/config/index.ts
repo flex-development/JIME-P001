@@ -8,9 +8,9 @@ import { FC } from 'react'
 
 export const excludePropKeys = []
 
-export type StoryFN<T = Args> = FC<T> & {
-  args?: T
-  parameters?: Parameters
+export type StoryFN<T = Args, P = Parameters> = FC<T> & {
+  args: T
+  parameters?: P
   storyName?: string
 }
 

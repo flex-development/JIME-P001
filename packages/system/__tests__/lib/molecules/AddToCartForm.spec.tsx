@@ -22,13 +22,11 @@ const SELECT_PLACEHOLDER = 'Select an option'
 const TEXTAREA_PLACEHOLDER = 'Describe your kustom ash or rolling tray'
 
 it('renders <form class="add-to-cart-form">', () => {
-  const testid = 'ash-tray'
-
-  render(
-    <AshTray {...(AshTray.args as AddToCartFormProps)} data-testid={testid} />
+  const { container } = render(
+    <AshTray {...(AshTray.args as AddToCartFormProps)} />
   )
 
-  expect(screen.getByTestId(testid)).toHaveClass('add-to-cart-form')
+  expect(container.firstChild).toHaveClass('add-to-cart-form')
 })
 
 it('only displays a <textarea> element for "KUSTOMZ" product', () => {

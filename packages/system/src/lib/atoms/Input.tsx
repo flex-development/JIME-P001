@@ -1,6 +1,7 @@
 import { Booleanish } from '@flex-development/kustomtypez'
 import { useMutatedProps } from '@kustomz/hooks'
 import { FormControlSize, MutatedFormControlProps } from '@kustomz/types'
+import { omit } from 'lodash'
 import React, {
   forwardRef,
   ForwardRefExoticComponent as FREC,
@@ -378,7 +379,7 @@ export const Input: FREC<InputRefProps> = forwardRef((props, ref) => {
     'is-invalid': invalid
   })
 
-  return <input {...mutatedProps} ref={ref} />
+  return <input {...omit(mutatedProps, ['children'])} ref={ref} />
 })
 
 Input.defaultProps = {

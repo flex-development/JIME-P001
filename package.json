@@ -34,7 +34,7 @@
     "format": "prettier --write \"./\"",
     "lint": "eslint . --ext html,js,ts,tsx --fix",
     "dev:app": "lerna run dev --scope @flex-development/morenaskustomz",
-    "dev:ui": "lerna run dev --scope @flex-development/kustomz",
+    "dev:ui": "lerna run dev --scope @flex-development/kustomzdesign",
     "test": "lerna run test || true",
     "start": "lerna run start"
   },

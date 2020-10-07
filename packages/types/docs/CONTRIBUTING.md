@@ -32,5 +32,5 @@ request.
 
 Type declarations used by **both**
 [`@flex-development/morenaskustomz`](../../app/README.md) and
-[`@flex-development/kustomz`](../../system/README.md) should be added to the
-[`lib`](../lib) directory.
+[`@flex-development/kustomzdesign`](../../system/README.md) should be added to
+the [`lib`](../lib) directory.

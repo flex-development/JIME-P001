@@ -33,9 +33,9 @@ from the [Learn Storybook](https://www.learnstorybook.com) docs.
 1. Be sure the package is built before attempting to install it
 
    If the script you're using doesn't already build the package, run
-   `lerna run build:bundle --scope @flex-development/kustomz`
+   `lerna run build:bundle --scope @flex-development/kustomzdesign`
 
-2. Add `"@flex-development/kustomz": "*"` to your project `dependencies`
+2. Add `"@flex-development/kustomzdesign": "*"` to your project `dependencies`
 
 3. Run `yarn` to re-install the project dependencies (if needed)
 

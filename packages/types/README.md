@@ -14,9 +14,9 @@ Shared type definitions for Morena's Kustomz
 
 ## Getting Started
 
-This project is used to support the development of `@flex-development/kustomz`
-and `@flex-development/morenaskustomz`, the design system and storefront
-projects for Morena's Kustomz.
+This project is used to support the development of
+`@flex-development/kustomzdesign` and `@flex-development/morenaskustomz`, the
+design system and storefront projects for Morena's Kustomz.
 
 Morena's Kustomz is an online store that specializes in "pot head" necessities.
 While enjoying a MySpace inspired UI, users can shop pre-made ash trays,

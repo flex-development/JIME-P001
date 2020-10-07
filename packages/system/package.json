@@ -1,5 +1,5 @@
 {
-  "name": "@flex-development/kustomz",
+  "name": "@flex-development/kustomzdesign",
   "version": "1.0.0",
   "description": "Storybook design system for Morena's Kustomz",
   "keywords": [
@@ -95,6 +95,7 @@
     "awesome-typescript-loader": "^5.2.1",
     "babel-loader": "^8.1.0",
     "microbundle": "^0.12.0-next.9",
+    "musickit-typescript": "^1.2.4",
     "next": "^9.5.1",
     "postcss": "^7.0.32",
     "postcss-flexbugs-fixes": "^4.2.1",

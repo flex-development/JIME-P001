@@ -1,5 +1,4 @@
 import { Quantity } from '@kustomz-stories/molecules/LabeledFormControl.stories'
-import { LabeledFormControlProps } from '@kustomz/lib'
 import { Matcher, render, screen } from '@testing-library/react'
 import React from 'react'
 
@@ -9,9 +8,7 @@ import React from 'react'
  */
 
 it('renders a nested <input type="number"> element', () => {
-  const { container } = render(
-    <Quantity {...(Quantity.args as LabeledFormControlProps)} />
-  )
+  const { container } = render(<Quantity {...Quantity.args} />)
 
   const descendent = screen.getByLabelText(Quantity.args?.children as Matcher)
 

@@ -61,5 +61,7 @@ export const Option: FREC<OptionRefProps> = forwardRef((props, ref) => {
     JSX.IntrinsicElements['option']
   >(props)
 
+  mutatedProps['aria-label'] = props.label
+
   return <option {...mutatedProps} ref={ref} />
 })

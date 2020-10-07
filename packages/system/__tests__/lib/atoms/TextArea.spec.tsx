@@ -10,7 +10,7 @@ import { ArgsMatcher } from '../../jest-env'
 
 it('renders <textarea class="form-control">', () => {
   const { getByPlaceholderText } = render(<Default {...Default.args} />)
-  const { placeholder } = (Default.args || {}) as ArgsMatcher
+  const { placeholder } = Default.args as ArgsMatcher
 
   expect(getByPlaceholderText(placeholder)).toHaveClass('form-control')
 })

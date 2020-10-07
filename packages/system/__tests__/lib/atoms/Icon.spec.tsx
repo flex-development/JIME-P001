@@ -10,7 +10,7 @@ import { ArgsMatcher } from '../../jest-env'
 
 it('renders a menu icon', () => {
   const { getByText } = render(<Menu {...Menu.args} />)
-  const { children } = (Menu.args || {}) as ArgsMatcher
+  const { children } = Menu.args as ArgsMatcher
 
   const element = getByText(children)
 
@@ -22,7 +22,7 @@ it('renders a menu icon', () => {
 
 it('renders a solid style person icon', () => {
   const { getByText } = render(<Person {...Person.args} />)
-  const { children } = (Person.args || {}) as ArgsMatcher
+  const { children } = Person.args as ArgsMatcher
 
   const element = getByText(children)
 
@@ -34,7 +34,7 @@ it('renders a solid style person icon', () => {
 
 it('renders a search icon', () => {
   const { getByText } = render(<Search {...Search.args} />)
-  const { children } = (Search.args || {}) as ArgsMatcher
+  const { children } = Search.args as ArgsMatcher
 
   const element = getByText(children)
 

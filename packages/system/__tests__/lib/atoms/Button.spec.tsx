@@ -24,14 +24,14 @@ it('renders a primary button', () => {
 
 it('renders a block level button', () => {
   const { getByText } = render(<Block {...Block.args} />)
-  const { children } = (Block.args || {}) as ArgsMatcher
+  const { children } = Block.args as ArgsMatcher
 
   expect(getByText(children)).toHaveClass('btn btn-block')
 })
 
 it('renders a disabled button', () => {
   const { getByText } = render(<Disabled {...Disabled.args} />)
-  const { children } = (Disabled.args || {}) as ArgsMatcher
+  const { children } = Disabled.args as ArgsMatcher
 
   const button = getByText(children)
 
@@ -41,14 +41,14 @@ it('renders a disabled button', () => {
 
 it('renders a large button', () => {
   const { getByText } = render(<Large {...Large.args} />)
-  const { children } = (Large.args || {}) as ArgsMatcher
+  const { children } = Large.args as ArgsMatcher
 
   expect(getByText(children)).toHaveClass('btn btn-lg')
 })
 
 it('renders a small button', () => {
   const { getByText } = render(<Small {...Small.args} />)
-  const { children } = (Small.args || {}) as ArgsMatcher
+  const { children } = Small.args as ArgsMatcher
 
   expect(getByText(children)).toHaveClass('btn btn-sm')
 })

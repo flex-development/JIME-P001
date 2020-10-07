@@ -10,7 +10,7 @@ import { ArgsMatcher } from '../../jest-env'
 
 it('renders a <summary> element', () => {
   const { getByText } = render(<Default {...Default.args} />)
-  const { children } = (Default.args || {}) as ArgsMatcher
+  const { children } = Default.args as ArgsMatcher
 
   expect(getByText(children)).toBeInTheDocument()
 })

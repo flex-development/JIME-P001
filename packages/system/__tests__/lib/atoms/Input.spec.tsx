@@ -10,7 +10,7 @@ import { ArgsMatcher } from '../../jest-env'
 
 it('adds the class "form-control" to non <input type="checkbox"> and <input type="radio"> elements, not "form-check-input" or "form-file-input"', () => {
   const { getByPlaceholderText } = render(<Default {...Default.args} />)
-  const { placeholder } = (Default.args || {}) as ArgsMatcher
+  const { placeholder } = Default.args as ArgsMatcher
 
   const element = getByPlaceholderText(placeholder)
 
@@ -22,51 +22,32 @@ it('adds the class "form-control" to non <input type="checkbox"> and <input type
 })
 
 it('does not add the class "form-control-lg" to <input type="checkbox"> and <input type="radio"> elements', () => {
-  const testid = 'checkbox'
+  const { container } = render(<Checkbox {...Checkbox.args} size='lg' />)
 
-  const { getByTestId } = render(
-    <Checkbox {...Checkbox.args} data-testid={testid} size='lg' />
-  )
-
-  expect(getByTestId(testid)).not.toHaveClass('form-control-lg')
+  expect(container.firstChild).not.toHaveClass('form-control-lg')
 })
 
-it('adds the class "form-check-input" to <input type="checkbox"> and <input type="radio"> elements, not "form-control"', () => {
-  let testid = 'checkbox'
+it('adds the class "form-check-input" to <input type="checkbox">, not "form-control"', () => {
+  const { container } = render(<Checkbox {...Checkbox.args} />)
 
-  const { getByTestId: getCheckbox } = render(
-    <Checkbox {...Checkbox.args} data-testid={testid} />
-  )
+  expect(container.firstChild).toHaveAttribute('type', 'checkbox')
 
-  let element = getCheckbox(testid)
+  expect(container.firstChild).toHaveClass('form-check-input')
+  expect(container.firstChild).not.toHaveClass('form-control')
+})
 
-  expect(element).toHaveAttribute('type', 'checkbox')
+it('adds the class "form-check-input" to <input type="radio"> elements, not "form-control"', () => {
+  const { container } = render(<Radio {...Radio.args} />)
 
-  expect(element).toHaveClass('form-check-input')
-  expect(element).not.toHaveClass('form-control')
+  expect(container.firstChild).toHaveAttribute('type', 'radio')
 
-  testid = 'radio'
-
-  const { getByTestId: getRadio } = render(
-    <Radio {...Radio.args} data-testid={testid} />
-  )
-
-  element = getRadio(testid)
-
-  expect(element).toHaveAttribute('type', 'radio')
-
-  expect(element).toHaveClass('form-check-input')
+  expect(container.firstChild).toHaveClass('form-check-input')
+  expect(container.firstChild).not.toHaveClass('form-control')
 })
 
 it('adds the class "form-file-input" to <input type="file"> elements, not "form-control"', () => {
-  const testid = 'file'
+  const { container } = render(<Default {...Default.args} type='file' />)
 
-  const { getByTestId } = render(
-    <Default {...Default.args} data-testid={testid} type='file' />
-  )
-
-  const element = getByTestId(testid)
-
-  expect(element).toHaveClass('form-file-input')
-  expect(element).not.toHaveClass('form-control')
+  expect(container.firstChild).toHaveClass('form-file-input')
+  expect(container.firstChild).not.toHaveClass('form-control')
 })

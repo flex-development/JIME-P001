@@ -2,7 +2,6 @@ import {
   Default,
   InitialQuery
 } from '@kustomz-stories/molecules/SearchBar.stories'
-import { SearchBarProps } from '@kustomz/lib'
 import { render, screen } from '@testing-library/react'
 import User from '@testing-library/user-event'
 import React from 'react'
@@ -19,9 +18,7 @@ const SEARCH_BUTTON_LABEL = 'Search button'
 const SEARCH_INPUT_LABEL = 'Search query'
 
 it('renders <form class="searchbar"> with search button', () => {
-  const { container } = render(
-    <Default {...(Default.args as SearchBarProps)} />
-  )
+  const { container } = render(<Default {...Default.args} />)
 
   // Expect <form> to be rendered
   expect(container.firstChild).toHaveClass('searchbar')
@@ -37,7 +34,7 @@ it('renders <form class="searchbar"> with search button', () => {
 })
 
 it('updates the search query', () => {
-  render(<Default {...(Default.args as SearchBarProps)} />)
+  render(<Default {...Default.args} />)
 
   // Get search query <input> element
   const query_input = screen.getByLabelText(SEARCH_INPUT_LABEL)
@@ -51,7 +48,7 @@ it('updates the search query', () => {
 })
 
 it('sets props.query as the initial search query', () => {
-  render(<InitialQuery {...(InitialQuery.args as SearchBarProps)} />)
+  render(<InitialQuery {...InitialQuery.args} />)
 
   // Get search query <input> element
   const input = screen.getByLabelText(SEARCH_INPUT_LABEL)

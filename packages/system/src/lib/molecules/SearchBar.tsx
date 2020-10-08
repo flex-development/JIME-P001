@@ -2,7 +2,7 @@ import { ANYTHING } from '@flex-development/kustomtypez'
 import { useMutatedProps } from '@kustomz/hooks'
 import { HTMLButtonClickEvent, HTMLInputChangeEvent } from '@kustomz/types'
 import React, { FC, FormEvent, useState } from 'react'
-import { Button, Form, FormProps, Input } from '../atoms'
+import { Button, Form, FormProps, Input, InputProps } from '../atoms'
 
 /**
  * @file Render a search <form>
@@ -18,6 +18,11 @@ export type SearchBarEvent = FormEvent | HTMLButtonClickEvent
  * `SearchBar` component properties.
  */
 export interface SearchBarProps extends FormProps {
+  /**
+   * Placeholder to display in `Input` component.
+   */
+  placeholder?: InputProps['placeholder']
+
   /**
    * Initial search query.
    */
@@ -38,6 +43,7 @@ export interface SearchBarProps extends FormProps {
  */
 export const SearchBar: FC<SearchBarProps> = (props: SearchBarProps) => {
   const {
+    placeholder,
     query: initialQuery,
     search = (query: string, event: SearchBarEvent) => {
       event.preventDefault()
@@ -57,7 +63,7 @@ export const SearchBar: FC<SearchBarProps> = (props: SearchBarProps) => {
       <Button
         aria-label='Search button'
         className='searchbar-btn'
-        icon={{ children: 'search' }}
+        icon={{ 'aria-label': 'Search icon', children: 'search' }}
         onClick={(event: HTMLButtonClickEvent) => search(query, event)}
         name='search'
         variant='ghost'
@@ -67,7 +73,7 @@ export const SearchBar: FC<SearchBarProps> = (props: SearchBarProps) => {
         aria-label='Search query'
         className='searchbar-input'
         onChange={(event: HTMLInputChangeEvent) => setQuery(event.target.value)}
-        placeholder='ash trays'
+        placeholder={placeholder}
         type='search'
         value={query}
       />

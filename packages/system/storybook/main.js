@@ -62,7 +62,7 @@ module.exports = {
    * @property {object} typescript.reactDocgenTypescriptOptions
    */
   typescript: {
-    check: false,
+    check: true,
     checkOptions: {},
     reactDocgen: 'react-docgen-typescript',
     reactDocgenTypescriptOptions: {

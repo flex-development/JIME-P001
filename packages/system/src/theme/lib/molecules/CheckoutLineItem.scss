@@ -5,7 +5,7 @@
 .line-item {
   @include display-flex(flex);
 
-  @include element-size(100%, width, unset, 100%);
+  @include element-size(100%, width, 100%);
 
   @include media-breakpoint-up(md) {
     @include flex-spread;

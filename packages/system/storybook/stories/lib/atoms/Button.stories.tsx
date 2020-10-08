@@ -20,6 +20,14 @@ export default {
   title: 'Library/Atoms/Button'
 }
 
+export const Default: StoryFN<ButtonProps> = (args: ButtonProps) => (
+  <Button {...args} />
+)
+
+Default.args = {
+  children: 'Button text'
+}
+
 export const Block: StoryFN<ButtonProps> = (args: ButtonProps) => (
   <Button {...args} />
 )

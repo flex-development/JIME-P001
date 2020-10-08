@@ -39,7 +39,7 @@ export function useIcon<E = HTMLElement, P = MutatedProps<E>>(props: P): P {
 
   useEffect(() => {
     // Skip hook logic
-    if (skip) return
+    if (skip || !icon.length) return
 
     // Parse icon props
     const iconParsed: IconProps = JSON.parse(icon)
@@ -58,7 +58,7 @@ export function useIcon<E = HTMLElement, P = MutatedProps<E>>(props: P): P {
       setMutatedChildren([children, component])
 
       if (['bottom', 'top'].includes(position ?? '')) {
-        setClassName(classes => {
+        setClassName((classes: string) => {
           return classnames({
             [`${classes}`]: true,
             'd-flex': true,

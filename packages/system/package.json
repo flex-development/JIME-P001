@@ -56,7 +56,6 @@
     "build": "run-p build:*"
   },
   "dependencies": {
-    "@flex-development/kustomtypez": "*",
     "@types/bootstrap": "^4.5.0",
     "@types/classnames": "^2.2.10",
     "@types/lodash": "^4.14.158",
@@ -69,6 +68,7 @@
     "validator": "^13.1.1"
   },
   "devDependencies": {
+    "@flex-development/kustomtypez": "*",
     "@storybook/addon-a11y": "^6.0.21",
     "@storybook/addon-actions": "^6.0.21",
     "@storybook/addon-backgrounds": "^6.0.21",
@@ -113,8 +113,10 @@
     "url-loader": "^4.1.0"
   },
   "peerDependencies": {
+    "@flex-development/kustomtypez": "*",
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
+    "musickit-typescript": "^1.2.4",
     "next": "^9.5.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",

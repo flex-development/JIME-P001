@@ -1,3 +1,20 @@
 /// ----------------------------------------------------------------------------
 /// @group Container
 /// ----------------------------------------------------------------------------
+
+/// ----------------------------------------------------------------------------
+/// Mixins
+/// ----------------------------------------------------------------------------
+
+/// Creates a new container.
+/// @require {mixin} margin-x
+/// @require {mixin} padding-x
+/// @require {mixin} width
+/// @require {variable} $container-padding-x
+@mixin container($gutter: $container-padding-x) {
+  @include margin-x(auto);
+
+  @include padding-x(calc(#{$gutter} / 2));
+
+  @include width(100%);
+}

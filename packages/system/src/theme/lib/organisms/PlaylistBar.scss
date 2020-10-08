@@ -1,0 +1,85 @@
+/// ----------------------------------------------------------------------------
+/// @group PlaylistBar
+/// ----------------------------------------------------------------------------
+
+/// ----------------------------------------------------------------------------
+/// Variables
+/// ----------------------------------------------------------------------------
+
+$playlistbar-color: $light;
+
+$playlistbar-artist-font-size: $font-size-xs;
+$playlistbar-control-playback-font-size: $font-size-xxl;
+$playlistbar-control-skip-font-size: $font-size-base-em;
+$playlistbar-title-font-size: $font-size-xs;
+$playlistbar-title-font-size-sm: $font-size-sm;
+
+$playlistbar-artwork-w: $spacer-em * 3.75;
+
+/// ----------------------------------------------------------------------------
+/// Styles
+/// ----------------------------------------------------------------------------
+
+.playlistbar {
+  @include flex(center, space-between);
+
+  color: $playlistbar-color;
+
+  // Artist(s) names
+  &-artist {
+    @include margin($spacers-0, bottom);
+
+    font-size: $playlistbar-artist-font-size;
+  }
+
+  // Image
+  &-artwork {
+    @include height($playlistbar-artwork-w, $playlistbar-artwork-w);
+
+    @include margin($spacers-3, right);
+
+    @include relative;
+
+    @include width($playlistbar-artwork-w, $playlistbar-artwork-w);
+  }
+
+  // Artist, image, and song name container
+  &-media {
+    @include flex(center);
+  }
+
+  // Next, previous, and playback buttons
+  &-control {
+    &-playback {
+      @include margin-x($spacers-2);
+
+      font-size: $playlistbar-control-playback-font-size;
+    }
+
+    &-skip {
+      font-size: $playlistbar-control-skip-font-size;
+    }
+
+    &-playback,
+    &-skip {
+      color: $playlistbar-color;
+    }
+  }
+
+  // Button container
+  &-controls {
+    @include flex(center, flex-end);
+  }
+
+  // Song title
+  &-title {
+    @include margin($spacers-0, bottom);
+
+    @include media-breakpoint-up(sm) {
+      font-size: $playlistbar-title-font-size-sm;
+    }
+
+    font-size: $playlistbar-title-font-size;
+    font-weight: $font-weight-semibold;
+  }
+}

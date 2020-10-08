@@ -21,7 +21,12 @@
       "@kustomz-stories/*": ["storybook/stories/lib/*"]
     },
     "sourceMap": false,
-    "target": "esnext"
+    "target": "esnext",
+    "typeRoots": [
+      "../../node_modules/musickit-typescript",
+      "../../node_modules/@types",
+      "src/types"
+    ]
   },
   "extends": "../../tsconfig.json",
   "files": ["__tests__/jest-env.d.ts", "src/types/index.d.ts"],

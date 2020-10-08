@@ -27,7 +27,7 @@ export const AshTray: StoryFN<ProductCardProps> = (args: ProductCardProps) => (
 )
 
 AshTray.args = {
-  ...ashtray_data,
+  ...(ashtray_data as ProductCardProps),
   style: {
     maxWidth: '438px'
   }
@@ -38,7 +38,7 @@ export const Kustomz: StoryFN<ProductCardProps> = (args: ProductCardProps) => (
 )
 
 Kustomz.args = {
-  ...kustomz_data,
+  ...(kustomz_data as ProductCardProps),
   style: {
     maxWidth: '438px'
   }

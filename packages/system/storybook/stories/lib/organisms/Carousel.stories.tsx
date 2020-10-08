@@ -27,17 +27,17 @@ ProductImages.args = {
     <Image
       alt='Rolling Tray - FUNFETTI'
       className='d-block w-100'
-      src='rolling-tray-funfetti.png'
+      src='assets/rolling-tray-funfetti.png'
     />,
     <Image
       alt='Rolling Tray - JELLY $LIDES'
       className='d-block w-100'
-      src='rolling-tray-jelly-slides.png'
+      src='assets/rolling-tray-jelly-slides.png'
     />,
     <Image
       alt='Rolling Tray - LA $ONRISA'
       className='d-block w-100'
-      src='rolling-tray-la-sonrisa.png'
+      src='assets/rolling-tray-la-sonrisa.png'
     />
   ],
   position: 2,

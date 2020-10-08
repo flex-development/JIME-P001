@@ -41,7 +41,7 @@
   "scripts": {
     "predev": "vc env pull --yes && yarn test:quiet",
     "dev:types": "lerna run dev --scope @flex-development/kustomtypez",
-    "dev:storybook": "start-storybook -p 3000 -c storybook -s ../app/public/assets --ci",
+    "dev:storybook": "start-storybook -p 3000 -c storybook -s ../app/public --ci",
     "dev:storybook:docs": "yarn dev:storybook --docs",
     "dev": "run-p dev:*",
     "pretest": "cross-env NODE_ENV=test",
@@ -52,7 +52,7 @@
     "build:bundle": "microbundle --tsconfig tsconfig.prod.json --jsx React.createElement",
     "build:storybook": "build-storybook -c storybook -o public",
     "postbuild:bundle": "shx cp -R src/theme/* dist/theme",
-    "postbuild:storybook": "shx cp -R ../app/public/assets/** public",
+    "postbuild:storybook": "shx cp -R ../app/public/assets public",
     "build": "run-p build:*"
   },
   "dependencies": {

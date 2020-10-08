@@ -6,7 +6,15 @@ import {
 import { useMutatedProps } from '@kustomz/hooks'
 import { HTMLButtonClickEvent, MutatedProps } from '@kustomz/types'
 import React, { FC } from 'react'
-import { Box, Button, IconProps, Image, Link, Paragraph } from '../atoms'
+import {
+  Box,
+  Button,
+  IconProps,
+  Image,
+  Link,
+  Paragraph,
+  Section
+} from '../atoms'
 
 /**
  * @file Play the shop playlist
@@ -59,7 +67,7 @@ export interface PlaylistBarProps extends MutatedProps {
 
 /**
  * Displays the current song of the shop playlist. Users can pause the playlist,
- * as well skip forward or backward. Renders a `Box` component with the
+ * as well skip forward or backward. Renders a `Section` component with the
  * class `playlistbar`.
  *
  * - https://github.com/wsmd/musickit-typescript
@@ -89,7 +97,7 @@ export const PlaylistBar: FC<PlaylistBarProps> = (props: PlaylistBarProps) => {
   const mutatedProps = useMutatedProps<typeof rest>(rest, 'playlistbar')
 
   return (
-    <Box {...mutatedProps}>
+    <Section {...mutatedProps}>
       <Box className='playlistbar-media col-8'>
         <Link className='playlistbar-artwork' href={artworkURL} target='_blank'>
           <Image alt={`Artwork for ${title}`} fluid src={artworkURL} />
@@ -126,7 +134,7 @@ export const PlaylistBar: FC<PlaylistBarProps> = (props: PlaylistBarProps) => {
           variant='ghost'
         />
       </Box>
-    </Box>
+    </Section>
   )
 }
 

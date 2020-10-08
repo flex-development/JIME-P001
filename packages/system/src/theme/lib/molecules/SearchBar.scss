@@ -8,18 +8,20 @@
   &-btn {
     color: $light;
     height: max-content;
-
-    .icon {
-      font-size: $font-size-xl;
-    }
   }
 
   &-input {
-    @include padding-x($spacers-1);
+    @include event {
+      color: $primary;
+    }
 
-    @include padding-y($spacers-0);
+    @include padding-x($spacers-2);
+
+    @include padding-y($spacers-0, $spacers-1 / 2);
 
     border: none;
+    color: $primary;
+    height: max-content;
     font-size: $font-size-sm;
     text-transform: $input-placeholder-text-transform;
 

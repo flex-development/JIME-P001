@@ -1,0 +1,52 @@
+/// ----------------------------------------------------------------------------
+/// @group ShopHeader
+/// ----------------------------------------------------------------------------
+
+/// ----------------------------------------------------------------------------
+/// Variables
+/// ----------------------------------------------------------------------------
+
+$shop-header-color: $light;
+
+$shop-header-spacer: $spacers-2;
+
+/// ----------------------------------------------------------------------------
+/// Styles
+/// ----------------------------------------------------------------------------
+
+.shop-header {
+  display: flex;
+
+  &-btn {
+    @include media-breakpoint-up(sm) {
+      margin-right: $spacers-6;
+    }
+
+    color: $shop-header-color;
+    margin-right: $shop-header-spacer;
+  }
+
+  &-cart-preview {
+    @include media-breakpoint-down(md) {
+      font-size: $font-size-sm;
+    }
+
+    color: $shop-header-color;
+    text-align: right;
+    text-transform: uppercase;
+
+    span {
+      font-weight: $font-weight-semibold;
+    }
+  }
+
+  &-searchbar {
+    @include width(100%);
+  }
+
+  .btn-ghost {
+    @include media-breakpoint-up(sm) {
+      @include padding(0.125em, top);
+    }
+  }
+}

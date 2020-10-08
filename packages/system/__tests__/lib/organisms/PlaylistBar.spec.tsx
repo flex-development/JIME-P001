@@ -8,9 +8,11 @@ import React from 'react'
 /**
  * @file Tests - PlaylistBar
  * @module tests/lib/organisms/PlaylistBar
+ *
+ * @todo Test callback functions
  */
 
-it('renders <div class="playlistbar">', () => {
+it('renders <section class="playlistbar">', () => {
   const { container } = render(<Default {...Default.args} />)
 
   expect(container.firstChild).toHaveClass('playlistbar')

@@ -33,6 +33,14 @@ it('renders <form class="searchbar"> with search button', () => {
   )
 })
 
+it('renders props.placeholder if defined', () => {
+  const placeholder = 'Shop ash trays, rolling trays, and more'
+
+  render(<Default {...Default.args} placeholder={placeholder} />)
+
+  expect(screen.getByPlaceholderText(placeholder)).toBeInTheDocument()
+})
+
 it('updates the search query', () => {
   render(<Default {...Default.args} />)
 

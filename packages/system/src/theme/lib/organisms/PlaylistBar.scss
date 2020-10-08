@@ -23,6 +23,8 @@ $playlistbar-artwork-w: $spacer-em * 3.75;
 .playlistbar {
   @include flex(center, space-between);
 
+  @include padding-y($spacers-0);
+
   color: $playlistbar-color;
 
   // Artist(s) names

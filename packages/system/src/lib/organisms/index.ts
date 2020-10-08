@@ -6,3 +6,4 @@
 export * from './Carousel'
 export * from './Hero'
 export * from './PlaylistBar'
+export * from './ShopHeader'

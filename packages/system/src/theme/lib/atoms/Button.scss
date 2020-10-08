@@ -7,6 +7,10 @@
   font-weight: $font-weight-semibold;
   text-transform: uppercase;
 
+  > * {
+    pointer-events: none;
+  }
+
   // Disabled buttons
   &:disabled {
     cursor: not-allowed;
@@ -18,9 +22,12 @@
     @include flex(center, null);
   }
 
-  // Buttons with icons as their only nested element
-  &[data-icon-only] {
+  // Buttons with icons as their only nested element and transparent buttons
+  &[data-icon-only],
+  &-ghost {
     @include remove-padding;
+
+    border-width: $spacers-0;
   }
 
   // Update font-color for theme buttons

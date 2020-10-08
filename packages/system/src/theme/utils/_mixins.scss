@@ -21,8 +21,8 @@
 // -----------------------------------------------------------------------------
 
 /// Add a border around an element.
+/// @require {variable} $border-color
 /// @require {variable} $border-width
-/// @require {variable} $border-radius
 /// @param {Color} $color - Border color
 /// @param {Number} $width [$border-width] - Outline border width
 /// @param {Number} $pos [null] - Where to place border
@@ -34,6 +34,7 @@
 }
 
 /// Creates an element outline
+/// @require {variable} $border-color
 /// @require {variable} $border-width
 /// @require {variable} $border-radius
 /// @param {Color} $color - Border color
@@ -495,9 +496,16 @@
 // Spacing
 // -----------------------------------------------------------------------------
 
+/// Set an element's margin values.
+/// @param {Number | String | List} $value - margin value(s)
+/// @param {Number} $side [null] - Where to place space - top, bottom, etc
+@mixin margin($value, $side: null) {
+  @include space(margin, $value, $side);
+}
+
 /// Set an element's left and right margin values
-/// @require {mixin} margin-left
-/// @require {mixin} margin-right
+/// @require {mixin} bootstrap.margin-left
+/// @require {mixin} bootstrap.margin-right
 /// @param {Number | String} $left - Left margin value
 /// @param {Number | String} $right [$left] - Right margin value
 @mixin margin-x($left, $right: $left) {
@@ -506,13 +514,20 @@
 }
 
 /// Set an element's top and bottom margin values
-/// @require {mixin} margin-bottom
-/// @require {mixin} margin-top
+/// @require {mixin} bootstrap.margin-bottom
+/// @require {mixin} bootstrap.margin-top
 /// @param {Number | String} $top - Top margin value
 /// @param {Number | String} $bottom [$top] - Bottom margin value
 @mixin margin-y($top, $bottom: $top) {
   @include margin-top($top);
   @include margin-bottom($bottom);
+}
+
+/// Set an element's padding values.
+/// @param {Number | String | List} $value - padding value(s)
+/// @param {Number} $side [null] - Where to place space - top, bottom, etc
+@mixin padding($value, $side: null) {
+  @include space(padding, $value, $side);
 }
 
 /// Set an element's left and right padding
@@ -547,19 +562,37 @@
   padding: if($important, 0 !important, 0);
 }
 
+/// Set an element's margin or padding values.
+/// @param {String} $type - margin | padding
+/// @param {Number | String} $value - Amount of space to add
+/// @param {Number} $side [null] - Where to place space - top, bottom, etc
+@mixin space($type, $value, $side: null) {
+  $suffix: if($side, '-#{$side}', '');
+
+  #{$type}#{$suffix}: $value;
+}
+
 // -----------------------------------------------------------------------------
 // Size
 // -----------------------------------------------------------------------------
 
 /// Sets the height or width of an element
-/// @param {Number | String} $size - height
+/// @param {Number | String} $size - Height or width of element
 /// @param {Number | String} $key [width] - Dimension to set
-/// @param {Number | String} $min-size [unset] - min-height
 /// @param {Number | String} $max-size [none] - max-height
-@mixin element-size($size, $key: width, $min-size: unset, $max-size: none) {
+/// @param {Number | String} $min-size [unset] - min-height
+@mixin element-size($size, $key: width, $max-size: none, $min-size: unset) {
   #{$key}: $size;
   max-#{$key}: $max-size;
   min-#{$key}: $min-size;
+}
+
+/// Sets the height of an element
+/// @param {Number | String} $size - Height of element
+/// @param {Number | String} $max-size [none] - max-height
+/// @param {Number | String} $min-size [unset] - min-height
+@mixin height($size, $max-size: none, $min-size: unset) {
+  @include element-size($size, height, $max-size, $min-size);
 }
 
 /// Set an element's height and width
@@ -575,6 +608,14 @@
 ) {
   height: if($h-important, $height !important, $height);
   width: if($w-important, $width !important, $width);
+}
+
+/// Sets the width of an element
+/// @param {Number | String} $size - Width of element
+/// @param {Number | String} $max-size [none] - max-width
+/// @param {Number | String} $min-size [unset] - min-width
+@mixin width($size, $max-size: none, $min-size: unset) {
+  @include element-size($size, width, $max-size, $min-size);
 }
 
 // -----------------------------------------------------------------------------

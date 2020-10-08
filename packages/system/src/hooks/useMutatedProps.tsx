@@ -1,6 +1,6 @@
 import { MutatedProps } from '@kustomz/types'
 import classnames from 'classnames'
-import { ClassValue } from 'classnames/types'
+import { ClassDictionary } from 'classnames/types'
 import { isObject, isString, omit, uniq } from 'lodash'
 import { Children, HTMLAttributes } from 'react'
 
@@ -30,7 +30,7 @@ import { Children, HTMLAttributes } from 'react'
 export function useMutatedProps<
   T1 extends MutatedProps = MutatedProps,
   Mask = HTMLAttributes<HTMLElement>
->(props: T1, injectClass?: ClassValue, keys?: string[]): Mask {
+>(props: T1, injectClass?: string | ClassDictionary, keys?: string[]): Mask {
   // Props are read-only so we need a copy
   const mutatedProps = { ...props }
 

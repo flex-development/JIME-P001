@@ -6,7 +6,32 @@ import { FC } from 'react'
  * @module storybook/config
  */
 
-export const excludePropKeys = []
+export const excludePropKeys = [
+  '__docgenInfo',
+  'about',
+  'contextMenu',
+  'datatype',
+  'dir',
+  'displayName',
+  'draggable',
+  'inlist',
+  'itemID',
+  'itemProp',
+  'itemRef',
+  'itemScope',
+  'itemType',
+  'prefix',
+  'property',
+  'radioGroup',
+  'resource',
+  'results',
+  'security',
+  'slot',
+  'suppressContentEditableWarning',
+  'suppressHydrationWarning',
+  'typeof',
+  'vocab'
+]
 
 export type StoryFN<T = Args, P = Parameters> = FC<T> & {
   args: T

@@ -2,7 +2,7 @@ import { useCarouselPlugin, useMutatedProps } from '@kustomz/hooks'
 import { uid } from '@kustomz/utils'
 import { CarouselOption } from 'bootstrap'
 import classnames from 'classnames'
-import React, { FC, ReactElement, useRef } from 'react'
+import React, { Children, FC, ReactElement, useRef } from 'react'
 import uuid from 'react-uuid'
 import { Box, BoxProps, Item, ItemProps, List } from '../atoms'
 
@@ -135,6 +135,7 @@ export const Carousel: FC<CarouselProps> & {
   CarouselItem: typeof CarouselItem
 } = (props: CarouselProps) => {
   const {
+    children,
     interval,
     keyboard,
     pause,
@@ -153,7 +154,7 @@ export const Carousel: FC<CarouselProps> & {
   mutatedProps.id = mutatedProps.id || uid('carousel')
 
   // Carousel items - useMutatedProps converts props.children into an array
-  const items = mutatedProps.children as CarouselProps['children']
+  const items = Children.toArray(children) as CarouselProps['children']
 
   // Ref to attach Bootstrap Carousel to
   const ref = useRef<HTMLDivElement | null>(null)

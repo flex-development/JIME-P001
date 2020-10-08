@@ -1,0 +1,97 @@
+/// ----------------------------------------------------------------------------
+/// @group Sidebar
+/// ----------------------------------------------------------------------------
+
+/// ----------------------------------------------------------------------------
+/// Variables
+/// ----------------------------------------------------------------------------
+
+$sidebar-font-size: $font-size-sm;
+
+$sidebar-padding-bottom: $spacers-21;
+$sidebar-padding-top: $spacers-40;
+$sidebar-padding-x: $spacers-12;
+
+/// ----------------------------------------------------------------------------
+/// Styles
+/// ----------------------------------------------------------------------------
+
+.sidebar {
+  @include flex(stretch, space-between, column, flex, false);
+
+  @include height(max-content, none, 100%);
+
+  @include media-breakpoint-up(sm) {
+    @include border($border-color, $border-width, right);
+
+    @include width($spacer * 30);
+  }
+
+  @include padding-x($sidebar-padding-x);
+
+  @include padding-y($sidebar-padding-top, $sidebar-padding-bottom);
+
+  @include width(100%);
+
+  font-size: $sidebar-font-size;
+  // padding-bottom: $sidebar-padding-bottom;
+
+  &-developer-credit {
+    @include margin-y($spacers-12, $spacers-0);
+
+    @include media-breakpoint-down(sm) {
+      font-size: $font-size-sm;
+    }
+
+    text-transform: uppercase;
+  }
+
+  &-profile {
+    @include margin-bottom($spacers-12);
+
+    @include media-breakpoint-up(sm) {
+      flex-direction: row;
+    }
+
+    display: flex;
+    flex-direction: column;
+
+    &-name {
+      font-size: $font-size-xl;
+    }
+
+    &-online-status {
+      display: inline-flex;
+
+      .icon {
+        @include margin-right($spacers-3 / 2);
+      }
+    }
+
+    &-name,
+    &-online-status {
+      font-weight: $font-weight-bold;
+    }
+
+    p {
+      &:not(:last-of-type) {
+        @include margin-bottom($spacers-2);
+      }
+
+      &:last-of-type {
+        @include margin-bottom($spacers-0);
+      }
+    }
+  }
+
+  &-menu {
+    display: flex;
+    flex-direction: column;
+
+    .nav-link {
+      @include padding-x($spacers-0);
+
+      font-weight: $font-weight-thin;
+    }
+  }
+}

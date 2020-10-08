@@ -16,14 +16,19 @@ See: https://storybook.js.org/docs/configurations/add-custom-body/
     height: 100vh;
   }
 
+  .sb-show-main #root > div {
+    height: 100%;
+  }
+
+  #root:not([hidden]) + #docs-root {
+    display: none;
+  }
+
   .sb-show-main #root {
     overflow-y: scroll;
   }
 
-  /* Allow horizontal scrolling */
-
   .sb-show-main {
-    overflow-x: scroll;
     padding: 0 !important;
   }
 
@@ -31,6 +36,10 @@ See: https://storybook.js.org/docs/configurations/add-custom-body/
   #docs-root {
     background-color: var(--bs-white);
     height: 100vh;
+  }
+
+  .sbdocs-preview {
+    background-color: var(--bs-dark);
   }
 
   /* Fix text overflow in ArgsTable */

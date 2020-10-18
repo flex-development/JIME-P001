@@ -3,12 +3,7 @@
     "declaration": true,
     "noEmit": false,
     "outDir": "./dist",
-    "rootDir": "./src",
-    "typeRoots": [
-      "../../node_modules/musickit-typescript",
-      "../../node_modules/@types",
-      "src/types"
-    ]
+    "rootDir": "./src"
   },
   "exclude": ["__tests__", "storybook", "jest.setup.ts"],
   "extends": "./tsconfig.json",

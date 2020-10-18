@@ -83,11 +83,13 @@
 /// Defines the element as a flex container.
 /// It enables a flex context for all its direct children.
 /// @param {String} $display [flex] - display
-/// @param {String} $wrap [true] - Set flex-wrap to 'wrap'
-@mixin display-flex($display: flex, $wrap: true) {
+/// @param {String} $wrap [null] - Set flex-wrap
+@mixin display-flex($display: flex, $wrap: null) {
   display: $display;
 
-  flex-wrap: if($wrap, wrap, nowrap);
+  @if $wrap != null {
+    flex-wrap: if($wrap, wrap, nowrap);
+  }
 
   @content;
 }
@@ -99,13 +101,13 @@
 /// @param {String} $justify [null] - justify-content value
 /// @param {String} $direction - justify-content value
 /// @param {String} $display [flex] - Flexbox display
-/// @param {String} $wrap [true] - Add flex-wrap:wrap
+/// @param {String} $wrap [null] - flex-wrap value
 @mixin flex(
   $align: stretch,
   $justify: flex-start,
   $direction: null,
   $display: flex,
-  $wrap: true
+  $wrap: null
 ) {
   @include display-flex($display, $wrap);
 
@@ -227,98 +229,32 @@
 }
 
 // -----------------------------------------------------------------------------
-// Forms
+// Icons
 // -----------------------------------------------------------------------------
 
-@mixin form-control($size: null) {
-  // Has no effect on <select>s in some browsers,
-  // due to the limited stylability of `<select>`s in CSS.
-  @include border-radius($input-border-radius, 0);
+/// Applies Material Icon styles to an element
+/// @param {String} $content [null] - Icon ligature
+/// @param {Boolean} $outline [false] - If true, use outlined theme
+/// @param {Number | String} $font-size [24px] - Icon size
+@mixin material-icon($content: null, $outline: false, $font-size: 24px) {
+  $font-family: if($outline, 'Material Icons Outlined', 'Material Icons');
 
-  @include box-shadow($input-box-shadow);
+  -moz-font-feature-settings: 'liga';
+  -moz-osx-font-smoothing: grayscale;
+  direction: ltr;
+  display: inline-block;
+  font-family: $font-family;
+  font-style: normal;
+  font-weight: normal;
+  font-size: $font-size;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  white-space: nowrap;
+  word-wrap: normal;
 
-  @include element-size(100%);
-
-  @include element-size(null, height, $input-height);
-
-  @include font-size($input-font-size);
-
-  @include transition($input-transition);
-
-  appearance: none; // Fix appearance for date inputs in Safari
-  background-color: $input-bg;
-  background-clip: padding-box;
-  border: $input-border-width solid $input-border-color;
-  color: $input-color;
-  display: block;
-  font-family: $input-font-family;
-  font-weight: $input-font-weight;
-  line-height: $input-line-height;
-  padding: $input-padding-y $input-padding-x;
-
-  // Customize the `:focus` state to imitate native WebKit styles.
-  &:focus {
-    background-color: $input-focus-bg;
-    border-color: $input-focus-border-color;
-    color: $input-focus-color;
-    outline: 0;
-
-    @if $enable-shadows {
-      @include box-shadow($input-box-shadow, $input-focus-box-shadow);
-    } @else {
-      // Avoid using mixin so we can pass custom focus shadow properly
-      box-shadow: $input-focus-box-shadow;
-    }
-  }
-
-  // Customize placeholder
-  &::placeholder {
-    color: $input-placeholder-color;
-    font-size: $input-placeholder-size;
-
-    // Override Firefox's unusual default opacity;
-    // see https://github.com/twbs/bootstrap/pull/11526.
-    opacity: 1;
-
-    padding-left: $spacers-2;
-    text-transform: $input-placeholder-text-transform;
-  }
-
-  // Disabled and read-only inputs
-  // HTML5 says that controls under a fieldset > legend:first-child won't be
-  // disabled if the fieldset is disabled. Due to implementation difficulty, we
-  // don't honor that edge case; we style them as disabled anyway.
-  &:disabled,
-  &[readonly] {
-    background-color: $input-disabled-bg;
-    border-color: $input-disabled-border-color;
-
-    // iOS fix for unreadable disabled content;
-    // see https://github.com/twbs/bootstrap/issues/11655.
-    opacity: 1;
-  }
-
-  // Hide box shadow in Firefox
-  &:-moz-ui-invalid,
-  &.is-invalid:focus {
-    box-shadow: none;
-  }
-
-  // Handle size argument
-  @if $size == lg {
-    @include border-radius($input-border-radius-lg);
-    @include font-size($input-font-size-lg);
-
-    min-height: $input-height-lg;
-    padding: $input-padding-y-lg $input-padding-x-lg;
-  }
-
-  @if $size == sm {
-    @include border-radius($input-border-radius-sm);
-    @include font-size($input-font-size-sm);
-
-    min-height: $input-height-sm;
-    padding: $input-padding-y-sm $input-padding-x-sm;
+  @if $content {
+    content: '#{$content}';
   }
 }
 
@@ -504,23 +440,29 @@
 }
 
 /// Set an element's left and right margin values
-/// @require {mixin} bootstrap.margin-left
-/// @require {mixin} bootstrap.margin-right
 /// @param {Number | String} $left - Left margin value
 /// @param {Number | String} $right [$left] - Right margin value
 @mixin margin-x($left, $right: $left) {
-  @include margin-left($left);
-  @include margin-right($right);
+  @if ($left) {
+    margin-left: $left;
+  }
+
+  @if ($right) {
+    margin-right: $right;
+  }
 }
 
 /// Set an element's top and bottom margin values
-/// @require {mixin} bootstrap.margin-bottom
-/// @require {mixin} bootstrap.margin-top
 /// @param {Number | String} $top - Top margin value
 /// @param {Number | String} $bottom [$top] - Bottom margin value
 @mixin margin-y($top, $bottom: $top) {
-  @include margin-top($top);
-  @include margin-bottom($bottom);
+  @if ($bottom) {
+    margin-bottom: $bottom;
+  }
+
+  @if ($top) {
+    margin-top: $top;
+  }
 }
 
 /// Set an element's padding values.
@@ -531,23 +473,29 @@
 }
 
 /// Set an element's left and right padding
-/// @require {mixin} padding-left
-/// @require {mixin} padding-right
 /// @param {Number | String} $left - Left padding value
 /// @param {Number | String} $right [$left] - Right padding value
 @mixin padding-x($left, $right: $left) {
-  @include padding-left($left);
-  @include padding-right($right);
+  @if ($left) {
+    padding-left: $left;
+  }
+
+  @if ($right) {
+    padding-right: $right;
+  }
 }
 
 /// Set an element's top and bottom padding values
-/// @require {mixin} padding-bottom
-/// @require {mixin} padding-top
 /// @param {Number | String} $top - Top padding value
 /// @param {Number | String} $bottom [$top] - Bottom padding value
 @mixin padding-y($top, $bottom: $top) {
-  @include padding-top($top);
-  @include padding-bottom($bottom);
+  @if ($bottom) {
+    padding-bottom: $bottom;
+  }
+
+  @if ($top) {
+    padding-top: $top;
+  }
 }
 
 /// Removes margin
@@ -582,9 +530,17 @@
 /// @param {Number | String} $max-size [none] - max-height
 /// @param {Number | String} $min-size [unset] - min-height
 @mixin element-size($size, $key: width, $max-size: none, $min-size: unset) {
-  #{$key}: $size;
-  max-#{$key}: $max-size;
-  min-#{$key}: $min-size;
+  @if $size {
+    #{$key}: $size;
+  }
+
+  @if $max-size {
+    max-#{$key}: $max-size;
+  }
+
+  @if $min-size {
+    min-#{$key}: $min-size;
+  }
 }
 
 /// Sets the height of an element

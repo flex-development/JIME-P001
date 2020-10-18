@@ -1,8 +1,7 @@
 import { NullishNumber, NullishString } from '@flex-development/kustomtypez'
-import { useMutatedProps } from '@kustomz/hooks'
-import { MutatedProps } from '@kustomz/types'
+import { useMutatedProps } from '@system/hooks'
+import { MutatedProps } from '@system/types'
 import React, { FC } from 'react'
-import uuid from 'react-uuid'
 import {
   Aside,
   Box,
@@ -11,9 +10,9 @@ import {
   ImageProps,
   Link,
   LinkProps,
-  Nav,
   Paragraph
 } from '../atoms'
+import { Menu } from '../molecules'
 
 /**
  * @file Display MySpace style profile snippet and shop menu
@@ -67,7 +66,7 @@ export interface SidebarProps extends MutatedProps {
 export const Sidebar: FC<SidebarProps> = (props: SidebarProps) => {
   const { age, menu = [], mood, img, location, ...rest } = props
 
-  const mutatedProps = useMutatedProps<typeof rest>(rest, 'sidebar')
+  const mutated = useMutatedProps<typeof rest>(rest, 'sidebar')
 
   const developer: LinkProps = {
     href: 'https://flexdevelopment.llc',
@@ -76,10 +75,10 @@ export const Sidebar: FC<SidebarProps> = (props: SidebarProps) => {
   }
 
   return (
-    <Aside {...mutatedProps}>
+    <Aside {...mutated}>
       <Box>
         <Box className='sidebar-profile'>
-          <Box className='col-sm-7 col-12 mb-sm-0 mb-12 mr-sm-6'>
+          <Box className='col-sm-7 col-12 mb-sm-0 mb-36 mr-sm-24'>
             <Link className='sidebar-profile-img' href={img} target='_blank'>
               <Image alt='Profile image for Morena' fluid src={img} />
             </Link>
@@ -105,11 +104,7 @@ export const Sidebar: FC<SidebarProps> = (props: SidebarProps) => {
           </Box>
         </Box>
 
-        <Nav className='sidebar-menu'>
-          {menu.map((link: LinkProps) => (
-            <Link {...link} key={uuid()} nav />
-          ))}
-        </Nav>
+        <Menu className='sidebar-menu' links={menu} />
       </Box>
 
       <Paragraph className='sidebar-developer-credit'>

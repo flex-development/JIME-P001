@@ -7,9 +7,13 @@
 
   @include element-size(100%, width, 100%);
 
+  @include flex-spread(md);
+
   @include media-breakpoint-up(md) {
-    @include flex-spread;
+    flex-direction: row;
   }
+
+  flex-direction: column;
 
   &-attribute,
   &-heading {
@@ -17,7 +21,7 @@
   }
 
   &-attribute {
-    @include margin-y($spacers-3);
+    @include margin-y($spacers-12);
 
     font-weight: $font-weight-semibold;
     text-transform: uppercase;

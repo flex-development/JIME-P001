@@ -1,5 +1,5 @@
-import { useMutatedProps } from '@kustomz/hooks'
-import { MutatedProps } from '@kustomz/types'
+import { useMutatedProps } from '@system/hooks'
+import { MutatedProps } from '@system/types'
 import React, { FC } from 'react'
 import { Heading, Paragraph, Section } from '../atoms'
 
@@ -30,10 +30,10 @@ export interface HeroProps extends MutatedProps {
 export const Hero: FC<HeroProps> = (props: HeroProps) => {
   const { subtitle, title, ...rest } = props
 
-  const mutatedProps = useMutatedProps<typeof rest>(rest, 'hero')
+  const mutated = useMutatedProps<typeof rest>(rest, 'hero')
 
   return (
-    <Section {...mutatedProps}>
+    <Section {...mutated}>
       <Heading className='hero-title'>{title}</Heading>
       <Paragraph className='hero-subtitle'>{subtitle}</Paragraph>
     </Section>

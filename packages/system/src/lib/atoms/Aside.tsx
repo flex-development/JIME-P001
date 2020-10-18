@@ -1,10 +1,10 @@
-import { useMutatedProps } from '@kustomz/hooks'
-import { RefProps } from '@kustomz/types'
+import { useMutatedProps } from '@system/hooks'
+import { RefProps } from '@system/types'
 import React, { forwardRef, ForwardRefExoticComponent as FREC } from 'react'
 
 /**
  * @file Render an `<aside>` element
- * @module lib/elements/Aside
+ * @module lib/atoms/Aside
  */
 
 /**
@@ -13,12 +13,13 @@ import React, { forwardRef, ForwardRefExoticComponent as FREC } from 'react'
  * - **https://developer.mozilla.org/en-US/docs/Web/HTML/Element/aside**
  */
 export const Aside: FREC<RefProps> = forwardRef((props, ref) => {
-  const mutatedProps = useMutatedProps<
-    typeof props,
-    JSX.IntrinsicElements['aside']
-  >(props)
+  const mutated = useMutatedProps<typeof props, JSX.IntrinsicElements['aside']>(
+    props
+  )
 
-  return <aside {...mutatedProps} ref={ref} />
+  return <aside {...mutated} ref={ref} />
 })
+
+Aside.displayName = 'Aside'
 
 Aside.defaultProps = {}

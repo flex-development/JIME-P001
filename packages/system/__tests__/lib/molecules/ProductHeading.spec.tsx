@@ -1,4 +1,4 @@
-import { AshTray } from '@kustomz-stories/molecules/ProductHeading.stories'
+import { AshTray } from '@system/stories/lib/molecules/ProductHeading.stories'
 import { render } from '@testing-library/react'
 import React from 'react'
 

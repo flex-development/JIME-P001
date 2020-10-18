@@ -3,7 +3,7 @@
 /// ----------------------------------------------------------------------------
 
 .searchbar {
-  @include flex(center, flex-start, row, flex, false);
+  @include flex(center, flex-start, row);
 
   &-btn {
     color: $light;
@@ -15,18 +15,14 @@
       color: $primary;
     }
 
-    @include padding-x($spacers-2);
+    @include padding-x($spacers-8);
 
-    @include padding-y($spacers-0, $spacers-1 / 2);
+    @include padding-y($spacers-0);
 
     border: none;
     color: $primary;
     height: max-content;
     font-size: $font-size-sm;
-    text-transform: $input-placeholder-text-transform;
-
-    &::placeholder {
-      font-size: $font-size-base-em;
-    }
+    text-transform: uppercase;
   }
 }

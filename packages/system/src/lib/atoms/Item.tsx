@@ -1,6 +1,6 @@
 import { Booleanish } from '@flex-development/kustomtypez'
-import { useMutatedProps } from '@kustomz/hooks'
-import { MutatedProps } from '@kustomz/types'
+import { useMutatedProps } from '@system/hooks'
+import { MutatedProps } from '@system/types'
 import React, {
   forwardRef,
   ForwardRefExoticComponent as FREC,
@@ -10,13 +10,10 @@ import React, {
 import { InputValue } from './Input'
 
 /**
- * @module lib/elements/Item
+ * @module lib/atoms/Item
  * @see https://developer.mozilla.org/docs/Web/HTML/Element/li
  */
 
-/**
- * Item component properties.
- */
 export interface ItemProps<E = HTMLLIElement> extends MutatedProps<E> {
   /**
    * If true, add the class `dropdown-item`.
@@ -60,15 +57,17 @@ export type ItemRefProps = ReflessItemProps & ItemRefAttributes
 export const Item: FREC<ItemRefProps> = forwardRef((props, ref) => {
   const { dropdown, nav, ...rest } = props
 
-  const mutatedProps = useMutatedProps<
-    typeof rest,
-    JSX.IntrinsicElements['li']
-  >(rest, {
-    'dropdown-item': dropdown,
-    'nav-item': nav
-  })
+  const mutated = useMutatedProps<typeof rest, JSX.IntrinsicElements['li']>(
+    rest,
+    {
+      'dropdown-item': dropdown,
+      'nav-item': nav
+    }
+  )
 
-  return <li {...mutatedProps} ref={ref} />
+  return <li {...mutated} ref={ref} />
 })
+
+Item.displayName = 'Item'
 
 Item.defaultProps = {}

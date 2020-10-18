@@ -1,5 +1,5 @@
-import { useMutatedProps } from '@kustomz/hooks'
-import { HTMLElementRefAttributes, MutatedProps } from '@kustomz/types'
+import { useMutatedProps } from '@system/hooks'
+import { HTMLElementRefAttributes, MutatedProps } from '@system/types'
 import React, {
   forwardRef,
   ForwardRefExoticComponent as FREC,
@@ -8,13 +8,10 @@ import React, {
 
 /**
  * @file Render a `<summary>` element
- * @module lib/elements/Summary
+ * @module lib/atoms/Summary
  * @see https://developer.mozilla.org/docs/Web/HTML/Element/summary
  */
 
-/**
- * Summary component properties.
- */
 export type SummaryProps = MutatedProps<HTMLElement>
 
 /**
@@ -33,10 +30,14 @@ export type SummaryRefProps = ReflessSummaryProps & HTMLElementRefAttributes
  * - **https://developer.mozilla.org/docs/Web/HTML/Element/summary**
  */
 export const Summary: FREC<SummaryRefProps> = forwardRef((props, ref) => {
-  const mutatedProps = useMutatedProps<
+  const mutated = useMutatedProps<
     typeof props,
     JSX.IntrinsicElements['summary']
   >(props)
 
-  return <summary {...mutatedProps} ref={ref} />
+  return <summary {...mutated} ref={ref} />
 })
+
+Summary.displayName = 'Span'
+
+Summary.defaultProps = {}

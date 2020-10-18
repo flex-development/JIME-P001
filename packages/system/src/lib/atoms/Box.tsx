@@ -1,5 +1,5 @@
-import { useMutatedProps } from '@kustomz/hooks'
-import { MutatedProps } from '@kustomz/types'
+import { useMutatedProps } from '@system/hooks'
+import { MutatedProps } from '@system/types'
 import React, {
   forwardRef,
   ForwardRefExoticComponent as FREC,
@@ -9,12 +9,9 @@ import React, {
 
 /**
  * @file Render a `<div>` element
- * @module lib/elements/Box
+ * @module lib/atoms/Box
  */
 
-/**
- * Box component properties.
- */
 export type BoxProps<E = HTMLDivElement> = MutatedProps<E>
 
 /**
@@ -38,12 +35,13 @@ export type BoxRefProps = ReflessBoxProps & BoxRefAttributes
  * - **https://developer.mozilla.org/docs/Web/HTML/Element/div**
  */
 export const Box: FREC<BoxRefProps> = forwardRef((props, ref) => {
-  const mutatedProps = useMutatedProps<
-    typeof props,
-    JSX.IntrinsicElements['div']
-  >(props)
+  const mutated = useMutatedProps<typeof props, JSX.IntrinsicElements['div']>(
+    props
+  )
 
-  return <div {...mutatedProps} ref={ref} />
+  return <div {...mutated} ref={ref} />
 })
+
+Box.displayName = 'Box'
 
 Box.defaultProps = {}

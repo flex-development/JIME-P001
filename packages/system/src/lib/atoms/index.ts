@@ -6,9 +6,11 @@
 export * from './Aside'
 export * from './Box'
 export * from './Button'
+export * from './Column'
 export * from './Container'
 export * from './Details'
 export * from './Divider'
+export * from './FlexBox'
 export * from './Footer'
 export * from './Form'
 export * from './Header'
@@ -29,3 +31,5 @@ export * from './Select'
 export * from './Span'
 export * from './Summary'
 export * from './TextArea'
+
+/* eslint-disable prettier/prettier */

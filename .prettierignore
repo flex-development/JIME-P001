@@ -1,7 +1,7 @@
 # Prettier Ignore
 # See: https://prettier.io/docs/en/ignore.html
 
-!storybook/
+!.storybook/
 
 .vercel/
 .vscode/

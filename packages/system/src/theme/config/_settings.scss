@@ -34,6 +34,8 @@ $ghost: transparent;
 // Options
 // -----------------------------------------------------------------------------
 
+$enable-shadows: false;
+
 // -----------------------------------------------------------------------------
 // Spacing
 // -----------------------------------------------------------------------------
@@ -41,42 +43,38 @@ $ghost: transparent;
 $spacer-em: 1em;
 
 $spacers-0: 0;
-$spacers-1: 0.25rem;
-$spacers-2: 0.5rem;
-$spacers-3: 0.75rem;
-$spacers-4: 1rem;
-$spacers-5: 1.25rem;
-$spacers-6: 1.5rem;
-$spacers-7: 1.75rem;
-$spacers-8: 2rem;
-$spacers-9: 2.25rem;
-$spacers-10: 2.5rem;
-$spacers-11: 2.75rem;
-$spacers-12: 3rem;
-$spacers-14: 3.5rem;
-$spacers-15: 3.75rem;
-$spacers-16: 4rem;
-$spacers-17: 4.25rem;
-$spacers-18: 4.5rem;
-$spacers-19: 4.75rem;
-$spacers-20: 5rem;
-$spacers-21: 5.25rem;
-$spacers-22: 5.5rem;
-$spacers-23: 5.75rem;
-$spacers-24: 6rem;
-$spacers-25: 6.25rem;
-$spacers-26: 6.5rem;
-$spacers-27: 6.75rem;
-$spacers-28: 7rem;
-$spacers-29: 7.25rem;
-$spacers-30: 7.5rem;
-$spacers-31: 7.75rem;
-$spacers-40: 10rem;
-$spacers-48: 12rem;
-$spacers-56: 14rem;
-$spacers-64: 16rem;
+$spacers-1: rem(1);
+$spacers-2: rem(2);
+$spacers-4: rem(4);
+$spacers-8: rem(8);
+$spacers-10: rem(10);
+$spacers-12: rem(12);
+$spacers-16: rem(16);
+$spacers-18: rem(18);
+$spacers-20: rem(20);
+$spacers-24: rem(24);
+$spacers-32: rem(32);
+$spacers-36: rem(36);
+$spacers-40: rem(40);
+$spacers-48: rem(48);
+$spacers-60: rem(60);
+$spacers-72: rem(72);
+$spacers-80: rem(80);
+$spacers-96: rem(96);
 
 $icon-pos-spacer: $spacers-1;
+
+// -----------------------------------------------------------------------------
+// Position
+// -----------------------------------------------------------------------------
+
+$position-values: map-merge(
+  bootstrap.$position-values,
+  (
+    auto: auto,
+    unset: unset
+  )
+);
 
 // -----------------------------------------------------------------------------
 // Body
@@ -120,10 +118,6 @@ $grid-breakpoints: map-merge(
 // Container Padding
 // -----------------------------------------------------------------------------
 
-$border-radius: $spacers-0;
-$border-radius-sm: $border-radius;
-$border-radius-lg: $border-radius;
-
 // -----------------------------------------------------------------------------
 // Components
 // -----------------------------------------------------------------------------
@@ -136,6 +130,10 @@ $border-width-light: 0.5px;
 $border-width-thin: 1px;
 $border-width-thick: 4px;
 
+$border-radius: $spacers-0;
+$border-radius-sm: $border-radius;
+$border-radius-lg: $border-radius;
+
 // -----------------------------------------------------------------------------
 // Typography
 // -----------------------------------------------------------------------------
@@ -143,21 +141,23 @@ $border-width-thick: 4px;
 $font-family-sans-serif: ibm-plex-sans, sans-serif;
 $font-family-sans-serif-special: quimby-gubernatorial, sans-serif;
 
-// Fixes "SassError: Incompatible units rem and em"
-$font-size-base-em: 1em;
+$font-size-xs: rem(12);
+$font-size-sm: rem(14);
+$font-size-lg: rem(18);
+$font-size-xl: rem(20);
+$font-size-xxl: rem(24);
 
-$font-size-xs: $font-size-base-em * 0.75;
-$font-size-sm: $font-size-base-em * 0.875;
-$font-size-lg: $font-size-base-em * 1.125;
-$font-size-xl: $font-size-base-em * 1.25;
-$font-size-xxl: $font-size-base-em * 1.5;
+$font-weight-hairline: 100;
+$font-weight-thin: 200;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
 
-$h1-font-size: $font-size-base-em * 3;
-$h2-font-size: $font-size-base-em * 2.25;
-$h3-font-size: $font-size-base-em * 2;
-$h4-font-size: $font-size-base-em * 1.75;
-$h5-font-size: $font-size-base-em * 1.5;
-$h6-font-size: $font-size-base-em * 1.25;
+$h1-font-size: rem(60);
+$h2-font-size: rem(48);
+$h3-font-size: rem(36);
+$h4-font-size: $font-size-xxl;
+$h5-font-size: $font-size-xl;
+$h6-font-size: $font-size-lg;
 
 $font-weight-hairline: 100;
 $font-weight-thin: 200;
@@ -182,11 +182,11 @@ $hr-color: $light;
 
 $input-btn-focus-box-shadow: none;
 
-$input-btn-padding-y: $spacers-2;
-$input-btn-padding-x: $spacers-3;
+$input-btn-padding-y: $spacers-8;
+$input-btn-padding-x: $spacers-12;
 
-$input-btn-padding-y-lg: $spacers-3;
-$input-btn-padding-x-lg: $spacers-5;
+$input-btn-padding-y-lg: $spacers-12;
+$input-btn-padding-x-lg: $spacers-20;
 
 // -----------------------------------------------------------------------------
 // Buttons
@@ -212,10 +212,6 @@ $input-focus-border-color: $input-border-color;
 
 $input-placeholder-color: $secondary-50;
 
-$input-placeholder-size: $font-size-xs;
-
-$input-placeholder-text-transform: uppercase;
-
 $form-control-border: bootstrap.$input-border-width solid
   bootstrap.$input-border-color;
 
@@ -226,8 +222,11 @@ $form-check-input-checked-bg-color: $primary;
 $form-select-color: $dark;
 $form-select-bg: $primary;
 
-$form-select-focus-color: $form-select-color;
-$form-select-focus-bg: $form-select-bg;
+$form-select-indicator-color: $input-border-color;
+
+$form-select-box-shadow: unset;
+
+$form-select-focus-box-shadow: $form-select-box-shadow;
 
 // -----------------------------------------------------------------------------
 // Form Validation
@@ -245,11 +244,6 @@ $form-select-focus-bg: $form-select-bg;
 // Navbars
 // -----------------------------------------------------------------------------
 
-// Fixes "SassError: Incompatible units rem and em"
-$nav-link-height: bootstrap.$font-size-base * bootstrap.$line-height-base +
-  bootstrap.$nav-link-padding-y * 2;
-$navbar-brand-font-size: strip-unit($font-size-lg) * 1rem;
-
 // -----------------------------------------------------------------------------
 // Dropdowns
 // -----------------------------------------------------------------------------
@@ -266,8 +260,8 @@ $dropdown-link-hover-bg: $primary;
 $dropdown-link-active-color: $dropdown-link-hover-color;
 $dropdown-link-active-bg: $dropdown-link-hover-bg;
 
-$dropdown-item-padding-y: $spacers-2;
-$dropdown-item-padding-x: $spacers-3;
+$dropdown-item-padding-y: $spacers-8;
+$dropdown-item-padding-x: $spacers-12;
 
 $dropdown-item-bg: $ghost;
 $dropdown-item-hover-bg: $primary;

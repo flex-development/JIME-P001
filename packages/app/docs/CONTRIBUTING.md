@@ -39,20 +39,20 @@ well as develop, document, and test features.
 
 #### Content API
 
-TODO: Update documentation.
+**TODO**: Update documentation.
 
 #### E-commerce API
 
-TODO: Update documentation.
+**TODO**: Update documentation.
 
 #### Reviews API
 
-TODO: Update documentation.
+**TODO**: Update documentation.
 
 ### 🚧 Components
 
-TODO: Update documentation.
+**TODO**: Update documentation.
 
 ## 🚧 Testing
 
-TODO: Update documentation.
+**TODO**: Update documentation.

@@ -1,4 +1,4 @@
-import { Footer } from '@kustomz/lib'
+import { Footer } from '@system/lib'
 import { render } from '@testing-library/react'
 import React from 'react'
 

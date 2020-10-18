@@ -1,5 +1,5 @@
-import { useMutatedProps } from '@kustomz/hooks'
-import { MutatedProps } from '@kustomz/types'
+import { useMutatedProps } from '@system/hooks'
+import { MutatedProps } from '@system/types'
 import React, {
   DetailedHTMLProps,
   forwardRef,
@@ -10,14 +10,11 @@ import React, {
 } from 'react'
 
 /**
- * @module lib/elements/Heading
+ * @module lib/atoms/Heading
  * @see
  * {@link https://developer.mozilla.org/docs/Web/HTML/Element/Heading_Elements}
  */
 
-/**
- * Heading component properties.
- */
 export interface HeadingProps extends MutatedProps<HTMLHeadingElement> {
   /**
    * Heading size.
@@ -51,30 +48,32 @@ export type HeadingRefProps = ReflessHeadingProps & HeadingRefAttributes
 export const Heading: FREC<HeadingRefProps> = forwardRef((props, ref) => {
   const { size, ...rest } = props
 
-  const mutatedProps = useMutatedProps<
+  const mutated = useMutatedProps<
     typeof rest,
     DetailedHTMLProps<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement>
   >({ ...rest, ref })
 
-  /* eslint-disable-next-line jsx-a11y/heading-has-content */
+  /* eslint-disable jsx-a11y/heading-has-content */
 
   switch (size) {
     case 2:
-      return <h2 {...mutatedProps} />
+      return <h2 {...mutated} />
     case 3:
-      return <h3 {...mutatedProps} />
+      return <h3 {...mutated} />
     case 4:
-      return <h4 {...mutatedProps} />
+      return <h4 {...mutated} />
     case 5:
-      return <h5 {...mutatedProps} />
+      return <h5 {...mutated} />
     case 6:
-      return <h6 {...mutatedProps} />
+      return <h6 {...mutated} />
     default:
-      return <h1 {...mutatedProps} />
+      return <h1 {...mutated} />
   }
 
   /* eslint-enable jsx-a11y/heading-has-content */
 })
+
+Heading.displayName = 'Heading'
 
 Heading.defaultProps = {
   size: 1

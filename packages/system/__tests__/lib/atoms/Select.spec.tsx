@@ -1,4 +1,4 @@
-import { Default } from '@kustomz-stories/atoms/Select.stories'
+import { Default } from '@system/stories/lib/atoms/Select.stories'
 import { render } from '@testing-library/react'
 import React from 'react'
 

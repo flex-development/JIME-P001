@@ -1,4 +1,4 @@
-import { Default } from '@kustomz-stories/molecules/ProductReview.stories'
+import { Default } from '@system/stories/lib/molecules/ProductReview.stories'
 import { render } from '@testing-library/react'
 import React from 'react'
 

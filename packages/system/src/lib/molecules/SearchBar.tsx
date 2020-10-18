@@ -1,6 +1,6 @@
 import { ANYTHING } from '@flex-development/kustomtypez'
-import { useMutatedProps } from '@kustomz/hooks'
-import { HTMLButtonClickEvent, HTMLInputChangeEvent } from '@kustomz/types'
+import { useMutatedProps } from '@system/hooks'
+import { HTMLButtonClickEvent, HTMLInputChangeEvent } from '@system/types'
 import React, { FC, FormEvent, useState } from 'react'
 import { Button, Form, FormProps, Input, InputProps } from '../atoms'
 
@@ -54,12 +54,12 @@ export const SearchBar: FC<SearchBarProps> = (props: SearchBarProps) => {
 
   rest.onSubmit = (event: FormEvent) => search(query, event)
 
-  const mutatedProps = useMutatedProps<typeof rest>(rest, 'searchbar')
+  const mutated = useMutatedProps<typeof rest>(rest, 'searchbar')
 
   const [query, setQuery] = useState<string>(initialQuery || '')
 
   return (
-    <Form {...mutatedProps}>
+    <Form {...mutated}>
       <Button
         aria-label='Search button'
         className='searchbar-btn'

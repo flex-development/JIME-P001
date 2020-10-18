@@ -1,6 +1,6 @@
 import { NullishString } from '@flex-development/kustomtypez'
-import { useMutatedProps } from '@kustomz/hooks'
-import { MutatedVoidElementProps } from '@kustomz/types'
+import { useMutatedProps } from '@system/hooks'
+import { MutatedVoidElementProps } from '@system/types'
 import { omit } from 'lodash'
 import React, {
   forwardRef,
@@ -10,13 +10,10 @@ import React, {
 } from 'react'
 
 /**
- * @module lib/elements/Image
+ * @module lib/atoms/Image
  * @see https://developer.mozilla.org/docs/Web/HTML/Element/img
  */
 
-/**
- * Image component properties.
- */
 export interface ImageProps extends MutatedVoidElementProps<HTMLImageElement> {
   /**
    * Defines an alternative text description of the image.
@@ -33,6 +30,8 @@ export interface ImageProps extends MutatedVoidElementProps<HTMLImageElement> {
    *
    * This attribute is also used when copying and pasting the image to text, or
    * saving a linked image to a bookmark.
+   *
+   * @default ''
    */
   alt?: NullishString
 
@@ -130,23 +129,26 @@ export type ImageRefProps = ReflessImageProps & ImageRefAttributes
 export const Image: FREC<ImageRefProps> = forwardRef((props, ref) => {
   const { fluid, rounded, thumbnail, ...rest } = props
 
-  const mutatedProps = useMutatedProps<
-    typeof rest,
-    JSX.IntrinsicElements['img']
-  >(rest, {
-    img: true,
-    'img-fluid': fluid,
-    'img-thumbnail': thumbnail,
-    rounded
-  })
+  const mutated = useMutatedProps<typeof rest, JSX.IntrinsicElements['img']>(
+    rest,
+    {
+      img: true,
+      'img-fluid': fluid,
+      'img-thumbnail': thumbnail,
+      rounded
+    }
+  )
 
-  /* eslint-disable-next-line jsx-a11y/alt-text */
+  /* eslint-disable jsx-a11y/alt-text */
 
-  return <img {...omit(mutatedProps, 'children')} ref={ref} />
+  return <img {...omit(mutated, 'children')} ref={ref} />
 
   /* eslint-enable jsx-a11y/alt-text */
 })
 
+Image.displayName = 'Image'
+
 Image.defaultProps = {
+  alt: '',
   src: 'assets/img-placeholder.png'
 }

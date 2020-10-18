@@ -1,4 +1,4 @@
-import { AshTray } from '@kustomz-stories/molecules/ProductReviewForm.stories'
+import { AshTray } from '@system/stories/lib/molecules/ProductReviewForm.stories'
 import { render, screen } from '@testing-library/react'
 import User from '@testing-library/user-event'
 import React from 'react'

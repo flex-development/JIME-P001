@@ -1,5 +1,5 @@
-import { useMutatedProps } from '@kustomz/hooks'
-import { MutatedFormControlProps, MutatedProps } from '@kustomz/types'
+import { useMutatedProps } from '@system/hooks'
+import { MutatedFormControlProps, MutatedProps } from '@system/types'
 import React, {
   forwardRef,
   ForwardRefExoticComponent as FREC,
@@ -9,12 +9,9 @@ import React, {
 
 /**
  * @file Render a `<option>` element
- * @module lib/elements/Option
+ * @module lib/atoms/Option
  */
 
-/**
- * Option component properties.
- */
 export interface OptionProps extends MutatedProps<HTMLOptionElement> {
   /**
    * If true, make option uncheckable.
@@ -56,12 +53,16 @@ export type OptionRefProps = ReflessOptionProps & OptionRefAttributes
  * - **https://developer.mozilla.org/docs/Web/HTML/Element/option**
  */
 export const Option: FREC<OptionRefProps> = forwardRef((props, ref) => {
-  const mutatedProps = useMutatedProps<
+  const mutated = useMutatedProps<
     typeof props,
     JSX.IntrinsicElements['option']
   >(props)
 
-  mutatedProps['aria-label'] = props.label
+  mutated['aria-label'] = props.label
 
-  return <option {...mutatedProps} ref={ref} />
+  return <option {...mutated} ref={ref} />
 })
+
+Option.displayName = 'Option'
+
+Option.defaultProps = {}

@@ -1,5 +1,5 @@
 import { ProductReviewEntity } from '@flex-development/kustomtypez'
-import { useMutatedProps } from '@kustomz/hooks'
+import { useMutatedProps } from '@system/hooks'
 import React, { FC } from 'react'
 import { Box, BoxProps, Image, Paragraph } from '../atoms'
 
@@ -38,13 +38,11 @@ export const ProductReview: FC<ProductReviewProps> = (
 ) => {
   const { body, name, ...rest } = props
 
-  const mutatedProps = useMutatedProps<typeof rest>(rest, 'product-review')
+  const mutated = useMutatedProps<typeof rest>(rest, 'product-review')
 
   return (
-    <Box {...mutatedProps}>
-      <Box className='col'>
-        <Image className='product-review-img' fluid src='assets/customer.svg' />
-      </Box>
+    <Box {...mutated}>
+      <Image className='product-review-img' fluid src='assets/customer.svg' />
       <Box className='product-review-text col-sm-10 col-12'>
         <Paragraph className='product-review-name'>{name}</Paragraph>
         <Paragraph className='product-review-body'>{body}</Paragraph>

@@ -9,7 +9,7 @@
 $carousel-indicator-bg: $primary-25;
 $carousel-indicator-active-bg: $primary;
 $carousel-indicator-size: $font-size-sm;
-$carousel-indicator-spacing: $spacers-3;
+$carousel-indicator-spacing: $spacers-12;
 
 /// ----------------------------------------------------------------------------
 /// Styles
@@ -33,7 +33,7 @@ $carousel-indicator-spacing: $spacers-3;
 
     @include margin-x($spacers-0);
 
-    @include margin-y($spacers-2, $spacers-0);
+    @include margin-y($spacers-8, $spacers-0);
 
     position: unset;
 

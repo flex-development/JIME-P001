@@ -1,11 +1,11 @@
 import { ANYTHING, ProductVariantResource } from '@flex-development/kustomtypez'
-import { useLineItemInput, useProductVariants } from '@kustomz/hooks'
+import { useLineItemInput, useProductVariants } from '@system/hooks'
 import {
   HTMLButtonClickEvent,
   HTMLInputChangeEvent,
   HTMLSelectChangeEvent,
   HTMLTextAreaChangeEvent
-} from '@kustomz/types'
+} from '@system/types'
 import React, { FC } from 'react'
 import { LineItemToAdd } from 'shopify-buy'
 import {
@@ -102,7 +102,7 @@ export const AddToCartForm: FC<AddToCartFormProps> = (
       <ProductHeading price={selected.price} title={product_title} size={2} />
 
       {/* Product description */}
-      <Paragraph className='form-text mb-6'>{description}</Paragraph>
+      <Paragraph className='form-text mb-24'>{description}</Paragraph>
 
       {/* Main form control container */}
       <Box className='row-fluid col-12'>
@@ -133,7 +133,7 @@ export const AddToCartForm: FC<AddToCartFormProps> = (
 
       {/* Only visible for "KUSTOMZ" product - sync with Shopify */}
       {product_title === 'KUSTOMZ' && (
-        <Box className='row-fluid mt-3'>
+        <Box className='row-fluid mt-12'>
           <TextArea
             aria-label='Kustom product description'
             onChange={({ target }: HTMLTextAreaChangeEvent) => {
@@ -147,7 +147,7 @@ export const AddToCartForm: FC<AddToCartFormProps> = (
       )}
 
       {/* Add to cart button container */}
-      <Box className='row-fluid mt-6'>
+      <Box className='row-fluid mt-24'>
         <Box className='col-sm-3 col-12 float-right'>
           <Button
             aria-label='Add product to cart'

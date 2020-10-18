@@ -81,7 +81,11 @@
 // -----------------------------------------------------------------------------
 
 .form-control {
-  @include form-control;
+  &::placeholder {
+    font-size: $font-size-xs;
+    padding-left: $spacers-8;
+    text-transform: uppercase;
+  }
 }
 
 // -----------------------------------------------------------------------------

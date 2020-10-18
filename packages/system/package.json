@@ -27,33 +27,21 @@
     "directory": "packages/system"
   },
   "publishConfig": {
-    "directory": "dist",
-    "registry": "https://npm.pkg.github.com/"
+    "directory": "src"
   },
-  "source": "src/index.ts",
-  "main": "dist/index.ts",
-  "module": "dist/index.module.js",
-  "esmodule": "dist/index.modern.js",
+  "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "files": [
-    "dist"
-  ],
   "scripts": {
     "predev": "vc env pull --yes && yarn test:quiet",
-    "dev:types": "lerna run dev --scope @flex-development/kustomtypez",
-    "dev:storybook": "start-storybook -p 3000 -c storybook -s ../app/public --ci",
+    "dev:storybook": "start-storybook -p 3000 -s ../app/public --ci",
     "dev:storybook:docs": "yarn dev:storybook --docs",
     "dev": "run-p dev:*",
-    "pretest": "cross-env NODE_ENV=test",
     "test": "jest --detectOpenHandles --passWithNoTests --json --outputFile=__tests__/jest-test-results.json",
     "test:quiet": "yarn test || true",
-    "prebuild:bundle": "rm -rf dist && mkdir dist dist/theme",
-    "prebuild:storybook": "yarn test:quiet && rm -rf public && mkdir public",
-    "build:bundle": "microbundle --tsconfig tsconfig.prod.json --jsx React.createElement",
-    "build:storybook": "build-storybook -c storybook -o public",
-    "postbuild:bundle": "shx cp -R src/theme/* dist/theme",
-    "postbuild:storybook": "shx cp -R ../app/public/assets public",
-    "build": "run-p build:*"
+    "prebuild": "yarn test:quiet && rm -rf public && mkdir public",
+    "build": "build-storybook -o public",
+    "postbuild": "shx cp -R ../app/public/assets public",
+    "prepare": "rm -rf dist && tsc --project tsconfig.prod.json"
   },
   "dependencies": {
     "@types/bootstrap": "^4.5.0",
@@ -62,6 +50,7 @@
     "bootstrap": "^5.0.0-alpha1",
     "classnames": "^2.2.6",
     "lodash": "^4.17.19",
+    "mdx-scoped-runtime": "^0.7.5",
     "popper": "^1.0.1",
     "react-hanger": "^2.2.1",
     "react-uuid": "^1.0.2",
@@ -92,9 +81,7 @@
     "@types/shopify-buy": "^2.10.3",
     "@types/storybook__react": "^5.2.1",
     "@whitespace/storybook-addon-html": "^2.0.1",
-    "awesome-typescript-loader": "^5.2.1",
     "babel-loader": "^8.1.0",
-    "microbundle": "^0.12.0-next.9",
     "musickit-typescript": "^1.2.4",
     "next": "^9.5.1",
     "postcss": "^7.0.32",

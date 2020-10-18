@@ -1,4 +1,4 @@
-import { Default } from '@kustomz-stories/atoms/Divider.stories'
+import { Default } from '@system/stories/lib/atoms/Divider.stories'
 import { render } from '@testing-library/react'
 import React from 'react'
 

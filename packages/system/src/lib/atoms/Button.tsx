@@ -1,9 +1,9 @@
-import { useIcon, useMutatedProps } from '@kustomz/hooks'
+import { useIcon, useMutatedProps } from '@system/hooks'
 import {
   ButtonVariant,
   FormControlSize,
   MutatedFormControlProps
-} from '@kustomz/types'
+} from '@system/types'
 import React, {
   forwardRef,
   ForwardRefExoticComponent as FREC,
@@ -13,13 +13,10 @@ import React, {
 import { IconProps } from './Icon'
 
 /**
- * @module lib/elements/Button
+ * @module lib/atoms/Button
  * @see https://developer.mozilla.org/docs/Web/HTML/Element/button
  */
 
-/**
- * Button component properties.
- */
 export interface ButtonProps
   extends Omit<MutatedFormControlProps<HTMLButtonElement>, 'variant'> {
   /**
@@ -76,7 +73,7 @@ export interface ButtonProps
   icon?: IconProps
 
   /**
-   * Make a button smaller or larger.
+   * Make a button smaller.
    *
    * See: https://v5.getbootstrap.com/docs/5.0/components/buttons/#sizes
    */
@@ -132,7 +129,7 @@ export const Button: FREC<ButtonRefProps> = forwardRef((props, ref) => {
 
   const withIcon = useIcon<HTMLButtonElement, ButtonProps>(rest)
 
-  const mutatedProps = useMutatedProps<
+  const mutated = useMutatedProps<
     typeof withIcon,
     JSX.IntrinsicElements['button']
   >(withIcon, {
@@ -142,11 +139,13 @@ export const Button: FREC<ButtonRefProps> = forwardRef((props, ref) => {
     [`btn-${variant}`]: variant
   })
 
-  if (rest.disabled) mutatedProps['aria-disabled'] = true
+  if (rest.disabled) mutated['aria-disabled'] = true
 
   /* eslint-disable-next-line react/button-has-type */
-  return <button {...mutatedProps} ref={ref} />
+  return <button {...mutated} ref={ref} />
 })
+
+Button.displayName = 'Button'
 
 Button.defaultProps = {
   type: 'button',

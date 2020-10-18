@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "Shopify storefront powered by Next.js",
   "keywords": [
+    "firestore",
     "nextjs",
-    "next-auth",
     "react",
     "shopify",
     "shopify api node",
@@ -29,25 +29,19 @@
     "directory": "packages/app"
   },
   "scripts": {
-    "predev": "vc env pull .env.development.local --yes && yarn build:ui",
-    "dev:types": "lerna run dev --scope @flex-development/kustomtypez",
-    "dev:app": "next dev -p 3001",
-    "dev": "run-p dev:*",
+    "predev": "vc env pull .env.development.local --yes",
+    "dev": "next dev -p 3001",
     "pretest": "dotenv -e .env.test.local -- echo \"Loaded test environment.\"",
     "test": "jest --detectOpenHandles --passWithNoTests",
     "prestart": "dotenv -e .env.production.local -- echo \"Loaded production environment.\"",
     "start": "next start",
-    "build:types": "lerna run build --scope @flex-development/kustomtypez",
-    "build:ui": "lerna run build:bundle --scope @flex-development/kustomzdesign",
-    "prebuild": "run-p build:*",
-    "build": "next build"
+    "build": "next build",
+    "now-build": "lerna link && yarn build"
   },
   "dependencies": {
     "@feathersjs/errors": "^4.5.3",
     "@flex-development/kustomtypez": "*",
     "@flex-development/kustomzdesign": "*",
-    "@types/cors": "^2.8.7",
-    "@types/crypto-js": "^3.1.47",
     "@types/feathersjs__errors": "^3.3.2",
     "@types/lodash": "^4.14.155",
     "@types/node": "^14.0.9",
@@ -58,28 +52,26 @@
     "@types/validator": "^13.1.0",
     "@vercel/node": "^1.8.1",
     "axios": "^0.19.2",
-    "class-validator": "^0.12.2",
-    "cors": "^2.8.5",
-    "crypto-js": "^4.0.0",
+    "firebase": "^7.23.0",
     "firebase-admin": "^9.2.0",
-    "fireorm": "^0.17.1",
     "front-matter": "^4.0.2",
     "lodash": "^4.17.15",
-    "next": "^9.5.3",
-    "node-fetch": "^2.6.1",
+    "next": "^9.5.1",
     "pino": "^6.4.1",
     "pino-pretty": "^4.1.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "reflect-metadata": "^0.1.13",
+    "react-uuid": "^1.0.2",
     "shopify-api-node": "^3.4.4",
     "shopify-buy": "^2.11.0",
+    "styled-components": "^5.2.0",
     "tslib": "^2.0.0",
+    "typesaurus": "^6.2.0",
     "urijs": "^1.19.2",
     "validator": "^13.1.1"
   },
   "devDependencies": {
-    "dotenv-cli": "^4.0.0"
+    "babel-plugin-styled-components": "^1.11.1"
   },
   "peerDependencies": {}
 }

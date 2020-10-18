@@ -45,9 +45,19 @@ $inner-control-font-size: $font-size-sm - 0.075;
 
   &[data-control='input'] {
     &[data-type='number'] {
+      @include element-size(100%);
+
+      @include element-size(null, height, $input-height);
+
       @include flex(center, space-between, row, inline-flex !important);
 
-      @include form-control;
+      @include font-size($input-font-size);
+
+      @include padding-x($input-padding-x);
+
+      @include padding-y($input-padding-y);
+
+      @include transition($input-transition);
 
       border: $input-border-width solid $input-border-color;
 
@@ -82,36 +92,24 @@ $inner-control-font-size: $font-size-sm - 0.075;
     text-transform: uppercase;
   }
 
-  .form-control {
-    @include padding-x($spacers-0);
+  .form {
+    &-control {
+      @include padding-x($spacers-0);
 
-    color: $light;
-    font-size: $font-size-sm;
-    font-weight: $font-weight-medium;
-    min-height: unset;
-    // text-transform: uppercase;
-
-    &::placeholder {
+      color: $light;
       font-size: $font-size-sm;
-      font-weight: $font-weight-semibold;
-      text-transform: none;
-    }
+      font-weight: $font-weight-medium;
+      min-height: unset;
 
-    &:not(select) {
-      padding-left: 0.375em;
-    }
+      &::placeholder {
+        font-size: $font-size-sm;
+        font-weight: $font-weight-semibold;
+        text-transform: none;
+      }
 
-    &.is-invalid {
-      border-bottom-color: $danger;
-    }
-  }
-
-  select.form-control {
-    background-color: $ghost;
-    color: $primary;
-
-    option {
-      background-color: $ghost;
+      &.is-invalid {
+        border-bottom-color: $danger;
+      }
     }
   }
 }

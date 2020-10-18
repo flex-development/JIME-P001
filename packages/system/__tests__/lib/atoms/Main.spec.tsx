@@ -1,4 +1,4 @@
-import { Main } from '@kustomz/lib'
+import { Main } from '@system/lib'
 import { render } from '@testing-library/react'
 import React from 'react'
 

@@ -21,4 +21,4 @@ and how to publish the package to the Github Package Registry.
 
 ## 🚧 Github Package Registry
 
-TODO: Update documentation.
+**TODO**: Update documentation.

@@ -3,35 +3,26 @@
     "allowJs": true,
     "allowUnreachableCode": false,
     "allowSyntheticDefaultImports": true,
+    "baseUrl": "./",
     "esModuleInterop": true,
-    "experimentalDecorators": true,
     "forceConsistentCasingInFileNames": true,
-    "isolatedModules": true,
-    "jsx": "react",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
-    "module": "esnext",
     "moduleResolution": "node",
-    "noEmit": true,
     "noFallthroughCasesInSwitch": true,
     "noImplicitAny": false,
-    "noImplicitReturns": true,    
+    "noImplicitReturns": true,
     "noUnusedLocals": false,
     "noUnusedParameters": false,
+    "paths": {
+      "@api/*": ["packages/app/src/pages/api/*"],
+      "@app/*": ["packages/app/src/*"],
+      "@system/*": ["packages/system/src/*"]
+    },
     "preserveConstEnums": true,
     "pretty": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "suppressImplicitAnyIndexErrors": true,
-    "strict": true,
-    "target": "es6",
-    "typeRoots": [
-      "node_modules/musickit-typescript",
-      "node_modules/@types"
-    ]
+    "strict": true
   },
   "exclude": [
     "node_modules"

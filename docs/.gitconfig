@@ -42,44 +42,43 @@
   # Remove local .git directory
   restart = "!f() { rm -rf .git; echo \"Removed .git directory.\"; }; f"
 
-# Emoji Log Aliases
+# Emoji Log Aliases & Extensions
 # See: https://github.com/ahmadawais/Emoji-Log/
 [alias]
-  # NEW: Use when you add something entirely new
-  new = "!f() { git ac \"📦 NEW: $@\"; }; f"
-
-  # TEST: Use when changes are related to testing or mock data
-  test = "!f() { git ac \"✅ TEST: $@\"; }; f"
+  # DOC: Use when you add/update documentation (ex: README, inline docs)
+  doc = "!f() { git ac \"📖 DOC: $@\"; }; f"
+  
+  # FIX: Use when you fix a bug
+  fix = "!f() { git ac \"🐛 FIX: $@\"; }; f"
 
   # IMPROVE: Use when you improve/enhance a piece of code (ex: refactoring)
   imp = "!f() { git ac \"👌🏾 IMPROVE: $@\"; }; f"
 
-  # FIX: Use when you fix a bug
-  fix = "!f() { git ac \"🐛 FIX: $@\"; }; f"
+  # NEW: Use when you add something entirely new
+  new = "!f() { git ac \"📦 NEW: $@\"; }; f"
 
-  # DOC: Use when you add/update documentation (ex: README, inline docs)
-  doc = "!f() { git ac \"📖 DOC: $@\"; }; f"
-  
   # RELEASE: Use when changes are related to a release
   rlz = "!f() { git ac \"🚀 RELEASE: $@\"; }; f"
 
+  # TEST: Use when changes are related to testing or mock data
+  test = "!f() { git ac \"✅ TEST: $@\"; }; f"
+
+  # WIP: Use for work in progress
+  wip = "!f() { git ac \"🚧 WIP: $@\"; }; f"
+
 # Git Flow Aliases
-# See: https://jeffkreeftmeijer.com/git-flow/
 [alias]
   # Create a new feature branch and push upstream
-  feature = "!f() { git flow feature start $@; git puo feature/$@; }; f"
-
-  # Finish a feature, release, hotfix, or support branch
-  finish = "!f() { git flow $0 finish $1; }; f"
+  feature = "!f() { git b feature/$@; }; f"
 
   # Create a new hotfix branch and push upstream
-  hotfix = "!f() { git flow hotfix start $@; git puo hotfix/$@; }; f"
+  hotfix = "!f() { git b hotfix/$@; }; f"
 
   # Create a new release branch and push upstream
-  release = "!f() { git flow release start $@; git puo release/$@; }; f"
+  release = "!f() { git b release/$@; }; f"
 
   # Create a new support branch and push upstream
-  support = "!f() { git flow support start $@; git puo support/$@; }; f"
+  support = "!f() { git b support/$@; }; f"
 
 # Helper Aliases
 [alias]
@@ -91,6 +90,11 @@
 
   # Generate a secret signing key
   signingkey = "!f() { openssl rand -base64 32; }; f"
+
+# Husky
+[alias]
+  # Push commits without running `pre-push` hook
+  pnv = "!f() { git push --no-verify; }; f"
 
 [core]
   ignorecase = false

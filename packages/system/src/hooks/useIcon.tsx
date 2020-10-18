@@ -1,9 +1,9 @@
 import { AnyObject } from '@flex-development/kustomtypez'
-import { MutatedProps } from '@kustomz/types'
 import classnames from 'classnames'
 import { isNull, isUndefined, omit } from 'lodash'
 import React, { useEffect, useState } from 'react'
-import { Icon, IconProps } from '../lib/atoms/Icon'
+import { Icon, IconProps } from '../lib'
+import { MutatedProps } from '../types'
 
 /**
  * @file Render icon with props.children
@@ -79,7 +79,7 @@ export function useIcon<E = HTMLElement, P = MutatedProps<E>>(props: P): P {
   return ({
     ...omit(props as AnyObject, ['icon']),
     ...dataAttrs,
-    children: mutatedChildren,
+    children: skip || !icon.length ? children : mutatedChildren,
     className
   } as unknown) as P
 }

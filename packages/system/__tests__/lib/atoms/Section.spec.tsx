@@ -1,4 +1,4 @@
-import { Section } from '@kustomz/lib'
+import { Section } from '@system/lib'
 import { render } from '@testing-library/react'
 import React from 'react'
 

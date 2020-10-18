@@ -3,8 +3,8 @@ import {
   MusicKitMediaItem,
   MusicKitPlaybackState
 } from '@flex-development/kustomtypez'
-import { useMutatedProps } from '@kustomz/hooks'
-import { HTMLButtonClickEvent, MutatedProps } from '@kustomz/types'
+import { useMutatedProps } from '@system/hooks'
+import { HTMLButtonClickEvent, MutatedProps } from '@system/types'
 import React, { FC } from 'react'
 import {
   Box,
@@ -94,10 +94,10 @@ export const PlaylistBar: FC<PlaylistBarProps> = (props: PlaylistBarProps) => {
     ...rest
   } = props
 
-  const mutatedProps = useMutatedProps<typeof rest>(rest, 'playlistbar')
+  const mutated = useMutatedProps<typeof rest>(rest, 'playlistbar')
 
   return (
-    <Section {...mutatedProps}>
+    <Section {...mutated}>
       <Box className='playlistbar-media col-8'>
         <Link className='playlistbar-artwork' href={artworkURL} target='_blank'>
           <Image alt={`Artwork for ${title}`} fluid src={artworkURL} />

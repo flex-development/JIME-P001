@@ -1,4 +1,4 @@
-import { Booleanish } from '@flex-development/kustomtypez'
+import { Booleanish, NullishString } from '@flex-development/kustomtypez'
 import {
   AriaAttributes,
   ChangeEvent,
@@ -6,6 +6,11 @@ import {
   PropsWithoutRef,
   RefAttributes
 } from 'react'
+
+/**
+ * @file Global type declarations for design system
+ * @module types/global
+ */
 
 /**
  * Aria attributes and event handlers.
@@ -211,6 +216,11 @@ export interface MutatedProps<E = HTMLElement> extends GlobalAttributes<E> {
    * @default false
    */
   flex?: Booleanish | 'inline'
+
+  /**
+   * URL of background image.
+   */
+  img?: NullishString
 
   /**
    * String containing HTML markup. This value will be used to set the value of

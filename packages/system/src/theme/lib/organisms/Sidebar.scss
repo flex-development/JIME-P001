@@ -8,16 +8,18 @@
 
 $sidebar-font-size: $font-size-sm;
 
-$sidebar-padding-bottom: $spacers-21;
-$sidebar-padding-top: $spacers-40;
-$sidebar-padding-x: $spacers-12;
+$sidebar-padding-bottom: $spacers-80;
+$sidebar-padding-top: $spacers-96;
+$sidebar-padding-top-sm: rem(120);
+
+$sidebar-padding-x: $spacers-36;
 
 /// ----------------------------------------------------------------------------
 /// Styles
 /// ----------------------------------------------------------------------------
 
 .sidebar {
-  @include flex(stretch, space-between, column, flex, false);
+  @include flex(stretch, space-between, column);
 
   @include height(max-content, none, 100%);
 
@@ -25,6 +27,8 @@ $sidebar-padding-x: $spacers-12;
     @include border($border-color, $border-width, right);
 
     @include width($spacer * 30);
+
+    padding-top: $sidebar-padding-top-sm;
   }
 
   @include padding-x($sidebar-padding-x);
@@ -37,7 +41,7 @@ $sidebar-padding-x: $spacers-12;
   // padding-bottom: $sidebar-padding-bottom;
 
   &-developer-credit {
-    @include margin-y($spacers-12, $spacers-0);
+    @include margin-y($sidebar-padding-x, $spacers-0);
 
     @include media-breakpoint-down(sm) {
       font-size: $font-size-sm;
@@ -47,7 +51,7 @@ $sidebar-padding-x: $spacers-12;
   }
 
   &-profile {
-    @include margin-bottom($spacers-12);
+    @include margin-bottom($sidebar-padding-x);
 
     @include media-breakpoint-up(sm) {
       flex-direction: row;
@@ -64,7 +68,7 @@ $sidebar-padding-x: $spacers-12;
       display: inline-flex;
 
       .icon {
-        @include margin-right($spacers-3 / 2);
+        @include margin-right($spacers-12 / 2);
       }
     }
 
@@ -75,7 +79,7 @@ $sidebar-padding-x: $spacers-12;
 
     p {
       &:not(:last-of-type) {
-        @include margin-bottom($spacers-2);
+        @include margin-bottom($spacers-8);
       }
 
       &:last-of-type {

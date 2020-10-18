@@ -1,6 +1,6 @@
 import { ANYTHING } from '@flex-development/kustomtypez'
-import { useMutatedProps } from '@kustomz/hooks'
-import { HTMLButtonClickEvent, MutatedProps } from '@kustomz/types'
+import { useMutatedProps } from '@system/hooks'
+import { HTMLButtonClickEvent, MutatedProps } from '@system/types'
 import React, { FC } from 'react'
 import { Box, Button, Header, Link, LinkProps, Span } from '../atoms'
 import { SearchBar, SearchBarProps } from '../molecules'
@@ -61,10 +61,10 @@ export const ShopHeader: FC<ShopHeaderProps> = (props: ShopHeaderProps) => {
     ...rest
   } = props
 
-  const mutatedProps = useMutatedProps<typeof rest>(rest, 'shop-header')
+  const mutated = useMutatedProps<typeof rest>(rest, 'shop-header')
 
   return (
-    <Header {...mutatedProps}>
+    <Header {...mutated}>
       <Box className='col' flex>
         <Button
           className='shop-header-btn'

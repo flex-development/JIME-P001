@@ -1,4 +1,4 @@
-import { Form } from '@kustomz/lib'
+import { Form } from '@system/lib'
 import { render } from '@testing-library/react'
 import React from 'react'
 

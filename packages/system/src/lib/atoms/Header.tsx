@@ -1,10 +1,10 @@
-import { useMutatedProps } from '@kustomz/hooks'
-import { RefProps } from '@kustomz/types'
+import { useMutatedProps } from '@system/hooks'
+import { RefProps } from '@system/types'
 import React, { forwardRef, ForwardRefExoticComponent as FREC } from 'react'
 
 /**
  * @file Render a `<header>` element
- * @module lib/elements/Header
+ * @module lib/atoms/Header
  */
 
 /**
@@ -13,12 +13,14 @@ import React, { forwardRef, ForwardRefExoticComponent as FREC } from 'react'
  * - **https://developer.mozilla.org/en-US/docs/Web/HTML/Element/header**
  */
 export const Header: FREC<RefProps> = forwardRef((props, ref) => {
-  const mutatedProps = useMutatedProps<
+  const mutated = useMutatedProps<
     typeof props,
     JSX.IntrinsicElements['header']
   >(props)
 
-  return <header {...mutatedProps} ref={ref} />
+  return <header {...mutated} ref={ref} />
 })
+
+Header.displayName = 'Header'
 
 Header.defaultProps = {}

@@ -1,4 +1,4 @@
-import { sanitizeQuantity } from '@kustomz/utils'
+import { sanitizeQuantity } from '@system/utils'
 import { isNumber } from 'lodash'
 import useNumber from 'react-hanger/array/useNumber'
 

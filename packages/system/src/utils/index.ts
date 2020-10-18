@@ -1,8 +1,15 @@
 /**
- * @file Utility Functions
+ * @file Utilities
  * @module lib/utils
  */
 
+export * from './args'
+export * from './breakpointInfix'
+export * from './colors'
+export * from './constants'
 export * from './sanitizeQuantity'
-export * from './sortByKeys'
+export * from './typography'
 export * from './uid'
+export * from './viewports'
+
+/* eslint-disable prettier/prettier */

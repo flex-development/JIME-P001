@@ -1,5 +1,5 @@
-import { useMutatedProps } from '@kustomz/hooks'
-import { MutatedProps } from '@kustomz/types'
+import { useMutatedProps } from '@system/hooks'
+import { MutatedProps } from '@system/types'
 import React, {
   forwardRef,
   ForwardRefExoticComponent as FREC,
@@ -10,12 +10,9 @@ import { Summary, SummaryProps } from './Summary'
 
 /**
  * @file Render a `<details>` element
- * @module lib/elements/Details
+ * @module lib/atoms/Details
  */
 
-/**
- * Details component properties.
- */
 export interface DetailsProps extends MutatedProps<HTMLDetailsElement> {
   /**
    * Indicates whether or not the contents of the `<details>` element is
@@ -54,18 +51,20 @@ export type DetailsRefProps = ReflessDetailsProps & DetailsRefAttributes
 export const Details: FREC<DetailsRefProps> = forwardRef((props, ref) => {
   const { children, summary, ...rest } = props
 
-  const mutatedProps = useMutatedProps<
+  const mutated = useMutatedProps<
     typeof rest,
     JSX.IntrinsicElements['details']
   >(rest)
 
   return (
-    <details {...mutatedProps} ref={ref}>
+    <details {...mutated} ref={ref}>
       {summary && <Summary {...summary} />}
       {children}
     </details>
   )
 })
+
+Details.displayName = 'Details'
 
 Details.defaultProps = {
   open: false

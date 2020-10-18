@@ -1,5 +1,5 @@
-import { useMutatedProps } from '@kustomz/hooks'
-import { MutatedVoidElementProps } from '@kustomz/types'
+import { useMutatedProps } from '@system/hooks'
+import { MutatedVoidElementProps, ThemeColor } from '@system/types'
 import { omit } from 'lodash'
 import React, {
   forwardRef,
@@ -10,17 +10,14 @@ import React, {
 
 /**
  * @file Render a `<hr>` element
- * @module lib/elements/Divider
+ * @module lib/atoms/Divider
  */
 
-/**
- * Divider component properties.
- */
 export interface DividerProps extends MutatedVoidElementProps<HTMLHRElement> {
   /**
-   * Sets the color of the rule through color name or hexadecimal value.
+   * Apply a theme color.
    */
-  color?: string
+  color?: ThemeColor | 'black' | 'white'
 }
 
 /**
@@ -44,10 +41,16 @@ export type DividerRefProps = ReflessDividerProps & DividerRefAttributes
  * - **https://developer.mozilla.org/docs/Web/HTML/Element/hr**
  */
 export const Divider: FREC<DividerProps> = forwardRef((props, ref) => {
-  const mutatedProps = useMutatedProps<
-    typeof props,
-    JSX.IntrinsicElements['hr']
-  >(props, 'divider')
+  const { color, ...rest } = props
 
-  return <hr {...omit(mutatedProps, ['children'])} ref={ref} />
+  const mutated = useMutatedProps<typeof rest, JSX.IntrinsicElements['hr']>(
+    rest,
+    { divider: true, [`text-${color}`]: color }
+  )
+
+  return <hr {...omit(mutated, ['children'])} ref={ref} />
 })
+
+Divider.displayName = 'Divider'
+
+Divider.defaultProps = {}

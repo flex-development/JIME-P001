@@ -1,5 +1,5 @@
-import { useCarouselPlugin, useMutatedProps } from '@kustomz/hooks'
-import { uid } from '@kustomz/utils'
+import { useCarouselPlugin, useMutatedProps } from '@system/hooks'
+import { uid } from '@system/utils'
 import { CarouselOption } from 'bootstrap'
 import classnames from 'classnames'
 import React, { Children, FC, ReactElement, useRef } from 'react'
@@ -148,10 +148,10 @@ export const Carousel: FC<CarouselProps> & {
   } = props
 
   // Handle props and inject class
-  const mutatedProps = useMutatedProps<typeof rest>(rest, 'carousel')
+  const mutated = useMutatedProps<typeof rest>(rest, 'carousel')
 
   // Bootstrap carousels require an ID
-  mutatedProps.id = mutatedProps.id || uid('carousel')
+  mutated.id = mutated.id || uid('carousel')
 
   // Carousel items - useMutatedProps converts props.children into an array
   const items = Children.toArray(children) as CarouselProps['children']
@@ -167,7 +167,7 @@ export const Carousel: FC<CarouselProps> & {
   )
 
   return (
-    <Box {...mutatedProps} ref={ref}>
+    <Box {...mutated} ref={ref}>
       <Box className='carousel-inner'>
         {items.map((child: ReactElement, i: number) => (
           <CarouselItem

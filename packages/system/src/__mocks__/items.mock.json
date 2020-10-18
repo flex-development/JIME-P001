@@ -1,0 +1,33 @@
+[
+  {
+    "customAttributes": [],
+    "id": "line-item-ash-tray-funfetti",
+    "image": {
+      "id": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0SW1hZ2UvMTk0OTgwODA2OTg1MjM=",
+      "src": "https://cdn.shopify.com/s/files/1/0470/4790/1339/products/ash-tray-funfetti.png?v=1601847412"
+    },
+    "linePrice": "20.00",
+    "quantity": 2,
+    "title": "Ash Tray",
+    "variantId": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0LzU2NjQ2MzkwOTA4NDM=",
+    "variantTitle": "FUNFETTI"
+  },
+  {
+    "customAttributes": [
+      {
+        "key": "kpd",
+        "value": "Organic kogi fixie, art party cray viral ex la croix marfa fashion axe bushwick flannel lo-fi sunt. Fugiat affogato sint, esse et normcore mustache craft beer ramps DIY."
+      }
+    ],
+    "id": "line-item-kustomz-rolling-tray",
+    "image": {
+      "id": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0SW1hZ2UvMTk0OTgwODg4NTc3NTU=",
+      "src": "https://cdn.shopify.com/s/files/1/0470/4790/1339/products/kustomz.png?v=1601847493"
+    },
+    "linePrice": "35.00",
+    "quantity": 1,
+    "title": "KUSTOMZ",
+    "variantId": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0VmFyaWFudC8zNjIwMDY4MzE3NjA5MQ==",
+    "variantTitle": "Rolling Tray"
+  }
+]

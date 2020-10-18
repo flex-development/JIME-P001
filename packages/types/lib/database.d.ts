@@ -1,16 +1,12 @@
-import { IEntity, IFireOrmQueryLine, IOrderByParams } from 'fireorm'
-
 /**
- * Firestore database query.
+ * @file Database Declarations
+ * @module database
  *
- * @see https://fireorm.js.org/#/Read_Data?id=complex-queries
- * @see https://fireorm.js.org/#/Read_Data?id=order-by-and-limit
+ * @todo Update documentation
  */
-export interface DatabaseQuery {
-  order?: IOrderByParams
-  queries?: IFireOrmQueryLine[]
-  limit?: number
-  single?: boolean
+export interface IEntity {
+  created_at: string
+  id: string
 }
 
 /**
@@ -20,27 +16,27 @@ export interface ProductReviewEntity extends IEntity {
   /**
    * Product review text.
    */
-  body: string = ''
+  body: string
 
   /**
    * Email address of the customer who posted the review.
    */
-  email: string = ''
+  email: string
 
   /**
    * Unique product review ID.
    */
-  id: string = ''
+  id: string
 
   /**
    * Name of the customer who posted the review.
    */
-  name: string = ''
+  name: string
 
   /**
    * ID of the product the review is for.
    */
-  product: string = ''
+  product: string
 
   /**
    * Product rating, on a scale of 0 to 5. 
@@ -50,15 +46,18 @@ export interface ProductReviewEntity extends IEntity {
   /**
    * Title of review.
    */
-  title: string = ''
+  title: string
 
   /**
    * Title of the product variant the review is for.
    */
-  variant: string = ''
+  variant: string
 }
 
 /**
  * User-populated fields needed to create a product review.
  */
-export type ProductReviewInput = Omit<ProductReviewEntity, 'id' | 'name'>
+export type ProductReviewInput = Omit<
+  ProductReviewEntity,
+  'created_at' | 'id' | 'name'
+>

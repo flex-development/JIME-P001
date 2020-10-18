@@ -1,5 +1,5 @@
-import { useMutatedProps } from '@kustomz/hooks'
-import { MutatedProps } from '@kustomz/types'
+import { useMutatedProps } from '@system/hooks'
+import { MutatedProps } from '@system/types'
 import React, {
   forwardRef,
   ForwardRefExoticComponent as FREC,
@@ -9,12 +9,9 @@ import React, {
 
 /**
  * @file Render a <label> element
- * @module lib/elements/Label
+ * @module lib/atoms/Label
  */
 
-/**
- * Label component properties.
- */
 export interface LabelProps extends MutatedProps<HTMLLabelElement> {
   /**
    * If true, add the class `col-form-label`.
@@ -79,25 +76,27 @@ export const Label: FREC<LabelRefProps> = forwardRef((props, ref) => {
 
   if (required) rest['data-required'] = required
 
-  const mutatedProps = useMutatedProps<
-    typeof rest,
-    JSX.IntrinsicElements['label']
-  >(rest, {
-    'col-form-label': col,
-    'form-label': form
-  })
+  const mutated = useMutatedProps<typeof rest, JSX.IntrinsicElements['label']>(
+    rest,
+    {
+      'col-form-label': col,
+      'form-label': form
+    }
+  )
 
   /* eslint-disable-next-line jsx-a11y/label-has-associated-control */
 
   return (
-    <label {...mutatedProps} htmlFor={htmlFor} ref={ref}>
+    <label {...mutated} htmlFor={htmlFor} ref={ref}>
       {required && '*'}
-      {mutatedProps.children}
+      {mutated.children}
     </label>
   )
 
   /* eslint-enable jsx-a11y/label-has-associated-control */
 })
+
+Label.displayName = 'Label'
 
 Label.defaultProps = {
   col: false,

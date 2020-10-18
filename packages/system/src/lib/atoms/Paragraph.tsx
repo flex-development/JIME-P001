@@ -1,21 +1,24 @@
-import { useMutatedProps } from '@kustomz/hooks'
-import { MutatedProps } from '@kustomz/types'
+import { useIcon, useMutatedProps } from '@system/hooks'
+import { MutatedProps } from '@system/types'
 import React, {
   forwardRef,
   ForwardRefExoticComponent as FREC,
   PropsWithoutRef,
   RefAttributes
 } from 'react'
+import { IconProps } from './Icon'
 
 /**
  * @file Render a `<p>` element
- * @module lib/elements/Paragraph
+ * @module lib/atoms/Paragraph
  */
 
-/**
- * Paragraph component properties.
- */
-export type ParagraphProps = MutatedProps<HTMLParagraphElement>
+export interface ParagraphProps extends MutatedProps<HTMLParagraphElement> {
+  /**
+   * Icon to render beside the element text.
+   */
+  icon?: IconProps
+}
 
 /**
  * Paragraph component properties without the `ref` property.
@@ -39,12 +42,15 @@ export type ParagraphRefProps = ReflessParagraphProps & ParagraphRefAttributes
  * - **https://v5.getbootstrap.com/docs/5.0/utilities/text/**
  */
 export const Paragraph: FREC<ParagraphRefProps> = forwardRef((props, ref) => {
-  const mutatedProps = useMutatedProps<
-    typeof props,
-    JSX.IntrinsicElements['p']
-  >(props)
+  const withIcon = useIcon<HTMLParagraphElement, ParagraphProps>(props)
 
-  return <p {...mutatedProps} ref={ref} />
+  const mutated = useMutatedProps<typeof withIcon, JSX.IntrinsicElements['p']>(
+    withIcon
+  )
+
+  return <p {...mutated} ref={ref} />
 })
+
+Paragraph.displayName = 'Paragraph'
 
 Paragraph.defaultProps = {}

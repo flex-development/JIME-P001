@@ -2,14 +2,6 @@
 /// @group Select
 /// ----------------------------------------------------------------------------
 
-select.form-control {
-  background-color: $form-select-bg;
-  color: $form-select-color;
-  font-weight: $font-weight-semibold;
+.form-select {
   text-transform: uppercase;
-
-  &:focus {
-    background-color: $form-select-focus-bg;
-    color: $form-select-focus-color;
-  }
 }

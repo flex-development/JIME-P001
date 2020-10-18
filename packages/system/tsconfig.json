@@ -8,27 +8,17 @@
     "useCache": true
   },
   "compilerOptions": {
-    "baseUrl": "./",
     "checkJs": false,
     "downlevelIteration": true,
     "isolatedModules": false,
     "jsx": "react",
     "lib": ["dom", "dom.iterable", "esnext"],
-    "paths": {
-      "@kustomz/*": ["src/*"],
-      "@kustomz-config/*": ["storybook/config/*"],
-      "@kustomz-mocks/*": ["__mocks__/*"],
-      "@kustomz-stories/*": ["storybook/stories/lib/*"]
-    },
+    "module": "esnext",
+    "noEmit": true,
     "sourceMap": false,
-    "target": "esnext",
-    "typeRoots": [
-      "../../node_modules/musickit-typescript",
-      "../../node_modules/@types",
-      "src/types"
-    ]
+    "target": "es6"
   },
+  "exclude": ["node_modules"],
   "extends": "../../tsconfig.json",
-  "files": ["__tests__/jest-env.d.ts", "src/types/index.d.ts"],
-  "include": ["__tests__", "storybook", "src", "jest.setup.ts"]
+  "include": ["__tests__", ".storybook", "src", "jest.setup.ts"]
 }

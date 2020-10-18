@@ -1,4 +1,4 @@
-import { Box } from '@kustomz/lib'
+import { Box } from '@system/lib'
 import { render } from '@testing-library/react'
 import React from 'react'
 

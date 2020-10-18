@@ -1,5 +1,5 @@
-import { useMutatedProps } from '@kustomz/hooks'
-import { Breakpoint, MutatedProps } from '@kustomz/types'
+import { useMutatedProps } from '@system/hooks'
+import { GridBreakpoint, MutatedProps } from '@system/types'
 import React, {
   forwardRef,
   ForwardRefExoticComponent as FREC,
@@ -8,36 +8,34 @@ import React, {
 import { BoxRefAttributes } from './Box'
 
 /**
- * @module lib/elements/Container
+ * @module lib/atoms/Container
  * @see https://v5.getbootstrap.com/docs/5.0/layout/containers/
  */
 
-/**
- * Container component properties.
- */
 export interface ContainerProps extends MutatedProps<HTMLDivElement> {
   /**
-   * Allow the Container to fill all of its available horizontal space.
+   * Allow the `Container` to fill all of its available horizontal space.
    *
    * @default false
    */
   fluid?: boolean
 
   /**
-   * Allow the Container to fill all of its available horizontal space until the
-   * specified breakpoint is reached.
+   * Allow the `Container` to fill all of its available horizontal space until
+   * the specified breakpoint is reached.
    */
-  size?: Breakpoint
+  size?: GridBreakpoint
+
+  /**
+   * Allow the `Container` to fill all of its available vertical space.
+   *
+   * @default false
+   */
+  stretch?: boolean
 }
 
-/**
- * Container component properties without the `ref` property.
- */
 export type ReflessContainerProps = PropsWithoutRef<ContainerProps>
 
-/**
- * {@link Container} component forward ref properties.
- */
 export type ContainerRefProps = ReflessContainerProps & BoxRefAttributes
 
 /**
@@ -46,19 +44,22 @@ export type ContainerRefProps = ReflessContainerProps & BoxRefAttributes
  * - **https://v5.getbootstrap.com/docs/5.0/layout/containers/**
  */
 export const Container: FREC<ContainerRefProps> = forwardRef((props, ref) => {
-  const { fluid, size, ...rest } = props
+  const { fluid, size, stretch, ...rest } = props
 
-  const mutatedProps = useMutatedProps<
-    typeof rest,
-    JSX.IntrinsicElements['div']
-  >(rest, {
-    container: !fluid && !size,
-    'container-fluid': fluid,
-    [`container-${size}`]: !!size
-  })
+  const mutated = useMutatedProps<typeof rest, JSX.IntrinsicElements['div']>(
+    rest,
+    {
+      container: !fluid && !size,
+      'container-fluid': fluid,
+      [`container-${size}`]: !!size,
+      'container-stretch': stretch
+    }
+  )
 
-  return <div {...mutatedProps} ref={ref} />
+  return <div {...mutated} ref={ref} />
 })
+
+Container.displayName = 'Container'
 
 Container.defaultProps = {
   fluid: false

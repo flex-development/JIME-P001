@@ -10,7 +10,7 @@
       font-size: rfs-value(48px);
     }
 
-    margin-bottom: $spacers-3;
+    margin-bottom: $spacers-12;
   }
 
   // Form rows
@@ -29,25 +29,22 @@
   }
 
   .form {
-    // Form control elements - <select>, <textarea>
-    &-control {
-      &[name='variantId'] {
-        @include media-breakpoint-down(sm) {
-          border-bottom: none;
-        }
+    &-control[name='kustom'] {
+      @include element-size(rem(120), height);
+    }
 
-        @include media-breakpoint-up(sm) {
-          border-right: none;
-        }
+    &-select[name='variantId'] {
+      @include media-breakpoint-down(sm) {
+        border-bottom: none;
       }
 
-      &[name='kustom'] {
-        @include element-size($spacers-30, height);
+      @include media-breakpoint-up(sm) {
+        border-right: none;
       }
     }
 
     &-text {
-      @include font-size($font-size-base-em);
+      @include font-size($font-size-base);
 
       color: $secondary;
     }

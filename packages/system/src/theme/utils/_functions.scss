@@ -3,8 +3,22 @@
 /// @group functions
 /// ----------------------------------------------------------------------------
 
-/// Removes the unit from a value and multiplies it by 1 em, rem, or px.
-/// @param {Number} $val - Value to convert
+/// Converts a px value into an em value.
+/// @param {Number} $value - Value to convert
+/// @param {Number} $base [16px] - Base font size
+@function em($value, $base: 16) {
+  @return ($value / $base) * 1em;
+}
+
+/// Converts a px value into rem value.
+/// @param {Number} $value - Value to convert
+/// @param {Number} $base [16px] - Base font size
+@function rem($value, $base: 16) {
+  @return ($value / $base) * 1rem;
+}
+
+/// Removes the unit from a value and attaches the unit em, rem, or px.
+/// @param {Number} $val - Value to strip
 /// @param {String} $unit [em] - Unit to convert to
 @function strip-convert($val, $unit: em) {
   @return #{strip-unit($val)}#{$unit};

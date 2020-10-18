@@ -1,4 +1,4 @@
-import { Default } from '@kustomz-stories/organisms/ShopHeader.stories'
+import { Default } from '@system/stories/lib/organisms/ShopHeader.stories'
 import { render } from '@testing-library/react'
 import React from 'react'
 

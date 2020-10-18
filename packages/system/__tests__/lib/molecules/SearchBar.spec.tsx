@@ -1,7 +1,7 @@
 import {
   Default,
   InitialQuery
-} from '@kustomz-stories/molecules/SearchBar.stories'
+} from '@system/stories/lib/molecules/SearchBar.stories'
 import { render, screen } from '@testing-library/react'
 import User from '@testing-library/user-event'
 import React from 'react'

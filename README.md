@@ -2,11 +2,10 @@
 
 [Storybook][8] design system and Shopify storefront powered by [Next.js][4]
 
-[![Code Style: Google](https://img.shields.io/badge/code%20style-google-blueviolet.svg)](https://github.com/google/gts)
-[![emoji-log](https://cdn.rawgit.com/ahmadawais/stuff/ca97874/emoji-log/non-flat-round.svg)](https://github.com/ahmadawais/Emoji-Log/)
 [![TypeScript](https://badgen.net/badge/-/typescript?icon=typescript&label)](https://www.typescriptlang.org/)
-[![Storybook](https://cdn.jsdelivr.net/gh/storybookjs/brand@master/badge/badge-storybook.svg)](https://storybook.js.org/)
+[![emoji-log](https://cdn.rawgit.com/ahmadawais/stuff/ca97874/emoji-log/non-flat-round.svg)](https://github.com/ahmadawais/Emoji-Log/)
 [![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lerna.js.org/)
+[![Storybook](https://cdn.jsdelivr.net/gh/storybookjs/brand@master/badge/badge-storybook.svg)](https://storybook.js.org/)
 
 ## Overview
 
@@ -30,11 +29,11 @@ design system, Shopify storefront powered by [Next.js][4], and shared
 
 ### 🚧 Design System (Storybook)
 
-TODO: Update documentation.
+**TODO**: Update documentation.
 
 ### 🚧 Storefront (Next.js)
 
-TODO: Update documentation
+**TODO**: Update documentation
 
 ## Built With
 
@@ -48,7 +47,7 @@ TODO: Update documentation
   functionality
 - [Shopify API Node][7] - Official Shopify API bindings for Node.js
 - [Storybook][8] - UI development and documentation tool
-- [TypeScript][9] - JavaScript extension
+- [TypeScript][9] - Typed JavaScript
 - [Vercel][10] - Hosting platform for static sites and [Serverless
   Functions][11]
 

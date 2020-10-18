@@ -1,4 +1,4 @@
-import { Fluid, Thumbnail } from '@kustomz-stories/atoms/Image.stories'
+import { Fluid, Thumbnail } from '@system/stories/lib/atoms/Image.stories'
 import { render } from '@testing-library/react'
 import React from 'react'
 import { ArgsMatcher } from '../../jest-env'

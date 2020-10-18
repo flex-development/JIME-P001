@@ -10,13 +10,13 @@ $product-review-border: $border-width-thick solid $border-color;
 
 $product-review-color: $light;
 
-$product-review-font-size: $font-size-base-em;
+$product-review-font-size: $font-size-base;
 $product-review-font-size-md: $font-size-lg;
 
-$product-review-spacer: $spacers-6;
+$product-review-spacer: $spacers-36;
 
-$product-review-padding-y: $spacers-12;
-$product-review-padding-x: $spacers-12;
+$product-review-padding-y: $product-review-spacer;
+$product-review-padding-x: $product-review-padding-y;
 
 $product-review-name-weight: $font-weight-bold;
 
@@ -25,11 +25,9 @@ $product-review-name-weight: $font-weight-bold;
 /// ----------------------------------------------------------------------------
 
 .product-review {
-  @include flex(center, center, column);
+  @include flex(center, flex-start, column);
 
   @include media-breakpoint-up(sm) {
-    @include flex-spread;
-
     flex-direction: row;
   }
 
@@ -38,7 +36,6 @@ $product-review-name-weight: $font-weight-bold;
   @include padding-y($product-review-padding-y);
 
   border: $product-review-border;
-  flex-wrap: nowrap;
 
   &-body {
     font-size: $font-size-sm;

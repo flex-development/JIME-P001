@@ -1,5 +1,5 @@
-import { useMutatedProps } from '@kustomz/hooks'
-import { MutatedProps } from '@kustomz/types'
+import { useMutatedProps } from '@system/hooks'
+import { MutatedProps } from '@system/types'
 import React, {
   forwardRef,
   ForwardRefExoticComponent as FREC,
@@ -11,14 +11,11 @@ import { Item, ItemProps } from './Item'
 
 /**
  * @file Render a <ol> or <ul> element
- * @module lib/elements/List
+ * @module lib/atoms/List
  */
 
 export type HTMLListElement = HTMLOListElement & HTMLUListElement
 
-/**
- * List component properties.
- */
 export interface ListProps extends MutatedProps<HTMLListElement> {
   /**
    * Type of list element to render.
@@ -66,9 +63,9 @@ export type ListRefProps = ReflessListProps & ListRefAttributes
 export const List: FREC<ListRefProps> = forwardRef((props, ref) => {
   const { is, items = [], ...rest } = props
 
-  const mutatedProps = useMutatedProps<typeof rest, InstrinsicListProps>(rest)
+  const mutated = useMutatedProps<typeof rest, InstrinsicListProps>(rest)
 
-  mutatedProps.children = ((): ReactNode => {
+  mutated.children = ((): ReactNode => {
     if (rest.children) return rest.children
 
     return items.map((item: ItemProps, i: number) => {
@@ -80,11 +77,13 @@ export const List: FREC<ListRefProps> = forwardRef((props, ref) => {
 
   switch (is) {
     case 'ol':
-      return <ol {...mutatedProps} ref={ref} />
+      return <ol {...mutated} ref={ref} />
     default:
-      return <ul {...mutatedProps} ref={ref} />
+      return <ul {...mutated} ref={ref} />
   }
 })
+
+List.displayName = 'List'
 
 List.defaultProps = {
   is: 'ul',

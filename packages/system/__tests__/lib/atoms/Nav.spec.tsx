@@ -1,4 +1,4 @@
-import { Nav } from '@kustomz/lib'
+import { Nav } from '@system/lib'
 import { render } from '@testing-library/react'
 import React from 'react'
 

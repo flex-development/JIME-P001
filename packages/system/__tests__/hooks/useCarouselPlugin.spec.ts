@@ -1,4 +1,4 @@
-import { useCarouselPlugin } from '@kustomz/hooks'
+import { useCarouselPlugin } from '@system/hooks'
 import { act, renderHook } from '@testing-library/react-hooks'
 
 /**

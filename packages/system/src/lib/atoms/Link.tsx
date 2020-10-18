@@ -1,21 +1,21 @@
-import { useMutatedProps } from '@kustomz/hooks'
-import { MutatedProps, ThemeColor } from '@kustomz/types'
+import { useIcon, useMutatedProps } from '@system/hooks'
+import { ButtonVariant, MutatedProps, ThemeColor } from '@system/types'
+import { isBoolean, isObject } from 'lodash'
+import NextLink, { LinkProps as NextLinkProps } from 'next/link'
 import React, {
   forwardRef,
   ForwardRefExoticComponent as FREC,
   PropsWithoutRef,
   RefAttributes
 } from 'react'
+import { IconProps } from './Icon'
 
 /**
  * @file Render an <a> element
- * @module lib/elements/Link
+ * @module lib/atoms/Link
  * @see https://developer.mozilla.org/docs/Web/HTML/Element/a
  */
 
-/**
- * Link component properties.
- */
 export interface LinkProps extends MutatedProps<HTMLAnchorElement> {
   /**
    * If true, add the class `active`.
@@ -26,9 +26,16 @@ export interface LinkProps extends MutatedProps<HTMLAnchorElement> {
   active?: boolean
 
   /**
+   * Create a button style link.
+   *
+   * - https://v5.getbootstrap.com/docs/5.0/components/buttons/#button-tags
+   */
+  btn?: false | ButtonVariant
+
+  /**
    * Add a colorized link class.
    *
-   * See: https://v5.getbootstrap.com/docs/5.0/helpers/colored-links/
+   * - https://v5.getbootstrap.com/docs/5.0/helpers/colored-links/
    */
   color?: false | ThemeColor
 
@@ -56,11 +63,21 @@ export interface LinkProps extends MutatedProps<HTMLAnchorElement> {
   href?: string
 
   /**
+   * Icon to render beside the element text.
+   */
+  icon?: IconProps
+
+  /**
    * If true, add the class `nav-link`.
    *
    * See: https://v5.getbootstrap.com/docs/5.0/components/navs/
    */
   nav?: boolean
+
+  /**
+   * If defined, wrap native anchor element in a Next `Link` component.
+   */
+  router?: true | (NextLinkProps & { href?: NextLinkProps['href'] })
 
   /**
    * If true, add the class `stretched-link`.
@@ -110,12 +127,29 @@ export type LinkRefProps = ReflessLinkProps & LinkRefAttributes
  * - **https://developer.mozilla.org/docs/Web/HTML/Element/a**
  */
 export const Link: FREC<LinkRefProps> = forwardRef((props, ref) => {
-  const { active, color, dropdown, nav, stretched, toggle, ...rest } = props
+  const {
+    active,
+    btn,
+    color,
+    dropdown,
+    nav,
+    router,
+    stretched,
+    toggle,
+    ...rest
+  } = props
 
-  const mutatedProps = useMutatedProps<typeof rest, JSX.IntrinsicElements['a']>(
-    rest,
+  const withIcon = useIcon<HTMLAnchorElement, LinkProps>({
+    ...rest,
+    children: rest.children || rest.title
+  })
+
+  const mutated = useMutatedProps<typeof withIcon, JSX.IntrinsicElements['a']>(
+    withIcon,
     {
       active,
+      btn: btn && btn,
+      [`btn-${btn}`]: btn,
       disabled: rest.disabled,
       'dropdown-item': dropdown,
       'dropdown-toggle': toggle,
@@ -126,17 +160,32 @@ export const Link: FREC<LinkRefProps> = forwardRef((props, ref) => {
   )
 
   if (toggle) {
-    mutatedProps['aria-expanded'] = rest['aria-expanded'] || false
-    mutatedProps['data-toggle'] = 'dropdown'
-    mutatedProps.role = 'button'
+    mutated['aria-expanded'] = rest['aria-expanded'] || false
+    mutated['data-toggle'] = 'dropdown'
+    mutated.role = 'button'
   }
 
-  return (
-    <a {...mutatedProps} ref={ref}>
-      {mutatedProps.children || mutatedProps.title}
+  const link = (
+    <a {...mutated} ref={ref}>
+      {mutated.children}
     </a>
   )
+
+  if (router) {
+    const router_link = isObject(router) ? router : {}
+    const href = isBoolean(router) || !router.href ? rest.href : router.href
+
+    return (
+      <NextLink {...router_link} href={href as string}>
+        {link}
+      </NextLink>
+    )
+  }
+
+  return link
 })
+
+Link.displayName = 'Link'
 
 Link.defaultProps = {
   href: '#'

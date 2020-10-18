@@ -1,5 +1,5 @@
-import { Default } from '@kustomz-stories/organisms/Sidebar.stories'
-import { LinkProps, Sidebar } from '@kustomz/lib'
+import { LinkProps, Sidebar } from '@system/lib'
+import { Default } from '@system/stories/lib/organisms/Sidebar.stories'
 import { Matcher, render } from '@testing-library/react'
 import React from 'react'
 import { ArgsMatcher } from '../../jest-env'

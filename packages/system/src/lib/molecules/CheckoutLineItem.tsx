@@ -1,6 +1,6 @@
 import { ANYTHING } from '@flex-development/kustomtypez'
-import { useLineItemInput } from '@kustomz/hooks'
-import { HTMLButtonClickEvent, HTMLInputChangeEvent } from '@kustomz/types'
+import { useLineItemInput } from '@system/hooks'
+import { HTMLButtonClickEvent, HTMLInputChangeEvent } from '@system/types'
 import classnames from 'classnames'
 import React, { FC, Fragment } from 'react'
 import { AttributeInput, CustomAttribute, LineItem } from 'shopify-buy'
@@ -123,10 +123,10 @@ export const CheckoutLineItem: FC<CheckoutLineItemProps> = (
 
   return (
     <Box {...rest} className={classnames('line-item', rest.className)}>
-      <Box className='col-md-3 col-12 mb-md-0 mb-6'>
+      <Box className='col-md-3 col-12 mb-md-0 mb-24'>
         <Image alt={`${title}`} fluid src={image.src as string} />
       </Box>
-      <Box className='col pl-md-6 pl-0'>
+      <Box className='col pl-md-24 pl-0'>
         <ProductHeading
           className='line-item-heading'
           price={linePrice}
@@ -135,14 +135,18 @@ export const CheckoutLineItem: FC<CheckoutLineItemProps> = (
         />
 
         <Paragraph className='line-item-attribute'>
-          {customAttributes[0]?.value ? (
-            <Fragment>
-              Kustom product description:&nbsp;
-              <Span>{customAttributes[0]?.value}</Span>
-            </Fragment>
-          ) : (
-            'No Kustomizations.'
-          )}
+          {
+            /* eslint-disable prettier/prettier */
+            customAttributes[0]?.value ? (
+              <Fragment>
+                Kustom product description:&nbsp;
+                <Span>{customAttributes[0]?.value}</Span>
+              </Fragment>
+            ) : (
+              'No Kustomizations.'
+            )
+            /* eslint-enable prettier/prettier */
+          }
         </Paragraph>
 
         <Box className='flex-md-row flex-md-spread flex-column' flex>
@@ -179,7 +183,7 @@ export const CheckoutLineItem: FC<CheckoutLineItemProps> = (
           </Box>
 
           <Button
-            className='mt-md-0 mt-6 px-5'
+            className='mt-md-0 mt-24 px-20'
             onClick={(e: HTMLButtonClickEvent) => remove(e.target.value)}
             name='remove'
             value={rest.id}

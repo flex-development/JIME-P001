@@ -2,7 +2,7 @@ import {
   Default,
   DropdownToggle,
   Nav
-} from '@kustomz-stories/atoms/Link.stories'
+} from '@system/stories/lib/atoms/Link.stories'
 import { render } from '@testing-library/react'
 import React from 'react'
 import { ArgsMatcher } from '../../jest-env'

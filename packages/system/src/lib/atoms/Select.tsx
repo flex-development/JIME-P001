@@ -1,5 +1,5 @@
-import { useMutatedProps } from '@kustomz/hooks'
-import { FormControlSize, MutatedFormControlProps } from '@kustomz/types'
+import { useMutatedProps } from '@system/hooks'
+import { MutatedFormControlProps } from '@system/types'
 import React, {
   FC,
   forwardRef,
@@ -12,12 +12,9 @@ import { Option, OptionProps } from './Option'
 
 /**
  * @file Render a `<select>` element
- * @module lib/elements/Select
+ * @module lib/atoms/Select
  */
 
-/**
- * Select component properties.
- */
 export interface SelectProps
   extends MutatedFormControlProps<HTMLSelectElement> {
   /**
@@ -50,13 +47,6 @@ export interface SelectProps
   placeholder?: string
 
   /**
-   * Make the control smaller or larger.
-   *
-   * See: https://v5.getbootstrap.com/docs/5.0/forms/form-control/#sizing
-   */
-  size?: false | FormControlSize
-
-  /**
    * Value of currently selected option.
    */
   value?: MutatedFormControlProps['value']
@@ -78,24 +68,21 @@ export type SelectRefProps = ReflessSelectProps & SelectRefAttributes
 export type ReflessSelectProps = PropsWithoutRef<SelectProps>
 
 /**
- * Renders a `<select>` element with the class `form-control`.
+ * Renders a `<select>` element with the class `form-select`.
  *
  * - **https://developer.mozilla.org/docs/Web/HTML/Element/select**
  * - **https://v5.getbootstrap.com/docs/5.0/forms/select/**
  */
 export const Select: FREC<SelectRefProps> = forwardRef((props, ref) => {
-  const { options = [], size, ...rest } = props
+  const { options = [], ...rest } = props
 
-  const mutatedProps = useMutatedProps<
-    typeof rest,
-    JSX.IntrinsicElements['select']
-  >(rest, {
-    'form-control': true,
-    [`form-control-${size}`]: size
-  })
+  const mutated = useMutatedProps<typeof rest, JSX.IntrinsicElements['select']>(
+    rest,
+    'form-select'
+  )
 
   return (
-    <select {...mutatedProps} ref={ref}>
+    <select {...mutated} ref={ref}>
       {((): ReactNodeArray => {
         if (rest.children) return rest.children
 
@@ -107,6 +94,8 @@ export const Select: FREC<SelectRefProps> = forwardRef((props, ref) => {
     </select>
   )
 })
+
+Select.displayName = 'Select'
 
 Select.defaultProps = {
   options: []

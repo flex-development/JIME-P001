@@ -2,8 +2,8 @@ import {
   ProductResource,
   ProductVariantResource
 } from '@flex-development/kustomtypez'
-import { useMutatedProps, useProductVariants } from '@kustomz/hooks'
-import { HTMLAnchorClickEvent } from '@kustomz/types'
+import { useMutatedProps, useProductVariants } from '@system/hooks'
+import { HTMLAnchorClickEvent } from '@system/types'
 import React, { FC, useEffect, useState } from 'react'
 import useBoolean from 'react-hanger/array/useBoolean'
 import {
@@ -57,7 +57,7 @@ export interface ProductCardProps extends BoxProps {
 export const ProductCard: FC<ProductCardProps> = (props: ProductCardProps) => {
   const { handle, title, variants = [], ...rest } = props
 
-  const mutatedProps = useMutatedProps<typeof rest, BoxProps>(rest, {
+  const mutated = useMutatedProps<typeof rest, BoxProps>(rest, {
     card: true,
     'product-card': true
   })
@@ -87,7 +87,7 @@ export const ProductCard: FC<ProductCardProps> = (props: ProductCardProps) => {
   )
 
   return (
-    <Box {...mutatedProps}>
+    <Box {...mutated}>
       <Box>
         <ProductLink>
           <Image

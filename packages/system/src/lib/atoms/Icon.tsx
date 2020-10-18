@@ -1,4 +1,4 @@
-import { useMutatedProps } from '@kustomz/hooks'
+import { useMutatedProps } from '@system/hooks'
 import React, {
   forwardRef,
   ForwardRefExoticComponent as FREC,
@@ -11,9 +11,6 @@ import { Span, SpanProps, SpanRefAttributes } from './Span'
  * @module lib/atoms/Icon
  */
 
-/**
- * Icon component properties.
- */
 export interface IconProps extends SpanProps {
   /**
    * Get the outlined version of the Material UI icon.
@@ -52,18 +49,20 @@ export type IconRefProps = ReflessIconProps & SpanRefAttributes
 export const Icon: FREC<IconRefProps> = forwardRef((props, ref) => {
   const { outlined, position, ...rest } = props
 
-  const mutatedProps = useMutatedProps<typeof rest, SpanProps>(rest, {
+  const mutated = useMutatedProps<typeof rest, SpanProps>(rest, {
     icon: true,
     'material-icons': !outlined,
     'material-icons-outlined': outlined
   })
 
-  mutatedProps['aria-hidden'] = rest.children ? rest?.['aria-hidden'] : false
-  mutatedProps['data-ligature'] = mutatedProps.children
-  mutatedProps['data-position'] = position
+  mutated['aria-hidden'] = rest.children ? rest?.['aria-hidden'] : false
+  mutated['data-ligature'] = mutated.children
+  mutated['data-position'] = position
 
-  return <Span {...mutatedProps} ref={ref} />
+  return <Span {...mutated} ref={ref} />
 })
+
+Icon.displayName = 'Icon'
 
 Icon.defaultProps = {
   outlined: true

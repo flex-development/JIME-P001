@@ -1,4 +1,4 @@
-# Morena's Kustomz Types
+# Kustom Typez
 
 Shared type definitions for Morena's Kustomz
 
@@ -37,4 +37,4 @@ grinders, and rolling trays, or have them custom made.
 
 ### 🚧 Production
 
-TODO: Update documentation.
+**TODO**: Update documentation.

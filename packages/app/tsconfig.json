@@ -1,10 +1,31 @@
 {
+  "awesomeTypescriptLoaderOptions": {
+    "babelCore": "@babel/core",
+    "babelOptions": {
+      "babelrc": false,
+      "extends": "../../babel.config.json",
+      "plugins": [
+        "@babel/plugin-transform-react-jsx",
+        ["babel-plugin-styled-components", { "ssr": true }]
+      ]
+    },
+    "useBabel": true,
+    "useCache": true
+  },
   "compilerOptions": {
     "checkJs": false,
-    "jsx": "preserve"
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "noEmit": true,
+    "module": "esnext",
+    "strictPropertyInitialization": false,
+    "target": "esnext"
   },
+  "exclude": ["node_modules"],
   "extends": "../../tsconfig.json",
   "files": ["next-env.d.ts"],
-  "include": ["__tests__", "lib", "pages"],
-  "exclude": ["node_modules"]
+  "include": ["__tests__", "src"]
 }

@@ -1,5 +1,5 @@
-import { useMutatedProps } from '@kustomz/hooks'
-import { HTMLElementRefAttributes, MutatedProps } from '@kustomz/types'
+import { useMutatedProps } from '@system/hooks'
+import { HTMLElementRefAttributes, MutatedProps } from '@system/types'
 import React, {
   forwardRef,
   ForwardRefExoticComponent as FREC,
@@ -8,12 +8,9 @@ import React, {
 
 /**
  * @file Render a `<nav>` element
- * @module lib/elements/Nav
+ * @module lib/atoms/Nav
  */
 
-/**
- * Nav component properties.
- */
 export interface NavProps extends MutatedProps {
   /**
    * Add the class `nav-fill` to create a pills navigation.
@@ -61,18 +58,20 @@ export type NavRefProps = ReflessNavProps & HTMLElementRefAttributes
 export const Nav: FREC<NavRefProps> = forwardRef((props, ref) => {
   const { fill, pills, tabs, ...rest } = props
 
-  const mutatedProps = useMutatedProps<
-    typeof rest,
-    JSX.IntrinsicElements['nav']
-  >(rest, {
-    nav: true,
-    'nav-fill': fill,
-    'nav-pills': pills,
-    'nav-tabs': tabs
-  })
+  const mutated = useMutatedProps<typeof rest, JSX.IntrinsicElements['nav']>(
+    rest,
+    {
+      nav: true,
+      'nav-fill': fill,
+      'nav-pills': pills,
+      'nav-tabs': tabs
+    }
+  )
 
-  return <nav {...mutatedProps} ref={ref} />
+  return <nav {...mutated} ref={ref} />
 })
+
+Nav.displayName = 'Nav'
 
 Nav.defaultProps = {
   fill: false,

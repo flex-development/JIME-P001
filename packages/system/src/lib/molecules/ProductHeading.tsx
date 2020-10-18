@@ -1,4 +1,4 @@
-import { useMutatedProps } from '@kustomz/hooks'
+import { useMutatedProps } from '@system/hooks'
 import React, { FC } from 'react'
 import { Heading, HeadingProps, Span } from '../atoms'
 
@@ -32,10 +32,10 @@ export const ProductHeading: FC<ProductHeadingProps> = (
 ) => {
   const { price, title, ...rest } = props
 
-  const mutatedProps = useMutatedProps(rest, 'product-heading')
+  const mutated = useMutatedProps(rest, 'product-heading')
 
   return (
-    <Heading {...mutatedProps}>
+    <Heading {...mutated}>
       <Span className='product-heading-title'>{title}</Span>
       <Span className='product-heading-price'>
         {price?.length && `$${price}`}

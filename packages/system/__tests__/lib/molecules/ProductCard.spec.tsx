@@ -1,7 +1,7 @@
 import {
   AshTray,
   Kustomz
-} from '@kustomz-stories/molecules/ProductCard.stories'
+} from '@system/stories/lib/molecules/ProductCard.stories'
 import { fireEvent, render } from '@testing-library/react'
 import React from 'react'
 

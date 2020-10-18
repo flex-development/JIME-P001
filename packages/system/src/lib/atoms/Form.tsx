@@ -1,5 +1,5 @@
-import { useMutatedProps } from '@kustomz/hooks'
-import { MutatedProps } from '@kustomz/types'
+import { useMutatedProps } from '@system/hooks'
+import { MutatedProps } from '@system/types'
 import React, {
   forwardRef,
   ForwardRefExoticComponent as FREC,
@@ -9,12 +9,9 @@ import React, {
 
 /**
  * @file Render a `<form>` element
- * @module lib/elements/Form
+ * @module lib/atoms/Form
  */
 
-/**
- * Form component properties.
- */
 export interface FormProps extends MutatedProps<HTMLFormElement> {
   /**
    * Space-separated character encodings the server accepts. The browser uses
@@ -124,10 +121,14 @@ export type FormRefProps = ReflessFormProps & FormRefAttributes
  * - **https://v5.getbootstrap.com/docs/5.0/forms/overview/**
  */
 export const Form: FREC<FormRefProps> = forwardRef((props, ref) => {
-  const mutatedProps = useMutatedProps<
-    typeof props,
-    JSX.IntrinsicElements['form']
-  >(props, 'form')
+  const mutated = useMutatedProps<typeof props, JSX.IntrinsicElements['form']>(
+    props,
+    'form'
+  )
 
-  return <form {...mutatedProps} ref={ref} />
+  return <form {...mutated} ref={ref} />
 })
+
+Form.displayName = 'Form'
+
+Form.defaultProps = {}

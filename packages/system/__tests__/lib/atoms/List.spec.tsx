@@ -1,4 +1,4 @@
-import { Ordered, Unordered } from '@kustomz-stories/atoms/List.stories'
+import { Ordered, Unordered } from '@system/stories/lib/atoms/List.stories'
 import { render } from '@testing-library/react'
 import React from 'react'
 

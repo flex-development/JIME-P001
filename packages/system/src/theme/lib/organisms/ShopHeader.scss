@@ -8,18 +8,18 @@
 
 $shop-header-color: $light;
 
-$shop-header-spacer: $spacers-2;
+$shop-header-spacer: $spacers-8;
 
 /// ----------------------------------------------------------------------------
 /// Styles
 /// ----------------------------------------------------------------------------
 
 .shop-header {
-  display: flex;
+  @include flex(center);
 
   &-btn {
     @include media-breakpoint-up(sm) {
-      margin-right: $spacers-6;
+      margin-right: $spacers-24;
     }
 
     color: $shop-header-color;
@@ -27,6 +27,8 @@ $shop-header-spacer: $spacers-2;
   }
 
   &-cart-preview {
+    @include height(max-content);
+
     @include media-breakpoint-down(md) {
       font-size: $font-size-sm;
     }

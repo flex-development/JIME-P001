@@ -1,4 +1,4 @@
-import { ProductImages } from '@kustomz-stories/organisms/Carousel.stories'
+import { ProductImages } from '@system/stories/lib/organisms/Carousel.stories'
 import { fireEvent, render, screen } from '@testing-library/react'
 import React, { ReactElement } from 'react'
 

@@ -1,5 +1,13 @@
-# Created by https://www.toptal.com/developers/gitignore/api/firebase,macos,node,react,sass,windows
-# Edit at https://www.toptal.com/developers/gitignore?templates=firebase,macos,node,react,sass,windows
+# Created by https://www.toptal.com/developers/gitignore/api/database,firebase,macos,node,react,sass,windows
+# Edit at https://www.toptal.com/developers/gitignore?templates=database,firebase,macos,node,react,sass,windows
+
+### Database ###
+*.accdb
+*.db
+*.dbf
+*.mdb
+*.pdb
+*.sqlite3
 
 ### Firebase ###
 .idea
@@ -112,9 +120,11 @@ typings/
 # dotenv environment variables file
 .env
 .env.test
+.env*.local
 
 # parcel-bundler cache (https://parceljs.org/)
 .cache
+.parcel-cache
 
 # Next.js build output
 .next
@@ -192,7 +202,7 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-# End of https://www.toptal.com/developers/gitignore/api/firebase,macos,node,react,sass,windows
+# End of https://www.toptal.com/developers/gitignore/api/database,firebase,macos,node,react,sass,windows
 
 # Awesome TypeScript Loader
 .awcache/
@@ -201,16 +211,13 @@ $RECYCLE.BIN/
 build/
 dist/
 
-# Database
-*.db~
-
 # Environment variables
 .env.local
 .env.*.local
 
 # Firebase
-firebase-credentials.json
-firebase-credentials-dev.json
+service-account.json
+service-account-*.json
 
 # GitHub Package Registry
 .yarnrc

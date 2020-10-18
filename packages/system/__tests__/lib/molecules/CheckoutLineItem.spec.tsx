@@ -1,7 +1,7 @@
 import {
   AshTray,
   Kustomz
-} from '@kustomz-stories/molecules/CheckoutLineItem.stories'
+} from '@system/stories/lib/molecules/CheckoutLineItem.stories'
 import { fireEvent, render, screen } from '@testing-library/react'
 import User from '@testing-library/user-event'
 import React from 'react'

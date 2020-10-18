@@ -1,6 +1,6 @@
 import { Booleanish } from '@flex-development/kustomtypez'
-import { useMutatedProps } from '@kustomz/hooks'
-import { FormControlSize, MutatedFormControlProps } from '@kustomz/types'
+import { useMutatedProps } from '@system/hooks'
+import { MutatedFormControlProps } from '@system/types'
 import { omit } from 'lodash'
 import React, {
   forwardRef,
@@ -10,15 +10,12 @@ import React, {
 } from 'react'
 
 /**
- * @module lib/elements/Input
+ * @module lib/atoms/Input
  * @see https://developer.mozilla.org/docs/Web/HTML/Element/input
  */
 
-/**
- * Input component properties.
- */
 export interface InputProps
-  extends Omit<MutatedFormControlProps<HTMLInputElement>, 'children' | 'size'> {
+  extends Omit<MutatedFormControlProps<HTMLInputElement>, 'children'> {
   /**
    * Valid for the `file` input type only, the accept property defines which
    * file types are selectable in a file upload control.
@@ -39,6 +36,8 @@ export interface InputProps
    * capitalized as it is entered/edited by the user.
    */
   autoCapitalize?: 'none' | 'sentences' | 'words' | 'characters'
+
+  /* eslint-disable prettier/prettier */
 
   /**
    * Specifies what permissions the user agent has to provide automated
@@ -100,6 +99,8 @@ export interface InputProps
     | 'impp'
     | 'url'
     | 'photo'
+
+  /* eslint-enable prettier/prettier */
 
   /**
    * Valid for the file input type only, the capture attribute defines which
@@ -263,13 +264,6 @@ export interface InputProps
   required?: Booleanish
 
   /**
-   * Make the control smaller or larger.
-   *
-   * See: https://v5.getbootstrap.com/docs/5.0/forms/form-control/#sizing
-   */
-  size?: false | FormControlSize
-
-  /**
    * Valid for the numeric input types, including number, date/time input types,
    * and range, the step attribute is a number that specifies the granularity
    * that the value must adhere to.
@@ -289,6 +283,8 @@ export interface InputProps
    * stepping value for time is 1 second, with 900 being equal to 15 minutes.
    */
   step?: number
+
+  /* eslint-disable prettier/prettier */
 
   /**
    * A string specifying the type of control to render. For example, to create a
@@ -322,6 +318,8 @@ export interface InputProps
     | 'time'
     | 'url'
     | 'week'
+
+  /* eslint-enable prettier/prettier */
 }
 
 /**
@@ -359,28 +357,31 @@ export type InputRefProps = ReflessInputProps & InputRefAttributes
 export const Input: FREC<InputRefProps> = forwardRef((props, ref) => {
   const checkInputTypes = ['checkbox', 'radio']
 
-  const { invalid, size, ...rest } = props
+  const { invalid, ...rest } = props
 
   const checks = checkInputTypes.includes(rest.type as string)
   const file = rest.type === 'file'
+  const range = rest.type === 'range'
 
   if (!rest.placeholder && rest.type === 'email') {
     rest.placeholder = 'you@email.com'
   }
 
-  const mutatedProps = useMutatedProps<
-    typeof rest,
-    JSX.IntrinsicElements['input']
-  >(rest, {
-    'form-check-input': checks,
-    'form-control': !checks && !file,
-    [`form-control-${size}`]: !checks && size,
-    'form-file-input': file,
-    'is-invalid': invalid
-  })
+  const mutated = useMutatedProps<typeof rest, JSX.IntrinsicElements['input']>(
+    rest,
+    {
+      'form-check-input': checks,
+      'form-control': !checks && !file && !range,
+      'form-file-input': file,
+      'form-range': range,
+      'is-invalid': invalid
+    }
+  )
 
-  return <input {...omit(mutatedProps, ['children'])} ref={ref} />
+  return <input {...omit(mutated, ['children'])} ref={ref} />
 })
+
+Input.displayName = 'Input'
 
 Input.defaultProps = {
   type: 'text'

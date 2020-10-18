@@ -19,7 +19,7 @@
 
   // Align icons inside of <button> elements
   &[data-icon]:not(.navbar-toggler) {
-    @include flex(center, null);
+    @include flex(center);
   }
 
   // Buttons with icons as their only nested element and transparent buttons

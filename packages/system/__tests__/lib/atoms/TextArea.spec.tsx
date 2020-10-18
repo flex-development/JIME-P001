@@ -1,4 +1,4 @@
-import { Default } from '@kustomz-stories/atoms/TextArea.stories'
+import { Default } from '@system/stories/lib/atoms/TextArea.stories'
 import { render } from '@testing-library/react'
 import React from 'react'
 import { ArgsMatcher } from '../../jest-env'

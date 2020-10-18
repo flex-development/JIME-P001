@@ -4,3 +4,5 @@
  */
 
 export default {}
+
+/* eslint-disable prettier/prettier */

@@ -6,7 +6,7 @@
 # VSCode
 .vscode
 
-# Linting / formatting should be handled by GitHub Actions
+# ESLint
 .eslintignore
 .eslintrc.json
 

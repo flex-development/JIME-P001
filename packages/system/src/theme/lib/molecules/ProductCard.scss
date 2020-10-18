@@ -14,8 +14,8 @@ $product-card-footer-title-font-size: $font-size-lg;
 
 $product-card-footer-bg: $darker;
 
-$product-card-footer-padding-y: $spacers-4;
-$product-card-footer-padding-x: $spacers-6;
+$product-card-footer-padding-y: $spacers-16;
+$product-card-footer-padding-x: $spacers-24;
 
 /// ----------------------------------------------------------------------------
 /// Styles
@@ -31,7 +31,7 @@ $product-card-footer-padding-x: $spacers-6;
 
   .card-title {
     color: $product-card-footer-title-color;
-    letter-spacing: $spacers-1 / 3;
+    letter-spacing: $spacers-4 / 3;
     margin-bottom: $spacers-0;
   }
 

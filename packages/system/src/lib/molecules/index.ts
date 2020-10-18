@@ -5,10 +5,12 @@
 
 export * from './AddToCartForm'
 export * from './CheckoutLineItem'
-export * from './Dropdown'
 export * from './LabeledFormControl'
+export * from './Menu'
 export * from './ProductCard'
 export * from './ProductHeading'
 export * from './ProductReview'
 export * from './ProductReviewForm'
 export * from './SearchBar'
+
+/* eslint-disable prettier/prettier */

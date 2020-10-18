@@ -9,7 +9,7 @@ a {
 }
 
 .link[data-icon] {
-  @include flex(center, null);
+  @include flex(center);
 }
 
 .link-muted {

@@ -1,4 +1,4 @@
-import { useQuantity } from '@kustomz/hooks'
+import { useQuantity } from '@system/hooks'
 import { act, renderHook } from '@testing-library/react-hooks'
 
 /**

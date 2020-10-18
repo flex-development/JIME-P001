@@ -1,5 +1,5 @@
-import { useMutatedProps } from '@kustomz/hooks'
-import { MutatedProps } from '@kustomz/types'
+import { useMutatedProps } from '@system/hooks'
+import { MutatedProps } from '@system/types'
 import React, {
   forwardRef,
   ForwardRefExoticComponent as FREC,
@@ -9,12 +9,9 @@ import React, {
 
 /**
  * @file Render a `<span>` element
- * @module lib/elements/Span
+ * @module lib/atoms/Span
  */
 
-/**
- * Span component properties.
- */
 export type SpanProps = MutatedProps<HTMLSpanElement>
 
 /**
@@ -38,10 +35,13 @@ export type SpanRefProps = ReflessSpanProps & SpanRefAttributes
  * - **https://developer.mozilla.org/docs/Web/HTML/Element/span**
  */
 export const Span: FREC<SpanRefProps> = forwardRef((props, ref) => {
-  const mutatedProps = useMutatedProps<
-    typeof props,
-    JSX.IntrinsicElements['span']
-  >(props)
+  const mutated = useMutatedProps<typeof props, JSX.IntrinsicElements['span']>(
+    props
+  )
 
-  return <span {...mutatedProps} ref={ref} />
+  return <span {...mutated} ref={ref} />
 })
+
+Span.displayName = 'Span'
+
+Span.defaultProps = {}

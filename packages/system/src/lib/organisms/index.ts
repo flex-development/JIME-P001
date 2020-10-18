@@ -8,3 +8,5 @@ export * from './Hero'
 export * from './PlaylistBar'
 export * from './ShopHeader'
 export * from './Sidebar'
+
+/* eslint-disable prettier/prettier */

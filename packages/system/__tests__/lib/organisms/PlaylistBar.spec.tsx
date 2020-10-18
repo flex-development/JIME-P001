@@ -1,7 +1,7 @@
 import {
   Default,
   Playing
-} from '@kustomz-stories/organisms/PlaylistBar.stories'
+} from '@system/stories/lib/organisms/PlaylistBar.stories'
 import { render } from '@testing-library/react'
 import React from 'react'
 

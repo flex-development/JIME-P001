@@ -1,4 +1,4 @@
-import { Default } from '@kustomz-stories/atoms/Option.stories'
+import { Default } from '@system/stories/lib/atoms/Option.stories'
 import { Matcher, render } from '@testing-library/react'
 import React from 'react'
 

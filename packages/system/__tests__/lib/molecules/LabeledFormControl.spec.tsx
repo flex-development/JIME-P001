@@ -1,4 +1,4 @@
-import { Quantity } from '@kustomz-stories/molecules/LabeledFormControl.stories'
+import { Quantity } from '@system/stories/lib/molecules/LabeledFormControl.stories'
 import { Matcher, render, screen } from '@testing-library/react'
 import React from 'react'
 

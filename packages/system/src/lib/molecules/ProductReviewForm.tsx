@@ -5,13 +5,13 @@ import {
   ProductReviewEntity,
   ProductReviewInput
 } from '@flex-development/kustomtypez'
-import { useMutatedProps, useProductVariants } from '@kustomz/hooks'
+import { useMutatedProps, useProductVariants } from '@system/hooks'
 import {
   HTMLButtonClickEvent,
   HTMLInputChangeEvent,
   HTMLSelectChangeEvent,
   HTMLTextAreaChangeEvent
-} from '@kustomz/types'
+} from '@system/types'
 import { isEmpty } from 'lodash'
 import React, { FC } from 'react'
 import { useSetState } from 'react-hanger'
@@ -84,7 +84,7 @@ export const ProductReviewForm: FC<ProductReviewFormProps> = (
     ...rest
   } = props
 
-  const mutatedProps = useMutatedProps<typeof rest>(rest, 'product-review-form')
+  const mutated = useMutatedProps<typeof rest>(rest, 'product-review-form')
 
   // Get product variants as options
   const { options, selectVariant, selected = {} } = useProductVariants(variants)
@@ -104,7 +104,7 @@ export const ProductReviewForm: FC<ProductReviewFormProps> = (
   const { state: errors, setState: setErrors } = useSetState<AnyObject>({})
 
   return (
-    <Form {...mutatedProps} id={`product-review-form-${id}`}>
+    <Form {...mutated} id={`product-review-form-${id}`}>
       <Heading className='product-review-form-title' size={5}>
         <Span>Product Review</Span>
 

@@ -5,7 +5,7 @@ import {
 import {
   AshTray,
   Kustomz
-} from '@kustomz-stories/molecules/AddToCartForm.stories'
+} from '@system/stories/lib/molecules/AddToCartForm.stories'
 import { fireEvent, render, screen } from '@testing-library/react'
 import User from '@testing-library/user-event'
 import React from 'react'

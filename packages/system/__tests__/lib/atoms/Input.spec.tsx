@@ -1,4 +1,8 @@
-import { Checkbox, Default, Radio } from '@kustomz-stories/atoms/Input.stories'
+import {
+  Checkbox,
+  Default,
+  Radio
+} from '@system/stories/lib/atoms/Input.stories'
 import { render } from '@testing-library/react'
 import React from 'react'
 import { ArgsMatcher } from '../../jest-env'

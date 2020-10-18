@@ -134,23 +134,21 @@ $spacers: (
   0: $spacers-0,
   1: $spacers-1,
   2: $spacers-2,
-  3: $spacers-3,
   4: $spacers-4,
-  5: $spacers-5,
-  6: $spacers-6,
   8: $spacers-8,
-  9: $spacers-9,
-  10: $spacers-10,
   12: $spacers-12,
-  14: $spacers-14,
   16: $spacers-16,
   18: $spacers-18,
   20: $spacers-20,
   24: $spacers-24,
+  32: $spacers-32,
+  36: $spacers-36,
   40: $spacers-40,
   48: $spacers-48,
-  56: $spacers-56,
-  64: $spacers-64
+  60: $spacers-60,
+  72: $spacers-72,
+  80: $spacers-80,
+  96: $spacers-96
 );
 
 // -----------------------------------------------------------------------------
@@ -228,31 +226,6 @@ $utilities: (
     class: bg,
     responsive: true,
     values: $bg-sizes
-  ),
-  'border': (
-    property: border,
-    responsive: true,
-    values: $borders
-  ),
-  'border-bottom': (
-    property: border-bottom,
-    responsive: true,
-    values: $borders
-  ),
-  'border-left': (
-    property: border-left,
-    responsive: true,
-    values: $borders
-  ),
-  'border-right': (
-    property: border-right,
-    responsive: true,
-    values: $borders
-  ),
-  'border-top': (
-    property: border-top,
-    responsive: true,
-    values: $borders
   ),
   'font-family': (
     property: font-family,

@@ -1,4 +1,4 @@
-import { Aside } from '@kustomz/lib'
+import { Aside } from '@system/lib'
 import { render } from '@testing-library/react'
 import React from 'react'
 

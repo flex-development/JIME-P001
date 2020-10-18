@@ -10,11 +10,11 @@ $playlistbar-color: $light;
 
 $playlistbar-artist-font-size: $font-size-xs;
 $playlistbar-control-playback-font-size: $font-size-xxl;
-$playlistbar-control-skip-font-size: $font-size-base-em;
+$playlistbar-control-skip-font-size: $font-size-base;
 $playlistbar-title-font-size: $font-size-xs;
 $playlistbar-title-font-size-sm: $font-size-sm;
 
-$playlistbar-artwork-w: $spacer-em * 3.75;
+$playlistbar-artwork-w: $spacers-60;
 
 /// ----------------------------------------------------------------------------
 /// Styles
@@ -38,7 +38,7 @@ $playlistbar-artwork-w: $spacer-em * 3.75;
   &-artwork {
     @include height($playlistbar-artwork-w, $playlistbar-artwork-w);
 
-    @include margin($spacers-3, right);
+    @include margin($spacers-12, right);
 
     @include relative;
 
@@ -53,7 +53,7 @@ $playlistbar-artwork-w: $spacer-em * 3.75;
   // Next, previous, and playback buttons
   &-control {
     &-playback {
-      @include margin-x($spacers-2);
+      @include margin-x($spacers-8);
 
       font-size: $playlistbar-control-playback-font-size;
     }

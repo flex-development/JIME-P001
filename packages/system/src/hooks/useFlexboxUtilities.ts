@@ -6,7 +6,7 @@ import {
   GRID_BREAKPOINTS
 } from '@system/utils'
 import classnames from 'classnames'
-import { isObject, isString } from 'lodash'
+import { isBoolean, isObject, isString } from 'lodash'
 
 /**
  * @file Generate flexbox utility classes
@@ -40,13 +40,18 @@ export const useFlexboxUtilities = (
   const dictionary = {}
 
   FLEXBOX_CONFIG_KEYS.forEach(c_key => {
-    const config_value = config[c_key]
+    let config_value = config[c_key]
     const prop = FLEXBOX_PROPERTY_MAP[c_key]
 
     const display = prop === 'display'
     const direction_or_wrap = prop === 'flex-direction' || prop === 'flex-wrap'
 
-    if (isString(config_value)) {
+    if (isBoolean(config_value)) {
+      if (prop === 'flex-wrap') {
+        config_value = config_value ? 'wrap' : 'nowrap'
+        dictionary[`flex-${config_value}`] = true
+      }
+    } else if (isString(config_value)) {
       if (display) {
         dictionary[`d-${config_value}`] = true
       } else if (direction_or_wrap) {

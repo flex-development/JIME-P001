@@ -1,5 +1,7 @@
 import { Carousel, CarouselProps, Image, ProductReview } from '@system/lib'
 import { StoryFN } from '@system/types'
+import { getProductReviewProps } from '@system/utils'
+import reviews from '@system/__mocks__/reviews.mock.json'
 import React from 'react'
 
 /**
@@ -55,26 +57,9 @@ export const ProductReviews: StoryFN<CarouselProps> = (args: CarouselProps) => (
 )
 
 ProductReviews.args = {
-  children: [
-    <ProductReview
-      body='Odio in hac habitasse platea dictumst maecenas ut massa quis augue luctus tincidunt nulla mollis molestie lorem quisque ut erat curabitur gravida nisi at nibh in hac habitasse platea dictumst aliquam augue quam sollicitudin vitae consectetuer eget.'
-      id='product-review-0'
-      key='product-review-0'
-      name='Mickey Pellington'
-    />,
-    <ProductReview
-      body='Eget nunc donec quis orci eget orci vehicula condimentum curabitur in libero ut massa volutpat convallis morbi odio odio elementum eu interdum eu tincidunt in leo maecenas pulvinar lobortis est phasellus sit amet erat nulla tempus vivamus in felis eu sapien cursus vestibulum.'
-      id='product-review-1'
-      key='product-review-1'
-      name='Ingemar Quarrington'
-    />,
-    <ProductReview
-      body='Justo in hac habitasse platea dictumst etiam faucibus cursus urna ut tellus nulla ut erat id mauris vulputate elementum nullam varius nulla facilisi cras non velit nec nisi vulputate nonummy maecenas tincidunt.'
-      id='product-review-2'
-      key='product-review-2'
-      name='Ibrahim Dowbekin'
-    />
-  ],
+  children: reviews.map(review => (
+    <ProductReview {...getProductReviewProps(review)} key={review.id} />
+  )),
   style: {
     maxWidth: '1362px'
   }

@@ -1,5 +1,7 @@
 import { ProductReview, ProductReviewProps } from '@system/lib'
 import { StoryFN } from '@system/types'
+import { getProductReviewProps } from '@system/utils'
+import reviews from '@system/__mocks__/reviews.mock.json'
 import React from 'react'
 
 /**
@@ -8,6 +10,11 @@ import React from 'react'
  */
 
 export default {
+  args: {
+    style: {
+      maxWidth: '1362px'
+    }
+  },
   component: ProductReview,
   parameters: {
     jest: ['ProductReview']
@@ -19,12 +26,4 @@ export const Default: StoryFN<ProductReviewProps> = (
   args: ProductReviewProps
 ) => <ProductReview {...args} />
 
-Default.args = {
-  body:
-    'Gastropub pork belly deserunt veniam four dollar toast, occaecat master cleanse copper mug heirloom excepteur austin asymmetrical deep v sint kickstarter. Lumbersexual hoodie succulents, yuccie drinking vinegar cupidatat enim.',
-  id: 'product-review-0',
-  name: 'Customer Name',
-  style: {
-    maxWidth: '1362px'
-  }
-}
+Default.args = getProductReviewProps(reviews[0])

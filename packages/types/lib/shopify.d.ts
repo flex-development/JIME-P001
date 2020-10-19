@@ -60,3 +60,45 @@ export type ProductVariantResource = {
   sku: string
   title: string
 }
+
+/**
+ * Product Review resource from Stamped Shopify App.
+ * 
+ * The fields defined are the ones used in this project.
+ * 
+ * @see https://developers.stamped.io/#1e9fc214-5b59-40a0-9a7b-1030fbaef679
+ */
+export type StampedProductReviewEntity = {
+  author: string
+  body: string
+  email: string
+  id: number
+  isPublishedShopify: boolean
+  productHandle: string
+  productId: number
+  productImageUrl: string
+  productTitle: string
+  productUrl: string
+  rating: number
+  title: string
+}
+
+/**
+ * Fields needed to create a product review.
+ * 
+ * @see https://developers.stamped.io/#d06415c3-5eae-46b1-a8db-c1016fd09902
+ */
+export type StampedProductReviewEntityInput = {
+  author: StampedProductReviewEntity['author']
+  email: StampedProductReviewEntity['email']
+  location: string
+  reviewMessage: StampedProductReviewEntity['body']
+  reviewRating: StampedProductReviewEntity['rating']
+  reviewRecommendProduct: boolean
+  reviewTitle: StampedProductReviewEntity['title']
+  productImageUrl: StampedProductReviewEntity['productImageUrl']
+  productName: StampedProductReviewEntity['productTitle']
+  productSKU: string
+  productUrl: StampedProductReviewEntity['productUrl']
+  reviewSource: string
+}

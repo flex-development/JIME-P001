@@ -96,7 +96,7 @@ export type FlexboxUtilitiesConfig = {
    *
    * - https://v5.getbootstrap.com/docs/5.0/utilities/flex/#wrap
    */
-  wrap?: FlexboxWrap | ResponsiveUtility<FlexboxWrap>
+  wrap?: boolean | FlexboxWrap | ResponsiveUtility<FlexboxWrap>
 }
 
 /**

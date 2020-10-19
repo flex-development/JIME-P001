@@ -1,8 +1,8 @@
 /**
- * @file Templates
+ * @file Template Components
  * @module lib/components/templates
  */
 
-export default {}
+export * from './IndexTemplate'
 
 /* eslint-disable prettier/prettier */

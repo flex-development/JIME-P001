@@ -89,7 +89,7 @@ export const ProductCard: FC<ProductCardProps> = (props: ProductCardProps) => {
   return (
     <Box {...mutated}>
       <Box>
-        <ProductLink>
+        <ProductLink className='d-inline-block'>
           <Image
             {...selected.image}
             alt={selected.image?.alt || `${title} - ${selected.title}`}

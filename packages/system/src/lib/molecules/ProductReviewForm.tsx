@@ -176,7 +176,7 @@ export const ProductReviewForm: FC<ProductReviewFormProps> = (
           invalid: errors?.body,
           name: 'body',
           onChange: ({ target: { value } }: HTMLTextAreaChangeEvent) => {
-            const valid = value.length >= 3
+            const valid = value.length >= 10 && value.length <= 100
 
             if (valid) updateReview({ body: value })
 

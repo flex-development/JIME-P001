@@ -15,11 +15,6 @@ $product-review-font-size-md: $font-size-lg;
 
 $product-review-spacer: $spacers-36;
 
-$product-review-padding-y: $product-review-spacer;
-$product-review-padding-x: $product-review-padding-y;
-
-$product-review-name-weight: $font-weight-bold;
-
 /// ----------------------------------------------------------------------------
 /// Styles
 /// ----------------------------------------------------------------------------
@@ -31,28 +26,15 @@ $product-review-name-weight: $font-weight-bold;
     flex-direction: row;
   }
 
-  @include padding-x($product-review-padding-x);
-
-  @include padding-y($product-review-padding-y);
-
   border: $product-review-border;
 
   &-body {
     font-size: $font-size-sm;
-  }
+    margin-bottom: $spacers-0;
 
-  &-img {
-    @include media-breakpoint-up(sm) {
-      padding-bottom: $spacers-0;
-      padding-right: $product-review-spacer;
+    &::first-letter {
+      text-transform: capitalize;
     }
-
-    padding-bottom: $product-review-spacer;
-  }
-
-  &-name {
-    font-weight: $product-review-name-weight;
-    text-transform: uppercase;
   }
 
   &-text {
@@ -60,12 +42,28 @@ $product-review-name-weight: $font-weight-bold;
       font-size: $product-review-font-size-md;
     }
 
+    @include media-breakpoint-up(sm) {
+      @include padding-y($spacers-0);
+    }
+
+    @include padding-x($product-review-spacer);
+
+    @include padding-y($product-review-spacer);
+
     color: $product-review-color;
     font-size: $product-review-font-size;
   }
 
+  &-title {
+    font-size: $font-size-lg;
+    font-weight: $font-weight-bold;
+    margin-bottom: $spacers-12 / 2;
+  }
+
   &-body,
-  &-name {
-    margin-bottom: $spacers-0;
+  &-title {
+    &::first-letter {
+      text-transform: capitalize;
+    }
   }
 }

@@ -3,6 +3,7 @@ import {
   AriaAttributes,
   ChangeEvent,
   DOMAttributes,
+  FC,
   PropsWithoutRef,
   RefAttributes
 } from 'react'
@@ -307,3 +308,15 @@ export type ReflessMutatedProps = PropsWithoutRef<MutatedProps>
  * {@link MutatedProps} type forward ref properties.
  */
 export type RefProps = ReflessMutatedProps & HTMLElementRefAttributes
+
+/**
+ * Template component properties.
+ */
+export type TemplateComponent<P = MutatedProps> = FC<P> & {
+  template_id: string
+}
+
+/**
+ * `TemplateComponent` type alias.
+ */
+export type TC<P = MutatedProps> = TemplateComponent<P>

@@ -15,13 +15,13 @@ it('renders <div class="product-review">', () => {
   expect(container.firstChild).toHaveClass('product-review')
 })
 
-it('displays a customer name', () => {
+it('displays the product review title', () => {
   const { getByText } = render(<Default {...Default.args} />)
 
-  expect(getByText(Default.args.name)).toHaveClass('product-review-name')
+  expect(getByText(Default.args.title)).toHaveClass('product-review-title')
 })
 
-it('displays a customer review', () => {
+it('displays the product review body', () => {
   const { getByText } = render(<Default {...Default.args} />)
 
   expect(getByText(Default.args.body)).toHaveClass('product-review-body')

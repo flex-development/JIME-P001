@@ -10,6 +10,6 @@ import React from 'react'
 it('renders without crashing', () => {
   const { container } = render(<Homepage {...Homepage.args} />)
 
-  expect(container.firstChild).toHaveClass('index-template')
+  expect(container.firstChild).toHaveClass('template')
   expect(container.firstChild).toHaveAttribute('data-template', 'index')
 })

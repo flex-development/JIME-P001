@@ -68,11 +68,34 @@ $product-review-form-spacer: $spacers-12;
     text-transform: uppercase;
   }
 
-  .form-check {
-    @include margin-y($product-review-form-spacer, $spacers-24);
-  }
-
+  > .form-select,
   .labeled-form-control {
     margin-bottom: $product-review-form-spacer;
+  }
+}
+
+.product-rating-field {
+  @include margin-y($spacers-24);
+
+  > .form-check {
+    @include media-breakpoint-up(sm) {
+      margin-bottom: $spacers-0;
+    }
+
+    margin-bottom: $spacers-24;
+  }
+}
+
+.product-rating-input {
+  $ligature: star_rate;
+
+  .btn-check {
+    ~ .btn::after {
+      @include material-icon($ligature, outlined);
+    }
+
+    &:checked ~ .btn::after {
+      @include material-icon($ligature);
+    }
   }
 }

@@ -210,9 +210,15 @@ $input-placeholder-color: $secondary-50;
 $form-control-border: bootstrap.$input-border-width solid
   bootstrap.$input-border-color;
 
+$form-check-margin-bottom: $spacers-0;
+
 $form-check-input-bg: $light;
 
 $form-check-input-checked-bg-color: $primary;
+
+$form-select-font-size: $font-size-sm;
+$form-select-indicator-padding: $spacers-36;
+$form-select-font-weight: $font-weight-semibold;
 
 $form-select-color: $dark;
 $form-select-bg: $primary;

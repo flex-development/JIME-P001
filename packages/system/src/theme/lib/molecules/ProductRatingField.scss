@@ -1,0 +1,36 @@
+/// ----------------------------------------------------------------------------
+/// @group ProductRatingField
+/// ----------------------------------------------------------------------------
+
+/// ----------------------------------------------------------------------------
+/// Variables
+/// ----------------------------------------------------------------------------
+
+/// ----------------------------------------------------------------------------
+/// Styles
+/// ----------------------------------------------------------------------------
+
+.product-rating-field {
+  @include flex-spread;
+
+  display: inline-flex;
+
+  &-check {
+    $ligature: star_rate;
+
+    @include margin-y($spacers-0);
+
+    // <input class='btn-check' type='checkbox'>
+    .btn-check {
+      // sibling <label> element
+      ~ .btn::after {
+        @include material-icon($ligature, outlined);
+      }
+
+      // fill in star if <input checked='' type='checkbox'>
+      &:checked ~ .btn::after {
+        @include material-icon($ligature);
+      }
+    }
+  }
+}

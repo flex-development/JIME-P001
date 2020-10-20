@@ -9,6 +9,11 @@ import React from 'react'
  */
 
 export default {
+  args: {
+    style: {
+      maxWidth: '1362px'
+    }
+  },
   component: CheckoutLineItem,
   parameters: {
     jest: ['CheckoutLineItem']
@@ -20,21 +25,11 @@ export const AshTray: StoryFN<CheckoutLineItemProps> = (
   args: CheckoutLineItemProps
 ) => <CheckoutLineItem {...args} />
 
-AshTray.args = {
-  ...Object.assign({}, items[0] as CheckoutLineItemProps),
-  style: {
-    maxWidth: '1362px'
-  }
-}
+AshTray.args = Object.assign({}, items[0] as CheckoutLineItemProps)
 
 export const Kustomz: StoryFN<CheckoutLineItemProps> = (
   args: CheckoutLineItemProps
 ) => <CheckoutLineItem {...args} />
 
 Kustomz.storyName = 'KUSTOMZ'
-Kustomz.args = {
-  ...Object.assign({}, items[1] as CheckoutLineItemProps),
-  style: {
-    maxWidth: '1362px'
-  }
-}
+Kustomz.args = Object.assign({}, items[1] as CheckoutLineItemProps)

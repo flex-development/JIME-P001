@@ -5,6 +5,7 @@
 
 export * from './AddToCartForm'
 export * from './CheckoutLineItem'
+export * from './FormCheck'
 export * from './LabeledFormControl'
 export * from './Menu'
 export * from './ProductCard'

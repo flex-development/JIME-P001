@@ -1,4 +1,4 @@
-import { useMutatedProps } from '@system/hooks'
+import { useIcon, useMutatedProps } from '@system/hooks'
 import { MutatedProps } from '@system/types'
 import React, {
   forwardRef,
@@ -6,6 +6,7 @@ import React, {
   PropsWithoutRef,
   RefAttributes
 } from 'react'
+import { IconProps } from './Icon'
 
 /**
  * @file Render a <label> element
@@ -43,6 +44,11 @@ export interface LabelProps extends MutatedProps<HTMLLabelElement> {
   htmlFor?: string
 
   /**
+   * Icon to render beside the element text.
+   */
+  icon?: IconProps
+
+  /**
    * True if labelling a form control element where `required=true`.
    *
    * @default false
@@ -76,13 +82,15 @@ export const Label: FREC<LabelRefProps> = forwardRef((props, ref) => {
 
   if (required) rest['data-required'] = required
 
-  const mutated = useMutatedProps<typeof rest, JSX.IntrinsicElements['label']>(
-    rest,
-    {
-      'col-form-label': col,
-      'form-label': form
-    }
-  )
+  const withIcon = useIcon<HTMLLabelElement, LabelProps>(rest)
+
+  const mutated = useMutatedProps<
+    typeof withIcon,
+    JSX.IntrinsicElements['label']
+  >(withIcon, {
+    'col-form-label': col,
+    'form-label': form
+  })
 
   /* eslint-disable-next-line jsx-a11y/label-has-associated-control */
 

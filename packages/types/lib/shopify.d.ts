@@ -96,6 +96,7 @@ export type StampedProductReviewEntityInput = {
   reviewRating: StampedProductReviewEntity['rating']
   reviewRecommendProduct: boolean
   reviewTitle: StampedProductReviewEntity['title']
+  productId: number | string
   productImageUrl: StampedProductReviewEntity['productImageUrl']
   productName: StampedProductReviewEntity['productTitle']
   productSKU: string

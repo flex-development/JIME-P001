@@ -21,7 +21,7 @@
   }
 
   &-attribute {
-    @include margin-y($spacers-12);
+    @include margin-y($spacers-12, $spacers-24);
 
     font-weight: $font-weight-semibold;
     text-transform: uppercase;
@@ -45,6 +45,13 @@
 
     @include media-breakpoint-up(sm) {
       border-right: none !important;
+    }
+  }
+
+  &-attribute,
+  .btn[name='remove'] {
+    @include media-breakpoint-down(sm) {
+      font-size: $font-size-sm;
     }
   }
 }

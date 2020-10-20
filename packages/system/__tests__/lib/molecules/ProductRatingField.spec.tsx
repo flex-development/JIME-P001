@@ -61,6 +61,6 @@ it('calls props.onChange when clicked', () => {
     screen.getByDisplayValue(`${ProductRatingFieldDefaultProps.values[2]}`)
   )
 
-  // Expect `onChange` handler to have been called
+  // Expect `onChange` fn to have been called once
   expect(onChange).toHaveBeenCalledTimes(1)
 })

@@ -7,6 +7,7 @@ input.form-control {
     background-color: $form-select-bg;
     border: $input-border-width solid $input-border-color;
     color: $form-select-color;
+    font-size: $font-size-sm;
     font-weight: $font-weight-semibold;
     text-transform: uppercase;
   }

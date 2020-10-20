@@ -31,14 +31,6 @@ export interface IndexTemplateProps extends MutatedProps {
   about_section_title?: string
 
   /**
-   * Maximum number of product reviews to display in the "Product Reviews"
-   * section.
-   *
-   * @default 3
-   */
-  max_reviews?: number
-
-  /**
    * Maximum number of products to display in the "Products" section.
    *
    * @default 3
@@ -77,7 +69,6 @@ export interface IndexTemplateProps extends MutatedProps {
 export const IndexTemplateDefaultProps = {
   about_section_title: 'About Morena',
   max_products: 3,
-  max_reviews: 3,
   products: [],
   products_section_title: 'Products',
   reviews: []
@@ -101,7 +92,6 @@ export const IndexTemplate: TC<IndexTemplateProps> = (
     about_section_text,
     about_section_title = IndexTemplateDefaultProps.about_section_title,
     max_products = IndexTemplateDefaultProps.max_products,
-    max_reviews = IndexTemplateDefaultProps.max_reviews,
     products = IndexTemplateDefaultProps.products,
     products_section_text,
     products_section_title = IndexTemplateDefaultProps.products_section_title,
@@ -142,11 +132,11 @@ export const IndexTemplate: TC<IndexTemplateProps> = (
         </FlexBox>
       </Section>
 
-      {max_reviews !== 0 && (
+      {reviews.length !== 0 && (
         <Section id='reviews'>
           <Heading size={2}>Reviews</Heading>
           <Carousel className='mt-12' id='product-review-carousel'>
-            {reviews.slice(0, max_reviews).map(review => (
+            {reviews.map(review => (
               <ProductReview {...review} key={review.id} />
             ))}
           </Carousel>

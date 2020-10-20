@@ -2,8 +2,7 @@ import {
   AnyObject,
   ANYTHING,
   ProductResource,
-  ProductReviewEntity,
-  ProductReviewInput
+  StampedProductReviewEntityInput
 } from '@flex-development/kustomtypez'
 import { useMutatedProps, useProductVariants } from '@system/hooks'
 import {
@@ -45,9 +44,21 @@ export interface ProductReviewFormProps extends FormProps {
    * the `submit` button.
    *
    * @param review - User-populated product review fields
+   * @param review.email - Email of customer who submitted review
+   * @param review.productId - ID of product variant review is for
+   * @param review.productImageUrl - Image URL of product variant review is for
+   * @param review.productName - Name of product variant review is for
+   * @param review.productSKU - SKU of product variant review is for
+   * @param review.reviewMessage - Review body, between 10 and 80 characters
+   * @param review.reviewRating - Product rating, 1 - 5
+   * @param review.reviewRecommendProduct - True if customer recommends product
+   * @param review.reviewTitle - Title of review, at least three characters
    * @param event - `click` event from submit button
    */
-  submit?(review: ProductReviewInput, event: HTMLButtonClickEvent): ANYTHING
+  submit?(
+    review: Partial<StampedProductReviewEntityInput>,
+    event: HTMLButtonClickEvent
+  ): ANYTHING
 
   /**
    * The title of the product the user is submitting a review for.
@@ -67,6 +78,8 @@ export interface ProductReviewFormProps extends FormProps {
  *
  * **TODO**:
  *
+ * - Implement product rating field
+ * - Implement product recommendation field
  * - Update documentation
  */
 export const ProductReviewForm: FC<ProductReviewFormProps> = (
@@ -75,7 +88,10 @@ export const ProductReviewForm: FC<ProductReviewFormProps> = (
   const {
     description,
     id,
-    submit = (review: ProductReviewEntity, event: HTMLButtonClickEvent) => {
+    submit = (
+      review: Partial<StampedProductReviewEntityInput>,
+      event: HTMLButtonClickEvent
+    ) => {
       event.preventDefault()
       console.log('Submitted product review', review)
     },
@@ -91,13 +107,18 @@ export const ProductReviewForm: FC<ProductReviewFormProps> = (
 
   // Product review entity state
   const { state: review, setState: updateReview } = useSetState<
-    ProductReviewInput
+    Partial<StampedProductReviewEntityInput>
   >({
-    body: '',
     email: '',
-    product: id,
-    title: '',
-    variant: selected.id
+    productId: selected.id,
+    productImageUrl: selected.image.src,
+    productName: selected.title,
+    productSKU: selected.sku,
+    reviewMessage: '',
+    reviewRating: 5,
+    reviewRecommendProduct: true,
+    reviewSource: 'website',
+    reviewTitle: ''
   })
 
   // Track form errors
@@ -122,8 +143,15 @@ export const ProductReviewForm: FC<ProductReviewFormProps> = (
         control={{
           name: 'variant',
           onChange: ({ target: { value } }: HTMLSelectChangeEvent) => {
+            const variant = variants.find(v => v.id === value)
+
             selectVariant(value)
-            updateReview({ variant: value })
+            updateReview({
+              productId: value,
+              productImageUrl: variant?.image.src,
+              productName: variant?.title,
+              productSKU: variant?.sku
+            })
           },
           options,
           placeholder: 'Select the product variant you purchased',
@@ -155,14 +183,14 @@ export const ProductReviewForm: FC<ProductReviewFormProps> = (
 
       <LabeledFormControl
         control={{
-          invalid: errors?.title,
-          name: 'title',
+          invalid: errors?.reviewTitle,
+          name: 'reviewTitle',
           onChange: ({ target: { value } }: HTMLInputChangeEvent) => {
             const valid = value.length >= 3
 
-            if (valid) updateReview({ title: value })
+            if (valid) updateReview({ reviewTitle: value })
 
-            setErrors({ title: !valid })
+            setErrors({ reviewTitle: !valid })
           },
           placeholder: 'A smoke worthy product',
           required: true
@@ -173,14 +201,14 @@ export const ProductReviewForm: FC<ProductReviewFormProps> = (
 
       <LabeledFormControl
         control={{
-          invalid: errors?.body,
-          name: 'body',
+          invalid: errors?.reviewMessage,
+          name: 'reviewMessage',
           onChange: ({ target: { value } }: HTMLTextAreaChangeEvent) => {
-            const valid = value.length >= 10 && value.length <= 100
+            const valid = value.length >= 10 && value.length <= 80
 
-            if (valid) updateReview({ body: value })
+            if (valid) updateReview({ reviewMessage: value })
 
-            setErrors({ body: !valid })
+            setErrors({ reviewMessage: !valid })
           },
           placeholder:
             'Blue bottle single-origin coffee next level taxidermy four loko seitan cupidatat flannel. Cred asymmetrical literally vexillologist cliche do distillery hashtag raw denim crucifix everyday carry affogato austin. Williamsburg jean shorts raclette, aesthetic quinoa dolore hammock echo park taxidermy messenger bag.',

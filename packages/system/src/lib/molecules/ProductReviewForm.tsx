@@ -14,8 +14,17 @@ import {
 import { isEmpty } from 'lodash'
 import React, { FC } from 'react'
 import { useSetState } from 'react-hanger'
+import uuid from 'react-uuid'
 import isEmail from 'validator/lib/isEmail'
-import { Button, Form, FormProps, Heading, Paragraph, Span } from '../atoms'
+import {
+  Button,
+  FlexBox,
+  Form,
+  FormProps,
+  Heading,
+  Paragraph,
+  Span
+} from '../atoms'
 import { FormCheck } from './FormCheck'
 import { LabeledFormControl } from './LabeledFormControl'
 
@@ -79,8 +88,7 @@ export interface ProductReviewFormProps extends FormProps {
  *
  * **TODO**:
  *
- * - Implement product rating field
- * - Implement product recommendation field
+ * - Implement `useCreateStampedProductReview`
  * - Update documentation
  */
 export const ProductReviewForm: FC<ProductReviewFormProps> = (
@@ -124,6 +132,9 @@ export const ProductReviewForm: FC<ProductReviewFormProps> = (
 
   // Track form errors
   const { state: errors, setState: setErrors } = useSetState<AnyObject>({})
+
+  // Product rating values
+  const ratings: number[] = [1, 2, 3, 4, 5]
 
   return (
     <Form {...mutated} id={`product-review-form-${id}`}>
@@ -220,17 +231,42 @@ export const ProductReviewForm: FC<ProductReviewFormProps> = (
         Review Body
       </LabeledFormControl>
 
-      <FormCheck
-        checked={review.reviewRecommendProduct}
-        onChange={() => {
-          updateReview(state => ({
-            reviewRecommendProduct: !state.reviewRecommendProduct
-          }))
-        }}
-        htmlFor='reviewRecommendProduct'
-        label='Would you recommend this product?'
-        name='reviewRecommendProduct'
-      />
+      <FlexBox
+        align={{ sm: 'center' }}
+        direction={{ sm: 'row', xs: 'column' }}
+        className='product-rating-field'
+        justify={{ sm: 'between' }}
+      >
+        <FormCheck
+          checked={review.reviewRecommendProduct}
+          onChange={() => {
+            updateReview(state => ({
+              reviewRecommendProduct: !state.reviewRecommendProduct
+            }))
+          }}
+          htmlFor='reviewRecommendProduct'
+          label='Would you recommend this product?'
+          name='reviewRecommendProduct'
+        />
+
+        <FlexBox align='center' className='pl-0-first w-70' justify='between'>
+          {ratings.map(rating => (
+            <FormCheck
+              aria-label='Product rating input'
+              btn='ghost'
+              checked={rating <= (review?.reviewRating ?? 5) ? true : false}
+              className='product-rating-input my-0'
+              htmlFor={`product-rating-${rating}`}
+              key={uuid()}
+              name='reviewRating'
+              onChange={({ target }: HTMLInputChangeEvent) => {
+                updateReview({ reviewRating: JSON.parse(target.value) })
+              }}
+              value={rating}
+            />
+          ))}
+        </FlexBox>
+      </FlexBox>
 
       <Button
         aria-label='Submit product review'

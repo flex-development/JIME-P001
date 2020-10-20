@@ -175,7 +175,7 @@ export const FormCheck: FC<FormCheckProps> = (props: FormCheckProps) => {
   const no_label_text = isEmpty(label)
 
   const mutated = useMutatedProps<typeof rest>(rest, {
-    'form-check': !no_label_text && !as_btn,
+    'form-check': !no_label_text || as_btn,
     'form-check-inline': no_label_text && inline,
     'form-switch': form_switch
   })

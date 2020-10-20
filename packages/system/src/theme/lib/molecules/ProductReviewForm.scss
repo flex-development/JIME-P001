@@ -68,6 +68,10 @@ $product-review-form-spacer: $spacers-12;
     text-transform: uppercase;
   }
 
+  .form-check {
+    @include margin-y($product-review-form-spacer, $spacers-24);
+  }
+
   .labeled-form-control {
     margin-bottom: $product-review-form-spacer;
   }

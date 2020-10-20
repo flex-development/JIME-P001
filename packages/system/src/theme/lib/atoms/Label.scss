@@ -2,7 +2,21 @@
 /// @group Label
 /// ----------------------------------------------------------------------------
 
-.form-label[data-required],
-.col-form-label[data-required] {
+/// ----------------------------------------------------------------------------
+/// Variants
+/// ----------------------------------------------------------------------------
+
+$form-check-label-font-size: $font-size-sm;
+
+/// ----------------------------------------------------------------------------
+/// Styles
+/// ----------------------------------------------------------------------------
+
+.form-check-label {
+  font-size: $form-check-label-font-size;
+}
+
+.col-form-label[data-required],
+.form-label[data-required] {
   font-weight: $font-weight-semibold;
 }

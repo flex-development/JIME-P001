@@ -16,6 +16,7 @@ import React, { FC } from 'react'
 import { useSetState } from 'react-hanger'
 import isEmail from 'validator/lib/isEmail'
 import { Button, Form, FormProps, Heading, Paragraph, Span } from '../atoms'
+import { FormCheck } from './FormCheck'
 import { LabeledFormControl } from './LabeledFormControl'
 
 /**
@@ -218,6 +219,18 @@ export const ProductReviewForm: FC<ProductReviewFormProps> = (
       >
         Review Body
       </LabeledFormControl>
+
+      <FormCheck
+        checked={review.reviewRecommendProduct}
+        onChange={() => {
+          updateReview(state => ({
+            reviewRecommendProduct: !state.reviewRecommendProduct
+          }))
+        }}
+        htmlFor='reviewRecommendProduct'
+        label='Would you recommend this product?'
+        name='reviewRecommendProduct'
+      />
 
       <Button
         aria-label='Submit product review'

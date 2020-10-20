@@ -15,6 +15,15 @@ import { IconProps } from './Icon'
 
 export interface LabelProps extends MutatedProps<HTMLLabelElement> {
   /**
+   * If true, add the class `form-check-label`.
+   *
+   * - https://v5.getbootstrap.com/docs/5.0/forms/checks-radios
+   *
+   * @default false
+   */
+  check?: boolean
+
+  /**
    * If true, add the class `col-form-label`.
    *
    * - https://v5.getbootstrap.com/docs/5.0/forms/overview/#form-text
@@ -74,11 +83,11 @@ export type LabelRefProps = ReflessLabelProps & LabelRefAttributes
 /**
  * Renders a `<label>` element.
  *
- * - **https://developer.mozilla.org/docs/Web/HTML/Element/label**
- * - **https://v5.getbootstrap.com/docs/5.0/forms/overview/#form-text**
+ * - https://developer.mozilla.org/docs/Web/HTML/Element/label
+ * - https://v5.getbootstrap.com/docs/5.0/forms/overview/#form-text
  */
 export const Label: FREC<LabelRefProps> = forwardRef((props, ref) => {
-  const { col, form, htmlFor, required, ...rest } = props
+  const { check, col, form, htmlFor, required, ...rest } = props
 
   if (required) rest['data-required'] = required
 
@@ -88,8 +97,9 @@ export const Label: FREC<LabelRefProps> = forwardRef((props, ref) => {
     typeof withIcon,
     JSX.IntrinsicElements['label']
   >(withIcon, {
-    'col-form-label': col,
-    'form-label': form
+    'col-form-label': !check && col,
+    'form-check-label': check,
+    'form-label': !check && form
   })
 
   /* eslint-disable-next-line jsx-a11y/label-has-associated-control */

@@ -1,6 +1,6 @@
 import { Booleanish } from '@flex-development/kustomtypez'
 import { useMutatedProps } from '@system/hooks'
-import { MutatedFormControlProps } from '@system/types'
+import { FormControlSize, MutatedFormControlProps } from '@system/types'
 import { omit } from 'lodash'
 import React, {
   forwardRef,
@@ -264,6 +264,13 @@ export interface InputProps
   required?: Booleanish
 
   /**
+   * Make the element smaller or larger.
+   *
+   * See: https://v5.getbootstrap.com/docs/5.0/forms/form-control/#sizing
+   */
+  size?: false | FormControlSize
+
+  /**
    * Valid for the numeric input types, including number, date/time input types,
    * and range, the step attribute is a number that specifies the granularity
    * that the value must adhere to.
@@ -357,7 +364,7 @@ export type InputRefProps = ReflessInputProps & InputRefAttributes
 export const Input: FREC<InputRefProps> = forwardRef((props, ref) => {
   const checkInputTypes = ['checkbox', 'radio']
 
-  const { invalid, ...rest } = props
+  const { invalid, size, ...rest } = props
 
   const checks = checkInputTypes.includes(rest.type as string)
   const file = rest.type === 'file'
@@ -372,6 +379,7 @@ export const Input: FREC<InputRefProps> = forwardRef((props, ref) => {
     {
       'form-check-input': checks && !props.className?.includes('btn-check'),
       'form-control': !checks && !file && !range,
+      [`form-control-${size}`]: !checks && !file && size,
       'form-file-input': file,
       'form-range': range,
       'is-invalid': invalid

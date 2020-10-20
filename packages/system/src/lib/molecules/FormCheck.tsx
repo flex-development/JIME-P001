@@ -2,20 +2,26 @@ import { ANYTHING } from '@flex-development/kustomtypez'
 import { useMutatedProps } from '@system/hooks'
 import {
   ButtonVariant,
+  FormControlSize,
   HTMLInputChangeEvent,
   MutatedFormControlProps
 } from '@system/types'
 import classnames from 'classnames'
-import { isEmpty, isString } from 'lodash'
+import { isEmpty } from 'lodash'
 import React, { FC } from 'react'
 import { Box, BoxProps, IconProps, Input, Label } from '../atoms'
 
 /**
- * @file Labeled checkbox/radio element
+ * @file Checks and radios component
  * @module lib/molecules/FormCheck
  */
 
 export interface FormCheckProps extends BoxProps {
+  /**
+   * Accessible name for assistive technologies.
+   */
+  'aria-label'?: string
+
   /**
    * Create button-like checkboxes and radio buttons by using `.btn` styles
    * rather than `.form-check-label` on the `<label>` elements.
@@ -70,6 +76,18 @@ export interface FormCheckProps extends BoxProps {
   form?: string
 
   /**
+   * `<label>` elements require the use of a `for` property to link the element
+   * to a labelable form-related element in the same document.
+   *
+   * Because `for` is a reserved keyword in JavaScript, React uses `htmlFor`
+   * instead.
+   *
+   * This value will be passed to inner `Label` component as `htmlFor` and the
+   * `Input` component as `id`.
+   */
+  htmlFor: string
+
+  /**
    * `Icon` properties to pass to the `Label` component.
    */
   icon?: IconProps
@@ -93,9 +111,16 @@ export interface FormCheckProps extends BoxProps {
   name?: string
 
   /**
-   * `onChange` handler. Fires when the `<input>` element is clicked.
+   * `onChange` handler. Fires when the `<input>` element value changes.
    */
   onChange?(event: HTMLInputChangeEvent): ANYTHING
+
+  /**
+   * Make button-like checkboxes and radio buttons smaller or larger.
+   *
+   * See: https://v5.getbootstrap.com/docs/5.0/components/buttons/#sizes
+   */
+  size?: false | FormControlSize
 
   /**
    * If true, add the class `form-switch`.
@@ -120,61 +145,72 @@ export interface FormCheckProps extends BoxProps {
 }
 
 /**
- * Displays a labeled `checkbox` or `radio` `<input>` element.
+ * Custom checkbox / radio `<input>` component.
  *
- * **TODO**:
- *
- * - Handle `htmlFor` attribute on `Label` component
+ * - https://v5.getbootstrap.com/docs/5.0/forms/checks-radios/
  */
 export const FormCheck: FC<FormCheckProps> = (props: FormCheckProps) => {
   const {
+    'aria-label': aria_label,
     btn,
     checked,
     defaultChecked,
     defaultValue,
     disabled,
     form,
+    htmlFor,
     icon,
     inline,
     label,
     name,
     onChange,
+    size,
     switch: form_switch,
     type,
     value,
     ...rest
   } = props
 
-  const as_btn = !isEmpty(btn)
+  const as_btn = !isEmpty(btn) || size
   const no_label_text = isEmpty(label)
 
   const mutated = useMutatedProps<typeof rest>(rest, {
-    'form-check': no_label_text && as_btn,
+    'form-check': !no_label_text && !as_btn,
     'form-check-inline': no_label_text && inline,
     'form-switch': form_switch
   })
 
   mutated['data-disabled'] = disabled
-  mutated['data-type'] = type
+  mutated['data-type'] = form_switch ? 'checkbox' : type
+
+  if (as_btn) mutated['data-btn'] = true
 
   return (
     <Box {...mutated}>
       <Input
+        aria-label={aria_label}
         checked={checked}
-        className={classnames({ 'btn-check': !isEmpty(btn) })}
+        className={classnames({ 'btn-check': as_btn })}
         defaultChecked={defaultChecked}
         defaultValue={defaultValue}
         disabled={disabled}
+        id={htmlFor}
         form={form}
         name={name}
         onChange={onChange}
-        type={type}
+        type={mutated['data-type']}
         value={value}
       />
 
       <Label
-        className={classnames({ btn: as_btn, [`btn-${btn}`]: isString(btn) })}
+        className={classnames({
+          btn: as_btn,
+          [`btn-${btn}`]: as_btn,
+          [`btn-${size}`]: size,
+          'form-check-label': !as_btn
+        })}
         icon={icon}
+        htmlFor={htmlFor}
       >
         {label}
       </Label>
@@ -183,5 +219,5 @@ export const FormCheck: FC<FormCheckProps> = (props: FormCheckProps) => {
 }
 
 FormCheck.defaultProps = {
-  type: 'radio'
+  type: 'checkbox'
 }

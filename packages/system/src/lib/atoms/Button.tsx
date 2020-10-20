@@ -73,7 +73,7 @@ export interface ButtonProps
   icon?: IconProps
 
   /**
-   * Make a button smaller.
+   * Make a button smaller or larger.
    *
    * See: https://v5.getbootstrap.com/docs/5.0/components/buttons/#sizes
    */

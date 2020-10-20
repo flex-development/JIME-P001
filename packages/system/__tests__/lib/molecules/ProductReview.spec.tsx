@@ -9,7 +9,7 @@ import React from 'react'
  * @todo Add unit tests for invalid form state and form submission
  */
 
-it('renders <div class="product-review">', () => {
+it('renders without crashing', () => {
   const { container } = render(<Default {...Default.args} />)
 
   expect(container.firstChild).toHaveClass('product-review')

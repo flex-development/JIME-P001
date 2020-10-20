@@ -36,6 +36,11 @@ export type HTMLButtonClickEvent = MouseEvent<HTMLButtonElement>
 export type HTMLInputChangeEvent = ChangeEvent<HTMLInputElement>
 
 /**
+ * `<input>` element click event.
+ */
+export type HTMLInputClickEvent = MouseEvent<HTMLInputElement>
+
+/**
  * `<select>` element change event.
  */
 export type HTMLSelectChangeEvent = ChangeEvent<HTMLSelectElement>

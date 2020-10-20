@@ -4,7 +4,7 @@ import React from 'react'
 
 /**
  * @file Tests - LabeledFormControl
- * @module tests/lib/atoms/LabeledFormControl
+ * @module tests/lib/molecules/LabeledFormControl
  */
 
 it('renders a nested <input type="number"> element', () => {

@@ -15,21 +15,13 @@ export default {
   title: 'Library/Molecules/FormCheck'
 }
 
-export const Disabled: StoryFN<FormCheckProps> = (args: FormCheckProps) => (
-  <FormCheck {...args} />
-)
-
-Disabled.args = {
-  disabed: true,
-  label: 'Disabled'
-}
-
 export const Checkbox: StoryFN<FormCheckProps> = (args: FormCheckProps) => (
   <FormCheck {...args} />
 )
 
 Checkbox.args = {
-  label: 'Default checkbox'
+  htmlFor: 'checkbox-example',
+  label: 'Checkbox label'
 }
 
 export const Radio: StoryFN<FormCheckProps> = (args: FormCheckProps) => (
@@ -37,7 +29,9 @@ export const Radio: StoryFN<FormCheckProps> = (args: FormCheckProps) => (
 )
 
 Radio.args = {
-  label: 'Default radio'
+  htmlFor: 'radio-example',
+  label: 'Radio label',
+  type: 'radio'
 }
 
 export const Switch: StoryFN<FormCheckProps> = (args: FormCheckProps) => (
@@ -45,7 +39,18 @@ export const Switch: StoryFN<FormCheckProps> = (args: FormCheckProps) => (
 )
 
 Switch.args = {
-  label: 'Default switch checkbox input',
-  switch: true,
-  type: 'checkbox'
+  htmlFor: 'switch-example',
+  label: 'Switch checkbox input label',
+  switch: true
+}
+
+export const ToggleButton: StoryFN<FormCheckProps> = (args: FormCheckProps) => (
+  <FormCheck {...args} />
+)
+
+ToggleButton.args = {
+  btn: 'primary',
+  htmlFor: 'toggle-btn-example',
+  label: 'Toggle button',
+  size: 'sm'
 }

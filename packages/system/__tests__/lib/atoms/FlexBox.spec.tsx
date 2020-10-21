@@ -75,7 +75,7 @@ it('renders with class "flex-nowrap"', () => {
 })
 
 it('renders with class "flex-sm-nowrap"', () => {
-  const { container } = render(<FlexBox direction={{ sm: 'nowrap' }} />)
+  const { container } = render(<FlexBox wrap={{ sm: 'nowrap' }} />)
 
   expect(container.firstChild).toHaveClass('flex-sm-nowrap')
 })

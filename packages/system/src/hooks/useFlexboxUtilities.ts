@@ -1,12 +1,12 @@
 import { FlexboxUtilitiesConfig, GridBreakpoint } from '@system/types'
 import {
-  breakpointInfix,
   FLEXBOX_CONFIG_KEYS,
   FLEXBOX_PROPERTY_MAP,
+  getResponsiveUtilities,
   GRID_BREAKPOINTS
 } from '@system/utils'
 import classnames from 'classnames'
-import { isBoolean, isObject, isString } from 'lodash'
+import { isBoolean, isEmpty, isNumber, isString } from 'lodash'
 
 /**
  * @file Generate flexbox utility classes
@@ -39,44 +39,28 @@ export const useFlexboxUtilities = (
 ): string => {
   const dictionary = {}
 
+  // Convert config into Record<string, ResponsiveUtility>
   FLEXBOX_CONFIG_KEYS.forEach(c_key => {
-    let config_value = config[c_key]
-    const prop = FLEXBOX_PROPERTY_MAP[c_key]
+    const value = config[c_key]
 
-    const display = prop === 'display'
-    const direction_or_wrap = prop === 'flex-direction' || prop === 'flex-wrap'
-
-    if (isBoolean(config_value)) {
-      if (prop === 'flex-wrap') {
-        config_value = config_value ? 'wrap' : 'nowrap'
-        dictionary[`flex-${config_value}`] = true
-      }
-    } else if (isString(config_value)) {
-      if (display) {
-        dictionary[`d-${config_value}`] = true
-      } else if (direction_or_wrap) {
-        dictionary[`flex-${config_value}`] = true
-      } else {
-        dictionary[`${prop}-${config_value}`] = true
-      }
-    } else if (isObject(config_value)) {
-      breakpoints.forEach(breakpoint => {
-        const b_value = config_value[breakpoint]
-
-        if (!b_value) return
-
-        const infix = breakpointInfix(breakpoint)
-        const infix_with_value = `${infix}-${b_value}`
-
-        if (display) {
-          dictionary[`d${infix_with_value}`] = true
-        } else if (direction_or_wrap) {
-          dictionary[`flex${infix_with_value}`] = true
-        } else {
-          dictionary[`${prop}${infix_with_value}`] = true
-        }
-      })
+    if (isBoolean(value) || isNumber(value) || isString(value)) {
+      config[c_key] = { xs: value }
     }
+  })
+
+  // Populate dictionary
+  FLEXBOX_CONFIG_KEYS.forEach(c_key => {
+    let prefix = FLEXBOX_PROPERTY_MAP[c_key]
+
+    if (c_key === 'display') {
+      prefix = 'd'
+    } else if (c_key === 'direction' || c_key === 'wrap') {
+      prefix = 'flex'
+    }
+
+    getResponsiveUtilities(prefix, config[c_key], breakpoints).map(classes => {
+      dictionary[classes] = !isEmpty(classes)
+    })
   })
 
   return classnames(dictionary)

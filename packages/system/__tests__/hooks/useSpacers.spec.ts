@@ -37,6 +37,15 @@ it('returns "mb-${margin}"', () => {
   expect(hook.result.current).toBe(`${prefix}-${margin_bottom}`)
 })
 
+it('returns "my-${margin}"', () => {
+  const prefix = 'my'
+  const margin_y = 0
+
+  const hook = renderHook(() => useSpacers(prefix, margin_y))
+
+  expect(hook.result.current).toBe(`${prefix}-${margin_y}`)
+})
+
 it('returns "mb-${margin} mb-${breakpoint}-${margin}"', () => {
   const prefix = 'mb'
 

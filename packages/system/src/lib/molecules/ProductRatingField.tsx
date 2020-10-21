@@ -84,6 +84,7 @@ export const ProductRatingField: FC<ProductRatingFieldProps> = (
           className='product-rating-field-check'
           htmlFor={`product-rating-${value}`}
           key={uuid()}
+          my={0}
           name={name}
           onChange={(event: HTMLInputChangeEvent) => {
             setRating(JSON.parse(event.target.value))

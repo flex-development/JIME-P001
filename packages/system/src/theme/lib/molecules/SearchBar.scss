@@ -7,7 +7,6 @@
 
   &-btn {
     color: $light;
-    height: max-content;
   }
 
   &-input {
@@ -21,8 +20,12 @@
 
     border: none;
     color: $primary;
-    height: max-content;
     font-size: $font-size-sm;
     text-transform: uppercase;
+  }
+
+  &-btn,
+  &-input {
+    @include height(map-get($sizes, maxc));
   }
 }

@@ -2,22 +2,12 @@
 /// @group ProductReviewForm
 /// ----------------------------------------------------------------------------
 
-/// ----------------------------------------------------------------------------
-/// Variables
-/// ----------------------------------------------------------------------------
-
-$product-review-form-spacer: $spacers-12;
-
-/// ----------------------------------------------------------------------------
-/// Styles
-/// ----------------------------------------------------------------------------
-
 .product-review-form {
   @include flex(stretch, center, column);
 
   @include padding-x($input-padding-x);
 
-  @include padding-y($product-review-form-spacer * 2);
+  @include padding-y($spacers-24);
 
   &-btn {
     @include element-size(100%);
@@ -30,26 +20,21 @@ $product-review-form-spacer: $spacers-12;
 
     font-size: $font-size-sm;
     font-weight: $font-weight-bold;
-    margin-top: $product-review-form-spacer;
   }
 
   &-text {
-    @include margin-y($product-review-form-spacer);
-
     color: $light-75;
     font-weight: $font-weight-medium;
   }
 
   &-title {
+    @include flex(null, null, column);
+
     @include flex-spread(sm);
 
     @include media-breakpoint-up(sm) {
       flex-direction: row;
     }
-
-    display: flex;
-    flex-direction: column;
-    margin-bottom: $spacers-0;
 
     &-product-details {
       span {
@@ -70,6 +55,6 @@ $product-review-form-spacer: $spacers-12;
 
   > .form-select,
   .labeled-form-control {
-    margin-bottom: $product-review-form-spacer;
+    margin-bottom: $spacers-12;
   }
 }

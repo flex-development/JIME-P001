@@ -30,7 +30,6 @@ $product-review-spacer: $spacers-36;
 
   &-body {
     font-size: $font-size-sm;
-    margin-bottom: $spacers-0;
 
     &::first-letter {
       text-transform: capitalize;
@@ -41,14 +40,6 @@ $product-review-spacer: $spacers-36;
     @include media-breakpoint-up(md) {
       font-size: $product-review-font-size-md;
     }
-
-    @include media-breakpoint-up(sm) {
-      @include padding-y($spacers-0);
-    }
-
-    @include padding-x($product-review-spacer);
-
-    @include padding-y($product-review-spacer);
 
     color: $product-review-color;
     font-size: $product-review-font-size;

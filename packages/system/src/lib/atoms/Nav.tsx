@@ -1,17 +1,18 @@
-import { useMutatedProps } from '@system/hooks'
-import { HTMLElementRefAttributes, MutatedProps } from '@system/types'
+import { useFlexbox, useMutatedProps } from '@system/hooks'
 import React, {
   forwardRef,
   ForwardRefExoticComponent as FREC,
   PropsWithoutRef
 } from 'react'
+import { BoxRefAttributes } from './Box'
+import { FlexBoxProps } from './FlexBox'
 
 /**
  * @file Render a `<nav>` element
  * @module lib/atoms/Nav
  */
 
-export interface NavProps extends MutatedProps {
+export interface NavProps extends FlexBoxProps {
   /**
    * Add the class `nav-fill` to create a pills navigation.
    *
@@ -48,7 +49,7 @@ export type ReflessNavProps = PropsWithoutRef<NavProps>
 /**
  * {@link Nav} component forward ref properties.
  */
-export type NavRefProps = ReflessNavProps & HTMLElementRefAttributes
+export type NavRefProps = ReflessNavProps & BoxRefAttributes
 
 /**
  * Renders a `<nav>` element with the class `nav`.
@@ -56,11 +57,30 @@ export type NavRefProps = ReflessNavProps & HTMLElementRefAttributes
  * - **https://v5.getbootstrap.com/docs/5.0/components/navs/**
  */
 export const Nav: FREC<NavRefProps> = forwardRef((props, ref) => {
-  const { fill, pills, tabs, ...rest } = props
+  const {
+    align,
+    direction,
+    display,
+    fill,
+    justify,
+    pills,
+    tabs,
+    wrap,
+    ...rest
+  } = props
+
+  const flexbox = useFlexbox({
+    align,
+    direction,
+    display,
+    justify,
+    wrap
+  })
 
   const mutated = useMutatedProps<typeof rest, JSX.IntrinsicElements['nav']>(
     rest,
     {
+      [flexbox]: flexbox.length !== 0,
       nav: true,
       'nav-fill': fill,
       'nav-pills': pills,

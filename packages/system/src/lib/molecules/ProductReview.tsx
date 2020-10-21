@@ -71,9 +71,18 @@ export const ProductReview: FC<ProductReviewProps> = (
       <Link className='product-review-img' href={productUrl} target='_blank'>
         <Image alt={productTitle} fluid src={productImageUrl} />
       </Link>
-      <Column className='product-review-text' lg={10} sm={8} xs={12}>
+      <Column
+        className='product-review-text'
+        lg={10}
+        px={36}
+        py={{ sm: 0, xs: 36 }}
+        sm={8}
+        xs={12}
+      >
         <Paragraph className='product-review-title'>{title}</Paragraph>
-        <Paragraph className='product-review-body'>{body}</Paragraph>
+        <Paragraph className='product-review-body' mb={0}>
+          {body}
+        </Paragraph>
       </Column>
     </Box>
   )

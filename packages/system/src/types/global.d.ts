@@ -264,6 +264,20 @@ export interface MutatedProps<E = HTMLElement> extends GlobalAttributes<E> {
   mt?: Spacer | ResponsiveUtility<Spacer>
 
   /**
+   * `margin-left` and `margin-right` value.
+   * 
+   * - https://v5.getbootstrap.com/docs/5.0/utilities/spacing/
+   */
+  mx?: Spacer | ResponsiveUtility<Spacer>
+
+  /**
+   * `margin-bottom` and `margin-top` value.
+   * 
+   * - https://v5.getbootstrap.com/docs/5.0/utilities/spacing/
+   */
+  my?: Spacer | ResponsiveUtility<Spacer>
+
+  /**
    * `padding-bottom` value.
    * 
    * - https://v5.getbootstrap.com/docs/5.0/utilities/spacing/
@@ -290,6 +304,20 @@ export interface MutatedProps<E = HTMLElement> extends GlobalAttributes<E> {
    * - https://v5.getbootstrap.com/docs/5.0/utilities/spacing/
    */
   pt?: Spacer | ResponsiveUtility<Spacer>
+
+  /**
+   * `padding-left` and `padding-right` value.
+   * 
+   * - https://v5.getbootstrap.com/docs/5.0/utilities/spacing/
+   */
+  px?: Spacer | ResponsiveUtility<Spacer>
+
+  /**
+   * `padding-bottom` and `padding-top` value.
+   * 
+   * - https://v5.getbootstrap.com/docs/5.0/utilities/spacing/
+   */
+  py?: Spacer | ResponsiveUtility<Spacer>
 }
 
 /**

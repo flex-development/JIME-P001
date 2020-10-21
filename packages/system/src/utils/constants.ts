@@ -61,10 +61,14 @@ export const SPACING_UTILITY_KEYS: SpacerPrefix[] = [
   'ml',
   'mr',
   'mt',
+  'mx',
+  'my',
   'pb',
   'pl',
   'pr',
-  'pt'
+  'pt',
+  'px',
+  'py'
 ]
 
 export const THEME_COLORS: ThemeColor[] = [

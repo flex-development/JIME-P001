@@ -9,23 +9,6 @@
     @include media-breakpoint-up(md) {
       font-size: rfs-value(48px);
     }
-
-    margin-bottom: $spacers-12;
-  }
-
-  // Form rows
-  .row-fluid {
-    &:first-of-type {
-      @include display-flex(flex, false);
-
-      @include flex-column;
-
-      @include media-breakpoint-up(sm) {
-        @include flex-row;
-
-        @include flex-spread;
-      }
-    }
   }
 
   .form {

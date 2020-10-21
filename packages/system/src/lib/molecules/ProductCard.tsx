@@ -9,6 +9,7 @@ import useBoolean from 'react-hanger/array/useBoolean'
 import {
   Box,
   BoxProps,
+  FlexBox,
   Image,
   Item,
   Link,
@@ -98,8 +99,9 @@ export const ProductCard: FC<ProductCardProps> = (props: ProductCardProps) => {
           />
         </ProductLink>
       </Box>
-      <Box className='card-footer'>
-        <Box className='flex-column' flex>
+
+      <FlexBox align='center' className='card-footer' justify='between'>
+        <FlexBox direction='column'>
           <ProductLink className='card-title product-card-title'>
             {title}
           </ProductLink>
@@ -115,12 +117,12 @@ export const ProductCard: FC<ProductCardProps> = (props: ProductCardProps) => {
           >
             {selected.title}
           </Link>
-        </Box>
+        </FlexBox>
 
         <Paragraph className='card-text product-card-price'>
           {selected.available ? `$${selected.price}` : 'Out of Stock'}
         </Paragraph>
-      </Box>
+      </FlexBox>
 
       {expanded && (
         <List className='dropdown-menu show'>

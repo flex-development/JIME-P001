@@ -1,4 +1,6 @@
+import { Primitive } from '@flex-development/kustomtypez'
 import { ResponsiveUtility } from '@system/types'
+import { isObject } from 'lodash'
 import { GRID_BREAKPOINTS } from '.'
 import { createResponsiveUtility } from './createResponsiveUtility'
 
@@ -19,9 +21,11 @@ import { createResponsiveUtility } from './createResponsiveUtility'
  */
 export const getResponsiveUtilities = (
   prefix: string,
-  utilities: ResponsiveUtility = {},
+  utilities: Primitive | ResponsiveUtility = {},
   breakpoints = GRID_BREAKPOINTS
 ): string[] => {
+  utilities = isObject(utilities) ? utilities : { xs: utilities }
+
   return breakpoints.map(breakpoint => {
     return createResponsiveUtility(prefix, breakpoint, utilities[breakpoint])
   })

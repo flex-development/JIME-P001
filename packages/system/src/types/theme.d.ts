@@ -19,6 +19,24 @@ export type ButtonVariant =
   | 'white'
 
 /**
+ * Number of columns to span.
+ */
+export type Columns =
+  'auto'
+  | 1
+  | 2
+  | 3
+  | 4
+  | 5
+  | 6
+  | 7
+  | 8
+  | 9
+  | 10
+  | 11
+  | 12
+
+/**
  * Values for the `align-items` property.
  * 
  * Defines the default behavior for how flex items are laid out along the cross
@@ -146,6 +164,7 @@ export type FormControlSize = 'sm' | 'lg'
  */
 export type GridBreakpoint = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl'
 
+
 /**
  * Number of columns or rows to span.
  */
@@ -167,6 +186,11 @@ export type GridSpan =
 /** @todo Update documentation */
 export type GridSpanUtilitiesConfig = ResponsiveUtility<boolean | GridSpan>
 
+/**
+ * Keys from `$gutters` map.
+ */
+export type Gutter = Spacer
+
 /** @todo Update documentation */
 export type ResponsiveUtility<T = Primitive> = {
   xs?: T
@@ -176,6 +200,57 @@ export type ResponsiveUtility<T = Primitive> = {
   xl?: T
   xxl?: T
 }
+
+/**
+ * Number of columns per row.
+ * 
+ * @see https://v5.getbootstrap.com/docs/5.0/layout/grid/#row-columns
+ */
+export type RowColumns =
+  'auto'
+  | 1
+  | 2
+  | 3
+  | 4
+  | 5
+  | 6
+
+/**
+ * Keys from `$spacers` map.
+ */
+export type Spacer =
+  0
+  | 2
+  | 4
+  | 8
+  | 10
+  | 12
+  | 14
+  | 16
+  | 18
+  | 20
+  | 24
+  | 36
+  | 48
+  | 60
+  | 72
+  | 80
+  | 96
+
+/**
+ * Prefixes for utilities using the `$spacers` map.
+ */
+export type SpacerPrefix =
+  'gx'
+  | 'gy'
+  | 'mb'
+  | 'mt'
+  | 'ml'
+  | 'mr'
+  | 'pb'
+  | 'pt'
+  | 'pl'
+  | 'pr'
 
 /**
  * Theme colors.
@@ -198,3 +273,4 @@ export type ThemeOutline =
   | 'outline-light'
   | 'outline-primary'
   | 'outline-secondary'
+

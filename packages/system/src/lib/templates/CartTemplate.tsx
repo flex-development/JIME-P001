@@ -59,7 +59,7 @@ export const CartTemplate: TC<CartTemplateProps> = (
   return (
     <Main {...mutated} data-template={CartTemplate.template_id}>
       <Section>
-        <Heading className='mb-24' size={2}>
+        <Heading mb={24} size={2}>
           Cart ({`${items.length}`})
         </Heading>
         <Box>
@@ -70,10 +70,14 @@ export const CartTemplate: TC<CartTemplateProps> = (
         <FlexBox
           align='center'
           direction={{ sm: 'row', xs: 'column' }}
-          className='mt-md-48 mt-72'
           justify={{ sm: 'end', xs: 'center' }}
+          mt={{ md: 48, xs: 72 }}
         >
-          <Paragraph className='subtotal mb-sm-0 mb-24 mr-sm-20 mr-0'>
+          <Paragraph
+            className='subtotal'
+            mb={{ sm: 0, xs: 24 }}
+            mr={{ sm: 20, xs: 0 }}
+          >
             Subtotal / {subtotal_formatted}
           </Paragraph>
           <Link className='checkout-btn' btn='primary' href={checkout_url}>

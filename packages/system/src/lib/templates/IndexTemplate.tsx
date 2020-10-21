@@ -86,7 +86,7 @@ export const IndexTemplate: TC<IndexTemplateProps> = (
   const {
     about_section_text,
     about_section_title = IndexTemplateDefaultProps.about_section_title,
-    max_products = IndexTemplateDefaultProps.max_products,
+    max_products: max = IndexTemplateDefaultProps.max_products,
     products = IndexTemplateDefaultProps.products,
     products_section_text,
     products_section_title = IndexTemplateDefaultProps.products_section_title,
@@ -95,6 +95,7 @@ export const IndexTemplate: TC<IndexTemplateProps> = (
   } = props
 
   const mutated = useMutatedProps<typeof rest>(rest, 'template')
+  const display_products = max > 0 ? products.slice(0, max) : products
 
   return (
     <Main {...mutated} data-template={IndexTemplate.template_id}>
@@ -108,13 +109,13 @@ export const IndexTemplate: TC<IndexTemplateProps> = (
         {products_section_text && (
           <Paragraph>{products_section_text}</Paragraph>
         )}
-        <ProductGrid className='mt-36' max={max_products} products={products} />
+        <ProductGrid mt={36} products={display_products} />
       </Section>
 
       {reviews.length !== 0 && (
         <Section id='reviews'>
           <Heading size={2}>Reviews</Heading>
-          <Carousel className='mt-12' id='product-review-carousel'>
+          <Carousel id='product-review-carousel' mt={12}>
             {reviews.map(review => (
               <ProductReview {...review} key={review.id} />
             ))}

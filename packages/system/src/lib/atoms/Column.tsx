@@ -1,5 +1,5 @@
-import { useGridOptions, useMutatedProps } from '@system/hooks'
-import { GridSpanUtilitiesConfig } from '@system/types'
+import { useColumn, useMutatedProps } from '@system/hooks'
+import { Columns } from '@system/types'
 import React, {
   forwardRef,
   ForwardRefExoticComponent as FREC,
@@ -14,34 +14,39 @@ import { BoxProps, BoxRefAttributes } from './Box'
 
 export interface ColumnProps extends BoxProps {
   /**
-   * Number of columns to span on extra small devices.
+   * Number of columns to span on large devices.
    */
-  xs?: GridSpanUtilitiesConfig['xs']
-
-  /**
-   * Number of columns to span on small devices.
-   */
-  sm?: GridSpanUtilitiesConfig['sm']
+  lg?: boolean | Columns
 
   /**
    * Number of columns to span on medium devices.
    */
-  md?: GridSpanUtilitiesConfig['md']
+  md?: boolean | Columns
 
   /**
-   * Number of columns to span on large devices.
+   * Number of columns to span on extra small devices.
    */
-  lg?: GridSpanUtilitiesConfig['lg']
+  span?: Columns
+
+  /**
+   * Number of columns to span on small devices.
+   */
+  sm?: boolean | Columns
 
   /**
    * Number of columns to span on extra large devices.
    */
-  xl?: GridSpanUtilitiesConfig['xl']
+  xl?: boolean | Columns
+
+  /**
+   * Number of columns to span on extra small devices.
+   */
+  xs?: boolean | Columns
 
   /**
    * Number of columns to span on extra extra large devices.
    */
-  xxl?: GridSpanUtilitiesConfig['xxl']
+  xxl?: boolean | Columns
 }
 
 export type ReflessColumnProps = PropsWithoutRef<ColumnProps>
@@ -54,14 +59,11 @@ export type ColumnRefProps = ReflessColumnProps & BoxRefAttributes
  * - https://v5.getbootstrap.com/docs/5.0/layout/columns/
  */
 export const Column: FREC<ColumnRefProps> = forwardRef((props, ref) => {
-  const { lg, md, sm, xl, xs, xxl, ...rest } = props
+  const { lg, md, span, sm, xl, xs, xxl, ...rest } = props
 
-  const grid_span = useGridOptions({ lg, md, sm, xl, xs, xxl })
+  const column = useColumn({ lg, md, sm, xl, xs: span || xs, xxl })
 
-  const mutated = useMutatedProps<typeof rest>(rest, {
-    col: grid_span.length === 0,
-    [grid_span]: true
-  })
+  const mutated = useMutatedProps<typeof rest>(rest, column)
 
   return <div {...mutated} ref={ref} />
 })

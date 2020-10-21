@@ -23,7 +23,8 @@ export const createResponsiveUtility = (
   breakpoint: GridBreakpoint,
   value?: Primitive
 ): string => {
-  if (!value) return ''
+  // If false, null, or undefined
+  if (value !== 0 && !value) return ''
 
   let classes = ''
   let append = ''

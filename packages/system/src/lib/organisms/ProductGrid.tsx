@@ -2,19 +2,14 @@ import { ProductResource } from '@flex-development/kustomtypez'
 import { useMutatedProps } from '@system/hooks'
 import { getProductCardProps } from '@system/utils'
 import React, { FC } from 'react'
-import { Box, BoxProps, Column } from '../atoms'
+import { Column, Row, RowProps } from '../atoms'
 import { ProductCard } from '../molecules'
 /**
  * @file Product layout component
  * @module lib/organisms/ProductGrid
  */
 
-export interface ProductGridProps extends BoxProps {
-  /**
-   * Maximum number of products to display in the grid.
-   */
-  max?: number
-
+export interface ProductGridProps extends RowProps {
   /**
    * Array of `ProductResource` data to display in the grid.
    *
@@ -26,27 +21,16 @@ export interface ProductGridProps extends BoxProps {
 /**
  * Displays `ProductCard` components in a grid.
  *
- * Renders a `Box` component with the class `product-grid`.
- *
- * **TODO**
- *
- * - Implement `Row` component
+ * Renders a `Row` component with the class `product-grid`.
  */
 export const ProductGrid: FC<ProductGridProps> = (props: ProductGridProps) => {
-  const { max, products = [], ...rest } = props
+  const { products = [], ...rest } = props
 
-  const mutated = useMutatedProps<typeof rest>(rest, {
-    'gy-24': true,
-    'product-grid': true,
-    row: true,
-    'row-cols-1': true,
-    'row-cols-md-3': true,
-    'row-cols-sm-2': true
-  })
+  const mutated = useMutatedProps<typeof rest>(rest, 'product-grid')
 
   return (
-    <Box {...mutated}>
-      {(max ? products.slice(0, max) : products).map(product => {
+    <Row {...mutated}>
+      {products.map(product => {
         const card = getProductCardProps(product)
 
         return (
@@ -55,10 +39,14 @@ export const ProductGrid: FC<ProductGridProps> = (props: ProductGridProps) => {
           </Column>
         )
       })}
-    </Box>
+    </Row>
   )
 }
 
 ProductGrid.defaultProps = {
-  products: []
+  gy: 24,
+  md: 3,
+  products: [],
+  sm: 2,
+  xs: 1
 }

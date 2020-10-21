@@ -17,3 +17,7 @@ it('returns the class "col-sm-4"', () => {
 it('returns the class "flex-row"', () => {
   expect(createResponsiveUtility('flex', 'xs', 'row')).toEqual('flex-row')
 })
+
+it('returns the class "mb-sm-0"', () => {
+  expect(createResponsiveUtility('mb', 'sm', 0)).toEqual('mb-sm-0')
+})

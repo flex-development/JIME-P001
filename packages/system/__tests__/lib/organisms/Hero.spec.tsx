@@ -7,7 +7,7 @@ import React from 'react'
  * @module tests/lib/organisms/Hero
  */
 
-it('renders <section class="hero">', () => {
+it('renders without crashing', () => {
   const { container } = render(<Default {...Default.args} />)
 
   expect(container.firstChild).toHaveClass('hero')

@@ -1,4 +1,4 @@
-import { useFlexboxUtilities, useMutatedProps } from '@system/hooks'
+import { useFlexbox, useMutatedProps } from '@system/hooks'
 import { FlexboxUtilitiesConfig } from '@system/types'
 import { isBoolean, isString } from 'lodash'
 import React, {
@@ -76,7 +76,7 @@ export type FlexBoxRefProps = ReflessFlexBoxProps & BoxRefAttributes
 export const FlexBox: FREC<FlexBoxRefProps> = forwardRef((props, ref) => {
   const { align, container, direction, display, justify, wrap, ...rest } = props
 
-  const flexbox = useFlexboxUtilities({
+  const flexbox = useFlexbox({
     align,
     direction,
     display,

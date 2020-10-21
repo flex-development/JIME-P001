@@ -7,6 +7,7 @@ import {
   PropsWithoutRef,
   RefAttributes
 } from 'react'
+import { ResponsiveUtility, Spacer } from './theme'
 
 /**
  * @file Global type declarations for design system
@@ -213,11 +214,7 @@ export interface MutatedProps<E = HTMLElement> extends GlobalAttributes<E> {
    * - `true`: Apply the class `d-flex`
    * - `inline`: Apply the class `d-inline-flex`
    *
-   * **TODO**
-   *
-   * - Handle responsive variations
-   *
-   * See: **https://v5.getbootstrap.com/docs/5.0/utilities/flex/**
+   * - https://v5.getbootstrap.com/docs/5.0/utilities/flex/
    *
    * @default false
    */
@@ -234,9 +231,65 @@ export interface MutatedProps<E = HTMLElement> extends GlobalAttributes<E> {
    *
    * If defined, `children` must be omitted.
    *
-   * See: **https://reactjs.org/docs/dom-elements.html#dangerouslysetinnerhtml**
+   * - https://reactjs.org/docs/dom-elements.html#dangerouslysetinnerhtml
    */
   innerHTML?: string
+
+  /**
+   * `margin-bottom` value.
+   * 
+   * - https://v5.getbootstrap.com/docs/5.0/utilities/spacing/
+   */
+  mb?: Spacer | ResponsiveUtility<Spacer>
+
+  /**
+   * `margin-left` value.
+   * 
+   * - https://v5.getbootstrap.com/docs/5.0/utilities/spacing/
+   */
+  ml?: Spacer | ResponsiveUtility<Spacer>
+
+  /**
+   * `margin-right` value.
+   * 
+   * - https://v5.getbootstrap.com/docs/5.0/utilities/spacing/
+   */
+  mr?: Spacer | ResponsiveUtility<Spacer>
+
+  /**
+   * `margin-top` value.
+   * 
+   * - https://v5.getbootstrap.com/docs/5.0/utilities/spacing/
+   */
+  mt?: Spacer | ResponsiveUtility<Spacer>
+
+  /**
+   * `padding-bottom` value.
+   * 
+   * - https://v5.getbootstrap.com/docs/5.0/utilities/spacing/
+   */
+  pb?: Spacer | ResponsiveUtility<Spacer>
+
+  /**
+   * `padding-left` value.
+   * 
+   * - https://v5.getbootstrap.com/docs/5.0/utilities/spacing/
+   */
+  pl?: Spacer | ResponsiveUtility<Spacer>
+
+  /**
+   * `padding-right` value.
+   * 
+   * - https://v5.getbootstrap.com/docs/5.0/utilities/spacing/
+   */
+  pr?: Spacer | ResponsiveUtility<Spacer>
+
+  /**
+   * `padding-top` value.
+   * 
+   * - https://v5.getbootstrap.com/docs/5.0/utilities/spacing/
+   */
+  pt?: Spacer | ResponsiveUtility<Spacer>
 }
 
 /**

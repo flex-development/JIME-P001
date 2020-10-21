@@ -1,4 +1,9 @@
-import { ButtonVariant, GridBreakpoint, ThemeColor } from '../types'
+import {
+  ButtonVariant,
+  GridBreakpoint,
+  SpacerPrefix,
+  ThemeColor
+} from '../types'
 
 /**
  * @file Design System Constants
@@ -47,6 +52,19 @@ export const GRID_BREAKPOINTS: GridBreakpoint[] = [
   'lg',
   'xl',
   'xxl'
+]
+
+export const SPACING_UTILITY_KEYS: SpacerPrefix[] = [
+  'gx',
+  'gy',
+  'mb',
+  'ml',
+  'mr',
+  'mt',
+  'pb',
+  'pl',
+  'pr',
+  'pt'
 ]
 
 export const THEME_COLORS: ThemeColor[] = [

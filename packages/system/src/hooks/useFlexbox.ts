@@ -10,7 +10,7 @@ import { isBoolean, isEmpty, isNumber, isString } from 'lodash'
 
 /**
  * @file Generate flexbox utility classes
- * @module hooks/useFlexboxUtilities
+ * @module hooks/useFlexbox
  *
  * @todo Add comments
  */
@@ -33,7 +33,7 @@ import { isBoolean, isEmpty, isNumber, isString } from 'lodash'
  * @param config - Flexbox config
  * @param breakpoints - Breakpoint array to use instead of `GRID_BREAKPOINTS`
  */
-export const useFlexboxUtilities = (
+export const useFlexbox = (
   config: FlexboxUtilitiesConfig,
   breakpoints: GridBreakpoint[] = GRID_BREAKPOINTS
 ): string => {

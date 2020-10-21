@@ -56,7 +56,7 @@ export const CollectionTemplate: TC<CollectionTemplateProps> = (
       <Section>
         <Heading size={2}>{title}</Heading>
         {description && <Paragraph>{description}</Paragraph>}
-        <ProductGrid className='mt-24' products={products} />
+        <ProductGrid mt={24} products={products} />
       </Section>
     </Main>
   )

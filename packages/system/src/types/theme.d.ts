@@ -4,6 +4,8 @@
  * @see https://v5.getbootstrap.com/
  */
 
+import { Primitive } from '@flex-development/kustomtypez'
+
 /**
  * {@link Button} component variants.
  */
@@ -33,14 +35,39 @@ export type FlexboxAlignItems =
   | 'start'
 
 /**
+ * Values for the `flex-direction` property.
+ * 
+ * Establishes the main-axis of the flexbox.
+ * 
+ * @see https://css-tricks.com/snippets/css/a-guide-to-flexbox/
+ */
+export type FlexboxDirection =
+  'column'
+  | 'column-reverse'
+  | 'row'
+  | 'row-reverse'
+
+/**
  * Flexbox values for the `display` property.
  * 
- * Flexbox definitions.
- *
  * @see https://css-tricks.com/snippets/css/a-guide-to-flexbox/
  */
 export type FlexboxDisplay = 'flex' | 'inline-flex'
 
+/**
+ * Values for the `justify-content` property.
+ * 
+ * Defines the alignment along the main flebox axis.
+ * 
+ * @see https://css-tricks.com/snippets/css/a-guide-to-flexbox/
+ */
+export type FlexboxJustifyContent =
+  'around'
+  | 'between'
+  | 'center'
+  | 'end'
+  | 'evenly'
+  | 'start'
 
 /**
  * Configuration object for generating flexbox utility classes.
@@ -73,7 +100,7 @@ export type FlexboxUtilitiesConfig = {
    *
    * - https://v5.getbootstrap.com/docs/5.0/utilities/flex/#direction
    */
-  direction?: FlexDirection | ResponsiveUtility<FlexDirection>
+  direction?: FlexboxDirection | ResponsiveUtility<FlexboxDirection>
 
   /**
    * Defines the flex container as `block` or `inline`.
@@ -98,34 +125,6 @@ export type FlexboxUtilitiesConfig = {
    */
   wrap?: boolean | FlexboxWrap | ResponsiveUtility<FlexboxWrap>
 }
-
-/**
- * Values for the `flex-direction` property.
- * 
- * Establishes the main-axis of the flexbox.
- * 
- * @see https://css-tricks.com/snippets/css/a-guide-to-flexbox/
- */
-export type FlexboxDirection =
-  'column'
-  | 'column-reverse'
-  | 'row'
-  | 'row-reverse'
-
-/**
- * Values for the `justify-content` property.
- * 
- * Defines the alignment along the main flebox axis.
- * 
- * @see https://css-tricks.com/snippets/css/a-guide-to-flexbox/
- */
-export type FlexboxJustifyContent =
-  'around'
-  | 'between'
-  | 'center'
-  | 'end'
-  | 'evenly'
-  | 'start'
 
 /**
  * Values for the `flex-wrap` property.
@@ -166,10 +165,10 @@ export type GridSpan =
   | 12
 
 /** @todo Update documentation */
-export type GridSpanConfig = ResponsiveUtility<boolean | GridSpan>
+export type GridSpanUtilitiesConfig = ResponsiveUtility<boolean | GridSpan>
 
 /** @todo Update documentation */
-export type ResponsiveUtility<T = AnyObject> = {
+export type ResponsiveUtility<T = Primitive> = {
   xs?: T
   sm?: T
   md?: T

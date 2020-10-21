@@ -1,5 +1,5 @@
 import { useGridOptions, useMutatedProps } from '@system/hooks'
-import { GridSpanConfig } from '@system/types'
+import { GridSpanUtilitiesConfig } from '@system/types'
 import React, {
   forwardRef,
   ForwardRefExoticComponent as FREC,
@@ -16,32 +16,32 @@ export interface ColumnProps extends BoxProps {
   /**
    * Number of columns to span on extra small devices.
    */
-  xs?: GridSpanConfig['xs']
+  xs?: GridSpanUtilitiesConfig['xs']
 
   /**
    * Number of columns to span on small devices.
    */
-  sm?: GridSpanConfig['sm']
+  sm?: GridSpanUtilitiesConfig['sm']
 
   /**
    * Number of columns to span on medium devices.
    */
-  md?: GridSpanConfig['md']
+  md?: GridSpanUtilitiesConfig['md']
 
   /**
    * Number of columns to span on large devices.
    */
-  lg?: GridSpanConfig['lg']
+  lg?: GridSpanUtilitiesConfig['lg']
 
   /**
    * Number of columns to span on extra large devices.
    */
-  xl?: GridSpanConfig['xl']
+  xl?: GridSpanUtilitiesConfig['xl']
 
   /**
    * Number of columns to span on extra extra large devices.
    */
-  xxl?: GridSpanConfig['xxl']
+  xxl?: GridSpanUtilitiesConfig['xxl']
 }
 
 export type ReflessColumnProps = PropsWithoutRef<ColumnProps>

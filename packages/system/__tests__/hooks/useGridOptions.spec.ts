@@ -10,12 +10,6 @@ it('returns an empty string if params.config is an empty object', () => {
   expect(renderHook(() => useGridOptions({})).result.current).toBe('')
 })
 
-it("returns an empty string if params.config[breakpoint] === true and params.prefix === 'row'", () => {
-  const hook = renderHook(() => useGridOptions({ md: true }, 'row'))
-
-  expect(hook.result.current).toBe('')
-})
-
 it('returns "col-${breakpoint}" if params.config[breakpoint] === true', () => {
   const hook = renderHook(() => useGridOptions({ md: true }))
 
@@ -38,4 +32,16 @@ it('returns "col-${span}" if params.config.xs is defined and the value is a numb
   const hook = renderHook(() => useGridOptions({ xs: 5 }))
 
   expect(hook.result.current).toBe('col-5')
+})
+
+it('returns "row-cols-${span}"', () => {
+  const hook = renderHook(() => useGridOptions({ xs: 5 }, 'row-cols'))
+
+  expect(hook.result.current).toBe('row-cols-5')
+})
+
+it('returns "row-cols-${breakpoint}-${span}"', () => {
+  const hook = renderHook(() => useGridOptions({ md: 4 }, 'row-cols'))
+
+  expect(hook.result.current).toBe('row-cols-md-4')
 })

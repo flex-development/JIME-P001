@@ -1,4 +1,4 @@
-import { ShopifyBuy } from '@app/config/shopify'
+import { Collections, Products } from '@app/config/shopify'
 import {
   GetStaticProps,
   InferGetStaticPropsType,
@@ -207,14 +207,17 @@ const Index: NextComponentType<
 
 /**
  * Pre-renders the homepage with data from Shopify.
- *
  */
 export const getStaticProps: GetStaticProps = async () => {
-  const products = await ShopifyBuy.product.fetchAll().then(products => {
+  const products = await Products.fetchAll().then(products => {
     return JSON.parse(JSON.stringify(products))
   })
 
-  return { props: { products } }
+  const collections = await Collections.fetchAllWithProducts().then(c => {
+    return JSON.parse(JSON.stringify(c))
+  })
+
+  return { props: { collections, products } }
 }
 
 export default Index

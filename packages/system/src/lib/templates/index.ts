@@ -4,6 +4,7 @@
  */
 
 export * from './CartTemplate'
+export * from './CollectionTemplate'
 export * from './IndexTemplate'
 
 /* eslint-disable prettier/prettier */

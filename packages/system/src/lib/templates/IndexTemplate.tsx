@@ -1,15 +1,10 @@
+import { ProductResource } from '@flex-development/kustomtypez'
 import { useMutatedProps } from '@system/hooks'
 import { MutatedProps, TC } from '@system/types'
-import { getProductCardProps } from '@system/utils'
 import React from 'react'
-import { Column, FlexBox, Heading, Main, Paragraph, Section } from '../atoms'
-import {
-  ProductCard,
-  ProductCardProps,
-  ProductReview,
-  ProductReviewProps
-} from '../molecules'
-import { Carousel } from '../organisms'
+import { Heading, Main, Paragraph, Section } from '../atoms'
+import { ProductReview, ProductReviewProps } from '../molecules'
+import { Carousel, ProductGrid } from '../organisms'
 
 /**
  * @file Index page template
@@ -38,11 +33,11 @@ export interface IndexTemplateProps extends MutatedProps {
   max_products?: number
 
   /**
-   * Array of `ProductResource` objects as `ProductCardProps` objects.
+   * Array of `ProductResource` objects.
    *
    * @default []
    */
-  products?: ProductCardProps[]
+  products?: ProductResource[]
 
   /**
    * Text to display in the "Products" section.
@@ -113,23 +108,7 @@ export const IndexTemplate: TC<IndexTemplateProps> = (
         {products_section_text && (
           <Paragraph>{products_section_text}</Paragraph>
         )}
-        <FlexBox className='mt-36' justify='between' wrap>
-          {products.slice(0, max_products).map(card => {
-            card = getProductCardProps(card)
-
-            return (
-              <Column
-                className='mb-sm-24 mb-48 w-md-32 w-sm-49 w-100'
-                key={card.id}
-                md={3}
-                sm={2}
-                xs={12}
-              >
-                <ProductCard {...card} />
-              </Column>
-            )
-          })}
-        </FlexBox>
+        <ProductGrid className='mt-36' max={max_products} products={products} />
       </Section>
 
       {reviews.length !== 0 && (

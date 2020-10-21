@@ -7,8 +7,9 @@ import { useMutatedProps } from '@system/hooks'
 import { HTMLButtonClickEvent, MutatedProps } from '@system/types'
 import React, { FC } from 'react'
 import {
-  Box,
   Button,
+  Column,
+  FlexBox,
   IconProps,
   Image,
   Link,
@@ -17,7 +18,7 @@ import {
 } from '../atoms'
 
 /**
- * @file Play the shop playlist
+ * @file Display the current song in the shop playlist
  * @module lib/organisms/PlaylistBar
  */
 
@@ -98,16 +99,17 @@ export const PlaylistBar: FC<PlaylistBarProps> = (props: PlaylistBarProps) => {
 
   return (
     <Section {...mutated}>
-      <Box className='playlistbar-media col-8'>
+      <Column align='center' flex span={8}>
         <Link className='playlistbar-artwork' href={artworkURL} target='_blank'>
           <Image alt={`Artwork for ${title}`} fluid src={artworkURL} />
         </Link>
-        <Box className='flex-column' flex>
+        <FlexBox direction='column'>
           <Paragraph className='playlistbar-title'>{title}</Paragraph>
           <Paragraph className='playlistbar-artist'>{artistName}</Paragraph>
-        </Box>
-      </Box>
-      <Box className='playlistbar-controls col-4'>
+        </FlexBox>
+      </Column>
+
+      <Column align='center' flex justify='end' span={4}>
         <Button
           className='playlistbar-control-skip'
           icon={{ children: 'skip_previous', outlined: false }}
@@ -133,7 +135,7 @@ export const PlaylistBar: FC<PlaylistBarProps> = (props: PlaylistBarProps) => {
           onClick={handleSkip}
           variant='ghost'
         />
-      </Box>
+      </Column>
     </Section>
   )
 }

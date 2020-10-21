@@ -1,10 +1,10 @@
+import { Primitive } from '@flex-development/kustomtypez'
+
 /**
  * @file Type declarations related to UI theme
  * @module types/theme
  * @see https://v5.getbootstrap.com/
  */
-
-import { Primitive } from '@flex-development/kustomtypez'
 
 /**
  * {@link Button} component variants.
@@ -164,33 +164,6 @@ export type FormControlSize = 'sm' | 'lg'
  */
 export type GridBreakpoint = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl'
 
-
-/**
- * Number of columns or rows to span.
- */
-export type GridSpan =
-  'auto'
-  | 1
-  | 2
-  | 3
-  | 4
-  | 5
-  | 6
-  | 7
-  | 8
-  | 9
-  | 10
-  | 11
-  | 12
-
-/** @todo Update documentation */
-export type GridSpanUtilitiesConfig = ResponsiveUtility<boolean | GridSpan>
-
-/**
- * Keys from `$gutters` map.
- */
-export type Gutter = Spacer
-
 /** @todo Update documentation */
 export type ResponsiveUtility<T = Primitive> = {
   xs?: T
@@ -206,17 +179,12 @@ export type ResponsiveUtility<T = Primitive> = {
  * 
  * @see https://v5.getbootstrap.com/docs/5.0/layout/grid/#row-columns
  */
-export type RowColumns =
-  'auto'
-  | 1
-  | 2
-  | 3
-  | 4
-  | 5
-  | 6
+export type RowColumns = 'auto' | 1 | 2 | 3 | 4 | 5 | 6
 
 /**
  * Keys from `$spacers` map.
+ * 
+ * ! Keep in sync with Sass theme settings
  */
 export type Spacer =
   0
@@ -239,6 +207,9 @@ export type Spacer =
 
 /**
  * Prefixes for utilities using the `$spacers` map.
+ * 
+ * @see https://v5.getbootstrap.com/docs/5.0/layout/gutters/
+ * @see https://v5.getbootstrap.com/docs/5.0/utilities/spacing/
  */
 export type SpacerPrefix =
   'gx'
@@ -247,10 +218,14 @@ export type SpacerPrefix =
   | 'mt'
   | 'ml'
   | 'mr'
+  | 'mx'
+  | 'my'
   | 'pb'
   | 'pt'
   | 'pl'
   | 'pr'
+  | 'px'
+  | 'py'
 
 /**
  * Theme colors.

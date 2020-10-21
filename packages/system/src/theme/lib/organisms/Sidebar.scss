@@ -10,7 +10,6 @@ $sidebar-font-size: $font-size-sm;
 
 $sidebar-padding-bottom: $spacers-80;
 $sidebar-padding-top: $spacers-96;
-$sidebar-padding-top-sm: rem(120);
 
 $sidebar-padding-x: $spacers-36;
 
@@ -28,7 +27,7 @@ $sidebar-padding-x: $spacers-36;
 
     @include width($spacer * 30);
 
-    padding-top: $sidebar-padding-top-sm;
+    padding-top: rem(120);
   }
 
   @include padding-x($sidebar-padding-x);
@@ -38,7 +37,6 @@ $sidebar-padding-x: $spacers-36;
   @include width(100%);
 
   font-size: $sidebar-font-size;
-  // padding-bottom: $sidebar-padding-bottom;
 
   &-developer-credit {
     @include margin-y($sidebar-padding-x, $spacers-0);
@@ -50,15 +48,34 @@ $sidebar-padding-x: $spacers-36;
     text-transform: uppercase;
   }
 
+  &-menu {
+    @include flex(null, null, column);
+
+    .nav-link {
+      @include padding-x($spacers-0);
+
+      font-weight: $font-weight-thin;
+    }
+  }
+
   &-profile {
+    @include flex(null, null, column);
+
     @include margin-bottom($sidebar-padding-x);
 
     @include media-breakpoint-up(sm) {
       flex-direction: row;
     }
 
-    display: flex;
-    flex-direction: column;
+    p {
+      &:not(:last-of-type) {
+        @include margin-bottom($spacers-8);
+      }
+
+      &:last-of-type {
+        @include margin-bottom($spacers-0);
+      }
+    }
 
     &-name {
       font-size: $font-size-xl;
@@ -75,27 +92,6 @@ $sidebar-padding-x: $spacers-36;
     &-name,
     &-online-status {
       font-weight: $font-weight-bold;
-    }
-
-    p {
-      &:not(:last-of-type) {
-        @include margin-bottom($spacers-8);
-      }
-
-      &:last-of-type {
-        @include margin-bottom($spacers-0);
-      }
-    }
-  }
-
-  &-menu {
-    display: flex;
-    flex-direction: column;
-
-    .nav-link {
-      @include padding-x($spacers-0);
-
-      font-weight: $font-weight-thin;
     }
   }
 }

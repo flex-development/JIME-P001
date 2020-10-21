@@ -15,7 +15,13 @@ $shop-header-spacer: $spacers-8;
 /// ----------------------------------------------------------------------------
 
 .shop-header {
-  @include flex(center);
+  @include flex(center, space-between);
+
+  .btn-ghost {
+    @include media-breakpoint-up(sm) {
+      @include padding(0.125em, top);
+    }
+  }
 
   &-btn {
     @include media-breakpoint-up(sm) {
@@ -44,11 +50,5 @@ $shop-header-spacer: $spacers-8;
 
   &-searchbar {
     @include width(100%);
-  }
-
-  .btn-ghost {
-    @include media-breakpoint-up(sm) {
-      @include padding(0.125em, top);
-    }
   }
 }

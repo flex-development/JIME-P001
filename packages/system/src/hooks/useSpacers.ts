@@ -33,7 +33,9 @@ export const useSpacers = (
   config = isObject(config) ? config : { xs: config }
 
   breakpoints.forEach(breakpoint => {
-    if (config[breakpoint]) {
+    const value = config[breakpoint]
+
+    if (value === 0 || value) {
       getResponsiveUtilities(prefix, config, breakpoints).map(classes => {
         dictionary[classes] = !isEmpty(classes)
       })

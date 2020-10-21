@@ -5,6 +5,7 @@ import React, { FC } from 'react'
 import {
   Aside,
   Box,
+  Column,
   Icon,
   Image,
   ImageProps,
@@ -78,15 +79,12 @@ export const Sidebar: FC<SidebarProps> = (props: SidebarProps) => {
     <Aside {...mutated}>
       <Box>
         <Box className='sidebar-profile'>
-          <Box className='col-sm-7 col-12 mb-sm-0 mb-36 mr-sm-24'>
+          <Column mb={{ sm: 0, xs: 36 }} mr={{ sm: 24, xs: 0 }} sm={7} xs={12}>
             <Link className='sidebar-profile-img' href={img} target='_blank'>
               <Image alt='Profile image for Morena' fluid src={img} />
             </Link>
-          </Box>
-          <Box
-            className='col-sm-5 col-12 flex-column justify-content-center'
-            flex
-          >
+          </Column>
+          <Column direction='column' flex justify='center' sm={5} xs={12}>
             <Paragraph className='sidebar-profile-online-status'>
               <Icon outlined={false}>person</Icon>
               Online Now!
@@ -101,7 +99,7 @@ export const Sidebar: FC<SidebarProps> = (props: SidebarProps) => {
             <Paragraph className='sidebar-profile-mood'>
               {`Mood: ${mood}`}
             </Paragraph>
-          </Box>
+          </Column>
         </Box>
 
         <Menu className='sidebar-menu' links={menu} />

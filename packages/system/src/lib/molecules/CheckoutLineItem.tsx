@@ -1,10 +1,18 @@
 import { ANYTHING } from '@flex-development/kustomtypez'
-import { useLineItemInput } from '@system/hooks'
+import { useLineItemInput, useMutatedProps } from '@system/hooks'
 import { HTMLButtonClickEvent, HTMLInputChangeEvent } from '@system/types'
-import classnames from 'classnames'
 import React, { FC, Fragment } from 'react'
 import { AttributeInput, CustomAttribute, LineItem } from 'shopify-buy'
-import { Box, BoxProps, Button, Image, Input, Paragraph, Span } from '../atoms'
+import {
+  BoxProps,
+  Button,
+  Column,
+  FlexBox,
+  Image,
+  Input,
+  Paragraph,
+  Span
+} from '../atoms'
 import { LabeledFormControl } from './LabeledFormControl'
 import { ProductHeading } from './ProductHeading'
 
@@ -121,20 +129,23 @@ export const CheckoutLineItem: FC<CheckoutLineItemProps> = (
     customAttributes
   )
 
+  const mutated = useMutatedProps<typeof rest>(rest, 'line-item')
+
   return (
-    <Box {...rest} className={classnames('line-item', rest.className)}>
-      <Box className='col-md-3 col-12 mb-md-0 mb-24'>
+    <FlexBox {...mutated}>
+      <Column mb={{ md: 0, xs: 24 }} md={3} xs={12}>
         <Image alt={`${title}`} fluid src={image.src as string} />
-      </Box>
-      <Box className='col pl-md-24 pl-0'>
+      </Column>
+      <Column pl={{ md: 24, xs: 0 }}>
         <ProductHeading
           className='line-item-heading'
+          mb={0}
           price={linePrice}
           size={3}
           title={title}
         />
 
-        <Paragraph className='line-item-attribute'>
+        <Paragraph className='line-item-attribute' mb={24} mt={12}>
           {
             /* eslint-disable prettier/prettier */
             customAttributes[0]?.value ? (
@@ -149,8 +160,12 @@ export const CheckoutLineItem: FC<CheckoutLineItemProps> = (
           }
         </Paragraph>
 
-        <Box className='flex-md-row flex-md-spread flex-column' flex>
-          <Box className='flex-sm-row flex-column' flex>
+        <FlexBox
+          align={{ md: 'center' }}
+          direction={{ md: 'row', xs: 'column' }}
+          justify={{ md: 'between' }}
+        >
+          <FlexBox direction={{ sm: 'row', xs: 'column' }}>
             <Input
               className='line-item-title'
               name='title'
@@ -180,19 +195,20 @@ export const CheckoutLineItem: FC<CheckoutLineItemProps> = (
             >
               Quantity
             </LabeledFormControl>
-          </Box>
+          </FlexBox>
 
           <Button
-            className='mt-md-0 mt-24 px-20'
             onClick={(e: HTMLButtonClickEvent) => remove(e.target.value)}
             name='remove'
+            mt={{ md: 0, xs: 24 }}
+            px={20}
             value={rest.id}
           >
             Remove
           </Button>
-        </Box>
-      </Box>
-    </Box>
+        </FlexBox>
+      </Column>
+    </FlexBox>
   )
 }
 

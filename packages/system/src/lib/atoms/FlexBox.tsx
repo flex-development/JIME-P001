@@ -13,7 +13,7 @@ import { BoxProps, BoxRefAttributes } from './Box'
  * @module lib/atoms/FlexBox
  */
 
-export interface FlexBoxProps extends Omit<BoxProps, 'flex'> {
+export interface FlexBoxProps extends BoxProps {
   /**
    * Use `align-items` utilities on flexbox containers to change the alignment
    * of flex items on the cross axis (the y-axis to start, x-axis if

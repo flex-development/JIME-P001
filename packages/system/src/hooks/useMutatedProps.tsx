@@ -41,10 +41,14 @@ export function useMutatedProps<
     ml = {},
     mr = {},
     mt = {},
+    mx = {},
+    my = {},
     pb = {},
     pl = {},
     pr = {},
     pt = {},
+    px = {},
+    py = {},
     ...rest
   } = props
 
@@ -68,20 +72,28 @@ export function useMutatedProps<
   const margin_left = useSpacers('ml', ml)
   const margin_right = useSpacers('mr', mr)
   const margin_top = useSpacers('mt', mt)
+  const margin_x = useSpacers('mx', mx)
+  const margin_y = useSpacers('my', my)
   const padding_bottom = useSpacers('pb', pb)
   const padding_left = useSpacers('pl', pl)
   const padding_right = useSpacers('pr', pr)
   const padding_top = useSpacers('pt', pt)
+  const padding_x = useSpacers('px', px)
+  const padding_y = useSpacers('py', py)
 
   // Update class dictionary with spacing utilities
-  dictionary[margin_bottom] = true
-  dictionary[margin_left] = true
-  dictionary[margin_right] = true
-  dictionary[margin_top] = true
-  dictionary[padding_bottom] = true
-  dictionary[padding_left] = true
-  dictionary[padding_right] = true
-  dictionary[padding_top] = true
+  dictionary[margin_bottom] = margin_bottom.length !== 0
+  dictionary[margin_left] = margin_left.length !== 0
+  dictionary[margin_right] = margin_right.length !== 0
+  dictionary[margin_top] = margin_top.length !== 0
+  dictionary[margin_x] = margin_x.length !== 0
+  dictionary[margin_y] = margin_y.length !== 0
+  dictionary[padding_bottom] = padding_bottom.length !== 0
+  dictionary[padding_left] = padding_left.length !== 0
+  dictionary[padding_right] = padding_right.length !== 0
+  dictionary[padding_top] = padding_top.length !== 0
+  dictionary[padding_x] = padding_x.length !== 0
+  dictionary[padding_y] = padding_y.length !== 0
 
   // Handle flexbox display utility
   if (flexbox_display) {
@@ -104,7 +116,7 @@ export function useMutatedProps<
   }
 
   // Merge original classes and class dictionary
-  mutated.className = classnames(mutated.className, dictionary).trim()
+  mutated.className = classnames(mutated?.className?.trim(), dictionary).trim()
 
   // Remove class attribute if empty
   if (!mutated.className.length) delete mutated.className

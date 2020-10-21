@@ -25,26 +25,12 @@ $product-card-footer-padding-x: $spacers-24;
   background-color: $product-card-bg;
   border: none;
 
-  &-price {
-    color: $product-card-footer-text-color;
-  }
-
-  .card-title {
-    color: $product-card-footer-title-color;
-    letter-spacing: $spacers-4 / 3;
-    margin-bottom: $spacers-0;
-  }
-
   .card-footer {
-    @include flex-spread;
-
     @include padding-x($product-card-footer-padding-x);
 
     @include padding-y($product-card-footer-padding-x);
 
     background-color: $product-card-footer-bg;
-    display: flex;
-    flex-direction: row;
   }
 
   .dropdown {
@@ -60,6 +46,16 @@ $product-card-footer-padding-x: $spacers-24;
       border-bottom: none;
       font-weight: $font-weight-medium;
     }
+  }
+
+  &-price {
+    color: $product-card-footer-text-color;
+  }
+
+  &-title {
+    color: $product-card-footer-title-color;
+    letter-spacing: $spacers-4 / 3;
+    margin-bottom: $spacers-0;
   }
 
   &-price,

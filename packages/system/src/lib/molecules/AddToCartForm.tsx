@@ -9,11 +9,12 @@ import {
 import React, { FC } from 'react'
 import { LineItemToAdd } from 'shopify-buy'
 import {
-  Box,
   Button,
+  FlexBox,
   Form,
   FormProps,
   Paragraph,
+  Row,
   Select,
   TextArea
 } from '../atoms'
@@ -99,13 +100,24 @@ export const AddToCartForm: FC<AddToCartFormProps> = (
   return (
     <Form {...rest} className='add-to-cart-form'>
       {/* Product title and variant price */}
-      <ProductHeading price={selected.price} title={product_title} size={2} />
+      <ProductHeading
+        mb={12}
+        price={selected.price}
+        title={product_title}
+        size={2}
+      />
 
       {/* Product description */}
-      <Paragraph className='form-text mb-24'>{description}</Paragraph>
+      <Paragraph className='form-text' mb={24}>
+        {description}
+      </Paragraph>
 
       {/* Main form control container */}
-      <Box className='row-fluid col-12'>
+      <FlexBox
+        align={{ sm: 'center' }}
+        direction={{ sm: 'row', xs: 'column' }}
+        justify={{ sm: 'between' }}
+      >
         <Select
           aria-label='Product variant selection'
           data-selected={selected.title}
@@ -129,11 +141,11 @@ export const AddToCartForm: FC<AddToCartFormProps> = (
         >
           Quantity
         </LabeledFormControl>
-      </Box>
+      </FlexBox>
 
       {/* Only visible for "KUSTOMZ" product - sync with Shopify */}
       {product_title === 'KUSTOMZ' && (
-        <Box className='row-fluid mt-12'>
+        <Row mt={12}>
           <TextArea
             aria-label='Kustom product description'
             onChange={({ target }: HTMLTextAreaChangeEvent) => {
@@ -143,21 +155,19 @@ export const AddToCartForm: FC<AddToCartFormProps> = (
             placeholder='Describe your kustom ash or rolling tray'
             value={item.customAttributes?.[0]?.value}
           />
-        </Box>
+        </Row>
       )}
 
       {/* Add to cart button container */}
-      <Box className='row-fluid mt-24'>
-        <Box className='col-sm-3 col-12 float-right'>
-          <Button
-            aria-label='Add product to cart'
-            className='float-sm-right w-sm-auto w-100'
-            disabled={!selected.available}
-            onClick={(event: HTMLButtonClickEvent) => addToCart(item, event)}
-            type='submit'
-          />
-        </Box>
-      </Box>
+      <FlexBox align='center' justify='end' mt={24}>
+        <Button
+          aria-label='Add product to cart'
+          className='w-sm-auto w-100'
+          disabled={!selected.available}
+          onClick={(event: HTMLButtonClickEvent) => addToCart(item, event)}
+          type='submit'
+        />
+      </FlexBox>
     </Form>
   )
 }

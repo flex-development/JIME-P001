@@ -3,8 +3,6 @@
 /// ----------------------------------------------------------------------------
 
 .line-item {
-  @include display-flex(flex);
-
   @include element-size(100%, width, 100%);
 
   @include flex-spread(md);
@@ -15,14 +13,7 @@
 
   flex-direction: column;
 
-  &-attribute,
-  &-heading {
-    margin-bottom: $spacers-0;
-  }
-
   &-attribute {
-    @include margin-y($spacers-12, $spacers-24);
-
     font-weight: $font-weight-semibold;
     text-transform: uppercase;
 

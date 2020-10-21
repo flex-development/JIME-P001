@@ -1,8 +1,4 @@
-import {
-  FlexboxDirection,
-  GridSpanUtilitiesConfig,
-  ResponsiveUtility
-} from '@system/types'
+import { Columns, FlexboxDirection, ResponsiveUtility } from '@system/types'
 import { getResponsiveUtilities } from '@system/utils'
 
 /**
@@ -11,7 +7,7 @@ import { getResponsiveUtilities } from '@system/utils'
  */
 
 it('returns an array of responsive grid column classes', () => {
-  const utilties: GridSpanUtilitiesConfig = { sm: 4, xs: true }
+  const utilties: ResponsiveUtility<boolean | Columns> = { sm: 4, xs: true }
 
   const classes = getResponsiveUtilities('col', utilties)
 

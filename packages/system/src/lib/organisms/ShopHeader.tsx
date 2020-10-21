@@ -2,7 +2,7 @@ import { ANYTHING } from '@flex-development/kustomtypez'
 import { useMutatedProps } from '@system/hooks'
 import { HTMLButtonClickEvent, MutatedProps } from '@system/types'
 import React, { FC } from 'react'
-import { Box, Button, Header, Link, LinkProps, Span } from '../atoms'
+import { Button, Column, Header, Link, LinkProps, Span } from '../atoms'
 import { SearchBar, SearchBarProps } from '../molecules'
 
 /**
@@ -65,7 +65,7 @@ export const ShopHeader: FC<ShopHeaderProps> = (props: ShopHeaderProps) => {
 
   return (
     <Header {...mutated}>
-      <Box className='col' flex>
+      <Column align='center' flex>
         <Button
           className='shop-header-btn'
           icon={{ children: 'menu' }}
@@ -78,8 +78,8 @@ export const ShopHeader: FC<ShopHeaderProps> = (props: ShopHeaderProps) => {
           placeholder='ash trays'
           search={handleSearch}
         />
-      </Box>
-      <Box className='col justify-content-end mw-sm-maxc' flex>
+      </Column>
+      <Column className='w-sm-maxc' flex justify='end'>
         <Link
           className='shop-header-cart-preview'
           href={cart_url}
@@ -88,7 +88,7 @@ export const ShopHeader: FC<ShopHeaderProps> = (props: ShopHeaderProps) => {
           Cart&nbsp;&nbsp;/&nbsp;&nbsp;
           <Span>{`${items} Items`}</Span>
         </Link>
-      </Box>
+      </Column>
     </Header>
   )
 }

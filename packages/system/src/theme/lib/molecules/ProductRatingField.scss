@@ -2,23 +2,11 @@
 /// @group ProductRatingField
 /// ----------------------------------------------------------------------------
 
-/// ----------------------------------------------------------------------------
-/// Variables
-/// ----------------------------------------------------------------------------
-
-/// ----------------------------------------------------------------------------
-/// Styles
-/// ----------------------------------------------------------------------------
-
 .product-rating-field {
-  @include flex-spread;
-
-  display: inline-flex;
+  @include flex(center, space-between, null, inline-flex);
 
   &-check {
     $ligature: star_rate;
-
-    @include margin-y($spacers-0);
 
     // <input class='btn-check' type='checkbox'>
     .btn-check {

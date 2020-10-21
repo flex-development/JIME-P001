@@ -2,52 +2,22 @@
 /// @group PlaylistBar
 /// ----------------------------------------------------------------------------
 
-/// ----------------------------------------------------------------------------
-/// Variables
-/// ----------------------------------------------------------------------------
-
-$playlistbar-color: $light;
-
-$playlistbar-artist-font-size: $font-size-xs;
-$playlistbar-control-playback-font-size: $font-size-xxl;
-$playlistbar-control-skip-font-size: $font-size-base;
-$playlistbar-title-font-size: $font-size-xs;
-$playlistbar-title-font-size-sm: $font-size-sm;
-
-$playlistbar-artwork-w: $spacers-60;
-
-/// ----------------------------------------------------------------------------
-/// Styles
-/// ----------------------------------------------------------------------------
-
 .playlistbar {
   @include flex(center, space-between);
 
   @include padding-y($spacers-0);
 
-  color: $playlistbar-color;
-
-  // Artist(s) names
-  &-artist {
-    @include margin($spacers-0, bottom);
-
-    font-size: $playlistbar-artist-font-size;
-  }
+  color: $light;
 
   // Image
   &-artwork {
-    @include height($playlistbar-artwork-w, $playlistbar-artwork-w);
-
     @include margin($spacers-12, right);
 
     @include relative;
 
-    @include width($playlistbar-artwork-w, $playlistbar-artwork-w);
-  }
+    @include set-element-dimensions($spacers-60);
 
-  // Artist, image, and song name container
-  &-media {
-    @include flex(center);
+    display: inline-block;
   }
 
   // Next, previous, and playback buttons
@@ -55,33 +25,33 @@ $playlistbar-artwork-w: $spacers-60;
     &-playback {
       @include margin-x($spacers-8);
 
-      font-size: $playlistbar-control-playback-font-size;
+      font-size: $font-size-xxl;
     }
 
     &-skip {
-      font-size: $playlistbar-control-skip-font-size;
+      font-size: $font-size-base;
     }
 
     &-playback,
     &-skip {
-      color: $playlistbar-color;
+      color: inherit;
     }
-  }
-
-  // Button container
-  &-controls {
-    @include flex(center, flex-end);
   }
 
   // Song title
   &-title {
-    @include margin($spacers-0, bottom);
-
     @include media-breakpoint-up(sm) {
-      font-size: $playlistbar-title-font-size-sm;
+      font-size: $font-size-sm;
     }
 
-    font-size: $playlistbar-title-font-size;
     font-weight: $font-weight-semibold;
+  }
+
+  // Artist and song title
+  &-artist,
+  &-title {
+    @include margin($spacers-0, bottom);
+
+    font-size: $font-size-xs;
   }
 }

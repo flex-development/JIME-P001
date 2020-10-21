@@ -134,7 +134,7 @@ export const ProductReviewForm: FC<ProductReviewFormProps> = (
 
   return (
     <Form {...mutated} id={`product-review-form-${id}`}>
-      <Heading className='product-review-form-title' size={5}>
+      <Heading className='product-review-form-title' mb={0} size={5}>
         <Span>Product Review</Span>
 
         <Span className='product-review-form-title-product-details'>
@@ -142,7 +142,7 @@ export const ProductReviewForm: FC<ProductReviewFormProps> = (
         </Span>
       </Heading>
 
-      <Paragraph className='form-text product-review-form-text'>
+      <Paragraph className='form-text product-review-form-text' my={12}>
         {description}
       </Paragraph>
 
@@ -229,8 +229,9 @@ export const ProductReviewForm: FC<ProductReviewFormProps> = (
 
       <FlexBox
         align={{ sm: 'center' }}
-        className='mt-8 mb-36'
         direction={{ sm: 'row', xs: 'column' }}
+        mb={36}
+        mt={8}
         justify={{ sm: 'between' }}
       >
         <FormCheck
@@ -246,7 +247,8 @@ export const ProductReviewForm: FC<ProductReviewFormProps> = (
         />
 
         <ProductRatingField
-          className='mt-sm-0 mt-16 pl-0-first w-70'
+          className='pl-0-first w-70'
+          mt={{ sm: 0, xs: 16 }}
           name='reviewRating'
           onChange={({ target }: HTMLInputChangeEvent) => {
             updateReview({ reviewRating: JSON.parse(target.value) })
@@ -258,6 +260,7 @@ export const ProductReviewForm: FC<ProductReviewFormProps> = (
         aria-label='Submit product review'
         className='product-review-form-btn'
         disabled={isEmpty(errors) || Object.values(errors).includes(true)}
+        mt={12}
         onClick={(event: HTMLButtonClickEvent) => submit(review, event)}
         type='submit'
       >

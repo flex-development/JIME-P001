@@ -1,3 +1,4 @@
+import { CartTemplate } from '@system/lib'
 import { Cart } from '@system/stories/lib/templates/CartTemplate.stories'
 import { render } from '@testing-library/react'
 import React from 'react'
@@ -8,10 +9,12 @@ import React from 'react'
  */
 
 it('renders without crashing', () => {
+  const { template_id } = CartTemplate
+
   const { container } = render(<Cart {...Cart.args} />)
 
   expect(container.firstChild).toHaveClass('template')
-  expect(container.firstChild).toHaveAttribute('data-template', 'cart')
+  expect(container.firstChild).toHaveAttribute('data-template', template_id)
 })
 
 it('renders the template title with the number of items in the cart', () => {

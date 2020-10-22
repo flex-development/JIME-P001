@@ -32,26 +32,38 @@ main.template {
 
     > h1,
     > .h1 {
-      font-size: $font-size-xxl;
+      @include font-size($font-size-xxl);
+
+      @include media-breakpoint-down(md) {
+        @include font-size($font-size-xl);
+      }
     }
 
     > h2,
     > .h2 {
-      font-size: $font-size-xl;
+      @include font-size($font-size-xl);
+
+      @include media-breakpoint-down(md) {
+        @include font-size($font-size-lg);
+      }
     }
 
     > h3,
     > h4,
     > .h3,
     > .h4 {
-      font-size: $font-size-lg;
+      @include font-size($font-size-lg);
+
+      @include media-breakpoint-down(md) {
+        @include font-size($font-size-base);
+      }
     }
 
     > h5,
     > h6,
     > .h5,
     > .h6 {
-      font-size: $font-size-base;
+      @include font-size($font-size-base);
     }
 
     > p {

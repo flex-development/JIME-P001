@@ -109,7 +109,7 @@ export const IndexTemplate: TC<IndexTemplateProps> = (
         {products_section_text && (
           <Paragraph>{products_section_text}</Paragraph>
         )}
-        <ProductGrid mt={36} products={display_products} />
+        <ProductGrid mt={24} products={display_products} />
       </Section>
 
       {reviews.length !== 0 && (

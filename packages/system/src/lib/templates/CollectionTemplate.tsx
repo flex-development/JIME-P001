@@ -64,4 +64,4 @@ export const CollectionTemplate: TC<CollectionTemplateProps> = (
 
 CollectionTemplate.template_id = 'collection'
 
-CollectionTemplate.defaultProps = {}
+CollectionTemplate.defaultProps = CollectionTemplateDefaultProps

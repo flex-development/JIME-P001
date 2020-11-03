@@ -1,4 +1,4 @@
-import { ProductRatingField, ProductRatingFieldProps } from '@system/lib'
+import { ProductRatingField, ProductRatingFieldProps } from '@system/components'
 import { StoryFN } from '@system/types'
 import React from 'react'
 

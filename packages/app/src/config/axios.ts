@@ -1,4 +1,4 @@
-import { AnyObject, ANYTHING } from '@flex-development/kustomtypez'
+import { AnyObject, ANYTHING } from '@system/types'
 import Axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios'
 import { pick } from 'lodash'
 import { createError } from '../utils'

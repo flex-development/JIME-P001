@@ -8,15 +8,14 @@
     "useCache": true
   },
   "compilerOptions": {
-    "checkJs": false,
     "downlevelIteration": true,
     "isolatedModules": false,
-    "jsx": "react",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "module": "esnext",
-    "noEmit": true,
     "sourceMap": false,
-    "target": "es6"
+    "target": "es6",
+    "typeRoots": [
+      "../../node_modules/musickit-typescript",
+      "../../node_modules/@types"
+    ]
   },
   "exclude": ["node_modules"],
   "extends": "../../tsconfig.json",

@@ -1,4 +1,4 @@
-import { useFlexbox } from '@system/hooks'
+import { useFlexbox } from '@system/hooks/useFlexbox'
 import { renderHook } from '@testing-library/react-hooks'
 
 /**

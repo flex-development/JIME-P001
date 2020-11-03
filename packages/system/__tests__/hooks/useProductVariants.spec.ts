@@ -1,4 +1,4 @@
-import { useProductVariants } from '@system/hooks'
+import { useProductVariants } from '@system/hooks/useProductVariants'
 import products from '@system/__mocks__/products.mock.json'
 import { act, renderHook } from '@testing-library/react-hooks'
 

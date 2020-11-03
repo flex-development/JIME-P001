@@ -1,8 +1,7 @@
-import { Primitive } from '@flex-development/kustomtypez'
-import { ResponsiveUtility } from '@system/types'
+import { GRID_BREAKPOINTS } from '@system/config/constants'
+import { Primitive, ResponsiveUtility } from '@system/types'
 import { isObject } from 'lodash'
-import { GRID_BREAKPOINTS } from '.'
-import { createResponsiveUtility } from './createResponsiveUtility'
+import createResponsiveUtility from './createResponsiveUtility'
 
 /**
  * @file Returns an array of responsive utility classes
@@ -19,7 +18,7 @@ import { createResponsiveUtility } from './createResponsiveUtility'
  * @param utilties - Responsive utilties map
  * @param breakpoints - Map to use instead of `GRID_BREAKPOINTS`
  */
-export const getResponsiveUtilities = (
+const getResponsiveUtilities = (
   prefix: string,
   utilities: Primitive | ResponsiveUtility = {},
   breakpoints = GRID_BREAKPOINTS
@@ -30,3 +29,5 @@ export const getResponsiveUtilities = (
     return createResponsiveUtility(prefix, breakpoint, utilities[breakpoint])
   })
 }
+
+export default getResponsiveUtilities

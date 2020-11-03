@@ -1,4 +1,4 @@
-import { ProductRatingFieldDefaultProps } from '@system/lib'
+import { ProductRatingFieldDefaultProps } from '@system/components'
 import { Default } from '@system/stories/lib/molecules/ProductRatingField.stories'
 import { fireEvent, render, screen } from '@testing-library/react'
 import React from 'react'

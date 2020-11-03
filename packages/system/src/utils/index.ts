@@ -1,19 +1,15 @@
 /**
  * @file Utilities
- * @module lib/utils
+ * @module components/utils
  */
 
-export * from './args'
-export * from './breakpointInfix'
-export * from './colors'
-export * from './constants'
-export * from './createResponsiveUtility'
-export * from './getProductCardProps'
-export * from './getProductReviewProps'
-export * from './getResponsiveUtilities'
-export * from './sanitizeQuantity'
-export * from './typography'
-export * from './uid'
-export * from './viewports'
+export { default as breakpointInfix } from './breakpointInfix'
+export { default as createResponsiveUtility } from './createResponsiveUtility'
+export { default as getProductCardProps } from './getProductCardProps'
+export { default as getProductReviewProps } from './getProductReviewProps'
+export { default as getResponsiveUtilities } from './getResponsiveUtilities'
+export { default as getThemeColor } from './getThemeColor'
+export { default as sanitizeQuantity } from './sanitizeQuantity'
+export { default as uid } from './uid'
 
 /* eslint-disable prettier/prettier */

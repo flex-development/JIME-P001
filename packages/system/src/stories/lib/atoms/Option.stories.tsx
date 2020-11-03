@@ -1,4 +1,4 @@
-import { Option, OptionProps } from '@system/lib'
+import { Option, OptionProps } from '@system/components'
 import { StoryFN } from '@system/types'
 import React from 'react'
 

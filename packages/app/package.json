@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "Shopify storefront powered by Next.js",
   "keywords": [
-    "firestore",
     "nextjs",
     "react",
     "shopify",
@@ -40,7 +39,6 @@
   },
   "dependencies": {
     "@feathersjs/errors": "^4.5.3",
-    "@flex-development/kustomtypez": "*",
     "@flex-development/kustomzdesign": "*",
     "@types/feathersjs__errors": "^3.3.2",
     "@types/lodash": "^4.14.155",

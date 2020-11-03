@@ -1,4 +1,4 @@
-import { Aside } from '@system/lib'
+import { Aside } from '@system/components'
 import { render } from '@testing-library/react'
 import React from 'react'
 

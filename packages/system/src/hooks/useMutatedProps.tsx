@@ -1,9 +1,9 @@
+import { MutatedProps } from '@system/types'
 import { createResponsiveUtility } from '@system/utils'
 import classnames from 'classnames'
 import { ClassDictionary } from 'classnames/types'
 import { isObject, merge, omit, uniq } from 'lodash'
 import { HTMLAttributes } from 'react'
-import { MutatedProps } from '../types'
 import { useSpacers } from './useSpacers'
 
 /**

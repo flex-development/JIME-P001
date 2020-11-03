@@ -1,5 +1,5 @@
 /**
- * @file Application hooks
+ * @file Hooks Library
  * @module hooks
  */
 

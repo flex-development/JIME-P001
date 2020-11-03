@@ -1,4 +1,4 @@
-import { ProductReview, ProductReviewProps } from '@system/lib'
+import { ProductReview, ProductReviewProps } from '@system/components'
 import { StoryFN } from '@system/types'
 import { getProductReviewProps } from '@system/utils'
 import reviews from '@system/__mocks__/reviews.mock.json'

@@ -1,4 +1,4 @@
-import { ShopHeader, ShopHeaderProps } from '@system/lib'
+import { ShopHeader, ShopHeaderProps } from '@system/components'
 import { StoryFN } from '@system/types'
 import React from 'react'
 

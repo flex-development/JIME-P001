@@ -1,4 +1,4 @@
-import { createResponsiveUtility } from '@system/utils'
+import createResponsiveUtility from '@system/utils/createResponsiveUtility'
 
 /**
  * @file Tests - createResponsiveUtility

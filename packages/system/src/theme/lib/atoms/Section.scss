@@ -3,5 +3,5 @@
 /// ----------------------------------------------------------------------------
 
 section {
-  @include padding-y(map-get($spacers, 48));
+  @include padding-y($spacers-48);
 }

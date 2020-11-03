@@ -1,7 +1,6 @@
-import { Primitive } from '@flex-development/kustomtypez'
-import { GridBreakpoint } from '@system/types'
+import { GridBreakpoint, Primitive } from '@system/types'
 import { isBoolean, isNumber, isString } from 'lodash'
-import { breakpointInfix } from './breakpointInfix'
+import breakpointInfix from './breakpointInfix'
 
 /**
  * @file Create a responsive variation of a CSS class
@@ -18,7 +17,7 @@ import { breakpointInfix } from './breakpointInfix'
  * @param breakpoint - Grid breakpoint key, xs | sm | md | lg | xl | xxl
  * @param value - Responsive value, e.g 5 or 'wrap'
  */
-export const createResponsiveUtility = (
+const createResponsiveUtility = (
   prefix: string,
   breakpoint: GridBreakpoint,
   value?: Primitive
@@ -37,3 +36,5 @@ export const createResponsiveUtility = (
 
   return classes.trim()
 }
+
+export default createResponsiveUtility

@@ -1,4 +1,4 @@
-import { Button } from '@system/lib'
+import { Button } from '@system/components'
 import {
   Block,
   Disabled,

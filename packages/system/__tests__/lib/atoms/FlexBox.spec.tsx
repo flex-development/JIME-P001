@@ -1,4 +1,4 @@
-import { FlexBox } from '@system/lib'
+import { FlexBox } from '@system/components'
 import { render } from '@testing-library/react'
 import React from 'react'
 

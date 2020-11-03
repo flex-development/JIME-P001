@@ -1,4 +1,4 @@
-import { Image, ImageProps } from '@system/lib'
+import { Image, ImageProps } from '@system/components'
 import { StoryFN } from '@system/types'
 import React from 'react'
 

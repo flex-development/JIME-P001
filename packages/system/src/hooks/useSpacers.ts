@@ -1,10 +1,11 @@
+import { GRID_BREAKPOINTS } from '@system/config'
 import {
   GridBreakpoint,
   ResponsiveUtility,
   Spacer,
   SpacerPrefix
 } from '@system/types'
-import { getResponsiveUtilities, GRID_BREAKPOINTS } from '@system/utils'
+import { getResponsiveUtilities } from '@system/utils'
 import classnames from 'classnames'
 import { isEmpty, isObject } from 'lodash'
 

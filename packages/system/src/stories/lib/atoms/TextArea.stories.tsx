@@ -1,4 +1,4 @@
-import { TextArea, TextAreaProps } from '@system/lib'
+import { TextArea, TextAreaProps } from '@system/components'
 import { StoryFN } from '@system/types'
 import React from 'react'
 

@@ -1,4 +1,4 @@
-import { Form } from '@system/lib'
+import { Form } from '@system/components'
 import { render } from '@testing-library/react'
 import React from 'react'
 

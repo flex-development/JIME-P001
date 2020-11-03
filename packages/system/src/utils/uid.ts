@@ -1,4 +1,4 @@
-import { NullishString } from '@flex-development/kustomtypez'
+import { NullishString } from '@system/types'
 import { uniqueId } from 'lodash'
 
 /**
@@ -12,7 +12,9 @@ import { uniqueId } from 'lodash'
  *
  * @param prefix - If defined, prepend this value to uid
  */
-export const uid = (prefix?: NullishString): string => {
+const uid = (prefix?: NullishString): string => {
   const uid = `${Math.floor(Math.random() * JSON.parse(uniqueId()))}`
   return prefix ? `${prefix}_${uid}` : uid
 }
+
+export default uid

@@ -4,18 +4,14 @@ import { FC } from 'react'
 /**
  * @file Storybook Type Definitions
  * @module types/storybook
- * 
+ *
  * @todo Update documentation
  */
 
 export type ColorItemProps = {
   title: string
   subtitle: string
-  colors:
-  | string[]
-  | {
-    [key: string]: string
-  }
+  colors: string[] | Record<string, string>
 }
 
 export type StorybookBackgroundColorConfig = {

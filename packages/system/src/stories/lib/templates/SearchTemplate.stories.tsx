@@ -1,4 +1,4 @@
-import { SearchTemplate, SearchTemplateProps } from '@system/lib'
+import { SearchTemplate, SearchTemplateProps } from '@system/components'
 import { StoryFN } from '@system/types'
 import products from '@system/__mocks__/products.mock.json'
 import React from 'react'

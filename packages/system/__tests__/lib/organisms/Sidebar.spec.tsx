@@ -1,4 +1,4 @@
-import { LinkProps, Sidebar } from '@system/lib'
+import { LinkProps, Sidebar } from '@system/components'
 import { Default } from '@system/stories/lib/organisms/Sidebar.stories'
 import { Matcher, render } from '@testing-library/react'
 import React from 'react'

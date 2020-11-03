@@ -1,4 +1,4 @@
-import { ProductCard, ProductCardProps } from '@system/lib'
+import { ProductCard, ProductCardProps } from '@system/components'
 import { StoryFN } from '@system/types'
 import { getProductCardProps } from '@system/utils'
 import products from '@system/__mocks__/products.mock.json'

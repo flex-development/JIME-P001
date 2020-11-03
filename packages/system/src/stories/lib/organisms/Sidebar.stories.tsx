@@ -1,4 +1,4 @@
-import { Sidebar, SidebarProps } from '@system/lib'
+import { Sidebar, SidebarProps } from '@system/components'
 import { StoryFN } from '@system/types'
 import React from 'react'
 

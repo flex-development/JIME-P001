@@ -1,4 +1,4 @@
-import { PlaylistBar, PlaylistBarProps } from '@system/lib'
+import { PlaylistBar, PlaylistBarProps } from '@system/components'
 import { StoryFN } from '@system/types'
 import React from 'react'
 

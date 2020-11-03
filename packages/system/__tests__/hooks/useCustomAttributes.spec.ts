@@ -1,4 +1,4 @@
-import { useCustomAttributes } from '@system/hooks'
+import { useCustomAttributes } from '@system/hooks/useCustomAttributes'
 import { act, renderHook } from '@testing-library/react-hooks'
 
 /**

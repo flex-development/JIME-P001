@@ -1,4 +1,4 @@
-import { CheckoutLineItem, CheckoutLineItemProps } from '@system/lib'
+import { CheckoutLineItem, CheckoutLineItemProps } from '@system/components'
 import { StoryFN } from '@system/types'
 import items from '@system/__mocks__/items.mock.json'
 import React from 'react'

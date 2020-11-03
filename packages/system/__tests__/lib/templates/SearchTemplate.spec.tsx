@@ -1,4 +1,4 @@
-import { SearchTemplate } from '@system/lib'
+import { SearchTemplate } from '@system/components'
 import { Search } from '@system/stories/lib/templates/SearchTemplate.stories'
 import { render } from '@testing-library/react'
 import React from 'react'

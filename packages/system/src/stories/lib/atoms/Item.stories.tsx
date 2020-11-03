@@ -1,4 +1,4 @@
-import { Item, ItemProps } from '@system/lib'
+import { Item, ItemProps } from '@system/components'
 import { StoryFN } from '@system/types'
 import React from 'react'
 

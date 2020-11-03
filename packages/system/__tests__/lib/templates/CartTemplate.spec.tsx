@@ -1,4 +1,4 @@
-import { CartTemplate } from '@system/lib'
+import { CartTemplate } from '@system/components'
 import { Cart } from '@system/stories/lib/templates/CartTemplate.stories'
 import { render } from '@testing-library/react'
 import React from 'react'

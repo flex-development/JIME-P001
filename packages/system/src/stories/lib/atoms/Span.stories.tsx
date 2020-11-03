@@ -1,4 +1,4 @@
-import { Span, SpanProps } from '@system/lib'
+import { Span, SpanProps } from '@system/components'
 import { StoryFN } from '@system/types'
 import React from 'react'
 

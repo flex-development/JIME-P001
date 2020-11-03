@@ -2,7 +2,7 @@ import {
   CollectionTemplate,
   CollectionTemplateDefaultProps,
   CollectionTemplateProps
-} from '@system/lib'
+} from '@system/components'
 import { StoryFN } from '@system/types'
 import collections from '@system/__mocks__/collections.mock.json'
 import React from 'react'

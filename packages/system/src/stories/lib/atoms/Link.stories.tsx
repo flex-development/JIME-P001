@@ -1,4 +1,4 @@
-import { Link, LinkProps } from '@system/lib'
+import { Link, LinkProps } from '@system/components'
 import { StoryFN } from '@system/types'
 import React from 'react'
 

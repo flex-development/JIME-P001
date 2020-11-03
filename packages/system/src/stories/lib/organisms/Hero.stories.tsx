@@ -1,4 +1,4 @@
-import { Hero, HeroProps } from '@system/lib'
+import { Hero, HeroProps } from '@system/components'
 import { StoryFN } from '@system/types'
 import React from 'react'
 

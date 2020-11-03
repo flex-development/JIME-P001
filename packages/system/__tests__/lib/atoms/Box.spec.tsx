@@ -1,4 +1,4 @@
-import { Box } from '@system/lib'
+import { Box } from '@system/components'
 import { render } from '@testing-library/react'
 import React from 'react'
 

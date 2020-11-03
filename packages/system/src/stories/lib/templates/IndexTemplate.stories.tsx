@@ -2,7 +2,7 @@ import {
   IndexTemplate,
   IndexTemplateDefaultProps,
   IndexTemplateProps
-} from '@system/lib'
+} from '@system/components'
 import { StoryFN } from '@system/types'
 import { getProductReviewProps } from '@system/utils'
 import products from '@system/__mocks__/products.mock.json'

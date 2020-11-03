@@ -1,4 +1,4 @@
-import { IndexTemplate } from '@system/lib'
+import { IndexTemplate } from '@system/components'
 import { Homepage } from '@system/stories/lib/templates/IndexTemplate.stories'
 import { render } from '@testing-library/react'
 import React from 'react'

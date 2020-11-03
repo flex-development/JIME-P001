@@ -1,7 +1,8 @@
+import { GRID_BREAKPOINTS } from '@system/config'
 import { GridBreakpoint, ResponsiveUtility, RowColumns } from '@system/types'
+import { getResponsiveUtilities } from '@system/utils'
 import classnames from 'classnames'
 import { isEmpty } from 'lodash'
-import { getResponsiveUtilities, GRID_BREAKPOINTS } from '../utils'
 
 /**
  * @file Generate row utility classes

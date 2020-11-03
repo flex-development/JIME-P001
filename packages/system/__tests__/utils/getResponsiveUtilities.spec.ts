@@ -1,5 +1,5 @@
 import { Columns, FlexboxDirection, ResponsiveUtility } from '@system/types'
-import { getResponsiveUtilities } from '@system/utils'
+import getResponsiveUtilities from '@system/utils/getResponsiveUtilities'
 
 /**
  * @file Tests - getResponsiveUtilities

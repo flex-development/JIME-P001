@@ -1,5 +1,5 @@
 import { getCurrentTime } from '@app/utils'
-import { IEntity } from '@flex-development/kustomtypez'
+import { IEntity } from '@system/types'
 import { omit } from 'lodash'
 import {
   add,

@@ -1,4 +1,4 @@
-import { AddToCartForm, AddToCartFormProps } from '@system/lib'
+import { AddToCartForm, AddToCartFormProps } from '@system/components'
 import { StoryFN } from '@system/types'
 import products from '@system/__mocks__/products.mock.json'
 import React from 'react'

@@ -1,4 +1,4 @@
-import { Header } from '@system/lib'
+import { Header } from '@system/components'
 import { render } from '@testing-library/react'
 import React from 'react'
 

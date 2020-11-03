@@ -1,4 +1,4 @@
-import { ProductReviewForm, ProductReviewFormProps } from '@system/lib'
+import { ProductReviewForm, ProductReviewFormProps } from '@system/components'
 import { StoryFN } from '@system/types'
 import products from '@system/__mocks__/products.mock.json'
 import { omit } from 'lodash'

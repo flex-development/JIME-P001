@@ -1,6 +1,6 @@
-import { Icon, IconProps } from '@system/lib'
+import { Icon, IconProps } from '@system/components'
+import { ligatures as children } from '@system/config'
 import { StoryFN } from '@system/types'
-import { ligatures as children } from '@system/utils'
 import React from 'react'
 
 /**

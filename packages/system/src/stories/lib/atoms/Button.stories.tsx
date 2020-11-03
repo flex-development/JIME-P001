@@ -1,9 +1,9 @@
-import { Button, ButtonProps } from '@system/lib'
-import { StoryFN } from '@system/types'
+import { Button, ButtonProps } from '@system/components'
 import {
   button_variant as variant,
   form_control_size as size
-} from '@system/utils'
+} from '@system/config'
+import { StoryFN } from '@system/types'
 import React from 'react'
 
 /**

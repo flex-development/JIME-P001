@@ -1,8 +1,5 @@
-import {
-  AnyObject,
-  ProductVariantResource
-} from '@flex-development/kustomtypez'
-import { OptionProps } from '@system/lib'
+import { OptionProps } from '@system/components'
+import { AnyObject, ProductVariantResource } from '@system/types'
 import { isNumber } from 'lodash'
 import { useState } from 'react'
 

@@ -1,4 +1,4 @@
-import { ProductGrid, ProductGridProps } from '@system/lib'
+import { ProductGrid, ProductGridProps } from '@system/components'
 import { StoryFN } from '@system/types'
 import products from '@system/__mocks__/products.mock.json'
 import React from 'react'

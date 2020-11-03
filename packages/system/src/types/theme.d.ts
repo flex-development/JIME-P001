@@ -1,7 +1,7 @@
-import { Primitive } from '@flex-development/kustomtypez'
+import { Primitive } from './utils'
 
 /**
- * @file Type declarations related to UI theme
+ * @file UI Theme Type Declarations
  * @module types/theme
  * @see https://v5.getbootstrap.com/
  */
@@ -10,7 +10,7 @@ import { Primitive } from '@flex-development/kustomtypez'
  * {@link Button} component variants.
  */
 export type ButtonVariant =
-  ThemeColor
+  | ThemeColor
   | ThemeOutline
   | 'black'
   | 'link'
@@ -21,31 +21,18 @@ export type ButtonVariant =
 /**
  * Number of columns to span.
  */
-export type Columns =
-  'auto'
-  | 1
-  | 2
-  | 3
-  | 4
-  | 5
-  | 6
-  | 7
-  | 8
-  | 9
-  | 10
-  | 11
-  | 12
+export type Columns = 'auto' | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12
 
 /**
  * Values for the `align-items` property.
- * 
+ *
  * Defines the default behavior for how flex items are laid out along the cross
  * axis on the current line.
  *
  * @see https://css-tricks.com/snippets/css/a-guide-to-flexbox/
  */
 export type FlexboxAlignItems =
-  'around'
+  | 'around'
   | 'between'
   | 'center'
   | 'end'
@@ -54,33 +41,33 @@ export type FlexboxAlignItems =
 
 /**
  * Values for the `flex-direction` property.
- * 
+ *
  * Establishes the main-axis of the flexbox.
- * 
+ *
  * @see https://css-tricks.com/snippets/css/a-guide-to-flexbox/
  */
 export type FlexboxDirection =
-  'column'
+  | 'column'
   | 'column-reverse'
   | 'row'
   | 'row-reverse'
 
 /**
  * Flexbox values for the `display` property.
- * 
+ *
  * @see https://css-tricks.com/snippets/css/a-guide-to-flexbox/
  */
 export type FlexboxDisplay = 'flex' | 'inline-flex'
 
 /**
  * Values for the `justify-content` property.
- * 
+ *
  * Defines the alignment along the main flebox axis.
- * 
+ *
  * @see https://css-tricks.com/snippets/css/a-guide-to-flexbox/
  */
 export type FlexboxJustifyContent =
-  'around'
+  | 'around'
   | 'between'
   | 'center'
   | 'end'
@@ -89,7 +76,7 @@ export type FlexboxJustifyContent =
 
 /**
  * Configuration object for generating flexbox utility classes.
- * 
+ *
  * Supports standard and responsive variations for the following flexbox
  * properties:
  *
@@ -146,7 +133,7 @@ export type FlexboxUtilitiesConfig = {
 
 /**
  * Values for the `flex-wrap` property.
- * 
+ *
  * By default, flex items will all try to fit onto one line. You can change that
  * and allow the items to wrap as needed with this property.
  *
@@ -176,18 +163,18 @@ export type ResponsiveUtility<T = Primitive> = {
 
 /**
  * Number of columns per row.
- * 
+ *
  * @see https://v5.getbootstrap.com/docs/5.0/layout/grid/#row-columns
  */
 export type RowColumns = 'auto' | 1 | 2 | 3 | 4 | 5 | 6
 
 /**
  * Keys from `$spacers` map.
- * 
+ *
  * ! Keep in sync with Sass theme settings
  */
 export type Spacer =
-  0
+  | 0
   | 2
   | 4
   | 8
@@ -207,12 +194,12 @@ export type Spacer =
 
 /**
  * Prefixes for utilities using the `$spacers` map.
- * 
+ *
  * @see https://v5.getbootstrap.com/docs/5.0/layout/gutters/
  * @see https://v5.getbootstrap.com/docs/5.0/utilities/spacing/
  */
 export type SpacerPrefix =
-  'gx'
+  | 'gx'
   | 'gy'
   | 'mb'
   | 'mt'
@@ -248,4 +235,3 @@ export type ThemeOutline =
   | 'outline-light'
   | 'outline-primary'
   | 'outline-secondary'
-

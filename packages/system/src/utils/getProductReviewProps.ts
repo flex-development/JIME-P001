@@ -1,5 +1,5 @@
-import { AnyObject } from '@flex-development/kustomtypez'
-import { ProductReviewProps } from '@system/lib'
+import { ProductReviewProps } from '@system/components'
+import { AnyObject } from '@system/types'
 import { pick } from 'lodash'
 
 /**
@@ -12,7 +12,7 @@ import { pick } from 'lodash'
  *
  * @param obj - Object to get `ProductReview` component properties from
  */
-export const getProductReviewProps = (obj: AnyObject): ProductReviewProps => {
+const getProductReviewProps = (obj: AnyObject): ProductReviewProps => {
   const PROP_KEYS: (keyof ProductReviewProps)[] = [
     'body',
     'id',
@@ -24,3 +24,5 @@ export const getProductReviewProps = (obj: AnyObject): ProductReviewProps => {
 
   return pick(obj, PROP_KEYS) as ProductReviewProps
 }
+
+export default getProductReviewProps

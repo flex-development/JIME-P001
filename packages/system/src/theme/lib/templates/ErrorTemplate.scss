@@ -1,0 +1,49 @@
+/// ----------------------------------------------------------------------------
+/// @group ErrorTemplate
+/// ----------------------------------------------------------------------------
+
+/// ----------------------------------------------------------------------------
+/// Variables
+/// ----------------------------------------------------------------------------
+
+$error-template-font-family: -apple-system, BlinkMacSystemFont, Roboto,
+  'Segoe UI', 'Fira Sans', Avenir, 'Helvetica Neue', 'Lucida Grande', sans-serif;
+
+/// ----------------------------------------------------------------------------
+/// Styles
+/// ----------------------------------------------------------------------------
+
+.template[data-template='error'] {
+  @include flex(center, center);
+
+  @include height(100vh);
+
+  font-family: $error-template-font-family;
+
+  .error-code,
+  .error-message {
+    @include margin-bottom($spacers-0);
+  }
+}
+
+.error {
+  &-code {
+    color: $danger;
+    font-size: $font-size-xxl;
+    font-weight: $font-weight-medium;
+  }
+
+  &-message {
+    $border-space: $spacers-24;
+
+    @include border(rgba($border-color-inverse, 0.3), $border-width, left);
+
+    @include margin-left($border-space);
+
+    @include padding-left($border-space);
+
+    color: $white;
+    font-size: $font-size-base;
+    font-weight: $font-weight-normal;
+  }
+}

@@ -1,4 +1,4 @@
-import { Container } from '@system/lib'
+import { Container } from '@system/components'
 import { render } from '@testing-library/react'
 import React from 'react'
 

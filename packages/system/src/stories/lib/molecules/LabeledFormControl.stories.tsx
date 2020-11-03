@@ -1,4 +1,4 @@
-import { LabeledFormControl, LabeledFormControlProps } from '@system/lib'
+import { LabeledFormControl, LabeledFormControlProps } from '@system/components'
 import { StoryFN } from '@system/types'
 import product_options from '@system/__mocks__/product-options.mock.json'
 import React from 'react'

@@ -1,4 +1,4 @@
-import { Menu, MenuProps } from '@system/lib'
+import { Menu, MenuProps } from '@system/components'
 import { StoryFN } from '@system/types'
 import React from 'react'
 

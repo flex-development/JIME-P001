@@ -1,4 +1,4 @@
-import { CollectionTemplate } from '@system/lib'
+import { CollectionTemplate } from '@system/components'
 import { Products } from '@system/stories/lib/templates/CollectionTemplate.stories'
 import { render } from '@testing-library/react'
 import React from 'react'

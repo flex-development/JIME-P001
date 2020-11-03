@@ -1,4 +1,4 @@
-import { useMutatedProps } from '@system/hooks'
+import { useMutatedProps } from '@system/hooks/useMutatedProps'
 import { renderHook } from '@testing-library/react-hooks'
 
 /**

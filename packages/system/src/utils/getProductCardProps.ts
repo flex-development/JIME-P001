@@ -1,5 +1,5 @@
-import { AnyObject } from '@flex-development/kustomtypez'
-import { ProductCardProps } from '@system/lib'
+import { ProductCardProps } from '@system/components'
+import { AnyObject } from '@system/types'
 import { pick } from 'lodash'
 
 /**
@@ -12,7 +12,7 @@ import { pick } from 'lodash'
  *
  * @param obj - Object to get `ProductCard` component properties from
  */
-export const getProductCardProps = (obj: AnyObject): ProductCardProps => {
+const getProductCardProps = (obj: AnyObject): ProductCardProps => {
   const PROP_KEYS: (keyof ProductCardProps)[] = [
     'handle',
     'id',
@@ -22,3 +22,5 @@ export const getProductCardProps = (obj: AnyObject): ProductCardProps => {
 
   return pick(obj, PROP_KEYS) as ProductCardProps
 }
+
+export default getProductCardProps

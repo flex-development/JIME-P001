@@ -1,0 +1,66 @@
+import { useMutatedProps } from '@system/hooks'
+import { GridBreakpoint, MutatedProps } from '@system/types'
+import React, {
+  forwardRef,
+  ForwardRefExoticComponent as FREC,
+  PropsWithoutRef
+} from 'react'
+import { BoxRefAttributes } from './Box'
+
+/**
+ * @module components/atoms/Container
+ * @see https://v5.getbootstrap.com/docs/5.0/layout/containers/
+ */
+
+export interface ContainerProps extends MutatedProps<HTMLDivElement> {
+  /**
+   * Allow the `Container` to fill all of its available horizontal space.
+   *
+   * @default false
+   */
+  fluid?: boolean
+
+  /**
+   * Allow the `Container` to fill all of its available horizontal space until
+   * the specified breakpoint is reached.
+   */
+  size?: GridBreakpoint
+
+  /**
+   * Allow the `Container` to fill all of its available vertical space.
+   *
+   * @default false
+   */
+  stretch?: boolean
+}
+
+export type ReflessContainerProps = PropsWithoutRef<ContainerProps>
+
+export type ContainerRefProps = ReflessContainerProps & BoxRefAttributes
+
+/**
+ * Renders a `<div>` element with the class `container`.
+ *
+ * - **https://v5.getbootstrap.com/docs/5.0/layout/containers/**
+ */
+export const Container: FREC<ContainerRefProps> = forwardRef((props, ref) => {
+  const { fluid, size, stretch, ...rest } = props
+
+  const mutated = useMutatedProps<typeof rest, JSX.IntrinsicElements['div']>(
+    rest,
+    {
+      container: !fluid && !size,
+      'container-fluid': fluid,
+      [`container-${size}`]: !!size,
+      'container-stretch': stretch
+    }
+  )
+
+  return <div {...mutated} ref={ref} />
+})
+
+Container.displayName = 'Container'
+
+Container.defaultProps = {
+  fluid: false
+}

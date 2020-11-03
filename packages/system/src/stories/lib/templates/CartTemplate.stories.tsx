@@ -2,7 +2,7 @@ import {
   CartTemplate,
   CartTemplateDefaultProps,
   CartTemplateProps
-} from '@system/lib'
+} from '@system/components'
 import { StoryFN } from '@system/types'
 import items from '@system/__mocks__/items.mock.json'
 import React from 'react'

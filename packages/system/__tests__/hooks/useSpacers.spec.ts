@@ -1,4 +1,4 @@
-import { useSpacers } from '@system/hooks'
+import { useSpacers } from '@system/hooks/useSpacers'
 import { renderHook } from '@testing-library/react-hooks'
 
 /**

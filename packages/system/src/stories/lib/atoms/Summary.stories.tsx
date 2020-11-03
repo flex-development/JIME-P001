@@ -1,4 +1,4 @@
-import { Summary, SummaryProps } from '@system/lib'
+import { Summary, SummaryProps } from '@system/components'
 import { StoryFN } from '@system/types'
 import React from 'react'
 

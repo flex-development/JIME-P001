@@ -1,4 +1,5 @@
-import { breakpointInfix, GRID_BREAKPOINTS } from '@system/utils'
+import { GRID_BREAKPOINTS } from '@system/config'
+import breakpointInfix from '@system/utils/breakpointInfix'
 
 /**
  * @file Tests - breakpointInfix

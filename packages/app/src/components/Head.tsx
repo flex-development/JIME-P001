@@ -1,4 +1,4 @@
-import { AnyObject, NullishString } from '@flex-development/kustomtypez'
+import { AnyObject, NullishString } from '@system/types'
 import NextHead from 'next/head'
 import React, { FC } from 'react'
 import uuid from 'react-uuid'

@@ -1,4 +1,4 @@
-import { Details, DetailsProps } from '@system/lib'
+import { Details, DetailsProps } from '@system/components'
 import { StoryFN } from '@system/types'
 import React from 'react'
 

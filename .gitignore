@@ -91,7 +91,7 @@ node_modules/
 jspm_packages/
 
 # TypeScript v1 declaration files
-typings/
+# typings/
 
 # TypeScript cache
 *.tsbuildinfo
@@ -209,7 +209,9 @@ $RECYCLE.BIN/
 
 # Builds & Distributions
 build/
-dist/
+
+# Allow packages to be installed from GitHub
+# dist/
 
 # Environment variables
 .env.local

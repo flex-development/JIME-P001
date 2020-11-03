@@ -1,4 +1,4 @@
-import { FormCheck, FormCheckProps } from '@system/lib'
+import { FormCheck, FormCheckProps } from '@system/components'
 import { StoryFN } from '@system/types'
 import React from 'react'
 

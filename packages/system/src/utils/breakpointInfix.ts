@@ -1,4 +1,4 @@
-import { GridBreakpoint } from '../types'
+import { GridBreakpoint } from '@system/types'
 
 /**
  * @file Responsive utility helper
@@ -15,6 +15,8 @@ import { GridBreakpoint } from '../types'
  *
  * @param breakpoint - Breakpoint key
  */
-export const breakpointInfix = (breakpoint: GridBreakpoint): string => {
+const breakpointInfix = (breakpoint: GridBreakpoint): string => {
   return breakpoint !== 'xs' ? `-${breakpoint}` : ''
 }
+
+export default breakpointInfix

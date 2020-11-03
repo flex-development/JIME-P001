@@ -1,4 +1,8 @@
-import { Heading, ProductHeading, ProductHeadingProps } from '@system/lib'
+import {
+  Heading,
+  ProductHeading,
+  ProductHeadingProps
+} from '@system/components'
 import { StoryFN } from '@system/types'
 import products from '@system/__mocks__/products.mock.json'
 import React from 'react'

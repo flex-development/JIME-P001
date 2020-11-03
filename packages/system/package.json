@@ -29,8 +29,7 @@
   "publishConfig": {
     "directory": "src"
   },
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "src/index.ts",
   "scripts": {
     "predev": "vc env pull --yes && yarn test:quiet",
     "dev:storybook": "start-storybook -p 3000 -s ../app/public --ci",
@@ -40,16 +39,16 @@
     "test:quiet": "yarn test || true",
     "prebuild": "yarn test:quiet && rm -rf public && mkdir public",
     "build": "build-storybook -o public",
-    "postbuild": "shx cp -R ../app/public/assets public",
-    "prepare": "rm -rf dist && tsc --project tsconfig.prod.json"
+    "postbuild": "shx cp -R ../app/public/assets public"
   },
   "dependencies": {
     "@types/bootstrap": "^4.5.0",
     "@types/classnames": "^2.2.10",
-    "@types/lodash": "^4.14.158",
+    "@types/mdx-js__react": "^1.5.3",
     "bootstrap": "^5.0.0-alpha1",
     "classnames": "^2.2.6",
-    "lodash": "^4.17.19",
+    "lodash": "^4.17.15",
+    "lodash-es": "^4.17.15",
     "mdx-scoped-runtime": "^0.7.5",
     "popper": "^1.0.1",
     "react-hanger": "^2.2.1",
@@ -57,7 +56,6 @@
     "validator": "^13.1.1"
   },
   "devDependencies": {
-    "@flex-development/kustomtypez": "*",
     "@storybook/addon-a11y": "^6.0.21",
     "@storybook/addon-actions": "^6.0.21",
     "@storybook/addon-backgrounds": "^6.0.21",
@@ -95,20 +93,28 @@
     "regenerator-runtime": "^0.13.7",
     "sass": "^1.26.10",
     "sass-loader": "^9.0.3",
+    "shopify-api-node": "^3.4.4",
     "shopify-buy": "2.11.0",
     "style-loader": "^1.2.1",
     "url-loader": "^4.1.0"
   },
   "peerDependencies": {
-    "@flex-development/kustomtypez": "*",
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
+    "@types/shopify-buy": "^2.10.3",
     "musickit-typescript": "^1.2.4",
     "next": "^9.5.1",
+    "postcss": "^7.0.32",
+    "postcss-flexbugs-fixes": "^4.2.1",
+    "postcss-loader": "^3.0.0",
+    "postcss-preset-env": "^6.7.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "regenerator-runtime": "^0.13.7",
-    "shopify-buy": "^2.11.0"
+    "sass": "^1.26.10",
+    "sass-loader": "^9.0.3",
+    "shopify-api-node": "^3.4.4",
+    "shopify-buy": "2.11.0"
   },
   "browserslist": {
     "production": [
@@ -121,5 +127,18 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "engines": {
+    "node": ">=10"
+  },
+  "size-limit": [
+    {
+      "path": "dist/kustomzdesign.cjs.production.min.js",
+      "limit": "300 KB"
+    },
+    {
+      "path": "dist/kustomzdesign.esm.js",
+      "limit": "300 KB"
+    }
+  ]
 }

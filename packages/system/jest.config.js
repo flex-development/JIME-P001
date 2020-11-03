@@ -18,7 +18,13 @@ module.exports = {
     '@testing-library/jest-dom/extend-expect',
     './jest.setup.ts'
   ],
-  testPathIgnorePatterns: ['build/', 'dist/', 'node_modules/', '(.*).d.ts'],
+  testPathIgnorePatterns: [
+    'build/',
+    'dist/',
+    'node_modules/',
+    '__tests__/__mocks__/',
+    '(.*).d.ts'
+  ],
   transform: {
     '^.+\\.[tj]sx?$': 'babel-jest'
   },

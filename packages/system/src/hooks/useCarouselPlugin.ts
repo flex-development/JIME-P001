@@ -1,4 +1,4 @@
-import { NullishNumber } from '@flex-development/kustomtypez'
+import { NullishNumber } from '@system/types'
 import { CarouselEventHandler, CarouselOption } from 'bootstrap'
 import CarouselPlugin from 'bootstrap/js/dist/carousel'
 import {

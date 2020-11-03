@@ -1,4 +1,4 @@
-import { Paragraph, ParagraphProps } from '@system/lib'
+import { Paragraph, ParagraphProps } from '@system/components'
 import { StoryFN } from '@system/types'
 import React from 'react'
 

@@ -1,11 +1,8 @@
 import {
-  AnyObject,
-  ProductVariantResource
-} from '@flex-development/kustomtypez'
-import {
   AshTray,
   Kustomz
 } from '@system/stories/lib/molecules/AddToCartForm.stories'
+import { AnyObject, ProductVariantResource } from '@system/types'
 import { fireEvent, render, screen } from '@testing-library/react'
 import User from '@testing-library/user-event'
 import React from 'react'

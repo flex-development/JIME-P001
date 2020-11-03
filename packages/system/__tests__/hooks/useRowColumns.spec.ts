@@ -1,4 +1,4 @@
-import { useRowColumns } from '@system/hooks'
+import { useRowColumns } from '@system/hooks/useRowColumns'
 import { renderHook } from '@testing-library/react-hooks'
 
 /**

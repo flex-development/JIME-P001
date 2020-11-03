@@ -1,4 +1,4 @@
-import { Footer } from '@system/lib'
+import { Footer } from '@system/components'
 import { render } from '@testing-library/react'
 import React from 'react'
 

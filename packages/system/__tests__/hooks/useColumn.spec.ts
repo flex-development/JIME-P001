@@ -1,4 +1,4 @@
-import { useColumn } from '@system/hooks'
+import { useColumn } from '@system/hooks/useColumn'
 import { renderHook } from '@testing-library/react-hooks'
 
 /**

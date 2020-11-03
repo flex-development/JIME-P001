@@ -1,4 +1,4 @@
-import { useLineItemInput } from '@system/hooks'
+import { useLineItemInput } from '@system/hooks/useLineItemInput'
 import { act, renderHook } from '@testing-library/react-hooks'
 
 /**

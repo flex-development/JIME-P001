@@ -13,16 +13,13 @@
     "useCache": true
   },
   "compilerOptions": {
-    "checkJs": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "isolatedModules": true,
-    "jsx": "preserve",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "noEmit": true,
-    "module": "esnext",
-    "strictPropertyInitialization": false,
-    "target": "esnext"
+    "isolatedModules": true
+    // "jsx": "preserve",
+    // "lib": ["dom", "dom.iterable", "esnext"],
+    // "noEmit": true,
+    // "target": "esnext"
   },
   "exclude": ["node_modules"],
   "extends": "../../tsconfig.json",

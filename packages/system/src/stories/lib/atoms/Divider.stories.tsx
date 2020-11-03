@@ -1,4 +1,4 @@
-import { Divider, DividerProps } from '@system/lib'
+import { Divider, DividerProps } from '@system/components'
 import { StoryFN } from '@system/types'
 import React from 'react'
 

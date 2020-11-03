@@ -1,4 +1,4 @@
-import { ANYTHING } from '@flex-development/kustomtypez'
+import { ANYTHING } from '@system/types'
 import { isBoolean, isNumber, isString } from 'lodash'
 
 /**
@@ -17,7 +17,7 @@ import { isBoolean, isNumber, isString } from 'lodash'
  *
  * @param value - Quantity value to sanitize
  */
-export const sanitizeQuantity = (value?: ANYTHING): number => {
+const sanitizeQuantity = (value?: ANYTHING): number => {
   // Check if value is a boolean
   if (isBoolean(value)) return value ? 1 : 0
 
@@ -28,3 +28,5 @@ export const sanitizeQuantity = (value?: ANYTHING): number => {
 
   return !isNumber(parsed) || parsed < 0 ? 0 : parsed
 }
+
+export default sanitizeQuantity

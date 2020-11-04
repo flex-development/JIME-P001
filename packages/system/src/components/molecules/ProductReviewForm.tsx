@@ -2,7 +2,7 @@ import { useMutatedProps, useProductVariants } from '@system/hooks'
 import {
   AnyObject,
   ANYTHING,
-  Events,
+  EventHandlers,
   ProductResource,
   StampedProductReviewEntityInput
 } from '@system/types'
@@ -62,7 +62,7 @@ export interface ProductReviewFormProps extends FormProps {
    */
   submit?(
     review: Partial<StampedProductReviewEntityInput>,
-    event: Events.Click.Button
+    event: EventHandlers.Click.Button
   ): ANYTHING
 
   /**
@@ -93,7 +93,7 @@ export const ProductReviewForm: FC<ProductReviewFormProps> = (
     id,
     submit = (
       review: Partial<StampedProductReviewEntityInput>,
-      event: Events.Click.Button
+      event: EventHandlers.Click.Button
     ) => {
       event.preventDefault()
       console.log('Submitted product review', review)
@@ -145,7 +145,7 @@ export const ProductReviewForm: FC<ProductReviewFormProps> = (
         data-selected={selected.title}
         control={{
           name: 'variant',
-          onChange: ({ target: { value } }: Events.Change.Select) => {
+          onChange: ({ target: { value } }: EventHandlers.Change.Select) => {
             const variant = variants.find(v => v.id === value)
 
             selectVariant(value)
@@ -170,7 +170,7 @@ export const ProductReviewForm: FC<ProductReviewFormProps> = (
         control={{
           invalid: errors?.email,
           name: 'email',
-          onChange: ({ target: { value } }: Events.Change.Input) => {
+          onChange: ({ target: { value } }: EventHandlers.Change.Input) => {
             const valid = isEmail(value)
 
             if (valid) updateReview({ email: value })
@@ -188,7 +188,7 @@ export const ProductReviewForm: FC<ProductReviewFormProps> = (
         control={{
           invalid: errors?.reviewTitle,
           name: 'reviewTitle',
-          onChange: ({ target: { value } }: Events.Change.Input) => {
+          onChange: ({ target: { value } }: EventHandlers.Change.Input) => {
             const valid = value.length >= 3
 
             if (valid) updateReview({ reviewTitle: value })
@@ -206,7 +206,7 @@ export const ProductReviewForm: FC<ProductReviewFormProps> = (
         control={{
           invalid: errors?.reviewMessage,
           name: 'reviewMessage',
-          onChange: ({ target: { value } }: Events.Change.TextArea) => {
+          onChange: ({ target: { value } }: EventHandlers.Change.TextArea) => {
             const valid = value.length >= 10 && value.length <= 80
 
             if (valid) updateReview({ reviewMessage: value })
@@ -245,7 +245,7 @@ export const ProductReviewForm: FC<ProductReviewFormProps> = (
           className='pl-0-first w-70'
           mt={{ sm: 0, xs: 16 }}
           name='reviewRating'
-          onChange={({ target }: Events.Change.Input) => {
+          onChange={({ target }: EventHandlers.Change.Input) => {
             updateReview({ reviewRating: JSON.parse(target.value) })
           }}
         />
@@ -256,7 +256,7 @@ export const ProductReviewForm: FC<ProductReviewFormProps> = (
         className='product-review-form-btn'
         disabled={isEmpty(errors) || Object.values(errors).includes(true)}
         mt={12}
-        onClick={(event: Events.Click.Button) => submit(review, event)}
+        onClick={(event: EventHandlers.Click.Button) => submit(review, event)}
         type='submit'
       >
         Submit Review

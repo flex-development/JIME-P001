@@ -1,6 +1,7 @@
 import { PageTemplate, PageTemplateProps } from '@system/components'
 import { StoryFN } from '@system/types'
 import React from 'react'
+import { PureMarkdown, PureMDX } from '../atoms/MDXBox.stories'
 
 /**
  * @file Stories - PageTemplate
@@ -25,7 +26,7 @@ export const Markdown: StoryFN<PageTemplateProps> = (
 ) => <PageTemplate {...args} />
 
 Markdown.args = {
-  body: '## Hello, World'
+  body: PureMarkdown.args.children
 }
 
 export const MDX: StoryFN<PageTemplateProps> = (args: PageTemplateProps) => (
@@ -33,6 +34,5 @@ export const MDX: StoryFN<PageTemplateProps> = (args: PageTemplateProps) => (
 )
 
 MDX.args = {
-  body:
-    '<Section><Container fluid><Heading size={2}>MDX Page</Heading><Paragraph mb={72}>Ramps fixie flexitarian locavore man bun shabby chic. Lyft asymmetrical forage mumblecore, kombucha copper mug snackwave selfies offal pork belly activated charcoal tacos. Pop-up wolf 3 wolf moon truffaut umami scenester mlkshk bespoke aesthetic whatever tousled drinking vinegar fanny pack iPhone.</Paragraph></Container></Section>'
+  body: PureMDX.args.children
 }

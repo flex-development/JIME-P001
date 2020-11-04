@@ -1,5 +1,5 @@
 import { useLineItemInput, useProductVariants } from '@system/hooks'
-import { ANYTHING, Events, ProductVariantResource } from '@system/types'
+import { ANYTHING, EventHandlers, ProductVariantResource } from '@system/types'
 import React, { FC } from 'react'
 import { LineItemToAdd } from 'shopify-buy'
 import {
@@ -31,7 +31,7 @@ export interface AddToCartFormProps extends FormProps {
    * @param item - Line item to add to cart
    * @param event - `<button>` onClick event
    */
-  addToCart?(item: LineItemToAdd, event: Events.Click.Button): ANYTHING
+  addToCart?(item: LineItemToAdd, event: EventHandlers.Click.Button): ANYTHING
 
   /**
    * Product description.
@@ -70,7 +70,7 @@ export const AddToCartForm: FC<AddToCartFormProps> = (
   props: AddToCartFormProps
 ) => {
   const {
-    addToCart = (item: LineItemToAdd, event: Events.Click.Button) => {
+    addToCart = (item: LineItemToAdd, event: EventHandlers.Click.Button) => {
       event.preventDefault()
       console.log(`${item.variantId} added to cart`, item)
     },
@@ -116,7 +116,9 @@ export const AddToCartForm: FC<AddToCartFormProps> = (
           aria-label='Product variant selection'
           data-selected={selected.title}
           name='variantId'
-          onChange={(e: Events.Change.Select) => selectVariant(e.target.value)}
+          onChange={(e: EventHandlers.Change.Select) =>
+            selectVariant(e.target.value)
+          }
           options={options}
           placeholder='Select an option'
           value={selected.id}
@@ -126,7 +128,7 @@ export const AddToCartForm: FC<AddToCartFormProps> = (
           control={{
             'aria-label': 'Product quantity',
             min: 0,
-            onChange: ({ target: { value } }: Events.Change.Input) => {
+            onChange: ({ target: { value } }: EventHandlers.Change.Input) => {
               return updateQuantity(value)
             },
             type: 'number',
@@ -142,7 +144,7 @@ export const AddToCartForm: FC<AddToCartFormProps> = (
         <Row mt={12}>
           <TextArea
             aria-label='Kustom product description'
-            onChange={({ target }: Events.Change.TextArea) => {
+            onChange={({ target }: EventHandlers.Change.TextArea) => {
               return updateAttribute(target.name, target.value)
             }}
             name='kpd'
@@ -158,7 +160,9 @@ export const AddToCartForm: FC<AddToCartFormProps> = (
           aria-label='Add product to cart'
           className='w-sm-auto w-100'
           disabled={!selected.available}
-          onClick={(event: Events.Click.Button) => addToCart(item, event)}
+          onClick={(event: EventHandlers.Click.Button) =>
+            addToCart(item, event)
+          }
           type='submit'
         />
       </FlexBox>

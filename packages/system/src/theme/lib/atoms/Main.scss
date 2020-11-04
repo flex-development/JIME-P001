@@ -18,10 +18,10 @@ main.template {
 
   @include padding-y($template-padding-y);
 
-  &:not(&[data-template='error']) {
-    > div,
-    > div section,
-    > section {
+  &:not([data-template='error']) {
+    > section,
+    > .mdx-box,
+    > .mdx-box section {
       @include padding-x($spacers-0);
 
       @include padding-y($spacers-0, $template-padding-y);

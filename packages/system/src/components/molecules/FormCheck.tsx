@@ -2,7 +2,7 @@ import { useMutatedProps } from '@system/hooks'
 import {
   ANYTHING,
   ButtonVariant,
-  Events,
+  EventHandlers,
   FormControlSize,
   MutatedFormControlProps
 } from '@system/types'
@@ -113,7 +113,7 @@ export interface FormCheckProps extends BoxProps {
   /**
    * `onChange` handler. Fires when the `<input>` element value changes.
    */
-  onChange?(event: Events.Change.Input): ANYTHING
+  onChange?(event: EventHandlers.Change.Input): ANYTHING
 
   /**
    * Make button-like checkboxes and radio buttons smaller or larger.

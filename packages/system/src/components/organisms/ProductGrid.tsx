@@ -43,6 +43,8 @@ export const ProductGrid: FC<ProductGridProps> = (props: ProductGridProps) => {
   )
 }
 
+ProductGrid.displayName = 'ProductGrid'
+
 ProductGrid.defaultProps = {
   gy: 24,
   md: 3,

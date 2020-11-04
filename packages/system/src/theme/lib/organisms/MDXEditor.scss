@@ -1,0 +1,15 @@
+/// ----------------------------------------------------------------------------
+/// @group MDXEditor
+/// ----------------------------------------------------------------------------
+
+.rc-md-editor {
+  .button-type-table {
+    display: none !important;
+  }
+}
+
+.sec-html {
+  &.visible {
+    background-color: $body-bg;
+  }
+}

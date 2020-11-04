@@ -1,5 +1,5 @@
 import { useMutatedProps } from '@system/hooks'
-import { ANYTHING, Events } from '@system/types'
+import { ANYTHING, EventHandlers } from '@system/types'
 import React, { FC } from 'react'
 import useNumber from 'react-hanger/array/useNumber'
 import uuid from 'react-uuid'
@@ -20,7 +20,7 @@ export interface ProductRatingFieldProps extends BoxProps {
   /**
    * `onChange` handler. Fires when a rating `<input>` element is clicked.
    */
-  onChange?(event: Events.Change.Input): ANYTHING
+  onChange?(event: EventHandlers.Change.Input): ANYTHING
 
   /**
    * Name of `<input>` element.
@@ -85,7 +85,7 @@ export const ProductRatingField: FC<ProductRatingFieldProps> = (
           key={uuid()}
           my={0}
           name={name}
-          onChange={(event: Events.Change.Input) => {
+          onChange={(event: EventHandlers.Change.Input) => {
             setRating(JSON.parse(event.target.value))
             if (onChange) return onChange(event)
           }}

@@ -1,7 +1,7 @@
 import { useMutatedProps } from '@system/hooks'
 import {
   ANYTHING,
-  Events,
+  EventHandlers,
   MusicKitMediaItem,
   MusicKitPlaybackState,
   MutatedProps
@@ -42,7 +42,7 @@ export interface PlaylistBarProps extends MutatedProps {
    *
    * @param event - `click` event from playback button
    */
-  handlePlayback?(event: Events.Click.Button): ANYTHING
+  handlePlayback?(event: EventHandlers.Click.Button): ANYTHING
 
   /**
    * Skip button handler. This function will be fired when a the `skip_previous`
@@ -51,7 +51,7 @@ export interface PlaylistBarProps extends MutatedProps {
    *
    * @param event - `click` event from skip button
    */
-  handleSkip?(event: Events.Click.Button): ANYTHING
+  handleSkip?(event: EventHandlers.Click.Button): ANYTHING
 
   /**
    * Queue playback state. If `playing`, the playback button will display a
@@ -83,11 +83,11 @@ export const PlaylistBar: FC<PlaylistBarProps> = (props: PlaylistBarProps) => {
   const {
     artistName,
     artworkURL,
-    handlePlayback = (event: Events.Click.Button) => {
+    handlePlayback = (event: EventHandlers.Click.Button) => {
       event.preventDefault && event.preventDefault()
       console.log(`Playback state: ${event.target.value}`)
     },
-    handleSkip = (event: Events.Click.Button) => {
+    handleSkip = (event: EventHandlers.Click.Button) => {
       event.preventDefault && event.preventDefault()
       console.log(event.target.name)
     },
@@ -140,6 +140,8 @@ export const PlaylistBar: FC<PlaylistBarProps> = (props: PlaylistBarProps) => {
     </Section>
   )
 }
+
+PlaylistBar.displayName = 'PlaylistBar'
 
 PlaylistBar.defaultProps = {
   playback_state: 'none'

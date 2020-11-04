@@ -53,6 +53,15 @@ $theme-colors: (
   secondary-25: $secondary-25
 );
 
+$color-utils: map-merge($theme-colors, (
+  'black-50': rgba(bootstrap.$black, .5),
+  'body': $body-color,
+  'muted': bootstrap.$text-muted,
+  'reset': inherit,
+  'white-50': rgba(bootstrap.$white, .5),
+  'white': bootstrap.$white
+));
+
 // -----------------------------------------------------------------------------
 // Grid Items
 // -----------------------------------------------------------------------------
@@ -195,6 +204,15 @@ $font-sizes: (
   xxl: $font-size-xxl
 );
 
+$font-sizes-headings: (
+  1: $h1-font-size,
+  2: $h2-font-size,
+  3: $h3-font-size,
+  4: $h4-font-size,
+  5: $h5-font-size,
+  6: $h6-font-size
+);
+
 $font-weights: (
   'hairline': $font-weight-hairline,
   'thin': $font-weight-thin,
@@ -228,6 +246,11 @@ $utilities: (
     class: bg,
     responsive: true,
     values: $bg-sizes
+  ),
+  'color': (
+    property: color,
+    class: c,
+    values: $color-utils
   ),
   'font-family': (
     property: font-family,

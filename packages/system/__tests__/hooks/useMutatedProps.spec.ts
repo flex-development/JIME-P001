@@ -24,6 +24,18 @@ it('adds the class "pt-sm-72" using the `pt` property', () => {
   expect(hook.result.current).toMatchObject({ className: 'pt-sm-72' })
 })
 
+it('adds the class "bg-danger" using the `bg` property', () => {
+  const hook = renderHook(() => useMutatedProps({ bg: 'danger' }))
+
+  expect(hook.result.current).toMatchObject({ className: 'bg-danger' })
+})
+
+it('adds the class "c-muted" using the `c` property', () => {
+  const hook = renderHook(() => useMutatedProps({ c: 'muted' }))
+
+  expect(hook.result.current).toMatchObject({ className: 'c-muted' })
+})
+
 it('adds the class "d-flex" using the `flex` property', () => {
   const hook = renderHook(() => useMutatedProps({ flex: true }))
 
@@ -34,6 +46,12 @@ it('adds the class "d-inline-flex" using the `flex` property', () => {
   const hook = renderHook(() => useMutatedProps({ flex: 'inline' }))
 
   expect(hook.result.current).toMatchObject({ className: 'd-inline-flex' })
+})
+
+it('adds the class "bg-gradient" using the `gradient` property', () => {
+  const hook = renderHook(() => useMutatedProps({ gradient: true }))
+
+  expect(hook.result.current).toMatchObject({ className: 'bg-gradient' })
 })
 
 it('sets props.style.backgroundImage', () => {

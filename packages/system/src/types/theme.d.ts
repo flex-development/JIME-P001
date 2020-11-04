@@ -7,16 +7,25 @@ import { Primitive } from './utils'
  */
 
 /**
+ * Background colors.
+ */
+export type BackgroundColor =
+  GrayscaleColor
+  | SemanticColor
+  | ThemeColor
+  | 'gradient'
+  | 'transparent'
+
+/**
  * {@link Button} component variants.
  */
 export type ButtonVariant =
+  | GrayscaleColor
   | ThemeColor
   | ThemeOutline
-  | 'black'
   | 'link'
   | 'outline-black'
   | 'outline-white'
-  | 'white'
 
 /**
  * Number of columns to span.
@@ -147,6 +156,21 @@ export type FlexboxWrap = 'nowrap' | 'wrap' | 'wrap-reverse'
 export type FormControlSize = 'sm' | 'lg'
 
 /**
+ * Grayscale base colors.
+ */
+export type GrayscaleColor =
+  | 'black'
+  | 'white'
+
+/**
+ * Grayscale colors.
+ */
+export type GrayscaleColorVariation =
+  | 'black-50'
+  | 'muted'
+  | 'white-50'
+
+/**
  * Responsive breakpoints.
  */
 export type GridBreakpoint = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl'
@@ -167,6 +191,15 @@ export type ResponsiveUtility<T = Primitive> = {
  * @see https://v5.getbootstrap.com/docs/5.0/layout/grid/#row-columns
  */
 export type RowColumns = 'auto' | 1 | 2 | 3 | 4 | 5 | 6
+
+/**
+ * Semantic color names.
+ */
+export type SemanticColor =
+  | 'danger'
+  | 'info'
+  | 'success'
+  | 'warning'
 
 /**
  * Keys from `$spacers` map.
@@ -235,3 +268,14 @@ export type ThemeOutline =
   | 'outline-light'
   | 'outline-primary'
   | 'outline-secondary'
+
+/**
+ * Text colors.
+ */
+export type TextColor =
+  GrayscaleColor
+  | GrayscaleColorVariation
+  | SemanticColor
+  | ThemeColor
+  | 'body'
+

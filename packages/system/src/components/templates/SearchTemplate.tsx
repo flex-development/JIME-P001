@@ -18,10 +18,6 @@ export interface SearchTemplateProps extends MutatedProps {
   results?: ProductResource[]
 }
 
-export const SearchTemplateDefaultProps = {
-  results: []
-}
-
 /**
  * Displays product search results.
  *
@@ -31,7 +27,10 @@ export const SearchTemplateDefaultProps = {
 export const SearchTemplate: TC<SearchTemplateProps> = (
   props: SearchTemplateProps
 ) => {
-  const { results = SearchTemplateDefaultProps.results, ...rest } = props
+  const {
+    results = SearchTemplate.defaultProps?.results as ProductResource[],
+    ...rest
+  } = props
 
   const mutated = useMutatedProps<typeof rest>(rest, 'template')
 
@@ -48,6 +47,10 @@ export const SearchTemplate: TC<SearchTemplateProps> = (
   )
 }
 
-SearchTemplate.template_id = 'search'
+SearchTemplate.displayName = 'SearchTemplate'
 
-SearchTemplate.defaultProps = SearchTemplateDefaultProps
+SearchTemplate.defaultProps = {
+  results: []
+}
+
+SearchTemplate.template_id = 'search'

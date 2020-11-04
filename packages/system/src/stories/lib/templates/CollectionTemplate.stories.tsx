@@ -1,8 +1,4 @@
-import {
-  CollectionTemplate,
-  CollectionTemplateDefaultProps,
-  CollectionTemplateProps
-} from '@system/components'
+import { CollectionTemplate, CollectionTemplateProps } from '@system/components'
 import { StoryFN } from '@system/types'
 import collections from '@system/__mocks__/collections.mock.json'
 import React from 'react'
@@ -32,7 +28,7 @@ export const Products: StoryFN<CollectionTemplateProps> = (
 ) => <CollectionTemplate {...args} />
 
 Products.args = {
-  ...CollectionTemplateDefaultProps,
+  ...CollectionTemplate?.defaultProps,
   description,
   products,
   title

@@ -264,3 +264,7 @@ export const ProductReviewForm: FC<ProductReviewFormProps> = (
     </Form>
   )
 }
+
+ProductReviewForm.displayName = 'ProductReviewForm'
+
+ProductReviewForm.defaultProps = {}

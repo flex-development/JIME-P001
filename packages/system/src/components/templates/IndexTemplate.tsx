@@ -84,12 +84,12 @@ export const IndexTemplate: TC<IndexTemplateProps> = (
 ) => {
   const {
     about_section_text,
-    about_section_title = IndexTemplateDefaultProps.about_section_title,
-    max_products: max = IndexTemplateDefaultProps.max_products,
-    products = IndexTemplateDefaultProps.products,
+    about_section_title = IndexTemplate.defaultProps?.about_section_title,
+    max_products: max = IndexTemplate.defaultProps?.max_products as number,
+    products = IndexTemplate.defaultProps?.products as ProductResource[],
     products_section_text,
-    products_section_title = IndexTemplateDefaultProps.products_section_title,
-    reviews = IndexTemplateDefaultProps.reviews,
+    products_section_title = IndexTemplate.defaultProps?.products_section_title,
+    reviews = IndexTemplate.defaultProps?.reviews as ProductReviewProps[],
     ...rest
   } = props
 
@@ -125,6 +125,14 @@ export const IndexTemplate: TC<IndexTemplateProps> = (
   )
 }
 
-IndexTemplate.template_id = 'index'
+IndexTemplate.displayName = 'IndexTemplate'
 
-IndexTemplate.defaultProps = IndexTemplateDefaultProps
+IndexTemplate.defaultProps = {
+  about_section_title: 'About Morena',
+  max_products: 3,
+  products: [],
+  products_section_title: 'Products',
+  reviews: []
+}
+
+IndexTemplate.template_id = 'index'

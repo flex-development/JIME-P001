@@ -43,3 +43,7 @@ export const ProductHeading: FC<ProductHeadingProps> = (
     </Heading>
   )
 }
+
+ProductHeading.displayName = 'ProductHeading'
+
+ProductHeading.defaultProps = {}

@@ -36,6 +36,8 @@ export const Menu: FC<MenuProps> = (props: MenuProps) => {
   )
 }
 
+Menu.displayName = 'Menu'
+
 Menu.defaultProps = {
   links: []
 }

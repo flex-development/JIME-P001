@@ -85,6 +85,8 @@ export const LabeledFormControl: FC<LabeledFormControlProps> = (
   )
 }
 
+LabeledFormControl.displayName = 'LabeledFormControl'
+
 LabeledFormControl.defaultProps = {
   control: {},
   name: 'input'

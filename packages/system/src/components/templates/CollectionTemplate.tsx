@@ -28,10 +28,6 @@ export interface CollectionTemplateProps extends MutatedProps {
   title: string
 }
 
-export const CollectionTemplateDefaultProps = {
-  products: []
-}
-
 /**
  * Displays the title of a collection as well as the products in it.
  *
@@ -43,7 +39,7 @@ export const CollectionTemplate: TC<CollectionTemplateProps> = (
 ) => {
   const {
     description,
-    products = CollectionTemplateDefaultProps.products,
+    products = CollectionTemplate.defaultProps?.products,
     title,
     ...rest
   } = props
@@ -61,6 +57,10 @@ export const CollectionTemplate: TC<CollectionTemplateProps> = (
   )
 }
 
-CollectionTemplate.template_id = 'collection'
+CollectionTemplate.displayName = 'CollectionTemplate'
 
-CollectionTemplate.defaultProps = CollectionTemplateDefaultProps
+CollectionTemplate.defaultProps = {
+  products: []
+}
+
+CollectionTemplate.template_id = 'collection'

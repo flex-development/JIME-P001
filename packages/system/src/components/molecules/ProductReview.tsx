@@ -42,7 +42,7 @@ export interface ProductReviewProps extends Omit<BoxProps, 'id'> {
   /**
    * Review title.
    */
-  title: string
+  title: StampedProductReviewEntity['title']
 }
 
 /**
@@ -86,4 +86,10 @@ export const ProductReview: FC<ProductReviewProps> = (
       </Column>
     </Box>
   )
+}
+
+ProductReview.displayName = 'ProductReview'
+
+ProductReview.defaultProps = {
+  body: ''
 }

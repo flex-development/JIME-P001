@@ -146,6 +146,8 @@ export const ProductCard: FC<ProductCardProps> = (props: ProductCardProps) => {
   )
 }
 
+ProductCard.displayName = 'ProductCard'
+
 ProductCard.defaultProps = {
   variants: []
 }

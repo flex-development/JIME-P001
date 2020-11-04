@@ -211,6 +211,8 @@ export const CheckoutLineItem: FC<CheckoutLineItemProps> = (
   )
 }
 
+CheckoutLineItem.displayName = 'CheckoutLineItem'
+
 CheckoutLineItem.defaultProps = {
   quantity: 1
 }

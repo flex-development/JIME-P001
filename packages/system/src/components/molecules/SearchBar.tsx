@@ -18,6 +18,12 @@ export type SearchBarEvent = FormEvent | EventHandlers.Click.Button
  */
 export interface SearchBarProps extends FormProps {
   /**
+   * Form submission handler. Fires when the users submits the search form or
+   * clicks the search button.
+   */
+  handleSearch?(query: string, event: SearchBarEvent): ANYTHING
+
+  /**
    * Placeholder to display in `Input` component.
    */
   placeholder?: InputProps['placeholder']
@@ -26,15 +32,6 @@ export interface SearchBarProps extends FormProps {
    * Initial search query.
    */
   query?: string
-
-  /**
-   * Form submission handler. Fires when the users submits the search form or
-   * clicks the search button.
-   *
-   * @param query - User query
-   * @param event - `click` event from search button or `<form>` submit event
-   */
-  search?(query: string, event: SearchBarEvent): ANYTHING
 }
 
 /**
@@ -42,16 +39,15 @@ export interface SearchBarProps extends FormProps {
  */
 export const SearchBar: FC<SearchBarProps> = (props: SearchBarProps) => {
   const {
+    handleSearch = SearchBar.defaultProps?.handleSearch as NonNullable<
+      SearchBarProps['handleSearch']
+    >,
     placeholder,
     query: initialQuery,
-    search = (query: string, event: SearchBarEvent) => {
-      event.preventDefault()
-      console.log('User search query', query)
-    },
     ...rest
   } = props
 
-  rest.onSubmit = (event: FormEvent) => search(query, event)
+  rest.onSubmit = (event: FormEvent) => handleSearch(query, event)
 
   const mutated = useMutatedProps<typeof rest>(rest, 'searchbar')
 
@@ -63,7 +59,7 @@ export const SearchBar: FC<SearchBarProps> = (props: SearchBarProps) => {
         aria-label='Search button'
         className='searchbar-btn'
         icon={{ 'aria-label': 'Search icon', children: 'search' }}
-        onClick={(event: EventHandlers.Click.Button) => search(query, event)}
+        onClick={(e: EventHandlers.Click.Button) => handleSearch(query, e)}
         name='search'
         variant='ghost'
       />
@@ -71,8 +67,8 @@ export const SearchBar: FC<SearchBarProps> = (props: SearchBarProps) => {
       <Input
         aria-label='Search query'
         className='searchbar-input'
-        onChange={(event: EventHandlers.Change.Input) => {
-          setQuery(event.target.value)
+        onChange={(e: EventHandlers.Change.Input) => {
+          setQuery(e.target.value)
         }}
         placeholder={placeholder}
         type='search'
@@ -84,4 +80,9 @@ export const SearchBar: FC<SearchBarProps> = (props: SearchBarProps) => {
 
 SearchBar.displayName = 'SearchBar'
 
-SearchBar.defaultProps = {}
+SearchBar.defaultProps = {
+  handleSearch: (query: string, event: SearchBarEvent) => {
+    event.preventDefault()
+    console.log('User search query', query)
+  }
+}

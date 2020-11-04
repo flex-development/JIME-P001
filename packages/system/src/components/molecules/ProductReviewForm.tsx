@@ -40,11 +40,6 @@ export interface ProductReviewFormProps extends FormProps {
   description: string
 
   /**
-   * The ID of the product the user is submitting a review for.
-   */
-  id: ProductResource['id']
-
-  /**
    * Form submission handler. This function will be fired when the user clicks
    * the `submit` button.
    *
@@ -60,10 +55,15 @@ export interface ProductReviewFormProps extends FormProps {
    * @param review.reviewTitle - Title of review, at least three characters
    * @param event - `click` event from submit button
    */
-  submit?(
+  handleSubmit?(
     review: Partial<StampedProductReviewEntityInput>,
     event: EventHandlers.Click.Button
   ): ANYTHING
+
+  /**
+   * The ID of the product the user is submitting a review for.
+   */
+  id: ProductResource['id']
 
   /**
    * The title of the product the user is submitting a review for.
@@ -90,14 +90,10 @@ export const ProductReviewForm: FC<ProductReviewFormProps> = (
 ) => {
   const {
     description,
+    handleSubmit = ProductReviewForm.defaultProps?.handleSubmit as NonNullable<
+      ProductReviewFormProps['handleSubmit']
+    >,
     id,
-    submit = (
-      review: Partial<StampedProductReviewEntityInput>,
-      event: EventHandlers.Click.Button
-    ) => {
-      event.preventDefault()
-      console.log('Submitted product review', review)
-    },
     title,
     variants,
     ...rest
@@ -256,7 +252,7 @@ export const ProductReviewForm: FC<ProductReviewFormProps> = (
         className='product-review-form-btn'
         disabled={isEmpty(errors) || Object.values(errors).includes(true)}
         mt={12}
-        onClick={(event: EventHandlers.Click.Button) => submit(review, event)}
+        onClick={(e: EventHandlers.Click.Button) => handleSubmit(review, e)}
         type='submit'
       >
         Submit Review
@@ -267,4 +263,12 @@ export const ProductReviewForm: FC<ProductReviewFormProps> = (
 
 ProductReviewForm.displayName = 'ProductReviewForm'
 
-ProductReviewForm.defaultProps = {}
+ProductReviewForm.defaultProps = {
+  handleSubmit: (
+    review: Partial<StampedProductReviewEntityInput>,
+    event: EventHandlers.Click.Button
+  ) => {
+    event.preventDefault()
+    console.log('Submitted product review', review)
+  }
+}

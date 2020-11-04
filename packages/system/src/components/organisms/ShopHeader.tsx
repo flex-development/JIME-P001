@@ -24,7 +24,7 @@ export interface ShopHeaderProps extends MutatedProps {
    * Searchbar handler. Fires when the users submits the search form or
    * clicks the search button.
    */
-  handleSearch?: SearchBarProps['search']
+  handleSearch?: SearchBarProps['handleSearch']
 
   /**
    * Sidebar button handler. Fires when the sidebar button is clicked.
@@ -52,10 +52,7 @@ export const ShopHeader: FC<ShopHeaderProps> = (props: ShopHeaderProps) => {
   const {
     cart_url,
     handleSearch,
-    handleSidebar = (event: EventHandlers.Click.Button) => {
-      event.preventDefault && event.preventDefault()
-      console.log('Sidebar button clicked')
-    },
+    handleSidebar = ShopHeader.defaultProps?.handleSidebar,
     items,
     ...rest
   } = props
@@ -74,8 +71,8 @@ export const ShopHeader: FC<ShopHeaderProps> = (props: ShopHeaderProps) => {
         />
         <SearchBar
           className='shop-header-searchbar'
+          handleSearch={handleSearch}
           placeholder='ash trays'
-          search={handleSearch}
         />
       </Column>
       <Column className='w-sm-maxc' flex justify='end'>
@@ -96,5 +93,9 @@ ShopHeader.displayName = 'ShopHeader'
 
 ShopHeader.defaultProps = {
   cart_url: 'cart',
+  handleSidebar: (event: EventHandlers.Click.Button) => {
+    event.preventDefault && event.preventDefault()
+    console.log('Sidebar button clicked')
+  },
   items: 0
 }

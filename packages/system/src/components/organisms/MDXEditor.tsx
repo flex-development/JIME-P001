@@ -16,6 +16,11 @@ export type MDXEditorData = {
   text: string
 }
 
+export type MDXEditorRenderHTMLOutput =
+  | HtmlType
+  | Promise<HtmlType>
+  | (() => HtmlType)
+
 export interface MDXEditorProps extends EditorConfig {
   /**
    * Editor configuration options.
@@ -31,6 +36,13 @@ export interface MDXEditorProps extends EditorConfig {
    * Default editor value.
    */
   defaultValue?: string
+
+  /**
+   * Function to render editor content.
+   *
+   * @default text => <MDXBox>{text}</MDXBox>
+   */
+  handleRender?: (text: string) => MDXEditorRenderHTMLOutput
 
   /**
    * Unique element id.
@@ -54,13 +66,6 @@ export interface MDXEditorProps extends EditorConfig {
    * Code to call when the `focus` event is fired.
    */
   onFocus?: (event: EventHandlers.Focus.TextArea) => void
-
-  /**
-   * Function to render editor content.
-   *
-   * @default text => <MDXBox>{text}</MDXBox>
-   */
-  onRender?: (text: string) => HtmlType | Promise<HtmlType> | (() => HtmlType)
 
   /**
    * Code to call when the `scroll` event is fired.
@@ -107,7 +112,7 @@ export interface MDXEditorProps extends EditorConfig {
  * `renderHTML` property.
  */
 type EditorProps = MDXEditorProps & {
-  renderHTML: NonNullable<MDXEditorProps['onRender']>
+  renderHTML: NonNullable<MDXEditorProps['handleRender']>
 }
 
 /**
@@ -117,10 +122,10 @@ type EditorProps = MDXEditorProps & {
  * - https://github.com/HarryChen0506/react-markdown-editor-lite
  */
 export const MDXEditor: FC<MDXEditorProps> = (props: MDXEditorProps) => {
-  const { onRender, ...rest } = props
+  const { handleRender: render, ...rest } = props
 
   const renderHTML: EditorProps['renderHTML'] = text => {
-    return isFunction(onRender) ? onRender?.(text) : <MDXBox>{text}</MDXBox>
+    return isFunction(render) ? render?.(text) : <MDXBox>{text}</MDXBox>
   }
 
   return <Editor {...(rest as MDXEditorProps)} renderHTML={renderHTML} />

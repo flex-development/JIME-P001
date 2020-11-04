@@ -1,9 +1,5 @@
 import { useMutatedProps, useProductVariants } from '@system/hooks'
-import {
-  EventHandlers,
-  ProductResource,
-  ProductVariantResource
-} from '@system/types'
+import { EventHandlers, ProductResource } from '@system/types'
 import React, { FC, useEffect, useState } from 'react'
 import useBoolean from 'react-hanger/array/useBoolean'
 import {
@@ -19,10 +15,8 @@ import {
 } from '../atoms'
 
 /**
- * @file Render a `ProductResource` preview card
+ * @file Display a product preview
  * @module components/molecules/ProductCard
- *
- * @todo Update documentation
  */
 
 /**
@@ -49,11 +43,13 @@ export interface ProductCardProps extends BoxProps {
    *
    * @default []
    */
-  variants?: ProductVariantResource[]
+  variants?: ProductResource['variants']
 }
 
 /**
- * Renders a `Box` component featuring a product image, title, and price.
+ * Displays a product image, title, and price.
+ *
+ * Renders a `Box` component with the class `product-card`.
  */
 export const ProductCard: FC<ProductCardProps> = (props: ProductCardProps) => {
   const { handle, title, variants = [], ...rest } = props

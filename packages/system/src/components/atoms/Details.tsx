@@ -6,7 +6,7 @@ import React, {
   PropsWithoutRef,
   RefAttributes
 } from 'react'
-import { Summary, SummaryProps } from './Summary'
+import { Summary } from './Summary'
 
 /**
  * @file Render a `<details>` element
@@ -25,7 +25,7 @@ export interface DetailsProps extends MutatedProps<HTMLDetailsElement> {
   /**
    * Properties to pass to the inner `Summary` component.
    */
-  summary?: SummaryProps
+  summary?: MutatedProps
 }
 
 /**
@@ -46,7 +46,8 @@ export type DetailsRefProps = ReflessDetailsProps & DetailsRefAttributes
 /**
  * Renders a `<details>` element.
  *
- * - **https://developer.mozilla.org/docs/Web/HTML/Element/details**
+ * - https://developer.mozilla.org/docs/Web/HTML/Element/details
+ * - https://developer.mozilla.org/docs/Web/API/HTMLDetailsElement
  */
 export const Details: FREC<DetailsRefProps> = forwardRef((props, ref) => {
   const { children, summary, ...rest } = props

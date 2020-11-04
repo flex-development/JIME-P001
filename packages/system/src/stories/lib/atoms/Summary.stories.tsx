@@ -1,5 +1,5 @@
-import { Summary, SummaryProps } from '@system/components'
-import { StoryFN } from '@system/types'
+import { Summary } from '@system/components'
+import { MutatedProps, StoryFN } from '@system/types'
 import React from 'react'
 
 /**
@@ -18,7 +18,7 @@ export default {
 /**
  * Default {@link Summary} story.
  */
-export const Default: StoryFN<SummaryProps> = (args: SummaryProps) => (
+export const Default: StoryFN<MutatedProps> = (args: MutatedProps) => (
   <Summary {...args} />
 )
 

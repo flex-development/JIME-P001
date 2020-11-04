@@ -43,8 +43,10 @@ export type IconRefProps = ReflessIconProps & SpanRefAttributes
 /**
  * Renders a `<Span>` component as a Material UI icon.
  *
- * - **https://material.io/resources/icons/?style=outline**
- * - **https://material.io/resources/icons/?style=solid**
+ * - https://material.io/resources/icons/?style=outline
+ * - https://material.io/resources/icons/?style=solid
+ * - https://developer.mozilla.org/docs/Web/HTML/Element/span
+ * - https://developer.mozilla.org/docs/Web/API/HTMLSpanElement
  */
 export const Icon: FREC<IconRefProps> = forwardRef((props, ref) => {
   const { outlined, position, ...rest } = props

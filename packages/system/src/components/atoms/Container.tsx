@@ -8,8 +8,8 @@ import React, {
 import { BoxRefAttributes } from './Box'
 
 /**
+ * @file Layout component
  * @module components/atoms/Container
- * @see https://v5.getbootstrap.com/docs/5.0/layout/containers/
  */
 
 export interface ContainerProps extends MutatedProps<HTMLDivElement> {
@@ -41,7 +41,9 @@ export type ContainerRefProps = ReflessContainerProps & BoxRefAttributes
 /**
  * Renders a `<div>` element with the class `container`.
  *
- * - **https://v5.getbootstrap.com/docs/5.0/layout/containers/**
+ * - https://v5.getbootstrap.com/docs/5.0/layout/containers
+ * - https://developer.mozilla.org/docs/Web/HTML/Element/div
+ * - https://developer.mozilla.org/docs/Web/API/HTMLDivElement
  */
 export const Container: FREC<ContainerRefProps> = forwardRef((props, ref) => {
   const { fluid, size, stretch, ...rest } = props

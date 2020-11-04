@@ -12,7 +12,7 @@ import { isEmpty } from 'lodash'
 /**
  * Returns a string of `col-*` classes.
  *
- * @see https://v5.getbootstrap.com/docs/5.0/layout/columns/
+ * @see https://v5.getbootstrap.com/docs/5.0/layout/columns
  *
  * @param config - Grid column span utilities
  * @param breakpoints - Breakpoint array to use instead of `GRID_BREAKPOINTS`

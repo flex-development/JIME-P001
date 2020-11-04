@@ -147,7 +147,7 @@ export interface FormCheckProps extends BoxProps {
 /**
  * Custom checkbox / radio `<input>` component.
  *
- * - https://v5.getbootstrap.com/docs/5.0/forms/checks-radios/
+ * - https://v5.getbootstrap.com/docs/5.0/forms/checks-radios
  */
 export const FormCheck: FC<FormCheckProps> = (props: FormCheckProps) => {
   const {

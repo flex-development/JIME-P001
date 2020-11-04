@@ -117,8 +117,10 @@ export type FormRefProps = ReflessFormProps & FormRefAttributes
 /**
  * Renders a `<form>` element with the class `form`.
  *
- * - **https://developer.mozilla.org/docs/Web/HTML/Element/form**
- * - **https://v5.getbootstrap.com/docs/5.0/forms/overview/**
+ * - https://developer.mozilla.org/docs/Web/HTML/Element/form
+ * - https://v5.getbootstrap.com/docs/5.0/forms/overview
+ * - https://developer.mozilla.org/docs/Web/HTML/Element/form
+ * - https://developer.mozilla.org/docs/Web/API/HTMLFormElement
  */
 export const Form: FREC<FormRefProps> = forwardRef((props, ref) => {
   const mutated = useMutatedProps<typeof props, JSX.IntrinsicElements['form']>(

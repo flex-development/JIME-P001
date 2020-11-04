@@ -32,7 +32,8 @@ export type SpanRefProps = ReflessSpanProps & SpanRefAttributes
 /**
  * Renders a `<span>` element.
  *
- * - **https://developer.mozilla.org/docs/Web/HTML/Element/span**
+ * - https://developer.mozilla.org/docs/Web/HTML/Element/span
+ * - https://developer.mozilla.org/docs/Web/API/HTMLSpanElement
  */
 export const Span: FREC<SpanRefProps> = forwardRef((props, ref) => {
   const mutated = useMutatedProps<typeof props, JSX.IntrinsicElements['span']>(

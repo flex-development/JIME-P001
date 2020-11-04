@@ -27,8 +27,8 @@ import { isBoolean, isEmpty, isNumber, isString } from 'lodash'
  * - `flex-wrap`
  * - `justify-content`
  *
- * @see https://v5.getbootstrap.com/docs/5.0/utilities/flex/
- * @see https://css-tricks.com/snippets/css/a-guide-to-flexbox/
+ * @see https://v5.getbootstrap.com/docs/5.0/utilities/flex
+ * @see https://css-tricks.com/snippets/css/a-guide-to-flexbox
  *
  * @param config - Flexbox config
  * @param breakpoints - Breakpoint array to use instead of `GRID_BREAKPOINTS`

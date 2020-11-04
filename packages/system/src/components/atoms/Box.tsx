@@ -32,7 +32,8 @@ export type BoxRefProps = ReflessBoxProps & BoxRefAttributes
 /**
  * Renders a `<div>` element.
  *
- * - **https://developer.mozilla.org/docs/Web/HTML/Element/div**
+ * - https://developer.mozilla.org/docs/Web/HTML/Element/div
+ * - https://developer.mozilla.org/docs/Web/API/HTMLDivElement
  */
 export const Box: FREC<BoxRefProps> = forwardRef((props, ref) => {
   const mutated = useMutatedProps<typeof props, JSX.IntrinsicElements['div']>(

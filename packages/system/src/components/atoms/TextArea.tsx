@@ -107,8 +107,9 @@ export type TextAreaRefProps = ReflessTextAreaProps & TextAreaRefAttributes
 /**
  * Renders a `<textarea>` element with the class `form-control`.
  *
- * - **https://developer.mozilla.org/docs/Web/HTML/Element/textarea**
- * - **https://v5.getbootstrap.com/docs/5.0/forms/form-control/**
+ * - https://v5.getbootstrap.com/docs/5.0/forms/form-control/
+ * - https://developer.mozilla.org/docs/Web/HTML/Element/textarea
+ * - https://developer.mozilla.org/docs/Web/API/HTMLTextAreaElement
  */
 export const TextArea: FREC<TextAreaRefProps> = forwardRef((props, ref) => {
   const { invalid, ...rest } = props

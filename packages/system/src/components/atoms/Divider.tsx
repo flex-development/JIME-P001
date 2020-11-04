@@ -38,7 +38,8 @@ export type DividerRefProps = ReflessDividerProps & DividerRefAttributes
 /**
  * Renders a `<hr>` element with the class `divider`.
  *
- * - **https://developer.mozilla.org/docs/Web/HTML/Element/hr**
+ * - https://developer.mozilla.org/docs/Web/HTML/Element/hr
+ * - https://developer.mozilla.org/docs/Web/API/HTMLHRElement
  */
 export const Divider: FREC<DividerProps> = forwardRef((props, ref) => {
   const { color, ...rest } = props

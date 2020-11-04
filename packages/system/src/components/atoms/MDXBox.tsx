@@ -33,6 +33,8 @@ export type MDXBoxProps = Omit<BoxProps, 'children'> & MDXProps
  *
  * - https://mdxjs.com/
  * - https://www.npmjs.com/package/mdx-scoped-runtime
+ * - https://developer.mozilla.org/docs/Web/HTML/Element/div
+ * - https://developer.mozilla.org/docs/Web/API/HTMLDivElement
  */
 export const MDXBox: FC<MDXBoxProps> & {
   components: MDXBoxProps['components']

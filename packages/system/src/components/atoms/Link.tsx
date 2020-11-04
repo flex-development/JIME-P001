@@ -1,7 +1,5 @@
 import { useIcon, useMutatedProps } from '@system/hooks'
 import { ButtonVariant, MutatedProps, ThemeColor } from '@system/types'
-import { isBoolean, isObject } from 'lodash'
-import NextLink, { LinkProps as NextLinkProps } from 'next/link'
 import React, {
   forwardRef,
   ForwardRefExoticComponent as FREC,
@@ -20,7 +18,7 @@ export interface LinkProps extends MutatedProps<HTMLAnchorElement> {
   /**
    * If true, add the class `active`.
    *
-   * - https://v5.getbootstrap.com/docs/5.0/components/navs/
+   * - https://v5.getbootstrap.com/docs/5.0/components/navs
    *
    */
   active?: boolean
@@ -35,7 +33,7 @@ export interface LinkProps extends MutatedProps<HTMLAnchorElement> {
   /**
    * Add a colorized link class.
    *
-   * - https://v5.getbootstrap.com/docs/5.0/helpers/colored-links/
+   * - https://v5.getbootstrap.com/docs/5.0/helpers/colored-links
    */
   color?: false | ThemeColor
 
@@ -70,19 +68,14 @@ export interface LinkProps extends MutatedProps<HTMLAnchorElement> {
   /**
    * If true, add the class `nav-link`.
    *
-   * See: https://v5.getbootstrap.com/docs/5.0/components/navs/
+   * See: https://v5.getbootstrap.com/docs/5.0/components/navs
    */
   nav?: boolean
 
   /**
-   * If defined, wrap native anchor element in a Next `Link` component.
-   */
-  router?: true | (NextLinkProps & { href?: NextLinkProps['href'] })
-
-  /**
    * If true, add the class `stretched-link`.
    *
-   * See: https://v5.getbootstrap.com/docs/5.0/helpers/stretched-link/
+   * See: https://v5.getbootstrap.com/docs/5.0/helpers/stretched-link
    */
   stretched?: boolean
 
@@ -124,7 +117,8 @@ export type LinkRefProps = ReflessLinkProps & LinkRefAttributes
 /**
  * Renders an `<a>` element with the class `link`.
  *
- * - **https://developer.mozilla.org/docs/Web/HTML/Element/a**
+ * - https://developer.mozilla.org/docs/Web/HTML/Element/a
+ * - https://developer.mozilla.org/docs/Web/API/HTMLAnchorElement
  */
 export const Link: FREC<LinkRefProps> = forwardRef((props, ref) => {
   const {
@@ -133,7 +127,6 @@ export const Link: FREC<LinkRefProps> = forwardRef((props, ref) => {
     color,
     dropdown,
     nav,
-    router,
     stretched,
     toggle,
     ...rest
@@ -165,24 +158,11 @@ export const Link: FREC<LinkRefProps> = forwardRef((props, ref) => {
     mutated.role = 'button'
   }
 
-  const link = (
+  return (
     <a {...mutated} ref={ref}>
       {mutated.children}
     </a>
   )
-
-  if (router) {
-    const router_link = isObject(router) ? router : {}
-    const href = isBoolean(router) || !router.href ? rest.href : router.href
-
-    return (
-      <NextLink {...router_link} href={href as string}>
-        {link}
-      </NextLink>
-    )
-  }
-
-  return link
 })
 
 Link.displayName = 'Link'

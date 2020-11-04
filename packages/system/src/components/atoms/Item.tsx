@@ -48,10 +48,11 @@ export type ItemRefAttributes = RefAttributes<HTMLLIElement>
 export type ItemRefProps = ReflessItemProps & ItemRefAttributes
 
 /**
- * Renders a `<li>` element with the class `item`.
+ * Renders a `<li>` element.
  *
- * - **https://developer.mozilla.org/docs/Web/HTML/Element/li**
- * - **https://v5.getbootstrap.com/docs/5.0/components/navs/**
+ * - https://v5.getbootstrap.com/docs/5.0/components/navs
+ * - https://developer.mozilla.org/docs/Web/HTML/Element/li
+ * - https://developer.mozilla.org/docs/Web/API/HTMLLIElement
  */
 export const Item: FREC<ItemRefProps> = forwardRef((props, ref) => {
   const { dropdown, nav, ...rest } = props

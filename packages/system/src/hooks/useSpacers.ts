@@ -17,8 +17,8 @@ import { isEmpty, isObject } from 'lodash'
 /**
  * Generates a string of gutter, margin, or padding utility classes.
  *
- * @see https://v5.getbootstrap.com/docs/5.0/layout/gutters/
- * @see https://v5.getbootstrap.com/docs/5.0/utilities/spacing/
+ * @see https://v5.getbootstrap.com/docs/5.0/layout/gutters
+ * @see https://v5.getbootstrap.com/docs/5.0/utilities/spacing
  *
  * @param config - Gutter, margin, or padding utilities config
  * @param prefix - Gutter, margin, or padding utility class prefix

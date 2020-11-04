@@ -83,8 +83,9 @@ export type LabelRefProps = ReflessLabelProps & LabelRefAttributes
 /**
  * Renders a `<label>` element.
  *
- * - https://developer.mozilla.org/docs/Web/HTML/Element/label
  * - https://v5.getbootstrap.com/docs/5.0/forms/overview/#form-text
+ * - https://developer.mozilla.org/docs/Web/HTML/Element/label
+ * - https://developer.mozilla.org/docs/Web/API/HTMLLabelElement
  */
 export const Label: FREC<LabelRefProps> = forwardRef((props, ref) => {
   const { check, col, form, htmlFor, required, ...rest } = props

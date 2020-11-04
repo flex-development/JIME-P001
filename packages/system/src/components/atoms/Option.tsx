@@ -50,7 +50,8 @@ export type OptionRefProps = ReflessOptionProps & OptionRefAttributes
 /**
  * Renders an `<option>` element.
  *
- * - **https://developer.mozilla.org/docs/Web/HTML/Element/option**
+ * - https://developer.mozilla.org/docs/Web/HTML/Element/option
+ * - https://developer.mozilla.org/docs/Web/API/HTMLOptionElement
  */
 export const Option: FREC<OptionRefProps> = forwardRef((props, ref) => {
   const mutated = useMutatedProps<

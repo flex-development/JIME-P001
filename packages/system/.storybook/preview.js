@@ -16,7 +16,7 @@ import { Documentation } from './components'
 
 export const parameters = {
   a11y: {},
-  actions: { argTypesRegex: '^on.*' },
+  actions: { argTypesRegex: ['^handle.*', '^on.*'] },
   backgrounds: {
     default: 'Dark',
     values: [

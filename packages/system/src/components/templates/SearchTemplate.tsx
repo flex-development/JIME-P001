@@ -40,7 +40,7 @@ export const SearchTemplate: TC<SearchTemplateProps> = (
       <Section>
         <Heading mb={24} size={2}>
           Search Results&nbsp;
-          <Span className='text-primary'>({`${results.length}`})</Span>
+          <Span className='c-primary'>({`${results.length}`})</Span>
         </Heading>
         <ProductGrid products={results} />
       </Section>

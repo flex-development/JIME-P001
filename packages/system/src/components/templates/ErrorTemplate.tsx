@@ -1,7 +1,7 @@
 import { useMutatedProps } from '@system/hooks'
 import { MutatedProps, TC } from '@system/types'
 import React from 'react'
-import { FlexBox, Heading, Main } from '../atoms'
+import { Heading, Main } from '../atoms'
 
 /**
  * @file Error page template
@@ -21,7 +21,7 @@ export interface ErrorTemplateProps extends MutatedProps {
 }
 
 /**
- * Display a client-side or server-side error.
+ * Displays an error code and message.
  *
  * Renders a `Main` component with the class `template` and attribute
  * `data-template='error'`.
@@ -35,12 +35,10 @@ export const ErrorTemplate: TC<ErrorTemplateProps> = (
 
   return (
     <Main {...mutated} data-template={ErrorTemplate.template_id}>
-      <FlexBox align='center' justify='center'>
-        <Heading className='error-code'>{code}</Heading>
-        <Heading className='error-message' size={2}>
-          {message}
-        </Heading>
-      </FlexBox>
+      <Heading className='error-code'>{code}</Heading>
+      <Heading className='error-message' size={2}>
+        {message}
+      </Heading>
     </Main>
   )
 }

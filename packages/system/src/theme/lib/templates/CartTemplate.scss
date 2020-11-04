@@ -3,6 +3,12 @@
 /// ----------------------------------------------------------------------------
 
 .template[data-template='cart'] {
+  @for $level from 1 through 6 {
+    h#{$level}.line-item-heading {
+      font-size: map-get($font-sizes-headings, $level);
+    }
+  }
+
   .line-item {
     &:not(:last-of-type) {
       @include media-breakpoint-up(sm) {

@@ -23,8 +23,8 @@ export default {
 export const Menu: StoryFN<IconProps> = (args: IconProps) => <Icon {...args} />
 
 Menu.args = {
-  children: 'menu',
-  className: 'text-light'
+  c: 'light',
+  children: 'menu'
 }
 
 /**
@@ -35,8 +35,9 @@ export const Person: StoryFN<IconProps> = (args: IconProps) => (
 )
 
 Person.args = {
+  c: 'light',
   children: 'person',
-  className: 'text-light-25',
+  className: 'o-25',
   outlined: false
 }
 
@@ -48,6 +49,6 @@ export const Search: StoryFN<IconProps> = (args: IconProps) => (
 )
 
 Search.args = {
-  children: 'search',
-  className: 'text-light'
+  c: 'light',
+  children: 'search'
 }

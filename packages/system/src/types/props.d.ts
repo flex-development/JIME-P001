@@ -14,7 +14,7 @@ import {
   RefAttributes,
   UIEvent
 } from 'react'
-import { ResponsiveUtility, Spacer } from './theme'
+import { BackgroundColor, ResponsiveUtility, Spacer, TextColor } from './theme'
 import { AnyObject, Booleanish, NullishString } from './utils'
 
 /**
@@ -233,6 +233,24 @@ export type MDXProps = Omit<MDXProviderProps, 'children' | 'components'> & {
  */
 export interface MutatedProps<E = HTMLElement> extends GlobalAttributes<E> {
   /**
+   * Background color utility class.
+   * 
+   * Refer to "Design Tokens" for additional background color options.
+   * 
+   * - https://v5.getbootstrap.com/docs/5.0/utilities/colors/#background-color
+   */
+  bg?: BackgroundColor | false
+
+  /**
+   * Text color utility class.
+   * 
+   * Refer to "Design Tokens" for additional text color options.
+   * 
+   * - https://v5.getbootstrap.com/docs/5.0/utilities/colors/#color
+   */
+  c?: TextColor | false
+
+  /**
    * Used to work with flexbox utility classes.
    *
    * Possible values:
@@ -246,6 +264,13 @@ export interface MutatedProps<E = HTMLElement> extends GlobalAttributes<E> {
    * @default false
    */
   flex?: Booleanish | 'inline'
+
+  /**
+   * If true, add the class `bg-gradient`.
+   * 
+   * - https://v5.getbootstrap.com/docs/5.0/utilities/colors/#background-gradient
+   */
+  gradient?: boolean
 
   /**
    * URL of background image.

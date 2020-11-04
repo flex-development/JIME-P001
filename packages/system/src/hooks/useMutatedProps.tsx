@@ -17,7 +17,10 @@ import { useSpacers } from './useSpacers'
  * Mutations (in order, if props are defined):
  *
  * - Spacing utility properties will be used to creating create utility classes
+ * - {@param props.bg} will be used to add background color classes
+ * - {@param props.c} will be used to add text color classes
  * - {@param props.flex} will be used to add flexbox display classes
+ * - {@param props.gradient} will be use to toggle `bg-gradient` class
  * - {@param props.img} will be used to set a background image
  * - {@param props.innerHTML} will be converted into `dangerouslySetInnerHTML`
  * - {@param inject} and updated class dictionary will be passed to `classnames`
@@ -34,7 +37,10 @@ export function useMutatedProps<
   Mask = HTMLAttributes<HTMLElement>
 >(props: T1, inject?: string | ClassDictionary, keys?: string[]): Mask {
   const {
+    bg,
+    c,
     flex: flexbox_display,
+    gradient,
     img,
     innerHTML,
     mb = {},
@@ -95,12 +101,21 @@ export function useMutatedProps<
   dictionary[padding_x] = padding_x.length !== 0
   dictionary[padding_y] = padding_y.length !== 0
 
+  // Handle background color
+  if (bg) dictionary[`bg-${bg}`] = true
+
+  // Handle text color
+  if (c) dictionary[`c-${c}`] = true
+
   // Handle flexbox display utility
   if (flexbox_display) {
     const display = flexbox_display === 'inline' ? 'inline-flex' : 'flex'
 
     dictionary[createResponsiveUtility('d', 'xs', display)] = true
   }
+
+  // Handle background gradient
+  if (gradient) dictionary['bg-gradient'] = true
 
   // Handle background image
   if (img) {

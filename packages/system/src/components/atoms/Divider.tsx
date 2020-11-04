@@ -45,7 +45,7 @@ export const Divider: FREC<DividerProps> = forwardRef((props, ref) => {
 
   const mutated = useMutatedProps<typeof rest, JSX.IntrinsicElements['hr']>(
     rest,
-    { divider: true, [`text-${color}`]: color }
+    { divider: true, [`c-${color}`]: color }
   )
 
   return <hr {...omit(mutated, ['children'])} ref={ref} />

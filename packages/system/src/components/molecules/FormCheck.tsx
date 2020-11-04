@@ -218,6 +218,8 @@ export const FormCheck: FC<FormCheckProps> = (props: FormCheckProps) => {
   )
 }
 
+FormCheck.displayName = 'FormCheck'
+
 FormCheck.defaultProps = {
   type: 'checkbox'
 }

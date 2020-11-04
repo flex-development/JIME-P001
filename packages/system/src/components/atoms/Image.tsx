@@ -1,6 +1,6 @@
 import { useMutatedProps } from '@system/hooks'
 import { MutatedVoidElementProps, NullishString } from '@system/types'
-import { omit } from 'lodash'
+import { isEmpty, omit } from 'lodash'
 import React, {
   forwardRef,
   ForwardRefExoticComponent as FREC,
@@ -137,6 +137,8 @@ export const Image: FREC<ImageRefProps> = forwardRef((props, ref) => {
       rounded
     }
   )
+
+  if (isEmpty(mutated.src)) mutated.src = Image.defaultProps?.src
 
   /* eslint-disable jsx-a11y/alt-text */
 

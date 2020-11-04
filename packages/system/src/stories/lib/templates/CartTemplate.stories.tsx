@@ -1,8 +1,4 @@
-import {
-  CartTemplate,
-  CartTemplateDefaultProps,
-  CartTemplateProps
-} from '@system/components'
+import { CartTemplate, CartTemplateProps } from '@system/components'
 import { StoryFN } from '@system/types'
 import items from '@system/__mocks__/items.mock.json'
 import React from 'react'
@@ -30,7 +26,7 @@ export const Cart: StoryFN<CartTemplateProps> = (args: CartTemplateProps) => (
 )
 
 Cart.args = {
-  ...CartTemplateDefaultProps,
+  ...CartTemplate?.defaultProps,
   items,
   subtotal: '55.00'
 }

@@ -71,7 +71,9 @@ export const SearchBar: FC<SearchBarProps> = (props: SearchBarProps) => {
       <Input
         aria-label='Search query'
         className='searchbar-input'
-        onChange={(event: EventHandlers.Change.Input) => setQuery(event.target.value)}
+        onChange={(event: EventHandlers.Change.Input) => {
+          setQuery(event.target.value)
+        }}
         placeholder={placeholder}
         type='search'
         value={query}
@@ -79,3 +81,7 @@ export const SearchBar: FC<SearchBarProps> = (props: SearchBarProps) => {
     </Form>
   )
 }
+
+SearchBar.displayName = 'SearchBar'
+
+SearchBar.defaultProps = {}

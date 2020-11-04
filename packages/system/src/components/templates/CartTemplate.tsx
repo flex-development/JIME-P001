@@ -31,12 +31,6 @@ export interface CartTemplateProps extends MutatedProps {
   subtotal?: string
 }
 
-export const CartTemplateDefaultProps = {
-  checkout_url: '#',
-  items: [],
-  subtotal: '0.00'
-}
-
 /**
  * Displays the items in a user's cart.
  *
@@ -47,9 +41,9 @@ export const CartTemplate: TC<CartTemplateProps> = (
   props: CartTemplateProps
 ) => {
   const {
-    checkout_url = CartTemplateDefaultProps.checkout_url,
-    items = CartTemplateDefaultProps.items,
-    subtotal = CartTemplateDefaultProps.subtotal,
+    checkout_url = CartTemplate.defaultProps?.checkout_url,
+    items = CartTemplate.defaultProps?.items as CheckoutLineItemProps[],
+    subtotal = CartTemplate.defaultProps?.subtotal,
     ...rest
   } = props
 
@@ -89,6 +83,12 @@ export const CartTemplate: TC<CartTemplateProps> = (
   )
 }
 
-CartTemplate.template_id = 'cart'
+CartTemplate.displayName = 'CartTemplate'
 
-CartTemplate.defaultProps = CartTemplateDefaultProps
+CartTemplate.defaultProps = {
+  checkout_url: '#',
+  items: [],
+  subtotal: '0.00'
+}
+
+CartTemplate.template_id = 'cart'

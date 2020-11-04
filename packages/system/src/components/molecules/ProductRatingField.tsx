@@ -43,12 +43,6 @@ export interface ProductRatingFieldProps extends BoxProps {
   values?: number[]
 }
 
-export const ProductRatingFieldDefaultProps = {
-  'aria-label': 'Product rating field',
-  name: 'rating',
-  values: [1, 2, 3, 4, 5]
-}
-
 /**
  * Allows users to submit a product rating. When a star (`<input>` element) is
  * clicked, the clicked star and the stars preceding it will be checked. Any
@@ -61,9 +55,9 @@ export const ProductRatingField: FC<ProductRatingFieldProps> = (
 ) => {
   const {
     onChange,
-    name = ProductRatingFieldDefaultProps.name,
+    name = ProductRatingField.defaultProps?.name as string,
     rating: initial_rating,
-    values = ProductRatingFieldDefaultProps.values,
+    values = ProductRatingField.defaultProps?.values as number[],
     ...rest
   } = props
 
@@ -96,4 +90,10 @@ export const ProductRatingField: FC<ProductRatingFieldProps> = (
   )
 }
 
-ProductRatingField.defaultProps = ProductRatingFieldDefaultProps
+ProductRatingField.displayName = 'ProductRatingField'
+
+ProductRatingField.defaultProps = {
+  'aria-label': 'Product rating field',
+  name: 'rating',
+  values: [1, 2, 3, 4, 5]
+}

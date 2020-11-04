@@ -170,6 +170,8 @@ export const AddToCartForm: FC<AddToCartFormProps> = (
   )
 }
 
+AddToCartForm.displayName = 'AddToCartForm'
+
 AddToCartForm.defaultProps = {
   description: '',
   variants: []

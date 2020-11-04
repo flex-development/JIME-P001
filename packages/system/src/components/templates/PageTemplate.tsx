@@ -39,8 +39,10 @@ export const PageTemplate: TC<PageTemplateProps> = (
   )
 }
 
-PageTemplate.template_id = 'page'
+PageTemplate.displayName = 'PageTemplate'
 
 PageTemplate.defaultProps = {
   body: ''
 }
+
+PageTemplate.template_id = 'page'

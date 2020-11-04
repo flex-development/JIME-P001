@@ -43,6 +43,8 @@ export const ErrorTemplate: TC<ErrorTemplateProps> = (
   )
 }
 
-ErrorTemplate.template_id = 'error'
+ErrorTemplate.displayName = 'ErrorTemplate'
 
 ErrorTemplate.defaultProps = {}
+
+ErrorTemplate.template_id = 'error'

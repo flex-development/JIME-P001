@@ -39,9 +39,10 @@ export interface SearchBarProps extends FormProps {
  */
 export const SearchBar: FC<SearchBarProps> = (props: SearchBarProps) => {
   const {
-    handleSearch = SearchBar.defaultProps?.handleSearch as NonNullable<
-      SearchBarProps['handleSearch']
-    >,
+    handleSearch = (query: string, event: SearchBarEvent) => {
+      event.preventDefault()
+      console.log('User search query', query)
+    },
     placeholder,
     query: initialQuery,
     ...rest
@@ -80,9 +81,4 @@ export const SearchBar: FC<SearchBarProps> = (props: SearchBarProps) => {
 
 SearchBar.displayName = 'SearchBar'
 
-SearchBar.defaultProps = {
-  handleSearch: (query: string, event: SearchBarEvent) => {
-    event.preventDefault()
-    console.log('User search query', query)
-  }
-}
+SearchBar.defaultProps = {}

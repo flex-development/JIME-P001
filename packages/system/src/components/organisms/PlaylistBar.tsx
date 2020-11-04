@@ -23,9 +23,6 @@ import {
  * @module components/organisms/PlaylistBar
  */
 
-/**
- * `PlaylistBar` component properties.
- */
 export interface PlaylistBarProps extends MutatedProps {
   /**
    * The artist(s) of the current song.

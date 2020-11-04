@@ -56,12 +56,8 @@ export interface CheckoutLineItemProps extends BoxProps {
 
   /**
    * `onClick` handler that's fired when the user clicks the "REMOVE" button.
-   *
-   * @param event - `click` event from remove button
-   * @param event.target - <button name="remove"> element
-   * @param event.target.value - ID of the line item to remove
    */
-  remove?(event?: EventHandlers.Click.Button): ANYTHING
+  handleRemove?(event?: EventHandlers.Click.Button): ANYTHING
 
   /**
    * Title of variant's parent product.
@@ -79,7 +75,10 @@ export interface CheckoutLineItemProps extends BoxProps {
    * @param updates.variantId - ID of the variant the
    * @param event - `change` event from quantity input
    */
-  update?(item: AttributeInput, event?: EventHandlers.Change.Input): ANYTHING
+  handleUpdate?(
+    item: AttributeInput,
+    event?: EventHandlers.Change.Input
+  ): ANYTHING
 
   /**
    * ID of line item variant.
@@ -108,14 +107,12 @@ export const CheckoutLineItem: FC<CheckoutLineItemProps> = (
 ) => {
   const {
     customAttributes = [],
+    handleRemove = () => console.log(`TODO: CheckoutLineItem.handleRemove`),
+    handleUpdate = updates => console.log(`Updated ${item.variantId}`, updates),
     image,
     linePrice,
     quantity,
-    remove = lineItemId => console.log(`Removed ${lineItemId}`),
     title,
-    update = updates => {
-      console.log(`Updated ${item.variantId}`, updates)
-    },
     variantId,
     variantTitle,
     ...rest
@@ -186,7 +183,7 @@ export const CheckoutLineItem: FC<CheckoutLineItemProps> = (
 
                   updateQuantity(updated_item.quantity)
 
-                  return update(updated_item, event)
+                  return handleUpdate(updated_item, event)
                 },
                 type: 'number',
                 value: item.quantity
@@ -197,7 +194,7 @@ export const CheckoutLineItem: FC<CheckoutLineItemProps> = (
           </FlexBox>
 
           <Button
-            onClick={(event: EventHandlers.Click.Button) => remove(event)}
+            onClick={(event: EventHandlers.Click.Button) => handleRemove(event)}
             name='remove'
             mt={{ md: 0, xs: 24 }}
             px={20}

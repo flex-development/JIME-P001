@@ -9,9 +9,6 @@ import { SearchBar, SearchBarProps } from '../molecules'
  * @module components/organisms/ShopHeader
  */
 
-/**
- * `ShopHeader` component properties.
- */
 export interface ShopHeaderProps extends MutatedProps {
   /**
    * URL to redirect the user to when the cart preview link is clicked.
@@ -52,7 +49,10 @@ export const ShopHeader: FC<ShopHeaderProps> = (props: ShopHeaderProps) => {
   const {
     cart_url,
     handleSearch,
-    handleSidebar = ShopHeader.defaultProps?.handleSidebar,
+    handleSidebar = (event: EventHandlers.Click.Button) => {
+      event.preventDefault && event.preventDefault()
+      console.log('Sidebar button clicked')
+    },
     items,
     ...rest
   } = props
@@ -93,9 +93,5 @@ ShopHeader.displayName = 'ShopHeader'
 
 ShopHeader.defaultProps = {
   cart_url: 'cart',
-  handleSidebar: (event: EventHandlers.Click.Button) => {
-    event.preventDefault && event.preventDefault()
-    console.log('Sidebar button clicked')
-  },
   items: 0
 }

@@ -2,7 +2,7 @@ import {
   AshTray,
   Kustomz
 } from '@system/stories/lib/molecules/AddToCartForm.stories'
-import { AnyObject, ProductVariantResource } from '@system/types'
+import { ProductVariantResource } from '@system/types'
 import { fireEvent, render, screen } from '@testing-library/react'
 import User from '@testing-library/user-event'
 import React from 'react'
@@ -41,7 +41,8 @@ it('updates the selected variant', () => {
   expect(select).toBeInTheDocument()
 
   // Get last product variant
-  const variant = AshTray.args.variants[AshTray.args.variants.length - 1]
+  const { variants } = AshTray.args.product
+  const variant = variants[variants.length - 1]
 
   // Mock product variant selection
   User.selectOptions(select, [variant.id])
@@ -50,11 +51,56 @@ it('updates the selected variant', () => {
   expect(select).toHaveAttribute('data-selected', variant.title)
 })
 
+it('updates the carousel position when a new variant is selected', () => {
+  render(<AshTray {...AshTray.args} />)
+
+  const { title, variants } = AshTray.args.product
+
+  // Get <select> element
+  const select = screen.getByPlaceholderText(SELECT_PLACEHOLDER)
+
+  // Get last product variant
+  const v_pos = variants.length - 1
+  const variant = variants[v_pos]
+
+  // Expect default image to be visible
+  expect(screen.getByAltText(`${title} image 1`)).toBeInTheDocument()
+
+  // Mock product variant selection
+  User.selectOptions(select, [variant.id])
+
+  // Expect image of selected variant to be visible
+  expect(screen.getByAltText(`${title} image ${v_pos}`)).toBeInTheDocument()
+})
+
+it('does not update the carousel position if the product has one image', () => {
+  render(<Kustomz {...Kustomz.args} />)
+
+  const { title, variants } = Kustomz.args.product
+
+  const visible = () => {
+    expect(screen.getByAltText(`${title} image 1`)).toBeInTheDocument()
+  }
+
+  // Get <select> element
+  const select = screen.getByPlaceholderText(SELECT_PLACEHOLDER)
+
+  // Expect default image to be visible
+  visible()
+
+  // Mock product variant selection
+  User.selectOptions(select, [variants[0].id])
+
+  // Expect default image to be visible because product has one image
+  visible()
+})
+
 it('disables the add to cart button when an unavailable product variant is selected', () => {
   render(<AshTray {...AshTray.args} />)
 
   // Get unavailable product variant
-  const variant = AshTray.args.variants.find(v => v.available === false) || {}
+  const { variants } = AshTray.args.product
+  const variant = variants.find(v => v.available === false) || {}
 
   // Mock user selection
   User.selectOptions(screen.getByPlaceholderText(SELECT_PLACEHOLDER), [
@@ -62,7 +108,8 @@ it('disables the add to cart button when an unavailable product variant is selec
   ])
 
   // Expect add to cart button to be disabled
-  expect(screen.getByRole('button')).toBeDisabled()
+  // ! Keep in sync with button's aria-label property
+  expect(screen.getByRole('button', { name: 'Add to cart' })).toBeDisabled()
 })
 
 // FIXME: Component passes tests manually (check state), but fails otherwise
@@ -81,22 +128,22 @@ it('[FALSE ALARM] updates the product quantity', () => {
 
 it('updates the display price if the selected option has a different price than the previous option', () => {
   const { getByText } = render(<Kustomz {...Kustomz.args} />)
+  const { variants } = Kustomz.args.product
 
   // Get default product variant
-  const variant = Kustomz.args.variants[0]
+  const variant = variants[0]
 
   // Expect price of default variant is shown
   expect(getByText(`$${variant.price}`)).toBeInTheDocument()
 
   // Get product variant with different price than default option
-  const variant2: AnyObject =
-    Kustomz.args.variants.find(v => {
-      return v.price !== variant.price
-    }) || {}
+  const variant2 = variants.find(v => {
+    return v.price !== variant.price
+  }) as ProductVariantResource
 
   // Mock user selection
   User.selectOptions(screen.getByPlaceholderText(SELECT_PLACEHOLDER), [
-    (variant2 as ProductVariantResource).id
+    variant2.id
   ])
 
   // Expect new price to be displayed

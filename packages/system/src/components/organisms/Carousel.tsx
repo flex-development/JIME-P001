@@ -2,7 +2,7 @@ import { useCarouselPlugin, useMutatedProps } from '@system/hooks'
 import { uid } from '@system/utils'
 import { CarouselOption } from 'bootstrap'
 import classnames from 'classnames'
-import React, { Children, FC, ReactElement, useRef } from 'react'
+import React, { Children, FC, ReactElement, useEffect, useRef } from 'react'
 import uuid from 'react-uuid'
 import { Box, BoxProps, Item, ItemProps, List } from '../atoms'
 
@@ -11,9 +11,6 @@ import { Box, BoxProps, Item, ItemProps, List } from '../atoms'
  * @module components/molecules/Carousel
  */
 
-/**
- * `Carousel` component properties.
- */
 export interface CarouselProps extends BoxProps, CarouselOption {
   /**
    * Components to render as `Carousel` items.
@@ -112,6 +109,7 @@ const CarouselIndicator: FC<CarouselIndicatorProps> = (
   return (
     <Item
       {...rest}
+      aria-label='Carousel indicator'
       className={classnames('carousel-indicator', { active })}
       role='button'
     />
@@ -166,6 +164,11 @@ export const Carousel: FC<CarouselProps> & {
     position && position >= 0 && position <= items.length - 1 ? position : null
   )
 
+  // Update carousel position if props.position changes
+  useEffect(() => {
+    if (position) setActive(position)
+  }, [position, setActive])
+
   return (
     <Box {...mutated} ref={ref}>
       <Box className='carousel-inner'>
@@ -179,15 +182,17 @@ export const Carousel: FC<CarouselProps> & {
           </CarouselItem>
         ))}
       </Box>
-      <List className='carousel-indicators' is='ol'>
-        {items.map((child: ReactElement, i: number) => (
-          <CarouselIndicator
-            active={isActive(i)}
-            key={uuid()}
-            onClick={() => setActive(i)}
-          />
-        ))}
-      </List>
+      {items.length > 1 && (
+        <List className='carousel-indicators' is='ol'>
+          {items.map((child: ReactElement, i: number) => (
+            <CarouselIndicator
+              active={isActive(i)}
+              key={uuid()}
+              onClick={() => setActive(i)}
+            />
+          ))}
+        </List>
+      )}
     </Box>
   )
 }

@@ -8,9 +8,6 @@ import { Heading, Paragraph, Section } from '../atoms'
  * @module components/organisms/Hero
  */
 
-/**
- * `Hero` component properties.
- */
 export interface HeroProps extends MutatedProps {
   /**
    * Hero subtitle.

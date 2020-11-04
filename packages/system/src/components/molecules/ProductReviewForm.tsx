@@ -90,9 +90,13 @@ export const ProductReviewForm: FC<ProductReviewFormProps> = (
 ) => {
   const {
     description,
-    handleSubmit = ProductReviewForm.defaultProps?.handleSubmit as NonNullable<
-      ProductReviewFormProps['handleSubmit']
-    >,
+    handleSubmit = (
+      review: Partial<StampedProductReviewEntityInput>,
+      event: EventHandlers.Click.Button
+    ) => {
+      event.preventDefault()
+      console.log('Submitted product review', review)
+    },
     id,
     title,
     variants,
@@ -263,12 +267,4 @@ export const ProductReviewForm: FC<ProductReviewFormProps> = (
 
 ProductReviewForm.displayName = 'ProductReviewForm'
 
-ProductReviewForm.defaultProps = {
-  handleSubmit: (
-    review: Partial<StampedProductReviewEntityInput>,
-    event: EventHandlers.Click.Button
-  ) => {
-    event.preventDefault()
-    console.log('Submitted product review', review)
-  }
-}
+ProductReviewForm.defaultProps = {}

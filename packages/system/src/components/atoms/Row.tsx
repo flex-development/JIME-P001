@@ -21,6 +21,13 @@ import { FlexBoxProps } from './FlexBox'
 
 export interface RowProps extends FlexBoxProps {
   /**
+   * Allow the `Row` to fill all of its available horizontal space.
+   *
+   * @default false
+   */
+  fluid?: boolean
+
+  /**
    * Key from `$gutters` map to create horizontal gutter utility class.
    *
    * - https://v5.getbootstrap.com/docs/5.0/layout/gutters/#horizontal-gutters
@@ -94,6 +101,7 @@ export const Row: FREC<RowRefProps> = forwardRef((props, ref) => {
     align,
     direction,
     display,
+    fluid,
     gx,
     gy,
     justify,
@@ -126,7 +134,7 @@ export const Row: FREC<RowRefProps> = forwardRef((props, ref) => {
     [flexbox]: flexbox.length !== 0,
     [gutter_x]: gutter_x.length !== 0,
     [gutter_y]: gutter_y.length !== 0,
-    row: true,
+    row: !fluid,
     [row_cols]: row_cols.length !== 0
   })
 

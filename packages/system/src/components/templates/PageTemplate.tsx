@@ -6,8 +6,6 @@ import { Main, MDXBox } from '../atoms'
 /**
  * @file Basic page template
  * @module components/templates/PageTemplate
- *
- * @todo Update documentation
  */
 
 export interface PageTemplateProps extends MutatedProps {

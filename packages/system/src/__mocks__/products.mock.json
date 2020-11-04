@@ -2,14 +2,18 @@
   {
     "id": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0LzU2NjQ2MDk1MzQxMDc=",
     "available": true,
-    "description": "",
+    "description": "Aesthetic banh mi yuccie pinterest etsy adipisicing narwhal fixie blue bottle qui. 8-bit selfies occaecat nostrud YOLO neutra fixie yuccie lumbersexual forage meggings. Banjo excepteur church-key post-ironic beard hashtag gentrify pour-over.",
     "handle": "ash-tray",
     "title": "Ash Tray",
     "options": [
       {
         "id": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0T3B0aW9uLzcyMjE4MjA0NTcxMTU=",
         "name": "Style",
-        "values": ["FUNFETTI", "JELLY $LIDES", "LA $ONRISA"]
+        "values": [
+          "FUNFETTI",
+          "JELLY $LIDES",
+          "LA $ONRISA"
+        ]
       }
     ],
     "images": [
@@ -78,7 +82,11 @@
       {
         "id": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0T3B0aW9uLzcyMjE4NTQ1MDMwNjc=",
         "name": "Style",
-        "values": ["FUNFETTI", "JELLY $LIDES", "LA $ONRISA"]
+        "values": [
+          "FUNFETTI",
+          "JELLY $LIDES",
+          "LA $ONRISA"
+        ]
       }
     ],
     "images": [
@@ -141,7 +149,7 @@
     "id": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0LzU2NjUxOTc0MjQ3OTU=",
     "title": "KUSTOMZ",
     "available": true,
-    "description": "",
+    "description": "Bicycle rights street art pabst elit esse labore enim portland post-ironic aliquip roof party in. Pour-over ugh palo santo, chartreuse distillery godard drinking vinegar brunch.",
     "handle": "kustomz",
     "images": [
       {
@@ -154,7 +162,12 @@
       {
         "id": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0T3B0aW9uLzcyMjI1MDQyNTk3Mzk=",
         "name": "Style",
-        "values": ["Rolling Tray", "♡ Ash Tray", "▢ Ash Tray", "◯ Ash Tray"]
+        "values": [
+          "Rolling Tray",
+          "♡ Ash Tray",
+          "▢ Ash Tray",
+          "◯ Ash Tray"
+        ]
       }
     ],
     "variants": [

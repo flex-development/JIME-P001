@@ -3,7 +3,19 @@
 /// ----------------------------------------------------------------------------
 
 .add-to-cart-form {
-  @include flex-center(column);
+  @include flex(center, center, column);
+
+  @include media-breakpoint-down(md) {
+    .row > .col {
+      &:first-of-type {
+        padding-right: $spacers-0;
+      }
+
+      &:last-of-type {
+        padding-left: $spacers-0;
+      }
+    }
+  }
 
   .product-heading {
     @include media-breakpoint-up(md) {

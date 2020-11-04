@@ -19,9 +19,6 @@ import { Menu } from '../molecules'
  * @module components/organisms/Sidebar
  */
 
-/**
- * `Sidebar` component properties.
- */
 export interface SidebarProps extends MutatedProps {
   /**
    * Profile age.

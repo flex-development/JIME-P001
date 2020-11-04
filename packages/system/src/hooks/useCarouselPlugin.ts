@@ -51,17 +51,17 @@ export type UseCarouselPlugin = {
  *
  * @param ref - HTML element to use as a carousel
  * @param options - Bootstrap carousel options
- * @param initialPosition - Index of the default active item
+ * @param position - Index of the active item
  */
 export function useCarouselPlugin<E = HTMLElement>(
   ref: RefObject<E>,
   options?: CarouselOption,
-  initialPosition: NullishNumber = 0
+  position: NullishNumber = 0
 ): UseCarouselPlugin {
   const [carousel, setCarousel] = useState<UseCarouselPlugin['carousel']>(null)
 
   const [active, setActive] = useState<UseCarouselPlugin['active']>(
-    initialPosition || 0
+    position || 0
   )
 
   /**

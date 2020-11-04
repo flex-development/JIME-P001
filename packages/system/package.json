@@ -48,10 +48,10 @@
     "bootstrap": "^5.0.0-alpha1",
     "classnames": "^2.2.6",
     "lodash": "^4.17.15",
-    "lodash-es": "^4.17.15",
     "mdx-scoped-runtime": "^0.7.5",
     "popper": "^1.0.1",
     "react-hanger": "^2.2.1",
+    "react-markdown-editor-lite": "^1.2.2",
     "react-uuid": "^1.0.2",
     "validator": "^13.1.1"
   },

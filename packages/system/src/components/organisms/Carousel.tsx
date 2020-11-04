@@ -195,6 +195,8 @@ export const Carousel: FC<CarouselProps> & {
 Carousel.CarouselIndicator = CarouselIndicator
 Carousel.CarouselItem = CarouselItem
 
+Carousel.displayName = 'Carousel'
+
 Carousel.defaultProps = {
   children: [],
   interval: false,

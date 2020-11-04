@@ -111,6 +111,8 @@ export const Sidebar: FC<SidebarProps> = (props: SidebarProps) => {
   )
 }
 
+Sidebar.displayName = 'Sidebar'
+
 Sidebar.defaultProps = {
   age: 22,
   img: 'assets/morena.jpeg',

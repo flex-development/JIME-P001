@@ -1,15 +1,21 @@
 import {
+  MDXProviderComponents as MDXComponents,
+  MDXProviderProps
+} from '@mdx-js/react'
+import {
   AriaAttributes,
-  ChangeEvent as ReactChangeEvent,
+  ChangeEvent,
   CSSProperties,
   DOMAttributes,
   FC,
-  MouseEvent as ReactMouseEvent,
+  FocusEvent,
+  MouseEvent,
   PropsWithoutRef,
-  RefAttributes
+  RefAttributes,
+  UIEvent
 } from 'react'
 import { ResponsiveUtility, Spacer } from './theme'
-import { Booleanish, NullishString } from './utils'
+import { AnyObject, Booleanish, NullishString } from './utils'
 
 /**
  * @file Type Definitions - Props
@@ -26,20 +32,36 @@ export type Attributes<E = HTMLElement> = AriaAttributes &
 /**
  * Event handler types.
  */
-export namespace Events {
-  export type DualChange<E = HTMLElement> = ChangeEvent<E> | ReactChangeEvent<E>
-  export type DualClick<E = HTMLElement> = MouseEvent<E> | ReactMouseEvent<E>
+export namespace EventHandlers {
+  export type ClickEvent<E = HTMLElement> = MouseEvent<E> & { target: E }
 
   export namespace Change {
-    export type Input = DualChange<HTMLInputElement>
-    export type Select = DualChange<HTMLSelectElement>
-    export type TextArea = DualChange<HTMLTextAreaElement>
+    export type Input = ChangeEvent<HTMLInputElement>
+    export type Select = ChangeEvent<HTMLSelectElement>
+    export type TextArea = ChangeEvent<HTMLTextAreaElement>
   }
 
   export namespace Click {
-    export type Anchor = DualClick<HTMLAnchorElement>
-    export type Button = DualClick<HTMLButtonElement>
-    export type Input = DualClick<HTMLInputElement>
+    export type Anchor = ClickEvent<HTMLAnchorElement>
+    export type Button = ClickEvent<HTMLButtonElement>
+    export type Input = ClickEvent<HTMLInputElement>
+  }
+
+  export namespace Focus {
+    export type Anchor = FocusEvent<HTMLAnchorElement>
+    export type Button = FocusEvent<HTMLButtonElement>
+    export type Input = FocusEvent<HTMLInputElement>
+    export type Select = FocusEvent<HTMLSelectElement>
+    export type TextArea = FocusEvent<HTMLTextAreaElement>
+  }
+
+  export namespace UI {
+    export type Anchor = UIEvent<HTMLAnchorElement>
+    export type Div = UIEvent<HTMLDivElement>
+    export type Button = UIEvent<HTMLButtonElement>
+    export type Input = UIEvent<HTMLInputElement>
+    export type Select = UIEvent<HTMLSelectElement>
+    export type TextArea = UIEvent<HTMLTextAreaElement>
   }
 }
 
@@ -194,6 +216,15 @@ export interface GlobalAttributes<E = HTMLElement> extends Attributes<E> {
  * Ref attributes for HTML elements.
  */
 export type HTMLElementRefAttributes = RefAttributes<HTMLElement>
+
+/**
+ * MDX component props.
+ */
+export type MDXProps = Omit<MDXProviderProps, 'children' | 'components'> & {
+  children?: string
+  components?: MDXComponents
+  scope?: Record<string, FC<AnyObject>> | AnyObject
+}
 
 /**
  * Properties used to add additional functionality to React's prop handling API.

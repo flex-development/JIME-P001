@@ -22,7 +22,10 @@ import { ServerStyleSheet } from 'styled-components'
  */
 export default class Document extends NextDocument {
   /**
-   * Injects the server side rendered styles into the `<head>` element.
+   * Injects the server side rendered styles into the `<head>` element. This is
+   * required to server side render styled components.
+   *
+   * @see https://styled-components.com/docs/advanced#server-side-rendering
    *
    * @param ctx - Next.js Document context
    * @param ctx.asPath - Path (including the query) shown in the browser
@@ -87,12 +90,13 @@ export default class Document extends NextDocument {
           {/* TODO: Update site verification token */}
           <meta name='google-site-verification' content='verification_token' />
 
-          {/* Third party styleshets & scripts */}
+          {/* Material Icons */}
           <link
             rel='stylesheet'
             href='https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined'
           />
 
+          {/* Font Awesome */}
           <script
             crossOrigin='anonymous'
             src='https://kit.fontawesome.com/0691581d45.js'

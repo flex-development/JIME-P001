@@ -39,3 +39,7 @@ export const Hero: FC<HeroProps> = (props: HeroProps) => {
     </Section>
   )
 }
+
+Hero.displayName = 'Hero'
+
+Hero.defaultProps = {}

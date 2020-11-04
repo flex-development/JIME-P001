@@ -1,5 +1,5 @@
 import { useLineItemInput, useMutatedProps } from '@system/hooks'
-import { ANYTHING, Events } from '@system/types'
+import { ANYTHING, EventHandlers } from '@system/types'
 import React, { FC, Fragment } from 'react'
 import { AttributeInput, CustomAttribute, LineItem } from 'shopify-buy'
 import {
@@ -61,7 +61,7 @@ export interface CheckoutLineItemProps extends BoxProps {
    * @param event.target - <button name="remove"> element
    * @param event.target.value - ID of the line item to remove
    */
-  remove?(event?: Events.Click.Button): ANYTHING
+  remove?(event?: EventHandlers.Click.Button): ANYTHING
 
   /**
    * Title of variant's parent product.
@@ -79,7 +79,7 @@ export interface CheckoutLineItemProps extends BoxProps {
    * @param updates.variantId - ID of the variant the
    * @param event - `change` event from quantity input
    */
-  update?(item: AttributeInput, event?: Events.Change.Input): ANYTHING
+  update?(item: AttributeInput, event?: EventHandlers.Change.Input): ANYTHING
 
   /**
    * ID of line item variant.
@@ -153,8 +153,8 @@ export const CheckoutLineItem: FC<CheckoutLineItemProps> = (
                 <Span>{customAttributes[0]?.value}</Span>
               </Fragment>
             ) : (
-              'No Kustomizations.'
-            )
+                'No Kustomizations.'
+              )
             /* eslint-enable prettier/prettier */
           }
         </Paragraph>
@@ -178,7 +178,7 @@ export const CheckoutLineItem: FC<CheckoutLineItemProps> = (
                 'aria-label': 'Line item quantity',
                 min: 0,
                 name: 'quantity',
-                onChange: (event: Events.Change.Input) => {
+                onChange: (event: EventHandlers.Change.Input) => {
                   const updated_item: AttributeInput = {
                     quantity: (event.target.value as unknown) as number,
                     variantId: item.variantId as string
@@ -197,7 +197,7 @@ export const CheckoutLineItem: FC<CheckoutLineItemProps> = (
           </FlexBox>
 
           <Button
-            onClick={(e: Events.Click.Button) => remove(e.target.value)}
+            onClick={(event: EventHandlers.Click.Button) => remove(event)}
             name='remove'
             mt={{ md: 0, xs: 24 }}
             px={20}

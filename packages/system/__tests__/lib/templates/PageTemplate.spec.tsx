@@ -1,4 +1,4 @@
-import { PageTemplate } from '@system/components'
+import { MDXBox, PageTemplate } from '@system/components'
 import {
   Markdown,
   MDX
@@ -25,5 +25,5 @@ it('renders a page with a markdown body', () => {
 it('renders a page with a MDX body', () => {
   const { getByText } = render(<MDX {...MDX.args} />)
 
-  expect(getByText('MDX Page')).toBeInTheDocument()
+  expect(getByText(MDXBox.displayName as string)).toBeInTheDocument()
 })

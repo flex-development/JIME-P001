@@ -1,5 +1,5 @@
 import { useMutatedProps } from '@system/hooks'
-import { ANYTHING, Events } from '@system/types'
+import { ANYTHING, EventHandlers } from '@system/types'
 import React, { FC, FormEvent, useState } from 'react'
 import { Button, Form, FormProps, Input, InputProps } from '../atoms'
 
@@ -11,7 +11,7 @@ import { Button, Form, FormProps, Input, InputProps } from '../atoms'
 /**
  * `Button` click event or `Form` event.
  */
-export type SearchBarEvent = FormEvent | Events.Click.Button
+export type SearchBarEvent = FormEvent | EventHandlers.Click.Button
 
 /**
  * `SearchBar` component properties.
@@ -63,7 +63,7 @@ export const SearchBar: FC<SearchBarProps> = (props: SearchBarProps) => {
         aria-label='Search button'
         className='searchbar-btn'
         icon={{ 'aria-label': 'Search icon', children: 'search' }}
-        onClick={(event: Events.Click.Button) => search(query, event)}
+        onClick={(event: EventHandlers.Click.Button) => search(query, event)}
         name='search'
         variant='ghost'
       />
@@ -71,7 +71,7 @@ export const SearchBar: FC<SearchBarProps> = (props: SearchBarProps) => {
       <Input
         aria-label='Search query'
         className='searchbar-input'
-        onChange={(event: Events.Change.Input) => setQuery(event.target.value)}
+        onChange={(event: EventHandlers.Change.Input) => setQuery(event.target.value)}
         placeholder={placeholder}
         type='search'
         value={query}

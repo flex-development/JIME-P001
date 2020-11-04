@@ -1,5 +1,9 @@
 import { useMutatedProps, useProductVariants } from '@system/hooks'
-import { Events, ProductResource, ProductVariantResource } from '@system/types'
+import {
+  EventHandlers,
+  ProductResource,
+  ProductVariantResource
+} from '@system/types'
 import React, { FC, useEffect, useState } from 'react'
 import useBoolean from 'react-hanger/array/useBoolean'
 import {
@@ -105,7 +109,7 @@ export const ProductCard: FC<ProductCardProps> = (props: ProductCardProps) => {
           {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
           <Link
             aria-expanded={expanded}
-            onClick={(event: Events.Click.Anchor) => {
+            onClick={(event: EventHandlers.Click.Anchor) => {
               event.preventDefault()
               return toggle()
             }}

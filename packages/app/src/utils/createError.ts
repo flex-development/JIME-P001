@@ -3,7 +3,6 @@ import {
   BadRequest,
   Conflict,
   FeathersError,
-  FeathersErrorJSON,
   Forbidden,
   GeneralError,
   LengthRequired,
@@ -36,11 +35,11 @@ import { AnyObject } from '@system/types'
  * @param status - Error status code. Defaults to 500
  * @returns {FeathersError}
  */
-export const createError = (
+const createError = (
   error?: string | Error,
   data: AnyObject = {},
   status: number | string = 500
-): FeathersErrorJSON => {
+): FeathersError => {
   if (typeof status === 'string') status = JSON.parse(status)
 
   switch (status) {
@@ -93,5 +92,7 @@ export const createError = (
       error = new GeneralError(error, data)
   }
 
-  return (error as FeathersError).toJSON()
+  return error as FeathersError
 }
+
+export default createError

@@ -1,5 +1,5 @@
 import { useMutatedProps } from '@system/hooks'
-import { ANYTHING, Events, MutatedProps } from '@system/types'
+import { ANYTHING, EventHandlers, MutatedProps } from '@system/types'
 import React, { FC } from 'react'
 import { Button, Column, Header, Link, LinkProps, Span } from '../atoms'
 import { SearchBar, SearchBarProps } from '../molecules'
@@ -31,7 +31,7 @@ export interface ShopHeaderProps extends MutatedProps {
    *
    * @param event - `click` event from sidebar button
    */
-  handleSidebar?(event: Events.Click.Button): ANYTHING
+  handleSidebar?(event: EventHandlers.Click.Button): ANYTHING
 
   /**
    * Number of items in the user's cart.
@@ -52,7 +52,7 @@ export const ShopHeader: FC<ShopHeaderProps> = (props: ShopHeaderProps) => {
   const {
     cart_url,
     handleSearch,
-    handleSidebar = (event: Events.Click.Button) => {
+    handleSidebar = (event: EventHandlers.Click.Button) => {
       event.preventDefault && event.preventDefault()
       console.log('Sidebar button clicked')
     },
@@ -91,6 +91,8 @@ export const ShopHeader: FC<ShopHeaderProps> = (props: ShopHeaderProps) => {
     </Header>
   )
 }
+
+ShopHeader.displayName = 'ShopHeader'
 
 ShopHeader.defaultProps = {
   cart_url: 'cart',

@@ -70,8 +70,9 @@ export type ReflessSelectProps = PropsWithoutRef<SelectProps>
 /**
  * Renders a `<select>` element with the class `form-select`.
  *
- * - **https://developer.mozilla.org/docs/Web/HTML/Element/select**
- * - **https://v5.getbootstrap.com/docs/5.0/forms/select/**
+ * - https://v5.getbootstrap.com/docs/5.0/forms/select
+ * - https://developer.mozilla.org/docs/Web/HTML/Element/select
+ * - https://developer.mozilla.org/docs/Web/API/HTMLSelectElement
  */
 export const Select: FREC<SelectRefProps> = forwardRef((props, ref) => {
   const { options = [], ...rest } = props

@@ -71,7 +71,9 @@ export type FlexBoxRefProps = ReflessFlexBoxProps & BoxRefAttributes
 /**
  * Flexbox layout component.
  *
- * - https://v5.getbootstrap.com/docs/5.0/utilities/flex/
+ * - https://v5.getbootstrap.com/docs/5.0/utilities/flex
+ * - https://developer.mozilla.org/docs/Web/HTML/Element/div
+ * - https://developer.mozilla.org/docs/Web/API/HTMLDivElement
  */
 export const FlexBox: FREC<FlexBoxRefProps> = forwardRef((props, ref) => {
   const { align, container, direction, display, justify, wrap, ...rest } = props

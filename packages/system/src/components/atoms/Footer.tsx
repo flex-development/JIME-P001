@@ -1,5 +1,5 @@
 import { useMutatedProps } from '@system/hooks'
-import { RefProps } from '@system/types'
+import { MutatedRefProps } from '@system/types'
 import React, { forwardRef, ForwardRefExoticComponent as FREC } from 'react'
 
 /**
@@ -10,9 +10,10 @@ import React, { forwardRef, ForwardRefExoticComponent as FREC } from 'react'
 /**
  * Renders a `<footer>` element.
  *
- * - **https://developer.mozilla.org/en-US/docs/Web/HTML/Element/footer**
+ * - https://developer.mozilla.org/docs/Web/HTML/Element/footer
+ * - https://developer.mozilla.org/docs/Web/API/HTMLElement
  */
-export const Footer: FREC<RefProps> = forwardRef((props, ref) => {
+export const Footer: FREC<MutatedRefProps> = forwardRef((props, ref) => {
   const mutated = useMutatedProps<
     typeof props,
     JSX.IntrinsicElements['footer']

@@ -57,7 +57,9 @@ export type ColumnRefProps = ReflessColumnProps & BoxRefAttributes
 /**
  * Grid layout component.
  *
- * - https://v5.getbootstrap.com/docs/5.0/layout/columns/
+ * - https://v5.getbootstrap.com/docs/5.0/layout/columns
+ * - https://developer.mozilla.org/docs/Web/HTML/Element/div
+ * - https://developer.mozilla.org/docs/Web/API/HTMLDivElement
  */
 export const Column: FREC<ColumnRefProps> = forwardRef((props, ref) => {
   const {

@@ -122,8 +122,9 @@ export type ImageRefProps = ReflessImageProps & ImageRefAttributes
 /**
  * Renders an `<img>` element with the class `img`.
  *
- * - **https://developer.mozilla.org/docs/Web/HTML/Element/img**
- * - **https://v5.getbootstrap.com/docs/5.0/content/images/**
+ * - https://developer.mozilla.org/docs/Web/HTML/Element/img
+ * - https://developer.mozilla.org/docs/Web/HTML/Element/img
+ * - https://developer.mozilla.org/docs/Web/API/HTMLImageElement
  */
 export const Image: FREC<ImageRefProps> = forwardRef((props, ref) => {
   const { fluid, rounded, thumbnail, ...rest } = props

@@ -5,7 +5,7 @@ import breakpointInfix from './breakpointInfix'
 /**
  * @file Create a responsive variation of a CSS class
  * @module utils/createResponsiveUtility
- * @see https://v5.getbootstrap.com/docs/5.0/utilities/api/
+ * @see https://v5.getbootstrap.com/docs/5.0/utilities/api
  */
 
 /**

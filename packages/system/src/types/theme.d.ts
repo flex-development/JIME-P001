@@ -3,7 +3,7 @@ import { Primitive } from './utils'
 /**
  * @file UI Theme Type Declarations
  * @module types/theme
- * @see https://v5.getbootstrap.com/
+ * @see https://v5.getbootstrap.com
  */
 
 /**
@@ -38,7 +38,7 @@ export type Columns = 'auto' | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12
  * Defines the default behavior for how flex items are laid out along the cross
  * axis on the current line.
  *
- * @see https://css-tricks.com/snippets/css/a-guide-to-flexbox/
+ * @see https://css-tricks.com/snippets/css/a-guide-to-flexbox
  */
 export type FlexboxAlignItems =
   | 'around'
@@ -53,7 +53,7 @@ export type FlexboxAlignItems =
  *
  * Establishes the main-axis of the flexbox.
  *
- * @see https://css-tricks.com/snippets/css/a-guide-to-flexbox/
+ * @see https://css-tricks.com/snippets/css/a-guide-to-flexbox
  */
 export type FlexboxDirection =
   | 'column'
@@ -64,7 +64,7 @@ export type FlexboxDirection =
 /**
  * Flexbox values for the `display` property.
  *
- * @see https://css-tricks.com/snippets/css/a-guide-to-flexbox/
+ * @see https://css-tricks.com/snippets/css/a-guide-to-flexbox
  */
 export type FlexboxDisplay = 'flex' | 'inline-flex'
 
@@ -73,7 +73,7 @@ export type FlexboxDisplay = 'flex' | 'inline-flex'
  *
  * Defines the alignment along the main flebox axis.
  *
- * @see https://css-tricks.com/snippets/css/a-guide-to-flexbox/
+ * @see https://css-tricks.com/snippets/css/a-guide-to-flexbox
  */
 export type FlexboxJustifyContent =
   | 'around'
@@ -95,8 +95,8 @@ export type FlexboxJustifyContent =
  * - `flex-wrap`
  * - `justify-content`
  *
- * @see https://v5.getbootstrap.com/docs/5.0/utilities/flex/
- * @see https://css-tricks.com/snippets/css/a-guide-to-flexbox/
+ * @see https://v5.getbootstrap.com/docs/5.0/utilities/flex
+ * @see https://css-tricks.com/snippets/css/a-guide-to-flexbox
  */
 export type FlexboxUtilitiesConfig = {
   /**
@@ -146,7 +146,7 @@ export type FlexboxUtilitiesConfig = {
  * By default, flex items will all try to fit onto one line. You can change that
  * and allow the items to wrap as needed with this property.
  *
- * @see https://css-tricks.com/snippets/css/a-guide-to-flexbox/
+ * @see https://css-tricks.com/snippets/css/a-guide-to-flexbox
  */
 export type FlexboxWrap = 'nowrap' | 'wrap' | 'wrap-reverse'
 

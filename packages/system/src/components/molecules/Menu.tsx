@@ -20,7 +20,7 @@ export interface MenuProps extends NavProps {
 /**
  * Displays the site navigation. Renders a `Nav` component.
  *
- * - https://v5.getbootstrap.com/docs/5.0/components/navs/
+ * - https://v5.getbootstrap.com/docs/5.0/components/navs
  */
 export const Menu: FC<MenuProps> = (props: MenuProps) => {
   const { links = [], ...rest } = props

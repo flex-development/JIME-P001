@@ -121,8 +121,9 @@ export type ButtonRefProps = ReflessButtonProps & ButtonRefAttributes
 /**
  * Renders a `<button>` element with the class `btn`.
  *
- * - **https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button**
- * - **https://v5.getbootstrap.com/docs/5.0/components/buttons/**
+ * - https://v5.getbootstrap.com/docs/5.0/components/buttons
+ * - https://developer.mozilla.org/docs/Web/HTML/Element/button
+ * - https://developer.mozilla.org/docs/Web/API/HTMLButtonElement
  */
 export const Button: FREC<ButtonRefProps> = forwardRef((props, ref) => {
   const { block, size, variant, ...rest } = props

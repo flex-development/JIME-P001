@@ -1,5 +1,5 @@
 import { useMutatedProps } from '@system/hooks'
-import { RefProps } from '@system/types'
+import { MutatedRefProps } from '@system/types'
 import React, { forwardRef, ForwardRefExoticComponent as FREC } from 'react'
 
 /**
@@ -10,9 +10,10 @@ import React, { forwardRef, ForwardRefExoticComponent as FREC } from 'react'
 /**
  * Renders a `<section>` element.
  *
- * - **https://developer.mozilla.org/en-US/docs/Web/HTML/Element/section**
+ * - https://developer.mozilla.org/docs/Web/HTML/Element/section
+ * - https://developer.mozilla.org/docs/Web/API/HTMLElement
  */
-export const Section: FREC<RefProps> = forwardRef((props, ref) => {
+export const Section: FREC<MutatedRefProps> = forwardRef((props, ref) => {
   const mutated = useMutatedProps<
     typeof props,
     JSX.IntrinsicElements['section']

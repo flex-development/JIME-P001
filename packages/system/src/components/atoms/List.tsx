@@ -57,8 +57,10 @@ export type ListRefProps = ReflessListProps & ListRefAttributes
 /**
  * Renders a `<ol>` or `<ul>` element.
  *
- * - **https://developer.mozilla.org/docs/Web/HTML/Element/ol**
- * - **https://developer.mozilla.org/docs/Web/HTML/Element/ul**
+ * - https://developer.mozilla.org/docs/Web/HTML/Element/ol
+ * - https://developer.mozilla.org/docs/Web/HTML/Element/ul
+ * - https://developer.mozilla.org/docs/Web/API/HTMLOListElement
+ * - https://developer.mozilla.org/docs/Web/API/HTMLUListElement
  */
 export const List: FREC<ListRefProps> = forwardRef((props, ref) => {
   const { is, items = [], ...rest } = props

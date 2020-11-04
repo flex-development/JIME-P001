@@ -43,7 +43,8 @@ export type HeadingRefProps = ReflessHeadingProps & HeadingRefAttributes
 /**
  * Renders a `<h1>`, `<h2>`, `<h3>`, `<h4>`, `<h5>`, or `<h6>` element.
  *
- * - **https://developer.mozilla.org/docs/Web/HTML/Element/Heading_Elements**
+ * - https://developer.mozilla.org/docs/Web/HTML/Element/Heading_Elements
+ * - https://developer.mozilla.org/docs/Web/API/HTMLHeadingElement
  */
 export const Heading: FREC<HeadingRefProps> = forwardRef((props, ref) => {
   const { size, ...rest } = props

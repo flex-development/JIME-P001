@@ -290,49 +290,49 @@ export interface MutatedProps<E = HTMLElement> extends GlobalAttributes<E> {
   /**
    * `margin-bottom` value.
    *
-   * - https://v5.getbootstrap.com/docs/5.0/utilities/spacing/
+   * - https://v5.getbootstrap.com/docs/5.0/utilities/spacing
    */
   mb?: Spacer | ResponsiveUtility<Spacer>
 
   /**
    * `margin-left` value.
    *
-   * - https://v5.getbootstrap.com/docs/5.0/utilities/spacing/
+   * - https://v5.getbootstrap.com/docs/5.0/utilities/spacing
    */
   ml?: Spacer | ResponsiveUtility<Spacer>
 
   /**
    * `margin-right` value.
    *
-   * - https://v5.getbootstrap.com/docs/5.0/utilities/spacing/
+   * - https://v5.getbootstrap.com/docs/5.0/utilities/spacing
    */
   mr?: Spacer | ResponsiveUtility<Spacer>
 
   /**
    * `margin-top` value.
    *
-   * - https://v5.getbootstrap.com/docs/5.0/utilities/spacing/
+   * - https://v5.getbootstrap.com/docs/5.0/utilities/spacing
    */
   mt?: Spacer | ResponsiveUtility<Spacer>
 
   /**
    * `margin-left` and `margin-right` value.
    *
-   * - https://v5.getbootstrap.com/docs/5.0/utilities/spacing/
+   * - https://v5.getbootstrap.com/docs/5.0/utilities/spacing
    */
   mx?: Spacer | ResponsiveUtility<Spacer>
 
   /**
    * `margin-bottom` and `margin-top` value.
    *
-   * - https://v5.getbootstrap.com/docs/5.0/utilities/spacing/
+   * - https://v5.getbootstrap.com/docs/5.0/utilities/spacing
    */
   my?: Spacer | ResponsiveUtility<Spacer>
 
   /**
    * `padding-bottom` value.
    *
-   * - https://v5.getbootstrap.com/docs/5.0/utilities/spacing/
+   * - https://v5.getbootstrap.com/docs/5.0/utilities/spacing
    */
   pb?: Spacer | ResponsiveUtility<Spacer>
 
@@ -346,28 +346,28 @@ export interface MutatedProps<E = HTMLElement> extends GlobalAttributes<E> {
   /**
    * `padding-right` value.
    *
-   * - https://v5.getbootstrap.com/docs/5.0/utilities/spacing/
+   * - https://v5.getbootstrap.com/docs/5.0/utilities/spacing
    */
   pr?: Spacer | ResponsiveUtility<Spacer>
 
   /**
    * `padding-top` value.
    *
-   * - https://v5.getbootstrap.com/docs/5.0/utilities/spacing/
+   * - https://v5.getbootstrap.com/docs/5.0/utilities/spacing
    */
   pt?: Spacer | ResponsiveUtility<Spacer>
 
   /**
    * `padding-left` and `padding-right` value.
    *
-   * - https://v5.getbootstrap.com/docs/5.0/utilities/spacing/
+   * - https://v5.getbootstrap.com/docs/5.0/utilities/spacing
    */
   px?: Spacer | ResponsiveUtility<Spacer>
 
   /**
    * `padding-bottom` and `padding-top` value.
    *
-   * - https://v5.getbootstrap.com/docs/5.0/utilities/spacing/
+   * - https://v5.getbootstrap.com/docs/5.0/utilities/spacing
    */
   py?: Spacer | ResponsiveUtility<Spacer>
 }
@@ -445,7 +445,7 @@ export type ReflessMutatedProps = PropsWithoutRef<MutatedProps>
 /**
  * {@link MutatedProps} type forward ref properties.
  */
-export type RefProps = ReflessMutatedProps & HTMLElementRefAttributes
+export type MutatedRefProps = ReflessMutatedProps & HTMLElementRefAttributes
 
 /**
  * Template component properties.

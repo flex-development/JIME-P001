@@ -54,7 +54,9 @@ export type NavRefProps = ReflessNavProps & BoxRefAttributes
 /**
  * Renders a `<nav>` element with the class `nav`.
  *
- * - **https://v5.getbootstrap.com/docs/5.0/components/navs/**
+ * - https://v5.getbootstrap.com/docs/5.0/components/navs
+ * - https://developer.mozilla.org/docs/Web/HTML/Element/nav
+ * - https://developer.mozilla.org/docs/Web/API/HTMLElement
  */
 export const Nav: FREC<NavRefProps> = forwardRef((props, ref) => {
   const {

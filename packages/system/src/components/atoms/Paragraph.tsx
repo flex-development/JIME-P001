@@ -38,8 +38,9 @@ export type ParagraphRefProps = ReflessParagraphProps & ParagraphRefAttributes
 /**
  * Renders a `<p>` element.
  *
- * - **https://developer.mozilla.org/docs/Web/HTML/Element/p**
- * - **https://v5.getbootstrap.com/docs/5.0/utilities/text/**
+ * - https://v5.getbootstrap.com/docs/5.0/utilities/text
+ * - https://developer.mozilla.org/docs/Web/HTML/Element/p
+ * - https://developer.mozilla.org/docs/Web/API/HTMLParagraphElement
  */
 export const Paragraph: FREC<ParagraphRefProps> = forwardRef((props, ref) => {
   const withIcon = useIcon<HTMLParagraphElement, ParagraphProps>(props)

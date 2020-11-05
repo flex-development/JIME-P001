@@ -1,17 +1,17 @@
-import { AshTray } from '@system/stories/lib/organisms/ProductReviewForm.stories'
+import { AshTray } from '@system/stories/lib/organisms/ProductReviewEntryForm.stories'
 import { render, screen } from '@testing-library/react'
 import User from '@testing-library/user-event'
 import React from 'react'
 
 /**
- * @file Tests - ProductReviewForm
- * @module tests/lib/organisms/ProductReviewForm
+ * @file Tests - ProductReviewEntryForm
+ * @module tests/lib/organisms/ProductReviewEntryForm
  */
 
 // ! Keep in sync with Input implementation
 const EMAIL_INPUT_PLACEHOLDER = 'you@email.com'
 
-// ! Keep in sync with ProductReviewForm implementation
+// ! Keep in sync with ProductReviewEntryForm implementation
 const SELECT_PLACEHOLDER = 'Select the product variant you purchased'
 const TEXTAREA_PLACEHOLDER =
   'Blue bottle single-origin coffee next level taxidermy four loko seitan cupidatat flannel. Cred asymmetrical literally vexillologist cliche do distillery hashtag raw denim crucifix everyday carry affogato austin. Williamsburg jean shorts raclette, aesthetic quinoa dolore hammock echo park taxidermy messenger bag.'

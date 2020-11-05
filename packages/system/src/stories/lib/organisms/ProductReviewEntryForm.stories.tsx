@@ -1,27 +1,30 @@
-import { ProductReviewForm, ProductReviewFormProps } from '@system/components'
+import {
+  ProductReviewEntryForm,
+  ProductReviewEntryFormProps
+} from '@system/components'
 import { StoryFN } from '@system/types'
 import products from '@system/__mocks__/products.mock.json'
 import { omit } from 'lodash'
 import React from 'react'
 
 /**
- * @file Stories - ProductReviewForm
- * @module stories/lib/organisms/ProductReviewForm
+ * @file Stories - ProductReviewEntryForm
+ * @module stories/lib/organisms/ProductReviewEntryForm
  */
 
 export default {
-  component: ProductReviewForm,
+  component: ProductReviewEntryForm,
   parameters: {
-    jest: ['ProductReviewForm']
+    jest: ['ProductReviewEntryForm']
   },
-  title: 'Library/Organisms/ProductReviewForm'
+  title: 'Library/Organisms/ProductReviewEntryForm'
 }
 
 const ashtray_data = Object.assign({}, omit(products[0]))
 
-export const AshTray: StoryFN<ProductReviewFormProps> = (
-  args: ProductReviewFormProps
-) => <ProductReviewForm {...args} />
+export const AshTray: StoryFN<ProductReviewEntryFormProps> = (
+  args: ProductReviewEntryFormProps
+) => <ProductReviewEntryForm {...args} />
 
 AshTray.args = {
   description:

@@ -5,7 +5,7 @@ import React from 'react'
 
 /**
  * @file Stories - AddToCartForm
- * @module stories/lib/molecules/AddToCartForm
+ * @module stories/lib/organisms/AddToCartForm
  */
 
 export default {
@@ -18,7 +18,7 @@ export default {
   parameters: {
     jest: ['AddToCartForm']
   },
-  title: 'Library/Molecules/AddToCartForm'
+  title: 'Library/Organisms/AddToCartForm'
 }
 
 export const AshTray: StoryFN<AddToCartFormProps> = (

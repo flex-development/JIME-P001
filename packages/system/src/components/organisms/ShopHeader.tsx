@@ -51,7 +51,7 @@ export const ShopHeader: FC<ShopHeaderProps> = (props: ShopHeaderProps) => {
     handleSearch,
     handleSidebar = (event: EventHandlers.Click.Button) => {
       event.preventDefault && event.preventDefault()
-      console.log('Sidebar button clicked')
+      console.log('TODO: ShopHeader.handleSidebar')
     },
     items,
     ...rest

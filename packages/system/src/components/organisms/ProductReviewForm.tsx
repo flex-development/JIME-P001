@@ -19,13 +19,11 @@ import {
   Paragraph,
   Span
 } from '../atoms'
-import { FormCheck } from './FormCheck'
-import { LabeledFormControl } from './LabeledFormControl'
-import { ProductRatingField } from './ProductRatingField'
+import { FormCheck, LabeledFormControl, ProductRatingField } from '../molecules'
 
 /**
  * @file Allow users to submit product reviews
- * @module components/molecules/ProductReviewForm
+ * @module components/organisms/ProductReviewForm
  *
  * @todo Update documentation
  */
@@ -42,18 +40,6 @@ export interface ProductReviewFormProps extends FormProps {
   /**
    * Form submission handler. This function will be fired when the user clicks
    * the `submit` button.
-   *
-   * @param review - User-populated product review fields
-   * @param review.email - Email of customer who submitted review
-   * @param review.productId - ID of product variant review is for
-   * @param review.productImageUrl - Image URL of product variant review is for
-   * @param review.productName - Name of product variant review is for
-   * @param review.productSKU - SKU of product variant review is for
-   * @param review.reviewMessage - Review body, between 10 and 80 characters
-   * @param review.reviewRating - Product rating, 1 - 5
-   * @param review.reviewRecommendProduct - True if customer recommends product
-   * @param review.reviewTitle - Title of review, at least three characters
-   * @param event - `click` event from submit button
    */
   handleSubmit?(
     review: Partial<StampedProductReviewEntityInput>,
@@ -79,11 +65,9 @@ export interface ProductReviewFormProps extends FormProps {
 }
 
 /**
- * Renders a `Form` component that allows users to submit product reviews.
+ * Allows users to submit product reviews.
  *
- * **TODO**:
- *
- * - Update documentation
+ * Renders a `Form` component with the class `product-review-form`.
  */
 export const ProductReviewForm: FC<ProductReviewFormProps> = (
   props: ProductReviewFormProps
@@ -95,7 +79,7 @@ export const ProductReviewForm: FC<ProductReviewFormProps> = (
       event: EventHandlers.Click.Button
     ) => {
       event.preventDefault()
-      console.log('Submitted product review', review)
+      console.log('TODO: ProductReviewForm.handleSubmit', review)
     },
     id,
     title,

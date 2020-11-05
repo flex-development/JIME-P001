@@ -1,5 +1,10 @@
 import { useLineItemInput, useProductVariants } from '@system/hooks'
-import { ANYTHING, EventHandlers, ProductResource } from '@system/types'
+import {
+  ANYTHING,
+  EventHandlers,
+  ProductResource,
+  ProductVariantResource
+} from '@system/types'
 import { findIndex, isEmpty } from 'lodash'
 import React, { FC, useEffect, useState } from 'react'
 import uuid from 'react-uuid'
@@ -17,27 +22,29 @@ import {
   Select,
   TextArea
 } from '../atoms'
-import { Carousel } from '../organisms'
-import { LabeledFormControl } from './LabeledFormControl'
-import { ProductHeading } from './ProductHeading'
+import { LabeledFormControl } from '../molecules/LabeledFormControl'
+import { ProductHeading } from '../molecules/ProductHeading'
+import { Carousel } from './Carousel'
 
 /**
  * @file Form allowing users to add products to their cart
- * @module components/molecules/AddToCartForm
+ * @module components/organisms/AddToCartForm
  */
 
 export interface AddToCartFormProps extends FormProps {
   /**
    * Form submission handler. If a submit handler isn't passed the result will
    * be logged to the console.
-   *
-   * @param item - Line item to add to cart
-   * @param event - `<button>` onClick event
    */
   handleSubmit?(
     item: LineItemToAdd,
     event: EventHandlers.Click.Button
   ): ANYTHING
+
+  /**
+   * Fires when a product variant is selected.
+   */
+  handleVariant?(id: ProductVariantResource['id']): ANYTHING
 
   /**
    * Shopify product resource.
@@ -58,8 +65,9 @@ export const AddToCartForm: FC<AddToCartFormProps> = (
   const {
     handleSubmit = (item: LineItemToAdd, event: EventHandlers.Click.Button) => {
       event.preventDefault()
-      console.log(`${item.variantId} added to cart`, item)
+      console.log(`TODO: AddToCartForm.handleSubmit`, item)
     },
+    handleVariant,
     product,
     ...rest
   } = props
@@ -136,9 +144,10 @@ export const AddToCartForm: FC<AddToCartFormProps> = (
               aria-label='Product variant selection'
               data-selected={selected.title}
               name='variantId'
-              onChange={(e: EventHandlers.Change.Select) =>
-                selectVariant(e.target.value)
-              }
+              onChange={({ target }: EventHandlers.Change.Select) => {
+                selectVariant(target.value)
+                if (handleVariant) handleVariant(target.value)
+              }}
               options={product_variant_options}
               placeholder='Select an option'
               value={selected.id}

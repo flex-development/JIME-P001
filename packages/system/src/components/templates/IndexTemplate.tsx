@@ -60,14 +60,6 @@ export interface IndexTemplateProps extends MutatedProps {
   reviews?: ProductReviewProps[]
 }
 
-export const IndexTemplateDefaultProps = {
-  about_section_title: 'About Morena',
-  max_products: 3,
-  products: [],
-  products_section_title: 'Products',
-  reviews: []
-}
-
 /**
  * Displays a quick blurb about the shop owner, a product grid, and a product
  * review carousel.
@@ -84,12 +76,12 @@ export const IndexTemplate: TC<IndexTemplateProps> = (
 ) => {
   const {
     about_section_text,
-    about_section_title = IndexTemplate.defaultProps?.about_section_title,
-    max_products: max = IndexTemplate.defaultProps?.max_products as number,
-    products = IndexTemplate.defaultProps?.products as ProductResource[],
+    about_section_title = 'About Morena',
+    max_products: max = 3,
+    products = [],
     products_section_text,
-    products_section_title = IndexTemplate.defaultProps?.products_section_title,
-    reviews = IndexTemplate.defaultProps?.reviews as ProductReviewProps[],
+    products_section_title = 'Products',
+    reviews = [],
     ...rest
   } = props
 

@@ -1,7 +1,7 @@
 import {
   AshTray,
   Kustomz
-} from '@system/stories/lib/molecules/AddToCartForm.stories'
+} from '@system/stories/lib/organisms/AddToCartForm.stories'
 import { ProductVariantResource } from '@system/types'
 import { fireEvent, render, screen } from '@testing-library/react'
 import User from '@testing-library/user-event'
@@ -9,7 +9,7 @@ import React from 'react'
 
 /**
  * @file Tests - AddToCartForm
- * @module tests/lib/molecules/AddToCartForm
+ * @module tests/lib/organisms/AddToCartForm
  */
 
 // ! Keep in sync with AddToCartForm implementation

@@ -53,14 +53,17 @@ $theme-colors: (
   secondary-25: $secondary-25
 );
 
-$color-utils: map-merge($theme-colors, (
-  'black-50': rgba(bootstrap.$black, .5),
-  'body': $body-color,
-  'muted': bootstrap.$text-muted,
-  'reset': inherit,
-  'white-50': rgba(bootstrap.$white, .5),
-  'white': bootstrap.$white
-));
+$color-utils: map-merge(
+  $theme-colors,
+  (
+    'black-50': rgba(bootstrap.$black, 0.5),
+    'body': $body-color,
+    'muted': bootstrap.$text-muted,
+    'reset': inherit,
+    'white-50': rgba(bootstrap.$white, 0.5),
+    'white': bootstrap.$white
+  )
+);
 
 // -----------------------------------------------------------------------------
 // Grid Items

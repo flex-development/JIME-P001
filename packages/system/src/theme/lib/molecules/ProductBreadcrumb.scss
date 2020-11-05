@@ -5,7 +5,7 @@
 .product-breadcrumb {
   color: $light;
   text-transform: uppercase;
-  
+
   &-divider {
     color: rgba(map-get($color-utils, muted), 0.5);
     font-weight: $font-weight-medium;

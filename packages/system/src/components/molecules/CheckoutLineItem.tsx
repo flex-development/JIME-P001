@@ -150,8 +150,8 @@ export const CheckoutLineItem: FC<CheckoutLineItemProps> = (
                 <Span>{customAttributes[0]?.value}</Span>
               </Fragment>
             ) : (
-                'No Kustomizations.'
-              )
+              'No Kustomizations.'
+            )
             /* eslint-enable prettier/prettier */
           }
         </Paragraph>

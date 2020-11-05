@@ -26,15 +26,8 @@
     // "noEmit": true,
     "target": "esnext"
   },
-  "exclude": [
-    "node_modules"
-  ],
+  "exclude": ["node_modules"],
   "extends": "../../tsconfig.json",
-  "files": [
-    "next-env.d.ts"
-  ],
-  "include": [
-    "__tests__",
-    "src"
-  ]
+  "files": ["next-env.d.ts"],
+  "include": ["__tests__", "src"]
 }

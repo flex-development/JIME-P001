@@ -9,11 +9,7 @@
       {
         "id": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0T3B0aW9uLzcyMjE4MjA0NTcxMTU=",
         "name": "Style",
-        "values": [
-          "FUNFETTI",
-          "JELLY $LIDES",
-          "LA $ONRISA"
-        ]
+        "values": ["FUNFETTI", "JELLY $LIDES", "LA $ONRISA"]
       }
     ],
     "images": [
@@ -82,11 +78,7 @@
       {
         "id": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0T3B0aW9uLzcyMjE4NTQ1MDMwNjc=",
         "name": "Style",
-        "values": [
-          "FUNFETTI",
-          "JELLY $LIDES",
-          "LA $ONRISA"
-        ]
+        "values": ["FUNFETTI", "JELLY $LIDES", "LA $ONRISA"]
       }
     ],
     "images": [
@@ -162,12 +154,7 @@
       {
         "id": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0T3B0aW9uLzcyMjI1MDQyNTk3Mzk=",
         "name": "Style",
-        "values": [
-          "Rolling Tray",
-          "♡ Ash Tray",
-          "▢ Ash Tray",
-          "◯ Ash Tray"
-        ]
+        "values": ["Rolling Tray", "♡ Ash Tray", "▢ Ash Tray", "◯ Ash Tray"]
       }
     ],
     "variants": [

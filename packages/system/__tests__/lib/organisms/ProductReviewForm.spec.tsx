@@ -1,11 +1,11 @@
-import { AshTray } from '@system/stories/lib/molecules/ProductReviewForm.stories'
+import { AshTray } from '@system/stories/lib/organisms/ProductReviewForm.stories'
 import { render, screen } from '@testing-library/react'
 import User from '@testing-library/user-event'
 import React from 'react'
 
 /**
  * @file Tests - ProductReviewForm
- * @module tests/lib/molecules/ProductReviewForm
+ * @module tests/lib/organisms/ProductReviewForm
  */
 
 // ! Keep in sync with Input implementation

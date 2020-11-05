@@ -40,12 +40,7 @@ export interface CartTemplateProps extends MutatedProps {
 export const CartTemplate: TC<CartTemplateProps> = (
   props: CartTemplateProps
 ) => {
-  const {
-    checkout_url = CartTemplate.defaultProps?.checkout_url,
-    items = CartTemplate.defaultProps?.items as CheckoutLineItemProps[],
-    subtotal = CartTemplate.defaultProps?.subtotal,
-    ...rest
-  } = props
+  const { checkout_url, items = [], subtotal = '0.00', ...rest } = props
 
   const mutated = useMutatedProps<typeof rest>(rest, 'template')
   const subtotal_formatted = `$${subtotal}`

@@ -6,7 +6,7 @@ import React from 'react'
 
 /**
  * @file Stories - ProductReviewForm
- * @module stories/lib/molecules/ProductReviewForm
+ * @module stories/lib/organisms/ProductReviewForm
  */
 
 export default {
@@ -14,7 +14,7 @@ export default {
   parameters: {
     jest: ['ProductReviewForm']
   },
-  title: 'Library/Molecules/ProductReviewForm'
+  title: 'Library/Organisms/ProductReviewForm'
 }
 
 const ashtray_data = Object.assign({}, omit(products[0]))

@@ -1,0 +1,37 @@
+/// ----------------------------------------------------------------------------
+/// @group ProductTemplate
+/// ----------------------------------------------------------------------------
+
+.template[data-template='product'] {
+  #reviews h2 {
+    @include margin-bottom($spacers-0);
+
+    font-size: $h4-font-size;
+  }
+
+  .btn[name='submit-review'] {
+    @include media-breakpoint-down(sm) {
+      @include padding-x($input-btn-padding-x-sm);
+
+      @include padding-y($input-btn-padding-y-sm);
+
+      font-size: $input-btn-font-size-sm;
+    }
+  }
+
+  .product-breadcrumb {
+    @include margin-bottom($spacers-16);
+
+    @include media-breakpoint-up(sm) {
+      @include margin-bottom($spacers-24);
+
+      font-size: $font-size-base;
+    }
+
+    @include media-breakpoint-up(rem(320px)) {
+      font-size: $font-size-sm;
+    }
+
+    font-size: $font-size-xs;
+  }
+}

@@ -37,12 +37,7 @@ export interface CollectionTemplateProps extends MutatedProps {
 export const CollectionTemplate: TC<CollectionTemplateProps> = (
   props: CollectionTemplateProps
 ) => {
-  const {
-    description,
-    products = CollectionTemplate.defaultProps?.products,
-    title,
-    ...rest
-  } = props
+  const { description, products = [], title, ...rest } = props
 
   const mutated = useMutatedProps<typeof rest>(rest, 'template')
 

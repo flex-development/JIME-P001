@@ -75,7 +75,7 @@ export type StampedProductReviewEntity = {
   id: number
   isPublishedShopify: boolean
   productHandle: string
-  productId: number
+  productId: number | string
   productImageUrl: string
   productTitle: string
   productUrl: string

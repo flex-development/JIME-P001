@@ -23,15 +23,15 @@ import { FormCheck, LabeledFormControl, ProductRatingField } from '../molecules'
 
 /**
  * @file Allow users to submit product reviews
- * @module components/organisms/ProductReviewForm
+ * @module components/organisms/ProductReviewEntryForm
  *
  * @todo Update documentation
  */
 
 /**
- * `ProductReviewForm` component properties.
+ * `ProductReviewEntryForm` component properties.
  */
-export interface ProductReviewFormProps extends FormProps {
+export interface ProductReviewEntryFormProps extends FormProps {
   /**
    * Form description.
    */
@@ -69,8 +69,8 @@ export interface ProductReviewFormProps extends FormProps {
  *
  * Renders a `Form` component with the class `product-review-form`.
  */
-export const ProductReviewForm: FC<ProductReviewFormProps> = (
-  props: ProductReviewFormProps
+export const ProductReviewEntryForm: FC<ProductReviewEntryFormProps> = (
+  props: ProductReviewEntryFormProps
 ) => {
   const {
     description,
@@ -79,7 +79,7 @@ export const ProductReviewForm: FC<ProductReviewFormProps> = (
       event: EventHandlers.Click.Button
     ) => {
       event.preventDefault()
-      console.log('TODO: ProductReviewForm.handleSubmit', review)
+      console.log('TODO: ProductReviewEntryForm.handleSubmit', review)
     },
     id,
     title,
@@ -249,6 +249,6 @@ export const ProductReviewForm: FC<ProductReviewFormProps> = (
   )
 }
 
-ProductReviewForm.displayName = 'ProductReviewForm'
+ProductReviewEntryForm.displayName = 'ProductReviewEntryForm'
 
-ProductReviewForm.defaultProps = {}
+ProductReviewEntryForm.defaultProps = {}

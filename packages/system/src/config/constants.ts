@@ -7,7 +7,7 @@ import {
 
 /**
  * @file Design System Constants
- * @module config/constants
+ * @module subdomains/config/constants
  */
 
 export const BUTTON_VARIANTS: ButtonVariant[] = [

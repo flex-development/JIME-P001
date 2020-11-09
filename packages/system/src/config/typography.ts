@@ -1,6 +1,6 @@
 /**
  * @file Typography Constants
- * @module config/typography
+ * @module subdomains/config/typography
  */
 
 /* eslint-disable sort-keys */

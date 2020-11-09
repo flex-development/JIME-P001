@@ -18,16 +18,20 @@
     "useCache": true
   },
   "compilerOptions": {
+    "allowJs": true,
+    "checkJs": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "isolatedModules": true,
-    // "jsx": "preserve",
-    // "lib": ["dom", "dom.iterable", "esnext"],
-    // "noEmit": true,
+    "jsx": "preserve",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "noEmit": true,
+    "module": "esnext",
+    "strictPropertyInitialization": false,
     "target": "esnext"
   },
   "exclude": ["node_modules"],
   "extends": "../../tsconfig.json",
   "files": ["next-env.d.ts"],
-  "include": ["__tests__", "src"]
+  "include": ["__tests__", "src", "jest.setup.ts"]
 }

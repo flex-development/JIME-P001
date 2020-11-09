@@ -28,11 +28,11 @@
     "directory": "packages/app"
   },
   "scripts": {
-    "predev": "vc env pull .env.development.local --yes",
+    "predev": "NODE_ENV=development vc env pull .env.local --yes",
     "dev": "next dev -p 3001",
-    "pretest": "dotenv -e .env.test.local -- echo \"Loaded test environment.\"",
+    "pretest": "dotenv -e .env.local -- echo \"Loaded environment variables.\"",
     "test": "jest --detectOpenHandles --passWithNoTests",
-    "prestart": "dotenv -e .env.production.local -- echo \"Loaded production environment.\"",
+    "prestart": "NODE_ENV=production",
     "start": "next start",
     "build": "next build",
     "now-build": "lerna link && yarn build"

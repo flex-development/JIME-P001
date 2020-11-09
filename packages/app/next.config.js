@@ -1,5 +1,3 @@
-const merge = require('lodash').merge
-
 /**
  * @file Next.js Configuration
  * @see https://nextjs.org/docs/api-reference/next.config.js/introduction
@@ -8,11 +6,10 @@ const merge = require('lodash').merge
 const {
   FIREBASE_API_KEY,
   FIREBASE_APP_ID,
-  FIREBASE_CLIENT_EMAIL,
-  FIREBASE_PRIVATE_KEY,
   FIREBASE_PROJECT_ID,
   FIREBASE_MESSAGING_SENDER_ID,
   SHOPIFY_DOMAIN,
+  SHOPIFY_STOREFRONT_ACCESS_TOKEN,
   SITE_URL,
   VERCEL_URL
 } = process.env
@@ -25,15 +22,13 @@ module.exports = {
     FIREBASE_API_KEY,
     FIREBASE_APP_ID,
     FIREBASE_AUTH_DOMAIN: `${FIREBASE_PROJECT_ID}.firebaseapp.com`,
-    FIREBASE_CLIENT_EMAIL,
     FIREBASE_DATABASE_URL: `https://${FIREBASE_PROJECT_ID}.firebaseio.com`,
     FIREBASE_MESSAGING_SENDER_ID,
-    FIREBASE_PRIVATE_KEY,
     FIREBASE_PROJECT_ID,
     FIREBASE_STORAGE_BUCKET: `${FIREBASE_PROJECT_ID}.appspot.com`,
     SHOPIFY_DOMAIN,
-    SHOPIFY_STOREFRONT_ACCESS_TOKEN: 'b4f6b94e9aa925d4d66a63ee091f9ebf',
-    SITE_URL: SITE_URL || VERCEL_URL || 'http://localhost:3000',
+    SHOPIFY_STOREFRONT_ACCESS_TOKEN,
+    SITE_URL: SITE_URL || VERCEL_URL || 'http://localhost:3001',
     VERCEL_URL
   },
 
@@ -52,12 +47,6 @@ module.exports = {
       test: /\.(ts|tsx)$/,
       use: [{ loader: 'awesome-typescript-loader' }]
     })
-
-    if (!isServer) {
-      config.resolve.alias = merge(config.resolve.alias, {
-        'firebase-admin': 'firebase'
-      })
-    }
 
     return config
   }

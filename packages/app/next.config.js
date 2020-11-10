@@ -42,7 +42,7 @@ module.exports = {
    * @param {boolean} param1.isServer - `true` for server-side compilation
    * @returns {object} Altered Webpack configuration
    */
-  webpack: (config, { isServer }) => {
+  webpack: config => {
     config.module.rules.push({
       test: /\.(ts|tsx)$/,
       use: [{ loader: 'awesome-typescript-loader' }]

@@ -1,0 +1,24 @@
+{
+  "emulators": {
+    "auth": {
+      "host": "localhost",
+      "port": 9099
+    },
+    "database": {
+      "host": "localhost",
+      "port": 5000
+    },
+    "firestore": {
+      "host": "localhost",
+      "port": 8080
+    },
+    "ui": {
+      "enabled": true,
+      "host": "localhost",
+      "port": 4000
+    }
+  },
+  "database": {
+    "rules": "database.rules.json"
+  }
+}

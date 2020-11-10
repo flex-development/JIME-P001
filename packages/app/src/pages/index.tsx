@@ -1,4 +1,4 @@
-import { Collections, Products } from '@app/subdomains/config/shopify'
+import { Collections, Products } from '@app/subdomains/config/shopify-buy'
 import {
   GetStaticProps,
   InferGetStaticPropsType,

@@ -1,13 +1,9 @@
 import ShopifyBuyClient from 'shopify-buy'
 
 /**
- * @file Shopify APIs Configuration
- * @module lib/config/shopify
- *
- * @see https://github.com/MONEI/Shopify-api-node
+ * @file Shopify JS Buy SDK Configuration
+ * @module subdomains/config/shopify-buy
  * @see https://github.com/Shopify/js-buy-sdk
- *
- * @todo Configure Shopify API Node
  */
 
 export const ShopifyBuy = ShopifyBuyClient.buildClient({

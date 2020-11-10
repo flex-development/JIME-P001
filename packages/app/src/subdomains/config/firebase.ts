@@ -5,14 +5,20 @@ import 'firebase/firestore'
 import { isEmpty } from 'lodash'
 
 /**
- * @file Firebase Configuration
+ * @file Firebase Web Configuration
  * @module subdomains/config/firebase
  */
+
+// True if Node devlopment enivronment
+export const DEV_ENV = process.env.NODE_ENV === 'development'
+
+// Test app database url
+export const LOCAL_DB_URL = 'http://localhost:5000?ns=cosparkdev'
 
 /**
  * Firebase Web configuration.
  */
-export const FIREBASE_CREDENTIALS = {
+export const FIREBASE_WEB_CONFIG = {
   apiKey: process.env.FIREBASE_API_KEY,
   appId: process.env.FIREBASE_APP_ID,
   authDomain: process.env.FIREBASE_AUTH_DOMAIN,
@@ -23,14 +29,13 @@ export const FIREBASE_CREDENTIALS = {
   storageBucket: process.env.FIREBASE_STORAGE_BUCKET
 }
 
-const ANALYTICS_CONFIGURATION = !isEmpty(FIREBASE_CREDENTIALS.measurementId)
-const DEV_ENV = process.env.NODE_ENV === 'development'
-const IS_BROWSER = typeof window !== 'undefined'
+// Don't initialize Analytics in Node environments or if config is invalid
+const ANALYTICS_CONFIG_VALID = !isEmpty(FIREBASE_WEB_CONFIG.measurementId)
 
 try {
-  firebase.initializeApp(FIREBASE_CREDENTIALS)
+  firebase.initializeApp(FIREBASE_WEB_CONFIG)
 
-  if (IS_BROWSER && !DEV_ENV && ANALYTICS_CONFIGURATION) {
+  if (!DEV_ENV && firebase.analytics.isSupported() && ANALYTICS_CONFIG_VALID) {
     firebase.analytics()
   }
 } catch (error) {
@@ -44,3 +49,7 @@ try {
 }
 
 export default firebase
+
+export const auth = firebase.auth()
+export const database = firebase.database()
+export const storage = firebase.storage()

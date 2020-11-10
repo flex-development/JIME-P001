@@ -1,9 +1,11 @@
+import { IEntity } from '@app/subdomains/app'
+
 /**
  * @file Mock - Car Entity Model
  * @module tests/mocks/models/Car
  */
 
-export interface CarEntity {
+export interface CarEntity extends IEntity {
   drivers: string[]
   make: string
   model: string

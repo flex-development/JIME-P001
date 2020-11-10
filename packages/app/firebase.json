@@ -8,10 +8,6 @@
       "host": "localhost",
       "port": 5000
     },
-    "firestore": {
-      "host": "localhost",
-      "port": 8080
-    },
     "ui": {
       "enabled": true,
       "host": "localhost",

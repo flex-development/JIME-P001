@@ -1,11 +1,8 @@
-import { ICMSMenu } from '@app/subdomains/cms/interfaces'
+import { ICMSMenu } from '@app/subdomains/cms/interfaces/ICMSMenu'
 import { MenuRepository } from '@app/subdomains/cms/repositories'
+import MockMenusRepoRoot from '../__mocks__/data/menus.mock.json'
 import firebaseTestApp from '../__mocks__/firebaseTestApp'
-import {
-  loadMenusTestData,
-  MENUS,
-  removeMenusTestData
-} from '../__mocks__/utils'
+import { loadMenusTestData, removeMenusTestData } from '../__mocks__/utils'
 
 /**
  * @file Unit Tests - MenuRepository
@@ -14,7 +11,7 @@ import {
 
 describe('MenuRepository', () => {
   const app = firebaseTestApp(true)
-  const menus = MENUS as Array<ICMSMenu>
+  const menus = Object.values(MockMenusRepoRoot) as Array<ICMSMenu>
   const repo: MenuRepository = new MenuRepository(app.database())
 
   describe('#create', () => {

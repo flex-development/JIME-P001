@@ -8,10 +8,10 @@ import {
   NullishPrimitive
 } from '@flex-development/kustomzdesign/types'
 import { get, gt, gte, isEqual, lt, lte, orderBy } from 'lodash'
+import MockCarsRepoRoot from '../__mocks__/data/cars.mock.json'
 import firebaseTestApp from '../__mocks__/firebaseTestApp'
 import { CarEntity, CarModel } from '../__mocks__/models/Car.model.mock'
 import {
-  CARS,
   CAR_REPO_TEST_PATH,
   loadCarsTestData,
   matchTestCarObjects,
@@ -27,6 +27,7 @@ describe('RTDRepository', () => {
   const IMAGINARY_CAR_ID = 'IMAGINARY_CAR_ID'
 
   const app = firebaseTestApp(true)
+  const cars: Partial<CarEntity>[] = Object.values(MockCarsRepoRoot)
 
   let CarRepo: Repo<CarEntity> | AnyObject = {}
   let REPO = CarRepo as Repo<CarEntity>
@@ -48,7 +49,7 @@ describe('RTDRepository', () => {
     afterAll(async () => removeCarsTestData(app))
 
     it('creates a new entity', async () => {
-      const req = CARS[0]
+      const req = cars[0]
       const res = await REPO.create(req)
 
       expect(res?.created_at).toBeDefined()
@@ -60,9 +61,9 @@ describe('RTDRepository', () => {
     afterAll(async () => removeCarsTestData(app))
 
     it('returns an array of created entities', async () => {
-      const res = await REPO.createBatch(Object.assign([], CARS))
+      const res = await REPO.createBatch(Object.assign([], cars))
 
-      matchTestCarObjects(res, CARS, true)
+      matchTestCarObjects(res, cars, true)
       matchTestCarObjects(res, await REPO.find(), true)
       expect(true).toBe(true)
     })
@@ -73,7 +74,7 @@ describe('RTDRepository', () => {
     afterAll(async () => removeCarsTestData(app))
 
     it('removes an entity', async () => {
-      const car = CARS[5] as CarEntity
+      const car = cars[5] as CarEntity
 
       await REPO.delete(car.id)
 
@@ -86,18 +87,18 @@ describe('RTDRepository', () => {
     afterAll(async () => removeCarsTestData(app))
 
     it('returns all entities', async () => {
-      expect((await REPO.find()).length).toBe(CARS.length)
+      expect((await REPO.find()).length).toBe(cars.length)
     })
 
     it('handles $eq query', async () => {
       const field = 'owner.first_name'
-      const $eq = CARS[0][field]
+      const $eq = cars[0][field]
 
       const equal = (car: CarEntity | Partial<CarEntity>) => {
         return isEqual(car[field], $eq)
       }
 
-      const expected = CARS.filter(car => equal(car))
+      const expected = cars.filter(car => equal(car))
       const result = await REPO.find({ [field]: { $eq } })
 
       expect(result.length).toBe(expected.length)
@@ -106,13 +107,13 @@ describe('RTDRepository', () => {
 
     it('handles $gt query', async () => {
       const field = 'model_year'
-      const $gt = CARS[4][field] as number
+      const $gt = cars[4][field] as number
 
       const greaterThan = (car: CarEntity | Partial<CarEntity>) => {
         return gt(car[field], $gt)
       }
 
-      const expected = CARS.filter(car => greaterThan(car))
+      const expected = cars.filter(car => greaterThan(car))
       const result = await REPO.find({ [field]: { $gt } })
 
       expect(result.length).toBe(expected.length)
@@ -121,13 +122,13 @@ describe('RTDRepository', () => {
 
     it('handles $gte query', async () => {
       const field = 'model_year'
-      const $gte = CARS[3][field] as number
+      const $gte = cars[3][field] as number
 
       const greaterThanEq = (car: CarEntity | Partial<CarEntity>) => {
         return gte(car[field], $gte)
       }
 
-      const expected = CARS.filter(car => greaterThanEq(car))
+      const expected = cars.filter(car => greaterThanEq(car))
       const result = await REPO.find({ [field]: { $gte } })
 
       expect(result.length).toBe(expected.length)
@@ -136,13 +137,13 @@ describe('RTDRepository', () => {
 
     it('handles $in query with primtive values', async () => {
       const field = 'make'
-      const $in = [CARS[0][field], CARS[4][field]] as NullishPrimitive[]
+      const $in = [cars[0][field], cars[4][field]] as NullishPrimitive[]
 
       const isIncluded = (car: CarEntity | Partial<CarEntity>) => {
         return $in.includes(car[field] as NullishPrimitive)
       }
 
-      const expected = CARS.filter(car => isIncluded(car))
+      const expected = cars.filter(car => isIncluded(car))
       const result = await REPO.find({ [field]: { $in } })
 
       expect(result.length).toBe(expected.length)
@@ -151,13 +152,13 @@ describe('RTDRepository', () => {
 
     it('handles $in query with primitive array', async () => {
       const field = 'drivers'
-      const $in = [(CARS as Array<CarEntity>)[0].drivers[0]]
+      const $in = [(cars as Array<CarEntity>)[0].drivers[0]]
 
       const isIncluded = (car: CarEntity | Partial<CarEntity>) => {
         return car[field]?.some(v => $in.includes(v))
       }
 
-      const expected = CARS.filter(car => isIncluded(car))
+      const expected = cars.filter(car => isIncluded(car))
       const result = await REPO.find({ [field]: { $in } })
 
       expect(result.length).toBe(expected.length)
@@ -174,13 +175,13 @@ describe('RTDRepository', () => {
 
     it('handles $lt query', async () => {
       const field = 'vin'
-      const $lt = CARS[7][field] as string
+      const $lt = cars[7][field] as string
 
       const lessThan = (car: CarEntity | Partial<CarEntity>) => {
         return lt(car[field], $lt)
       }
 
-      const expected = CARS.filter(car => lessThan(car))
+      const expected = cars.filter(car => lessThan(car))
       const result = await REPO.find({ [field]: { $lt } })
 
       expect(result.length).toBe(expected.length)
@@ -189,13 +190,13 @@ describe('RTDRepository', () => {
 
     it('handles $lte query', async () => {
       const field = 'vin'
-      const $lte = CARS[1][field] as string
+      const $lte = cars[1][field] as string
 
       const lessThanEq = (car: CarEntity | Partial<CarEntity>) => {
         return lte(car[field], $lte)
       }
 
-      const expected = CARS.filter(car => lessThanEq(car))
+      const expected = cars.filter(car => lessThanEq(car))
       const result = await REPO.find({ [field]: { $lte } })
 
       expect(result.length).toBe(expected.length)
@@ -204,13 +205,13 @@ describe('RTDRepository', () => {
 
     it('handles $ne query', async () => {
       const field = 'model_year'
-      const $ne = CARS[2][field]
+      const $ne = cars[2][field]
 
       const notEqual = (car: CarEntity | Partial<CarEntity>) => {
         return !isEqual(car[field], $ne)
       }
 
-      const expected = CARS.filter(car => notEqual(car))
+      const expected = cars.filter(car => notEqual(car))
       const res = await REPO.find({ [field]: { $ne } })
 
       expect(res.length).toBe(expected.length)
@@ -219,13 +220,13 @@ describe('RTDRepository', () => {
 
     it('handles $nin query with primtive values', async () => {
       const field = 'owner.last_name'
-      const $nin = [CARS[0][field], CARS[4][field]] as NullishPrimitive[]
+      const $nin = [cars[0][field], cars[4][field]] as NullishPrimitive[]
 
       const notIncluded = (car: CarEntity | Partial<CarEntity>) => {
         return !$nin.includes(get(car, field))
       }
 
-      const expected = CARS.filter(car => notIncluded(car))
+      const expected = cars.filter(car => notIncluded(car))
       const result = await REPO.find({ [field]: { $nin } })
 
       expect(result.length).toBe(expected.length)
@@ -234,13 +235,13 @@ describe('RTDRepository', () => {
 
     it('handles $nin query with primitive array', async () => {
       const field = 'drivers'
-      const $nin = CARS[3].drivers as CarEntity['drivers']
+      const $nin = cars[3].drivers as CarEntity['drivers']
 
       const notIncluded = (car: CarEntity | Partial<CarEntity>) => {
         return car[field]?.every(v => !$nin.includes(v))
       }
 
-      const expected = CARS.filter(car => notIncluded(car))
+      const expected = cars.filter(car => notIncluded(car))
       const result = await REPO.find({ [field]: { $nin } })
 
       expect(result.length).toBe(expected.length)
@@ -261,13 +262,13 @@ describe('RTDRepository', () => {
 
       const res = await REPO.find({ $skip })
 
-      expect(res.length).toBe(CARS.length - $skip)
+      expect(res.length).toBe(cars.length - $skip)
     })
 
     it('handles $sort query', async () => {
       const $sort = { 'owner.last_name': SortOrder.ASCENDING }
 
-      const expected = orderBy(CARS, Object.keys($sort), Object.values($sort))
+      const expected = orderBy(cars, Object.keys($sort), Object.values($sort))
       const res = await REPO.find({ $sort })
 
       matchTestCarObjects(res, expected)
@@ -280,7 +281,7 @@ describe('RTDRepository', () => {
     afterAll(async () => removeCarsTestData(app))
 
     it('returns an entity', async () => {
-      const car = CARS[8] as CarEntity
+      const car = cars[8] as CarEntity
 
       expect(await REPO.findById(car.id)).toMatchObject(car)
     })
@@ -295,7 +296,7 @@ describe('RTDRepository', () => {
     afterAll(async () => removeCarsTestData(app))
 
     it('returns an entity', async () => {
-      const car = CARS[1] as CarEntity
+      const car = cars[1] as CarEntity
 
       expect(await REPO.get(car.id)).toMatchObject(car)
     })
@@ -310,7 +311,7 @@ describe('RTDRepository', () => {
     afterAll(async () => removeCarsTestData(app))
 
     it('returns an updated entity', async () => {
-      const car = CARS[5] as CarEntity
+      const car = cars[5] as CarEntity
       const data = { id: 'cant-update', model: 'car model name' }
 
       const result = await REPO.update(car.id, data)
@@ -326,8 +327,8 @@ describe('RTDRepository', () => {
 
     it('returns an array of updated entities', async () => {
       const data = [
-        { ...CARS[7], model: 'car model' },
-        { ...CARS[5], model: 'another car model' }
+        { ...cars[7], model: 'car model' },
+        { ...cars[5], model: 'another car model' }
       ] as RTDRepoUpdateEntityBatch<CarEntity>[]
 
       const result = await REPO.updateBatch(data)
@@ -342,14 +343,14 @@ describe('RTDRepository', () => {
     afterAll(async () => removeCarsTestData(app))
 
     it('returns a new entity', async () => {
-      const data = { ...CARS[5], ...CARS[1] }
+      const data = { ...cars[5], ...cars[1] }
       const expected = { ...data, id: IMAGINARY_CAR_ID }
 
       expect(await REPO.upsert(IMAGINARY_CAR_ID, data)).toMatchObject(expected)
     })
 
     it('returns an updated entity', async () => {
-      const data = { ...CARS[3], ...CARS[1] } as CarEntity
+      const data = { ...cars[3], ...cars[1] } as CarEntity
 
       const result = await REPO.upsert(data.id, data)
 
@@ -363,8 +364,8 @@ describe('RTDRepository', () => {
 
     it('returns an array with a new and updated entity', async () => {
       const data = [
-        { ...CARS[7], id: IMAGINARY_CAR_ID },
-        { ...CARS[5], ...CARS[1] }
+        { ...cars[7], id: IMAGINARY_CAR_ID },
+        { ...cars[5], ...cars[1] }
       ] as RTDRepoUpdateEntityBatch<CarEntity>[]
 
       const result = await REPO.upsertBatch(data)

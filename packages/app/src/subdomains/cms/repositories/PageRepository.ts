@@ -1,4 +1,4 @@
-import { createError, Logger, RTDRepository } from '@app/subdomains/app'
+import { createError, RTDRepository } from '@app/subdomains/app'
 import { PageTemplateProps, uuid } from '@flex-development/kustomzdesign'
 import { AnyObject } from '@flex-development/kustomzdesign/types'
 import { isEmpty } from 'lodash'
@@ -38,7 +38,7 @@ export default class PageRepository extends RTDRepository<ICMSPage> {
    * @throws {FeathersErrorJSON}
    */
   async create(data: AnyObject): Promise<ICMSPage> {
-    const { component, content, path, title } = data
+    const { component, content, metadata = {}, path, title = '' } = data
 
     if (isEmpty(path)) data.path = `/${slugify(title).toLowerCase()}`
 
@@ -46,17 +46,14 @@ export default class PageRepository extends RTDRepository<ICMSPage> {
 
     if (exists) {
       const error_message = `Page with path "${data.path}" already exists.`
-      const error = createError(error_message, data, 400)
-
-      Logger.error({ 'PageRepository.create': error })
-      throw error
+      throw createError(error_message, data, 400)
     }
 
     if (isEmpty(component)) data.component = 'PageTemplate'
 
     if (isEmpty(content)) data.content = {} as PageTemplateProps
 
-    return super.create({ ...data, uuid: uuid() })
+    return super.create({ ...data, metadata, uuid: uuid() })
   }
 
   /**
@@ -85,10 +82,7 @@ export default class PageRepository extends RTDRepository<ICMSPage> {
 
       if (path_match && path_match.id !== id) {
         const error_message = `Page with path "${path}" already exists.`
-        const error = createError(error_message, data, 400)
-
-        Logger.error({ 'PageRepository.update': error })
-        throw error
+        throw createError(error_message, data, 400)
       }
     }
 

@@ -90,7 +90,7 @@ export class RTDRepository<E extends IEntity = IEntity>
     this.database = database
     this.model = model
     this.path = path
-    this.root = this.database.ref(this.path)
+    this.root = this.database.ref().child(this.path)
 
     const metadata = getFromContainer<E>(this.model)
 
@@ -123,27 +123,24 @@ export class RTDRepository<E extends IEntity = IEntity>
    */
   async create(data: RTDRepoCreateEntity<E>): Promise<E> {
     // Timestamp database entry
-    let entity_data = { ...data, created_at: new Date().valueOf() } as E
+    let entity = { ...data, created_at: new Date().valueOf() } as E
 
-    // Create reference to database location
-    let ref = this.root.child(entity_data.id || '')
+    // Copy reference to root of repository
+    let ref = this.root
 
-    if (!entity_data.id) {
-      entity_data = { ...entity_data, id: ref.key as string }
+    // Generate random ID
+    if (!entity.id) entity = { ...entity, id: ref.push().key }
 
-      // Reinitialize ref with correct ID
-      ref = this.root.child(entity_data.id)
-    }
+    // Get reference to entity db location
+    ref = this.root.child(entity.id)
 
     // Validate data and create new entity
-    if (this.metadata) {
-      entity_data = await this.validator(this.model, entity_data)
-    }
+    if (this.metadata) entity = await this.validator(this.model, entity)
 
-    await ref.set(entity_data)
+    await ref.set(entity)
 
     // Guarenteed to be an entity because data was just added
-    return (await this.get(entity_data.id)) as E
+    return (await this.get(entity.id)) as E
   }
 
   /**
@@ -332,7 +329,7 @@ export class RTDRepository<E extends IEntity = IEntity>
    */
   async update(id: IEntity['id'], data: RTDRepoUpdateEntity<E>): Promise<E> {
     // Check if entity exists before attempting to perform update
-    const existing = await this.findById(id)
+    const existing = await this.get(id)
 
     // Remove IEntity base properties and merge existing data with update data
     data = merge(existing, omit(data, ['created_at', 'id']))

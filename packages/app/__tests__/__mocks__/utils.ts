@@ -1,7 +1,8 @@
 import { FirebaseAdaptor, RTDRepository as Repo } from '@app/subdomains/app'
-import { ICMSMenu } from '@app/subdomains/cms/interfaces'
+import { ICMSMenu, ICMSPage } from '@app/subdomains/cms/interfaces'
 import MockCarsRepoRoot from './data/cars.mock.json'
 import MockMenusRepoRoot from './data/menus.mock.json'
+import MockPagesRepoRoot from './data/pages.mock.json'
 import { CarEntity } from './models/Car.model.mock'
 
 /**
@@ -10,10 +11,8 @@ import { CarEntity } from './models/Car.model.mock'
  */
 
 export const CAR_REPO_TEST_PATH = 'cars'
-export const CARS: Partial<CarEntity>[] = Object.values(MockCarsRepoRoot)
-
 export const MENUS_REPO_TEST_PATH = 'menus'
-export const MENUS = Object.values(MockMenusRepoRoot) as Partial<ICMSMenu>[]
+export const PAGES_REPO_TEST_PATH = 'pages'
 
 /**
  * Returns mock cars data.
@@ -29,6 +28,38 @@ export const getCarsTestData = (): Array<CarEntity> => {
 
   // Return array of mock cars
   return Object.values(dataset as Record<string, CarEntity>)
+}
+
+/**
+ * Returns mock pages data.
+ */
+export const getMockPagesData = (): Array<ICMSPage> => {
+  // Dataset is missing timestamps
+  const dataset = { ...MockPagesRepoRoot }
+
+  // Add timestamps to mock data
+  Object.keys(dataset).forEach(key => {
+    dataset[key] = { ...dataset[key], created_at: Repo.timestamp() }
+  })
+
+  // Return array of mock pages
+  return Object.values((dataset as unknown) as Record<string, ICMSPage>)
+}
+
+/**
+ * Returns mock pages data.
+ */
+export const getMockMenusData = (): Array<ICMSMenu> => {
+  // Dataset is missing timestamps
+  const dataset = { ...MockMenusRepoRoot }
+
+  // Add timestamps to mock data
+  Object.keys(dataset).forEach(key => {
+    dataset[key] = { ...dataset[key], created_at: Repo.timestamp() }
+  })
+
+  // Return array of mock cars
+  return Object.values((dataset as unknown) as Record<string, ICMSMenu>)
 }
 
 /**
@@ -54,6 +85,31 @@ export const loadCarsTestData = async (
   // Return array of mock cars
   return Object.values(dataset as Record<string, CarEntity>)
 }
+
+/**
+ * Loads the mock pages data into the database.
+ *
+ * @async
+ * @param app - Firebase test application
+ */
+export const loadPagesTestData = async (
+  app: FirebaseAdaptor
+): Promise<Array<ICMSPage>> => {
+  // Dataset is missing timestamps
+  const dataset = { ...MockPagesRepoRoot }
+
+  // Add timestamps to mock data
+  Object.keys(dataset).forEach(key => {
+    dataset[key] = { ...dataset[key], created_at: Repo.timestamp() }
+  })
+
+  // Set data
+  await app.database().ref(PAGES_REPO_TEST_PATH).set(dataset)
+
+  // Return array of mock pages
+  return Object.values((dataset as unknown) as Record<string, ICMSPage>)
+}
+
 /**
  * Loads the mock menus data into the database.
  *
@@ -87,7 +143,7 @@ export const loadMenusTestData = async (
  */
 export const matchTestCarObjects = (
   res: Array<CarEntity | Partial<CarEntity>>,
-  expected: typeof CARS,
+  expected: Array<Partial<CarEntity>>,
   length?: boolean
 ): void => {
   if (length) expect(res.length).toBe(expected.length)
@@ -104,6 +160,18 @@ export const removeCarsTestData = async (
   app: FirebaseAdaptor
 ): Promise<void> => {
   await app.database().ref(CAR_REPO_TEST_PATH).remove()
+}
+
+/**
+ * Removes the mock pages data from the database.
+ *
+ * @async
+ * @param app - Firebase test application
+ */
+export const removePagesTestData = async (
+  app: FirebaseAdaptor
+): Promise<void> => {
+  await app.database().ref(PAGES_REPO_TEST_PATH).remove()
 }
 
 /**

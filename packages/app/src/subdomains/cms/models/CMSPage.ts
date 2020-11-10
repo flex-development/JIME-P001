@@ -11,6 +11,7 @@ import { CMSEntity } from './CMSEntity'
  * @file Business Object Model - CMS Page
  * @module subdomains/cms/models/CMSPage
  *
+ * @todo Implement `CMSMetadata` model
  * @todo Implement `IndexTemplateProps` model
  * @todo Implement `PageTemplateProps` model
  */
@@ -24,6 +25,8 @@ export class CMSPage extends CMSEntity implements ICMSPage {
 
   @IsBoolean()
   draft: boolean
+
+  @Allow()
   metadata: AnyObject
 
   @IsString()

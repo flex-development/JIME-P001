@@ -22,6 +22,5 @@ module.exports = {
   transform: {
     '^.+\\.[tj]sx?$': 'babel-jest'
   },
-  transformIgnorePatterns: ['<rootDir>/node_modules/'],
   verbose: true
 }

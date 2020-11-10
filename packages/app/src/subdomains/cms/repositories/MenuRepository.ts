@@ -1,4 +1,4 @@
-import { createError, Logger, RTDRepository } from '@app/subdomains/app'
+import { createError, RTDRepository } from '@app/subdomains/app'
 import { uuid } from '@flex-development/kustomzdesign'
 import { isEmpty } from 'lodash'
 import { ICMSMenu } from '../interfaces'
@@ -36,14 +36,9 @@ export default class MenuRepository extends RTDRepository<ICMSMenu> {
     const { id = '', title = '' } = data
     let { links = [] } = data
 
-    const exists: ICMSMenu | null = await this.findById(id || '')
-
-    if (exists) {
+    if (await this.findById(id || '')) {
       const error_message = `Menu with id "${id}" already exists.`
-      const error = createError(error_message, data, 400)
-
-      Logger.error({ 'MenuRepository.create': error })
-      throw error
+      throw createError(error_message, { data }, 400)
     }
 
     links = links.map(link => ({

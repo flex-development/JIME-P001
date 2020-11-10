@@ -1,0 +1,38 @@
+{
+  "main": {
+    "id": "main",
+    "links": [
+      {
+        "title": "Home"
+      },
+      {
+        "title": "Products"
+      },
+      {
+        "title": "About"
+      },
+      {
+        "title": "Send Message"
+      },
+      {
+        "title": "Instagram"
+      }
+    ],
+    "title": "Main Menu"
+  },
+  "social": {
+    "id": "social",
+    "links": [
+      {
+        "className": "fab fa-instagram"
+      },
+      {
+        "className": "fab fa-twitter"
+      },
+      {
+        "className": "fab fa-facebook-f"
+      }
+    ],
+    "title": "Social Menu"
+  }
+}

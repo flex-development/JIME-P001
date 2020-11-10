@@ -226,7 +226,7 @@ export class RTDRepository<E extends IEntity = IEntity>
 
     // Get root repository data
     const root = (await this.normalize(this.root)) as RepoRootData<E>
-    let qd: Array<E | Partial<E>> = Object.values<E>(root)
+    let qd: Array<E | Partial<E>> = Object.values<E>(root || {})
 
     // Skip the specified number of results
     qd = this.$skip(qd, $skip)

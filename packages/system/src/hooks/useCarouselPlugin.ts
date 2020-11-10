@@ -1,5 +1,5 @@
 import { NullishNumber } from '@system/types'
-import { CarouselEventHandler, CarouselOption } from 'bootstrap'
+import { CarouselOption } from 'bootstrap'
 import CarouselPlugin from 'bootstrap/js/dist/carousel'
 import {
   Dispatch,
@@ -49,6 +49,8 @@ export type UseCarouselPlugin = {
  *
  * @see https://v5.getbootstrap.com/docs/5.0/components/carousel/#via-javascript
  *
+ * @todo Reimplement carousel logic -> ReferenceError: Element is not defined
+ *
  * @param ref - HTML element to use as a carousel
  * @param options - Bootstrap carousel options
  * @param position - Index of the active item
@@ -80,15 +82,22 @@ export function useCarouselPlugin<E = HTMLElement>(
     // If missing HTML element, do nothing
     if (!ref.current || carousel) return
 
+    /**
+     * FIXME: This logic needs to be reimplmented because it is not compatible
+     * with Next.js SSR. The following error is thrown:
+     *
+     * `ReferenceError: Element is not defined`.
+     */
+
     // Create carousel w/ Bootstrap JS API
-    setCarousel(new CarouselPlugin(ref.current, options))
+    // setCarousel(new CarouselPlugin(ref.current, options))
 
     // Update active state when `carousel.slide` instance method is invoked
-    const element = (ref.current as unknown) as HTMLElement
-    element.addEventListener('slide.bs.carousel', event => {
-      const slide = (event as unknown) as CarouselEventHandler<HTMLDivElement>
-      setActive(slide.to)
-    })
+    // const element = (ref.current as unknown) as HTMLElement
+    // element.addEventListener('slide.bs.carousel', event => {
+    //   const slide = (event as unknown) as CarouselEventHandler<HTMLDivElement>
+    //   setActive(slide.to)
+    // })
 
     return () => {
       // If defined, destroy carousel

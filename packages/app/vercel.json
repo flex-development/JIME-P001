@@ -1,0 +1,23 @@
+{
+  "name": "morenaskustomz",
+  "version": 2,
+  "alias": "morenaskustomz.flexdevelopment.vercel.app",
+  "github": {
+    "autoAlias": true,
+    "enabled": false,
+    "silent": false
+  },
+  "scope": "flexdevelopment",
+  "functions": {
+    "src/pages/api/**/*.ts": {
+      "maxDuration": 10
+    }
+  },
+  "redirects": [
+    {
+      "source": "/admin",
+      "destination": "/api/auth/signin/github",
+      "statusCode": 308
+    }
+  ]
+}

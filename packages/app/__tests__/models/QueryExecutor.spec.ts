@@ -1,8 +1,7 @@
 import { QueryExecutor, SortOrder } from '@app/subdomains/app'
 import { get, gt, gte, isEqual, lt, lte, orderBy } from 'lodash'
-import MockCarsRepoRoot from '../__mocks__/data/cars.mock.json'
 import { CarEntity } from '../__mocks__/models/Car.model.mock'
-import { matchTestCarObjects } from '../__mocks__/utils'
+import { getCarsTestData, matchTestCarObjects } from '../__mocks__/utils'
 
 /**
  * @file Unit Tests - QueryExecutor
@@ -11,7 +10,7 @@ import { matchTestCarObjects } from '../__mocks__/utils'
 
 describe('QueryExecutor', () => {
   const CarQueryExecutor = new QueryExecutor<CarEntity>()
-  const data: Array<CarEntity> = Object.values(MockCarsRepoRoot)
+  const data: Array<CarEntity> = getCarsTestData()
 
   describe('#$eq', () => {
     it('matches values that are equal to a specified value', () => {

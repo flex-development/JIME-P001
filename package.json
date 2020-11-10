@@ -36,9 +36,9 @@
     "dev:app": "lerna run dev --scope @flex-development/morenaskustomz",
     "dev:ui": "lerna run dev --scope @flex-development/kustomzdesign",
     "dev": "run-p dev:*",
-    "test:app": "lerna run test --scope @flex-development/morenaskustomz",
+    "test:app": "lerna run test:exec --scope @flex-development/morenaskustomz",
     "test:ui": "lerna run test --scope @flex-development/kustomzdesign",
-    "test": "lerna run test || true",
+    "test": "run-p test:* || true",
     "start": "lerna run start"
   },
   "dependencies": {},

@@ -7,10 +7,10 @@ import {
   StampedProductReviewEntity,
   TC
 } from '@system/types'
+import { uuid } from '@system/utils'
 import productReviewProps from '@system/utils/getProductReviewProps'
 import { chunk } from 'lodash'
 import React, { useState } from 'react'
-import uuid from 'react-uuid'
 import { Button, FlexBox, Heading, LinkProps, Main, Section } from '../atoms'
 import { ProductBreadcrumb, ProductReview } from '../molecules'
 import { AddToCartForm, AddToCartFormProps, Carousel } from '../organisms'

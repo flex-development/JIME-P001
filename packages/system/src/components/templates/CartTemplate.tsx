@@ -1,7 +1,7 @@
 import { useMutatedProps } from '@system/hooks'
 import { MutatedProps, TC } from '@system/types'
+import { uuid } from '@system/utils'
 import React from 'react'
-import uuid from 'react-uuid'
 import { Box, FlexBox, Heading, Link, Main, Paragraph, Section } from '../atoms'
 import { CheckoutLineItem, CheckoutLineItemProps } from '../molecules'
 

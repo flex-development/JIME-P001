@@ -1,9 +1,8 @@
 import { useCarouselPlugin, useMutatedProps } from '@system/hooks'
-import { uid } from '@system/utils'
+import { uuid } from '@system/utils'
 import { CarouselOption } from 'bootstrap'
 import classnames from 'classnames'
 import React, { Children, FC, ReactElement, useEffect, useRef } from 'react'
-import uuid from 'react-uuid'
 import { Box, BoxProps, Item, ItemProps, List } from '../atoms'
 
 /**
@@ -149,7 +148,7 @@ export const Carousel: FC<CarouselProps> & {
   const mutated = useMutatedProps<typeof rest>(rest, 'carousel')
 
   // Bootstrap carousels require an ID
-  mutated.id = mutated.id || uid('carousel')
+  mutated.id = mutated.id || uuid('carousel')
 
   // Carousel items - useMutatedProps converts props.children into an array
   const items = Children.toArray(children) as CarouselProps['children']

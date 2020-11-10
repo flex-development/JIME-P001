@@ -5,9 +5,9 @@ import {
   ProductResource,
   ProductVariantResource
 } from '@system/types'
+import { uuid } from '@system/utils'
 import { findIndex, isEmpty } from 'lodash'
 import React, { FC, useEffect, useState } from 'react'
-import uuid from 'react-uuid'
 import { LineItemToAdd } from 'shopify-buy'
 import {
   Button,

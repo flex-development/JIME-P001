@@ -1,0 +1,15 @@
+/* TINACMS OVERRIDES */
+
+#modal-root div[class^='ModalBody'] {
+  min-height: 800px;
+}
+
+#modal-root div[class^='PopupModal'] {
+  width: 560px;
+}
+
+@media screen and (max-width: 834px) {
+  #modal-root div[class^='PopupModal'] {
+    width: 90%;
+  }
+}

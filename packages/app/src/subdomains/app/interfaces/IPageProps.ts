@@ -1,3 +1,4 @@
+import { GitHubSession } from '@app/subdomains/cms/interfaces/IGitHubService'
 import { AnyObject } from '@flex-development/kustomzdesign/types'
 
 /**
@@ -17,4 +18,16 @@ export interface IPageProps {
    * @see https://shopify.dev/docs/admin-api/rest/reference/online-store
    */
   page: AnyObject
+
+  /**
+   * True if user is signed-in with GitHub and viewing a marketing site page.
+   *
+   * @see https://nextjs.org/docs/advanced-features/preview-mode
+   */
+  preview?: boolean
+
+  /**
+   * Current user session.
+   */
+  session: GitHubSession | null
 }

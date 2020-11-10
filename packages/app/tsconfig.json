@@ -11,6 +11,14 @@
           {
             "ssr": true
           }
+        ],
+        [
+          "module-resolver",
+          {
+            "alias": {
+              "@app": "./src"
+            }
+          }
         ]
       ]
     },

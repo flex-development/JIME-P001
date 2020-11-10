@@ -1,6 +1,6 @@
 import { useMutatedProps } from '@system/hooks'
+import { uuid } from '@system/utils'
 import React, { FC } from 'react'
-import uuid from 'react-uuid'
 import { Link, LinkProps, Nav, NavProps } from '../atoms'
 
 /**

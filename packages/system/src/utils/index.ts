@@ -10,6 +10,6 @@ export { default as getProductReviewProps } from './getProductReviewProps'
 export { default as getResponsiveUtilities } from './getResponsiveUtilities'
 export { default as getThemeColor } from './getThemeColor'
 export { default as sanitizeQuantity } from './sanitizeQuantity'
-export { default as uid } from './uid'
+export { default as uuid } from './uuid'
 
 /* eslint-disable prettier/prettier */

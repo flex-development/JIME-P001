@@ -16,7 +16,7 @@ import FirebaseAdminAuthService from './FirebaseAdminAuthService'
  * @module subdomains/cms/services/GitHubService
  */
 
-const { GITHUB_REPO_FULL_NAME = '' } = process.env
+const { GITHUB_PAT, GITHUB_REPO_FULL_NAME = '' } = process.env
 
 /**
  * Handles all communication with the GitHub API.
@@ -33,8 +33,16 @@ export default class GitHubService implements IGitHubService {
    * @param auth - Firebase Admin service to use instead of default
    */
   constructor(auth?: IFirebaseAdminAuthService['auth']) {
-    // Throw internal error if missing environment variable
-    if (!isString(GITHUB_REPO_FULL_NAME) || !GITHUB_REPO_FULL_NAME.length) {
+    // Throw internal error if missing environment variables
+    if (!isString(GITHUB_PAT) || !GITHUB_PAT.length) {
+      const error = createError('Missing GITHUB_PAT')
+
+      Logger.error({ GitHubService: error })
+      throw error
+    } else if (
+      !isString(GITHUB_REPO_FULL_NAME) ||
+      !GITHUB_REPO_FULL_NAME.length
+    ) {
       const error = createError('Missing GITHUB_REPO_FULL_NAME')
 
       Logger.error({ GitHubService: error })

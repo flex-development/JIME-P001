@@ -1,10 +1,12 @@
-import { Collections, Products } from '@app/subdomains/config/shopify-buy'
 import {
-  GetStaticProps,
-  InferGetStaticPropsType,
-  NextComponentType,
-  NextPageContext
-} from 'next'
+  IPageProps,
+  PC,
+  serialize,
+  ServerSidePageProps
+} from '@app/subdomains/app'
+import { Collections, Products } from '@app/subdomains/config/shopify-buy'
+import { GetServerSidePropsContext } from 'next'
+import { getSession } from 'next-auth/client'
 import Head from 'next/head'
 import React from 'react'
 
@@ -13,11 +15,7 @@ import React from 'react'
  *
  * @param props - Page component props
  */
-const Index: NextComponentType<
-  NextPageContext,
-  InferGetStaticPropsType<typeof getStaticProps>,
-  InferGetStaticPropsType<typeof getStaticProps>
-> = () => {
+const Index: PC = () => {
   return (
     <div className='container'>
       <Head>
@@ -206,18 +204,28 @@ const Index: NextComponentType<
 }
 
 /**
- * Pre-renders the homepage with data from Shopify.
+ * Retrieves the current user session.
+ *
+ * @see https://nextjs.org/docs/basic-features/data-fetching
+ *
+ * @param ctx - Next.js page component context
+ * @param ctx.params - Route parameters if page uses a dynamic route
+ * @param ctx.req - HTTP request object
+ * @param ctx.res - HTTP response object
+ * @param ctx.resolvedUrl - Normalized version of the request URL
  */
-export const getStaticProps: GetStaticProps = async () => {
-  const products = await Products.fetchAll().then(products => {
-    return JSON.parse(JSON.stringify(products))
-  })
+export const getServerSideProps: ServerSidePageProps = async (
+  context: GetServerSidePropsContext
+) => {
+  const session = (await getSession(context)) as IPageProps['session']
+
+  const products = await Products.fetchAll().then(p => serialize(p))
 
   const collections = await Collections.fetchAllWithProducts().then(c => {
-    return JSON.parse(JSON.stringify(c))
+    return serialize(c)
   })
 
-  return { props: { collections, products } }
+  return { props: { page: { collections, products }, session } }
 }
 
 export default Index

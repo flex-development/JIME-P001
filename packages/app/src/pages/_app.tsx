@@ -1,6 +1,7 @@
 import { AC, IAppProps } from '@app/subdomains/app'
 import { CMS_BASE_CONFIG } from '@app/subdomains/cms/config'
 import '@app/subdomains/cms/styles.css'
+import { Provider as NextAuthProvider, Session } from 'next-auth/client'
 import React, { useMemo } from 'react'
 import { TinaCMS, TinaProvider } from 'tinacms'
 
@@ -29,9 +30,14 @@ const App: AC = ({ Component, pageProps }: IAppProps) => {
   const cms = useMemo(() => new TinaCMS(CMS_BASE_CONFIG), [])
 
   return (
-    <TinaProvider cms={cms}>
-      <Component {...pageProps} />
-    </TinaProvider>
+    <NextAuthProvider
+      options={{ baseUrl: 'http://localhost:3001' }}
+      session={(pageProps.session as unknown) as Session}
+    >
+      <TinaProvider cms={cms}>
+        <Component {...pageProps} />
+      </TinaProvider>
+    </NextAuthProvider>
   )
 }
 

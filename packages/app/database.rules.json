@@ -1,6 +1,26 @@
 {
   "rules": {
-    ".read": "true",
-    ".write": "false"
+    "menus": {
+      ".indexOn": [
+        "id",
+        "title",
+        "uuid"
+      ],
+      ".read": true,
+      ".write": "auth.token.collaborator === true"
+    },
+    "metadata": {
+      ".read": true,
+      ".write": "auth.token.collaborator === true"
+    },
+    "pages": {
+      ".indexOn": [
+        "id",
+        "title",
+        "uuid"
+      ],
+      ".read": true,
+      ".write": "auth.token.collaborator === true"
+    }
   }
 }

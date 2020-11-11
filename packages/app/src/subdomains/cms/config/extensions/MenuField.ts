@@ -32,7 +32,7 @@ const MenuField = (
   defaultValue: {
     links: [],
     title: 'Menu Title',
-    uuid: uuid()
+    uuid: (() => uuid())()
   },
   description,
   fields: [
@@ -40,7 +40,7 @@ const MenuField = (
     LinkListField('links', 'Links', undefined, {
       href: '#',
       title: '',
-      uuid: uuid()
+      uuid: (() => uuid())()
     }),
     ClassNameField(),
     IDField('Unique HTML element ID')

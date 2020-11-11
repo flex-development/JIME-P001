@@ -1,5 +1,4 @@
 import { IPageProps } from '@app/subdomains/app'
-import { isEmpty } from 'lodash'
 import { useSession } from 'next-auth/client'
 import { useEffect, useState } from 'react'
 import { useCMS } from 'tinacms'
@@ -35,13 +34,13 @@ export const useCMSData = (): UseCMSData => {
   const [session] = useSession() as [IPageProps['session'], boolean]
 
   // Get site navigation
-  const menus = useMenus(session)
+  const menus = useMenus()
 
   // Get data for current page
   const page = usePage(session)
 
   // Get page title
-  const [title, setTitle] = useState('CoSpark')
+  const [title, setTitle] = useState("Morena's Kustomz")
 
   // Update page title when error is encountered
   useEffect(() => {
@@ -51,9 +50,9 @@ export const useCMSData = (): UseCMSData => {
     if (error) cms.disable()
   }, [cms, page, setTitle])
 
-  // If user is logged in with GitHub and page data is found, enable CMS
+  // If user is logged in with GitHub, enable CMS
   useEffect(() => {
-    if (session?.provider === 'github' && !isEmpty(page.data)) cms.enable()
+    if (session?.provider === 'github') cms.enable()
     return () => cms.disable()
   }, [cms, page, session])
 

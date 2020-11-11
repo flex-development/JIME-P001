@@ -8,5 +8,6 @@ export * from './useIndexPageForm'
 export * from './useMenus'
 export * from './useNavigationForm'
 export * from './usePage'
+export * from './useSignInWithCustomToken'
 
 /* eslint-disable prettier/prettier */

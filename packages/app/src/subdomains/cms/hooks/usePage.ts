@@ -1,6 +1,5 @@
 import { createError, IPageProps, Logger } from '@app/subdomains/app'
 import { FeathersErrorJSON } from '@feathersjs/errors'
-import { isEmpty } from 'lodash'
 import { useRouter } from 'next/dist/client/router'
 import { useEffect, useState } from 'react'
 import { ICMSPage } from '../interfaces'
@@ -65,7 +64,7 @@ export const usePage = (session?: IPageProps['session']): UsePage => {
     setData(homepage)
   }, [homepage, path])
 
-  // Get data for pages that use `PagesTemplate`
+  // Get data for pages that use `PageTemplate`
   useEffect(() => {
     // If pages aren't loaded, or on homepage do nothing
     if (!pages || path === '/') return
@@ -95,5 +94,5 @@ export const usePage = (session?: IPageProps['session']): UsePage => {
     setData(page)
   }, [pages, path, session])
 
-  return { data, error, loading: isEmpty(data) && !error, path }
+  return { data, error, loading: error === null, path }
 }

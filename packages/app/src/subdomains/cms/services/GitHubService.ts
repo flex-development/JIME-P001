@@ -132,14 +132,14 @@ export default class GitHubService implements IGitHubService {
     const { avatar_url, id, login } = profile
 
     // Check collaborator status
-    const collaborator = this.isCollaborator(login)
+    const collaborator = await this.isCollaborator(login)
 
     // Deny sign-in if not collaborator
     if (!collaborator) return collaborator
 
     // If user already exists, existing data will be returned (no error)
     await this.admin.createUser(id, login, undefined, avatar_url)
-    await this.admin.auth.setCustomUserClaims(`${id}`, { provider: 'github' })
+    await this.admin.auth.setCustomUserClaims(`${id}`, { collaborator })
 
     // Allow sign-in
     return collaborator

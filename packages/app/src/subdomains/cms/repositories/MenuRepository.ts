@@ -1,4 +1,5 @@
-import { createError, RTDRepository } from '@app/subdomains/app'
+import { RTDRepository } from '@app/subdomains/app/models/RTDRepository'
+import createError from '@app/subdomains/app/utils/createError'
 import { uuid } from '@flex-development/kustomzdesign'
 import { isEmpty } from 'lodash'
 import { ICMSMenu } from '../interfaces'
@@ -44,7 +45,7 @@ export default class MenuRepository extends RTDRepository<ICMSMenu> {
     links = links.map(link => ({
       ...link,
       href: isEmpty(link.href) ? '#' : link.href,
-      uuid: uuid()
+      uuid: (() => uuid())()
     }))
 
     return super.create({ id, links, title, uuid: uuid() })

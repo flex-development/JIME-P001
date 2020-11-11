@@ -16,8 +16,7 @@
           "module-resolver",
           {
             "alias": {
-              "@app": "./src",
-              "@system": "../packages/system/src"
+              "@app": "./src"
             }
           }
         ]

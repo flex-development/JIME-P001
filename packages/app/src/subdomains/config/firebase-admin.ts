@@ -33,3 +33,5 @@ if (typeof window === 'undefined' && SERVICE_ACCOUNT.project_id) {
 }
 
 export default admin
+
+export const auth = admin.auth()

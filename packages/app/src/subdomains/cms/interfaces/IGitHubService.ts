@@ -1,6 +1,6 @@
 import { Session } from 'next-auth/client'
 import { SessionBase } from 'next-auth/_utils'
-import { GenericToken } from '../utils'
+import { IFirebaseAdminAuthService } from './IFirebaseAdminAuthService'
 
 /**
  * @file Subdomain Interfaces - GitHub Service
@@ -10,11 +10,11 @@ import { GenericToken } from '../utils'
  */
 
 export interface IGitHubService {
-  createJWT(token: string, profile: GitHubOAuthProfile): GitHubJWT
-  createSession(
-    session: Session,
-    profile: GenericToken | GitHubJWT
-  ): Promise<GitHubSession>
+  admin: IFirebaseAdminAuthService
+
+  createJWT(access_token: string, profile: GitHubOAuthProfile): GitHubJWT
+  createSession(session: Session, profile: GitHubJWT): Promise<GitHubSession>
+  isCollaborator(username: string): Promise<boolean>
   signIn(profile: GitHubOAuthProfile): Promise<boolean>
 }
 

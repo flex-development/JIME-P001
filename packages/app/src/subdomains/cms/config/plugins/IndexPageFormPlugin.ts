@@ -1,7 +1,7 @@
 import { FormOptions } from 'tinacms'
 import { ICMSPage } from '../../interfaces'
 import { PagesAPI } from '../config'
-import { TextField } from '../helpers'
+import { NumberField, TextAreaField, TextField } from '../helpers'
 
 /**
  * @file Form configuration to edit the homepage
@@ -27,7 +27,52 @@ export const IndexPageFormPlugin = (
 
   return {
     __type: 'form',
-    fields: [TextField('title', 'Title')],
+    fields: [
+      TextField('title', 'Title'),
+      {
+        component: 'group',
+        description: 'Page content settings',
+        fields: [
+          TextField(
+            'about_section_title',
+            'About Section Title',
+            '',
+            '',
+            'About'
+          ),
+          TextAreaField('about_section_text', 'About Section Text'),
+          TextField(
+            'products_section_title',
+            'Products Section Title',
+            '',
+            '',
+            'Products'
+          ),
+          TextAreaField('products_section_text', 'Products Section Text'),
+          NumberField(
+            'max_products',
+            'Max Products',
+            'Maximum number of products to display in Products section',
+            3
+          ),
+          TextField(
+            'product_reviews_title',
+            'Product Reviews Section Title',
+            '',
+            '',
+            'Reviews'
+          ),
+          NumberField(
+            'max_reviews',
+            'Max Reviews',
+            'Maximum number of reviews to display in Product Reviews section',
+            3
+          )
+        ],
+        label: 'Content',
+        name: 'content'
+      }
+    ],
     id,
     label,
 

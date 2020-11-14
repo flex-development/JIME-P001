@@ -27,6 +27,9 @@ export const useIndexPageForm = (
    * @param page - Updated homepage
    */
   const onSubmit = async (page: ICMSPage) => {
+    page.component = 'IndexTemplate'
+    page.path = '/'
+
     return await PagesAPI.upsert(page.id, page)
   }
 

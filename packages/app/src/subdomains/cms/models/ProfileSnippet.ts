@@ -3,7 +3,7 @@ import {
   NullishNumber,
   NullishString
 } from '@flex-development/kustomzdesign/types'
-import { IsNumber, IsOptional, IsString } from 'class-validator'
+import { IsNumber, IsOptional, IsString, IsUrl } from 'class-validator'
 import { IProfileSnippet } from '../interfaces'
 
 /**
@@ -16,7 +16,7 @@ export class ProfileSnippet extends Entity implements IProfileSnippet {
   @IsOptional()
   age?: NullishNumber
 
-  @IsString()
+  @IsUrl()
   @IsOptional()
   img?: NullishString
 

@@ -13,9 +13,7 @@ import { UseFormScreenPlugin } from '../utils'
 /**
  * Creates and registers a new `ProfileSnippetFormPlugin` instance.
  *
- * @param id - Entity ID of the page the template will be rendered
  * @param label - Label for the form that will appear in the sidebar
- * @param initial - Initial `IndexTemplate` component properties
  */
 export const useProfileSnippetForm = (
   label?: string

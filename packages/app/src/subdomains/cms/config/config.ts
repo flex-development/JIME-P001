@@ -17,7 +17,7 @@ import {
 
 export const MenusAPI = new MenuRepository(database)
 export const PagesAPI = new PageRepository(database)
-export const PlaylistsAPI = new PlaylistRepository(database)
+export const PlaylistAPI = new PlaylistRepository(database)
 export const ProfileSnippetAPI = new ProfileSnippetRepository(database)
 
 /**
@@ -29,7 +29,7 @@ export const ProfileSnippetAPI = new ProfileSnippetRepository(database)
 export const CMS_APIS: Record<string, AnyObject> = Object.freeze({
   menus: MenusAPI,
   pages: PagesAPI,
-  playlists: PlaylistsAPI,
+  playlists: PlaylistAPI,
   snippets: ProfileSnippetAPI
 })
 

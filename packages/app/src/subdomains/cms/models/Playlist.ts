@@ -1,5 +1,5 @@
 import { Entity } from '@app/subdomains/app/models/Entity'
-import { IsString } from 'class-validator'
+import { IsUrl } from 'class-validator'
 import { IPlaylist } from '../interfaces'
 
 /**
@@ -8,6 +8,6 @@ import { IPlaylist } from '../interfaces'
  */
 
 export class Playlist extends Entity implements IPlaylist {
-  @IsString()
+  @IsUrl()
   url: string
 }

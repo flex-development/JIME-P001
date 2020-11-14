@@ -37,6 +37,8 @@ export type UsePage = {
  * Retrieve a page from the CMS database.
  *
  * Draft pages will be accessible if the current user is signed-in with GitHub.
+ *
+ * @param session - Current user session
  */
 export const usePage = (session?: IPageProps['session']): UsePage => {
   // Handle response and error states from fetching page data

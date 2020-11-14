@@ -1,4 +1,8 @@
-import { useCMSData, useProfileSnippetForm } from '@app/subdomains/cms/hooks'
+import {
+  useCMSData,
+  usePlaylistForm,
+  useProfileSnippetForm
+} from '@app/subdomains/cms/hooks'
 import { ErrorTemplate } from '@flex-development/kustomzdesign'
 import React, { FC, Fragment, ReactNode } from 'react'
 import { IPageProps, PC } from '../interfaces'
@@ -25,7 +29,6 @@ export interface ShopLayoutProps {
  * Renders the store layout and current page.
  *
  *
- * @todo Implement `usePlaylistForm`
  * @todo Implement `ShopHeader`
  * @todo Implement `Sidebar`
  * @todo Implement `PlaylistBar`
@@ -42,6 +45,9 @@ export const ShopLayout: FC<ShopLayoutProps> = (props: ShopLayoutProps) => {
   // Get metadata, site navigation as menu links, and data for current page
   const { page, title } = useCMSData()
   const { data, error, loading } = page
+
+  // Register playlist settings form
+  const { modified: playlist } = usePlaylistForm()
 
   // Register profile snippet settings form (data used in Sidebar)
   const { modified: snippet } = useProfileSnippetForm()

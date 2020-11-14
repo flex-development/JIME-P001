@@ -33,11 +33,11 @@ export const useCMSData = (): UseCMSData => {
   // Get user session to determine if CMS should be enabled
   const [session] = useSession() as [IPageProps['session'], boolean]
 
-  // Get site navigation
-  const menus = useMenus()
-
   // Get data for current page
   const page = usePage(session)
+
+  // Get site navigation
+  const menus = useMenus()
 
   // Get page title
   const [title, setTitle] = useState("Morena's Kustomz")

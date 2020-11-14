@@ -23,7 +23,7 @@ export interface SidebarProps extends MutatedProps {
   /**
    * Profile age.
    *
-   * @default {}
+   * @default 22
    */
   age?: NullishNumber
 

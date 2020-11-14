@@ -7,5 +7,7 @@ export * from './CMSEntity'
 export * from './CMSMenu'
 export * from './CMSMenuLink'
 export * from './CMSPage'
+export * from './FirebaseMediaStore'
+export * from './ProfileSnippet'
 
 /* eslint-disable prettier/prettier */

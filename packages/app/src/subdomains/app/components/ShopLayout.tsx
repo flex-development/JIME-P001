@@ -1,4 +1,4 @@
-import { useCMSData } from '@app/subdomains/cms/hooks'
+import { useCMSData, useProfileSnippetForm } from '@app/subdomains/cms/hooks'
 import { ErrorTemplate } from '@flex-development/kustomzdesign'
 import React, { FC, Fragment, ReactNode } from 'react'
 import { IPageProps, PC } from '../interfaces'
@@ -24,11 +24,13 @@ export interface ShopLayoutProps {
 /**
  * Renders the store layout and current page.
  *
- * @todo Handle loading state
- * @todo Implement `PlaylistBar`
+ *
+ * @todo Implement `usePlaylistSettingsForm`
  * @todo Implement `ShopHeader`
  * @todo Implement `Sidebar`
+ * @todo Implement `PlaylistBar`
  * @todo Pass metadata from `useCMSData` to `Head` component
+ * @todo Handle loading state
  *
  * @param props - Component properties
  * @param props.page - Next.js page component
@@ -40,6 +42,9 @@ export const ShopLayout: FC<ShopLayoutProps> = (props: ShopLayoutProps) => {
   // Get metadata, site navigation as menu links, and data for current page
   const { page, title } = useCMSData()
   const { data, error, loading } = page
+
+  // Register profile snippet settings form (data used in Sidebar)
+  const { modified: snippet } = useProfileSnippetForm()
 
   return (
     <Fragment>

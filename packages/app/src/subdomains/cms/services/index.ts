@@ -3,6 +3,6 @@
  * @module subdomains/cms/services
  */
 
-export default {}
+export { default as AuthGitHubService } from './AuthGitHubService'
 
 /* eslint-disable prettier/prettier */

@@ -2,7 +2,7 @@ import Providers from 'next-auth/providers'
 
 /**
  * @file NextAuth Providers Configuration
- * @module subdomains/config/providers
+ * @module config/providers
  */
 
 const { GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRET } = process.env

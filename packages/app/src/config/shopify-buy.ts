@@ -2,7 +2,7 @@ import ShopifyBuyClient from 'shopify-buy'
 
 /**
  * @file Shopify JS Buy SDK Configuration
- * @module subdomains/config/shopify-buy
+ * @module config/shopify-buy
  * @see https://github.com/Shopify/js-buy-sdk
  */
 

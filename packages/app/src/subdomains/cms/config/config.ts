@@ -1,4 +1,4 @@
-import { database } from '@app/subdomains/config/firebase'
+import { database } from '@app/config/firebase'
 import { AnyObject } from '@flex-development/kustomzdesign/types'
 import { MarkdownFieldPlugin } from 'react-tinacms-editor'
 import { Plugin, TinaCMSConfig } from 'tinacms'

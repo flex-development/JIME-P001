@@ -19,7 +19,7 @@ import { QueryExecutor } from './QueryExecutor'
 
 /**
  * @file Firebase RTD Repository Model
- * @module subdomains/config/models/RTDRepository
+ * @module config/models/RTDRepository
  * @see https://firebase.google.com/docs/database
  */
 

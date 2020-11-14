@@ -1,6 +1,6 @@
 /**
  * @file Storybook Args
- * @module subdomains/config/args
+ * @module config/args
  */
 
 export const autoComplete = {

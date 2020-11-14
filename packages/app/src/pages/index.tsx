@@ -1,10 +1,10 @@
+import { Collections, Products } from '@app/config/shopify-buy'
 import {
   IPageProps,
   PC,
   serialize,
   ServerSidePageProps
 } from '@app/subdomains/app'
-import { Collections, Products } from '@app/subdomains/config/shopify-buy'
 import { GetServerSidePropsContext } from 'next'
 import { getSession } from 'next-auth/client'
 import Head from 'next/head'

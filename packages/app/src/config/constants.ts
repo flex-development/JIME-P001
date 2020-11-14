@@ -1,6 +1,6 @@
 /**
  * @file Constant Values
- * @module subdomains/config/constants
+ * @module config/constants
  */
 
 export default {}

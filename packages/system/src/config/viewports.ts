@@ -1,6 +1,6 @@
 /**
  * @file Custom viewports for @storybook/addon-viewport
- * @module subdomains/config/viewports
+ * @module config/viewports
  * @see https://www.npmjs.com/package/@storybook/addon-viewport
  */
 

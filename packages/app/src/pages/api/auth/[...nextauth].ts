@@ -1,15 +1,16 @@
+import { auth } from '@app/config/firebase-admin'
+import { AUTH_PROVIDERS } from '@app/config/providers'
 import {
-  GitHubJWT,
-  GitHubOAuthProfile,
-  GitHubProviderAccount,
-  GitHubSession
-} from '@app/subdomains/cms/interfaces'
-import GitHubService from '@app/subdomains/cms/services/GitHubService'
-import { GenericToken } from '@app/subdomains/cms/utils'
-import { AUTH_PROVIDERS } from '@app/subdomains/config/providers'
+  GenericToken,
+  JWTGitHub,
+  OAuthProfileGitHub,
+  ProviderAccountGitHub,
+  ProviderSessionGitHub
+} from '@app/subdomains/cms'
+import AuthGitHubService from '@app/subdomains/cms/services/AuthGitHubService'
 import { NextApiRequest, NextApiResponse } from 'next'
 import NextAuth, { InitOptions } from 'next-auth'
-import { Session } from 'next-auth/client'
+import { Session as SessionClientSide } from 'next-auth/client'
 import { GenericObject } from 'next-auth/_utils'
 
 /**
@@ -18,11 +19,9 @@ import { GenericObject } from 'next-auth/_utils'
  * @see https://next-auth.js.org/configuration/options
  */
 
-const { GITHUB_PAT, NODE_ENV = 'development', SITE_URL } = process.env
+process.env.NEXTAUTH_URL = process.env.SITE_URL
 
-process.env.NEXTAUTH_URL = SITE_URL
-
-const GitHub = new GitHubService()
+const GitHubAuth = new AuthGitHubService(auth)
 
 const options = {
   // Control what happens when an action is performed.
@@ -42,34 +41,43 @@ const options = {
     jwt: async (
       orignal_token: GenericToken,
       user?: GenericObject,
-      account?: GitHubProviderAccount,
-      profile?: GitHubOAuthProfile
-    ): Promise<GitHubJWT | GenericToken> => {
+      account?: ProviderAccountGitHub,
+      profile?: OAuthProfileGitHub
+    ): Promise<GenericToken | JWTGitHub> => {
       if (!user) return orignal_token
 
-      const { accessToken, provider } = account as GitHubProviderAccount
+      const { accessToken, provider } = account as ProviderAccountGitHub
 
-      let token = {} as GitHubJWT
+      let token = {} as JWTGitHub | JWTGitHub
 
       if (provider === 'github') {
-        profile = profile as GitHubOAuthProfile
-        token = GitHub.createJWT(accessToken, profile)
+        profile = profile as OAuthProfileGitHub
+        token = await GitHubAuth.createJWT(accessToken, profile)
       }
 
       return Promise.resolve(token)
     },
 
     /**
-     * Creates a new GitHub or LinkedIn session object.
+     * Creates a new default or GitHub session object.
      *
      * @param session - Session object
-     * @param user - GitHub or LinkedIn JWT
+     * @param user - GitHub JWT
      * @returns Session that will be returned to the client
      */
     session: async (
-      session: Session,
-      user: GitHubJWT
-    ): Promise<GitHubSession> => GitHub.createSession(session, user),
+      session: SessionClientSide,
+      user: JWTGitHub
+    ): Promise<ProviderSessionGitHub | SessionClientSide> => {
+      const { provider } = user
+
+      if (provider === 'github') {
+        user = user as JWTGitHub
+        return GitHubAuth.createSession(session, user)
+      }
+
+      return session
+    },
 
     /**
      * Determines if a user is able to sign-in.
@@ -82,14 +90,14 @@ const options = {
      */
     signIn: async (
       user?: GenericObject,
-      account?: GitHubProviderAccount,
-      profile?: GitHubOAuthProfile
-    ): Promise<boolean | GitHubJWT> => {
-      let sign_in = false
+      account?: ProviderAccountGitHub,
+      profile?: OAuthProfileGitHub
+    ): Promise<boolean | JWTGitHub> => {
+      let sign_in: boolean | JWTGitHub = false
 
       if (account?.provider === 'github') {
-        profile = profile as GitHubOAuthProfile
-        sign_in = await GitHub.signIn(profile)
+        profile = profile as OAuthProfileGitHub
+        sign_in = await GitHubAuth.signIn(account.accessToken, profile)
       }
 
       return sign_in
@@ -97,7 +105,7 @@ const options = {
   },
 
   // Enable debug messages in the console if you are having problems
-  debug: NODE_ENV.toLowerCase() !== 'production',
+  debug: process.env.NODE_ENV?.toLowerCase() !== 'production',
 
   // Events are useful for logging
   // https://next-auth.js.org/configuration/events
@@ -105,7 +113,7 @@ const options = {
 
   // JSON Web Tokens can be used for session tokens if enabled.
   jwt: {
-    secret: GITHUB_PAT
+    secret: process.env.GITHUB_PAT
   },
 
   // Configure authentication providers
@@ -113,7 +121,7 @@ const options = {
 
   // Used to sign cookies and to sign and encrypt JSON Web Tokens, unless
   // a seperate secret is defined explicitly for encrypting the JWT.
-  secret: GITHUB_PAT
+  secret: process.env.GITHUB_PAT
 }
 
 export default (req: NextApiRequest, res: NextApiResponse): Promise<void> => {

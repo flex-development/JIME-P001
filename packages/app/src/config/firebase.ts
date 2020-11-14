@@ -1,12 +1,13 @@
 import 'firebase/analytics'
-import firebase from 'firebase/app'
+import Firebase from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/database'
+import 'firebase/storage'
 import { isEmpty } from 'lodash'
 
 /**
  * @file Firebase Web Configuration
- * @module subdomains/config/firebase
+ * @module config/firebase
  */
 /**
  * Firebase Web configuration.
@@ -27,24 +28,27 @@ const ANALYTICS_CONFIG_VALID = !isEmpty(FIREBASE_WEB_CONFIG.measurementId)
 
 // True if Node devlopment enivronment
 export const DEV_ENV = process.env.NODE_ENV === 'development'
+export const SERVER = typeof window === 'undefined'
 
-try {
-  firebase.initializeApp(FIREBASE_WEB_CONFIG)
+export const getFirebaseApp = (): Firebase.app.App => {
+  if (Firebase.apps.length > 0) return Firebase.app()
 
-  if (!DEV_ENV && firebase.analytics.isSupported() && ANALYTICS_CONFIG_VALID) {
-    firebase.analytics()
+  const app = Firebase.initializeApp({
+    ...FIREBASE_WEB_CONFIG,
+    auth: {}
+  })
+
+  if (!SERVER && Firebase.analytics.isSupported() && ANALYTICS_CONFIG_VALID) {
+    Firebase.analytics()
   }
-} catch (error) {
-  /*
-   * Skip the "already exists" message which is not an actual error when we're
-   * hot-reloading.
-   */
-  if (!/already exists/u.test(error.message)) {
-    console.error('Firebase initialization error', error.stack)
-  }
+
+  return app
 }
 
-export default firebase
+export const firebase = getFirebaseApp()
 
 export const auth = firebase.auth()
 export const database = firebase.database()
+export const storage = firebase.storage()
+
+export default Firebase

@@ -1,6 +1,6 @@
 /**
  * @file Color Palette
- * @module subdomains/config/colors
+ * @module config/colors
  */
 
 export default {

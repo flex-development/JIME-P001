@@ -1,19 +1,20 @@
+import { octokit } from '@app/config/github'
 import { createError, Logger } from '@app/subdomains/app'
-import { octokit } from '@app/subdomains/config'
+import { Endpoints, RequestInterface } from '@octokit/types'
+import admin from 'firebase-admin'
 import { isString } from 'lodash'
 import { Session } from 'next-auth/client'
-import { IFirebaseAdminAuthService } from '../interfaces'
 import {
-  GitHubJWT,
-  GitHubOAuthProfile,
-  GitHubSession,
-  IGitHubService
-} from '../interfaces/IGitHubService'
-import FirebaseAdminAuthService from './FirebaseAdminAuthService'
+  IAuthGitHubService,
+  JWTGitHub,
+  OAuthProfileGitHub,
+  ProviderSessionGitHub
+} from '../interfaces/IAuthGitHubService'
+import upsertFirebaseUser from '../utils/upsertFirebaseUser'
 
 /**
  * @file Subdomain Services - GitHub Service
- * @module subdomains/cms/services/GitHubService
+ * @module subdomains/cms/services/AuthGitHubService
  */
 
 const { GITHUB_PAT, GITHUB_REPO_FULL_NAME = '' } = process.env
@@ -22,22 +23,24 @@ const { GITHUB_PAT, GITHUB_REPO_FULL_NAME = '' } = process.env
  * Handles all communication with the GitHub API.
  * This service uses Firebase Admin and should be used server-side only.
  *
- * @class GitHubService
+ * @class AuthGitHubService
  */
-export default class GitHubService implements IGitHubService {
-  admin: IFirebaseAdminAuthService
+export default class AuthGitHubService implements IAuthGitHubService {
+  admin: admin.auth.Auth
+  octokit: RequestInterface
 
   /**
-   * Creates a new `GitHubService` instance.
+   * Creates a new `AuthGitHubService` instance.
    *
-   * @param auth - Firebase Admin service to use instead of default
+   * @param auth - Firebase Admin authentication service
+   * @throws {FeathersErrorJSON}
    */
-  constructor(auth?: IFirebaseAdminAuthService['auth']) {
+  constructor(auth: IAuthGitHubService['admin']) {
     // Throw internal error if missing environment variables
     if (!isString(GITHUB_PAT) || !GITHUB_PAT.length) {
       const error = createError('Missing GITHUB_PAT')
 
-      Logger.error({ GitHubService: error })
+      Logger.error({ AuthGitHubService: error })
       throw error
     } else if (
       !isString(GITHUB_REPO_FULL_NAME) ||
@@ -45,11 +48,12 @@ export default class GitHubService implements IGitHubService {
     ) {
       const error = createError('Missing GITHUB_REPO_FULL_NAME')
 
-      Logger.error({ GitHubService: error })
+      Logger.error({ AuthGitHubService: error })
       throw error
     }
 
-    this.admin = new FirebaseAdminAuthService(auth)
+    this.admin = auth
+    this.octokit = octokit
   }
 
   /**
@@ -62,12 +66,19 @@ export default class GitHubService implements IGitHubService {
    * @param profile.login - GitHub username
    * @param profile.name - GitHub display name
    */
-  createJWT(access_token: string, profile: GitHubOAuthProfile): GitHubJWT {
+  async createJWT(
+    access_token: string,
+    profile: OAuthProfileGitHub
+  ): Promise<JWTGitHub> {
     const { avatar_url, id, login, name } = profile
+
+    // Get public AND private profile information
+    const { email } = await this.getUser(access_token)
 
     return {
       access_token,
       avatar_url,
+      email,
       id,
       login,
       name,
@@ -86,17 +97,36 @@ export default class GitHubService implements IGitHubService {
    */
   async createSession(
     session: Session,
-    profile: GitHubJWT
-  ): Promise<GitHubSession> {
-    const { access_token, provider, ...rest } = profile
+    user: JWTGitHub
+  ): Promise<ProviderSessionGitHub> {
+    const { access_token, provider, ...rest } = user
 
     return {
       access_token,
       expires: session.expires,
-      firebase_token: await this.admin.auth.createCustomToken(`${profile.id}`),
+      firebase_token: await this.admin.createCustomToken(`${user.id}`),
       provider,
       user: rest
     }
+  }
+
+  /**
+   * Returns the profile of the authenticated user.
+   *
+   * @async
+   * @param access_token - OAuth access token
+   * @returns Public and private profile information
+   */
+  async getUser(
+    access_token: string
+  ): Promise<Endpoints['GET /user']['response']['data']> {
+    const request = {
+      headers: { authorization: `Authorization: token ${access_token}` },
+      method: 'GET',
+      url: '/user'
+    }
+
+    return (await this.octokit(request)).data
   }
 
   /**
@@ -114,7 +144,7 @@ export default class GitHubService implements IGitHubService {
     const endpoint = 'GET /repos/{owner}/{repo}/collaborators/{username}'
 
     // Check collaborator status
-    const { status } = await octokit(endpoint, { owner, repo, username })
+    const { status } = await this.octokit(endpoint, { owner, repo, username })
 
     return status === 204
   }
@@ -123,12 +153,17 @@ export default class GitHubService implements IGitHubService {
    * Determines if the current user is able to sign-in with GitHub. GitHub login
    * is restricted to repository collaborators.
    *
+   *
    * @async
+   * @param access_token - OAuth access token
    * @param profie - GitHub OAuth Profile
    * @param profile.login - GitHub username
    * @returns True if allowed to sign-in with GitHub
    */
-  async signIn(profile: GitHubOAuthProfile): Promise<boolean> {
+  async signIn(
+    access_token: string,
+    profile: OAuthProfileGitHub
+  ): Promise<boolean | JWTGitHub> {
     const { avatar_url, id, login } = profile
 
     // Check collaborator status
@@ -137,11 +172,14 @@ export default class GitHubService implements IGitHubService {
     // Deny sign-in if not collaborator
     if (!collaborator) return collaborator
 
-    // If user already exists, existing data will be returned (no error)
-    await this.admin.createUser(id, login, undefined, avatar_url)
-    await this.admin.auth.setCustomUserClaims(`${id}`, { collaborator })
+    // Get public AND private profile information
+    const { email } = await this.getUser(access_token)
+
+    // Upsert Firebase user and grant database / storage permissions
+    await upsertFirebaseUser(id, login, email, avatar_url)
+    await this.admin.setCustomUserClaims(`${id}`, { collaborator })
 
     // Allow sign-in
-    return collaborator
+    return this.createJWT(access_token, profile)
   }
 }

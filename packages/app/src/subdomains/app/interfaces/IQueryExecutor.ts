@@ -6,7 +6,7 @@ import { SortOrder } from '../utils'
 
 /**
  * @file Subdomain Interfaces - QueryExecutor
- * @module subdomains/config/interfaces/IQueryExecutor
+ * @module config/interfaces/IQueryExecutor
  */
 
 /**

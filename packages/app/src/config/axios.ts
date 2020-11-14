@@ -5,7 +5,7 @@ import { pick } from 'lodash'
 
 /**
  * @file Axios Configuration
- * @module subdomains/config/axios
+ * @module config/axios
  * @see {@link https://github.com/axios/axios}
  */
 

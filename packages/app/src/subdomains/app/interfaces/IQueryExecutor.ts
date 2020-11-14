@@ -26,6 +26,7 @@ export interface IQueryExecutor<T extends AnyObject = AnyObject> {
   $select(data: QEData<T>, $select?: Query<T>['$select']): typeof data
   $skip(data: QEData<T>, $skip?: Query<T>['$skip']): typeof data
   $sort(data: QEData<T>, $sort?: Query<T>['$sort']): typeof data
+  query(data: QEData<T>, params?: Query<T>): typeof data
 }
 
 /**

@@ -3,6 +3,6 @@
  * @module subdomains/products/utils
  */
 
-export default {}
+export { default as toImageResource } from './toImageResource'
 
 /* eslint-disable prettier/prettier */

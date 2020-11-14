@@ -3,6 +3,7 @@
  * @module subdomains/products/interfaces
  */
 
-export default {}
+export * from './ICollectionService'
+export * from './IProductService'
 
 /* eslint-disable prettier/prettier */

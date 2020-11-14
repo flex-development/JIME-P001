@@ -1,14 +1,17 @@
-import { Collections, Products } from '@app/config/shopify-buy'
+import { Collections } from '@app/config/shopify-buy'
 import {
   IPageProps,
   PC,
   serialize,
   ServerSidePageProps
 } from '@app/subdomains/app'
+import ProductService from '@app/subdomains/products/services/ProductService'
 import { GetServerSidePropsContext } from 'next'
 import { getSession } from 'next-auth/client'
 import Head from 'next/head'
 import React from 'react'
+
+const Products = new ProductService()
 
 /**
  * Renders the homepage.
@@ -219,13 +222,13 @@ export const getServerSideProps: ServerSidePageProps = async (
 ) => {
   const session = (await getSession(context)) as IPageProps['session']
 
-  const products = await Products.fetchAll(250).then(p => serialize(p))
-
   const collections = await Collections.fetchAllWithProducts().then(c => {
     return serialize(c)
   })
 
-  return { props: { page: { collections, products }, session } }
+  return {
+    props: { page: { collections, products: await Products.find() }, session }
+  }
 }
 
 export default Index

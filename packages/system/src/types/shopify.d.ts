@@ -34,7 +34,6 @@ export type ImageResource = {
  * @see https://shopify.dev/docs/storefront-api/reference/object/product
  */
 export type ProductResource = {
-  available: boolean
   description: string
   handle: string
   id: string

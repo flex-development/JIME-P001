@@ -3,8 +3,6 @@ import { ClassType, transformAndValidate } from 'class-transformer-validator'
 import { getFromContainer } from 'class-validator'
 import { isEmpty, merge, omit } from 'lodash'
 import {
-  FieldQuery,
-  FieldQueryParams,
   IEntity,
   IRTDRepository,
   Query,
@@ -217,59 +215,12 @@ export class RTDRepository<E extends IEntity = IEntity>
    * @param query[foo].$nin - Matches none of the values specified in an array
    * @returns Array of entities
    */
-  async find(query?: Query<E>): Promise<(E | Partial<E>)[]> {
-    const { $limit, $select, $skip, $sort, ...rest } = query || {}
-    const fields = (rest as unknown) as FieldQueryParams<E>
-
+  async find(query?: Query<E>): Promise<Array<E | Partial<E>>> {
     // Get root repository data
     const root = (await this.normalize(this.root)) as RepoRootData<E>
-    let qd: Array<E | Partial<E>> = Object.values<E>(root || {})
 
-    // Skip the specified number of results
-    qd = this.$skip(qd, $skip)
-
-    // Apply sorting rules
-    qd = this.$sort(qd, $sort)
-
-    // Handle queries against indivdual fields
-    Object.keys(fields).forEach(key => {
-      const query = fields[key] as FieldQuery
-      const { $eq, $gt, $gte, $in, $lt, $lte, $ne, $nin } = query
-
-      let new_qd: Array<E | Partial<E>> = [...qd]
-
-      // Equality
-      new_qd = this.$eq(new_qd, key, $eq)
-
-      // Greater than
-      new_qd = this.$gt(new_qd, key, $gt)
-
-      // Greater than or equal to
-      new_qd = this.$gte(new_qd, key, $gte)
-
-      // Matches any of the values specified in $in
-      new_qd = this.$in(new_qd, key, $in)
-
-      // Less than
-      new_qd = this.$lt(new_qd, key, $lt)
-
-      // Less than or equal to
-      new_qd = this.$lte(new_qd, key, $lte)
-
-      // Inequality
-      new_qd = this.$ne(new_qd, key, $ne)
-
-      // Does not match values in $nin
-      new_qd = this.$nin(new_qd, key, $nin)
-
-      qd = new_qd
-    })
-
-    // Limit number of results
-    qd = this.$limit(qd, $limit)
-
-    // Return data and apply $select
-    return this.$select(qd, $select)
+    // Run queries
+    return this.query(Object.values<E>(root || {}), query)
   }
 
   /**

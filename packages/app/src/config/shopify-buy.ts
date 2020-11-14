@@ -14,3 +14,5 @@ export const ShopifyBuyClient = ShopifyBuy.buildClient({
 export const Checkouts = ShopifyBuyClient.checkout
 export const Collections = ShopifyBuyClient.collection
 export const Products = ShopifyBuyClient.product
+
+export default ShopifyBuy

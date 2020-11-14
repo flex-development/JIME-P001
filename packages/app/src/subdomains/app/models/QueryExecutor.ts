@@ -18,15 +18,21 @@ import {
   pick,
   takeRight
 } from 'lodash'
-import { FieldQuery, IQueryExecutor as IQE, QEData, Query } from '../interfaces'
+import {
+  FieldQuery,
+  FieldQueryParams,
+  IQueryExecutor as IQE,
+  QEData,
+  Query
+} from '../interfaces'
 
 /**
- * @file Executes queries against JSON data from Firebase RTD repositories
+ * @file Executes queries against JSON data
  * @module subdomains/app/QueryExecutor
  */
 
 /**
- * Class for executing queries against JSON data from Firebase RTD repositories.
+ * Class for executing queries against JSON data.
  *
  * @class QueryExecutor
  * @implements IQueryExecutor
@@ -278,7 +284,7 @@ export class QueryExecutor<T extends AnyObject = AnyObject> implements IQE<T> {
    * @param data - Array of entities to sort
    * @param $sort - Sorting rules
    */
-  $sort(data: QEData<T>, $sort?: Query<T>['$sort']): QEData<T> {
+  $sort(data: QEData<T>, $sort?: Query<T>['$sort']): typeof data {
     // If value isn't an object or is an empty object, return original array
     if (!isObject($sort) || !Object.keys($sort).length) return data
 
@@ -290,5 +296,82 @@ export class QueryExecutor<T extends AnyObject = AnyObject> implements IQE<T> {
 
     // Return sorted data
     return orderBy(data, iteratees, orders)
+  }
+
+  /**
+   * Executes a query against an array of data.
+   *
+   * Data can be sorted, filtered, and paginated using {@param params}.
+   *
+   * @param data - Data to execute queries against
+   * @param params - Query parameters
+   * @param params.$limit - Maximum number of items to return. To return data
+   * from the end of the array, pass a negative value
+   * @param params.$select - Pick which fields to include in the result
+   * @param params.$skip - Skip the specified number of results
+   * @param params.$sort - Property to sort by mapped and order (1 asc, -1 des)
+   * @param query[foo] - Object containing queries for specified property
+   * @param query[foo].$eq - Matches values that are equal to a specified value
+   * @param query[foo].$gt - Matches values where value > params.$gt
+   * @param query[foo].$gte - Matches values where value >= params.$gte
+   * @param query[foo].$in - Matches any of the values specified in an array
+   * @param query[foo].$lt - Matches values where value < params.$lt
+   * @param query[foo].$lte - Matches values where value <= params.$lte
+   * @param query[foo].$ne - Matches all values where value !== params.$ne
+   * @param query[foo].$nin - Matches none of the values specified in an array
+   * @returns Queried array of data
+   */
+  query(data: QEData<T>, params: Query<T> = {}): typeof data {
+    const { $limit, $select, $skip, $sort, ...rest } = params || {}
+    const fields = (rest as unknown) as FieldQueryParams<T>
+
+    // Copy data to run queries against
+    let qd: typeof data = [...data]
+
+    // Skip the specified number of results
+    qd = this.$skip(qd, $skip)
+
+    // Apply sorting rules
+    qd = this.$sort(qd, $sort)
+
+    // Handle queries against indivdual fields
+    Object.keys(fields).forEach(key => {
+      const query = fields[key] as FieldQuery
+      const { $eq, $gt, $gte, $in, $lt, $lte, $ne, $nin } = query
+
+      let new_qd: Array<T | Partial<T>> = [...qd]
+
+      // Equality
+      new_qd = this.$eq(new_qd, key, $eq)
+
+      // Greater than
+      new_qd = this.$gt(new_qd, key, $gt)
+
+      // Greater than or equal to
+      new_qd = this.$gte(new_qd, key, $gte)
+
+      // Matches any of the values specified in $in
+      new_qd = this.$in(new_qd, key, $in)
+
+      // Less than
+      new_qd = this.$lt(new_qd, key, $lt)
+
+      // Less than or equal to
+      new_qd = this.$lte(new_qd, key, $lte)
+
+      // Inequality
+      new_qd = this.$ne(new_qd, key, $ne)
+
+      // Does not match values in $nin
+      new_qd = this.$nin(new_qd, key, $nin)
+
+      qd = new_qd
+    })
+
+    // Limit number of results
+    qd = this.$limit(qd, $limit)
+
+    // Return data and apply $select
+    return this.$select(qd, $select)
   }
 }

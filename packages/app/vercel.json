@@ -4,7 +4,7 @@
   "alias": "morenaskustomz.flexdevelopment.vercel.app",
   "github": {
     "autoAlias": true,
-    "enabled": false,
+    "enabled": true,
     "silent": false
   },
   "scope": "flexdevelopment",

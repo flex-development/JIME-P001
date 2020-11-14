@@ -219,7 +219,7 @@ export const getServerSideProps: ServerSidePageProps = async (
 ) => {
   const session = (await getSession(context)) as IPageProps['session']
 
-  const products = await Products.fetchAll().then(p => serialize(p))
+  const products = await Products.fetchAll(250).then(p => serialize(p))
 
   const collections = await Collections.fetchAllWithProducts().then(c => {
     return serialize(c)

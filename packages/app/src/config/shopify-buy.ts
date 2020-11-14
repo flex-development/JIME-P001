@@ -1,4 +1,4 @@
-import ShopifyBuyClient from 'shopify-buy'
+import ShopifyBuy from 'shopify-buy'
 
 /**
  * @file Shopify JS Buy SDK Configuration
@@ -6,11 +6,11 @@ import ShopifyBuyClient from 'shopify-buy'
  * @see https://github.com/Shopify/js-buy-sdk
  */
 
-export const ShopifyBuy = ShopifyBuyClient.buildClient({
+export const ShopifyBuyClient = ShopifyBuy.buildClient({
   domain: process.env.SHOPIFY_DOMAIN as string,
   storefrontAccessToken: process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN as string
 })
 
-export const Checkouts = ShopifyBuy.checkout
-export const Collections = ShopifyBuy.collection
-export const Products = ShopifyBuy.product
+export const Checkouts = ShopifyBuyClient.checkout
+export const Collections = ShopifyBuyClient.collection
+export const Products = ShopifyBuyClient.product

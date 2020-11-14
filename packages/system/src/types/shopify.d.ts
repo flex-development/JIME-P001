@@ -3,9 +3,19 @@ import { NullishString } from './utils'
 /**
  * @file Shopify Type Definitons
  * @module types/shopify
- * 
- * @todo Update documentation
  */
+
+/**
+ * Represents a collection resource.
+ */
+export type CollectionResource = {
+  description: string
+  handle: string
+  id: string
+  image: ImageResource
+  products: ProductResource[]
+  title: string
+}
 
 /**
  * Represents an image resource.

@@ -9,6 +9,7 @@ export * from './ICMSEntity'
 export * from './ICMSMenu'
 export * from './ICMSMenuLink'
 export * from './ICMSPage'
+export * from './IPlaylist'
 export * from './IProfileSnippet'
 
 /* eslint-disable prettier/prettier */

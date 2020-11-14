@@ -3,7 +3,7 @@ import { IProfileSnippet } from '../interfaces'
 import { ProfileSnippet } from '../models'
 
 /**
- * @file Access the `settings` collection
+ * @file Access `settings/profile-snippet` data
  * @module subdomains/cms/repositories/ProfileSnippetRepository
  *
  * @todo Set id for repository methods

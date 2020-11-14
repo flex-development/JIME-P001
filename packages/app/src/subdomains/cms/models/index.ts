@@ -8,6 +8,7 @@ export * from './CMSMenu'
 export * from './CMSMenuLink'
 export * from './CMSPage'
 export * from './FirebaseMediaStore'
+export * from './Playlist'
 export * from './ProfileSnippet'
 
 /* eslint-disable prettier/prettier */

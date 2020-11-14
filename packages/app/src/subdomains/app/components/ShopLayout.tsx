@@ -25,7 +25,7 @@ export interface ShopLayoutProps {
  * Renders the store layout and current page.
  *
  *
- * @todo Implement `usePlaylistSettingsForm`
+ * @todo Implement `usePlaylistForm`
  * @todo Implement `ShopHeader`
  * @todo Implement `Sidebar`
  * @todo Implement `PlaylistBar`

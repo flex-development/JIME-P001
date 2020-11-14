@@ -30,7 +30,7 @@ const URLField = (
   defaultValue?: string
 ): Field => ({
   ...TextField(name, label, description, placeholder),
-  defaultValue: defaultValue || '#'
+  defaultValue: defaultValue
 })
 
 export default URLField

@@ -6,6 +6,7 @@ import { FirebaseMediaStore } from '../models/FirebaseMediaStore'
 import {
   MenuRepository,
   PageRepository,
+  PlaylistRepository,
   ProfileSnippetRepository
 } from '../repositories'
 
@@ -16,6 +17,7 @@ import {
 
 export const MenusAPI = new MenuRepository(database)
 export const PagesAPI = new PageRepository(database)
+export const PlaylistsAPI = new PlaylistRepository(database)
 export const ProfileSnippetAPI = new ProfileSnippetRepository(database)
 
 /**
@@ -27,6 +29,7 @@ export const ProfileSnippetAPI = new ProfileSnippetRepository(database)
 export const CMS_APIS: Record<string, AnyObject> = Object.freeze({
   menus: MenusAPI,
   pages: PagesAPI,
+  playlists: PlaylistsAPI,
   snippets: ProfileSnippetAPI
 })
 

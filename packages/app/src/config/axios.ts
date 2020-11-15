@@ -59,7 +59,7 @@ Axios.interceptors.response.use(handleSuccessResponse, handleErrorResponse)
  * Passes the request config to our configured Axios client. Used to properly
  * type response data when using {@link handleSuccessResponse}.
  *
- * @param response - Success response
+ * @param config - Axios request config
  * @throws {FeathersError}
  */
 export async function axios<T = ANYTHING>(
@@ -67,3 +67,27 @@ export async function axios<T = ANYTHING>(
 ): Promise<T> {
   return ((await Axios(config)) as unknown) as Promise<T>
 }
+
+/**
+ * Make requests to the Stamped.io API. If passed, {@param config.auth} and
+ * {@param config.baseURL} will be overriden.
+ *
+ * @see https://developers.stamped.io/
+ *
+ * @param config - Axios request config
+ * @throws {FeathersError}
+ */
+export async function axiosStamped<T = ANYTHING>(
+  config: Omit<AxiosRequestConfig, 'auth' | 'baseURL'>
+): Promise<T> {
+  return axios<T>({
+    ...config,
+    auth: {
+      password: process.env.SHOPIFIY_STAMPED_API_KEY_PRIVATE || '',
+      username: process.env.SHOPIFIY_STAMPED_API_KEY_PUBLIC || ''
+    },
+    baseURL: 'https://stamped.io/api/'
+  })
+}
+
+export default Axios

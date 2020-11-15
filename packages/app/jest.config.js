@@ -12,7 +12,8 @@ module.exports = {
     '^@app-tests/(.*)$': '<rootDir>/__tests__/$1'
   },
   prettierPath: path.join(__dirname, '../../node_modules/prettier'),
-  setupFilesAfterEnv: [],
+  setupFilesAfterEnv: ['dotenv/config', './jest.setup.ts'],
+  testEnvironment: 'node',
   testPathIgnorePatterns: [
     '.next/',
     'node_modules/',

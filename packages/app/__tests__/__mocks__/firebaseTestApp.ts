@@ -6,9 +6,6 @@ import * as testing from '@firebase/rules-unit-testing'
  * @module tests/__mocks__/firebaseTestApp
  */
 
-// Set Firestore emulator host
-process.env.FIRESTORE_EMULATOR_HOST = 'localhost:8080'
-
 /**
  * Firebase testing credentials.
  */

@@ -52,7 +52,7 @@ export interface IndexTemplateProps extends MutatedProps {
   products_section_title?: string
 
   /**
-   * Array of `StampedProductReviewEntity` objects as `ProductReviewProps`
+   * Array of `ProductReviewResource` objects as `ProductReviewProps`
    * objects.
    *
    * @default []

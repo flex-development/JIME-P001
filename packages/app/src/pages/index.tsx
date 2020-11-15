@@ -1,12 +1,16 @@
 import { IPageProps, PC, ServerSidePageProps } from '@app/subdomains/app'
-import CollectionService from '@app/subdomains/products/services/CollectionService'
-import ProductService from '@app/subdomains/products/services/ProductService'
+import {
+  CollectionService,
+  ProductReviewService,
+  ProductService
+} from '@app/subdomains/products'
 import { GetServerSidePropsContext } from 'next'
 import { getSession } from 'next-auth/client'
 import Head from 'next/head'
 import React from 'react'
 
 const Collections = new CollectionService()
+const ProductReviews = new ProductReviewService()
 const Products = new ProductService()
 
 /**
@@ -222,7 +226,8 @@ export const getServerSideProps: ServerSidePageProps = async (
     props: {
       page: {
         collections: await Collections.find(),
-        products: await Products.find()
+        products: await Products.find(),
+        reviews: await ProductReviews.find()
       },
       session
     }

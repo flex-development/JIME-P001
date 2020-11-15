@@ -1,5 +1,5 @@
 import { useMutatedProps } from '@system/hooks'
-import { StampedProductReviewEntity } from '@system/types'
+import { ProductReviewResource } from '@system/types'
 import React, { FC } from 'react'
 import { Box, BoxProps, Column, Image, Link, Paragraph } from '../atoms'
 
@@ -17,32 +17,32 @@ export interface ProductReviewProps extends Omit<BoxProps, 'id'> {
    *
    * @default ''
    */
-  body: StampedProductReviewEntity['body']
+  body: ProductReviewResource['body']
 
   /**
    * Unique product review ID.
    */
-  id: StampedProductReviewEntity['id']
+  id: ProductReviewResource['id']
 
   /**
    * Image URL of the product being reviewed.
    */
-  productImageUrl?: StampedProductReviewEntity['productImageUrl']
+  productImageUrl?: ProductReviewResource['productImageUrl']
 
   /**
    * Title of the product being reviewed.
    */
-  productTitle: StampedProductReviewEntity['productTitle']
+  productTitle: ProductReviewResource['productTitle']
 
   /**
    * Link to the page of the product being reviewed.
    */
-  productUrl: StampedProductReviewEntity['productUrl']
+  productUrl: ProductReviewResource['productUrl']
 
   /**
    * Review title.
    */
-  title: StampedProductReviewEntity['title']
+  title: ProductReviewResource['title']
 }
 
 /**

@@ -1,7 +1,7 @@
 import createError from '@app/subdomains/app/utils/createError'
 import { AnyObject, ANYTHING } from '@flex-development/kustomzdesign/types'
 import Axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios'
-import { pick } from 'lodash'
+import { isPlainObject, pick } from 'lodash'
 
 /**
  * @file Axios Configuration
@@ -30,15 +30,17 @@ export const handleErrorResponse = (error: AxiosError): void => {
     feathersError = createError('No response received.')
   } else {
     // Something happened in setting up the request that triggered an error
-    feathersError = createError(message, { errors: stack })
+    feathersError = createError(message, { errors: { stack } })
   }
 
-  feathersError.data.config = pick(config, [
-    'url',
-    'method',
-    'params',
-    'headers'
-  ])
+  if (isPlainObject(feathersError.data)) {
+    feathersError.data.config = pick(config, [
+      'url',
+      'method',
+      'params',
+      'headers'
+    ])
+  }
 
   throw feathersError
 }
@@ -78,15 +80,18 @@ export async function axios<T = ANYTHING>(
  * @throws {FeathersError}
  */
 export async function axiosStamped<T = ANYTHING>(
-  config: Omit<AxiosRequestConfig, 'auth' | 'baseURL'>
+  config: Omit<AxiosRequestConfig, 'auth' | 'baseURL' | 'headers'> = {}
 ): Promise<T> {
-  return axios<T>({
+  return await axios<T>({
     ...config,
     auth: {
-      password: process.env.SHOPIFIY_STAMPED_API_KEY_PRIVATE || '',
-      username: process.env.SHOPIFIY_STAMPED_API_KEY_PUBLIC || ''
+      password: process.env.SHOPIFY_STAMPED_API_KEY_PRIVATE || '',
+      username: process.env.SHOPIFY_STAMPED_API_KEY_PUBLIC || ''
     },
-    baseURL: 'https://stamped.io/api/'
+    baseURL: 'https://stamped.io/api/',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    }
   })
 }
 

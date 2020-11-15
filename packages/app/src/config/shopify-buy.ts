@@ -11,8 +11,4 @@ export const ShopifyBuyClient = ShopifyBuy.buildClient({
   storefrontAccessToken: process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN as string
 })
 
-export const Checkouts = ShopifyBuyClient.checkout
-export const Collections = ShopifyBuyClient.collection
-export const Products = ShopifyBuyClient.product
-
 export default ShopifyBuy

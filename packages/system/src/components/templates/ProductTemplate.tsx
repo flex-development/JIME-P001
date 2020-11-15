@@ -4,7 +4,7 @@ import {
   EventHandlers,
   MutatedProps,
   ProductResource,
-  StampedProductReviewEntity,
+  ProductReviewResource,
   TC
 } from '@system/types'
 import { uuid } from '@system/utils'
@@ -46,7 +46,7 @@ export interface ProductTemplateProps extends MutatedProps {
    *
    * @default []
    */
-  reviews?: StampedProductReviewEntity[]
+  reviews?: ProductReviewResource[]
 
   /**
    * Maximum number of product reviews to show in a group.
@@ -125,7 +125,7 @@ export const ProductTemplate: TC<ProductTemplateProps> = (
         </FlexBox>
 
         <Carousel id='product-review-carousel'>
-          {review_chunks.map((chunk: StampedProductReviewEntity[]) => (
+          {review_chunks.map((chunk: ProductReviewResource[]) => (
             <FlexBox direction='column' key={uuid()}>
               {chunk.map((review, i: number) => (
                 <ProductReview

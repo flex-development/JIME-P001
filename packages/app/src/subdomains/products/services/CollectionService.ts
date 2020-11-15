@@ -1,5 +1,7 @@
 import ShopifyBuy, { ShopifyBuyClient } from '@app/config/shopify-buy'
-import { createError, Logger, QEData, QueryExecutor } from '@app/subdomains/app'
+import { QEData } from '@app/subdomains/app/interfaces'
+import { QueryExecutor } from '@app/subdomains/app/models'
+import { createError, Logger } from '@app/subdomains/app/utils'
 import {
   AnyObject,
   CollectionResource
@@ -12,15 +14,10 @@ import { toImageResource } from '../utils'
 import ProductService from './ProductService'
 
 /**
- * @file Subdomain Services - Collection Service
+ * @file Subdomain Services - Collections
  * @module subdomains/products/services/CollectionService
  */
 
-/**
- * Faciliates all actions with Shopify product resources.
- *
- * @class CollectionService
- */
 export default class CollectionService
   extends QueryExecutor<CollectionResource>
   implements ICollectionService {

@@ -1,20 +1,17 @@
 import ShopifyBuy, { ShopifyBuyClient } from '@app/config/shopify-buy'
-import { createError, Logger, QEData, QueryExecutor } from '@app/subdomains/app'
+import { QEData } from '@app/subdomains/app/interfaces'
+import { QueryExecutor } from '@app/subdomains/app/models'
+import { createError, Logger } from '@app/subdomains/app/utils'
 import { ProductResource } from '@flex-development/kustomzdesign/types'
 import slugify from 'slugify'
 import { IProductService, ProductQuery } from '../interfaces/IProductService'
 import { toImageResource } from '../utils'
 
 /**
- * @file Subdomain Services - Product Service
+ * @file Subdomain Services - Products
  * @module subdomains/products/services/ProductService
  */
 
-/**
- * Faciliates all actions with Shopify product resources.
- *
- * @class ProductService
- */
 export default class ProductService
   extends QueryExecutor<ProductResource>
   implements IProductService {

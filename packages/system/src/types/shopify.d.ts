@@ -64,7 +64,7 @@ export type ProductVariantResource = {
  * 
  * @see https://developers.stamped.io/#1e9fc214-5b59-40a0-9a7b-1030fbaef679
  */
-export type StampedProductReviewEntity = {
+export type ProductReviewResource = {
   author: string
   body: string
   email: string
@@ -84,18 +84,18 @@ export type StampedProductReviewEntity = {
  * 
  * @see https://developers.stamped.io/#d06415c3-5eae-46b1-a8db-c1016fd09902
  */
-export type StampedProductReviewEntityInput = {
-  author: StampedProductReviewEntity['author']
-  email: StampedProductReviewEntity['email']
+export type ProductReviewResourceInput = {
+  author: ProductReviewResource['author']
+  email: ProductReviewResource['email']
   location: string
-  reviewMessage: StampedProductReviewEntity['body']
-  reviewRating: StampedProductReviewEntity['rating']
-  reviewRecommendProduct: boolean
-  reviewTitle: StampedProductReviewEntity['title']
   productId: number | string
-  productImageUrl: StampedProductReviewEntity['productImageUrl']
-  productName: StampedProductReviewEntity['productTitle']
+  productImageUrl: ProductReviewResource['productImageUrl']
+  productName: ProductReviewResource['productTitle']
   productSKU: string
-  productUrl: StampedProductReviewEntity['productUrl']
-  reviewSource: string
+  productUrl: ProductReviewResource['productUrl']
+  reviewMessage: ProductReviewResource['body']
+  reviewRating: ProductReviewResource['rating']
+  reviewRecommendProduct: boolean
+  reviewSource?: string
+  reviewTitle: ProductReviewResource['title']
 }

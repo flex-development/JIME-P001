@@ -4,7 +4,7 @@ import {
   ANYTHING,
   EventHandlers,
   ProductResource,
-  StampedProductReviewEntityInput
+  ProductReviewResourceInput
 } from '@system/types'
 import { isEmpty } from 'lodash'
 import React, { FC } from 'react'
@@ -40,7 +40,7 @@ export interface ProductReviewEntryFormProps extends FormProps {
    * the `submit` button.
    */
   handleSubmit?(
-    review: Partial<StampedProductReviewEntityInput>,
+    review: Partial<ProductReviewResourceInput>,
     event: EventHandlers.Click.Button
   ): ANYTHING
 
@@ -73,7 +73,7 @@ export const ProductReviewEntryForm: FC<ProductReviewEntryFormProps> = (
   const {
     description,
     handleSubmit = (
-      review: Partial<StampedProductReviewEntityInput>,
+      review: Partial<ProductReviewResourceInput>,
       event: EventHandlers.Click.Button
     ) => {
       event.preventDefault()
@@ -92,7 +92,7 @@ export const ProductReviewEntryForm: FC<ProductReviewEntryFormProps> = (
 
   // Product review entity state
   const { state: review, setState: updateReview } = useSetState<
-    Partial<StampedProductReviewEntityInput>
+    Partial<ProductReviewResourceInput>
   >({
     email: '',
     productId: selected.id,

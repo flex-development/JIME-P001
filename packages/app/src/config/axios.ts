@@ -71,8 +71,36 @@ export async function axios<T = ANYTHING>(
 }
 
 /**
+ * Make requests to the Shopify REST API. If passed, {@param config.baseURL}
+ * will be overriden.
+ *
+ * The extension `.json` will be appended to {@param config.url}.
+ *
+ * @see https://shopify.dev/docs/admin-api/rest/reference
+ *
+ * @param config - Axios request config
+ * @throws {FeathersError}
+ */
+export async function axiosShopify<T = ANYTHING>(
+  config: Omit<AxiosRequestConfig, 'baseURL'> = {}
+): Promise<T> {
+  const hostname = process.env.SHOPIFY_DOMAIN
+  const password = process.env.SHOPIFY_PASSWORD
+  const username = process.env.SHOPIFY_API_KEY
+  const version = process.env.SHOPIFY_VERSION
+
+  const login = `${username}:${password}`
+
+  return await axios<T>({
+    ...config,
+    baseURL: `https://${login}@${hostname}/admin/api/${version}/`,
+    url: `${config.url}.json`
+  })
+}
+
+/**
  * Make requests to the Stamped.io API. If passed, {@param config.auth} and
- * {@param config.baseURL} will be overriden.
+ * {@param config.baseURL}, and {@param config.headers} will be overriden.
  *
  * @see https://developers.stamped.io/
  *

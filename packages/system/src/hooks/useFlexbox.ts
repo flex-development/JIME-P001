@@ -11,8 +11,6 @@ import { isBoolean, isEmpty, isNumber, isString } from 'lodash'
 /**
  * @file Generate flexbox utility classes
  * @module hooks/useFlexbox
- *
- * @todo Add comments
  */
 
 /**

@@ -12,8 +12,6 @@ import { CMSEntity } from './CMSEntity'
  * @module subdomains/cms/models/CMSPage
  *
  * @todo Implement `CMSMetadata` model
- * @todo Implement `IndexTemplateProps` model
- * @todo Implement `PageTemplateProps` model
  */
 
 export class CMSPage extends CMSEntity implements ICMSPage {

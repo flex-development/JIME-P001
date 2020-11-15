@@ -35,11 +35,14 @@ module.exports = {
   /**
    * Extends the native Webpack configuration.
    *
-   * @todo Update documentation
-   *
    * @param {object} config - Webpack config object
-   * @param {object} param1 - Next.js helpers
-   * @param {boolean} param1.isServer - `true` for server-side compilation
+   * @param {object} helpers - Next.js helpers
+   * @param {string} helpers.buildId - Unique identifier between builds
+   * @param {object} helpers.defaultLoaders - Default loaders used internally
+   * @param {object} helpers.defaultLoaders.babel - `babel-loader` config
+   * @param {boolean} helpers.dev - True if the compiling in development mode
+   * @param {boolean} helpers.isServer - `true` for server-side compilation
+   * @param {object} helpers.webpack - Webpack
    * @returns {object} Altered Webpack configuration
    */
   webpack: config => {

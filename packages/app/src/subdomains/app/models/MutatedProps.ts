@@ -4,8 +4,6 @@ import { IsOptional, IsString } from 'class-validator'
 /**
  * @file Subdomain Models - MutatedProps
  * @module subdomains/app/models/MutatedProps
- *
- * @todo Add decorators for other `IMP` properties
  */
 
 export class MutatedProps implements IMP {

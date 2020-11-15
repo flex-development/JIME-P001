@@ -9,8 +9,6 @@ import { TextField } from '../helpers'
 /**
  * Extends the TinaCMS Text field plugin.
  *
- * @todo Pass validate function
- *
  * @see https://tinacms.org/docs/plugins/fields/text/
  *
  * @param description - Optional description that expands on the purpose of the

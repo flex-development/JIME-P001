@@ -87,13 +87,13 @@ export async function axiosShopify<T = ANYTHING>(
   const hostname = process.env.SHOPIFY_DOMAIN
   const password = process.env.SHOPIFY_PASSWORD
   const username = process.env.SHOPIFY_API_KEY
-  const version = process.env.SHOPIFY_VERSION
+  const version = process.env.SHOPIFY_API_VERSION
 
-  const login = `${username}:${password}`
+  const login = `${username}:${password}@${hostname}`
 
   return await axios<T>({
     ...config,
-    baseURL: `https://${login}@${hostname}/admin/api/${version}/`,
+    baseURL: `https://${login}/admin/api/${version}/`,
     url: `${config.url}.json`
   })
 }

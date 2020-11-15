@@ -1,4 +1,5 @@
 import { IPageProps, PC, ServerSidePageProps } from '@app/subdomains/app'
+import { CustomerService } from '@app/subdomains/customers'
 import {
   CollectionService,
   ProductReviewService,
@@ -10,6 +11,7 @@ import Head from 'next/head'
 import React from 'react'
 
 const Collections = new CollectionService()
+const Customers = new CustomerService()
 const ProductReviews = new ProductReviewService()
 const Products = new ProductService()
 
@@ -226,6 +228,7 @@ export const getServerSideProps: ServerSidePageProps = async (
     props: {
       page: {
         collections: await Collections.find(),
+        customers: await Customers.find(),
         products: await Products.find(),
         reviews: await ProductReviews.find()
       },

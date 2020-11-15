@@ -6,7 +6,7 @@ import { UseFormScreenPlugin } from '../utils'
 
 /**
  * @file Connect a page to the `IndexPageFormPlugin`
- * @module hooks/useIndexPageForm
+ * @module subdomains/cms/hooks/useIndexPageForm
  * @see https://tinacms.org/docs/plugins/screens/#usescreenplugin
  */
 

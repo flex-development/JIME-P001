@@ -26,7 +26,7 @@ export class FirebaseMediaStore implements MediaStore {
   accept = '*'
 
   /**
-   * Reference to `public/` directory in Storage Bucket.
+   * Reference to `public/images` directory in Storage Bucket.
    */
   public: firebase.storage.Reference
 

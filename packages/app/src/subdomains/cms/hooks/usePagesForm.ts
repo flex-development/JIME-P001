@@ -7,7 +7,7 @@ import { UseFormScreenPlugin } from '../utils'
 
 /**
  * @file Register a `PagesFormPlugin` instance
- * @module hooks/usePagesForm
+ * @module subdomains/cms/hooks/usePagesForm
  * @see https://tinacms.org/docs/plugins/screens/#usescreenplugin
  */
 

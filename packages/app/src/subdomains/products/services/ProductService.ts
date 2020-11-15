@@ -36,7 +36,7 @@ export default class ProductService
    * @returns Formatted product resource object
    */
   static toProductResource(product: ShopifyBuy.Product): ProductResource {
-    const { description, id, images, options, title, variants } = product
+    const { description, id, images, title, variants } = product
 
     const handle = slugify(title).toLowerCase()
 
@@ -47,11 +47,6 @@ export default class ProductService
       images: images.map(img => ({
         ...toImageResource(img),
         alt: `${title} image`
-      })),
-      options: options.map(({ name, values }, i) => ({
-        id: `${handle}-option-${i}`,
-        name,
-        values: values.map(({ value }) => value)
       })),
       title,
       variants: variants.map(({ available, id, image, price, title }) => ({

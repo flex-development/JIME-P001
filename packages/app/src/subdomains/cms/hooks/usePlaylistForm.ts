@@ -6,7 +6,7 @@ import { UseFormScreenPlugin } from '../utils'
 
 /**
  * @file Connect a page to the `PlaylistFormPlugin`
- * @module hooks/usePlaylistForm
+ * @module subdomains/cms/hooks/usePlaylistForm
  * @see https://tinacms.org/docs/plugins/screens/#usescreenplugin
  */
 

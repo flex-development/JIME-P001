@@ -38,21 +38,8 @@ export type ProductResource = {
   handle: string
   id: string
   images: ImageResource[]
-  options: ProductOptionResource[]
   variants: ProductVariantResource[]
   title: string
-}
-
-/**
- * Custom product property names like "size", "color", or "material".
- * `ProductResource` objects may have a maximum of 3 options.
- *
- * @see https://shopify.dev/docs/storefront-api/reference/object/productoption
- */
-export type ProductOptionResource = {
-  id: string
-  name: string
-  values: string[]
 }
 
 /**

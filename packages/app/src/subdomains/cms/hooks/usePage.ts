@@ -8,7 +8,7 @@ import { usePagesForm } from './usePagesForm'
 
 /**
  * @file Retrieve a page from the CMS database
- * @module hooks/usePage
+ * @module subdomains/cms/hooks/usePage
  */
 
 export type UsePage = {

@@ -1,3 +1,4 @@
+import { IQueryExecutor, QEData, Query } from '@app/subdomains/app'
 import { CollectionResource } from '@flex-development/kustomzdesign/types'
 import ShopifyBuy from 'shopify-buy'
 
@@ -6,10 +7,15 @@ import ShopifyBuy from 'shopify-buy'
  * @module subdomains/products/interfaces/ICollectionService
  */
 
-export interface ICollectionService {
+export interface ICollectionService extends IQueryExecutor<CollectionResource> {
   shopify: ShopifyBuy.CollectionResource
 
-  find($limit?: number): Promise<Array<CollectionResource>>
+  find(query?: CollectionQuery): Promise<QEData<CollectionResource>>
   get(id: CollectionResource['id']): Promise<CollectionResource>
   getByHandle(handle: CollectionResource['handle']): Promise<CollectionResource>
 }
+
+/**
+ * Object representing a collection query.
+ */
+export type CollectionQuery = Query<CollectionResource>

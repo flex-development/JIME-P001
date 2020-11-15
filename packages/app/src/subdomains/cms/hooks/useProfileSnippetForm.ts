@@ -6,7 +6,7 @@ import { UseFormScreenPlugin } from '../utils'
 
 /**
  * @file Connect a page to the `ProfileSnippetFormPlugin`
- * @module hooks/useProfileSnippetForm
+ * @module subdomains/cms/hooks/useProfileSnippetForm
  * @see https://tinacms.org/docs/plugins/screens/#usescreenplugin
  */
 

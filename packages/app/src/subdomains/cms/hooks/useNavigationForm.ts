@@ -6,7 +6,7 @@ import { UseFormScreenPlugin } from '../utils'
 
 /**
  * @file Register a `NavigationFormPlugin` instance
- * @module hooks/useNavigationForm
+ * @module subdomains/cms/hooks/useNavigationForm
  * @see https://tinacms.org/docs/plugins/screens/#usescreenplugin
  */
 

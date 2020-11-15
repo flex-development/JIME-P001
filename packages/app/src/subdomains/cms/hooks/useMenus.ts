@@ -3,7 +3,7 @@ import { useNavigationForm } from './useNavigationForm'
 
 /**
  * @file Get site navigation as menu links
- * @module hooks/useMenus
+ * @module subdomains/cms/hooks/useMenus
  */
 
 export type UseMenus = {

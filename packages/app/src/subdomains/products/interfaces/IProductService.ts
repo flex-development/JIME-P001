@@ -5,8 +5,6 @@ import ShopifyBuy from 'shopify-buy'
 /**
  * @file Subdomain Interfaces - Product Service
  * @module subdomains/products/interfaces/IProductService
- *
- * @todo Implement `IProductService.search`
  */
 
 export interface IProductService extends IQueryExecutor<ProductResource> {

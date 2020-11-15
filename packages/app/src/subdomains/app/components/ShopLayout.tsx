@@ -10,7 +10,7 @@ import { Head } from './Head'
 
 /**
  * @file Shop Layout
- * @module components/layout/ShopLayout
+ * @module subdomains/app/components/ShopLayout
  */
 
 export interface ShopLayoutProps {
@@ -27,13 +27,6 @@ export interface ShopLayoutProps {
 
 /**
  * Renders the store layout and current page.
- *
- *
- * @todo Implement `ShopHeader`
- * @todo Implement `Sidebar`
- * @todo Implement `PlaylistBar`
- * @todo Pass metadata from `useCMSData` to `Head` component
- * @todo Handle loading state
  *
  * @param props - Component properties
  * @param props.page - Next.js page component

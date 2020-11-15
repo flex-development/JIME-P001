@@ -11,8 +11,6 @@ import breakpointInfix from './breakpointInfix'
 /**
  * Creates a responsive variation of a CSS class.
  *
- * @todo Add example usage and output
- *
  * @param prefix - Value to prefix breakpoint infix, e.g 'col' or 'd'
  * @param breakpoint - Grid breakpoint key, xs | sm | md | lg | xl | xxl
  * @param value - Responsive value, e.g 5 or 'wrap'

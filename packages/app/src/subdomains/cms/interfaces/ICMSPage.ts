@@ -12,8 +12,6 @@ import { ICMSEntity } from './ICMSEntity'
 
 /**
  * Object representing marketing site page data.
- *
- * @todo Implement `ICMSPageMetadata`
  */
 export interface ICMSPage extends ICMSEntity {
   /**

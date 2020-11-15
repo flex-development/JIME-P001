@@ -12,8 +12,6 @@ import { NumberField, TextAreaField, TextField } from '../helpers'
 /**
  * Returns the form configuration to edit the homepage.
  *
- * @todo Implement `SEOField`
- *
  * @param label - Label for the form that will appear in the sidebar
  * @param onSubmit - Function to invoke when the form is saved
  * @returns `IndexTemplate` form configuration

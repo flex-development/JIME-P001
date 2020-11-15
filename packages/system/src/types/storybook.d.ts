@@ -4,8 +4,6 @@ import { FC } from 'react'
 /**
  * @file Storybook Type Definitions
  * @module types/storybook
- *
- * @todo Update documentation
  */
 
 export type ColorItemProps = {

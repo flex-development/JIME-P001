@@ -5,8 +5,6 @@ import { Playlist } from '../models'
 /**
  * @file Access `settings/playlist` data
  * @module subdomains/cms/repositories/PlaylistRepository
- *
- * @todo Set id for repository methods
  */
 
 export default class PlaylistRepository extends Repo<IPlaylist> {

@@ -22,9 +22,6 @@ export type UseCMSData = {
  *
  * The current user session will be accessed to determine if the CMS should be
  * enabled. If the user is signed in with GitHub, the CMS will be enabled.
- *
- * @todo Implement `useMetadataForm`
- * @todo Merge global site metadata and page metadata
  */
 export const useCMSData = (): UseCMSData => {
   // Get CMS instance

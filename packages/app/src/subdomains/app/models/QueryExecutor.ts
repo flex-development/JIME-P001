@@ -70,8 +70,6 @@ export class QueryExecutor<T extends AnyObject = AnyObject> implements IQE<T> {
    * @see https://docs.mongodb.com/manual/reference/operator/query/gt
    * @see https://lodash.com/docs/4.17.15#gt
    *
-   * @todo Handle arrays
-   *
    * @param data - Array of data to filter
    * @param field - Name of field to match against
    * @param $gt - Value to match against
@@ -90,8 +88,6 @@ export class QueryExecutor<T extends AnyObject = AnyObject> implements IQE<T> {
    *
    * @see https://docs.mongodb.com/manual/reference/operator/query/gte
    * @see https://lodash.com/docs/4.17.15#gte
-   *
-   * @todo Handle arrays
    *
    * @param data - Array of data to filter
    * @param field - Name of field to match against
@@ -158,8 +154,6 @@ export class QueryExecutor<T extends AnyObject = AnyObject> implements IQE<T> {
    * @see https://docs.mongodb.com/manual/reference/operator/query/lt
    * @see https://lodash.com/docs/4.17.15#lt
    *
-   * @todo Handle arrays
-   *
    * @param data - Array of data to filter
    * @param field - Name of field to match against
    * @param $lt - Value to match against
@@ -178,8 +172,6 @@ export class QueryExecutor<T extends AnyObject = AnyObject> implements IQE<T> {
    *
    * @see https://docs.mongodb.com/manual/reference/operator/query/lte
    * @see https://lodash.com/docs/4.17.15#lte
-   *
-   * @todo Handle arrays
    *
    * @param data - Array of data to filter
    * @param field - Name of field to match against

@@ -89,8 +89,6 @@ export class FirebaseMediaStore implements MediaStore {
   /**
    * Lists all files in a specific directory.
    *
-   * @todo Convert files in sub-sub-folders to media objects
-   *
    * @async
    * @param options - Media list options
    * @param options.directory - Directory to find files

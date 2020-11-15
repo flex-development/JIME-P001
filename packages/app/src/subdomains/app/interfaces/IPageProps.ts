@@ -8,8 +8,6 @@ import { AnyObject } from '@flex-development/kustomzdesign/types'
 
 /**
  * Props passed to all Next.js page components.
- *
- * @todo Update `page` type definition
  */
 export interface IPageProps {
   /**

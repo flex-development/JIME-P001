@@ -9,8 +9,6 @@ import React from 'react'
 /**
  * @file Tests - SearchBar
  * @module tests/lib/molecules/SearchBar
- *
- * @todo Unit test callback functions
  */
 
 // ! Keep in sync with SearchBar implementation

@@ -12,8 +12,6 @@ import createResponsiveUtility from './createResponsiveUtility'
 /**
  * Returns an array of responsive utility classes.
  *
- * @todo Add example usage an output
- *
  * @param prefix - Value to prefix breakpoint infix
  * @param utilties - Responsive utilties map
  * @param breakpoints - Map to use instead of `GRID_BREAKPOINTS`

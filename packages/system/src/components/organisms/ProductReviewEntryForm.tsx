@@ -24,8 +24,6 @@ import { FormCheck, LabeledFormControl, ProductRatingField } from '../molecules'
 /**
  * @file Allow users to submit product reviews
  * @module components/organisms/ProductReviewEntryForm
- *
- * @todo Update documentation
  */
 
 /**

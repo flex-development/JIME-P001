@@ -65,12 +65,6 @@ export default class Document extends NextDocument {
 
   /**
    * Renders the document.
-   *
-   * @todo Favicons
-   * @todo Apple Web App Meta
-   * @todo Windows Tiles
-   * @todo Update site verification token
-   *
    */
   render(): JSX.Element {
     return (

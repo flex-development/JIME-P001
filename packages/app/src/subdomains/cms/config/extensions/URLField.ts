@@ -11,8 +11,6 @@ import { TextField } from '../helpers'
  *
  * Returns the configuration for a URL input.
  *
- * @todo Validate URL
- *
  * @see https://tinacms.org/docs/plugins/fields/text/
  *
  * @param name - Equivalent of an input's `name` attribute

@@ -5,8 +5,6 @@ import { IFirebaseAdminAuthService } from './IFirebaseAdminAuthService'
 /**
  * @file Subdomain Interfaces - GitHub Service
  * @module subdomains/cms/interfaces/IGitHubService
- *
- * @todo Update documentation
  */
 
 export interface IGitHubService {

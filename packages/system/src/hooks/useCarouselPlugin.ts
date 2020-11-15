@@ -13,8 +13,6 @@ import {
 /**
  * @file Create a Bootstrap carousel instance
  * @module hooks/useCarouselPlugin
- *
- * @todo Add declaration file for 'bootstrap/js/dist/carousel'
  */
 
 /**
@@ -48,8 +46,6 @@ export type UseCarouselPlugin = {
  * Initializes a Bootstrap carousel instance.
  *
  * @see https://v5.getbootstrap.com/docs/5.0/components/carousel/#via-javascript
- *
- * @todo Reimplement carousel logic -> ReferenceError: Element is not defined
  *
  * @param ref - HTML element to use as a carousel
  * @param options - Bootstrap carousel options

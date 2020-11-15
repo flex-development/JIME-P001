@@ -15,8 +15,6 @@ import { MarkdownField, TextField, ToggleField } from '../helpers'
  * Returns the form configuration that allows CMS admins to edit the pages that
  * use the `PagesTemplate`.
  *
- * @todo Implement `SEOField`
- *
  * @param label - Label for the form that will appear in the sidebar
  * @param onSubmit - Function to invoke when the form is saved
  * @returns `PagesFormPlugin` instance

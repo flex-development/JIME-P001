@@ -5,8 +5,6 @@ import React from 'react'
 /**
  * @file Tests - ShopHeader
  * @module tests/lib/organisms/ShopHeader
- *
- * @todo Test callback functions
  */
 
 it('renders <header class="shop-header">', () => {

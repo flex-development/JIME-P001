@@ -5,8 +5,6 @@ import { ProfileSnippet } from '../models'
 /**
  * @file Access `settings/profile-snippet` data
  * @module subdomains/cms/repositories/ProfileSnippetRepository
- *
- * @todo Set id for repository methods
  */
 
 export default class ProfileSnippetRepository extends Repo<IProfileSnippet> {

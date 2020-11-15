@@ -5,10 +5,8 @@ import React, { FC } from 'react'
 
 /**
  * @file Inject elements into <head> tag
- * @module components/Head
+ * @module subdomains/app/components/Head
  * @see {@link https://nextjs.org/docs/api-reference/next/head}
- *
- * @todo Complete Front-End Checklist Head section
  */
 
 /**

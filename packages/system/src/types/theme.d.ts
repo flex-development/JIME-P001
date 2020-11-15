@@ -175,7 +175,6 @@ export type GrayscaleColorVariation =
  */
 export type GridBreakpoint = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl'
 
-/** @todo Update documentation */
 export type ResponsiveUtility<T = Primitive> = {
   xs?: T
   sm?: T

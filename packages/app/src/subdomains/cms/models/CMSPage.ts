@@ -8,10 +8,8 @@ import { CMSPageComponents, ICMSPage } from '../interfaces/ICMSPage'
 import { CMSEntity } from './CMSEntity'
 
 /**
- * @file Business Object Model - CMS Page
+ * @file Subdomain Models - CMS Page
  * @module subdomains/cms/models/CMSPage
- *
- * @todo Implement `CMSMetadata` model
  */
 
 export class CMSPage extends CMSEntity implements ICMSPage {

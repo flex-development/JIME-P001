@@ -9,8 +9,6 @@ import { TinaCMS, TinaProvider } from 'tinacms'
  * @file Next.js Custom App
  * @module pages/app
  * @see https://nextjs.org/docs/advanced-features/custom-app
- *
- * @todo Import global stylesheet
  */
 
 /**

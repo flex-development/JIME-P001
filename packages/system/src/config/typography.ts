@@ -33,8 +33,6 @@ export const fontWeights = {
 
 /**
  * Font families used in this project.
- *
- * @todo Update fonts weights and headings font config
  */
 export const fonts = {
   body: {

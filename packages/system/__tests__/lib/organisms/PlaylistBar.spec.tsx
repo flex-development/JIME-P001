@@ -8,8 +8,6 @@ import React from 'react'
 /**
  * @file Tests - PlaylistBar
  * @module tests/lib/organisms/PlaylistBar
- *
- * @todo Test callback functions
  */
 
 it('renders <section class="playlistbar">', () => {

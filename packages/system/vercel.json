@@ -1,0 +1,11 @@
+{
+  "name": "kustomzdesign",
+  "version": 2,
+  "alias": "kustomzdesign.flexdevelopment.vercel.app",
+  "github": {
+    "autoAlias": true,
+    "enabled": false,
+    "silent": false
+  },
+  "scope": "flexdevelopment"
+}

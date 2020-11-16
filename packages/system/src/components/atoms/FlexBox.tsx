@@ -1,5 +1,5 @@
+import { FlexboxUtilitiesConfig } from '@flex-development/types'
 import { useFlexbox, useMutatedProps } from '@system/hooks'
-import { FlexboxUtilitiesConfig } from '@system/types'
 import { isBoolean, isString } from 'lodash'
 import React, {
   forwardRef,

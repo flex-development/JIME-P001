@@ -1,10 +1,10 @@
-import { useLineItemInput, useProductVariants } from '@system/hooks'
 import {
   ANYTHING,
-  EventHandlers,
   ProductResource,
   ProductVariantResource
-} from '@system/types'
+} from '@flex-development/types'
+import { useLineItemInput, useProductVariants } from '@system/hooks'
+import { EventHandlers } from '@system/types'
 import { uuid } from '@system/utils'
 import { findIndex, isEmpty } from 'lodash'
 import React, { FC, useEffect, useState } from 'react'

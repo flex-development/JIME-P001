@@ -1,11 +1,10 @@
-import { useMutatedProps } from '@system/hooks'
 import {
   ANYTHING,
   ButtonVariant,
-  EventHandlers,
-  FormControlSize,
-  MutatedFormControlProps
-} from '@system/types'
+  FormControlSize
+} from '@flex-development/types'
+import { useMutatedProps } from '@system/hooks'
+import { EventHandlers, MutatedFormControlProps } from '@system/types'
 import classnames from 'classnames'
 import { isEmpty } from 'lodash'
 import React, { FC } from 'react'

@@ -1,5 +1,5 @@
+import { Columns } from '@flex-development/types'
 import { useColumn, useFlexbox, useMutatedProps } from '@system/hooks'
-import { Columns } from '@system/types'
 import React, {
   forwardRef,
   ForwardRefExoticComponent as FREC,

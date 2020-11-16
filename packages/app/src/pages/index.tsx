@@ -1,3 +1,4 @@
+import { database } from '@app/config/firebase'
 import {
   IPageProps,
   PC,
@@ -7,8 +8,8 @@ import {
 import { CustomerService } from '@app/subdomains/customers'
 import {
   CollectionService,
-  ProductReviewService,
-  ProductService
+  ProductService,
+  ReviewService
 } from '@app/subdomains/sales'
 import { GetServerSidePropsContext } from 'next'
 import { getSession } from 'next-auth/client'
@@ -17,7 +18,7 @@ import React from 'react'
 
 const Collections = new CollectionService()
 const Customers = new CustomerService()
-const ProductReviews = new ProductReviewService()
+const ProductReviews = new ReviewService(database)
 const Products = new ProductService()
 
 /**

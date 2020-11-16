@@ -1,5 +1,6 @@
+import { NullishNumber, NullishString } from '@flex-development/types'
 import { useMutatedProps } from '@system/hooks'
-import { MutatedProps, NullishNumber, NullishString } from '@system/types'
+import { MutatedProps } from '@system/types'
 import React, { FC } from 'react'
 import {
   Aside,

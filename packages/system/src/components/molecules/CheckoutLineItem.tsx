@@ -1,5 +1,6 @@
+import { ANYTHING } from '@flex-development/types'
 import { useLineItemInput, useMutatedProps } from '@system/hooks'
-import { ANYTHING, EventHandlers } from '@system/types'
+import { EventHandlers } from '@system/types'
 import React, { FC, Fragment } from 'react'
 import { AttributeInput, CustomAttribute, LineItem } from 'shopify-buy'
 import {
@@ -150,8 +151,8 @@ export const CheckoutLineItem: FC<CheckoutLineItemProps> = (
                 <Span>{customAttributes[0]?.value}</Span>
               </Fragment>
             ) : (
-              'No Kustomizations.'
-            )
+                'No Kustomizations.'
+              )
             /* eslint-enable prettier/prettier */
           }
         </Paragraph>

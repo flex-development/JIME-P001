@@ -1,12 +1,10 @@
-import { useMutatedProps } from '@system/hooks'
 import {
   ANYTHING,
-  EventHandlers,
-  MutatedProps,
   ProductResource,
-  ProductReviewResource,
-  TC
-} from '@system/types'
+  ProductReviewResource
+} from '@flex-development/types'
+import { useMutatedProps } from '@system/hooks'
+import { EventHandlers, MutatedProps, TC } from '@system/types'
 import { uuid } from '@system/utils'
 import productReviewProps from '@system/utils/getProductReviewProps'
 import { chunk } from 'lodash'

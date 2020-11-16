@@ -4,7 +4,8 @@
  */
 
 export * from './ICollectionService'
-export * from './IProductReviewService'
 export * from './IProductService'
+export * from './IReviewRepository'
+export * from './IReviewService'
 
 /* eslint-disable prettier/prettier */

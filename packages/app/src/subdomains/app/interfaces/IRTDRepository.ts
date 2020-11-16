@@ -1,8 +1,7 @@
-import { NullishPrimitive } from '@flex-development/types'
+import { IEntity, NullishPrimitive } from '@flex-development/types'
 import { ClassType, transformAndValidate } from 'class-transformer-validator'
 import { QueryExecutor as QE } from '../models/QueryExecutor'
 import { FirebaseAdaptorDatabase, FirebaseAdaptorReference } from '../utils'
-import { IEntity } from './IEntity'
 import { Query } from './IQueryExecutor'
 
 /**

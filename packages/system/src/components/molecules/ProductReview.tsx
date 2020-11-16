@@ -1,5 +1,5 @@
+import { ProductReviewResource } from '@flex-development/types'
 import { useMutatedProps } from '@system/hooks'
-import { ProductReviewResource } from '@system/types'
 import React, { FC } from 'react'
 import { Box, BoxProps, Column, Image, Link, Paragraph } from '../atoms'
 

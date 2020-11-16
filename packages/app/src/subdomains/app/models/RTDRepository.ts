@@ -1,9 +1,9 @@
 import createError from '@app/subdomains/app/utils/createError'
+import { IEntity } from '@flex-development/types'
 import { ClassType, transformAndValidate } from 'class-transformer-validator'
 import { getFromContainer } from 'class-validator'
 import { isEmpty, merge, omit } from 'lodash'
 import {
-  IEntity,
   IRTDRepository,
   Query,
   RTDRepoCreateEntity,

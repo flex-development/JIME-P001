@@ -1,5 +1,6 @@
+import { Booleanish } from '@flex-development/types'
 import { useMutatedProps } from '@system/hooks'
-import { Booleanish, MutatedProps } from '@system/types'
+import { MutatedProps } from '@system/types'
 import React, {
   forwardRef,
   ForwardRefExoticComponent as FREC,

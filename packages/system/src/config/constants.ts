@@ -3,7 +3,7 @@ import {
   GridBreakpoint,
   SpacerPrefix,
   ThemeColor
-} from '@system/types'
+} from '@flex-development/types'
 
 /**
  * @file Design System Constants

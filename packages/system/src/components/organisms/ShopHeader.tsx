@@ -1,5 +1,6 @@
+import { ANYTHING } from '@flex-development/types'
 import { useMutatedProps } from '@system/hooks'
-import { ANYTHING, EventHandlers, MutatedProps } from '@system/types'
+import { EventHandlers, MutatedProps } from '@system/types'
 import React, { FC } from 'react'
 import { Button, Column, Header, Link, LinkProps, Span } from '../atoms'
 import { SearchBar, SearchBarProps } from '../molecules'

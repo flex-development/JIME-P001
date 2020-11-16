@@ -1,9 +1,10 @@
+import { ProductResource } from '@flex-development/types'
 import { useMutatedProps } from '@system/hooks'
-import { ProductResource } from '@system/types'
 import { getProductCardProps } from '@system/utils'
 import React, { FC } from 'react'
 import { Column, Row, RowProps } from '../atoms'
 import { ProductCard } from '../molecules'
+
 /**
  * @file Product layout component
  * @module components/organisms/ProductGrid

@@ -3,6 +3,6 @@
  * @module subdomains/sales/models
  */
 
-export * from './ProductReviewCreateRequest'
+export * from './Review'
 
 /* eslint-disable prettier/prettier */

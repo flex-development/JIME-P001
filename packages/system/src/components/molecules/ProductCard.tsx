@@ -1,5 +1,6 @@
+import { ProductResource } from '@flex-development/types'
 import { useMutatedProps, useProductVariants } from '@system/hooks'
-import { EventHandlers, ProductResource } from '@system/types'
+import { EventHandlers } from '@system/types'
 import React, { FC, useEffect, useState } from 'react'
 import useBoolean from 'react-hanger/array/useBoolean'
 import {

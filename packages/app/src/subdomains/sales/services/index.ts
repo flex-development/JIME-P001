@@ -4,7 +4,7 @@
  */
 
 export { default as CollectionService } from './CollectionService'
-export { default as ProductReviewService } from './ProductReviewService'
 export { default as ProductService } from './ProductService'
+export { default as ReviewService } from './ReviewService'
 
 /* eslint-disable prettier/prettier */

@@ -1,4 +1,4 @@
-import { IEntity } from '@app/subdomains/app/interfaces/IEntity'
+import { IEntity } from '@flex-development/types'
 
 /**
  * @file Domain Object Interfaces - CMS Entity

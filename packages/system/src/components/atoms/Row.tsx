@@ -1,10 +1,10 @@
+import { ResponsiveUtility, RowColumns, Spacer } from '@flex-development/types'
 import {
   useFlexbox,
   useMutatedProps,
   useRowColumns,
   useSpacers
 } from '@system/hooks'
-import { ResponsiveUtility, RowColumns, Spacer } from '@system/types'
 import { isObject } from 'lodash'
 import React, {
   forwardRef,

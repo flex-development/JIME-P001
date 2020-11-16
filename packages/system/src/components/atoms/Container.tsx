@@ -1,5 +1,6 @@
+import { GridBreakpoint } from '@flex-development/types'
 import { useMutatedProps } from '@system/hooks'
-import { GridBreakpoint, MutatedProps } from '@system/types'
+import { MutatedProps } from '@system/types'
 import React, {
   forwardRef,
   ForwardRefExoticComponent as FREC,

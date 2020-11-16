@@ -1,5 +1,6 @@
+import { ButtonVariant, ThemeColor } from '@flex-development/types'
 import { useIcon, useMutatedProps } from '@system/hooks'
-import { ButtonVariant, MutatedProps, ThemeColor } from '@system/types'
+import { MutatedProps } from '@system/types'
 import React, {
   forwardRef,
   ForwardRefExoticComponent as FREC,

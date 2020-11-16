@@ -1,5 +1,5 @@
+import { IEntity } from '@flex-development/types'
 import { IsString, MaxDate } from 'class-validator'
-import { IEntity } from '../interfaces/IEntity'
 
 /**
  * @file Subdomain Models - Entity Base

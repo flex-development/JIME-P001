@@ -1,5 +1,6 @@
+import { ANYTHING } from '@flex-development/types'
 import { useMutatedProps } from '@system/hooks'
-import { ANYTHING, EventHandlers } from '@system/types'
+import { EventHandlers } from '@system/types'
 import { uuid } from '@system/utils'
 import React, { FC } from 'react'
 import useNumber from 'react-hanger/array/useNumber'

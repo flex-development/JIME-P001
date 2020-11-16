@@ -1,5 +1,6 @@
+import { NullishString } from '@flex-development/types'
 import { useMutatedProps } from '@system/hooks'
-import { MutatedVoidElementProps, NullishString } from '@system/types'
+import { MutatedVoidElementProps } from '@system/types'
 import { isEmpty, omit } from 'lodash'
 import React, {
   forwardRef,

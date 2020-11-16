@@ -1,11 +1,10 @@
-import { useMutatedProps } from '@system/hooks'
 import {
   ANYTHING,
-  EventHandlers,
   MusicKitMediaItem,
-  MusicKitPlaybackState,
-  MutatedProps
-} from '@system/types'
+  MusicKitPlaybackState
+} from '@flex-development/types'
+import { useMutatedProps } from '@system/hooks'
+import { EventHandlers, MutatedProps } from '@system/types'
 import React, { FC } from 'react'
 import {
   Button,

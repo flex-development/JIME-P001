@@ -1,5 +1,6 @@
+import { ProductResource } from '@flex-development/types'
 import { useMutatedProps } from '@system/hooks'
-import { MutatedProps, ProductResource, TC } from '@system/types'
+import { MutatedProps, TC } from '@system/types'
 import React from 'react'
 import { Heading, Main, Paragraph, Section } from '../atoms'
 import { ProductReview, ProductReviewProps } from '../molecules'

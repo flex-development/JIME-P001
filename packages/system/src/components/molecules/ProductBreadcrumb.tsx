@@ -1,5 +1,8 @@
+import {
+  ProductResource,
+  ProductVariantResource
+} from '@flex-development/types'
 import { useMutatedProps } from '@system/hooks'
-import { ProductResource, ProductVariantResource } from '@system/types'
 import React, { FC } from 'react'
 import {
   FlexBox,

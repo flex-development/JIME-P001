@@ -1,4 +1,4 @@
-import { IEntity } from '@app/subdomains/app'
+import { IEntity } from '@flex-development/types'
 
 /**
  * @file Subdomain Interfaces - Playlist Settings

@@ -1,9 +1,6 @@
+import { ButtonVariant, FormControlSize } from '@flex-development/types'
 import { useIcon, useMutatedProps } from '@system/hooks'
-import {
-  ButtonVariant,
-  FormControlSize,
-  MutatedFormControlProps
-} from '@system/types'
+import { MutatedFormControlProps } from '@system/types'
 import React, {
   forwardRef,
   ForwardRefExoticComponent as FREC,

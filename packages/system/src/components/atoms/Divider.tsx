@@ -1,5 +1,6 @@
+import { ThemeColor } from '@flex-development/types'
 import { useMutatedProps } from '@system/hooks'
-import { MutatedVoidElementProps, ThemeColor } from '@system/types'
+import { MutatedVoidElementProps } from '@system/types'
 import { omit } from 'lodash'
 import React, {
   forwardRef,

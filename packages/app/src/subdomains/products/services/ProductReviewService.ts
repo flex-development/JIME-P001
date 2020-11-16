@@ -2,17 +2,24 @@ import { axiosStamped } from '@app/config/axios'
 import { QEData, Query } from '@app/subdomains/app/interfaces'
 import { QueryExecutor } from '@app/subdomains/app/models'
 import { createError, Logger } from '@app/subdomains/app/utils'
+import { ICustomerService } from '@app/subdomains/customers/interfaces'
+import { CustomerService } from '@app/subdomains/customers/services'
 import {
   ProductResource,
-  ProductReviewResource as ReviewResource,
-  ProductReviewResourceInput as ReviewResourceInput
+  ProductReviewResource as ReviewResource
 } from '@flex-development/kustomzdesign/types'
+import { transformAndValidate } from 'class-transformer-validator'
+import { pick } from 'lodash'
 import qs from 'qs'
+import { ProductService } from '.'
+import { IProductService } from '../interfaces'
 import {
   GetReviews,
+  IProductReviewCreateRequest,
   IProductReviewService,
   ProductReviewQuery
 } from '../interfaces/IProductReviewService'
+import { ProductReviewCreateRequest } from '../models'
 
 /**
  * @file Subdomain Services - Product Reviews
@@ -25,6 +32,8 @@ export default class ProductReviewService
   implements IProductReviewService {
   api_key_private: string
   api_key_public: string
+  customers: ICustomerService
+  products: IProductService
   store_hash: string
 
   /**
@@ -36,23 +45,18 @@ export default class ProductReviewService
     this.api_key_private = process.env.SHOPIFY_STAMPED_API_KEY_PRIVATE || ''
     this.api_key_public = process.env.SHOPIFY_STAMPED_API_KEY_PUBLIC || ''
     this.store_hash = process.env.SHOPIFY_STAMPED_STORE_HASH || ''
+
+    this.customers = new CustomerService()
+    this.products = new ProductService()
   }
 
   /**
    * Creates a new product review.
    *
-   * @todo Check if {@param data.email} belongs to a previous customer
-   * @todo Make sure product and product variant exist before submitting review
-   *
    * @param data - Product review input data
-   * @param data.author - Name of customer submitting review
    * @param data.email - Email of customer submitting review
-   * @param data.location - Location of customer submitting review
    * @param data.productId - ID of product being reviewed
-   * @param data.productImageUrl - Image URL of product variant being reviewed
-   * @param data.productName - Name of product being reviewed
    * @param data.productSKU - SKU of product variant being reviewed
-   * @param data.productUrl - Link to product variant
    * @param data.reviewMessage - Review body
    * @param data.reviewRating - Product rating, a value 1 through 5
    * @param data.reviewRecommendProduct - True if customer would recommend the
@@ -60,12 +64,59 @@ export default class ProductReviewService
    * @param data.reviewSource - Source of review
    * @param data.reviewTitle - Title of review
    * @returns Product review resource
+   * @throws {FeathersErrorJSON}
    */
-  async create(data: ReviewResourceInput): Promise<ReviewResource> {
+  async create(data: IProductReviewCreateRequest): Promise<ReviewResource> {
+    const { email, productId, productSKU } = data
+
+    // Make sure customer exists
+    const customer = await this.customers.getByEmail(email)
+
+    // Make sure product exists
+    const product = await this.products.get(`${productId}`)
+
+    // Get product variant
+    const variant = product.variants.find(v => v.sku === productSKU)
+
+    if (!variant) {
+      const data = { errors: { productSKU }, product }
+      const message = `Product variant with sku "${productSKU}" does not exist.`
+      const error = createError(message, data, 404)
+
+      Logger.error({ ProductReviewService: error })
+      throw error
+    }
+
+    // Get products url
+    const products_base_url = `${process.env.SITE_URL}/products`
+
+    // Get customer review input
+    const review_input = pick(data, [
+      'reviewMessage',
+      'reviewRating',
+      'reviewRecommendProduct',
+      'reviewSource',
+      'reviewTitle'
+    ])
+
+    // Validate request data
+    data = await transformAndValidate(ProductReviewCreateRequest, {
+      ...review_input,
+      author: `${customer.first_name} ${customer.last_name}`,
+      email: customer.email,
+      location: customer.default_address.country_name,
+      productId: product.id,
+      productImageUrl: variant.image.src,
+      productName: product.title,
+      productSKU: variant.sku,
+      productUrl: `${products_base_url}/${product.handle}?style=${productSKU}`
+    })
+
     return await axiosStamped<ReviewResource>({
       data: qs.stringify({ ...data, source: 'api' }),
       method: 'post',
-      url: `/reviews2?apiKey=${this.api_key_public}&sId=${this.store_hash}`
+      params: { apiKey: this.api_key_public, sId: this.store_hash },
+      url: `/reviews2`
     })
   }
 

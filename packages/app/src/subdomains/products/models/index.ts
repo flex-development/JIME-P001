@@ -3,6 +3,6 @@
  * @module subdomains/products/models
  */
 
-export default {}
+export * from './ProductReviewCreateRequest'
 
 /* eslint-disable prettier/prettier */

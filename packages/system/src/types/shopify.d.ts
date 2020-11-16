@@ -43,21 +43,6 @@ export type ProductResource = {
 }
 
 /**
- * Represents a different version of a product, such as differing sizes or
- * differing colors. 
- *
- * @see https://shopify.dev/docs/storefront-api/reference/object/productvariant
- */
-export type ProductVariantResource = {
-  available: boolean
-  id: string
-  image: ImageResource
-  price: string
-  sku: string
-  title: string
-}
-
-/**
  * Product Review resource from Stamped Shopify App.
  * 
  * The fields defined are the ones used in this project.
@@ -75,7 +60,7 @@ export type ProductReviewResource = {
   productImageUrl: string
   productTitle: string
   productUrl: string
-  rating: number
+  rating: 1 | 2 | 3 | 4 | 5
   title: string
 }
 
@@ -98,4 +83,19 @@ export type ProductReviewResourceInput = {
   reviewRecommendProduct: boolean
   reviewSource?: string
   reviewTitle: ProductReviewResource['title']
+}
+
+/**
+ * Represents a different version of a product, such as differing sizes or
+ * differing colors. 
+ *
+ * @see https://shopify.dev/docs/storefront-api/reference/object/productvariant
+ */
+export type ProductVariantResource = {
+  available: boolean
+  id: string
+  image: ImageResource
+  price: string
+  sku: string
+  title: string
 }

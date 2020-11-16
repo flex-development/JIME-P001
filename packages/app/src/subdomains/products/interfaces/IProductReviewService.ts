@@ -1,14 +1,11 @@
-import {
-  IQueryExecutor as IQE,
-  OneOrMany,
-  QEData,
-  Query
-} from '@app/subdomains/app'
+import { IQueryExecutor as IQE, QEData, Query } from '@app/subdomains/app'
+import { ICustomerService } from '@app/subdomains/customers/interfaces'
 import {
   ProductResource,
   ProductReviewResource,
   ProductReviewResourceInput
 } from '@flex-development/kustomzdesign/types'
+import { IProductService } from './IProductService'
 
 /**
  * @file Subdomain Interfaces - Product Review Service
@@ -18,9 +15,11 @@ import {
 export interface IProductReviewService extends IQE<ProductReviewResource> {
   api_key_private: string
   api_key_public: string
+  customers: ICustomerService
+  products: IProductService
   store_hash: string
 
-  create(data: ProductReviewResourceInput): Promise<ProductReviewResource>
+  create(data: IProductReviewCreateRequest): Promise<ProductReviewResource>
   find(query?: ProductReviewQuery): Promise<QEData<ProductReviewResource>>
   findByProductId(
     id: ProductResource['id']
@@ -56,23 +55,20 @@ export type GetReviewsSummary = {
 }
 
 /**
+ * Object representing a product review creation request.
+ */
+export interface IProductReviewCreateRequest {
+  email: ProductReviewResourceInput['email']
+  productId: ProductReviewResourceInput['productId']
+  productSKU: ProductReviewResourceInput['productSKU']
+  reviewMessage: ProductReviewResourceInput['reviewMessage']
+  reviewRating: ProductReviewResourceInput['reviewRating']
+  reviewRecommendProduct: ProductReviewResourceInput['reviewRecommendProduct']
+  reviewSource?: ProductReviewResourceInput['reviewSource']
+  reviewTitle: ProductReviewResourceInput['reviewTitle']
+}
+
+/**
  * Object representing a product review query.
  */
 export type ProductReviewQuery = Query<ProductReviewResource>
-
-/**
- * Object representing product review search parameters.
- */
-export type ProductReviewSearchParams = {
-  author?: OneOrMany<ProductReviewResource['author']>
-  email?: OneOrMany<ProductReviewResource['email']>
-  id?: OneOrMany<ProductReviewResource['id']>
-  productHandle?: OneOrMany<ProductReviewResource['productHandle']>
-  productId?: OneOrMany<ProductReviewResource['productId']>
-  productImageUrl?: OneOrMany<ProductReviewResource['productImageUrl']>
-  productTitle?: OneOrMany<ProductReviewResource['productTitle']>
-  productUrl?: OneOrMany<ProductReviewResource['productUrl']>
-  published?: OneOrMany<ProductReviewResource['isPublishedShopify']>
-  rating?: OneOrMany<ProductReviewResource['rating']>
-  title?: OneOrMany<ProductReviewResource['title']>
-}

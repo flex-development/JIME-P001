@@ -1,9 +1,14 @@
-import { IPageProps, PC, ServerSidePageProps } from '@app/subdomains/app'
+import {
+  IPageProps,
+  PC,
+  ServerSidePageProps,
+  SortOrder
+} from '@app/subdomains/app'
 import { CustomerService } from '@app/subdomains/customers'
 import {
   CollectionService,
-
-  ProductReviewService, ProductService
+  ProductReviewService,
+  ProductService
 } from '@app/subdomains/sales'
 import { GetServerSidePropsContext } from 'next'
 import { getSession } from 'next-auth/client'
@@ -229,8 +234,12 @@ export const getServerSideProps: ServerSidePageProps = async (
       page: {
         collections: await Collections.find(),
         customers: await Customers.find(),
-        products: await Products.find(),
-        reviews: await ProductReviews.find()
+        products: await Products.find({
+          $sort: { handle: SortOrder.ASCENDING }
+        }),
+        reviews: await ProductReviews.find({
+          $sort: { id: SortOrder.ASCENDING }
+        })
       },
       session
     }

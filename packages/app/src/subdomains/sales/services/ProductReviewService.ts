@@ -105,7 +105,7 @@ export default class ProductReviewService
     // Validate request data
     data = await transformAndValidate(ProductReviewCreateRequest, {
       ...review_input,
-      author: `${customer.first_name} ${customer.last_name}`,
+      author: customer.default_address.name,
       email: customer.email,
       location: customer.default_address.country_name,
       productId: product.product_id,

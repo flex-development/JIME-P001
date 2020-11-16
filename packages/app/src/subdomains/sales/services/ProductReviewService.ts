@@ -73,13 +73,17 @@ export default class ProductReviewService
     const customer = await this.customers.getByEmail(email)
 
     // Make sure product exists
-    const product = await this.products.get(productId)
+    const product = await this.products.get(JSON.parse(productId))
 
     // Get product variant
     const variant = product.variants.find(v => v.sku === productSKU)
 
     if (!variant) {
-      const data = { errors: { productSKU }, product }
+      const data = {
+        errors: { productSKU },
+        product: pick(product, ['product_id', 'variants'])
+      }
+
       const message = `Product variant with sku "${productSKU}" does not exist.`
       const error = createError(message, data, 404)
 
@@ -91,7 +95,8 @@ export default class ProductReviewService
     const variant_img = product.images.find(img => img.id === variant.image_id)
 
     // Get base products url
-    const products_base_url = `${process.env.SITE_URL}/products`
+    const site_url = process.env.SITE_URL || 'http://localhost:3001'
+    const products_base_url = `${site_url}/products`
 
     // Get customer review input
     const review_input = pick(data, [
@@ -102,24 +107,33 @@ export default class ProductReviewService
       'reviewTitle'
     ])
 
-    // Validate request data
-    data = await transformAndValidate(ProductReviewCreateRequest, {
+    data = {
       ...review_input,
       author: customer.default_address.name,
       email: customer.email,
       location: customer.default_address.country_name,
-      productId: product.product_id,
+      productId: `${product.product_id}`,
       productImageUrl: variant_img?.src ?? '',
       productName: product.title,
       productSKU: variant.sku,
-      productUrl: `${products_base_url}/${product.handle}?style=${productSKU}`
-    })
+      productUrl: `${products_base_url}/${product.handle}?style=${productSKU}`,
+      reviewSource: 'website'
+    } as typeof data
+
+    try {
+      data = await transformAndValidate(ProductReviewCreateRequest, data)
+    } catch (errors) {
+      const error = createError('Invalid request schema', { data, errors }, 400)
+
+      Logger.error({ ProductReviewService: error })
+      throw error
+    }
 
     return await axiosStamped<ReviewResource>({
-      data: qs.stringify({ ...data, source: 'api' }),
+      data: qs.stringify(data),
       method: 'post',
       params: { apiKey: this.api_key_public, sId: this.store_hash },
-      url: `/reviews2`
+      url: '/reviews2'
     })
   }
 

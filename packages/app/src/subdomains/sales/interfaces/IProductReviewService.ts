@@ -1,7 +1,6 @@
 import { IQueryExecutor as IQE, QEData, Query } from '@app/subdomains/app'
 import { ICustomerService } from '@app/subdomains/customers/interfaces'
 import {
-  CreateProductReviewRequest,
   ProductResource,
   ProductReviewResource
 } from '@flex-development/kustomzdesign/types'
@@ -58,14 +57,14 @@ export type GetReviewsSummary = {
  * Object representing a product review creation request.
  */
 export interface IProductReviewCreateRequest {
-  email: CreateProductReviewRequest['email']
-  productId: CreateProductReviewRequest['productId']
-  productSKU: CreateProductReviewRequest['productSKU']
-  reviewMessage: CreateProductReviewRequest['reviewMessage']
-  reviewRating: CreateProductReviewRequest['reviewRating']
-  reviewRecommendProduct: CreateProductReviewRequest['reviewRecommendProduct']
-  reviewSource?: CreateProductReviewRequest['reviewSource']
-  reviewTitle: CreateProductReviewRequest['reviewTitle']
+  email: string
+  productId: string
+  productSKU: string
+  reviewMessage: string
+  reviewRating: '1' | '2' | '3' | '4' | '5'
+  reviewRecommendProduct: 'false' | 'true'
+  reviewSource?: string
+  reviewTitle: string
 }
 
 /**

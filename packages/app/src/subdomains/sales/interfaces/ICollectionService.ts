@@ -3,7 +3,7 @@ import { ICollectionListing } from 'shopify-api-node'
 
 /**
  * @file Subdomain Interfaces - Collection Service
- * @module subdomains/products/interfaces/ICollectionService
+ * @module subdomains/sales/interfaces/ICollectionService
  */
 
 export interface ICollectionService extends IQueryExecutor<ICollectionListing> {

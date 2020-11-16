@@ -1,6 +1,6 @@
 /**
- * @file Subdomain Models - Products
- * @module subdomains/products/models
+ * @file Subdomain Models - Sales Channels
+ * @module subdomains/sales/models
  */
 
 export * from './ProductReviewCreateRequest'

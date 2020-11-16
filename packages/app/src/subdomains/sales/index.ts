@@ -1,6 +1,7 @@
 /**
- * @file Subdomain Entry Point - Products
- * @module subdomans/products
+ * @file Subdomain Entry Point - Sales Channels
+ * @module subdomains/sales
+ * @see https://shopify.dev/docs/admin-api/rest/reference/sales-channels
  */
 
 export * from './hooks'

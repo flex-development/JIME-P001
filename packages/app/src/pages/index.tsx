@@ -4,7 +4,7 @@ import {
   CollectionService,
 
   ProductReviewService, ProductService
-} from '@app/subdomains/products'
+} from '@app/subdomains/sales'
 import { GetServerSidePropsContext } from 'next'
 import { getSession } from 'next-auth/client'
 import Head from 'next/head'

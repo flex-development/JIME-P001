@@ -1,6 +1,6 @@
 /**
  * @file Subdomain Entry Point - Config
- * @module subdomans/config
+ * @module subdomains/config
  */
 
 export * from './axios'

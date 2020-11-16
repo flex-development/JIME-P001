@@ -1,6 +1,6 @@
 /**
  * @file Subdomain Hooks
- * @module subdomains/checkouts/hooks
+ * @module subdomains/sales/hooks
  */
 
 export default {}

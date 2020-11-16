@@ -23,7 +23,7 @@ import { ProductReviewCreateRequest } from '../models'
 
 /**
  * @file Subdomain Services - Product Reviews
- * @module subdomains/products/services/ProductReviewService
+ * @module subdomains/sales/services/ProductReviewService
  * @see https://developers.stamped.io/#da27f990-cabd-4882-864a-7b8f9dd55832
  */
 

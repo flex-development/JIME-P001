@@ -1,6 +1,6 @@
 /**
- * @file Subdomain Interfaces - Products
- * @module subdomains/products/interfaces
+ * @file Subdomain Interfaces - Sales Channels
+ * @module subdomains/sales/interfaces
  */
 
 export * from './ICollectionService'

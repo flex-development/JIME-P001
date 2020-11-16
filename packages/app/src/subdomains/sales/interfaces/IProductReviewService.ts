@@ -9,7 +9,7 @@ import { IProductService } from './IProductService'
 
 /**
  * @file Subdomain Interfaces - Product Review Service
- * @module subdomains/products/interfaces/IProductReviewService
+ * @module subdomains/sales/interfaces/IProductReviewService
  */
 
 export interface IProductReviewService extends IQE<ProductReviewResource> {

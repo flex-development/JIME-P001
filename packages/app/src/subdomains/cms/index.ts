@@ -1,6 +1,7 @@
 /**
  * @file Subdomain Entry Point - CMS
- * @module subdomans/cms
+ * @module subdomains/cms
+ * @see https://tina.io/docs/
  */
 
 export * from './config'

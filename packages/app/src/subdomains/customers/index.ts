@@ -1,6 +1,7 @@
 /**
  * @file Subdomain Entry Point - Customers
- * @module subdomans/customers
+ * @module subdomains/customers
+ * @see https://shopify.dev/docs/admin-api/rest/reference/customers
  */
 
 export * from './hooks'

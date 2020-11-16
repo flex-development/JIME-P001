@@ -1,6 +1,7 @@
 /**
  * @file Subdomain Entry Point - Playlists
- * @module subdomans/playlists
+ * @module subdomains/playlists
+ * @see https://developer.apple.com/documentation/musickitjs/
  */
 
 export * from './hooks'

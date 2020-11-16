@@ -13,7 +13,7 @@ import { IProductReviewCreateRequest } from '../interfaces'
 
 /**
  * @file Subdomain Models - Product Review Create Request
- * @module subdomains/products/models/ProductReviewCreateRequest
+ * @module subdomains/sales/models/ProductReviewCreateRequest
  */
 
 export class ProductReviewCreateRequest implements IProductReviewCreateRequest {

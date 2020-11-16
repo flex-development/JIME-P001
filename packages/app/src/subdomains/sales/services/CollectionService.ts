@@ -11,8 +11,8 @@ import {
 } from '../interfaces/ICollectionService'
 
 /**
- * @file Subdomain Services - Collections
- * @module subdomains/products/services/CollectionService
+ * @file Subdomain Services - Collection Listings
+ * @module subdomains/sales/services/CollectionService
  */
 
 export default class CollectionService

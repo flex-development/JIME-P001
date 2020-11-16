@@ -1,13 +1,17 @@
 import { IQueryExecutor, QEData, Query } from '@app/subdomains/app'
-import { IProductListing } from 'shopify-api-node'
+import { ICollectionListing, IProductListing } from 'shopify-api-node'
 
 /**
  * @file Subdomain Interfaces - Product Service
- * @module subdomains/products/interfaces/IProductService
+ * @module subdomains/sales/interfaces/IProductService
  */
 
 export interface IProductService extends IQueryExecutor<IProductListing> {
   find(query?: ProductQuery): Promise<QEData<IProductListing>>
+  findByCollection(
+    collection_id: ICollectionListing['collection_id'],
+    query?: ProductQuery
+  ): Promise<QEData<IProductListing>>
   get(id: IProductListing['product_id']): Promise<IProductListing>
   getByHandle(handle: IProductListing['handle']): Promise<IProductListing>
 }

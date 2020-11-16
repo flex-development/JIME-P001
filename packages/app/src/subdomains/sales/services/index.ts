@@ -1,6 +1,6 @@
 /**
- * @file Subdomain Services - Products
- * @module subdomains/products/services
+ * @file Subdomain Services - Sales Channels
+ * @module subdomains/sales/services
  */
 
 export { default as CollectionService } from './CollectionService'

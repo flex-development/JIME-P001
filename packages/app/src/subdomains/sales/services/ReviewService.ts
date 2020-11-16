@@ -83,7 +83,6 @@ export default class ReviewService
     return await super.create({
       ...rest,
       customer_id: customer.id,
-      customer_name: customer.default_address.name,
       product_handle: product.handle,
       product_id,
       product_image_url: variant_img?.src ?? '',

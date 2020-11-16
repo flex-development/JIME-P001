@@ -1,5 +1,5 @@
 import { uuid } from '@flex-development/kustomzdesign'
-import { AnyObject, NullishString } from '@flex-development/kustomzdesign/types'
+import { AnyObject, NullishString } from '@flex-development/types'
 import NextHead from 'next/head'
 import React, { FC } from 'react'
 

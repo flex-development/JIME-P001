@@ -1,5 +1,8 @@
 import colors from '@system/config/colors'
-import { ColorItemProps, StorybookBackgroundColorConfig } from '@system/types'
+import {
+  ColorItemProps,
+  StorybookBackgroundColorConfig
+} from '@system/types/storybook'
 import { get, isString } from 'lodash'
 
 /**

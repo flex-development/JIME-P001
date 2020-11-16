@@ -1,5 +1,5 @@
 import { GitHubSession } from '@app/subdomains/cms/interfaces/IGitHubService'
-import { AnyObject } from '@flex-development/kustomzdesign/types'
+import { AnyObject } from '@flex-development/types'
 
 /**
  * @file Subdomain Interfaces - Next.js Page Props

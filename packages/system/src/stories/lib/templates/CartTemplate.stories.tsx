@@ -1,5 +1,5 @@
 import { CartTemplate, CartTemplateProps } from '@system/components'
-import { StoryFN } from '@system/types'
+import { StoryFN } from '@system/types/storybook'
 import items from '@system/__mocks__/items.mock.json'
 import React from 'react'
 

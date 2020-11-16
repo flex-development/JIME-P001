@@ -1,5 +1,5 @@
 import { CollectionTemplate, CollectionTemplateProps } from '@system/components'
-import { StoryFN } from '@system/types'
+import { StoryFN } from '@system/types/storybook'
 import collections from '@system/__mocks__/collections.mock.json'
 import React from 'react'
 

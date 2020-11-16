@@ -2,8 +2,8 @@ import { IProductListing } from 'shopify-api-node'
 import { NullishString } from './utils'
 
 /**
- * @file Shopify Type Definitons
- * @module types/shopify
+ * @file Type Declarations - Shopify
+ * @module lib/shopify
  */
 
 /**
@@ -20,7 +20,7 @@ export type CollectionResource = {
 
 /**
  * Fields needed to create a product review using the Stamped API.
- * 
+ *
  * @see https://developers.stamped.io/#d06415c3-5eae-46b1-a8db-c1016fd09902
  */
 export type CreateProductReviewRequest = {
@@ -41,7 +41,7 @@ export type CreateProductReviewRequest = {
 
 /**
  * Represents an image resource.
- * 
+ *
  * @see https://shopify.dev/docs/storefront-api/reference/object/image
  */
 export type ImageResource = {
@@ -66,9 +66,9 @@ export type ProductResource = {
 
 /**
  * Product Review resource from Stamped Shopify App.
- * 
+ *
  * The fields defined are the ones used in this project.
- * 
+ *
  * @see https://developers.stamped.io/#1e9fc214-5b59-40a0-9a7b-1030fbaef679
  */
 export type ProductReviewResource = {
@@ -88,7 +88,7 @@ export type ProductReviewResource = {
 
 /**
  * Represents a different version of a product, such as differing sizes or
- * differing colors. 
+ * differing colors.
  *
  * @see https://shopify.dev/docs/storefront-api/reference/object/productvariant
  */

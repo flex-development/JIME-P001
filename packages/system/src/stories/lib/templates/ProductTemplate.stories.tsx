@@ -1,5 +1,6 @@
+import { ProductResource } from '@flex-development/types'
 import { ProductTemplate, ProductTemplateProps } from '@system/components'
-import { ProductResource, StoryFN } from '@system/types'
+import { StoryFN } from '@system/types/storybook'
 import products from '@system/__mocks__/products.mock.json'
 import reviews from '@system/__mocks__/reviews.mock.json'
 import React from 'react'

@@ -80,7 +80,6 @@
     "@types/storybook__react": "^5.2.1",
     "@whitespace/storybook-addon-html": "^2.0.1",
     "babel-loader": "^8.1.0",
-    "musickit-typescript": "^1.2.4",
     "next": "^9.5.1",
     "postcss": "^7.0.32",
     "postcss-flexbugs-fixes": "^4.2.1",
@@ -99,10 +98,9 @@
     "url-loader": "^4.1.0"
   },
   "peerDependencies": {
+    "@flex-development/types": "*",
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
-    "@types/shopify-buy": "^2.10.3",
-    "musickit-typescript": "^1.2.4",
     "next": "^9.5.1",
     "postcss": "^7.0.32",
     "postcss-flexbugs-fixes": "^4.2.1",
@@ -112,9 +110,7 @@
     "react-dom": "^16.13.1",
     "regenerator-runtime": "^0.13.7",
     "sass": "^1.26.10",
-    "sass-loader": "^9.0.3",
-    "shopify-api-node": "^3.4.4",
-    "shopify-buy": "2.11.0"
+    "sass-loader": "^9.0.3"
   },
   "browserslist": {
     "production": [

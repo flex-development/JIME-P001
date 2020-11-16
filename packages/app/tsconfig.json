@@ -36,7 +36,11 @@
     "noEmit": true,
     "module": "esnext",
     "strictPropertyInitialization": false,
-    "target": "esnext"
+    "target": "esnext",
+    "typeRoots": [
+      "../../node_modules/musickit-typescript",
+      "../../node_modules/@types"
+    ]
   },
   "exclude": ["node_modules"],
   "extends": "../../tsconfig.json",

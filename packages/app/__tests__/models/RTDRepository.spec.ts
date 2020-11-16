@@ -3,10 +3,7 @@ import {
   RTDRepoUpdateEntityBatch,
   SortOrder
 } from '@app/subdomains/app'
-import {
-  AnyObject,
-  NullishPrimitive
-} from '@flex-development/kustomzdesign/types'
+import { AnyObject, NullishPrimitive } from '@flex-development/types'
 import { get, gt, gte, isEqual, lt, lte, orderBy } from 'lodash'
 import MockCarsRepoRoot from '../__mocks__/data/cars.mock.json'
 import firebaseTestApp from '../__mocks__/firebaseTestApp'

@@ -1,6 +1,6 @@
 import { Input, InputProps } from '@system/components'
 import { form_control_size as size, input_type as type } from '@system/config'
-import { StoryFN } from '@system/types'
+import { StoryFN } from '@system/types/storybook'
 import React from 'react'
 
 /**

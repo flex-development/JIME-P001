@@ -1,5 +1,5 @@
+import { Primitive, ResponsiveUtility } from '@flex-development/types'
 import { GRID_BREAKPOINTS } from '@system/config/constants'
-import { Primitive, ResponsiveUtility } from '@system/types'
 import { isObject } from 'lodash'
 import createResponsiveUtility from './createResponsiveUtility'
 

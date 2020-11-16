@@ -1,7 +1,7 @@
 import { RTDRepository } from '@app/subdomains/app/models/RTDRepository'
 import createError from '@app/subdomains/app/utils/createError'
 import { PageTemplateProps, uuid } from '@flex-development/kustomzdesign'
-import { AnyObject } from '@flex-development/kustomzdesign/types'
+import { AnyObject } from '@flex-development/types'
 import { isEmpty } from 'lodash'
 import slugify from 'slugify'
 import { ICMSPage } from '../interfaces'

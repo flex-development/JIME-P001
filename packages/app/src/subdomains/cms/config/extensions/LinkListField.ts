@@ -1,4 +1,4 @@
-import { AnyObject } from '@flex-development/kustomzdesign/types'
+import { AnyObject } from '@flex-development/types'
 import { AnyField } from '@tinacms/forms/build/field'
 import { GroupListItemProps } from '../../utils'
 import LinkField from './LinkField'

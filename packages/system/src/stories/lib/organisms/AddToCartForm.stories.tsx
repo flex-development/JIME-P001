@@ -1,5 +1,6 @@
+import { ProductResource } from '@flex-development/types'
 import { AddToCartForm, AddToCartFormProps } from '@system/components'
-import { ProductResource, StoryFN } from '@system/types'
+import { StoryFN } from '@system/types/storybook'
 import products from '@system/__mocks__/products.mock.json'
 import React from 'react'
 

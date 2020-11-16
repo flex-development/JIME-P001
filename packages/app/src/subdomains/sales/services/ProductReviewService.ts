@@ -7,7 +7,7 @@ import { CustomerService } from '@app/subdomains/customers/services'
 import {
   ProductResource,
   ProductReviewResource as ReviewResource
-} from '@flex-development/kustomzdesign/types'
+} from '@flex-development/types'
 import { transformAndValidate } from 'class-transformer-validator'
 import { pick } from 'lodash'
 import qs from 'qs'

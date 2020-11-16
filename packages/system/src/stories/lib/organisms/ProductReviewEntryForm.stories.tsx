@@ -2,7 +2,7 @@ import {
   ProductReviewEntryForm,
   ProductReviewEntryFormProps
 } from '@system/components'
-import { StoryFN } from '@system/types'
+import { StoryFN } from '@system/types/storybook'
 import products from '@system/__mocks__/products.mock.json'
 import { omit } from 'lodash'
 import React from 'react'

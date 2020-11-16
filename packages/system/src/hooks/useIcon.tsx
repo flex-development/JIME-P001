@@ -1,5 +1,6 @@
+import { AnyObject } from '@flex-development/types'
 import { Icon, IconProps } from '@system/components'
-import { AnyObject, MutatedProps } from '@system/types'
+import { MutatedProps } from '@system/types'
 import classnames from 'classnames'
 import { isNull, isUndefined, omit } from 'lodash'
 import React, { useEffect, useState } from 'react'

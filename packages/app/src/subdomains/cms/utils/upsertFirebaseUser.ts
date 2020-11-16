@@ -1,6 +1,6 @@
 import FirebaseAdmin, { auth } from '@app/config/firebase-admin'
 import Logger from '@app/subdomains/app/utils/logger'
-import { NullishString } from '@flex-development/kustomzdesign/types'
+import { NullishString } from '@flex-development/types'
 import { isNumber } from 'lodash'
 
 /**

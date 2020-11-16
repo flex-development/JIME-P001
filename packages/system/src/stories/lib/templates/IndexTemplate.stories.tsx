@@ -1,5 +1,5 @@
 import { IndexTemplate, IndexTemplateProps } from '@system/components'
-import { StoryFN } from '@system/types'
+import { StoryFN } from '@system/types/storybook'
 import { getProductReviewProps } from '@system/utils'
 import products from '@system/__mocks__/products.mock.json'
 import reviews from '@system/__mocks__/reviews.mock.json'

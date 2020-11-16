@@ -1,5 +1,5 @@
+import { AnyObject } from '@flex-development/types'
 import { ProductReviewProps } from '@system/components'
-import { AnyObject } from '@system/types'
 import { pick } from 'lodash'
 
 /**

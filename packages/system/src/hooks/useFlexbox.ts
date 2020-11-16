@@ -1,9 +1,9 @@
+import { FlexboxUtilitiesConfig, GridBreakpoint } from '@flex-development/types'
 import {
   FLEXBOX_CONFIG_KEYS,
   FLEXBOX_PROPERTY_MAP,
   GRID_BREAKPOINTS
 } from '@system/config'
-import { FlexboxUtilitiesConfig, GridBreakpoint } from '@system/types'
 import { getResponsiveUtilities } from '@system/utils'
 import classnames from 'classnames'
 import { isBoolean, isEmpty, isNumber, isString } from 'lodash'

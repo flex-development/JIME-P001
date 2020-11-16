@@ -1,7 +1,4 @@
-import {
-  AnyObject,
-  NullishPrimitive
-} from '@flex-development/kustomzdesign/types'
+import { AnyObject, NullishPrimitive } from '@flex-development/types'
 import {
   get,
   gt,

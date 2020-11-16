@@ -1,5 +1,9 @@
+import {
+  GridBreakpoint,
+  ResponsiveUtility,
+  RowColumns
+} from '@flex-development/types'
 import { GRID_BREAKPOINTS } from '@system/config'
-import { GridBreakpoint, ResponsiveUtility, RowColumns } from '@system/types'
 import { getResponsiveUtilities } from '@system/utils'
 import classnames from 'classnames'
 import { isEmpty } from 'lodash'

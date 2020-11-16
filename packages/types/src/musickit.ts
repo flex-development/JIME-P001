@@ -1,5 +1,6 @@
 /**
- * @file MusicKitJS Type Declarations
+ * @file Type Declarations - MusicKitJS
+ * @module lib/musickit
  * @see https://github.com/wsmd/musickit-typescript
  */
 
@@ -12,7 +13,7 @@ export type MusicKitMediaItem = MusicKit.MediaItem
 export type MusicKitInstance = MusicKit.MusicKitInstance
 
 export type MusicKitPlaybackState =
-  'completed'
+  | 'completed'
   | 'ended'
   | 'loading'
   | 'none'

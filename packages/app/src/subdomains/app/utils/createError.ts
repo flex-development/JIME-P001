@@ -17,7 +17,7 @@ import {
   Unavailable,
   Unprocessable
 } from '@feathersjs/errors'
-import { AnyObject } from '@flex-development/kustomzdesign/types'
+import { AnyObject } from '@flex-development/types'
 
 /**
  * @file Creates a Feathers error

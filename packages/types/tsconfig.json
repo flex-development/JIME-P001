@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "isolatedModules": true,
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "module": "esnext",
+    "strictPropertyInitialization": false,
+    "target": "esnext",
+    "typeRoots": [
+      "../../node_modules/musickit-typescript",
+      "../../node_modules/@types"
+    ]
+  },
+  "exclude": ["node_modules"],
+  "extends": "../../tsconfig.json",
+  "include": ["src"]
+}

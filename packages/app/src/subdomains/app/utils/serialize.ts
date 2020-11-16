@@ -1,4 +1,4 @@
-import { AnyObject, Primitive } from '@flex-development/kustomzdesign/types'
+import { AnyObject, Primitive } from '@flex-development/types'
 
 /**
  * @file Serialize an object or primitive

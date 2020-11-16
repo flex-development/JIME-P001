@@ -1,4 +1,4 @@
-import { GridBreakpoint } from '@system/types'
+import { GridBreakpoint } from '@flex-development/types'
 
 /**
  * @file Responsive utility helper

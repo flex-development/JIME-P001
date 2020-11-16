@@ -2,7 +2,7 @@ import {
   IndexTemplateProps,
   PageTemplateProps
 } from '@flex-development/kustomzdesign'
-import { AnyObject } from '@flex-development/kustomzdesign/types'
+import { AnyObject } from '@flex-development/types'
 import { ICMSEntity } from './ICMSEntity'
 
 /**

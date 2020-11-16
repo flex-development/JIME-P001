@@ -1,4 +1,15 @@
 import {
+  BackgroundColor,
+  ResponsiveUtility,
+  Spacer,
+  TextColor
+} from '@flex-development/types/theme'
+import {
+  AnyObject,
+  Booleanish,
+  NullishString
+} from '@flex-development/types/utils'
+import {
   MDXProviderComponents as MDXComponents,
   MDXProviderProps
 } from '@mdx-js/react'
@@ -14,8 +25,6 @@ import {
   RefAttributes,
   UIEvent
 } from 'react'
-import { BackgroundColor, ResponsiveUtility, Spacer, TextColor } from './theme'
-import { AnyObject, Booleanish, NullishString } from './utils'
 
 /**
  * @file Type Definitions - Props

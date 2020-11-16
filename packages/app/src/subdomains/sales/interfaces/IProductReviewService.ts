@@ -1,9 +1,6 @@
 import { IQueryExecutor as IQE, QEData, Query } from '@app/subdomains/app'
 import { ICustomerService } from '@app/subdomains/customers/interfaces'
-import {
-  ProductResource,
-  ProductReviewResource
-} from '@flex-development/kustomzdesign/types'
+import { ProductResource, ProductReviewResource } from '@flex-development/types'
 import { IProductService } from './IProductService'
 
 /**

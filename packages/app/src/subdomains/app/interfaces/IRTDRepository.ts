@@ -1,4 +1,4 @@
-import { NullishPrimitive } from '@flex-development/kustomzdesign/types'
+import { NullishPrimitive } from '@flex-development/types'
 import { ClassType, transformAndValidate } from 'class-transformer-validator'
 import { QueryExecutor as QE } from '../models/QueryExecutor'
 import { FirebaseAdaptorDatabase, FirebaseAdaptorReference } from '../utils'

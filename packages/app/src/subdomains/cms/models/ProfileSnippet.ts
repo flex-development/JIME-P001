@@ -1,8 +1,5 @@
 import { Entity } from '@app/subdomains/app/models/Entity'
-import {
-  NullishNumber,
-  NullishString
-} from '@flex-development/kustomzdesign/types'
+import { NullishNumber, NullishString } from '@flex-development/types'
 import { IsNumber, IsOptional, IsString, IsUrl } from 'class-validator'
 import { IProfileSnippet } from '../interfaces'
 

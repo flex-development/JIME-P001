@@ -4,7 +4,7 @@ import {
   Image,
   ProductReview
 } from '@system/components'
-import { StoryFN } from '@system/types'
+import { StoryFN } from '@system/types/storybook'
 import { getProductReviewProps } from '@system/utils'
 import reviews from '@system/__mocks__/reviews.mock.json'
 import React from 'react'

@@ -1,8 +1,8 @@
 import { Primitive } from './utils'
 
 /**
- * @file UI Theme Type Declarations
- * @module types/theme
+ * @file Type Declarations - UI Theme
+ * @module lib/theme
  * @see https://v5.getbootstrap.com
  */
 
@@ -10,7 +10,7 @@ import { Primitive } from './utils'
  * Background colors.
  */
 export type BackgroundColor =
-  GrayscaleColor
+  | GrayscaleColor
   | SemanticColor
   | ThemeColor
   | 'gradient'
@@ -158,17 +158,12 @@ export type FormControlSize = 'sm' | 'lg'
 /**
  * Grayscale base colors.
  */
-export type GrayscaleColor =
-  | 'black'
-  | 'white'
+export type GrayscaleColor = 'black' | 'white'
 
 /**
  * Grayscale colors.
  */
-export type GrayscaleColorVariation =
-  | 'black-50'
-  | 'muted'
-  | 'white-50'
+export type GrayscaleColorVariation = 'black-50' | 'muted' | 'white-50'
 
 /**
  * Responsive breakpoints.
@@ -194,11 +189,7 @@ export type RowColumns = 'auto' | 1 | 2 | 3 | 4 | 5 | 6
 /**
  * Semantic color names.
  */
-export type SemanticColor =
-  | 'danger'
-  | 'info'
-  | 'success'
-  | 'warning'
+export type SemanticColor = 'danger' | 'info' | 'success' | 'warning'
 
 /**
  * Keys from `$spacers` map.
@@ -273,9 +264,8 @@ export type ThemeOutline =
  * Text colors.
  */
 export type TextColor =
-  GrayscaleColor
+  | GrayscaleColor
   | GrayscaleColorVariation
   | SemanticColor
   | ThemeColor
   | 'body'
-

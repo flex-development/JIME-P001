@@ -1,4 +1,4 @@
-import { ANYTHING } from '@flex-development/kustomzdesign/types'
+import { ANYTHING } from '@flex-development/types'
 import firebase from 'firebase/app'
 import { orderBy } from 'lodash'
 import {

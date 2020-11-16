@@ -1,8 +1,5 @@
 import { IEntity } from '@app/subdomains/app'
-import {
-  NullishNumber,
-  NullishString
-} from '@flex-development/kustomzdesign/types'
+import { NullishNumber, NullishString } from '@flex-development/types'
 
 /**
  * @file Subdomain Interfaces - Profile Snippet Settings

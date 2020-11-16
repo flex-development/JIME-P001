@@ -1,5 +1,5 @@
 import * as FirebaseTesting from '@firebase/rules-unit-testing'
-import { ANYTHING } from '@flex-development/kustomzdesign/types'
+import { ANYTHING } from '@flex-development/types'
 import FirebaseAdmin from 'firebase-admin'
 import Firebase from 'firebase/app'
 

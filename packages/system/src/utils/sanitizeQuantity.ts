@@ -1,4 +1,4 @@
-import { ANYTHING } from '@system/types'
+import { ANYTHING } from '@flex-development/types'
 import { isBoolean, isNumber, isString } from 'lodash'
 
 /**

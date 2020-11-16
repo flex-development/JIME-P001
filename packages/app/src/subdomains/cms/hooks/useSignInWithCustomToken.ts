@@ -1,5 +1,5 @@
 import firebase, { auth } from '@app/config/firebase'
-import { NullishString } from '@flex-development/kustomzdesign/types'
+import { NullishString } from '@flex-development/types'
 import { isString } from 'lodash'
 import { useEffect, useState } from 'react'
 

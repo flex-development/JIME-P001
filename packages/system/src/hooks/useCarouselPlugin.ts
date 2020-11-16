@@ -1,4 +1,4 @@
-import { NullishNumber } from '@system/types'
+import { NullishNumber } from '@flex-development/types'
 import { CarouselOption } from 'bootstrap'
 import CarouselPlugin from 'bootstrap/js/dist/carousel'
 import {

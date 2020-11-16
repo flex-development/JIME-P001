@@ -9,7 +9,8 @@ Next.js powered Shopify storefront
 ## Overview
 
 [Getting Started](#getting-started)  
-[Usage](#usage)
+[Usage](#usage)  
+[Contributing](docs/CONTRIBUTING.md)
 
 ## Getting Started
 

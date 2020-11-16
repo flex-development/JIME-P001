@@ -1,4 +1,4 @@
-import { NullishString } from '@flex-development/kustomzdesign/types'
+import { NullishString } from '@flex-development/types'
 import admin from 'firebase-admin'
 
 /**

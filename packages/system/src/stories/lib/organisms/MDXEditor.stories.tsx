@@ -2,7 +2,7 @@ import {
   MDXEditor,
   MDXEditorProps
 } from '@system/components/organisms/MDXEditor'
-import { StoryFN } from '@system/types'
+import { StoryFN } from '@system/types/storybook'
 import React from 'react'
 
 /**

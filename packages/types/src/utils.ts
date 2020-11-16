@@ -1,6 +1,6 @@
 /**
- * @file Utility Types
- * @module types/utils
+ * @file Type Declarations - Utilities
+ * @module lib/utils
  */
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -15,7 +15,7 @@ export type ANYTHING = any
 /**
  * Type representing any object (`{}`) value.
  */
-export type AnyObject = Record<string, Any>
+export type AnyObject = Record<string, any>
 
 /**
  * Boolean and string values representing `true` or `false`.

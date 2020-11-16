@@ -1,5 +1,5 @@
 import { database, storage } from '@app/config/firebase'
-import { AnyObject } from '@flex-development/kustomzdesign/types'
+import { AnyObject } from '@flex-development/types'
 import { MarkdownFieldPlugin } from 'react-tinacms-editor'
 import { Plugin, TinaCMSConfig } from 'tinacms'
 import { FirebaseMediaStore } from '../models/FirebaseMediaStore'

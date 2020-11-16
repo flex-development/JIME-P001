@@ -9,15 +9,33 @@
       ".read": true,
       ".write": "auth.token.collaborator === true"
     },
-    "metadata": {
-      ".read": true,
-      ".write": "auth.token.collaborator === true"
-    },
     "pages": {
       ".indexOn": [
         "id",
         "title",
         "uuid"
+      ],
+      ".read": true,
+      ".write": "auth.token.collaborator === true"
+    },
+    "reviews": {
+      ".indexOn": [
+        "customer_id",
+        "customer_name",
+        "id",
+        "product_handle",
+        "product_id",
+        "product_sku",
+        "product_title",
+        "rating",
+        "title"
+      ],
+      ".read": true,
+      ".write": true
+    },
+    "settings": {
+      ".indexOn": [
+        "id"
       ],
       ".read": true,
       ".write": "auth.token.collaborator === true"

@@ -14,7 +14,6 @@ import { IEntity } from './database'
 export interface IReview extends IEntity {
   body: string
   customer_id: ICustomer['id']
-  customer_name: ICustomer['default_address']['name']
   published: boolean
   product_handle: IProductListing['handle']
   product_id: IProductListing['product_id']
@@ -22,7 +21,7 @@ export interface IReview extends IEntity {
   product_sku: IProductVariant['sku']
   product_title: IProductListing['title']
   product_url: string
-  rating: typeof ReviewRating
+  rating: ReviewRating
   title: string
 }
 

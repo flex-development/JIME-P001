@@ -1,8 +1,10 @@
 import { FirebaseAdaptor, RTDRepository as Repo } from '@app/subdomains/app'
 import { ICMSMenu, ICMSPage } from '@app/subdomains/cms/interfaces'
+import { IReview } from 'packages/types/src'
 import MockCarsRepoRoot from './data/cars.mock.json'
 import MockMenusRepoRoot from './data/menus.mock.json'
 import MockPagesRepoRoot from './data/pages.mock.json'
+import MockReviewsRepoRoot from './data/reviews.mock.json'
 import { CarEntity } from './models/Car.model.mock'
 
 /**
@@ -13,6 +15,7 @@ import { CarEntity } from './models/Car.model.mock'
 export const CAR_REPO_TEST_PATH = 'cars'
 export const MENUS_REPO_TEST_PATH = 'menus'
 export const PAGES_REPO_TEST_PATH = 'pages'
+export const REVIEWS_REPO_TEST_PATH = 'reviews'
 
 /**
  * Returns mock cars data.
@@ -47,7 +50,7 @@ export const getMockPagesData = (): Array<ICMSPage> => {
 }
 
 /**
- * Returns mock pages data.
+ * Returns mock menus data.
  */
 export const getMockMenusData = (): Array<ICMSMenu> => {
   // Dataset is missing timestamps
@@ -58,8 +61,18 @@ export const getMockMenusData = (): Array<ICMSMenu> => {
     dataset[key] = { ...dataset[key], created_at: Repo.timestamp() }
   })
 
-  // Return array of mock cars
+  // Return array of mock menus
   return Object.values((dataset as unknown) as Record<string, ICMSMenu>)
+}
+
+/**
+ * Returns mock product reviews data.
+ */
+export const getMockReviewsData = (): Array<IReview> => {
+  const dataset = { ...MockReviewsRepoRoot }
+
+  // Return array of mock product reviews
+  return Object.values((dataset as unknown) as Record<string, IReview>)
 }
 
 /**
@@ -135,6 +148,24 @@ export const loadMenusTestData = async (
 }
 
 /**
+ * Loads the mock product reviews data into the database.
+ *
+ * @async
+ * @param app - Firebase test application
+ */
+export const loadReviewsTestData = async (
+  app: FirebaseAdaptor
+): Promise<Array<IReview>> => {
+  const dataset = { ...MockReviewsRepoRoot }
+
+  // Set data
+  await app.database().ref(REVIEWS_REPO_TEST_PATH).set(dataset)
+
+  // Return array of mock product reviews
+  return Object.values((dataset as unknown) as Record<string, IReview>)
+}
+
+/**
  * Expects each entity in {@param res} to match {@param expected}.
  *
  * @param res - Result from `find` method
@@ -184,4 +215,16 @@ export const removeMenusTestData = async (
   app: FirebaseAdaptor
 ): Promise<void> => {
   await app.database().ref(MENUS_REPO_TEST_PATH).remove()
+}
+
+/**
+ * Removes the mock product reviews data from the database.
+ *
+ * @async
+ * @param app - Firebase test application
+ */
+export const removeReviewsTestData = async (
+  app: FirebaseAdaptor
+): Promise<void> => {
+  await app.database().ref(REVIEWS_REPO_TEST_PATH).remove()
 }

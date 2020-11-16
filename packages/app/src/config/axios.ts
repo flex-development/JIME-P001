@@ -1,6 +1,7 @@
 import createError from '@app/subdomains/app/utils/createError'
 import { AnyObject, ANYTHING } from '@flex-development/kustomzdesign/types'
 import Axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios'
+import rateLimit from 'axios-rate-limit'
 import { isPlainObject, pick } from 'lodash'
 
 /**
@@ -57,17 +58,33 @@ export const handleSuccessResponse = (res: AxiosResponse): ANYTHING => {
 
 Axios.interceptors.response.use(handleSuccessResponse, handleErrorResponse)
 
+export const RateLimitedAxios = rateLimit(Axios, {
+  maxRPS: 2,
+  maxRequests: 2,
+  perMilliseconds: 1000
+})
+
 /**
  * Passes the request config to our configured Axios client. Used to properly
  * type response data when using {@link handleSuccessResponse}.
  *
  * @param config - Axios request config
+ * @param limit - If true, apply rate limit of 2 requests per second
  * @throws {FeathersError}
  */
 export async function axios<T = ANYTHING>(
-  config: AxiosRequestConfig
+  config: AxiosRequestConfig,
+  limit = false
 ): Promise<T> {
-  return ((await Axios(config)) as unknown) as Promise<T>
+  let response: ANYTHING = null
+
+  if (limit) {
+    response = await RateLimitedAxios(config)
+  } else {
+    response = await Axios(config)
+  }
+
+  return (response as unknown) as Promise<T>
 }
 
 /**
@@ -91,11 +108,13 @@ export async function axiosShopify<T = ANYTHING>(
 
   const login = `${username}:${password}@${hostname}`
 
-  return await axios<T>({
+  config = {
     ...config,
     baseURL: `https://${login}/admin/api/${version}/`,
     url: `${config.url}.json`
-  })
+  } as typeof config
+
+  return await axios<T>(config, true)
 }
 
 /**

@@ -73,7 +73,7 @@ export default class ProductReviewService
     const customer = await this.customers.getByEmail(email)
 
     // Make sure product exists
-    const product = await this.products.get(`${productId}`)
+    const product = await this.products.get(productId)
 
     // Get product variant
     const variant = product.variants.find(v => v.sku === productSKU)
@@ -87,7 +87,10 @@ export default class ProductReviewService
       throw error
     }
 
-    // Get products url
+    // Get variant image
+    const variant_img = product.images.find(img => img.id === variant.image_id)
+
+    // Get base products url
     const products_base_url = `${process.env.SITE_URL}/products`
 
     // Get customer review input
@@ -105,8 +108,8 @@ export default class ProductReviewService
       author: `${customer.first_name} ${customer.last_name}`,
       email: customer.email,
       location: customer.default_address.country_name,
-      productId: product.id,
-      productImageUrl: variant.image.src,
+      productId: product.product_id,
+      productImageUrl: variant_img?.src ?? '',
       productName: product.title,
       productSKU: variant.sku,
       productUrl: `${products_base_url}/${product.handle}?style=${productSKU}`

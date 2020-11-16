@@ -1,11 +1,14 @@
-import ShopifyBuy, { ShopifyBuyClient } from '@app/config/shopify-buy'
+import { axiosShopify } from '@app/config/axios'
 import { QEData } from '@app/subdomains/app/interfaces'
 import { QueryExecutor } from '@app/subdomains/app/models'
 import { createError, Logger } from '@app/subdomains/app/utils'
-import { ProductResource } from '@flex-development/kustomzdesign/types'
-import slugify from 'slugify'
-import { IProductService, ProductQuery } from '../interfaces/IProductService'
-import { toImageResource } from '../utils'
+import { omit } from 'lodash'
+import { IProductListing } from 'shopify-api-node'
+import {
+  IProductService,
+  ListProductsResponse,
+  ProductQuery
+} from '../interfaces/IProductService'
 
 /**
  * @file Subdomain Services - Products
@@ -13,52 +16,10 @@ import { toImageResource } from '../utils'
  */
 
 export default class ProductService
-  extends QueryExecutor<ProductResource>
+  extends QueryExecutor<IProductListing>
   implements IProductService {
-  shopify: ShopifyBuy.ProductResource
-
   /**
-   * Creates a new Product service instance.
-   */
-  constructor() {
-    super()
-    this.shopify = ShopifyBuyClient.product
-  }
-
-  /**
-   * Converts a GraphQL product object from the Shopify JS Buy SDK into a
-   * `ProductResource` object.
-   *
-   * @param product - Serialized GraphQL product object
-   * @returns Formatted product resource object
-   */
-  static toProductResource(product: ShopifyBuy.Product): ProductResource {
-    const { description, id, images, title, variants } = product
-
-    const handle = slugify(title).toLowerCase()
-
-    return {
-      description,
-      handle,
-      id: `${id}`,
-      images: images.map(img => ({
-        ...toImageResource(img),
-        alt: `${title} image`
-      })),
-      title,
-      variants: variants.map(({ available, id, image, price, title }) => ({
-        available,
-        id: `${id}`,
-        image: { ...toImageResource(image), alt: `${title} image` },
-        price,
-        sku: slugify(title.replace('$', 'S')).toLowerCase(),
-        title
-      }))
-    }
-  }
-
-  /**
-   * Returns an array of `ProductResource` objects.
+   * Returns an array of `IProductListing` objects.
    * Data can be sorted, filtered, and paginated using {@param query}.
    *
    * @async
@@ -77,15 +38,18 @@ export default class ProductService
    * @param query[foo].$lte - Matches values where value <= query.$lte
    * @param query[foo].$ne - Matches all values where value !== query.$ne
    * @param query[foo].$nin - Matches none of the values specified in an array
-   * @returns Array of Product resource objects
+   * @returns Array of product listing objects
    */
-  async find(query: ProductQuery = {}): Promise<QEData<ProductResource>> {
+  async find(query: ProductQuery = {}): Promise<QEData<IProductListing>> {
     if (!query?.$limit) query.$limit = 250
 
-    const data = await this.shopify.fetchAll(query.$limit).then(p => p)
-    const products = data.map(p => ProductService.toProductResource(p))
+    const { product_listings } = await axiosShopify<ListProductsResponse>({
+      method: 'get',
+      params: { limit: query.$limit },
+      url: 'product_listings'
+    })
 
-    return this.query(products, query)
+    return this.query(product_listings, omit(query, ['$limit']))
   }
 
   /**
@@ -95,10 +59,11 @@ export default class ProductService
    * @param id - ID of product to retrieve
    * @throws {FeathersErrorJSON}
    */
-  async get(id: string): Promise<ProductResource> {
-    const product = await this.shopify.fetch(id)
+  async get(id: IProductListing['product_id']): Promise<IProductListing> {
+    const query: ProductQuery = { product_id: { $eq: id } }
+    const products = (await this.find(query)) as Array<IProductListing>
 
-    if (!product.id) {
+    if (!products.length) {
       const data = { errors: { id } }
       const error = createError(`Product with id ${id} not found`, data, 404)
 
@@ -106,7 +71,7 @@ export default class ProductService
       throw error
     }
 
-    return ProductService.toProductResource(product)
+    return products[0]
   }
 
   /**
@@ -116,10 +81,11 @@ export default class ProductService
    * @param handle - Handle of product to retrieve
    * @throws {FeathersErrorJSON}
    */
-  async getByHandle(handle: string): Promise<ProductResource> {
-    const product = await this.shopify.fetchByHandle(handle)
+  async getByHandle(handle: string): Promise<IProductListing> {
+    const query: ProductQuery = { handle: { $eq: handle } }
+    const products = (await this.find(query)) as Array<IProductListing>
 
-    if (!product.id) {
+    if (!products.length) {
       const data = { errors: { handle } }
       const message = `Product with handle ${handle} not found`
       const error = createError(message, data, 404)
@@ -128,6 +94,6 @@ export default class ProductService
       throw error
     }
 
-    return ProductService.toProductResource(product)
+    return products[0]
   }
 }

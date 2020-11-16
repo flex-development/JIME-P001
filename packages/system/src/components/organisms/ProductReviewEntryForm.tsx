@@ -2,9 +2,9 @@ import { useMutatedProps, useProductVariants } from '@system/hooks'
 import {
   AnyObject,
   ANYTHING,
+  CreateProductReviewRequest,
   EventHandlers,
-  ProductResource,
-  ProductReviewResourceInput
+  ProductResource
 } from '@system/types'
 import { isEmpty } from 'lodash'
 import React, { FC } from 'react'
@@ -40,7 +40,7 @@ export interface ProductReviewEntryFormProps extends FormProps {
    * the `submit` button.
    */
   handleSubmit?(
-    review: Partial<ProductReviewResourceInput>,
+    review: Partial<CreateProductReviewRequest>,
     event: EventHandlers.Click.Button
   ): ANYTHING
 
@@ -73,7 +73,7 @@ export const ProductReviewEntryForm: FC<ProductReviewEntryFormProps> = (
   const {
     description,
     handleSubmit = (
-      review: Partial<ProductReviewResourceInput>,
+      review: Partial<CreateProductReviewRequest>,
       event: EventHandlers.Click.Button
     ) => {
       event.preventDefault()
@@ -92,17 +92,14 @@ export const ProductReviewEntryForm: FC<ProductReviewEntryFormProps> = (
 
   // Product review entity state
   const { state: review, setState: updateReview } = useSetState<
-    Partial<ProductReviewResourceInput>
+    Partial<CreateProductReviewRequest>
   >({
     email: '',
     productId: selected.id,
-    productImageUrl: selected.image.src,
-    productName: selected.title,
     productSKU: selected.sku,
     reviewMessage: '',
     reviewRating: 5,
     reviewRecommendProduct: true,
-    reviewSource: 'website',
     reviewTitle: ''
   })
 
@@ -132,7 +129,7 @@ export const ProductReviewEntryForm: FC<ProductReviewEntryFormProps> = (
 
             selectVariant(value)
             updateReview({
-              productId: value,
+              productId: JSON.parse(value),
               productImageUrl: variant?.image.src,
               productName: variant?.title,
               productSKU: variant?.sku

@@ -2,8 +2,8 @@ import { IPageProps, PC, ServerSidePageProps } from '@app/subdomains/app'
 import { CustomerService } from '@app/subdomains/customers'
 import {
   CollectionService,
-  ProductReviewService,
-  ProductService
+
+  ProductReviewService, ProductService
 } from '@app/subdomains/products'
 import { GetServerSidePropsContext } from 'next'
 import { getSession } from 'next-auth/client'

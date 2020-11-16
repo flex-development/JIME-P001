@@ -1,17 +1,14 @@
-import ShopifyBuy, { ShopifyBuyClient } from '@app/config/shopify-buy'
+import { axiosShopify } from '@app/config/axios'
 import { QEData } from '@app/subdomains/app/interfaces'
 import { QueryExecutor } from '@app/subdomains/app/models'
 import { createError, Logger } from '@app/subdomains/app/utils'
-import {
-  AnyObject,
-  CollectionResource
-} from '@flex-development/kustomzdesign/types'
+import { omit } from 'lodash'
+import { ICollectionListing } from 'shopify-api-node'
 import {
   CollectionQuery,
-  ICollectionService
+  ICollectionService,
+  ListCollectionsResponse
 } from '../interfaces/ICollectionService'
-import { toImageResource } from '../utils'
-import ProductService from './ProductService'
 
 /**
  * @file Subdomain Services - Collections
@@ -19,52 +16,10 @@ import ProductService from './ProductService'
  */
 
 export default class CollectionService
-  extends QueryExecutor<CollectionResource>
+  extends QueryExecutor<ICollectionListing>
   implements ICollectionService {
-  shopify: ShopifyBuy.CollectionResource
-
   /**
-   * Creates a new Collection service instance.
-   */
-  constructor() {
-    super()
-    this.shopify = ShopifyBuyClient.collection
-  }
-
-  /**
-   * Converts a GraphQL collection object from the Shopify JS Buy SDK into a
-   * `CollectionResource` object.
-   *
-   * @param collection - Serialized GraphQL product object
-   * @returns Formatted product resource object
-   */
-  static toCollectionResource(
-    collection: ShopifyBuy.Collection
-  ): CollectionResource {
-    // Type cast required because shopify-buy@2.11.0 type defs are not correct
-    const {
-      description,
-      handle,
-      id,
-      image,
-      products,
-      title
-    } = collection as AnyObject
-
-    return {
-      description,
-      handle,
-      id,
-      image: toImageResource(image),
-      products: products.map((product: ShopifyBuy.Product) => {
-        return ProductService.toProductResource(product)
-      }),
-      title
-    }
-  }
-
-  /**
-   * Returns an array of `CollectionResource` objects.
+   * Returns an array of `ICollectionListing` objects.
    * Data can be sorted, filtered, and paginated using {@param query}.
    *
    * @async
@@ -85,13 +40,18 @@ export default class CollectionService
    * @param query[foo].$nin - Matches none of the values specified in an array
    * @returns Array of Collection resource objects
    */
-  async find(query: CollectionQuery = {}): Promise<QEData<CollectionResource>> {
+  async find(query: CollectionQuery = {}): Promise<QEData<ICollectionListing>> {
     if (!query?.$limit) query.$limit = 250
 
-    const data = await this.shopify.fetchAllWithProducts().then(c => c)
-    const collections = data.map(c => CollectionService.toCollectionResource(c))
+    const { collection_listings } = await axiosShopify<ListCollectionsResponse>(
+      {
+        method: 'get',
+        params: { limit: query.$limit },
+        url: 'collection_listings'
+      }
+    )
 
-    return collections
+    return this.query(collection_listings, omit(query, ['$limit']))
   }
 
   /**
@@ -101,8 +61,11 @@ export default class CollectionService
    * @param id - ID of collection to retrieve
    * @throws {FeathersErrorJSON}
    */
-  async get(id: string): Promise<CollectionResource> {
-    const collections = await this.find({ id: { $eq: id } })
+  async get(
+    id: ICollectionListing['collection_id']
+  ): Promise<ICollectionListing> {
+    const query: CollectionQuery = { collection_id: { $eq: id } }
+    const collections = (await this.find(query)) as Array<ICollectionListing>
 
     if (!collections.length) {
       const data = { errors: { id } }
@@ -112,7 +75,7 @@ export default class CollectionService
       throw error
     }
 
-    return collections[0] as CollectionResource
+    return collections[0]
   }
 
   /**
@@ -122,8 +85,11 @@ export default class CollectionService
    * @param handle - Handle of collection to retrieve
    * @throws {FeathersErrorJSON}
    */
-  async getByHandle(handle: string): Promise<CollectionResource> {
-    const collections = await this.find({ handle: { $eq: handle } })
+  async getByHandle(
+    handle: ICollectionListing['handle']
+  ): Promise<ICollectionListing> {
+    const query: CollectionQuery = { handle: { $eq: handle } }
+    const collections = (await this.find(query)) as Array<ICollectionListing>
 
     if (!collections.length) {
       const data = { errors: { handle } }
@@ -134,6 +100,6 @@ export default class CollectionService
       throw error
     }
 
-    return collections[0] as CollectionResource
+    return collections[0]
   }
 }

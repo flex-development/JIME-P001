@@ -1,4 +1,4 @@
-import { ProductReviewResourceInput } from '@flex-development/kustomzdesign/types'
+import { CreateProductReviewRequest } from '@flex-development/kustomzdesign/types'
 import {
   IsBoolean,
   IsEmail,
@@ -18,32 +18,32 @@ import { IProductReviewCreateRequest } from '../interfaces'
 
 export class ProductReviewCreateRequest implements IProductReviewCreateRequest {
   @IsEmail()
-  email: ProductReviewResourceInput['email']
+  email: CreateProductReviewRequest['email']
 
   @IsNumber()
   @IsString()
-  productId: ProductReviewResourceInput['productId']
+  productId: CreateProductReviewRequest['productId']
 
   @IsString()
   @MinLength(1)
-  productSKU: ProductReviewResourceInput['productSKU']
+  productSKU: CreateProductReviewRequest['productSKU']
 
   @IsString()
   @MaxLength(80)
   @MinLength(10)
-  reviewMessage: ProductReviewResourceInput['reviewMessage']
+  reviewMessage: CreateProductReviewRequest['reviewMessage']
 
   @IsIn([1, 2, 3, 4, 5])
-  reviewRating: ProductReviewResourceInput['reviewRating']
+  reviewRating: CreateProductReviewRequest['reviewRating']
 
   @IsBoolean()
-  reviewRecommendProduct: ProductReviewResourceInput['reviewRecommendProduct']
+  reviewRecommendProduct: CreateProductReviewRequest['reviewRecommendProduct']
 
   @IsOptional()
   @IsString()
-  reviewSource?: ProductReviewResourceInput['reviewSource']
+  reviewSource?: CreateProductReviewRequest['reviewSource']
 
   @IsString()
   @MinLength(3)
-  reviewTitle: ProductReviewResourceInput['reviewTitle']
+  reviewTitle: CreateProductReviewRequest['reviewTitle']
 }

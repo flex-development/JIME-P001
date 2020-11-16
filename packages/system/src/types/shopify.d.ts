@@ -1,3 +1,4 @@
+import { IProductListing } from 'shopify-api-node'
 import { NullishString } from './utils'
 
 /**
@@ -15,6 +16,27 @@ export type CollectionResource = {
   image: ImageResource
   products: ProductResource[]
   title: string
+}
+
+/**
+ * Fields needed to create a product review using the Stamped API.
+ * 
+ * @see https://developers.stamped.io/#d06415c3-5eae-46b1-a8db-c1016fd09902
+ */
+export type CreateProductReviewRequest = {
+  author: ProductReviewResource['author']
+  email: ProductReviewResource['email']
+  location: string
+  productId: IProductListing['product_id']
+  productImageUrl: ProductReviewResource['productImageUrl']
+  productName: ProductReviewResource['productTitle']
+  productSKU: string
+  productUrl: ProductReviewResource['productUrl']
+  reviewMessage: ProductReviewResource['body']
+  reviewRating: ProductReviewResource['rating']
+  reviewRecommendProduct: boolean
+  reviewSource?: string
+  reviewTitle: ProductReviewResource['title']
 }
 
 /**
@@ -62,27 +84,6 @@ export type ProductReviewResource = {
   productUrl: string
   rating: 1 | 2 | 3 | 4 | 5
   title: string
-}
-
-/**
- * Fields needed to create a product review.
- * 
- * @see https://developers.stamped.io/#d06415c3-5eae-46b1-a8db-c1016fd09902
- */
-export type ProductReviewResourceInput = {
-  author: ProductReviewResource['author']
-  email: ProductReviewResource['email']
-  location: string
-  productId: number | string
-  productImageUrl: ProductReviewResource['productImageUrl']
-  productName: ProductReviewResource['productTitle']
-  productSKU: string
-  productUrl: ProductReviewResource['productUrl']
-  reviewMessage: ProductReviewResource['body']
-  reviewRating: ProductReviewResource['rating']
-  reviewRecommendProduct: boolean
-  reviewSource?: string
-  reviewTitle: ProductReviewResource['title']
 }
 
 /**

@@ -1,4 +1,4 @@
-import { ProductReviewResource } from '@flex-development/types'
+import { IReview } from '@flex-development/types'
 import { useMutatedProps } from '@system/hooks'
 import React, { FC } from 'react'
 import { Box, BoxProps, Column, Image, Link, Paragraph } from '../atoms'
@@ -17,32 +17,32 @@ export interface ProductReviewProps extends Omit<BoxProps, 'id'> {
    *
    * @default ''
    */
-  body: ProductReviewResource['body']
+  body: IReview['body']
 
   /**
    * Unique product review ID.
    */
-  id: ProductReviewResource['id']
+  id: IReview['id']
 
   /**
    * Image URL of the product being reviewed.
    */
-  productImageUrl?: ProductReviewResource['productImageUrl']
+  product_image_url?: IReview['product_image_url']
 
   /**
    * Title of the product being reviewed.
    */
-  productTitle: ProductReviewResource['productTitle']
+  product_title: IReview['product_title']
 
   /**
    * Link to the page of the product being reviewed.
    */
-  productUrl: ProductReviewResource['productUrl']
+  product_url: IReview['product_url']
 
   /**
    * Review title.
    */
-  title: ProductReviewResource['title']
+  title: IReview['title']
 }
 
 /**
@@ -57,9 +57,9 @@ export const ProductReview: FC<ProductReviewProps> = (
   const {
     body,
     id,
-    productImageUrl,
-    productTitle,
-    productUrl,
+    product_image_url,
+    product_title,
+    product_url,
     title,
     ...rest
   } = props
@@ -68,8 +68,8 @@ export const ProductReview: FC<ProductReviewProps> = (
 
   return (
     <Box {...mutated} id={`product-review-${id}`}>
-      <Link className='product-review-img' href={productUrl} target='_blank'>
-        <Image alt={productTitle} fluid src={productImageUrl} />
+      <Link className='product-review-img' href={product_url} target='_blank'>
+        <Image alt={product_title} fluid src={product_image_url} />
       </Link>
       <Column
         className='product-review-text'

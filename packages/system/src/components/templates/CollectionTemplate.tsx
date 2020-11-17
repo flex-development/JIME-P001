@@ -1,7 +1,7 @@
-import { ProductResource } from '@flex-development/types'
 import { useMutatedProps } from '@system/hooks'
 import { MutatedProps, TC } from '@system/types'
 import React from 'react'
+import { ICollectionListing, IProductListing } from 'shopify-api-node'
 import { Heading, Main, Paragraph, Section } from '../atoms'
 import { ProductGrid } from '../organisms'
 
@@ -14,19 +14,19 @@ export interface CollectionTemplateProps extends MutatedProps {
   /**
    * Collection description.
    */
-  description?: string
+  body_html?: ICollectionListing['body_html']
 
   /**
-   * Array of `ProductResource` objects.
+   * Array of `IProductListing` objects that belong to the current collection.
    *
    * @default []
    */
-  products?: ProductResource[]
+  products?: Array<IProductListing>
 
   /**
    * Title of the collection.
    */
-  title: string
+  title: ICollectionListing['title']
 }
 
 /**
@@ -38,7 +38,7 @@ export interface CollectionTemplateProps extends MutatedProps {
 export const CollectionTemplate: TC<CollectionTemplateProps> = (
   props: CollectionTemplateProps
 ) => {
-  const { description, products = [], title, ...rest } = props
+  const { body_html, products = [], title, ...rest } = props
 
   const mutated = useMutatedProps<typeof rest>(rest, 'template')
 
@@ -46,7 +46,7 @@ export const CollectionTemplate: TC<CollectionTemplateProps> = (
     <Main {...mutated} data-template={CollectionTemplate.template_id}>
       <Section>
         <Heading size={2}>{title}</Heading>
-        {description && <Paragraph>{description}</Paragraph>}
+        {body_html && <Paragraph>{body_html}</Paragraph>}
         <ProductGrid mt={24} products={products} />
       </Section>
     </Main>

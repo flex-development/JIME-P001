@@ -1,7 +1,7 @@
+import products from '@app-tests/__mocks__/data/product-listings.mock.json'
 import { ProductCard, ProductCardProps } from '@system/components'
 import { StoryFN } from '@system/types/storybook'
 import { getProductCardProps } from '@system/utils'
-import products from '@system/__mocks__/products.mock.json'
 import React from 'react'
 
 /**

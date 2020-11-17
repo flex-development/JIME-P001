@@ -20,7 +20,11 @@ const getProductCardProps = (obj: AnyObject): ProductCardProps => {
     'variants'
   ]
 
-  return pick(obj, PROP_KEYS) as ProductCardProps
+  const props = pick(obj, PROP_KEYS)
+
+  if (props.id) props.id = `${props.id}`
+
+  return props as ProductCardProps
 }
 
 export default getProductCardProps

@@ -1,8 +1,8 @@
 import { IReviewService } from '@app/subdomains/sales/interfaces/IReviewService'
 import ReviewService from '@app/subdomains/sales/services/ReviewService'
-import ProductListingsMock from '@flex-development/kustomzdesign/__mocks__/product-listings.mock.json'
 import { CreateReviewRequest } from '@flex-development/types'
 import CustomersMock from '../__mocks__/data/customers.mock.json'
+import ProductListingsMock from '../__mocks__/data/product-listings.mock.json'
 import firebaseTestApp from '../__mocks__/firebaseTestApp'
 
 /**

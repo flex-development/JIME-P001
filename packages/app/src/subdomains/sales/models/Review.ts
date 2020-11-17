@@ -26,10 +26,6 @@ export class Review extends Entity implements IReview {
 
   @IsString()
   @MinLength(1)
-  customer_name: IReview['customer_name']
-
-  @IsString()
-  @MinLength(1)
   product_handle: IReview['product_handle']
 
   @IsNumber()

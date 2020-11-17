@@ -1,7 +1,7 @@
-import { ProductResource } from '@flex-development/types'
 import { useMutatedProps } from '@system/hooks'
 import { getProductCardProps } from '@system/utils'
 import React, { FC } from 'react'
+import { IProductListing } from 'shopify-api-node'
 import { Column, Row, RowProps } from '../atoms'
 import { ProductCard } from '../molecules'
 
@@ -12,11 +12,11 @@ import { ProductCard } from '../molecules'
 
 export interface ProductGridProps extends RowProps {
   /**
-   * Array of `ProductResource` data to display in the grid.
+   * Array of `IProductListing` data to display in the grid.
    *
    * @default []
    */
-  products?: ProductResource[]
+  products?: IProductListing[]
 }
 
 /**

@@ -16,9 +16,9 @@ const getProductReviewProps = (obj: AnyObject): ProductReviewProps => {
   const PROP_KEYS: (keyof ProductReviewProps)[] = [
     'body',
     'id',
-    'productImageUrl',
-    'productTitle',
-    'productUrl',
+    'product_image_url',
+    'product_title',
+    'product_url',
     'title'
   ]
 

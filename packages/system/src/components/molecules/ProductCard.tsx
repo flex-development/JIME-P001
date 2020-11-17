@@ -1,8 +1,8 @@
-import { ProductResource } from '@flex-development/types'
 import { useMutatedProps, useProductVariants } from '@system/hooks'
 import { EventHandlers } from '@system/types'
 import React, { FC, useEffect, useState } from 'react'
 import useBoolean from 'react-hanger/array/useBoolean'
+import { IProductListing } from 'shopify-api-node'
 import {
   Box,
   BoxProps,
@@ -27,24 +27,24 @@ export interface ProductCardProps extends BoxProps {
   /**
    * Product handle.
    */
-  handle: ProductResource['handle']
+  handle: IProductListing['handle']
 
   /**
    * Unique product id.
    */
-  id: ProductResource['id']
+  id: string
 
   /**
    * The product title.
    */
-  title: ProductResource['title']
+  title: IProductListing['title']
 
   /**
    * Product variants.
    *
    * @default []
    */
-  variants?: ProductResource['variants']
+  variants?: IProductListing['variants']
 }
 
 /**
@@ -75,7 +75,7 @@ export const ProductCard: FC<ProductCardProps> = (props: ProductCardProps) => {
     const default_selected = selected.sku === variants[0].sku
     const base = `products/${handle}`
 
-    setURL(default_selected ? base : `${base}?style=${selected.sku}`)
+    setURL(default_selected ? base : `${base}?sku=${selected.sku}`)
   }, [handle, selected.sku, variants])
 
   const ProductLink: FC<LinkProps> = ({ children, className }) => (

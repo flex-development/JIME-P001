@@ -26,5 +26,5 @@ it('renders the collection title', () => {
 it('renders the collection description', () => {
   const { getByText } = render(<Products {...Products.args} />)
 
-  expect(getByText(Products.args?.description as string)).toBeInTheDocument()
+  expect(getByText(Products.args?.body_html as string)).toBeInTheDocument()
 })

@@ -1,8 +1,8 @@
-import { ProductResource } from '@flex-development/types'
+import products from '@app-tests/__mocks__/data/product-listings.mock.json'
 import { AddToCartForm, AddToCartFormProps } from '@system/components'
 import { StoryFN } from '@system/types/storybook'
-import products from '@system/__mocks__/products.mock.json'
 import React from 'react'
+import { IProductListing } from 'shopify-api-node'
 
 /**
  * @file Stories - AddToCartForm
@@ -22,12 +22,14 @@ export default {
   title: 'Library/Organisms/AddToCartForm'
 }
 
+const PRODUCTS = (products as unknown) as Array<IProductListing>
+
 export const AshTray: StoryFN<AddToCartFormProps> = (
   args: AddToCartFormProps
 ) => <AddToCartForm {...args} />
 
 AshTray.args = {
-  product: products.find(p => p.handle === 'ash-tray') as ProductResource
+  product: PRODUCTS.find(p => p.handle === 'ash-tray') as IProductListing
 }
 
 export const Kustomz: StoryFN<AddToCartFormProps> = (
@@ -36,7 +38,7 @@ export const Kustomz: StoryFN<AddToCartFormProps> = (
 
 Kustomz.storyName = 'KUSTOMZ'
 Kustomz.args = {
-  product: products.find(p => p.handle === 'kustomz') as ProductResource
+  product: PRODUCTS.find(p => p.handle === 'kustomz') as IProductListing
 }
 
 export const RollingTray: StoryFN<AddToCartFormProps> = (
@@ -44,5 +46,5 @@ export const RollingTray: StoryFN<AddToCartFormProps> = (
 ) => <AddToCartForm {...args} />
 
 RollingTray.args = {
-  product: products.find(p => p.handle === 'rolling-tray') as ProductResource
+  product: PRODUCTS.find(p => p.handle === 'rolling-tray') as IProductListing
 }

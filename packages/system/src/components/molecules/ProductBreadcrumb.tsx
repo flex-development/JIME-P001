@@ -1,9 +1,6 @@
-import {
-  ProductResource,
-  ProductVariantResource
-} from '@flex-development/types'
 import { useMutatedProps } from '@system/hooks'
 import React, { FC } from 'react'
+import { IProductListing, IProductListingVariant } from 'shopify-api-node'
 import {
   FlexBox,
   FlexBoxProps,
@@ -27,12 +24,12 @@ export interface ProductBreadcrumbProps extends FlexBoxProps {
   /**
    * Product title.
    */
-  product: ProductResource['title']
+  product: IProductListing['title']
 
   /**
    * Product variant title.
    */
-  variant: ProductVariantResource['title']
+  variant: IProductListingVariant['title']
 }
 
 /**

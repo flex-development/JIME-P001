@@ -1,14 +1,11 @@
-import {
-  ANYTHING,
-  ProductResource,
-  ProductReviewResource
-} from '@flex-development/types'
+import { ANYTHING, IReview } from '@flex-development/types'
 import { useMutatedProps } from '@system/hooks'
 import { EventHandlers, MutatedProps, TC } from '@system/types'
 import { uuid } from '@system/utils'
 import productReviewProps from '@system/utils/getProductReviewProps'
 import { chunk } from 'lodash'
 import React, { useState } from 'react'
+import { IProductListing, IProductListingVariant } from 'shopify-api-node'
 import { Button, FlexBox, Heading, LinkProps, Main, Section } from '../atoms'
 import { ProductBreadcrumb, ProductReview } from '../molecules'
 import { AddToCartForm, AddToCartFormProps, Carousel } from '../organisms'
@@ -35,16 +32,16 @@ export interface ProductTemplateProps extends MutatedProps {
   handleSubmitReview?: (event: EventHandlers.Click.Button) => ANYTHING
 
   /**
-   * Shopify `Product` resource.
+   * Shopify `IProductListing` object.
    */
-  product: ProductResource
+  product: IProductListing
 
   /**
    * Array of product reviews for `product`.
    *
    * @default []
    */
-  reviews?: ProductReviewResource[]
+  reviews?: Array<IReview>
 
   /**
    * Maximum number of product reviews to show in a group.
@@ -90,7 +87,7 @@ export const ProductTemplate: TC<ProductTemplateProps> = (
    *
    * @param id - ID of newly selected variant
    */
-  const handleVariant = (id: string) => {
+  const handleVariant = (id: IProductListingVariant['id']) => {
     const new_variant = product.variants.find(v => v.id === id)
     if (new_variant) setVariant(new_variant)
   }
@@ -123,7 +120,7 @@ export const ProductTemplate: TC<ProductTemplateProps> = (
         </FlexBox>
 
         <Carousel id='product-review-carousel'>
-          {review_chunks.map((chunk: ProductReviewResource[]) => (
+          {review_chunks.map((chunk: IReview[]) => (
             <FlexBox direction='column' key={uuid()}>
               {chunk.map((review, i: number) => (
                 <ProductReview

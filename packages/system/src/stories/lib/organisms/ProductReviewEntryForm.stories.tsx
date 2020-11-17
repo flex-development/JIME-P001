@@ -1,11 +1,11 @@
+import products from '@app-tests/__mocks__/data/product-listings.mock.json'
 import {
   ProductReviewEntryForm,
   ProductReviewEntryFormProps
 } from '@system/components'
 import { StoryFN } from '@system/types/storybook'
-import products from '@system/__mocks__/products.mock.json'
-import { omit } from 'lodash'
 import React from 'react'
+import { IProductListing } from 'shopify-api-node'
 
 /**
  * @file Stories - ProductReviewEntryForm
@@ -20,7 +20,8 @@ export default {
   title: 'Library/Organisms/ProductReviewEntryForm'
 }
 
-const ashtray_data = Object.assign({}, omit(products[0]))
+const PRODUCTS = (products as unknown) as Array<IProductListing>
+const ashtray_data = PRODUCTS.find(p => p.handle === 'ash-tray')
 
 export const AshTray: StoryFN<ProductReviewEntryFormProps> = (
   args: ProductReviewEntryFormProps
@@ -29,10 +30,10 @@ export const AshTray: StoryFN<ProductReviewEntryFormProps> = (
 AshTray.args = {
   description:
     'To submit a review, you must use an email attached to a previously made order.',
-  id: ashtray_data.id,
+  id: `${ashtray_data?.product_id}`,
   style: {
     maxWidth: '704px'
   },
-  title: ashtray_data.title,
-  variants: ashtray_data.variants
+  title: ashtray_data?.title as string,
+  variants: ashtray_data?.variants ?? []
 }

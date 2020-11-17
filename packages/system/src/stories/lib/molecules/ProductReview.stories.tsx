@@ -1,7 +1,7 @@
+import ReviewsMockRepoRoot from '@app-tests/__mocks__/data/reviews.mock.json'
 import { ProductReview, ProductReviewProps } from '@system/components'
 import { StoryFN } from '@system/types/storybook'
 import { getProductReviewProps } from '@system/utils'
-import reviews from '@system/__mocks__/reviews.mock.json'
 import React from 'react'
 
 /**
@@ -21,6 +21,8 @@ export default {
   },
   title: 'Library/Molecules/ProductReview'
 }
+
+const reviews = Object.values(ReviewsMockRepoRoot)
 
 export const Default: StoryFN<ProductReviewProps> = (
   args: ProductReviewProps

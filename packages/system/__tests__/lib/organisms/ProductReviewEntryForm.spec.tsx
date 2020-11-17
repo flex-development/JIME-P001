@@ -42,7 +42,7 @@ it('updates the product variant title when a selection is made', () => {
 
   // Mock user selection
   User.selectOptions(screen.getByPlaceholderText(SELECT_PLACEHOLDER), [
-    variant2.id
+    `${variant2.id}`
   ])
 
   // Expect selected variant title to be shown in form title

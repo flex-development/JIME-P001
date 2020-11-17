@@ -1,7 +1,7 @@
-import { ProductResource } from '@flex-development/types'
 import { useMutatedProps } from '@system/hooks'
 import { MutatedProps, TC } from '@system/types'
 import React from 'react'
+import { IProductListing } from 'shopify-api-node'
 import { Heading, Main, Section, Span } from '../atoms'
 import { ProductGrid } from '../organisms'
 
@@ -16,7 +16,7 @@ export interface SearchTemplateProps extends MutatedProps {
    *
    * @default []
    */
-  results?: ProductResource[]
+  results?: IProductListing[]
 }
 
 /**
@@ -28,10 +28,7 @@ export interface SearchTemplateProps extends MutatedProps {
 export const SearchTemplate: TC<SearchTemplateProps> = (
   props: SearchTemplateProps
 ) => {
-  const {
-    results = SearchTemplate.defaultProps?.results as ProductResource[],
-    ...rest
-  } = props
+  const { results = [], ...rest } = props
 
   const mutated = useMutatedProps<typeof rest>(rest, 'template')
 

@@ -1,9 +1,11 @@
-import { ProductResource } from '@flex-development/types'
+import { IReview } from '@flex-development/types'
 import { useMutatedProps } from '@system/hooks'
 import { MutatedProps, TC } from '@system/types'
+import { getProductReviewProps } from '@system/utils'
 import React from 'react'
+import { IProductListing } from 'shopify-api-node'
 import { Heading, Main, Paragraph, Section } from '../atoms'
-import { ProductReview, ProductReviewProps } from '../molecules'
+import { ProductReview } from '../molecules'
 import { Carousel, ProductGrid } from '../organisms'
 
 /**
@@ -33,11 +35,11 @@ export interface IndexTemplateProps extends MutatedProps {
   max_products?: number
 
   /**
-   * Array of `ProductResource` objects.
+   * Array of `IProductListing` objects.
    *
    * @default []
    */
-  products?: ProductResource[]
+  products?: Array<IProductListing>
 
   /**
    * Text to display in the "Products" section.
@@ -53,12 +55,11 @@ export interface IndexTemplateProps extends MutatedProps {
   products_section_title?: string
 
   /**
-   * Array of `ProductReviewResource` objects as `ProductReviewProps`
-   * objects.
+   * Array of `IReview` objects.
    *
    * @default []
    */
-  reviews?: ProductReviewProps[]
+  reviews?: Array<IReview>
 }
 
 /**
@@ -109,7 +110,10 @@ export const IndexTemplate: TC<IndexTemplateProps> = (
           <Heading size={2}>Reviews</Heading>
           <Carousel id='product-review-carousel' mt={12}>
             {reviews.map(review => (
-              <ProductReview {...review} key={review.id} />
+              <ProductReview
+                {...getProductReviewProps(review)}
+                key={review.id}
+              />
             ))}
           </Carousel>
         </Section>

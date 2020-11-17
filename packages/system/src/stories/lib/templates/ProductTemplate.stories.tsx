@@ -1,9 +1,10 @@
-import { ProductResource } from '@flex-development/types'
+import products from '@app-tests/__mocks__/data/product-listings.mock.json'
+import ReviewsMockRepoRoot from '@app-tests/__mocks__/data/reviews.mock.json'
+import { IReview } from '@flex-development/types'
 import { ProductTemplate, ProductTemplateProps } from '@system/components'
 import { StoryFN } from '@system/types/storybook'
-import products from '@system/__mocks__/products.mock.json'
-import reviews from '@system/__mocks__/reviews.mock.json'
 import React from 'react'
+import { IProductListing } from 'shopify-api-node'
 
 /**
  * @file Stories - ProductTemplate
@@ -23,11 +24,14 @@ export default {
   title: 'Library/Templates/ProductTemplate'
 }
 
+const PRODUCTS = (products as unknown) as Array<IProductListing>
+const reviews = Object.values(ReviewsMockRepoRoot) as Array<IReview>
+
 export const AshTray: StoryFN<ProductTemplateProps> = (
   args: ProductTemplateProps
 ) => <ProductTemplate {...args} />
 
-const ashtray_p = products.find(p => p.handle === 'ash-tray') as ProductResource
+const ashtray_p = PRODUCTS.find(p => p.handle === 'ash-tray') as IProductListing
 
 AshTray.args = {
   collection: {
@@ -36,14 +40,14 @@ AshTray.args = {
     title: 'All Products'
   },
   product: ashtray_p,
-  reviews: reviews.filter(review => review.productId === ashtray_p.id)
+  reviews: reviews.filter(review => review.product_id === ashtray_p.product_id)
 }
 
 export const Kustomz: StoryFN<ProductTemplateProps> = (
   args: ProductTemplateProps
 ) => <ProductTemplate {...args} />
 
-const kustomz_p = products.find(p => p.handle === 'kustomz') as ProductResource
+const kustomz_p = PRODUCTS.find(p => p.handle === 'kustomz') as IProductListing
 
 Kustomz.args = {
   collection: {
@@ -52,16 +56,16 @@ Kustomz.args = {
     title: 'All Products'
   },
   product: kustomz_p,
-  reviews: reviews.filter(review => review.productId === kustomz_p.id)
+  reviews: reviews.filter(review => review.product_id === kustomz_p.product_id)
 }
 
 export const RollingTray: StoryFN<ProductTemplateProps> = (
   args: ProductTemplateProps
 ) => <ProductTemplate {...args} />
 
-const rollingtray_p = products.find(
+const rollingtray_p = PRODUCTS.find(
   p => p.handle === 'rolling-tray'
-) as ProductResource
+) as IProductListing
 
 RollingTray.args = {
   collection: {
@@ -70,5 +74,7 @@ RollingTray.args = {
     title: 'All Products'
   },
   product: rollingtray_p,
-  reviews: reviews.filter(review => review.productId === rollingtray_p.id)
+  reviews: reviews.filter(
+    review => review.product_id === rollingtray_p.product_id
+  )
 }

@@ -10,6 +10,7 @@ module.exports = {
       'module-resolver',
       {
         alias: {
+          '@app-tests': '../app/__tests__',
           '@system': './src'
         }
       }

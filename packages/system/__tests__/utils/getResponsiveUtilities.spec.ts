@@ -1,4 +1,8 @@
-import { Columns, FlexboxDirection, ResponsiveUtility } from '@system/types'
+import {
+  Columns,
+  FlexboxDirection,
+  ResponsiveUtility
+} from '@flex-development/types'
 import getResponsiveUtilities from '@system/utils/getResponsiveUtilities'
 
 /**

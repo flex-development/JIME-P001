@@ -92,6 +92,6 @@ it('updates the product link when an option is selected', () => {
   // Expect product URL to be updated
   expect(getByText(Kustomz.args.title)).toHaveAttribute(
     'href',
-    `${product_link}?style=${variant2.sku}`
+    `${product_link}?sku=${variant2.sku}`
   )
 })

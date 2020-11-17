@@ -1,11 +1,14 @@
+import products from '@app-tests/__mocks__/data/product-listings.mock.json'
 import { useProductVariants } from '@system/hooks/useProductVariants'
-import products from '@system/__mocks__/products.mock.json'
 import { act, renderHook } from '@testing-library/react-hooks'
+import { IProductListing } from 'shopify-api-node'
 
 /**
  * @file Tests - useProductVariants
  * @module tests/hooks/useProductVariants
  */
+
+const PRODUCTS = (products as unknown) as Array<IProductListing>
 
 it('selected variant is an empty object ({}) when `initialVariants` is an empty array ([])', () => {
   const variants = []
@@ -19,31 +22,21 @@ it('selected variant is an empty object ({}) when `initialVariants` is an empty 
 })
 
 it('creates an `OptionProps` array from `initialVariants`', () => {
-  const { result } = renderHook(() => useProductVariants(products[0].variants))
+  const { variants } = PRODUCTS[0]
+  const { result } = renderHook(() => useProductVariants(PRODUCTS[0].variants))
 
-  const options = [
-    {
-      'data-available': true,
-      label: 'FUNFETTI',
-      value: 'Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0LzU2NjQ2MzkwOTA4NDM='
-    },
-    {
-      'data-available': true,
-      label: 'JELLY $LIDES',
-      value: 'Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0VmFyaWFudC8zNjE5NzczMjk0MTk3OQ=='
-    },
-    {
-      'data-available': false,
-      label: 'LA $ONRISA',
-      value: 'Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0VmFyaWFudC8zNjE5NzczMjk3NDc0Nw=='
-    }
-  ]
+  const options = variants.map(({ available, id, sku, title }) => ({
+    'data-available': available,
+    'data-sku': sku,
+    label: title,
+    value: id
+  }))
 
   expect(result.current.options).toEqual(expect.arrayContaining(options))
 })
 
 it('updates the selected variant', () => {
-  const variants = products[0].variants
+  const variants = PRODUCTS[0].variants
 
   const { result } = renderHook(() => useProductVariants(variants))
 

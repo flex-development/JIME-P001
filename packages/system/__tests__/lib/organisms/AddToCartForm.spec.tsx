@@ -2,10 +2,10 @@ import {
   AshTray,
   Kustomz
 } from '@system/stories/lib/organisms/AddToCartForm.stories'
-import { ProductVariantResource } from '@system/types'
 import { fireEvent, render, screen } from '@testing-library/react'
 import User from '@testing-library/user-event'
 import React from 'react'
+import { IProductListingVariant } from 'shopify-api-node'
 
 /**
  * @file Tests - AddToCartForm
@@ -45,7 +45,7 @@ it('updates the selected variant', () => {
   const variant = variants[variants.length - 1]
 
   // Mock product variant selection
-  User.selectOptions(select, [variant.id])
+  User.selectOptions(select, [`${variant.id}`])
 
   // Expect data-selected to match title of selected variant
   expect(select).toHaveAttribute('data-selected', variant.title)
@@ -60,17 +60,20 @@ it('updates the carousel position when a new variant is selected', () => {
   const select = screen.getByPlaceholderText(SELECT_PLACEHOLDER)
 
   // Get last product variant
+  const default_variant = variants[0]
   const v_pos = variants.length - 1
   const variant = variants[v_pos]
 
   // Expect default image to be visible
-  expect(screen.getByAltText(`${title} image 1`)).toBeInTheDocument()
+  expect(
+    screen.getByAltText(`${title} - ${default_variant.title}`)
+  ).toBeInTheDocument()
 
   // Mock product variant selection
-  User.selectOptions(select, [variant.id])
+  User.selectOptions(select, [`${variant.id}`])
 
   // Expect image of selected variant to be visible
-  expect(screen.getByAltText(`${title} image ${v_pos}`)).toBeInTheDocument()
+  expect(screen.getByAltText(`${title} - ${variant.title}`)).toBeInTheDocument()
 })
 
 it('does not update the carousel position if the product has one image', () => {
@@ -78,8 +81,12 @@ it('does not update the carousel position if the product has one image', () => {
 
   const { title, variants } = Kustomz.args.product
 
+  const variant = variants[0]
+
   const visible = () => {
-    expect(screen.getByAltText(`${title} image 1`)).toBeInTheDocument()
+    expect(
+      screen.getByAltText(`${title} - ${variant.title}`)
+    ).toBeInTheDocument()
   }
 
   // Get <select> element
@@ -89,7 +96,7 @@ it('does not update the carousel position if the product has one image', () => {
   visible()
 
   // Mock product variant selection
-  User.selectOptions(select, [variants[0].id])
+  User.selectOptions(select, [`${variant.id}`])
 
   // Expect default image to be visible because product has one image
   visible()
@@ -104,7 +111,7 @@ it('disables the add to cart button when an unavailable product variant is selec
 
   // Mock user selection
   User.selectOptions(screen.getByPlaceholderText(SELECT_PLACEHOLDER), [
-    (variant as ProductVariantResource).id
+    `${(variant as IProductListingVariant).id}`
   ])
 
   // Expect add to cart button to be disabled
@@ -139,11 +146,11 @@ it('updates the display price if the selected option has a different price than 
   // Get product variant with different price than default option
   const variant2 = variants.find(v => {
     return v.price !== variant.price
-  }) as ProductVariantResource
+  }) as IProductListingVariant
 
   // Mock user selection
   User.selectOptions(screen.getByPlaceholderText(SELECT_PLACEHOLDER), [
-    variant2.id
+    `${variant2.id}`
   ])
 
   // Expect new price to be displayed

@@ -1,10 +1,10 @@
+import products from '@app-tests/__mocks__/data/product-listings.mock.json'
 import {
   Heading,
   ProductHeading,
   ProductHeadingProps
 } from '@system/components'
 import { StoryFN } from '@system/types/storybook'
-import products from '@system/__mocks__/products.mock.json'
 import React from 'react'
 
 /**

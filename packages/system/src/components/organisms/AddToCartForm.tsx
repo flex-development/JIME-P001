@@ -1,13 +1,10 @@
-import {
-  ANYTHING,
-  ProductResource,
-  ProductVariantResource
-} from '@flex-development/types'
+import { ANYTHING } from '@flex-development/types'
 import { useLineItemInput, useProductVariants } from '@system/hooks'
 import { EventHandlers } from '@system/types'
-import { uuid } from '@system/utils'
+import { getProductVariantImage, uuid } from '@system/utils'
 import { findIndex, isEmpty } from 'lodash'
 import React, { FC, useEffect, useState } from 'react'
+import { IProductListing, IProductListingVariant } from 'shopify-api-node'
 import { LineItemToAdd } from 'shopify-buy'
 import {
   Button,
@@ -16,7 +13,6 @@ import {
   Form,
   FormProps,
   Image,
-  ImageProps,
   Paragraph,
   Row,
   Select,
@@ -44,12 +40,12 @@ export interface AddToCartFormProps extends FormProps {
   /**
    * Fires when a product variant is selected.
    */
-  handleVariant?(id: ProductVariantResource['id']): ANYTHING
+  handleVariant?(id: IProductListingVariant['id']): ANYTHING
 
   /**
-   * Shopify product resource.
+   * Shopify product listing resource.
    */
-  product: ProductResource
+  product: IProductListing
 }
 
 /**
@@ -73,7 +69,7 @@ export const AddToCartForm: FC<AddToCartFormProps> = (
   } = props
 
   // Toggle styles based on product description length
-  const no_description = isEmpty(product.description)
+  const no_description = isEmpty(product.body_html)
 
   // Use product variants as options
   const {
@@ -108,12 +104,15 @@ export const AddToCartForm: FC<AddToCartFormProps> = (
       >
         <Column mb={{ md: 0, xs: 36 }} md={4} xs>
           <Carousel position={position}>
-            {product.images.map(({ alt, src }: ImageProps, i: number) => (
+            {variants.map(({ image_id, title }: IProductListingVariant) => (
               <Image
-                alt={alt ? alt : `${product.title} image ${i + 1}`}
+                {...getProductVariantImage(
+                  image_id,
+                  product.images,
+                  `${product.title} - ${title}`
+                )}
                 className='d-block w-100'
                 key={uuid()}
-                src={src}
               />
             ))}
           </Carousel>
@@ -130,7 +129,7 @@ export const AddToCartForm: FC<AddToCartFormProps> = (
           {/* Product description */}
           {!no_description && (
             <Paragraph className='form-text' mb={12}>
-              {product.description}
+              {product.body_html}
             </Paragraph>
           )}
 
@@ -145,8 +144,8 @@ export const AddToCartForm: FC<AddToCartFormProps> = (
               data-selected={selected.title}
               name='variantId'
               onChange={({ target }: EventHandlers.Change.Select) => {
-                selectVariant(target.value)
-                if (handleVariant) handleVariant(target.value)
+                selectVariant(JSON.parse(target.value))
+                if (handleVariant) handleVariant(JSON.parse(target.value))
               }}
               options={product_variant_options}
               placeholder='Select an option'

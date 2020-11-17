@@ -88,7 +88,7 @@ export default class ReviewService
       product_image_url: variant_img?.src ?? '',
       product_sku,
       product_title: product.title,
-      product_url: `${products_base_url}/${product.handle}?style=${product_sku}`
+      product_url: `${products_base_url}/${product.handle}?sku=${product_sku}`
     })
   }
 }

@@ -1,14 +1,14 @@
 import {
   AnyObject,
   ANYTHING,
-  CreateProductReviewRequest,
-  ProductResource
+  CreateReviewRequest
 } from '@flex-development/types'
 import { useMutatedProps, useProductVariants } from '@system/hooks'
 import { EventHandlers } from '@system/types'
 import { isEmpty } from 'lodash'
 import React, { FC } from 'react'
 import { useSetState } from 'react-hanger'
+import { IProductListing } from 'shopify-api-node'
 import isEmail from 'validator/lib/isEmail'
 import {
   Button,
@@ -19,7 +19,7 @@ import {
   Paragraph,
   Span
 } from '../atoms'
-import { FormCheck, LabeledFormControl, ProductRatingField } from '../molecules'
+import { LabeledFormControl, ProductRatingField } from '../molecules'
 
 /**
  * @file Allow users to submit product reviews
@@ -40,26 +40,26 @@ export interface ProductReviewEntryFormProps extends FormProps {
    * the `submit` button.
    */
   handleSubmit?(
-    review: Partial<CreateProductReviewRequest>,
+    req: Omit<CreateReviewRequest, 'product_id'>,
     event: EventHandlers.Click.Button
   ): ANYTHING
 
   /**
    * The ID of the product the user is submitting a review for.
    */
-  id: ProductResource['id']
+  id: string
 
   /**
    * The title of the product the user is submitting a review for.
    */
-  title: ProductResource['title']
+  title: IProductListing['title']
 
   /**
    * Product variants.
    *
    * @default []
    */
-  variants: ProductResource['variants']
+  variants: IProductListing['variants']
 }
 
 /**
@@ -73,7 +73,7 @@ export const ProductReviewEntryForm: FC<ProductReviewEntryFormProps> = (
   const {
     description,
     handleSubmit = (
-      review: Partial<CreateProductReviewRequest>,
+      req: Omit<CreateReviewRequest, 'product_id'>,
       event: EventHandlers.Click.Button
     ) => {
       event.preventDefault()
@@ -92,15 +92,13 @@ export const ProductReviewEntryForm: FC<ProductReviewEntryFormProps> = (
 
   // Product review entity state
   const { state: review, setState: updateReview } = useSetState<
-    Partial<CreateProductReviewRequest>
+    Omit<CreateReviewRequest, 'product_id'>
   >({
+    body: '',
     email: '',
-    productId: selected.id,
-    productSKU: selected.sku,
-    reviewMessage: '',
-    reviewRating: 5,
-    reviewRecommendProduct: true,
-    reviewTitle: ''
+    product_sku: selected.sku,
+    rating: 5,
+    title: ''
   })
 
   // Track form errors
@@ -125,15 +123,12 @@ export const ProductReviewEntryForm: FC<ProductReviewEntryFormProps> = (
         control={{
           name: 'variant',
           onChange: ({ target: { value } }: EventHandlers.Change.Select) => {
-            const variant = variants.find(v => v.id === value)
+            const parsed_value = JSON.parse(value)
 
-            selectVariant(value)
-            updateReview({
-              productId: JSON.parse(value),
-              productImageUrl: variant?.image.src,
-              productName: variant?.title,
-              productSKU: variant?.sku
-            })
+            const variant = variants.find(v => v.id === parsed_value)
+
+            selectVariant(parsed_value)
+            updateReview({ product_sku: variant?.sku })
           },
           options,
           placeholder: 'Select the product variant you purchased',
@@ -165,14 +160,14 @@ export const ProductReviewEntryForm: FC<ProductReviewEntryFormProps> = (
 
       <LabeledFormControl
         control={{
-          invalid: errors?.reviewTitle,
-          name: 'reviewTitle',
+          invalid: errors?.title,
+          name: 'title',
           onChange: ({ target: { value } }: EventHandlers.Change.Input) => {
             const valid = value.length >= 3
 
-            if (valid) updateReview({ reviewTitle: value })
+            if (valid) updateReview({ title: value })
 
-            setErrors({ reviewTitle: !valid })
+            setErrors({ title: !valid })
           },
           placeholder: 'A smoke worthy product',
           required: true
@@ -183,14 +178,14 @@ export const ProductReviewEntryForm: FC<ProductReviewEntryFormProps> = (
 
       <LabeledFormControl
         control={{
-          invalid: errors?.reviewMessage,
-          name: 'reviewMessage',
+          invalid: errors?.body,
+          name: 'body',
           onChange: ({ target: { value } }: EventHandlers.Change.TextArea) => {
             const valid = value.length >= 10 && value.length <= 80
 
-            if (valid) updateReview({ reviewMessage: value })
+            if (valid) updateReview({ body: value })
 
-            setErrors({ reviewMessage: !valid })
+            setErrors({ body: !valid })
           },
           placeholder:
             'Blue bottle single-origin coffee next level taxidermy four loko seitan cupidatat flannel. Cred asymmetrical literally vexillologist cliche do distillery hashtag raw denim crucifix everyday carry affogato austin. Williamsburg jean shorts raclette, aesthetic quinoa dolore hammock echo park taxidermy messenger bag.',
@@ -208,24 +203,12 @@ export const ProductReviewEntryForm: FC<ProductReviewEntryFormProps> = (
         mt={8}
         justify={{ sm: 'between' }}
       >
-        <FormCheck
-          checked={review.reviewRecommendProduct}
-          onChange={() => {
-            updateReview(state => ({
-              reviewRecommendProduct: !state.reviewRecommendProduct
-            }))
-          }}
-          htmlFor='reviewRecommendProduct'
-          label='Would you recommend this product?'
-          name='reviewRecommendProduct'
-        />
-
         <ProductRatingField
           className='pl-0-first w-70'
           mt={{ sm: 0, xs: 16 }}
-          name='reviewRating'
+          name='rating'
           onChange={({ target }: EventHandlers.Change.Input) => {
-            updateReview({ reviewRating: JSON.parse(target.value) })
+            updateReview({ rating: JSON.parse(target.value) })
           }}
         />
       </FlexBox>

@@ -117,29 +117,4 @@ export async function axiosShopify<T = ANYTHING>(
   return await axios<T>(config, true)
 }
 
-/**
- * Make requests to the Stamped.io API. If passed, {@param config.auth} and
- * {@param config.baseURL}, and {@param config.headers} will be overriden.
- *
- * @see https://developers.stamped.io/
- *
- * @param config - Axios request config
- * @throws {FeathersError}
- */
-export async function axiosStamped<T = ANYTHING>(
-  config: Omit<AxiosRequestConfig, 'auth' | 'baseURL' | 'headers'> = {}
-): Promise<T> {
-  return await axios<T>({
-    ...config,
-    auth: {
-      password: process.env.SHOPIFY_STAMPED_API_KEY_PRIVATE || '',
-      username: process.env.SHOPIFY_STAMPED_API_KEY_PUBLIC || ''
-    },
-    baseURL: 'https://stamped.io/api/',
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded'
-    }
-  })
-}
-
 export default Axios

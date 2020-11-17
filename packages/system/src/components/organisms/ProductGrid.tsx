@@ -1,5 +1,5 @@
 import { useMutatedProps } from '@system/hooks'
-import { getProductCardProps } from '@system/utils'
+import { uuid } from '@system/utils'
 import React, { FC } from 'react'
 import { IProductListing } from 'shopify-api-node'
 import { Column, Row, RowProps } from '../atoms'
@@ -32,11 +32,9 @@ export const ProductGrid: FC<ProductGridProps> = (props: ProductGridProps) => {
   return (
     <Row {...mutated}>
       {products.map(product => {
-        const card = getProductCardProps(product)
-
         return (
-          <Column key={card.id}>
-            <ProductCard {...card} />
+          <Column key={uuid()}>
+            <ProductCard product={product} />
           </Column>
         )
       })}

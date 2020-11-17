@@ -1,4 +1,4 @@
-import products from '@app-tests/__mocks__/data/product-listings.mock.json'
+import { PRODUCTS } from '@system-mocks/utils'
 import {
   Heading,
   ProductHeading,
@@ -6,6 +6,7 @@ import {
 } from '@system/components'
 import { StoryFN } from '@system/types/storybook'
 import React from 'react'
+import { IProductListing } from 'shopify-api-node'
 
 /**
  * @file Stories - ProductHeading
@@ -33,10 +34,9 @@ export const AshTray: StoryFN<ProductHeadingProps> = (
   args: ProductHeadingProps
 ) => <ProductHeading {...args} />
 
-const ash_tray_data = Object.assign(
-  {},
-  products.find(p => p.handle === 'ash-tray')
-)
+const ash_tray_data = PRODUCTS.find(
+  p => p.handle === 'ash-tray'
+) as IProductListing
 
 AshTray.args = {
   price: ash_tray_data.variants[0].price,

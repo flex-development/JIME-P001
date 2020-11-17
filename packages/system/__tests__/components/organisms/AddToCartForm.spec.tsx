@@ -81,12 +81,8 @@ it('does not update the carousel position if the product has one image', () => {
 
   const { title, variants } = Kustomz.args.product
 
-  const variant = variants[0]
-
   const visible = () => {
-    expect(
-      screen.getByAltText(`${title} - ${variant.title}`)
-    ).toBeInTheDocument()
+    expect(screen.getByAltText(title)).toBeInTheDocument()
   }
 
   // Get <select> element
@@ -96,7 +92,7 @@ it('does not update the carousel position if the product has one image', () => {
   visible()
 
   // Mock product variant selection
-  User.selectOptions(select, [`${variant.id}`])
+  User.selectOptions(select, [`${variants[0].id}`])
 
   // Expect default image to be visible because product has one image
   visible()

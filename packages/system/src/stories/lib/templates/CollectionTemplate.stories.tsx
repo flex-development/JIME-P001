@@ -1,9 +1,8 @@
-import collections from '@app-tests/__mocks__/data/collection-listings.mock.json'
-import products from '@app-tests/__mocks__/data/product-listings.mock.json'
+import collections from '@app-mocks/data/collection-listings.mock.json'
+import { PRODUCTS } from '@system-mocks/utils'
 import { CollectionTemplate, CollectionTemplateProps } from '@system/components'
 import { StoryFN } from '@system/types/storybook'
 import React from 'react'
-import { IProductListing } from 'shopify-api-node'
 
 /**
  * @file Stories - CollectionTemplate
@@ -32,6 +31,6 @@ export const Products: StoryFN<CollectionTemplateProps> = (
 Products.args = {
   ...CollectionTemplate?.defaultProps,
   body_html,
-  products: (products as unknown) as Array<IProductListing>,
+  products: PRODUCTS,
   title
 }

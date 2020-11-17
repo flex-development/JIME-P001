@@ -1,7 +1,7 @@
 import { IReview } from '@flex-development/types'
 import { useMutatedProps } from '@system/hooks'
 import { MutatedProps, TC } from '@system/types'
-import { getProductReviewProps } from '@system/utils'
+import { uuid } from '@system/utils'
 import React from 'react'
 import { IProductListing } from 'shopify-api-node'
 import { Heading, Main, Paragraph, Section } from '../atoms'
@@ -110,10 +110,7 @@ export const IndexTemplate: TC<IndexTemplateProps> = (
           <Heading size={2}>Reviews</Heading>
           <Carousel id='product-review-carousel' mt={12}>
             {reviews.map(review => (
-              <ProductReview
-                {...getProductReviewProps(review)}
-                key={review.id}
-              />
+              <ProductReview key={uuid()} review={review} />
             ))}
           </Carousel>
         </Section>

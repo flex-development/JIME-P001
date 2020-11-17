@@ -1,4 +1,4 @@
-import products from '@app-tests/__mocks__/data/product-listings.mock.json'
+import { PRODUCTS } from '@system-mocks/utils'
 import { AddToCartForm, AddToCartFormProps } from '@system/components'
 import { StoryFN } from '@system/types/storybook'
 import React from 'react'
@@ -21,8 +21,6 @@ export default {
   },
   title: 'Library/Organisms/AddToCartForm'
 }
-
-const PRODUCTS = (products as unknown) as Array<IProductListing>
 
 export const AshTray: StoryFN<AddToCartFormProps> = (
   args: AddToCartFormProps

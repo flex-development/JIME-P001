@@ -1,4 +1,4 @@
-import items from '@app-mock-data/checkout-line-items.mock.json'
+import items from '@app-mocks/data/checkout-line-items.mock.json'
 import { CheckoutLineItem, CheckoutLineItemProps } from '@system/components'
 import { StoryFN } from '@system/types/storybook'
 import React from 'react'

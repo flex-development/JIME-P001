@@ -1,12 +1,13 @@
-import ReviewsMockRepoRoot from '@app-tests/__mocks__/data/reviews.mock.json'
+import items from '@app-mocks/data/checkout-line-items.mock.json'
+import { REVIEWS } from '@system-mocks/utils'
 import {
   Carousel,
   CarouselProps,
+  CheckoutLineItemProps,
   Image,
   ProductReview
 } from '@system/components'
 import { StoryFN } from '@system/types/storybook'
-import { getProductReviewProps } from '@system/utils'
 import React from 'react'
 
 /**
@@ -25,34 +26,22 @@ export default {
   title: 'Library/Organisms/Carousel'
 }
 
-const reviews = Object.values(ReviewsMockRepoRoot)
-
 export const ProductImages: StoryFN<CarouselProps> = (args: CarouselProps) => (
   <Carousel {...args} />
 )
 
 ProductImages.args = {
-  children: [
-    <Image
-      alt='Rolling Tray - FUNFETTI'
-      className='d-block w-100'
-      key='funfetti'
-      src='assets/rolling-tray-funfetti.png'
-    />,
-    <Image
-      alt='Rolling Tray - JELLY $LIDES'
-      className='d-block w-100'
-      key='jelly-slides'
-      src='assets/rolling-tray-jelly-slides.png'
-    />,
-    <Image
-      alt='Rolling Tray - LA $ONRISA'
-      className='d-block w-100'
-      key='la-sonrisa'
-      src='assets/rolling-tray-la-sonrisa.png'
-    />
-  ],
-  position: 2,
+  children: items.map((item: CheckoutLineItemProps) => {
+    return (
+      <Image
+        alt={item.image.alt || item.item.title}
+        className='d-block w-100'
+        key={item.item.key}
+        src={item.image.src}
+      />
+    )
+  }),
+  position: items.length - 1,
   style: {
     maxHeight: '600px',
     maxWidth: '438px'
@@ -64,8 +53,8 @@ export const ProductReviews: StoryFN<CarouselProps> = (args: CarouselProps) => (
 )
 
 ProductReviews.args = {
-  children: reviews.map(review => (
-    <ProductReview {...getProductReviewProps(review)} key={review.id} />
+  children: REVIEWS.map(review => (
+    <ProductReview review={review} key={`review-${review.id}`} />
   )),
   style: {
     maxWidth: '1362px'

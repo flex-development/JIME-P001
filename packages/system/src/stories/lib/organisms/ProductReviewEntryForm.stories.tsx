@@ -1,11 +1,10 @@
-import products from '@app-tests/__mocks__/data/product-listings.mock.json'
+import { PRODUCTS } from '@system-mocks/utils'
 import {
   ProductReviewEntryForm,
   ProductReviewEntryFormProps
 } from '@system/components'
 import { StoryFN } from '@system/types/storybook'
 import React from 'react'
-import { IProductListing } from 'shopify-api-node'
 
 /**
  * @file Stories - ProductReviewEntryForm
@@ -20,7 +19,6 @@ export default {
   title: 'Library/Organisms/ProductReviewEntryForm'
 }
 
-const PRODUCTS = (products as unknown) as Array<IProductListing>
 const ashtray_data = PRODUCTS.find(p => p.handle === 'ash-tray')
 
 export const AshTray: StoryFN<ProductReviewEntryFormProps> = (

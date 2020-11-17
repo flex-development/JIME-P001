@@ -1,8 +1,7 @@
-import products from '@app-tests/__mocks__/data/product-listings.mock.json'
+import { PRODUCTS } from '@system-mocks/utils'
 import { ProductGrid, ProductGridProps } from '@system/components'
 import { StoryFN } from '@system/types/storybook'
 import React from 'react'
-import { IProductListing } from 'shopify-api-node'
 
 /**
  * @file Stories - ProductGrid
@@ -27,5 +26,5 @@ export const Default: StoryFN<ProductGridProps> = (args: ProductGridProps) => (
 )
 
 Default.args = {
-  products: (products as unknown) as Array<IProductListing>
+  products: PRODUCTS
 }

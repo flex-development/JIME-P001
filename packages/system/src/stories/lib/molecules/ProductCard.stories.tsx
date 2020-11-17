@@ -1,8 +1,8 @@
-import products from '@app-tests/__mocks__/data/product-listings.mock.json'
+import { PRODUCTS } from '@system-mocks/utils'
 import { ProductCard, ProductCardProps } from '@system/components'
 import { StoryFN } from '@system/types/storybook'
-import { getProductCardProps } from '@system/utils'
 import React from 'react'
+import { IProductListing } from 'shopify-api-node'
 
 /**
  * @file Stories - ProductCard
@@ -26,10 +26,14 @@ export const AshTray: StoryFN<ProductCardProps> = (args: ProductCardProps) => (
   <ProductCard {...args} />
 )
 
-AshTray.args = getProductCardProps(products[0])
+AshTray.args = {
+  product: PRODUCTS.find(p => p.handle === 'ash-tray') as IProductListing
+}
 
 export const Kustomz: StoryFN<ProductCardProps> = (args: ProductCardProps) => (
   <ProductCard {...args} />
 )
 
-Kustomz.args = getProductCardProps(products[2])
+Kustomz.args = {
+  product: PRODUCTS.find(p => p.handle === 'kustomz') as IProductListing
+}

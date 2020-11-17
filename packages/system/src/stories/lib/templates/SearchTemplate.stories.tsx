@@ -1,8 +1,7 @@
-import products from '@app-tests/__mocks__/data/product-listings.mock.json'
+import { PRODUCTS } from '@system-mocks/utils'
 import { SearchTemplate, SearchTemplateProps } from '@system/components'
 import { StoryFN } from '@system/types/storybook'
 import React from 'react'
-import { IProductListing } from 'shopify-api-node'
 
 /**
  * @file Stories - SearchTemplate
@@ -27,5 +26,5 @@ export const Search: StoryFN<SearchTemplateProps> = (
 ) => <SearchTemplate {...args} />
 
 Search.args = {
-  results: (products as unknown) as Array<IProductListing>
+  results: PRODUCTS
 }

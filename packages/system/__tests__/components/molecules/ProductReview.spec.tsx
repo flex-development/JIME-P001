@@ -15,12 +15,14 @@ it('renders without crashing', () => {
 
 it('displays the product review title', () => {
   const { getByText } = render(<Default {...Default.args} />)
+  const { title } = Default.args.review
 
-  expect(getByText(Default.args.title)).toHaveClass('product-review-title')
+  expect(getByText(title)).toHaveClass('product-review-title')
 })
 
 it('displays the product review body', () => {
   const { getByText } = render(<Default {...Default.args} />)
+  const { body } = Default.args.review
 
-  expect(getByText(Default.args.body)).toHaveClass('product-review-body')
+  expect(getByText(body)).toHaveClass('product-review-body')
 })

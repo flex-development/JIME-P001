@@ -31,4 +31,5 @@ const formatPrice = (
   return new Intl.NumberFormat('en-US', options).format(value)
 }
 
-export { formatPrice as default, IntlNumberFormatOptionsCurrency }
+export default formatPrice
+export type { IntlNumberFormatOptionsCurrency }

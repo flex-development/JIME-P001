@@ -11,9 +11,9 @@ module.exports = {
       {
         alias: {
           '@app': './src',
-          '@app-mock-data': './__tests__/__mocks__/data',
-          '@app-tests': './__tests__',
-          '@system': '../system/src'
+          '@app-mocks': './__tests__/__mocks__',
+          '@system': '../system/src',
+          '@system-mocks': '../system/__tests__/__mocks__'
         }
       }
     ]

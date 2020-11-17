@@ -35,7 +35,7 @@
     "lint": "eslint . --ext js,ts,tsx --fix --cache",
     "dev:app": "lerna run dev --scope @flex-development/morenaskustomz",
     "dev:ui": "lerna run dev --scope @flex-development/kustomzdesign",
-    "dev": "run-p dev:*",
+    "dev": "lerna run dev",
     "test:app": "lerna run test:exec --scope @flex-development/morenaskustomz",
     "test:ui": "lerna run test --scope @flex-development/kustomzdesign",
     "test": "run-p test:* || true",

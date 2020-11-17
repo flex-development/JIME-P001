@@ -1,14 +1,11 @@
-import products from '@app-tests/__mocks__/data/product-listings.mock.json'
 import { useProductVariants } from '@system/hooks/useProductVariants'
 import { act, renderHook } from '@testing-library/react-hooks'
-import { IProductListing } from 'shopify-api-node'
+import { PRODUCTS } from '../__mocks__/utils'
 
 /**
  * @file Tests - useProductVariants
  * @module tests/hooks/useProductVariants
  */
-
-const PRODUCTS = (products as unknown) as Array<IProductListing>
 
 it('selected variant is an empty object ({}) when `initialVariants` is an empty array ([])', () => {
   const variants = []

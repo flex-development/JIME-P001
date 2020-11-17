@@ -2,7 +2,6 @@ import { ANYTHING, IReview } from '@flex-development/types'
 import { useMutatedProps } from '@system/hooks'
 import { EventHandlers, MutatedProps, TC } from '@system/types'
 import { uuid } from '@system/utils'
-import productReviewProps from '@system/utils/getProductReviewProps'
 import { chunk } from 'lodash'
 import React, { useState } from 'react'
 import { IProductListing, IProductListingVariant } from 'shopify-api-node'
@@ -124,9 +123,9 @@ export const ProductTemplate: TC<ProductTemplateProps> = (
             <FlexBox direction='column' key={uuid()}>
               {chunk.map((review, i: number) => (
                 <ProductReview
-                  {...productReviewProps(review)}
                   key={uuid()}
                   mb={i === chunk.length - 1 ? 0 : 36}
+                  review={review}
                 />
               ))}
             </FlexBox>

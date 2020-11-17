@@ -13,36 +13,9 @@ import { Box, BoxProps, Column, Image, Link, Paragraph } from '../atoms'
  */
 export interface ProductReviewProps extends Omit<BoxProps, 'id'> {
   /**
-   * Product review text.
-   *
-   * @default ''
+   * Product review data.
    */
-  body: IReview['body']
-
-  /**
-   * Unique product review ID.
-   */
-  id: IReview['id']
-
-  /**
-   * Image URL of the product being reviewed.
-   */
-  product_image_url?: IReview['product_image_url']
-
-  /**
-   * Title of the product being reviewed.
-   */
-  product_title: IReview['product_title']
-
-  /**
-   * Link to the page of the product being reviewed.
-   */
-  product_url: IReview['product_url']
-
-  /**
-   * Review title.
-   */
-  title: IReview['title']
+  review: IReview
 }
 
 /**
@@ -54,15 +27,16 @@ export interface ProductReviewProps extends Omit<BoxProps, 'id'> {
 export const ProductReview: FC<ProductReviewProps> = (
   props: ProductReviewProps
 ) => {
+  const { review, ...rest } = props
+
   const {
     body,
     id,
     product_image_url,
     product_title,
     product_url,
-    title,
-    ...rest
-  } = props
+    title
+  } = review
 
   const mutated = useMutatedProps<typeof rest>(rest, 'product-review')
 
@@ -90,6 +64,4 @@ export const ProductReview: FC<ProductReviewProps> = (
 
 ProductReview.displayName = 'ProductReview'
 
-ProductReview.defaultProps = {
-  body: ''
-}
+ProductReview.defaultProps = {}

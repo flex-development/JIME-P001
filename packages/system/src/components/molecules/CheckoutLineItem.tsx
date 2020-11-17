@@ -1,8 +1,12 @@
-import { ANYTHING } from '@flex-development/types'
-import { useLineItemInput, useMutatedProps } from '@system/hooks'
+import {
+  ANYTHING,
+  CheckoutLineItemDisplay,
+  CheckoutLineItemInput
+} from '@flex-development/types'
+import { useCheckoutLineItemInput, useMutatedProps } from '@system/hooks'
 import { EventHandlers } from '@system/types'
 import React, { FC, Fragment } from 'react'
-import { AttributeInput, CustomAttribute, LineItem } from 'shopify-buy'
+import { IProductImage } from 'shopify-api-node'
 import {
   BoxProps,
   Button,
@@ -21,75 +25,30 @@ import { ProductHeading } from './ProductHeading'
  * @module components/molecules/CheckoutLineItem
  */
 
-/**
- * `CheckoutLineItem` component properties.
- */
 export interface CheckoutLineItemProps extends BoxProps {
-  /**
-   * Additional line item properties.
-   *
-   * @default []
-   */
-  customAttributes?: CustomAttribute[]
-
-  /**
-   * Line item ID.
-   */
-  id: string
-
-  /**
-   * The total price of the line item.
-   */
-  linePrice: LineItem['linePrice']
-
-  /**
-   * Product variant image properties. If this attribute is undefined, a
-   * placeholder image will be displayed instead.
-   */
-  image: Partial<LineItem['image']>
-
-  /**
-   * Number of variants to order.
-   *
-   * @default 1
-   */
-  quantity?: LineItem['quantity']
-
   /**
    * `onClick` handler that's fired when the user clicks the "REMOVE" button.
    */
   handleRemove?(event?: EventHandlers.Click.Button): ANYTHING
 
   /**
-   * Title of variant's parent product.
-   */
-  title: LineItem['title']
-
-  /**
    * `onChange` handler that's fired when the user updates the line item
    * quantity.
-   *
-   * @param updates - Updated line item values
-   * @param updates.key - Name of a custom attribute
-   * @param updates.quantity - Number of variants to order
-   * @param updates.value - Value of {@param updates.key}
-   * @param updates.variantId - ID of the variant the
-   * @param event - `change` event from quantity input
    */
   handleUpdate?(
-    item: AttributeInput,
+    updates: CheckoutLineItemInput,
     event?: EventHandlers.Change.Input
   ): ANYTHING
 
   /**
-   * ID of line item variant.
+   * Variant display image.
    */
-  variantId: LineItem['variantId']
+  image: Partial<IProductImage>
 
   /**
-   * Title of the product variant to order.
+   * `ICheckoutLineItem` object display properties.
    */
-  variantTitle: LineItem['variantTitle']
+  item: CheckoutLineItemDisplay
 }
 
 /**
@@ -101,54 +60,49 @@ export interface CheckoutLineItemProps extends BoxProps {
  *
  * **TODO**:
  *
- * - ? Allow users to update custom attributes for line item
+ * - Calculate line item price with custom properties
  */
 export const CheckoutLineItem: FC<CheckoutLineItemProps> = (
   props: CheckoutLineItemProps
 ) => {
   const {
-    customAttributes = [],
     handleRemove = () => console.log(`TODO: CheckoutLineItem.handleRemove`),
-    handleUpdate = updates => console.log(`Updated ${item.variantId}`, updates),
+    handleUpdate = () => console.log(`TODO: CheckoutLineItem.handleUpdate`),
     image,
-    linePrice,
-    quantity,
-    title,
-    variantId,
-    variantTitle,
+    item,
     ...rest
   } = props
 
-  // Initialize line item state
-  const { input: item, updateQuantity } = useLineItemInput(
-    variantId,
-    quantity,
-    customAttributes
-  )
-
+  // Get outer component properties
   const mutated = useMutatedProps<typeof rest>(rest, 'line-item')
 
+  // Handle line item state
+  const { input, updateQuantity } = useCheckoutLineItemInput(item)
+
+  // Get parent product title
+  const { 0: product_title, 1: variant_title } = item.title.split(' - ')
+
   return (
-    <FlexBox {...mutated}>
+    <FlexBox {...mutated} id={item.key}>
       <Column mb={{ md: 0, xs: 24 }} md={3} xs={12}>
-        <Image alt={`${title}`} fluid src={image.src as string} />
+        <Image alt={image.alt || item.title} fluid src={image.src} />
       </Column>
       <Column pl={{ md: 24, xs: 0 }}>
         <ProductHeading
           className='line-item-heading'
           mb={0}
-          price={linePrice}
+          price={input.quantity * JSON.parse(item.price)}
           size={3}
-          title={title}
+          title={product_title}
         />
 
         <Paragraph className='line-item-attribute' mb={24} mt={12}>
           {
             /* eslint-disable prettier/prettier */
-            customAttributes[0]?.value ? (
+            input.properties?.kpd ? (
               <Fragment>
                 Kustom product description:&nbsp;
-                <Span>{customAttributes[0]?.value}</Span>
+                <Span>{input.properties.kpd}</Span>
               </Fragment>
             ) : (
                 'No Kustomizations.'
@@ -167,19 +121,22 @@ export const CheckoutLineItem: FC<CheckoutLineItemProps> = (
               className='line-item-title'
               name='title'
               readOnly
-              value={variantTitle}
+              value={variant_title}
             />
 
             <LabeledFormControl
               className='line-item-quantity'
               control={{
                 'aria-label': 'Line item quantity',
-                min: 0,
+                min: 1,
                 name: 'quantity',
                 onChange: (event: EventHandlers.Change.Input) => {
-                  const updated_item: AttributeInput = {
-                    quantity: (event.target.value as unknown) as number,
-                    variantId: item.variantId as string
+                  const new_quantity = JSON.parse(event.target.value)
+
+                  const updated_item: CheckoutLineItemInput = {
+                    properties: input.properties,
+                    quantity: new_quantity < 1 ? 1 : new_quantity,
+                    variant_id: input.variant_id
                   }
 
                   updateQuantity(updated_item.quantity)
@@ -187,7 +144,7 @@ export const CheckoutLineItem: FC<CheckoutLineItemProps> = (
                   return handleUpdate(updated_item, event)
                 },
                 type: 'number',
-                value: item.quantity
+                value: input.quantity
               }}
             >
               Quantity
@@ -199,7 +156,7 @@ export const CheckoutLineItem: FC<CheckoutLineItemProps> = (
             name='remove'
             mt={{ md: 0, xs: 24 }}
             px={20}
-            value={rest.id}
+            value={item.key}
           >
             Remove
           </Button>
@@ -211,6 +168,4 @@ export const CheckoutLineItem: FC<CheckoutLineItemProps> = (
 
 CheckoutLineItem.displayName = 'CheckoutLineItem'
 
-CheckoutLineItem.defaultProps = {
-  quantity: 1
-}
+CheckoutLineItem.defaultProps = {}

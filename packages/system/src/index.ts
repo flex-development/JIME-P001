@@ -5,7 +5,7 @@
  * @todo [DOC] ProductReviewEntryForm - Update documentation
  * @todo [DOC] Storybook Types - Update documentation
  * @todo [DOC] Typography - Update fonts weights and headings font config
- * @todo [FIX] Carousel - Reimplement carousel logic
+ * @todo [FIX] Carousel - https://github.com/flex-development/JIME-P001/issues/7
  * @todo [TEST] ProductReview - Add unit tests for invalid form state
  * @todo [TEST] PlaylistBar - Test callback functions
  * @todo [TEST] SearchBar - Test callback functions

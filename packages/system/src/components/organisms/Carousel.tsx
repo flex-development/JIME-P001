@@ -1,8 +1,7 @@
-import { useCarouselPlugin, useMutatedProps } from '@system/hooks'
+import { useActiveIndex, useMutatedProps } from '@system/hooks'
 import { uuid } from '@system/utils'
-import { CarouselOption } from 'bootstrap'
 import classnames from 'classnames'
-import React, { Children, FC, ReactElement, useEffect, useRef } from 'react'
+import React, { Children, FC, ReactElement } from 'react'
 import { Box, BoxProps, Item, ItemProps, List } from '../atoms'
 
 /**
@@ -10,80 +9,18 @@ import { Box, BoxProps, Item, ItemProps, List } from '../atoms'
  * @module components/organisms/Carousel
  */
 
-export interface CarouselProps extends BoxProps, CarouselOption {
+export interface CarouselProps extends BoxProps {
   /**
    * Components to render as `Carousel` items.
    */
   children: ReactElement[]
 
   /**
-   * The amount of time to delay between automatically cycling an item. If
-   * false, carousel will not automatically cycle.
-   *
-   * @default false
-   */
-  interval?: false | number
-
-  /**
-   * Indiciates if the carousel should react to keyboard events.
-   *
-   * @default true
-   */
-  keyboard?: boolean
-
-  /**
-   * If set to `hover`, pauses the cycling of the carousel on `mouseenter` and
-   * resumes the cycling of the carousel on `mouseleave`.
-   *
-   * If set to `false`, hovering over the carousel won't pause it.
-   *
-   * On touch-enabled devices, when set to `hover`, cycling will pause on
-   * `touchend` (once the user finished interacting with the carousel)
-   * for two intervals, before automatically resuming. Note that this is in
-   * addition to the above mouse behavior.
-   *
-   * @default 'hover'
-   */
-  pause?: 'hover' | false
-
-  /**
    * Index position of the slide to display first.
+   *
+   * @default 0
    */
   position?: number
-
-  /**
-   * Autoplays the carousel after the user manually cycles the first item.
-   * If `carousel`, autoplays the carousel on load.
-   *
-   * @default 'carousel'
-   */
-  ride?: 'carousel' | boolean
-
-  /**
-   * Use to easily control the position of the carousel. It accepts the keywords
-   * prev or next, which alters the slide position relative to its current
-   * position.
-   *
-   * Alternatively, use `data-slide-to` to pass a raw slide index to
-   * the carousel.
-   *
-   * @default false
-   */
-  slide?: 'next' | 'prev' | false
-
-  /**
-   * If `true`, support left/right swipe interactions on touchscreen devices.
-   *
-   * @default true
-   */
-  touch?: boolean
-
-  /**
-   * Indicates if the carousel should cycle continuously or have hard stops.
-   *
-   * @default true
-   */
-  wrap?: boolean
 }
 
 export interface CarouselIndicatorProps extends ItemProps {
@@ -122,8 +59,9 @@ const CarouselItem: FC<CarouseItemProps> = (props: CarouseItemProps) => {
 }
 
 /**
- * Slideshow component for cycling through elements. Renders a `Box` component
- * with the class `carousel`.
+ * Slideshow component for cycling through elements.
+ *
+ * Renders a `Box` component with the class `carousel`.
  *
  * - https://v5.getbootstrap.com/docs/5.0/components/carousel
  */
@@ -131,51 +69,27 @@ export const Carousel: FC<CarouselProps> & {
   CarouselIndicator: typeof CarouselIndicator
   CarouselItem: typeof CarouselItem
 } = (props: CarouselProps) => {
-  const {
-    children,
-    interval,
-    keyboard,
-    pause,
-    position,
-    ride,
-    slide,
-    touch,
-    wrap,
-    ...rest
-  } = props
+  const { children, position, ...rest } = props
 
   // Handle props and inject class
   const mutated = useMutatedProps<typeof rest>(rest, 'carousel')
 
-  // Bootstrap carousels require an ID
-  mutated.id = mutated.id || uuid('carousel')
-
   // Carousel items - useMutatedProps converts props.children into an array
   const items = Children.toArray(children) as CarouselProps['children']
 
-  // Ref to attach Bootstrap Carousel to
-  const ref = useRef<HTMLDivElement | null>(null)
-
-  // Initialize Bootstrap Carousel plugin
-  const { isActive, setActive } = useCarouselPlugin<HTMLDivElement>(
-    ref,
-    { interval, keyboard, pause, ride, slide, touch, wrap },
-    position && position >= 0 && position <= items.length - 1 ? position : null
-  )
-
-  // Update carousel position if props.position changes
-  useEffect(() => {
-    if (position) setActive(position)
-  }, [position, setActive])
+  // Handle active carousel item index
+  const { isActive, setIndex } = useActiveIndex(position, {
+    upperLimit: items.length - 1
+  })
 
   return (
-    <Box {...mutated} ref={ref}>
+    <Box {...mutated}>
       <Box className='carousel-inner'>
         {items.map((child: ReactElement, i: number) => (
           <CarouselItem
             active={isActive(i)}
             key={uuid()}
-            onClick={() => setActive(i)}
+            onClick={() => setIndex(i)}
           >
             {child}
           </CarouselItem>
@@ -187,7 +101,7 @@ export const Carousel: FC<CarouselProps> & {
             <CarouselIndicator
               active={isActive(i)}
               key={uuid()}
-              onClick={() => setActive(i)}
+              onClick={() => setIndex(i)}
             />
           ))}
         </List>
@@ -203,11 +117,5 @@ Carousel.displayName = 'Carousel'
 
 Carousel.defaultProps = {
   children: [],
-  interval: false,
-  keyboard: true,
-  pause: 'hover',
-  ride: 'carousel',
-  slide: false,
-  touch: true,
-  wrap: true
+  position: 0
 }

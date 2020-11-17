@@ -1,11 +1,14 @@
-import { ANYTHING } from '@flex-development/types'
-import { useLineItemInput, useProductVariants } from '@system/hooks'
+import { ANYTHING, CheckoutLineItemInput } from '@flex-development/types'
+import {
+  useActiveIndex,
+  useCheckoutLineItemInput,
+  useProductVariants
+} from '@system/hooks'
 import { EventHandlers } from '@system/types'
 import { getProductVariantImage, uuid } from '@system/utils'
 import { findIndex, isEmpty } from 'lodash'
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC } from 'react'
 import { IProductListing, IProductListingVariant } from 'shopify-api-node'
-import { LineItemToAdd } from 'shopify-buy'
 import {
   Button,
   Column,
@@ -33,7 +36,7 @@ export interface AddToCartFormProps extends FormProps {
    * be logged to the console.
    */
   handleSubmit?(
-    item: LineItemToAdd,
+    item: CheckoutLineItemInput,
     event: EventHandlers.Click.Button
   ): ANYTHING
 
@@ -59,7 +62,10 @@ export const AddToCartForm: FC<AddToCartFormProps> = (
   props: AddToCartFormProps
 ) => {
   const {
-    handleSubmit = (item: LineItemToAdd, event: EventHandlers.Click.Button) => {
+    handleSubmit = (
+      item: CheckoutLineItemInput,
+      event: EventHandlers.Click.Button
+    ) => {
       event.preventDefault()
       console.log(`TODO: AddToCartForm.handleSubmit`, item)
     },
@@ -81,18 +87,20 @@ export const AddToCartForm: FC<AddToCartFormProps> = (
 
   // Initialize line item state
   // This object will be passed to props.addToCart if the fn is defined
-  const { input: item, updateAttribute, updateQuantity } = useLineItemInput(
-    selected.id
-  )
+  const {
+    input: item,
+    updateProperties,
+    updateQuantity
+  } = useCheckoutLineItemInput({
+    properties: null,
+    quantity: 1,
+    variant_id: selected.id
+  })
 
   // Carousel position state
-  const [position, setPosition] = useState<number>(0)
-
-  // Update carousel position
-  useEffect(() => {
-    const pos = findIndex(variants, variant => variant.id === selected.id)
-    setPosition(pos >= product.images.length ? 0 : pos)
-  }, [product.images.length, selected, variants])
+  const { active, setIndex: setCarouselPosition } = useActiveIndex(0, {
+    upperLimit: product.images.length - 1
+  })
 
   return (
     <Form {...rest} className='add-to-cart-form'>
@@ -103,25 +111,25 @@ export const AddToCartForm: FC<AddToCartFormProps> = (
         xs={1}
       >
         <Column mb={{ md: 0, xs: 36 }} md={4} xs>
-          <Carousel position={position}>
-            {variants.map(({ image_id, title }: IProductListingVariant) => (
-              <Image
-                {...getProductVariantImage(
-                  image_id,
-                  product.images,
-                  `${product.title} - ${title}`
-                )}
-                className='d-block w-100'
-                key={uuid()}
-              />
-            ))}
+          <Carousel position={active}>
+            {product.images.map(({ id }) => {
+              const variant = variants.find(({ image_id }) => image_id === id)
+
+              const image = getProductVariantImage(
+                variant?.image_id || null,
+                product.images,
+                variant ? `${product.title} - ${variant?.title}` : product.title
+              )
+
+              return <Image {...image} className='d-block w-100' key={uuid()} />
+            })}
           </Carousel>
         </Column>
         <Column md={8} xs>
           {/* Product title and variant price */}
           <ProductHeading
             mb={no_description ? 16 : 4}
-            price={selected.price}
+            price={item.quantity * selected.price}
             title={product.title}
             size={2}
           />
@@ -142,10 +150,19 @@ export const AddToCartForm: FC<AddToCartFormProps> = (
             <Select
               aria-label='Product variant selection'
               data-selected={selected.title}
-              name='variantId'
+              name='variant_id'
               onChange={({ target }: EventHandlers.Change.Select) => {
-                selectVariant(JSON.parse(target.value))
-                if (handleVariant) handleVariant(JSON.parse(target.value))
+                const variant_id = JSON.parse(target.value)
+                const variant = variants.find(({ id }) => id === variant_id)
+
+                const pos = findIndex(product.images, ({ id }) => {
+                  return id === variant?.image_id
+                })
+
+                selectVariant(variant_id)
+                setCarouselPosition(pos)
+
+                if (handleVariant) handleVariant(variant_id)
               }}
               options={product_variant_options}
               placeholder='Select an option'
@@ -156,10 +173,9 @@ export const AddToCartForm: FC<AddToCartFormProps> = (
               control={{
                 'aria-label': 'Product quantity',
                 min: 0,
-                onChange: ({
-                  target: { value }
-                }: EventHandlers.Change.Input) => {
-                  return updateQuantity(value)
+                onChange: ({ target }: EventHandlers.Change.Input) => {
+                  const value = JSON.parse(target.value)
+                  return updateQuantity(value < 1 ? 1 : value)
                 },
                 type: 'number',
                 value: item.quantity
@@ -175,11 +191,11 @@ export const AddToCartForm: FC<AddToCartFormProps> = (
               <TextArea
                 aria-label='Kustom product description'
                 onChange={({ target }: EventHandlers.Change.TextArea) => {
-                  return updateAttribute(target.name, target.value)
+                  return updateProperties({ [target.name]: target.value })
                 }}
                 name='kpd'
                 placeholder='Describe your kustom ash or rolling tray'
-                value={item.customAttributes?.[0]?.value}
+                value={item.properties?.kpd}
               />
             </Row>
           )}

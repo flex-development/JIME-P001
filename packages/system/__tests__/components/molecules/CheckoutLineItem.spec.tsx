@@ -32,6 +32,6 @@ it('[FALSE ALARM] updates the product quantity', () => {
   fireEvent.keyPress(input, { key: 'ArrowUp' })
 
   // Expect element with new quanity as value to be in the document
-  const initial_quantity = Kustomz.args.quantity || 1
+  const initial_quantity = Kustomz.args.item.quantity || 1
   expect((input as HTMLInputElement).value).toBe(`${initial_quantity + 1}`)
 })

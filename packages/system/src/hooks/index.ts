@@ -3,12 +3,11 @@
  * @module hooks
  */
 
-export * from './useCarouselPlugin'
+export * from './useActiveIndex'
+export * from './useCheckoutLineItemInput'
 export * from './useColumn'
-export * from './useCustomAttributes'
 export * from './useFlexbox'
 export * from './useIcon'
-export * from './useLineItemInput'
 export * from './useMutatedProps'
 export * from './useProductVariants'
 export * from './useQuantity'

@@ -33,12 +33,12 @@ export const AshTray: StoryFN<ProductHeadingProps> = (
   args: ProductHeadingProps
 ) => <ProductHeading {...args} />
 
-const { variants, title } = Object.assign(
+const ash_tray_data = Object.assign(
   {},
   products.find(p => p.handle === 'ash-tray')
 )
 
 AshTray.args = {
-  price: variants[0].price,
-  title: title
+  price: ash_tray_data.variants[0].price,
+  title: ash_tray_data.title
 }

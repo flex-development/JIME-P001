@@ -1,6 +1,6 @@
 import { FirebaseAdaptor, RTDRepository as Repo } from '@app/subdomains/app'
 import { ICMSMenu, ICMSPage } from '@app/subdomains/cms/interfaces'
-import { IReview } from 'packages/types/src'
+import { IReview } from '@flex-development/types'
 import MockCarsRepoRoot from './data/cars.mock.json'
 import MockMenusRepoRoot from './data/menus.mock.json'
 import MockPagesRepoRoot from './data/pages.mock.json'

@@ -5,6 +5,10 @@
 
 export { default as breakpointInfix } from './breakpointInfix'
 export { default as createResponsiveUtility } from './createResponsiveUtility'
+export {
+  default as formatPrice,
+  IntlNumberFormatOptionsCurrency
+} from './formatPrice'
 export { default as getProductCardProps } from './getProductCardProps'
 export { default as getProductReviewProps } from './getProductReviewProps'
 export { default as getProductVariantImage } from './getProductVariantImage'

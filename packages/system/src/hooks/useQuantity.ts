@@ -1,5 +1,4 @@
 import { sanitizeQuantity } from '@system/utils'
-import { isNumber } from 'lodash'
 import useNumber from 'react-hanger/array/useNumber'
 
 /**
@@ -8,9 +7,14 @@ import useNumber from 'react-hanger/array/useNumber'
  */
 
 /**
- * Functions to update the `useQuantity` state.
+ * `useQuantity` return type.
  */
-export type UseQuantityActions = {
+export type UseQuantity = {
+  /**
+   * Number of products to order.
+   */
+  quantity: number
+
   /**
    * Updates the `quantity` state.
    *
@@ -20,28 +24,13 @@ export type UseQuantityActions = {
 }
 
 /**
- * `useQuantity` state.
- */
-export type UseQuantityState = {
-  /**
-   * Number of products to order.
-   */
-  quantity: number
-}
-
-/**
- * `useQuantity` return type.
- */
-export type UseQuantity = UseQuantityActions & UseQuantityState
-
-/**
  * Maintains product quantity state.
  *
  * @param initialQuantity - Initial product quantity
  */
 export const useQuantity = (initialQuantity = 1): UseQuantity => {
   // Sanitize initial quantity
-  initialQuantity = isNumber(initialQuantity) ? initialQuantity : 1
+  if (initialQuantity < 0) initialQuantity = 0
 
   // Initialize state
   const [quantity, { setValue }] = useNumber(initialQuantity, { lowerLimit: 0 })

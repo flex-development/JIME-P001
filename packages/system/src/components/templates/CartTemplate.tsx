@@ -1,6 +1,6 @@
 import { useMutatedProps } from '@system/hooks'
 import { MutatedProps, TC } from '@system/types'
-import { uuid } from '@system/utils'
+import { formatPrice, uuid } from '@system/utils'
 import React from 'react'
 import { Box, FlexBox, Heading, Link, Main, Paragraph, Section } from '../atoms'
 import { CheckoutLineItem, CheckoutLineItemProps } from '../molecules'
@@ -23,7 +23,7 @@ export interface CartTemplateProps extends MutatedProps {
    *
    * @default []
    */
-  items?: CheckoutLineItemProps[]
+  items?: Array<CheckoutLineItemProps>
 
   /**
    * Cart subtotal.
@@ -43,7 +43,6 @@ export const CartTemplate: TC<CartTemplateProps> = (
   const { checkout_url, items = [], subtotal = '0.00', ...rest } = props
 
   const mutated = useMutatedProps<typeof rest>(rest, 'template')
-  const subtotal_formatted = `$${subtotal}`
 
   return (
     <Main {...mutated} data-template={CartTemplate.template_id}>
@@ -67,7 +66,7 @@ export const CartTemplate: TC<CartTemplateProps> = (
             mb={{ sm: 0, xs: 24 }}
             mr={{ sm: 20, xs: 0 }}
           >
-            Subtotal / {subtotal_formatted}
+            Subtotal / {formatPrice(subtotal)}
           </Paragraph>
           <Link className='checkout-btn' btn='primary' href={checkout_url}>
             Checkout

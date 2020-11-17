@@ -20,6 +20,7 @@
     "paths": {
       "@api/*": ["packages/app/src/pages/api/*"],
       "@app/*": ["packages/app/src/*"],
+      "@app-mock-data/*": ["packages/app/__tests__/__mocks__/data/*"],
       "@app-tests/*": ["packages/app/__tests__/*"],
       "@system/*": ["packages/system/src/*"]
     },

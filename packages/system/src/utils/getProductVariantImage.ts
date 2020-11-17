@@ -20,7 +20,7 @@ const getProductVariantImage = (
   images: IProductListing['images'],
   alt?: ImageProps['alt']
 ): ImageProps => {
-  const image = images.find(img => img.id === image_id)
+  const image = image_id ? images.find(img => img.id === image_id) : images[0]
 
   return {
     alt: alt || image?.alt,

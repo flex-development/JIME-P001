@@ -20,7 +20,7 @@ export default {
   },
   component: Carousel,
   parameters: {
-    jest: ['Carousel', 'useCarouselPlugin']
+    jest: ['Carousel', 'useActiveIndex']
   },
   title: 'Library/Organisms/Carousel'
 }

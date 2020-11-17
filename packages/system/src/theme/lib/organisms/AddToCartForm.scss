@@ -28,7 +28,7 @@
       @include element-size(rem(120), height);
     }
 
-    &-select[name='variantId'] {
+    &-select[name='variant_id'] {
       @include media-breakpoint-down(sm) {
         border-bottom: none;
       }

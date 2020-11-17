@@ -1,4 +1,4 @@
-import { AnyObject, ProductVariantResource } from '@flex-development/types'
+import { AnyObject } from '@flex-development/types'
 import { OptionProps } from '@system/components'
 import { isNumber } from 'lodash'
 import { useState } from 'react'
@@ -28,7 +28,7 @@ export type UseProductVariants = {
   /**
    * The selected product variant
    */
-  selected: ProductVariantResource | AnyObject
+  selected: IProductListingVariant | AnyObject
 
   /**
    * Array of product variant data.

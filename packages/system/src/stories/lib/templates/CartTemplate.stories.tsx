@@ -1,6 +1,6 @@
+import items from '@app-mock-data/checkout-line-items.mock.json'
 import { CartTemplate, CartTemplateProps } from '@system/components'
 import { StoryFN } from '@system/types/storybook'
-import items from '@system/__mocks__/items.mock.json'
 import React from 'react'
 
 /**

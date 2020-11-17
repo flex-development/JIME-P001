@@ -2,9 +2,6 @@
  * @file Package Entry Point
  * @author Lexus Drumgold <lex@flexdevelopment.llc>
  *
- * @todo [DOC] createResponsiveUtility - Add example usage and output
- * @todo [DOC] getResponsiveUtilities - Add example usage and output
- * @todo [DOC] ProductReviewEntryForm - Update documentation
  * @todo [DOC] ProductReviewEntryForm - Update documentation
  * @todo [DOC] Storybook Types - Update documentation
  * @todo [DOC] Typography - Update fonts weights and headings font config

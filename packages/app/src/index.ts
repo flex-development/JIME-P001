@@ -11,12 +11,8 @@
  * @todo [IMP] IPageProps - Update `page` type definition
  * @todo [IMP] PlaylistRepository - Set id value for all methods
  * @todo [IMP] ProfileSnippetRepository - Set id value for all methods
- * @todo [IMP] ShopLayout - Implement `ShopHeader`, `Sidebar`, and `PlaylistBar`
- * @todo [IMP] ShopLayout - Merge global metadata and page metadata
  * @todo [IMP] ShopLayout - Handle loading state
  * @todo [IMP] URLField - Implement validatation function
- * @todo [NEW] CMSPageMetadata, ICMSPageMetadata
- * @todo [NEW] SEOField
  */
 
 export default {}

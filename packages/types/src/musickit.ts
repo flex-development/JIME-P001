@@ -26,6 +26,24 @@ export type MusicKitPlaybackState =
 
 export type MusicKitPlayer = MusicKit.Player
 
+export type MusicKitSongAttributes = {
+  albumName: string
+  artistName: string
+  artwork: MusicKit.Artwork
+  composerName?: string
+  discNumber: number
+  durationInMillis: number
+  hasLyrics: boolean
+  genreNames: Array<string>
+  playParams: { id: string; kind: string }
+  previews: Array<Record<'url', string>>
+  isrc: string
+  name: string
+  trackNumber: number
+  releaseDate: string
+  url: string
+}
+
 export type MusicKitQueue = MusicKit.Queue
 
 export type MusicKitSetQueueOptions = MusicKit.SetQueueOptions

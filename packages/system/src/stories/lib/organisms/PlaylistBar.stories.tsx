@@ -1,3 +1,4 @@
+import SONGS from '@system-mocks/data/song-attributes.mock.json'
 import { PlaylistBar, PlaylistBarProps } from '@system/components'
 import { StoryFN } from '@system/types/storybook'
 import React from 'react'
@@ -20,10 +21,7 @@ export const Default: StoryFN<PlaylistBarProps> = (args: PlaylistBarProps) => (
 )
 
 Default.args = {
-  artistName: 'Fabolous',
-  artworkURL:
-    'https://images-na.ssl-images-amazon.com/images/I/814FrdIhipL._SL1425_.jpg',
-  title: 'Into You (feat. Ashanti)'
+  song: SONGS[3]
 }
 
 export const Playing: StoryFN<PlaylistBarProps> = (args: PlaylistBarProps) => (
@@ -31,9 +29,6 @@ export const Playing: StoryFN<PlaylistBarProps> = (args: PlaylistBarProps) => (
 )
 
 Playing.args = {
-  artistName: 'Fabolous',
-  artworkURL:
-    'https://images-na.ssl-images-amazon.com/images/I/814FrdIhipL._SL1425_.jpg',
-  playback_state: 'playing',
-  title: 'Into You (feat. Ashanti)'
+  playback: 'playing',
+  song: SONGS[1]
 }

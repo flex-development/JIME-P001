@@ -18,33 +18,34 @@ it('renders <section class="playlistbar">', () => {
 
 it('renders the song title', () => {
   const { getByText } = render(<Default {...Default.args} />)
+  const { name } = Default.args.song
 
-  expect(getByText(Default.args.title)).toHaveClass('playlistbar-title')
+  expect(getByText(name)).toHaveClass('playlistbar-song')
 })
 
 it('renders the song artist(s)', () => {
   const { getByText } = render(<Default {...Default.args} />)
+  const { artistName } = Default.args.song
 
-  expect(getByText(Default.args.artistName)).toHaveClass('playlistbar-artist')
+  expect(getByText(artistName)).toHaveClass('playlistbar-artist')
 })
 
 it('renders the song artwork', () => {
   const { getByAltText } = render(<Default {...Default.args} />)
+  const { name } = Default.args.song
 
   // ! Keep in sync with PlaylistBar implementation
-  const alt = `Artwork for ${Default.args.title}`
-
-  expect(getByAltText(alt)).toBeInTheDocument()
+  expect(getByAltText(`Artwork for ${name}`)).toBeInTheDocument()
 })
 
-it('renders a play icon in the playback button if props.playback_state !== "playing"', () => {
+it('renders play icon in the playback button if props.playback !== "playing"', () => {
   const { getByText } = render(<Default {...Default.args} />)
 
   // ! Keep in sync with PlaylistBar implementation
   expect(getByText('play_circle_outline')).toBeInTheDocument()
 })
 
-it('renders a pause icon in the playback button if props.playback_state === "paused"', () => {
+it('renders pause icon in the playback button if props.playback === "paused"', () => {
   const { getByText } = render(<Playing {...Playing.args} />)
 
   // ! Keep in sync with PlaylistBar implementation

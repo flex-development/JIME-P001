@@ -3,7 +3,8 @@ import {
   MusicKitInstance,
   MusicKitMediaItem,
   MusicKitQueue,
-  MusicKitSetQueueOptions
+  MusicKitSetQueueOptions,
+  MusicKitSongAttributes
 } from '@flex-development/types'
 import { isEmpty } from 'lodash'
 import { useEffect, useState } from 'react'
@@ -23,7 +24,7 @@ export type UsePlaylist = {
    * Returns the song attributes for the media item located at the indicated
    * array index.
    */
-  getSongAttributes(index: number): MusicKitMediaItem['attributes'] | null
+  getSongAttributes(index: number): MusicKitMediaItem['attributes'] | AnyObject
 
   /**
    * Starts playback of the next media item in the playback queue.
@@ -53,7 +54,7 @@ export type UsePlaylist = {
   /**
    * Array of song attributes for the current playlist.
    */
-  songs: Array<MusicKitMediaItem['attributes']>
+  songs: Array<MusicKitSongAttributes>
 }
 
 /**
@@ -86,7 +87,7 @@ export const usePlaylist = (
   }, [kit, setMusicKitQueue, setSongs, url])
 
   return {
-    getSongAttributes: (index: number) => songs[index] || null,
+    getSongAttributes: (index: number) => songs[index] || {},
     next: kit.skipToNextItem,
     pause: kit.pause,
     play: kit.play,

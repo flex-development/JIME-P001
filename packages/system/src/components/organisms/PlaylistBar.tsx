@@ -1,7 +1,7 @@
 import {
   ANYTHING,
-  MusicKitMediaItem,
-  MusicKitPlaybackState
+  MusicKitPlaybackState,
+  MusicKitSongAttributes
 } from '@flex-development/types'
 import { useMutatedProps } from '@system/hooks'
 import { EventHandlers, MutatedProps } from '@system/types'
@@ -24,16 +24,6 @@ import {
 
 export interface PlaylistBarProps extends MutatedProps {
   /**
-   * The artist(s) of the current song.
-   */
-  artistName: MusicKitMediaItem['artistName']
-
-  /**
-   * The artwork image for the current song.
-   */
-  artworkURL?: MusicKitMediaItem['artworkURL']
-
-  /**
    * Playback button handler.
    *
    * @param event - `click` event from playback button
@@ -55,12 +45,12 @@ export interface PlaylistBarProps extends MutatedProps {
    *
    * @default 'none'
    */
-  playback_state?: MusicKitPlaybackState
+  playback?: MusicKitPlaybackState
 
   /**
-   * The name of the current song.
+   * Attributes of the current song.
    */
-  title: MusicKitMediaItem['title']
+  song: MusicKitSongAttributes
 }
 
 /**
@@ -77,8 +67,6 @@ export interface PlaylistBarProps extends MutatedProps {
  */
 export const PlaylistBar: FC<PlaylistBarProps> = (props: PlaylistBarProps) => {
   const {
-    artistName,
-    artworkURL,
     handlePlayback = (event: EventHandlers.Click.Button) => {
       event.preventDefault && event.preventDefault()
       console.log(`Playback state: ${event.target.value}`)
@@ -87,22 +75,31 @@ export const PlaylistBar: FC<PlaylistBarProps> = (props: PlaylistBarProps) => {
       event.preventDefault && event.preventDefault()
       console.log(event.target.name)
     },
-    playback_state = 'playing',
-    title,
+    playback = 'none',
+    song,
     ...rest
   } = props
 
   const mutated = useMutatedProps<typeof rest>(rest, 'playlistbar')
 
+  let artwork_url = song.artwork.url.replace('{w}', `${song.artwork.width}`)
+  artwork_url = artwork_url.replace('{h}', `${song.artwork.height}`)
+
   return (
     <Section {...mutated}>
       <Column align='center' flex span={8}>
-        <Link className='playlistbar-artwork' href={artworkURL} target='_blank'>
-          <Image alt={`Artwork for ${title}`} fluid src={artworkURL} />
+        <Link
+          className='playlistbar-artwork'
+          href={artwork_url}
+          target='_blank'
+        >
+          <Image alt={`Artwork for ${song.name}`} fluid src={artwork_url} />
         </Link>
         <FlexBox direction='column'>
-          <Paragraph className='playlistbar-title'>{title}</Paragraph>
-          <Paragraph className='playlistbar-artist'>{artistName}</Paragraph>
+          <Paragraph className='playlistbar-song'>{song.name}</Paragraph>
+          <Paragraph className='playlistbar-artist'>
+            {song.artistName}
+          </Paragraph>
         </FlexBox>
       </Column>
 
@@ -117,12 +114,12 @@ export const PlaylistBar: FC<PlaylistBarProps> = (props: PlaylistBarProps) => {
         <Button
           className='playlistbar-control-playback'
           icon={((): IconProps => {
-            const prefix = playback_state === 'playing' ? 'pause' : 'play'
+            const prefix = playback === 'playing' ? 'pause' : 'play'
             return { children: `${prefix}_circle_outline` }
           })()}
           onClick={handlePlayback}
           name='playback'
-          value={playback_state}
+          value={playback}
           variant='ghost'
         />
         <Button
@@ -140,5 +137,5 @@ export const PlaylistBar: FC<PlaylistBarProps> = (props: PlaylistBarProps) => {
 PlaylistBar.displayName = 'PlaylistBar'
 
 PlaylistBar.defaultProps = {
-  playback_state: 'none'
+  playback: 'none'
 }

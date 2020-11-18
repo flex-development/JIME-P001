@@ -13,11 +13,11 @@ it('sets the default active index to 0', () => {
   expect(result.current.isActive(0)).toBeTruthy()
 })
 
-it('sets the default active index to 0 if args.intitialActive is an empty string', () => {
+it('sets the default active index to -1 if args.intitialActive is an empty string', () => {
   const { result } = renderHook(() => useActiveIndex(''))
 
-  expect(result.current.active).toBe(0)
-  expect(result.current.isActive(0)).toBeTruthy()
+  expect(result.current.active).toBe(-1)
+  expect(result.current.isActive(-1)).toBeTruthy()
 })
 
 it('updates the active index', () => {

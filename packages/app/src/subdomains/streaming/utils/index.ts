@@ -3,6 +3,6 @@
  * @module subdomains/streaming/utils
  */
 
-export default {}
+export { default as createDeveloperToken } from './createDeveloperToken'
 
 /* eslint-disable prettier/prettier */

@@ -47,9 +47,7 @@ export const ShopLayout: FC<ShopLayoutProps> = (props: ShopLayoutProps) => {
   const { modified: playlist_settings } = usePlaylistForm()
 
   // Handle playlist streaming
-  const playlist = usePlaylist(playlist_settings.url)
-
-  // if (playlist.play) playlist.play()
+  usePlaylist(playlist_settings.url, true)
 
   return (
     <Fragment>

@@ -26,7 +26,7 @@ export const useMusicKit = (): UseMusicKit => {
     if (!MusicKit) return
 
     const new_instance: UseMusicKit = MusicKit.configure({
-      app: { build: pkg.version, name: pkg.name },
+      app: { name: pkg.name, version: pkg.version },
       developerToken: createDeveloperToken()
     })
 

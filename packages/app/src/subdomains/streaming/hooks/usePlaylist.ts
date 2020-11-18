@@ -61,9 +61,11 @@ export type UsePlaylist = {
  * Returns functions to control playlist streaming via the Apple Music API.
  *
  * @param url - URL of playlist to stream
+ * @param play_when_ready - If true, start playback when queue is set
  */
 export const usePlaylist = (
-  url: MusicKitSetQueueOptions['url'] = ''
+  url: MusicKitSetQueueOptions['url'] = '',
+  play_when_ready = false
 ): UsePlaylist => {
   // Get MusicKit instance
   const kit = useMusicKit()
@@ -74,6 +76,7 @@ export const usePlaylist = (
   // Array of song attributes
   const [songs, { setValue: setSongs }] = useArray<UsePlaylist['songs']>([])
 
+  // Update queue and song attributes state
   useEffect(() => {
     if (!kit.developerToken || isEmpty(url)) return
 
@@ -85,6 +88,17 @@ export const usePlaylist = (
       setSongs(queue.items.map(({ attributes }) => attributes))
     })
   }, [kit, setMusicKitQueue, setSongs, url])
+
+  // Handle immediate playback
+  useEffect(() => {
+    if (!kit.player || !queue) return
+
+    if (play_when_ready) (async () => kit.player.play())()
+
+    return () => {
+      kit.player.stop()
+    }
+  }, [kit, play_when_ready, queue])
 
   return {
     getSongAttributes: (index: number) => songs[index] || {},

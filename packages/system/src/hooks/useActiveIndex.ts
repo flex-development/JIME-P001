@@ -41,7 +41,7 @@ export type UseActiveIndex = {
 
 /**
  * Returns an object containing the active index and a functions to update the
- * active state. The value of {@param options.lowerLimit} will be set to 0.
+ * active state. The value of {@param options.lowerLimit} will be set to -1.
  *
  * @see https://github.com/kitze/react-hanger#usenumber
  *
@@ -54,17 +54,17 @@ export const useActiveIndex = (
 ): UseActiveIndex => {
   // Parse index if string
   if (isString(index)) {
-    index = JSON.parse(index.length ? index : '0')
+    index = JSON.parse(index.length ? index : '-1')
     index = index as number
   }
 
   // Set index to zero if negative number
-  if (index < 0) index = 0
+  if (index < -1) index = -1
 
   // Initialize state
   const [active, { decrease, increase, setValue }] = useNumber(0, {
     ...options,
-    lowerLimit: 0
+    lowerLimit: -1
   })
 
   // Update active state if args.index changes

@@ -3,6 +3,7 @@ import {
   usePlaylistForm,
   useProfileSnippetForm
 } from '@app/subdomains/cms/hooks'
+import { usePlaylist } from '@app/subdomains/streaming/hooks'
 import { ErrorTemplate } from '@flex-development/kustomzdesign'
 import React, { FC, Fragment, ReactNode } from 'react'
 import { IPageProps, PC } from '../interfaces'
@@ -39,11 +40,16 @@ export const ShopLayout: FC<ShopLayoutProps> = (props: ShopLayoutProps) => {
   const { page, title } = useCMSData()
   const { data, error, loading } = page
 
-  // Register playlist settings form
-  const { modified: playlist } = usePlaylistForm()
-
   // Register profile snippet settings form (data used in Sidebar)
   const { modified: snippet } = useProfileSnippetForm()
+
+  // Register playlist settings form
+  const { modified: playlist_settings } = usePlaylistForm()
+
+  // Handle playlist streaming
+  const playlist = usePlaylist(playlist_settings.url)
+
+  // if (playlist.play) playlist.play()
 
   return (
     <Fragment>

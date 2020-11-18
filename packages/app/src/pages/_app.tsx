@@ -1,7 +1,6 @@
 import { AC, IAppProps, ShopLayout } from '@app/subdomains/app'
 import { CMS_BASE_CONFIG, useSignInWithCustomToken } from '@app/subdomains/cms'
 import '@app/subdomains/cms/styles.css'
-import { useMusicKit } from '@app/subdomains/streaming'
 import { Provider as NextAuthProvider, Session } from 'next-auth/client'
 import React, { useMemo } from 'react'
 import { TinaCMS, TinaProvider } from 'tinacms'
@@ -30,8 +29,6 @@ const App: AC = ({ Component, pageProps }: IAppProps) => {
 
   // Get configured TinaCMS instance
   const cms = useMemo(() => new TinaCMS(CMS_BASE_CONFIG), [])
-
-  useMusicKit()
 
   return (
     <NextAuthProvider session={(session as unknown) as Session}>

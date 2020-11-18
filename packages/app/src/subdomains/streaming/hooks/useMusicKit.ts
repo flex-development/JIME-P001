@@ -1,4 +1,4 @@
-import { MusicKitInstance } from '@flex-development/types'
+import { AnyObject, MusicKitInstance } from '@flex-development/types'
 import { useEffect, useState } from 'react'
 import pkg from '../../../../package.json'
 import { createDeveloperToken } from '../utils'
@@ -11,7 +11,7 @@ import { createDeveloperToken } from '../utils'
 /**
  * `useMusicKit` return type.
  */
-export type UseMusicKit = MusicKitInstance | null
+export type UseMusicKit = MusicKitInstance | AnyObject
 
 /**
  * Returns an Apple Music kit instance.
@@ -19,7 +19,7 @@ export type UseMusicKit = MusicKitInstance | null
  * @see https://developer.apple.com/documentation/musickitjs/
  */
 export const useMusicKit = (): UseMusicKit => {
-  const [instance, setInstance] = useState<UseMusicKit>(null)
+  const [instance, setInstance] = useState<UseMusicKit>({})
 
   // Configure MusicKit and get instance
   useEffect(() => {

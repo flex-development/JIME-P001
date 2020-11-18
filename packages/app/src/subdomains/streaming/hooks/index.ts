@@ -4,5 +4,6 @@
  */
 
 export * from './useMusicKit'
+export * from './usePlaylist'
 
 /* eslint-disable prettier/prettier */

@@ -1,4 +1,4 @@
-import { AnyObject, CheckoutLineItemInput } from 'packages/types/src'
+import { AnyObject, CheckoutLineItemInput } from '@flex-development/types'
 import { useSetState } from 'react-hanger'
 import { useQuantity, UseQuantity } from './useQuantity'
 

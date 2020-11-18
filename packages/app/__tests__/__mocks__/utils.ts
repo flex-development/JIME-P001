@@ -1,6 +1,7 @@
 import { FirebaseAdaptor, RTDRepository as Repo } from '@app/subdomains/app'
 import { ICMSMenu, ICMSPage } from '@app/subdomains/cms/interfaces'
 import { IReview } from '@flex-development/types'
+import { ICheckout } from 'shopify-api-node'
 import MockCarsRepoRoot from './data/cars.mock.json'
 import MockMenusRepoRoot from './data/menus.mock.json'
 import MockPagesRepoRoot from './data/pages.mock.json'
@@ -163,6 +164,30 @@ export const loadReviewsTestData = async (
 
   // Return array of mock product reviews
   return Object.values((dataset as unknown) as Record<string, IReview>)
+}
+
+/**
+ * Expects in each line item in {@param res.line_items} to have the same
+ * `properties`, `quantity`, and `variant_id` as the line items in
+ * {@param expected.line_items}.
+ *
+ * @param res - Checkout
+ * @param expected - Expected checkout
+ * @param token - If true, match tokens
+ */
+export const matchLineItems = (
+  res: ICheckout,
+  expected: ICheckout,
+  token = false
+): void => {
+  if (token) expect(res.token).toBe(expected.token)
+
+  // Expect line properties, quantity, and variant_id to match
+  res.line_items.map(({ properties, quantity, variant_id }, i) => {
+    expect(properties).toBe(expected.line_items[i].properties)
+    expect(quantity).toBe(expected.line_items[i].quantity)
+    expect(variant_id).toBe(expected.line_items[i].variant_id)
+  })
 }
 
 /**

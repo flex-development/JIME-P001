@@ -7,6 +7,14 @@ import { AnyObject } from './utils'
  */
 
 /**
+ * Object representing a checkout permalink query object.
+ */
+export type CheckoutPermalinkQuery = Record<
+  ICheckoutLineItem['variant_id'],
+  ICheckoutLineItem['quantity']
+>
+
+/**
  * Object representing the fields needed to display a checkout line item.
  */
 export type CheckoutLineItemDisplay = Pick<

@@ -1,8 +1,8 @@
 /**
- * @file Subdomain Hooks
+ * @file Subdomain Hooks - Sales
  * @module subdomains/sales/hooks
  */
 
-export default {}
+export * from './useCheckoutPermalink'
 
 /* eslint-disable prettier/prettier */

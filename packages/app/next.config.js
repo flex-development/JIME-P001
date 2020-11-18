@@ -4,6 +4,9 @@
  */
 
 const {
+  APPLE_AUTHKEY_MUSICKIT,
+  APPLE_AUTHKEY_MUSICKIT_KEY_ID,
+  APPLE_TEAM_ID,
   FIREBASE_API_KEY,
   FIREBASE_APP_ID,
   FIREBASE_PROJECT_ID,
@@ -19,6 +22,9 @@ module.exports = {
    * Add environment variables to the JavaScript bundle.
    */
   env: {
+    APPLE_AUTHKEY_MUSICKIT,
+    APPLE_AUTHKEY_MUSICKIT_KEY_ID,
+    APPLE_TEAM_ID,
     FIREBASE_API_KEY,
     FIREBASE_APP_ID,
     FIREBASE_AUTH_DOMAIN: `${FIREBASE_PROJECT_ID}.firebaseapp.com`,

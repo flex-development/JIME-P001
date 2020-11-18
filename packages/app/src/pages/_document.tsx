@@ -87,14 +87,17 @@ export default class Document extends NextDocument {
           {/* Material Icons */}
           <link
             rel='stylesheet'
-            href='https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined'
+            href='//fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined'
           />
 
           {/* Font Awesome */}
           <script
             crossOrigin='anonymous'
-            src='https://kit.fontawesome.com/0691581d45.js'
+            src='//kit.fontawesome.com/0691581d45.js'
           />
+
+          {/* Apple MusicKit */}
+          <script src='//js-cdn.music.apple.com/musickit/v1/musickit.js' />
         </Head>
         <body>
           <Main />

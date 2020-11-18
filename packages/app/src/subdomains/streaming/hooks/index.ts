@@ -3,6 +3,6 @@
  * @module subdomains/streaming/hooks
  */
 
-export default {}
+export * from './useMusicKit'
 
 /* eslint-disable prettier/prettier */

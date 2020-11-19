@@ -2,7 +2,7 @@ import { FlexboxUtilitiesConfig, GridBreakpoint } from '@flex-development/types'
 import {
   FLEXBOX_CONFIG_KEYS,
   FLEXBOX_PROPERTY_MAP,
-  GRID_BREAKPOINTS
+  GRID_BREAKPOINT_KEYS
 } from '@system/config'
 import { getResponsiveUtilities } from '@system/utils'
 import classnames from 'classnames'
@@ -29,11 +29,11 @@ import { isBoolean, isEmpty, isNumber, isString } from 'lodash'
  * @see https://css-tricks.com/snippets/css/a-guide-to-flexbox
  *
  * @param config - Flexbox config
- * @param breakpoints - Breakpoint array to use instead of `GRID_BREAKPOINTS`
+ * @param breakpoints - Breakpoint keys to use instead of `GRID_BREAKPOINT_KEYS`
  */
 export const useFlexbox = (
   config: FlexboxUtilitiesConfig,
-  breakpoints: GridBreakpoint[] = GRID_BREAKPOINTS
+  breakpoints: GridBreakpoint[] = GRID_BREAKPOINT_KEYS
 ): string => {
   const dictionary = {}
 

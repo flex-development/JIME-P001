@@ -1,10 +1,26 @@
 /* APP STYLES */
 
-/* PlaylistBar */
+/* ShopLayout */
 
-.playlistbar {
-  bottom: 0;
-  min-width: 100%;
-  position: absolute;
-  width: 100%;
+.hero {
+  height: 668px !important;
+}
+
+.sidebar {
+  width: inherit;
+}
+
+.sidebar-col {
+  height: 100vh;
+}
+
+.playlistbar,
+.shop-header {
+  z-index: 2;
+}
+
+@media screen and (max-width: 576px) {
+  .sidebar {
+    width: 100%;
+  }
 }

@@ -1,5 +1,5 @@
 import { Primitive, ResponsiveUtility } from '@flex-development/types'
-import { GRID_BREAKPOINTS } from '@system/config/constants'
+import { GRID_BREAKPOINT_KEYS } from '@system/config/constants'
 import { isObject } from 'lodash'
 import createResponsiveUtility from './createResponsiveUtility'
 
@@ -14,12 +14,12 @@ import createResponsiveUtility from './createResponsiveUtility'
  *
  * @param prefix - Value to prefix breakpoint infix
  * @param utilties - Responsive utilties map
- * @param breakpoints - Map to use instead of `GRID_BREAKPOINTS`
+ * @param breakpoints - Map to use instead of `GRID_BREAKPOINT_KEYS`
  */
 const getResponsiveUtilities = (
   prefix: string,
   utilities: Primitive | ResponsiveUtility = {},
-  breakpoints = GRID_BREAKPOINTS
+  breakpoints = GRID_BREAKPOINT_KEYS
 ): string[] => {
   utilities = isObject(utilities) ? utilities : { xs: utilities }
 

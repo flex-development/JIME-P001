@@ -102,6 +102,7 @@ $grid-breakpoints: map-merge(
   bootstrap.$grid-breakpoints,
   (
     md: 834px,
+    xl: 1368px,
     xxl: 1440px
   )
 );

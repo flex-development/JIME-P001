@@ -15,6 +15,8 @@ $shop-header-spacer: $spacers-8;
 /// ----------------------------------------------------------------------------
 
 .shop-header {
+  @include border($border-color, $border-width, bottom);
+
   @include flex(center, space-between);
 
   .btn-ghost {
@@ -22,6 +24,8 @@ $shop-header-spacer: $spacers-8;
       @include padding(0.125em, top);
     }
   }
+
+  background-color: $body-bg;
 
   &-btn {
     @include media-breakpoint-up(sm) {

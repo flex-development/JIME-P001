@@ -25,8 +25,6 @@ $sidebar-padding-x: $spacers-36;
   @include media-breakpoint-up(sm) {
     @include border($border-color, $border-width, right);
 
-    @include width($spacer * 30);
-
     padding-top: rem(120);
   }
 
@@ -34,19 +32,7 @@ $sidebar-padding-x: $spacers-36;
 
   @include padding-y($sidebar-padding-top, $sidebar-padding-bottom);
 
-  @include width(100%);
-
   font-size: $sidebar-font-size;
-
-  &-developer-credit {
-    @include margin-y($sidebar-padding-x, $spacers-0);
-
-    @include media-breakpoint-down(sm) {
-      font-size: $font-size-sm;
-    }
-
-    text-transform: uppercase;
-  }
 
   &-menu {
     @include flex(null, null, column);
@@ -59,14 +45,6 @@ $sidebar-padding-x: $spacers-36;
   }
 
   &-profile {
-    @include flex(null, null, column);
-
-    @include margin-bottom($sidebar-padding-x);
-
-    @include media-breakpoint-up(sm) {
-      flex-direction: row;
-    }
-
     p {
       &:not(:last-of-type) {
         @include margin-bottom($spacers-8);
@@ -75,6 +53,12 @@ $sidebar-padding-x: $spacers-36;
       &:last-of-type {
         @include margin-bottom($spacers-0);
       }
+    }
+
+    &-img {
+      display: inline-block;
+      max-height: rem(250);
+      max-width: rem(250);
     }
 
     &-name {
@@ -94,4 +78,14 @@ $sidebar-padding-x: $spacers-36;
       font-weight: $font-weight-bold;
     }
   }
+}
+
+.developer-credit {
+  @include margin-y($sidebar-padding-x, $spacers-0);
+
+  @include media-breakpoint-down(sm) {
+    font-size: $font-size-sm;
+  }
+
+  text-transform: uppercase;
 }

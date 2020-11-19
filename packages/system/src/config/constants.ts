@@ -44,8 +44,21 @@ export const FLEXBOX_PROPERTY_MAP = {
   wrap: 'flex-wrap'
 }
 
+/* eslint-disable sort-keys */
+
 // ! Keep in sync with Sass theme settings
-export const GRID_BREAKPOINTS: GridBreakpoint[] = [
+export const GRID_BREAKPOINTS: Record<GridBreakpoint, number> = {
+  xs: 0,
+  sm: 576,
+  md: 834,
+  lg: 992,
+  xl: 1368,
+  xxl: 1440
+}
+
+/* eslint-enable sort-keys */
+
+export const GRID_BREAKPOINT_KEYS: Array<GridBreakpoint> = [
   'xs',
   'sm',
   'md',

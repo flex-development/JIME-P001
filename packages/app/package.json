@@ -84,7 +84,8 @@
     "slugify": "^1.4.5",
     "styled-components": "^5.2.0",
     "tinacms": "^0.32.0",
-    "urijs": "^1.19.2"
+    "urijs": "^1.19.2",
+    "use-hooks": "^2.0.0-rc.5"
   },
   "devDependencies": {
     "@firebase/rules-unit-testing": "^1.0.9",

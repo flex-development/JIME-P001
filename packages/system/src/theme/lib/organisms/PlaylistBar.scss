@@ -3,10 +3,13 @@
 /// ----------------------------------------------------------------------------
 
 .playlistbar {
+  @include border($border-color, $border-width, top);
+
   @include flex(center, space-between);
 
   @include padding-y($spacers-0);
 
+  background-color: $body-bg;
   color: $light;
 
   // Image

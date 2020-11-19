@@ -22,6 +22,8 @@ $hero-subtitle-font-size: $font-size-sm;
 /// ----------------------------------------------------------------------------
 
 .hero {
+  @include border($border-color, $border-width, bottom);
+
   @include flex(center, center, column);
 
   @include height($hero-height);

@@ -3,7 +3,7 @@ import {
   ResponsiveUtility,
   RowColumns
 } from '@flex-development/types'
-import { GRID_BREAKPOINTS } from '@system/config'
+import { GRID_BREAKPOINT_KEYS } from '@system/config'
 import { getResponsiveUtilities } from '@system/utils'
 import classnames from 'classnames'
 import { isEmpty } from 'lodash'
@@ -19,11 +19,11 @@ import { isEmpty } from 'lodash'
  * @see https://v5.getbootstrap.com/docs/5.0/layout/grid/#row-columns
  *
  * @param config - Row column config
- * @param breakpoints - Breakpoint array to use instead of `GRID_BREAKPOINTS`
+ * @param breakpoints - Breakpoint keys to use instead of `GRID_BREAKPOINT_KEYS`
  */
 export const useRowColumns = (
   config: ResponsiveUtility<RowColumns>,
-  breakpoints: GridBreakpoint[] = GRID_BREAKPOINTS
+  breakpoints: GridBreakpoint[] = GRID_BREAKPOINT_KEYS
 ): string => {
   const dictionary = {}
 

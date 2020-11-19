@@ -4,7 +4,7 @@ import {
   Spacer,
   SpacerPrefix
 } from '@flex-development/types'
-import { GRID_BREAKPOINTS } from '@system/config'
+import { GRID_BREAKPOINT_KEYS } from '@system/config'
 import { getResponsiveUtilities } from '@system/utils'
 import classnames from 'classnames'
 import { isEmpty, isObject } from 'lodash'
@@ -22,12 +22,12 @@ import { isEmpty, isObject } from 'lodash'
  *
  * @param config - Gutter, margin, or padding utilities config
  * @param prefix - Gutter, margin, or padding utility class prefix
- * @param breakpoints - Breakpoint array to use instead of `GRID_BREAKPOINTS`
+ * @param breakpoints - Breakpoint keys to use instead of `GRID_BREAKPOINT_KEYS`
  */
 export const useSpacers = (
   prefix: SpacerPrefix,
   config: Spacer | ResponsiveUtility<Spacer>,
-  breakpoints: GridBreakpoint[] = GRID_BREAKPOINTS
+  breakpoints: GridBreakpoint[] = GRID_BREAKPOINT_KEYS
 ): string => {
   const dictionary = {}
 

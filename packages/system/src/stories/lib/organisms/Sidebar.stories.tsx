@@ -8,8 +8,10 @@ import React from 'react'
  */
 
 export default {
-  argTypes: {
-    profile: { control: 'object' }
+  args: {
+    style: {
+      width: '30rem'
+    }
   },
   component: Sidebar,
   parameters: {
@@ -19,7 +21,18 @@ export default {
 }
 
 export const Default: StoryFN<SidebarProps> = (args: SidebarProps) => (
-  <Sidebar {...args} />
+  <>
+    <style>
+      {`
+        @media screen and (max-width: 576px) {
+          .sidebar {
+            width: 100% !important;
+          }
+        }
+      `}
+    </style>
+    <Sidebar {...args} />
+  </>
 )
 
 Default.args = {

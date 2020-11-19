@@ -11,7 +11,8 @@ import {
   ImageProps,
   Link,
   LinkProps,
-  Paragraph
+  Paragraph,
+  Row
 } from '../atoms'
 import { Menu } from '../molecules'
 
@@ -75,13 +76,35 @@ export const Sidebar: FC<SidebarProps> = (props: SidebarProps) => {
   return (
     <Aside {...mutated}>
       <Box>
-        <Box className='sidebar-profile'>
-          <Column mb={{ sm: 0, xs: 36 }} mr={{ sm: 24, xs: 0 }} sm={7} xs={12}>
+        <Row
+          className='sidebar-profile'
+          justify={{ lg: 'between', xs: 'start' }}
+          mb={36}
+          mt={0}
+          mx={0}
+          wrap={false}
+        >
+          <Column
+            lg={6}
+            mb={{ md: 0, xs: 24 }}
+            md={3}
+            mr={{ lg: 0, xs: 12 }}
+            mt={0}
+            px={0}
+            xs={12}
+          >
             <Link className='sidebar-profile-img' href={img} target='_blank'>
               <Image alt='Profile image for Morena' fluid src={img} />
             </Link>
           </Column>
-          <Column direction='column' flex justify='center' sm={5} xs={12}>
+          <Column
+            direction='column'
+            flex
+            justify='center'
+            mt={0}
+            px={0}
+            span={5}
+          >
             <Paragraph className='sidebar-profile-online-status'>
               <Icon outlined={false}>person</Icon>
               Online Now!
@@ -97,12 +120,12 @@ export const Sidebar: FC<SidebarProps> = (props: SidebarProps) => {
               {`Mood: ${mood}`}
             </Paragraph>
           </Column>
-        </Box>
+        </Row>
 
         <Menu className='sidebar-menu' links={menu} />
       </Box>
 
-      <Paragraph className='sidebar-developer-credit'>
+      <Paragraph className='developer-credit'>
         Made with love by <Link {...developer} />
       </Paragraph>
     </Aside>

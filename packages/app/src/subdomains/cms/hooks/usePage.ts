@@ -23,11 +23,6 @@ export type UsePage = {
   error: FeathersErrorJSON | null
 
   /**
-   * True if fetching data, false otherwise.
-   */
-  loading: boolean
-
-  /**
    * Path of current page.
    */
   path: string
@@ -96,5 +91,5 @@ export const usePage = (session?: IPageProps['session']): UsePage => {
     setData(page)
   }, [pages, path, session])
 
-  return { data, error, loading: error === null, path }
+  return { data, error, path }
 }

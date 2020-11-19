@@ -82,8 +82,8 @@ export const PlaylistBar: FC<PlaylistBarProps> = (props: PlaylistBarProps) => {
 
   const mutated = useMutatedProps<typeof rest>(rest, 'playlistbar')
 
-  let artwork_url = song.artwork.url.replace('{w}', `${song.artwork.width}`)
-  artwork_url = artwork_url.replace('{h}', `${song.artwork.height}`)
+  let artwork_url = song.artwork?.url.replace('{w}', `${song.artwork.width}`)
+  artwork_url = artwork_url?.replace('{h}', `${song.artwork.height}`)
 
   return (
     <Section {...mutated}>

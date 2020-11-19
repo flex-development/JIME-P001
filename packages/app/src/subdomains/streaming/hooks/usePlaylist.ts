@@ -1,15 +1,13 @@
 import {
   AnyObject,
   MusicKitInstance,
-  MusicKitMediaItem,
   MusicKitQueue,
   MusicKitSetQueueOptions,
   MusicKitSongAttributes
 } from '@flex-development/types'
 import { isEmpty } from 'lodash'
 import { useEffect, useState } from 'react'
-import { useArray } from 'react-hanger/array/useArray'
-import { useMusicKit } from './useMusicKit'
+import { UseMusicKit, useMusicKit } from './useMusicKit'
 
 /**
  * @file Stream a playlist from the Apple Music API
@@ -21,40 +19,19 @@ import { useMusicKit } from './useMusicKit'
  */
 export type UsePlaylist = {
   /**
-   * Returns the song attributes for the media item located at the indicated
-   * array index.
+   * Returns the attributes for the current song.
    */
-  getSongAttributes(index: number): MusicKitMediaItem['attributes'] | AnyObject
+  currentSong(queue: MusicKitQueue): MusicKitSongAttributes
 
   /**
-   * Starts playback of the next media item in the playback queue.
+   * MusicKit instance or empty object.
    */
-  next: MusicKitInstance['skipToNextItem']
+  kit: UseMusicKit
 
   /**
-   * Pauses the playlist.
+   * MusicKit Queue instance or empty object.
    */
-  pause: MusicKitInstance['pause']
-
-  /**
-   * Begins playback of the current media item.
-   */
-  play: MusicKitInstance['play']
-
-  /**
-   * The current queue position.
-   */
-  position: MusicKitQueue['position']
-
-  /**
-   * Starts playback of the next media item in the playback queue.
-   */
-  previous: MusicKitInstance['skipToPreviousItem']
-
-  /**
-   * Array of song attributes for the current playlist.
-   */
-  songs: Array<MusicKitSongAttributes>
+  queue: MusicKitQueue | AnyObject
 }
 
 /**
@@ -71,42 +48,45 @@ export const usePlaylist = (
   const kit = useMusicKit()
 
   // Queue state
-  const [queue, setMusicKitQueue] = useState<MusicKitQueue | AnyObject>({})
+  const [queue, setMusicKitQueue] = useState<UsePlaylist['queue']>({})
 
-  // Array of song attributes
-  const [songs, { setValue: setSongs }] = useArray<UsePlaylist['songs']>([])
+  // Handle ready state
+  const [ready, setReady] = useState<boolean>(false)
 
   // Update queue and song attributes state
   useEffect(() => {
-    if (!kit.developerToken || isEmpty(url)) return
+    if (isEmpty(kit) || isEmpty(url)) return
 
     const musickit = kit as MusicKitInstance
     const options = { url: url } as MusicKitSetQueueOptions
 
     musickit.setQueue(options).then(queue => {
       setMusicKitQueue(queue)
-      setSongs(queue.items.map(({ attributes }) => attributes))
     })
-  }, [kit, setMusicKitQueue, setSongs, url])
+  }, [kit, queue, setMusicKitQueue, url])
 
   // Handle immediate playback
   useEffect(() => {
     if (!kit.player || !queue) return
 
-    if (play_when_ready) (async () => kit.player.play())()
+    if (play_when_ready) (async () => kit.player.changeToMediaAtIndex(0))()
 
     return () => {
       kit.player.stop()
     }
   }, [kit, play_when_ready, queue])
 
+  /**
+   * Returns the attributes for the current song.
+   */
+  const currentSong = (queue: MusicKitQueue): MusicKitSongAttributes => {
+    const { position: pos } = queue
+    return queue.item(pos === -1 ? 0 : pos)?.attributes || {}
+  }
+
   return {
-    getSongAttributes: (index: number) => songs[index] || {},
-    next: kit.skipToNextItem,
-    pause: kit.pause,
-    play: kit.play,
-    position: queue.position || -1,
-    previous: kit.skipToPreviousItem,
-    songs: queue.items?.map(({ attributes }) => attributes) ?? []
+    currentSong,
+    kit,
+    queue
   }
 }

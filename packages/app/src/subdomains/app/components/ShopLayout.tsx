@@ -4,7 +4,8 @@ import {
   useProfileSnippetForm
 } from '@app/subdomains/cms/hooks'
 import { usePlaylist } from '@app/subdomains/streaming/hooks'
-import { ErrorTemplate } from '@flex-development/kustomzdesign'
+import { ErrorTemplate, PlaylistBar } from '@flex-development/kustomzdesign'
+import { isEmpty } from 'lodash'
 import React, { FC, Fragment, ReactNode } from 'react'
 import { IPageProps, PC } from '../interfaces'
 import { Head } from './Head'
@@ -38,16 +39,18 @@ export const ShopLayout: FC<ShopLayoutProps> = (props: ShopLayoutProps) => {
 
   // Get metadata, site navigation as menu links, and data for current page
   const { page, title } = useCMSData()
-  const { data, error, loading } = page
+  const { data, error } = page
 
   // Register profile snippet settings form (data used in Sidebar)
   const { modified: snippet } = useProfileSnippetForm()
 
   // Register playlist settings form
-  const { modified: playlist_settings } = usePlaylistForm()
+  const { modified: playlist } = usePlaylistForm()
 
   // Handle playlist streaming
-  usePlaylist(playlist_settings.url, true)
+  const { kit, queue } = usePlaylist(playlist.url, error === null)
+
+  if (isEmpty(queue)) return null
 
   return (
     <Fragment>
@@ -60,6 +63,18 @@ export const ShopLayout: FC<ShopLayoutProps> = (props: ShopLayoutProps) => {
         return (
           <Fragment>
             <Component page={data} session={session} />
+            <PlaylistBar
+              playback={kit.player.playbackState}
+              song={(() => {
+                const { position: pos } = queue
+                return queue.item(pos === -1 ? 0 : pos)?.attributes || {}
+              })()}
+              handleSkip={({ target }) => {
+                return target.name === 'skip_next'
+                  ? kit.player.skipToNextItem()
+                  : kit.player.skipToPreviousItem()
+              }}
+            />
           </Fragment>
         )
       })()}

@@ -1,6 +1,8 @@
 import { AC, IAppProps, ShopLayout } from '@app/subdomains/app'
+import '@app/subdomains/app/styles.css'
 import { CMS_BASE_CONFIG, useSignInWithCustomToken } from '@app/subdomains/cms'
 import '@app/subdomains/cms/styles.css'
+import '@flex-development/kustomzdesign/theme/theme.scss'
 import { Provider as NextAuthProvider, Session } from 'next-auth/client'
 import React, { useMemo } from 'react'
 import { TinaCMS, TinaProvider } from 'tinacms'

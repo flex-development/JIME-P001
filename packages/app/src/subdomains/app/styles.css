@@ -1,0 +1,10 @@
+/* APP STYLES */
+
+/* PlaylistBar */
+
+.playlistbar {
+  bottom: 0;
+  min-width: 100%;
+  position: absolute;
+  width: 100%;
+}

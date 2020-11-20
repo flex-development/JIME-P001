@@ -7,7 +7,7 @@ import react_uuid from 'react-uuid'
  */
 
 /**
- * Generates a uniquie uuid value.
+ * Generates a unique uuid value.
  *
  * @param prefix - String to prepend to uuid
  * @param suffix - String to append to uuid

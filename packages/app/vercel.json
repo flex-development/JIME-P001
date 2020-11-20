@@ -1,13 +1,9 @@
 {
-  "name": "morenaskustomz",
-  "version": 2,
-  "alias": "morenaskustomz.flexdevelopment.vercel.app",
   "github": {
     "autoAlias": true,
     "enabled": true,
     "silent": false
   },
-  "scope": "flexdevelopment",
   "functions": {
     "src/pages/api/**/*.ts": {
       "maxDuration": 10
@@ -15,14 +11,30 @@
   },
   "redirects": [
     {
-      "source": "/admin",
-      "destination": "/api/auth/signin/github",
-      "statusCode": 308
-    },
-    {
       "source": "/instagram",
       "destination": "https://instagram.com/morenaskustomz",
-      "statusCode": 308
+      "permanent": true
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/admin",
+      "destination": "/api/admin"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        {
+          "key": "Access-Control-Allow-Credentials",
+          "value": "true"
+        },
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        }
+      ]
     }
   ]
 }

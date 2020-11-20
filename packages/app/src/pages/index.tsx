@@ -1,13 +1,16 @@
 import { database } from '@app/config/firebase'
 import {
-  IndexTemplatePropsServer,
   IPageProps,
+  Logger,
   PC,
+  serialize,
   ServerSidePageProps,
   SortOrder
 } from '@app/subdomains/app'
 import { ICMSPage } from '@app/subdomains/cms'
+import { PageService } from '@app/subdomains/cms/services'
 import { ProductService, ReviewService } from '@app/subdomains/sales'
+import { FeathersErrorJSON } from '@feathersjs/errors'
 import {
   IndexTemplate,
   IndexTemplateProps
@@ -37,7 +40,7 @@ import { IProductListing } from 'shopify-api-node'
  * @param props.page.title - Page title
  * @param props.session - Current user session or null
  */
-const Index: PC = ({ page }) => {
+const Index: PC = ({ page }: IPageProps) => {
   const { content } = page as ICMSPage
   return <IndexTemplate {...(content as IndexTemplateProps)} />
 }
@@ -54,22 +57,35 @@ const Index: PC = ({ page }) => {
 export const getServerSideProps: ServerSidePageProps = async (
   context: GetServerSidePropsContext
 ) => {
-  console.debug(context.preview, context.previewData)
-
+  // Initialize services
+  const Pages = new PageService(database)
   const ProductReviews = new ReviewService(database)
   const Products = new ProductService()
 
-  const product_query = { $sort: { handle: SortOrder.ASCENDING } }
-  const reviews_query = { $sort: { id: SortOrder.ASCENDING } }
-
-  const page: IndexTemplatePropsServer = {
-    products: (await Products.find(product_query)) as Array<IProductListing>,
-    reviews: (await ProductReviews.find(reviews_query)) as Array<IReview>
-  }
-
+  // Get current user session
   const session = (await getSession(context)) as IPageProps['session']
 
-  return { props: { page, session } }
+  try {
+    // Get page data. Throws if in draft mode and not signed-in with GitHub
+    const entity = await Pages.getPage(context.req.url as string, session)
+
+    // Get products and product reviews
+    const product_query = { $sort: { handle: SortOrder.ASCENDING } }
+    const reviews_query = { $sort: { id: SortOrder.ASCENDING } }
+
+    // Get template props
+    entity.content = {
+      ...(entity.content as IndexTemplateProps),
+      products: (await Products.find(product_query)) as Array<IProductListing>,
+      reviews: (await ProductReviews.find(reviews_query)) as Array<IReview>
+    }
+
+    // Return page component props
+    return { props: { page: entity, session } }
+  } catch (error) {
+    Logger.error({ 'Index.getServerSideProps': error })
+    return { props: { page: serialize<FeathersErrorJSON>(error), session } }
+  }
 }
 
 export default Index

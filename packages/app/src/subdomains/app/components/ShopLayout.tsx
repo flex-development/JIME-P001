@@ -1,4 +1,3 @@
-import { ICMSPage } from '@app/subdomains/cms'
 import {
   useCMSData,
   usePlaylistSettingsForm,
@@ -50,20 +49,13 @@ export interface ShopLayoutProps {
  */
 export const ShopLayout: FC<ShopLayoutProps> = (props: ShopLayoutProps) => {
   const { page: Component, pageProps } = props
+  const { preview } = pageProps
 
   // Get metadata, site navigation as menu links, and data for current page
   const { menus, page, title } = useCMSData()
 
-  const getPageData = (): IPageProps['page'] => {
-    if (page.data.component) {
-      return {
-        ...page.data,
-        content: merge(page.data.content, pageProps.page)
-      } as ICMSPage
-    }
-
-    return pageProps.page
-  }
+  // Use CMS data if page is in preview mode
+  if (preview && !page.error) pageProps.page = merge(pageProps.page, page.data)
 
   // Register profile snippet settings form (data used in Sidebar)
   const { modified: snippet } = useProfileSnippetForm()
@@ -131,16 +123,15 @@ export const ShopLayout: FC<ShopLayoutProps> = (props: ShopLayoutProps) => {
               title='Morenas Kustomz'
             />
             {((): ReactNode => {
-              if (page.error || (pageProps.page as FeathersErrorJSON)?.code) {
-                const server_error = pageProps.page as FeathersErrorJSON
-                const { code, message } = server_error || page.error
+              const cms_error = preview && page.error
+              const server_error = pageProps.page as FeathersErrorJSON
 
+              if (cms_error || server_error.code) {
+                const { code, message } = cms_error || server_error
                 return <ErrorTemplate code={code} message={message} />
               }
 
-              return (
-                <Component page={getPageData()} session={pageProps.session} />
-              )
+              return <Component {...pageProps} />
             })()}
           </FlexBox>
         </Column>

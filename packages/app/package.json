@@ -32,7 +32,7 @@
     "kill:firebase:ui": "kill $(lsof -ti:4000) || true",
     "kill:firebase": "run-p kill:firebase:*",
     "predev": "NODE_ENV=development vc env pull .env.local --yes",
-    "dev": "next dev -p 3001",
+    "dev": "NODE_OPTIONS='--inspect' next dev -p 3001",
     "dev:kill": "kill $(lsof -ti:3001) || true",
     "mock:db": "firebase emulators:start --only database,ui",
     "pretest:exec": "yarn kill:firebase",

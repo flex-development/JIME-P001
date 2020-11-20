@@ -2,7 +2,7 @@ import { useMutatedProps } from '@system/hooks'
 import { MutatedProps, TC } from '@system/types'
 import React from 'react'
 import { ICollectionListing, IProductListing } from 'shopify-api-node'
-import { Heading, Main, Paragraph, Section } from '../atoms'
+import { Heading, LinkProps, Main, Paragraph, Section } from '../atoms'
 import { ProductGrid } from '../organisms'
 
 /**
@@ -15,6 +15,11 @@ export interface CollectionTemplateProps extends MutatedProps {
    * The `ICollectionListing` object.
    */
   collection: ICollectionListing
+
+  /**
+   * Returns a `LinkProps` for the `ProductCard` link.
+   */
+  handleProductLink?(product: IProductListing): LinkProps
 
   /**
    * Array of `IProductListing` objects that belong to the current collection.
@@ -33,7 +38,15 @@ export interface CollectionTemplateProps extends MutatedProps {
 export const CollectionTemplate: TC<CollectionTemplateProps> = (
   props: CollectionTemplateProps
 ) => {
-  const { collection, products = [], ...rest } = props
+  const {
+    collection,
+    handleProductLink = () => {
+      console.log('TODO: CollectionTemplate.handleProductLink')
+      return { href: '#' }
+    },
+    products = [],
+    ...rest
+  } = props
   const { body_html, title } = collection
 
   const mutated = useMutatedProps<typeof rest>(rest, 'template')
@@ -43,7 +56,13 @@ export const CollectionTemplate: TC<CollectionTemplateProps> = (
       <Section>
         <Heading size={2}>{title}</Heading>
         {body_html && <Paragraph>{body_html}</Paragraph>}
-        <ProductGrid mt={24} products={products} />
+        <ProductGrid
+          mt={24}
+          products={products.map(product => ({
+            product,
+            product_link: handleProductLink(product)
+          }))}
+        />
       </Section>
     </Main>
   )

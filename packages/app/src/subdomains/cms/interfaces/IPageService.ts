@@ -1,4 +1,3 @@
-import { Session } from 'next-auth/client'
 import { ICMSPage } from './ICMSPage'
 import { GitHubSession } from './IGitHubService'
 import { IPageRepository } from './IPageRepository'
@@ -12,4 +11,4 @@ export interface IPageService extends IPageRepository {
   getPage(path: ICMSPage['path'], session: PageSession): Promise<ICMSPage>
 }
 
-export type PageSession = GitHubSession | Session | null
+export type PageSession = GitHubSession | null

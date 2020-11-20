@@ -1,5 +1,14 @@
-import { IPageProps, PC, ServerSidePageProps } from '@app/subdomains/app'
+import { database } from '@app/config/firebase'
+import {
+  IPageProps,
+  Logger,
+  PC,
+  serialize,
+  ServerSidePageProps
+} from '@app/subdomains/app'
 import { ICMSPage } from '@app/subdomains/cms'
+import { PageService } from '@app/subdomains/cms/services'
+import { FeathersErrorJSON } from '@feathersjs/errors'
 import {
   PageTemplate,
   PageTemplateProps
@@ -27,7 +36,7 @@ import React from 'react'
  * @param props.page.title - Page title
  * @param props.session - Current user session or null
  */
-const Slug: PC = ({ page }) => {
+const Slug: PC = ({ page }: IPageProps) => {
   const { content } = page as ICMSPage
   return <PageTemplate {...(content as PageTemplateProps)} />
 }
@@ -44,9 +53,22 @@ const Slug: PC = ({ page }) => {
 export const getServerSideProps: ServerSidePageProps = async (
   context: GetServerSidePropsContext
 ) => {
+  // Initialize services
+  const Pages = new PageService(database)
+
+  // Get current user session
   const session = (await getSession(context)) as IPageProps['session']
 
-  return { props: { page: null, session } }
+  try {
+    // Get page data. Throws if in draft mode and not signed-in with GitHub
+    const entity = await Pages.getPage(context.req.url as string, session)
+
+    // Return page component props
+    return { props: { page: entity, session } }
+  } catch (error) {
+    Logger.error({ 'Slug.getServerSideProps': error })
+    return { props: { page: serialize<FeathersErrorJSON>(error), session } }
+  }
 }
 
 export default Slug

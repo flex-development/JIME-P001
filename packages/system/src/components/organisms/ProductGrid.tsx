@@ -1,9 +1,10 @@
 import { useMutatedProps } from '@system/hooks'
-import { uuid } from '@system/utils'
-import React, { FC } from 'react'
+import { AnyObject } from 'packages/types/src'
+import React, { FC, useEffect } from 'react'
+import { useArray } from 'react-hanger/array/useArray'
 import { IProductListing } from 'shopify-api-node'
 import { Column, Row, RowProps } from '../atoms'
-import { ProductCard } from '../molecules'
+import { ProductCard, ProductCardProps } from '../molecules'
 
 /**
  * @file Product layout component
@@ -12,11 +13,11 @@ import { ProductCard } from '../molecules'
 
 export interface ProductGridProps extends RowProps {
   /**
-   * Array of `IProductListing` data to display in the grid.
+   * Array of `ProductCardProps` data to display in the grid.
    *
    * @default []
    */
-  products?: IProductListing[]
+  products?: Array<IProductListing> | Array<ProductCardProps>
 }
 
 /**
@@ -29,12 +30,25 @@ export const ProductGrid: FC<ProductGridProps> = (props: ProductGridProps) => {
 
   const mutated = useMutatedProps<typeof rest>(rest, 'product-grid')
 
+  const [cards, { setValue: setCards }] = useArray<ProductCardProps>([])
+
+  useEffect(() => {
+    const cards = (products as Array<AnyObject>).map(data => {
+      const { product, product_link } = data
+      const props = product ? data : { product: data, product_link }
+
+      return props as ProductCardProps
+    })
+
+    setCards(cards)
+  }, [products, setCards])
+
   return (
     <Row {...mutated}>
-      {products.map(product => {
+      {cards.map(card => {
         return (
-          <Column key={uuid()}>
-            <ProductCard product={product} />
+          <Column key={card.product.product_id}>
+            <ProductCard {...card} />
           </Column>
         )
       })}

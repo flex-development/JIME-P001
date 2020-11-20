@@ -1,12 +1,15 @@
-import { PC, ServerSidePageProps } from '@app/subdomains/app'
+import { IPageProps, PC, ServerSidePageProps } from '@app/subdomains/app'
 import { CollectionService, ProductService } from '@app/subdomains/sales'
 import {
   CollectionTemplate,
-  CollectionTemplateProps
+  CollectionTemplateProps,
+  LinkProps
 } from '@flex-development/kustomzdesign'
 import { isArray } from 'lodash'
 import { GetServerSidePropsContext } from 'next'
+import { useRouter } from 'next/router'
 import React from 'react'
+import { IProductListing } from 'shopify-api-node'
 
 /**
  * @file Product Collection Page
@@ -24,8 +27,26 @@ import React from 'react'
  * @param props.page.title - Collection title
  * @param props.session - Current user session or null
  */
-const Collection: PC = ({ page }) => {
-  return <CollectionTemplate {...(page as CollectionTemplateProps)} />
+const Collection: PC = ({ page }: IPageProps) => {
+  const data = page as CollectionTemplateProps
+
+  // Get router instance to generate `LinkProps` for each collection product
+  const router = useRouter()
+
+  /**
+   * Generates product `LinkProps` using the `handle` of the current collection.
+   *
+   * @param product - Product listing object
+   * @returns `LinkProps` for the product listing
+   */
+  const handleProductLink = (product: IProductListing): LinkProps => {
+    const href = `products/${product.handle}`
+    const as = `${router.query.handle}/${href}`
+
+    return { onClick: () => router.push(href, as) }
+  }
+
+  return <CollectionTemplate {...data} handleProductLink={handleProductLink} />
 }
 
 /**
@@ -46,22 +67,19 @@ export const getServerSideProps: ServerSidePageProps = async (
   const Collections = new CollectionService()
   const Products = new ProductService()
 
-  let page = {}
-
   try {
     const collection = await Collections.getByHandle(collection_handle)
+    const products = await Products.findByCollection(collection.collection_id)
 
-    page = {
-      body_html: collection.body_html,
+    const page: CollectionTemplateProps = {
       collection,
-      products: await Products.findByCollection(collection.collection_id),
-      title: collection.title
-    } as CollectionTemplateProps
+      products: products as Array<IProductListing>
+    }
+
+    return { props: { page, session: null } }
   } catch (error) {
     return { props: { page: error, session: null } }
   }
-
-  return { props: { page, session: null } }
 }
 
 export default Collection

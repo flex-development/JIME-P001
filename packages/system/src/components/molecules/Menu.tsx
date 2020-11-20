@@ -1,6 +1,8 @@
 import { useMutatedProps } from '@system/hooks'
 import { uuid } from '@system/utils'
-import React, { FC } from 'react'
+import { AnyObject } from 'packages/types/src'
+import React, { FC, useEffect } from 'react'
+import { useArray } from 'react-hanger/array/useArray'
 import { Link, LinkProps, Nav, NavProps } from '../atoms'
 
 /**
@@ -17,20 +19,29 @@ export interface MenuProps extends NavProps {
   links?: LinkProps[]
 }
 
+type MenuLink = LinkProps & { key: string }
+
 /**
  * Displays the site navigation. Renders a `Nav` component.
  *
  * - https://v5.getbootstrap.com/docs/5.0/components/navs
  */
 export const Menu: FC<MenuProps> = (props: MenuProps) => {
-  const { links = [], ...rest } = props
+  const { links: initialLinks = [], ...rest } = props
 
   const mutated = useMutatedProps<typeof rest>(rest)
 
+  const [links, { setValue: setLinks }] = useArray<MenuLink>([])
+
+  useEffect(() => {
+    setLinks(initialLinks.map(data => ({ ...data, key: uuid(), nav: true })))
+  }, [initialLinks, setLinks])
+
   return (
     <Nav {...mutated}>
-      {links.map((link: LinkProps): MenuProps['children'] => {
-        return <Link {...link} key={uuid()} nav />
+      {/* eslint-disable-next-line prettier/prettier */}
+      {links.map(({ key, uuid, ...link }: AnyObject) => {
+        return <Link {...link} key={uuid || key} />
       })}
     </Nav>
   )

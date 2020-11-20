@@ -76,27 +76,3 @@ it('updates the product display price when an option is selected', () => {
   // Expect image for second option to be shown
   expect(getByText(`$${variant2.price}`)).toBeInTheDocument()
 })
-
-it('updates the product link when an option is selected', () => {
-  const { getByText } = render(<Kustomz {...Kustomz.args} />)
-
-  const { handle, title, variants } = Kustomz.args.product
-
-  const variant = variants[0]
-  const variant2 = variants[2]
-
-  const product_url = `products/${handle}`
-
-  // Expect default product title to be visible
-  expect(getByText(title)).toHaveAttribute('href', product_url)
-
-  // Open dropdown menu and click second option
-  fireEvent.click(getByText(variant.title))
-  fireEvent.click(getByText(variant2.title))
-
-  // Expect product URL to be updated
-  expect(getByText(title)).toHaveAttribute(
-    'href',
-    `${product_url}?sku=${variant2.sku}`
-  )
-})

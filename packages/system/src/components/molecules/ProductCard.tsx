@@ -1,7 +1,7 @@
 import { useMutatedProps, useProductVariants } from '@system/hooks'
 import { EventHandlers } from '@system/types'
 import { getProductVariantImage } from '@system/utils'
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC } from 'react'
 import useBoolean from 'react-hanger/array/useBoolean'
 import { IProductListing } from 'shopify-api-node'
 import {
@@ -26,6 +26,13 @@ export interface ProductCardProps extends BoxProps {
    * The `IProductListing` object.
    */
   product: IProductListing
+
+  /**
+   * Product `Link` component props.
+   *
+   * @default {}
+   */
+  product_link?: LinkProps
 }
 
 /**
@@ -34,7 +41,7 @@ export interface ProductCardProps extends BoxProps {
  * Renders a `Box` component with the class `product-card`.
  */
 export const ProductCard: FC<ProductCardProps> = (props: ProductCardProps) => {
-  const { product, ...rest } = props
+  const { product_link = {}, product, ...rest } = props
 
   const mutated = useMutatedProps<typeof rest, BoxProps>(rest, {
     card: true,
@@ -47,19 +54,6 @@ export const ProductCard: FC<ProductCardProps> = (props: ProductCardProps) => {
   // Toggle dropdown menu visibility
   const [expanded, { toggle }] = useBoolean(false)
 
-  // Maintain product URL state
-  const [url, setURL] = useState(`products/${product.handle}`)
-
-  // Update product url when new variant is selected
-  useEffect(() => {
-    if (!selected?.sku) return
-
-    const default_selected = selected.sku === product.variants[0].sku
-    const base = `products/${product.handle}`
-
-    setURL(default_selected ? base : `${base}?sku=${selected.sku}`)
-  }, [product.handle, selected.sku, product.variants])
-
   // Get product variant display image
   const image = getProductVariantImage(
     selected.image_id,
@@ -67,33 +61,23 @@ export const ProductCard: FC<ProductCardProps> = (props: ProductCardProps) => {
     `${product.title} - ${selected.title}`
   )
 
-  /**
-   * Helper `Link` component with preset href value.
-   *
-   * @param param0 - Component properties
-   * @param param0.children - Link text
-   * @param param0.className - CSS classes to apply
-   * @returns Link to product
-   */
-  const ProductLink: FC<LinkProps> = ({ children, className }) => (
-    <Link className={className} href={url} target='_blank'>
-      {children}
-    </Link>
-  )
-
   return (
     <Box {...mutated} id={`product-card-${product.product_id}`}>
       <Box>
-        <ProductLink className='d-inline-block'>
+        <Link {...product_link} className='d-inline-block' target='_blank'>
           <Image {...image} className='product-card-img card-img-top' fluid />
-        </ProductLink>
+        </Link>
       </Box>
 
       <FlexBox align='center' className='card-footer' justify='between'>
         <FlexBox direction='column'>
-          <ProductLink className='card-title product-card-title'>
+          <Link
+            {...product_link}
+            className='card-title product-card-title'
+            target='_blank'
+          >
             {product.title}
-          </ProductLink>
+          </Link>
 
           {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
           <Link
@@ -137,4 +121,6 @@ export const ProductCard: FC<ProductCardProps> = (props: ProductCardProps) => {
 
 ProductCard.displayName = 'ProductCard'
 
-ProductCard.defaultProps = {}
+ProductCard.defaultProps = {
+  product_link: {}
+}

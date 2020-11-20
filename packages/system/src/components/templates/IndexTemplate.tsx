@@ -3,10 +3,9 @@ import { useMutatedProps } from '@system/hooks'
 import { MutatedProps, TC } from '@system/types'
 import { uuid } from '@system/utils'
 import React from 'react'
-import { IProductListing } from 'shopify-api-node'
 import { Heading, Main, Paragraph, Section } from '../atoms'
 import { ProductReview } from '../molecules'
-import { Carousel, ProductGrid } from '../organisms'
+import { Carousel, ProductGrid, ProductGridProps } from '../organisms'
 
 /**
  * @file Index page template
@@ -53,7 +52,7 @@ export interface IndexTemplateProps extends MutatedProps {
    *
    * @default []
    */
-  products?: Array<IProductListing>
+  products?: ProductGridProps['products']
 
   /**
    * Text to display in the "Products" section.

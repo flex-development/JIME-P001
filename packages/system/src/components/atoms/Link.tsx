@@ -159,6 +159,8 @@ export const Link: FREC<LinkRefProps> = forwardRef((props, ref) => {
     mutated.role = 'button'
   }
 
+  if (mutated.onClick && mutated.href === '#') delete mutated.href
+
   return (
     <a {...mutated} ref={ref}>
       {mutated.children}

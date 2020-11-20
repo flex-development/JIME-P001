@@ -3,7 +3,6 @@ import { GitHubSession } from '@app/subdomains/cms/interfaces/IGitHubService'
 import { FeathersErrorJSON } from '@feathersjs/errors'
 import {
   CollectionTemplateProps,
-  IndexTemplateProps,
   ProductTemplateProps,
   SearchTemplateProps
 } from '@flex-development/kustomzdesign'
@@ -22,7 +21,7 @@ export interface IPageProps {
    *
    * @see https://shopify.dev/docs/admin-api/rest/reference/online-store
    */
-  page: FeathersErrorJSON | PageData | null
+  page: FeathersErrorJSON | PageData
 
   /**
    * True if user is signed-in with GitHub and viewing a marketing site page.
@@ -42,19 +41,10 @@ export interface IPageProps {
 export type PageData =
   | CollectionTemplateProps
   | ICMSPage
-  | IndexTemplatePropsServer
   | ProductTemplatePropsServer
   | SearchTemplateProps
 
 /* eslint-enable prettier/prettier */
-
-/**
- * Server side `IndexTemplateProps`.
- */
-export type IndexTemplatePropsServer = Pick<
-  IndexTemplateProps,
-  'products' | 'reviews'
->
 
 /**
  * Server side `ProductTemplateProps`.

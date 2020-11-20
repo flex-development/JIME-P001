@@ -35,6 +35,20 @@ export interface IndexTemplateProps extends MutatedProps {
   max_products?: number
 
   /**
+   * Maximum number of review to display in the "Reviews" section.
+   *
+   * @default 5
+   */
+  max_reviews?: number
+
+  /**
+   * "Reviews" section title.
+   *
+   * @default 'Reviews'
+   */
+  product_reviews_title?: string
+
+  /**
    * Array of `IProductListing` objects.
    *
    * @default []
@@ -79,7 +93,9 @@ export const IndexTemplate: TC<IndexTemplateProps> = (
   const {
     about_section_text,
     about_section_title = 'About Morena',
-    max_products: max = 3,
+    max_products = 3,
+    max_reviews = 5,
+    product_reviews_title = 'Reviews',
     products = [],
     products_section_text,
     products_section_title = 'Products',
@@ -88,7 +104,6 @@ export const IndexTemplate: TC<IndexTemplateProps> = (
   } = props
 
   const mutated = useMutatedProps<typeof rest>(rest, 'template')
-  const display_products = max > 0 ? products.slice(0, max) : products
 
   return (
     <Main {...mutated} data-template={IndexTemplate.template_id}>
@@ -102,14 +117,14 @@ export const IndexTemplate: TC<IndexTemplateProps> = (
         {products_section_text && (
           <Paragraph>{products_section_text}</Paragraph>
         )}
-        <ProductGrid mt={24} products={display_products} />
+        <ProductGrid mt={24} products={products.slice(0, max_products)} />
       </Section>
 
       {reviews.length !== 0 && (
         <Section id='reviews'>
-          <Heading size={2}>Reviews</Heading>
+          <Heading size={2}>{product_reviews_title}</Heading>
           <Carousel id='product-review-carousel' mt={12}>
-            {reviews.map(review => (
+            {reviews.slice(0, max_reviews).map(review => (
               <ProductReview key={uuid()} review={review} />
             ))}
           </Carousel>
@@ -124,6 +139,8 @@ IndexTemplate.displayName = 'IndexTemplate'
 IndexTemplate.defaultProps = {
   about_section_title: 'About Morena',
   max_products: 3,
+  max_reviews: 5,
+  product_reviews_title: 'Reviews',
   products: [],
   products_section_title: 'Products',
   reviews: []

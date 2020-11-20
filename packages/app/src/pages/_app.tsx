@@ -21,21 +21,19 @@ import { TinaCMS, TinaProvider } from 'tinacms'
  *
  * @param param0 - Component props
  * @param param0.Component - Current page component
- * @param param0.pageProps - Initial page props from data fetching methods
+ * @param param0.pageProps - Page component props from data fetching methods
  */
 const App: AC = ({ Component, pageProps }: IAppProps) => {
-  const { session } = pageProps
-
   // Grant authenticated user access to database and storage resources
-  useSignInWithCustomToken(session?.firebase_token)
+  useSignInWithCustomToken(pageProps.session?.firebase_token)
 
   // Get configured TinaCMS instance
   const cms = useMemo(() => new TinaCMS(CMS_BASE_CONFIG), [])
 
   return (
-    <NextAuthProvider session={(session as unknown) as Session}>
+    <NextAuthProvider session={(pageProps.session || {}) as Session}>
       <TinaProvider cms={cms}>
-        <ShopLayout page={Component} session={session} />
+        <ShopLayout page={Component} pageProps={pageProps} />
       </TinaProvider>
     </NextAuthProvider>
   )

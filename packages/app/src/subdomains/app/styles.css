@@ -17,7 +17,8 @@
 }
 
 .playlistbar,
-.shop-header {
+.shop-header,
+.sidebar-col {
   z-index: 2;
 }
 

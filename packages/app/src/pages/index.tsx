@@ -1,87 +1,31 @@
 import { database } from '@app/config/firebase'
 import {
+  IndexTemplatePropsServer,
   IPageProps,
   PC,
   ServerSidePageProps,
   SortOrder
 } from '@app/subdomains/app'
-import { CustomerService } from '@app/subdomains/customers'
+import { ICMSPage } from '@app/subdomains/cms'
+import { ProductService, ReviewService } from '@app/subdomains/sales'
 import {
-  CollectionService,
-  ProductService,
-  ReviewService
-} from '@app/subdomains/sales'
+  IndexTemplate,
+  IndexTemplateProps
+} from '@flex-development/kustomzdesign'
+import { IReview } from '@flex-development/types'
 import { GetServerSidePropsContext } from 'next'
 import { getSession } from 'next-auth/client'
-import Head from 'next/head'
 import React from 'react'
-
-const Collections = new CollectionService()
-const Customers = new CustomerService()
-const ProductReviews = new ReviewService(database)
-const Products = new ProductService()
+import { IProductListing } from 'shopify-api-node'
 
 /**
  * Renders the homepage.
  *
  * @param props - Page component props
  */
-const Index: PC = () => {
-  return (
-    <div className='container'>
-      <Head>
-        <title>Create Next App</title>
-        <link rel='icon' href='/favicon.ico' />
-      </Head>
-
-      <main>
-        <h1 className='title'>
-          Welcome to <a href='https://nextjs.org'>Next.js!</a>
-        </h1>
-      </main>
-
-      <style jsx>{`
-        .container {
-          min-height: 100vh;
-          padding: 0 0.5rem;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-        }
-        main {
-          padding: 5rem 0;
-          flex: 1;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-        }
-        a {
-          color: inherit;
-          text-decoration: none;
-        }
-        .title a {
-          color: #0070f3;
-          text-decoration: none;
-        }
-        .title a:hover,
-        .title a:focus,
-        .title a:active {
-          text-decoration: underline;
-        }
-        .title {
-          margin: 0;
-          line-height: 1.15;
-          font-size: 4rem;
-          text-align: center;
-        }
-        .logo {
-          height: 1em;
-        }
-      `}</style>
-    </div>
-  )
+const Index: PC = ({ page }) => {
+  const { content } = page as ICMSPage
+  return <IndexTemplate {...(content as IndexTemplateProps)} />
 }
 
 /**
@@ -98,23 +42,20 @@ const Index: PC = () => {
 export const getServerSideProps: ServerSidePageProps = async (
   context: GetServerSidePropsContext
 ) => {
+  const ProductReviews = new ReviewService(database)
+  const Products = new ProductService()
+
+  const product_query = { $sort: { handle: SortOrder.ASCENDING } }
+  const reviews_query = { $sort: { id: SortOrder.ASCENDING } }
+
+  const page: IndexTemplatePropsServer = {
+    products: (await Products.find(product_query)) as Array<IProductListing>,
+    reviews: (await ProductReviews.find(reviews_query)) as Array<IReview>
+  }
+
   const session = (await getSession(context)) as IPageProps['session']
 
-  return {
-    props: {
-      page: {
-        collections: await Collections.find(),
-        customers: await Customers.find(),
-        products: await Products.find({
-          $sort: { handle: SortOrder.ASCENDING }
-        }),
-        reviews: await ProductReviews.find({
-          $sort: { id: SortOrder.ASCENDING }
-        })
-      },
-      session
-    }
-  }
+  return { props: { page, session } }
 }
 
 export default Index

@@ -1,5 +1,11 @@
+import { ICMSPage } from '@app/subdomains/cms/interfaces/ICMSPage'
 import { GitHubSession } from '@app/subdomains/cms/interfaces/IGitHubService'
-import { AnyObject } from '@flex-development/types'
+import {
+  CollectionTemplateProps,
+  IndexTemplateProps,
+  ProductTemplateProps,
+  SearchTemplateProps
+} from '@flex-development/kustomzdesign'
 
 /**
  * @file Subdomain Interfaces - Next.js Page Props
@@ -15,7 +21,7 @@ export interface IPageProps {
    *
    * @see https://shopify.dev/docs/admin-api/rest/reference/online-store
    */
-  page: AnyObject
+  page: PageData
 
   /**
    * True if user is signed-in with GitHub and viewing a marketing site page.
@@ -29,3 +35,30 @@ export interface IPageProps {
    */
   session: GitHubSession | null
 }
+
+/* eslint-disable prettier/prettier */
+
+export type PageData =
+  | CollectionTemplateProps
+  | ICMSPage
+  | IndexTemplatePropsServer
+  | ProductTemplatePropsServer
+  | SearchTemplateProps
+
+/* eslint-enable prettier/prettier */
+
+/**
+ * Server side `IndexTemplateProps`.
+ */
+export type IndexTemplatePropsServer = Pick<
+  IndexTemplateProps,
+  'products' | 'reviews'
+>
+
+/**
+ * Server side `ProductTemplateProps`.
+ */
+export type ProductTemplatePropsServer = Pick<
+  ProductTemplateProps,
+  'product' | 'reviews'
+>

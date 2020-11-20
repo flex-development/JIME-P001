@@ -1,3 +1,4 @@
+import { ICMSPage } from '@app/subdomains/cms'
 import {
   useCMSData,
   usePlaylistForm,
@@ -15,7 +16,7 @@ import {
   ShopHeader,
   Sidebar
 } from '@flex-development/kustomzdesign'
-import { isEmpty } from 'lodash'
+import { isEmpty, merge } from 'lodash'
 import React, { FC, Fragment, ReactNode, useEffect } from 'react'
 import { useBoolean } from 'react-hanger/array/useBoolean'
 import { useWindowSize } from 'use-hooks'
@@ -34,9 +35,9 @@ export interface ShopLayoutProps {
   page: PC
 
   /**
-   * Current user session.
+   * Props from Next.js data-fetching methods.
    */
-  session: IPageProps['session']
+  pageProps: IPageProps
 }
 
 /**
@@ -44,14 +45,24 @@ export interface ShopLayoutProps {
  *
  * @param props - Component properties
  * @param props.page - Next.js page component
- * @param props.session - Current user session
+ * @param props.pageProps - Props from Next.js data-fetching methods
  */
 export const ShopLayout: FC<ShopLayoutProps> = (props: ShopLayoutProps) => {
-  const { page: Component, session } = props
+  const { page: Component, pageProps } = props
 
   // Get metadata, site navigation as menu links, and data for current page
   const { menus, page, title } = useCMSData()
-  const { data, error } = page
+
+  const getPageData = (): IPageProps['page'] => {
+    if (page.data.component) {
+      return {
+        ...page.data,
+        content: merge(page.data.content, pageProps.page)
+      } as ICMSPage
+    }
+
+    return pageProps.page
+  }
 
   // Register profile snippet settings form (data used in Sidebar)
   const { modified: snippet } = useProfileSnippetForm()
@@ -87,7 +98,8 @@ export const ShopLayout: FC<ShopLayoutProps> = (props: ShopLayoutProps) => {
     <Fragment>
       <Head title={title} />
       {((): ReactNode => {
-        if (error) {
+        if (page.error) {
+          const { error } = page
           return <ErrorTemplate code={error.code} message={error.message} />
         }
 
@@ -125,7 +137,7 @@ export const ShopLayout: FC<ShopLayoutProps> = (props: ShopLayoutProps) => {
                     subtitle='Kustom made pot head necessities.'
                     title='Morenas Kustomz'
                   />
-                  <Component page={data} session={session} />
+                  <Component page={getPageData()} session={pageProps.session} />
                 </FlexBox>
               </Column>
             </Row>

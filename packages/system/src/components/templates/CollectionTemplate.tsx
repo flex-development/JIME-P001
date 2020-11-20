@@ -12,9 +12,9 @@ import { ProductGrid } from '../organisms'
 
 export interface CollectionTemplateProps extends MutatedProps {
   /**
-   * Collection description.
+   * The `ICollectionListing` object.
    */
-  body_html?: ICollectionListing['body_html']
+  collection: ICollectionListing
 
   /**
    * Array of `IProductListing` objects that belong to the current collection.
@@ -22,11 +22,6 @@ export interface CollectionTemplateProps extends MutatedProps {
    * @default []
    */
   products?: Array<IProductListing>
-
-  /**
-   * Title of the collection.
-   */
-  title: ICollectionListing['title']
 }
 
 /**
@@ -38,7 +33,8 @@ export interface CollectionTemplateProps extends MutatedProps {
 export const CollectionTemplate: TC<CollectionTemplateProps> = (
   props: CollectionTemplateProps
 ) => {
-  const { body_html, products = [], title, ...rest } = props
+  const { collection, products = [], ...rest } = props
+  const { body_html, title } = collection
 
   const mutated = useMutatedProps<typeof rest>(rest, 'template')
 

@@ -18,6 +18,11 @@
       "source": "/admin",
       "destination": "/api/auth/signin/github",
       "statusCode": 308
+    },
+    {
+      "source": "/instagram",
+      "destination": "https://instagram.com/morenaskustomz",
+      "statusCode": 308
     }
   ]
 }

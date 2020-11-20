@@ -3,6 +3,7 @@ import { PRODUCTS } from '@system-mocks/utils'
 import { CollectionTemplate, CollectionTemplateProps } from '@system/components'
 import { StoryFN } from '@system/types/storybook'
 import React from 'react'
+import { ICollectionListing } from 'shopify-api-node'
 
 /**
  * @file Stories - CollectionTemplate
@@ -22,15 +23,12 @@ export default {
   title: 'Library/Templates/CollectionTemplate'
 }
 
-const { body_html, title } = collections[0]
-
 export const Products: StoryFN<CollectionTemplateProps> = (
   args: CollectionTemplateProps
 ) => <CollectionTemplate {...args} />
 
 Products.args = {
   ...CollectionTemplate?.defaultProps,
-  body_html,
-  products: PRODUCTS,
-  title
+  collection: (collections[0] as unknown) as ICollectionListing,
+  products: PRODUCTS
 }

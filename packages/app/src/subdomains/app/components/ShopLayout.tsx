@@ -5,6 +5,7 @@ import {
   useProfileSnippetForm
 } from '@app/subdomains/cms/hooks'
 import { usePlaylist } from '@app/subdomains/streaming/hooks'
+import { FeathersErrorJSON } from '@feathersjs/errors'
 import {
   Column,
   ErrorTemplate,
@@ -130,11 +131,11 @@ export const ShopLayout: FC<ShopLayoutProps> = (props: ShopLayoutProps) => {
               title='Morenas Kustomz'
             />
             {((): ReactNode => {
-              if (page.error) {
-                const { error } = page
-                return (
-                  <ErrorTemplate code={error.code} message={error.message} />
-                )
+              if (page.error || (pageProps.page as FeathersErrorJSON)?.code) {
+                const server_error = pageProps.page as FeathersErrorJSON
+                const { code, message } = server_error || page.error
+
+                return <ErrorTemplate code={code} message={message} />
               }
 
               return (

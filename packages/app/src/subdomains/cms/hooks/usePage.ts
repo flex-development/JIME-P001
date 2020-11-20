@@ -65,7 +65,7 @@ export const usePage = (session?: IPageProps['session']): UsePage => {
   // Get data for pages that use `PageTemplate` (CMS pages)
   useEffect(() => {
     // If pages aren't loaded, on homepage, or not a cms page do nothing
-    if (!pages || path === '/') return
+    if (!pages || path === '/' || !slug) return
 
     // Find page by path
     const page = pages.find(page => page.path === path)

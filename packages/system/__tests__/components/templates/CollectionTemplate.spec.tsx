@@ -19,12 +19,14 @@ it('renders without crashing', () => {
 
 it('renders the collection title', () => {
   const { getByText } = render(<Products {...Products.args} />)
+  const { collection } = Products.args
 
-  expect(getByText(Products.args.title)).toBeInTheDocument()
+  expect(getByText(collection.title)).toBeInTheDocument()
 })
 
 it('renders the collection description', () => {
   const { getByText } = render(<Products {...Products.args} />)
+  const { collection } = Products.args
 
-  expect(getByText(Products.args?.body_html as string)).toBeInTheDocument()
+  expect(getByText(collection.body_html as string)).toBeInTheDocument()
 })

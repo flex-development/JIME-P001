@@ -19,6 +19,11 @@ import React from 'react'
 import { IProductListing } from 'shopify-api-node'
 
 /**
+ * @file Index Page
+ * @module pages/index
+ */
+
+/**
  * Renders the homepage.
  * The value of {@param props.page.component} will always be `IndexTemplate`.
  *
@@ -43,8 +48,8 @@ const Index: PC = ({ page }) => {
  *
  * @see https://nextjs.org/docs/basic-features/data-fetching
  *
- * @param ctx - Next.js page component context
- * @param ctx.req - HTTP request object
+ * @param context - Next.js page component context
+ * @param context.req - HTTP request object
  * @returns Product listings, reviews, and current user session
  */
 export const getServerSideProps: ServerSidePageProps = async (

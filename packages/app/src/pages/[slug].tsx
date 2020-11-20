@@ -9,6 +9,11 @@ import { getSession } from 'next-auth/client'
 import React from 'react'
 
 /**
+ * @file Slug (CMS) pages
+ * @module pages/handle
+ */
+
+/**
  * Renders a CMS page.
  * The value of {@param props.page.component} will always be `PageTemplate`.
  *
@@ -32,8 +37,8 @@ const Slug: PC = ({ page }) => {
  *
  * @see https://nextjs.org/docs/basic-features/data-fetching
  *
- * @param ctx - Next.js page component context
- * @param ctx.req - HTTP request object
+ * @param context - Next.js page component context
+ * @param context.req - HTTP request object
  * @returns Current user session
  */
 export const getServerSideProps: ServerSidePageProps = async (

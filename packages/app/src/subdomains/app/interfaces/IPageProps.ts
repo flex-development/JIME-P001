@@ -1,5 +1,6 @@
 import { ICMSPage } from '@app/subdomains/cms/interfaces/ICMSPage'
 import { GitHubSession } from '@app/subdomains/cms/interfaces/IGitHubService'
+import { FeathersErrorJSON } from '@feathersjs/errors'
 import {
   CollectionTemplateProps,
   IndexTemplateProps,
@@ -21,7 +22,7 @@ export interface IPageProps {
    *
    * @see https://shopify.dev/docs/admin-api/rest/reference/online-store
    */
-  page: PageData | null
+  page: FeathersErrorJSON | PageData | null
 
   /**
    * True if user is signed-in with GitHub and viewing a marketing site page.

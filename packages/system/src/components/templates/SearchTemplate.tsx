@@ -16,7 +16,7 @@ export interface SearchTemplateProps extends MutatedProps {
    *
    * @default []
    */
-  results?: IProductListing[]
+  results?: Array<IProductListing | Partial<IProductListing>>
 }
 
 /**
@@ -39,7 +39,7 @@ export const SearchTemplate: TC<SearchTemplateProps> = (
           Search Results&nbsp;
           <Span className='c-primary'>({`${results.length}`})</Span>
         </Heading>
-        <ProductGrid products={results} />
+        <ProductGrid products={results as Array<IProductListing>} />
       </Section>
     </Main>
   )

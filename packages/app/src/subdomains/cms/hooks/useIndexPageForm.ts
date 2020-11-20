@@ -1,3 +1,4 @@
+import { IndexTemplateProps } from '@flex-development/kustomzdesign'
 import { useForm, useFormScreenPlugin } from 'tinacms'
 import { PagesAPI } from '../config/config'
 import { IndexPageFormPlugin } from '../config/plugins'
@@ -27,6 +28,15 @@ export const useIndexPageForm = (
   const onSubmit = async (page: ICMSPage) => {
     page.component = 'IndexTemplate'
     page.path = '/'
+
+    /**
+     * FIXES: `Preview data is limited to 2KB currently, reduce how much data
+     * you are storing as preview data to continue`.
+     *
+     * These values also don't need to be stored in the database.
+     */
+    delete (page.content as IndexTemplateProps).products
+    delete (page.content as IndexTemplateProps).reviews
 
     return await PagesAPI.upsert(page.id, page)
   }

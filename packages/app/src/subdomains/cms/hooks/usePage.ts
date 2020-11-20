@@ -48,9 +48,10 @@ export const usePage = (session?: IPageProps['session']): UsePage => {
 
   // Get pathname and query from router instance
   const { pathname, query } = useRouter()
+  const { slug } = query
 
   // If on homepage, use pathname. Otherwise use slug query from dynamic routing
-  const [path] = useState(pathname === '/' ? pathname : `/${query.slug}`)
+  const [path] = useState(pathname === '/' || !slug ? pathname : `/${slug}`)
 
   // Get homepage data
   useEffect(() => {
@@ -61,9 +62,9 @@ export const usePage = (session?: IPageProps['session']): UsePage => {
     setData(homepage)
   }, [homepage, path])
 
-  // Get data for pages that use `PageTemplate`
+  // Get data for pages that use `PageTemplate` (CMS pages)
   useEffect(() => {
-    // If pages aren't loaded, or on homepage do nothing
+    // If pages aren't loaded, on homepage, or not a cms page do nothing
     if (!pages || path === '/') return
 
     // Find page by path
@@ -89,7 +90,7 @@ export const usePage = (session?: IPageProps['session']): UsePage => {
 
     // Update page state
     setData(page)
-  }, [pages, path, session])
+  }, [pages, path, session, slug])
 
   return { data, error, path }
 }

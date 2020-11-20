@@ -79,6 +79,8 @@ export type HeadProps = {
    * characters used in the title, and it cuts off between 472 and 482 pixels.
    * The average character limit would be around 55-characters).
    *
+   * The value `| Morena's Kustomz` will be appended to the title if defined.
+   *
    * @default "Morena's Kustomz"
    */
   title?: string
@@ -109,7 +111,7 @@ export const Head: FC<HeadProps> = ({
         content='width=device-width, initial-scale=1, viewport-fit=cover'
       />
 
-      <title>{title}</title>
+      <title>{title?.length ? `${title} | Morena's Kustomz` : title}</title>
 
       <meta name='description' content={description} />
       <meta name='keywords' content={keywords} />

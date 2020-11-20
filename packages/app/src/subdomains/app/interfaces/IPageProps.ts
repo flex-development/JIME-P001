@@ -21,7 +21,7 @@ export interface IPageProps {
    *
    * @see https://shopify.dev/docs/admin-api/rest/reference/online-store
    */
-  page: PageData
+  page: PageData | null
 
   /**
    * True if user is signed-in with GitHub and viewing a marketing site page.

@@ -20,8 +20,17 @@ import { IProductListing } from 'shopify-api-node'
 
 /**
  * Renders the homepage.
+ * The value of {@param props.page.component} will always be `IndexTemplate`.
  *
  * @param props - Page component props
+ * @param props.page - Page data
+ * @param props.page.component - Display name of template component
+ * @param props.page.content - Template component props
+ * @param props.page.draft - True if page is in draft mode
+ * @param props.page.metadata - SEO metadata
+ * @param props.page.path - Page path
+ * @param props.page.title - Page title
+ * @param props.session - Current user session or null
  */
 const Index: PC = ({ page }) => {
   const { content } = page as ICMSPage
@@ -29,15 +38,14 @@ const Index: PC = ({ page }) => {
 }
 
 /**
- * Retrieves the current user session.
+ * Retrieves the product listing and reviews for the `IndexTemplate`, as well as
+ * the current user session.
  *
  * @see https://nextjs.org/docs/basic-features/data-fetching
  *
  * @param ctx - Next.js page component context
- * @param ctx.params - Route parameters if page uses a dynamic route
  * @param ctx.req - HTTP request object
- * @param ctx.res - HTTP response object
- * @param ctx.resolvedUrl - Normalized version of the request URL
+ * @returns Product listings, reviews, and current user session
  */
 export const getServerSideProps: ServerSidePageProps = async (
   context: GetServerSidePropsContext

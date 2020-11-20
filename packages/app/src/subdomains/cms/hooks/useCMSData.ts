@@ -43,7 +43,7 @@ export const useCMSData = (): UseCMSData => {
   useEffect(() => {
     const { data, error } = page
 
-    setTitle(error ? `${error.code}: ${error.message}` : data.title)
+    setTitle(error ? `${error.code} | ${error.message}` : data.title)
     if (error) cms.disable()
   }, [cms, page, setTitle])
 

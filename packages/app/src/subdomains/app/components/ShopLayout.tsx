@@ -97,68 +97,68 @@ export const ShopLayout: FC<ShopLayoutProps> = (props: ShopLayoutProps) => {
   return (
     <Fragment>
       <Head title={title} />
-      {((): ReactNode => {
-        if (page.error) {
-          const { error } = page
-          return <ErrorTemplate code={error.code} message={error.message} />
-        }
+      <Row gx={0} justify='end'>
+        <Column
+          className={`sidebar-col${sidebar ? '' : ' d-none'}`}
+          lg={sidebar ? 4 : 12}
+          mt={0}
+          px={0}
+          xl={sidebar ? 3 : 12}
+        >
+          <Sidebar
+            age={snippet.age}
+            img={snippet.img || undefined}
+            location={snippet.location}
+            menu={menus.main}
+            mood={snippet.mood}
+          />
+        </Column>
 
-        return (
-          <Fragment>
-            <Row gx={0} justify='end'>
-              <Column
-                className={`sidebar-col${sidebar ? '' : ' d-none'}`}
-                lg={sidebar ? 4 : 12}
-                mt={0}
-                px={0}
-                xl={sidebar ? 3 : 12}
-              >
-                <Sidebar
-                  age={snippet.age}
-                  img={snippet.img || undefined}
-                  location={snippet.location}
-                  menu={menus.main}
-                  mood={snippet.mood}
-                />
-              </Column>
-
-              <Column lg={sidebar ? 8 : 12} mt={0} px={0} xl={sidebar ? 9 : 12}>
-                <ShopHeader
-                  className='position-fixed top-0 w-available w-100'
-                  handleSidebar={handleSidebar}
-                  px={24}
-                  py={20}
-                />
-                <FlexBox
-                  className={`${sidebar_sm ? 'd-none' : ''}`}
-                  direction='column'
-                >
-                  <Hero
-                    subtitle='Kustom made pot head necessities.'
-                    title='Morenas Kustomz'
-                  />
-                  <Component page={getPageData()} session={pageProps.session} />
-                </FlexBox>
-              </Column>
-            </Row>
-
-            <PlaylistBar
-              className='bottom-0 position-fixed w-100'
-              handleSkip={({ target }) => {
-                return target.name === 'skip_next'
-                  ? kit.player.skipToNextItem()
-                  : kit.player.skipToPreviousItem()
-              }}
-              playback={kit.player.playbackState}
-              pr={24}
-              song={(() => {
-                const { position: pos } = queue
-                return queue.item(pos === -1 ? 0 : pos)?.attributes || {}
-              })()}
+        <Column lg={sidebar ? 8 : 12} mt={0} px={0} xl={sidebar ? 9 : 12}>
+          <ShopHeader
+            className='position-fixed top-0 w-available w-100'
+            handleSidebar={handleSidebar}
+            px={24}
+            py={20}
+          />
+          <FlexBox
+            className={`${sidebar_sm ? 'd-none' : ''}`}
+            direction='column'
+          >
+            <Hero
+              subtitle='Kustom made pot head necessities.'
+              title='Morenas Kustomz'
             />
-          </Fragment>
-        )
-      })()}
+            {((): ReactNode => {
+              if (page.error) {
+                const { error } = page
+                return (
+                  <ErrorTemplate code={error.code} message={error.message} />
+                )
+              }
+
+              return (
+                <Component page={getPageData()} session={pageProps.session} />
+              )
+            })()}
+          </FlexBox>
+        </Column>
+      </Row>
+
+      <PlaylistBar
+        className='bottom-0 position-fixed w-100'
+        handleSkip={({ target }) => {
+          return target.name === 'skip_next'
+            ? kit.player.skipToNextItem()
+            : kit.player.skipToPreviousItem()
+        }}
+        playback={kit.player.playbackState}
+        pr={24}
+        song={(() => {
+          const { position: pos } = queue
+          return queue.item(pos === -1 ? 0 : pos)?.attributes || {}
+        })()}
+      />
     </Fragment>
   )
 }

@@ -8,7 +8,7 @@ export * from './useIndexPageForm'
 export * from './useMenus'
 export * from './useNavigationForm'
 export * from './usePage'
-export * from './usePlaylistForm'
+export * from './usePlaylistSettingsForm'
 export * from './useProfileSnippetForm'
 export * from './useSignInWithCustomToken'
 

@@ -6,7 +6,7 @@ import { FirebaseMediaStore } from '../models/FirebaseMediaStore'
 import {
   MenuRepository,
   PageRepository,
-  PlaylistRepository,
+  PlaylistSettingsRepository,
   ProfileSnippetRepository
 } from '../repositories'
 
@@ -17,7 +17,7 @@ import {
 
 export const MenusAPI = new MenuRepository(database)
 export const PagesAPI = new PageRepository(database)
-export const PlaylistAPI = new PlaylistRepository(database)
+export const PlaylistAPI = new PlaylistSettingsRepository(database)
 export const ProfileSnippetAPI = new ProfileSnippetRepository(database)
 
 /**

@@ -10,8 +10,6 @@
  * @todo [IMP] FirebaseMediaStore - Convert files in sub-sub-folders recursively
  * @todo [IMP] QueryExecutor - Handle arrays in $gt, $gte, $lt, and $lte methods
  * @todo [IMP] IPageProps - Update `page` type definition
- * @todo [IMP] PlaylistRepository - Set id value for all methods
- * @todo [IMP] ProfileSnippetRepository - Set id value for all methods
  * @todo [IMP] ShopLayout - Handle loading state
  * @todo [IMP] URLField - Implement validatation function
  */

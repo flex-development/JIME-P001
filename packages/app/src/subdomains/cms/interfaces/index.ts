@@ -9,7 +9,11 @@ export * from './ICMSEntity'
 export * from './ICMSMenu'
 export * from './ICMSMenuLink'
 export * from './ICMSPage'
-export * from './IPlaylist'
+export * from './IMenuRepository'
+export * from './IPageRepository'
+export * from './IPlaylistSettings'
+export * from './IPlaylistSettingsRepository'
 export * from './IProfileSnippet'
+export * from './IProfileSnippetRepository'
 
 /* eslint-disable prettier/prettier */

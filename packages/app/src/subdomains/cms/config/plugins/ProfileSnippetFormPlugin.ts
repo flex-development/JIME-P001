@@ -45,7 +45,7 @@ export const ProfileSnippetFormPlugin = (
      * @async
      */
     loadInitialValues: async () => {
-      return (await ProfileSnippetAPI.findById(id)) || ({} as IProfileSnippet)
+      return (await ProfileSnippetAPI.findById()) || ({} as IProfileSnippet)
     },
 
     /**

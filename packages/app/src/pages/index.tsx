@@ -43,8 +43,7 @@ const Index: PC = ({ page }) => {
 }
 
 /**
- * Retrieves the product listing and reviews for the `IndexTemplate`, as well as
- * the current user session.
+ * Retrieves the data for the `IndexTemplate`.
  *
  * @see https://nextjs.org/docs/basic-features/data-fetching
  *
@@ -55,6 +54,8 @@ const Index: PC = ({ page }) => {
 export const getServerSideProps: ServerSidePageProps = async (
   context: GetServerSidePropsContext
 ) => {
+  console.debug(context.preview, context.previewData)
+
   const ProductReviews = new ReviewService(database)
   const Products = new ProductService()
 

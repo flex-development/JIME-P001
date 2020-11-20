@@ -1,7 +1,7 @@
 import { ICMSPage } from '@app/subdomains/cms'
 import {
   useCMSData,
-  usePlaylistForm,
+  usePlaylistSettingsForm,
   useProfileSnippetForm
 } from '@app/subdomains/cms/hooks'
 import { usePlaylist } from '@app/subdomains/streaming/hooks'
@@ -69,7 +69,7 @@ export const ShopLayout: FC<ShopLayoutProps> = (props: ShopLayoutProps) => {
   const { modified: snippet } = useProfileSnippetForm()
 
   // Register playlist settings form
-  const { modified: playlist } = usePlaylistForm()
+  const { modified: playlist } = usePlaylistSettingsForm()
 
   // Handle playlist streaming
   const { kit, queue } = usePlaylist(playlist.url)

@@ -3,8 +3,7 @@ import { createError } from '@app/subdomains/app'
 import { ICMSPage } from '@app/subdomains/cms'
 import { GitHubSession } from '@app/subdomains/cms/interfaces/IGitHubService'
 import { PageRepository } from '@app/subdomains/cms/repositories'
-import { FeathersErrorJSON } from '@feathersjs/errors'
-import { isString } from 'lodash'
+import { isString, pick } from 'lodash'
 import { NextApiRequest as Req, NextApiResponse as Res } from 'next'
 import { getSession } from 'next-auth/client'
 
@@ -30,33 +29,37 @@ export default async (req: Req, res: Res): Promise<void> => {
 
   // If not signed in with GitHub, return 401 error
   if (!authenticated) {
-    return res.json(createError('Not authenticated.', { session }, 401))
+    const error = createError('Not authenticated.', { session }, 401)
+    return res.status(error.code).json(error)
   }
 
   // If invalid path query, return 400 error
   if (!is_valid_path) {
     const data = { path: path || null }
-    return res.json(createError('Invalid path query.', data, 400))
+    const error = createError('Invalid path query.', data, 400)
+
+    return res.status(error.code).json(error)
   }
 
   // Initialize Page repository
   const Pages = new PageRepository(database)
 
   // Get page data by path
-  const page: ICMSPage | null = await Pages.findByPath(valid_path[1])
-  let preview: FeathersErrorJSON | ICMSPage = {} as ICMSPage
+  const page: ICMSPage | null = await Pages.findByPath(valid_path)
 
   if (!page) {
-    preview = createError(`Page with path "${path}" not found`, { path }, 404)
-  } else {
-    preview = page
+    const data = { path: valid_path }
+    const error = createError(`Page with path "${path}" not found`, data, 404)
+
+    return res.status(error.code).json(error)
   }
 
   /**
-   * Unable to use `res.setPreviewData(preview)` because it causes the following
+   * Unable to use `res.setPreviewData(page)` because it causes the following
    * error: `Preview data is limited to 2KB currently, reduce how much data
    * you are storing as preview data to continue`.
    */
-  // res.setPreviewData(preview)
-  return res.json(preview)
+  res.setPreviewData(pick(page, ['id', 'path', 'uuid']))
+  res.writeHead(307, { Location: page.path })
+  res.end()
 }

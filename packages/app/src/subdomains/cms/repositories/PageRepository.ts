@@ -5,6 +5,7 @@ import { AnyObject } from '@flex-development/types'
 import { isEmpty } from 'lodash'
 import slugify from 'slugify'
 import { ICMSPage } from '../interfaces'
+import { IPageRepository } from '../interfaces/IPageRepository'
 import { CMSPage } from '../models'
 
 /**
@@ -12,7 +13,9 @@ import { CMSPage } from '../models'
  * @module subdomains/cms/repositories/PageRepository
  */
 
-export default class PageRepository extends RTDRepository<ICMSPage> {
+export default class PageRepository
+  extends RTDRepository<ICMSPage>
+  implements IPageRepository {
   /**
    * Creates a new connection to the `pages` collection.
    *
@@ -63,9 +66,27 @@ export default class PageRepository extends RTDRepository<ICMSPage> {
    * @param path - Slug of page to search for
    * @returns Page resource or null if not found
    */
-  async findByPath(path: string): Promise<ICMSPage | null> {
+  async findByPath(path: ICMSPage['path']): Promise<ICMSPage | null> {
     const pages = await this.find({ path: { $eq: path } })
     return (pages[0] as ICMSPage) || null
+  }
+
+  /**
+   * Returns the page with the path {@param path} or throws an error.
+   *
+   * @param path - Slug of page to search for
+   * @returns Page resource
+   * @throws {FeathersErrorJSON}
+   */
+  async getByPath(path: ICMSPage['path']): Promise<ICMSPage> {
+    const page = await this.findByPath(path)
+
+    if (!page) {
+      const message = `Page with path "${path}" not found.`
+      throw createError(message, { path: path || null }, 404)
+    }
+
+    return page
   }
 
   /**
@@ -75,7 +96,7 @@ export default class PageRepository extends RTDRepository<ICMSPage> {
    * @param id - ID of page to update
    * @param data - Data to update page
    */
-  async update(id: string, data: AnyObject): Promise<ICMSPage> {
+  async update(id: ICMSPage['id'], data: AnyObject): Promise<ICMSPage> {
     const { path } = data
 
     if (path) {

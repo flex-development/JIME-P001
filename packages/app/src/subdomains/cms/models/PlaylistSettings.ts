@@ -1,13 +1,13 @@
 import { Entity } from '@app/subdomains/app/models/Entity'
 import { IsUrl } from 'class-validator'
-import { IPlaylist } from '../interfaces'
+import { IPlaylistSettings } from '../interfaces'
 
 /**
  * @file Subdomain Models - Playlist Settings
  * @module subdomains/cms/models/Playlist
  */
 
-export class Playlist extends Entity implements IPlaylist {
+export class PlaylistSettings extends Entity implements IPlaylistSettings {
   @IsUrl()
   url: string
 }

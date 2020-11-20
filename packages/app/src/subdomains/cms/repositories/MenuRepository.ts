@@ -3,6 +3,7 @@ import createError from '@app/subdomains/app/utils/createError'
 import { uuid } from '@flex-development/kustomzdesign'
 import { isEmpty } from 'lodash'
 import { ICMSMenu } from '../interfaces'
+import { IMenuRepository } from '../interfaces/IMenuRepository'
 import { CMSMenu } from '../models'
 
 /**
@@ -10,7 +11,9 @@ import { CMSMenu } from '../models'
  * @module subdomains/cms/repositories/MenuRepository
  */
 
-export default class MenuRepository extends RTDRepository<ICMSMenu> {
+export default class MenuRepository
+  extends RTDRepository<ICMSMenu>
+  implements IMenuRepository {
   /**
    * Creates a new connection to the `menus` collection.
    *

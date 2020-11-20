@@ -1,11 +1,11 @@
 import { FormOptions } from 'tinacms'
-import { IPlaylist } from '../../interfaces'
+import { IPlaylistSettings } from '../../interfaces'
 import { PlaylistAPI } from '../config'
 import { URLField } from '../extensions'
 
 /**
  * @file Form configuration edit store playlist settings
- * @module subdomains/cms/config/plugins/PlaylistFormPlugin
+ * @module subdomains/cms/config/plugins/PlaylistSettingsFormPlugin
  */
 
 /**
@@ -15,10 +15,10 @@ import { URLField } from '../extensions'
  * @param onSubmit - Function to invoke when the form is saved
  * @returns Store playlist settings form configuration
  */
-export const PlaylistFormPlugin = (
+export const PlaylistSettingsFormPlugin = (
   label = 'Playlist Settings',
-  onSubmit?: FormOptions<IPlaylist>['onSubmit']
-): FormOptions<IPlaylist> => {
+  onSubmit?: FormOptions<IPlaylistSettings>['onSubmit']
+): FormOptions<IPlaylistSettings> => {
   const id = 'playlist'
 
   return {
@@ -40,7 +40,7 @@ export const PlaylistFormPlugin = (
      * @async
      */
     loadInitialValues: async () => {
-      return (await PlaylistAPI.findById(id)) || ({} as IPlaylist)
+      return (await PlaylistAPI.findById()) || ({} as IPlaylistSettings)
     },
 
     /**

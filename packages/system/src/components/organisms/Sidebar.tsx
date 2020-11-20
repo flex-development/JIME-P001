@@ -78,19 +78,20 @@ export const Sidebar: FC<SidebarProps> = (props: SidebarProps) => {
       <Box>
         <Row
           className='sidebar-profile'
-          justify={{ lg: 'between', xs: 'start' }}
+          direction={{ xl: 'row', xs: 'column' }}
+          justify={{ xl: 'between', xs: 'start' }}
           mb={36}
           mt={0}
           mx={0}
           wrap={false}
         >
           <Column
-            lg={6}
-            mb={{ md: 0, xs: 24 }}
-            md={3}
-            mr={{ lg: 0, xs: 12 }}
+            mb={{ xl: 0, xs: 24 }}
+            mr={0}
             mt={0}
             px={0}
+            sm={8}
+            xl={6}
             xs={12}
           >
             <Link className='sidebar-profile-img' href={img} target='_blank'>
@@ -103,7 +104,8 @@ export const Sidebar: FC<SidebarProps> = (props: SidebarProps) => {
             justify='center'
             mt={0}
             px={0}
-            span={5}
+            xl={5}
+            xs={12}
           >
             <Paragraph className='sidebar-profile-online-status'>
               <Icon outlined={false}>person</Icon>

@@ -51,7 +51,7 @@ export const GRID_BREAKPOINTS: Record<GridBreakpoint, number> = {
   xs: 0,
   sm: 576,
   md: 834,
-  lg: 992,
+  lg: 1010,
   xl: 1368,
   xxl: 1440
 }

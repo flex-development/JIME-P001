@@ -32,6 +32,7 @@ $sidebar-padding-x: $spacers-36;
 
   @include padding-y($sidebar-padding-top, $sidebar-padding-bottom);
 
+  background-color: $body-bg;
   font-size: $sidebar-font-size;
 
   &-menu {
@@ -56,9 +57,12 @@ $sidebar-padding-x: $spacers-36;
     }
 
     &-img {
+      @include media-breakpoint-up(xl) {
+        max-height: rem(250);
+        max-width: rem(250);
+      }
+
       display: inline-block;
-      max-height: rem(250);
-      max-width: rem(250);
     }
 
     &-name {

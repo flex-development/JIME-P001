@@ -98,13 +98,14 @@ $link-decoration: none;
 // Grid Breakpoints
 // -----------------------------------------------------------------------------
 
-$grid-breakpoints: map-merge(
-  bootstrap.$grid-breakpoints,
-  (
-    md: 834px,
-    xl: 1368px,
-    xxl: 1440px
-  )
+$grid-breakpoints: (
+  xs: 0,
+  gt-360: 361px,
+  sm: 576px,
+  md: 834px,
+  lg: 1010px,
+  xl: 1368px,
+  xxl: 1440px
 );
 
 // -----------------------------------------------------------------------------

@@ -8,15 +8,6 @@
 
 $hero-height: 100vh;
 
-$hero-title-font-family: $font-family-sans-serif-special;
-$hero-title-font-size-lg: $font-size-base * 6;
-$hero-title-font-size-sm-lg: $font-size-base * 3;
-$hero-title-font-size: $font-size-base * 2;
-
-$hero-subtitle-color: $secondary;
-$hero-subtitle-font-size-sm: $font-size-xxl;
-$hero-subtitle-font-size: $font-size-sm;
-
 /// ----------------------------------------------------------------------------
 /// Styles
 /// ----------------------------------------------------------------------------
@@ -32,25 +23,32 @@ $hero-subtitle-font-size: $font-size-sm;
 
   &-subtitle {
     @include media-breakpoint-up(sm) {
-      font-size: $hero-subtitle-font-size-sm;
+      font-size: $font-size-xxl;
     }
 
-    color: $hero-subtitle-color;
-    font-size: $hero-subtitle-font-size;
+    color: $secondary;
+    font-size: $font-size-sm;
     font-weight: $font-weight-bold;
     text-transform: uppercase;
   }
 
   &-title {
-    @include media-breakpoint-between(sm, lg) {
-      font-size: $hero-title-font-size-sm-lg;
+    @include media-breakpoint-up(gt-360) {
+      font-size: $font-size-base * 3;
+    }
+
+    @include media-breakpoint-up(sm) {
+      font-size: $font-size-base * 4;
     }
 
     @include media-breakpoint-up(lg) {
-      font-size: $hero-title-font-size-lg;
+      font-size: $font-size-base * 5;
     }
 
-    font-family: $hero-title-font-family;
-    font-size: $hero-title-font-size;
+    @include media-breakpoint-up(xl) {
+      font-size: $font-size-base * 6;
+    }
+
+    font-family: $font-family-sans-serif-special;
   }
 }

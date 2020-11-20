@@ -7,11 +7,13 @@
 }
 
 .sidebar {
-  width: inherit;
+  width: 100%;
 }
 
 .sidebar-col {
   height: 100vh;
+  left: 0;
+  position: fixed;
 }
 
 .playlistbar,
@@ -19,8 +21,20 @@
   z-index: 2;
 }
 
-@media screen and (max-width: 576px) {
+@media screen and (max-width: 1010px) {
+  .sidebar-col:not(.d-none) {
+    background-color: rgba(0, 0, 0, 25%);
+  }
+}
+
+@media screen and (max-width: 834px) {
+  .sidebar-col {
+    position: absolute;
+  }
+}
+
+@media screen and (min-width: 576px) and (max-width: 1010px) {
   .sidebar {
-    width: 100%;
+    width: 40vw;
   }
 }

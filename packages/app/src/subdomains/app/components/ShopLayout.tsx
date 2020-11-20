@@ -5,9 +5,9 @@ import {
 } from '@app/subdomains/cms/hooks'
 import { usePlaylist } from '@app/subdomains/streaming/hooks'
 import {
-  Box,
   Column,
   ErrorTemplate,
+  FlexBox,
   GRID_BREAKPOINTS,
   Hero,
   PlaylistBar,
@@ -64,22 +64,22 @@ export const ShopLayout: FC<ShopLayoutProps> = (props: ShopLayoutProps) => {
 
   // Handle window size
   const size = useWindowSize()
-  const { width } = size
 
   // Handle sidebar
   const [sidebar, { setValue: setSidebar, toggle: handleSidebar }] = useBoolean(
-    false
+    true
   )
-  const sidebar_mobile = sidebar && width <= GRID_BREAKPOINTS.lg
+
+  const sidebar_sm = sidebar && size.width <= GRID_BREAKPOINTS.sm
 
   // Close sidebar when window size is less than value of GRID_BREAKPOINTS.lg
   useEffect(() => {
-    if (width > GRID_BREAKPOINTS.lg) {
+    if (size.width > GRID_BREAKPOINTS.lg) {
       setSidebar(true)
-    } else if (width <= GRID_BREAKPOINTS.lg) {
+    } else if (size.width <= GRID_BREAKPOINTS.lg) {
       setSidebar(false)
     }
-  }, [setSidebar, width])
+  }, [setSidebar, size.width])
 
   if (isEmpty(queue)) return null
 
@@ -93,7 +93,7 @@ export const ShopLayout: FC<ShopLayoutProps> = (props: ShopLayoutProps) => {
 
         return (
           <Fragment>
-            <Row gx={0}>
+            <Row gx={0} justify='end'>
               <Column
                 className={`sidebar-col${sidebar ? '' : ' d-none'}`}
                 lg={sidebar ? 4 : 12}
@@ -103,7 +103,6 @@ export const ShopLayout: FC<ShopLayoutProps> = (props: ShopLayoutProps) => {
               >
                 <Sidebar
                   age={snippet.age}
-                  className='position-fixed'
                   img={snippet.img || undefined}
                   location={snippet.location}
                   menu={menus.main}
@@ -113,21 +112,21 @@ export const ShopLayout: FC<ShopLayoutProps> = (props: ShopLayoutProps) => {
 
               <Column lg={sidebar ? 8 : 12} mt={0} px={0} xl={sidebar ? 9 : 12}>
                 <ShopHeader
-                  className='position-fixed top-0 w-100'
+                  className='position-fixed top-0 w-available w-100'
                   handleSidebar={handleSidebar}
                   px={24}
                   py={20}
                 />
-                <Box
-                  className={`${sidebar_mobile ? 'd-none' : ''}`}
-                  flex={sidebar_mobile}
+                <FlexBox
+                  className={`${sidebar_sm ? 'd-none' : ''}`}
+                  direction='column'
                 >
                   <Hero
                     subtitle='Kustom made pot head necessities.'
                     title='Morenas Kustomz'
                   />
                   <Component page={data} session={session} />
-                </Box>
+                </FlexBox>
               </Column>
             </Row>
 

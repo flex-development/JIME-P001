@@ -1,3 +1,5 @@
+const vercel = require('./vercel.json')
+
 /**
  * @file Next.js Configuration
  * @see https://nextjs.org/docs/api-reference/next.config.js/introduction
@@ -36,6 +38,46 @@ module.exports = {
     SHOPIFY_STOREFRONT_ACCESS_TOKEN,
     SITE_URL: SITE_URL || VERCEL_URL || 'http://localhost:3001',
     VERCEL_URL
+  },
+
+  /**
+   * Returns the headers configuration.
+   *
+   * @see https://nextjs.org/docs/api-reference/next.config.js/headers
+   *
+   * @returns {Array<object>} Array of headers
+   */
+  async headers() {
+    return vercel.headers || []
+  },
+
+  /**
+   * Opt-in to React Strict Mode.
+   *
+   * @see https://reactjs.org/docs/strict-mode.html
+   */
+  reactStrictMode: true,
+
+  /**
+   * Returns the redirects configuration.
+   *
+   * @see https://nextjs.org/docs/api-reference/next.config.js/redirects
+   *
+   * @returns {Array<object>} Array of redirects
+   */
+  async redirects() {
+    return vercel.redirects || []
+  },
+
+  /**
+   * Returns the rewrites configuration.
+   *
+   * @see https://nextjs.org/docs/api-reference/next.config.js/rewrites
+   *
+   * @returns {Array<object>} Array of rewrites
+   */
+  async rewrites() {
+    return vercel.rewrites || []
   },
 
   /**

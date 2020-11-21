@@ -137,4 +137,33 @@ export default class ProductService
 
     return products[0]
   }
+
+  /**
+   * Searches the products of the collection with the id {@param collection_id}
+   * the product with the handle {@param handle}.
+   *
+   * An error will be thrown if the product isn't found.
+   *
+   * @async
+   * @param collection_id - ID of collection to search
+   * @param handle - Handle of product to find
+   */
+  async getFromCollection(
+    collection_id: ICollectionListing['collection_id'],
+    handle: IProductListing['handle']
+  ): Promise<IProductListing> {
+    const products = await this.findByCollection(collection_id)
+    const product = products.find(p => p.handle === handle)
+
+    if (!product) {
+      const data = { errors: { collection_id, product: handle } }
+      const message = `Product with handle "${handle}" not found in collection.`
+      const error = createError(message, data, 404)
+
+      Logger.error({ 'ProductService.getFromCollection': error })
+      throw error
+    }
+
+    return product as IProductListing
+  }
 }

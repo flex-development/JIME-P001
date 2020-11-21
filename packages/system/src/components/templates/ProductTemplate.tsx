@@ -1,7 +1,6 @@
 import { ANYTHING, IReview } from '@flex-development/types'
 import { useMutatedProps } from '@system/hooks'
 import { EventHandlers, MutatedProps, TC } from '@system/types'
-import { uuid } from '@system/utils'
 import { chunk } from 'lodash'
 import React, { useState } from 'react'
 import { IProductListing, IProductListingVariant } from 'shopify-api-node'
@@ -15,6 +14,13 @@ import { AddToCartForm, AddToCartFormProps, Carousel } from '../organisms'
  */
 
 export interface ProductTemplateProps extends MutatedProps {
+  /**
+   * Index position of the carousel slide to display first.
+   *
+   * @default 0
+   */
+  active?: number
+
   /**
    * Title and link of the collection the `product` belongs to.
    */
@@ -61,6 +67,7 @@ export const ProductTemplate: TC<ProductTemplateProps> = (
   props: ProductTemplateProps
 ) => {
   const {
+    active = 0,
     collection,
     handleAddToCart,
     handleSubmitReview = (event: EventHandlers.Click.Button) => {
@@ -76,7 +83,8 @@ export const ProductTemplate: TC<ProductTemplateProps> = (
   const mutated = useMutatedProps<typeof rest>(rest, 'template')
 
   // Selected variant
-  const [variant, setVariant] = useState(product.variants[0])
+  const initial_index = active < 0 ? 0 : active
+  const [variant, setVariant] = useState(product.variants[initial_index])
 
   // Paginate product reviews
   const review_chunks = chunk(reviews, reviews_chunk_max)
@@ -100,6 +108,7 @@ export const ProductTemplate: TC<ProductTemplateProps> = (
       />
 
       <AddToCartForm
+        active={active}
         handleSubmit={handleAddToCart}
         handleVariant={handleVariant}
         product={product}
@@ -118,19 +127,21 @@ export const ProductTemplate: TC<ProductTemplateProps> = (
           </Button>
         </FlexBox>
 
-        <Carousel id='product-review-carousel'>
-          {review_chunks.map((chunk: IReview[]) => (
-            <FlexBox direction='column' key={uuid()}>
-              {chunk.map((review, i: number) => (
-                <ProductReview
-                  key={uuid()}
-                  mb={i === chunk.length - 1 ? 0 : 36}
-                  review={review}
-                />
-              ))}
-            </FlexBox>
-          ))}
-        </Carousel>
+        {reviews?.length && (
+          <Carousel id='product-review-carousel'>
+            {review_chunks.map((chunk: IReview[], ci: number) => (
+              <FlexBox direction='column' key={`review-chunk-${ci}`}>
+                {chunk.map((review, i: number) => (
+                  <ProductReview
+                    key={`review-chunk-${ci}-review-${i}`}
+                    mb={i === chunk.length - 1 ? 0 : 36}
+                    review={review}
+                  />
+                ))}
+              </FlexBox>
+            ))}
+          </Carousel>
+        )}
       </Section>
     </Main>
   )
@@ -139,6 +150,7 @@ export const ProductTemplate: TC<ProductTemplateProps> = (
 ProductTemplate.displayName = 'ProductTemplate'
 
 ProductTemplate.defaultProps = {
+  active: 0,
   reviews: []
 }
 

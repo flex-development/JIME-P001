@@ -8,7 +8,7 @@ import { GetServerSidePropsContext } from 'next'
 import React from 'react'
 
 /**
- * @file Product Search page
+ * @file Page - Product Search
  * @module pages/search
  */
 

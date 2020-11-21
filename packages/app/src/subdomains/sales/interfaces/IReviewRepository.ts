@@ -1,4 +1,4 @@
-import { IRTDRepository, QEData, Query } from '@app/subdomains/app/interfaces'
+import { IRTDRepository, Query } from '@app/subdomains/app/interfaces'
 import { IReview } from '@flex-development/types'
 import { IProductListing } from 'shopify-api-node'
 
@@ -8,7 +8,7 @@ import { IProductListing } from 'shopify-api-node'
  */
 
 export interface IReviewRepository extends IRTDRepository<IReview> {
-  findByProductId(id: IProductListing['product_id']): Promise<QEData<IReview>>
+  findByProductId(id: IProductListing['product_id']): Promise<Array<IReview>>
 }
 
 /**

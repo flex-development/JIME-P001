@@ -5,7 +5,7 @@ import {
   useProductVariants
 } from '@system/hooks'
 import { EventHandlers } from '@system/types'
-import { getProductVariantImage, uuid } from '@system/utils'
+import { getProductVariantImage } from '@system/utils'
 import { findIndex, isEmpty } from 'lodash'
 import React, { FC } from 'react'
 import { IProductListing, IProductListingVariant } from 'shopify-api-node'
@@ -31,6 +31,13 @@ import { Carousel } from './Carousel'
  */
 
 export interface AddToCartFormProps extends FormProps {
+  /**
+   * Index position of the carousel slide to display first.
+   *
+   * @default 0
+   */
+  active?: number
+
   /**
    * Form submission handler. If a submit handler isn't passed the result will
    * be logged to the console.
@@ -62,6 +69,7 @@ export const AddToCartForm: FC<AddToCartFormProps> = (
   props: AddToCartFormProps
 ) => {
   const {
+    active: position = 0,
     handleSubmit = (
       item: CheckoutLineItemInput,
       event: EventHandlers.Click.Button
@@ -83,7 +91,7 @@ export const AddToCartForm: FC<AddToCartFormProps> = (
     selectVariant,
     selected = {},
     variants
-  } = useProductVariants(product.variants)
+  } = useProductVariants(product.variants, position)
 
   // Initialize line item state
   // This object will be passed to props.addToCart if the fn is defined
@@ -98,7 +106,7 @@ export const AddToCartForm: FC<AddToCartFormProps> = (
   })
 
   // Carousel position state
-  const { active, setIndex: setCarouselPosition } = useActiveIndex(0, {
+  const { active, setIndex: setCarouselPosition } = useActiveIndex(position, {
     upperLimit: product.images.length - 1
   })
 
@@ -111,7 +119,7 @@ export const AddToCartForm: FC<AddToCartFormProps> = (
         xs={1}
       >
         <Column mb={{ md: 0, xs: 36 }} md={4} xs>
-          <Carousel position={active}>
+          <Carousel position={active < 0 ? 0 : active}>
             {product.images.map(({ id }) => {
               const variant = variants.find(({ image_id }) => image_id === id)
 
@@ -121,7 +129,7 @@ export const AddToCartForm: FC<AddToCartFormProps> = (
                 variant ? `${product.title} - ${variant?.title}` : product.title
               )
 
-              return <Image {...image} className='d-block w-100' key={uuid()} />
+              return <Image {...image} className='d-block w-100' key={id} />
             })}
           </Carousel>
         </Column>
@@ -221,4 +229,6 @@ export const AddToCartForm: FC<AddToCartFormProps> = (
 
 AddToCartForm.displayName = 'AddToCartForm'
 
-AddToCartForm.defaultProps = {}
+AddToCartForm.defaultProps = {
+  active: 0
+}

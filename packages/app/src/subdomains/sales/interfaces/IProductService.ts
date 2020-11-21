@@ -14,6 +14,10 @@ export interface IProductService extends IQueryExecutor<IProductListing> {
   ): Promise<QEData<IProductListing>>
   get(id: IProductListing['product_id']): Promise<IProductListing>
   getByHandle(handle: IProductListing['handle']): Promise<IProductListing>
+  getFromCollection(
+    collection_id: ICollectionListing['collection_id'],
+    handle: IProductListing['handle']
+  ): Promise<IProductListing>
 }
 
 /**

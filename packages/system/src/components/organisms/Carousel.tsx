@@ -1,5 +1,4 @@
 import { useActiveIndex, useMutatedProps } from '@system/hooks'
-import { uuid } from '@system/utils'
 import classnames from 'classnames'
 import React, { Children, FC, ReactElement } from 'react'
 import { Box, BoxProps, Item, ItemProps, List } from '../atoms'
@@ -74,7 +73,7 @@ export const Carousel: FC<CarouselProps> & {
   // Handle props and inject class
   const mutated = useMutatedProps<typeof rest>(rest, 'carousel')
 
-  // Carousel items - useMutatedProps converts props.children into an array
+  // Get carousel items
   const items = Children.toArray(children) as CarouselProps['children']
 
   // Handle active carousel item index
@@ -87,8 +86,8 @@ export const Carousel: FC<CarouselProps> & {
       <Box className='carousel-inner'>
         {items.map((child: ReactElement, i: number) => (
           <CarouselItem
-            active={isActive(i)}
-            key={uuid()}
+            active={items.length === 1 || isActive(i)}
+            key={`carousel-item-${i}`}
             onClick={() => setIndex(i)}
           >
             {child}
@@ -100,7 +99,7 @@ export const Carousel: FC<CarouselProps> & {
           {items.map((child: ReactElement, i: number) => (
             <CarouselIndicator
               active={isActive(i)}
-              key={uuid()}
+              key={`carousel-indicator-${i}`}
               onClick={() => setIndex(i)}
             />
           ))}

@@ -1,5 +1,12 @@
-import { IPageProps, PC, ServerSidePageProps } from '@app/subdomains/app'
+import {
+  IPageProps,
+  Logger,
+  PC,
+  serialize,
+  ServerSidePageProps
+} from '@app/subdomains/app'
 import { CollectionService, ProductService } from '@app/subdomains/sales'
+import { FeathersErrorJSON } from '@feathersjs/errors'
 import {
   CollectionTemplate,
   CollectionTemplateProps,
@@ -12,8 +19,8 @@ import React from 'react'
 import { IProductListing } from 'shopify-api-node'
 
 /**
- * @file Product Collection Page
- * @module pages/collections/handle
+ * @file Page - Product Collection
+ * @module pages/collections/collection
  */
 
 /**
@@ -22,16 +29,15 @@ import { IProductListing } from 'shopify-api-node'
  *
  * @param props - Page component props
  * @param props.page - Page data
- * @param props.page.body_html - Collection description
+ * @param props.page.collection - Shopify collection listing object
  * @param props.page.products - Product listings in collection
- * @param props.page.title - Collection title
  * @param props.session - Current user session or null
  */
 const Collection: PC = ({ page }: IPageProps) => {
   const data = page as CollectionTemplateProps
 
   // Get router instance to generate `LinkProps` for each collection product
-  const router = useRouter()
+  const { asPath, query } = useRouter()
 
   /**
    * Generates product `LinkProps` using the `handle` of the current collection.
@@ -40,10 +46,8 @@ const Collection: PC = ({ page }: IPageProps) => {
    * @returns `LinkProps` for the product listing
    */
   const handleProductLink = (product: IProductListing): LinkProps => {
-    const href = `products/${product.handle}`
-    const as = `${router.query.handle}/${href}`
-
-    return { onClick: () => router.push(href, as) }
+    const base = !asPath.includes('collections') ? '/' : `${query.collection}/`
+    return { href: `${base}products/${product.handle}` }
   }
 
   return <CollectionTemplate {...data} handleProductLink={handleProductLink} />
@@ -61,24 +65,34 @@ const Collection: PC = ({ page }: IPageProps) => {
 export const getServerSideProps: ServerSidePageProps = async (
   context: GetServerSidePropsContext
 ) => {
-  const { handle = '' } = context.params || {}
-  const collection_handle = isArray(handle) ? handle[0] : handle
+  const { req, params = {} } = context
+
+  let { collection: handle = '' } = params
+
+  handle = isArray(handle) ? handle[0] : handle
 
   const Collections = new CollectionService()
   const Products = new ProductService()
 
   try {
-    const collection = await Collections.getByHandle(collection_handle)
+    const collection = await Collections.getByHandle(handle)
     const products = await Products.findByCollection(collection.collection_id)
 
-    const page: CollectionTemplateProps = {
-      collection,
+    const page = serialize<CollectionTemplateProps>({
+      collection: {
+        ...collection,
+        title: !req.url?.includes('collections') ? 'Products' : collection.title
+      },
       products: products as Array<IProductListing>
-    }
+    })
 
     return { props: { page, session: null } }
   } catch (error) {
-    return { props: { page: error, session: null } }
+    Logger.error({ 'Collection.getServerSideProps': error })
+
+    return {
+      props: { page: serialize<FeathersErrorJSON>(error), session: null }
+    }
   }
 }
 

@@ -69,15 +69,22 @@ export const getServerSideProps: ServerSidePageProps = async (
     // Get page data. Throws if in draft mode and not signed-in with GitHub
     const entity = await Pages.getPage(context.req.url as string, session)
 
+    // Build service queries
+    const p_query = { $sort: { handle: SortOrder.ASCENDING } }
+    const r_query = { $sort: { id: SortOrder.ASCENDING } }
+
     // Get products and product reviews
-    const product_query = { $sort: { handle: SortOrder.ASCENDING } }
-    const reviews_query = { $sort: { id: SortOrder.ASCENDING } }
+    const products = (await Products.find(p_query)) as Array<IProductListing>
+    const reviews = (await ProductReviews.find(r_query)) as Array<IReview>
 
     // Get template props
     entity.content = {
       ...(entity.content as IndexTemplateProps),
-      products: (await Products.find(product_query)) as Array<IProductListing>,
-      reviews: (await ProductReviews.find(reviews_query)) as Array<IReview>
+      products: products.map(product => ({
+        product,
+        product_link: { href: `products/${product.handle}` }
+      })),
+      reviews
     }
 
     // Return page component props

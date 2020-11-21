@@ -3,7 +3,7 @@ import { NextComponentType, NextPageContext } from 'next'
 import React from 'react'
 
 /**
- * @file Shopping Cart
+ * @file Page - Shopping Cart
  * @module pages/cart
  */
 

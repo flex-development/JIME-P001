@@ -20,6 +20,10 @@
     {
       "source": "/admin",
       "destination": "/api/admin"
+    },
+    {
+      "source": "/products",
+      "destination": "/collections/all-products"
     }
   ],
   "headers": [

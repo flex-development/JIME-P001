@@ -1,4 +1,3 @@
-import { QEData } from '@app/subdomains/app'
 import { RTDRepository } from '@app/subdomains/app/models/RTDRepository'
 import { IReview } from '@flex-development/types'
 import { IProductListing } from 'shopify-api-node'
@@ -31,7 +30,9 @@ export default class ReviewRepository
    * @returns Array of product review objects
    * @throws {FeathersErrorJSON}
    */
-  findByProductId(id: IProductListing['product_id']): Promise<QEData<IReview>> {
-    return this.find({ product_id: { $eq: id } })
+  async findByProductId(
+    id: IProductListing['product_id']
+  ): Promise<Array<IReview>> {
+    return (await this.find({ product_id: { $eq: id } })) as Array<IReview>
   }
 }

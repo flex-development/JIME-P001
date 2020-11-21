@@ -126,7 +126,7 @@ export const ShopLayout: FC<ShopLayoutProps> = (props: ShopLayoutProps) => {
               const cms_error = preview && page.error
               const server_error = pageProps.page as FeathersErrorJSON
 
-              if (cms_error || server_error.code) {
+              if (cms_error || server_error?.code) {
                 const { code, message } = cms_error || server_error
                 return <ErrorTemplate code={code} message={message} />
               }

@@ -18,8 +18,8 @@ import { getSession } from 'next-auth/client'
 import React from 'react'
 
 /**
- * @file Slug (CMS) pages
- * @module pages/handle
+ * @file Page - Slug (CMS)
+ * @module pages/slug
  */
 
 /**

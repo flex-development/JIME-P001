@@ -45,14 +45,16 @@ export type UseProductVariants = {
  * @see https://shopify.dev/docs/storefront-api/reference/object/productvariant
  *
  * @param variants - Array of `ProductVariant` data
+ * @param active - Index of active item
  */
 export const useProductVariants = (
-  variants: Array<IProductListingVariant> = []
+  variants: Array<IProductListingVariant> = [],
+  active = 0
 ): UseProductVariants => {
   // Initialize selected variant state
   // The default option will be the first object in the array or {}
   const [selected, setSelected] = useState<UseProductVariants['selected']>(
-    variants[0] || {}
+    variants[active < 0 ? 0 : active] || {}
   )
 
   // Get product variants as `OptionProps` for `<Select />` component

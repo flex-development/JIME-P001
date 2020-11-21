@@ -10,12 +10,12 @@
  */
 export type ANYTHING = any
 
-/* eslint-enable @typescript-eslint/no-explicit-any */
-
 /**
  * Type representing any object (`{}`) value.
  */
 export type AnyObject = Record<string, any>
+
+/* eslint-enable @typescript-eslint/no-explicit-any */
 
 /**
  * Boolean and string values representing `true` or `false`.
@@ -60,3 +60,10 @@ export type NullishString = string | null
  * Type capturing primitive value types.
  */
 export type Primitive = boolean | number | string
+
+/**
+ * Type capturing all relational operators.
+ *
+ * @see http://www.cafeaulait.org/course/week2/35.html
+ */
+export type RelationalOperator = '>' | '>=' | '<' | '<=' | '==' | '!='

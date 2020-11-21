@@ -14,12 +14,11 @@ import {
   PlaylistBar,
   Row,
   ShopHeader,
-  Sidebar
+  Sidebar,
+  useVisibility
 } from '@flex-development/kustomzdesign'
 import { isEmpty, merge } from 'lodash'
-import React, { FC, Fragment, ReactNode, useEffect } from 'react'
-import { useBoolean } from 'react-hanger/array/useBoolean'
-import { useWindowSize } from 'use-hooks'
+import React, { FC, Fragment, ReactNode } from 'react'
 import { IPageProps, PC } from '../interfaces'
 import { Head } from './Head'
 
@@ -60,30 +59,14 @@ export const ShopLayout: FC<ShopLayoutProps> = (props: ShopLayoutProps) => {
   // Register profile snippet settings form (data used in Sidebar)
   const { modified: snippet } = useProfileSnippetForm()
 
+  // Handle sidebar
+  const sidebar = useVisibility(GRID_BREAKPOINTS.lg)
+
   // Register playlist settings form
   const { modified: playlist } = usePlaylistSettingsForm()
 
   // Handle playlist streaming
   const { kit, queue } = usePlaylist(playlist.url)
-
-  // Handle window size
-  const size = useWindowSize()
-
-  // Handle sidebar
-  const [sidebar, { setValue: setSidebar, toggle: handleSidebar }] = useBoolean(
-    true
-  )
-
-  const sidebar_sm = sidebar && size.width <= GRID_BREAKPOINTS.sm
-
-  // Close sidebar when window size is less than value of GRID_BREAKPOINTS.lg
-  useEffect(() => {
-    if (size.width > GRID_BREAKPOINTS.lg) {
-      setSidebar(true)
-    } else if (size.width <= GRID_BREAKPOINTS.lg) {
-      setSidebar(false)
-    }
-  }, [setSidebar, size.width])
 
   if (isEmpty(queue)) return null
 
@@ -92,11 +75,11 @@ export const ShopLayout: FC<ShopLayoutProps> = (props: ShopLayoutProps) => {
       <Head title={title} />
       <Row gx={0} justify='end'>
         <Column
-          className={`sidebar-col${sidebar ? '' : ' d-none'}`}
-          lg={sidebar ? 4 : 12}
+          className={`sidebar-col${sidebar.visible ? '' : ' d-none'}`}
+          lg={sidebar.visible ? 4 : 12}
           mt={0}
           px={0}
-          xl={sidebar ? 3 : 12}
+          xl={sidebar.visible ? 3 : 12}
         >
           <Sidebar
             age={snippet.age}
@@ -107,15 +90,20 @@ export const ShopLayout: FC<ShopLayoutProps> = (props: ShopLayoutProps) => {
           />
         </Column>
 
-        <Column lg={sidebar ? 8 : 12} mt={0} px={0} xl={sidebar ? 9 : 12}>
+        <Column
+          lg={sidebar.visible ? 8 : 12}
+          mt={0}
+          px={0}
+          xl={sidebar.visible ? 9 : 12}
+        >
           <ShopHeader
             className='position-fixed top-0 w-available w-100'
-            handleSidebar={handleSidebar}
+            handleSidebar={sidebar.toggleVisibility}
             px={24}
             py={20}
           />
           <FlexBox
-            className={`${sidebar_sm ? 'd-none' : ''}`}
+            className={`${sidebar.breakpoints.sm ? 'd-none' : ''}`}
             direction='column'
           >
             <Hero

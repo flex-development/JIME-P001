@@ -166,10 +166,13 @@ export type GrayscaleColor = 'black' | 'white'
 export type GrayscaleColorVariation = 'black-50' | 'muted' | 'white-50'
 
 /**
- * Responsive breakpoints.
+ * Responsive breakpoint keys.
  */
 export type GridBreakpoint = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl'
 
+/**
+ * Responsive utility object where each key is that a `GridBreakpoint`.
+ */
 export type ResponsiveUtility<T = Primitive> = {
   xs?: T
   sm?: T
@@ -193,8 +196,6 @@ export type SemanticColor = 'danger' | 'info' | 'success' | 'warning'
 
 /**
  * Keys from `$spacers` map.
- *
- * ! Keep in sync with Sass theme settings
  */
 export type Spacer =
   | 0

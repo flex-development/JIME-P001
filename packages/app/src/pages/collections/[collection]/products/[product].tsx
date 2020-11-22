@@ -1,9 +1,4 @@
-import {
-  IPageProps,
-  Logger,
-  PC,
-  ServerSidePageProps
-} from '@app/subdomains/app'
+import { IPageProps, PC, ServerSidePageProps } from '@app/subdomains/app'
 import { CollectionService } from '@app/subdomains/sales'
 import { FeathersErrorJSON } from '@feathersjs/errors'
 import { ProductTemplateProps } from '@flex-development/kustomzdesign'
@@ -67,22 +62,17 @@ export const getServerSideProps: ServerSidePageProps = async (
   // Initialize service
   const Collections = new CollectionService()
 
-  try {
-    // Get product collection title
-    const { title: c_title } = await Collections.getByHandle(c_handle)
+  // Get product collection title
+  const { title: c_title } = await Collections.getByHandle(c_handle)
 
-    // Get data for template
-    const page: ProductTemplateProps = {
-      ...((pageProps.props.page || {}) as ProductTemplateProps),
-      collection: { href: `collections/${c_handle}`, title: c_title }
-    }
-
-    // Return page component props and user session
-    return { props: { page, session: pageProps.props.session } }
-  } catch (error) {
-    Logger.error({ 'CollectionProduct.getServerSideProps': error })
-    return { props: { page: error, session: null } }
+  // Get data for template
+  const page: ProductTemplateProps = {
+    ...((pageProps.props.page || {}) as ProductTemplateProps),
+    collection: { href: `collections/${c_handle}`, title: c_title }
   }
+
+  // Return page component props and user session
+  return { props: { page, session: pageProps.props.session } }
 }
 
 export default CollectionProduct

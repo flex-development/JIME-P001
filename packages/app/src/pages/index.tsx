@@ -3,14 +3,12 @@ import {
   IPageProps,
   Logger,
   PC,
-  serialize,
   ServerSidePageProps,
   SortOrder
 } from '@app/subdomains/app'
 import { ICMSPage } from '@app/subdomains/cms'
 import { PageService } from '@app/subdomains/cms/services'
 import { ProductService, ReviewService } from '@app/subdomains/sales'
-import { FeathersErrorJSON } from '@feathersjs/errors'
 import {
   IndexTemplate,
   IndexTemplateProps
@@ -98,7 +96,7 @@ export const getServerSideProps: ServerSidePageProps = async (
       context.res.end()
     }
 
-    return { props: { page: serialize<FeathersErrorJSON>(error), session } }
+    throw error
   }
 }
 

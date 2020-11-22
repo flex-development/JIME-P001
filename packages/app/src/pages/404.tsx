@@ -11,9 +11,6 @@ import React, { Fragment } from 'react'
 
 /**
  * Renders a `404` error page.
- *
- * @param props - Page component props
- * @param props.error - Error thrown while building page, or undefined
  */
 const NotFound: NextComponentType<NextPageContext> = () => (
   <Fragment>

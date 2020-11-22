@@ -1,14 +1,7 @@
 import { database } from '@app/config/firebase'
-import {
-  IPageProps,
-  Logger,
-  PC,
-  serialize,
-  ServerSidePageProps
-} from '@app/subdomains/app'
+import { IPageProps, PC, ServerSidePageProps } from '@app/subdomains/app'
 import { ICMSPage } from '@app/subdomains/cms'
 import { PageService } from '@app/subdomains/cms/services'
-import { FeathersErrorJSON } from '@feathersjs/errors'
 import {
   PageTemplate,
   PageTemplateProps
@@ -66,15 +59,13 @@ export const getServerSideProps: ServerSidePageProps = async (
     // Return page component props
     return { props: { page: entity, session } }
   } catch (error) {
-    Logger.error({ 'Slug.getServerSideProps': error })
-
     if (error.code === 404) {
       context.res.setHeader('Location', '/404')
       context.res.statusCode = 302
       context.res.end()
     }
 
-    return { props: { page: serialize<FeathersErrorJSON>(error), session } }
+    throw error
   }
 }
 

@@ -1,7 +1,6 @@
 import { database } from '@app/config/firebase'
 import {
   IPageProps,
-  Logger,
   PC,
   serialize,
   ServerSidePageProps
@@ -58,32 +57,27 @@ export const getServerSideProps: ServerSidePageProps = async (
   const Products = new ProductService()
   const Reviews = new ReviewService(database)
 
-  try {
-    // Get data for template
-    const product = await Products.getByHandle(handle)
-    const reviews = await Reviews.findByProductId(product.product_id)
+  // Get data for template
+  const product = await Products.getByHandle(handle)
+  const reviews = await Reviews.findByProductId(product.product_id)
 
-    // Get index of active carousel position
-    const active = findIndex(
-      product.variants,
-      product.variants.find(variant => variant.sku === sku)
-    )
+  // Get index of active carousel position
+  const active = findIndex(
+    product.variants,
+    product.variants.find(variant => variant.sku === sku)
+  )
 
-    // Build template data object
-    const page: ProductTemplateProps = {
-      active,
-      collection: { href: 'products', title: 'Products' },
-      product,
-      reviews
-    }
+  // Build template data object
+  const page: ProductTemplateProps = {
+    active,
+    collection: { href: 'products', title: 'Products' },
+    product,
+    reviews
+  }
 
-    // Return page component props and user session
-    return {
-      props: { page: serialize<ProductTemplateProps>(page), session: null }
-    }
-  } catch (error) {
-    Logger.error({ 'Product.getServerSideProps': error })
-    return { props: { page: error, session: null } }
+  // Return page component props and user session
+  return {
+    props: { page: serialize<ProductTemplateProps>(page), session: null }
   }
 }
 

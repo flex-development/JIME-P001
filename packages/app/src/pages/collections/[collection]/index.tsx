@@ -1,12 +1,10 @@
 import {
   IPageProps,
-  Logger,
   PC,
   serialize,
   ServerSidePageProps
 } from '@app/subdomains/app'
 import { CollectionService, ProductService } from '@app/subdomains/sales'
-import { FeathersErrorJSON } from '@feathersjs/errors'
 import {
   CollectionTemplate,
   CollectionTemplateProps,
@@ -74,26 +72,18 @@ export const getServerSideProps: ServerSidePageProps = async (
   const Collections = new CollectionService()
   const Products = new ProductService()
 
-  try {
-    const collection = await Collections.getByHandle(handle)
-    const products = await Products.findByCollection(collection.collection_id)
+  const collection = await Collections.getByHandle(handle)
+  const products = await Products.findByCollection(collection.collection_id)
 
-    const page = serialize<CollectionTemplateProps>({
-      collection: {
-        ...collection,
-        title: !req.url?.includes('collections') ? 'Products' : collection.title
-      },
-      products: products as Array<IProductListing>
-    })
+  const page = serialize<CollectionTemplateProps>({
+    collection: {
+      ...collection,
+      title: !req.url?.includes('collections') ? 'Products' : collection.title
+    },
+    products: products as Array<IProductListing>
+  })
 
-    return { props: { page, session: null } }
-  } catch (error) {
-    Logger.error({ 'Collection.getServerSideProps': error })
-
-    return {
-      props: { page: serialize<FeathersErrorJSON>(error), session: null }
-    }
-  }
+  return { props: { page, session: null } }
 }
 
 export default Collection

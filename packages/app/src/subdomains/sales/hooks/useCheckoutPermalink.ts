@@ -1,6 +1,6 @@
 import { createError } from '@app/subdomains/app'
 import {
-  CheckoutLineItemDisplay,
+  CheckoutLineItemInput,
   CheckoutPermalinkQuery
 } from '@flex-development/types'
 import { isEmpty } from 'lodash'
@@ -21,32 +21,32 @@ export type UseCheckoutPermalink = {
   /**
    * Add a line item.
    */
-  addItem: UseArrayActions<CheckoutLineItemDisplayWithId>['add']
+  addItem: UseArrayActions<CheckoutLineItemInputWithId>['add']
 
   /**
    * Removes all line items.
    */
-  clearItems: UseArrayActions<CheckoutLineItemDisplayWithId>['clear']
+  clearItems: UseArrayActions<CheckoutLineItemInputWithId>['clear']
 
   /**
    * Checkout line items.
    */
-  items: Array<CheckoutLineItemDisplayWithId>
+  items: Array<CheckoutLineItemInputWithId>
 
   /**
    * Removes a single line item.
    */
-  removeItem: UseArrayActions<CheckoutLineItemDisplayWithId>['removeById']
+  removeItem: UseArrayActions<CheckoutLineItemInputWithId>['removeById']
 
   /**
    * Updates the line items state.
    */
-  setItems: UseArrayActions<CheckoutLineItemDisplayWithId>['setValue']
+  setItems: UseArrayActions<CheckoutLineItemInputWithId>['setValue']
 
   /**
    * Updates a single line item.
    */
-  updateItem: UseArrayActions<CheckoutLineItemDisplayWithId>['modifyById']
+  updateItem: UseArrayActions<CheckoutLineItemInputWithId>['modifyById']
 
   /**
    * Checkout URL.
@@ -54,8 +54,8 @@ export type UseCheckoutPermalink = {
   url: string
 }
 
-type CheckoutLineItemDisplayWithId = CheckoutLineItemDisplay & {
-  id: CheckoutLineItemDisplay['key']
+type CheckoutLineItemInputWithId = CheckoutLineItemInput & {
+  id: CheckoutLineItemInput['variant_id']
 }
 
 /**
@@ -67,7 +67,7 @@ type CheckoutLineItemDisplayWithId = CheckoutLineItemDisplay & {
  * @throws {FeathersErrorJSON} If store domain is invalid
  */
 export const useCheckoutPermalink = (
-  initialItems: Array<CheckoutLineItemDisplay> = [],
+  initialItems: Array<CheckoutLineItemInput> = [],
   domain = process.env.SHOPIFY_DOMAIN
 ): UseCheckoutPermalink => {
   if (isEmpty(domain)) {
@@ -76,11 +76,11 @@ export const useCheckoutPermalink = (
   }
 
   // Add id property to line items
-  initialItems = initialItems.map(item => ({ ...item, id: item.key }))
+  initialItems = initialItems.map(item => ({ ...item, id: item.variant_id }))
 
   // Handle checkout items state
-  const [items, actions] = useArray<CheckoutLineItemDisplayWithId>(
-    initialItems as Array<CheckoutLineItemDisplayWithId>
+  const [items, actions] = useArray<CheckoutLineItemInputWithId>(
+    initialItems as Array<CheckoutLineItemInputWithId>
   )
 
   // Handle checkout permalink URL state

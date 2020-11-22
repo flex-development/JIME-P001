@@ -1,5 +1,7 @@
 import { useActiveIndex, useMutatedProps } from '@system/hooks'
 import classnames from 'classnames'
+import { chunk } from 'lodash'
+import { AnyObject } from 'packages/types/src'
 import React, { Children, FC, ReactElement } from 'react'
 import { Box, BoxProps, Item, ItemProps, List } from '../atoms'
 
@@ -13,6 +15,11 @@ export interface CarouselProps extends BoxProps {
    * Components to render as `Carousel` items.
    */
   children: ReactElement[]
+
+  /**
+   * If defined, maximum number of slides to show in a group.
+   */
+  chunk_max?: number
 
   /**
    * Index position of the slide to display first.
@@ -68,13 +75,15 @@ export const Carousel: FC<CarouselProps> & {
   CarouselIndicator: typeof CarouselIndicator
   CarouselItem: typeof CarouselItem
 } = (props: CarouselProps) => {
-  const { children, position, ...rest } = props
+  const { children, chunk_max, position, ...rest } = props
 
   // Handle props and inject class
   const mutated = useMutatedProps<typeof rest>(rest, 'carousel')
 
   // Get carousel items
   const items = Children.toArray(children) as CarouselProps['children']
+  const chunk_items = chunk(items, chunk_max || 1)
+  const items_adaptor = (chunk_max ? chunk_items : items) as Array<AnyObject>
 
   // Handle active carousel item index
   const { isActive, setIndex } = useActiveIndex(position, {
@@ -84,19 +93,38 @@ export const Carousel: FC<CarouselProps> & {
   return (
     <Box {...mutated}>
       <Box className='carousel-inner'>
-        {items.map((child: ReactElement, i: number) => (
-          <CarouselItem
-            active={items.length === 1 || isActive(i)}
-            key={`carousel-item-${i}`}
-            onClick={() => setIndex(i)}
-          >
-            {child}
-          </CarouselItem>
-        ))}
+        {(() => {
+          if (chunk_max) {
+            return chunk_items.map((chunk: ReactElement[], i: number) => {
+              const active = chunk_items.length === 1 || isActive(i)
+
+              return (
+                <CarouselItem
+                  active={active}
+                  flex={active}
+                  key={`carousel-item-${i}`}
+                  onClick={() => setIndex(i)}
+                >
+                  {chunk}
+                </CarouselItem>
+              )
+            })
+          }
+
+          return items.map((child: ReactElement, i: number) => (
+            <CarouselItem
+              active={items.length === 1 || isActive(i)}
+              key={`carousel-item-${i}`}
+              onClick={() => setIndex(i)}
+            >
+              {child}
+            </CarouselItem>
+          ))
+        })()}
       </Box>
-      {items.length > 1 && (
+      {items_adaptor.length > 1 && (
         <List className='carousel-indicators' is='ol'>
-          {items.map((child: ReactElement, i: number) => (
+          {items_adaptor.map((child, i: number) => (
             <CarouselIndicator
               active={isActive(i)}
               key={`carousel-indicator-${i}`}

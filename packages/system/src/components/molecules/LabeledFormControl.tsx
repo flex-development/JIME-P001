@@ -31,7 +31,7 @@ export interface LabeledFormControlProps extends LabelProps {
    *
    * @default {}
    */
-  control: InputRefProps | SelectRefProps | TextAreaRefProps
+  control?: InputRefProps | SelectRefProps | TextAreaRefProps
 
   /**
    * Tag name of the form control to render.

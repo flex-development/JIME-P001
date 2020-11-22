@@ -22,6 +22,7 @@ export default {
 
 export const Default: StoryFN<SidebarProps> = (args: SidebarProps) => (
   <>
+    <Sidebar {...args} />
     <style>
       {`
         @media screen and (max-width: 576px) {
@@ -31,7 +32,6 @@ export const Default: StoryFN<SidebarProps> = (args: SidebarProps) => (
         }
       `}
     </style>
-    <Sidebar {...args} />
   </>
 )
 
@@ -40,7 +40,6 @@ Default.args = {
     { title: 'Home' },
     { title: 'Products' },
     { title: 'About' },
-    { title: 'Send Message' },
     { title: 'Instagram' }
   ]
 }

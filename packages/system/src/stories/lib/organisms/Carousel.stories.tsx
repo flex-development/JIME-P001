@@ -1,12 +1,5 @@
-import items from '@app-mocks/data/checkout-line-items.mock.json'
 import { REVIEWS } from '@system-mocks/utils'
-import {
-  Carousel,
-  CarouselProps,
-  CheckoutLineItemProps,
-  Image,
-  ProductReview
-} from '@system/components'
+import { Carousel, CarouselProps, ProductReview } from '@system/components'
 import { StoryFN } from '@system/types/storybook'
 import React from 'react'
 
@@ -24,28 +17,6 @@ export default {
     jest: ['Carousel', 'useActiveIndex']
   },
   title: 'Library/Organisms/Carousel'
-}
-
-export const ProductImages: StoryFN<CarouselProps> = (args: CarouselProps) => (
-  <Carousel {...args} />
-)
-
-ProductImages.args = {
-  children: items.map((item: CheckoutLineItemProps) => {
-    return (
-      <Image
-        alt={item.image.alt || item.item.title}
-        className='d-block w-100'
-        key={item.item.key}
-        src={item.image.src}
-      />
-    )
-  }),
-  position: items.length - 1,
-  style: {
-    maxHeight: '600px',
-    maxWidth: '438px'
-  }
 }
 
 export const ProductReviews: StoryFN<CarouselProps> = (args: CarouselProps) => (

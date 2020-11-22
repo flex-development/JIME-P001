@@ -1,7 +1,7 @@
 import { NullishString } from '@flex-development/types'
 import { useMutatedProps } from '@system/hooks'
 import { MutatedVoidElementProps } from '@system/types'
-import { isEmpty, omit } from 'lodash'
+import { omit } from 'lodash'
 import React, {
   forwardRef,
   ForwardRefExoticComponent as FREC,
@@ -130,6 +130,7 @@ export type ImageRefProps = ReflessImageProps & ImageRefAttributes
 export const Image: FREC<ImageRefProps> = forwardRef((props, ref) => {
   const { fluid, rounded, thumbnail, ...rest } = props
 
+  // Get component properties
   const mutated = useMutatedProps<typeof rest, JSX.IntrinsicElements['img']>(
     rest,
     {
@@ -140,13 +141,8 @@ export const Image: FREC<ImageRefProps> = forwardRef((props, ref) => {
     }
   )
 
-  if (isEmpty(mutated.src)) mutated.src = Image.defaultProps?.src
-
-  /* eslint-disable jsx-a11y/alt-text */
-
+  /* eslint-disable-next-line jsx-a11y/alt-text */
   return <img {...omit(mutated, 'children')} ref={ref} />
-
-  /* eslint-enable jsx-a11y/alt-text */
 })
 
 Image.displayName = 'Image'

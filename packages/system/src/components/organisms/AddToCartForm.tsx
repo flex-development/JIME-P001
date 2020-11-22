@@ -5,7 +5,6 @@ import {
   useProductVariants
 } from '@system/hooks'
 import { EventHandlers } from '@system/types'
-import { getProductVariantImage } from '@system/utils'
 import { findIndex, isEmpty } from 'lodash'
 import React, { FC } from 'react'
 import { IProductListing, IProductListingVariant } from 'shopify-api-node'
@@ -15,7 +14,6 @@ import {
   FlexBox,
   Form,
   FormProps,
-  Image,
   Paragraph,
   Row,
   Select,
@@ -23,7 +21,7 @@ import {
 } from '../atoms'
 import { LabeledFormControl } from '../molecules/LabeledFormControl'
 import { ProductHeading } from '../molecules/ProductHeading'
-import { Carousel } from './Carousel'
+import { ProductImageCarousel } from './ProductImageCarousel'
 
 /**
  * @file Form allowing users to add products to their cart
@@ -119,19 +117,12 @@ export const AddToCartForm: FC<AddToCartFormProps> = (
         xs={1}
       >
         <Column mb={{ md: 0, xs: 36 }} md={4} xs>
-          <Carousel position={active < 0 ? 0 : active}>
-            {product.images.map(({ id }) => {
-              const variant = variants.find(({ image_id }) => image_id === id)
-
-              const image = getProductVariantImage(
-                variant?.image_id || null,
-                product.images,
-                variant ? `${product.title} - ${variant?.title}` : product.title
-              )
-
-              return <Image {...image} className='d-block w-100' key={id} />
-            })}
-          </Carousel>
+          <ProductImageCarousel
+            images={product.images}
+            position={active < 0 ? 0 : active}
+            product_title={product.title}
+            variants={product.variants}
+          />
         </Column>
         <Column md={8} xs>
           {/* Product title and variant price */}

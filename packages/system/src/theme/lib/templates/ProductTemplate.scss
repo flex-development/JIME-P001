@@ -35,3 +35,13 @@
     font-size: $font-size-xs;
   }
 }
+
+#product-review-carousel {
+  .carousel-item {
+    flex-direction: column;
+
+    .product-review:last-of-type {
+      margin-bottom: 0
+    }
+  }
+}

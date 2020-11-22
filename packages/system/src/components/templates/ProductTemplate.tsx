@@ -1,7 +1,6 @@
 import { ANYTHING, IReview } from '@flex-development/types'
 import { useMutatedProps } from '@system/hooks'
 import { EventHandlers, MutatedProps, TC } from '@system/types'
-import { chunk } from 'lodash'
 import React, { useState } from 'react'
 import { IProductListing, IProductListingVariant } from 'shopify-api-node'
 import { Button, FlexBox, Heading, LinkProps, Main, Section } from '../atoms'
@@ -86,9 +85,6 @@ export const ProductTemplate: TC<ProductTemplateProps> = (
   const initial_index = active < 0 ? 0 : active
   const [variant, setVariant] = useState(product.variants[initial_index])
 
-  // Paginate product reviews
-  const review_chunks = chunk(reviews, reviews_chunk_max)
-
   /**
    * Updates the selected product variant state.
    *
@@ -128,17 +124,13 @@ export const ProductTemplate: TC<ProductTemplateProps> = (
         </FlexBox>
 
         {reviews?.length && (
-          <Carousel id='product-review-carousel'>
-            {review_chunks.map((chunk: IReview[], ci: number) => (
-              <FlexBox direction='column' key={`review-chunk-${ci}`}>
-                {chunk.map((review, i: number) => (
-                  <ProductReview
-                    key={`review-chunk-${ci}-review-${i}`}
-                    mb={i === chunk.length - 1 ? 0 : 36}
-                    review={review}
-                  />
-                ))}
-              </FlexBox>
+          <Carousel chunk_max={reviews_chunk_max} id='product-review-carousel'>
+            {reviews.map((review, i: number) => (
+              <ProductReview
+                key={`product-review-${i}`}
+                mb={36}
+                review={review}
+              />
             ))}
           </Carousel>
         )}

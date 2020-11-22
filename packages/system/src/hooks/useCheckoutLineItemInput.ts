@@ -32,30 +32,23 @@ export type UseCheckoutLineItemInput = {
 /**
  * Specify the input fields to create a checkout line item.
  *
- * @param initialInput - Initial line item data
- * @param initialInput.properties - Initial custom properties
- * @param initialQuantity - Initial number of variants to add
- * @param initialAttributes - Custom line item properties
+ * @param input - Initial line item data
+ * @param input.properties - Initial custom properties
+ * @param input.quantity - Number of line items to order
  */
 export const useCheckoutLineItemInput = (
-  initialInput: CheckoutLineItemInput
+  input: CheckoutLineItemInput
 ): UseCheckoutLineItemInput => {
-  const {
-    properties: initialProperties,
-    quantity: initialQuantity,
-    variant_id
-  } = initialInput
-
   // Handle custom propeties
   const { state: properties, setState: updateProperties } = useSetState<
     AnyObject
-  >(initialProperties || {})
+  >(input.properties || {})
 
   // Handle product quantity
-  const { quantity, updateQuantity } = useQuantity(initialQuantity)
+  const { quantity, updateQuantity } = useQuantity(input.quantity)
 
   return {
-    input: { properties, quantity, variant_id },
+    input: { properties, quantity, variant_id: input.variant_id },
     updateProperties,
     updateQuantity
   }

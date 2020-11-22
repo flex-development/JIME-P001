@@ -11,6 +11,7 @@ import {
   FlexBox,
   GRID_BREAKPOINTS,
   Hero,
+  LinkProps,
   PlaylistBar,
   Row,
   ShopHeader,
@@ -85,7 +86,7 @@ export const ShopLayout: FC<ShopLayoutProps> = (props: ShopLayoutProps) => {
             age={snippet.age}
             img={snippet.img || undefined}
             location={snippet.location}
-            menu={menus.main}
+            menu={menus.main as Array<LinkProps>}
             mood={snippet.mood}
           />
         </Column>

@@ -1,5 +1,5 @@
 import { useCheckoutPermalink } from '@app/subdomains/sales'
-import { CheckoutLineItemDisplay } from '@flex-development/types'
+import { CheckoutLineItemInput } from '@flex-development/types'
 import { renderHook } from '@testing-library/react-hooks'
 import CheckoutLineItems from '../__mocks__/data/checkout-line-items.mock.json'
 
@@ -10,7 +10,7 @@ import CheckoutLineItems from '../__mocks__/data/checkout-line-items.mock.json'
 
 const CHECKOUT_BASE_URL = `${process.env.SHOPIFY_DOMAIN}/cart/`
 
-const LINE_ITEMS: Array<CheckoutLineItemDisplay> = CheckoutLineItems.map(i => {
+const LINE_ITEMS: Array<CheckoutLineItemInput> = CheckoutLineItems.map(i => {
   return i.item
 })
 
@@ -30,7 +30,7 @@ describe('useCheckoutPermalink', () => {
 
     expect(result.current.url).toBe(`${CHECKOUT_BASE_URL}${item_path_0}`)
     result.current.items.map((item, i) => {
-      expect(item.id).toBe(items[i].key)
+      expect(item.id).toBe(items[i].variant_id)
     })
   })
 

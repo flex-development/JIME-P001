@@ -34,12 +34,14 @@ $product-card-footer-padding-x: $spacers-24;
   }
 
   .dropdown {
-    &-menu {
-      position: unset !important;
-    }
-
     &-item {
       @include padding-x($product-card-footer-padding-x);
+    }
+
+    &-menu {
+      position: relative !important;
+      top: 0.125rem !important;
+      z-index: 5;
     }
 
     &-toggle {

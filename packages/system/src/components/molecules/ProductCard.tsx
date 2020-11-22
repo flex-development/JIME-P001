@@ -91,11 +91,9 @@ export const ProductCard: FC<ProductCardProps> = (props: ProductCardProps) => {
 
   return (
     <Box {...mutated} id={`product-card-${product.product_id}`}>
-      <Box>
-        <ProductLink className='d-inline-block'>
-          <Image {...image} className='product-card-img card-img-top' fluid />
-        </ProductLink>
-      </Box>
+      <ProductLink className='d-inline-block'>
+        <Image {...image} className='product-card-img card-img-top' fluid />
+      </ProductLink>
 
       <FlexBox align='center' className='card-footer' justify='between'>
         <FlexBox direction='column'>

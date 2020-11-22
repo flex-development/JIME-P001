@@ -84,6 +84,12 @@ export default class Document extends NextDocument {
           {/* TODO: Update site verification token */}
           <meta name='google-site-verification' content='verification_token' />
 
+          {/* Animate.css */}
+          <link
+            rel='stylesheet'
+            href='//cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css'
+          />
+
           {/* Material Icons */}
           <link
             rel='stylesheet'

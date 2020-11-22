@@ -38,5 +38,9 @@ export const Thumbnail: StoryFN<ImageProps> = (args: ImageProps) => (
 Thumbnail.args = {
   alt: 'Picsum thumbnail image',
   src: 'https://picsum.photos/400',
+  style: {
+    height: '400px',
+    width: '400px'
+  },
   thumbnail: true
 }

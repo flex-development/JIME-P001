@@ -1,7 +1,7 @@
 import { useMutatedProps } from '@system/hooks'
 import { MutatedProps, TC } from '@system/types'
 import React from 'react'
-import { Heading, Main } from '../atoms'
+import { Heading, Main, Section, Span } from '../atoms'
 
 /**
  * @file Error page template
@@ -17,7 +17,7 @@ export interface ErrorTemplateProps extends MutatedProps {
   /**
    * Error message.
    */
-  message?: string
+  message: string
 }
 
 /**
@@ -29,16 +29,20 @@ export interface ErrorTemplateProps extends MutatedProps {
 export const ErrorTemplate: TC<ErrorTemplateProps> = (
   props: ErrorTemplateProps
 ) => {
-  const { code, message, ...rest } = props
+  const { children, code, message, ...rest } = props
 
   const mutated = useMutatedProps<typeof rest>(rest, 'template')
 
   return (
     <Main {...mutated} data-template={ErrorTemplate.template_id}>
-      <Heading className='error-code'>{code}</Heading>
-      <Heading className='error-message' size={2}>
-        {message}
-      </Heading>
+      <Section>
+        <Heading size={2}>
+          <Span className='error-code'>{code}</Span>
+          <Span className='error-divider'>/</Span>
+          <Span className='error-message'>{message}</Span>
+        </Heading>
+        {children}
+      </Section>
     </Main>
   )
 }

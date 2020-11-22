@@ -8,6 +8,10 @@ a {
   }
 }
 
+p a {
+  font-weight: $font-weight-semibold;
+}
+
 .link[data-icon] {
   @include flex(center);
 }

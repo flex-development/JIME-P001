@@ -1,4 +1,9 @@
-import { ErrorTemplate, ErrorTemplateProps } from '@system/components'
+import {
+  ErrorTemplate,
+  ErrorTemplateProps,
+  Link,
+  Paragraph
+} from '@system/components'
 import { StoryFN } from '@system/types/storybook'
 import React from 'react'
 
@@ -21,6 +26,12 @@ export const NotFound: StoryFN<ErrorTemplateProps> = (
 
 NotFound.storyName = '404'
 NotFound.args = {
+  children: (
+    <Paragraph c='white'>
+      {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+      Go <Link c='secondary'>home</Link> and smoke or something.
+    </Paragraph>
+  ),
   code: 404,
-  message: 'Page with slug "/about" not found.'
+  message: "Sorry, the page you're looking for does not exist."
 }

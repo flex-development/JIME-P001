@@ -42,13 +42,13 @@ const Slug: PC = ({ page }: IPageProps) => {
 }
 
 /**
- * Retrieves the current user session.
+ * Retrieves the data for the `PageTemplate` and the current user session.
  *
  * @see https://nextjs.org/docs/basic-features/data-fetching
  *
  * @param context - Next.js page component context
  * @param context.req - HTTP request object
- * @returns Current user session
+ * @returns Template data and current user session
  */
 export const getServerSideProps: ServerSidePageProps = async (
   context: GetServerSidePropsContext
@@ -67,6 +67,13 @@ export const getServerSideProps: ServerSidePageProps = async (
     return { props: { page: entity, session } }
   } catch (error) {
     Logger.error({ 'Slug.getServerSideProps': error })
+
+    if (error.code === 404) {
+      context.res.setHeader('Location', '/404')
+      context.res.statusCode = 302
+      context.res.end()
+    }
+
     return { props: { page: serialize<FeathersErrorJSON>(error), session } }
   }
 }

@@ -4,10 +4,8 @@ import {
   useProfileSnippetForm
 } from '@app/subdomains/cms/hooks'
 import { usePlaylist } from '@app/subdomains/streaming/hooks'
-import { FeathersErrorJSON } from '@feathersjs/errors'
 import {
   Column,
-  ErrorTemplate,
   FlexBox,
   GRID_BREAKPOINTS,
   Hero,
@@ -19,7 +17,7 @@ import {
   useVisibility
 } from '@flex-development/kustomzdesign'
 import { isEmpty, merge } from 'lodash'
-import React, { FC, Fragment, ReactNode } from 'react'
+import React, { FC, Fragment } from 'react'
 import { IPageProps, PC } from '../interfaces'
 import { Head } from './Head'
 
@@ -111,17 +109,7 @@ export const ShopLayout: FC<ShopLayoutProps> = (props: ShopLayoutProps) => {
               subtitle='Kustom made pot head necessities.'
               title='Morenas Kustomz'
             />
-            {((): ReactNode => {
-              const cms_error = preview && page.error
-              const server_error = pageProps.page as FeathersErrorJSON
-
-              if (cms_error || server_error?.code) {
-                const { code, message } = cms_error || server_error
-                return <ErrorTemplate code={code} message={message} />
-              }
-
-              return <Component {...pageProps} />
-            })()}
+            <Component {...pageProps} />
           </FlexBox>
         </Column>
       </Row>

@@ -38,13 +38,16 @@ const App: AC = ({ Component, pageProps }: IAppProps) => {
   // Get configured TinaCMS instance
   const cms = useMemo(() => new TinaCMS(CMS_BASE_CONFIG), [])
 
-  // True if signed in with GitHub and rendering CMS page
-  const preview = session?.provider === 'github' && !!(page as ICMSPage)?.uuid
+  // Page will be undefined if redirected after catching 404 error
+  if (page !== undefined) {
+    const preview = session?.provider === 'github' && !!(page as ICMSPage)?.uuid
+    pageProps.preview = preview
+  }
 
   return (
     <NextAuthProvider session={(session || {}) as Session}>
       <TinaProvider cms={cms}>
-        <ShopLayout page={Component} pageProps={{ ...pageProps, preview }} />
+        <ShopLayout page={Component} pageProps={pageProps} />
       </TinaProvider>
     </NextAuthProvider>
   )

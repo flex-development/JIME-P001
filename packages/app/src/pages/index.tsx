@@ -91,6 +91,13 @@ export const getServerSideProps: ServerSidePageProps = async (
     return { props: { page: entity, session } }
   } catch (error) {
     Logger.error({ 'Index.getServerSideProps': error })
+
+    if (error.code === 404) {
+      context.res.setHeader('Location', '/404')
+      context.res.statusCode = 302
+      context.res.end()
+    }
+
     return { props: { page: serialize<FeathersErrorJSON>(error), session } }
   }
 }

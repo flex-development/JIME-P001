@@ -27,6 +27,7 @@ ProductReviews.args = {
   children: REVIEWS.map(review => (
     <ProductReview review={review} key={`review-${review.id}`} />
   )),
+  position: REVIEWS.length - 3,
   style: {
     maxWidth: '1362px'
   }

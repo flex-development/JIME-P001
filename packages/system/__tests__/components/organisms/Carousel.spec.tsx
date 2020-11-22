@@ -1,5 +1,6 @@
 import { ProductReviews } from '@system/stories/lib/organisms/Carousel.stories'
 import { fireEvent, render, screen } from '@testing-library/react'
+import { findIndex } from 'lodash'
 import React, { ReactElement } from 'react'
 
 /**
@@ -14,12 +15,13 @@ it('renders <div class="carousel">', () => {
 })
 
 it('renders the carousel items', () => {
-  const { getByText } = render(<ProductReviews {...ProductReviews.args} />)
+  const { children } = ProductReviews.args
 
-  // Expect each inner carousel item to be in the document
-  ProductReviews.args.children.forEach((child: ReactElement) => {
-    expect(getByText(child?.props.title)).toBeInTheDocument()
-  })
+  const { container } = render(<ProductReviews {...ProductReviews.args} />)
+  const { childNodes } = container.firstChild?.firstChild as HTMLElement
+
+  // Expect each carousel item to be in the document
+  expect(childNodes.length).toBe(children.length)
 })
 
 it('renders the carousel indicators', () => {
@@ -30,33 +32,21 @@ it('renders the carousel indicators', () => {
   expect(indicators.length).toBe(ProductReviews.args.children.length)
 })
 
-it('sets the carousel position if props.position is valid', () => {
-  render(<ProductReviews {...ProductReviews.args} />)
+it('updates the active item when an indicator is clicked', () => {
+  const { children, position } = ProductReviews.args
+  const { getByText } = render(<ProductReviews {...ProductReviews.args} />)
 
-  // Get initial position and inner content of the active carousel item
-  const initial_position = ProductReviews.args.position as number
-  const active = ProductReviews.args.children[initial_position]
-
-  // Expect inner content of active slide to be visible
-  expect(screen.getByAltText(active.props.alt)).toBeInTheDocument()
-})
-
-it('updates the active item when an indicator is clicked', async () => {
-  render(<ProductReviews {...ProductReviews.args} />)
-
-  // Get initial position and inner content of the active carousel item
-  const initial_position = ProductReviews.args.position as number
-  const initial = ProductReviews.args.children[initial_position]
-
-  // Get non-active indicator
-  const indicator = screen.queryAllByRole('button').find((btn, i: number) => {
-    return (ProductReviews.args.position as number) !== i
+  // Get index of non-active item
+  const item_index = findIndex(children, (child: ReactElement, i) => {
+    return (position as number) !== i
   })
+
+  // Get indicator of non-active item
+  const indicator = screen.queryAllByRole('button')[item_index]
 
   // Click non-active indicator
   fireEvent.click(indicator as HTMLElement)
 
-  // Expect active class to be removed the parent of the initial carousel item
-  const initial_parent = screen.getByAltText(initial.props.alt).parentElement
-  expect(initial_parent).not.toHaveClass('active')
+  // Expect inner content of new active item to be visible
+  expect(getByText(children[item_index].props.review.body)).toBeInTheDocument()
 })

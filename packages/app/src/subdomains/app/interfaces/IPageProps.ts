@@ -1,6 +1,5 @@
 import { ICMSPage } from '@app/subdomains/cms/interfaces/ICMSPage'
 import { GitHubSession } from '@app/subdomains/cms/interfaces/IGitHubService'
-import { FeathersErrorJSON } from '@feathersjs/errors'
 import {
   CollectionTemplateProps,
   ProductTemplateProps,
@@ -13,7 +12,7 @@ import {
  */
 
 /**
- * Props passed to all Next.js page components.
+ * Props passed to Next.js page components.
  */
 export interface IPageProps {
   /**
@@ -21,10 +20,10 @@ export interface IPageProps {
    *
    * @see https://shopify.dev/docs/admin-api/rest/reference/online-store
    */
-  page: FeathersErrorJSON | PageData
+  page: PageData
 
   /**
-   * True if user is signed-in with GitHub and viewing a marketing site page.
+   * True if user is signed-in with GitHub.
    *
    * @see https://nextjs.org/docs/advanced-features/preview-mode
    */
@@ -38,18 +37,13 @@ export interface IPageProps {
 
 /* eslint-disable prettier/prettier */
 
+/**
+ * Types of data passed to Next.js page components via the `page` property.
+ */
 export type PageData =
   | CollectionTemplateProps
   | ICMSPage
-  | ProductTemplatePropsServer
+  | ProductTemplateProps
   | SearchTemplateProps
 
 /* eslint-enable prettier/prettier */
-
-/**
- * Server side `ProductTemplateProps`.
- */
-export type ProductTemplatePropsServer = Pick<
-  ProductTemplateProps,
-  'product' | 'reviews'
->

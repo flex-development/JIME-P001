@@ -41,12 +41,9 @@ module.exports = {
    * @property {string[]} stories
    */
   stories: [
-    '../src/stories/index.stories.mdx',
-    '../src/stories/blocks/*.stories.mdx',
-    '../src/stories/lib/atoms/*.stories.@(mdx|tsx)',
-    '../src/stories/lib/molecules/*.stories.@(mdx|tsx)',
-    '../src/stories/lib/organisms/*.stories.@(mdx|tsx)',
-    '../src/stories/lib/templates/*.stories.@(mdx|tsx)'
+    '../src/index.stories.mdx',
+    '../src/blocks/*.stories.mdx',
+    '../src/components/**/**/*.stories.@(mdx|tsx)'
   ],
 
   /**

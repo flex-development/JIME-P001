@@ -1,5 +1,5 @@
 /**
- * @file Template Components
+ * @file Templates
  * @module components/templates
  */
 

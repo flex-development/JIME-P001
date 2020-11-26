@@ -13,11 +13,13 @@
     "sourceMap": false,
     "target": "es6",
     "typeRoots": [
-      "../../node_modules/musickit-typescript",
-      "../../node_modules/@types"
+      "../../node_modules/@testing-library/react/types",
+      "../../node_modules/@types",
+      "../../node_modules/musickit-typescript"
     ]
   },
   "exclude": ["node_modules"],
   "extends": "../../tsconfig.json",
+  "files": ["jest-env.d.ts"],
   "include": ["__tests__", ".storybook", "src", "jest.setup.ts"]
 }

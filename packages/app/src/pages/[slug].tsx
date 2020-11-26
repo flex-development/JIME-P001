@@ -1,11 +1,8 @@
 import { database } from '@app/config/firebase'
 import { IPageProps, PC, ServerSidePageProps } from '@app/subdomains/app'
-import { ICMSPage } from '@app/subdomains/cms'
+import { ICMSPageSlug } from '@app/subdomains/cms'
 import { PageService } from '@app/subdomains/cms/services'
-import {
-  PageTemplate,
-  PageTemplateProps
-} from '@flex-development/kustomzdesign'
+import { PageTemplate } from '@flex-development/kustomzdesign'
 import { GetServerSidePropsContext } from 'next'
 import { getSession } from 'next-auth/client'
 import React from 'react'
@@ -22,16 +19,16 @@ import React from 'react'
  * @param props - Page component props
  * @param props.page - Page data
  * @param props.page.component - Display name of template component
- * @param props.page.content - Template component props
+ * @param props.page.content - `PageTemplate` component props
  * @param props.page.draft - True if page is in draft mode
  * @param props.page.metadata - SEO metadata
- * @param props.page.path - Page path
- * @param props.page.title - Page title
+ * @param props.page.path - URL path page can be accessed from
+ * @param props.page.title - Title of page
+ * @param props.preview - True if CMS is enabled
  * @param props.session - Current user session or null
  */
 const Slug: PC = ({ page }: IPageProps) => {
-  const { content } = page as ICMSPage
-  return <PageTemplate {...(content as PageTemplateProps)} />
+  return <PageTemplate {...(page as ICMSPageSlug).content} />
 }
 
 /**

@@ -1,8 +1,6 @@
-import { IndexTemplateProps } from '@flex-development/kustomzdesign'
-import { useForm, useFormScreenPlugin } from 'tinacms'
-import { PagesAPI } from '../config/config'
-import { IndexPageFormPlugin } from '../config/plugins'
-import { ICMSPage } from '../interfaces'
+import { isEmpty } from 'lodash'
+import { FormOptions, useForm, useFormScreenPlugin } from 'tinacms'
+import { ICMSPageIndex } from '../interfaces'
 import { UseFormScreenPlugin } from '../utils'
 
 /**
@@ -14,38 +12,17 @@ import { UseFormScreenPlugin } from '../utils'
 /**
  * Creates and registers a new `IndexPageFormPlugin` instance.
  *
- * @param label - Label for the form that will appear in the sidebar
+ * @param config - Form configuration
+ * @returns Form API, config, and values
  */
 export const useIndexPageForm = (
-  label?: string
-): UseFormScreenPlugin<ICMSPage, ICMSPage> => {
-  /**
-   * Form submission handler.
-   *
-   * @param id - ID of page to update
-   * @param page - Updated homepage
-   */
-  const onSubmit = async (page: ICMSPage) => {
-    page.component = 'IndexTemplate'
-    page.path = '/'
+  config: FormOptions<ICMSPageIndex>
+): UseFormScreenPlugin<ICMSPageIndex, ICMSPageIndex> => {
+  // Add label to form if missing one
+  if (isEmpty(config.label)) config.label = 'Home'
 
-    /**
-     * FIXES: `Preview data is limited to 2KB currently, reduce how much data
-     * you are storing as preview data to continue`.
-     *
-     * These values also don't need to be stored in the database.
-     */
-    delete (page.content as IndexTemplateProps).products
-    delete (page.content as IndexTemplateProps).reviews
-
-    return await PagesAPI.upsert(page.id, page)
-  }
-
-  // Get form config
-  const config = IndexPageFormPlugin(label, onSubmit)
-
-  // Create and register IndexPage form
-  const [page, form] = useForm<ICMSPage>(config)
+  // Create form and watch values
+  const [page, form] = useForm<ICMSPageIndex>(config)
 
   // Register form as screen plugin
   useFormScreenPlugin(form)

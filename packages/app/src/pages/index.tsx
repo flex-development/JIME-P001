@@ -1,12 +1,11 @@
 import { database } from '@app/config/firebase'
 import {
   IPageProps,
-  Logger,
   PC,
   ServerSidePageProps,
   SortOrder
 } from '@app/subdomains/app'
-import { ICMSPage } from '@app/subdomains/cms'
+import { ICMSPageIndex } from '@app/subdomains/cms'
 import { PageService } from '@app/subdomains/cms/services'
 import { ProductService, ReviewService } from '@app/subdomains/sales'
 import {
@@ -31,16 +30,16 @@ import { IProductListing } from 'shopify-api-node'
  * @param props - Page component props
  * @param props.page - Page data
  * @param props.page.component - Display name of template component
- * @param props.page.content - Template component props
+ * @param props.page.content - `IndexTemplate` component props
  * @param props.page.draft - True if page is in draft mode
  * @param props.page.metadata - SEO metadata
- * @param props.page.path - Page path
- * @param props.page.title - Page title
+ * @param props.page.path - URL path page can be accessed from
+ * @param props.page.title - Title of page
+ * @param props.preview - True if CMS is enabled
  * @param props.session - Current user session or null
  */
 const Index: PC = ({ page }: IPageProps) => {
-  const { content } = page as ICMSPage
-  return <IndexTemplate {...(content as IndexTemplateProps)} />
+  return <IndexTemplate {...(page as ICMSPageIndex).content} />
 }
 
 /**
@@ -50,7 +49,7 @@ const Index: PC = ({ page }: IPageProps) => {
  *
  * @param context - Next.js page component context
  * @param context.req - HTTP request object
- * @returns Product listings, reviews, and current user session
+ * @returns Template data and current user session
  */
 export const getServerSideProps: ServerSidePageProps = async (
   context: GetServerSidePropsContext
@@ -88,8 +87,6 @@ export const getServerSideProps: ServerSidePageProps = async (
     // Return page component props
     return { props: { page: entity, session } }
   } catch (error) {
-    Logger.error({ 'Index.getServerSideProps': error })
-
     if (error.code === 404) {
       context.res.setHeader('Location', '/404')
       context.res.statusCode = 302

@@ -61,5 +61,5 @@ export const usePagesForm = (
   // Register form as screen plugin
   useFormScreenPlugin(form)
 
-  return { config, form, modified: pages.pages }
+  return { config, form, modified: pages.pages || [] }
 }

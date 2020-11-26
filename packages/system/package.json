@@ -55,6 +55,8 @@
     "react-markdown-editor-lite": "^1.2.2",
     "react-spring": "^8.0.27",
     "react-uuid": "^1.0.2",
+    "slugify": "^1.4.5",
+    "use-hooks": "^2.0.0-rc.5",
     "validator": "^13.1.1"
   },
   "devDependencies": {
@@ -80,6 +82,7 @@
     "@types/react-dom": "^16.9.0",
     "@types/shopify-buy": "^2.10.3",
     "@types/storybook__react": "^5.2.1",
+    "@types/styled-components": "^5.1.4",
     "@whitespace/storybook-addon-html": "^2.0.1",
     "babel-loader": "^8.1.0",
     "next": "^9.5.1",
@@ -97,6 +100,7 @@
     "shopify-api-node": "^3.4.4",
     "shopify-buy": "2.11.0",
     "style-loader": "^1.2.1",
+    "styled-components": "^5.2.0",
     "url-loader": "^4.1.0"
   },
   "peerDependencies": {
@@ -104,15 +108,10 @@
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
     "next": "^9.5.1",
-    "postcss": "^7.0.32",
-    "postcss-flexbugs-fixes": "^4.2.1",
-    "postcss-loader": "^3.0.0",
-    "postcss-preset-env": "^6.7.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "regenerator-runtime": "^0.13.7",
-    "sass": "^1.26.10",
-    "sass-loader": "^9.0.3"
+    "styled-components": "^5.2.0"
   },
   "browserslist": {
     "production": [

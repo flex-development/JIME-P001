@@ -8,7 +8,7 @@ import { MarkdownField, TextField, ToggleField } from '../helpers'
 /**
  * @file Form configuration to edit site pages
  * @module subdomains/cms/config/plugins/PagesFormPlugin
- * @see https://tinacms.org/docs/modules/cms/config/plugins/forms/
+ * @see https://tina.io/docs/plugins/forms/#form-configuration
  */
 
 /**
@@ -17,37 +17,19 @@ import { MarkdownField, TextField, ToggleField } from '../helpers'
  *
  * @param label - Label for the form that will appear in the sidebar
  * @param onSubmit - Function to invoke when the form is saved
+ * @param onChange - Function that runs when the form values are changed
  * @returns `PagesFormPlugin` instance
  */
 export const PagesFormPlugin = (
   label = 'Pages',
-  onSubmit?: FormOptions<CMSPagesDTO>['onSubmit']
+  onSubmit?: FormOptions<CMSPagesDTO>['onSubmit'],
+  onChange?: FormOptions<CMSPagesDTO>['onChange']
 ): FormOptions<CMSPagesDTO> => {
   const id = 'pages'
 
   return {
     __type: 'form',
-    fields: [
-      {
-        component: 'group-list',
-        defaultItem: {
-          title: 'Page Title',
-          uuid: uuid()
-        },
-        fields: [
-          ToggleField('draft', 'Draft', 'Publish / unpublish page'),
-          TextField('title', 'Title', 'Page Title'),
-          TextField('path', 'Slug', 'URL path page can be accessed from'),
-          MarkdownField('content.body', 'Markdown / MDX Content')
-        ],
-        itemProps: ({ title, uuid }: ICMSPage): GroupListItemProps => ({
-          key: uuid,
-          label: title
-        }),
-        label: 'Pages',
-        name: id
-      }
-    ],
+    fields: PagesFormPluginFields,
     id,
     label,
 
@@ -57,9 +39,11 @@ export const PagesFormPlugin = (
      * @async
      */
     loadInitialValues: async () => {
-      const pages = (await PagesAPI.find()) as Array<ICMSPage>
-      return { pages: pages.filter(page => page.component === 'PageTemplate') }
+      const query = { component: { $eq: 'PageTemplate' } }
+      return { pages: (await PagesAPI.find(query)) as Array<ICMSPage> }
     },
+
+    onChange,
 
     /**
      * Logs the form submission or passes it to a submission handler if defined.
@@ -72,3 +56,22 @@ export const PagesFormPlugin = (
     }
   }
 }
+
+export const PagesFormPluginFields = [
+  {
+    component: 'group-list',
+    defaultItem: { title: 'Page Title', uuid: uuid() },
+    fields: [
+      ToggleField('draft', 'Draft', 'Publish / unpublish page'),
+      TextField('title', 'Title', 'Page Title'),
+      TextField('path', 'Slug', 'URL path page can be accessed from'),
+      MarkdownField('content.body', 'Markdown / MDX Content')
+    ],
+    itemProps: ({ title, uuid }: ICMSPage): GroupListItemProps => ({
+      key: uuid,
+      label: title
+    }),
+    label: 'Pages',
+    name: 'pages'
+  }
+]

@@ -1,16 +1,16 @@
 /**
- * @file Utilities
- * @module components/utils
+ * @file Utilities Library
+ * @module utils
  */
 
-export { default as breakpointInfix } from './breakpointInfix'
-export { default as createResponsiveUtility } from './createResponsiveUtility'
-export { default as formatPrice } from './formatPrice'
-export type { IntlNumberFormatOptionsCurrency } from './formatPrice'
-export { default as getProductVariantImage } from './getProductVariantImage'
-export { default as getResponsiveUtilities } from './getResponsiveUtilities'
-export { default as getThemeColor } from './getThemeColor'
-export { default as sanitizeQuantity } from './sanitizeQuantity'
-export { default as uuid } from './uuid'
+export * from './breakpointInfix'
+export * from './creativeResponsiveUtility'
+export * from './formatPrice'
+export * from './getProductVariantImage'
+export * from './getResponsiveUtilities'
+export * from './getThemeColor'
+export * from './sanitizeQuantity'
+export * from './uuid'
 
 /* eslint-disable prettier/prettier */
+

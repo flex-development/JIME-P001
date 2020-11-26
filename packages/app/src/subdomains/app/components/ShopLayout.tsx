@@ -1,5 +1,6 @@
 import {
-  useCMSData,
+  useMenus,
+  usePage,
   usePlaylistSettingsForm,
   useProfileSnippetForm
 } from '@app/subdomains/cms/hooks'
@@ -19,7 +20,6 @@ import {
 import { isEmpty, merge } from 'lodash'
 import React, { FC, Fragment } from 'react'
 import { IPageProps, PC } from '../interfaces'
-import { Head } from './Head'
 
 /**
  * @file Shop Layout
@@ -47,19 +47,12 @@ export interface ShopLayoutProps {
  */
 export const ShopLayout: FC<ShopLayoutProps> = (props: ShopLayoutProps) => {
   const { page: Component, pageProps } = props
-  const { preview } = pageProps
 
-  // Get metadata, site navigation as menu links, and data for current page
-  const { menus, page, title } = useCMSData()
+  // Get site navigation as menu links
+  const menus = useMenus()
 
-  // Use CMS data if page is in preview mode
-  if (preview && !page.error) pageProps.page = merge(pageProps.page, page.data)
-
-  // Register profile snippet settings form (data used in Sidebar)
-  const { modified: snippet } = useProfileSnippetForm()
-
-  // Handle sidebar
-  const sidebar = useVisibility(GRID_BREAKPOINTS.lg)
+  // Get page data
+  const page = usePage(pageProps.page)
 
   // Register playlist settings form
   const { modified: playlist } = usePlaylistSettingsForm()
@@ -67,11 +60,17 @@ export const ShopLayout: FC<ShopLayoutProps> = (props: ShopLayoutProps) => {
   // Handle playlist streaming
   const { kit, queue } = usePlaylist(playlist.url)
 
+  // Register profile snippet settings form (data used in Sidebar)
+  const { modified: snippet } = useProfileSnippetForm()
+
+  // Handle sidebar
+  const sidebar = useVisibility(GRID_BREAKPOINTS.lg)
+
+  // Don't render content until queue is ready to be played
   if (isEmpty(queue)) return null
 
   return (
     <Fragment>
-      <Head title={title} />
       <Row gx={0} justify='end'>
         <Column
           className={`sidebar-col${sidebar.visible ? '' : ' d-none'}`}
@@ -109,7 +108,7 @@ export const ShopLayout: FC<ShopLayoutProps> = (props: ShopLayoutProps) => {
               subtitle='Kustom made pot head necessities.'
               title='Morenas Kustomz'
             />
-            <Component {...pageProps} />
+            <Component {...merge(pageProps, { page })} />
           </FlexBox>
         </Column>
       </Row>

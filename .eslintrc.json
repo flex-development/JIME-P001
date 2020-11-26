@@ -1,6 +1,5 @@
 // ESLint Configuration
 // See: https://eslint.org/docs/user-guide/configuring
-
 {
   "env": {
     "browser": true,
@@ -24,7 +23,10 @@
       "jsx": true
     },
     "ecmaVersion": 2020,
-    "project": ["./tsconfig.json", "./packages/**/tsconfig.json"],
+    "project": [
+      "./tsconfig.json",
+      "./packages/**/tsconfig.json"
+    ],
     "sourceType": "module"
   },
   "plugins": [
@@ -112,7 +114,9 @@
   "overrides": [
     {
       "files": [
-        "**/__tests__/**"
+        "**/__tests__/**",
+        "*.spec.ts",
+        "*.spec.tsx"
       ],
       "env": {
         "es6": true,

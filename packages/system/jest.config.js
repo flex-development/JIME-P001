@@ -11,7 +11,10 @@ module.exports = {
     '\\.(jpg|ico|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
       'identity-obj-proxy',
     '^.+\\.(css|sass|scss|less)$': 'identity-obj-proxy',
-    '^@system/(.*)$': '<rootDir>/src/$1'
+    '^@app/(.*)$': '<rootDir>/../app/src/$1',
+    '^@app-mocks/(.*)$': '<rootDir>/../app/__tests__/__mocks__/$1',
+    '^@system/(.*)$': '<rootDir>/src/$1',
+    '^@system-mocks/(.*)$': '<rootDir>/__tests__/__mocks__/$1'
   },
   prettierPath: path.join(__dirname, '../../node_modules/prettier'),
   setupFilesAfterEnv: [

@@ -1,12 +1,14 @@
+import { isFunction } from 'lodash'
 import { FormOptions } from 'tinacms'
-import { ICMSPage } from '../../interfaces'
+import { ICMSPageIndex } from '../../interfaces'
+import { InitialFormValues } from '../../utils/types'
 import { PagesAPI } from '../config'
 import { NumberField, TextAreaField, TextField } from '../helpers'
 
 /**
  * @file Form configuration to edit the homepage
  * @module subdomains/cms/config/plugins/IndexPageFormPlugin
- * @see https://tinacms.org/docs/modules/cms/config/plugins/forms/
+ * @see https://tina.io/docs/plugins/forms/#form-configuration
  */
 
 /**
@@ -14,83 +16,84 @@ import { NumberField, TextAreaField, TextField } from '../helpers'
  *
  * @param label - Label for the form that will appear in the sidebar
  * @param onSubmit - Function to invoke when the form is saved
+ * @param initialValues - Object containing the initial form state or a function
+ * to load the initial form state asynchronously
+ * @param onChange - Function that runs when the form values are changed
  * @returns `IndexTemplate` form configuration
  */
 export const IndexPageFormPlugin = (
   label = 'Home',
-  onSubmit?: FormOptions<ICMSPage>['onSubmit']
-): FormOptions<ICMSPage> => {
+  initialValues?: InitialFormValues<ICMSPageIndex>,
+  onSubmit?: FormOptions<ICMSPageIndex>['onSubmit'],
+  onChange?: FormOptions<ICMSPageIndex>['onChange']
+): FormOptions<ICMSPageIndex> => {
   const id = 'index'
+
+  let loadInitialValues: FormOptions<ICMSPageIndex>['loadInitialValues']
+
+  if (!initialValues) {
+    loadInitialValues = async () => {
+      const page = await PagesAPI.findByPath('/')
+      return (page || {}) as ICMSPageIndex
+    }
+    initialValues = undefined
+  } else if (isFunction(initialValues)) {
+    loadInitialValues = initialValues
+    initialValues = undefined
+  }
 
   return {
     __type: 'form',
-    fields: [
-      TextField('title', 'Title'),
-      {
-        component: 'group',
-        description: 'Page content settings',
-        fields: [
-          TextField(
-            'about_section_title',
-            'About Section Title',
-            '',
-            '',
-            'About'
-          ),
-          TextAreaField('about_section_text', 'About Section Text'),
-          TextField(
-            'products_section_title',
-            'Products Section Title',
-            '',
-            '',
-            'Products'
-          ),
-          TextAreaField('products_section_text', 'Products Section Text'),
-          NumberField(
-            'max_products',
-            'Max Products',
-            'Maximum number of products to display in Products section',
-            3
-          ),
-          TextField(
-            'product_reviews_title',
-            'Product Reviews Section Title',
-            '',
-            '',
-            'Reviews'
-          ),
-          NumberField(
-            'max_reviews',
-            'Max Reviews',
-            'Maximum number of reviews to display in Product Reviews section',
-            3
-          )
-        ],
-        label: 'Content',
-        name: 'content'
-      }
-    ],
+    fields: IndexPageFormPluginFields,
     id,
+    initialValues,
     label,
-
-    /**
-     * Loads the homepage data from the CMS database.
-     *
-     * @async
-     */
-    loadInitialValues: async () => {
-      const page = await PagesAPI.findByPath('/')
-      return (page || {}) as ICMSPage
-    },
-
-    /**
-     * Logs the form submission or passes it to a submission handler if defined.
-     *
-     * @async
-     */
-    onSubmit: async (values, form, callback) => {
-      if (!onSubmit) return console.debug(values)
-      return onSubmit(values, form, callback)
+    loadInitialValues,
+    onChange,
+    onSubmit: async (values, form, error) => {
+      if (!onSubmit) return console.debug({ IndexPageFormPlugin: values })
+      return onSubmit(values, form, error)
     }
   }
 }
+
+export const IndexPageFormPluginFields = [
+  TextField('title', 'Title'),
+  {
+    component: 'group',
+    description: 'Page content settings',
+    fields: [
+      TextField('about_section_title', 'About Section Title', '', '', 'About'),
+      TextAreaField('about_section_text', 'About Section Text'),
+      TextField(
+        'products_section_title',
+        'Products Section Title',
+        '',
+        '',
+        'Products'
+      ),
+      TextAreaField('products_section_text', 'Products Section Text'),
+      NumberField(
+        'max_products',
+        'Max Products',
+        'Maximum number of products to display in Products section',
+        3
+      ),
+      TextField(
+        'product_reviews_title',
+        'Product Reviews Section Title',
+        '',
+        '',
+        'Reviews'
+      ),
+      NumberField(
+        'max_reviews',
+        'Max Reviews',
+        'Maximum number of reviews to display in Product Reviews section',
+        3
+      )
+    ],
+    label: 'Content',
+    name: 'content'
+  }
+]

@@ -3,8 +3,8 @@
  * @module subdomains/cms/hooks
  */
 
-export * from './useCMSData'
 export * from './useIndexPageForm'
+export * from './useIndexPageFormConfig'
 export * from './useMenus'
 export * from './useNavigationForm'
 export * from './usePage'

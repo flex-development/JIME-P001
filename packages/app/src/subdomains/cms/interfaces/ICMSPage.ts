@@ -20,7 +20,7 @@ export interface ICMSPage extends ICMSEntity {
   component: 'IndexTemplate' | 'PageTemplate'
 
   /**
-   * String or an object with template data.
+   * Object with template data.
    */
   content: IndexTemplateProps | PageTemplateProps
 
@@ -43,6 +43,23 @@ export interface ICMSPage extends ICMSEntity {
    * Title of the page.
    */
   title: string
+}
+
+/**
+ * Object representing page data passed to the `Index` page component.
+ */
+export interface ICMSPageIndex extends ICMSPage {
+  content: IndexTemplateProps
+}
+
+/**
+ * Object representing page data passed to the dynamic page components.
+ */
+export interface ICMSPageSlug extends ICMSPage {
+  /**
+   * String or an object with template data.
+   */
+  content: PageTemplateProps
 }
 
 /**

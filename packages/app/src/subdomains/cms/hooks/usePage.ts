@@ -1,9 +1,8 @@
-import { createError, IPageProps, Logger } from '@app/subdomains/app'
-import { FeathersErrorJSON } from '@feathersjs/errors'
-import { useRouter } from 'next/dist/client/router'
-import { useEffect, useState } from 'react'
+import { AnyObject } from '@flex-development/types'
+import { merge } from 'lodash'
 import { ICMSPage } from '../interfaces'
 import { useIndexPageForm } from './useIndexPageForm'
+import { useIndexPageFormConfig } from './useIndexPageFormConfig'
 import { usePagesForm } from './usePagesForm'
 
 /**
@@ -11,86 +10,35 @@ import { usePagesForm } from './usePagesForm'
  * @module subdomains/cms/hooks/usePage
  */
 
-export type UsePage = {
-  /**
-   * Page data if found.
-   */
-  data: ICMSPage
-
-  /**
-   * Error thrown, if any.
-   */
-  error: FeathersErrorJSON | null
-
-  /**
-   * Path of current page.
-   */
-  path: string
-}
-
 /**
- * Retrieve a page from the CMS database.
+ * Initializes the `IndexPageFormPlugin` and `PagesFormPlugin` as CMS forms.
  *
- * Draft pages will be accessible if the current user is signed-in with GitHub.
+ * If {@param page} is a CMS page, it will be merged with the CMS content from
+ * the database. The original data will be returned otherwise.
  *
- * @param session - Current user session
+ * @param page - Page data for current Next.js page component
+ * @returns CMS page content or empty object if not rendering a CMS page
  */
-export const usePage = (session?: IPageProps['session']): UsePage => {
-  // Handle response and error states from fetching page data
-  const [data, setData] = useState<UsePage['data']>({} as UsePage['data'])
-  const [error, setError] = useState<UsePage['error']>(null)
+export const usePage = (page: AnyObject = {}): ICMSPage | AnyObject => {
+  // Generate `Index` page form configuration
+  const index_config = useIndexPageFormConfig(page)
 
-  // Get homepage data
-  const { modified: homepage } = useIndexPageForm()
+  // Get data for `Index` page
+  const { modified: index } = useIndexPageForm(index_config)
 
-  // Get pages that use `PagesTemplate`
+  // Get all pages that use `PagesTemplate`
   const { modified: pages } = usePagesForm()
 
-  // Get pathname and query from router instance
-  const { pathname, query } = useRouter()
-  const { slug } = query
+  // Return original data object if not working with CMS page data
+  if (!(page as ICMSPage).component) return page
 
-  // If on homepage, use pathname. Otherwise use slug query from dynamic routing
-  const [path] = useState(pathname === '/' || !slug ? pathname : `/${slug}`)
+  // If on homepage, return CMS data merged with original page data
+  if ((page as ICMSPage).path === '/') return merge(page, index)
 
-  // Get homepage data
-  useEffect(() => {
-    // If not on homepage, do nothing
-    if (path !== '/' || !homepage) return
+  // If not on homepage, search for the corresponding CMS page data.
+  // Data is guaranteed to exist because we weren't redirected to /404 page
+  const cms_page = pages.find(({ id }) => id === page.id) as ICMSPage
 
-    // Update page state
-    setData(homepage)
-  }, [homepage, path])
-
-  // Get data for pages that use `PageTemplate` (CMS pages)
-  useEffect(() => {
-    // If pages aren't loaded, on homepage, or not a cms page do nothing
-    if (!pages || path === '/' || !slug) return
-
-    // Find page by path
-    const page = pages.find(page => page.path === path)
-
-    // If data for page isn't found
-    if (!page) {
-      const data = { path }
-      const error = createError(`Page with path "${path}" not found`, data, 404)
-
-      Logger.error({ usePage: error })
-      setError(error)
-
-      return
-    }
-
-    // If page is in draft mode and user isn't logged in with GitHub
-    if (page.draft && session?.provider !== 'github') {
-      const error = createError('Page unavailable', { page }, 401)
-      Logger.error({ usePage: error })
-      setError(error)
-    }
-
-    // Update page state
-    setData(page)
-  }, [pages, path, session, slug])
-
-  return { data, error, path }
+  // Return CMS data merged with original page data
+  return merge(cms_page, page as ICMSPage)
 }

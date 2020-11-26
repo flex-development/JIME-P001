@@ -67,7 +67,6 @@
     "class-validator": "^0.12.2",
     "firebase": "^7.23.0",
     "firebase-admin": "^9.2.0",
-    "json-web-token": "^3.2.0",
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.15",
     "next": "^9.5.1",

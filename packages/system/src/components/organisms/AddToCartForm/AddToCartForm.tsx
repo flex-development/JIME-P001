@@ -98,6 +98,7 @@ export const AddToCartForm: FC<AddToCartFormProps> = (
     updateProperties,
     updateQuantity
   } = useCheckoutLineItemInput({
+    price: selected.price,
     properties: null,
     quantity: 1,
     variant_id: selected.id

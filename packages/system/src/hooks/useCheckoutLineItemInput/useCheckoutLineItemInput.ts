@@ -48,7 +48,12 @@ export const useCheckoutLineItemInput = (
   const { quantity, updateQuantity } = useQuantity(input.quantity)
 
   return {
-    input: { properties, quantity, variant_id: input.variant_id },
+    input: {
+      price: input.price,
+      properties,
+      quantity,
+      variant_id: input.variant_id
+    },
     updateProperties,
     updateQuantity
   }

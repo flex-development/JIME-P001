@@ -1,6 +1,6 @@
 import { createError } from '@app/subdomains/app'
 import {
-  CheckoutLineItemInput,
+  CheckoutPermalinkInput,
   CheckoutPermalinkQuery
 } from '@flex-development/types'
 import { isEmpty } from 'lodash'
@@ -19,43 +19,19 @@ import { useArray, UseArrayActions } from 'react-hanger/array/useArray'
  */
 export type UseCheckoutPermalink = {
   /**
-   * Add a line item.
-   */
-  addItem: UseArrayActions<CheckoutLineItemInputWithId>['add']
-
-  /**
-   * Removes all line items.
-   */
-  clearItems: UseArrayActions<CheckoutLineItemInputWithId>['clear']
-
-  /**
    * Checkout line items.
    */
-  items: Array<CheckoutLineItemInputWithId>
-
-  /**
-   * Removes a single line item.
-   */
-  removeItem: UseArrayActions<CheckoutLineItemInputWithId>['removeById']
+  items: Array<CheckoutPermalinkInput>
 
   /**
    * Updates the line items state.
    */
-  setItems: UseArrayActions<CheckoutLineItemInputWithId>['setValue']
-
-  /**
-   * Updates a single line item.
-   */
-  updateItem: UseArrayActions<CheckoutLineItemInputWithId>['modifyById']
+  setItems: UseArrayActions<CheckoutPermalinkInput>['setValue']
 
   /**
    * Checkout URL.
    */
   url: string
-}
-
-type CheckoutLineItemInputWithId = CheckoutLineItemInput & {
-  id: CheckoutLineItemInput['variant_id']
 }
 
 /**
@@ -67,7 +43,7 @@ type CheckoutLineItemInputWithId = CheckoutLineItemInput & {
  * @throws {FeathersErrorJSON} If store domain is invalid
  */
 export const useCheckoutPermalink = (
-  initialItems: Array<CheckoutLineItemInput> = [],
+  initialItems: Array<CheckoutPermalinkInput> = [],
   domain = process.env.SHOPIFY_DOMAIN
 ): UseCheckoutPermalink => {
   if (isEmpty(domain)) {
@@ -79,9 +55,7 @@ export const useCheckoutPermalink = (
   initialItems = initialItems.map(item => ({ ...item, id: item.variant_id }))
 
   // Handle checkout items state
-  const [items, actions] = useArray<CheckoutLineItemInputWithId>(
-    initialItems as Array<CheckoutLineItemInputWithId>
-  )
+  const [items, actions] = useArray<CheckoutPermalinkInput>(initialItems)
 
   // Handle checkout permalink URL state
   const [url, setURL] = useState(`${domain}/cart/`)
@@ -113,13 +87,5 @@ export const useCheckoutPermalink = (
     setURL(`${base_url}${attr_qs}`)
   }, [domain, items, setURL])
 
-  return {
-    addItem: actions.add,
-    clearItems: actions.clear,
-    items,
-    removeItem: actions.removeById,
-    setItems: actions.setValue,
-    updateItem: actions.modifyById,
-    url
-  }
+  return { items, setItems: actions.setValue, url }
 }

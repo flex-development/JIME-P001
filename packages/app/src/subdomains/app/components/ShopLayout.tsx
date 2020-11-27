@@ -4,6 +4,7 @@ import {
   usePlaylistSettingsForm,
   useProfileSnippetForm
 } from '@app/subdomains/cms/hooks'
+import { useCart } from '@app/subdomains/sales'
 import { usePlaylist } from '@app/subdomains/streaming/hooks'
 import {
   Column,
@@ -66,6 +67,9 @@ export const ShopLayout: FC<ShopLayoutProps> = (props: ShopLayoutProps) => {
   // Handle sidebar
   const sidebar = useVisibility(GRID_BREAKPOINTS.lg)
 
+  // Get cart information
+  const cart = useCart()
+
   // Don't render content until queue is ready to be played
   if (isEmpty(queue)) return null
 
@@ -97,6 +101,7 @@ export const ShopLayout: FC<ShopLayoutProps> = (props: ShopLayoutProps) => {
           <ShopHeader
             className='position-fixed top-0 w-available w-100'
             handleSidebar={sidebar.toggleVisibility}
+            items={cart.items.length}
             px={24}
             py={20}
           />

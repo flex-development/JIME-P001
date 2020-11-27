@@ -5,7 +5,7 @@ import {
   serialize,
   ServerSidePageProps
 } from '@app/subdomains/app'
-import { ProductService, ReviewService } from '@app/subdomains/sales'
+import { ProductService, ReviewService, useCart } from '@app/subdomains/sales'
 import {
   ProductTemplate,
   ProductTemplateProps
@@ -32,7 +32,24 @@ import React from 'react'
  * @param props.session - Current user session or null
  */
 const Product: PC = ({ page }: IPageProps) => {
-  return <ProductTemplate {...(page as ProductTemplateProps)} />
+  // Cast template data
+  const data = page as ProductTemplateProps
+
+  // Get cart functions
+  const cart = useCart()
+
+  /**
+   * Adds a line item to the user's cart.
+   *
+   * @param item - Line item to add
+   * @param event - <button> element click event
+   */
+  data.handleAddToCart = (item, event) => {
+    event.preventDefault()
+    return cart.upsertItem(item)
+  }
+
+  return <ProductTemplate {...data} />
 }
 
 /**

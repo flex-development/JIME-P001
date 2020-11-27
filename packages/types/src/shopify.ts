@@ -7,6 +7,13 @@ import { AnyObject } from './utils'
  */
 
 /**
+ * Types of cart line items.
+ */
+export type CheckoutPermalinkInput =
+  | CheckoutLineItemInput
+  | CheckoutLineItemInputWithId
+
+/**
  * Object representing a checkout permalink query object.
  */
 export type CheckoutPermalinkQuery = Record<
@@ -27,5 +34,9 @@ export type CheckoutLineItemDisplay = Pick<
  */
 export type CheckoutLineItemInput = Pick<
   ICheckoutLineItem,
-  'quantity' | 'variant_id'
+  'price' | 'quantity' | 'variant_id'
 > & { properties: AnyObject | null }
+
+export type CheckoutLineItemInputWithId = CheckoutLineItemInput & {
+  id: CheckoutLineItemInput['variant_id']
+}

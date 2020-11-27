@@ -1,5 +1,5 @@
 /**
- * @file Subdomain Hooks
+ * @file Subdomain Hooks - CMS
  * @module subdomains/cms/hooks
  */
 

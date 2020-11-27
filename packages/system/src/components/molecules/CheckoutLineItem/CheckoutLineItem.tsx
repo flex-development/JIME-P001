@@ -134,6 +134,7 @@ export const CheckoutLineItem: FC<CheckoutLineItemProps> = (
                   const new_quantity = JSON.parse(event.target.value)
 
                   const updated_item: CheckoutLineItemInput = {
+                    price: input.price,
                     properties: input.properties,
                     quantity: new_quantity < 1 ? 1 : new_quantity,
                     variant_id: input.variant_id

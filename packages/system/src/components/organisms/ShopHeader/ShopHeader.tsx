@@ -14,7 +14,7 @@ export interface ShopHeaderProps extends MutatedProps {
   /**
    * URL to redirect the user to when the cart preview link is clicked.
    *
-   * @default 'cart'
+   * @default '/cart'
    */
   cart_url?: LinkProps['href']
 
@@ -54,7 +54,7 @@ export const ShopHeader: FC<ShopHeaderProps> = (props: ShopHeaderProps) => {
       event.preventDefault && event.preventDefault()
       console.log('TODO: ShopHeader.handleSidebar')
     },
-    items,
+    items = 0,
     ...rest
   } = props
 
@@ -83,7 +83,7 @@ export const ShopHeader: FC<ShopHeaderProps> = (props: ShopHeaderProps) => {
           target='_blank'
         >
           Cart&nbsp;&nbsp;/&nbsp;&nbsp;
-          <Span>{`${items} Items`}</Span>
+          <Span>{`${items} Item${items === 1 ? '' : 's'}`}</Span>
         </Link>
       </Column>
     </Header>
@@ -93,6 +93,6 @@ export const ShopHeader: FC<ShopHeaderProps> = (props: ShopHeaderProps) => {
 ShopHeader.displayName = 'ShopHeader'
 
 ShopHeader.defaultProps = {
-  cart_url: 'cart',
+  cart_url: '/cart',
   items: 0
 }

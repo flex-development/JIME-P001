@@ -14,14 +14,14 @@ import { Logger } from '../utils'
 export type UseLocalStorage<T = ANYTHING> = [T, (v: T | ((v: T) => T)) => void]
 
 /**
- * Returns an object with CRUD functions to interact with local storage.
+ * Manipulate key/value pairs in local storage.
  *
  * @param key - Name of local storage key
  * @param value - Initial value to store
  */
 function useLocalStorage<T = ANYTHING>(
   key: string,
-  value: T
+  value?: T
 ): UseLocalStorage<T> {
   // State to store value
   // Pass initial state function to useState so logic is only executed once

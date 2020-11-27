@@ -2,6 +2,7 @@
  * @file Package Entry Point
  * @author Lexus Drumgold <lex@flexdevelopment.llc>
  *
+ * @todo [DOC] CartProvider
  * @todo [IMP] App - Import global stylesheet
  * @todo [IMP] Database Rules
  * @todo [IMP] Document - Update global meta tags

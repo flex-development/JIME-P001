@@ -5,7 +5,7 @@ import {
 } from '@flex-development/types'
 import { isEmpty } from 'lodash'
 import qs from 'querystring'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { useArray, UseArrayActions } from 'react-hanger/array/useArray'
 
 /**
@@ -24,9 +24,21 @@ export type UseCheckoutPermalink = {
   items: Array<CheckoutPermalinkInput>
 
   /**
+   * Removes a checkout line item.
+   *
+   * @param id - ID of variant to remove
+   */
+  removeItem: UseArrayActions<CheckoutPermalinkInput>['removeById']
+
+  /**
    * Updates the line items state.
    */
   setItems: UseArrayActions<CheckoutPermalinkInput>['setValue']
+
+  /**
+   * Adds or updates a checkout line item.
+   */
+  upsertItem: (data: CheckoutPermalinkInput) => void
 
   /**
    * Checkout URL.
@@ -87,5 +99,25 @@ export const useCheckoutPermalink = (
     setURL(`${base_url}${attr_qs}`)
   }, [domain, items, setURL])
 
-  return { items, setItems: actions.setValue, url }
+  /**
+   * Adds an items to the user's cart. If a line item already exists, it's
+   * quantity and properties will be updated.
+   *
+   * @param data - Line item to add
+   */
+  const upsertItem = (data: CheckoutPermalinkInput) => {
+    if (items.find(item => item.variant_id === data.variant_id)) {
+      actions.modifyById(data.variant_id, data)
+    } else {
+      actions.add(data)
+    }
+  }
+
+  return {
+    items,
+    removeItem: actions.removeById,
+    setItems: actions.setValue,
+    upsertItem: useCallback(upsertItem, [actions, items]),
+    url
+  }
 }

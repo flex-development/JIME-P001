@@ -1,11 +1,18 @@
 import { AC, IAppProps, ShopLayout } from '@app/subdomains/app'
+import { useLocalStorage } from '@app/subdomains/app/hooks'
 import '@app/subdomains/app/styles.css'
 import { CMS_BASE_CONFIG, useSignInWithCustomToken } from '@app/subdomains/cms'
 import '@app/subdomains/cms/styles.css'
+import {
+  CartContext,
+  CART_PERSISTENCE_KEY as CART_KEY,
+  useCheckoutPermalink
+} from '@app/subdomains/sales'
 import '@flex-development/kustomzdesign/index.scss'
+import { CheckoutLineItemInput } from '@flex-development/types'
 import { isUndefined } from 'lodash'
 import { Provider as NextAuthProvider, Session } from 'next-auth/client'
-import React, { useMemo } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { TinaCMS, TinaProvider } from 'tinacms'
 
 /**
@@ -19,6 +26,9 @@ import { TinaCMS, TinaProvider } from 'tinacms'
  *
  * Registers the NextAuth and TinaCMS providers. Editors (repository
  * collaborators) can sign in with GitHub to edit marketing site content.
+ *
+ * The CartContext provider will also be registered. Line items will be loaded
+ * from local storage.
  *
  * @param param0 - Component props
  * @param param0.Component - Current page component
@@ -43,10 +53,26 @@ const App: AC = ({ Component, pageProps }: IAppProps) => {
     return new TinaCMS({ ...CMS_BASE_CONFIG, enabled: pageProps.preview })
   }, [pageProps.preview])
 
+  // Load initial line items from local storage
+  const [cart, setCart] = useLocalStorage<CheckoutLineItemInput[]>(CART_KEY)
+
+  // Get checkout URL using persisted cart
+  const { items, removeItem, upsertItem } = useCheckoutPermalink(cart)
+
+  // Cart context value
+  const cart_context = { items, removeItem, subtotal: 0, upsertItem }
+
+  // Persist checkout line items to local storage
+  useEffect(() => {
+    setCart(items)
+  }, [items, setCart])
+
   return (
     <NextAuthProvider session={(session || {}) as Session}>
       <TinaProvider cms={cms}>
-        <ShopLayout page={Component} pageProps={pageProps} />
+        <CartContext.Provider value={cart_context}>
+          <ShopLayout page={Component} pageProps={pageProps} />
+        </CartContext.Provider>
       </TinaProvider>
     </NextAuthProvider>
   )

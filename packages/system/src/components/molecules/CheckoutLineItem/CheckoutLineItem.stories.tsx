@@ -1,4 +1,4 @@
-import items from '@app-mocks/data/checkout-line-items.mock.json'
+import LINE_ITEMS from '@app-mocks/data/checkout-line-items.mock.json'
 import { StoryFN } from '@system/types/storybook'
 import React from 'react'
 import { CheckoutLineItem, CheckoutLineItemProps } from './CheckoutLineItem'
@@ -25,11 +25,11 @@ export const AshTray: StoryFN<CheckoutLineItemProps> = (
   args: CheckoutLineItemProps
 ) => <CheckoutLineItem {...args} />
 
-AshTray.args = Object.assign({}, items[0])
+AshTray.args = Object.assign({}, LINE_ITEMS[0])
 
 export const Kustomz: StoryFN<CheckoutLineItemProps> = (
   args: CheckoutLineItemProps
 ) => <CheckoutLineItem {...args} />
 
 Kustomz.storyName = 'KUSTOMZ'
-Kustomz.args = Object.assign({}, items[1] as CheckoutLineItemProps)
+Kustomz.args = Object.assign({}, LINE_ITEMS[1])

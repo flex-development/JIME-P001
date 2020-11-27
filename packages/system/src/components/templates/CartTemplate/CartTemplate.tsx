@@ -36,7 +36,7 @@ export interface CartTemplateProps extends MutatedProps {
   /**
    * Cart subtotal.
    */
-  subtotal?: string
+  subtotal?: number | string
 }
 
 /**

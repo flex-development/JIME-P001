@@ -8,15 +8,17 @@ import { useCheckoutLineItemInput } from './useCheckoutLineItemInput'
  * @module tests/hooks/useCheckoutLineItemInput
  */
 
-const MOCK_INPUT = Object.freeze({ variant_id: -1 }) as CheckoutLineItemInput
+const MOCK_INPUT = (Object.freeze({
+  data: { variant_id: -1 }
+}) as unknown) as CheckoutLineItemInput
 
 it('defaults to one product with zero custom attributes', () => {
   const { result } = renderHook(() => useCheckoutLineItemInput(MOCK_INPUT))
-  const { properties, quantity, variant_id } = result.current.input
+  const { properties, quantity, variant_id } = result.current.item.data
 
   expect(isPlainObject(properties)).toBeTruthy()
   expect(quantity).toBe(1)
-  expect(variant_id).toBe(MOCK_INPUT.variant_id)
+  expect(variant_id).toBe(MOCK_INPUT.data.variant_id)
 })
 
 it('updates the line item quantity', () => {
@@ -28,7 +30,7 @@ it('updates the line item quantity', () => {
     result.current.updateQuantity(NEW_QUANTITY)
   })
 
-  expect(result.current.input.quantity).toBe(2)
+  expect(result.current.item.data.quantity).toBe(2)
 })
 
 it('adds a new custom property for a line item', () => {
@@ -39,7 +41,7 @@ it('adds a new custom property for a line item', () => {
     result.current.updateProperties(new_properties)
   })
 
-  const properties = result.current.input.properties as AnyObject
+  const properties = result.current.item.data.properties as AnyObject
 
   expect(isPlainObject(properties)).toBeTruthy()
   expect(Object.keys(properties).length).toBe(1)

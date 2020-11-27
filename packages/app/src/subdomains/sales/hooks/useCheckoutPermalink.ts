@@ -1,9 +1,10 @@
 import { createError } from '@app/subdomains/app'
 import {
+  CheckoutLineItemInput,
   CheckoutPermalinkInput,
   CheckoutPermalinkQuery
 } from '@flex-development/types'
-import { isEmpty } from 'lodash'
+import { isEmpty, omit } from 'lodash'
 import qs from 'querystring'
 import { useCallback, useEffect, useState } from 'react'
 import { useArray, UseArrayActions } from 'react-hanger/array/useArray'
@@ -11,7 +12,7 @@ import { useArray, UseArrayActions } from 'react-hanger/array/useArray'
 /**
  * @file Create and update checkout URLs
  * @module subdomains/sales/hooks/useCheckoutPermalink
- * @see https://shopify.dev/tutorials/build-a-sales-channel-with-cart-permalinks
+ * @see https://shopify.dev/tutorials/build-a-sales-channel-with-inputs-permalinks
  */
 
 /**
@@ -21,7 +22,7 @@ export type UseCheckoutPermalink = {
   /**
    * Checkout line items.
    */
-  items: Array<CheckoutPermalinkInput>
+  items: Array<CheckoutLineItemInput>
 
   /**
    * Removes a checkout line item.
@@ -49,13 +50,13 @@ export type UseCheckoutPermalink = {
 /**
  * Create and update checkout URLs.
  *
- * @param initialItems - Array of checkout line items
+ * @param inputs - Array of checkout line items
  * @param domain - Domain to use instead of `process.env.SHOPIFY_DOMAIN'
  * @returns Checkout URL
  * @throws {FeathersErrorJSON} If store domain is invalid
  */
 export const useCheckoutPermalink = (
-  initialItems: Array<CheckoutPermalinkInput> = [],
+  inputs: Array<CheckoutPermalinkInput> = [],
   domain = process.env.SHOPIFY_DOMAIN
 ): UseCheckoutPermalink => {
   if (isEmpty(domain)) {
@@ -64,13 +65,13 @@ export const useCheckoutPermalink = (
   }
 
   // Add id property to line items
-  initialItems = initialItems.map(item => ({ ...item, id: item.variant_id }))
+  inputs = inputs.map(input => ({ ...input, id: input.data.variant_id }))
 
   // Handle checkout items state
-  const [items, actions] = useArray<CheckoutPermalinkInput>(initialItems)
+  const [items, actions] = useArray<CheckoutPermalinkInput>(inputs)
 
   // Handle checkout permalink URL state
-  const [url, setURL] = useState(`${domain}/cart/`)
+  const [url, setURL] = useState(`${domain}/inputs/`)
 
   // Use line items to create checkout permalink query
   useEffect(() => {
@@ -79,7 +80,7 @@ export const useCheckoutPermalink = (
     const path_query: CheckoutPermalinkQuery = {}
     const attr_qs_arr: Array<string> = []
 
-    items.forEach(({ quantity, properties, variant_id }) => {
+    items.forEach(({ data: { quantity, properties, variant_id } }) => {
       path_query[variant_id] = quantity
 
       const attributes = properties || {}
@@ -89,7 +90,7 @@ export const useCheckoutPermalink = (
       })
     })
 
-    const base_url = `${domain}/cart/${qs.stringify(path_query, ',', ':')}`
+    const base_url = `${domain}/inputs/${qs.stringify(path_query, ',', ':')}`
     let attr_qs = ''
 
     if (attr_qs_arr.length) {
@@ -100,21 +101,21 @@ export const useCheckoutPermalink = (
   }, [domain, items, setURL])
 
   /**
-   * Adds an items to the user's cart. If a line item already exists, it's
+   * Adds an items to the user's inputs. If a line item already exists, it's
    * quantity and properties will be updated.
    *
    * @param data - Line item to add
    */
   const upsertItem = (data: CheckoutPermalinkInput) => {
-    if (items.find(item => item.variant_id === data.variant_id)) {
-      actions.modifyById(data.variant_id, data)
+    if (items.find(item => item.data.variant_id === data.data.variant_id)) {
+      actions.modifyById(data.data.variant_id, data)
     } else {
       actions.add(data)
     }
   }
 
   return {
-    items,
+    items: items.map(item => omit(item, ['id']) as CheckoutLineItemInput),
     removeItem: actions.removeById,
     setItems: actions.setValue,
     upsertItem: useCallback(upsertItem, [actions, items]),

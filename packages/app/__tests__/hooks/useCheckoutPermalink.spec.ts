@@ -1,10 +1,7 @@
 import { useCheckoutPermalink } from '@app/subdomains/sales'
-import {
-  CheckoutLineItemInputWithId,
-  CheckoutPermalinkInput
-} from '@flex-development/types'
+import { CheckoutLineItemInputWithId } from '@flex-development/types'
 import { renderHook } from '@testing-library/react-hooks'
-import CheckoutLineItems from '../__mocks__/data/checkout-line-items.mock.json'
+import LINE_ITEMS from '../__mocks__/data/checkout-line-items.mock.json'
 
 /**
  * @file Tests - useCheckoutPermalink
@@ -12,10 +9,6 @@ import CheckoutLineItems from '../__mocks__/data/checkout-line-items.mock.json'
  */
 
 const CHECKOUT_BASE_URL = `${process.env.SHOPIFY_DOMAIN}/cart/`
-
-const LINE_ITEMS: Array<CheckoutPermalinkInput> = CheckoutLineItems.map(i => {
-  return i.item
-})
 
 describe('useCheckoutPermalink', () => {
   it('creates the default checkout URL', () => {
@@ -27,23 +20,25 @@ describe('useCheckoutPermalink', () => {
 
   it('creates a checkout URL', () => {
     const items = [LINE_ITEMS[0]]
-    const item_path_0 = `${items[0].variant_id}:${items[0].quantity}`
+    const item_path = `${items[0].data.variant_id}:${items[0].data.quantity}`
 
     const { result } = renderHook(() => useCheckoutPermalink(items))
 
-    expect(result.current.url).toBe(`${CHECKOUT_BASE_URL}${item_path_0}`)
+    expect(result.current.url).toBe(`${CHECKOUT_BASE_URL}${item_path}`)
     result.current.items.map((item, i) => {
-      expect((item as CheckoutLineItemInputWithId).id).toBe(items[i].variant_id)
+      expect((item as CheckoutLineItemInputWithId).id).toBe(
+        items[i].data.variant_id
+      )
     })
   })
 
   it('creates a checkout URL with cart attributes', () => {
     const items = [LINE_ITEMS[1]]
-    let item_path_0 = `${items[0].variant_id}:${items[0].quantity}`
-    item_path_0 = `${item_path_0}?attributes[kpd]=${items[0].properties?.kpd}`
+    let item_path = `${items[0].data.variant_id}:${items[0].data.quantity}`
+    item_path = `${item_path}?attributes[kpd]=${items[0].data.properties?.kpd}`
 
     const { result } = renderHook(() => useCheckoutPermalink(items))
 
-    expect(result.current.url).toBe(`${CHECKOUT_BASE_URL}${item_path_0}`)
+    expect(result.current.url).toBe(`${CHECKOUT_BASE_URL}${item_path}`)
   })
 })

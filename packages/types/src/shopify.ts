@@ -1,5 +1,5 @@
 import { ICheckoutLineItem } from 'shopify-api-node'
-import { AnyObject } from './utils'
+import { AnyObject, NullishString } from './utils'
 
 /**
  * @file Type Declarations - Shopify
@@ -26,17 +26,17 @@ export type CheckoutPermalinkQuery = Record<
  */
 export type CheckoutLineItemDisplay = Pick<
   ICheckoutLineItem,
-  'key' | 'price' | 'quantity' | 'title' | 'variant_id'
-> & { properties: CheckoutLineItemInput['properties'] }
+  'price' | 'quantity' | 'title' | 'variant_id'
+> & { properties: AnyObject | null }
 
 /**
  * Object representing the fields needed to create a checkout.
  */
-export type CheckoutLineItemInput = Pick<
-  ICheckoutLineItem,
-  'price' | 'quantity' | 'variant_id'
-> & { properties: AnyObject | null }
+export type CheckoutLineItemInput = {
+  data: CheckoutLineItemDisplay
+  image: { alt?: NullishString; id?: string; src?: string }
+}
 
 export type CheckoutLineItemInputWithId = CheckoutLineItemInput & {
-  id: CheckoutLineItemInput['variant_id']
+  id: CheckoutLineItemInput['data']['variant_id']
 }

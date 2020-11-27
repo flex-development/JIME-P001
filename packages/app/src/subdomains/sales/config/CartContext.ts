@@ -1,4 +1,7 @@
-import { CheckoutPermalinkInput } from '@flex-development/types'
+import {
+  CheckoutLineItemInput,
+  CheckoutPermalinkInput
+} from '@flex-development/types'
 import { createContext } from 'react'
 
 /**
@@ -7,19 +10,23 @@ import { createContext } from 'react'
  */
 
 export type CartContextState = {
-  items: Array<CheckoutPermalinkInput>
+  items: Array<CheckoutLineItemInput>
   removeItem: (variant: string) => void
   subtotal: number
   upsertItem: (data: CheckoutPermalinkInput) => void
+  url: string
 }
 
 export const CartContext = createContext<CartContextState>({
   items: [],
-  removeItem: (variant: string) => console.debug({ CartContext: variant }),
+  removeItem: (variant: string) => {
+    console.debug({ 'CartContext.removeItem': variant })
+  },
   subtotal: 0,
   upsertItem: (data: CheckoutPermalinkInput) => {
-    console.debug({ CartContext: data })
-  }
+    console.debug({ 'CartContext.upsertItem': data })
+  },
+  url: '/cart'
 })
 
 CartContext.displayName = 'CartContext'

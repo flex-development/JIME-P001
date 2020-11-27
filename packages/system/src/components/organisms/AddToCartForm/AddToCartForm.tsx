@@ -5,6 +5,7 @@ import {
   useProductVariants
 } from '@system/hooks'
 import { EventHandlers } from '@system/types'
+import { getProductVariantImage } from '@system/utils'
 import { findIndex, isEmpty } from 'lodash'
 import React, { FC } from 'react'
 import { IProductListing, IProductListingVariant } from 'shopify-api-node'
@@ -92,16 +93,20 @@ export const AddToCartForm: FC<AddToCartFormProps> = (
   } = useProductVariants(product.variants, position)
 
   // Initialize line item state
-  // This object will be passed to props.addToCart if the fn is defined
-  const {
-    input: item,
-    updateProperties,
-    updateQuantity
-  } = useCheckoutLineItemInput({
-    price: selected.price,
-    properties: null,
-    quantity: 1,
-    variant_id: selected.id
+  // The item state will be passed to props.addToCart if the fn is defined
+  const { item, updateProperties, updateQuantity } = useCheckoutLineItemInput({
+    data: {
+      price: selected.price,
+      properties: null,
+      quantity: 1,
+      title: `${product.title} - ${selected.title}`,
+      variant_id: selected.id
+    },
+    image: getProductVariantImage(
+      selected?.image_id || null,
+      product.images,
+      `${product.title} - ${selected.title}`
+    )
   })
 
   // Carousel position state
@@ -129,7 +134,7 @@ export const AddToCartForm: FC<AddToCartFormProps> = (
           {/* Product title and variant price */}
           <ProductHeading
             mb={no_description ? 16 : 4}
-            price={item.quantity * selected.price}
+            price={item.data.quantity * selected.price}
             title={product.title}
             size={2}
           />
@@ -178,7 +183,7 @@ export const AddToCartForm: FC<AddToCartFormProps> = (
                   return updateQuantity(value < 1 ? 1 : value)
                 },
                 type: 'number',
-                value: item.quantity
+                value: item.data.quantity
               }}
             >
               Quantity
@@ -195,7 +200,7 @@ export const AddToCartForm: FC<AddToCartFormProps> = (
                 }}
                 name='kpd'
                 placeholder='Describe your kustom ash or rolling tray'
-                value={item.properties?.kpd}
+                value={item.data.properties?.kpd}
               />
             </Row>
           )}

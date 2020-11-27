@@ -57,10 +57,10 @@ const App: AC = ({ Component, pageProps }: IAppProps) => {
   const [cart, setCart] = useLocalStorage<CheckoutLineItemInput[]>(CART_KEY)
 
   // Get checkout URL using persisted cart
-  const { items, removeItem, upsertItem } = useCheckoutPermalink(cart)
+  const { items, removeItem, upsertItem, url } = useCheckoutPermalink(cart)
 
   // Cart context value
-  const cart_context = { items, removeItem, subtotal: 0, upsertItem }
+  const cart_state = { items, removeItem, subtotal: 0, upsertItem, url }
 
   // Persist checkout line items to local storage
   useEffect(() => {
@@ -70,7 +70,7 @@ const App: AC = ({ Component, pageProps }: IAppProps) => {
   return (
     <NextAuthProvider session={(session || {}) as Session}>
       <TinaProvider cms={cms}>
-        <CartContext.Provider value={cart_context}>
+        <CartContext.Provider value={cart_state}>
           <ShopLayout page={Component} pageProps={pageProps} />
         </CartContext.Provider>
       </TinaProvider>

@@ -3,7 +3,7 @@ import { useSetState } from 'react-hanger'
 import { useQuantity, UseQuantity } from '../useQuantity'
 
 /**
- * @file Specify the input fields to create a line item on a checkout
+ * @file Specify the item fields to create a line item on a checkout
  * @module hooks/useCheckoutLineItemInput
  */
 
@@ -14,7 +14,7 @@ export type UseCheckoutLineItemInput = {
   /**
    * The updated line item information.
    */
-  input: CheckoutLineItemInput
+  item: CheckoutLineItemInput
 
   /**
    * Updates the line item `properties` state.
@@ -30,30 +30,25 @@ export type UseCheckoutLineItemInput = {
 }
 
 /**
- * Specify the input fields to create a checkout line item.
+ * Specify the item fields to create a checkout line item.
  *
- * @param input - Initial line item data
- * @param input.properties - Initial custom properties
- * @param input.quantity - Number of line items to order
+ * @param item - Initial line item data
+ * @param item.properties - Initial custom properties
+ * @param item.quantity - Number of line items to order
  */
 export const useCheckoutLineItemInput = (
-  input: CheckoutLineItemInput
+  item: CheckoutLineItemInput
 ): UseCheckoutLineItemInput => {
   // Handle custom propeties
   const { state: properties, setState: updateProperties } = useSetState<
     AnyObject
-  >(input.properties || {})
+  >(item.data.properties || {})
 
   // Handle product quantity
-  const { quantity, updateQuantity } = useQuantity(input.quantity)
+  const { quantity, updateQuantity } = useQuantity(item.data.quantity)
 
   return {
-    input: {
-      price: input.price,
-      properties,
-      quantity,
-      variant_id: input.variant_id
-    },
+    item: { ...item, data: { ...item.data, properties, quantity } },
     updateProperties,
     updateQuantity
   }

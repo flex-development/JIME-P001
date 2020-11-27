@@ -11,7 +11,7 @@ import LinkField from './LinkField'
 /**
  * Extends the TinaCMS Group List field plugin.
  *
- * Returns the configuration for an array of `Link` component inputs.
+ * Returns the configuration for an array of `Link` component items.
  *
  * @see https://tinacms.org/docs/plugins/fields/group-list/
  *

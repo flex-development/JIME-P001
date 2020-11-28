@@ -62,10 +62,7 @@ const App: AC = ({ Component, pageProps }: IAppProps) => {
   // Persist checkout line items to local storage
   useEffect(() => {
     if (typeof window === 'undefined') return
-
-    return () => {
-      localStorage.setItem(CART_KEY, JSON.stringify(checkout.items))
-    }
+    localStorage.setItem(CART_KEY, JSON.stringify(checkout.items))
   }, [checkout.items])
 
   return (

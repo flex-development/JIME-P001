@@ -1,10 +1,9 @@
-import { createError } from '@app/subdomains/app'
 import {
   CheckoutLineItemInput,
   CheckoutPermalinkInput,
   CheckoutPermalinkQuery
 } from '@flex-development/types'
-import { isEmpty, omit } from 'lodash'
+import { omit } from 'lodash'
 import qs from 'querystring'
 import { useCallback, useEffect, useState } from 'react'
 import { useArray, UseArrayActions } from 'react-hanger/array/useArray'
@@ -32,11 +31,6 @@ export type UseCheckoutPermalink = {
   removeItem: UseArrayActions<CheckoutPermalinkInput>['removeById']
 
   /**
-   * Updates the line items state.
-   */
-  setItems: UseArrayActions<CheckoutPermalinkInput>['setValue']
-
-  /**
    * Adds or updates a checkout line item.
    */
   upsertItem: (data: CheckoutPermalinkInput) => void
@@ -51,19 +45,12 @@ export type UseCheckoutPermalink = {
  * Create and update checkout URLs.
  *
  * @param inputs - Array of checkout line items
- * @param domain - Domain to use instead of `process.env.SHOPIFY_DOMAIN'
  * @returns Checkout URL
  * @throws {FeathersErrorJSON} If store domain is invalid
  */
 export const useCheckoutPermalink = (
-  inputs: Array<CheckoutPermalinkInput> = [],
-  domain = process.env.SHOPIFY_DOMAIN
+  inputs: Array<CheckoutPermalinkInput> = []
 ): UseCheckoutPermalink => {
-  if (isEmpty(domain)) {
-    const error = createError('Missing SHOPIFY_DOMAIN')
-    throw error
-  }
-
   // Add id property to line items
   inputs = inputs.map(input => ({ ...input, id: input.data.variant_id }))
 
@@ -71,7 +58,7 @@ export const useCheckoutPermalink = (
   const [items, actions] = useArray<CheckoutPermalinkInput>(inputs)
 
   // Handle checkout permalink URL state
-  const [url, setURL] = useState(`${domain}/inputs/`)
+  const [url, setURL] = useState(`/checkouts`)
 
   // Use line items to create checkout permalink query
   useEffect(() => {
@@ -90,7 +77,7 @@ export const useCheckoutPermalink = (
       })
     })
 
-    const base_url = `${domain}/inputs/${qs.stringify(path_query, ',', ':')}`
+    const base_url = `/checkouts/${qs.stringify(path_query, ',', ':')}`
     let attr_qs = ''
 
     if (attr_qs_arr.length) {
@@ -98,7 +85,7 @@ export const useCheckoutPermalink = (
     }
 
     setURL(`${base_url}${attr_qs}`)
-  }, [domain, items, setURL])
+  }, [items, setURL])
 
   /**
    * Adds an items to the user's inputs. If a line item already exists, it's
@@ -117,7 +104,6 @@ export const useCheckoutPermalink = (
   return {
     items: items.map(item => omit(item, ['id']) as CheckoutLineItemInput),
     removeItem: actions.removeById,
-    setItems: actions.setValue,
     upsertItem: useCallback(upsertItem, [actions, items]),
     url
   }

@@ -11,7 +11,7 @@ import { createContext } from 'react'
 
 export type CartContextState = {
   items: Array<CheckoutLineItemInput>
-  removeItem: (variant: string) => void
+  removeItem: (variant_id: number | string) => void
   subtotal: number
   upsertItem: (data: CheckoutPermalinkInput) => void
   url: string
@@ -19,8 +19,8 @@ export type CartContextState = {
 
 export const CartContext = createContext<CartContextState>({
   items: [],
-  removeItem: (variant: string) => {
-    console.debug({ 'CartContext.removeItem': variant })
+  removeItem: (variant_id: number | string) => {
+    console.debug({ 'CartContext.removeItem': variant_id })
   },
   subtotal: 0,
   upsertItem: (data: CheckoutPermalinkInput) => {

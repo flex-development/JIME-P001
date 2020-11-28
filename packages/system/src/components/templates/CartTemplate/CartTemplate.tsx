@@ -1,6 +1,6 @@
 import { useMutatedProps } from '@system/hooks'
 import { MutatedProps, TC } from '@system/types'
-import { formatPrice, uuid } from '@system/utils'
+import { formatPrice } from '@system/utils'
 import React from 'react'
 import {
   Box,
@@ -27,6 +27,17 @@ export interface CartTemplateProps extends MutatedProps {
   checkout_url?: string
 
   /**
+   * `onClick` handler that's fired when the user clicks the "REMOVE" button.
+   */
+  handleRemove?: CheckoutLineItemProps['handleRemove']
+
+  /**
+   * `onChange` handler that's fired when the user updates the line item
+   * quantity.
+   */
+  handleUpdate?: CheckoutLineItemProps['handleUpdate']
+
+  /**
    * Array of items in the user's cart as an array of `CheckoutLineItemProps`.
    *
    * @default []
@@ -48,7 +59,14 @@ export interface CartTemplateProps extends MutatedProps {
 export const CartTemplate: TC<CartTemplateProps> = (
   props: CartTemplateProps
 ) => {
-  const { checkout_url, items = [], subtotal = '0.00', ...rest } = props
+  const {
+    checkout_url,
+    handleRemove,
+    handleUpdate,
+    items = [],
+    subtotal = '0.00',
+    ...rest
+  } = props
 
   const mutated = useMutatedProps<typeof rest>(rest, 'template')
 
@@ -59,9 +77,14 @@ export const CartTemplate: TC<CartTemplateProps> = (
           Cart ({`${items.length}`})
         </Heading>
         <Box>
-          {items.map((item: CheckoutLineItemProps) => {
-            return <CheckoutLineItem {...item} key={uuid()} />
-          })}
+          {items.map((item: CheckoutLineItemProps) => (
+            <CheckoutLineItem
+              {...item}
+              handleRemove={handleRemove}
+              handleUpdate={handleUpdate}
+              key={item.data.variant_id}
+            />
+          ))}
         </Box>
         <FlexBox
           align='center'

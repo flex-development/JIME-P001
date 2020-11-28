@@ -11,6 +11,11 @@
   },
   "redirects": [
     {
+      "source": "/checkouts/:permalink",
+      "destination": "https://morenaskustomz.myshopify.com/cart/:permalink",
+      "permanent": true
+    },
+    {
       "source": "/instagram",
       "destination": "https://instagram.com/morenaskustomz",
       "permanent": true

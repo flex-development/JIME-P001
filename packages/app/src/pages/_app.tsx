@@ -12,6 +12,7 @@ import '@flex-development/kustomzdesign/index.scss'
 import { CheckoutLineItemInput } from '@flex-development/types'
 import { isUndefined } from 'lodash'
 import { Provider as NextAuthProvider, Session } from 'next-auth/client'
+import { useRouter } from 'next/router'
 import React, { useEffect, useMemo } from 'react'
 import { TinaCMS, TinaProvider } from 'tinacms'
 
@@ -38,6 +39,7 @@ import { TinaCMS, TinaProvider } from 'tinacms'
  */
 const App: AC = ({ Component, pageProps }: IAppProps) => {
   const { page, session } = pageProps
+  const router = useRouter()
 
   /**
    * Preview mode will be enabled if current user is signed-in with GitHub.
@@ -54,23 +56,24 @@ const App: AC = ({ Component, pageProps }: IAppProps) => {
   }, [pageProps.preview])
 
   // Load initial line items from local storage
-  const [cart, setCart] = useLocalStorage<CheckoutLineItemInput[]>(CART_KEY)
+  const [cart] = useLocalStorage<CheckoutLineItemInput[]>(CART_KEY)
 
   // Get checkout URL using persisted cart
-  const { items, removeItem, upsertItem, url } = useCheckoutPermalink(cart)
-
-  // Cart context value
-  const cart_state = { items, removeItem, subtotal: 0, upsertItem, url }
+  const checkout = useCheckoutPermalink(cart)
 
   // Persist checkout line items to local storage
   useEffect(() => {
-    setCart(items)
-  }, [items, setCart])
+    if (typeof window === 'undefined') return
+
+    return () => {
+      localStorage.setItem(CART_KEY, JSON.stringify(checkout.items))
+    }
+  }, [checkout.items])
 
   return (
     <NextAuthProvider session={(session || {}) as Session}>
       <TinaProvider cms={cms}>
-        <CartContext.Provider value={cart_state}>
+        <CartContext.Provider value={{ ...checkout, subtotal: 0 }}>
           <ShopLayout page={Component} pageProps={pageProps} />
         </CartContext.Provider>
       </TinaProvider>

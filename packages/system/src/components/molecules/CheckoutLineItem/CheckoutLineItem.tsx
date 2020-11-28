@@ -34,7 +34,7 @@ export interface CheckoutLineItemProps extends BoxProps {
   /**
    * `onClick` handler that's fired when the user clicks the "REMOVE" button.
    */
-  handleRemove?(event?: EventHandlers.Click.Button): ANYTHING
+  handleRemove?(event: EventHandlers.Click.Button): ANYTHING
 
   /**
    * `onChange` handler that's fired when the user updates the line item
@@ -42,7 +42,7 @@ export interface CheckoutLineItemProps extends BoxProps {
    */
   handleUpdate?(
     updates: CheckoutLineItemInput,
-    event?: EventHandlers.Change.Input
+    event: EventHandlers.Change.Input
   ): ANYTHING
 
   /**

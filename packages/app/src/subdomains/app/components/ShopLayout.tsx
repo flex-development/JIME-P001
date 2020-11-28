@@ -20,6 +20,7 @@ import {
 } from '@flex-development/kustomzdesign'
 import { isEmpty, merge } from 'lodash'
 import React, { FC, Fragment } from 'react'
+import { useCMS } from 'tinacms'
 import { IPageProps, PC } from '../interfaces'
 
 /**
@@ -48,6 +49,9 @@ export interface ShopLayoutProps {
  */
 export const ShopLayout: FC<ShopLayoutProps> = (props: ShopLayoutProps) => {
   const { page: Component, pageProps } = props
+
+  // Check if CMS is enabled
+  const cms = useCMS()
 
   // Get site navigation as menu links
   const menus = useMenus()
@@ -99,11 +103,12 @@ export const ShopLayout: FC<ShopLayoutProps> = (props: ShopLayoutProps) => {
           xl={sidebar.visible ? 9 : 12}
         >
           <ShopHeader
-            className='position-fixed top-0 w-available w-100'
+            className='position-fixed w-available w-100'
             handleSidebar={sidebar.toggleVisibility}
             items={cart.items.length}
             px={24}
             py={20}
+            style={{ top: cms.enabled ? '62px' : 0 }}
           />
           <FlexBox
             className={`${sidebar.breakpoints.sm ? 'd-none' : ''}`}

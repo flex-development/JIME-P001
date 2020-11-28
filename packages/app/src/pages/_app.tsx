@@ -12,7 +12,6 @@ import '@flex-development/kustomzdesign/index.scss'
 import { CheckoutLineItemInput } from '@flex-development/types'
 import { isUndefined } from 'lodash'
 import { Provider as NextAuthProvider, Session } from 'next-auth/client'
-import { useRouter } from 'next/router'
 import React, { useEffect, useMemo } from 'react'
 import { TinaCMS, TinaProvider } from 'tinacms'
 
@@ -39,7 +38,6 @@ import { TinaCMS, TinaProvider } from 'tinacms'
  */
 const App: AC = ({ Component, pageProps }: IAppProps) => {
   const { page, session } = pageProps
-  const router = useRouter()
 
   /**
    * Preview mode will be enabled if current user is signed-in with GitHub.
@@ -73,7 +71,7 @@ const App: AC = ({ Component, pageProps }: IAppProps) => {
   return (
     <NextAuthProvider session={(session || {}) as Session}>
       <TinaProvider cms={cms}>
-        <CartContext.Provider value={{ ...checkout, subtotal: 0 }}>
+        <CartContext.Provider value={checkout}>
           <ShopLayout page={Component} pageProps={pageProps} />
         </CartContext.Provider>
       </TinaProvider>

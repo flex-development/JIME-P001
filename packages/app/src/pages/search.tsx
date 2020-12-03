@@ -1,10 +1,11 @@
-import { IPageProps, PC } from '@app/subdomains/app'
+import { IPagePropsSearch, PC, SearchPageUrlQuery } from '@app/subdomains/app'
 import { ProductService } from '@app/subdomains/sales'
 import {
   SearchTemplate,
   SearchTemplateProps
 } from '@flex-development/kustomzdesign'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
+import { getSession } from 'next-auth/client'
 
 /**
  * @file Page - Product Search
@@ -34,18 +35,38 @@ const Search: PC = ({ page }) => {
  * @param context.query - The query string
  * @returns Array of search results
  */
-export const getServerSideProps: GetServerSideProps<IPageProps> = async (
-  context: GetServerSidePropsContext
-) => {
+export const getServerSideProps: GetServerSideProps<
+  IPagePropsSearch,
+  SearchPageUrlQuery
+> = async (context: GetServerSidePropsContext) => {
+  // Initialize services
   const Products = new ProductService()
 
-  const query = { title: { $in: ['tray'], partial: true } }
+  // Get search term from query
+  const { term } = context.query as SearchPageUrlQuery
 
-  console.debug(await Products.find(query))
+  // Build search rules based on types of product property values
+  const search_rules_prim = { $lte: term }
+  const search_rules_arr = term ? { $lte: [term] } : search_rules_prim
 
-  const page: SearchTemplateProps = { results: await Products.find() }
+  // Build search query
+  const query = {
+    body_html: search_rules_prim,
+    product_type: search_rules_prim,
+    tags: search_rules_arr,
+    title: search_rules_prim,
+    variant_skus: search_rules_arr,
+    variant_titles: search_rules_arr,
+    vendor: search_rules_prim
+  }
 
-  return { props: { page, session: null } }
+  // Get template data
+  const page: SearchTemplateProps = { results: await Products.find(query) }
+
+  // Get current user session
+  const session = (await getSession(context)) as IPagePropsSearch['session']
+
+  return { props: { page, session } }
 }
 
 export default Search

@@ -60,7 +60,7 @@ export interface IPagePropsProduct extends IPageProps {
 /**
  * Props passed to the product search page.
  */
-export interface IPagePropsProductSearch extends IPageProps {
+export interface IPagePropsSearch extends IPageProps {
   page: SearchTemplateProps
 }
 

@@ -21,8 +21,7 @@ import {
   Select,
   TextArea
 } from '../../atoms'
-import { LabeledFormControl } from '../../molecules/LabeledFormControl'
-import { ProductHeading } from '../../molecules/ProductHeading'
+import { LabeledFormControl, ProductHeading } from '../../molecules'
 import { ProductImageCarousel } from '../ProductImageCarousel'
 
 /**
@@ -142,9 +141,11 @@ export const AddToCartForm: FC<AddToCartFormProps> = (
 
           {/* Product description */}
           {!no_description && (
-            <Paragraph className='form-text' mb={12}>
-              {product.body_html}
-            </Paragraph>
+            <Paragraph
+              className='form-text'
+              innerHTML={product.body_html}
+              mb={12}
+            />
           )}
 
           {/* Main form control container */}

@@ -92,6 +92,15 @@ export interface ProductPageUrlQuery extends ProductPageParams {
 }
 
 /**
+ * Product page URL query parameters.
+ */
+export interface SearchPageUrlQuery extends ParsedUrlQuery {
+  [x: string]: string | undefined
+
+  term?: string
+}
+
+/**
  * Object indicating that the user should be redirected to the `/404` page.
  */
 export type ServerSide404 = { notFound: true }

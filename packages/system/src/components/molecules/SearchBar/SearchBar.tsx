@@ -43,7 +43,7 @@ export const SearchBar: FC<SearchBarProps> = (props: SearchBarProps) => {
     ...rest
   } = props
 
-  rest.onSubmit = (event: FormEvent) => handleSearch(query, event)
+  rest.onSubmit = (e: FormEvent) => handleSearch(query.replace(' ', '+'), e)
 
   const mutated = useMutatedProps<typeof rest>(rest, 'searchbar')
 

@@ -2,12 +2,17 @@ import { axiosShopify } from '@app/config/axios'
 import Logger from '@app/config/logger'
 import { createError, ServerSide404 } from '@app/subdomains/app/utils'
 import {
+  AnyObject,
   ArrayQueryExecutor,
   DataArray,
   DataArrayQueryParams
 } from '@flex-development/json'
-import { omit } from 'lodash'
-import { ICollectionListing, IProductListing } from 'shopify-api-node'
+import { omit, pick } from 'lodash'
+import {
+  ICollectionListing,
+  IProductListing,
+  IProductListingVariant
+} from 'shopify-api-node'
 import { IProductService, ListProductsResponse } from './IProductService'
 
 /**
@@ -51,7 +56,49 @@ export default class ProductService
       url: 'product_listings'
     })
 
-    return this.query(product_listings, omit(query, ['$limit']))
+    // Keys of additional search properties
+    const asp = ['variant_skus', 'variant_titles']
+
+    // Add additional search functionality
+    let searchable: Array<AnyObject> = []
+    product_listings.forEach((product: AnyObject) => {
+      const pcopy = { ...product }
+
+      // Add properties to product listings
+      const variant_skus: string[] = []
+      const variant_titles: string[] = []
+
+      pcopy.variants.forEach((variant: IProductListingVariant) => {
+        variant_skus.push(variant.sku.toLowerCase())
+        variant_titles.push(variant.title.toLowerCase())
+      })
+
+      // Normalize search values
+      pcopy.body_html = pcopy.body_html.toLowerCase()
+      pcopy.product_type = pcopy.product_type.toLowerCase()
+      pcopy.tags = pcopy.tags.split(',')
+      pcopy.title = pcopy.title.toLowerCase()
+      pcopy.vendor = pcopy.vendor.toLowerCase()
+
+      searchable.push({ ...pcopy, variant_skus, variant_titles })
+    })
+
+    // Execute query
+    searchable = this.query(searchable, omit(query, ['$limit']))
+
+    // Get data with original product props and values
+    const listings: DataArray<IProductListing> = []
+    searchable.forEach(({ handle }) => {
+      const found = product_listings.find(listing => listing.handle === handle)
+
+      // Add to new array of listing and remove additional search properties
+      if (found) {
+        query.$select = query.$select || Object.keys(found)
+        listings.push(pick(omit(found, asp), query.$select))
+      }
+    })
+
+    return listings
   }
 
   /**

@@ -62,17 +62,17 @@ export const ShopLayout: FC<ShopLayoutProps> = (props: ShopLayoutProps) => {
   // Register playlist settings form
   const { modified: playlist } = usePlaylistSettingsForm()
 
-  // Handle playlist streaming
-  const { kit, queue } = usePlaylist(playlist.url)
-
   // Register profile snippet settings form (data used in Sidebar)
   const { modified: snippet } = useProfileSnippetForm()
+
+  // Get cart information
+  const cart = useCart()
 
   // Handle sidebar
   const sidebar = useVisibility(GRID_BREAKPOINTS.lg)
 
-  // Get cart information
-  const cart = useCart()
+  // Handle playlist streaming
+  const { kit, queue } = usePlaylist(playlist.url)
 
   // Don't render content until queue is ready to be played
   if (isEmpty(queue)) return null
@@ -104,6 +104,10 @@ export const ShopLayout: FC<ShopLayoutProps> = (props: ShopLayoutProps) => {
         >
           <ShopHeader
             className='position-fixed w-available w-100'
+            handleSearch={(term, event) => {
+              event.preventDefault()
+              window.location.href = `/search?term=${term}`
+            }}
             handleSidebar={sidebar.toggleVisibility}
             items={cart.items.length}
             px={24}

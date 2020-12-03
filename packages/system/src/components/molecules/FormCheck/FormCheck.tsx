@@ -1,18 +1,15 @@
-import {
-  ANYTHING,
-  ButtonVariant,
-  FormControlSize
-} from '@flex-development/types'
+import { ANYTHING } from '@flex-development/json'
+import { ButtonVariant, FormControlSize } from '@flex-development/kustomzcore'
 import { useMutatedProps } from '@system/hooks'
 import { EventHandlers, MutatedFormControlProps } from '@system/types'
 import classnames from 'classnames'
 import { isEmpty } from 'lodash'
-import React, { FC } from 'react'
+import { FC } from 'react'
 import { Box, BoxProps, IconProps, Input, Label } from '../../atoms'
 
 /**
  * @file Checks and radios component
- * @module components/molecules/FormCheck/FormCheck/FormCheck/FormCheck
+ * @module components/molecules/FormCheck/FormCheck
  */
 
 export interface FormCheckProps extends BoxProps {

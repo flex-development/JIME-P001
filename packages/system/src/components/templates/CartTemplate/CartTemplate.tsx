@@ -1,7 +1,6 @@
 import { useMutatedProps } from '@system/hooks'
 import { MutatedProps, TC } from '@system/types'
 import { formatPrice } from '@system/utils'
-import React from 'react'
 import {
   Box,
   FlexBox,

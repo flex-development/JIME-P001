@@ -1,8 +1,8 @@
 /**
- * @file Subdomain Utilities - Sales Channels
+ * @file Subdomain Utilities - Sales
  * @module subdomains/sales/utils
  */
 
-export { default as getSubtotal } from './getSubtotal'
+export * from './getSubtotal'
 
 /* eslint-disable prettier/prettier */

@@ -1,4 +1,4 @@
-import { GridBreakpoint } from '@flex-development/types'
+import { GridBreakpoint } from '@flex-development/kustomzcore'
 
 /**
  * @file Responsive utility helper

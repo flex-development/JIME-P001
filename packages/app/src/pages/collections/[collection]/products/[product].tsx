@@ -1,13 +1,19 @@
-import { IPageProps, PC, ServerSidePageProps } from '@app/subdomains/app'
-import { CollectionService } from '@app/subdomains/sales'
-import { FeathersErrorJSON } from '@feathersjs/errors'
-import { ProductTemplateProps } from '@flex-development/kustomzdesign'
-import { isArray } from 'lodash'
-import { GetServerSidePropsContext } from 'next'
-import React from 'react'
 import ProductPage, {
   getServerSideProps as getServerSideProductPageProps
-} from '../../../products/[handle]'
+} from '@app/pages/products/[handle]'
+import {
+  CollectionProductPageParams,
+  CollectionProductPageUrlQuery,
+  IPagePropsProduct,
+  PC,
+  ProductPageParams,
+  ServerSide404,
+  ServerSidePageProps
+} from '@app/subdomains/app'
+import { CollectionService } from '@app/subdomains/sales'
+import { ProductTemplateProps } from '@flex-development/kustomzdesign'
+import { GetServerSideProps, GetServerSidePropsContext } from 'next'
+import { ICollectionListing } from 'shopify-api-node'
 
 /**
  * @file Page - Collection Product
@@ -15,17 +21,16 @@ import ProductPage, {
  */
 
 /**
- * Renders a product page.
- * The value of {@param props.session} will always be `null`.
+ * Renders a collection product page.
  *
  * @param props - Page component props
  * @param props.page - Page data
  * @param props.collection - `LinkProps` for product collection
  * @param props.collection.href - Link to collection
  * @param props.collection.title - Title of collection
- * @param props.session - Current user session or null
+ * @param props.session - CMS admin user session or null
  */
-const CollectionProduct: PC = (props: IPageProps) => {
+const CollectionProduct: PC<IPagePropsProduct> = props => {
   return <ProductPage {...props} />
 }
 
@@ -38,37 +43,47 @@ const CollectionProduct: PC = (props: IPageProps) => {
  * @param context.params - Route parameters if dynamic route
  * @returns Product listing object and an array of products in the collection
  */
-export const getServerSideProps: ServerSidePageProps = async (
-  context: GetServerSidePropsContext
-) => {
-  const { params = {}, query = {} } = context
-
-  // Get handle params
-  let { collection: c_handle, product: p_handle } = params
-
-  // Get one collection handle and one product handle
-  c_handle = (isArray(c_handle) ? c_handle[0] : c_handle) as string
-  p_handle = (isArray(p_handle) ? p_handle[0] : p_handle) as string
+export const getServerSideProps: GetServerSideProps<
+  IPagePropsProduct,
+  CollectionProductPageUrlQuery
+> = async (context: GetServerSidePropsContext<CollectionProductPageParams>) => {
+  const {
+    collection: chandle,
+    product,
+    sku
+  } = context.query as CollectionProductPageUrlQuery
 
   // Use `getServerSideProps` from main product page
-  const pageProps = await getServerSideProductPageProps({
-    ...context,
-    query: { handle: p_handle, sku: query.sku }
-  })
+  const pctx: GetServerSidePropsContext<ProductPageParams> = {
+    ...((context as unknown) as GetServerSidePropsContext<ProductPageParams>),
+    query: { handle: product, sku }
+  }
 
-  // If error is caught, return pageProps
-  if ((pageProps.props.page as FeathersErrorJSON)?.code) return pageProps
+  // Get page component props
+  let pageProps = await getServerSideProductPageProps(pctx)
+
+  // If product isn't found, show 404 layout
+  if ((pageProps as ServerSide404).notFound) return pageProps as ServerSide404
+
+  // ! Guarenteed to be server side data. Error will be thrown otherwise
+  pageProps = pageProps as ServerSidePageProps<IPagePropsProduct>
 
   // Initialize service
   const Collections = new CollectionService()
 
   // Get product collection title
-  const { title: c_title } = await Collections.getByHandle(c_handle)
+  let collection = await Collections.getByHandle(chandle)
+
+  // If collection isn't found, show 404 layout
+  if ((collection as ServerSide404).notFound) return collection as ServerSide404
+
+  // ! Guarenteed to be collection data. Error will be thrown otherwise
+  collection = collection as ICollectionListing
 
   // Get data for template
   const page: ProductTemplateProps = {
-    ...((pageProps.props.page || {}) as ProductTemplateProps),
-    collection: { href: `collections/${c_handle}`, title: c_title }
+    ...((pageProps.props?.page || {}) as ProductTemplateProps),
+    collection: { href: `collections/${chandle}`, title: collection.title }
   }
 
   // Return page component props and user session

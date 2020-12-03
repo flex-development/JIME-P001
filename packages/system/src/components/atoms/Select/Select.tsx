@@ -1,6 +1,6 @@
 import { useMutatedProps } from '@system/hooks'
 import { MutatedFormControlProps } from '@system/types'
-import React, {
+import {
   FC,
   forwardRef,
   ForwardRefExoticComponent as FREC,

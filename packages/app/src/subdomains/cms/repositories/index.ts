@@ -3,9 +3,10 @@
  * @module subdomains/cms/repositories
  */
 
-export { default as MenuRepository } from './MenuRepository'
-export { default as PageRepository } from './PageRepository'
-export { default as PlaylistSettingsRepository } from './PlaylistSettingsRepository'
-export { default as ProfileSnippetRepository } from './ProfileSnippetRepository'
+export * from './MenuRepository'
+export * from './PageRepository'
+export * from './PlaylistSettingsRepository'
+export * from './ProfileSnippetRepository'
+export * from './StorageRepository'
 
 /* eslint-disable prettier/prettier */

@@ -1,11 +1,11 @@
+import { ANYTHING } from '@flex-development/json'
 import {
-  ANYTHING,
   MusicKitPlaybackState,
   MusicKitSongAttributes
-} from '@flex-development/types'
+} from '@flex-development/kustomzcore'
 import { useMutatedProps } from '@system/hooks'
 import { EventHandlers, MutatedProps } from '@system/types'
-import React, { FC } from 'react'
+import { FC } from 'react'
 import {
   Button,
   Column,

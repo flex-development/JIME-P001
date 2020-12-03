@@ -1,4 +1,4 @@
-import { GitHubSession } from '@app/subdomains/cms/interfaces/IGitHubService'
+import { ProviderSessionGitHub } from '@app/subdomains/cms/services'
 import { isString, merge } from 'lodash'
 import { NextApiRequest as Req, NextApiResponse as Res } from 'next'
 import { getSession } from 'next-auth/client'
@@ -10,7 +10,7 @@ import { getSession } from 'next-auth/client'
 
 export default async (req: Req, res: Res): Promise<void> => {
   // Get current user session
-  const session = (await getSession({ req })) as GitHubSession | null
+  const session = (await getSession({ req })) as ProviderSessionGitHub | null
 
   // Get page path query
   const { path } = req.query || {}

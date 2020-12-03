@@ -1,10 +1,12 @@
-import { createError, Logger, serialize } from '@app/subdomains/app'
+import Logger from '@app/config/logger'
+import { createError } from '@app/subdomains/app'
 import { FeathersErrorJSON } from '@feathersjs/errors'
+import { serialize } from '@flex-development/json'
 import { ErrorTemplate, Link, Paragraph } from '@flex-development/kustomzdesign'
 import { merge, pick } from 'lodash'
 import { NextPage } from 'next'
 import NextHead from 'next/head'
-import React, { Fragment } from 'react'
+import { Fragment } from 'react'
 
 /**
  * @file Custom server error page
@@ -30,7 +32,11 @@ const Error: NextPage<ErrorPageProps> = ({ error }) => {
       <ErrorTemplate code={code} message={message}>
         <Paragraph c='white'>
           {/* eslint-disable-next-line prettier/prettier */}
-          Go <Link c='secondary' href='/'>home</Link> and smoke or something.
+          Go{' '}
+          <Link c='secondary' href='/'>
+            home
+          </Link>{' '}
+          and smoke or something.
         </Paragraph>
       </ErrorTemplate>
     </Fragment>

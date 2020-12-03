@@ -1,4 +1,5 @@
-import { Primitive, ResponsiveUtility } from '@flex-development/types'
+import { Primitive } from '@flex-development/json'
+import { ResponsiveUtility } from '@flex-development/kustomzcore'
 import { GRID_BREAKPOINT_KEYS } from '@system/config/constants'
 import { isObject } from 'lodash'
 import { createResponsiveUtility } from '../creativeResponsiveUtility'

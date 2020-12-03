@@ -1,6 +1,6 @@
-import { AnyObject } from '@flex-development/types'
+import { AnyObject } from '@flex-development/json'
 import { useMutatedProps } from '@system/hooks'
-import React, { FC, useEffect } from 'react'
+import { FC, useEffect } from 'react'
 import { useArray } from 'react-hanger/array/useArray'
 import { IProductListing } from 'shopify-api-node'
 import { Column, Row, RowProps } from '../../atoms'

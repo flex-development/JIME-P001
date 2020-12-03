@@ -1,7 +1,7 @@
 import { useMutatedProps } from '@system/hooks'
 import { MDXProps } from '@system/types'
 import MDX from 'mdx-scoped-runtime'
-import React, { FC } from 'react'
+import { FC } from 'react'
 import { Box, BoxProps, Button } from '..'
 import { Column } from '../Column'
 import { Container } from '../Container/Container'

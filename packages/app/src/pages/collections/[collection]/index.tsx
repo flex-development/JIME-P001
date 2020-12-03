@@ -1,20 +1,20 @@
 import {
-  IPageProps,
+  CollectionPageParams,
+  IPagePropsCollection,
   PC,
-  serialize,
-  ServerSidePageProps
+  ServerSide404
 } from '@app/subdomains/app'
 import { CollectionService, ProductService } from '@app/subdomains/sales'
+import { serialize } from '@flex-development/json'
 import {
   CollectionTemplate,
   CollectionTemplateProps,
   LinkProps
 } from '@flex-development/kustomzdesign'
-import { isArray } from 'lodash'
-import { GetServerSidePropsContext } from 'next'
+import { GetServerSideProps, GetServerSidePropsContext } from 'next'
+import { getSession } from 'next-auth/client'
 import { useRouter } from 'next/router'
-import React from 'react'
-import { IProductListing } from 'shopify-api-node'
+import { ICollectionListing, IProductListing } from 'shopify-api-node'
 
 /**
  * @file Page - Product Collection
@@ -29,11 +29,9 @@ import { IProductListing } from 'shopify-api-node'
  * @param props.page - Page data
  * @param props.page.collection - Shopify collection listing object
  * @param props.page.products - Product listings in collection
- * @param props.session - Current user session or null
+ * @param props.session - CMS admin user session or null
  */
-const Collection: PC = ({ page }: IPageProps) => {
-  const data = page as CollectionTemplateProps
-
+const Collection: PC<IPagePropsCollection> = ({ page }) => {
   // Get router instance to generate `LinkProps` for each collection product
   const { asPath, query } = useRouter()
 
@@ -48,11 +46,11 @@ const Collection: PC = ({ page }: IPageProps) => {
     return { href: `${base}products/${product.handle}` }
   }
 
-  return <CollectionTemplate {...data} handleProductLink={handleProductLink} />
+  return <CollectionTemplate {...page} handleProductLink={handleProductLink} />
 }
 
 /**
- * Retrieves the data for the `CollectionTemplate`.
+ * Retrieves the data for the `CollectionTemplate` and the current user session.
  *
  * @see https://nextjs.org/docs/basic-features/data-fetching
  *
@@ -60,21 +58,31 @@ const Collection: PC = ({ page }: IPageProps) => {
  * @param context.params - Route parameters if dynamic route
  * @returns Collection listing object and an array of products in the collection
  */
-export const getServerSideProps: ServerSidePageProps = async (
-  context: GetServerSidePropsContext
-) => {
+export const getServerSideProps: GetServerSideProps<
+  IPagePropsCollection,
+  CollectionPageParams
+> = async (context: GetServerSidePropsContext<CollectionPageParams>) => {
   const { req, params = {} } = context
 
-  let { collection: handle = '' } = params
+  const { collection: handle = '' } = params as CollectionPageParams
 
-  handle = isArray(handle) ? handle[0] : handle
-
+  // Initialize services
   const Collections = new CollectionService()
   const Products = new ProductService()
 
-  const collection = await Collections.getByHandle(handle)
+  // Get collection title to build collection link
+  let collection = await Collections.getByHandle(handle)
+
+  // If collection isn't found, show 404 layout
+  if ((collection as ServerSide404).notFound) return collection as ServerSide404
+
+  // ! Guarenteed to be collection data. Error will be thrown otherwise
+  collection = collection as ICollectionListing
+
+  // Get products in collection
   const products = await Products.findByCollection(collection.collection_id)
 
+  // Get template data
   const page = serialize<CollectionTemplateProps>({
     collection: {
       ...collection,
@@ -83,7 +91,10 @@ export const getServerSideProps: ServerSidePageProps = async (
     products: products as Array<IProductListing>
   })
 
-  return { props: { page, session: null } }
+  // Get current user session
+  const session = (await getSession(context)) as IPagePropsCollection['session']
+
+  return { props: { page, session } }
 }
 
 export default Collection

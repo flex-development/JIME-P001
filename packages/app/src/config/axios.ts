@@ -1,5 +1,5 @@
 import createError from '@app/subdomains/app/utils/createError'
-import { AnyObject, ANYTHING } from '@flex-development/types'
+import { AnyObject, ANYTHING } from '@flex-development/json'
 import Axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios'
 import rateLimit from 'axios-rate-limit'
 import { isPlainObject, pick } from 'lodash'

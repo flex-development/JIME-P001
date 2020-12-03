@@ -1,6 +1,5 @@
-import { AnyObject } from '@flex-development/types'
+import { AnyObject } from '@flex-development/json'
 import { render } from '@testing-library/react'
-import React from 'react'
 import { WithSummary } from './Details.stories'
 
 /**

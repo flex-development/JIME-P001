@@ -1,3 +1,4 @@
+const { CheckerPlugin } = require('awesome-typescript-loader')
 const vercel = require('./vercel.json')
 
 /**
@@ -93,11 +94,20 @@ module.exports = {
    * @param {object} helpers.webpack - Webpack
    * @returns {object} Altered Webpack configuration
    */
-  webpack: config => {
+  webpack: (config, { dev, isServer }) => {
+    // Push custom TypeScript loader
     config.module.rules.push({
       test: /\.(ts|tsx)$/,
-      use: [{ loader: 'awesome-typescript-loader' }]
+      use: [
+        {
+          loader: 'awesome-typescript-loader',
+          options: { configFileName: 'tsconfig.dev.json' }
+        }
+      ]
     })
+
+    // Do not run type checking twice
+    if (dev && isServer) config.plugins.push(new CheckerPlugin())
 
     return config
   }

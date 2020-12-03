@@ -1,6 +1,6 @@
 import { useMutatedProps } from '@system/hooks'
 import { MutatedProps } from '@system/types'
-import React, {
+import {
   DetailedHTMLProps,
   forwardRef,
   ForwardRefExoticComponent as FREC,

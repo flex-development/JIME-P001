@@ -1,7 +1,7 @@
-import { NullishNumber, NullishString } from '@flex-development/types'
+import { NullishNumber, NullishString } from '@flex-development/json'
 import { useMutatedProps } from '@system/hooks'
 import { MutatedProps } from '@system/types'
-import React, { FC } from 'react'
+import { FC } from 'react'
 import {
   Aside,
   Box,

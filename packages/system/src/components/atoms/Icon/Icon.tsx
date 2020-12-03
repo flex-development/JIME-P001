@@ -1,5 +1,5 @@
 import { useMutatedProps } from '@system/hooks'
-import React, {
+import {
   forwardRef,
   ForwardRefExoticComponent as FREC,
   PropsWithoutRef

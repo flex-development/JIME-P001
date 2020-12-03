@@ -1,5 +1,5 @@
 import { useMutatedProps } from '@system/hooks'
-import React, { FC } from 'react'
+import { FC } from 'react'
 import {
   Input,
   InputRefProps,

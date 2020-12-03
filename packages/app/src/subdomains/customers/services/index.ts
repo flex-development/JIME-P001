@@ -3,6 +3,6 @@
  * @module subdomains/customers/services
  */
 
-export { default as CustomerService } from './CustomerService'
+export * from './CustomerService'
 
 /* eslint-disable prettier/prettier */

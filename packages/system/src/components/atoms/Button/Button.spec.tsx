@@ -1,5 +1,4 @@
 import { render } from '@testing-library/react'
-import React from 'react'
 import { Button } from './Button'
 import { Block, Disabled, Large, Small } from './Button.stories'
 

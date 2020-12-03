@@ -1,4 +1,4 @@
-import { ANYTHING } from '@flex-development/types'
+import { ANYTHING } from '@flex-development/json'
 import { isBoolean, isNumber, isString } from 'lodash'
 
 /**

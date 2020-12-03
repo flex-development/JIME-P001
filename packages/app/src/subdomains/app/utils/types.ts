@@ -1,12 +1,43 @@
 import * as FirebaseTesting from '@firebase/rules-unit-testing'
-import { ANYTHING } from '@flex-development/types'
+import { AnyObject } from '@flex-development/json'
 import FirebaseAdmin from 'firebase-admin'
 import Firebase from 'firebase/app'
+import { Redirect } from 'next'
+import { ParsedUrlQuery } from 'querystring'
+import {
+  ICollectionListing,
+  IProductListing,
+  IProductListingVariant
+} from 'shopify-api-node'
 
 /**
  * @file Subdomain Utility Types - App
  * @module subdomains/app/types
  */
+
+/**
+ * Collection page route parameters.
+ */
+export interface CollectionPageParams extends ParsedUrlQuery {
+  [x: string]: string | undefined
+
+  collection: ICollectionListing['handle']
+}
+
+/**
+ * Collection product page route parameters.
+ */
+export interface CollectionProductPageParams extends CollectionPageParams {
+  product: ProductPageUrlQuery['handle']
+}
+
+/**
+ * Collection product page URL query parameters.
+ */
+export interface CollectionProductPageUrlQuery
+  extends CollectionProductPageParams {
+  sku?: ProductPageUrlQuery['sku']
+}
 
 /**
  * Types of Firebase modules.
@@ -45,16 +76,32 @@ export type FirebaseTestApp =
   | ReturnType<typeof FirebaseTesting.initializeAdminApp>
 
 /**
- * Type that accepts one piece of data or an array of data.
+ * Product page route parameters.
  */
-export type OneOrMany<T = ANYTHING> = T | Array<T>
+export interface ProductPageParams extends ParsedUrlQuery {
+  [x: string]: string | undefined
+
+  handle: IProductListing['handle']
+}
 
 /**
- * Sort types.
- *
- * @see https://lodash.com/docs/4.17.15#orderBy
+ * Product page URL query parameters.
  */
-export enum SortOrder {
-  ASCENDING = 'asc',
-  DESCENDING = 'desc'
+export interface ProductPageUrlQuery extends ProductPageParams {
+  sku?: IProductListingVariant['sku']
 }
+
+/**
+ * Object indicating that the user should be redirected to the `/404` page.
+ */
+export type ServerSide404 = { notFound: true }
+
+/**
+ * Object representing a URL redirect from a `getServerSideProps` call.
+ */
+export type ServerSideRedirect = { redirect: Redirect }
+
+/**
+ * Object containing props to be passed to server-side rendered CMS pages.
+ */
+export type ServerSidePageProps<P extends AnyObject = AnyObject> = { props: P }

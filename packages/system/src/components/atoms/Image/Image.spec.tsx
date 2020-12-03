@@ -1,7 +1,5 @@
 import { render } from '@testing-library/react'
-import React from 'react'
 import { Fluid, Thumbnail } from './Image.stories'
-
 
 /**
  * @file Tests - Image

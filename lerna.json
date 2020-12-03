@@ -1,13 +1,22 @@
 {
+  "changelogPreset": "conventionalcommits",
+  "command": {
+    "publish": {
+      "registry": "https://npm.pkg.github.com"
+    },
+    "version": {
+      "allowBranch": ["main"],
+      "conventionalCommits": true,
+      "message": "chore(release): publish %s"
+    }
+  },
+  "ignoreChanges": ["**/__mocks__/**", "**/*.{md,mdx}", "**/*.spec.{ts,tsx}"],
   "npmClient": "yarn",
-  "npmClientArgs": [
-    "--ignore-engines"
-  ],
-  "packages": [
-    "packages/*"
-  ],
+  "npmClientArgs": ["--ignore-engines"],
+  "packages": ["packages/*"],
   "parallel": true,
   "stream": true,
+  "tagVersionPrefix": "v",
   "useWorkspaces": true,
-  "version": "independent"
+  "version": "1.0.0"
 }

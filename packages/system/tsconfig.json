@@ -10,6 +10,7 @@
   "compilerOptions": {
     "downlevelIteration": true,
     "isolatedModules": false,
+    "jsx": "react-jsxdev",
     "sourceMap": false,
     "target": "es6",
     "typeRoots": [

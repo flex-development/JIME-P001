@@ -1,34 +1,28 @@
 # Contributing
 
-These instructions will help you install the project on your local machine, as
-well follow our coding guidelines. You'll also find information on making a pull
-request.
+These instructions will help you begin making changes on your local machine, as
+well follow our coding guidelines.
 
 ## Overview
 
 [Getting Started](#getting-started)  
-[Coding Guidelines](#coding-guidlines)  
+[Coding Standards](#coding-standards)  
 [Testing](#testing)  
+[Documentation](#documentation)  
+[Branch Naming Conventions](#branch-naming-conventions)  
 [Creating a Pull Request](#creating-a-pull-request)
 
 ## Getting Started
+
+This project is structured as monorepo and [Lerna](https://lerna.js.org/) with
+Yarn workspaces.
 
 ### Git Configuration
 
 Copy the [starter Git global configuration](.gitconfig) to stay inline with our
 coding guidelines, as well as begin extending your own workflow.
 
-**Note**:
-
-- The examples below will uses aliases from the starter config
-- The examples below require you to
-  [install Git Flow](https://github.com/nvie/gitflow/wiki/Installation)
-
-### Yarn
-
-This project uses [Lerna](https://lerna.js.org/) with Yarn workspaces. To
-install Yarn, view the
-[installation documentation](https://classic.yarnpkg.com/en/docs/install).
+**Note**: The examples below will uses aliases from the starter config.
 
 ### Development Environment
 
@@ -36,18 +30,52 @@ Copy the snippet below to get your development environment setup:
 
 ```zsh
 git clone https://github.com/flex-development/JIME-P001.git; cd JIME-P001
-yarn
+yarn # or npm install
 ```
 
 - `yarn dev:app`: Start Next.js app on port `3001`
 - `yarn dev:ui`: Start Storyboook app on port `3000`
 
-## Coding Guidelines
+## Coding Standards
 
-### Code Formatting & Linting
+[Husky](https://github.com/typicode/husky) is used to enforce coding and commit
+message standards.
 
-[Husky](https://github.com/typicode/husky) is used to test code for formatting
-and linting errors before every commit.
+### Commit Messages
+
+This project adheres to
+[Conventional Commits](https://www.conventionalcommits.org/) standards.
+
+Commit messages should be one of the following types:
+
+- `build`: Changes that affect the build system or external dependencies
+- `ci`: Changes to our CI configuration files and scripts
+- `chore`: Changes that don't impact external users
+- `docs`: Documentation only changes
+- `feat`: New features
+- `fix`: Bug fixes
+- `perf`: Performance improvements
+- `refactor`: Code improvements
+- `style`: Changes that do not affect the meaning of the code
+- `test`: Adding missing tests or correcting existing tests
+- `wip`: Working on changes, but you need to go to bed :wink:
+
+For example:
+
+```zsh
+  git chore "add eslint configuration"
+```
+
+will produce the following commit: `chore: add eslint configuration`
+
+[commitlint](https://github.com/conventional-changelog/commitlint) is used to
+enforce commit guidlelines.
+
+To review our commitlint rules, see the configuration file:
+
+- [`commitlint.config.js`](../commitlint.config.js)`
+
+### Formatting & Linting
 
 #### Formatting
 
@@ -68,33 +96,7 @@ To review our linting guidelines, see our configuration files:
 - Configuration: [`.eslintrc.json`](../.eslintrc.json)`
 - Ignore Patterns: [`.eslintignore`](../.eslintignore)`
 
-### Commit Messages
-
-This project follows [Emoji Log](https://github.com/ahmadawais/Emoji-Log)
-standards when making commits.
-
-Commit messages should follow one of the following templates:
-
-1. **`📦 NEW: MESSAGE_GOES_HERE`** - Use when you add something entirely new
-2. **`✅ TEST: MESSAGE_GOES_HERE`** - Use when changes are related to testing or
-   mock data
-3. **`👌🏾 IMPROVE: MESSAGE_GOES_HERE`** - Use when you improve/enhance a piece of
-   code (ex: refactoring)
-4. **`🐛 FIX: MESSAGE_GOES_HERE`** - Use when you fix a bug
-5. **`📖 DOC: MESSAGE_GOES_HERE`** - Use when you add/update documentation (ex:
-   README, inline docs)
-6. **`🚀 RELEASE: MESSAGE_GOES_HERE`** - Use when changes are related to a
-   release
-
-For example:
-
-```zsh
-  git new "eslint configuration"
-```
-
-will produce the following commit: `📦 NEW: eslint configuration`
-
-### Documentation
+## Documentation
 
 - JavaScript & TypeScript: [JSDoc](https://jsdoc.app)
 - Sass: [SassDoc](http://sassdoc.com/annotations/)
@@ -102,21 +104,15 @@ will produce the following commit: `📦 NEW: eslint configuration`
 Before making a pull request, be sure your code is well documented, as it will
 be part of your code review.
 
-### Workflow
+## Testing
 
-This project uses the Gitflow Workflow, a Git workflow design that was first
-published and made popular by
-[Vincent Driessen at nvie](https://nvie.com/posts/a-successful-git-branching-model/).
+This project uses [Jest](https://jestjs.io/) as its test runner. To run the
+tests in this project, run `yarn test`.
 
-Gitflow has several benefits:
+Husky is configured to run tests before every push. If a bug report concerning a
+failed test is needed, you'll be able to push your code even if a test fails.
 
-- Assigns specific roles to branches
-- Defines how branches should interact
-- Uses individual branches for preparing, maintaining, and recording releases
-- Leverages all benefits of
-  [Feature Branch Workflow](https://www.atlassian.com/git/tutorials/comparing-workflows/feature-branch-workflow)
-
-#### Branch Naming Convention
+## Branch Naming Conventions
 
 When creating a new branch, the name should match the following format:
 **`feature/`**, **`hotfix/`**, **`release/`**, or **`support/`** followed by
@@ -129,15 +125,6 @@ For example:
 ```
 
 will create a new branch titled `feature/repo-setup` and push it to `origin`.
-
-## Testing
-
-This project uses [Jest](https://jestjs.io/) as its test runner. To run the
-tests in this project, run `yarn test`.
-
-[Husky](https://github.com/typicode/husky) is configured to run tests before
-every push. If a bug report concerning a failed test is needed, you'll be able
-to push your code even if a test fails.
 
 ## Creating a Pull Request
 

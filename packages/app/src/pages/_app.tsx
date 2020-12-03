@@ -1,18 +1,23 @@
-import { AC, IAppProps, ShopLayout } from '@app/subdomains/app'
-import { useLocalStorage } from '@app/subdomains/app/hooks'
+import {
+  AC,
+  IAppProps,
+  ShopLayout,
+  useLocalStorage,
+  useSignInWithCustomToken
+} from '@app/subdomains/app'
 import '@app/subdomains/app/styles.css'
-import { CMS_BASE_CONFIG, useSignInWithCustomToken } from '@app/subdomains/cms'
+import { CMS_BASE_CONFIG } from '@app/subdomains/cms'
 import '@app/subdomains/cms/styles.css'
 import {
   CartContext,
   CART_PERSISTENCE_KEY as CART_KEY,
   useCheckoutPermalink
 } from '@app/subdomains/sales'
+import { CheckoutLineItemInput } from '@flex-development/kustomzcore'
 import '@flex-development/kustomzdesign/index.scss'
-import { CheckoutLineItemInput } from '@flex-development/types'
 import { isUndefined } from 'lodash'
 import { Provider as NextAuthProvider, Session } from 'next-auth/client'
-import React, { useEffect, useMemo } from 'react'
+import { useEffect, useMemo } from 'react'
 import { TinaCMS, TinaProvider } from 'tinacms'
 
 /**
@@ -34,7 +39,7 @@ import { TinaCMS, TinaProvider } from 'tinacms'
  * @param param0.Component - Current page component
  * @param param0.pageProps - Page component props from data fetching methods
  * @param param0.pageProps.page - Data for current page
- * @param param0.pageProps.session - Current user session or null
+ * @param param0.pageProps.session - CMS admin user session or null
  */
 const App: AC = ({ Component, pageProps }: IAppProps) => {
   const { page, session } = pageProps

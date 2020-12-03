@@ -13,21 +13,15 @@ well as develop, document, and test new features.
 
 ## Development Environment
 
-1. Copy the snippet below to get the project running on your local machine.
-
-   If you're coming from the
-   [root Contributing Guide](../../../docs/CONTRIBUTING.md), skip the first
-   step.
+1. Copy the snippet below to get the project running on your local machine
 
    ```zsh
-    git clone https://github.com/flex-development/JIME-P001.git; cd JIME-P001; yarn
-    cd packages/system
+    git clone https://github.com/flex-development/JIME-P001.git; cd JIME-P001;
+    yarn # or npm install
    ```
 
-2. Run the project
-
-   - `yarn dev`: Run the project in `development` mode
-   - `yarn start`: Run the project in `production` mode
+2. Run `yarn dev:ui` or `yarn start:ui` to start the Storybook app on
+   `http://localhost:3000`
 
 ## Making Changes
 

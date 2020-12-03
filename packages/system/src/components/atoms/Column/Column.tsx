@@ -1,6 +1,6 @@
-import { Columns } from '@flex-development/types'
+import { Columns } from '@flex-development/kustomzcore'
 import { useColumn, useFlexbox, useMutatedProps } from '@system/hooks'
-import React, {
+import {
   forwardRef,
   ForwardRefExoticComponent as FREC,
   PropsWithoutRef

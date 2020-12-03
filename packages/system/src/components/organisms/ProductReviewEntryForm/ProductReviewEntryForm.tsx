@@ -1,12 +1,9 @@
-import {
-  AnyObject,
-  ANYTHING,
-  CreateReviewRequest
-} from '@flex-development/types'
+import { AnyObject, ANYTHING } from '@flex-development/json'
+import { CreateReviewRequest } from '@flex-development/kustomzcore'
 import { useMutatedProps, useProductVariants } from '@system/hooks'
 import { EventHandlers } from '@system/types'
 import { isEmpty } from 'lodash'
-import React, { FC } from 'react'
+import { FC } from 'react'
 import { useSetState } from 'react-hanger'
 import { IProductListing } from 'shopify-api-node'
 import isEmail from 'validator/lib/isEmail'

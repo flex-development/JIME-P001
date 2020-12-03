@@ -1,8 +1,8 @@
 /**
- * @file Subdomain Repositories - Sales Channels
+ * @file Subdomain Repositories - Sales
  * @module subdomains/sales/repositories
  */
 
-export { default as ReviewRepository } from './ReviewRepository'
+export * from './ReviewRepository'
 
 /* eslint-disable prettier/prettier */

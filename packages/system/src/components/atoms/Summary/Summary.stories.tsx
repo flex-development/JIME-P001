@@ -1,6 +1,5 @@
 import { Summary } from '@system/components'
 import { MutatedProps, StoryFN } from '@system/types'
-import React from 'react'
 
 /**
  * @file Stories - Summary

@@ -1,6 +1,5 @@
 import { Link, Paragraph } from '@system/components'
 import { StoryFN } from '@system/types/storybook'
-import React from 'react'
 import { ErrorTemplate, ErrorTemplateProps } from './ErrorTemplate'
 
 /**

@@ -1,8 +1,8 @@
-import { GetServerSideProps, NextComponentType, NextPageContext } from 'next'
+import { NextComponentType, NextPageContext as PageContext } from 'next'
 import { AppContext } from 'next/app'
 import { Router } from 'next/dist/client/router'
 import { IAppInitialProps } from './IAppInitialProps'
-import { IPageProps } from './IPageProps'
+import { IPageProps as IPP } from './IPageProps'
 
 /**
  * @file Subdomain Interfaces - Props passed to the Next.js app
@@ -14,7 +14,7 @@ import { IPageProps } from './IPageProps'
  */
 export interface IAppProps extends IAppInitialProps {
   Component: NextComponentType<
-    NextPageContext,
+    PageContext,
     IAppInitialProps,
     IAppInitialProps['pageProps']
   >
@@ -41,18 +41,13 @@ export type AC = AppComponent
  * Next.js page component that renders a collection, production, or online store
  * page.
  */
-export type PageComponent = NextComponentType<
-  NextPageContext,
+export type PageComponent<P extends IPP = IPP> = NextComponentType<
+  PageContext,
   IAppInitialProps,
-  IPageProps
+  P
 >
 
 /**
  * `CMSPageComponent` type alias.
  */
-export type PC = PageComponent
-
-/**
- * Props passed to server-side rendered CMS pages.
- */
-export type ServerSidePageProps = GetServerSideProps<IPageProps>
+export type PC<P extends IPP = IPP> = PageComponent<P>

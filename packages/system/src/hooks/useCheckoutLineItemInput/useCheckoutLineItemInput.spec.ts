@@ -1,4 +1,5 @@
-import { AnyObject, CheckoutLineItemInput } from '@flex-development/types'
+import { AnyObject } from '@flex-development/json'
+import { CheckoutLineItemInput } from '@flex-development/kustomzcore'
 import { act, renderHook } from '@testing-library/react-hooks'
 import { isPlainObject } from 'lodash'
 import { useCheckoutLineItemInput } from './useCheckoutLineItemInput'

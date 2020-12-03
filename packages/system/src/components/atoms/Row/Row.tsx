@@ -1,4 +1,8 @@
-import { ResponsiveUtility, RowColumns, Spacer } from '@flex-development/types'
+import {
+  ResponsiveUtility,
+  RowColumns,
+  Spacer
+} from '@flex-development/kustomzcore'
 import {
   useFlexbox,
   useMutatedProps,
@@ -6,7 +10,7 @@ import {
   useSpacers
 } from '@system/hooks'
 import { isObject } from 'lodash'
-import React, {
+import {
   forwardRef,
   ForwardRefExoticComponent as FREC,
   PropsWithoutRef

@@ -1,6 +1,5 @@
 import { useMutatedProps } from '@system/hooks'
 import { MutatedProps, TC } from '@system/types'
-import React from 'react'
 import { Main, MDXBox } from '../../atoms'
 
 /**

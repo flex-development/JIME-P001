@@ -1,6 +1,6 @@
 import { EventHandlers } from '@system/types'
 import { isFunction } from 'lodash'
-import React, { CSSProperties, FC, UIEvent } from 'react'
+import { CSSProperties, FC, UIEvent } from 'react'
 import Editor from 'react-markdown-editor-lite'
 import { HtmlType } from 'react-markdown-editor-lite/editor/preview'
 import { EditorConfig } from 'react-markdown-editor-lite/share/var'

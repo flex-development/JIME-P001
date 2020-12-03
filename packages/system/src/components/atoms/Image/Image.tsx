@@ -1,8 +1,8 @@
-import { NullishString } from '@flex-development/types'
+import { NullishString } from '@flex-development/json'
 import { useMutatedProps } from '@system/hooks'
 import { MutatedVoidElementProps } from '@system/types'
 import { omit } from 'lodash'
-import React, {
+import {
   forwardRef,
   ForwardRefExoticComponent as FREC,
   PropsWithoutRef,

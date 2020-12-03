@@ -1,11 +1,11 @@
 import { Heading, Paragraph, Section } from '@system/components/atoms'
 import { useMutatedProps } from '@system/hooks'
 import { MutatedProps } from '@system/types'
-import React, { FC } from 'react'
+import { FC } from 'react'
 
 /**
  * @file Jumbotron-style component
- * @module components/organisms/Hero/Hero/Hero/Hero
+ * @module components/organisms/Hero/Hero
  */
 
 export interface HeroProps extends MutatedProps {

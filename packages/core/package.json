@@ -1,0 +1,44 @@
+{
+  "name": "@flex-development/kustomzcore",
+  "version": "1.0.0",
+  "description": "Shared config for Morena's Kustomz design system and storefront",
+  "keywords": [
+    "lerna",
+    "musickitjs",
+    "shopify",
+    "shopify api node",
+    "typescript"
+  ],
+  "homepage": "https://morenaskustomz.com",
+  "bugs": {
+    "url": "https://github.com/flex-development/JIME-P001/issues",
+    "email": "developers@flexdevelopment.llc"
+  },
+  "license": "UNLICENSED",
+  "author": {
+    "name": "Lexus Drumgold",
+    "email": "lex@flexdevelopment.llc",
+    "url": "https://flexdevelopment.llc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com/flex-development/JIME-P001.git",
+    "directory": "packages/core"
+  },
+  "publishConfig": {
+    "directory": "src"
+  },
+  "main": "src/index.ts",
+  "scripts": {},
+  "dependencies": {},
+  "devDependencies": {
+    "@flex-development/json": "^1.0.5",
+    "class-validator": "^0.12.2"
+  },
+  "peerDependencies": {
+    "@flex-development/json": "^1.0.5",
+    "class-validator": "^0.12.2",
+    "musickit-typescript": "^1.2.4",
+    "shopify-api-node": "^3.4.4"
+  }
+}

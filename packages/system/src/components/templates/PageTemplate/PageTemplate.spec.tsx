@@ -1,6 +1,5 @@
 import { MDXBox } from '@system/components/atoms'
 import { render } from '@testing-library/react'
-import React from 'react'
 import { PageTemplate } from './PageTemplate'
 import { Markdown, MDX } from './PageTemplate.stories'
 

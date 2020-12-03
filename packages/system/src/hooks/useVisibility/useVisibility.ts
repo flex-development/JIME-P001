@@ -1,4 +1,5 @@
-import { RelationalOperator, ResponsiveUtility } from '@flex-development/types'
+import { RelationalOperator } from '@flex-development/json'
+import { ResponsiveUtility } from '@flex-development/kustomzcore'
 import { GRID_BREAKPOINTS } from '@system/config'
 import { isString } from 'lodash'
 import { useEffect } from 'react'

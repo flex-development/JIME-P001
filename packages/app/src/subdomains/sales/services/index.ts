@@ -1,10 +1,10 @@
 /**
- * @file Subdomain Services - Sales Channels
+ * @file Subdomain Services - Sales
  * @module subdomains/sales/services
  */
 
-export { default as CollectionService } from './CollectionService'
-export { default as ProductService } from './ProductService'
-export { default as ReviewService } from './ReviewService'
+export * from './CollectionService'
+export * from './ProductService'
+export * from './ReviewService'
 
 /* eslint-disable prettier/prettier */

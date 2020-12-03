@@ -1,6 +1,5 @@
 import { PRODUCTS } from '@system-mocks/utils'
 import { StoryFN } from '@system/types/storybook'
-import React from 'react'
 import { IProductListing } from 'shopify-api-node'
 import {
   ProductImageCarousel,

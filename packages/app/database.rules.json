@@ -1,20 +1,12 @@
 {
   "rules": {
     "menus": {
-      ".indexOn": [
-        "id",
-        "title",
-        "uuid"
-      ],
+      ".indexOn": ["id", "title", "uuid"],
       ".read": true,
       ".write": "auth.token.collaborator === true"
     },
     "pages": {
-      ".indexOn": [
-        "id",
-        "title",
-        "uuid"
-      ],
+      ".indexOn": ["id", "title", "uuid"],
       ".read": true,
       ".write": "auth.token.collaborator === true"
     },
@@ -34,9 +26,7 @@
       ".write": true
     },
     "settings": {
-      ".indexOn": [
-        "id"
-      ],
+      ".indexOn": ["id"],
       ".read": true,
       ".write": "auth.token.collaborator === true"
     }

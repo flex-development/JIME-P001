@@ -11,8 +11,8 @@ Storybook design system
 
 [Getting Started](#getting-started)  
 [Usage](#usage)  
-[Contributing](docs/CONTRIBUTING.md)  
-[Distribution](docs/DISTRIBUTION.md)
+[Built With](#built-with)  
+[Contributing](docs/CONTRIBUTING.md)
 
 ## Getting Started
 
@@ -28,17 +28,24 @@ from the [Learn Storybook](https://www.learnstorybook.com) docs.
 
 ## Usage
 
-### Local
+1. Add `"@flex-development/kustomzdesign": "*"` to your project `dependencies`
 
-1. Be sure the package is built before attempting to install it
+2. Run `yarn` to re-install the project dependencies
 
-   If the script you're using doesn't already build the package, run
-   `lerna run build:bundle --scope @flex-development/kustomzdesign`
+### 🚧 Examples
 
-2. Add `"@flex-development/kustomzdesign": "*"` to your project `dependencies`
+**TODO**: Update documentation
 
-3. Run `yarn` to re-install the project dependencies (if needed)
+## Built With
 
-### 🚧 Production
+- [FlexJSON][1] - JSON data starter kit
+- [React][2] - JavaScript library for building user interfaces
+- [Storybook][3] - UI development and documentation tool
+- [TypeScript][4] - Typed JavaScript
+- [Vercel][5] - Hosting platform for static sites and serverless functions
 
-**TODO**: Update documentation.
+[1]: https://github.com/flex-development/json
+[2]: https://reactjs.org/
+[3]: https://storybook.js.org/
+[4]: https://www.typescriptlang.org/
+[5]: https://vercel.com/

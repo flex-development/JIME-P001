@@ -1,7 +1,7 @@
-import { FlexboxUtilitiesConfig } from '@flex-development/types'
+import { FlexboxUtilitiesConfig } from '@flex-development/kustomzcore'
 import { useFlexbox, useMutatedProps } from '@system/hooks'
 import { isBoolean, isString } from 'lodash'
-import React, {
+import {
   forwardRef,
   ForwardRefExoticComponent as FREC,
   PropsWithoutRef

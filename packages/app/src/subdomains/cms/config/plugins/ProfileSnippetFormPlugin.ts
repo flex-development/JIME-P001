@@ -1,5 +1,5 @@
+import { IProfileSnippet } from '@app/subdomains/cms/models'
 import { FormOptions } from 'tinacms'
-import { IProfileSnippet } from '../../interfaces'
 import { ProfileSnippetAPI } from '../config'
 import { URLField } from '../extensions'
 import { NumberField, TextField } from '../helpers'

@@ -1,11 +1,6 @@
 import { render } from '@testing-library/react'
-import React from 'react'
 import { MDXBox } from './MDXBox'
-import {
-  MarkdownMDX,
-  PureMarkdown,
-  PureMDX
-} from './MDXBox.stories'
+import { MarkdownMDX, PureMarkdown, PureMDX } from './MDXBox.stories'
 
 /**
  * @file Tests - MDXBox

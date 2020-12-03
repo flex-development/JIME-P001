@@ -3,7 +3,7 @@ import {
   GridBreakpoint,
   SpacerPrefix,
   ThemeColor
-} from '@flex-development/types'
+} from '@flex-development/kustomzcore'
 
 /**
  * @file Design System Constants

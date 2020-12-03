@@ -1,7 +1,6 @@
 import collections from '@app-mocks/data/collection-listings.mock.json'
 import { PRODUCTS } from '@system-mocks/utils'
 import { StoryFN } from '@system/types/storybook'
-import React from 'react'
 import { ICollectionListing } from 'shopify-api-node'
 import {
   CollectionTemplate,

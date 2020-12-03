@@ -1,14 +1,14 @@
 import {
+  AnyObject,
+  Booleanish,
+  NullishString
+} from '@flex-development/json/utils'
+import {
   BackgroundColor,
   ResponsiveUtility,
   Spacer,
   TextColor
-} from '@flex-development/types/theme'
-import {
-  AnyObject,
-  Booleanish,
-  NullishString
-} from '@flex-development/types/utils'
+} from '@flex-development/kustomzcore/theme'
 import {
   MDXProviderComponents as MDXComponents,
   MDXProviderProps

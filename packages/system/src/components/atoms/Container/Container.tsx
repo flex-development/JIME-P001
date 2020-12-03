@@ -1,7 +1,7 @@
-import { GridBreakpoint } from '@flex-development/types'
+import { GridBreakpoint } from '@flex-development/kustomzcore'
 import { useMutatedProps } from '@system/hooks'
 import { MutatedProps } from '@system/types'
-import React, {
+import {
   forwardRef,
   ForwardRefExoticComponent as FREC,
   PropsWithoutRef

@@ -1,6 +1,5 @@
 import LINE_ITEMS from '@app-mocks/data/checkout-line-items.mock.json'
 import { StoryFN } from '@system/types/storybook'
-import React from 'react'
 import { CartTemplate, CartTemplateProps } from './CartTemplate'
 
 /**

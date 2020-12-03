@@ -1,7 +1,7 @@
-import { ANYTHING } from '@flex-development/types'
+import { ANYTHING } from '@flex-development/json'
 import { useMutatedProps } from '@system/hooks'
 import { EventHandlers } from '@system/types'
-import React, { FC, FormEvent, useState } from 'react'
+import { FC, FormEvent, useState } from 'react'
 import { Button, Form, FormProps, Input, InputProps } from '../../atoms'
 
 /**

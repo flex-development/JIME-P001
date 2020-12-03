@@ -1,35 +1,7 @@
 {
-  "awesomeTypescriptLoaderOptions": {
-    "babelCore": "@babel/core",
-    "babelOptions": {
-      "babelrc": false,
-      "extends": "../../babel.config.json",
-      "plugins": [
-        "@babel/plugin-transform-react-jsx",
-        [
-          "babel-plugin-styled-components",
-          {
-            "ssr": true
-          }
-        ],
-        [
-          "module-resolver",
-          {
-            "alias": {
-              "@app": "./src"
-            }
-          }
-        ]
-      ]
-    },
-    "useBabel": true,
-    "useCache": true
-  },
   "compilerOptions": {
     "allowJs": true,
     "checkJs": false,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
     "isolatedModules": true,
     "jsx": "preserve",
     "lib": ["dom", "dom.iterable", "esnext"],

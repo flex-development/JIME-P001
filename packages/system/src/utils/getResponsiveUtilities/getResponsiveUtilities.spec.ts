@@ -2,7 +2,7 @@ import {
   Columns,
   FlexboxDirection,
   ResponsiveUtility
-} from '@flex-development/types'
+} from '@flex-development/kustomzcore'
 import getResponsiveUtilities from './getResponsiveUtilities'
 
 /**

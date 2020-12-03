@@ -1,4 +1,5 @@
-import { GridBreakpoint, Primitive } from '@flex-development/types'
+import { Primitive } from '@flex-development/json'
+import { GridBreakpoint } from '@flex-development/kustomzcore'
 import { isBoolean, isNumber, isString } from 'lodash'
 import { breakpointInfix } from '../breakpointInfix'
 

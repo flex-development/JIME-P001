@@ -1,10 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import User from '@testing-library/user-event'
-import React from 'react'
-import {
-  Default,
-  InitialQuery
-} from './SearchBar.stories'
+import { Default, InitialQuery } from './SearchBar.stories'
 
 /**
  * @file Tests - SearchBar

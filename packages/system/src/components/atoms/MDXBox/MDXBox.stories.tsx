@@ -1,5 +1,4 @@
 import { StoryFN } from '@system/types/storybook'
-import React from 'react'
 import { MDXBox, MDXBoxProps } from './MDXBox'
 
 /**

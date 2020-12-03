@@ -80,9 +80,12 @@ export const useActiveIndex = (
    * @param curr - Current index
    * @returns True if {@param curr} === value of active state
    */
-  const isActive = useCallback((curr: typeof index): boolean => {
-    return curr === active
-  }, [active])
+  const isActive = useCallback(
+    (curr: typeof index): boolean => {
+      return curr === active
+    },
+    [active]
+  )
 
   /* eslint-enable prettier/prettier */
 

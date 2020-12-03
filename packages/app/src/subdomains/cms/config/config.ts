@@ -1,13 +1,13 @@
 import { database, storage } from '@app/config/firebase'
-import { AnyObject } from '@flex-development/types'
+import { AnyObject } from '@flex-development/json'
 import { MarkdownFieldPlugin } from 'react-tinacms-editor'
 import { Plugin, TinaCMSConfig } from 'tinacms'
-import { FirebaseMediaStore } from '../models/FirebaseMediaStore'
 import {
   MenuRepository,
   PageRepository,
   PlaylistSettingsRepository,
-  ProfileSnippetRepository
+  ProfileSnippetRepository,
+  StorageRepository
 } from '../repositories'
 
 /**
@@ -38,7 +38,7 @@ export const CMS_APIS: Record<string, AnyObject> = Object.freeze({
  *
  * @see https://tinacms.org/docs/media/
  */
-export const CMS_MEDIA = new FirebaseMediaStore(storage)
+export const CMS_MEDIA = new StorageRepository(storage)
 
 /**
  * Array of plugins to be added to the CMS object.

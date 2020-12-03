@@ -1,7 +1,7 @@
 import { ErrorTemplate, Link, Paragraph } from '@flex-development/kustomzdesign'
 import { NextComponentType, NextPageContext } from 'next'
 import NextHead from 'next/head'
-import React, { Fragment } from 'react'
+import { Fragment } from 'react'
 
 /**
  * @file Custom 404 page
@@ -23,7 +23,11 @@ const NotFound: NextComponentType<NextPageContext> = () => (
     >
       <Paragraph c='white'>
         {/* eslint-disable-next-line prettier/prettier */}
-          Go <Link c='secondary' href='/'>home</Link> and smoke or something.
+        Go{' '}
+        <Link c='secondary' href='/'>
+          home
+        </Link>{' '}
+        and smoke or something.
       </Paragraph>
     </ErrorTemplate>
   </Fragment>

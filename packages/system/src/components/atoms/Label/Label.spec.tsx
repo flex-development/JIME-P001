@@ -1,7 +1,5 @@
 import { render } from '@testing-library/react'
-import React from 'react'
 import { Default } from './Label.stories'
-
 
 /**
  * @file Tests - Label

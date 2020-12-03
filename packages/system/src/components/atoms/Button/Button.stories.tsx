@@ -3,7 +3,6 @@ import {
   form_control_size as size
 } from '@system/config'
 import { StoryFN } from '@system/types/storybook'
-import React from 'react'
 import { Button, ButtonProps } from './Button'
 
 /**

@@ -1,11 +1,11 @@
+import { ANYTHING } from '@flex-development/json'
 import {
-  ANYTHING,
   CheckoutLineItemDisplay,
   CheckoutLineItemInput
-} from '@flex-development/types'
+} from '@flex-development/kustomzcore'
 import { useCheckoutLineItemInput, useMutatedProps } from '@system/hooks'
 import { EventHandlers } from '@system/types'
-import React, { FC, Fragment } from 'react'
+import { FC, Fragment } from 'react'
 import {
   BoxProps,
   Button,
@@ -105,8 +105,8 @@ export const CheckoutLineItem: FC<CheckoutLineItemProps> = (
                 <Span>{item.data.properties.kpd}</Span>
               </Fragment>
             ) : (
-                'No Kustomizations.'
-              )
+              'No Kustomizations.'
+            )
             /* eslint-enable prettier/prettier */
           }
         </Paragraph>

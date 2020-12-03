@@ -1,4 +1,7 @@
-import { FlexboxUtilitiesConfig, GridBreakpoint } from '@flex-development/types'
+import {
+  FlexboxUtilitiesConfig,
+  GridBreakpoint
+} from '@flex-development/kustomzcore'
 import {
   FLEXBOX_CONFIG_KEYS,
   FLEXBOX_PROPERTY_MAP,

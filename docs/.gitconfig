@@ -31,10 +31,10 @@
   launch = "!f() { git local; git rao $@; git puo next; }; f"
 
   # Start a new local repository and perform initial commit
-  local = "!f() { git init; git add -A; git commit -m \"first commit\"; git branch -M next; }; f"
+  local = "!f() { git init; git add -A; git chore initial commit; git branch -M next; }; f"
 
   # Tell Git to start tracking branch and push to origin
-  puo = "!f() { git push -u origin $@; }; f"
+  puo = "!f() { git push -u origin $@ --no-verify; }; f"
 
   # Add new remote origin
   rao = "!f() { git remote add origin $@; }; f"
@@ -42,29 +42,42 @@
   # Remove local .git directory
   restart = "!f() { rm -rf .git; echo \"Removed .git directory.\"; }; f"
 
-# Emoji Log Aliases & Extensions
-# See: https://github.com/ahmadawais/Emoji-Log/
+# Conventional Commits
+# See: https://www.conventionalcommits.org/
+# See: https://github.com/angular/angular/blob/master/CONTRIBUTING.md#type
 [alias]
-  # DOC: Use when you add/update documentation (ex: README, inline docs)
-  doc = "!f() { git ac \"📖 DOC: $@\"; }; f"
+  # Changes that affect the build system or external dependencies
+  build = "!f() { git ac \"build: $@\"; }; f"
+
+  # Changes to our CI configuration files and scripts
+  ci = "!f() { git ac \"ci: $@\"; }; f"
+
+  # Changes that don't impact external users
+  chore = "!f() { git ac \"chore: $@\"; }; f"
+
+  # Documentation only changes
+  docs = "!f() { git ac \"docs: $@\"; }; f"
+
+  # New features
+  feat = "!f() { git ac \"feat: $@\"; }; f"
   
-  # FIX: Use when you fix a bug
-  fix = "!f() { git ac \"🐛 FIX: $@\"; }; f"
+  # Bug fixes
+  fix = "!f() { git ac \"fix: $@\"; }; f"
 
-  # IMPROVE: Use when you improve/enhance a piece of code (ex: refactoring)
-  imp = "!f() { git ac \"👌🏾 IMPROVE: $@\"; }; f"
+  # Performance improvements
+  perf = "!f() { git ac \"perf: $@\"; }; f"
+  
+  # Code improvements
+  refactor = "!f() { git ac \"refactor: $@\"; }; f"
 
-  # NEW: Use when you add something entirely new
-  new = "!f() { git ac \"📦 NEW: $@\"; }; f"
+  # Changes that do not affect the meaning of the code
+  style = "!f() { git ac \"style: $@\"; }; f"
 
-  # RELEASE: Use when changes are related to a release
-  rlz = "!f() { git ac \"🚀 RELEASE: $@\"; }; f"
+  # Adding missing tests or correcting existing tests
+  test = "!f() { git ac \"test: $@\"; }; f"
 
-  # TEST: Use when changes are related to testing or mock data
-  test = "!f() { git ac \"✅ TEST: $@\"; }; f"
-
-  # WIP: Use for work in progress
-  wip = "!f() { git ac \"🚧 WIP: $@\"; }; f"
+  # Work in progress
+  wip = "!f() { git ac \"wip: $@\"; }; f"
 
 # Git Flow Aliases
 [alias]

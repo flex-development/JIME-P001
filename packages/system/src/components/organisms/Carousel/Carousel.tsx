@@ -1,8 +1,8 @@
-import { AnyObject } from '@flex-development/types'
+import { AnyObject } from '@flex-development/json'
 import { useActiveIndex, useMutatedProps } from '@system/hooks'
 import classnames from 'classnames'
 import { chunk } from 'lodash'
-import React, { Children, FC, ReactElement } from 'react'
+import { Children, FC, ReactElement } from 'react'
 import { Box, BoxProps, Item, ItemProps, List } from '../../atoms'
 
 /**

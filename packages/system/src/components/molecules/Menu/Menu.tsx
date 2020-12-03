@@ -1,7 +1,7 @@
-import { AnyObject } from '@flex-development/types'
+import { AnyObject } from '@flex-development/json'
 import { useMutatedProps } from '@system/hooks'
 import { uuid } from '@system/utils'
-import React, { FC, useEffect } from 'react'
+import { FC, useEffect } from 'react'
 import { useArray } from 'react-hanger/array/useArray'
 import { Link, LinkProps, Nav, NavProps } from '../../atoms'
 

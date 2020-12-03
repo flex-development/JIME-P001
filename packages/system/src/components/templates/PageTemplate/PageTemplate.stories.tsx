@@ -1,5 +1,4 @@
 import { StoryFN } from '@system/types/storybook'
-import React from 'react'
 import { PureMarkdown, PureMDX } from '../../atoms/MDXBox/MDXBox.stories'
 import { PageTemplate, PageTemplateProps } from './PageTemplate'
 

@@ -1,6 +1,6 @@
-import { IReview } from '@flex-development/types'
+import { IReview } from '@flex-development/kustomzcore'
 import { useMutatedProps } from '@system/hooks'
-import React, { FC } from 'react'
+import { FC } from 'react'
 import { Box, BoxProps, Column, Image, Link, Paragraph } from '../../atoms'
 
 /**

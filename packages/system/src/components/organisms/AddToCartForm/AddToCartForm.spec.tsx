@@ -1,6 +1,5 @@
 import { fireEvent, render, screen } from '@testing-library/react'
 import User from '@testing-library/user-event'
-import React from 'react'
 import { IProductListingVariant } from 'shopify-api-node'
 import { AshTray, Kustomz } from './AddToCartForm.stories'
 

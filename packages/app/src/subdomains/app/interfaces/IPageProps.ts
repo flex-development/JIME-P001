@@ -1,5 +1,6 @@
-import { ICMSPage } from '@app/subdomains/cms/interfaces/ICMSPage'
-import { GitHubSession } from '@app/subdomains/cms/interfaces/IGitHubService'
+import { ICMSPageIndex, ICMSPageSlug } from '@app/subdomains/cms/models/CMSPage'
+import { ProviderSessionGitHub } from '@app/subdomains/cms/services'
+import { AnyObject } from '@flex-development/json'
 import {
   CollectionTemplateProps,
   ProductTemplateProps,
@@ -20,7 +21,7 @@ export interface IPageProps {
    *
    * @see https://shopify.dev/docs/admin-api/rest/reference/online-store
    */
-  page: PageData
+  page: AnyObject
 
   /**
    * True if user is signed-in with GitHub.
@@ -32,18 +33,40 @@ export interface IPageProps {
   /**
    * Current user session.
    */
-  session: GitHubSession | null
+  session: ProviderSessionGitHub | null
 }
 
-/* eslint-disable prettier/prettier */
+/**
+ * Props passed to product collection pages.
+ */
+export interface IPagePropsCollection extends IPageProps {
+  page: CollectionTemplateProps
+}
 
 /**
- * Types of data passed to Next.js page components via the `page` property.
+ * Props passed to the index page.
  */
-export type PageData =
-  | CollectionTemplateProps
-  | ICMSPage
-  | ProductTemplateProps
-  | SearchTemplateProps
+export interface IPagePropsIndex extends IPageProps {
+  page: ICMSPageIndex
+}
 
-/* eslint-enable prettier/prettier */
+/**
+ * Props passed to product and collection product pages.
+ */
+export interface IPagePropsProduct extends IPageProps {
+  page: ProductTemplateProps
+}
+
+/**
+ * Props passed to the product search page.
+ */
+export interface IPagePropsProductSearch extends IPageProps {
+  page: SearchTemplateProps
+}
+
+/**
+ * Props passed to dynamic `[slug]` pages.
+ */
+export interface IPagePropsSlug extends IPageProps {
+  page: ICMSPageSlug
+}

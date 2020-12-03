@@ -1,7 +1,6 @@
 import { REVIEWS } from '@system-mocks/utils'
 import { ProductReview } from '@system/components'
 import { StoryFN } from '@system/types/storybook'
-import React from 'react'
 import { Carousel, CarouselProps } from './Carousel'
 
 /**

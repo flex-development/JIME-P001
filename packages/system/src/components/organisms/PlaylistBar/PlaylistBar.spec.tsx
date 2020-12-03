@@ -1,9 +1,5 @@
 import { render } from '@testing-library/react'
-import React from 'react'
-import {
-  Default,
-  Playing
-} from './PlaylistBar.stories'
+import { Default, Playing } from './PlaylistBar.stories'
 
 /**
  * @file Tests - PlaylistBar

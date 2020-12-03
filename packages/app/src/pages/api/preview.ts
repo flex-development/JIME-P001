@@ -1,8 +1,8 @@
 import { database } from '@app/config/firebase'
 import { createError } from '@app/subdomains/app'
 import { ICMSPage } from '@app/subdomains/cms'
-import { GitHubSession } from '@app/subdomains/cms/interfaces/IGitHubService'
 import { PageRepository } from '@app/subdomains/cms/repositories'
+import { ProviderSessionGitHub } from '@app/subdomains/cms/services'
 import { isString, pick } from 'lodash'
 import { NextApiRequest as Req, NextApiResponse as Res } from 'next'
 import { getSession } from 'next-auth/client'
@@ -15,7 +15,7 @@ import { getSession } from 'next-auth/client'
 
 export default async (req: Req, res: Res): Promise<void> => {
   // Get current user session
-  const session = (await getSession({ req })) as GitHubSession | null
+  const session = (await getSession({ req })) as ProviderSessionGitHub | null
 
   // Get page path query
   const { path } = req.query || {}

@@ -1,6 +1,5 @@
 import { ligatures as children } from '@system/config'
 import { StoryFN } from '@system/types/storybook'
-import React from 'react'
 import { Icon, IconProps } from './Icon'
 
 /**

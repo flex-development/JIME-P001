@@ -4,7 +4,6 @@ import {
   CartTemplate,
   CartTemplateProps
 } from '@flex-development/kustomzdesign'
-import React from 'react'
 
 /**
  * @file Page - Shopping Cart

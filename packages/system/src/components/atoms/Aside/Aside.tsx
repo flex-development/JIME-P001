@@ -1,6 +1,6 @@
 import { useMutatedProps } from '@system/hooks'
 import { MutatedRefProps } from '@system/types'
-import React, { forwardRef, ForwardRefExoticComponent as FREC } from 'react'
+import { forwardRef, ForwardRefExoticComponent as FREC } from 'react'
 
 /**
  * @file Render an `<aside>` element

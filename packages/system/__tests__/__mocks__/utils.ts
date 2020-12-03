@@ -1,6 +1,6 @@
 import products from '@app-mocks/data/product-listings.mock.json'
 import ReviewsMockRepoRoot from '@app-mocks/data/reviews.mock.json'
-import { IReview } from '@flex-development/types'
+import { IReview } from '@flex-development/kustomzcore'
 import { IProductListing } from 'shopify-api-node'
 /**
  * @file Testing Utilities

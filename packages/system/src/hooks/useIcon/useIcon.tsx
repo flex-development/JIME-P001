@@ -1,9 +1,9 @@
-import { AnyObject } from '@flex-development/types'
+import { AnyObject } from '@flex-development/json'
 import { Icon, IconProps } from '@system/components'
 import { MutatedProps } from '@system/types'
 import classnames from 'classnames'
 import { isNull, isUndefined, omit } from 'lodash'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 /**
  * @file Render icon with props.children

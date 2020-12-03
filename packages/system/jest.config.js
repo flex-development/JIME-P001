@@ -1,3 +1,4 @@
+const babelConfig = require('../../babel.config.json')
 const path = require('path')
 
 /**
@@ -6,13 +7,18 @@ const path = require('path')
  */
 
 module.exports = {
+  globals: {
+    'ts-jest': {
+      babelConfig: '<rootDir>/babel.config.js',
+      tsconfig: '<rootDir>/tsconfig.json'
+    }
+  },
   moduleFileExtensions: ['js', 'json', 'ts', 'tsx'],
   moduleNameMapper: {
     '\\.(jpg|ico|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
       'identity-obj-proxy',
     '^.+\\.(css|sass|scss|less)$': 'identity-obj-proxy',
-    '^@app/(.*)$': '<rootDir>/../app/src/$1',
-    '^@app-mocks/(.*)$': '<rootDir>/../app/__tests__/__mocks__/$1',
+    '^@app-mocks/(.*)$': '<rootDir>/../app/__mocks__/$1',
     '^@system/(.*)$': '<rootDir>/src/$1',
     '^@system-mocks/(.*)$': '<rootDir>/__tests__/__mocks__/$1'
   },
@@ -29,7 +35,7 @@ module.exports = {
     '(.*).d.ts'
   ],
   transform: {
-    '^.+\\.[tj]sx?$': 'babel-jest'
+    '^.+\\.[tj]sx?$': 'ts-jest'
   },
   verbose: true
 }

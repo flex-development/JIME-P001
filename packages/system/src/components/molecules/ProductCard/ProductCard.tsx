@@ -1,7 +1,7 @@
 import { useMutatedProps, useProductVariants } from '@system/hooks'
 import { EventHandlers } from '@system/types'
 import { getProductVariantImage } from '@system/utils'
-import React, { FC, useEffect, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import useBoolean from 'react-hanger/array/useBoolean'
 import { IProductListing } from 'shopify-api-node'
 import {

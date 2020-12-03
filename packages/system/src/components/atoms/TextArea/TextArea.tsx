@@ -1,7 +1,7 @@
 import { useMutatedProps } from '@system/hooks'
 import { MutatedFormControlProps } from '@system/types'
 import { omit } from 'lodash'
-import React, {
+import {
   forwardRef,
   ForwardRefExoticComponent as FREC,
   PropsWithoutRef,

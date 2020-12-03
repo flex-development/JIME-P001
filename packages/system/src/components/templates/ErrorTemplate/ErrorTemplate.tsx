@@ -1,6 +1,5 @@
 import { useMutatedProps } from '@system/hooks'
 import { MutatedProps, TC } from '@system/types'
-import React from 'react'
 import { Heading, Main, Section, Span } from '../../atoms'
 
 /**

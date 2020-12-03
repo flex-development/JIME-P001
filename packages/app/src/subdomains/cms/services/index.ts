@@ -3,6 +3,7 @@
  * @module subdomains/cms/services
  */
 
-export { default as PageService } from './PageService'
+export * from './AuthGitHubService/IAuthGitHubService'
+export * from './PageService'
 
 /* eslint-disable prettier/prettier */

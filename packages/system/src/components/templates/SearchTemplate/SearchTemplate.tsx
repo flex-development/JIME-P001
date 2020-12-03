@@ -1,6 +1,5 @@
 import { useMutatedProps } from '@system/hooks'
 import { MutatedProps, TC } from '@system/types'
-import React from 'react'
 import { IProductListing } from 'shopify-api-node'
 import { Heading, Main, Section, Span } from '../../atoms'
 import { ProductGrid } from '../../organisms'

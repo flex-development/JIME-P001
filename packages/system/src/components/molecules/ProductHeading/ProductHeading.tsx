@@ -1,6 +1,6 @@
 import { useMutatedProps } from '@system/hooks'
 import { formatPrice } from '@system/utils'
-import React, { FC } from 'react'
+import { FC } from 'react'
 import { Heading, HeadingProps, Span } from '../../atoms'
 
 /**

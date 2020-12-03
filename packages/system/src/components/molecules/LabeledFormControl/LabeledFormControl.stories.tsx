@@ -1,6 +1,5 @@
 import product_options from '@system-mocks/data/product-options.mock.json'
 import { StoryFN } from '@system/types/storybook'
-import React from 'react'
 import {
   LabeledFormControl,
   LabeledFormControlProps

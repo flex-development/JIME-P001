@@ -7,6 +7,7 @@ export * from './axios'
 export * from './constants'
 export * from './firebase'
 export * from './github'
+export { default as Logger } from './logger'
 export * from './providers'
 export * from './shopify-buy'
 

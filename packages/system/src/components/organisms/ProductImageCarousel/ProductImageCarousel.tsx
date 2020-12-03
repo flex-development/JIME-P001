@@ -1,6 +1,6 @@
 import { useMutatedProps } from '@system/hooks'
 import { getProductVariantImage } from '@system/utils'
-import React, { FC, useEffect } from 'react'
+import { FC, useEffect } from 'react'
 import { useArray } from 'react-hanger/array/useArray'
 import { IProductListing } from 'shopify-api-node'
 import { Image, ImageProps } from '../../atoms'

@@ -1,21 +1,12 @@
 import { database } from '@app/config/firebase'
-import {
-  IPageProps,
-  PC,
-  ServerSidePageProps,
-  SortOrder
-} from '@app/subdomains/app'
-import { ICMSPageIndex } from '@app/subdomains/cms'
-import { PageService } from '@app/subdomains/cms/services'
+import { IPagePropsIndex, PC, ServerSide404 } from '@app/subdomains/app'
+import { ICMSPageIndex, PageService } from '@app/subdomains/cms'
 import { ProductService, ReviewService } from '@app/subdomains/sales'
-import {
-  IndexTemplate,
-  IndexTemplateProps
-} from '@flex-development/kustomzdesign'
-import { IReview } from '@flex-development/types'
-import { GetServerSidePropsContext } from 'next'
+import { SortOrder } from '@flex-development/json'
+import { IReview } from '@flex-development/kustomzcore'
+import { IndexTemplate } from '@flex-development/kustomzdesign'
+import { GetServerSideProps, GetServerSidePropsContext } from 'next'
 import { getSession } from 'next-auth/client'
-import React from 'react'
 import { IProductListing } from 'shopify-api-node'
 
 /**
@@ -36,14 +27,14 @@ import { IProductListing } from 'shopify-api-node'
  * @param props.page.path - URL path page can be accessed from
  * @param props.page.title - Title of page
  * @param props.preview - True if CMS is enabled
- * @param props.session - Current user session or null
+ * @param props.session - CMS admin user session or null
  */
-const Index: PC = ({ page }: IPageProps) => {
-  return <IndexTemplate {...(page as ICMSPageIndex).content} />
+const Index: PC<IPagePropsIndex> = ({ page }) => {
+  return <IndexTemplate {...page.content} />
 }
 
 /**
- * Retrieves the data for the `IndexTemplate`.
+ * Retrieves the data for the `IndexTemplate` and the current user session.
  *
  * @see https://nextjs.org/docs/basic-features/data-fetching
  *
@@ -51,7 +42,7 @@ const Index: PC = ({ page }: IPageProps) => {
  * @param context.req - HTTP request object
  * @returns Template data and current user session
  */
-export const getServerSideProps: ServerSidePageProps = async (
+export const getServerSideProps: GetServerSideProps<IPagePropsIndex> = async (
   context: GetServerSidePropsContext
 ) => {
   // Initialize services
@@ -60,41 +51,37 @@ export const getServerSideProps: ServerSidePageProps = async (
   const Products = new ProductService()
 
   // Get current user session
-  const session = (await getSession(context)) as IPageProps['session']
+  const session = (await getSession(context)) as IPagePropsIndex['session']
 
-  try {
-    // Get page data. Throws if in draft mode and not signed-in with GitHub
-    const entity = await Pages.getPage(context.req.url as string, session)
+  // Get page data. Throws if in draft mode and not signed-in with GitHub
+  let page = await Pages.getPage(context.req.url as string, session)
 
-    // Build service queries
-    const p_query = { $sort: { handle: SortOrder.ASCENDING } }
-    const r_query = { $sort: { id: SortOrder.ASCENDING } }
+  // If page isn't found, show 404 layout
+  if ((page as ServerSide404).notFound) return page as ServerSide404
 
-    // Get products and product reviews
-    const products = (await Products.find(p_query)) as Array<IProductListing>
-    const reviews = (await ProductReviews.find(r_query)) as Array<IReview>
+  // ! Guarenteed to be page data. Error will be thrown otherwise
+  page = page as ICMSPageIndex
 
-    // Get template props
-    entity.content = {
-      ...(entity.content as IndexTemplateProps),
-      products: products.map(product => ({
-        product,
-        product_link: { href: `products/${product.handle}` }
-      })),
-      reviews
-    }
+  // Get products and product reviews
+  let products = await Products.find()
+  products = Products.$sort(products, { handle: SortOrder.ASCENDING })
 
-    // Return page component props
-    return { props: { page: entity, session } }
-  } catch (error) {
-    if (error.code === 404) {
-      context.res.setHeader('Location', '/404')
-      context.res.statusCode = 302
-      context.res.end()
-    }
+  // Get product reviews
+  let reviews = await ProductReviews.find()
+  reviews = ProductReviews.$sort(reviews, { id: SortOrder.ASCENDING })
 
-    throw error
+  // Get template props
+  page.content = {
+    ...page.content,
+    products: (products as Array<IProductListing>).map(product => ({
+      product,
+      product_link: { href: `products/${product.handle}` }
+    })),
+    reviews: reviews as Array<IReview>
   }
+
+  // Return page component props
+  return { props: { page: page as ICMSPageIndex, session } }
 }
 
 export default Index

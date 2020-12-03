@@ -2,7 +2,7 @@ import {
   GridBreakpoint,
   ResponsiveUtility,
   RowColumns
-} from '@flex-development/types'
+} from '@flex-development/kustomzcore'
 import { GRID_BREAKPOINT_KEYS } from '@system/config'
 import { getResponsiveUtilities } from '@system/utils'
 import classnames from 'classnames'

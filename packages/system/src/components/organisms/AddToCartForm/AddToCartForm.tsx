@@ -1,4 +1,5 @@
-import { ANYTHING, CheckoutLineItemInput } from '@flex-development/types'
+import { ANYTHING } from '@flex-development/json'
+import { CheckoutLineItemInput } from '@flex-development/kustomzcore'
 import {
   useActiveIndex,
   useCheckoutLineItemInput,
@@ -7,7 +8,7 @@ import {
 import { EventHandlers } from '@system/types'
 import { getProductVariantImage } from '@system/utils'
 import { findIndex, isEmpty } from 'lodash'
-import React, { FC } from 'react'
+import { FC } from 'react'
 import { IProductListing, IProductListingVariant } from 'shopify-api-node'
 import {
   Button,

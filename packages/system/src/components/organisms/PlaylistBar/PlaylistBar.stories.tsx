@@ -1,6 +1,5 @@
 import SONGS from '@system-mocks/data/song-attributes.mock.json'
 import { StoryFN } from '@system/types/storybook'
-import React from 'react'
 import { PlaylistBar, PlaylistBarProps } from './PlaylistBar'
 
 /**

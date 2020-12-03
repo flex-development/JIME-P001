@@ -4,5 +4,6 @@
  */
 
 export * from './useLocalStorage'
+export * from './useSignInWithCustomToken'
 
 /* eslint-disable prettier/prettier */

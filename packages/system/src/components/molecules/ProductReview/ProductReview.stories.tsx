@@ -1,6 +1,5 @@
 import { REVIEWS } from '@system-mocks/utils'
 import { StoryFN } from '@system/types/storybook'
-import React from 'react'
 import { ProductReview, ProductReviewProps } from './ProductReview'
 
 /**

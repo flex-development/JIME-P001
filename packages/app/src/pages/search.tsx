@@ -1,11 +1,10 @@
-import { PC, ServerSidePageProps } from '@app/subdomains/app'
+import { IPageProps, PC } from '@app/subdomains/app'
 import { ProductService } from '@app/subdomains/sales'
 import {
   SearchTemplate,
   SearchTemplateProps
 } from '@flex-development/kustomzdesign'
-import { GetServerSidePropsContext } from 'next'
-import React from 'react'
+import { GetServerSideProps, GetServerSidePropsContext } from 'next'
 
 /**
  * @file Page - Product Search
@@ -18,7 +17,7 @@ import React from 'react'
  *
  * @param props - Page component props
  * @param props.page.results - Search results
- * @param props.session - Current user session or null
+ * @param props.session - CMS admin user session or null
  */
 const Search: PC = ({ page }) => {
   return <SearchTemplate {...(page as SearchTemplateProps)} />
@@ -35,10 +34,14 @@ const Search: PC = ({ page }) => {
  * @param context.query - The query string
  * @returns Array of search results
  */
-export const getServerSideProps: ServerSidePageProps = async (
+export const getServerSideProps: GetServerSideProps<IPageProps> = async (
   context: GetServerSidePropsContext
 ) => {
   const Products = new ProductService()
+
+  const query = { title: { $in: ['tray'], partial: true } }
+
+  console.debug(await Products.find(query))
 
   const page: SearchTemplateProps = { results: await Products.find() }
 

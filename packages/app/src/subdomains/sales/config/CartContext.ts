@@ -1,7 +1,7 @@
 import {
   CheckoutLineItemInput,
   CheckoutPermalinkInput
-} from '@flex-development/types'
+} from '@flex-development/kustomzcore'
 import { createContext } from 'react'
 
 /**

@@ -1,4 +1,5 @@
-import { AnyObject, CheckoutLineItemInput } from '@flex-development/types'
+import { AnyObject } from '@flex-development/json'
+import { CheckoutLineItemInput } from '@flex-development/kustomzcore'
 import { useSetState } from 'react-hanger'
 import { useQuantity, UseQuantity } from '../useQuantity'
 
@@ -40,9 +41,10 @@ export const useCheckoutLineItemInput = (
   item: CheckoutLineItemInput
 ): UseCheckoutLineItemInput => {
   // Handle custom propeties
-  const { state: properties, setState: updateProperties } = useSetState<
-    AnyObject
-  >(item.data.properties || {})
+  const {
+    state: properties,
+    setState: updateProperties
+  } = useSetState<AnyObject>(item.data.properties || {})
 
   // Handle product quantity
   const { quantity, updateQuantity } = useQuantity(item.data.quantity)

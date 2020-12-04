@@ -10,22 +10,22 @@ import {
 
 /**
  * @file Animate the CSS `scale` transformation
- * @module hooks/useTransformScale/impl
+ * @module hooks/useTransformScaleX/impl
  */
 
-export type UseTransformScale<T extends AnyObject = AnyObject> = {
+export type UseTransformScaleX<T extends AnyObject = AnyObject> = {
   style: AnimatedProps<T>['style']['transform']
   sx?: SpringValue<number>
   toggle: UseBooleanActions['toggle']
 }
 
-export type UseTransformScaleSpringProps = UseSpringProps<{
+export type UseTransformScaleXSpringProps = UseSpringProps<{
   config: { duration: number }
   from: { sx: number }
   sx: number
 }>
 
-export const UseTransformScaleDefaults = Object.freeze({
+export const UseTransformScaleXDefaults = Object.freeze({
   duration: 1000,
   intconfig: {
     output: [1, 0.97, 0.9, 1.1, 0.9, 1.1, 1.03, 1],
@@ -47,16 +47,16 @@ export const UseTransformScaleDefaults = Object.freeze({
  * @returns Object containing current sx value, style object, and function to
  * toggle when animation runs
  */
-export function useTransformScale<T extends AnyObject = AnyObject>(
-  initialSX: number = UseTransformScaleDefaults.sx,
-  duration: number = UseTransformScaleDefaults.duration,
-  intconfig: IC<number> = UseTransformScaleDefaults.intconfig
-): UseTransformScale<T> {
+export function useTransformScaleX<T extends AnyObject = AnyObject>(
+  initialSX: number = UseTransformScaleXDefaults.sx,
+  duration: number = UseTransformScaleXDefaults.duration,
+  intconfig: IC<number> = UseTransformScaleXDefaults.intconfig
+): UseTransformScaleX<T> {
   // Control when the animation runs
   const [animating, { toggle }] = useBoolean(false)
 
   // Create spring animation
-  const { sx } = useSpring<UseTransformScaleSpringProps>({
+  const { sx } = useSpring<UseTransformScaleXSpringProps>({
     config: { duration },
     from: { sx: initialSX },
     sx: animating ? 1 : 0

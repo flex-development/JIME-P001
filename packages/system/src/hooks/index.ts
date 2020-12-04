@@ -13,7 +13,7 @@ export * from './useProductVariants'
 export * from './useQuantity'
 export * from './useRowColumns'
 export * from './useSpacers'
-export * from './useTransformScale'
+export * from './useTransformScaleX'
 export * from './useVisibility'
 
 /* eslint-disable prettier/prettier */

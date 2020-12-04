@@ -14,7 +14,7 @@ import {
 
 /**
  * @file Render a labeled <input>, <select>, or <textarea> element
- * @module components/molecules/LabeledFormControl/LabeledFormControl
+ * @module components/molecules/LabeledFormControl/impl
  */
 
 /**

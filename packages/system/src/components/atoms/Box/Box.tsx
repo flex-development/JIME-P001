@@ -9,7 +9,7 @@ import {
 
 /**
  * @file Render a `<div>` element
- * @module components/atoms/Box/Box
+ * @module components/atoms/Box/impl
  */
 
 export type BoxProps<E = HTMLDivElement> = MutatedProps<E>

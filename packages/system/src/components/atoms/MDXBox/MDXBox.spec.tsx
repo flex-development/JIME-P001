@@ -4,7 +4,7 @@ import { MarkdownMDX, PureMarkdown, PureMDX } from './MDXBox.stories'
 
 /**
  * @file Tests - MDXBox
- * @module components/atoms/MDXBox/spec
+ * @module components/atoms/MDXBox/impl
  */
 
 it('renders markdown and mdx', () => {

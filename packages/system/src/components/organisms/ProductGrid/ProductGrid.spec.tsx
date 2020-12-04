@@ -3,7 +3,7 @@ import { Default } from './ProductGrid.stories'
 
 /**
  * @file Tests - ProductGrid
- * @module components/organisms/ProductGrid/spec
+ * @module components/organisms/ProductGrid/impl
  */
 
 it('renders without crashing', () => {

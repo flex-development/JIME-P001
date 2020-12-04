@@ -11,7 +11,7 @@ import {
 
 /**
  * @file Render a `<hr>` element
- * @module components/atoms/Divider/Divider
+ * @module components/atoms/Divider/impl
  */
 
 export interface DividerProps extends MutatedVoidElementProps<HTMLHRElement> {

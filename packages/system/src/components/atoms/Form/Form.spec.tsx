@@ -3,7 +3,7 @@ import { Form } from './Form'
 
 /**
  * @file Unit Tests - Form
- * @module components/atoms/Form/spec
+ * @module components/atoms/Form/impl
  */
 
 it('renders <form class="form" />', () => {

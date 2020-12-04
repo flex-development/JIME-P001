@@ -1,5 +1,5 @@
+import { AnyObject } from '@flex-development/json'
 import {
-  AnyObject,
   Booleanish,
   NullishString
 } from '@flex-development/json/utils'
@@ -16,20 +16,28 @@ import {
 import {
   AriaAttributes,
   ChangeEvent,
-  CSSProperties,
   DOMAttributes,
   FC,
   FocusEvent,
+  ForwardRefExoticComponent,
   MouseEvent,
   PropsWithoutRef,
   RefAttributes,
   UIEvent
 } from 'react'
+import { AnimatedComponent } from 'react-spring'
 
 /**
  * @file Type Definitions - Props
  * @module types/props
  */
+
+/**
+ * The type of an `animated()` component.
+ */
+export type AnimatedFREC<T extends AnyObject | string> = AnimatedComponent<
+  T extends string ? T : FC<T>
+>
 
 /**
  * Aria attributes and event handlers.
@@ -73,6 +81,11 @@ export namespace EventHandlers {
     export type TextArea = UIEvent<HTMLTextAreaElement>
   }
 }
+
+/**
+ * `ForwardRefExoticComponent` type alias.
+ */
+export type FREC<T extends AnyObject = AnyObject> = ForwardRefExoticComponent<T>
 
 /**
  * Global properties are attributes common to all HTML elements. Even though
@@ -240,7 +253,7 @@ export type MDXProps = Omit<MDXProviderProps, 'children' | 'components'> & {
  *
  * @see https://v5.getbootstrap.com/docs/5.0/utilities
  */
-export interface MutatedProps<E = HTMLElement> extends GlobalAttributes<E> {
+export interface MutatedProps<E = HTMLElement> extends Omit<GlobalAttributes<E>, 'style'> {
   /**
    * Background color utility class.
    * 
@@ -379,6 +392,11 @@ export interface MutatedProps<E = HTMLElement> extends GlobalAttributes<E> {
    * - https://v5.getbootstrap.com/docs/5.0/utilities/spacing
    */
   py?: Spacer | ResponsiveUtility<Spacer>
+
+  /**
+   * Animated style properties.
+   */
+  style?: AnimatedProps<AnyObject>['style']
 }
 
 /**
@@ -393,7 +411,7 @@ export interface MutatedFormControlProps<E = HTMLElement>
    * Only one form-associated element in a document can have this attribute
    * specified.
    */
-  autoFocus?: Booleanish
+  autoFocus?: boolean
 
   /**
    * Indicates that the user cannot interact with the control.
@@ -402,7 +420,7 @@ export interface MutatedFormControlProps<E = HTMLElement>
    * the containing element, for example `<fieldset>`; if there is no containing
    * element when the `disabled` attribute is set, the control is enabled.
    */
-  disabled?: Booleanish
+  disabled?: boolean
 
   /**
    * The `id` of the `<form>` element that the element is associated with.
@@ -418,12 +436,12 @@ export interface MutatedFormControlProps<E = HTMLElement>
   /**
    * If `true`, add the class `is-invalid`.
    */
-  invalid?: Booleanish
+  invalid?: boolean
 
   /**
    * Indicates that the user must fill in a value before submitting a form.
    */
-  required?: Booleanish
+  required?: boolean
 
   /**
    * The name of the control.

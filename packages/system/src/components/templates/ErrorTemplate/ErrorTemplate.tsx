@@ -4,7 +4,7 @@ import { Heading, Main, Section, Span } from '../../atoms'
 
 /**
  * @file Error page template
- * @module components/templates/ErrorTemplate/ErrorTemplate
+ * @module components/templates/ErrorTemplate/impl
  */
 
 export interface ErrorTemplateProps extends MutatedProps {

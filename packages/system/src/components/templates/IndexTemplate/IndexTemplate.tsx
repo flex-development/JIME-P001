@@ -8,7 +8,7 @@ import { Carousel, ProductGrid, ProductGridProps } from '../../organisms'
 
 /**
  * @file Index page template
- * @module components/templates/IndexTemplate/IndexTemplate
+ * @module components/templates/IndexTemplate/impl
  */
 
 export interface IndexTemplateProps extends MutatedProps {

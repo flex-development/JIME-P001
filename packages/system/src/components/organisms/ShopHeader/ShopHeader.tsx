@@ -7,7 +7,7 @@ import { SearchBar, SearchBarProps } from '../../molecules'
 
 /**
  * @file Render sidebar button, searchbar, and cart preview
- * @module components/organisms/ShopHeader/ShopHeader
+ * @module components/organisms/ShopHeader/impl
  */
 
 export interface ShopHeaderProps extends MutatedProps {

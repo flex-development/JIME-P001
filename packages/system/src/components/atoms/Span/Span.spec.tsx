@@ -3,7 +3,7 @@ import { Default } from './Span.stories'
 
 /**
  * @file Tests - Span
- * @module components/atoms/Span/spec
+ * @module components/atoms/Span/impl
  */
 
 it('renders a <span> element', () => {

@@ -11,7 +11,7 @@ import { Item, ItemProps } from '../Item/Item'
 
 /**
  * @file Render a <ol> or <ul> element
- * @module components/atoms/List/List
+ * @module components/atoms/List/impl
  */
 
 export type HTMLListElement = HTMLOListElement & HTMLUListElement

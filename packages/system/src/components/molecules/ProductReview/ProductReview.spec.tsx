@@ -3,7 +3,7 @@ import { Default } from './ProductReview.stories'
 
 /**
  * @file Tests - ProductReview
- * @module components/molecules/ProductReview/spec
+ * @module components/molecules/ProductReview/impl
  */
 
 it('renders without crashing', () => {

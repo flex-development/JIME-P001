@@ -9,7 +9,7 @@ import { FlexBoxProps } from '../FlexBox/FlexBox'
 
 /**
  * @file Render a `<nav>` element
- * @module components/atoms/Nav/Nav
+ * @module components/atoms/Nav/impl
  */
 
 export interface NavProps extends FlexBoxProps {

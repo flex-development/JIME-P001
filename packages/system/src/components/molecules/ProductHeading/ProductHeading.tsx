@@ -5,7 +5,7 @@ import { Heading, HeadingProps, Span } from '../../atoms'
 
 /**
  * @file Displays the title and price of a product (variant)
- * @module components/molecules/ProductHeading/ProductHeading
+ * @module components/molecules/ProductHeading/impl
  */
 
 /**

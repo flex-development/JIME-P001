@@ -10,7 +10,7 @@ import { AddToCartForm, AddToCartFormProps, Carousel } from '../../organisms'
 
 /**
  * @file Product page template
- * @module components/templates/ProductTemplate/ProductTemplate
+ * @module components/templates/ProductTemplate/impl
  */
 
 export interface ProductTemplateProps extends MutatedProps {

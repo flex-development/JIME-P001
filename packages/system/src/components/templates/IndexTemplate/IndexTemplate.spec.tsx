@@ -4,7 +4,7 @@ import { Homepage } from './IndexTemplate.stories'
 
 /**
  * @file Tests - IndexTemplate
- * @module components/templates/IndexTemplate/spec
+ * @module components/templates/IndexTemplate/impl
  */
 
 it('renders without crashing', () => {

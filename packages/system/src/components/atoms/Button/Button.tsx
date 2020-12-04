@@ -1,16 +1,12 @@
 import { ButtonVariant, FormControlSize } from '@flex-development/kustomzcore'
 import { useIcon, useMutatedProps } from '@system/hooks'
-import { MutatedFormControlProps } from '@system/types'
-import {
-  forwardRef,
-  ForwardRefExoticComponent as FREC,
-  PropsWithoutRef,
-  RefAttributes
-} from 'react'
+import { AnimatedFREC, FREC, MutatedFormControlProps } from '@system/types'
+import { forwardRef, PropsWithoutRef, RefAttributes } from 'react'
+import { animated } from 'react-spring'
 import { IconProps } from '../Icon/Icon'
 
 /**
- * @module components/atoms/Button/Button
+ * @module components/atoms/Button/impl
  * @see https://developer.mozilla.org/docs/Web/HTML/Element/button
  */
 
@@ -125,22 +121,21 @@ export type ButtonRefProps = ReflessButtonProps & ButtonRefAttributes
 export const Button: FREC<ButtonRefProps> = forwardRef((props, ref) => {
   const { block, size, variant, ...rest } = props
 
-  const withIcon = useIcon<HTMLButtonElement, ButtonProps>(rest)
+  const withIcon = useIcon<ButtonProps>(rest)
 
-  const mutated = useMutatedProps<
-    typeof withIcon,
-    JSX.IntrinsicElements['button']
-  >(withIcon, {
-    btn: true,
-    'btn-block': block,
-    [`btn-${size}`]: size,
-    [`btn-${variant}`]: variant
-  })
+  const mutated = useMutatedProps<typeof withIcon, AnimatedFREC<'button'>>(
+    withIcon,
+    {
+      btn: true,
+      'btn-block': block,
+      [`btn-${size}`]: size,
+      [`btn-${variant}`]: variant
+    }
+  )
 
   if (rest.disabled) mutated['aria-disabled'] = true
 
-  /* eslint-disable-next-line react/button-has-type */
-  return <button {...mutated} ref={ref} />
+  return <animated.button {...mutated} ref={ref} />
 })
 
 Button.displayName = 'Button'

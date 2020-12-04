@@ -4,7 +4,7 @@ import { forwardRef, ForwardRefExoticComponent as FREC } from 'react'
 
 /**
  * @file Render an `<aside>` element
- * @module components/atoms/Aside/Aside
+ * @module components/atoms/Aside/impl
  */
 
 /**

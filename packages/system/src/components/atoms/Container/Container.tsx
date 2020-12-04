@@ -10,7 +10,7 @@ import { BoxRefAttributes } from '../Box'
 
 /**
  * @file Layout component
- * @module components/atoms/Container/Container
+ * @module components/atoms/Container/impl
  */
 
 export interface ContainerProps extends MutatedProps<HTMLDivElement> {

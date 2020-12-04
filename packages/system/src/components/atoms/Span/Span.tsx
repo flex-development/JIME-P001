@@ -9,7 +9,7 @@ import {
 
 /**
  * @file Render a `<span>` element
- * @module components/atoms/Span/Span
+ * @module components/atoms/Span/impl
  */
 
 export type SpanProps = MutatedProps<HTMLSpanElement>

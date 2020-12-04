@@ -22,7 +22,7 @@ import { ProductHeading } from '../ProductHeading'
 
 /**
  * @file Display product checkout information
- * @module components/molecules/CheckoutLineItem/CheckoutLineItem
+ * @module components/molecules/CheckoutLineItem/impl
  */
 
 export interface CheckoutLineItemProps extends BoxProps {

@@ -9,7 +9,7 @@ import {
 
 /**
  * @file Render a `<form>` element
- * @module components/atoms/Form/Form
+ * @module components/atoms/Form/impl
  */
 
 export interface FormProps extends MutatedProps<HTMLFormElement> {

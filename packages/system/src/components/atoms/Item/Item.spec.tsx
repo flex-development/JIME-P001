@@ -3,7 +3,7 @@ import { Default } from './Item.stories'
 
 /**
  * @file Tests - Item
- * @module components/atoms/Item/spec
+ * @module components/atoms/Item/impl
  */
 
 it('renders a <li> element', () => {

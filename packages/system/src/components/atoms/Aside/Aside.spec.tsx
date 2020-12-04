@@ -3,7 +3,7 @@ import { Aside } from './Aside'
 
 /**
  * @file Unit Tests - Aside
- * @module components/atoms/Aside/spec
+ * @module components/atoms/Aside/impl
  */
 
 it('renders an <aside> element', () => {

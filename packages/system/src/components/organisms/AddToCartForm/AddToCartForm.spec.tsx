@@ -5,7 +5,7 @@ import { AshTray, Kustomz } from './AddToCartForm.stories'
 
 /**
  * @file Tests - AddToCartForm
- * @module components/organisms/AddToCartForm/spec
+ * @module components/organisms/AddToCartForm/impl
  */
 
 // ! Keep in sync with AddToCartForm implementation

@@ -9,7 +9,7 @@ import { FormCheck } from '../FormCheck'
 
 /**
  * @file Allow users to rate products
- * @module components/molecules/ProductRatingField/ProductRatingField
+ * @module components/molecules/ProductRatingField/impl
  */
 
 export interface ProductRatingFieldProps extends BoxProps {

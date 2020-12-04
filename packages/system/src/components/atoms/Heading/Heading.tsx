@@ -10,7 +10,7 @@ import {
 } from 'react'
 
 /**
- * @module components/atoms/Heading/Heading
+ * @module components/atoms/Heading/impl
  * @see
  * {@link https://developer.mozilla.org/docs/Web/HTML/Element/Heading_Elements}
  */

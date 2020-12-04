@@ -3,7 +3,7 @@ import { Default } from './Heading.stories'
 
 /**
  * @file Tests - Heading
- * @module components/atoms/Heading/spec
+ * @module components/atoms/Heading/impl
  */
 
 it('renders a heading element', () => {

@@ -3,7 +3,7 @@ import { Default, DropdownToggle, Nav } from './Link.stories'
 
 /**
  * @file Tests - Link
- * @module components/atoms/Link/spec
+ * @module components/atoms/Link/impl
  */
 
 it('renders <a href="#">', () => {

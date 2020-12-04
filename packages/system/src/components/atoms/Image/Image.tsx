@@ -10,7 +10,7 @@ import {
 } from 'react'
 
 /**
- * @module components/atoms/Image/Image
+ * @module components/atoms/Image/impl
  * @see https://developer.mozilla.org/docs/Web/HTML/Element/img
  */
 

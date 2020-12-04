@@ -3,7 +3,7 @@ import { Default } from './TextArea.stories'
 
 /**
  * @file Tests - TextArea
- * @module components/atoms/TextArea/spec
+ * @module components/atoms/TextArea/impl
  */
 
 it('renders <textarea class="form-control">', () => {

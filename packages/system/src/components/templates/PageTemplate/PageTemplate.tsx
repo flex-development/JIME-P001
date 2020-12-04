@@ -4,7 +4,7 @@ import { Main, MDXBox } from '../../atoms'
 
 /**
  * @file Basic page template
- * @module components/templates/PageTemplate/PageTemplate
+ * @module components/templates/PageTemplate/impl
  */
 
 export interface PageTemplateProps extends MutatedProps {

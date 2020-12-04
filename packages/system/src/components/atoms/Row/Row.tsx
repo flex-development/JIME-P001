@@ -20,7 +20,7 @@ import { FlexBoxProps } from '../FlexBox/FlexBox'
 
 /**
  * @file `Column` wrapper component
- * @module components/atoms/Row/Row
+ * @module components/atoms/Row/impl
  */
 
 export interface RowProps extends FlexBoxProps {

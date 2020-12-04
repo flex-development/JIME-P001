@@ -5,7 +5,7 @@ import { Default } from './Sidebar.stories'
 
 /**
  * @file Tests - Sidebar
- * @module components/organisms/Sidebar/spec
+ * @module components/organisms/Sidebar/impl
  */
 
 const SidebarDefaults = Sidebar.defaultProps as ArgsMatcher

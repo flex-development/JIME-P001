@@ -12,7 +12,7 @@ import {
 
 /**
  * @file Display a collection link, product title, and product variant title
- * @module components/molecules/ProductBreadcrumb/ProductBreadcrumb
+ * @module components/molecules/ProductBreadcrumb/impl
  */
 
 export interface ProductBreadcrumbProps extends FlexBoxProps {

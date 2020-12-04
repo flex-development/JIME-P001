@@ -20,7 +20,7 @@ import { LabeledFormControl, ProductRatingField } from '../../molecules'
 
 /**
  * @file Allow users to submit product reviews
- * @module components/organisms/ProductReviewEntryForm/ProductReviewEntryForm
+ * @module components/organisms/ProductReviewEntryForm/impl
  */
 
 /**

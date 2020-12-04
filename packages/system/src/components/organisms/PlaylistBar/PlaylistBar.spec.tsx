@@ -3,7 +3,7 @@ import { Default, Playing } from './PlaylistBar.stories'
 
 /**
  * @file Tests - PlaylistBar
- * @module components/organisms/PlaylistBar/spec
+ * @module components/organisms/PlaylistBar/impl
  */
 
 it('renders <section class="playlistbar">', () => {

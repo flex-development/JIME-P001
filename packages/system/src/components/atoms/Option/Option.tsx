@@ -9,7 +9,7 @@ import {
 
 /**
  * @file Render a `<option>` element
- * @module components/atoms/Option/Option
+ * @module components/atoms/Option/impl
  */
 
 export interface OptionProps extends MutatedProps<HTMLOptionElement> {

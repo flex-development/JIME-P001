@@ -7,7 +7,7 @@ import { Link, LinkProps, Nav, NavProps } from '../../atoms'
 
 /**
  * @file Navigation component
- * @module components/molecules/Menu/Menu/Menu/Menu
+ * @module components/molecules/Menu/Menu/Menu/impl
  */
 
 export interface MenuProps extends NavProps {

@@ -10,7 +10,7 @@ import { IconProps } from '../Icon/Icon'
 
 /**
  * @file Render a `<p>` element
- * @module components/atoms/Paragraph/Paragraph
+ * @module components/atoms/Paragraph/impl
  */
 
 export interface ParagraphProps extends MutatedProps<HTMLParagraphElement> {
@@ -43,7 +43,7 @@ export type ParagraphRefProps = ReflessParagraphProps & ParagraphRefAttributes
  * - https://developer.mozilla.org/docs/Web/API/HTMLParagraphElement
  */
 export const Paragraph: FREC<ParagraphRefProps> = forwardRef((props, ref) => {
-  const withIcon = useIcon<HTMLParagraphElement, ParagraphProps>(props)
+  const withIcon = useIcon<ParagraphProps>(props)
 
   const mutated = useMutatedProps<typeof withIcon, JSX.IntrinsicElements['p']>(
     withIcon

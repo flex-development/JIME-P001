@@ -14,7 +14,7 @@ import { CheckoutLineItem, CheckoutLineItemProps } from '../../molecules'
 
 /**
  * @file Display the items in a user's cart
- * @module components/templates/CartTemplate/CartTemplate
+ * @module components/templates/CartTemplate/impl
  */
 
 export interface CartTemplateProps extends MutatedProps {

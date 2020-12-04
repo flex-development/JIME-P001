@@ -6,7 +6,7 @@ import { ProductGrid } from '../../organisms'
 
 /**
  * @file Display the items in a user's cart
- * @module components/templates/SearchTemplate/SearchTemplate
+ * @module components/templates/SearchTemplate/impl
  */
 
 export interface SearchTemplateProps extends MutatedProps {

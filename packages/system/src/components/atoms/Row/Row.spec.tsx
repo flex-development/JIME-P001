@@ -3,7 +3,7 @@ import { Row } from './Row'
 
 /**
  * @file Tests - Row
- * @module components/atoms/Row/spec
+ * @module components/atoms/Row/impl
  */
 
 it('renders without crashing', () => {

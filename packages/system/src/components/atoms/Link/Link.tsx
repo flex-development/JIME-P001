@@ -11,7 +11,7 @@ import { IconProps } from '../Icon/Icon'
 
 /**
  * @file Render an <a> element
- * @module components/atoms/Link/Link
+ * @module components/atoms/Link/impl
  * @see https://developer.mozilla.org/docs/Web/HTML/Element/a
  */
 
@@ -133,7 +133,7 @@ export const Link: FREC<LinkRefProps> = forwardRef((props, ref) => {
     ...rest
   } = props
 
-  const withIcon = useIcon<HTMLAnchorElement, LinkProps>({
+  const withIcon = useIcon<LinkProps>({
     ...rest,
     children: rest.children || rest.title
   })

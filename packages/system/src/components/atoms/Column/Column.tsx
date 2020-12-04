@@ -10,7 +10,7 @@ import { FlexBoxProps } from '../FlexBox/FlexBox'
 
 /**
  * @file Grid item component
- * @module components/atoms/Column/Column
+ * @module components/atoms/Column/impl
  */
 
 export interface ColumnProps extends FlexBoxProps {

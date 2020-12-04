@@ -3,7 +3,7 @@ import { Main } from './Main'
 
 /**
  * @file Unit Tests - Main
- * @module components/atoms/Main/spec
+ * @module components/atoms/Main/impl
  */
 
 it('renders a <main> element', () => {

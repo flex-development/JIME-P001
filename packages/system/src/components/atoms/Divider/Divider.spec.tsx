@@ -3,7 +3,7 @@ import { Default } from './Divider.stories'
 
 /**
  * @file Tests - Divider
- * @module components/atoms/Divider/spec
+ * @module components/atoms/Divider/impl
  */
 
 it('renders <hr class="divider">', () => {

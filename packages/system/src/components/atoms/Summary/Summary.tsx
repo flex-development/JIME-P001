@@ -4,7 +4,7 @@ import { forwardRef, ForwardRefExoticComponent as FREC } from 'react'
 
 /**
  * @file Render a `<summary>` element
- * @module components/atoms/Summary/Summary
+ * @module components/atoms/Summary/impl
  */
 
 /**

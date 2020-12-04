@@ -4,7 +4,7 @@ import { NotFound } from './ErrorTemplate.stories'
 
 /**
  * @file Tests - ErrorTemplate
- * @module components/templates/ErrorTemplate/spec
+ * @module components/templates/ErrorTemplate/impl
  */
 
 it('renders without crashing', () => {

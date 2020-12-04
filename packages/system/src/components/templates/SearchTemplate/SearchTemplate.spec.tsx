@@ -4,7 +4,7 @@ import { Search } from './SearchTemplate.stories'
 
 /**
  * @file Tests - SearchTemplate
- * @module components/templates/SearchTemplate/spec
+ * @module components/templates/SearchTemplate/impl
  */
 
 it('renders without crashing', () => {

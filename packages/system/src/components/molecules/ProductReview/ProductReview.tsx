@@ -5,7 +5,7 @@ import { Box, BoxProps, Column, Image, Link, Paragraph } from '../../atoms'
 
 /**
  * @file Display a product review submitted by a customer
- * @module components/molecules/ProductReview/ProductReview
+ * @module components/molecules/ProductReview/impl
  */
 
 /**

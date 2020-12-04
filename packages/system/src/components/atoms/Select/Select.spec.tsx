@@ -3,7 +3,7 @@ import { Default } from './Select.stories'
 
 /**
  * @file Tests - Select
- * @module components/atoms/Select/spec
+ * @module components/atoms/Select/impl
  */
 
 it('renders a <select> element with nested <option> elements', () => {

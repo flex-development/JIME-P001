@@ -5,7 +5,7 @@ import { FC } from 'react'
 
 /**
  * @file Jumbotron-style component
- * @module components/organisms/Hero/Hero
+ * @module components/organisms/Hero/impl
  */
 
 export interface HeroProps extends MutatedProps {

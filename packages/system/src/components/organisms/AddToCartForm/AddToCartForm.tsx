@@ -26,7 +26,7 @@ import { ProductImageCarousel } from '../ProductImageCarousel'
 
 /**
  * @file Form allowing users to add products to their cart
- * @module components/organisms/AddToCartForm/AddToCartForm
+ * @module components/organisms/AddToCartForm/impl
  */
 
 export interface AddToCartFormProps extends FormProps {

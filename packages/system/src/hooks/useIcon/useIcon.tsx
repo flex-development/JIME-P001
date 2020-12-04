@@ -13,6 +13,12 @@ import { useEffect, useState } from 'react'
  * @see https://reactjs.org/docs/hooks-reference.html#useeffect
  */
 
+export type UseIconProps = {
+  children?: MutatedProps['children']
+  className?: MutatedProps['className']
+  icon?: IconProps
+}
+
 /**
  * Renders an `Icon` component with {@param props.children}.
  *
@@ -21,15 +27,16 @@ import { useEffect, useState } from 'react'
  *
  * @param props - Component properties
  * @param props.children - Inner content
+ * @param props.className - Classes to pass to component
  * @param props.icon - Icon component properties
  * @param props.icon.position - String indication where to position icon
  */
-export function useIcon<E = HTMLElement, P = MutatedProps<E>>(props: P): P {
+export function useIcon<P extends UseIconProps = UseIconProps>(props: P): P {
   const {
     children,
     className: initialClassName = '',
     icon: initialIcon
-  } = props as AnyObject
+  } = props
 
   const [className, setClassName] = useState(initialClassName)
   const [skip] = useState(!initialIcon)
@@ -77,7 +84,7 @@ export function useIcon<E = HTMLElement, P = MutatedProps<E>>(props: P): P {
   }, [children, icon, skip])
 
   return ({
-    ...omit(props as AnyObject, ['icon']),
+    ...omit(props, ['icon']),
     ...dataAttrs,
     children: skip || !icon.length ? children : mutatedChildren,
     className

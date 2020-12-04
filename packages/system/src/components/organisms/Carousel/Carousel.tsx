@@ -7,7 +7,7 @@ import { Box, BoxProps, Item, ItemProps, List } from '../../atoms'
 
 /**
  * @file Slideshow component for cycling through elements
- * @module components/organisms/Carousel/Carousel
+ * @module components/organisms/Carousel/impl
  */
 
 export interface CarouselProps extends BoxProps {

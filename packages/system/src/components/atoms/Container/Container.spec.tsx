@@ -3,7 +3,7 @@ import { Container } from './Container'
 
 /**
  * @file Tests - Container
- * @module components/atoms/Container/spec
+ * @module components/atoms/Container/impl
  * @see https://v5.getbootstrap.com/docs/5.0/layout/containers/
  */
 

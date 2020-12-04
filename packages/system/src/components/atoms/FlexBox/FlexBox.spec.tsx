@@ -3,7 +3,7 @@ import { FlexBox } from './FlexBox'
 
 /**
  * @file Tests - FlexBox
- * @module components/atoms/FlexBox/spec
+ * @module components/atoms/FlexBox/impl
  * @see https://v5.getbootstrap.com/docs/5.0/utilities/flex/
  */
 

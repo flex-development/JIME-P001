@@ -3,7 +3,7 @@ import { AshTray, Kustomz } from './ProductCard.stories'
 
 /**
  * @file Tests - ProductCard
- * @module components/molecules/ProductCard/spec
+ * @module components/molecules/ProductCard/impl
  */
 
 it('renders <div class="product-card">', () => {

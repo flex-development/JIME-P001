@@ -6,7 +6,7 @@ import { Button, Form, FormProps, Input, InputProps } from '../../atoms'
 
 /**
  * @file Render a search <form>
- * @module components/molecules/SearchBar/SearchBar/SearchBar/SearchBar
+ * @module components/molecules/SearchBar/SearchBar/SearchBar/impl
  */
 
 export type SearchBarEvent = FormEvent | EventHandlers.Click.Button

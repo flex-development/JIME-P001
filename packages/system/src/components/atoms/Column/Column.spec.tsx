@@ -3,7 +3,7 @@ import { Column } from './Column'
 
 /**
  * @file Tests - Column
- * @module components/atoms/Column/spec
+ * @module components/atoms/Column/impl
  * @see https://v5.getbootstrap.com/docs/5.0/layout/columns/
  */
 

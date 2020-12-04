@@ -17,7 +17,7 @@ export type StorybookBackgroundColorConfig = {
   value: string
 }
 
-export type StoryFN<T = Args, P = Parameters> = FC<T> & {
+export type StoryFN<T extends Args = Args, P = Parameters> = FC<T> & {
   args: T
   parameters?: P
   storyName?: string

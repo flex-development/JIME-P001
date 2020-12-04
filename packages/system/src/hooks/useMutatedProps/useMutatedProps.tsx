@@ -3,7 +3,6 @@ import { createResponsiveUtility } from '@system/utils'
 import classnames from 'classnames'
 import { ClassDictionary } from 'classnames/types'
 import { isObject, merge, omit, uniq } from 'lodash'
-import { HTMLAttributes } from 'react'
 import { useSpacers } from '../useSpacers'
 
 /**
@@ -33,9 +32,9 @@ import { useSpacers } from '../useSpacers'
  * @param keys - Array of keys to remove from {@param props}
  */
 export function useMutatedProps<
-  T1 extends MutatedProps = MutatedProps,
-  Mask = HTMLAttributes<HTMLElement>
->(props: T1, inject?: string | ClassDictionary, keys?: string[]): Mask {
+  MP extends MutatedProps = MutatedProps,
+  Pure = Record<string, never>
+>(props: MP, inject?: string | ClassDictionary, keys?: string[]): Pure {
   const {
     bg,
     c,
@@ -137,7 +136,7 @@ export function useMutatedProps<
   if (!mutated.className.length) delete mutated.className
 
   // Remove keys and return mutated props
-  return omit(mutated, uniq(keys)) as Mask
+  return omit(mutated, uniq(keys)) as Pure
 }
 
 export default useMutatedProps

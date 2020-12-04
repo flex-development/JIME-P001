@@ -3,7 +3,7 @@ import { Header } from './Header'
 
 /**
  * @file Unit Tests - Header
- * @module components/atoms/Header/spec
+ * @module components/atoms/Header/impl
  */
 
 it('renders a <header> element', () => {

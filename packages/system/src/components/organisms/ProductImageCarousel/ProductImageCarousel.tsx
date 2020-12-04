@@ -9,7 +9,7 @@ import { Carousel, CarouselProps } from '../Carousel'
 
 /**
  * @file Slideshow component for cycling through product images
- * @module components/organisms/ProductImageCarousel/ProductImageCarousel
+ * @module components/organisms/ProductImageCarousel/impl
  */
 
 export interface ProductImageCarouselProps

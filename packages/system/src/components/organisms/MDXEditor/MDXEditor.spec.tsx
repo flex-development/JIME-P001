@@ -3,7 +3,7 @@ import { Default } from './MDXEditor.stories'
 
 /**
  * @file Tests - MDXEditor
- * @module components/organisms/MDXEditor/spec
+ * @module components/organisms/MDXEditor/impl
  */
 
 it('renders without crashing', () => {

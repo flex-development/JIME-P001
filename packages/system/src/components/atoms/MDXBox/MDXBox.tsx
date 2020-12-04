@@ -21,7 +21,7 @@ import { Span } from '../Span/Span'
 
 /**
  * @file Display MDX content
- * @module components/atoms/MDXBox/MDXBox
+ * @module components/atoms/MDXBox/impl
  */
 
 export type MDXBoxProps = Omit<BoxProps, 'children'> & MDXProps

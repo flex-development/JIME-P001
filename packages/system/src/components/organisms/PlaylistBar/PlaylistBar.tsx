@@ -19,7 +19,7 @@ import {
 
 /**
  * @file Display the current song in the shop playlist
- * @module components/organisms/PlaylistBar/PlaylistBar
+ * @module components/organisms/PlaylistBar/impl
  */
 
 export interface PlaylistBarProps extends MutatedProps {

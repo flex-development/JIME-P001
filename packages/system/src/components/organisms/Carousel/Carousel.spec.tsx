@@ -5,7 +5,7 @@ import { ProductReviews } from './Carousel.stories'
 
 /**
  * @file Tests - Carousel
- * @module components/organisms/Carousel/spec
+ * @module components/organisms/Carousel/impl
  */
 
 it('renders <div class="carousel">', () => {

@@ -3,7 +3,7 @@ import { AshTray } from './ProductHeading.stories'
 
 /**
  * @file Tests - ProductHeading
- * @module components/molecules/ProductHeading/spec
+ * @module components/molecules/ProductHeading/impl
  */
 
 it('renders the title and price of a product', () => {

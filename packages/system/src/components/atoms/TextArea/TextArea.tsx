@@ -10,7 +10,7 @@ import {
 
 /**
  * @file Render a `<textarea>` element
- * @module components/atoms/TextArea/TextArea
+ * @module components/atoms/TextArea/impl
  */
 
 export interface TextAreaProps

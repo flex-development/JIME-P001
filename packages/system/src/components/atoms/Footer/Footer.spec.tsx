@@ -3,7 +3,7 @@ import { Footer } from './Footer'
 
 /**
  * @file Unit Tests - Footer
- * @module components/atoms/Footer/spec
+ * @module components/atoms/Footer/impl
  */
 
 it('renders a <footer> element', () => {

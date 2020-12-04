@@ -8,7 +8,7 @@ import { Span, SpanProps, SpanRefAttributes } from '../Span/Span'
 
 /**
  * @file Render a Material UI icon
- * @module components/atoms/Icon/Icon
+ * @module components/atoms/Icon/impl
  */
 
 export interface IconProps extends SpanProps {

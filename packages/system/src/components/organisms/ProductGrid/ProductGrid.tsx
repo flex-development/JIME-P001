@@ -8,7 +8,7 @@ import { ProductCard, ProductCardProps } from '../../molecules'
 
 /**
  * @file Product layout component
- * @module components/organisms/ProductGrid/ProductGrid
+ * @module components/organisms/ProductGrid/impl
  */
 
 export interface ProductGridProps extends RowProps {

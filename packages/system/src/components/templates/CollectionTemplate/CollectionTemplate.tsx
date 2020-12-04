@@ -6,7 +6,7 @@ import { ProductGrid } from '../../organisms'
 
 /**
  * @file Display the items in a user's cart
- * @module components/templates/CollectionTemplate/CollectionTemplate
+ * @module components/templates/CollectionTemplate/impl
  */
 
 export interface CollectionTemplateProps extends MutatedProps {

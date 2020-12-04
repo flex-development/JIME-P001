@@ -9,7 +9,7 @@ import {
 
 /**
  * @file Render a `<dialog>` element
- * @module components/atoms/Dialog/Dialog
+ * @module components/atoms/Dialog/impl
  */
 
 export interface DialogProps

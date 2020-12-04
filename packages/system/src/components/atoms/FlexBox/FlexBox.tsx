@@ -10,7 +10,7 @@ import { BoxProps, BoxRefAttributes } from '../Box'
 
 /**
  * @file Flexbox layout component
- * @module components/atoms/FlexBox/FlexBox
+ * @module components/atoms/FlexBox/impl
  */
 
 export interface FlexBoxProps extends BoxProps {

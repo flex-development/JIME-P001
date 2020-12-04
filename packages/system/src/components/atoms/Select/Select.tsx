@@ -12,7 +12,7 @@ import { Option, OptionProps } from '../Option/Option'
 
 /**
  * @file Render a `<select>` element
- * @module components/atoms/Select/Select
+ * @module components/atoms/Select/impl
  */
 
 export interface SelectProps

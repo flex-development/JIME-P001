@@ -3,7 +3,7 @@ import { Default } from './Hero.stories'
 
 /**
  * @file Tests - Hero
- * @module components/organisms/Hero/spec
+ * @module components/organisms/Hero/impl
  */
 
 it('renders without crashing', () => {

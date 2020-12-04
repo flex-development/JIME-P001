@@ -3,7 +3,7 @@ import { Fluid, Thumbnail } from './Image.stories'
 
 /**
  * @file Tests - Image
- * @module components/atoms/Image/spec
+ * @module components/atoms/Image/impl
  */
 
 it('renders a fluid image', () => {

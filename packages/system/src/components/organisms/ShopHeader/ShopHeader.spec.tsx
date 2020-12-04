@@ -3,7 +3,7 @@ import { Default } from './ShopHeader.stories'
 
 /**
  * @file Tests - ShopHeader
- * @module components/organisms/ShopHeader/spec
+ * @module components/organisms/ShopHeader/impl
  */
 
 it('renders <header class="shop-header">', () => {

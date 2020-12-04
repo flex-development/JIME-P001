@@ -1,4 +1,3 @@
-import { Booleanish } from '@flex-development/json'
 import { FormControlSize } from '@flex-development/kustomzcore'
 import { useMutatedProps } from '@system/hooks'
 import { MutatedFormControlProps } from '@system/types'
@@ -11,7 +10,7 @@ import {
 } from 'react'
 
 /**
- * @module components/atoms/Input/Input
+ * @module components/atoms/Input/impl
  * @see https://developer.mozilla.org/docs/Web/HTML/Element/input
  */
 
@@ -253,7 +252,7 @@ export interface InputProps
    * Supported by `text`, `search`, `url`, `tel`, `email`, `date`, `month`,
    * `week`, `time`, `datetime-local`, `number`, and `password` input types.
    */
-  readOnly?: Booleanish
+  readOnly?: boolean
 
   /**
    * A `Boolean` attribute which, if present, indicates that the user must
@@ -262,7 +261,7 @@ export interface InputProps
    * Supported by `text`, `search`, `url`, `tel`, `email`, `date`, `month`,
    * `week`, `time`, `datetime-local`, `number`, and `file` input types.
    */
-  required?: Booleanish
+  required?: boolean
 
   /**
    * Make the element smaller or larger.

@@ -18,7 +18,7 @@ import {
 
 /**
  * @file Display a product preview
- * @module components/molecules/ProductCard/ProductCard
+ * @module components/molecules/ProductCard/impl
  */
 
 export interface ProductCardProps extends BoxProps {

@@ -10,7 +10,7 @@ import { IconProps } from '../Icon/Icon'
 
 /**
  * @file Render a <label> element
- * @module components/atoms/Label/Label
+ * @module components/atoms/Label/impl
  */
 
 export interface LabelProps extends MutatedProps<HTMLLabelElement> {
@@ -92,7 +92,7 @@ export const Label: FREC<LabelRefProps> = forwardRef((props, ref) => {
 
   if (required) rest['data-required'] = required
 
-  const withIcon = useIcon<HTMLLabelElement, LabelProps>(rest)
+  const withIcon = useIcon<LabelProps>(rest)
 
   const mutated = useMutatedProps<
     typeof withIcon,

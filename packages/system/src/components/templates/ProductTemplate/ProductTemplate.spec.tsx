@@ -4,7 +4,7 @@ import { AshTray } from './ProductTemplate.stories'
 
 /**
  * @file Tests - ProductTemplate
- * @module components/templates/ProductTemplate/spec
+ * @module components/templates/ProductTemplate/impl
  */
 
 it('renders without crashing', () => {

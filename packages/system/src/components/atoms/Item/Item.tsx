@@ -10,7 +10,7 @@ import {
 import { InputValue } from '../Input/Input'
 
 /**
- * @module components/atoms/Item/Item
+ * @module components/atoms/Item/impl
  * @see https://developer.mozilla.org/docs/Web/HTML/Element/li
  */
 

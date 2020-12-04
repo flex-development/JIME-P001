@@ -10,7 +10,7 @@ import { Summary } from '../Summary/Summary'
 
 /**
  * @file Render a `<details>` element
- * @module components/atoms/Details/Details
+ * @module components/atoms/Details/impl
  */
 
 export interface DetailsProps extends MutatedProps<HTMLDetailsElement> {

@@ -9,7 +9,7 @@ import { Box, BoxProps, IconProps, Input, Label } from '../../atoms'
 
 /**
  * @file Checks and radios component
- * @module components/molecules/FormCheck/FormCheck
+ * @module components/molecules/FormCheck/impl
  */
 
 export interface FormCheckProps extends BoxProps {
@@ -170,7 +170,7 @@ export const FormCheck: FC<FormCheckProps> = (props: FormCheckProps) => {
   const as_btn = !isEmpty(btn) || size
   const no_label_text = isEmpty(label)
 
-  const mutated = useMutatedProps<typeof rest>(rest, {
+  const mutated = useMutatedProps<typeof rest, typeof Box>(rest, {
     'form-check': !no_label_text || as_btn,
     'form-check-inline': no_label_text && inline,
     'form-switch': form_switch

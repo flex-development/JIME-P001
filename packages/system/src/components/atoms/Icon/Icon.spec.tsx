@@ -3,7 +3,7 @@ import { Menu, Person, Search } from './Icon.stories'
 
 /**
  * @file Tests - Icon
- * @module components/atoms/Icon/spec
+ * @module components/atoms/Icon/impl
  */
 
 it('renders a menu icon', () => {

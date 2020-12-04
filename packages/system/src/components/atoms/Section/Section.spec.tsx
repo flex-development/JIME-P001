@@ -3,7 +3,7 @@ import { Section } from './Section'
 
 /**
  * @file Unit Tests - Section
- * @module components/atoms/Section/spec
+ * @module components/atoms/Section/impl
  */
 
 it('renders a <section> element', () => {

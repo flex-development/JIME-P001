@@ -18,7 +18,7 @@ import { Menu } from '../../molecules'
 
 /**
  * @file Display MySpace style profile snippet and shop menu
- * @module components/organisms/Sidebar/Sidebar
+ * @module components/organisms/Sidebar/impl
  */
 
 export interface SidebarProps extends MutatedProps {

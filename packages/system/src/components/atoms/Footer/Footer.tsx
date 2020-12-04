@@ -4,7 +4,7 @@ import { forwardRef, ForwardRefExoticComponent as FREC } from 'react'
 
 /**
  * @file Render a `<footer>` element
- * @module components/atoms/Footer/Footer
+ * @module components/atoms/Footer/impl
  */
 
 /**

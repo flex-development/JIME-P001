@@ -1,5 +1,5 @@
-import { IRTDRepository } from '@app/subdomains/app'
-import { ICMSMenu } from '@app/subdomains/cms/models'
+import { IRTDRepository } from '@subdomains/app'
+import { ICMSMenu } from '@subdomains/cms/models'
 
 /**
  * @file Subdomain Interface - Menu Repository

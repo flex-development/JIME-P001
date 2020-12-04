@@ -1,4 +1,4 @@
-import { ICMSPageIndex } from '@app/subdomains/cms/models'
+import { ICMSPageIndex } from '@subdomains/cms/models'
 import { isEmpty } from 'lodash'
 import { FormOptions, useForm, useFormScreenPlugin } from 'tinacms'
 import { UseFormScreenPlugin } from '../../utils'

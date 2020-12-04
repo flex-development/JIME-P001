@@ -1,4 +1,4 @@
-import { ICMSMenu } from '@app/subdomains/cms/models'
+import { ICMSMenu } from '@subdomains/cms/models'
 import { useNavigationForm } from '../useNavigationForm'
 
 /**

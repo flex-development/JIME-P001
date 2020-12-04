@@ -1,5 +1,5 @@
-import { PagesAPI } from '@app/subdomains/cms/config'
-import { ICMSPage, ICMSPageIndex } from '@app/subdomains/cms/models'
+import { PagesAPI } from '@subdomains/cms/config'
+import { ICMSPage, ICMSPageIndex } from '@subdomains/cms/models'
 import { FormApi } from 'final-form'
 import { omit } from 'lodash'
 import { FormOptions } from 'tinacms'

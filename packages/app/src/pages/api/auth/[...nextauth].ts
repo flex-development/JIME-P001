@@ -1,13 +1,13 @@
 import { auth } from '@app/config/firebase-admin'
 import { AUTH_PROVIDERS } from '@app/config/providers'
-import { GenericToken } from '@app/subdomains/cms'
+import { GenericToken } from '@subdomains/cms'
 import {
   AuthGitHubService,
   JWTGitHub,
   OAuthProfileGitHub,
   ProviderAccountGitHub,
   ProviderSessionGitHub
-} from '@app/subdomains/cms/services/AuthGitHubService'
+} from '@subdomains/cms/services/AuthGitHubService'
 import { NextApiRequest, NextApiResponse } from 'next'
 import NextAuth, { InitOptions } from 'next-auth'
 import { Session as SessionClientSide } from 'next-auth/client'

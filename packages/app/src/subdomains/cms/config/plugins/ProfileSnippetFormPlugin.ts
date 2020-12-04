@@ -1,4 +1,4 @@
-import { IProfileSnippet } from '@app/subdomains/cms/models'
+import { IProfileSnippet } from '@subdomains/cms/models'
 import { FormOptions } from 'tinacms'
 import { ProfileSnippetAPI } from '../config'
 import { URLField } from '../extensions'

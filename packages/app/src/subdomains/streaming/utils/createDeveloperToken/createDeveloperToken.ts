@@ -1,5 +1,5 @@
 import Logger from '@app/config/logger'
-import { createError } from '@app/subdomains/app/utils'
+import { createError } from '@subdomains/app/utils'
 import jwt, { Algorithm, SignOptions } from 'jsonwebtoken'
 import { isEmpty } from 'lodash'
 

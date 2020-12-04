@@ -1,6 +1,6 @@
-import { createDeveloperToken } from '@app/subdomains/streaming/utils'
 import { AnyObject } from '@flex-development/json'
 import { MusicKitInstance } from '@flex-development/kustomzcore'
+import { createDeveloperToken } from '@subdomains/streaming/utils'
 import { useEffect, useState } from 'react'
 import pkg from '../../../../../package.json'
 

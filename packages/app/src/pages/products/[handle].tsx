@@ -1,4 +1,11 @@
 import { database } from '@app/config/firebase'
+import { AnyObject, serialize } from '@flex-development/json'
+import { IReview } from '@flex-development/kustomzcore'
+import {
+  getProductVariantImage,
+  ProductTemplate,
+  ProductTemplateProps
+} from '@flex-development/kustomzdesign'
 import {
   IPageProps,
   IPagePropsProduct,
@@ -8,15 +15,8 @@ import {
   SEO,
   SEOProps,
   ServerSide404
-} from '@app/subdomains/app'
-import { ProductService, ReviewService, useCart } from '@app/subdomains/sales'
-import { AnyObject, serialize } from '@flex-development/json'
-import { IReview } from '@flex-development/kustomzcore'
-import {
-  getProductVariantImage,
-  ProductTemplate,
-  ProductTemplateProps
-} from '@flex-development/kustomzdesign'
+} from '@subdomains/app'
+import { ProductService, ReviewService, useCart } from '@subdomains/sales'
 import { findIndex } from 'lodash'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
 import { getSession } from 'next-auth/client'

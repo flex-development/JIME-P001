@@ -1,12 +1,3 @@
-import { IPageProps, PC } from '@app/subdomains/app/interfaces'
-import {
-  useMenus,
-  usePage,
-  usePlaylistSettingsForm,
-  useProfileSnippetForm
-} from '@app/subdomains/cms/hooks'
-import { useCart } from '@app/subdomains/sales'
-import { usePlaylist } from '@app/subdomains/streaming/hooks'
 import {
   Column,
   FlexBox,
@@ -19,6 +10,15 @@ import {
   Sidebar,
   useVisibility
 } from '@flex-development/kustomzdesign'
+import { IPageProps, PC } from '@subdomains/app/interfaces'
+import {
+  useMenus,
+  usePage,
+  usePlaylistSettingsForm,
+  useProfileSnippetForm
+} from '@subdomains/cms/hooks'
+import { useCart } from '@subdomains/sales'
+import { usePlaylist } from '@subdomains/streaming/hooks'
 import { isEmpty, merge } from 'lodash'
 import Head from 'next/head'
 import { FC, Fragment } from 'react'

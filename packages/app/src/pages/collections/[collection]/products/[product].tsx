@@ -1,6 +1,7 @@
 import ProductPage, {
   getServerSideProps as getServerSideProductPageProps
 } from '@app/pages/products/[handle]'
+import { ProductTemplateProps } from '@flex-development/kustomzdesign'
 import {
   CollectionProductPageParams,
   CollectionProductPageUrlQuery,
@@ -9,9 +10,8 @@ import {
   ProductPageParams,
   ServerSide404,
   ServerSidePageProps
-} from '@app/subdomains/app'
-import { CollectionService } from '@app/subdomains/sales'
-import { ProductTemplateProps } from '@flex-development/kustomzdesign'
+} from '@subdomains/app'
+import { CollectionService } from '@subdomains/sales'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
 import { ICollectionListing } from 'shopify-api-node'
 

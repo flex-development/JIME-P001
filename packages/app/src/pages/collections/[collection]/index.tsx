@@ -1,3 +1,9 @@
+import { serialize } from '@flex-development/json'
+import {
+  CollectionTemplate,
+  CollectionTemplateProps,
+  LinkProps
+} from '@flex-development/kustomzdesign'
 import {
   CollectionPageParams,
   IPagePropsCollection,
@@ -5,14 +11,8 @@ import {
   SEO,
   SEOProps,
   ServerSide404
-} from '@app/subdomains/app'
-import { CollectionService, ProductService } from '@app/subdomains/sales'
-import { serialize } from '@flex-development/json'
-import {
-  CollectionTemplate,
-  CollectionTemplateProps,
-  LinkProps
-} from '@flex-development/kustomzdesign'
+} from '@subdomains/app'
+import { CollectionService, ProductService } from '@subdomains/sales'
 import { join } from 'lodash'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
 import { getSession } from 'next-auth/client'

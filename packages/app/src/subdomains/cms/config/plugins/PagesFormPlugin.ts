@@ -1,7 +1,7 @@
-import { PagesAPI } from '@app/subdomains/cms/config'
-import { CMSPagesDTO, ICMSPage } from '@app/subdomains/cms/models'
-import { GroupListItemProps } from '@app/subdomains/cms/utils'
 import { uuid } from '@flex-development/kustomzdesign/utils'
+import { PagesAPI } from '@subdomains/cms/config'
+import { CMSPagesDTO, ICMSPage } from '@subdomains/cms/models'
+import { GroupListItemProps } from '@subdomains/cms/utils'
 import { FormOptions } from 'tinacms'
 import {
   MarkdownField,

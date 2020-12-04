@@ -1,10 +1,10 @@
-import { IPageProps, PC, SEO } from '@app/subdomains/app'
-import { getCMSPageSEO } from '@app/subdomains/cms'
-import { useCart } from '@app/subdomains/sales'
 import {
   CartTemplate,
   CartTemplateProps
 } from '@flex-development/kustomzdesign'
+import { IPageProps, PC, SEO } from '@subdomains/app'
+import { getCMSPageSEO } from '@subdomains/cms'
+import { useCart } from '@subdomains/sales'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
 import { getSession } from 'next-auth/client'
 

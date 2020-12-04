@@ -1,7 +1,7 @@
 import MockMenusRepoRoot from '@app-mocks/data/menus.mock.json'
 import firebaseTestApp from '@app-mocks/firebaseTestApp'
 import { loadMenusTestData, removeMenusTestData } from '@app-mocks/utils'
-import { ICMSMenu } from '@app/subdomains/cms/models'
+import { ICMSMenu } from '@subdomains/cms/models'
 import MenuRepository from './MenuRepository'
 
 /**

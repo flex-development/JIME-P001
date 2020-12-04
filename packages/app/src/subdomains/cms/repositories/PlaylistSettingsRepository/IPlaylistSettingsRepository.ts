@@ -1,5 +1,5 @@
-import { IRTDRepository as IRepo } from '@app/subdomains/app'
-import { IPlaylistSettings } from '@app/subdomains/cms/models'
+import { IRTDRepository as IRepo } from '@subdomains/app'
+import { IPlaylistSettings } from '@subdomains/cms/models'
 
 /**
  * @file Subdomain Interfaces - Playlist Settings Repository

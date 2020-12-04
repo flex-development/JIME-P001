@@ -1,6 +1,6 @@
-import { ICustomerService } from '@app/subdomains/customers/services'
-import { IReviewRepository } from '@app/subdomains/sales/repositories'
 import { CreateReviewRequest, IReview } from '@flex-development/kustomzcore'
+import { ICustomerService } from '@subdomains/customers/services'
+import { IReviewRepository } from '@subdomains/sales/repositories'
 import { IProductService } from '../ProductService'
 
 /**

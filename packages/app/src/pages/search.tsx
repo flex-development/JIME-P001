@@ -1,15 +1,10 @@
 import {
-  IPagePropsSearch,
-  PC,
-  SearchPageUrlQuery,
-  SEO
-} from '@app/subdomains/app'
-import { getCMSPageSEO } from '@app/subdomains/cms'
-import { ProductService } from '@app/subdomains/sales'
-import {
   SearchTemplate,
   SearchTemplateProps
 } from '@flex-development/kustomzdesign'
+import { IPagePropsSearch, PC, SearchPageUrlQuery, SEO } from '@subdomains/app'
+import { getCMSPageSEO } from '@subdomains/cms'
+import { ProductService } from '@subdomains/sales'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
 import { getSession } from 'next-auth/client'
 import { useRouter } from 'next/router'

@@ -15,7 +15,8 @@ module.exports = {
   moduleFileExtensions: ['js', 'json', 'ts', 'tsx'],
   moduleNameMapper: {
     '^@app/(.*)$': '<rootDir>/src/$1',
-    '^@app-tests/(.*)$': '<rootDir>/__tests__/$1'
+    '^@app-tests/(.*)$': '<rootDir>/__tests__/$1',
+    '^@subdomains/(.*)$': '<rootDir>/src/subdomains/$1'
   },
   prettierPath: path.join(__dirname, '../../node_modules/prettier'),
   setupFilesAfterEnv: ['./jest.setup.ts'],

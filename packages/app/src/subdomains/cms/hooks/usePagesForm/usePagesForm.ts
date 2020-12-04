@@ -1,6 +1,6 @@
-import { PagesAPI, PagesFormPlugin } from '@app/subdomains/cms/config'
-import { CMSPagesDTO, ICMSPage } from '@app/subdomains/cms/models'
-import { UseFormScreenPlugin } from '@app/subdomains/cms/utils'
+import { PagesAPI, PagesFormPlugin } from '@subdomains/cms/config'
+import { CMSPagesDTO, ICMSPage } from '@subdomains/cms/models'
+import { UseFormScreenPlugin } from '@subdomains/cms/utils'
 import { isEmpty } from 'lodash'
 import { FormOptions, useForm, useFormScreenPlugin } from 'tinacms'
 

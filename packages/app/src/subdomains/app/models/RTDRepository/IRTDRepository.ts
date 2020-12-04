@@ -1,13 +1,13 @@
 import {
-  FirebaseAdaptorDatabase,
-  FirebaseAdaptorReference
-} from '@app/subdomains/app/utils'
-import {
   ArrayQueryExecutor as AQE,
   DataArrayQueryParams,
   NullishPrimitive
 } from '@flex-development/json'
 import { IEntity } from '@flex-development/kustomzcore'
+import {
+  FirebaseAdaptorDatabase,
+  FirebaseAdaptorReference
+} from '@subdomains/app/utils'
 import { ClassType, transformAndValidate } from 'class-transformer-validator'
 
 /**

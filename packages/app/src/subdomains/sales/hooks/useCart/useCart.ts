@@ -1,4 +1,4 @@
-import { CartContext, CartContextState } from '@app/subdomains/sales/config'
+import { CartContext, CartContextState } from '@subdomains/sales/config'
 import { useContext } from 'react'
 
 /**

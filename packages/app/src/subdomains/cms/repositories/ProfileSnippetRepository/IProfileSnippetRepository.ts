@@ -1,5 +1,5 @@
-import { IRTDRepository as IRepo } from '@app/subdomains/app'
-import { IProfileSnippet } from '@app/subdomains/cms/models'
+import { IRTDRepository as IRepo } from '@subdomains/app'
+import { IProfileSnippet } from '@subdomains/cms/models'
 
 /**
  * @file Subdomain Interfaces - Profile Snippet Repository

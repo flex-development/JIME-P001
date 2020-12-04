@@ -1,5 +1,5 @@
-import { createError, ServerSide404 } from '@app/subdomains/app'
-import { ICMSPage } from '@app/subdomains/cms/models'
+import { createError, ServerSide404 } from '@subdomains/app'
+import { ICMSPage } from '@subdomains/cms/models'
 import { PageRepository as Repo } from '../../repositories'
 import { IPageService, PageSession } from './IPageService'
 

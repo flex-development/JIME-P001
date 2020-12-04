@@ -1,7 +1,7 @@
-import { RTDRepository } from '@app/subdomains/app/models/RTDRepository'
-import createError from '@app/subdomains/app/utils/createError'
-import { CMSMenu, ICMSMenu } from '@app/subdomains/cms/models'
 import { uuid } from '@flex-development/kustomzdesign'
+import { RTDRepository } from '@subdomains/app/models/RTDRepository'
+import createError from '@subdomains/app/utils/createError'
+import { CMSMenu, ICMSMenu } from '@subdomains/cms/models'
 import { isEmpty } from 'lodash'
 import { IMenuRepository } from './IMenuRepository'
 

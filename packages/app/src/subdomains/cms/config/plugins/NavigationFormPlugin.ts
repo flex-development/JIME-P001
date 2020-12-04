@@ -1,5 +1,5 @@
-import { CMSMenusDTO, ICMSMenu } from '@app/subdomains/cms/models'
 import { uuid } from '@flex-development/kustomzdesign/utils'
+import { CMSMenusDTO, ICMSMenu } from '@subdomains/cms/models'
 import { FormOptions } from 'tinacms'
 import { GroupListItemProps } from '../../utils'
 import { MenusAPI } from '../config'

@@ -1,4 +1,4 @@
-import { ICMSPageIndex } from '@app/subdomains/cms/models'
+import { ICMSPageIndex } from '@subdomains/cms/models'
 import { isFunction } from 'lodash'
 import { FormOptions } from 'tinacms'
 import { InitialFormValues } from '../../utils/types'

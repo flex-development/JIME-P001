@@ -1,9 +1,9 @@
 import {
   ProfileSnippetAPI,
   ProfileSnippetFormPlugin
-} from '@app/subdomains/cms/config'
-import { IProfileSnippet } from '@app/subdomains/cms/models'
-import { UseFormScreenPlugin } from '@app/subdomains/cms/utils'
+} from '@subdomains/cms/config'
+import { IProfileSnippet } from '@subdomains/cms/models'
+import { UseFormScreenPlugin } from '@subdomains/cms/utils'
 import { useForm, useFormScreenPlugin } from 'tinacms'
 
 /**

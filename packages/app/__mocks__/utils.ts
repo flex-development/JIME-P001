@@ -1,6 +1,6 @@
-import { FirebaseAdaptor, RTDRepository as Repo } from '@app/subdomains/app'
-import { ICMSMenu, ICMSPage } from '@app/subdomains/cms/models'
 import { IReview } from '@flex-development/kustomzcore'
+import { FirebaseAdaptor, RTDRepository as Repo } from '@subdomains/app'
+import { ICMSMenu, ICMSPage } from '@subdomains/cms/models'
 import { ICheckout } from 'shopify-api-node'
 import MockCarsRepoRoot from './data/cars.mock.json'
 import MockMenusRepoRoot from './data/menus.mock.json'

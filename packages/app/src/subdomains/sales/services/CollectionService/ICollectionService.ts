@@ -1,9 +1,9 @@
-import { ServerSide404 } from '@app/subdomains/app'
 import {
   DataArray,
   DataArrayQueryParams,
   IArrayQueryExecutor
 } from '@flex-development/json'
+import { ServerSide404 } from '@subdomains/app'
 import { ICollectionListing } from 'shopify-api-node'
 
 /**

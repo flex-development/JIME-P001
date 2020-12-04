@@ -1,20 +1,20 @@
+import { CheckoutLineItemInput } from '@flex-development/kustomzcore'
+import '@flex-development/kustomzdesign/index.scss'
 import {
   AC,
   IAppProps,
   ShopLayout,
   useLocalStorage,
   useSignInWithCustomToken
-} from '@app/subdomains/app'
-import '@app/subdomains/app/styles.css'
-import { CMS_BASE_CONFIG } from '@app/subdomains/cms'
-import '@app/subdomains/cms/styles.css'
+} from '@subdomains/app'
+import '@subdomains/app/styles.css'
+import { CMS_BASE_CONFIG } from '@subdomains/cms'
+import '@subdomains/cms/styles.css'
 import {
   CartContext,
   CART_PERSISTENCE_KEY as CART_KEY,
   useCheckoutPermalink
-} from '@app/subdomains/sales'
-import { CheckoutLineItemInput } from '@flex-development/kustomzcore'
-import '@flex-development/kustomzdesign/index.scss'
+} from '@subdomains/sales'
 import { isUndefined } from 'lodash'
 import { Provider as NextAuthProvider, Session } from 'next-auth/client'
 import { useEffect, useMemo } from 'react'

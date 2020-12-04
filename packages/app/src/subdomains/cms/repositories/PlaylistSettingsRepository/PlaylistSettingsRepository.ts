@@ -1,6 +1,6 @@
-import { RTDRepository as Repo } from '@app/subdomains/app/models/RTDRepository'
-import { createError } from '@app/subdomains/app/utils'
-import { IPlaylistSettings, PlaylistSettings } from '@app/subdomains/cms/models'
+import { RTDRepository as Repo } from '@subdomains/app/models/RTDRepository'
+import { createError } from '@subdomains/app/utils'
+import { IPlaylistSettings, PlaylistSettings } from '@subdomains/cms/models'
 import {
   IPlaylistSettingsRepository,
   PlaylistSettingsData

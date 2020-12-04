@@ -1,6 +1,6 @@
-import { RTDRepository } from '@app/subdomains/app/models/RTDRepository'
 import { DataArray } from '@flex-development/json'
 import { IReview, Review } from '@flex-development/kustomzcore'
+import { RTDRepository } from '@subdomains/app/models/RTDRepository'
 import { IProductListing } from 'shopify-api-node'
 import { IReviewRepository } from './IReviewRepository'
 

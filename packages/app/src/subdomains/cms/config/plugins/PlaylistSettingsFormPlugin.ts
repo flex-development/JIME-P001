@@ -1,4 +1,4 @@
-import { IPlaylistSettings } from '@app/subdomains/cms/models'
+import { IPlaylistSettings } from '@subdomains/cms/models'
 import { FormOptions } from 'tinacms'
 import { PlaylistAPI } from '../config'
 import { URLField } from '../extensions'

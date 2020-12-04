@@ -1,9 +1,9 @@
-import { getSubtotal } from '@app/subdomains/sales/utils'
 import {
   CheckoutLineItemInput,
   CheckoutPermalinkInput,
   CheckoutPermalinkQuery
 } from '@flex-development/kustomzcore'
+import { getSubtotal } from '@subdomains/sales/utils'
 import { omit } from 'lodash'
 import qs from 'querystring'
 import { useCallback, useEffect, useState } from 'react'

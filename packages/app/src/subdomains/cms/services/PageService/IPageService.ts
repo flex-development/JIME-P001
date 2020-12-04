@@ -1,6 +1,6 @@
-import { ServerSide404 } from '@app/subdomains/app/utils'
-import { ICMSPage } from '@app/subdomains/cms/models'
-import { IPageRepository } from '@app/subdomains/cms/repositories'
+import { ServerSide404 } from '@subdomains/app/utils'
+import { ICMSPage } from '@subdomains/cms/models'
+import { IPageRepository } from '@subdomains/cms/repositories'
 import { ProviderSessionGitHub } from '../AuthGitHubService/IAuthGitHubService'
 
 /**

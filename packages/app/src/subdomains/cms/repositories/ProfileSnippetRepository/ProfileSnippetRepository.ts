@@ -1,5 +1,5 @@
-import { RTDRepository as Repo } from '@app/subdomains/app/models/RTDRepository'
-import { IProfileSnippet, ProfileSnippet } from '@app/subdomains/cms/models'
+import { RTDRepository as Repo } from '@subdomains/app/models/RTDRepository'
+import { IProfileSnippet, ProfileSnippet } from '@subdomains/cms/models'
 import { IProfileSnippetRepository } from './IProfileSnippetRepository'
 
 /**

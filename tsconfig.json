@@ -22,6 +22,7 @@
       "@api/*": ["packages/app/src/pages/api/*"],
       "@app/*": ["packages/app/src/*"],
       "@app-mocks/*": ["packages/app/__mocks__/*"],
+      "@subdomains/*": ["packages/app/src/subdomains/*"],
       "@system/*": ["packages/system/src/*"],
       "@system-mocks/*": ["packages/system/__tests__/__mocks__/*"]
     },

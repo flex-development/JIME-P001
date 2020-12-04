@@ -1,7 +1,7 @@
 import MockPagesRepoRoot from '@app-mocks/data/pages.mock.json'
 import firebaseTestApp from '@app-mocks/firebaseTestApp'
 import { loadPagesTestData, removePagesTestData } from '@app-mocks/utils'
-import { ICMSPage } from '@app/subdomains/cms/models'
+import { ICMSPage } from '@subdomains/cms/models'
 import PageRepository from './PageRepository'
 
 /**

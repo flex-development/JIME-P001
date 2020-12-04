@@ -1,4 +1,4 @@
-import { MutatedProps } from '@app/subdomains/app/models/MutatedProps'
+import { MutatedProps } from '@subdomains/app/models/MutatedProps'
 import { IsOptional, IsString, IsUUID } from 'class-validator'
 import { ICMSMenuLink } from './ICMSMenuLink'
 

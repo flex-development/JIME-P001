@@ -1,11 +1,11 @@
+import { Endpoints, RequestInterface } from '@octokit/types'
 import {
   IAuthService,
   JWT,
   OAuthProfile,
   ProviderAccount,
   ProviderSession
-} from '@app/subdomains/app/interfaces/IAuthService'
-import { Endpoints, RequestInterface } from '@octokit/types'
+} from '@subdomains/app/interfaces/IAuthService'
 import { Session } from 'next-auth/client'
 
 /**

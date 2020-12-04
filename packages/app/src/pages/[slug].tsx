@@ -1,7 +1,7 @@
 import { database } from '@app/config/firebase'
-import { IPagePropsSlug, PC, SEO, ServerSide404 } from '@app/subdomains/app'
-import { getCMSPageSEO, ICMSPageSlug, PageService } from '@app/subdomains/cms'
 import { PageTemplate } from '@flex-development/kustomzdesign'
+import { IPagePropsSlug, PC, SEO, ServerSide404 } from '@subdomains/app'
+import { getCMSPageSEO, ICMSPageSlug, PageService } from '@subdomains/cms'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
 import { getSession } from 'next-auth/client'
 

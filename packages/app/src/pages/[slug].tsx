@@ -1,6 +1,6 @@
 import { database } from '@app/config/firebase'
-import { IPagePropsSlug, PC, ServerSide404 } from '@app/subdomains/app'
-import { ICMSPageSlug, PageService } from '@app/subdomains/cms'
+import { IPagePropsSlug, PC, SEO, ServerSide404 } from '@app/subdomains/app'
+import { getCMSPageSEO, ICMSPageSlug, PageService } from '@app/subdomains/cms'
 import { PageTemplate } from '@flex-development/kustomzdesign'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
 import { getSession } from 'next-auth/client'
@@ -23,14 +23,19 @@ import { getSession } from 'next-auth/client'
  * @param props.page.path - URL path page can be accessed from
  * @param props.page.title - Title of page
  * @param props.preview - True if CMS is enabled
- * @param props.session - CMS admin user session or null
+ * @param props.session - CMS user session or null
  */
 const Slug: PC<IPagePropsSlug> = ({ page }) => {
-  return <PageTemplate {...page.content} />
+  return (
+    <>
+      <SEO {...getCMSPageSEO(page)} />
+      <PageTemplate {...page.content} />
+    </>
+  )
 }
 
 /**
- * Retrieves the data for the `PageTemplate` and the current user session.
+ * Retrieves the data for the `PageTemplate` and the current CMS user session.
  *
  * @see https://nextjs.org/docs/basic-features/data-fetching
  *

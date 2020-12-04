@@ -1,4 +1,10 @@
-import { IPagePropsSearch, PC, SearchPageUrlQuery } from '@app/subdomains/app'
+import {
+  IPagePropsSearch,
+  PC,
+  SearchPageUrlQuery,
+  SEO
+} from '@app/subdomains/app'
+import { getCMSPageSEO } from '@app/subdomains/cms'
 import { ProductService } from '@app/subdomains/sales'
 import {
   SearchTemplate,
@@ -6,6 +12,7 @@ import {
 } from '@flex-development/kustomzdesign'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
 import { getSession } from 'next-auth/client'
+import { useRouter } from 'next/router'
 
 /**
  * @file Page - Product Search
@@ -18,14 +25,26 @@ import { getSession } from 'next-auth/client'
  *
  * @param props - Page component props
  * @param props.page.results - Search results
- * @param props.session - CMS admin user session or null
+ * @param props.session - CMS user session or null
  */
 const Search: PC = ({ page }) => {
-  return <SearchTemplate {...(page as SearchTemplateProps)} />
+  const router = useRouter()
+  const seo = getCMSPageSEO({
+    description: `Search products for Morena's Kustomz.`,
+    keywords: 'grinders, ash trays, rolling trays, weed, cannabis, marijuana',
+    title: router.query ? `Search results for "${router.query}"` : 'Search'
+  })
+
+  return (
+    <>
+      <SEO {...seo} />
+      <SearchTemplate {...(page as SearchTemplateProps)} />
+    </>
+  )
 }
 
 /**
- * Returns the data for the `SearchTemplate`.
+ * Returns the data for the `SearchTemplate` and the current CMS user session.
  *
  * @see https://nextjs.org/docs/basic-features/data-fetching
  *
@@ -33,6 +52,7 @@ const Search: PC = ({ page }) => {
  *
  * @param context - Next.js page component context
  * @param context.query - The query string
+ * @param context.req - HTTP request object
  * @returns Array of search results
  */
 export const getServerSideProps: GetServerSideProps<

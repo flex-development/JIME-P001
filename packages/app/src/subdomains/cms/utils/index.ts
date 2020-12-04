@@ -3,6 +3,7 @@
  * @module subdomains/cms/utils
  */
 
+export * from './getCMSPageSEO'
 export * from './handleIndexPageForm'
 export * from './types'
 

@@ -1,6 +1,6 @@
 import { database } from '@app/config/firebase'
-import { IPagePropsIndex, PC, ServerSide404 } from '@app/subdomains/app'
-import { ICMSPageIndex, PageService } from '@app/subdomains/cms'
+import { IPagePropsIndex, PC, SEO, ServerSide404 } from '@app/subdomains/app'
+import { getCMSPageSEO, ICMSPageIndex, PageService } from '@app/subdomains/cms'
 import { ProductService, ReviewService } from '@app/subdomains/sales'
 import { SortOrder } from '@flex-development/json'
 import { IReview } from '@flex-development/kustomzcore'
@@ -22,19 +22,25 @@ import { IProductListing } from 'shopify-api-node'
  * @param props.page - Page data
  * @param props.page.component - Display name of template component
  * @param props.page.content - `IndexTemplate` component props
+ * @param props.page.description - SEO page description
  * @param props.page.draft - True if page is in draft mode
- * @param props.page.metadata - SEO metadata
+ * @param props.page.keywords - Comma-delimitted list of SEO keywords
  * @param props.page.path - URL path page can be accessed from
  * @param props.page.title - Title of page
  * @param props.preview - True if CMS is enabled
- * @param props.session - CMS admin user session or null
+ * @param props.session - CMS user session or null
  */
 const Index: PC<IPagePropsIndex> = ({ page }) => {
-  return <IndexTemplate {...page.content} />
+  return (
+    <>
+      <SEO {...getCMSPageSEO(page)} />
+      <IndexTemplate {...page.content} />
+    </>
+  )
 }
 
 /**
- * Retrieves the data for the `IndexTemplate` and the current user session.
+ * Retrieves the data for the `IndexTemplate` and the current CMS user session.
  *
  * @see https://nextjs.org/docs/basic-features/data-fetching
  *

@@ -1,4 +1,4 @@
-import { database, storage } from '@app/config/firebase'
+import { database } from '@app/config/firebase'
 import { AnyObject } from '@flex-development/json'
 import { MarkdownFieldPlugin } from 'react-tinacms-editor'
 import { Plugin, TinaCMSConfig } from 'tinacms'
@@ -6,8 +6,7 @@ import {
   MenuRepository,
   PageRepository,
   PlaylistSettingsRepository,
-  ProfileSnippetRepository,
-  StorageRepository
+  ProfileSnippetRepository
 } from '../repositories'
 
 /**
@@ -34,13 +33,6 @@ export const CMS_APIS: Record<string, AnyObject> = Object.freeze({
 })
 
 /**
- * CMS Media configuration object.
- *
- * @see https://tinacms.org/docs/media/
- */
-export const CMS_MEDIA = new StorageRepository(storage)
-
-/**
  * Array of plugins to be added to the CMS object.
  *
  * @see https://tinacms.org/docs/plugins/
@@ -52,7 +44,6 @@ export const CMS_PLUGINS: Plugin[] = [MarkdownFieldPlugin]
  */
 export const CMS_BASE_CONFIG: TinaCMSConfig = Object.freeze({
   apis: CMS_APIS,
-  media: CMS_MEDIA,
   plugins: CMS_PLUGINS,
   sidebar: false,
   toolbar: true

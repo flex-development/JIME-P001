@@ -18,11 +18,14 @@ export class CMSPage extends CMSEntity implements ICMSPage {
   @Allow()
   content: IndexTemplateProps | PageTemplateProps
 
+  @IsString()
+  description: ICMSPage['description']
+
   @IsBoolean()
   draft: ICMSPage['draft']
 
-  @Allow()
-  metadata: ICMSPage['metadata']
+  @IsString()
+  keywords: ICMSPage['keywords']
 
   @IsString()
   @MinLength(1)

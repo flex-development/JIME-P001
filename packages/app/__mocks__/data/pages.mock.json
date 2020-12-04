@@ -1,33 +1,42 @@
 {
   "-MLAdRk9P6IDZuu6QgIn": {
+    "description": "",
     "draft": false,
     "component": "IndexTemplate",
     "content": {},
+    "created_at": 1605065153269,
+    "keywords": "grinders, ash trays, rolling trays, weed, cannabis, marijuana",
     "id": "-MLAdRk9P6IDZuu6QgIn",
-    "metadata": {},
     "path": "/",
-    "title": "Home"
+    "title": "Home",
+    "uuid": "a7678ae-51d5-1f5c-dc07-1b2468f2305"
   },
   "-MLAdRkOxVqwS4ZL_uqx": {
+    "description": "",
     "draft": true,
     "component": "PageTemplate",
     "content": {
       "body": "## Hello, World"
     },
+    "created_at": 1605843264711,
+    "keywords": "dreamcatcher, authentic, wayfarers, trust, fund",
     "id": "-MLAdRkOxVqwS4ZL_uqx",
-    "metadata": {},
     "path": "/test-page",
-    "title": "Test Page"
+    "title": "Test Page",
+    "uuid": "fc7e4b-c10b-756c-d1d8-6c2582158f54"
   },
   "-MLAdRkpxCe2JbzIMWXh": {
+    "description": "",
     "draft": true,
     "component": "PageTemplate",
+    "keywords": "mlkshk, bitters, vexillologist, artisan, 90's readymade",
     "content": {
       "body": "## Hello, World. Again!"
     },
+    "created_at": 1605843264314,
     "id": "-MLAdRkpxCe2JbzIMWXh",
-    "metadata": {},
     "path": "/test-page-2",
-    "title": "Test Page 2"
+    "title": "Test Page 2",
+    "uuid": "ec6784b-d74a-239c-b953-8f28f2158f54"
   }
 }

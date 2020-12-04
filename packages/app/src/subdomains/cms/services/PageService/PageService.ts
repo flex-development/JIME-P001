@@ -17,7 +17,7 @@ export default class PageService extends Repo implements IPageService {
    *
    * @async
    * @param path - Page of path to get
-   * @param session - CMS admin user session or null
+   * @param session - CMS user session or null
    * @throws {FeathersErrorJSON}
    */
   async getPage(

@@ -3,7 +3,7 @@
  * @module subdomains/app/components
  */
 
-export * from './Head'
+export * from './SEO'
 export * from './ShopLayout'
 
 /* eslint-disable prettier/prettier */

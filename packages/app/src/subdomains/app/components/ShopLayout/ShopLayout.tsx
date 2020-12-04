@@ -20,6 +20,7 @@ import {
   useVisibility
 } from '@flex-development/kustomzdesign'
 import { isEmpty, merge } from 'lodash'
+import Head from 'next/head'
 import { FC, Fragment } from 'react'
 import { useCMS } from 'tinacms'
 
@@ -79,6 +80,13 @@ export const ShopLayout: FC<ShopLayoutProps> = (props: ShopLayoutProps) => {
 
   return (
     <Fragment>
+      <Head>
+        {/* Viewport for responsive web design */}
+        <meta
+          name='viewport'
+          content='width=device-width,initial-scale=1,viewport-fit=cover'
+        />
+      </Head>
       <Row gx={0} justify='end'>
         <Column
           className={`sidebar-col${sidebar.visible ? '' : ' d-none'}`}

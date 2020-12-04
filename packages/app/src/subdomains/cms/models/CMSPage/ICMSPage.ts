@@ -1,4 +1,3 @@
-import { AnyObject } from '@flex-development/json'
 import {
   IndexTemplateProps,
   PageTemplateProps
@@ -25,14 +24,23 @@ export interface ICMSPage extends ICMSEntity {
   content: IndexTemplateProps | PageTemplateProps
 
   /**
+   * Description of the page in less than 150 characters.
+   *
+   * @default ''
+   */
+  description?: string
+
+  /**
    * True if page shouldn't be published.
    */
   draft: boolean
 
   /**
-   * Object containing SEO information for the page.
+   * Comma-delimitted list of SEO keywords.
+   *
+   * @default ''
    */
-  metadata: AnyObject
+  keywords?: string
 
   /**
    * Path page can be accessed from.

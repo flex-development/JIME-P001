@@ -41,6 +41,12 @@ export interface ImageProps extends MutatedVoidElementProps<HTMLImageElement> {
   fluid?: boolean
 
   /**
+   * The intrinsic height of the image, in pixels. Must be an integer without a
+   * unit.
+   */
+  height?: number
+
+  /**
    * Indicates that the element is not yet, or is no longer, relevant.
    *
    * For example, it can be used to hide elements of the page that can't be used
@@ -103,6 +109,12 @@ export interface ImageProps extends MutatedVoidElementProps<HTMLImageElement> {
    * Add the class `img-thumbnail`.
    */
   thumbnail?: boolean
+
+  /**
+   * The intrinsic height of the image, in pixels. Must be an integer without a
+   * unit.
+   */
+  width?: number
 }
 
 /**

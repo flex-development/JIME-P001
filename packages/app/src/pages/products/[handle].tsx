@@ -5,12 +5,15 @@ import {
   PC,
   ProductPageParams,
   ProductPageUrlQuery,
+  SEO,
+  SEOProps,
   ServerSide404
 } from '@app/subdomains/app'
 import { ProductService, ReviewService, useCart } from '@app/subdomains/sales'
-import { serialize } from '@flex-development/json'
+import { AnyObject, serialize } from '@flex-development/json'
 import { IReview } from '@flex-development/kustomzcore'
 import {
+  getProductVariantImage,
   ProductTemplate,
   ProductTemplateProps
 } from '@flex-development/kustomzdesign'
@@ -18,6 +21,7 @@ import { findIndex } from 'lodash'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
 import { getSession } from 'next-auth/client'
 import { IProductListing } from 'shopify-api-node'
+import stripHtml from 'string-strip-html'
 
 /**
  * @file Page - Product
@@ -33,7 +37,7 @@ import { IProductListing } from 'shopify-api-node'
  * @param props.collection.href - Link to collection
  * @param props.collection.title - Title of collection
  * @param props.product - Product listing data
- * @param props.session - CMS admin user session or null
+ * @param props.session - CMS user session or null
  */
 const Product: PC<IPagePropsProduct> = ({ page }) => {
   // Get cart functions
@@ -50,16 +54,55 @@ const Product: PC<IPagePropsProduct> = ({ page }) => {
     return cart.upsertItem(item)
   }
 
-  return <ProductTemplate {...page} />
+  // Get current product variant to build page SEO
+  const variant = page.product.variants[page.active || 0]
+  const page_title = `${page.product.title} - ${variant.title}`
+  const variant_img = getProductVariantImage(
+    variant.image_id,
+    page.product.images,
+    page_title
+  )
+
+  // Get SEO metadata
+  const { available, body_html, tags, vendor } = page.product as AnyObject
+
+  const seo: SEOProps = {
+    description: stripHtml(body_html).result,
+    keywords: tags,
+    og: {
+      image: variant_img.src,
+      'image:alt': variant_img.alt || undefined,
+      'image:height': variant_img.height,
+      'image:secure_url': variant_img.src,
+      'image:width': variant_img.width,
+      'product:availability': `${available}`,
+      'product:brand': vendor,
+      'product:condition': 'new',
+      'product:price:amount': variant.price,
+      'product:price:currency': 'USD'
+    },
+    title: page_title,
+    twitter: { card: 'summary', image: variant_img.src }
+  }
+
+  return (
+    <>
+      <SEO {...seo} />
+      <ProductTemplate {...page} />
+    </>
+  )
 }
 
 /**
- * Retrieves the data for the `ProductTemplate` and the current user session.
+ * Retrieves the data for the `ProductTemplate` and the current CMS user
+ * session.
  *
  * @see https://nextjs.org/docs/basic-features/data-fetching
  *
  * @param context - Next.js page component context
  * @param context.params - Route parameters if dynamic route
+ * @param context.query - The query string
+ * @param context.req - HTTP request object
  * @returns Product listing object and an array of products in the collection
  */
 export const getServerSideProps: GetServerSideProps<

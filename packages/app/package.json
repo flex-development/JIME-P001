@@ -46,8 +46,8 @@
   "dependencies": {
     "@feathersjs/errors": "^4.5.3",
     "@flex-development/json": "^1.0.5",
-    "@flex-development/kustomzdesign": "*",
     "@flex-development/kustomzcore": "*",
+    "@flex-development/kustomzdesign": "*",
     "@octokit/core": "^3.1.2",
     "@types/feathersjs__errors": "^3.3.2",
     "@types/jsonwebtoken": "^8.5.0",
@@ -82,6 +82,7 @@
     "shopify-api-node": "^3.4.4",
     "shopify-buy": "^2.11.0",
     "slugify": "^1.4.5",
+    "string-strip-html": "^7.0.3",
     "styled-components": "^5.2.0",
     "tinacms": "^0.32.0",
     "urijs": "^1.19.2",

@@ -39,7 +39,7 @@ import { TinaCMS, TinaProvider } from 'tinacms'
  * @param param0.Component - Current page component
  * @param param0.pageProps - Page component props from data fetching methods
  * @param param0.pageProps.page - Data for current page
- * @param param0.pageProps.session - CMS admin user session or null
+ * @param param0.pageProps.session - CMS user session or null
  */
 const App: AC = ({ Component, pageProps }: IAppProps) => {
   const { page, session } = pageProps

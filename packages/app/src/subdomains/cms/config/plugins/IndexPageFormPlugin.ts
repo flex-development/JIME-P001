@@ -59,6 +59,12 @@ export const IndexPageFormPlugin = (
 
 export const IndexPageFormPluginFields = [
   TextField('title', 'Title'),
+  TextField('keywords', 'Keywords', 'Comma-delimitted list of SEO keywords'),
+  TextAreaField(
+    'description',
+    'Description',
+    'SEO description must be less than 150 characters'
+  ),
   {
     component: 'group',
     description: 'Page content settings',

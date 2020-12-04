@@ -237,7 +237,7 @@ export default class RTDRepository<E extends IEntity = IEntity>
    * @throws {FeathersErrorJSON}
    */
   async findById(id: IEntity['id']): Promise<E | null> {
-    const entities = this.$eq(await this.find(), 'id', id, false)
+    const entities = await this.find({ id: { $eq: id } })
     return (entities[0] as E) || null
   }
 

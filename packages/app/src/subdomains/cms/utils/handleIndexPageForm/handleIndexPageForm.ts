@@ -1,7 +1,7 @@
 import { PagesAPI } from '@app/subdomains/cms/config'
-import { ICMSPageIndex } from '@app/subdomains/cms/models'
-import { IndexTemplateProps } from '@flex-development/kustomzdesign'
+import { ICMSPage, ICMSPageIndex } from '@app/subdomains/cms/models'
 import { FormApi } from 'final-form'
+import { omit } from 'lodash'
 import { FormOptions } from 'tinacms'
 
 /**
@@ -24,21 +24,13 @@ const handleIndexPageForm = async (
   page: ICMSPageIndex,
   form: FormApi<ICMSPageIndex>,
   error: Parameters<FormOptions<ICMSPageIndex>['onSubmit']>[2]
-): Promise<void> => {
+): Promise<ICMSPage> => {
   page.component = 'IndexTemplate'
+  page.content = { ...omit(page.content, ['products', 'reviews']) }
   page.path = '/'
 
-  /**
-   * FIXES: `Preview data is limited to 2KB currently, reduce how much data
-   * you are storing as preview data to continue`.
-   *
-   * These values also should not to be stored in the database.
-   */
-  delete (page.content as IndexTemplateProps).products
-  delete (page.content as IndexTemplateProps).reviews
-
   // Upsert page data
-  await PagesAPI.upsert(page.id, page)
+  return await PagesAPI.upsert(page.id, page)
 }
 
 export default handleIndexPageForm

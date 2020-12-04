@@ -48,7 +48,7 @@ export const usePagesForm = (
     const deleted = basic_pages.filter(page => !submitted.includes(page.id))
 
     // Delete pages that weren't submitted
-    await PagesAPI.deleteBatch(deleted.map(page => page.id))
+    return await PagesAPI.deleteBatch(deleted.map(page => page.id))
   }
 
   // Get form config

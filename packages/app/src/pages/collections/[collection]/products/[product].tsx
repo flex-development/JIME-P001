@@ -28,7 +28,7 @@ import { ICollectionListing } from 'shopify-api-node'
  * @param props.collection - `LinkProps` for product collection
  * @param props.collection.href - Link to collection
  * @param props.collection.title - Title of collection
- * @param props.session - CMS admin user session or null
+ * @param props.session - CMS user session or null
  */
 const CollectionProduct: PC<IPagePropsProduct> = props => {
   return <ProductPage {...props} />
@@ -41,6 +41,8 @@ const CollectionProduct: PC<IPagePropsProduct> = props => {
  *
  * @param context - Next.js page component context
  * @param context.params - Route parameters if dynamic route
+ * @param context.query - The query string
+ * @param context.req - HTTP request object
  * @returns Product listing object and an array of products in the collection
  */
 export const getServerSideProps: GetServerSideProps<

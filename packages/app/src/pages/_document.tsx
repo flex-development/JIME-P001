@@ -69,9 +69,7 @@ export default class Document extends NextDocument {
     return (
       <Html lang='en'>
         <Head>
-          {/* 
-            Set the character encoding for this document, so that a characters within the UTF-8 space (such as emoji) are render correctly.
-          */}
+          {/* Set character encoding for the document */}
           <meta charSet='utf-8' />
 
           {/* TODO: Favicons */}
@@ -83,11 +81,10 @@ export default class Document extends NextDocument {
           {/* TODO: Update site verification token */}
           <meta name='google-site-verification' content='verification_token' />
 
-          {/* Animate.css */}
-          <link
-            rel='stylesheet'
-            href='//cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css'
-          />
+          {/* SEO properties that don't need to be easily accessible */}
+          <meta property='og:locale' content='en_US' />
+          <meta property='og:site_name' content="Morena's Kustomz" />
+          <meta property='og:type' content='website' />
 
           {/* Material Icons */}
           <link

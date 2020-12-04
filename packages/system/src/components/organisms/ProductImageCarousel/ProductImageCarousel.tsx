@@ -1,5 +1,6 @@
 import { useMutatedProps } from '@system/hooks'
 import { getProductVariantImage } from '@system/utils'
+import { omit } from 'lodash'
 import { FC, useEffect } from 'react'
 import { useArray } from 'react-hanger/array/useArray'
 import { IProductListing } from 'shopify-api-node'
@@ -61,7 +62,10 @@ export const ProductImageCarousel: FC<ProductImageCarouselProps> = (
         variant ? `${product_title} - ${variant?.title}` : product_title
       )
 
-      carousel_slides.push(image)
+      if (image.height) image['data-height'] = image.height
+      if (image.width) image['data-width'] = image.width
+
+      carousel_slides.push(omit(image, ['height', 'width']))
     })
 
     setSlides(carousel_slides)

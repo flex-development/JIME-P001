@@ -2,7 +2,7 @@ import { RTDRepository } from '@app/subdomains/app/models/RTDRepository'
 import createError from '@app/subdomains/app/utils/createError'
 import { CMSPage, ICMSPage } from '@app/subdomains/cms/models'
 import { AnyObject } from '@flex-development/json'
-import { PageTemplateProps, uuid } from '@flex-development/kustomzdesign'
+import { uuid } from '@flex-development/kustomzdesign'
 import { isEmpty } from 'lodash'
 import slugify from 'slugify'
 import { IPageRepository } from './IPageRepository'
@@ -27,36 +27,63 @@ export default class PageRepository
   /**
    * Creates a new page.
    *
-   * If the page is missing a title, or if an existing page has the same path as
-   * {@param data.path}, a 400 error will be thrown.
+   * The page path will be generated using {@param data.title} if
+   * {@param data.path} is null, undefined, or an empty string.
+   *
+   * A 400 error will be thrown if:
+   *
+   * - The page is missing a title
+   * - The resulting page path is the same as an existing page path
+   * - The page description is greater than 150 characters
    *
    * @async
    * @param data - New page data
    * @param data.component - `displayName` of component that renders page
    * @param data.content - Object containing template data or MD(X) string
+   * @param data.description - Page description in less than 150 characters
    * @param data.draft - True if page should be marked as a draft
-   * @param data.path - URL path page can be accessed from. If falsy, the path
-   * be generated from the page title.
+   * @param data.keywords - Comma-delimitted list of SEO keywords
+   * @param data.path - URL path page can be accessed from
    * @param data.title - Title of page
    * @throws {FeathersErrorJSON}
    */
   async create(data: AnyObject): Promise<ICMSPage> {
-    const { component, content, metadata = {}, path, title = '' } = data
+    const {
+      component,
+      content = {},
+      description = '',
+      draft,
+      keywords = '',
+      path,
+      title = ''
+    } = data
 
-    if (isEmpty(path)) data.path = `/${slugify(title).toLowerCase()}`
+    if (isEmpty(path)) data.path = `/${slugify(title.trim()).toLowerCase()}`
 
     const exists: ICMSPage | null = await this.findByPath(data.path)
 
     if (exists) {
+      const error_data = { ...data, errors: { path: data.path } }
       const error_message = `Page with path "${data.path}" already exists.`
-      throw createError(error_message, data, 400)
+      throw createError(error_message, error_data, 400)
     }
 
-    if (isEmpty(component)) data.component = 'PageTemplate'
+    if (description.length > 150) {
+      const error_data = { ...data, errors: { length: description.length } }
+      const error_message = `Page description must be less than 150 characters.`
 
-    if (isEmpty(content)) data.content = {} as PageTemplateProps
+      throw createError(error_message, error_data, 400)
+    }
 
-    return super.create({ ...data, metadata, uuid: uuid() })
+    return super.create({
+      component: isEmpty(component) ? 'PageTemplate' : component,
+      content: content || {},
+      description,
+      draft,
+      keywords,
+      path: data.path,
+      uuid: uuid()
+    })
   }
 
   /**
@@ -106,6 +133,8 @@ export default class PageRepository
         throw createError(error_message, data, 400)
       }
     }
+
+    console.debug(data)
 
     return await super.update(id, data)
   }

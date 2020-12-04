@@ -24,8 +24,10 @@ const getProductVariantImage = (
 
   return {
     alt: alt || image?.alt,
+    height: image?.height,
     id: image ? `${image.id}` : undefined,
-    src: image?.src
+    src: image?.src,
+    width: image?.width
   }
 }
 

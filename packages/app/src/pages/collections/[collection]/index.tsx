@@ -2,6 +2,8 @@ import {
   CollectionPageParams,
   IPagePropsCollection,
   PC,
+  SEO,
+  SEOProps,
   ServerSide404
 } from '@app/subdomains/app'
 import { CollectionService, ProductService } from '@app/subdomains/sales'
@@ -11,10 +13,12 @@ import {
   CollectionTemplateProps,
   LinkProps
 } from '@flex-development/kustomzdesign'
+import { join } from 'lodash'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
 import { getSession } from 'next-auth/client'
 import { useRouter } from 'next/router'
 import { ICollectionListing, IProductListing } from 'shopify-api-node'
+import stripHtml from 'string-strip-html'
 
 /**
  * @file Page - Product Collection
@@ -29,9 +33,16 @@ import { ICollectionListing, IProductListing } from 'shopify-api-node'
  * @param props.page - Page data
  * @param props.page.collection - Shopify collection listing object
  * @param props.page.products - Product listings in collection
- * @param props.session - CMS admin user session or null
+ * @param props.session - CMS user session or null
  */
 const Collection: PC<IPagePropsCollection> = ({ page }) => {
+  const {
+    body_html,
+    default_product_image,
+    image: cimage,
+    title
+  } = page.collection
+
   // Get router instance to generate `LinkProps` for each collection product
   const { asPath, query } = useRouter()
 
@@ -46,16 +57,45 @@ const Collection: PC<IPagePropsCollection> = ({ page }) => {
     return { href: `${base}products/${product.handle}` }
   }
 
-  return <CollectionTemplate {...page} handleProductLink={handleProductLink} />
+  // Get collection image
+  const image = default_product_image || cimage
+
+  // Build keywords from product tags
+  const keywords: string[] = []
+  page.products?.forEach(product => keywords.concat(product.tags.split(',')))
+
+  // Get SEO metadata
+  const seo: SEOProps = {
+    description: stripHtml(body_html).result,
+    keywords: join(keywords),
+    og: {
+      image: image.src,
+      'image:alt': image.alt || undefined,
+      'image:height': image.height,
+      'image:secure_url': image.src,
+      'image:width': image.width
+    },
+    title: `Collections - ${title}`,
+    twitter: { card: 'summary', image: image.src }
+  }
+
+  return (
+    <>
+      <SEO {...seo} />
+      <CollectionTemplate {...page} handleProductLink={handleProductLink} />
+    </>
+  )
 }
 
 /**
- * Retrieves the data for the `CollectionTemplate` and the current user session.
+ * Retrieves the data for the `CollectionTemplate` and the current CMS user
+ * session.
  *
  * @see https://nextjs.org/docs/basic-features/data-fetching
  *
  * @param context - Next.js page component context
  * @param context.params - Route parameters if dynamic route
+ * @param context.req - HTTP request object
  * @returns Collection listing object and an array of products in the collection
  */
 export const getServerSideProps: GetServerSideProps<

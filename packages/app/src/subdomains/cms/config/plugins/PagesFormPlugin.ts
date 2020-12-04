@@ -3,7 +3,12 @@ import { CMSPagesDTO, ICMSPage } from '@app/subdomains/cms/models'
 import { GroupListItemProps } from '@app/subdomains/cms/utils'
 import { uuid } from '@flex-development/kustomzdesign/utils'
 import { FormOptions } from 'tinacms'
-import { MarkdownField, TextField, ToggleField } from '../helpers'
+import {
+  MarkdownField,
+  TextAreaField,
+  TextField,
+  ToggleField
+} from '../helpers'
 
 /**
  * @file Form configuration to edit site pages
@@ -64,7 +69,21 @@ export const PagesFormPluginFields = [
     fields: [
       ToggleField('draft', 'Draft', 'Publish / unpublish page'),
       TextField('title', 'Title', 'Page Title'),
-      TextField('path', 'Slug', 'URL path page can be accessed from'),
+      TextField(
+        'path',
+        'Slug',
+        'URL path page can be accessed from. Will be generated using page title if blank.'
+      ),
+      TextField(
+        'keywords',
+        'Keywords',
+        'Comma-delimitted list of SEO keywords'
+      ),
+      TextAreaField(
+        'description',
+        'Description',
+        'SEO description must be less than 150 characters'
+      ),
       MarkdownField('content.body', 'Markdown / MDX Content')
     ],
     itemProps: ({ title, uuid }: ICMSPage): GroupListItemProps => ({

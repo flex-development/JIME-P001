@@ -1,9 +1,12 @@
-import { PC } from '@app/subdomains/app'
+import { IPageProps, PC, SEO } from '@app/subdomains/app'
+import { getCMSPageSEO } from '@app/subdomains/cms'
 import { useCart } from '@app/subdomains/sales'
 import {
   CartTemplate,
   CartTemplateProps
 } from '@flex-development/kustomzdesign'
+import { GetServerSideProps, GetServerSidePropsContext } from 'next'
+import { getSession } from 'next-auth/client'
 
 /**
  * @file Page - Shopping Cart
@@ -12,10 +15,17 @@ import {
 
 /**
  * Renders a user's shopping cart.
+ *
+ * @param props - Page component props
+ * @param props.page - Server side template data
+ * @param props.session - CMS user session or null
  */
 const Cart: PC = () => {
   // Get checkout line items, subtotal, and checkout url
   const { items, removeItem, subtotal, upsertItem, url } = useCart()
+
+  // Get SEO metadata
+  const seo = getCMSPageSEO({ title: `Cart (${items.length})` })
 
   /**
    * Removes a line item from the cart.
@@ -39,14 +49,33 @@ const Cart: PC = () => {
   }
 
   return (
-    <CartTemplate
-      checkout_url={url}
-      handleRemove={handleRemove}
-      handleUpdate={handleUpdate}
-      items={items}
-      subtotal={subtotal}
-    />
+    <>
+      <SEO {...seo} />
+      <CartTemplate
+        checkout_url={url}
+        handleRemove={handleRemove}
+        handleUpdate={handleUpdate}
+        items={items}
+        subtotal={subtotal}
+      />
+    </>
   )
+}
+
+/**
+ * Retrieves the current CMS user session.
+ *
+ * @param context - Next.js page component context
+ * @param context.req - HTTP request object
+ * @returns Object with current CMS user session
+ */
+export const getServerSideProps: GetServerSideProps<IPageProps> = async (
+  context: GetServerSidePropsContext
+) => {
+  // Get current user session
+  const session = (await getSession(context)) as IPageProps['session']
+
+  return { props: { page: {}, session } }
 }
 
 export default Cart

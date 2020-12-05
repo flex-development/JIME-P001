@@ -1,5 +1,5 @@
 import { NullishNumber, NullishString } from '@flex-development/json'
-import { useMutatedProps } from '@system/hooks'
+import { useSanitizedProps } from '@system/hooks'
 import { MutatedProps } from '@system/types'
 import { FC } from 'react'
 import {
@@ -65,7 +65,7 @@ export interface SidebarProps extends MutatedProps {
 export const Sidebar: FC<SidebarProps> = (props: SidebarProps) => {
   const { age, menu = [], mood, img, location, ...rest } = props
 
-  const mutated = useMutatedProps<typeof rest>(rest, 'sidebar')
+  const sanitized = useSanitizedProps<typeof rest>(rest, 'sidebar')
 
   const developer: LinkProps = {
     href: 'https://flexdevelopment.llc',
@@ -74,7 +74,7 @@ export const Sidebar: FC<SidebarProps> = (props: SidebarProps) => {
   }
 
   return (
-    <Aside {...mutated}>
+    <Aside {...sanitized}>
       <Box>
         <Row
           className='sidebar-profile'

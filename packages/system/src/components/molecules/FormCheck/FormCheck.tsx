@@ -1,6 +1,6 @@
 import { ANYTHING } from '@flex-development/json'
 import { ButtonVariant, FormControlSize } from '@flex-development/kustomzcore'
-import { useMutatedProps } from '@system/hooks'
+import { useSanitizedProps } from '@system/hooks'
 import { EventHandlers, MutatedFormControlProps } from '@system/types'
 import classnames from 'classnames'
 import { isEmpty } from 'lodash'
@@ -170,19 +170,19 @@ export const FormCheck: FC<FormCheckProps> = (props: FormCheckProps) => {
   const as_btn = !isEmpty(btn) || size
   const no_label_text = isEmpty(label)
 
-  const mutated = useMutatedProps<typeof rest, typeof Box>(rest, {
+  const sanitized = useSanitizedProps<typeof rest, typeof Box>(rest, {
     'form-check': !no_label_text || as_btn,
     'form-check-inline': no_label_text && inline,
     'form-switch': form_switch
   })
 
-  mutated['data-disabled'] = disabled
-  mutated['data-type'] = form_switch ? 'checkbox' : type
+  sanitized['data-disabled'] = disabled
+  sanitized['data-type'] = form_switch ? 'checkbox' : type
 
-  if (as_btn) mutated['data-btn'] = true
+  if (as_btn) sanitized['data-btn'] = true
 
   return (
-    <Box {...mutated}>
+    <Box {...sanitized}>
       <Input
         aria-label={aria_label}
         checked={checked}
@@ -194,7 +194,7 @@ export const FormCheck: FC<FormCheckProps> = (props: FormCheckProps) => {
         form={form}
         name={name}
         onChange={onChange}
-        type={mutated['data-type']}
+        type={sanitized['data-type']}
         value={value}
       />
 

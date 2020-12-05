@@ -1,4 +1,5 @@
 import { AnyObject } from '@flex-development/json'
+import { isEqual } from 'lodash'
 import useBoolean, { UseBooleanActions } from 'react-hanger/array/useBoolean'
 import {
   AnimatedProps,
@@ -7,6 +8,7 @@ import {
   useSpring,
   UseSpringProps
 } from 'react-spring'
+import useMemoCompare, { MemoCompare } from '../useMemoCompare/useMemoCompare'
 
 /**
  * @file Animate the CSS `scale` transformation
@@ -52,6 +54,8 @@ export function useTransformScaleX<T extends AnyObject = AnyObject>(
   duration: number = UseTransformScaleXDefaults.duration,
   intconfig: IC<number> = UseTransformScaleXDefaults.intconfig
 ): UseTransformScaleX<T> {
+  const _compare: MemoCompare = (previous, next) => isEqual(previous, next)
+
   // Control when the animation runs
   const [animating, { toggle }] = useBoolean(false)
 
@@ -62,8 +66,11 @@ export function useTransformScaleX<T extends AnyObject = AnyObject>(
     sx: animating ? 1 : 0
   })
 
+  // Get CSS styles
+  const style = { transform: sx?.to(intconfig)?.to(sx => `scale(${sx})`) }
+
   return {
-    style: { transform: sx?.to(intconfig)?.to(sx => `scale(${sx})`) },
+    style: useMemoCompare<UseTransformScaleX<T>['style']>(style, _compare),
     sx,
     toggle
   }

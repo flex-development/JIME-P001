@@ -1,5 +1,5 @@
 import { AnyObject } from '@flex-development/json'
-import { useMutatedProps } from '@system/hooks'
+import { useSanitizedProps } from '@system/hooks'
 import { FC, useEffect } from 'react'
 import { useArray } from 'react-hanger/array/useArray'
 import { IProductListing } from 'shopify-api-node'
@@ -28,7 +28,7 @@ export interface ProductGridProps extends RowProps {
 export const ProductGrid: FC<ProductGridProps> = (props: ProductGridProps) => {
   const { products = [], ...rest } = props
 
-  const mutated = useMutatedProps<typeof rest>(rest, 'product-grid')
+  const sanitized = useSanitizedProps<typeof rest>(rest, 'product-grid')
 
   const [cards, { setValue: setCards }] = useArray<ProductCardProps>([])
 
@@ -44,7 +44,7 @@ export const ProductGrid: FC<ProductGridProps> = (props: ProductGridProps) => {
   }, [products, setCards])
 
   return (
-    <Row {...mutated}>
+    <Row {...sanitized}>
       {cards.map(card => {
         return (
           <Column key={card.product.product_id}>

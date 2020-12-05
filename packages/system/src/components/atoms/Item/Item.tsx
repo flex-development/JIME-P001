@@ -1,5 +1,5 @@
 import { Booleanish } from '@flex-development/json'
-import { useMutatedProps } from '@system/hooks'
+import { useSanitizedProps } from '@system/hooks'
 import { MutatedProps } from '@system/types'
 import {
   forwardRef,
@@ -58,7 +58,7 @@ export type ItemRefProps = ReflessItemProps & ItemRefAttributes
 export const Item: FREC<ItemRefProps> = forwardRef((props, ref) => {
   const { dropdown, nav, ...rest } = props
 
-  const mutated = useMutatedProps<typeof rest, JSX.IntrinsicElements['li']>(
+  const sanitized = useSanitizedProps<typeof rest, JSX.IntrinsicElements['li']>(
     rest,
     {
       'dropdown-item': dropdown,
@@ -66,7 +66,7 @@ export const Item: FREC<ItemRefProps> = forwardRef((props, ref) => {
     }
   )
 
-  return <li {...mutated} ref={ref} />
+  return <li {...sanitized} ref={ref} />
 })
 
 Item.displayName = 'Item'

@@ -1,4 +1,4 @@
-import { useIcon, useMutatedProps } from '@system/hooks'
+import { useIcon, useSanitizedProps } from '@system/hooks'
 import { MutatedProps } from '@system/types'
 import {
   forwardRef,
@@ -45,11 +45,12 @@ export type ParagraphRefProps = ReflessParagraphProps & ParagraphRefAttributes
 export const Paragraph: FREC<ParagraphRefProps> = forwardRef((props, ref) => {
   const withIcon = useIcon<ParagraphProps>(props)
 
-  const mutated = useMutatedProps<typeof withIcon, JSX.IntrinsicElements['p']>(
-    withIcon
-  )
+  const sanitized = useSanitizedProps<
+    typeof withIcon,
+    JSX.IntrinsicElements['p']
+  >(withIcon)
 
-  return <p {...mutated} ref={ref} />
+  return <p {...sanitized} ref={ref} />
 })
 
 Paragraph.displayName = 'Paragraph'

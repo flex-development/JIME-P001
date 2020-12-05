@@ -1,4 +1,4 @@
-import { useMutatedProps } from '@system/hooks'
+import { useSanitizedProps } from '@system/hooks'
 import { MutatedProps } from '@system/types'
 import {
   DetailedHTMLProps,
@@ -49,7 +49,7 @@ export type HeadingRefProps = ReflessHeadingProps & HeadingRefAttributes
 export const Heading: FREC<HeadingRefProps> = forwardRef((props, ref) => {
   const { size, ...rest } = props
 
-  const mutated = useMutatedProps<
+  const sanitized = useSanitizedProps<
     typeof rest,
     DetailedHTMLProps<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement>
   >({ ...rest, ref })
@@ -58,17 +58,17 @@ export const Heading: FREC<HeadingRefProps> = forwardRef((props, ref) => {
 
   switch (size) {
     case 2:
-      return <h2 {...mutated} />
+      return <h2 {...sanitized} />
     case 3:
-      return <h3 {...mutated} />
+      return <h3 {...sanitized} />
     case 4:
-      return <h4 {...mutated} />
+      return <h4 {...sanitized} />
     case 5:
-      return <h5 {...mutated} />
+      return <h5 {...sanitized} />
     case 6:
-      return <h6 {...mutated} />
+      return <h6 {...sanitized} />
     default:
-      return <h1 {...mutated} />
+      return <h1 {...sanitized} />
   }
 
   /* eslint-enable jsx-a11y/heading-has-content */

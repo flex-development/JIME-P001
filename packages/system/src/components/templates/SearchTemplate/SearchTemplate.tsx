@@ -1,4 +1,4 @@
-import { useMutatedProps } from '@system/hooks'
+import { useSanitizedProps } from '@system/hooks'
 import { MutatedProps, TC } from '@system/types'
 import { IProductListing } from 'shopify-api-node'
 import { Heading, Main, Section, Span } from '../../atoms'
@@ -29,10 +29,10 @@ export const SearchTemplate: TC<SearchTemplateProps> = (
 ) => {
   const { results = [], ...rest } = props
 
-  const mutated = useMutatedProps<typeof rest>(rest, 'template')
+  const sanitized = useSanitizedProps<typeof rest>(rest, 'template')
 
   return (
-    <Main {...mutated} data-template={SearchTemplate.template_id}>
+    <Main {...sanitized} data-template={SearchTemplate.template_id}>
       <Section>
         <Heading mb={24} size={2}>
           Search Results&nbsp;

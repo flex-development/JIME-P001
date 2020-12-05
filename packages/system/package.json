@@ -32,6 +32,7 @@
   "main": "src/index.ts",
   "scripts": {
     "predev": "vc env pull --yes && yarn test:quiet",
+    "dev:kill": "kill $(lsof -ti:3000) || true",
     "dev:storybook": "start-storybook -p 3000 -s ../app/public --ci",
     "dev:storybook:docs": "yarn dev:storybook --docs",
     "dev": "run-p dev:*",
@@ -43,7 +44,6 @@
     "postbuild": "shx cp -R ../app/public/assets public"
   },
   "dependencies": {
-    "@alloc/types": "^1.3.0",
     "@flex-development/json": "^1.0.5",
     "@types/bootstrap": "^4.5.0",
     "@types/classnames": "^2.2.10",
@@ -54,12 +54,10 @@
     "mdx-scoped-runtime": "^0.7.5",
     "react-hanger": "^2.2.1",
     "react-lazy-load": "^3.1.13",
-    "react-markdown-editor-lite": "^1.2.2",
     "react-spring": "^9.0.0-rc.3",
+    "react-use": "^15.3.4",
     "react-use-gesture": "^8.0.1",
-    "react-uuid": "^1.0.2",
-    "slugify": "^1.4.5",
-    "use-hooks": "^2.0.0-rc.5"
+    "react-uuid": "^1.0.2"
   },
   "devDependencies": {
     "@storybook/addon-a11y": "^6.1.9",

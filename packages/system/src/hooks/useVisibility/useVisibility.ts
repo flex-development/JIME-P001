@@ -5,7 +5,7 @@ import { isString } from 'lodash'
 import { useEffect } from 'react'
 import { useBoolean, UseBooleanActions } from 'react-hanger/array/useBoolean'
 import { useSetState } from 'react-hanger/array/useSetState'
-import { useWindowSize } from 'use-hooks'
+import { useWindowSize } from 'react-use'
 
 /**
  * @file Toggle element display

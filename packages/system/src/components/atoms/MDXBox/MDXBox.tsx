@@ -1,4 +1,4 @@
-import { useMutatedProps } from '@system/hooks'
+import { useSanitizedProps } from '@system/hooks'
 import { MDXProps } from '@system/types'
 import MDX from 'mdx-scoped-runtime'
 import { FC } from 'react'
@@ -41,10 +41,10 @@ export const MDXBox: FC<MDXBoxProps> & {
   scope: MDXBoxProps['scope']
 } = (props: MDXBoxProps) => {
   const { children, components = {}, scope = {}, ...rest } = props
-  const mutated = useMutatedProps(rest, 'mdx-box')
+  const sanitized = useSanitizedProps(rest, 'mdx-box')
 
   return (
-    <Box {...mutated}>
+    <Box {...sanitized}>
       <MDX
         components={{ ...MDXBox.components, ...components }}
         scope={{ ...MDXBox.scope, ...scope }}

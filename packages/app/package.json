@@ -31,9 +31,9 @@
     "kill:firebase:db": "kill $(lsof -ti:5000) || true",
     "kill:firebase:ui": "kill $(lsof -ti:4000) || true",
     "kill:firebase": "run-p kill:firebase:*",
-    "predev": "NODE_ENV=development vc env pull .env.local --yes",
+    "kill:d": "kill $(lsof -ti:3001) || true",
+    "predev": "yarn kill:d; NODE_ENV=development vc env pull .env.local --yes",
     "dev": "NODE_OPTIONS='--inspect' next dev -p 3001",
-    "dev:kill": "kill $(lsof -ti:3001) || true",
     "mock:db": "firebase emulators:start --only database,ui",
     "pretest": "yarn kill:firebase",
     "test": "firebase emulators:exec \"yarn test:run\" --only database",
@@ -85,8 +85,7 @@
     "string-strip-html": "^7.0.3",
     "styled-components": "^5.2.0",
     "tinacms": "^0.32.0",
-    "urijs": "^1.19.2",
-    "use-hooks": "^2.0.0-rc.5"
+    "urijs": "^1.19.2"
   },
   "devDependencies": {
     "@firebase/rules-unit-testing": "^1.0.9",

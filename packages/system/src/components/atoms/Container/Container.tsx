@@ -1,5 +1,5 @@
 import { GridBreakpoint } from '@flex-development/kustomzcore'
-import { useMutatedProps } from '@system/hooks'
+import { useSanitizedProps } from '@system/hooks'
 import { MutatedProps } from '@system/types'
 import {
   forwardRef,
@@ -49,17 +49,17 @@ export type ContainerRefProps = ReflessContainerProps & BoxRefAttributes
 export const Container: FREC<ContainerRefProps> = forwardRef((props, ref) => {
   const { fluid, size, stretch, ...rest } = props
 
-  const mutated = useMutatedProps<typeof rest, JSX.IntrinsicElements['div']>(
-    rest,
-    {
-      container: !fluid && !size,
-      'container-fluid': fluid,
-      [`container-${size}`]: !!size,
-      'container-stretch': stretch
-    }
-  )
+  const sanitized = useSanitizedProps<
+    typeof rest,
+    JSX.IntrinsicElements['div']
+  >(rest, {
+    container: !fluid && !size,
+    'container-fluid': fluid,
+    [`container-${size}`]: !!size,
+    'container-stretch': stretch
+  })
 
-  return <div {...mutated} ref={ref} />
+  return <div {...sanitized} ref={ref} />
 })
 
 Container.displayName = 'Container'

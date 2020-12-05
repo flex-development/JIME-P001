@@ -1,4 +1,4 @@
-import { useMutatedProps } from '@system/hooks'
+import { useSanitizedProps } from '@system/hooks'
 import { MutatedFormControlProps } from '@system/types'
 import {
   FC,
@@ -77,13 +77,13 @@ export type ReflessSelectProps = PropsWithoutRef<SelectProps>
 export const Select: FREC<SelectRefProps> = forwardRef((props, ref) => {
   const { options = [], ...rest } = props
 
-  const mutated = useMutatedProps<typeof rest, JSX.IntrinsicElements['select']>(
-    rest,
-    'form-select'
-  )
+  const sanitized = useSanitizedProps<
+    typeof rest,
+    JSX.IntrinsicElements['select']
+  >(rest, 'form-select')
 
   return (
-    <select {...mutated} ref={ref}>
+    <select {...sanitized} ref={ref}>
       {((): ReactNodeArray => {
         if (rest.children) return rest.children
 

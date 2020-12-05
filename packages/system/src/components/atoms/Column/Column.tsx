@@ -1,5 +1,5 @@
 import { Columns } from '@flex-development/kustomzcore'
-import { useColumn, useFlexbox, useMutatedProps } from '@system/hooks'
+import { useColumn, useFlexbox, useSanitizedProps } from '@system/hooks'
 import {
   forwardRef,
   ForwardRefExoticComponent as FREC,
@@ -88,12 +88,12 @@ export const Column: FREC<ColumnRefProps> = forwardRef((props, ref) => {
     wrap
   })
 
-  const mutated = useMutatedProps<typeof rest>(rest, {
+  const sanitized = useSanitizedProps<typeof rest>(rest, {
     [column]: true,
     [flexbox]: flexbox.length !== 0
   })
 
-  return <div {...mutated} ref={ref} />
+  return <div {...sanitized} ref={ref} />
 })
 
 Column.displayName = 'Column'

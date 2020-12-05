@@ -5,8 +5,8 @@ import {
 } from '@flex-development/kustomzcore'
 import {
   useFlexbox,
-  useMutatedProps,
   useRowColumns,
+  useSanitizedProps,
   useSpacers
 } from '@system/hooks'
 import { isObject } from 'lodash'
@@ -134,7 +134,7 @@ export const Row: FREC<RowRefProps> = forwardRef((props, ref) => {
 
   const row_cols = useRowColumns({ lg, md, sm, xl, xs: max || xs, xxl })
 
-  const mutated = useMutatedProps<typeof rest>(rest, {
+  const sanitized = useSanitizedProps<typeof rest>(rest, {
     [flexbox]: flexbox.length !== 0,
     [gutter_x]: gutter_x.length !== 0,
     [gutter_y]: gutter_y.length !== 0,
@@ -142,7 +142,7 @@ export const Row: FREC<RowRefProps> = forwardRef((props, ref) => {
     [row_cols]: row_cols.length !== 0
   })
 
-  return <div {...mutated} ref={ref} />
+  return <div {...sanitized} ref={ref} />
 })
 
 Row.displayName = 'Row'

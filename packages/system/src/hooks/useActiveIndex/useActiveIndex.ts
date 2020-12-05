@@ -58,7 +58,7 @@ export const useActiveIndex = (
     index = index as number
   }
 
-  // Set index to zero if negative number
+  // Set index to -1 if negative number
   if (index < -1) index = -1
 
   // Initialize state

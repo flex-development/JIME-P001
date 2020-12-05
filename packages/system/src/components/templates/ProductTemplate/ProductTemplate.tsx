@@ -1,6 +1,6 @@
 import { ANYTHING } from '@flex-development/json'
 import { IReview } from '@flex-development/kustomzcore'
-import { useMutatedProps } from '@system/hooks'
+import { useSanitizedProps } from '@system/hooks'
 import { EventHandlers, MutatedProps, TC } from '@system/types'
 import { useState } from 'react'
 import { IProductListing, IProductListingVariant } from 'shopify-api-node'
@@ -80,7 +80,7 @@ export const ProductTemplate: TC<ProductTemplateProps> = (
     ...rest
   } = props
 
-  const mutated = useMutatedProps<typeof rest>(rest, 'template')
+  const sanitized = useSanitizedProps<typeof rest>(rest, 'template')
 
   // Selected variant
   const initial_index = active < 0 ? 0 : active
@@ -97,7 +97,7 @@ export const ProductTemplate: TC<ProductTemplateProps> = (
   }
 
   return (
-    <Main {...mutated} data-template={ProductTemplate.template_id}>
+    <Main {...sanitized} data-template={ProductTemplate.template_id}>
       <ProductBreadcrumb
         collection={collection}
         product={product.title}

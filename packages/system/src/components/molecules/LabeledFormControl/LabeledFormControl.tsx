@@ -1,4 +1,4 @@
-import { useMutatedProps } from '@system/hooks'
+import { useSanitizedProps } from '@system/hooks'
 import { FC } from 'react'
 import {
   Input,
@@ -63,12 +63,12 @@ export const LabeledFormControl: FC<LabeledFormControlProps> = (
 
   rest['data-required'] = control.required
 
-  const mutated = useMutatedProps<typeof rest, LabelProps>(rest, {
+  const sanitized = useSanitizedProps<typeof rest, LabelProps>(rest, {
     'labeled-form-control': true
   })
 
   return (
-    <Label {...mutated} data-control={name}>
+    <Label {...sanitized} data-control={name}>
       {children && <Span>{children}</Span>}
       {((): LabelProps['children'] => {
         let component = <Input {...(control as InputRefProps)} />

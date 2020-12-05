@@ -1,4 +1,4 @@
-import { useMutatedProps } from '@system/hooks'
+import { useSanitizedProps } from '@system/hooks'
 import { MutatedProps, TC } from '@system/types'
 import { formatPrice } from '@system/utils'
 import {
@@ -67,10 +67,10 @@ export const CartTemplate: TC<CartTemplateProps> = (
     ...rest
   } = props
 
-  const mutated = useMutatedProps<typeof rest>(rest, 'template')
+  const sanitized = useSanitizedProps<typeof rest>(rest, 'template')
 
   return (
-    <Main {...mutated} data-template={CartTemplate.template_id}>
+    <Main {...sanitized} data-template={CartTemplate.template_id}>
       <Section>
         <Heading mb={24} size={2}>
           Cart ({`${items.length}`})

@@ -1,4 +1,4 @@
-import { useMutatedProps } from '@system/hooks'
+import { useSanitizedProps } from '@system/hooks'
 import { MutatedProps, TC } from '@system/types'
 import { ICollectionListing, IProductListing } from 'shopify-api-node'
 import { Heading, LinkProps, Main, Paragraph, Section } from '../../atoms'
@@ -48,10 +48,10 @@ export const CollectionTemplate: TC<CollectionTemplateProps> = (
   } = props
   const { body_html, title } = collection
 
-  const mutated = useMutatedProps<typeof rest>(rest, 'template')
+  const sanitized = useSanitizedProps<typeof rest>(rest, 'template')
 
   return (
-    <Main {...mutated} data-template={CollectionTemplate.template_id}>
+    <Main {...sanitized} data-template={CollectionTemplate.template_id}>
       <Section>
         <Heading size={2}>{title}</Heading>
         {body_html && <Paragraph>{body_html}</Paragraph>}

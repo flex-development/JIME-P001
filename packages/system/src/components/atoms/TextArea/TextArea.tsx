@@ -1,4 +1,4 @@
-import { useMutatedProps } from '@system/hooks'
+import { useSanitizedProps } from '@system/hooks'
 import { MutatedFormControlProps } from '@system/types'
 import { omit } from 'lodash'
 import {
@@ -114,7 +114,7 @@ export type TextAreaRefProps = ReflessTextAreaProps & TextAreaRefAttributes
 export const TextArea: FREC<TextAreaRefProps> = forwardRef((props, ref) => {
   const { invalid, ...rest } = props
 
-  const mutated = useMutatedProps<
+  const sanitized = useSanitizedProps<
     typeof rest,
     JSX.IntrinsicElements['textarea']
   >(rest, {
@@ -122,7 +122,7 @@ export const TextArea: FREC<TextAreaRefProps> = forwardRef((props, ref) => {
     'is-invalid': invalid
   })
 
-  return <textarea {...omit(mutated, 'children')} ref={ref} />
+  return <textarea {...omit(sanitized, 'children')} ref={ref} />
 })
 
 TextArea.displayName = 'TextArea'

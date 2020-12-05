@@ -1,4 +1,4 @@
-import { useMutatedProps } from '@system/hooks'
+import { useSanitizedProps } from '@system/hooks'
 import { MutatedProps } from '@system/types'
 import {
   forwardRef,
@@ -52,13 +52,13 @@ export type DetailsRefProps = ReflessDetailsProps & DetailsRefAttributes
 export const Details: FREC<DetailsRefProps> = forwardRef((props, ref) => {
   const { children, summary, ...rest } = props
 
-  const mutated = useMutatedProps<
+  const sanitized = useSanitizedProps<
     typeof rest,
     JSX.IntrinsicElements['details']
   >(rest)
 
   return (
-    <details {...mutated} ref={ref}>
+    <details {...sanitized} ref={ref}>
       {summary && <Summary {...summary} />}
       {children}
     </details>

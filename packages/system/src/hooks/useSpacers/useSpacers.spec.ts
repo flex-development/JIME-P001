@@ -3,7 +3,7 @@ import { useSpacers } from './useSpacers'
 
 /**
  * @file Tests - useSpacers
- * @module tests/hooks/useSpacers
+ * @module hooks/useSpacers/spec
  */
 
 it('returns an empty string if params.config is an empty object', () => {

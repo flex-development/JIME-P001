@@ -23,11 +23,13 @@ import { useRouter } from 'next/router'
  * @param props.session - CMS user session or null
  */
 const Search: PC = ({ page }) => {
-  const router = useRouter()
+  const { query } = useRouter()
+  const { term = '' } = query || {}
+
   const seo = getCMSPageSEO({
     description: `Search products for Morena's Kustomz.`,
     keywords: 'grinders, ash trays, rolling trays, weed, cannabis, marijuana',
-    title: router.query ? `Search results for "${router.query}"` : 'Search'
+    title: term.length ? `Search results for "${term}"` : 'Search'
   })
 
   return (

@@ -3,6 +3,7 @@ import {
   BadRequest,
   Conflict,
   FeathersError,
+  FeathersErrorJSON,
   Forbidden,
   GeneralError,
   LengthRequired,
@@ -33,13 +34,13 @@ import { AnyObject } from '@flex-development/json'
  * @param data.errors - Typically validation errors or if you want to group
  * multiple errors together
  * @param status - Error status code. Defaults to 500
- * @returns {FeathersError}
+ * @returns {FeathersErrorJSON}
  */
 const createError = (
   error?: string | Error,
   data: AnyObject = {},
   status: number | string = 500
-): FeathersError => {
+): FeathersErrorJSON => {
   if (typeof status === 'string') status = JSON.parse(status)
 
   switch (status) {
@@ -92,7 +93,7 @@ const createError = (
       error = new GeneralError(error, data)
   }
 
-  return error as FeathersError
+  return (error as FeathersError).toJSON()
 }
 
 export default createError

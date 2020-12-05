@@ -1,4 +1,4 @@
-import { useMutatedProps } from '@system/hooks'
+import { useSanitizedProps } from '@system/hooks'
 import { MutatedRefProps } from '@system/types'
 import { forwardRef, ForwardRefExoticComponent as FREC } from 'react'
 
@@ -14,11 +14,12 @@ import { forwardRef, ForwardRefExoticComponent as FREC } from 'react'
  * - https://developer.mozilla.org/docs/Web/API/HTMLElement
  */
 export const Aside: FREC<MutatedRefProps> = forwardRef((props, ref) => {
-  const mutated = useMutatedProps<typeof props, JSX.IntrinsicElements['aside']>(
-    props
-  )
+  const sanitized = useSanitizedProps<
+    typeof props,
+    JSX.IntrinsicElements['aside']
+  >(props)
 
-  return <aside {...mutated} ref={ref} />
+  return <aside {...sanitized} ref={ref} />
 })
 
 Aside.displayName = 'Aside'

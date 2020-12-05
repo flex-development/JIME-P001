@@ -9,7 +9,10 @@ import {
 } from '@system/config'
 import { getResponsiveUtilities } from '@system/utils'
 import classnames from 'classnames'
-import { isBoolean, isEmpty, isNumber, isString } from 'lodash'
+import { isBoolean, isEmpty, isEqual, isNumber, isString } from 'lodash'
+import { useMemo } from 'react'
+import { MemoCompare } from '../useMemoCompare'
+import useMemoCompare from '../useMemoCompare/useMemoCompare'
 
 /**
  * @file Generate flexbox utility classes
@@ -38,31 +41,38 @@ export const useFlexbox = (
   config: FlexboxUtilitiesConfig,
   breakpoints: GridBreakpoint[] = GRID_BREAKPOINT_KEYS
 ): string => {
-  const dictionary = {}
+  const _compare: MemoCompare = (previous, next) => isEqual(previous, next)
 
-  // Convert config into Record<string, ResponsiveUtility>
-  FLEXBOX_CONFIG_KEYS.forEach(c_key => {
-    const value = config[c_key]
+  const _breakpoints = useMemoCompare<typeof breakpoints>(breakpoints, _compare)
+  const _config = useMemoCompare<typeof config>(config, _compare)
 
-    if (isBoolean(value) || isNumber(value) || isString(value)) {
-      config[c_key] = { xs: value }
-    }
-  })
+  return useMemo<string>(() => {
+    const dictionary = {}
 
-  // Populate dictionary
-  FLEXBOX_CONFIG_KEYS.forEach(c_key => {
-    let prefix = FLEXBOX_PROPERTY_MAP[c_key]
+    // Convert config into Record<string, ResponsiveUtility>
+    FLEXBOX_CONFIG_KEYS.forEach(ckey => {
+      const value = _config[ckey]
 
-    if (c_key === 'display') {
-      prefix = 'd'
-    } else if (c_key === 'direction' || c_key === 'wrap') {
-      prefix = 'flex'
-    }
-
-    getResponsiveUtilities(prefix, config[c_key], breakpoints).map(classes => {
-      dictionary[classes] = !isEmpty(classes)
+      if (isBoolean(value) || isNumber(value) || isString(value)) {
+        _config[ckey] = { xs: value }
+      }
     })
-  })
 
-  return classnames(dictionary)
+    // Populate dictionary
+    FLEXBOX_CONFIG_KEYS.forEach(ckey => {
+      let prefix = FLEXBOX_PROPERTY_MAP[ckey]
+
+      if (ckey === 'display') {
+        prefix = 'd'
+      } else if (ckey === 'direction' || ckey === 'wrap') {
+        prefix = 'flex'
+      }
+
+      getResponsiveUtilities(prefix, _config[ckey], _breakpoints).map(c => {
+        dictionary[c] = !isEmpty(c)
+      })
+    })
+
+    return classnames(dictionary).trim()
+  }, [_breakpoints, _config])
 }

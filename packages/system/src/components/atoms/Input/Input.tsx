@@ -1,5 +1,5 @@
 import { FormControlSize } from '@flex-development/kustomzcore'
-import { useMutatedProps } from '@system/hooks'
+import { useSanitizedProps } from '@system/hooks'
 import { MutatedFormControlProps } from '@system/types'
 import { omit } from 'lodash'
 import {
@@ -375,19 +375,19 @@ export const Input: FREC<InputRefProps> = forwardRef((props, ref) => {
     rest.placeholder = 'you@email.com'
   }
 
-  const mutated = useMutatedProps<typeof rest, JSX.IntrinsicElements['input']>(
-    rest,
-    {
-      'form-check-input': checks && !props.className?.includes('btn-check'),
-      'form-control': !checks && !file && !range,
-      [`form-control-${size}`]: !checks && !file && size,
-      'form-file-input': file,
-      'form-range': range,
-      'is-invalid': invalid
-    }
-  )
+  const sanitized = useSanitizedProps<
+    typeof rest,
+    JSX.IntrinsicElements['input']
+  >(rest, {
+    'form-check-input': checks && !props.className?.includes('btn-check'),
+    'form-control': !checks && !file && !range,
+    [`form-control-${size}`]: !checks && !file && size,
+    'form-file-input': file,
+    'form-range': range,
+    'is-invalid': invalid
+  })
 
-  return <input {...omit(mutated, ['children'])} ref={ref} />
+  return <input {...omit(sanitized, ['children'])} ref={ref} />
 })
 
 Input.displayName = 'Input'

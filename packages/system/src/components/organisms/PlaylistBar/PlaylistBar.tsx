@@ -3,7 +3,7 @@ import {
   MusicKitPlaybackState,
   MusicKitSongAttributes
 } from '@flex-development/kustomzcore'
-import { useMutatedProps } from '@system/hooks'
+import { useSanitizedProps } from '@system/hooks'
 import { EventHandlers, MutatedProps } from '@system/types'
 import { FC } from 'react'
 import {
@@ -80,13 +80,13 @@ export const PlaylistBar: FC<PlaylistBarProps> = (props: PlaylistBarProps) => {
     ...rest
   } = props
 
-  const mutated = useMutatedProps<typeof rest>(rest, 'playlistbar')
+  const sanitized = useSanitizedProps<typeof rest>(rest, 'playlistbar')
 
   let artwork_url = song.artwork?.url.replace('{w}', `${song.artwork.width}`)
   artwork_url = artwork_url?.replace('{h}', `${song.artwork.height}`)
 
   return (
-    <Section {...mutated}>
+    <Section {...sanitized}>
       <Column align='center' flex span={8}>
         <Link
           className='playlistbar-artwork'

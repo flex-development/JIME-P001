@@ -6,7 +6,9 @@ import {
 import { GRID_BREAKPOINT_KEYS } from '@system/config'
 import { getResponsiveUtilities } from '@system/utils'
 import classnames from 'classnames'
-import { isEmpty } from 'lodash'
+import { isEmpty, isEqual } from 'lodash'
+import { useMemo } from 'react'
+import useMemoCompare, { MemoCompare } from '../useMemoCompare/useMemoCompare'
 
 /**
  * @file Generate grid column classes
@@ -25,13 +27,17 @@ export const useColumn = (
   utilities: ResponsiveUtility<boolean | Columns>,
   breakpoints: GridBreakpoint[] = GRID_BREAKPOINT_KEYS
 ): string => {
-  const dictionary = {}
+  const _compare: MemoCompare = (previous, next) => isEqual(previous, next)
+  const _breakpoints = useMemoCompare<typeof breakpoints>(breakpoints, _compare)
 
-  getResponsiveUtilities('col', utilities, breakpoints).map(classes => {
-    dictionary[classes] = !isEmpty(classes)
-  })
+  return useMemo(() => {
+    const dictionary = {}
 
-  const classes = classnames(dictionary)
+    getResponsiveUtilities('col', utilities, _breakpoints).map(c => {
+      dictionary[c] = !isEmpty(c)
+    })
 
-  return classes.length ? classes : 'col'
+    const classes = classnames(dictionary).trim()
+    return classes.length ? classes : 'col'
+  }, [_breakpoints, utilities])
 }

@@ -1,4 +1,4 @@
-import { useMutatedProps } from '@system/hooks'
+import { useSanitizedProps } from '@system/hooks'
 import { getProductVariantImage } from '@system/utils'
 import { omit } from 'lodash'
 import { FC, useEffect } from 'react'
@@ -44,7 +44,10 @@ export const ProductImageCarousel: FC<ProductImageCarouselProps> = (
   const { images = [], product_title, variants = [], ...rest } = props
 
   // Get component properties
-  const mutated = useMutatedProps<typeof rest>(rest, 'product-image-carousel')
+  const sanitized = useSanitizedProps<typeof rest>(
+    rest,
+    'product-image-carousel'
+  )
 
   // Initialize carousel slides state
   const [slides, { setValue: setSlides }] = useArray<ImageProps>([])
@@ -72,7 +75,7 @@ export const ProductImageCarousel: FC<ProductImageCarouselProps> = (
   }, [images, product_title, setSlides, variants])
 
   return (
-    <Carousel {...mutated}>
+    <Carousel {...sanitized}>
       {slides.map(slide => (
         <Image {...slide} className='d-block w-100' key={slide.id} />
       ))}

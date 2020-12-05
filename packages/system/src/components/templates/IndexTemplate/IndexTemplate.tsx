@@ -1,5 +1,5 @@
 import { IReview } from '@flex-development/kustomzcore'
-import { useMutatedProps } from '@system/hooks'
+import { useSanitizedProps } from '@system/hooks'
 import { MutatedProps, TC } from '@system/types'
 import { uuid } from '@system/utils'
 import { Heading, Main, Paragraph, Section } from '../../atoms'
@@ -101,10 +101,10 @@ export const IndexTemplate: TC<IndexTemplateProps> = (
     ...rest
   } = props
 
-  const mutated = useMutatedProps<typeof rest>(rest, 'template')
+  const sanitized = useSanitizedProps<typeof rest>(rest, 'template')
 
   return (
-    <Main {...mutated} data-template={IndexTemplate.template_id}>
+    <Main {...sanitized} data-template={IndexTemplate.template_id}>
       <Section id='about'>
         <Heading size={2}>{about_section_title}</Heading>
         <Paragraph>{about_section_text}</Paragraph>

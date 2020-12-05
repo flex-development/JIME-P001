@@ -1,3 +1,4 @@
+import { FeathersErrorJSON } from '@feathersjs/errors'
 import { AnyObject, ANYTHING } from '@flex-development/json'
 import createError from '@subdomains/app/utils/createError'
 import Axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios'
@@ -19,7 +20,7 @@ import { isPlainObject, pick } from 'lodash'
 export const handleErrorResponse = (error: AxiosError): void => {
   const { config, message, request, response, stack } = error
 
-  let feathersError = {} as ReturnType<typeof createError>
+  let feathersError = {} as FeathersErrorJSON
 
   if (response) {
     // The request was made and the server responded with a status code

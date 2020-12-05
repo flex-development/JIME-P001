@@ -1,5 +1,5 @@
 import { ANYTHING } from '@flex-development/json'
-import { useMutatedProps } from '@system/hooks'
+import { useSanitizedProps } from '@system/hooks'
 import { EventHandlers, MutatedProps } from '@system/types'
 import { FC } from 'react'
 import { Button, Column, Header, Link, LinkProps, Span } from '../../atoms'
@@ -58,10 +58,10 @@ export const ShopHeader: FC<ShopHeaderProps> = (props: ShopHeaderProps) => {
     ...rest
   } = props
 
-  const mutated = useMutatedProps<typeof rest>(rest, 'shop-header')
+  const sanitized = useSanitizedProps<typeof rest>(rest, 'shop-header')
 
   return (
-    <Header {...mutated}>
+    <Header {...sanitized}>
       <Column align='center' flex>
         <Button
           className='shop-header-btn'

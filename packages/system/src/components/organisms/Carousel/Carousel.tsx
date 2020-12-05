@@ -1,5 +1,5 @@
 import { AnyObject } from '@flex-development/json'
-import { useActiveIndex, useMutatedProps } from '@system/hooks'
+import { useActiveIndex, useSanitizedProps } from '@system/hooks'
 import classnames from 'classnames'
 import { chunk } from 'lodash'
 import { Children, FC, ReactElement } from 'react'
@@ -78,7 +78,7 @@ export const Carousel: FC<CarouselProps> & {
   const { children, chunk_max, position, ...rest } = props
 
   // Handle props and inject class
-  const mutated = useMutatedProps<typeof rest>(rest, 'carousel')
+  const sanitized = useSanitizedProps<typeof rest>(rest, 'carousel')
 
   // Get carousel items
   const items = Children.toArray(children) as CarouselProps['children']
@@ -91,7 +91,7 @@ export const Carousel: FC<CarouselProps> & {
   })
 
   return (
-    <Box {...mutated}>
+    <Box {...sanitized}>
       <Box className='carousel-inner'>
         {(() => {
           if (chunk_max) {

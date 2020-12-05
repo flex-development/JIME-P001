@@ -4,6 +4,7 @@ import {
 } from '@system/config'
 import { useTransformScaleX } from '@system/hooks'
 import { StoryFN } from '@system/types/storybook'
+import { useRef } from 'react'
 import { animated } from 'react-spring'
 import { Button, ButtonProps } from './Button'
 /**
@@ -28,15 +29,6 @@ Default.args = {
   children: 'Button text'
 }
 
-export const Block: StoryFN<ButtonProps> = (args: ButtonProps) => (
-  <Button {...args} />
-)
-
-Block.args = {
-  block: true,
-  children: 'Block level button'
-}
-
 export const Disabled: StoryFN<ButtonProps> = (args: ButtonProps) => {
   return <Button {...args} />
 }
@@ -44,6 +36,15 @@ export const Disabled: StoryFN<ButtonProps> = (args: ButtonProps) => {
 Disabled.args = {
   children: 'Disabled button',
   disabled: true
+}
+
+export const Fluid: StoryFN<ButtonProps> = (args: ButtonProps) => (
+  <Button {...args} />
+)
+
+Fluid.args = {
+  children: 'Fluid button',
+  fluid: true
 }
 
 export const Large: StoryFN<ButtonProps> = (args: ButtonProps) => (
@@ -57,9 +58,12 @@ Large.args = {
 
 export const ScaleButton: StoryFN<ButtonProps> = (args: ButtonProps) => {
   const { toggle, style } = useTransformScaleX()
+  const ref = useRef<HTMLButtonElement>(null)
+
+  console.debug(ref)
 
   return (
-    <Button {...args} onClick={() => toggle()}>
+    <Button {...args} onClick={() => toggle()} ref={ref}>
       <animated.div style={style}>{args.children}</animated.div>
     </Button>
   )

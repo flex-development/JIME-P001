@@ -1,4 +1,4 @@
-import { useIcon, useMutatedProps } from '@system/hooks'
+import { useIcon, useSanitizedProps } from '@system/hooks'
 import { MutatedProps } from '@system/types'
 import {
   forwardRef,
@@ -94,7 +94,7 @@ export const Label: FREC<LabelRefProps> = forwardRef((props, ref) => {
 
   const withIcon = useIcon<LabelProps>(rest)
 
-  const mutated = useMutatedProps<
+  const sanitized = useSanitizedProps<
     typeof withIcon,
     JSX.IntrinsicElements['label']
   >(withIcon, {
@@ -106,9 +106,9 @@ export const Label: FREC<LabelRefProps> = forwardRef((props, ref) => {
   /* eslint-disable-next-line jsx-a11y/label-has-associated-control */
 
   return (
-    <label {...mutated} htmlFor={htmlFor} ref={ref}>
+    <label {...sanitized} htmlFor={htmlFor} ref={ref}>
       {required && '*'}
-      {mutated.children}
+      {sanitized.children}
     </label>
   )
 

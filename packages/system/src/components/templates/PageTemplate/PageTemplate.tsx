@@ -1,4 +1,4 @@
-import { useMutatedProps } from '@system/hooks'
+import { useSanitizedProps } from '@system/hooks'
 import { MutatedProps, TC } from '@system/types'
 import { Main, MDXBox } from '../../atoms'
 
@@ -27,10 +27,10 @@ export const PageTemplate: TC<PageTemplateProps> = (
 ) => {
   const { body, ...rest } = props
 
-  const mutated = useMutatedProps<typeof rest>(rest, 'template')
+  const sanitized = useSanitizedProps<typeof rest>(rest, 'template')
 
   return (
-    <Main {...mutated} data-template={PageTemplate.template_id}>
+    <Main {...sanitized} data-template={PageTemplate.template_id}>
       <MDXBox>{body}</MDXBox>
     </Main>
   )

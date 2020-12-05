@@ -1,4 +1,4 @@
-import { useMutatedProps } from '@system/hooks'
+import { useSanitizedProps } from '@system/hooks'
 import { MutatedFormControlProps, MutatedProps } from '@system/types'
 import {
   forwardRef,
@@ -54,14 +54,14 @@ export type OptionRefProps = ReflessOptionProps & OptionRefAttributes
  * - https://developer.mozilla.org/docs/Web/API/HTMLOptionElement
  */
 export const Option: FREC<OptionRefProps> = forwardRef((props, ref) => {
-  const mutated = useMutatedProps<
+  const sanitized = useSanitizedProps<
     typeof props,
     JSX.IntrinsicElements['option']
   >(props)
 
-  mutated['aria-label'] = props.label
+  sanitized['aria-label'] = props.label
 
-  return <option {...mutated} ref={ref} />
+  return <option {...sanitized} ref={ref} />
 })
 
 Option.displayName = 'Option'

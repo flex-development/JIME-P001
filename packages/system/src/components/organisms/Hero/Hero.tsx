@@ -1,5 +1,5 @@
 import { Heading, Paragraph, Section } from '@system/components/atoms'
-import { useMutatedProps } from '@system/hooks'
+import { useSanitizedProps } from '@system/hooks'
 import { MutatedProps } from '@system/types'
 import { FC } from 'react'
 
@@ -27,10 +27,10 @@ export interface HeroProps extends MutatedProps {
 export const Hero: FC<HeroProps> = (props: HeroProps) => {
   const { subtitle, title, ...rest } = props
 
-  const mutated = useMutatedProps<typeof rest>(rest, 'hero')
+  const sanitized = useSanitizedProps<typeof rest>(rest, 'hero')
 
   return (
-    <Section {...mutated}>
+    <Section {...sanitized}>
       <Heading className='hero-title'>{title}</Heading>
       <Paragraph className='hero-subtitle'>{subtitle}</Paragraph>
     </Section>

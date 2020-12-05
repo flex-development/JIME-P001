@@ -2,8 +2,10 @@ import { AnyObject } from '@flex-development/json'
 import { Icon, IconProps } from '@system/components'
 import { MutatedProps } from '@system/types'
 import classnames from 'classnames'
-import { isNull, isUndefined, omit } from 'lodash'
-import { useEffect, useState } from 'react'
+import { isEqual, isNull, isUndefined, join, uniq } from 'lodash'
+import { useMemo } from 'react'
+import { MemoCompare } from '../useMemoCompare'
+import useMemoCompare from '../useMemoCompare/useMemoCompare'
 
 /**
  * @file Render icon with props.children
@@ -32,61 +34,56 @@ export type UseIconProps = {
  * @param props.icon.position - String indication where to position icon
  */
 export function useIcon<P extends UseIconProps = UseIconProps>(props: P): P {
-  const {
-    children,
-    className: initialClassName = '',
-    icon: initialIcon
-  } = props
+  const { children, className = '', icon, ...rest } = props
 
-  const [className, setClassName] = useState(initialClassName)
-  const [skip] = useState(!initialIcon)
-  const [dataAttrs, setDataAttrs] = useState<AnyObject>({})
-  const [mutatedChildren, setMutatedChildren] = useState(children)
-  const [icon] = useState(JSON.stringify(initialIcon || ''))
+  const _compare: MemoCompare = (previous, next) => isEqual(previous, next)
 
-  useEffect(() => {
-    // Skip hook logic
-    if (skip || !icon.length) return
+  const _children = useMemoCompare<typeof children>(children, _compare)
+  const _icon = useMemoCompare<IconProps>(icon || {}, _compare)
+  const _rest = useMemoCompare<typeof rest>(rest, _compare)
 
-    // Parse icon props
-    const iconParsed: IconProps = JSON.parse(icon)
+  return useMemo<P>(() => {
+    // Logic will be skipped if icon is undefined or empty object
+    const skip = !Object.keys(_icon).length
 
-    // Get icon component
-    const component: JSX.Element = <Icon {...iconParsed} key='icon' />
+    // Initialize new props
+    const _props: AnyObject = { ..._rest, children: _children }
 
-    // Position icon
-    const { position } = iconParsed
+    // Update children
+    if (!skip) {
+      // Get icon component
+      const component: JSX.Element = <Icon {..._icon} key='icon' />
 
-    if (!children) {
-      setMutatedChildren(component)
-    } else if (position === 'left') {
-      setMutatedChildren([component, children])
-    } else {
-      setMutatedChildren([children, component])
+      // Update component children
+      if (!_children) {
+        _props.children = [component]
+      } else if (_children && _icon.position === 'left') {
+        _props.children = [component, _children]
+      } else {
+        _props.children = [_children, component]
 
-      if (['bottom', 'top'].includes(position ?? '')) {
-        setClassName((classes: string) => {
-          return classnames({
-            [`${classes}`]: true,
+        if (['bottom', 'top'].includes(_icon.position ?? '')) {
+          _props.className = classnames({
             'd-flex': true,
-            'flex-column': position === 'bottom',
-            'flex-column-reverse': position === 'top'
+            'flex-column': _icon.position === 'bottom',
+            'flex-column-reverse': _icon.position === 'top'
           })
-        })
+        }
       }
     }
 
-    // Set data attributes
-    setDataAttrs({
-      'data-icon': true,
-      'data-icon-only': isNull(children) || isUndefined(children)
-    })
-  }, [children, icon, skip])
+    // Merge classes and get unique class names
+    _props.className = classnames(className, _props.className).trim()
+    _props.className = join(uniq(_props.className.split(' ')), ' ').trim()
 
-  return ({
-    ...omit(props, ['icon']),
-    ...dataAttrs,
-    children: skip || !icon.length ? children : mutatedChildren,
-    className
-  } as unknown) as P
+    // Add additional data attributes
+    if (!skip) {
+      const { children: _pc } = _props
+
+      _props['data-icon'] = true
+      _props['data-icon-only'] = isNull(_pc) || isUndefined(_pc)
+    }
+
+    return _props as P
+  }, [_children, _icon, _rest, className])
 }

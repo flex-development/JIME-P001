@@ -1,4 +1,4 @@
-import { useMutatedProps, useProductVariants } from '@system/hooks'
+import { useProductVariants, useSanitizedProps } from '@system/hooks'
 import { EventHandlers } from '@system/types'
 import { getProductVariantImage } from '@system/utils'
 import { FC, useEffect, useState } from 'react'
@@ -43,7 +43,7 @@ export interface ProductCardProps extends BoxProps {
 export const ProductCard: FC<ProductCardProps> = (props: ProductCardProps) => {
   const { product_link = {}, product, ...rest } = props
 
-  const mutated = useMutatedProps<typeof rest, BoxProps>(rest, {
+  const sanitized = useSanitizedProps<typeof rest, BoxProps>(rest, {
     card: true,
     'product-card': true
   })
@@ -90,7 +90,7 @@ export const ProductCard: FC<ProductCardProps> = (props: ProductCardProps) => {
   )
 
   return (
-    <Box {...mutated} id={`product-card-${product.product_id}`}>
+    <Box {...sanitized} id={`product-card-${product.product_id}`}>
       <ProductLink className='d-inline-block'>
         <Image {...image} className='product-card-img card-img-top' fluid />
       </ProductLink>

@@ -1,4 +1,4 @@
-import { useMutatedProps } from '@system/hooks'
+import { useSanitizedProps } from '@system/hooks'
 import { MutatedProps } from '@system/types'
 import {
   forwardRef,
@@ -123,12 +123,12 @@ export type FormRefProps = ReflessFormProps & FormRefAttributes
  * - https://developer.mozilla.org/docs/Web/API/HTMLFormElement
  */
 export const Form: FREC<FormRefProps> = forwardRef((props, ref) => {
-  const mutated = useMutatedProps<typeof props, JSX.IntrinsicElements['form']>(
-    props,
-    'form'
-  )
+  const sanitized = useSanitizedProps<
+    typeof props,
+    JSX.IntrinsicElements['form']
+  >(props, 'form')
 
-  return <form {...mutated} ref={ref} />
+  return <form {...sanitized} ref={ref} />
 })
 
 Form.displayName = 'Form'

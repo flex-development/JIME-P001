@@ -1,5 +1,5 @@
 import { FlexboxUtilitiesConfig } from '@flex-development/kustomzcore'
-import { useFlexbox, useMutatedProps } from '@system/hooks'
+import { useFlexbox, useSanitizedProps } from '@system/hooks'
 import { isBoolean, isString } from 'lodash'
 import {
   forwardRef,
@@ -86,13 +86,13 @@ export const FlexBox: FREC<FlexBoxRefProps> = forwardRef((props, ref) => {
     wrap
   })
 
-  const mutated = useMutatedProps<typeof rest>(rest, {
+  const sanitized = useSanitizedProps<typeof rest>(rest, {
     container: isBoolean(container) && container,
     [`container-${container}`]: isString(container),
     [flexbox]: true
   })
 
-  return <div {...mutated} ref={ref} />
+  return <div {...sanitized} ref={ref} />
 })
 
 FlexBox.displayName = 'FlexBox'

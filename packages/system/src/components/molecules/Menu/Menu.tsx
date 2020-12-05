@@ -1,5 +1,5 @@
 import { AnyObject } from '@flex-development/json'
-import { useMutatedProps } from '@system/hooks'
+import { useSanitizedProps } from '@system/hooks'
 import { uuid } from '@system/utils'
 import { FC, useEffect } from 'react'
 import { useArray } from 'react-hanger/array/useArray'
@@ -29,7 +29,7 @@ type MenuLink = LinkProps & { key: string }
 export const Menu: FC<MenuProps> = (props: MenuProps) => {
   const { links: initialLinks = [], ...rest } = props
 
-  const mutated = useMutatedProps<typeof rest>(rest)
+  const sanitized = useSanitizedProps<typeof rest>(rest)
 
   const [links, { setValue: setLinks }] = useArray<MenuLink>([])
 
@@ -38,7 +38,7 @@ export const Menu: FC<MenuProps> = (props: MenuProps) => {
   }, [initialLinks, setLinks])
 
   return (
-    <Nav {...mutated}>
+    <Nav {...sanitized}>
       {/* eslint-disable-next-line prettier/prettier */}
       {links.map(({ key, uuid, ...link }: AnyObject) => {
         return <Link {...link} key={uuid || key} />

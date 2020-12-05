@@ -1,5 +1,5 @@
 import { ButtonVariant, ThemeColor } from '@flex-development/kustomzcore'
-import { useIcon, useMutatedProps } from '@system/hooks'
+import { useIcon, useSanitizedProps } from '@system/hooks'
 import { MutatedProps } from '@system/types'
 import {
   forwardRef,
@@ -138,32 +138,32 @@ export const Link: FREC<LinkRefProps> = forwardRef((props, ref) => {
     children: rest.children || rest.title
   })
 
-  const mutated = useMutatedProps<typeof withIcon, JSX.IntrinsicElements['a']>(
-    withIcon,
-    {
-      active,
-      btn: btn && btn,
-      [`btn-${btn}`]: btn,
-      disabled: rest.disabled,
-      'dropdown-item': dropdown,
-      'dropdown-toggle': toggle,
-      [`link-${color}`]: color,
-      'nav-link': nav,
-      'stretched-link': stretched
-    }
-  )
+  const sanitized = useSanitizedProps<
+    typeof withIcon,
+    JSX.IntrinsicElements['a']
+  >(withIcon, {
+    active,
+    btn: btn && btn,
+    [`btn-${btn}`]: btn,
+    disabled: rest.disabled,
+    'dropdown-item': dropdown,
+    'dropdown-toggle': toggle,
+    [`link-${color}`]: color,
+    'nav-link': nav,
+    'stretched-link': stretched
+  })
 
   if (toggle) {
-    mutated['aria-expanded'] = rest['aria-expanded'] || false
-    mutated['data-toggle'] = 'dropdown'
-    mutated.role = 'button'
+    sanitized['aria-expanded'] = rest['aria-expanded'] || false
+    sanitized['data-toggle'] = 'dropdown'
+    sanitized.role = 'button'
   }
 
-  if (mutated.onClick && mutated.href === '#') delete mutated.href
+  if (sanitized.onClick && sanitized.href === '#') delete sanitized.href
 
   return (
-    <a {...mutated} ref={ref}>
-      {mutated.children}
+    <a {...sanitized} ref={ref}>
+      {sanitized.children}
     </a>
   )
 })

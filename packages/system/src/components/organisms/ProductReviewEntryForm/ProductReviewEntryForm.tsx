@@ -1,6 +1,6 @@
 import { AnyObject, ANYTHING } from '@flex-development/json'
 import { CreateReviewRequest } from '@flex-development/kustomzcore'
-import { useMutatedProps, useProductVariants } from '@system/hooks'
+import { useProductVariants, useSanitizedProps } from '@system/hooks'
 import { EventHandlers } from '@system/types'
 import { isEmpty } from 'lodash'
 import { FC } from 'react'
@@ -82,7 +82,7 @@ export const ProductReviewEntryForm: FC<ProductReviewEntryFormProps> = (
     ...rest
   } = props
 
-  const mutated = useMutatedProps<typeof rest>(rest, 'product-review-form')
+  const sanitized = useSanitizedProps<typeof rest>(rest, 'product-review-form')
 
   // Get product variants as options
   const { options, selectVariant, selected = {} } = useProductVariants(variants)
@@ -102,7 +102,7 @@ export const ProductReviewEntryForm: FC<ProductReviewEntryFormProps> = (
   const { state: errors, setState: setErrors } = useSetState<AnyObject>({})
 
   return (
-    <Form {...mutated} id={`product-review-form-${id}`}>
+    <Form {...sanitized} id={`product-review-form-${id}`}>
       <Heading className='product-review-form-title' mb={0} size={5}>
         <Span>Product Review</Span>
 

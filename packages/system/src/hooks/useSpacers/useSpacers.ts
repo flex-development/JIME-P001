@@ -7,11 +7,14 @@ import {
 import { GRID_BREAKPOINT_KEYS } from '@system/config'
 import { getResponsiveUtilities } from '@system/utils'
 import classnames from 'classnames'
-import { isEmpty, isObject } from 'lodash'
+import { isEmpty, isEqual, isObject } from 'lodash'
+import { useMemo } from 'react'
+import { MemoCompare } from '../useMemoCompare'
+import useMemoCompare from '../useMemoCompare/useMemoCompare'
 
 /**
  * @file Generate gutter, margin, or padding utility classes
- * @module hooks/useSpacers
+ * @module hooks/useSpacers/impl
  */
 
 /**
@@ -20,8 +23,8 @@ import { isEmpty, isObject } from 'lodash'
  * @see https://v5.getbootstrap.com/docs/5.0/layout/gutters
  * @see https://v5.getbootstrap.com/docs/5.0/utilities/spacing
  *
- * @param config - Gutter, margin, or padding utilities config
  * @param prefix - Gutter, margin, or padding utility class prefix
+ * @param config - Gutter, margin, or padding utilities config
  * @param breakpoints - Breakpoint keys to use instead of `GRID_BREAKPOINT_KEYS`
  */
 export const useSpacers = (
@@ -29,19 +32,26 @@ export const useSpacers = (
   config: Spacer | ResponsiveUtility<Spacer>,
   breakpoints: GridBreakpoint[] = GRID_BREAKPOINT_KEYS
 ): string => {
-  const dictionary = {}
-
   config = isObject(config) ? config : { xs: config }
 
-  breakpoints.forEach(breakpoint => {
-    const value = config[breakpoint]
+  const _compare: MemoCompare = (previous, next) => isEqual(previous, next)
 
-    if (value === 0 || value) {
-      getResponsiveUtilities(prefix, config, breakpoints).map(classes => {
-        dictionary[classes] = !isEmpty(classes)
-      })
-    }
-  })
+  const _breakpoints = useMemoCompare<typeof breakpoints>(breakpoints, _compare)
+  const _config = useMemoCompare<typeof config>(config, _compare)
 
-  return classnames(dictionary).trim()
+  return useMemo<string>(() => {
+    const dictionary = {}
+
+    _breakpoints.forEach(breakpoint => {
+      const value = _config[breakpoint]
+
+      if (value === 0 || value) {
+        getResponsiveUtilities(prefix, _config, _breakpoints).map(classes => {
+          dictionary[classes] = !isEmpty(classes)
+        })
+      }
+    })
+
+    return classnames(dictionary).trim()
+  }, [_breakpoints, _config, prefix])
 }

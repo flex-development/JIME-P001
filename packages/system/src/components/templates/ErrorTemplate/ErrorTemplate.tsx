@@ -1,4 +1,4 @@
-import { useMutatedProps } from '@system/hooks'
+import { useSanitizedProps } from '@system/hooks'
 import { MutatedProps, TC } from '@system/types'
 import { Heading, Main, Section, Span } from '../../atoms'
 
@@ -30,10 +30,10 @@ export const ErrorTemplate: TC<ErrorTemplateProps> = (
 ) => {
   const { children, code, message, ...rest } = props
 
-  const mutated = useMutatedProps<typeof rest>(rest, 'template')
+  const sanitized = useSanitizedProps<typeof rest>(rest, 'template')
 
   return (
-    <Main {...mutated} data-template={ErrorTemplate.template_id}>
+    <Main {...sanitized} data-template={ErrorTemplate.template_id}>
       <Section>
         <Heading size={2}>
           <Span className='error-code'>{code}</Span>

@@ -1,5 +1,5 @@
 import { ANYTHING } from '@flex-development/json'
-import { useMutatedProps } from '@system/hooks'
+import { useSanitizedProps } from '@system/hooks'
 import { EventHandlers } from '@system/types'
 import { uuid } from '@system/utils'
 import { FC } from 'react'
@@ -62,14 +62,14 @@ export const ProductRatingField: FC<ProductRatingFieldProps> = (
     ...rest
   } = props
 
-  const mutated = useMutatedProps<typeof rest>(rest, 'product-rating-field')
+  const sanitized = useSanitizedProps<typeof rest>(rest, 'product-rating-field')
 
   const [rating, { setValue: setRating }] = useNumber(
     initial_rating || values[values.length - 1] || 5
   )
 
   return (
-    <Box {...mutated} data-rating={rating} role='group'>
+    <Box {...sanitized} data-rating={rating} role='group'>
       {values.map(value => (
         <FormCheck
           aria-label='Product rating field input'

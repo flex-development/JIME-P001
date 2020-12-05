@@ -1,4 +1,4 @@
-import { useMutatedProps } from '@system/hooks'
+import { useSanitizedProps } from '@system/hooks'
 import {
   forwardRef,
   ForwardRefExoticComponent as FREC,
@@ -51,17 +51,17 @@ export type IconRefProps = ReflessIconProps & SpanRefAttributes
 export const Icon: FREC<IconRefProps> = forwardRef((props, ref) => {
   const { outlined, position, ...rest } = props
 
-  const mutated = useMutatedProps<typeof rest, SpanProps>(rest, {
+  const sanitized = useSanitizedProps<typeof rest, SpanProps>(rest, {
     icon: true,
     'material-icons': !outlined,
     'material-icons-outlined': outlined
   })
 
-  mutated['aria-hidden'] = rest.children ? rest?.['aria-hidden'] : false
-  mutated['data-ligature'] = mutated.children
-  mutated['data-position'] = position
+  sanitized['aria-hidden'] = rest.children ? rest?.['aria-hidden'] : false
+  sanitized['data-ligature'] = sanitized.children
+  sanitized['data-position'] = position
 
-  return <Span {...mutated} ref={ref} />
+  return <Span {...sanitized} ref={ref} />
 })
 
 Icon.displayName = 'Icon'

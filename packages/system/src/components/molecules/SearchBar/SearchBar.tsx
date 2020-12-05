@@ -1,5 +1,5 @@
 import { ANYTHING } from '@flex-development/json'
-import { useMutatedProps } from '@system/hooks'
+import { useSanitizedProps } from '@system/hooks'
 import { EventHandlers } from '@system/types'
 import { FC, FormEvent, useState } from 'react'
 import { Button, Form, FormProps, Input, InputProps } from '../../atoms'
@@ -45,12 +45,12 @@ export const SearchBar: FC<SearchBarProps> = (props: SearchBarProps) => {
 
   rest.onSubmit = (e: FormEvent) => handleSearch(query.replace(' ', '+'), e)
 
-  const mutated = useMutatedProps<typeof rest>(rest, 'searchbar')
+  const sanitized = useSanitizedProps<typeof rest>(rest, 'searchbar')
 
   const [query, setQuery] = useState<string>(initialQuery || '')
 
   return (
-    <Form {...mutated}>
+    <Form {...sanitized}>
       <Button
         aria-label='Search button'
         className='searchbar-btn'

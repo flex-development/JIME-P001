@@ -1,4 +1,4 @@
-import { useMutatedProps } from '@system/hooks'
+import { useSanitizedProps } from '@system/hooks'
 import { MutatedProps } from '@system/types'
 import {
   forwardRef,
@@ -36,11 +36,12 @@ export type BoxRefProps = ReflessBoxProps & BoxRefAttributes
  * - https://developer.mozilla.org/docs/Web/API/HTMLDivElement
  */
 export const Box: FREC<BoxRefProps> = forwardRef((props, ref) => {
-  const mutated = useMutatedProps<typeof props, JSX.IntrinsicElements['div']>(
-    props
-  )
+  const sanitized = useSanitizedProps<
+    typeof props,
+    JSX.IntrinsicElements['div']
+  >(props)
 
-  return <div {...mutated} ref={ref} />
+  return <div {...sanitized} ref={ref} />
 })
 
 Box.displayName = 'Box'

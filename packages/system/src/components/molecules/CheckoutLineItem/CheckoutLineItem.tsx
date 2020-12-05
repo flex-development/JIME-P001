@@ -3,7 +3,7 @@ import {
   CheckoutLineItemDisplay,
   CheckoutLineItemInput
 } from '@flex-development/kustomzcore'
-import { useCheckoutLineItemInput, useMutatedProps } from '@system/hooks'
+import { useCheckoutLineItemInput, useSanitizedProps } from '@system/hooks'
 import { EventHandlers } from '@system/types'
 import { FC, Fragment } from 'react'
 import {
@@ -74,7 +74,7 @@ export const CheckoutLineItem: FC<CheckoutLineItemProps> = (
   } = props
 
   // Get outer component properties
-  const mutated = useMutatedProps<typeof rest>(rest, 'line-item')
+  const sanitized = useSanitizedProps<typeof rest>(rest, 'line-item')
 
   // Handle line item state
   const { item, updateQuantity } = useCheckoutLineItemInput({ data, image })
@@ -83,7 +83,7 @@ export const CheckoutLineItem: FC<CheckoutLineItemProps> = (
   const { 0: product_title, 1: variant_title } = data.title.split(' - ')
 
   return (
-    <FlexBox {...mutated} id={`line-item-${data.variant_id}`}>
+    <FlexBox {...sanitized} id={`line-item-${data.variant_id}`}>
       <Column mb={{ md: 0, xs: 24 }} md={3} xs={12}>
         <Image alt={image.alt || data.title} fluid src={image.src} />
       </Column>

@@ -1,7 +1,7 @@
 import { ButtonVariant, FormControlSize } from '@flex-development/kustomzcore'
-import { useIcon, useMutatedProps } from '@system/hooks'
+import { useSanitizedProps } from '@system/hooks'
 import { AnimatedFREC, FREC, MutatedFormControlProps } from '@system/types'
-import { forwardRef, PropsWithoutRef, RefAttributes } from 'react'
+import { forwardRef } from 'react'
 import { animated } from 'react-spring'
 import { IconProps } from '../Icon/Icon'
 
@@ -23,11 +23,9 @@ export interface ButtonProps
   autoComplete?: 'off'
 
   /**
-   * Create a block level button.
-   *
-   * See: https://v5.getbootstrap.com/docs/5.0/components/buttons/#sizes
+   * If true, add the class `w-100`.
    */
-  block?: boolean
+  fluid?: boolean
 
   /**
    * The URL to which to submit the form's data; overrides the parent form's
@@ -97,45 +95,28 @@ export interface ButtonProps
 }
 
 /**
- * Button component properties without the `ref` property.
- */
-export type ReflessButtonProps = PropsWithoutRef<ButtonProps>
-
-/**
- * Ref attributes for `<button>` elements.
- */
-export type ButtonRefAttributes = RefAttributes<HTMLButtonElement>
-
-/**
- * {@link Button} component forward ref properties.
- */
-export type ButtonRefProps = ReflessButtonProps & ButtonRefAttributes
-
-/**
  * Renders a `<button>` element with the class `btn`.
  *
  * - https://v5.getbootstrap.com/docs/5.0/components/buttons
  * - https://developer.mozilla.org/docs/Web/HTML/Element/button
  * - https://developer.mozilla.org/docs/Web/API/HTMLButtonElement
  */
-export const Button: FREC<ButtonRefProps> = forwardRef((props, ref) => {
-  const { block, size, variant, ...rest } = props
+export const Button: FREC<ButtonProps> = forwardRef((props, ref) => {
+  const { fluid, size, variant, ...rest } = props
 
-  const withIcon = useIcon<ButtonProps>(rest)
-
-  const mutated = useMutatedProps<typeof withIcon, AnimatedFREC<'button'>>(
-    withIcon,
+  const sanitized = useSanitizedProps<typeof rest, AnimatedFREC<'button'>>(
+    rest,
     {
       btn: true,
-      'btn-block': block,
       [`btn-${size}`]: size,
-      [`btn-${variant}`]: variant
+      [`btn-${variant}`]: variant,
+      'w-100': fluid
     }
   )
 
-  if (rest.disabled) mutated['aria-disabled'] = true
+  if (rest.disabled) sanitized['aria-disabled'] = true
 
-  return <animated.button {...mutated} ref={ref} />
+  return <animated.button {...sanitized} ref={ref} />
 })
 
 Button.displayName = 'Button'

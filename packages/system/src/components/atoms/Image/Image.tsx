@@ -1,5 +1,5 @@
 import { NullishString } from '@flex-development/json'
-import { useMutatedProps } from '@system/hooks'
+import { useSanitizedProps } from '@system/hooks'
 import { MutatedVoidElementProps } from '@system/types'
 import { omit } from 'lodash'
 import {
@@ -143,18 +143,18 @@ export const Image: FREC<ImageRefProps> = forwardRef((props, ref) => {
   const { fluid, rounded, thumbnail, ...rest } = props
 
   // Get component properties
-  const mutated = useMutatedProps<typeof rest, JSX.IntrinsicElements['img']>(
-    rest,
-    {
-      img: true,
-      'img-fluid': fluid,
-      'img-thumbnail': thumbnail,
-      rounded
-    }
-  )
+  const sanitized = useSanitizedProps<
+    typeof rest,
+    JSX.IntrinsicElements['img']
+  >(rest, {
+    img: true,
+    'img-fluid': fluid,
+    'img-thumbnail': thumbnail,
+    rounded
+  })
 
   /* eslint-disable-next-line jsx-a11y/alt-text */
-  return <img {...omit(mutated, 'children')} ref={ref} />
+  return <img {...omit(sanitized, 'children')} ref={ref} />
 })
 
 Image.displayName = 'Image'

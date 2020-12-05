@@ -1,5 +1,5 @@
-import { AnyObject } from '@flex-development/json'
 import {
+  AnyObject,
   Booleanish,
   NullishString
 } from '@flex-development/json/utils'
@@ -293,6 +293,11 @@ export interface MutatedProps<E = HTMLElement> extends Omit<GlobalAttributes<E>,
    * - https://v5.getbootstrap.com/docs/5.0/utilities/colors/#background-gradient
    */
   gradient?: boolean
+
+  /**
+   * Icon to render beside the element text.
+   */
+  icon?: AnyObject
 
   /**
    * URL of background image.

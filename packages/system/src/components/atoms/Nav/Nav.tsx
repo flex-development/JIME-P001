@@ -1,4 +1,4 @@
-import { useFlexbox, useMutatedProps } from '@system/hooks'
+import { useFlexbox, useSanitizedProps } from '@system/hooks'
 import {
   forwardRef,
   ForwardRefExoticComponent as FREC,
@@ -79,18 +79,18 @@ export const Nav: FREC<NavRefProps> = forwardRef((props, ref) => {
     wrap
   })
 
-  const mutated = useMutatedProps<typeof rest, JSX.IntrinsicElements['nav']>(
-    rest,
-    {
-      [flexbox]: flexbox.length !== 0,
-      nav: true,
-      'nav-fill': fill,
-      'nav-pills': pills,
-      'nav-tabs': tabs
-    }
-  )
+  const sanitized = useSanitizedProps<
+    typeof rest,
+    JSX.IntrinsicElements['nav']
+  >(rest, {
+    [flexbox]: flexbox.length !== 0,
+    nav: true,
+    'nav-fill': fill,
+    'nav-pills': pills,
+    'nav-tabs': tabs
+  })
 
-  return <nav {...mutated} ref={ref} />
+  return <nav {...sanitized} ref={ref} />
 })
 
 Nav.displayName = 'Nav'

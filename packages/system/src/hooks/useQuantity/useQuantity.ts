@@ -1,4 +1,5 @@
 import { sanitizeQuantity } from '@system/utils'
+import { useCallback } from 'react'
 import useNumber from 'react-hanger/array/useNumber'
 
 /**
@@ -35,9 +36,16 @@ export const useQuantity = (initialQuantity = 1): UseQuantity => {
   // Initialize state
   const [quantity, { setValue }] = useNumber(initialQuantity, { lowerLimit: 0 })
 
+  /**
+   * Updates the internal quantity state.
+   *
+   * @param value - New quantity
+   */
+  const updateQuantity = (value?: number) => setValue(sanitizeQuantity(value))
+
   // Return quanity and useQuantity actions
   return {
     quantity,
-    updateQuantity: (value?: number) => setValue(sanitizeQuantity(value))
+    updateQuantity: useCallback(updateQuantity, [setValue])
   }
 }

@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react'
 import { Button } from './Button'
-import { Block, Disabled, Large, Small } from './Button.stories'
+import { Disabled, Fluid, Large, Small } from './Button.stories'
 
 /**
  * @file Tests - Button
@@ -15,13 +15,6 @@ it('renders a primary button', () => {
   expect(getByText(args.children)).toHaveClass('btn btn-primary')
 })
 
-it('renders a block level button', () => {
-  const { getByText } = render(<Block {...Block.args} />)
-  const { children } = Block.args as ArgsMatcher
-
-  expect(getByText(children)).toHaveClass('btn btn-block')
-})
-
 it('renders a disabled button', () => {
   const { getByText } = render(<Disabled {...Disabled.args} />)
   const { children } = Disabled.args as ArgsMatcher
@@ -30,6 +23,13 @@ it('renders a disabled button', () => {
 
   expect(button).toBeDisabled()
   expect(button).toHaveAttribute('aria-disabled')
+})
+
+it('renders a full width button', () => {
+  const { getByText } = render(<Fluid {...Fluid.args} />)
+  const { children } = Fluid.args as ArgsMatcher
+
+  expect(getByText(children)).toHaveClass('btn w-100')
 })
 
 it('renders a large button', () => {

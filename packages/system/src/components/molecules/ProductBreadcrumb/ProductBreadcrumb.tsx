@@ -1,4 +1,4 @@
-import { useMutatedProps } from '@system/hooks'
+import { useSanitizedProps } from '@system/hooks'
 import { FC } from 'react'
 import { IProductListing, IProductListingVariant } from 'shopify-api-node'
 import {
@@ -42,10 +42,10 @@ export const ProductBreadcrumb: FC<ProductBreadcrumbProps> = (
 ) => {
   const { collection, product, variant, ...rest } = props
 
-  const mutated = useMutatedProps<typeof rest>(rest, 'product-breadcrumb')
+  const sanitized = useSanitizedProps<typeof rest>(rest, 'product-breadcrumb')
 
   return (
-    <FlexBox {...mutated}>
+    <FlexBox {...sanitized}>
       <Link {...collection} />
       &nbsp;<Span className='product-breadcrumb-divider'>/</Span>&nbsp;
       <Paragraph className='product-breadcrumb-p'>{product}</Paragraph>

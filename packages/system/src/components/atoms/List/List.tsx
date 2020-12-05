@@ -1,4 +1,4 @@
-import { useMutatedProps } from '@system/hooks'
+import { useSanitizedProps } from '@system/hooks'
 import { MutatedProps } from '@system/types'
 import {
   forwardRef,
@@ -65,9 +65,9 @@ export type ListRefProps = ReflessListProps & ListRefAttributes
 export const List: FREC<ListRefProps> = forwardRef((props, ref) => {
   const { is, items = [], ...rest } = props
 
-  const mutated = useMutatedProps<typeof rest, InstrinsicListProps>(rest)
+  const sanitized = useSanitizedProps<typeof rest, InstrinsicListProps>(rest)
 
-  mutated.children = ((): ReactNode => {
+  sanitized.children = ((): ReactNode => {
     if (rest.children) return rest.children
 
     return items.map((item: ItemProps, i: number) => {
@@ -79,9 +79,9 @@ export const List: FREC<ListRefProps> = forwardRef((props, ref) => {
 
   switch (is) {
     case 'ol':
-      return <ol {...mutated} ref={ref} />
+      return <ol {...sanitized} ref={ref} />
     default:
-      return <ul {...mutated} ref={ref} />
+      return <ul {...sanitized} ref={ref} />
   }
 })
 

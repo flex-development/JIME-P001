@@ -1,4 +1,4 @@
-import { useMutatedProps } from '@system/hooks'
+import { useSanitizedProps } from '@system/hooks'
 import { MutatedProps } from '@system/types'
 import {
   forwardRef,
@@ -50,12 +50,12 @@ export type DialogRefProps = ReflessDialogProps & DialogRefAttributes
  * - https://developer.mozilla.org/docs/Web/API/HTMLDialogElement
  */
 export const Dialog: FREC<DialogRefProps> = forwardRef((props, ref) => {
-  const mutated = useMutatedProps<
+  const sanitized = useSanitizedProps<
     typeof props,
     JSX.IntrinsicElements['dialog']
   >(props)
 
-  return <dialog {...mutated} ref={ref} />
+  return <dialog {...sanitized} ref={ref} />
 })
 
 Dialog.displayName = 'Dialog'

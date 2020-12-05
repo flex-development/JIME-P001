@@ -1,5 +1,5 @@
 import { ThemeColor } from '@flex-development/kustomzcore'
-import { useMutatedProps } from '@system/hooks'
+import { useSanitizedProps } from '@system/hooks'
 import { MutatedVoidElementProps } from '@system/types'
 import { omit } from 'lodash'
 import {
@@ -45,12 +45,12 @@ export type DividerRefProps = ReflessDividerProps & DividerRefAttributes
 export const Divider: FREC<DividerProps> = forwardRef((props, ref) => {
   const { color, ...rest } = props
 
-  const mutated = useMutatedProps<typeof rest, JSX.IntrinsicElements['hr']>(
+  const sanitized = useSanitizedProps<typeof rest, JSX.IntrinsicElements['hr']>(
     rest,
     { divider: true, [`c-${color}`]: color }
   )
 
-  return <hr {...omit(mutated, ['children'])} ref={ref} />
+  return <hr {...omit(sanitized, ['children'])} ref={ref} />
 })
 
 Divider.displayName = 'Divider'

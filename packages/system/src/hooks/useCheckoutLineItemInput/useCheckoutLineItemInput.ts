@@ -40,7 +40,7 @@ export type UseCheckoutLineItemInput = {
 export const useCheckoutLineItemInput = (
   item: CheckoutLineItemInput
 ): UseCheckoutLineItemInput => {
-  // Handle custom propeties
+  // Handle custom properties
   const {
     state: properties,
     setState: updateProperties

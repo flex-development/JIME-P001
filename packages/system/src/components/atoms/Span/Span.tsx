@@ -1,4 +1,4 @@
-import { useMutatedProps } from '@system/hooks'
+import { useSanitizedProps } from '@system/hooks'
 import { MutatedProps } from '@system/types'
 import {
   forwardRef,
@@ -36,11 +36,12 @@ export type SpanRefProps = ReflessSpanProps & SpanRefAttributes
  * - https://developer.mozilla.org/docs/Web/API/HTMLSpanElement
  */
 export const Span: FREC<SpanRefProps> = forwardRef((props, ref) => {
-  const mutated = useMutatedProps<typeof props, JSX.IntrinsicElements['span']>(
-    props
-  )
+  const sanitized = useSanitizedProps<
+    typeof props,
+    JSX.IntrinsicElements['span']
+  >(props)
 
-  return <span {...mutated} ref={ref} />
+  return <span {...sanitized} ref={ref} />
 })
 
 Span.displayName = 'Span'

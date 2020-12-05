@@ -1,8 +1,10 @@
 import { AnyObject } from '@flex-development/json'
 import { OptionProps } from '@system/components'
-import { isNumber } from 'lodash'
-import { useState } from 'react'
+import { isEqual, isNumber } from 'lodash'
+import { useCallback, useMemo, useState } from 'react'
 import { IProductListingVariant } from 'shopify-api-node'
+import { MemoCompare } from '../useMemoCompare'
+import useMemoCompare from '../useMemoCompare/useMemoCompare'
 
 /**
  * @file Use product variants as options
@@ -51,25 +53,16 @@ export const useProductVariants = (
   variants: Array<IProductListingVariant> = [],
   active = 0
 ): UseProductVariants => {
+  const _compare: MemoCompare = (previous, next) => isEqual(previous, next)
+
   // Initialize selected variant state
   // The default option will be the first object in the array or {}
   const [selected, setSelected] = useState<UseProductVariants['selected']>(
     variants[active < 0 ? 0 : active] || {}
   )
 
-  // Get product variants as `OptionProps` for `<Select />` component
-  const [options] = useState(
-    variants.map(variant => {
-      const { available, id, sku, title } = variant
-
-      return {
-        'data-available': available,
-        'data-sku': sku,
-        label: title,
-        value: id
-      }
-    })
-  )
+  // Get reference to product variants
+  const _variants = useMemoCompare<typeof variants>(variants, _compare)
 
   /**
    * Updates the selected variant.
@@ -79,7 +72,7 @@ export const useProductVariants = (
   const selectVariant = (
     id: IProductListingVariant['id']
   ): IProductListingVariant['id'] => {
-    const newVariant = variants.find(v => v.id === id)
+    const newVariant = _variants.find(v => v.id === id)
 
     if (newVariant && isNumber(newVariant?.id)) setSelected(newVariant)
 
@@ -87,8 +80,19 @@ export const useProductVariants = (
   }
 
   return {
-    options,
-    selectVariant,
+    options: useMemo<UseProductVariants['options']>(() => {
+      return _variants.map(variant => {
+        const { available, id, sku, title } = variant
+
+        return {
+          'data-available': available,
+          'data-sku': sku,
+          label: title,
+          value: id
+        }
+      })
+    }, [_variants]),
+    selectVariant: useCallback(selectVariant, [_variants]),
     selected,
     variants
   }

@@ -1,5 +1,5 @@
 import { IReview } from '@flex-development/kustomzcore'
-import { useMutatedProps } from '@system/hooks'
+import { useSanitizedProps } from '@system/hooks'
 import { FC } from 'react'
 import { Box, BoxProps, Column, Image, Link, Paragraph } from '../../atoms'
 
@@ -38,10 +38,10 @@ export const ProductReview: FC<ProductReviewProps> = (
     title
   } = review
 
-  const mutated = useMutatedProps<typeof rest>(rest, 'product-review')
+  const sanitized = useSanitizedProps<typeof rest>(rest, 'product-review')
 
   return (
-    <Box {...mutated} id={`product-review-${id}`}>
+    <Box {...sanitized} id={`product-review-${id}`}>
       <Link className='product-review-img' href={product_url} target='_blank'>
         <Image alt={product_title} fluid src={product_image_url} />
       </Link>

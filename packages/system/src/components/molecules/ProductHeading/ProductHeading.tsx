@@ -1,4 +1,4 @@
-import { useMutatedProps } from '@system/hooks'
+import { useSanitizedProps } from '@system/hooks'
 import { formatPrice } from '@system/utils'
 import { FC } from 'react'
 import { Heading, HeadingProps, Span } from '../../atoms'
@@ -35,10 +35,10 @@ export const ProductHeading: FC<ProductHeadingProps> = (
 ) => {
   const { price = 0, title, ...rest } = props
 
-  const mutated = useMutatedProps(rest, 'product-heading')
+  const sanitized = useSanitizedProps(rest, 'product-heading')
 
   return (
-    <Heading {...mutated}>
+    <Heading {...sanitized}>
       <Span className='product-heading-title'>{title}</Span>
       <Span className='product-heading-price'>{formatPrice(price)}</Span>
     </Heading>

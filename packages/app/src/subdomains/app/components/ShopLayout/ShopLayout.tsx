@@ -4,7 +4,6 @@ import {
   GRID_BREAKPOINTS,
   Hero,
   LinkProps,
-  PlaylistBar,
   Row,
   ShopHeader,
   Sidebar,
@@ -18,8 +17,7 @@ import {
   useProfileSnippetForm
 } from '@subdomains/cms/hooks'
 import { useCart } from '@subdomains/sales'
-import { usePlaylist } from '@subdomains/streaming/hooks'
-import { isEmpty, merge } from 'lodash'
+import { merge } from 'lodash'
 import Head from 'next/head'
 import { FC, Fragment } from 'react'
 import { useCMS } from 'tinacms'
@@ -73,10 +71,10 @@ export const ShopLayout: FC<ShopLayoutProps> = (props: ShopLayoutProps) => {
   const sidebar = useVisibility(GRID_BREAKPOINTS.lg)
 
   // Handle playlist streaming
-  const { kit, queue } = usePlaylist(playlist.url)
+  // const { kit, queue } = usePlaylist(playlist.url)
 
   // Don't render content until queue is ready to be played
-  if (isEmpty(queue)) return null
+  // if (isEmpty(queue)) return null
 
   return (
     <Fragment>
@@ -135,7 +133,7 @@ export const ShopLayout: FC<ShopLayoutProps> = (props: ShopLayoutProps) => {
         </Column>
       </Row>
 
-      <PlaylistBar
+      {/* <PlaylistBar
         className='bottom-0 position-fixed w-100'
         handleSkip={({ target }) => {
           return target.name === 'skip_next'
@@ -148,7 +146,7 @@ export const ShopLayout: FC<ShopLayoutProps> = (props: ShopLayoutProps) => {
           const { position: pos } = queue
           return queue.item(pos === -1 ? 0 : pos)?.attributes || {}
         })()}
-      />
+      /> */}
     </Fragment>
   )
 }

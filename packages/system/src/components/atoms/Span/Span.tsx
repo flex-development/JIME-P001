@@ -1,11 +1,7 @@
 import { useSanitizedProps } from '@system/hooks'
-import { MutatedProps } from '@system/types'
-import {
-  forwardRef,
-  ForwardRefExoticComponent as FREC,
-  PropsWithoutRef,
-  RefAttributes
-} from 'react'
+import { AnimatedFREC, FREC, MutatedProps } from '@system/types'
+import { forwardRef } from 'react'
+import { animated } from 'react-spring'
 
 /**
  * @file Render a `<span>` element
@@ -15,33 +11,14 @@ import {
 export type SpanProps = MutatedProps<HTMLSpanElement>
 
 /**
- * Span component properties without the `ref` property.
- */
-export type ReflessSpanProps = PropsWithoutRef<SpanProps>
-
-/**
- * Ref attributes for `<span>` elements.
- */
-export type SpanRefAttributes = RefAttributes<HTMLSpanElement>
-
-/**
- * {@link Span} component forward ref properties.
- */
-export type SpanRefProps = ReflessSpanProps & SpanRefAttributes
-
-/**
  * Renders a `<span>` element.
  *
  * - https://developer.mozilla.org/docs/Web/HTML/Element/span
  * - https://developer.mozilla.org/docs/Web/API/HTMLSpanElement
  */
-export const Span: FREC<SpanRefProps> = forwardRef((props, ref) => {
-  const sanitized = useSanitizedProps<
-    typeof props,
-    JSX.IntrinsicElements['span']
-  >(props)
-
-  return <span {...sanitized} ref={ref} />
+export const Span: FREC<SpanProps> = forwardRef((props, ref) => {
+  const sanitized = useSanitizedProps<typeof props, AnimatedFREC<'span'>>(props)
+  return <animated.span {...sanitized} ref={ref} />
 })
 
 Span.displayName = 'Span'

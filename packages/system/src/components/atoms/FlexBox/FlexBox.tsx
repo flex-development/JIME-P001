@@ -1,12 +1,10 @@
 import { FlexboxUtilitiesConfig } from '@flex-development/kustomzcore'
 import { useFlexbox, useSanitizedProps } from '@system/hooks'
+import { AnimatedFREC, FREC } from '@system/types'
 import { isBoolean, isString } from 'lodash'
-import {
-  forwardRef,
-  ForwardRefExoticComponent as FREC,
-  PropsWithoutRef
-} from 'react'
-import { BoxProps, BoxRefAttributes } from '../Box'
+import { forwardRef } from 'react'
+import { animated } from 'react-spring'
+import { BoxProps } from '../Box'
 
 /**
  * @file Flexbox layout component
@@ -64,10 +62,6 @@ export interface FlexBoxProps extends BoxProps {
   wrap?: FlexboxUtilitiesConfig['wrap']
 }
 
-export type ReflessFlexBoxProps = PropsWithoutRef<FlexBoxProps>
-
-export type FlexBoxRefProps = ReflessFlexBoxProps & BoxRefAttributes
-
 /**
  * Flexbox layout component.
  *
@@ -75,7 +69,7 @@ export type FlexBoxRefProps = ReflessFlexBoxProps & BoxRefAttributes
  * - https://developer.mozilla.org/docs/Web/HTML/Element/div
  * - https://developer.mozilla.org/docs/Web/API/HTMLDivElement
  */
-export const FlexBox: FREC<FlexBoxRefProps> = forwardRef((props, ref) => {
+export const FlexBox: FREC<FlexBoxProps> = forwardRef((props, ref) => {
   const { align, container, direction, display, justify, wrap, ...rest } = props
 
   const flexbox = useFlexbox({
@@ -86,13 +80,13 @@ export const FlexBox: FREC<FlexBoxRefProps> = forwardRef((props, ref) => {
     wrap
   })
 
-  const sanitized = useSanitizedProps<typeof rest>(rest, {
+  const sanitized = useSanitizedProps<typeof rest, AnimatedFREC<'div'>>(rest, {
     container: isBoolean(container) && container,
     [`container-${container}`]: isString(container),
     [flexbox]: true
   })
 
-  return <div {...sanitized} ref={ref} />
+  return <animated.div {...sanitized} ref={ref} />
 })
 
 FlexBox.displayName = 'FlexBox'

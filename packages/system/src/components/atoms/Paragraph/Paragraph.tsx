@@ -1,12 +1,8 @@
-import { useIcon, useSanitizedProps } from '@system/hooks'
-import { MutatedProps } from '@system/types'
-import {
-  forwardRef,
-  ForwardRefExoticComponent as FREC,
-  PropsWithoutRef,
-  RefAttributes
-} from 'react'
-import { IconProps } from '../Icon/Icon'
+import { useSanitizedProps } from '@system/hooks'
+import { AnimatedFREC, FREC, MutatedProps } from '@system/types'
+import { forwardRef } from 'react'
+import { animated } from 'react-spring'
+import { IconProps } from '../Icon'
 
 /**
  * @file Render a `<p>` element
@@ -21,36 +17,15 @@ export interface ParagraphProps extends MutatedProps<HTMLParagraphElement> {
 }
 
 /**
- * Paragraph component properties without the `ref` property.
- */
-export type ReflessParagraphProps = PropsWithoutRef<ParagraphProps>
-
-/**
- * Ref attributes for `<p>` elements.
- */
-export type ParagraphRefAttributes = RefAttributes<HTMLParagraphElement>
-
-/**
- * {@link Paragraph} component forward ref properties.
- */
-export type ParagraphRefProps = ReflessParagraphProps & ParagraphRefAttributes
-
-/**
  * Renders a `<p>` element.
  *
  * - https://v5.getbootstrap.com/docs/5.0/utilities/text
  * - https://developer.mozilla.org/docs/Web/HTML/Element/p
  * - https://developer.mozilla.org/docs/Web/API/HTMLParagraphElement
  */
-export const Paragraph: FREC<ParagraphRefProps> = forwardRef((props, ref) => {
-  const withIcon = useIcon<ParagraphProps>(props)
-
-  const sanitized = useSanitizedProps<
-    typeof withIcon,
-    JSX.IntrinsicElements['p']
-  >(withIcon)
-
-  return <p {...sanitized} ref={ref} />
+export const Paragraph: FREC<ParagraphProps> = forwardRef((props, ref) => {
+  const sanitized = useSanitizedProps<typeof props, AnimatedFREC<'p'>>(props)
+  return <animated.p {...sanitized} ref={ref} />
 })
 
 Paragraph.displayName = 'Paragraph'

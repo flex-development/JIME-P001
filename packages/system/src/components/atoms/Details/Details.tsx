@@ -1,11 +1,7 @@
 import { useSanitizedProps } from '@system/hooks'
-import { MutatedProps } from '@system/types'
-import {
-  forwardRef,
-  ForwardRefExoticComponent as FREC,
-  PropsWithoutRef,
-  RefAttributes
-} from 'react'
+import { AnimatedFREC, FREC, MutatedProps } from '@system/types'
+import { forwardRef } from 'react'
+import { animated } from 'react-spring'
 import { Summary } from '../Summary/Summary'
 
 /**
@@ -29,39 +25,23 @@ export interface DetailsProps extends MutatedProps<HTMLDetailsElement> {
 }
 
 /**
- * Details component properties without the `ref` property.
- */
-export type ReflessDetailsProps = PropsWithoutRef<DetailsProps>
-
-/**
- * Ref attributes for `<details>` elements.
- */
-export type DetailsRefAttributes = RefAttributes<HTMLDetailsElement>
-
-/**
- * {@link Details} component forward ref properties.
- */
-export type DetailsRefProps = ReflessDetailsProps & DetailsRefAttributes
-
-/**
  * Renders a `<details>` element.
  *
  * - https://developer.mozilla.org/docs/Web/HTML/Element/details
  * - https://developer.mozilla.org/docs/Web/API/HTMLDetailsElement
  */
-export const Details: FREC<DetailsRefProps> = forwardRef((props, ref) => {
+export const Details: FREC<DetailsProps> = forwardRef((props, ref) => {
   const { children, summary, ...rest } = props
 
-  const sanitized = useSanitizedProps<
-    typeof rest,
-    JSX.IntrinsicElements['details']
-  >(rest)
+  const sanitized = useSanitizedProps<typeof rest, AnimatedFREC<'details'>>(
+    rest
+  )
 
   return (
-    <details {...sanitized} ref={ref}>
+    <animated.details {...sanitized} ref={ref}>
       {summary && <Summary {...summary} />}
       {children}
-    </details>
+    </animated.details>
   )
 })
 

@@ -1,11 +1,7 @@
 import { useSanitizedProps } from '@system/hooks'
-import { MutatedProps } from '@system/types'
-import {
-  forwardRef,
-  ForwardRefExoticComponent as FREC,
-  PropsWithoutRef,
-  RefAttributes
-} from 'react'
+import { AnimatedFREC, FREC, MutatedProps } from '@system/types'
+import { forwardRef } from 'react'
+import { animated } from 'react-spring'
 
 /**
  * @file Render a `<form>` element
@@ -100,21 +96,6 @@ export interface FormProps extends MutatedProps<HTMLFormElement> {
 }
 
 /**
- * Form component properties without the `ref` property.
- */
-export type ReflessFormProps = PropsWithoutRef<FormProps>
-
-/**
- * Ref attributes for `<form>` elements.
- */
-export type FormRefAttributes = RefAttributes<HTMLFormElement>
-
-/**
- * {@link Form} component forward ref properties.
- */
-export type FormRefProps = ReflessFormProps & FormRefAttributes
-
-/**
  * Renders a `<form>` element with the class `form`.
  *
  * - https://developer.mozilla.org/docs/Web/HTML/Element/form
@@ -122,13 +103,13 @@ export type FormRefProps = ReflessFormProps & FormRefAttributes
  * - https://developer.mozilla.org/docs/Web/HTML/Element/form
  * - https://developer.mozilla.org/docs/Web/API/HTMLFormElement
  */
-export const Form: FREC<FormRefProps> = forwardRef((props, ref) => {
-  const sanitized = useSanitizedProps<
-    typeof props,
-    JSX.IntrinsicElements['form']
-  >(props, 'form')
+export const Form: FREC<FormProps> = forwardRef((props, ref) => {
+  const sanitized = useSanitizedProps<typeof props, AnimatedFREC<'form'>>(
+    props,
+    'form'
+  )
 
-  return <form {...sanitized} ref={ref} />
+  return <animated.form {...sanitized} ref={ref} />
 })
 
 Form.displayName = 'Form'

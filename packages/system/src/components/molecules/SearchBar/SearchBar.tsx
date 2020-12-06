@@ -1,7 +1,8 @@
 import { ANYTHING } from '@flex-development/json'
 import { useSanitizedProps } from '@system/hooks'
 import { EventHandlers } from '@system/types'
-import { FC, FormEvent, useState } from 'react'
+import { FC, FormEvent } from 'react'
+import { useInput } from 'react-hanger'
 import { Button, Form, FormProps, Input, InputProps } from '../../atoms'
 
 /**
@@ -43,11 +44,13 @@ export const SearchBar: FC<SearchBarProps> = (props: SearchBarProps) => {
     ...rest
   } = props
 
-  rest.onSubmit = (e: FormEvent) => handleSearch(query.replace(' ', '+'), e)
+  const input = useInput(initialQuery || '')
+
+  rest.onSubmit = (event: FormEvent) => {
+    return handleSearch(input.value.replace(' ', '+'), event)
+  }
 
   const sanitized = useSanitizedProps<typeof rest>(rest, 'searchbar')
-
-  const [query, setQuery] = useState<string>(initialQuery || '')
 
   return (
     <Form {...sanitized}>
@@ -55,20 +58,21 @@ export const SearchBar: FC<SearchBarProps> = (props: SearchBarProps) => {
         aria-label='Search button'
         className='searchbar-btn'
         icon={{ 'aria-label': 'Search icon', children: 'search' }}
-        onClick={(e: EventHandlers.Click.Button) => handleSearch(query, e)}
+        onClick={(event: EventHandlers.Click.Button) => {
+          return handleSearch(input.value, event)
+        }}
         name='search'
         variant='ghost'
       />
 
       <Input
+        {...input.eventBind}
         aria-label='Search query'
         className='searchbar-input'
-        onChange={(e: EventHandlers.Change.Input) => {
-          setQuery(e.target.value)
-        }}
+        onChange={input.onChange}
         placeholder={placeholder}
         type='search'
-        value={query}
+        value={input.value}
       />
     </Form>
   )

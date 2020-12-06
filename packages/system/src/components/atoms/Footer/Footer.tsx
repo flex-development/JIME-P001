@@ -1,6 +1,7 @@
 import { useSanitizedProps } from '@system/hooks'
-import { MutatedRefProps } from '@system/types'
-import { forwardRef, ForwardRefExoticComponent as FREC } from 'react'
+import { AnimatedFREC, FREC, MutatedProps } from '@system/types'
+import { forwardRef } from 'react'
+import { animated } from 'react-spring'
 
 /**
  * @file Render a `<footer>` element
@@ -13,13 +14,12 @@ import { forwardRef, ForwardRefExoticComponent as FREC } from 'react'
  * - https://developer.mozilla.org/docs/Web/HTML/Element/footer
  * - https://developer.mozilla.org/docs/Web/API/HTMLElement
  */
-export const Footer: FREC<MutatedRefProps> = forwardRef((props, ref) => {
-  const sanitized = useSanitizedProps<
-    typeof props,
-    JSX.IntrinsicElements['footer']
-  >(props)
+export const Footer: FREC<MutatedProps> = forwardRef((props, ref) => {
+  const sanitized = useSanitizedProps<typeof props, AnimatedFREC<'footer'>>(
+    props
+  )
 
-  return <footer {...sanitized} ref={ref} />
+  return <animated.footer {...sanitized} ref={ref} />
 })
 
 Footer.displayName = 'Footer'

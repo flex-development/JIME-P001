@@ -1,20 +1,13 @@
 import { useSanitizedProps } from '@system/hooks'
-import { MutatedFormControlProps } from '@system/types'
-import {
-  FC,
-  forwardRef,
-  ForwardRefExoticComponent as FREC,
-  PropsWithoutRef,
-  ReactNodeArray,
-  RefAttributes
-} from 'react'
-import { Option, OptionProps } from '../Option/Option'
+import { AnimatedFREC, FREC, MutatedFormControlProps } from '@system/types'
+import { FC, forwardRef, ReactNodeArray } from 'react'
+import { animated } from 'react-spring'
+import { Option, OptionProps } from '../Option'
 
 /**
  * @file Render a `<select>` element
  * @module components/atoms/Select/impl
  */
-
 export interface SelectProps
   extends MutatedFormControlProps<HTMLSelectElement> {
   /**
@@ -53,37 +46,22 @@ export interface SelectProps
 }
 
 /**
- * Ref attributes for `<select>` elements.
- */
-export type SelectRefAttributes = RefAttributes<HTMLSelectElement>
-
-/**
- * {@link Select} component forward ref properties.
- */
-export type SelectRefProps = ReflessSelectProps & SelectRefAttributes
-
-/**
- * Select component properties without the `ref` property.
- */
-export type ReflessSelectProps = PropsWithoutRef<SelectProps>
-
-/**
  * Renders a `<select>` element with the class `form-select`.
  *
  * - https://v5.getbootstrap.com/docs/5.0/forms/select
  * - https://developer.mozilla.org/docs/Web/HTML/Element/select
  * - https://developer.mozilla.org/docs/Web/API/HTMLSelectElement
  */
-export const Select: FREC<SelectRefProps> = forwardRef((props, ref) => {
+export const Select: FREC<SelectProps> = forwardRef((props, ref) => {
   const { options = [], ...rest } = props
 
-  const sanitized = useSanitizedProps<
-    typeof rest,
-    JSX.IntrinsicElements['select']
-  >(rest, 'form-select')
+  const sanitized = useSanitizedProps<typeof rest, AnimatedFREC<'select'>>(
+    rest,
+    'form-select'
+  )
 
   return (
-    <select {...sanitized} ref={ref}>
+    <animated.select {...sanitized} ref={ref}>
       {((): ReactNodeArray => {
         if (rest.children) return rest.children
 
@@ -92,7 +70,7 @@ export const Select: FREC<SelectRefProps> = forwardRef((props, ref) => {
           return <Option {...option} key={key} />
         })
       })()}
-    </select>
+    </animated.select>
   )
 })
 

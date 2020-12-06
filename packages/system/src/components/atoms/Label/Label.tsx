@@ -1,11 +1,7 @@
-import { useIcon, useSanitizedProps } from '@system/hooks'
-import { MutatedProps } from '@system/types'
-import {
-  forwardRef,
-  ForwardRefExoticComponent as FREC,
-  PropsWithoutRef,
-  RefAttributes
-} from 'react'
+import { useSanitizedProps } from '@system/hooks'
+import { AnimatedFREC, FREC, MutatedProps } from '@system/types'
+import { forwardRef } from 'react'
+import { animated } from 'react-spring'
 import { IconProps } from '../Icon/Icon'
 
 /**
@@ -66,53 +62,32 @@ export interface LabelProps extends MutatedProps<HTMLLabelElement> {
 }
 
 /**
- * Label component properties without the `ref` property.
- */
-export type ReflessLabelProps = PropsWithoutRef<LabelProps>
-
-/**
- * Ref attributes for `<label>` elements.
- */
-export type LabelRefAttributes = RefAttributes<HTMLLabelElement>
-
-/**
- * {@link Label} component forward ref properties.
- */
-export type LabelRefProps = ReflessLabelProps & LabelRefAttributes
-
-/**
  * Renders a `<label>` element.
  *
  * - https://v5.getbootstrap.com/docs/5.0/forms/overview/#form-text
  * - https://developer.mozilla.org/docs/Web/HTML/Element/label
  * - https://developer.mozilla.org/docs/Web/API/HTMLLabelElement
  */
-export const Label: FREC<LabelRefProps> = forwardRef((props, ref) => {
+export const Label: FREC<LabelProps> = forwardRef((props, ref) => {
   const { check, col, form, htmlFor, required, ...rest } = props
 
   if (required) rest['data-required'] = required
 
-  const withIcon = useIcon<LabelProps>(rest)
-
-  const sanitized = useSanitizedProps<
-    typeof withIcon,
-    JSX.IntrinsicElements['label']
-  >(withIcon, {
-    'col-form-label': !check && col,
-    'form-check-label': check,
-    'form-label': !check && form
-  })
-
-  /* eslint-disable-next-line jsx-a11y/label-has-associated-control */
-
-  return (
-    <label {...sanitized} htmlFor={htmlFor} ref={ref}>
-      {required && '*'}
-      {sanitized.children}
-    </label>
+  const sanitized = useSanitizedProps<typeof rest, AnimatedFREC<'label'>>(
+    rest,
+    {
+      'col-form-label': !check && col,
+      'form-check-label': check,
+      'form-label': !check && form
+    }
   )
 
-  /* eslint-enable jsx-a11y/label-has-associated-control */
+  return (
+    <animated.label {...sanitized} htmlFor={htmlFor} ref={ref}>
+      {required && '*'}
+      {(sanitized as typeof rest).children}
+    </animated.label>
+  )
 })
 
 Label.displayName = 'Label'

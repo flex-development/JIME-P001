@@ -1,14 +1,18 @@
 import { useProductVariants, useSanitizedProps } from '@system/hooks'
+import { MemoCompare } from '@system/hooks/useMemoCompare'
+import useMemoCompare from '@system/hooks/useMemoCompare/useMemoCompare'
 import { EventHandlers } from '@system/types'
 import { getProductVariantImage } from '@system/utils'
-import { FC, useEffect, useState } from 'react'
+import { isEqual } from 'lodash'
+import { FC, useCallback, useEffect, useState } from 'react'
 import useBoolean from 'react-hanger/array/useBoolean'
-import { IProductListing } from 'shopify-api-node'
+import { IProductListing, IProductListingVariant } from 'shopify-api-node'
 import {
   Box,
   BoxProps,
   FlexBox,
   Image,
+  ImageProps,
   Item,
   Link,
   LinkProps,
@@ -43,6 +47,8 @@ export interface ProductCardProps extends BoxProps {
 export const ProductCard: FC<ProductCardProps> = (props: ProductCardProps) => {
   const { product_link = {}, product, ...rest } = props
 
+  const _compare: MemoCompare = (previous, next) => isEqual(previous, next)
+
   const sanitized = useSanitizedProps<typeof rest, BoxProps>(rest, {
     card: true,
     'product-card': true
@@ -58,6 +64,13 @@ export const ProductCard: FC<ProductCardProps> = (props: ProductCardProps) => {
   const initial_url = product_link.href || `products/${product.handle}`
   const [url, setURL] = useState(initial_url)
 
+  // Get product variant display image
+  const image_alt = `${product.title} - ${selected.title}`
+  const image = useMemoCompare<ImageProps>(
+    getProductVariantImage(selected.image_id, product.images, image_alt),
+    _compare
+  )
+
   // Update product url when new variant is selected
   useEffect(() => {
     if (!selected?.sku) return
@@ -68,46 +81,52 @@ export const ProductCard: FC<ProductCardProps> = (props: ProductCardProps) => {
     setURL(default_selected ? base : `${base}?sku=${selected.sku}`)
   }, [product.handle, product_link.href, selected.sku, product.variants])
 
-  // Get product variant display image
-  const image = getProductVariantImage(
-    selected.image_id,
-    product.images,
-    `${product.title} - ${selected.title}`
-  )
+  /**
+   * Toggles the dropdown visibility.
+   *
+   * @param event - `click` event from `<a>` element
+   */
+  const onClickProduct = (event: EventHandlers.Click.Anchor) => {
+    event.preventDefault()
+    return toggle()
+  }
 
   /**
-   * Helper `Link` component with preset href value.
+   * Selects a product variant title from the dropdown and toggles the dropdown
+   * visibility.
    *
-   * @param param0 - Component properties
-   * @param param0.children - Link text
-   * @param param0.className - CSS classes to apply
-   * @returns Link to product
+   * @param id - ID of product variant to select from dropdown
    */
-  const ProductLink: FC<LinkProps> = ({ children, className }) => (
-    <Link className={className} href={url} target='_blank'>
-      {children}
-    </Link>
-  )
+  const onClickDropItem = (id: IProductListingVariant['id']) => {
+    selectVariant(id) && toggle()
+  }
+
+  /* Callback version of `onClickProduct` */
+  const _onClickProduct = useCallback(onClickProduct, [toggle])
+
+  /* Callback version of `onClickDropItem` */
+  const _onClickDropItem = useCallback(onClickDropItem, [selectVariant, toggle])
 
   return (
     <Box {...sanitized} id={`product-card-${product.product_id}`}>
-      <ProductLink className='d-inline-block'>
+      <Link className='d-inline-block' href={url} target='_blank'>
         <Image {...image} className='product-card-img card-img-top' fluid />
-      </ProductLink>
+      </Link>
 
       <FlexBox align='center' className='card-footer' justify='between'>
         <FlexBox direction='column'>
-          <ProductLink className='card-title product-card-title'>
+          <Link
+            className='card-title product-card-title'
+            href={url}
+            target='_blank'
+          >
             {product.title}
-          </ProductLink>
+          </Link>
 
           {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
           <Link
             aria-expanded={expanded}
-            onClick={(event: EventHandlers.Click.Anchor) => {
-              event.preventDefault()
-              return toggle()
-            }}
+            onClick={(e: EventHandlers.Click.Anchor) => _onClickProduct(e)}
             toggle
           >
             {selected.title}
@@ -129,7 +148,7 @@ export const ProductCard: FC<ProductCardProps> = (props: ProductCardProps) => {
                 dropdown
                 className='dropdown-item'
                 key={id}
-                onClick={() => selectVariant(id) && toggle()}
+                onClick={() => _onClickDropItem(id)}
               >
                 {title}
               </Item>

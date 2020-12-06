@@ -1,13 +1,9 @@
 import { NullishString } from '@flex-development/json'
 import { useSanitizedProps } from '@system/hooks'
-import { MutatedVoidElementProps } from '@system/types'
+import { AnimatedFREC, FREC, MutatedVoidElementProps } from '@system/types'
 import { omit } from 'lodash'
-import {
-  forwardRef,
-  ForwardRefExoticComponent as FREC,
-  PropsWithoutRef,
-  RefAttributes
-} from 'react'
+import { forwardRef } from 'react'
+import { animated } from 'react-spring'
 
 /**
  * @module components/atoms/Image/impl
@@ -118,43 +114,24 @@ export interface ImageProps extends MutatedVoidElementProps<HTMLImageElement> {
 }
 
 /**
- * Image component properties without the `ref` property.
- */
-export type ReflessImageProps = PropsWithoutRef<ImageProps>
-
-/**
- * Ref attributes for `<img>` elements.
- */
-export type ImageRefAttributes = RefAttributes<HTMLImageElement>
-
-/**
- * {@link Image} component forward ref properties.
- */
-export type ImageRefProps = ReflessImageProps & ImageRefAttributes
-
-/**
  * Renders an `<img>` element with the class `img`.
  *
  * - https://developer.mozilla.org/docs/Web/HTML/Element/img
  * - https://developer.mozilla.org/docs/Web/HTML/Element/img
  * - https://developer.mozilla.org/docs/Web/API/HTMLImageElement
  */
-export const Image: FREC<ImageRefProps> = forwardRef((props, ref) => {
+export const Image: FREC<ImageProps> = forwardRef((props, ref) => {
   const { fluid, rounded, thumbnail, ...rest } = props
 
   // Get component properties
-  const sanitized = useSanitizedProps<
-    typeof rest,
-    JSX.IntrinsicElements['img']
-  >(rest, {
+  const sanitized = useSanitizedProps<typeof rest, AnimatedFREC<'img'>>(rest, {
     img: true,
     'img-fluid': fluid,
     'img-thumbnail': thumbnail,
     rounded
   })
 
-  /* eslint-disable-next-line jsx-a11y/alt-text */
-  return <img {...omit(sanitized, 'children')} ref={ref} />
+  return <animated.img {...omit(sanitized, 'children')} ref={ref} />
 })
 
 Image.displayName = 'Image'

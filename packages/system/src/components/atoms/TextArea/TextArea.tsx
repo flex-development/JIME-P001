@@ -1,12 +1,7 @@
 import { useSanitizedProps } from '@system/hooks'
-import { MutatedFormControlProps } from '@system/types'
-import { omit } from 'lodash'
-import {
-  forwardRef,
-  ForwardRefExoticComponent as FREC,
-  PropsWithoutRef,
-  RefAttributes
-} from 'react'
+import { AnimatedFREC, FREC, MutatedFormControlProps } from '@system/types'
+import { forwardRef } from 'react'
+import { animated } from 'react-spring'
 
 /**
  * @file Render a `<textarea>` element
@@ -90,39 +85,26 @@ export interface TextAreaProps
 }
 
 /**
- * TextArea component properties without the `ref` property.
- */
-export type ReflessTextAreaProps = PropsWithoutRef<TextAreaProps>
-
-/**
- * Ref attributes for `<span>` elements.
- */
-export type TextAreaRefAttributes = RefAttributes<HTMLTextAreaElement>
-
-/**
- * {@link TextArea} component forward ref properties.
- */
-export type TextAreaRefProps = ReflessTextAreaProps & TextAreaRefAttributes
-
-/**
  * Renders a `<textarea>` element with the class `form-control`.
  *
  * - https://v5.getbootstrap.com/docs/5.0/forms/form-control/
  * - https://developer.mozilla.org/docs/Web/HTML/Element/textarea
  * - https://developer.mozilla.org/docs/Web/API/HTMLTextAreaElement
  */
-export const TextArea: FREC<TextAreaRefProps> = forwardRef((props, ref) => {
+export const TextArea: FREC<TextAreaProps> = forwardRef((props, ref) => {
   const { invalid, ...rest } = props
 
-  const sanitized = useSanitizedProps<
-    typeof rest,
-    JSX.IntrinsicElements['textarea']
-  >(rest, {
-    'form-control': true,
-    'is-invalid': invalid
-  })
+  const sanitized = useSanitizedProps<typeof rest, AnimatedFREC<'textarea'>>(
+    rest,
+    {
+      'form-control': true,
+      'is-invalid': invalid
+    }
+  )
 
-  return <textarea {...omit(sanitized, 'children')} ref={ref} />
+  sanitized['children'] = undefined
+
+  return <animated.textarea {...sanitized} ref={ref} />
 })
 
 TextArea.displayName = 'TextArea'

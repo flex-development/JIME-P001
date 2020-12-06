@@ -9,14 +9,11 @@ import {
   useSanitizedProps,
   useSpacers
 } from '@system/hooks'
+import { AnimatedFREC, FREC } from '@system/types'
 import { isObject } from 'lodash'
-import {
-  forwardRef,
-  ForwardRefExoticComponent as FREC,
-  PropsWithoutRef
-} from 'react'
-import { BoxRefAttributes } from '../Box'
-import { FlexBoxProps } from '../FlexBox/FlexBox'
+import { forwardRef } from 'react'
+import { animated } from 'react-spring'
+import { FlexBoxProps } from '../FlexBox'
 
 /**
  * @file `Column` wrapper component
@@ -88,10 +85,6 @@ export interface RowProps extends FlexBoxProps {
   xxl?: RowColumns
 }
 
-export type ReflessRowProps = PropsWithoutRef<RowProps>
-
-export type RowRefProps = ReflessRowProps & BoxRefAttributes
-
 /**
  * Grid layout component.
  *
@@ -100,7 +93,7 @@ export type RowRefProps = ReflessRowProps & BoxRefAttributes
  * - https://developer.mozilla.org/docs/Web/HTML/Element/div
  * - https://developer.mozilla.org/docs/Web/API/HTMLDivElement
  */
-export const Row: FREC<RowRefProps> = forwardRef((props, ref) => {
+export const Row: FREC<RowProps> = forwardRef((props, ref) => {
   const {
     align,
     direction,
@@ -134,7 +127,7 @@ export const Row: FREC<RowRefProps> = forwardRef((props, ref) => {
 
   const row_cols = useRowColumns({ lg, md, sm, xl, xs: max || xs, xxl })
 
-  const sanitized = useSanitizedProps<typeof rest>(rest, {
+  const sanitized = useSanitizedProps<typeof rest, AnimatedFREC<'div'>>(rest, {
     [flexbox]: flexbox.length !== 0,
     [gutter_x]: gutter_x.length !== 0,
     [gutter_y]: gutter_y.length !== 0,
@@ -142,7 +135,7 @@ export const Row: FREC<RowRefProps> = forwardRef((props, ref) => {
     [row_cols]: row_cols.length !== 0
   })
 
-  return <div {...sanitized} ref={ref} />
+  return <animated.div {...sanitized} ref={ref} />
 })
 
 Row.displayName = 'Row'

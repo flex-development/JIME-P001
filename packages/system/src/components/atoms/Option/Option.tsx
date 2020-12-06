@@ -1,11 +1,12 @@
 import { useSanitizedProps } from '@system/hooks'
-import { MutatedFormControlProps, MutatedProps } from '@system/types'
 import {
-  forwardRef,
-  ForwardRefExoticComponent as FREC,
-  PropsWithoutRef,
-  RefAttributes
-} from 'react'
+  AnimatedFREC,
+  FREC,
+  MutatedFormControlProps,
+  MutatedProps
+} from '@system/types'
+import { forwardRef } from 'react'
+import { animated } from 'react-spring'
 
 /**
  * @file Render a `<option>` element
@@ -33,35 +34,19 @@ export interface OptionProps extends MutatedProps<HTMLOptionElement> {
 }
 
 /**
- * Option component properties without the `ref` property.
- */
-export type ReflessOptionProps = PropsWithoutRef<OptionProps>
-
-/**
- * Ref attributes for `<option>` elements.
- */
-export type OptionRefAttributes = RefAttributes<HTMLOptionElement>
-
-/**
- * {@link Option} component forward ref properties.
- */
-export type OptionRefProps = ReflessOptionProps & OptionRefAttributes
-
-/**
  * Renders an `<option>` element.
  *
  * - https://developer.mozilla.org/docs/Web/HTML/Element/option
  * - https://developer.mozilla.org/docs/Web/API/HTMLOptionElement
  */
-export const Option: FREC<OptionRefProps> = forwardRef((props, ref) => {
-  const sanitized = useSanitizedProps<
-    typeof props,
-    JSX.IntrinsicElements['option']
-  >(props)
+export const Option: FREC<OptionProps> = forwardRef((props, ref) => {
+  const sanitized = useSanitizedProps<typeof props, AnimatedFREC<'option'>>(
+    props
+  )
 
   sanitized['aria-label'] = props.label
 
-  return <option {...sanitized} ref={ref} />
+  return <animated.option {...sanitized} ref={ref} />
 })
 
 Option.displayName = 'Option'

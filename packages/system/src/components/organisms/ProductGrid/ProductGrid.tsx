@@ -1,7 +1,6 @@
 import { AnyObject } from '@flex-development/json'
 import { useSanitizedProps } from '@system/hooks'
-import { FC, useEffect } from 'react'
-import { useArray } from 'react-hanger/array/useArray'
+import { FC } from 'react'
 import { IProductListing } from 'shopify-api-node'
 import { Column, Row, RowProps } from '../../atoms'
 import { ProductCard, ProductCardProps } from '../../molecules'
@@ -22,7 +21,6 @@ export interface ProductGridProps extends RowProps {
 
 /**
  * Displays `ProductCard` components in a grid.
- *
  * Renders a `Row` component with the class `product-grid`.
  */
 export const ProductGrid: FC<ProductGridProps> = (props: ProductGridProps) => {
@@ -30,25 +28,15 @@ export const ProductGrid: FC<ProductGridProps> = (props: ProductGridProps) => {
 
   const sanitized = useSanitizedProps<typeof rest>(rest, 'product-grid')
 
-  const [cards, { setValue: setCards }] = useArray<ProductCardProps>([])
-
-  useEffect(() => {
-    const cards = (products as Array<AnyObject>).map(data => {
-      const { product, product_link } = data
-      const props = product ? data : { product: data, product_link }
-
-      return props as ProductCardProps
-    })
-
-    setCards(cards)
-  }, [products, setCards])
-
   return (
     <Row {...sanitized}>
-      {cards.map(card => {
+      {(products as Array<AnyObject>).map(data => {
+        const { product, product_link } = data
+        const card = product ? data : { product: data, product_link }
+
         return (
           <Column key={card.product.product_id}>
-            <ProductCard {...card} />
+            <ProductCard {...(card as ProductCardProps)} />
           </Column>
         )
       })}

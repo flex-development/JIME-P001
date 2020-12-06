@@ -1,17 +1,9 @@
 import { Columns } from '@flex-development/kustomzcore'
 import { useColumn, useFlexbox, useSanitizedProps } from '@system/hooks'
-import {
-  forwardRef,
-  ForwardRefExoticComponent as FREC,
-  PropsWithoutRef
-} from 'react'
-import { BoxRefAttributes } from '../Box'
-import { FlexBoxProps } from '../FlexBox/FlexBox'
-
-/**
- * @file Grid item component
- * @module components/atoms/Column/impl
- */
+import { AnimatedFREC, FREC } from '@system/types'
+import { forwardRef } from 'react'
+import { animated } from 'react-spring'
+import { FlexBoxProps } from '../FlexBox'
 
 export interface ColumnProps extends FlexBoxProps {
   /**
@@ -50,10 +42,6 @@ export interface ColumnProps extends FlexBoxProps {
   xxl?: boolean | Columns
 }
 
-export type ReflessColumnProps = PropsWithoutRef<ColumnProps>
-
-export type ColumnRefProps = ReflessColumnProps & BoxRefAttributes
-
 /**
  * Grid layout component.
  *
@@ -61,7 +49,7 @@ export type ColumnRefProps = ReflessColumnProps & BoxRefAttributes
  * - https://developer.mozilla.org/docs/Web/HTML/Element/div
  * - https://developer.mozilla.org/docs/Web/API/HTMLDivElement
  */
-export const Column: FREC<ColumnRefProps> = forwardRef((props, ref) => {
+export const Column: FREC<ColumnProps> = forwardRef((props, ref) => {
   const {
     align,
     direction,
@@ -88,12 +76,12 @@ export const Column: FREC<ColumnRefProps> = forwardRef((props, ref) => {
     wrap
   })
 
-  const sanitized = useSanitizedProps<typeof rest>(rest, {
+  const sanitized = useSanitizedProps<typeof rest, AnimatedFREC<'div'>>(rest, {
     [column]: true,
     [flexbox]: flexbox.length !== 0
   })
 
-  return <div {...sanitized} ref={ref} />
+  return <animated.div {...sanitized} ref={ref} />
 })
 
 Column.displayName = 'Column'

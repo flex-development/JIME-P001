@@ -2,14 +2,14 @@ import { useSanitizedProps } from '@system/hooks'
 import { FC } from 'react'
 import {
   Input,
-  InputRefProps,
+  InputProps,
   Label,
   LabelProps,
   Select,
-  SelectRefProps,
+  SelectProps,
   Span,
   TextArea,
-  TextAreaRefProps
+  TextAreaProps
 } from '../../atoms'
 
 /**
@@ -31,7 +31,7 @@ export interface LabeledFormControlProps extends LabelProps {
    *
    * @default {}
    */
-  control?: InputRefProps | SelectRefProps | TextAreaRefProps
+  control?: InputProps | SelectProps | TextAreaProps
 
   /**
    * Tag name of the form control to render.
@@ -53,7 +53,7 @@ export const LabeledFormControl: FC<LabeledFormControlProps> = (
     rest['data-disabled'] = control.disabled
 
     if (name === 'input') {
-      rest['data-type'] = (control as InputRefProps).type
+      rest['data-type'] = (control as InputProps).type
     } else if (name === 'select') {
       control['data-selected'] = rest['data-selected']
     }
@@ -71,12 +71,12 @@ export const LabeledFormControl: FC<LabeledFormControlProps> = (
     <Label {...sanitized} data-control={name}>
       {children && <Span>{children}</Span>}
       {((): LabelProps['children'] => {
-        let component = <Input {...(control as InputRefProps)} />
+        let component = <Input {...(control as InputProps)} />
 
         if (name === 'select') {
-          component = <Select {...(control as SelectRefProps)} />
+          component = <Select {...(control as SelectProps)} />
         } else if (name === 'textarea') {
-          component = <TextArea {...(control as TextAreaRefProps)} />
+          component = <TextArea {...(control as TextAreaProps)} />
         }
 
         return component

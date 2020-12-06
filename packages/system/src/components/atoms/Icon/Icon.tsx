@@ -1,10 +1,7 @@
 import { useSanitizedProps } from '@system/hooks'
-import {
-  forwardRef,
-  ForwardRefExoticComponent as FREC,
-  PropsWithoutRef
-} from 'react'
-import { Span, SpanProps, SpanRefAttributes } from '../Span/Span'
+import { FREC } from '@system/types'
+import { forwardRef } from 'react'
+import { Span, SpanProps } from '../Span'
 
 /**
  * @file Render a Material UI icon
@@ -31,16 +28,6 @@ export interface IconProps extends SpanProps {
 }
 
 /**
- * Icon component properties without the `ref` property.
- */
-export type ReflessIconProps = PropsWithoutRef<IconProps>
-
-/**
- * {@link Icon} component forward ref properties.
- */
-export type IconRefProps = ReflessIconProps & SpanRefAttributes
-
-/**
  * Renders a `<Span>` component as a Material UI icon.
  *
  * - https://material.io/resources/icons/?style=outline
@@ -48,7 +35,7 @@ export type IconRefProps = ReflessIconProps & SpanRefAttributes
  * - https://developer.mozilla.org/docs/Web/HTML/Element/span
  * - https://developer.mozilla.org/docs/Web/API/HTMLSpanElement
  */
-export const Icon: FREC<IconRefProps> = forwardRef((props, ref) => {
+export const Icon: FREC<IconProps> = forwardRef((props, ref) => {
   const { outlined, position, ...rest } = props
 
   const sanitized = useSanitizedProps<typeof rest, SpanProps>(rest, {

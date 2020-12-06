@@ -1,6 +1,7 @@
 import { useSanitizedProps } from '@system/hooks'
-import { MutatedRefProps } from '@system/types'
-import { forwardRef, ForwardRefExoticComponent as FREC } from 'react'
+import { AnimatedFREC, FREC, MutatedProps } from '@system/types'
+import { forwardRef } from 'react'
+import { animated } from 'react-spring'
 
 /**
  * @file Render a `<section>` element
@@ -13,13 +14,12 @@ import { forwardRef, ForwardRefExoticComponent as FREC } from 'react'
  * - https://developer.mozilla.org/docs/Web/HTML/Element/section
  * - https://developer.mozilla.org/docs/Web/API/HTMLElement
  */
-export const Section: FREC<MutatedRefProps> = forwardRef((props, ref) => {
-  const sanitized = useSanitizedProps<
-    typeof props,
-    JSX.IntrinsicElements['section']
-  >(props)
+export const Section: FREC<MutatedProps> = forwardRef((props, ref) => {
+  const sanitized = useSanitizedProps<typeof props, AnimatedFREC<'section'>>(
+    props
+  )
 
-  return <section {...sanitized} ref={ref} />
+  return <animated.section {...sanitized} ref={ref} />
 })
 
 Section.displayName = 'Section'

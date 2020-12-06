@@ -1,12 +1,7 @@
 import { useSanitizedProps } from '@system/hooks'
-import { MutatedProps } from '@system/types'
-import {
-  forwardRef,
-  ForwardRefExoticComponent as FREC,
-  PropsWithoutRef,
-  ReactNode,
-  RefAttributes
-} from 'react'
+import { AnimatedFREC, FREC, MutatedProps } from '@system/types'
+import { forwardRef, ReactNode } from 'react'
+import { animated } from 'react-spring'
 import { Item, ItemProps } from '../Item/Item'
 
 /**
@@ -33,28 +28,6 @@ export interface ListProps extends MutatedProps<HTMLListElement> {
 }
 
 /**
- * JSX `<dl>`, `<ol>`, and `<ul>` properties.
- */
-type InstrinsicListProps = JSX.IntrinsicElements['dl'] &
-  JSX.IntrinsicElements['ol'] &
-  JSX.IntrinsicElements['ul']
-
-/**
- * List component properties without the `ref` property.
- */
-export type ReflessListProps = PropsWithoutRef<ListProps>
-
-/**
- * Ref attributes for `<dl>`, `<ol>`, and `<ul>` elements.
- */
-export type ListRefAttributes = RefAttributes<HTMLListElement>
-
-/**
- * {@link List} component forward ref properties.
- */
-export type ListRefProps = ReflessListProps & ListRefAttributes
-
-/**
  * Renders a `<ol>` or `<ul>` element.
  *
  * - https://developer.mozilla.org/docs/Web/HTML/Element/ol
@@ -62,12 +35,15 @@ export type ListRefProps = ReflessListProps & ListRefAttributes
  * - https://developer.mozilla.org/docs/Web/API/HTMLOListElement
  * - https://developer.mozilla.org/docs/Web/API/HTMLUListElement
  */
-export const List: FREC<ListRefProps> = forwardRef((props, ref) => {
+export const List: FREC<ListProps> = forwardRef((props, ref) => {
   const { is, items = [], ...rest } = props
 
-  const sanitized = useSanitizedProps<typeof rest, InstrinsicListProps>(rest)
+  const sanitized = useSanitizedProps<
+    typeof rest,
+    AnimatedFREC<'ol'> | AnimatedFREC<'ul'>
+  >(rest)
 
-  sanitized.children = ((): ReactNode => {
+  sanitized['children'] = ((): ReactNode => {
     if (rest.children) return rest.children
 
     return items.map((item: ItemProps, i: number) => {
@@ -79,9 +55,9 @@ export const List: FREC<ListRefProps> = forwardRef((props, ref) => {
 
   switch (is) {
     case 'ol':
-      return <ol {...sanitized} ref={ref} />
+      return <animated.ol {...sanitized} ref={ref} />
     default:
-      return <ul {...sanitized} ref={ref} />
+      return <animated.ul {...sanitized} ref={ref} />
   }
 })
 

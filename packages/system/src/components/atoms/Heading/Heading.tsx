@@ -1,13 +1,7 @@
 import { useSanitizedProps } from '@system/hooks'
-import { MutatedProps } from '@system/types'
-import {
-  DetailedHTMLProps,
-  forwardRef,
-  ForwardRefExoticComponent as FREC,
-  HTMLAttributes,
-  PropsWithoutRef,
-  RefAttributes
-} from 'react'
+import { FREC, MutatedProps } from '@system/types'
+import { forwardRef } from 'react'
+import { animated } from 'react-spring'
 
 /**
  * @module components/atoms/Heading/impl
@@ -25,53 +19,30 @@ export interface HeadingProps extends MutatedProps<HTMLHeadingElement> {
 }
 
 /**
- * Heading component properties without the `ref` property.
- */
-export type ReflessHeadingProps = PropsWithoutRef<HeadingProps>
-
-/**
- * Ref attributes for `<h1>`, `<h2>`, `<h3>`, `<h4>`, `<h5>`, and `<h6>`
- * elements.
- */
-export type HeadingRefAttributes = RefAttributes<HTMLHeadingElement>
-
-/**
- * {@link Heading} component forward ref properties.
- */
-export type HeadingRefProps = ReflessHeadingProps & HeadingRefAttributes
-
-/**
  * Renders a `<h1>`, `<h2>`, `<h3>`, `<h4>`, `<h5>`, or `<h6>` element.
  *
  * - https://developer.mozilla.org/docs/Web/HTML/Element/Heading_Elements
  * - https://developer.mozilla.org/docs/Web/API/HTMLHeadingElement
  */
-export const Heading: FREC<HeadingRefProps> = forwardRef((props, ref) => {
+export const Heading: FREC<HeadingProps> = forwardRef((props, ref) => {
   const { size, ...rest } = props
 
-  const sanitized = useSanitizedProps<
-    typeof rest,
-    DetailedHTMLProps<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement>
-  >({ ...rest, ref })
-
-  /* eslint-disable jsx-a11y/heading-has-content */
+  const sanitized = useSanitizedProps<typeof rest>({ ...rest, ref })
 
   switch (size) {
     case 2:
-      return <h2 {...sanitized} />
+      return <animated.h2 {...sanitized} />
     case 3:
-      return <h3 {...sanitized} />
+      return <animated.h3 {...sanitized} />
     case 4:
-      return <h4 {...sanitized} />
+      return <animated.h4 {...sanitized} />
     case 5:
-      return <h5 {...sanitized} />
+      return <animated.h5 {...sanitized} />
     case 6:
-      return <h6 {...sanitized} />
+      return <animated.h6 {...sanitized} />
     default:
-      return <h1 {...sanitized} />
+      return <animated.h1 {...sanitized} />
   }
-
-  /* eslint-enable jsx-a11y/heading-has-content */
 })
 
 Heading.displayName = 'Heading'

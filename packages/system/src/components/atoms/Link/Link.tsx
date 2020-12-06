@@ -1,12 +1,8 @@
 import { ButtonVariant, ThemeColor } from '@flex-development/kustomzcore'
-import { useIcon, useSanitizedProps } from '@system/hooks'
-import { MutatedProps } from '@system/types'
-import {
-  forwardRef,
-  ForwardRefExoticComponent as FREC,
-  PropsWithoutRef,
-  RefAttributes
-} from 'react'
+import { useSanitizedProps } from '@system/hooks'
+import { AnimatedFREC, FREC, MutatedProps } from '@system/types'
+import { forwardRef, useEffect, useRef } from 'react'
+import { animated } from 'react-spring'
 import { IconProps } from '../Icon/Icon'
 
 /**
@@ -101,71 +97,54 @@ export interface LinkProps extends MutatedProps<HTMLAnchorElement> {
 }
 
 /**
- * Link component properties without the `ref` property.
- */
-export type ReflessLinkProps = PropsWithoutRef<LinkProps>
-
-/**
- * Ref attributes for `<a>` elements.
- */
-export type LinkRefAttributes = RefAttributes<HTMLAnchorElement>
-
-/**
- * {@link Link} component forward ref properties.
- */
-export type LinkRefProps = ReflessLinkProps & LinkRefAttributes
-
-/**
  * Renders an `<a>` element with the class `link`.
  *
  * - https://developer.mozilla.org/docs/Web/HTML/Element/a
  * - https://developer.mozilla.org/docs/Web/API/HTMLAnchorElement
  */
-export const Link: FREC<LinkRefProps> = forwardRef((props, ref) => {
+export const Link: FREC<LinkProps> = forwardRef((props, ref) => {
   const {
     active,
     btn,
     color,
     dropdown,
+    href = '',
     nav,
     stretched,
     toggle,
     ...rest
   } = props
 
-  const withIcon = useIcon<LinkProps>({
-    ...rest,
-    children: rest.children || rest.title
-  })
+  const sanitized = useSanitizedProps<typeof rest, AnimatedFREC<'a'>>(
+    { ...rest, children: rest.children || rest.title },
+    {
+      active,
+      btn: btn && btn,
+      [`btn-${btn}`]: btn,
+      disabled: rest.disabled,
+      'dropdown-item': dropdown,
+      'dropdown-toggle': toggle,
+      [`link-${color}`]: color,
+      'nav-link': nav,
+      'stretched-link': stretched
+    }
+  )
 
-  const sanitized = useSanitizedProps<
-    typeof withIcon,
-    JSX.IntrinsicElements['a']
-  >(withIcon, {
-    active,
-    btn: btn && btn,
-    [`btn-${btn}`]: btn,
-    disabled: rest.disabled,
-    'dropdown-item': dropdown,
-    'dropdown-toggle': toggle,
-    [`link-${color}`]: color,
-    'nav-link': nav,
-    'stretched-link': stretched
-  })
+  const _href = useRef<string | undefined>(href)
 
   if (toggle) {
     sanitized['aria-expanded'] = rest['aria-expanded'] || false
     sanitized['data-toggle'] = 'dropdown'
-    sanitized.role = 'button'
+    sanitized['role'] = 'button'
   }
 
-  if (sanitized.onClick && sanitized.href === '#') delete sanitized.href
+  if (sanitized['onClick'] && _href.current === '#') _href.current = undefined
 
-  return (
-    <a {...sanitized} ref={ref}>
-      {sanitized.children}
-    </a>
-  )
+  useEffect(() => {
+    _href.current = href
+  }, [href])
+
+  return <animated.a {...sanitized} href={_href.current} ref={ref} />
 })
 
 Link.displayName = 'Link'

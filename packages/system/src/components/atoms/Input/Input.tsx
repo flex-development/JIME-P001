@@ -1,13 +1,9 @@
 import { FormControlSize } from '@flex-development/kustomzcore'
 import { useSanitizedProps } from '@system/hooks'
-import { MutatedFormControlProps } from '@system/types'
+import { AnimatedFREC, FREC, MutatedFormControlProps } from '@system/types'
 import { omit } from 'lodash'
-import {
-  forwardRef,
-  ForwardRefExoticComponent as FREC,
-  PropsWithoutRef,
-  RefAttributes
-} from 'react'
+import { forwardRef } from 'react'
+import { animated } from 'react-spring'
 
 /**
  * @module components/atoms/Input/impl
@@ -337,21 +333,6 @@ export interface InputProps
 export type InputValue = InputProps['value']
 
 /**
- * Input component properties without the `ref` property.
- */
-export type ReflessInputProps = PropsWithoutRef<InputProps>
-
-/**
- * Ref attributes for `<input>` elements.
- */
-export type InputRefAttributes = RefAttributes<HTMLInputElement>
-
-/**
- * {@link Input} component forward ref properties.
- */
-export type InputRefProps = ReflessInputProps & InputRefAttributes
-
-/**
  * Renders an `<input>` element with the class `form-control`.
  *
  * If `type` is `checkbox` or `radio`, the class `form-check-input` will be
@@ -362,7 +343,7 @@ export type InputRefProps = ReflessInputProps & InputRefAttributes
  * - https://developer.mozilla.org/docs/Web/HTML/Element/input
  * - https://developer.mozilla.org/docs/Web/API/HTMLInputElement
  */
-export const Input: FREC<InputRefProps> = forwardRef((props, ref) => {
+export const Input: FREC<InputProps> = forwardRef((props, ref) => {
   const checkInputTypes = ['checkbox', 'radio']
 
   const { invalid, size, ...rest } = props
@@ -375,19 +356,19 @@ export const Input: FREC<InputRefProps> = forwardRef((props, ref) => {
     rest.placeholder = 'you@email.com'
   }
 
-  const sanitized = useSanitizedProps<
-    typeof rest,
-    JSX.IntrinsicElements['input']
-  >(rest, {
-    'form-check-input': checks && !props.className?.includes('btn-check'),
-    'form-control': !checks && !file && !range,
-    [`form-control-${size}`]: !checks && !file && size,
-    'form-file-input': file,
-    'form-range': range,
-    'is-invalid': invalid
-  })
+  const sanitized = useSanitizedProps<typeof rest, AnimatedFREC<'input'>>(
+    rest,
+    {
+      'form-check-input': checks && !props.className?.includes('btn-check'),
+      'form-control': !checks && !file && !range,
+      [`form-control-${size}`]: !checks && !file && size,
+      'form-file-input': file,
+      'form-range': range,
+      'is-invalid': invalid
+    }
+  )
 
-  return <input {...omit(sanitized, ['children'])} ref={ref} />
+  return <animated.input {...omit(sanitized, ['children'])} ref={ref} />
 })
 
 Input.displayName = 'Input'

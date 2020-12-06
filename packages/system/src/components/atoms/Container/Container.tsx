@@ -1,19 +1,11 @@
 import { GridBreakpoint } from '@flex-development/kustomzcore'
 import { useSanitizedProps } from '@system/hooks'
-import { MutatedProps } from '@system/types'
-import {
-  forwardRef,
-  ForwardRefExoticComponent as FREC,
-  PropsWithoutRef
-} from 'react'
-import { BoxRefAttributes } from '../Box'
+import { AnimatedFREC, FREC } from '@system/types'
+import { forwardRef } from 'react'
+import { animated } from 'react-spring'
+import { BoxProps } from '../Box'
 
-/**
- * @file Layout component
- * @module components/atoms/Container/impl
- */
-
-export interface ContainerProps extends MutatedProps<HTMLDivElement> {
+export interface ContainerProps extends BoxProps {
   /**
    * Allow the `Container` to fill all of its available horizontal space.
    *
@@ -35,10 +27,6 @@ export interface ContainerProps extends MutatedProps<HTMLDivElement> {
   stretch?: boolean
 }
 
-export type ReflessContainerProps = PropsWithoutRef<ContainerProps>
-
-export type ContainerRefProps = ReflessContainerProps & BoxRefAttributes
-
 /**
  * Renders a `<div>` element with the class `container`.
  *
@@ -46,20 +34,17 @@ export type ContainerRefProps = ReflessContainerProps & BoxRefAttributes
  * - https://developer.mozilla.org/docs/Web/HTML/Element/div
  * - https://developer.mozilla.org/docs/Web/API/HTMLDivElement
  */
-export const Container: FREC<ContainerRefProps> = forwardRef((props, ref) => {
+export const Container: FREC<ContainerProps> = forwardRef((props, ref) => {
   const { fluid, size, stretch, ...rest } = props
 
-  const sanitized = useSanitizedProps<
-    typeof rest,
-    JSX.IntrinsicElements['div']
-  >(rest, {
+  const sanitized = useSanitizedProps<typeof rest, AnimatedFREC<'div'>>(rest, {
     container: !fluid && !size,
     'container-fluid': fluid,
     [`container-${size}`]: !!size,
     'container-stretch': stretch
   })
 
-  return <div {...sanitized} ref={ref} />
+  return <animated.div {...sanitized} ref={ref} />
 })
 
 Container.displayName = 'Container'

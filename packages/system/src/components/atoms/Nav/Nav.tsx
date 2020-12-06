@@ -1,11 +1,8 @@
 import { useFlexbox, useSanitizedProps } from '@system/hooks'
-import {
-  forwardRef,
-  ForwardRefExoticComponent as FREC,
-  PropsWithoutRef
-} from 'react'
-import { BoxRefAttributes } from '../Box'
-import { FlexBoxProps } from '../FlexBox/FlexBox'
+import { AnimatedFREC, FREC } from '@system/types'
+import { forwardRef } from 'react'
+import { animated } from 'react-spring'
+import { FlexBoxProps } from '../FlexBox'
 
 /**
  * @file Render a `<nav>` element
@@ -42,23 +39,13 @@ export interface NavProps extends FlexBoxProps {
 }
 
 /**
- * Nav component properties without the `ref` property.
- */
-export type ReflessNavProps = PropsWithoutRef<NavProps>
-
-/**
- * {@link Nav} component forward ref properties.
- */
-export type NavRefProps = ReflessNavProps & BoxRefAttributes
-
-/**
  * Renders a `<nav>` element with the class `nav`.
  *
  * - https://v5.getbootstrap.com/docs/5.0/components/navs
  * - https://developer.mozilla.org/docs/Web/HTML/Element/nav
  * - https://developer.mozilla.org/docs/Web/API/HTMLElement
  */
-export const Nav: FREC<NavRefProps> = forwardRef((props, ref) => {
+export const Nav: FREC<NavProps> = forwardRef((props, ref) => {
   const {
     align,
     direction,
@@ -79,10 +66,7 @@ export const Nav: FREC<NavRefProps> = forwardRef((props, ref) => {
     wrap
   })
 
-  const sanitized = useSanitizedProps<
-    typeof rest,
-    JSX.IntrinsicElements['nav']
-  >(rest, {
+  const sanitized = useSanitizedProps<typeof rest, AnimatedFREC<'nav'>>(rest, {
     [flexbox]: flexbox.length !== 0,
     nav: true,
     'nav-fill': fill,
@@ -90,7 +74,7 @@ export const Nav: FREC<NavRefProps> = forwardRef((props, ref) => {
     'nav-tabs': tabs
   })
 
-  return <nav {...sanitized} ref={ref} />
+  return <animated.nav {...sanitized} ref={ref} />
 })
 
 Nav.displayName = 'Nav'

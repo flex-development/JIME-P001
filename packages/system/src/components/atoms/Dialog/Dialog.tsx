@@ -1,11 +1,7 @@
 import { useSanitizedProps } from '@system/hooks'
-import { MutatedProps } from '@system/types'
-import {
-  forwardRef,
-  ForwardRefExoticComponent as FREC,
-  PropsWithoutRef,
-  RefAttributes
-} from 'react'
+import { AnimatedFREC, FREC, MutatedProps } from '@system/types'
+import { forwardRef } from 'react'
+import { animated } from 'react-spring'
 
 /**
  * @file Render a `<dialog>` element
@@ -29,33 +25,17 @@ export interface DialogProps
 }
 
 /**
- * Dialog component properties without the `ref` property.
- */
-export type ReflessDialogProps = PropsWithoutRef<DialogProps>
-
-/**
- * Ref attributes for `<dialog>` elements.
- */
-export type DialogRefAttributes = RefAttributes<HTMLDialogElement>
-
-/**
- * {@link Dialog} component forward ref properties.
- */
-export type DialogRefProps = ReflessDialogProps & DialogRefAttributes
-
-/**
  * Renders a `<dialog>` element.
  *
  * - https://developer.mozilla.org/docs/Web/HTML/Element/dialog
  * - https://developer.mozilla.org/docs/Web/API/HTMLDialogElement
  */
-export const Dialog: FREC<DialogRefProps> = forwardRef((props, ref) => {
-  const sanitized = useSanitizedProps<
-    typeof props,
-    JSX.IntrinsicElements['dialog']
-  >(props)
+export const Dialog: FREC<DialogProps> = forwardRef((props, ref) => {
+  const sanitized = useSanitizedProps<typeof props, AnimatedFREC<'dialog'>>(
+    props
+  )
 
-  return <dialog {...sanitized} ref={ref} />
+  return <animated.dialog {...sanitized} ref={ref} />
 })
 
 Dialog.displayName = 'Dialog'

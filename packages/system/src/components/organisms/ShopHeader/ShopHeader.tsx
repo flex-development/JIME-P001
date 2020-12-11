@@ -2,6 +2,8 @@ import { ANYTHING } from '@flex-development/json'
 import { useSanitizedProps } from '@system/hooks'
 import { EventHandlers, MutatedProps } from '@system/types'
 import { FC } from 'react'
+import { usePrevious } from 'react-hanger'
+import { Spring } from 'react-spring'
 import { Button, Column, Header, Link, LinkProps, Span } from '../../atoms'
 import { SearchBar, SearchBarProps } from '../../molecules'
 
@@ -59,6 +61,7 @@ export const ShopHeader: FC<ShopHeaderProps> = (props: ShopHeaderProps) => {
   } = props
 
   const sanitized = useSanitizedProps<typeof rest>(rest, 'shop-header')
+  const items_prev = usePrevious<number>(items)
 
   return (
     <Header {...sanitized}>
@@ -83,7 +86,19 @@ export const ShopHeader: FC<ShopHeaderProps> = (props: ShopHeaderProps) => {
           target='_blank'
         >
           Cart&nbsp;&nbsp;/&nbsp;&nbsp;
-          <Span>{`${items} Item${items === 1 ? '' : 's'}`}</Span>
+          <Span>
+            <Spring
+              config={{ precision: 0.999 }}
+              from={{ items: items_prev }}
+              to={{ items }}
+            >
+              {({ items: num = 0 }) => (
+                <>
+                  <Span>{num}</Span> {`Item${items === 1 ? '' : 's'}`}
+                </>
+              )}
+            </Spring>
+          </Span>
         </Link>
       </Column>
     </Header>

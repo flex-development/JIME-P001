@@ -156,6 +156,7 @@ export const CheckoutLineItem: FC<CheckoutLineItemProps> = (
             name='remove'
             mt={{ md: 0, xs: 24 }}
             px={20}
+            scale
             value={data.variant_id}
           >
             Remove

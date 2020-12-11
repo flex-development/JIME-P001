@@ -48,17 +48,8 @@
 
   // Add to cart button
   .btn[type='submit'] {
-    // `selected.available ? 'Add to Cart' : 'Out of Stock'` didn't work
-    &::after {
-      content: 'Add to Cart';
-    }
-
     &:disabled {
       @include opacity(map-get($opacities, 0.25));
-
-      &::after {
-        content: 'Out of Stock';
-      }
     }
   }
 }

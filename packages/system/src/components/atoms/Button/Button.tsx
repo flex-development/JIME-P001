@@ -1,7 +1,14 @@
+import { AnyObject } from '@flex-development/json'
 import { ButtonVariant, FormControlSize } from '@flex-development/kustomzcore'
-import { useSanitizedProps } from '@system/hooks'
-import { AnimatedFREC, FREC, MutatedFormControlProps } from '@system/types'
-import { forwardRef } from 'react'
+import { useSanitizedProps, useTransformScaleX } from '@system/hooks'
+import {
+  AnimatedFREC,
+  EventHandlers,
+  FREC,
+  MutatedFormControlProps
+} from '@system/types'
+import { isBoolean, isUndefined } from 'lodash'
+import { forwardRef, useCallback } from 'react'
 import { animated } from 'react-spring'
 import { IconProps } from '../Icon/Icon'
 
@@ -64,6 +71,12 @@ export interface ButtonProps
   icon?: IconProps
 
   /**
+   * If true, use default `transform: scale` animation properties. Default
+   * values can be overriden by passing a config object instead.
+   */
+  scale?: Parameters<typeof useTransformScaleX> | boolean
+
+  /**
    * Make a button smaller or larger.
    *
    * See: https://v5.getbootstrap.com/docs/5.0/components/buttons/#sizes
@@ -102,10 +115,13 @@ export interface ButtonProps
  * - https://developer.mozilla.org/docs/Web/API/HTMLButtonElement
  */
 export const Button: FREC<ButtonProps> = forwardRef((props, ref) => {
-  const { fluid, size, variant, ...rest } = props
+  const { fluid, scale, size, variant, ...rest } = props
+
+  const _scale = isBoolean(scale) || isUndefined(scale) ? [] : scale
+  const scalex = useTransformScaleX(_scale[0], _scale[1], _scale[2])
 
   const sanitized = useSanitizedProps<typeof rest, AnimatedFREC<'button'>>(
-    rest,
+    { ...rest, 'aria-disabled': rest.disabled ? true : undefined },
     {
       btn: true,
       [`btn-${size}`]: size,
@@ -114,9 +130,25 @@ export const Button: FREC<ButtonProps> = forwardRef((props, ref) => {
     }
   )
 
-  if (rest.disabled) sanitized['aria-disabled'] = true
+  const onClick = (event: EventHandlers.Click.Button) => {
+    if (rest.onClick) rest.onClick(event)
+    if (scale) scalex.toggle()
+  }
 
-  return <animated.button {...sanitized} ref={ref} />
+  const { children } = sanitized as AnyObject
+
+  return (
+    <animated.button
+      {...sanitized}
+      onClick={useCallback(onClick, [rest, scale, scalex])}
+      ref={ref}
+    >
+      {(() => {
+        if (!scale) return children
+        return <animated.div style={scalex.style}>{children}</animated.div>
+      })()}
+    </animated.button>
+  )
 })
 
 Button.displayName = 'Button'

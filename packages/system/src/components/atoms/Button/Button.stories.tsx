@@ -2,11 +2,9 @@ import {
   button_variant as variant,
   form_control_size as size
 } from '@system/config'
-import { useTransformScaleX } from '@system/hooks'
 import { StoryFN } from '@system/types/storybook'
-import { useRef } from 'react'
-import { animated } from 'react-spring'
 import { Button, ButtonProps } from './Button'
+
 /**
  * @file Stories - Button
  * @module components/atoms/Button/stories
@@ -56,21 +54,13 @@ Large.args = {
   size: 'lg'
 }
 
-export const ScaleButton: StoryFN<ButtonProps> = (args: ButtonProps) => {
-  const { toggle, style } = useTransformScaleX()
-  const ref = useRef<HTMLButtonElement>(null)
-
-  console.debug(ref)
-
-  return (
-    <Button {...args} onClick={() => toggle()} ref={ref}>
-      <animated.div style={style}>{args.children}</animated.div>
-    </Button>
-  )
-}
+export const ScaleButton: StoryFN<ButtonProps> = (args: ButtonProps) => (
+  <Button {...args} />
+)
 
 ScaleButton.args = {
-  children: 'Click!'
+  children: 'Click!',
+  scale: true
 }
 
 export const Small: StoryFN<ButtonProps> = (args: ButtonProps) => (

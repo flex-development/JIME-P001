@@ -217,8 +217,11 @@ export const AddToCartForm: FC<AddToCartFormProps> = (
               onClick={(event: EventHandlers.Click.Button) =>
                 handleSubmit(item, event)
               }
+              scale
               type='submit'
-            />
+            >
+              {selected.available ? 'Add to Cart' : 'Out of Stock'}
+            </Button>
           </FlexBox>
         </Column>
       </Row>

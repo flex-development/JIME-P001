@@ -118,6 +118,7 @@ export const ProductTemplate: TC<ProductTemplateProps> = (
             aria-label='Submit product review'
             name='submit-review'
             onClick={(e: EventHandlers.Click.Button) => handleSubmitReview(e)}
+            scale
             type='submit'
           >
             Submit Review

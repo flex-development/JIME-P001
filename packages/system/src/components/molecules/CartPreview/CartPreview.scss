@@ -1,0 +1,27 @@
+/// ----------------------------------------------------------------------------
+/// @group CartPreview
+/// ----------------------------------------------------------------------------
+
+/// ----------------------------------------------------------------------------
+/// Styles
+/// ----------------------------------------------------------------------------
+
+.cart-preview {
+  @include event {
+    color: $primary !important;
+  }
+
+  @include height(max-content);
+
+  @include media-breakpoint-down(md) {
+    font-size: $font-size-sm;
+  }
+
+  color: inherit;
+  text-align: right;
+  text-transform: uppercase;
+
+  span {
+    font-weight: $font-weight-semibold;
+  }
+}

@@ -2,10 +2,8 @@ import { ANYTHING } from '@flex-development/json'
 import { useSanitizedProps } from '@system/hooks'
 import { EventHandlers, MutatedProps } from '@system/types'
 import { FC } from 'react'
-import { usePrevious } from 'react-hanger'
-import { Spring } from 'react-spring'
-import { Button, Column, Header, Link, LinkProps, Span } from '../../atoms'
-import { SearchBar, SearchBarProps } from '../../molecules'
+import { Button, Column, Header, LinkProps } from '../../atoms'
+import { CartPreview, SearchBar, SearchBarProps } from '../../molecules'
 
 /**
  * @file Render sidebar button, searchbar, and cart preview
@@ -61,7 +59,6 @@ export const ShopHeader: FC<ShopHeaderProps> = (props: ShopHeaderProps) => {
   } = props
 
   const sanitized = useSanitizedProps<typeof rest>(rest, 'shop-header')
-  const items_prev = usePrevious<number>(items)
 
   return (
     <Header {...sanitized}>
@@ -80,26 +77,7 @@ export const ShopHeader: FC<ShopHeaderProps> = (props: ShopHeaderProps) => {
         />
       </Column>
       <Column className='w-sm-maxc' flex justify='end'>
-        <Link
-          className='shop-header-cart-preview'
-          href={cart_url}
-          target='_blank'
-        >
-          Cart&nbsp;&nbsp;/&nbsp;&nbsp;
-          <Span>
-            <Spring
-              config={{ precision: 0.999 }}
-              from={{ items: items_prev }}
-              to={{ items }}
-            >
-              {({ items: num = 0 }) => (
-                <>
-                  <Span>{num}</Span> {`Item${items === 1 ? '' : 's'}`}
-                </>
-              )}
-            </Spring>
-          </Span>
-        </Link>
+        <CartPreview href={cart_url} items={items} />
       </Column>
     </Header>
   )

@@ -3,6 +3,7 @@
  * @module components/molecules
  */
 
+export * from './CartPreview'
 export * from './CheckoutLineItem'
 export * from './FormCheck'
 export * from './LabeledFormControl'

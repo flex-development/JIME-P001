@@ -32,27 +32,15 @@ $shop-header-spacer: $spacers-8;
       margin-right: $spacers-24;
     }
 
-    color: $shop-header-color;
     margin-right: $shop-header-spacer;
-  }
-
-  &-cart-preview {
-    @include height(max-content);
-
-    @include media-breakpoint-down(md) {
-      font-size: $font-size-sm;
-    }
-
-    color: $shop-header-color;
-    text-align: right;
-    text-transform: uppercase;
-
-    span {
-      font-weight: $font-weight-semibold;
-    }
   }
 
   &-searchbar {
     @include width(100%);
+  }
+
+  &-btn,
+  .cart-preview {
+    color: $shop-header-color;
   }
 }

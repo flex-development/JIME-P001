@@ -4,7 +4,7 @@ import { AshTray, Kustomz } from './CheckoutLineItem.stories'
 
 /**
  * @file Tests - CheckoutLineItem
- * @module components/molecules/CheckoutLineItem/impl
+ * @module components/molecules/CheckoutLineItem/spec
  */
 
 // ! Keep in sync with CheckoutLineItem implementation

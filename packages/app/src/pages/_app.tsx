@@ -2,8 +2,8 @@ import { CheckoutLineItemInput } from '@flex-development/kustomzcore'
 import '@flex-development/kustomzdesign/index.scss'
 import {
   AC,
+  AppLayout,
   IAppProps,
-  ShopLayout,
   useLocalStorage,
   useSignInWithCustomToken
 } from '@subdomains/app'
@@ -74,7 +74,7 @@ const App: AC = ({ Component, pageProps }: IAppProps) => {
     <NextAuthProvider session={(session || {}) as Session}>
       <TinaProvider cms={cms}>
         <CartContext.Provider value={checkout}>
-          <ShopLayout page={Component} pageProps={pageProps} />
+          <AppLayout page={Component} pageProps={pageProps} />
         </CartContext.Provider>
       </TinaProvider>
     </NextAuthProvider>

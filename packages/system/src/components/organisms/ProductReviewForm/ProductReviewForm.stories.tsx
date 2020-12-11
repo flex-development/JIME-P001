@@ -1,28 +1,25 @@
 import { PRODUCTS } from '@system-mocks/utils'
 import { StoryFN } from '@system/types/storybook'
-import {
-  ProductReviewEntryForm,
-  ProductReviewEntryFormProps
-} from './ProductReviewEntryForm'
+import { ProductReviewForm, ProductReviewFormProps } from './ProductReviewForm'
 
 /**
- * @file Stories - ProductReviewEntryForm
- * @module components/organisms/ProductReviewEntryForm/stories
+ * @file Stories - ProductReviewForm
+ * @module components/organisms/ProductReviewForm/stories
  */
 
 export default {
-  component: ProductReviewEntryForm,
+  component: ProductReviewForm,
   parameters: {
-    jest: ['ProductReviewEntryForm']
+    jest: ['ProductReviewForm']
   },
-  title: 'Library/Organisms/ProductReviewEntryForm'
+  title: 'Library/Organisms/ProductReviewForm'
 }
 
 const ashtray_data = PRODUCTS.find(p => p.handle === 'ash-tray')
 
-export const AshTray: StoryFN<ProductReviewEntryFormProps> = (
-  args: ProductReviewEntryFormProps
-) => <ProductReviewEntryForm {...args} />
+export const AshTray: StoryFN<ProductReviewFormProps> = (
+  args: ProductReviewFormProps
+) => <ProductReviewForm {...args} />
 
 AshTray.args = {
   description:

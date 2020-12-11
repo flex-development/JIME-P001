@@ -218,6 +218,11 @@ export type Spacer =
   | 96
 
 /**
+ * Spacer (`margin-`, `padding`, etc) directions.
+ */
+export type SpacerDirection = 'bottom' | 'left' | 'right' | 'top'
+
+/**
  * Prefixes for utilities using the `$spacers` map.
  *
  * @see https://v5.getbootstrap.com/docs/5.0/layout/gutters/

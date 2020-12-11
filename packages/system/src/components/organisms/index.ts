@@ -9,7 +9,7 @@ export * from './Hero'
 export * from './PlaylistBar'
 export * from './ProductGrid'
 export * from './ProductImageCarousel'
-export * from './ProductReviewEntryForm'
+export * from './ProductReviewForm'
 export * from './ShopHeader'
 export * from './Sidebar'
 

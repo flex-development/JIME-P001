@@ -1,0 +1,77 @@
+/// ----------------------------------------------------------------------------
+/// @group ShopLayout
+/// ----------------------------------------------------------------------------
+
+/// ----------------------------------------------------------------------------
+/// Styles
+/// ----------------------------------------------------------------------------
+
+.shop-layout {
+  overflow-x: hidden;
+  overflow-y: scroll;
+
+  .playlistbar {
+    bottom: 0;
+    width: 100%;
+  }
+
+  .shop-header {
+    width: 100%;
+    width: -moz-available;
+  }
+
+  .sidebar-col {
+    @include make-col(12);
+
+    @include media-breakpoint-between(sm, lg) {
+      background-color: $darker-75;
+    }
+
+    @include media-breakpoint-up(lg) {
+      @include make-col(4);
+    }
+
+    @include media-breakpoint-up(xl) {
+      @include make-col(3);
+    }
+
+    display: flex;
+    height: 100vh;
+    overflow-y: scroll;
+
+    &[data-visible='true'] + .content-col {
+      @include media-breakpoint-up(lg) {
+        @include make-col(8);
+      }
+
+      @include media-breakpoint-up(xl) {
+        @include make-col(9);
+      }
+    }
+
+    &[data-visible='false'] + .content-col,
+    &[hidden] + .content-col {
+      @include make-col(12);
+    }
+
+    .sidebar {
+      @include media-breakpoint-between(sm, lg) {
+        @include make-col(6);
+      }
+
+      @include media-breakpoint-down(sm) {
+        @include make-col(12);
+      }
+
+      width: 100%;
+    }
+  }
+
+  .playlistbar,
+  .shop-header,
+  .sidebar-col {
+    @include fixed;
+
+    z-index: 2;
+  }
+}

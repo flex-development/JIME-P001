@@ -1,11 +1,12 @@
 import { NullishNumber, NullishString } from '@flex-development/json'
-import { useSanitizedProps } from '@system/hooks'
-import { MutatedProps } from '@system/types'
-import { FC } from 'react'
+import { useFlexbox, useSanitizedProps } from '@system/hooks'
+import { FREC } from '@system/types'
+import { forwardRef } from 'react'
 import {
   Aside,
   Box,
   Column,
+  FlexBoxProps,
   Icon,
   Image,
   ImageProps,
@@ -21,7 +22,7 @@ import { Menu } from '../../molecules'
  * @module components/organisms/Sidebar/impl
  */
 
-export interface SidebarProps extends MutatedProps {
+export interface SidebarProps extends FlexBoxProps {
   /**
    * Profile age.
    *
@@ -62,10 +63,33 @@ export interface SidebarProps extends MutatedProps {
  * Displays a MySpace style profile snippet and the shop menu. Renders an
  * `Aside` component with the class `sidebar`.
  */
-export const Sidebar: FC<SidebarProps> = (props: SidebarProps) => {
-  const { age, menu = [], mood, img, location, ...rest } = props
+export const Sidebar: FREC<SidebarProps> = forwardRef((props, ref) => {
+  const {
+    age,
+    align,
+    direction,
+    display,
+    img,
+    justify,
+    location,
+    menu = [],
+    mood,
+    wrap,
+    ...rest
+  } = props
 
-  const sanitized = useSanitizedProps<typeof rest>(rest, 'sidebar')
+  const flexbox = useFlexbox({
+    align,
+    direction,
+    display,
+    justify,
+    wrap
+  })
+
+  const sanitized = useSanitizedProps<typeof rest>(rest, {
+    [flexbox]: flexbox.length !== 0,
+    sidebar: true
+  })
 
   const developer: LinkProps = {
     href: 'https://flexdevelopment.llc',
@@ -74,7 +98,7 @@ export const Sidebar: FC<SidebarProps> = (props: SidebarProps) => {
   }
 
   return (
-    <Aside {...sanitized}>
+    <Aside {...sanitized} ref={ref}>
       <Box>
         <Row
           className='sidebar-profile'
@@ -132,7 +156,7 @@ export const Sidebar: FC<SidebarProps> = (props: SidebarProps) => {
       </Paragraph>
     </Aside>
   )
-}
+})
 
 Sidebar.displayName = 'Sidebar'
 

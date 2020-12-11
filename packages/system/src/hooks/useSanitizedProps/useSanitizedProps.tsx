@@ -170,8 +170,10 @@ export function useSanitizedProps<
     _sanitized.className = dstring.length ? dstring : undefined
 
     // Handle background image
-    const style = { backgroundImage: !isEmpty(img) ? `url(${img})` : undefined }
-    _sanitized.style = merge(style, _sanitized.style || {})
+    if (!isEmpty(img)) {
+      const style = { backgroundImage: `url(${img})` }
+      _sanitized.style = merge(style, _sanitized.style || {})
+    }
 
     // Handle dangerouslySetInnerHTML
     if (innerHTML) _sanitized.dangerouslySetInnerHTML = { __html: innerHTML }
@@ -180,7 +182,12 @@ export function useSanitizedProps<
   }, [dstring, img, innerHTML])
 
   // Handle keys to remove and return sanitized props
-  return omit({ ..._rest, ...sanitized() }, uniq(_keys)) as Sanitized
+  const _sanitized = omit(merge(_rest, sanitized()), uniq(_keys))
+
+  // Remove `className` property if an empty string
+  if (!_sanitized.className?.length) delete _sanitized.className
+
+  return _sanitized as Sanitized
 }
 
 export default useSanitizedProps

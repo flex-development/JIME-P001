@@ -18,7 +18,7 @@ import { useWindowSize } from 'react-use'
 export type UseVisibility = {
   breakpoints: Required<ResponsiveUtility<boolean>>
   setVisibility: UseBooleanActions['setValue']
-  toggleVisibility: UseBooleanActions['toggle']
+  toggle: UseBooleanActions['toggle']
   visible: boolean
 }
 
@@ -92,7 +92,7 @@ export const useVisibility = (
   return {
     breakpoints,
     setVisibility: visibilityActions.setValue,
-    toggleVisibility: visibilityActions.toggle,
+    toggle: visibilityActions.toggle,
     visible
   }
 }

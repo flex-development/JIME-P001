@@ -5,6 +5,7 @@ import {
 } from '@flex-development/kustomzcore'
 import { useSanitizedProps } from '@system/hooks'
 import { EventHandlers, MutatedProps } from '@system/types'
+import { isEmpty } from 'lodash'
 import { FC } from 'react'
 import {
   Button,
@@ -55,15 +56,11 @@ export interface PlaylistBarProps extends MutatedProps {
 
 /**
  * Displays the current song of the shop playlist. Users can pause the playlist,
- * as well skip forward or backward. Renders a `Section` component with the
- * class `playlistbar`.
+ * as well skip forward or backward.
+ *
+ * Renders a `Section` component with the class `playlistbar`.
  *
  * - https://github.com/wsmd/musickit-typescript
- *
- * **TODO**
- *
- * - Handle playlist playback state
- * - Handle playlist control functions
  */
 export const PlaylistBar: FC<PlaylistBarProps> = (props: PlaylistBarProps) => {
   const {
@@ -76,11 +73,13 @@ export const PlaylistBar: FC<PlaylistBarProps> = (props: PlaylistBarProps) => {
       console.log(event.target.name)
     },
     playback = 'none',
-    song,
+    song = {} as MusicKitSongAttributes,
     ...rest
   } = props
 
   const sanitized = useSanitizedProps<typeof rest>(rest, 'playlistbar')
+
+  if (isEmpty(song)) return null
 
   let artwork_url = song.artwork?.url.replace('{w}', `${song.artwork.width}`)
   artwork_url = artwork_url?.replace('{h}', `${song.artwork.height}`)
@@ -137,5 +136,6 @@ export const PlaylistBar: FC<PlaylistBarProps> = (props: PlaylistBarProps) => {
 PlaylistBar.displayName = 'PlaylistBar'
 
 PlaylistBar.defaultProps = {
-  playback: 'none'
+  playback: 'none',
+  song: {} as MusicKitSongAttributes
 }

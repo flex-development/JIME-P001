@@ -10,5 +10,6 @@ export * from './IndexTemplate'
 export * from './PageTemplate'
 export * from './ProductTemplate'
 export * from './SearchTemplate'
+export * from './ShopLayout'
 
 /* eslint-disable prettier/prettier */

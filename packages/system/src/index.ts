@@ -2,7 +2,7 @@
  * @file Package Entry Point
  * @author Lexus Drumgold <lex@flexdevelopment.llc>
  *
- * @todo [DOC] ProductReviewEntryForm - Update documentation
+ * @todo [DOC] ProductReviewForm - Update documentation
  * @todo [DOC] Storybook Types - Update documentation
  * @todo [DOC] Typography - Update fonts weights and headings font config
  * @todo [FIX] Carousel - https://github.com/flex-development/JIME-P001/issues/7

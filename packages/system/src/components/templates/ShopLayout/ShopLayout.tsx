@@ -1,4 +1,11 @@
-import { Box, Column, FlexBox, Row } from '@system/components/atoms'
+import {
+  Box,
+  Column,
+  FlexBox,
+  Paragraph,
+  Row,
+  Span
+} from '@system/components/atoms'
 import {
   Hero,
   HeroProps,
@@ -12,6 +19,7 @@ import {
 import { GRID_BREAKPOINTS } from '@system/config'
 import { useSlideInOut } from '@system/hooks'
 import { FC, ReactNode, useCallback } from 'react'
+import { useSpring } from 'react-spring'
 import { useEvent, useMedia } from 'react-use'
 
 /**
@@ -38,6 +46,11 @@ export interface ShopLayoutProps {
   hero?: HeroProps
 
   /**
+   * If true, show loading screen instead of content.
+   */
+  loading?: boolean
+
+  /**
    * Props to pass to the `PlaylistBar` component.
    *
    * @default {}
@@ -60,6 +73,7 @@ export const ShopLayout: FC<ShopLayoutProps> = (props: ShopLayoutProps) => {
     children,
     header = {} as ShopHeaderProps,
     hero = {} as HeroProps,
+    loading = false,
     playlistbar = {} as PlaylistBarProps,
     sidebar = {} as SidebarProps
   } = props
@@ -69,6 +83,9 @@ export const ShopLayout: FC<ShopLayoutProps> = (props: ShopLayoutProps) => {
 
   // Animate sidebar visibility
   const sidebar_a = useSlideInOut<HTMLDivElement>(breakpoint_lg)
+
+  // Animate loading container in/out
+  const loading_a = useSpring({ opacity: loading ? 1 : 0 })
 
   /**
    * The sidebar will be closed automatically when the window width is less than
@@ -80,33 +97,56 @@ export const ShopLayout: FC<ShopLayoutProps> = (props: ShopLayoutProps) => {
   useEvent('resize', useCallback(onResize, [breakpoint_lg, sidebar_a]))
 
   return (
-    <Box className='shop-layout'>
-      <Row gx={0} justify='end'>
-        <Column
-          className='sidebar-col'
-          data-visible={sidebar_a.visible}
-          hidden={!breakpoint_lg && !sidebar_a.visible}
-          ref={sidebar_a.ref}
-          style={sidebar_a.style}
-        >
-          <Sidebar {...sidebar} />
-        </Column>
+    <Box className='shop-layout' data-loading={loading}>
+      {(() => {
+        if (loading)
+          return (
+            <Box className='loading-container h-100 w-100' style={loading_a}>
+              <FlexBox
+                align='center'
+                className='h-100'
+                direction='column'
+                justify='center'
+              >
+                <Span className='fas fa-spinner fa-spin fa-2x' />
+                <Paragraph className='text-bold text-xs text-uppercase' mt={16}>
+                  Loading...
+                </Paragraph>
+              </FlexBox>
+            </Box>
+          )
 
-        <Column className='content-col' mt={0} px={0}>
-          <ShopHeader
-            {...header}
-            handleSidebar={sidebar_a.toggle}
-            px={24}
-            py={20}
-          />
-          <FlexBox direction='column'>
-            <Hero {...hero} />
-            {children}
-          </FlexBox>
-        </Column>
-      </Row>
+        return (
+          <>
+            <Row gx={0} justify='end'>
+              <Column
+                className='sidebar-col'
+                data-visible={sidebar_a.visible}
+                hidden={!breakpoint_lg && !sidebar_a.visible}
+                ref={sidebar_a.ref}
+                style={sidebar_a.style}
+              >
+                <Sidebar {...sidebar} />
+              </Column>
 
-      <PlaylistBar {...(playlistbar as PlaylistBarProps)} pr={24} />
+              <Column className='content-col' mt={0} px={0}>
+                <ShopHeader
+                  {...header}
+                  handleSidebar={sidebar_a.toggle}
+                  px={24}
+                  py={20}
+                />
+                <FlexBox direction='column'>
+                  <Hero {...hero} />
+                  {children}
+                </FlexBox>
+              </Column>
+            </Row>
+
+            <PlaylistBar {...(playlistbar as PlaylistBarProps)} pr={24} />
+          </>
+        )
+      })()}
     </Box>
   )
 }

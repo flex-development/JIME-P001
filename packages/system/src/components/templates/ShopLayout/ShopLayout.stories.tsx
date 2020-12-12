@@ -12,6 +12,12 @@ import { ShopLayout, ShopLayoutProps } from './ShopLayout'
  */
 
 export default {
+  argTypes: {
+    header: { control: 'object' },
+    hero: { control: 'object' },
+    playlistbar: { control: 'object' },
+    sidebar: { control: 'object' }
+  },
   component: ShopLayout,
   parameters: {
     jest: ['ShopLayout']
@@ -29,4 +35,13 @@ Home.args = {
   hero: Hero.args,
   playlistbar: PlaylistBar.args,
   sidebar: Sidebar.args
+}
+
+export const Loading: StoryFN<ShopLayoutProps> = (args: ShopLayoutProps) => (
+  <ShopLayout {...args} />
+)
+
+Loading.args = {
+  ...Home.args,
+  loading: true
 }

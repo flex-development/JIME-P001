@@ -15,19 +15,26 @@ import {
 } from '@subdomains/app'
 import {
   getCMSPageSEO,
+  ICMSPage,
   ICMSPageIndex,
   ICMSPageSlug,
   PageService
 } from '@subdomains/cms'
 import { ProductService, ReviewService } from '@subdomains/sales'
-import { GetServerSideProps, GetServerSidePropsContext } from 'next'
+import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from 'next'
 import { getSession } from 'next-auth/client'
 import { IProductListing } from 'shopify-api-node'
 
 /**
  * @file Page - Slug (CMS)
  * @module pages/slug
+ * @see https://nextjs.org/docs/basic-features/data-fetching
  */
+
+// Initialize services
+const Pages = new PageService(database)
+const ProductReviews = new ReviewService(database)
+const Products = new ProductService()
 
 /**
  * Renders a CMS page.
@@ -59,10 +66,27 @@ const Slug: PC<IPagePropsCMS> = ({ page }) => (
 )
 
 /**
+ * Returns an object containing the dynamic route parameters of each page that
+ * should be pre-rendered.
+ *
+ * Any paths not returned will result in a 404 page.
+ */
+export const getStaticPaths: GetStaticPaths<CMSPageParams> = async () => {
+  // Get pages in database
+  const pages = (await Pages.find()) as Array<ICMSPage>
+
+  // Get pages to pre-render
+  const paths = pages.map(({ path }) => {
+    return { params: { slug: path === '/' ? 'index' : path.replace('/', '') } }
+  })
+
+  // Return paths to prerender and redirect other routes to 404
+  return { fallback: false, paths }
+}
+
+/**
  * Retrieves the data for the `IndexTemplate` or `PageTemplate` and the current
  * CMS user session.
- *
- * @see https://nextjs.org/docs/basic-features/data-fetching
  *
  * @param context - Next.js page component context
  * @param context.params - Dynamic route parameters
@@ -70,20 +94,17 @@ const Slug: PC<IPagePropsCMS> = ({ page }) => (
  * @param context.previewData - Preview data set by `setPreviewData`
  * @returns Template data and current user session
  */
-export const getServerSideProps: GetServerSideProps<
+export const getStaticProps: GetStaticProps<
   IPagePropsCMS,
   CMSPageParams
-> = async (context: GetServerSidePropsContext<CMSPageParams>) => {
+> = async (context: GetStaticPropsContext<CMSPageParams>) => {
   const { slug } = context.params as CMSPageParams
-
-  // Initialize services
-  const Pages = new PageService(database)
 
   // Get incoming page path
   const path = slug === 'index' ? '/' : `/${slug}`
 
   // Get current user session
-  const session = (await getSession(context)) as IPagePropsCMS['session']
+  const session = (await getSession()) as IPagePropsCMS['session']
 
   // Get page data. Throws if in draft mode and not signed-in with GitHub
   let page = await Pages.getPage(path, session)
@@ -96,10 +117,6 @@ export const getServerSideProps: GetServerSideProps<
 
   // Get data for homepage
   if (page.component === 'IndexTemplate') {
-    // Initialize homepage services
-    const ProductReviews = new ReviewService(database)
-    const Products = new ProductService()
-
     // Cast page data
     page = page as ICMSPageIndex
 

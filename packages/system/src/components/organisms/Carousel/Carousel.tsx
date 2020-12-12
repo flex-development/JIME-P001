@@ -3,7 +3,7 @@ import { Box, BoxProps, Item, ItemProps, List } from '@system/components/atoms'
 import { useActiveIndex, useSanitizedProps } from '@system/hooks'
 import classnames from 'classnames'
 import { chunk } from 'lodash'
-import { Children, FC, ReactElement } from 'react'
+import { Children, FC, ReactElement, useCallback } from 'react'
 
 /**
  * @file Slideshow component for cycling through elements
@@ -90,6 +90,8 @@ export const Carousel: FC<CarouselProps> & {
     upperLimit: items.length - 1
   })
 
+  const onClickItem = useCallback((i: number) => setIndex(i), [setIndex])
+
   return (
     <Box {...sanitized}>
       <Box className='carousel-inner'>
@@ -103,7 +105,7 @@ export const Carousel: FC<CarouselProps> & {
                   active={active}
                   flex={active}
                   key={`carousel-item-${i}`}
-                  onClick={() => setIndex(i)}
+                  onClick={() => onClickItem(i)}
                 >
                   {chunk}
                 </CarouselItem>
@@ -115,7 +117,7 @@ export const Carousel: FC<CarouselProps> & {
             <CarouselItem
               active={items.length === 1 || isActive(i)}
               key={`carousel-item-${i}`}
-              onClick={() => setIndex(i)}
+              onClick={() => onClickItem(i)}
             >
               {child}
             </CarouselItem>
@@ -128,7 +130,7 @@ export const Carousel: FC<CarouselProps> & {
             <CarouselIndicator
               active={isActive(i)}
               key={`carousel-indicator-${i}`}
-              onClick={() => setIndex(i)}
+              onClick={() => onClickItem(i)}
             />
           ))}
         </List>

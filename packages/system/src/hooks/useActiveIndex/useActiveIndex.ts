@@ -27,73 +27,94 @@ export type UseActiveIndex = {
   increaseIndex: UseNumberActions['increase']
 
   /**
-   * Determines the active item index.
+   * Returns true if {@param curr} is equal to the `active` state.
    *
-   * @param curr - Current array index
+   * @param curr - Current index
    */
   isActive(curr: number): boolean
 
   /**
    * Updates the active index state.
+   *
+   * @param new_index - New index state
    */
-  setIndex: UseNumberActions['setValue']
+  setIndex: (curr: string | number) => void
 }
 
 /**
- * Returns an object containing the active index and a functions to update the
+ * Returns an object containing the active index and functions to update the
  * active state. The value of {@param options.lowerLimit} will be set to -1.
  *
  * @see https://github.com/kitze/react-hanger#usenumber
  *
- * @param index - Initial active item index
+ * @param index - Current active index
  * @param options - useNumber options
  */
 export const useActiveIndex = (
   index: number | string = 0,
   options: Parameters<typeof useNumber>[1] = {}
 ): UseActiveIndex => {
-  // Parse index if string
-  if (isString(index)) {
-    index = JSON.parse(index.length ? index : '-1')
-    index = index as number
+  // Get `useNumber` options and override lowerLimit settings
+  const _options = { ...options, lowerLimit: -1 }
+
+  // Initialize active index state
+  const [active, { decrease, increase, setValue }] = useNumber(-1, _options)
+
+  /**
+   * Helper function to convert {@param val} into a number if it's a string.
+   * If the value is already a number, it will be returned.
+   *
+   * @param val - Number or string containing number to convert
+   */
+  const parse = (val: number | string) => {
+    let parsed = val as number
+
+    if (isString(val)) {
+      // Get number from string. Empty strings will be set to '-1'
+      const _val = JSON.parse(val.length ? val : '-1')
+
+      // Use lowerLimit settings to set minimum value
+      parsed = _val < _options.lowerLimit ? _options.lowerLimit : _val
+    }
+
+    return parsed
   }
 
-  // Set index to -1 if negative number
-  if (index < -1) index = -1
+  // Callback version of `parse`
+  const parseCB = useCallback(parse, [_options.lowerLimit])
 
-  // Initialize state
-  const [active, { decrease, increase, setValue }] = useNumber(0, {
-    ...options,
-    lowerLimit: -1
-  })
+  /**
+   * Updates the active state.
+   *
+   * @param new_index - New index state
+   */
+  const setIndex = (new_index: typeof index) => setValue(parseCB(new_index))
+
+  // Callback version of `setIndex`
+  const setIndexCB = useCallback(setIndex, [parseCB, setValue])
+
+  /**
+   * Returns true if {@param curr} is equal to the value of the active state.
+   *
+   * @param curr - Current index
+   */
+  const isActive = (curr: typeof index): boolean => {
+    return parseCB(curr) === active
+  }
+
+  // Callback version of `isActive`
+  const isActiveCB = useCallback(isActive, [active, parseCB])
 
   // Update active state if args.index changes
   useEffect(() => {
-    if (index) setValue(index as number)
-  }, [index, setValue])
-
-  /* eslint-disable prettier/prettier */
-
-  /**
-   * Determines the active item index.
-   *
-   * @param curr - Current index
-   * @returns True if {@param curr} === value of active state
-   */
-  const isActive = useCallback(
-    (curr: typeof index): boolean => {
-      return curr === active
-    },
-    [active]
-  )
-
-  /* eslint-enable prettier/prettier */
+    setIndexCB(index)
+  }, [index, setIndexCB])
 
   return {
     active,
     decreaseIndex: decrease,
     increaseIndex: increase,
-    isActive,
-    setIndex: setValue
+    isActive: isActiveCB,
+    setIndex: setIndexCB
   }
 }

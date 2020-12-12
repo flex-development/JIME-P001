@@ -4,7 +4,7 @@ import { Sidebar } from './Menu.stories'
 
 /**
  * @file Tests - Menu
- * @module components/molecules/Menu/impl
+ * @module components/molecules/Menu/spec
  */
 
 it('renders the sidebar menu links', () => {

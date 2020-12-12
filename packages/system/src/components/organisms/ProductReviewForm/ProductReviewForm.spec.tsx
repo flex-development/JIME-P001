@@ -4,7 +4,7 @@ import { AshTray } from './ProductReviewForm.stories'
 
 /**
  * @file Tests - ProductReviewForm
- * @module components/organisms/ProductReviewForm/impl
+ * @module components/organisms/ProductReviewForm/spec
  */
 
 // ! Keep in sync with Input implementation

@@ -3,7 +3,7 @@ import { Box } from './Box'
 
 /**
  * @file Unit Tests - Box
- * @module components/atoms/Box/impl
+ * @module components/atoms/Box/spec
  */
 
 it('renders <div />', () => {

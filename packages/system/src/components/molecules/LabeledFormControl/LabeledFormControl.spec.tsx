@@ -3,7 +3,7 @@ import { Quantity } from './LabeledFormControl.stories'
 
 /**
  * @file Tests - LabeledFormControl
- * @module components/molecules/LabeledFormControl/impl
+ * @module components/molecules/LabeledFormControl/spec
  */
 
 it('renders a nested <input type="number"> element', () => {

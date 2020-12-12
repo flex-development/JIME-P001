@@ -35,12 +35,14 @@ $product-card-footer-padding-x: $spacers-24;
 
   .dropdown {
     &-item {
+      @include event {
+        cursor: pointer;
+      }
+
       @include padding-x($product-card-footer-padding-x);
     }
 
     &-menu {
-      position: relative !important;
-      top: 0.125rem !important;
       z-index: 5;
     }
 

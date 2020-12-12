@@ -4,7 +4,7 @@ import { Cart } from './CartTemplate.stories'
 
 /**
  * @file Tests - CartTemplate
- * @module components/templates/CartTemplate/impl
+ * @module components/templates/CartTemplate/spec
  */
 
 it('renders without crashing', () => {

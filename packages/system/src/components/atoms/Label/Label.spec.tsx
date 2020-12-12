@@ -3,7 +3,7 @@ import { Default } from './Label.stories'
 
 /**
  * @file Tests - Label
- * @module components/atoms/Label/impl
+ * @module components/atoms/Label/spec
  */
 
 it('adds the class "form-label" when props.form is true', () => {

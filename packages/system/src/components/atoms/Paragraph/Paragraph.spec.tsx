@@ -3,7 +3,7 @@ import { Default } from './Paragraph.stories'
 
 /**
  * @file Tests - Paragraph
- * @module components/atoms/Paragraph/impl
+ * @module components/atoms/Paragraph/spec
  */
 
 it('renders a <p> element', () => {

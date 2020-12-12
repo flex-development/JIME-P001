@@ -4,7 +4,7 @@ import { Disabled, Fluid, Large, Small } from './Button.stories'
 
 /**
  * @file Tests - Button
- * @module  components/atoms/Button/impl
+ * @module  components/atoms/Button/spec
  */
 
 it('renders a primary button', () => {

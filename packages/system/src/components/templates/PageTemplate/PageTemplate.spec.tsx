@@ -5,7 +5,7 @@ import { Markdown, MDX } from './PageTemplate.stories'
 
 /**
  * @file Tests - PageTemplate
- * @module components/templates/PageTemplate/impl
+ * @module components/templates/PageTemplate/spec
  */
 
 const { template_id } = PageTemplate

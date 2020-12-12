@@ -3,7 +3,7 @@ import { Checkbox, Default, Radio } from './Input.stories'
 
 /**
  * @file Tests - Input
- * @module components/atoms/Input/impl
+ * @module components/atoms/Input/spec
  */
 
 it('adds the class "form-control" to non <input type="checkbox"> and <input type="radio"> elements, not "form-check-input" or "form-file-input"', () => {

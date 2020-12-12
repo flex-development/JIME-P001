@@ -4,7 +4,7 @@ import useMemoCompare from '@system/hooks/useMemoCompare/useMemoCompare'
 import { EventHandlers } from '@system/types'
 import { getProductVariantImage } from '@system/utils'
 import { isEqual } from 'lodash'
-import { FC, useCallback, useEffect, useState } from 'react'
+import { FC, useCallback, useEffect, useMemo, useState } from 'react'
 import useBoolean from 'react-hanger/array/useBoolean'
 import { IProductListing, IProductListingVariant } from 'shopify-api-node'
 import {
@@ -13,12 +13,11 @@ import {
   FlexBox,
   Image,
   ImageProps,
-  Item,
   Link,
   LinkProps,
-  List,
   Paragraph
 } from '../../atoms'
+import { DropdownMenu } from '../DropdownMenu'
 
 /**
  * @file Display a product preview
@@ -107,6 +106,12 @@ export const ProductCard: FC<ProductCardProps> = (props: ProductCardProps) => {
   /* Callback version of `onClickDropItem` */
   const _onClickDropItem = useCallback(onClickDropItem, [selectVariant, toggle])
 
+  const dropdown_variants = useMemo(() => {
+    return product.variants.filter(variant => {
+      return variant.title !== selected.title
+    })
+  }, [product.variants, selected.title])
+
   return (
     <Box {...sanitized} id={`product-card-${product.product_id}`}>
       <Link className='d-inline-block' href={url} target='_blank'>
@@ -138,24 +143,13 @@ export const ProductCard: FC<ProductCardProps> = (props: ProductCardProps) => {
         </Paragraph>
       </FlexBox>
 
-      {expanded && (
-        <List className='dropdown-menu show'>
-          {product.variants.map(({ id, title }) => {
-            if (title === selected.title) return null
-
-            return (
-              <Item
-                dropdown
-                className='dropdown-item'
-                key={id}
-                onClick={() => _onClickDropItem(id)}
-              >
-                {title}
-              </Item>
-            )
-          })}
-        </List>
-      )}
+      <DropdownMenu
+        items={dropdown_variants.map(({ id, title }) => ({
+          children: title,
+          onClick: () => _onClickDropItem(id)
+        }))}
+        open={expanded}
+      />
     </Box>
   )
 }

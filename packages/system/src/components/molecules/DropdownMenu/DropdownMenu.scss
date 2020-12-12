@@ -1,5 +1,5 @@
 /// ----------------------------------------------------------------------------
-/// @group Dropdown
+/// @group DropdownMenu
 /// ----------------------------------------------------------------------------
 
 .dropdown {
@@ -15,14 +15,15 @@
   }
 
   &-menu {
-    @include absolute($spacers-36 !important);
+    @include absolute;
+
+    @include border($secondary, $border-width, top);
 
     @include padding-y($spacers-0);
 
     background-color: $ghost;
     margin-top: $spacers-0;
     text-transform: uppercase;
-    transform: none !important;
 
     &.nav {
       display: none;
@@ -42,6 +43,14 @@
 
     background-color: $dropdown-item-bg;
     color: $dropdown-item-color;
+
+    &:empty {
+      display: none;
+    }
+
+    &:not(:last-of-type) {
+      @include border($secondary-25, $border-width-thin, bottom);
+    }
 
     a {
       color: $dropdown-item-color;

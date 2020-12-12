@@ -3,7 +3,7 @@ import { Default } from './Dialog.stories'
 
 /**
  * @file Tests - Dialog
- * @module components/atoms/Dialog/impl
+ * @module components/atoms/Dialog/spec
  */
 
 it('renders without crashing', () => {

@@ -3,7 +3,7 @@ import { Default } from './Option.stories'
 
 /**
  * @file Tests - Option
- * @module components/atoms/Option/impl
+ * @module components/atoms/Option/spec
  */
 
 it('renders an <option> element', () => {

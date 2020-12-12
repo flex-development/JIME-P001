@@ -3,7 +3,7 @@ import { Nav } from './Nav'
 
 /**
  * @file Unit Tests - Nav
- * @module components/atoms/Nav/impl
+ * @module components/atoms/Nav/spec
  */
 
 it('renders <nav class="nav" />', () => {

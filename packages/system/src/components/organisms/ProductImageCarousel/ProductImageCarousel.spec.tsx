@@ -3,7 +3,7 @@ import { AshTray } from './ProductImageCarousel.stories'
 
 /**
  * @file Tests - ProductImageCarousel
- * @module components/organisms/ProductImageCarousel/impl
+ * @module components/organisms/ProductImageCarousel/spec
  */
 
 it('renders <div class="product-image-carousel">', () => {

@@ -3,7 +3,7 @@ import { Ordered, Unordered } from './List.stories'
 
 /**
  * @file Tests - List
- * @module components/atoms/List/impl
+ * @module components/atoms/List/spec
  */
 
 it('renders an <ol> element with nested <li> elements', () => {

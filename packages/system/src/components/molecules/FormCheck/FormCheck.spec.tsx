@@ -3,7 +3,7 @@ import { Checkbox, Switch, ToggleButton } from './FormCheck.stories'
 
 /**
  * @file Tests - FormCheck
- * @module components/molecules/FormCheck/impl
+ * @module components/molecules/FormCheck/spec
  */
 
 it('renders without crashing', () => {

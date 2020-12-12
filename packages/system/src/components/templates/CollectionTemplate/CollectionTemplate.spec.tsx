@@ -4,7 +4,7 @@ import { Products } from './CollectionTemplate.stories'
 
 /**
  * @file Tests - CollectionTemplate
- * @module components/templates/CollectionTemplate/impl
+ * @module components/templates/CollectionTemplate/spec
  */
 
 it('renders without crashing', () => {

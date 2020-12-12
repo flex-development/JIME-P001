@@ -3,7 +3,7 @@ import { Default } from './ProductBreadcrumb.stories'
 
 /**
  * @file Tests - ProductBreadcrumb
- * @module components/molecules/ProductBreadcrumb/impl
+ * @module components/molecules/ProductBreadcrumb/spec
  */
 
 it('renders without crashing', () => {

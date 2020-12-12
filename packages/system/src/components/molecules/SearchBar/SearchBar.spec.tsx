@@ -4,7 +4,7 @@ import { Default, InitialQuery } from './SearchBar.stories'
 
 /**
  * @file Tests - SearchBar
- * @module components/molecules/SearchBar/impl
+ * @module components/molecules/SearchBar/spec
  */
 
 // ! Keep in sync with SearchBar implementation

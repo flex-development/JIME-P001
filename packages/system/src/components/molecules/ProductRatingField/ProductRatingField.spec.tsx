@@ -4,7 +4,7 @@ import { Default } from './ProductRatingField.stories'
 
 /**
  * @file Tests - ProductRatingField
- * @module components/molecules/ProductRatingField/impl
+ * @module components/molecules/ProductRatingField/spec
  */
 
 const { defaultProps } = ProductRatingField

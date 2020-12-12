@@ -4,7 +4,7 @@ import { WithSummary } from './Details.stories'
 
 /**
  * @file Tests - Details
- * @module components/atoms/Details/impl
+ * @module components/atoms/Details/spec
  */
 
 it('renders a nested <summary> element', () => {

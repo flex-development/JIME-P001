@@ -256,7 +256,7 @@ $form-select-focus-box-shadow: $form-select-box-shadow;
 
 $dropdown-font-size: $font-size-sm;
 
-$dropdown-border-color: $ghost;
+$dropdown-border-color: $secondary;
 $dropdown-border-width: $spacers-0;
 
 $dropdown-link-color: $link-color;
@@ -269,7 +269,7 @@ $dropdown-link-active-bg: $dropdown-link-hover-bg;
 $dropdown-item-padding-y: $spacers-8;
 $dropdown-item-padding-x: $spacers-12;
 
-$dropdown-item-bg: $ghost;
+$dropdown-item-bg: $darker;
 $dropdown-item-hover-bg: $primary;
 $dropdown-item-color: $primary;
 $dropdown-item-font-size: $font-size-xs;

@@ -3,7 +3,7 @@ import { Default } from './Summary.stories'
 
 /**
  * @file Tests - Summary
- * @module components/atoms/Summary/impl
+ * @module components/atoms/Summary/spec
  */
 
 it('renders a <summary> element', () => {

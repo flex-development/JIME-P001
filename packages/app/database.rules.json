@@ -1,19 +1,68 @@
 {
   "rules": {
     "menus": {
-      ".indexOn": ["id", "title", "uuid"],
+      ".indexOn": ["created_at", "id", "title", "uuid"],
       ".read": true,
-      ".write": "auth.token.collaborator === true"
+      ".write": "auth.token.collaborator == true",
+      "$id": {
+        "created_at": {
+          ".validate": "newData.val() <= now"
+        },
+        "id": {
+          ".validate": "newData.val() == $id"
+        },
+        "links": {
+          ".validate": true
+        },
+        "title": {
+          ".validate": "newData.isString()"
+        },
+        "uuid": {
+          ".validate": "newData.isString() && newData.val().length > 0"
+        }
+      }
     },
     "pages": {
-      ".indexOn": ["id", "title", "uuid"],
+      ".indexOn": ["created_at", "id", "title", "uuid"],
       ".read": true,
-      ".write": "auth.token.collaborator === true"
+      ".write": "auth.token.collaborator == true",
+      "$id": {
+        "component": {
+          ".validate": "newData.val() == 'IndexTemplate' || newData.val() == 'PageTemplate'"
+        },
+        "content": {
+          ".validate": true
+        },
+        "created_at": {
+          ".validate": "newData.val() <= now"
+        },
+        "description": {
+          ".validate": "newData.val().length <= 150"
+        },
+        "draft": {
+          ".validate": "newData.isBoolean()"
+        },
+        "id": {
+          ".validate": "newData.val() == $id"
+        },
+        "keywords": {
+          ".validate": "newData.isString()"
+        },
+        "path": {
+          ".validate": "!root.child('pages/' + $id + newData.val()).exists()"
+        },
+        "title": {
+          ".validate": "newData.isString() && newData.val().length > 0"
+        },
+        "uuid": {
+          ".validate": "newData.isString() && newData.val().length > 0"
+        }
+      }
     },
     "reviews": {
       ".indexOn": [
+        "created_at",
         "customer_id",
-        "customer_name",
         "id",
         "product_handle",
         "product_id",
@@ -23,12 +72,12 @@
         "title"
       ],
       ".read": true,
-      ".write": true
+      ".write": "auth.token.collaborator == true || auth.token.customer == true"
     },
     "settings": {
       ".indexOn": ["id"],
       ".read": true,
-      ".write": "auth.token.collaborator === true"
+      ".write": "auth.token.collaborator == true"
     }
   }
 }

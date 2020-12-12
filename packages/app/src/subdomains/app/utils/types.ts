@@ -40,6 +40,15 @@ export interface CollectionProductPageUrlQuery
 }
 
 /**
+ * CMS page route parameters.
+ */
+export interface CMSPageParams extends ParsedUrlQuery {
+  [x: string]: string
+
+  slug: string
+}
+
+/**
  * Types of Firebase modules.
  */
 export type FirebaseAdaptor =
@@ -76,6 +85,11 @@ export type FirebaseTestApp =
   | ReturnType<typeof FirebaseTesting.initializeAdminApp>
 
 /**
+ * Object indicating that the user should be redirected to the `/404` page.
+ */
+export type NotFound = { notFound: true }
+
+/**
  * Product page route parameters.
  */
 export interface ProductPageParams extends ParsedUrlQuery {
@@ -99,11 +113,6 @@ export interface SearchPageUrlQuery extends ParsedUrlQuery {
 
   term?: string
 }
-
-/**
- * Object indicating that the user should be redirected to the `/404` page.
- */
-export type ServerSide404 = { notFound: true }
 
 /**
  * Object representing a URL redirect from a `getServerSideProps` call.

@@ -9,12 +9,12 @@ import {
 import {
   IPageProps,
   IPagePropsProduct,
+  NotFound,
   PC,
   ProductPageParams,
   ProductPageUrlQuery,
   SEO,
-  SEOProps,
-  ServerSide404
+  SEOProps
 } from '@subdomains/app'
 import { ProductService, ReviewService, useCart } from '@subdomains/sales'
 import { findIndex } from 'lodash'
@@ -120,7 +120,7 @@ export const getServerSideProps: GetServerSideProps<
   let product = await Products.getByHandle(handle)
 
   // If product isn't found, show 404 layout
-  if ((product as ServerSide404).notFound) return product as ServerSide404
+  if ((product as NotFound).notFound) return product as NotFound
 
   // ! Guarenteed to be product data. Error will be thrown otherwise
   product = product as IProductListing

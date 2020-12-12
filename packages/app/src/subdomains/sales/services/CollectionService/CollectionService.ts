@@ -5,7 +5,7 @@ import {
   DataArray,
   DataArrayQueryParams
 } from '@flex-development/json'
-import { createError, ServerSide404 } from '@subdomains/app/utils'
+import { createError, NotFound } from '@subdomains/app/utils'
 import { omit } from 'lodash'
 import { ICollectionListing } from 'shopify-api-node'
 import {
@@ -91,7 +91,7 @@ export default class CollectionService
    */
   async getByHandle(
     handle: ICollectionListing['handle']
-  ): Promise<ICollectionListing | ServerSide404> {
+  ): Promise<ICollectionListing | NotFound> {
     const query: DataArrayQueryParams = { handle: { $eq: handle } }
     const collections = await this.find(query)
 

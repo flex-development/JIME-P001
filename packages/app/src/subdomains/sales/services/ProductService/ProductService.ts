@@ -6,7 +6,7 @@ import {
   DataArray,
   DataArrayQueryParams
 } from '@flex-development/json'
-import { createError, ServerSide404 } from '@subdomains/app/utils'
+import { createError, NotFound } from '@subdomains/app/utils'
 import { omit, pick } from 'lodash'
 import {
   ICollectionListing,
@@ -170,7 +170,7 @@ export default class ProductService
    * @async
    * @param handle - Handle of product to retrieve
    */
-  async getByHandle(handle: string): Promise<IProductListing | ServerSide404> {
+  async getByHandle(handle: string): Promise<IProductListing | NotFound> {
     const query: DataArrayQueryParams = { handle: { $eq: handle } }
     const products = await this.find(query)
 

@@ -23,6 +23,10 @@
   ],
   "rewrites": [
     {
+      "source": "/",
+      "destination": "/index"
+    },
+    {
       "source": "/admin",
       "destination": "/api/admin"
     },

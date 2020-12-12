@@ -1,4 +1,4 @@
-import { createError, ServerSide404 } from '@subdomains/app'
+import { createError, NotFound } from '@subdomains/app'
 import { ICMSPage } from '@subdomains/cms/models'
 import { PageRepository as Repo } from '../../repositories'
 import { IPageService, PageSession } from './IPageService'
@@ -23,7 +23,7 @@ export default class PageService extends Repo implements IPageService {
   async getPage(
     path: ICMSPage['path'],
     session: PageSession
-  ): Promise<ICMSPage | ServerSide404> {
+  ): Promise<ICMSPage | NotFound> {
     try {
       const page = await this.getByPath(path)
 

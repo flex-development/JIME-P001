@@ -44,6 +44,13 @@ export interface IPagePropsCollection extends IPageProps {
 }
 
 /**
+ * Props passed to CMS pages.
+ */
+export interface IPagePropsCMS extends IPageProps {
+  page: ICMSPageIndex | ICMSPageSlug
+}
+
+/**
  * Props passed to the index page.
  */
 export interface IPagePropsIndex extends IPageProps {

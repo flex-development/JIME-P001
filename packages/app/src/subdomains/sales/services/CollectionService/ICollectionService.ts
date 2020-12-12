@@ -3,7 +3,7 @@ import {
   DataArrayQueryParams,
   IArrayQueryExecutor
 } from '@flex-development/json'
-import { ServerSide404 } from '@subdomains/app'
+import { NotFound } from '@subdomains/app'
 import { ICollectionListing } from 'shopify-api-node'
 
 /**
@@ -17,7 +17,7 @@ export interface ICollectionService
   get(id: ICollectionListing['collection_id']): Promise<ICollectionListing>
   getByHandle(
     handle: ICollectionListing['handle']
-  ): Promise<ICollectionListing | ServerSide404>
+  ): Promise<ICollectionListing | NotFound>
 }
 
 /**

@@ -7,10 +7,10 @@ import {
 import {
   CollectionPageParams,
   IPagePropsCollection,
+  NotFound,
   PC,
   SEO,
-  SEOProps,
-  ServerSide404
+  SEOProps
 } from '@subdomains/app'
 import { CollectionService, ProductService } from '@subdomains/sales'
 import { join } from 'lodash'
@@ -114,7 +114,7 @@ export const getServerSideProps: GetServerSideProps<
   let collection = await Collections.getByHandle(handle)
 
   // If collection isn't found, show 404 layout
-  if ((collection as ServerSide404).notFound) return collection as ServerSide404
+  if ((collection as NotFound).notFound) return collection as NotFound
 
   // ! Guarenteed to be collection data. Error will be thrown otherwise
   collection = collection as ICollectionListing

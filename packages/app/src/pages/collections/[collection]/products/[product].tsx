@@ -6,9 +6,9 @@ import {
   CollectionProductPageParams,
   CollectionProductPageUrlQuery,
   IPagePropsProduct,
+  NotFound,
   PC,
   ProductPageParams,
-  ServerSide404,
   ServerSidePageProps
 } from '@subdomains/app'
 import { CollectionService } from '@subdomains/sales'
@@ -65,7 +65,7 @@ export const getServerSideProps: GetServerSideProps<
   let pageProps = await getServerSideProductPageProps(pctx)
 
   // If product isn't found, show 404 layout
-  if ((pageProps as ServerSide404).notFound) return pageProps as ServerSide404
+  if ((pageProps as NotFound).notFound) return pageProps as NotFound
 
   // ! Guarenteed to be server side data. Error will be thrown otherwise
   pageProps = pageProps as ServerSidePageProps<IPagePropsProduct>
@@ -77,7 +77,7 @@ export const getServerSideProps: GetServerSideProps<
   let collection = await Collections.getByHandle(chandle)
 
   // If collection isn't found, show 404 layout
-  if ((collection as ServerSide404).notFound) return collection as ServerSide404
+  if ((collection as NotFound).notFound) return collection as NotFound
 
   // ! Guarenteed to be collection data. Error will be thrown otherwise
   collection = collection as ICollectionListing

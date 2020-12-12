@@ -2,14 +2,13 @@
  * @file Package Entry Point
  * @author Lexus Drumgold <lex@flexdevelopment.llc>
  *
- * @todo [DOC] ProductReviewForm - Update documentation
- * @todo [DOC] Storybook Types - Update documentation
- * @todo [DOC] Typography - Update fonts weights and headings font config
- * @todo [FIX] Carousel - https://github.com/flex-development/JIME-P001/issues/7
- * @todo [TEST] ProductReview - Add unit tests for invalid form state
- * @todo [TEST] PlaylistBar - Test callback functions
- * @todo [TEST] SearchBar - Test callback functions
- * @todo [TEST] ShopHeader - Test callback functions
+ * @todo [docs] ProductReviewForm - Update documentation
+ * @todo [docs] Storybook Types - Update documentation
+ * @todo [docs] Typography - Update fonts weights and headings font config
+ * @todo [test] PlaylistBar - Test callback functions
+ * @todo [test] ProductReviewForm - Add unit tests for invalid form state
+ * @todo [test] SearchBar - Test callback functions
+ * @todo [test] ShopHeader - Test callback functions
  */
 
 export * from './components'

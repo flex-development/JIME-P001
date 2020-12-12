@@ -1,9 +1,9 @@
 import { AnyObject } from '@flex-development/json'
+import { Link, LinkProps, Nav, NavProps } from '@system/components/atoms'
 import { useSanitizedProps } from '@system/hooks'
 import { uuid } from '@system/utils'
 import { FC, useEffect } from 'react'
 import { useArray } from 'react-hanger/array/useArray'
-import { Link, LinkProps, Nav, NavProps } from '../../atoms'
 
 /**
  * @file Navigation component

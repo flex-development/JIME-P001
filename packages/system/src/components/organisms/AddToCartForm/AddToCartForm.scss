@@ -49,7 +49,7 @@
   // Add to cart button
   .btn[type='submit'] {
     &:disabled {
-      @include opacity(map-get($opacities, 0.25));
+      @include opacity(map-get($opacities, 25));
     }
   }
 }

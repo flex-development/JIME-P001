@@ -1,12 +1,3 @@
-import { useProductVariants, useSanitizedProps } from '@system/hooks'
-import { MemoCompare } from '@system/hooks/useMemoCompare'
-import useMemoCompare from '@system/hooks/useMemoCompare/useMemoCompare'
-import { EventHandlers } from '@system/types'
-import { getProductVariantImage } from '@system/utils'
-import { isEqual } from 'lodash'
-import { FC, useCallback, useEffect, useMemo, useState } from 'react'
-import useBoolean from 'react-hanger/array/useBoolean'
-import { IProductListing, IProductListingVariant } from 'shopify-api-node'
 import {
   Box,
   BoxProps,
@@ -16,7 +7,15 @@ import {
   Link,
   LinkProps,
   Paragraph
-} from '../../atoms'
+} from '@system/components/atoms'
+import { useProductVariants, useSanitizedProps } from '@system/hooks'
+import { MemoCompare, useMemoCompare } from '@system/hooks/useMemoCompare'
+import { EventHandlers } from '@system/types'
+import { getProductVariantImage } from '@system/utils'
+import { isEqual } from 'lodash'
+import { FC, useCallback, useEffect, useMemo, useState } from 'react'
+import useBoolean from 'react-hanger/array/useBoolean'
+import { IProductListing, IProductListingVariant } from 'shopify-api-node'
 import { DropdownMenu } from '../DropdownMenu'
 
 /**

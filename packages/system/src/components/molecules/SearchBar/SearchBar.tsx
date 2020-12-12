@@ -1,9 +1,15 @@
 import { ANYTHING } from '@flex-development/json'
+import {
+  Button,
+  Form,
+  FormProps,
+  Input,
+  InputProps
+} from '@system/components/atoms'
 import { useSanitizedProps } from '@system/hooks'
 import { EventHandlers } from '@system/types'
 import { FC, FormEvent } from 'react'
 import { useInput } from 'react-hanger'
-import { Button, Form, FormProps, Input, InputProps } from '../../atoms'
 
 /**
  * @file Render a search <form>

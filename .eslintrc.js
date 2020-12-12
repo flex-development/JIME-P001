@@ -10,8 +10,9 @@ const EXTENDS_CONFIG = [
   'plugin:@typescript-eslint/recommended',
   'plugin:react/recommended',
   'plugin:jsx-a11y/recommended',
+  'plugin:prettier/recommended',
   'prettier/@typescript-eslint',
-  'plugin:prettier/recommended'
+  'prettier/react'
 ]
 
 module.exports = {
@@ -70,6 +71,7 @@ module.exports = {
       }
     ],
     'no-ex-assign': 0,
+    'prefer-arrow-callback': 2,
     'prettier/prettier': [
       2,
       {
@@ -77,8 +79,14 @@ module.exports = {
       }
     ],
     'react/display-name': 0,
-    'react/jsx-uses-react': 0,
+    'react/jsx-filename-extension': [
+      1,
+      {
+        extensions: ['.tsx']
+      }
+    ],
     'react/jsx-fragments': 0,
+    'react/jsx-uses-react': 0,
     'react/prop-types': 0,
     'react/react-in-jsx-scope': 0,
     'react/self-closing-comp': 1,

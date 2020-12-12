@@ -1,9 +1,13 @@
 import { ANYTHING } from '@flex-development/json'
+import { Button, Column, Header, LinkProps } from '@system/components/atoms'
+import {
+  CartPreview,
+  SearchBar,
+  SearchBarProps
+} from '@system/components/molecules'
 import { useSanitizedProps } from '@system/hooks'
 import { EventHandlers, MutatedProps } from '@system/types'
 import { FC } from 'react'
-import { Button, Column, Header, LinkProps } from '../../atoms'
-import { CartPreview, SearchBar, SearchBarProps } from '../../molecules'
 
 /**
  * @file Render sidebar button, searchbar, and cart preview

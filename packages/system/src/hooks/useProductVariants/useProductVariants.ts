@@ -3,8 +3,7 @@ import { OptionProps } from '@system/components'
 import { isEqual, isNumber } from 'lodash'
 import { useCallback, useMemo, useState } from 'react'
 import { IProductListingVariant } from 'shopify-api-node'
-import { MemoCompare } from '../useMemoCompare'
-import useMemoCompare from '../useMemoCompare/useMemoCompare'
+import { MemoCompare, useMemoCompare } from '../useMemoCompare'
 
 /**
  * @file Use product variants as options

@@ -1,10 +1,10 @@
 import { ANYTHING } from '@flex-development/json'
+import { Box, BoxProps } from '@system/components/atoms'
 import { useSanitizedProps } from '@system/hooks'
 import { EventHandlers } from '@system/types'
 import { uuid } from '@system/utils'
 import { FC } from 'react'
 import useNumber from 'react-hanger/array/useNumber'
-import { Box, BoxProps } from '../../atoms'
 import { FormCheck } from '../FormCheck'
 
 /**

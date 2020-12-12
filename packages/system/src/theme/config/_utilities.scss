@@ -147,6 +147,7 @@ $opacities: (
 // -----------------------------------------------------------------------------
 
 $spacers: (
+  auto: auto,
   0: $spacers-0,
   1: $spacers-1,
   2: $spacers-2,
@@ -293,6 +294,18 @@ $utilities: (
     responsive: true,
     values: $grid-item-order
   ),
+  'margin-left': (
+    property: margin-left,
+    class: ml,
+    responsive: true,
+    values: $spacers
+  ),
+  'margin-right': (
+    property: margin-right,
+    class: mr,
+    responsive: true,
+    values: $spacers
+  ),
   'max-height': (
     property: max-height,
     class: mh,
@@ -312,6 +325,18 @@ $utilities: (
           75: 75%
         )
       )
+  ),
+  'padding-left': (
+    property: padding-left,
+    class: pl,
+    responsive: true,
+    values: $spacers
+  ),
+  'padding-right': (
+    property: padding-right,
+    class: pr,
+    responsive: true,
+    values: $spacers
   ),
   'width': (
     property: width,

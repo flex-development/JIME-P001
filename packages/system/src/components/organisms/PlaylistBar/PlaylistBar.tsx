@@ -3,10 +3,6 @@ import {
   MusicKitPlaybackState,
   MusicKitSongAttributes
 } from '@flex-development/kustomzcore'
-import { useSanitizedProps } from '@system/hooks'
-import { EventHandlers, MutatedProps } from '@system/types'
-import { isEmpty } from 'lodash'
-import { FC } from 'react'
 import {
   Button,
   Column,
@@ -16,7 +12,11 @@ import {
   Link,
   Paragraph,
   Section
-} from '../../atoms'
+} from '@system/components/atoms'
+import { useSanitizedProps } from '@system/hooks'
+import { EventHandlers, MutatedProps } from '@system/types'
+import { isEmpty } from 'lodash'
+import { FC } from 'react'
 
 /**
  * @file Display the current song in the shop playlist

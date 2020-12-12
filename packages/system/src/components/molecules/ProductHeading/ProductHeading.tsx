@@ -1,7 +1,7 @@
+import { Heading, HeadingProps, Span } from '@system/components/atoms'
 import { useSanitizedProps } from '@system/hooks'
 import { formatPrice } from '@system/utils'
 import { FC } from 'react'
-import { Heading, HeadingProps, Span } from '../../atoms'
 
 /**
  * @file Displays the title and price of a product (variant)

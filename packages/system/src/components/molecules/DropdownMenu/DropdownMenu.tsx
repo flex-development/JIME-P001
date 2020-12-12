@@ -1,4 +1,5 @@
 import { AnyObject } from '@flex-development/json'
+import { Item, ItemProps, List, ListProps } from '@system/components/atoms'
 import { useSanitizedProps } from '@system/hooks'
 import { uuid } from '@system/utils'
 import classnames from 'classnames'
@@ -6,7 +7,6 @@ import { isEmpty, merge } from 'lodash'
 import { FC, useEffect } from 'react'
 import { useArray } from 'react-hanger/array/useArray'
 import { useSpring } from 'react-spring'
-import { Item, ItemProps, List, ListProps } from '../../atoms'
 
 /**
  * @file Navigation component

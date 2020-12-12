@@ -1,10 +1,14 @@
 import { IReview } from '@flex-development/kustomzcore'
+import { Heading, Main, Paragraph, Section } from '@system/components/atoms'
+import { ProductReview } from '@system/components/molecules'
+import {
+  Carousel,
+  ProductGrid,
+  ProductGridProps
+} from '@system/components/organisms'
 import { useSanitizedProps } from '@system/hooks'
 import { MutatedProps, TC } from '@system/types'
 import { uuid } from '@system/utils'
-import { Heading, Main, Paragraph, Section } from '../../atoms'
-import { ProductReview } from '../../molecules'
-import { Carousel, ProductGrid, ProductGridProps } from '../../organisms'
 
 /**
  * @file Index page template

@@ -1,10 +1,10 @@
+import { Link, LinkProps, Span } from '@system/components/atoms'
 import { useSanitizedProps } from '@system/hooks'
 import { FREC } from '@system/types'
 import { isEmpty } from 'lodash'
 import { forwardRef } from 'react'
 import { usePrevious } from 'react-hanger'
 import { config, Spring, SpringConfig } from 'react-spring'
-import { Link, LinkProps, Span } from '../../atoms'
 
 /**
  * @file Display the number of items a user's cart

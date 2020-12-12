@@ -1,5 +1,5 @@
+import { LinkProps } from '@system/components/atoms'
 import { render } from '@testing-library/react'
-import { LinkProps } from '../../atoms'
 import { Sidebar } from './Menu.stories'
 
 /**

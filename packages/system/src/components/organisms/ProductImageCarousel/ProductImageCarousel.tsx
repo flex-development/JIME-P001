@@ -1,10 +1,10 @@
+import { Image, ImageProps } from '@system/components/atoms'
 import { useSanitizedProps } from '@system/hooks'
 import { getProductVariantImage } from '@system/utils'
 import { omit } from 'lodash'
 import { FC, useEffect } from 'react'
 import { useArray } from 'react-hanger/array/useArray'
 import { IProductListing } from 'shopify-api-node'
-import { Image, ImageProps } from '../../atoms'
 import { Carousel, CarouselProps } from '../Carousel'
 
 /**

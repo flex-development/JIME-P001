@@ -1,5 +1,5 @@
+import { ItemProps } from '@system/components/atoms'
 import { render } from '@testing-library/react'
-import { ItemProps } from '../../atoms'
 import { ProductVariants } from './DropdownMenu.stories'
 
 /**

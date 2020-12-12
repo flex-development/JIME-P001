@@ -1,7 +1,14 @@
 import { IReview } from '@flex-development/kustomzcore'
+import {
+  Box,
+  BoxProps,
+  Column,
+  Image,
+  Link,
+  Paragraph
+} from '@system/components/atoms'
 import { useSanitizedProps } from '@system/hooks'
 import { FC } from 'react'
-import { Box, BoxProps, Column, Image, Link, Paragraph } from '../../atoms'
 
 /**
  * @file Display a product review submitted by a customer

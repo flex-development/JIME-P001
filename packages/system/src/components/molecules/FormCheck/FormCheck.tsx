@@ -1,11 +1,17 @@
 import { ANYTHING } from '@flex-development/json'
 import { ButtonVariant, FormControlSize } from '@flex-development/kustomzcore'
+import {
+  Box,
+  BoxProps,
+  IconProps,
+  Input,
+  Label
+} from '@system/components/atoms'
 import { useSanitizedProps } from '@system/hooks'
 import { EventHandlers, MutatedFormControlProps } from '@system/types'
 import classnames from 'classnames'
 import { isEmpty } from 'lodash'
 import { FC } from 'react'
-import { Box, BoxProps, IconProps, Input, Label } from '../../atoms'
 
 /**
  * @file Checks and radios component

@@ -9,9 +9,7 @@ import { getResponsiveUtilities } from '@system/utils'
 import classnames from 'classnames'
 import { isEmpty, isEqual, isObject } from 'lodash'
 import { useMemo } from 'react'
-import { MemoCompare } from '../useMemoCompare'
-import useMemoCompare from '../useMemoCompare/useMemoCompare'
-
+import { MemoCompare, useMemoCompare } from '../useMemoCompare'
 /**
  * @file Generate gutter, margin, or padding utility classes
  * @module hooks/useSpacers/impl

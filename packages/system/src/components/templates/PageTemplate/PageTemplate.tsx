@@ -1,6 +1,6 @@
+import { Main, MDXBox } from '@system/components/atoms'
 import { useSanitizedProps } from '@system/hooks'
 import { MutatedProps, TC } from '@system/types'
-import { Main, MDXBox } from '../../atoms'
 
 /**
  * @file Basic page template

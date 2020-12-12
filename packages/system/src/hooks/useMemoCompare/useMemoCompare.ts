@@ -20,7 +20,7 @@ export type MemoCompare<T = ANYTHING> = (v1: T, v2: T) => boolean
  * @param next - Next data value
  * @param compare - Function to compare previous value to next value
  */
-function useMemoCompare<T = ANYTHING>(next: T, compare: MemoCompare): T {
+export function useMemoCompare<T = ANYTHING>(next: T, compare: MemoCompare): T {
   // Ref for storing previous value
   const previous = useRef<T>()
 
@@ -39,5 +39,3 @@ function useMemoCompare<T = ANYTHING>(next: T, compare: MemoCompare): T {
   // If equal then return the previous value
   return equal ? (previous.current as T) : next
 }
-
-export default useMemoCompare

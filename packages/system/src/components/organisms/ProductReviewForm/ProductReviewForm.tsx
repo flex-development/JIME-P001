@@ -1,12 +1,5 @@
 import { AnyObject, ANYTHING } from '@flex-development/json'
 import { CreateReviewRequest } from '@flex-development/kustomzcore'
-import { useProductVariants, useSanitizedProps } from '@system/hooks'
-import { EventHandlers, FREC } from '@system/types'
-import { isEmpty } from 'lodash'
-import { forwardRef } from 'react'
-import { useSetState } from 'react-hanger'
-import { IProductListing } from 'shopify-api-node'
-import isEmail from 'validator/lib/isEmail'
 import {
   Button,
   FlexBox,
@@ -15,8 +8,18 @@ import {
   Heading,
   Paragraph,
   Span
-} from '../../atoms'
-import { LabeledFormControl, ProductRatingField } from '../../molecules'
+} from '@system/components/atoms'
+import {
+  LabeledFormControl,
+  ProductRatingField
+} from '@system/components/molecules'
+import { useProductVariants, useSanitizedProps } from '@system/hooks'
+import { EventHandlers, FREC } from '@system/types'
+import { isEmpty } from 'lodash'
+import { forwardRef } from 'react'
+import { useSetState } from 'react-hanger'
+import { IProductListing } from 'shopify-api-node'
+import isEmail from 'validator/lib/isEmail'
 
 /**
  * @file Allow users to submit product reviews

@@ -1,6 +1,3 @@
-import { useSanitizedProps } from '@system/hooks'
-import { FC } from 'react'
-import { IProductListing, IProductListingVariant } from 'shopify-api-node'
 import {
   FlexBox,
   FlexBoxProps,
@@ -8,7 +5,10 @@ import {
   LinkProps,
   Paragraph,
   Span
-} from '../../atoms'
+} from '@system/components/atoms'
+import { useSanitizedProps } from '@system/hooks'
+import { FC } from 'react'
+import { IProductListing, IProductListingVariant } from 'shopify-api-node'
 
 /**
  * @file Display a collection link, product title, and product variant title

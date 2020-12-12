@@ -11,8 +11,7 @@ import { getResponsiveUtilities } from '@system/utils'
 import classnames from 'classnames'
 import { isBoolean, isEmpty, isEqual, isNumber, isString } from 'lodash'
 import { useMemo } from 'react'
-import { MemoCompare } from '../useMemoCompare'
-import useMemoCompare from '../useMemoCompare/useMemoCompare'
+import { MemoCompare, useMemoCompare } from '../useMemoCompare'
 
 /**
  * @file Generate flexbox utility classes

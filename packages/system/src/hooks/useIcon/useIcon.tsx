@@ -4,8 +4,7 @@ import { MutatedProps } from '@system/types'
 import classnames from 'classnames'
 import { isEqual, isNull, isUndefined, join, uniq } from 'lodash'
 import { useMemo } from 'react'
-import { MemoCompare } from '../useMemoCompare'
-import useMemoCompare from '../useMemoCompare/useMemoCompare'
+import { MemoCompare, useMemoCompare } from '../useMemoCompare'
 
 /**
  * @file Render icon with props.children

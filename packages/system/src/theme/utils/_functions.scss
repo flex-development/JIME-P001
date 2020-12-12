@@ -3,6 +3,15 @@
 /// @group functions
 /// ----------------------------------------------------------------------------
 
+/// Clamp `$num` between `$min` and `$max`.
+/// @link https://css-tricks.com/snippets/sass/clamping-number/
+/// @param {Number} $num - Number to clamp
+/// @param {Number} $min - Minimum value
+/// @param {Number} $max - Maximum value
+@function clamp($num, $min, $max) {
+  @return min(max($num, $min), $max);
+}
+
 /// Converts a px value into an em value.
 /// @param {Number} $value - Value to convert
 /// @param {Number} $base [16px] - Base font size

@@ -10,7 +10,7 @@ import {
 import { isBoolean, isUndefined } from 'lodash'
 import { forwardRef, useCallback } from 'react'
 import { animated } from 'react-spring'
-import { IconProps } from '../Icon/Icon'
+import { IconProps } from '../Icon'
 
 /**
  * @module components/atoms/Button/impl
@@ -130,21 +130,27 @@ export const Button: FREC<ButtonProps> = forwardRef((props, ref) => {
     }
   )
 
+  /**
+   * Calls `props.onClick` if defined and the function to toggle the scale
+   * animation, if enabled.
+   *
+   * @param event `click` event from `<button>` element
+   */
   const onClick = (event: EventHandlers.Click.Button) => {
     if (rest.onClick) rest.onClick(event)
     if (scale) scalex.toggle()
   }
 
+  /* Callback version of `onClick` */
+  const onClickCB = useCallback(onClick, [rest, scale, scalex])
+
   const { children } = sanitized as AnyObject
 
   return (
-    <animated.button
-      {...sanitized}
-      onClick={useCallback(onClick, [rest, scale, scalex])}
-      ref={ref}
-    >
+    <animated.button {...sanitized} onClick={onClickCB} ref={ref}>
       {(() => {
         if (!scale) return children
+
         return <animated.div style={scalex.style}>{children}</animated.div>
       })()}
     </animated.button>

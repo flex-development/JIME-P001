@@ -1,8 +1,8 @@
+import { Heading, Main, Section, Span } from '@system/components/atoms'
+import { ProductGrid } from '@system/components/organisms'
 import { useSanitizedProps } from '@system/hooks'
 import { MutatedProps, TC } from '@system/types'
 import { IProductListing } from 'shopify-api-node'
-import { Heading, Main, Section, Span } from '../../atoms'
-import { ProductGrid } from '../../organisms'
 
 /**
  * @file Display the items in a user's cart

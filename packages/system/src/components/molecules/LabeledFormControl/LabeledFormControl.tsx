@@ -1,5 +1,3 @@
-import { useSanitizedProps } from '@system/hooks'
-import { FC } from 'react'
 import {
   Input,
   InputProps,
@@ -10,7 +8,9 @@ import {
   Span,
   TextArea,
   TextAreaProps
-} from '../../atoms'
+} from '@system/components/atoms'
+import { useSanitizedProps } from '@system/hooks'
+import { FC } from 'react'
 
 /**
  * @file Render a labeled <input>, <select>, or <textarea> element

@@ -1,6 +1,6 @@
+import { Heading, Main, Section, Span } from '@system/components/atoms'
 import { useSanitizedProps } from '@system/hooks'
 import { MutatedProps, TC } from '@system/types'
-import { Heading, Main, Section, Span } from '../../atoms'
 
 /**
  * @file Error page template

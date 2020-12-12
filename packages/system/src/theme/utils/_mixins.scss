@@ -663,9 +663,23 @@
 }
 
 /// Mixin for cross-browser opacity (IE 8).
-/// Clamps the value between 0 and 1.
+/// `$value` will be clamped between 0 and 1.
 /// @require {function} clamp
-/// @param {Number} $opacity - Opacity level, between 0 and 1
-@mixin opacity($opacity) {
-  opacity: clamp($opacity, 0, 1);
+/// @param {Number} $value - Opacity level
+/// @param {Boolean} $important [false] - If true, add `!important` flag
+@mixin opacity($value, $important: false) {
+  $opacity: clamp($value, 0, 1);
+
+  @if $value != $opacity {
+    @warn "Mixin `opacity` needs a float; #{$value} clamped to #{$opacity}.";
+  }
+
+  $opacity-ie: $opacity * 100;
+
+  opacity: if($important, $opacity !important, $opacity);
+  filter: if(
+    $important,
+    alpha(opacity=$opacity-ie) !important,
+    alpha(opacity=$opacity-ie)
+  );
 }

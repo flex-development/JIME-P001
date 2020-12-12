@@ -22,9 +22,8 @@ it('renders <form class="add-to-cart-form">', () => {
 it('only displays a <textarea> element for "KUSTOMZ" product', () => {
   render(<AshTray {...AshTray.args} />)
 
-  expect(() => {
-    screen.getByPlaceholderText(TEXTAREA_PLACEHOLDER)
-  }).toThrowError()
+  const element = screen.getByPlaceholderText(TEXTAREA_PLACEHOLDER)
+  expect(element).toHaveAttribute('hidden', 'true')
 })
 
 it('updates the selected variant', () => {

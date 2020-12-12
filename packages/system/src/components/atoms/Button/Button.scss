@@ -27,6 +27,7 @@
   &-ghost {
     @include remove-padding;
 
+    background-color: $ghost !important;
     border-width: $spacers-0;
   }
 

@@ -1,7 +1,4 @@
 import { NullishNumber, NullishString } from '@flex-development/json'
-import { useFlexbox, useSanitizedProps } from '@system/hooks'
-import { FREC } from '@system/types'
-import { forwardRef } from 'react'
 import {
   Aside,
   Box,
@@ -14,8 +11,11 @@ import {
   LinkProps,
   Paragraph,
   Row
-} from '../../atoms'
-import { Menu } from '../../molecules'
+} from '@system/components/atoms'
+import { Menu } from '@system/components/molecules'
+import { useFlexbox, useSanitizedProps } from '@system/hooks'
+import { FREC } from '@system/types'
+import { forwardRef } from 'react'
 
 /**
  * @file Display MySpace style profile snippet and shop menu

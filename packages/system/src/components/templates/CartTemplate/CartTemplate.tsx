@@ -1,6 +1,3 @@
-import { useSanitizedProps } from '@system/hooks'
-import { MutatedProps, TC } from '@system/types'
-import { formatPrice } from '@system/utils'
 import {
   Box,
   FlexBox,
@@ -9,8 +6,14 @@ import {
   Main,
   Paragraph,
   Section
-} from '../../atoms'
-import { CheckoutLineItem, CheckoutLineItemProps } from '../../molecules'
+} from '@system/components/atoms'
+import {
+  CheckoutLineItem,
+  CheckoutLineItemProps
+} from '@system/components/molecules'
+import { useSanitizedProps } from '@system/hooks'
+import { MutatedProps, TC } from '@system/types'
+import { formatPrice } from '@system/utils'
 
 /**
  * @file Display the items in a user's cart

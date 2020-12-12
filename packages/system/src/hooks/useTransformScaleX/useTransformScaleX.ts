@@ -8,7 +8,7 @@ import {
   useSpring,
   UseSpringProps
 } from 'react-spring'
-import useMemoCompare, { MemoCompare } from '../useMemoCompare/useMemoCompare'
+import { MemoCompare, useMemoCompare } from '../useMemoCompare'
 
 /**
  * @file Animate the CSS `scale` transformation

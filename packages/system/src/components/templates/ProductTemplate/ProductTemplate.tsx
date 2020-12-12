@@ -1,12 +1,23 @@
 import { ANYTHING } from '@flex-development/json'
 import { IReview } from '@flex-development/kustomzcore'
+import {
+  Button,
+  FlexBox,
+  Heading,
+  LinkProps,
+  Main,
+  Section
+} from '@system/components/atoms'
+import { ProductBreadcrumb, ProductReview } from '@system/components/molecules'
+import {
+  AddToCartForm,
+  AddToCartFormProps,
+  Carousel
+} from '@system/components/organisms'
 import { useSanitizedProps } from '@system/hooks'
 import { EventHandlers, MutatedProps, TC } from '@system/types'
 import { useState } from 'react'
 import { IProductListing, IProductListingVariant } from 'shopify-api-node'
-import { Button, FlexBox, Heading, LinkProps, Main, Section } from '../../atoms'
-import { ProductBreadcrumb, ProductReview } from '../../molecules'
-import { AddToCartForm, AddToCartFormProps, Carousel } from '../../organisms'
 
 /**
  * @file Product page template

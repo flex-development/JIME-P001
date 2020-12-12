@@ -3,9 +3,6 @@ import {
   CheckoutLineItemDisplay,
   CheckoutLineItemInput
 } from '@flex-development/kustomzcore'
-import { useCheckoutLineItemInput, useSanitizedProps } from '@system/hooks'
-import { EventHandlers } from '@system/types'
-import { FC, Fragment } from 'react'
 import {
   BoxProps,
   Button,
@@ -16,7 +13,10 @@ import {
   Input,
   Paragraph,
   Span
-} from '../../atoms'
+} from '@system/components/atoms'
+import { useCheckoutLineItemInput, useSanitizedProps } from '@system/hooks'
+import { EventHandlers } from '@system/types'
+import { FC, ReactNode, useCallback } from 'react'
 import { LabeledFormControl } from '../LabeledFormControl'
 import { ProductHeading } from '../ProductHeading'
 
@@ -82,6 +82,39 @@ export const CheckoutLineItem: FC<CheckoutLineItemProps> = (
   // Get parent product title
   const { 0: product_title, 1: variant_title } = data.title.split(' - ')
 
+  /**
+   * Updates the number of line items to purchase.
+   *
+   * @param e - `change` event from `<input>` element
+   */
+  const onChangeQuantity = useCallback(
+    (e: EventHandlers.Change.Input) => {
+      let quantity = JSON.parse(e.target.value)
+      quantity = quantity < 1 ? 1 : quantity
+
+      const updates: CheckoutLineItemInput = {
+        data: { ...item.data, quantity },
+        image
+      }
+
+      updateQuantity(updates.data.quantity)
+      return handleUpdate(updates, e)
+    },
+    [handleUpdate, image, item.data, updateQuantity]
+  )
+
+  /**
+   * Wrapper function around `props.handleRemove`.
+   *
+   * @param e - `click` event from `<button>` element
+   */
+  const onClickRemove = useCallback(
+    (e: EventHandlers.Click.Button) => {
+      return handleRemove(e)
+    },
+    [handleRemove]
+  )
+
   return (
     <FlexBox {...sanitized} id={`line-item-${data.variant_id}`}>
       <Column mb={{ md: 0, xs: 24 }} md={3} xs={12}>
@@ -97,18 +130,18 @@ export const CheckoutLineItem: FC<CheckoutLineItemProps> = (
         />
 
         <Paragraph className='line-item-attribute' mb={24} mt={12}>
-          {
-            /* eslint-disable prettier/prettier */
-            item.data.properties?.kpd ? (
-              <Fragment>
-                Kustom product description:&nbsp;
-                <Span>{item.data.properties.kpd}</Span>
-              </Fragment>
-            ) : (
-              'No Kustomizations.'
-            )
-            /* eslint-enable prettier/prettier */
-          }
+          {((): ReactNode => {
+            if (item.data.properties?.kpd) {
+              return (
+                <>
+                  Kustom product description:&nbsp;
+                  <Span>{item.data.properties.kpd}</Span>
+                </>
+              )
+            }
+
+            return 'No Kustomizations.'
+          })()}
         </Paragraph>
 
         <FlexBox
@@ -130,19 +163,7 @@ export const CheckoutLineItem: FC<CheckoutLineItemProps> = (
                 'aria-label': 'Line item quantity',
                 min: 1,
                 name: 'quantity',
-                onChange: (event: EventHandlers.Change.Input) => {
-                  let quantity = JSON.parse(event.target.value)
-                  quantity = quantity < 1 ? 1 : quantity
-
-                  const updates: CheckoutLineItemInput = {
-                    data: { ...item.data, quantity },
-                    image
-                  }
-
-                  updateQuantity(updates.data.quantity)
-
-                  return handleUpdate(updates, event)
-                },
+                onChange: onChangeQuantity,
                 type: 'number',
                 value: item.data.quantity
               }}
@@ -152,7 +173,7 @@ export const CheckoutLineItem: FC<CheckoutLineItemProps> = (
           </FlexBox>
 
           <Button
-            onClick={(event: EventHandlers.Click.Button) => handleRemove(event)}
+            onClick={onClickRemove}
             name='remove'
             mt={{ md: 0, xs: 24 }}
             px={20}

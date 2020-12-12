@@ -1,9 +1,9 @@
 import { AnyObject } from '@flex-development/json'
+import { Box, BoxProps, Item, ItemProps, List } from '@system/components/atoms'
 import { useActiveIndex, useSanitizedProps } from '@system/hooks'
 import classnames from 'classnames'
 import { chunk } from 'lodash'
 import { Children, FC, ReactElement } from 'react'
-import { Box, BoxProps, Item, ItemProps, List } from '../../atoms'
 
 /**
  * @file Slideshow component for cycling through elements

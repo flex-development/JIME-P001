@@ -1,16 +1,6 @@
 import { ANYTHING } from '@flex-development/json'
 import { CheckoutLineItemInput } from '@flex-development/kustomzcore'
 import {
-  useActiveIndex,
-  useCheckoutLineItemInput,
-  useProductVariants
-} from '@system/hooks'
-import { EventHandlers } from '@system/types'
-import { getProductVariantImage } from '@system/utils'
-import { findIndex, isEmpty } from 'lodash'
-import { FC } from 'react'
-import { IProductListing, IProductListingVariant } from 'shopify-api-node'
-import {
   Button,
   Column,
   FlexBox,
@@ -20,8 +10,21 @@ import {
   Row,
   Select,
   TextArea
-} from '../../atoms'
-import { LabeledFormControl, ProductHeading } from '../../molecules'
+} from '@system/components/atoms'
+import {
+  LabeledFormControl,
+  ProductHeading
+} from '@system/components/molecules'
+import {
+  useActiveIndex,
+  useCheckoutLineItemInput,
+  useProductVariants
+} from '@system/hooks'
+import { EventHandlers } from '@system/types'
+import { getProductVariantImage } from '@system/utils'
+import { findIndex, isEmpty } from 'lodash'
+import { FC, useCallback } from 'react'
+import { IProductListing, IProductListingVariant } from 'shopify-api-node'
 import { ProductImageCarousel } from '../ProductImageCarousel'
 
 /**
@@ -74,7 +77,9 @@ export const AddToCartForm: FC<AddToCartFormProps> = (
       event: EventHandlers.Click.Button
     ) => {
       event.preventDefault()
-      console.log(`TODO: AddToCartForm.handleSubmit`, item)
+      return setTimeout(() => {
+        console.log('TODO: AddToCartForm.handleSubmit', item)
+      }, 5000)
     },
     handleVariant,
     product,
@@ -113,6 +118,75 @@ export const AddToCartForm: FC<AddToCartFormProps> = (
   const { active, setIndex: setCarouselPosition } = useActiveIndex(position, {
     upperLimit: product.images.length - 1
   })
+
+  /**
+   * Updates the selected variant state and sets the carousel position to the
+   * image of the new variant.
+   *
+   * @param e - `change` event from `<select>` element
+   */
+  const onChangeVariant = (e: EventHandlers.Change.Select) => {
+    const variant_id = JSON.parse(e.target.value)
+    const variant = variants.find(({ id }) => id === variant_id)
+
+    const pos = findIndex(product.images, ({ id }) => {
+      return id === variant?.image_id
+    })
+
+    selectVariant(variant_id)
+    setCarouselPosition(pos)
+
+    if (handleVariant) handleVariant(variant_id)
+  }
+
+  /* Callback version of `onChangeVariant` */
+  const onChangeVariantCB = useCallback(onChangeVariant, [
+    handleVariant,
+    product.images,
+    selectVariant,
+    setCarouselPosition,
+    variants
+  ])
+
+  /**
+   * Updates the number of product variants to order.
+   *
+   * @param e - `change` event from `<input>` element
+   */
+  const onChangeQuantity = (e: EventHandlers.Change.Input) => {
+    const value = JSON.parse(e.target.value)
+    return updateQuantity(value < 1 ? 1 : value)
+  }
+
+  /* Callback version of `onChangeQuantity` */
+  const onChangeQuantityCB = useCallback(onChangeQuantity, [updateQuantity])
+
+  /**
+   * Updates the custom properties for the product if the `props.product.handle`
+   * is `kustomz`.
+   *
+   * @param e - `change` event from `<textarea>` element
+   */
+  const onChangeProperties = (e: EventHandlers.Change.TextArea) => {
+    return updateProperties({ [e.target.name]: e.target.value })
+  }
+
+  /* Callback version of `onChangeProperties` */
+  const onChangePropertiesCB = useCallback(onChangeProperties, [
+    updateProperties
+  ])
+
+  /**
+   * Updates the form submission state and calls `props.handleSubmit`.
+   *
+   * @param e - `click` event from `<button>` element
+   */
+  const onClickSubmit = (e: EventHandlers.Click.Button) => {
+    if (handleSubmit) handleSubmit(item, e)
+  }
+
+  /* Callback version of `onClickSubmit` */
+  const onClickSubmitCB = useCallback(onClickSubmit, [handleSubmit, item])
 
   return (
     <Form {...rest} className='add-to-cart-form'>
@@ -158,19 +232,7 @@ export const AddToCartForm: FC<AddToCartFormProps> = (
               aria-label='Product variant selection'
               data-selected={selected.title}
               name='variant_id'
-              onChange={({ target }: EventHandlers.Change.Select) => {
-                const variant_id = JSON.parse(target.value)
-                const variant = variants.find(({ id }) => id === variant_id)
-
-                const pos = findIndex(product.images, ({ id }) => {
-                  return id === variant?.image_id
-                })
-
-                selectVariant(variant_id)
-                setCarouselPosition(pos)
-
-                if (handleVariant) handleVariant(variant_id)
-              }}
+              onChange={onChangeVariantCB}
               options={product_variant_options}
               placeholder='Select an option'
               value={selected.id}
@@ -180,10 +242,7 @@ export const AddToCartForm: FC<AddToCartFormProps> = (
               control={{
                 'aria-label': 'Product quantity',
                 min: 0,
-                onChange: ({ target }: EventHandlers.Change.Input) => {
-                  const value = JSON.parse(target.value)
-                  return updateQuantity(value < 1 ? 1 : value)
-                },
+                onChange: onChangeQuantityCB,
                 type: 'number',
                 value: item.data.quantity
               }}
@@ -193,19 +252,16 @@ export const AddToCartForm: FC<AddToCartFormProps> = (
           </FlexBox>
 
           {/* Only visible for "KUSTOMZ" product - sync with Shopify */}
-          {product.title === 'KUSTOMZ' && (
-            <Row fluid mt={16}>
-              <TextArea
-                aria-label='Kustom product description'
-                onChange={({ target }: EventHandlers.Change.TextArea) => {
-                  return updateProperties({ [target.name]: target.value })
-                }}
-                name='kpd'
-                placeholder='Describe your kustom ash or rolling tray'
-                value={item.data.properties?.kpd}
-              />
-            </Row>
-          )}
+          <Row fluid mt={16} hidden={product.handle !== 'kustomz'}>
+            <TextArea
+              aria-label='Kustom product description'
+              disabled={product.handle !== 'kustomz'}
+              onChange={onChangePropertiesCB}
+              name='kpd'
+              placeholder='Describe your kustom ash or rolling tray'
+              value={item.data.properties?.kpd}
+            />
+          </Row>
 
           {/* Add to cart button container */}
           <FlexBox align='center' justify='end' mt={24}>
@@ -214,9 +270,7 @@ export const AddToCartForm: FC<AddToCartFormProps> = (
               className='w-sm-auto w-100'
               disabled={!selected.available}
               name='add-to-cart'
-              onClick={(event: EventHandlers.Click.Button) =>
-                handleSubmit(item, event)
-              }
+              onClick={onClickSubmitCB}
               scale
               type='submit'
             >

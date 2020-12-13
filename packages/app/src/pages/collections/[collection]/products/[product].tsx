@@ -28,7 +28,6 @@ import { ICollectionListing } from 'shopify-api-node'
  * @param props.collection - `LinkProps` for product collection
  * @param props.collection.href - Link to collection
  * @param props.collection.title - Title of collection
- * @param props.session - CMS user session or null
  */
 const CollectionProduct: PC<IPagePropsProduct> = props => {
   return <ProductPage {...props} />
@@ -89,7 +88,7 @@ export const getServerSideProps: GetServerSideProps<
   }
 
   // Return page component props and user session
-  return { props: { page, session: pageProps.props.session } }
+  return { props: { page } }
 }
 
 export default CollectionProduct

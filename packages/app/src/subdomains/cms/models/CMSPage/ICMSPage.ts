@@ -79,6 +79,7 @@ export enum CMSPageComponents {
 }
 
 /**
- * Object containing all the pages in the CMS database.
+ * Object containing all the pages (not including the homepage) in the CMS
+ * database.
  */
-export type CMSPagesDTO = { pages: ICMSPage[] }
+export type CMSPagesDTO = { pages: ICMSPageSlug[] }

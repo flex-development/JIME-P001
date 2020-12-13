@@ -1,8 +1,10 @@
-import { PagesAPI, PagesFormPlugin } from '@subdomains/cms/config'
-import { CMSPagesDTO, ICMSPage } from '@subdomains/cms/models'
-import { UseFormScreenPlugin } from '@subdomains/cms/utils'
-import { isEmpty } from 'lodash'
-import { FormOptions, useForm, useFormScreenPlugin } from 'tinacms'
+import { PagesFormPlugin } from '@subdomains/cms/config'
+import { CMSPagesDTO, ICMSPageSlug } from '@subdomains/cms/models'
+import {
+  handlePagesForm as onSubmit,
+  UseFormScreenPlugin
+} from '@subdomains/cms/utils'
+import { useForm, useFormScreenPlugin } from 'tinacms'
 
 /**
  * @file Register a `PagesFormPlugin` instance
@@ -17,40 +19,7 @@ import { FormOptions, useForm, useFormScreenPlugin } from 'tinacms'
  */
 export const usePagesForm = (
   label?: string
-): UseFormScreenPlugin<CMSPagesDTO, Array<ICMSPage>> => {
-  /**
-   * Form submission handler. Pages can be created, updated, and removed.
-   *
-   * @param param0 - Form value
-   * @param param0.pages - Updated pages
-   */
-  const onSubmit: FormOptions<CMSPagesDTO>['onSubmit'] = async ({ pages }) => {
-    // Get IDs of submitted pages
-    const submitted = pages.map(page => page.id)
-
-    // Create or update pages
-    await Promise.all(
-      pages.map(async (page: ICMSPage) => {
-        if (isEmpty(page.id)) {
-          page = await PagesAPI.create(page)
-          submitted.push(page.id)
-        } else {
-          await PagesAPI.update(page.id, page)
-        }
-      })
-    )
-
-    // Get all pages using `PageTemplate`
-    let basic_pages = (await PagesAPI.find()) as Array<ICMSPage>
-    basic_pages = basic_pages.filter(page => page.component === 'PageTemplate')
-
-    // Filter out pages not present in submitted pages array
-    const deleted = basic_pages.filter(page => !submitted.includes(page.id))
-
-    // Delete pages that weren't submitted
-    return await PagesAPI.deleteBatch(deleted.map(page => page.id))
-  }
-
+): UseFormScreenPlugin<CMSPagesDTO, Array<ICMSPageSlug>> => {
   // Get form config
   const config = PagesFormPlugin(label, onSubmit)
 

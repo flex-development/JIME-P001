@@ -250,7 +250,7 @@ export default class RTDRepository<E extends IEntity = IEntity>
    * @throws {FeathersErrorJSON}
    */
   async get(id: IEntity['id']): Promise<E> {
-    const data = this.get(id)
+    const data = (await this.normalize(this.root.child(id))) as E | null
 
     if (!data) {
       const message = `Entity with id "${id}" not found.`

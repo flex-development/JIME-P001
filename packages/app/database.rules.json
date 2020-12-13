@@ -49,7 +49,7 @@
           ".validate": "newData.isString()"
         },
         "path": {
-          ".validate": "!root.child('pages/' + $id + newData.val()).exists()"
+          ".validate": "newData.isString()"
         },
         "title": {
           ".validate": "newData.isString() && newData.val().length > 0"

@@ -4,8 +4,8 @@ import { NextApiRequest as Req, NextApiResponse as Res } from 'next'
 import { getSession } from 'next-auth/client'
 
 /**
- * @file CMS Login Handler
- * @module pages/api/admin
+ * @file CMS Admin Login Handler
+ * @module pages/api/admin/login
  */
 
 export default async (req: Req, res: Res): Promise<void> => {

@@ -15,7 +15,6 @@ import {
 import { CollectionService, ProductService } from '@subdomains/sales'
 import { join } from 'lodash'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
-import { getSession } from 'next-auth/client'
 import { useRouter } from 'next/router'
 import { ICollectionListing, IProductListing } from 'shopify-api-node'
 import stripHtml from 'string-strip-html'
@@ -33,7 +32,6 @@ import stripHtml from 'string-strip-html'
  * @param props.page - Page data
  * @param props.page.collection - Shopify collection listing object
  * @param props.page.products - Product listings in collection
- * @param props.session - CMS user session or null
  */
 const Collection: PC<IPagePropsCollection> = ({ page }) => {
   const {
@@ -75,7 +73,7 @@ const Collection: PC<IPagePropsCollection> = ({ page }) => {
       'image:secure_url': image.src,
       'image:width': image.width
     },
-    title: `Collections - ${title}`,
+    title: asPath === '/products' ? 'All Products' : `Collections - ${title}`,
     twitter: { card: 'summary', image: image.src }
   }
 
@@ -88,8 +86,7 @@ const Collection: PC<IPagePropsCollection> = ({ page }) => {
 }
 
 /**
- * Retrieves the data for the `CollectionTemplate` and the current CMS user
- * session.
+ * Retrieves the data for the `CollectionTemplate`.
  *
  * @see https://nextjs.org/docs/basic-features/data-fetching
  *
@@ -131,10 +128,7 @@ export const getServerSideProps: GetServerSideProps<
     products: products as Array<IProductListing>
   })
 
-  // Get current user session
-  const session = (await getSession(context)) as IPagePropsCollection['session']
-
-  return { props: { page, session } }
+  return { props: { page } }
 }
 
 export default Collection

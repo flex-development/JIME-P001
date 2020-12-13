@@ -1,14 +1,14 @@
 import { uuid } from '@flex-development/kustomzdesign/utils'
 import { PagesAPI } from '@subdomains/cms/config'
-import { CMSPagesDTO, ICMSPage } from '@subdomains/cms/models'
-import { GroupListItemProps } from '@subdomains/cms/utils'
-import { FormOptions } from 'tinacms'
 import {
   MarkdownField,
   TextAreaField,
   TextField,
   ToggleField
-} from '../helpers'
+} from '@subdomains/cms/config/helpers'
+import { CMSPagesDTO, ICMSPageSlug } from '@subdomains/cms/models'
+import { GroupListItemProps } from '@subdomains/cms/utils'
+import { FormOptions } from 'tinacms'
 
 /**
  * @file Form configuration to edit site pages
@@ -45,7 +45,7 @@ export const PagesFormPlugin = (
      */
     loadInitialValues: async () => {
       const query = { component: { $eq: 'PageTemplate' } }
-      return { pages: (await PagesAPI.find(query)) as Array<ICMSPage> }
+      return { pages: (await PagesAPI.find(query)) as Array<ICMSPageSlug> }
     },
 
     onChange,
@@ -86,7 +86,7 @@ export const PagesFormPluginFields = [
       ),
       MarkdownField('content.body', 'Markdown / MDX Content')
     ],
-    itemProps: ({ title, uuid }: ICMSPage): GroupListItemProps => ({
+    itemProps: ({ title, uuid }: ICMSPageSlug): GroupListItemProps => ({
       key: uuid,
       label: title
     }),

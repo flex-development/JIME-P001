@@ -90,6 +90,14 @@ export interface OAuthProfileGitHub extends OAuthProfile {
   url: string
 }
 
+/**
+ * Response from preview endpoint.
+ */
+export type PreviewRes = {
+  preview: boolean
+  session: ProviderSessionGitHub | null
+}
+
 export interface ProviderAccountGitHub extends ProviderAccount {
   id: number
   provider: 'github'

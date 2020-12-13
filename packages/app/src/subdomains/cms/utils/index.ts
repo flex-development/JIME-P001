@@ -5,6 +5,7 @@
 
 export * from './getCMSPageSEO'
 export * from './handleIndexPageForm'
+export * from './handlePagesForm'
 export * from './types'
 
 /* eslint-disable prettier/prettier */

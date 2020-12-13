@@ -28,7 +28,7 @@
     },
     {
       "source": "/admin",
-      "destination": "/api/admin"
+      "destination": "/api/admin/login"
     },
     {
       "source": "/products",

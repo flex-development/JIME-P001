@@ -5,7 +5,6 @@ import {
   SearchTemplateProps
 } from '@flex-development/kustomzdesign'
 import { ICMSPageIndex, ICMSPageSlug } from '@subdomains/cms/models/CMSPage'
-import { ProviderSessionGitHub } from '@subdomains/cms/services'
 
 /**
  * @file Subdomain Interfaces - Next.js Page Props
@@ -22,18 +21,6 @@ export interface IPageProps {
    * @see https://shopify.dev/docs/admin-api/rest/reference/online-store
    */
   page: AnyObject
-
-  /**
-   * True if user is signed-in with GitHub.
-   *
-   * @see https://nextjs.org/docs/advanced-features/preview-mode
-   */
-  preview?: boolean
-
-  /**
-   * Current user session.
-   */
-  session: ProviderSessionGitHub | null
 }
 
 /**

@@ -40,10 +40,11 @@ export const CMS_APIS: Record<string, AnyObject> = Object.freeze({
 export const CMS_PLUGINS: Plugin[] = [MarkdownFieldPlugin]
 
 /**
- * Base TinaCMS configuration object.
+ * TinaCMS configuration object.
  */
-export const CMS_BASE_CONFIG: TinaCMSConfig = Object.freeze({
+export const CMS_CONFIG: TinaCMSConfig = Object.freeze({
   apis: CMS_APIS,
+  enabled: true,
   plugins: CMS_PLUGINS,
   sidebar: false,
   toolbar: true

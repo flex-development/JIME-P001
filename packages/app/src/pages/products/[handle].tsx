@@ -7,7 +7,6 @@ import {
   ProductTemplateProps
 } from '@flex-development/kustomzdesign'
 import {
-  IPageProps,
   IPagePropsProduct,
   NotFound,
   PC,
@@ -19,7 +18,6 @@ import {
 import { ProductService, ReviewService, useCart } from '@subdomains/sales'
 import { findIndex } from 'lodash'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
-import { getSession } from 'next-auth/client'
 import { IProductListing } from 'shopify-api-node'
 import stripHtml from 'string-strip-html'
 
@@ -37,7 +35,6 @@ import stripHtml from 'string-strip-html'
  * @param props.collection.href - Link to collection
  * @param props.collection.title - Title of collection
  * @param props.product - Product listing data
- * @param props.session - CMS user session or null
  */
 const Product: PC<IPagePropsProduct> = ({ page }) => {
   // Get cart functions
@@ -94,8 +91,7 @@ const Product: PC<IPagePropsProduct> = ({ page }) => {
 }
 
 /**
- * Retrieves the data for the `ProductTemplate` and the current CMS user
- * session.
+ * Retrieves the data for the `ProductTemplate`.
  *
  * @see https://nextjs.org/docs/basic-features/data-fetching
  *
@@ -142,11 +138,8 @@ export const getServerSideProps: GetServerSideProps<
     reviews: reviews as Array<IReview>
   })
 
-  // Get current user session
-  const session = (await getSession(context)) as IPageProps['session']
-
   // Return page component props and user session
-  return { props: { page, session } }
+  return { props: { page } }
 }
 
 export default Product

@@ -1,7 +1,7 @@
+import { PlaylistAPI } from '@subdomains/cms/config/config'
+import { URLField } from '@subdomains/cms/config/extensions'
 import { IPlaylistSettings } from '@subdomains/cms/models'
 import { FormOptions } from 'tinacms'
-import { PlaylistAPI } from '../config'
-import { URLField } from '../extensions'
 
 /**
  * @file Form configuration edit store playlist settings

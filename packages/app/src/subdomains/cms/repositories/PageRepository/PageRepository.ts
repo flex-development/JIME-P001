@@ -134,8 +134,6 @@ export default class PageRepository
       }
     }
 
-    console.debug(data)
-
     return await super.update(id, data)
   }
 }

@@ -1,21 +1,14 @@
 import { CheckoutLineItemInput } from '@flex-development/kustomzcore'
 import '@flex-development/kustomzdesign/index.scss'
-import {
-  AC,
-  AppLayout,
-  IAppProps,
-  useLocalStorage,
-  useSignInWithCustomToken
-} from '@subdomains/app'
+import { AC, AppLayout, IAppProps, useLocalStorage } from '@subdomains/app'
 import '@subdomains/app/styles.css'
-import { CMS_BASE_CONFIG } from '@subdomains/cms'
+import { CMS_CONFIG, useCMSAuth } from '@subdomains/cms'
 import '@subdomains/cms/styles.css'
 import {
   CartContext,
   CART_PERSISTENCE_KEY as CART_KEY,
   useCheckoutPermalink
 } from '@subdomains/sales'
-import { isUndefined } from 'lodash'
 import { Provider as NextAuthProvider, Session } from 'next-auth/client'
 import { useEffect, useMemo } from 'react'
 import { TinaCMS, TinaProvider } from 'tinacms'
@@ -38,25 +31,13 @@ import { TinaCMS, TinaProvider } from 'tinacms'
  * @param param0 - Component props
  * @param param0.Component - Current page component
  * @param param0.pageProps - Page component props from data fetching methods
- * @param param0.pageProps.page - Data for current page
- * @param param0.pageProps.session - CMS user session or null
  */
 const App: AC = ({ Component, pageProps }: IAppProps) => {
-  const { page, session } = pageProps
+  // Handle CMS admin user session
+  const { session } = useCMSAuth()
 
-  /**
-   * Preview mode will be enabled if current user is signed-in with GitHub.
-   * Page will be undefined if redirected to /404 page.
-   */
-  pageProps.preview = session?.provider === 'github' && !isUndefined(page)
-
-  // Grant authenticated user access to database and storage resources
-  useSignInWithCustomToken(session?.firebase_token)
-
-  // Get configured TinaCMS instance
-  const cms = useMemo(() => {
-    return new TinaCMS({ ...CMS_BASE_CONFIG, enabled: pageProps.preview })
-  }, [pageProps.preview])
+  // Get configured CMS instance
+  const cms = useMemo<TinaCMS>(() => new TinaCMS(CMS_CONFIG), [])
 
   // Load initial line items from local storage
   const [cart] = useLocalStorage<CheckoutLineItemInput[]>(CART_KEY)

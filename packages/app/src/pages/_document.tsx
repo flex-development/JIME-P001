@@ -100,6 +100,14 @@ export default class Document extends NextDocument {
 
           {/* Apple MusicKit */}
           <script src='//js-cdn.music.apple.com/musickit/v1/musickit.js' />
+
+          {/* Preload requests to preview handler */}
+          <link
+            rel='preload'
+            href='/api/preview'
+            as='fetch'
+            crossOrigin='anonymous'
+          />
         </Head>
         <body>
           <Main />

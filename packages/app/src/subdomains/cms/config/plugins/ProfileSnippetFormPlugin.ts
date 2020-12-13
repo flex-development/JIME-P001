@@ -1,8 +1,8 @@
+import { ProfileSnippetAPI } from '@subdomains/cms/config/config'
+import { URLField } from '@subdomains/cms/config/extensions'
+import { NumberField, TextField } from '@subdomains/cms/config/helpers'
 import { IProfileSnippet } from '@subdomains/cms/models'
 import { FormOptions } from 'tinacms'
-import { ProfileSnippetAPI } from '../config'
-import { URLField } from '../extensions'
-import { NumberField, TextField } from '../helpers'
 
 /**
  * @file Form configuration edit profile snippet settings

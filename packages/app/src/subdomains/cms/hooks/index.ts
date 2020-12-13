@@ -3,6 +3,7 @@
  * @module subdomains/cms/hooks
  */
 
+export * from './useCMSAuth'
 export * from './useIndexPageForm'
 export * from './useMenus'
 export * from './useNavigationForm'

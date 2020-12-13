@@ -6,7 +6,6 @@ import { IPagePropsSearch, PC, SearchPageUrlQuery, SEO } from '@subdomains/app'
 import { getCMSPageSEO } from '@subdomains/cms'
 import { ProductService } from '@subdomains/sales'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
-import { getSession } from 'next-auth/client'
 import { useRouter } from 'next/router'
 
 /**
@@ -16,20 +15,18 @@ import { useRouter } from 'next/router'
 
 /**
  * Renders the product search page.
- * The value of {@param props.session} will always be `null`.
  *
  * @param props - Page component props
  * @param props.page.results - Search results
- * @param props.session - CMS user session or null
  */
 const Search: PC = ({ page }) => {
   const { query } = useRouter()
-  const { term = '' } = query || {}
+  const { term = null } = (query || {}) as SearchPageUrlQuery
 
   const seo = getCMSPageSEO({
     description: `Search products for Morena's Kustomz.`,
     keywords: 'grinders, ash trays, rolling trays, weed, cannabis, marijuana',
-    title: term.length ? `Search results for "${term}"` : 'Search'
+    title: term?.length ? `Search results for "${term}"` : 'Search'
   })
 
   return (
@@ -41,7 +38,7 @@ const Search: PC = ({ page }) => {
 }
 
 /**
- * Returns the data for the `SearchTemplate` and the current CMS user session.
+ * Returns the data for the `SearchTemplate`.
  *
  * @see https://nextjs.org/docs/basic-features/data-fetching
  *
@@ -80,10 +77,7 @@ export const getServerSideProps: GetServerSideProps<
   // Get template data
   const page: SearchTemplateProps = { results: await Products.find(query) }
 
-  // Get current user session
-  const session = (await getSession(context)) as IPagePropsSearch['session']
-
-  return { props: { page, session } }
+  return { props: { page } }
 }
 
 export default Search

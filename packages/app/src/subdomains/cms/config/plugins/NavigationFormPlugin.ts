@@ -1,10 +1,14 @@
 import { uuid } from '@flex-development/kustomzdesign/utils'
+import { MenusAPI } from '@subdomains/cms/config/config'
+import {
+  ClassNameField,
+  IDField,
+  LinkListField
+} from '@subdomains/cms/config/extensions'
+import { TextField } from '@subdomains/cms/config/helpers'
 import { CMSMenusDTO, ICMSMenu } from '@subdomains/cms/models'
+import { GroupListItemProps } from '@subdomains/cms/utils'
 import { FormOptions } from 'tinacms'
-import { GroupListItemProps } from '../../utils'
-import { MenusAPI } from '../config'
-import { ClassNameField, IDField, LinkListField } from '../extensions'
-import { TextField } from '../helpers'
 
 /**
  * @file Form configuration to edit site menus

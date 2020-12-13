@@ -1,9 +1,13 @@
+import { PagesAPI } from '@subdomains/cms/config/config'
+import {
+  NumberField,
+  TextAreaField,
+  TextField
+} from '@subdomains/cms/config/helpers'
 import { ICMSPageIndex } from '@subdomains/cms/models'
+import { InitialFormValues } from '@subdomains/cms/utils'
 import { isFunction } from 'lodash'
 import { FormOptions } from 'tinacms'
-import { InitialFormValues } from '../../utils/types'
-import { PagesAPI } from '../config'
-import { NumberField, TextAreaField, TextField } from '../helpers'
 
 /**
  * @file Form configuration to edit the homepage

@@ -12,9 +12,10 @@ import {
   useProfileSnippetForm
 } from '@subdomains/cms/hooks'
 import { useCart } from '@subdomains/sales'
+import { useMemoCompare } from '@system/hooks/useMemoCompare'
 import { merge } from 'lodash'
 import Head from 'next/head'
-import { FC, Fragment, useMemo } from 'react'
+import { FC, Fragment } from 'react'
 import { useCMS } from 'tinacms'
 
 /**
@@ -71,26 +72,24 @@ export const AppLayout: FC<AppLayoutProps> = (props: AppLayoutProps) => {
   // Don't render content until queue is ready to be played
   // if (isEmpty(queue)) return null
 
-  const shop_header_props = useMemo<ShopHeaderProps>(() => {
-    return {
-      handleSearch: (term, event) => {
-        event.preventDefault()
-        window.location.href = `/search?term=${term}`
-      },
-      items: cart.items.length,
-      style: { top: cms.enabled ? '62px' : 0 }
-    }
-  }, [cart.items.length, cms.enabled])
+  //  Get `ShopHeader` component props
+  const header = useMemoCompare<ShopHeaderProps>({
+    handleSearch: (term, event) => {
+      event.preventDefault()
+      window.location.href = `/search?term=${term}`
+    },
+    items: cart.items_total,
+    style: { top: cms.enabled ? '62px' : 0 }
+  })
 
-  const sidebar_props = useMemo<SidebarProps>(() => {
-    return {
-      age: snippet.age,
-      img: snippet.img || undefined,
-      location: snippet.location,
-      menu: menus.main as Array<LinkProps>,
-      mood: snippet.mood
-    }
-  }, [menus.main, snippet.age, snippet.img, snippet.location, snippet.mood])
+  // Get `Sidebar` component props
+  const sidebar = useMemoCompare<SidebarProps>({
+    age: snippet.age,
+    img: snippet.img || undefined,
+    location: snippet.location,
+    menu: menus.main as Array<LinkProps>,
+    mood: snippet.mood
+  })
 
   return (
     <Fragment>
@@ -102,7 +101,7 @@ export const AppLayout: FC<AppLayoutProps> = (props: AppLayoutProps) => {
         />
       </Head>
 
-      <ShopLayout header={shop_header_props} sidebar={sidebar_props}>
+      <ShopLayout header={header} sidebar={sidebar}>
         <Component {...merge(pageProps, { page })} />
       </ShopLayout>
     </Fragment>

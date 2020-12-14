@@ -13,7 +13,7 @@ import {
 } from '@system/components/molecules'
 import { useSanitizedProps } from '@system/hooks'
 import { MutatedProps, TC } from '@system/types'
-import { formatPrice } from '@system/utils'
+import { formatPrice, getItemsTotal, getSubtotal } from '@system/utils'
 
 /**
  * @file Display the items in a user's cart
@@ -45,11 +45,6 @@ export interface CartTemplateProps extends MutatedProps {
    * @default []
    */
   items?: Array<CheckoutLineItemProps>
-
-  /**
-   * Cart subtotal.
-   */
-  subtotal?: number | string
 }
 
 /**
@@ -66,7 +61,6 @@ export const CartTemplate: TC<CartTemplateProps> = (
     handleRemove,
     handleUpdate,
     items = [],
-    subtotal = '0.00',
     ...rest
   } = props
 
@@ -76,7 +70,7 @@ export const CartTemplate: TC<CartTemplateProps> = (
     <Main {...sanitized} data-template={CartTemplate.template_id}>
       <Section>
         <Heading mb={24} size={2}>
-          Cart ({`${items.length}`})
+          Cart ({`${getItemsTotal(items)}`})
         </Heading>
         <Box>
           {items.map((item: CheckoutLineItemProps) => (
@@ -99,7 +93,7 @@ export const CartTemplate: TC<CartTemplateProps> = (
             mb={{ sm: 0, xs: 24 }}
             mr={{ sm: 20, xs: 0 }}
           >
-            Subtotal / {formatPrice(subtotal)}
+            Subtotal / {formatPrice(getSubtotal(items))}
           </Paragraph>
           <Link className='checkout-btn' btn='primary' href={checkout_url}>
             Checkout
@@ -114,8 +108,7 @@ CartTemplate.displayName = 'CartTemplate'
 
 CartTemplate.defaultProps = {
   checkout_url: '#',
-  items: [],
-  subtotal: '0.00'
+  items: []
 }
 
 CartTemplate.template_id = 'cart'

@@ -3,7 +3,6 @@ import {
   CheckoutPermalinkInput,
   CheckoutPermalinkQuery
 } from '@flex-development/kustomzcore'
-import { getSubtotal } from '@subdomains/sales/utils'
 import { omit } from 'lodash'
 import qs from 'querystring'
 import { useCallback, useEffect, useState } from 'react'
@@ -30,11 +29,6 @@ export type UseCheckoutPermalink = {
    * @param id - ID of variant to remove
    */
   removeItem: UseArrayActions<CheckoutPermalinkInput>['removeById']
-
-  /**
-   * Order subtotal, not including the price of custom line item properties.
-   */
-  subtotal: number
 
   /**
    * Adds or updates a checkout line item.
@@ -110,7 +104,6 @@ export const useCheckoutPermalink = (
   return {
     items: items.map(item => omit(item, ['id']) as CheckoutLineItemInput),
     removeItem: actions.removeById,
-    subtotal: getSubtotal(items),
     upsertItem: useCallback(upsertItem, [actions, items]),
     url
   }

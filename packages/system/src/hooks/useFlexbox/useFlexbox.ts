@@ -9,9 +9,9 @@ import {
 } from '@system/config'
 import { getResponsiveUtilities } from '@system/utils'
 import classnames from 'classnames'
-import { isBoolean, isEmpty, isEqual, isNumber, isString } from 'lodash'
+import { isBoolean, isEmpty, isNumber, isString } from 'lodash'
 import { useMemo } from 'react'
-import { MemoCompare, useMemoCompare } from '../useMemoCompare'
+import { useMemoCompare } from '../useMemoCompare'
 
 /**
  * @file Generate flexbox utility classes
@@ -40,10 +40,8 @@ export const useFlexbox = (
   config: FlexboxUtilitiesConfig,
   breakpoints: GridBreakpoint[] = GRID_BREAKPOINT_KEYS
 ): string => {
-  const _compare: MemoCompare = (previous, next) => isEqual(previous, next)
-
-  const _breakpoints = useMemoCompare<typeof breakpoints>(breakpoints, _compare)
-  const _config = useMemoCompare<typeof config>(config, _compare)
+  const _breakpoints = useMemoCompare<typeof breakpoints>(breakpoints)
+  const _config = useMemoCompare<typeof config>(config)
 
   return useMemo<string>(() => {
     const dictionary = {}

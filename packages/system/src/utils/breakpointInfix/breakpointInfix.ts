@@ -2,7 +2,7 @@ import { GridBreakpoint } from '@flex-development/kustomzcore'
 
 /**
  * @file Responsive utility helper
- * @module utils/breakpointInfix
+ * @module utils/breakpointInfix/impl
  */
 
 /**

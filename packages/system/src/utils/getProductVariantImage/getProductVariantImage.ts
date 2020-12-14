@@ -3,7 +3,7 @@ import { IProductListing, IProductListingVariant } from 'shopify-api-node'
 
 /**
  * @file Get `ImageProps` for a Product Listing Variant
- * @module utils/getProductVariantImage
+ * @module utils/getProductVariantImage/impl
  */
 
 /**

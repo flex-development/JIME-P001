@@ -31,13 +31,17 @@ const CONFIG: ConfigInterface<PreviewRes, Error> = {
 const KEY = '/api/preview'
 
 /**
+ * Requests the `/api/preview` endpoint to check if the user is authenticated
+ * with GitHub. CMS users are GitHub repository collaborators.
  *
+ * If the user is authenticated, their custom token will be used to grant them
+ * access to database and storage resources.
  */
 export const useCMSAuth = (): UseCMSAuth => {
   // Request preview mode handler
   const { data, error } = useSWR<PreviewRes, Error>(KEY, fetcher, CONFIG)
 
-  // Sign-in authenticated user to access database and storage resources
+  // Grant access to database and storage resources
   useSignInWithCustomToken(data?.session?.firebase_token)
 
   return {

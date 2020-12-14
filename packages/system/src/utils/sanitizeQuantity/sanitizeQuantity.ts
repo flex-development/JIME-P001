@@ -3,7 +3,7 @@ import { isBoolean, isNumber, isString } from 'lodash'
 
 /**
  * @file Convert a value into a product quantity
- * @module utils/sanitizeQuantity
+ * @module utils/sanitizeQuantity/impl
  */
 
 /**

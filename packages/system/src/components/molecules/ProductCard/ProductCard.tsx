@@ -9,10 +9,9 @@ import {
   Paragraph
 } from '@system/components/atoms'
 import { useProductVariants, useSanitizedProps } from '@system/hooks'
-import { MemoCompare, useMemoCompare } from '@system/hooks/useMemoCompare'
+import { useMemoCompare } from '@system/hooks/useMemoCompare'
 import { EventHandlers } from '@system/types'
 import { getProductVariantImage } from '@system/utils'
-import { isEqual } from 'lodash'
 import { FC, useCallback, useEffect, useMemo, useState } from 'react'
 import useBoolean from 'react-hanger/array/useBoolean'
 import { IProductListing, IProductListingVariant } from 'shopify-api-node'
@@ -45,8 +44,6 @@ export interface ProductCardProps extends BoxProps {
 export const ProductCard: FC<ProductCardProps> = (props: ProductCardProps) => {
   const { product_link = {}, product, ...rest } = props
 
-  const _compare: MemoCompare = (previous, next) => isEqual(previous, next)
-
   const sanitized = useSanitizedProps<typeof rest, BoxProps>(rest, {
     card: true,
     'product-card': true
@@ -65,8 +62,7 @@ export const ProductCard: FC<ProductCardProps> = (props: ProductCardProps) => {
   // Get product variant display image
   const image_alt = `${product.title} - ${selected.title}`
   const image = useMemoCompare<ImageProps>(
-    getProductVariantImage(selected.image_id, product.images, image_alt),
-    _compare
+    getProductVariantImage(selected.image_id, product.images, image_alt)
   )
 
   // Update product url when new variant is selected

@@ -6,7 +6,7 @@ import { createResponsiveUtility } from '../creativeResponsiveUtility'
 
 /**
  * @file Returns an array of responsive utility classes
- * @module utils/getResponsiveUtilities
+ * @module utils/getResponsiveUtilities/impl
  * @see https://v5.getbootstrap.com/docs/5.0/utilities/api
  */
 

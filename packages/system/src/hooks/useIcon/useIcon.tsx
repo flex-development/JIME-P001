@@ -2,9 +2,9 @@ import { AnyObject } from '@flex-development/json'
 import { Icon, IconProps } from '@system/components'
 import { MutatedProps } from '@system/types'
 import classnames from 'classnames'
-import { isEqual, isNull, isUndefined, join, uniq } from 'lodash'
+import { isNull, isUndefined, join, uniq } from 'lodash'
 import { useMemo } from 'react'
-import { MemoCompare, useMemoCompare } from '../useMemoCompare'
+import { useMemoCompare } from '../useMemoCompare'
 
 /**
  * @file Render icon with props.children
@@ -35,11 +35,9 @@ export type UseIconProps = {
 export function useIcon<P extends UseIconProps = UseIconProps>(props: P): P {
   const { children, className = '', icon, ...rest } = props
 
-  const _compare: MemoCompare = (previous, next) => isEqual(previous, next)
-
-  const _children = useMemoCompare<typeof children>(children, _compare)
-  const _icon = useMemoCompare<IconProps>(icon || {}, _compare)
-  const _rest = useMemoCompare<typeof rest>(rest, _compare)
+  const _children = useMemoCompare<typeof children>(children)
+  const _icon = useMemoCompare<IconProps>(icon || {})
+  const _rest = useMemoCompare<typeof rest>(rest)
 
   return useMemo<P>(() => {
     // Logic will be skipped if icon is undefined or empty object

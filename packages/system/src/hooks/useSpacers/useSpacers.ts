@@ -7,9 +7,11 @@ import {
 import { GRID_BREAKPOINT_KEYS } from '@system/config'
 import { getResponsiveUtilities } from '@system/utils'
 import classnames from 'classnames'
-import { isEmpty, isEqual, isObject } from 'lodash'
+import { dequal } from 'dequal'
+import { isEmpty, isObject } from 'lodash'
 import { useMemo } from 'react'
 import { MemoCompare, useMemoCompare } from '../useMemoCompare'
+
 /**
  * @file Generate gutter, margin, or padding utility classes
  * @module hooks/useSpacers/impl
@@ -32,10 +34,10 @@ export const useSpacers = (
 ): string => {
   config = isObject(config) ? config : { xs: config }
 
-  const _compare: MemoCompare = (previous, next) => isEqual(previous, next)
+  const _compare: MemoCompare = (previous, next) => dequal(previous, next)
 
-  const _breakpoints = useMemoCompare<typeof breakpoints>(breakpoints, _compare)
-  const _config = useMemoCompare<typeof config>(config, _compare)
+  const _breakpoints = useMemoCompare<typeof breakpoints>(breakpoints)
+  const _config = useMemoCompare<typeof config>(config)
 
   return useMemo<string>(() => {
     const dictionary = {}

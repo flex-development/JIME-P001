@@ -2,7 +2,7 @@ import { isString } from 'lodash'
 
 /**
  * @file Converts a number to money format
- * @module utils/formatPrice
+ * @module utils/formatPrice/impl
  */
 
 type IntlNumberFormatOptionsCurrency = Pick<

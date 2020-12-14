@@ -7,7 +7,7 @@ import { get, isString } from 'lodash'
 
 /**
  * @file Get a color item object to use with Storybook Backgrounds / Docs
- * @module utils/getThemeColor
+ * @module utils/getThemeColor/impl
  */
 
 /**

@@ -4,7 +4,7 @@ import { FREC } from '@system/types'
 import { isEmpty } from 'lodash'
 import { forwardRef } from 'react'
 import { usePrevious } from 'react-hanger'
-import { config, Spring, SpringConfig } from 'react-spring'
+import { config, SpringConfig, useSpring } from 'react-spring'
 
 /**
  * @file Display the number of items a user's cart
@@ -49,6 +49,9 @@ export const CartPreview: FREC<CartPreviewProps> = forwardRef((props, ref) => {
   // Get reference to previous number of items in cart
   const items_prev = usePrevious<number>(items)
 
+  // Animate items total decrease/increase
+  const { _items } = useSpring({ _items: items, from: { _items: items_prev } })
+
   // Get component properties
   const sanitized = useSanitizedProps<typeof rest, LinkProps>(
     { ...rest, target: rest.target || '_blank' },
@@ -59,13 +62,7 @@ export const CartPreview: FREC<CartPreviewProps> = forwardRef((props, ref) => {
     <Link {...sanitized} data-items={items} ref={ref}>
       Cart&nbsp;&nbsp;/&nbsp;&nbsp;
       <Span>
-        <Spring config={_spring} from={{ items: items_prev }} to={{ items }}>
-          {props => (
-            <>
-              <Span>{props.items}</Span> {`Item${items === 1 ? '' : 's'}`}
-            </>
-          )}
-        </Spring>
+        <Span>{_items}</Span> {`Item${items === 1 ? '' : 's'}`}
       </Span>
     </Link>
   )

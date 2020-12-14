@@ -1,9 +1,9 @@
 import { AnyObject } from '@flex-development/json'
 import { OptionProps } from '@system/components'
-import { isEqual, isNumber } from 'lodash'
+import { isNumber } from 'lodash'
 import { useCallback, useMemo, useState } from 'react'
 import { IProductListingVariant } from 'shopify-api-node'
-import { MemoCompare, useMemoCompare } from '../useMemoCompare'
+import { useMemoCompare } from '../useMemoCompare'
 
 /**
  * @file Use product variants as options
@@ -52,8 +52,6 @@ export const useProductVariants = (
   variants: Array<IProductListingVariant> = [],
   active = 0
 ): UseProductVariants => {
-  const _compare: MemoCompare = (previous, next) => isEqual(previous, next)
-
   // Initialize selected variant state
   // The default option will be the first object in the array or {}
   const [selected, setSelected] = useState<UseProductVariants['selected']>(
@@ -61,7 +59,7 @@ export const useProductVariants = (
   )
 
   // Get reference to product variants
-  const _variants = useMemoCompare<typeof variants>(variants, _compare)
+  const _variants = useMemoCompare<typeof variants>(variants)
 
   /**
    * Updates the selected variant.

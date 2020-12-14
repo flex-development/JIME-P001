@@ -1,4 +1,5 @@
 import { ANYTHING } from '@flex-development/json'
+import { isEqual, isFunction } from 'lodash'
 import { useEffect, useMemo, useRef } from 'react'
 
 /**
@@ -15,27 +16,36 @@ export type MemoCompare<T = ANYTHING> = (v1: T, v2: T) => boolean
  * or anything else to determine equality. If the compare function returns true,
  * then the hook returns the old data reference.
  *
+ * By default, the `isEqual` Lodash module will be used to compare values.
+ *
+ * @see https://lodash.com/docs/4.17.15
  * @see https://usehooks.com/useMemoCompare
  *
- * @param next - Next data value
+ * @param next - Next data value or function that returns the next value
  * @param compare - Function to compare previous value to next value
  */
-export function useMemoCompare<T = ANYTHING>(next: T, compare: MemoCompare): T {
+export function useMemoCompare<T = ANYTHING>(
+  next: T | (() => T),
+  compare: MemoCompare = isEqual
+): T {
+  // If next is a function, call it to get initial value
+  const _next = isFunction(next) ? next() : next
+
   // Ref for storing previous value
   const previous = useRef<T>()
 
   // Pass prev and next value to compare function to determine equality
   const equal = useMemo<boolean>(() => {
-    return compare(previous.current, next)
-  }, [compare, next])
+    return compare(previous.current, _next)
+  }, [compare, _next])
 
   // If not equal update previousRef to next value.
   // We only update if not equal so that this hook continues to return
   // the same old value if compare keeps returning true
   useEffect(() => {
-    if (!equal) previous.current = next
+    if (!equal) previous.current = _next
   })
 
   // If equal then return the previous value
-  return equal ? (previous.current as T) : next
+  return equal ? (previous.current as T) : _next
 }

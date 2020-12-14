@@ -26,6 +26,5 @@ export const Cart: StoryFN<CartTemplateProps> = (args: CartTemplateProps) => (
 
 Cart.args = {
   ...CartTemplate?.defaultProps,
-  items: LINE_ITEMS,
-  subtotal: '55.00'
+  items: LINE_ITEMS
 }

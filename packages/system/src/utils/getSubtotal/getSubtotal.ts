@@ -2,7 +2,7 @@ import { CheckoutLineItemInput } from '@flex-development/kustomzcore'
 
 /**
  * @file Get cart subtotal
- * @module subdomains/sales/utils/getSubtotal/impl
+ * @module utils/getSubtotal/impl
  */
 
 /**

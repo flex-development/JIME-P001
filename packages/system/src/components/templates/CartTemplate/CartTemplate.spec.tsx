@@ -1,3 +1,4 @@
+import { getItemsTotal, getSubtotal } from '@system/utils'
 import { render } from '@testing-library/react'
 import { CartTemplate } from './CartTemplate'
 import { Cart } from './CartTemplate.stories'
@@ -18,12 +19,14 @@ it('renders without crashing', () => {
 
 it('renders the template title with the number of items in the cart', () => {
   const { getByText } = render(<Cart {...Cart.args} />)
+  const { items = [] } = Cart.args
 
-  expect(getByText(`Cart (${Cart.args.items?.length})`)).toBeInTheDocument()
+  expect(getByText(`Cart (${getItemsTotal(items)})`)).toBeInTheDocument()
 })
 
 it('renders the cart subtotal', () => {
   const { getByText } = render(<Cart {...Cart.args} />)
+  const { items = [] } = Cart.args
 
-  expect(getByText(`Subtotal / $${Cart.args?.subtotal}`)).toBeInTheDocument()
+  expect(getByText(`Subtotal / $${getSubtotal(items)}`)).toBeInTheDocument()
 })

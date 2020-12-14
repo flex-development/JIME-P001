@@ -3,6 +3,6 @@
  * @module subdomains/sales/utils
  */
 
-export * from './getSubtotal'
+export default {}
 
 /* eslint-disable prettier/prettier */

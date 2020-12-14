@@ -1,5 +1,6 @@
 import { CheckoutLineItemInput } from '@flex-development/kustomzcore'
 import { getItemsTotal } from '@system/utils'
+import { isFunction } from 'lodash'
 import { useMemo } from 'react'
 import {
   UseCheckoutPermalink,
@@ -27,9 +28,11 @@ export type UseCart = UseCheckoutPermalink & {
  *
  * @param items - Current line items
  */
-export const useCart = (items: CheckoutLineItemInput[] = []): UseCart => {
+export const useCart = (
+  items: CheckoutLineItemInput[] | (() => CheckoutLineItemInput[]) = []
+): UseCart => {
   // Get checkout URL using initial line items
-  const checkout = useCheckoutPermalink(items)
+  const checkout = useCheckoutPermalink(isFunction(items) ? items() : items)
 
   // Get number of line items in cart
   const items_total = useMemo<number>(() => {

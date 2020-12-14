@@ -1,5 +1,4 @@
 import { ANYTHING } from '@flex-development/json'
-import { CheckoutLineItemInput } from '@flex-development/kustomzcore'
 import { useMemoCompare } from '@system/hooks'
 import { UseCart, useCart } from '@system/hooks/useCart'
 import { isFunction } from 'lodash'
@@ -20,7 +19,7 @@ export type CartContextProviderProps = {
   /**
    * Initial line items in user's cart.
    */
-  items?: CheckoutLineItemInput[]
+  items?: Parameters<typeof useCart>[0]
 
   /**
    * Optional function to persist the user's cart.
@@ -55,7 +54,7 @@ export const CartContextProvider: FC<CartContextProviderProps> = props => {
      * @param unmount - Boolean indicating if component being unmounted
      */
     const _persist = (unmount: boolean): ANYTHING => {
-      if (isFunction(persist)) return persist(cart_m, unmount)
+      if (isFunction(persist)) return (async () => persist(cart_m, unmount))()
       return unmount
     }
 

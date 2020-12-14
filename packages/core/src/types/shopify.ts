@@ -7,6 +7,17 @@ import { ICheckoutLineItem } from 'shopify-api-node'
  */
 
 /**
+ * Shopping cart context state.
+ */
+export type CartContextState = {
+  items: Array<CheckoutLineItemInput>
+  items_total: number
+  removeItem: (variant_id: number | string) => void
+  upsertItem: (data: CheckoutPermalinkInput) => void
+  url: string
+}
+
+/**
  * Types of cart line items.
  */
 export type CheckoutPermalinkInput =

@@ -1,11 +1,11 @@
 import { axiosShopify } from '@app/config/axios'
-import Logger from '@app/config/logger'
 import {
   ArrayQueryExecutor,
   DataArray,
   DataArrayQueryParams
 } from '@flex-development/json'
-import { createError, NotFound } from '@subdomains/app/utils'
+import { createError, Logger } from '@flex-development/kustomzcore'
+import { NotFound } from '@subdomains/app/utils'
 import { omit } from 'lodash'
 import { ICollectionListing } from 'shopify-api-node'
 import {

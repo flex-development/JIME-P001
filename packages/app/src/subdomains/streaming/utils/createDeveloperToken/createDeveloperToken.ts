@@ -1,5 +1,4 @@
-import Logger from '@app/config/logger'
-import { createError } from '@subdomains/app/utils'
+import { createError, Logger } from '@flex-development/kustomzcore'
 import jwt, { Algorithm, SignOptions } from 'jsonwebtoken'
 import { isEmpty } from 'lodash'
 

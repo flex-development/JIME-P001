@@ -3,7 +3,7 @@
  * @module subdomains/app/hooks
  */
 
-export * from './useLocalStorage'
+export * from './useLocalForage'
 export * from './useSignInWithCustomToken'
 
 /* eslint-disable prettier/prettier */

@@ -1,5 +1,5 @@
-import Logger from '@app/config/logger'
 import { NullishString } from '@flex-development/json'
+import { Logger } from '@flex-development/kustomzcore'
 import admin from 'firebase-admin'
 import { isNumber } from 'lodash'
 

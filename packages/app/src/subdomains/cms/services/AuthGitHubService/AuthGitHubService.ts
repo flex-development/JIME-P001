@@ -1,7 +1,6 @@
 import { octokit } from '@app/config/github'
-import Logger from '@app/config/logger'
+import { createError, Logger } from '@flex-development/kustomzcore'
 import { Endpoints, RequestInterface } from '@octokit/types'
-import { createError } from '@subdomains/app/utils'
 import { upsertFirebaseUser } from '@subdomains/cms/utils/upsertFirebaseUser'
 import admin from 'firebase-admin'
 import { isString } from 'lodash'

@@ -1,7 +1,8 @@
-import firebase, { auth } from '@app/config/firebase'
 import { NullishString } from '@flex-development/json'
+import firebase from 'firebase/app'
 import { isString } from 'lodash'
 import { useEffect, useState } from 'react'
+import { useAuth } from 'reactfire'
 
 /**
  * @file Sign in a Firebase user with a custom token
@@ -15,17 +16,17 @@ type UserCredentialState = FirebaseUserCredential | null
 
 export type UseSignInWithCustomToken = {
   /**
-   * Error thrown if custom token is invalid, expired, or not accepted by the
-   * Firebase Auth service.
-   */
-  error: FirebaseAuthError | null
-
-  /**
    * A structure containing a User, an AuthCredential, the operationType, and
    * any additional user information that was returned from the identity
    * provider.
    */
-  user_credential: UserCredentialState
+  credential: UserCredentialState
+
+  /**
+   * Error thrown if custom token is invalid, expired, or not accepted by the
+   * Firebase Auth service.
+   */
+  error: FirebaseAuthError | null
 }
 
 /**
@@ -38,6 +39,9 @@ export type UseSignInWithCustomToken = {
 export const useSignInWithCustomToken = (
   token?: NullishString
 ): UseSignInWithCustomToken => {
+  // Get auth module
+  const auth = useAuth()
+
   // Get user credentials after successful sign-in
   const [credential, setCredential] = useState<UserCredentialState>(null)
 
@@ -58,7 +62,7 @@ export const useSignInWithCustomToken = (
     })()
 
     /* eslint-enable prettier/prettier */
-  }, [setCredential, token])
+  }, [auth, setCredential, token])
 
-  return { error, user_credential: credential }
+  return { credential, error }
 }

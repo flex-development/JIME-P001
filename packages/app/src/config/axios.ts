@@ -1,6 +1,6 @@
 import { FeathersErrorJSON } from '@feathersjs/errors'
 import { AnyObject, ANYTHING } from '@flex-development/json'
-import createError from '@subdomains/app/utils/createError'
+import { createError } from '@flex-development/kustomzcore'
 import Axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios'
 import rateLimit from 'axios-rate-limit'
 import { isPlainObject, pick } from 'lodash'

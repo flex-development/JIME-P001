@@ -15,7 +15,7 @@ import {
   SEO,
   SEOProps
 } from '@subdomains/app'
-import { ProductService, ReviewService, useCart } from '@subdomains/sales'
+import { ProductService, ReviewService } from '@subdomains/sales'
 import { findIndex } from 'lodash'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
 import { IProductListing } from 'shopify-api-node'
@@ -37,20 +37,6 @@ import stripHtml from 'string-strip-html'
  * @param props.product - Product listing data
  */
 const Product: PC<IPagePropsProduct> = ({ page }) => {
-  // Get cart functions
-  const cart = useCart()
-
-  /**
-   * Adds a line item to the user's cart.
-   *
-   * @param item - Line item to add
-   * @param event - <button> element click event
-   */
-  page.handleAddToCart = (item, event) => {
-    event.preventDefault()
-    return cart.upsertItem(item)
-  }
-
   // Get current product variant to build page SEO
   const variant = page.product.variants[page.active || 0]
   const page_title = `${page.product.title} - ${variant.title}`

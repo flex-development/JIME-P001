@@ -2,6 +2,7 @@ import fetcher from '@app/config/fetcher'
 import { useSignInWithCustomToken } from '@subdomains/app/hooks'
 import { PreviewRes } from '@subdomains/cms/services'
 import useSWR, { ConfigInterface } from 'swr'
+import { TinaCMS, useCMS } from 'tinacms'
 
 /**
  * @file Enable/disable CMS using preview endpoint
@@ -12,6 +13,7 @@ import useSWR, { ConfigInterface } from 'swr'
  * `useCMSAuth` return type.
  */
 export type UseCMSAuth = PreviewRes & {
+  cms: TinaCMS
   config: typeof CONFIG
   error?: Error
   key: typeof KEY
@@ -44,7 +46,11 @@ export const useCMSAuth = (): UseCMSAuth => {
   // Grant access to database and storage resources
   useSignInWithCustomToken(data?.session?.firebase_token)
 
+  // Access CMS instance
+  const cms = useCMS()
+
   return {
+    cms,
     config: CONFIG,
     error,
     key: KEY,

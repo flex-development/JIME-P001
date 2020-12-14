@@ -1,7 +1,7 @@
 import CustomersMock from '@app-mocks/data/customers.mock.json'
-import ProductListingsMock from '@app-mocks/data/product-listings.mock.json'
 import firebaseTestApp from '@app-mocks/firebaseTestApp'
 import { CreateReviewRequest } from '@flex-development/kustomzcore'
+import ProductListingsMock from '@system-mocks/data/product-listings.mock.json'
 import { IReviewService } from './IReviewService'
 import ReviewService from './ReviewService'
 

@@ -2,9 +2,8 @@ import {
   ArrayQueryExecutor,
   DataArrayQueryParams
 } from '@flex-development/json'
-import { IEntity } from '@flex-development/kustomzcore'
+import { createError, IEntity } from '@flex-development/kustomzcore'
 import {
-  createError,
   FirebaseAdaptorDatabase,
   FirebaseAdaptorReference
 } from '@subdomains/app/utils'

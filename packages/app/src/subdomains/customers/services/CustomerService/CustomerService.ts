@@ -1,11 +1,10 @@
 import { axiosShopify } from '@app/config/axios'
-import Logger from '@app/config/logger'
 import {
   ArrayQueryExecutor,
   DataArray,
   DataArrayQueryParams
 } from '@flex-development/json'
-import { createError } from '@subdomains/app/utils'
+import { createError, Logger } from '@flex-development/kustomzcore'
 import { ICustomer } from 'shopify-api-node'
 import { ICustomerService, ListCustomersResponse } from './ICustomerService'
 

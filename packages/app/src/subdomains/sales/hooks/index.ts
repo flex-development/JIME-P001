@@ -3,7 +3,6 @@
  * @module subdomains/sales/hooks
  */
 
-export * from './useCart'
-export * from './useCheckoutPermalink'
+export default {}
 
 /* eslint-disable prettier/prettier */

@@ -1,6 +1,9 @@
-import Logger from '@app/config/logger'
-import { CreateReviewRequest, IReview } from '@flex-development/kustomzcore'
-import { createError } from '@subdomains/app/utils'
+import {
+  createError,
+  CreateReviewRequest,
+  IReview,
+  Logger
+} from '@flex-development/kustomzcore'
 import { CustomerService, ICustomerService } from '@subdomains/customers'
 import { ReviewRepository } from '@subdomains/sales/repositories'
 import { pick } from 'lodash'

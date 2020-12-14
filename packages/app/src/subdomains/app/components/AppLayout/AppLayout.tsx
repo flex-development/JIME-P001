@@ -2,21 +2,21 @@ import {
   LinkProps,
   ShopHeaderProps,
   ShopLayout,
-  SidebarProps
+  SidebarProps,
+  useMemoCompare
 } from '@flex-development/kustomzdesign'
 import { IPageProps, PC } from '@subdomains/app/interfaces'
 import {
+  useCMSAuth,
   useMenus,
   usePage,
   usePlaylistSettingsForm,
   useProfileSnippetForm
 } from '@subdomains/cms/hooks'
-import { useCart } from '@subdomains/sales'
-import { useMemoCompare } from '@system/hooks/useMemoCompare'
 import { merge } from 'lodash'
+import { Provider as NextAuthProvider, Session } from 'next-auth/client'
 import Head from 'next/head'
-import { FC, Fragment } from 'react'
-import { useCMS } from 'tinacms'
+import { FC } from 'react'
 
 /**
  * @file Application Layout component
@@ -36,7 +36,8 @@ export interface AppLayoutProps {
 }
 
 /**
- * Renders the store layout and current page.
+ * Renders the store layout and current page and initializes the NextAuth
+ * provider component.
  *
  * @todo Get hero data from CMS
  * @todo Finish implementing PlaylistBar functionality
@@ -48,11 +49,8 @@ export interface AppLayoutProps {
 export const AppLayout: FC<AppLayoutProps> = (props: AppLayoutProps) => {
   const { page: Component, pageProps } = props
 
-  // Get cart information
-  const cart = useCart()
-
-  // Check if CMS is enabled
-  const cms = useCMS()
+  // Handle CMS user session and access CMS instance
+  const { cms, session } = useCMSAuth()
 
   // Get site navigation as menu links
   const menus = useMenus()
@@ -78,7 +76,6 @@ export const AppLayout: FC<AppLayoutProps> = (props: AppLayoutProps) => {
       event.preventDefault()
       window.location.href = `/search?term=${term}`
     },
-    items: cart.items_total,
     style: { top: cms.enabled ? '62px' : 0 }
   })
 
@@ -92,7 +89,7 @@ export const AppLayout: FC<AppLayoutProps> = (props: AppLayoutProps) => {
   })
 
   return (
-    <Fragment>
+    <NextAuthProvider session={(session || {}) as Session}>
       <Head>
         {/* Viewport for responsive web design */}
         <meta
@@ -104,7 +101,7 @@ export const AppLayout: FC<AppLayoutProps> = (props: AppLayoutProps) => {
       <ShopLayout header={header} sidebar={sidebar}>
         <Component {...merge(pageProps, { page })} />
       </ShopLayout>
-    </Fragment>
+    </NextAuthProvider>
   )
 }
 

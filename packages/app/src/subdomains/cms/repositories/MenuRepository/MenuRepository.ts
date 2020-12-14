@@ -1,6 +1,6 @@
+import { createError } from '@flex-development/kustomzcore'
 import { uuid } from '@flex-development/kustomzdesign'
 import { RTDRepository } from '@subdomains/app/models/RTDRepository'
-import createError from '@subdomains/app/utils/createError'
 import { CMSMenu, ICMSMenu } from '@subdomains/cms/models'
 import { isEmpty } from 'lodash'
 import { IMenuRepository } from './IMenuRepository'

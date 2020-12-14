@@ -1,7 +1,7 @@
 import { AnyObject } from '@flex-development/json'
+import { createError } from '@flex-development/kustomzcore'
 import { uuid } from '@flex-development/kustomzdesign'
 import { RTDRepository } from '@subdomains/app/models/RTDRepository'
-import createError from '@subdomains/app/utils/createError'
 import { CMSPage, ICMSPage } from '@subdomains/cms/models'
 import { isEmpty } from 'lodash'
 import slugify from 'slugify'

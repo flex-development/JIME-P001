@@ -1,5 +1,5 @@
+import { createError } from '@flex-development/kustomzcore'
 import { RTDRepository as Repo } from '@subdomains/app/models/RTDRepository'
-import { createError } from '@subdomains/app/utils'
 import { IPlaylistSettings, PlaylistSettings } from '@subdomains/cms/models'
 import {
   IPlaylistSettingsRepository,

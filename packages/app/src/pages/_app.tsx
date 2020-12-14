@@ -1,10 +1,21 @@
+import { firebase } from '@app/config/firebase'
+import localforage from '@app/config/localforage'
+import {
+  CART_PERSISTENCE_KEY,
+  CheckoutLineItemInput
+} from '@flex-development/kustomzcore'
+import {
+  CartContextProvider,
+  UseCart,
+  useMemoCompare
+} from '@flex-development/kustomzdesign'
 import '@flex-development/kustomzdesign/index.scss'
-import { AC, AppLayout, IAppProps } from '@subdomains/app'
+import { AC, AppLayout, IAppProps, useLocalForage } from '@subdomains/app'
 import '@subdomains/app/styles.css'
-import { CMS_CONFIG, useCMSAuth } from '@subdomains/cms'
+import { CMS_CONFIG } from '@subdomains/cms'
 import '@subdomains/cms/styles.css'
-import { Provider as NextAuthProvider, Session } from 'next-auth/client'
-import { useMemo } from 'react'
+import { useCallback, useRef } from 'react'
+import { FirebaseAppProvider } from 'reactfire'
 import { TinaCMS, TinaProvider } from 'tinacms'
 
 /**
@@ -16,26 +27,50 @@ import { TinaCMS, TinaProvider } from 'tinacms'
 /**
  * Custom app initialization component.
  *
- * Registers the NextAuth and TinaCMS providers. Editors (repository
- * collaborators) can sign in with GitHub to edit marketing site content.
+ * The following providers will be initialized (in order):
+ *
+ * - `FirebaseAppProvider`
+ * - `CartContextProvider`
+ * - `TinaProvider`
  *
  * @param param0 - Component props
  * @param param0.Component - Current page component
  * @param param0.pageProps - Page component props from data fetching methods
  */
 const App: AC = ({ Component, pageProps }: IAppProps) => {
-  // Handle CMS admin user session
-  const { session } = useCMSAuth()
-
   // Get configured CMS instance
-  const cms = useMemo<TinaCMS>(() => new TinaCMS(CMS_CONFIG), [])
+  const cms = useMemoCompare<TinaCMS>(new TinaCMS(CMS_CONFIG))
+
+  // Load initial line items from local storage
+  const [items] = useLocalForage<CheckoutLineItemInput[]>(CART_PERSISTENCE_KEY)
+
+  // Maintain line items state to pass to `CartContextProvider`
+  const line_items = useRef<CheckoutLineItemInput[]>(items || [])
+
+  /**
+   * Updates the line items state and persists the items to local storage.
+   *
+   * @param cart - `CartContextProvider` state
+   * @param cart.items - Checkout line items
+   */
+  const persistCart = (cart: UseCart) => {
+    line_items.current = cart.items
+
+    if (typeof window === 'undefined') return
+    return localforage.setItem(CART_PERSISTENCE_KEY, cart.items)
+  }
+
+  /* Callback version of `persistCart` */
+  const persistCartCB = useCallback(persistCart, [line_items])
 
   return (
-    <NextAuthProvider session={(session || {}) as Session}>
-      <TinaProvider cms={cms}>
-        <AppLayout page={Component} pageProps={pageProps} />
-      </TinaProvider>
-    </NextAuthProvider>
+    <FirebaseAppProvider firebaseApp={firebase}>
+      <CartContextProvider items={line_items.current} persist={persistCartCB}>
+        <TinaProvider cms={cms}>
+          <AppLayout page={Component} pageProps={pageProps} />
+        </TinaProvider>
+      </CartContextProvider>
+    </FirebaseAppProvider>
   )
 }
 

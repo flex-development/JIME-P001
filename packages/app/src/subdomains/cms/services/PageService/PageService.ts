@@ -1,4 +1,5 @@
-import { createError, NotFound } from '@subdomains/app'
+import { createError } from '@flex-development/kustomzcore'
+import { NotFound } from '@subdomains/app'
 import { ICMSPage } from '@subdomains/cms/models'
 import { PageRepository as Repo } from '../../repositories'
 import { IPageService, PageSession } from './IPageService'

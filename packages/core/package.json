@@ -32,13 +32,19 @@
   "scripts": {},
   "dependencies": {},
   "devDependencies": {
+    "@feathersjs/errors": "^4.5.3",
     "@flex-development/json": "^1.0.5",
+    "@types/feathersjs__errors": "^3.3.2",
     "class-validator": "^0.12.2"
   },
   "peerDependencies": {
+    "@feathersjs/errors": "^4.5.3",
     "@flex-development/json": "^1.0.5",
+    "@types/feathersjs__errors": "^3.3.2",
     "class-validator": "^0.12.2",
     "musickit-typescript": "^1.2.4",
+    "pino": "^6.4.1",
+    "pino-pretty": "^4.1.0",
     "shopify-api-node": "^3.4.4"
   }
 }

@@ -41,7 +41,7 @@
     "prestart": "NODE_ENV=production",
     "start": "next start",
     "build": "next build",
-    "now-build": "lerna link && yarn build"
+    "now-build": "NODE_ENV=production; lerna link && yarn build"
   },
   "dependencies": {
     "@feathersjs/errors": "^4.5.3",

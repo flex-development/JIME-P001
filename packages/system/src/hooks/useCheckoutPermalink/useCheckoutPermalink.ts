@@ -106,7 +106,12 @@ export const useCheckoutPermalink = (
    * @param data - Line item to add
    */
   const upsertItem = (data: CheckoutPermalinkInput) => {
-    if (items.find(item => item.data.variant_id === data.data.variant_id)) {
+    const existing = items.find(item => {
+      return item.data.variant_id === data.data.variant_id
+    })
+
+    if (existing) {
+      data.data.quantity = existing.data.quantity + data.data.quantity
       actions.modifyById(data.data.variant_id, data)
     } else {
       actions.add(data)

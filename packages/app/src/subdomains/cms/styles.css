@@ -24,3 +24,11 @@ body[data-cms-enabled='false'] div[class^='StyledToolbar'],
 body[data-cms-enabled='false'] div[class^='ToolbarPlaceholder'] {
   display: none;
 }
+
+body[data-cms-enabled='false'] .shop-header {
+  top: 0px;
+}
+
+body[data-cms-enabled='true'] .shop-header {
+  top: 62px;
+}

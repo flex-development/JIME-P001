@@ -1,9 +1,7 @@
 import {
   LinkProps,
   ShopHeaderProps,
-  ShopLayout,
-  SidebarProps,
-  useMemoCompare
+  ShopLayout
 } from '@flex-development/kustomzdesign'
 import { IPageProps, PC } from '@subdomains/app/interfaces'
 import {
@@ -16,7 +14,7 @@ import {
 import { merge } from 'lodash'
 import { Provider as NextAuthProvider, Session } from 'next-auth/client'
 import Head from 'next/head'
-import { FC } from 'react'
+import { FC, useCallback } from 'react'
 
 /**
  * @file Application Layout component
@@ -49,8 +47,8 @@ export interface AppLayoutProps {
 export const AppLayout: FC<AppLayoutProps> = (props: AppLayoutProps) => {
   const { page: Component, pageProps } = props
 
-  // Handle CMS user session and access CMS instance
-  const { cms, preview, session } = useCMSAuth()
+  // Handle CMS user session
+  const { session } = useCMSAuth()
 
   // Get site navigation as menu links
   const menus = useMenus()
@@ -70,23 +68,19 @@ export const AppLayout: FC<AppLayoutProps> = (props: AppLayoutProps) => {
   // Don't render content until queue is ready to be played
   // if (isEmpty(queue)) return null
 
-  //  Get `ShopHeader` component props
-  const header = useMemoCompare<ShopHeaderProps>({
-    handleSearch: (term, event) => {
-      event.preventDefault()
-      window.location.href = `/search?term=${term}`
-    },
-    style: { top: preview ? '62px' : 0 }
-  })
+  /**
+   * Redirects the user to the search page with their search {@param term}.
+   *
+   * @param term - User search query
+   * @param event - `SearchBar` event
+   */
+  const handleSearch: ShopHeaderProps['handleSearch'] = (term, event) => {
+    event.preventDefault()
+    window.location.href = `/search?term=${term}`
+  }
 
-  // Get `Sidebar` component props
-  const sidebar = useMemoCompare<SidebarProps>({
-    age: snippet.age,
-    img: snippet.img || undefined,
-    location: snippet.location,
-    menu: menus.main as Array<LinkProps>,
-    mood: snippet.mood
-  })
+  /* Callback version of `handleSearch` */
+  const handleSearchCB = useCallback(handleSearch, [])
 
   return (
     <NextAuthProvider session={(session || {}) as Session}>
@@ -98,7 +92,16 @@ export const AppLayout: FC<AppLayoutProps> = (props: AppLayoutProps) => {
         />
       </Head>
 
-      <ShopLayout header={header} sidebar={sidebar}>
+      <ShopLayout
+        header={{ handleSearch: handleSearchCB }}
+        sidebar={{
+          age: snippet.age,
+          img: snippet.img || undefined,
+          location: snippet.location,
+          menu: menus.main as Array<LinkProps>,
+          mood: snippet.mood
+        }}
+      >
         <Component {...merge(pageProps, { page })} />
       </ShopLayout>
     </NextAuthProvider>

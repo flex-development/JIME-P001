@@ -12,11 +12,7 @@ import { ANYTHING } from '@flex-development/json'
  * @param url - Request URL
  */
 async function fetcher<T = ANYTHING>(url: string): Promise<T> {
-  const res = await fetch(url)
-
-  console.debug({ res: res || null })
-
-  return await res.json()
+  return (await fetch(url)).json()
 }
 
 export default fetcher

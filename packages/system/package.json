@@ -39,7 +39,7 @@
     "test": "jest --detectOpenHandles --passWithNoTests --json --outputFile=__tests__/jest-test-results.json",
     "test:quiet": "yarn test || true",
     "start": "NODE_ENV=production yarn dev",
-    "prebuild": "yarn test:quiet && rm -rf public && mkdir public",
+    "prebuild": "rm -rf public && mkdir public",
     "build": "build-storybook -o public",
     "postbuild": "shx cp -R ../app/public/assets public"
   },

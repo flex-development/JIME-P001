@@ -1,22 +1,12 @@
-import { database } from '@app/subdomains/firebase/config/web'
+import { database } from '@app/subdomains/firebase'
 import {
   PageTemplate,
   PageTemplateProps
 } from '@flex-development/kustomzdesign'
 import { CMSPageParams, IPagePropsCMS, PC, SEO } from '@subdomains/app'
-import { getCMSPageSEO, PageService } from '@subdomains/cms'
-import { ProductService, ReviewService } from '@subdomains/sales'
-import {
-  GetStaticPaths,
-  GetStaticPathsContext,
-  GetStaticProps,
-  GetStaticPropsContext
-} from 'next'
-import {
-  getStaticPaths as getStaticPathsGlobal,
-  getStaticProps as getStaticPropsGlobal
-} from './index'
-
+import { getCMSPageSEO, ICMSPage, PageService } from '@subdomains/cms'
+import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from 'next'
+import { getStaticProps as getStaticPropsGlobal } from './index'
 /**
  * @file Page - Slug (CMS)
  * @module pages/slug
@@ -25,16 +15,16 @@ import {
 
 // Initialize services
 const Pages = new PageService(database)
-const ProductReviews = new ReviewService(database)
-const Products = new ProductService()
 
 /**
  * Renders a CMS page.
  *
+ * The value of {@param props.page.component} will be always be `PageTemplate`.
+ *
  * @param props - Page component props
  * @param props.page - Page data
  * @param props.page.component - Display name of template component
- * @param props.page.content - `IndexTemplate` or `PageTemplate` component props
+ * @param props.page.content - `PageTemplate` component props
  * @param props.page.draft - True if page is in draft mode
  * @param props.page.id - Unique page entity ID
  * @param props.page.keywords - Comma-delimitted list of SEO keywords
@@ -56,19 +46,22 @@ const Slug: PC<IPagePropsCMS> = ({ page }) => (
  * should be pre-rendered.
  *
  * Any paths not returned will result in a 404 page.
- *
- * @param context - Static paths context
  */
-export const getStaticPaths: GetStaticPaths<CMSPageParams> = async (
-  context: GetStaticPathsContext
-) => {
+export const getStaticPaths: GetStaticPaths<CMSPageParams> = async () => {
+  // Get pages in database
+  const pages = (await Pages.find()) as Array<ICMSPage>
+
+  // Get pages to pre-render
+  const paths = pages.map(({ path }) => {
+    return { params: { slug: path === '/' ? 'index' : path.replace('/', '') } }
+  })
+
   // Return paths to prerender and redirect other routes to 404
-  return getStaticPathsGlobal(context)
+  return { fallback: false, paths }
 }
 
 /**
- * Retrieves the data for the `IndexTemplate` or `PageTemplate` and the current
- * CMS user session.
+ * Retrieves the data for the `PageTemplate`.
  *
  * @param context - Next.js page component context
  * @param context.params - Dynamic route parameters

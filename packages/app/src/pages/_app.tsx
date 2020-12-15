@@ -50,10 +50,9 @@ const App: AC = ({ Component, pageProps }: IAppProps) => {
    *
    * @param cart - `CartContextProvider` state
    * @param cart.items - Checkout line items
-   * @param unmount - True when component is being unmounted
    */
-  const persistCart = async (cart: UseCart, unmount: boolean) => {
-    if (typeof window !== 'undefined' && unmount) return setItems(cart.items)
+  const persistCart = async (cart: UseCart) => {
+    if (typeof window !== 'undefined') return setItems(cart.items)
   }
 
   /* Callback version of `persistCart` */

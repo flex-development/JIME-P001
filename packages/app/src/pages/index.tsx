@@ -14,19 +14,13 @@ import {
 } from '@subdomains/app'
 import {
   getCMSPageSEO,
-  ICMSPage,
   ICMSPageIndex,
   ICMSPageSlug,
   PageService,
   ProviderSessionGitHub
 } from '@subdomains/cms'
 import { ProductService, ReviewService } from '@subdomains/sales'
-import {
-  GetStaticPaths,
-
-  GetStaticProps,
-  GetStaticPropsContext
-} from 'next'
+import { GetStaticProps, GetStaticPropsContext } from 'next'
 import { getSession } from 'next-auth/client'
 import { IProductListing } from 'shopify-api-node'
 
@@ -42,12 +36,14 @@ const ProductReviews = new ReviewService(database)
 const Products = new ProductService()
 
 /**
- * Renders a CMS page.
+ * Renders the homepage.
+ *
+ * The value of {@param props.page.component} will be always be `IndexTemplate`.
  *
  * @param props - Page component props
  * @param props.page - Page data
  * @param props.page.component - Display name of template component
- * @param props.page.content - `IndexTemplate` or `PageTemplate` component props
+ * @param props.page.content - `IndexTemplate` component props
  * @param props.page.draft - True if page is in draft mode
  * @param props.page.id - Unique page entity ID
  * @param props.page.keywords - Comma-delimitted list of SEO keywords
@@ -65,27 +61,7 @@ const Slug: PC<IPagePropsCMS> = ({ page }) => (
 )
 
 /**
- * Returns an object containing the dynamic route parameters of each page that
- * should be pre-rendered.
- *
- * Any paths not returned will result in a 404 page.
- */
-export const getStaticPaths: GetStaticPaths<CMSPageParams> = async () => {
-  // Get pages in database
-  const pages = (await Pages.find()) as Array<ICMSPage>
-
-  // Get pages to pre-render
-  const paths = pages.map(({ path }) => {
-    return { params: { slug: path === '/' ? 'index' : path.replace('/', '') } }
-  })
-
-  // Return paths to prerender and redirect other routes to 404
-  return { fallback: false, paths }
-}
-
-/**
- * Retrieves the data for the `IndexTemplate` or `PageTemplate` and the current
- * CMS user session.
+ * Retrieves the data for the `IndexTemplate` or `PageTemplate`.
  *
  * @param context - Next.js page component context
  * @param context.params - Dynamic route parameters
@@ -97,10 +73,10 @@ export const getStaticProps: GetStaticProps<
   IPagePropsCMS,
   CMSPageParams
 > = async (context: GetStaticPropsContext<CMSPageParams>) => {
-  const { slug } = context.params as CMSPageParams
+  const { slug } = (context.params || {}) as CMSPageParams
 
   // Get incoming page path
-  const path = slug === 'index' ? '/' : `/${slug}`
+  const path = !slug || slug === 'index' ? '/' : `/${slug}`
 
   // Get current user session
   const session = (await getSession()) as ProviderSessionGitHub
@@ -139,7 +115,7 @@ export const getStaticProps: GetStaticProps<
   }
 
   // Return page component props
-  return { props: { page: page as ICMSPageSlug, session } }
+  return { props: { page: page as ICMSPageSlug } }
 }
 
 export default Slug

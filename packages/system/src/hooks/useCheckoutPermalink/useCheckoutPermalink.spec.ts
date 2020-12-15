@@ -1,4 +1,3 @@
-import { CheckoutLineItemInputWithId } from '@flex-development/kustomzcore'
 import LINE_ITEMS from '@system-mocks/data/checkout-line-items.mock.json'
 import { renderHook } from '@testing-library/react-hooks'
 import { useCheckoutPermalink } from './useCheckoutPermalink'
@@ -25,11 +24,6 @@ describe('useCheckoutPermalink', () => {
     const { result } = renderHook(() => useCheckoutPermalink(items))
 
     expect(result.current.url).toBe(`${CHECKOUT_BASE_URL}/${item_path}`)
-    result.current.items.map((item, i) => {
-      expect((item as CheckoutLineItemInputWithId).id).toBe(
-        items[i].data.variant_id
-      )
-    })
   })
 
   it('creates a checkout URL with cart attributes', () => {

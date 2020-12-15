@@ -147,13 +147,12 @@ export const Button: FREC<ButtonProps> = forwardRef((props, ref) => {
   const { children } = sanitized as AnyObject
 
   return (
-    <animated.button {...sanitized} onClick={onClickCB} ref={ref}>
+    <button {...sanitized} onClick={onClickCB} ref={ref}>
       {(() => {
         if (!scale) return children
-
         return <animated.div style={scalex.style}>{children}</animated.div>
       })()}
-    </animated.button>
+    </button>
   )
 })
 

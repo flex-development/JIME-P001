@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react'
+import { renderWithMockCartContext as render } from '@system-mocks/utils'
 import { CartTemplate } from './CartTemplate'
 import { Cart } from './CartTemplate.stories'
 

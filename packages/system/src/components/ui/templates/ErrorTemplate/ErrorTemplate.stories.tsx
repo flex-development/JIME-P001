@@ -1,4 +1,4 @@
-import { Link, Paragraph } from '@system/components'
+import { Link, Paragraph } from '@system/components/ui/atoms'
 import { StoryFN } from '@system/types/storybook'
 import { ErrorTemplate, ErrorTemplateProps } from './ErrorTemplate'
 

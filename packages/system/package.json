@@ -31,7 +31,7 @@
   },
   "main": "src/index.ts",
   "scripts": {
-    "predev": "vc env pull --yes",
+    "predev": "vc env pull --yes && yarn test:quiet",
     "dev:kill": "kill $(lsof -ti:3000) || true",
     "dev:storybook": "start-storybook -p 3000 -s ../app/public --ci",
     "dev:storybook:docs": "yarn dev:storybook --docs",
@@ -39,7 +39,7 @@
     "test": "jest --detectOpenHandles --passWithNoTests --json --outputFile=__tests__/jest-test-results.json",
     "test:quiet": "yarn test || true",
     "start": "NODE_ENV=production yarn dev",
-    "prebuild": "rm -rf public && mkdir public",
+    "prebuild": "yarn test:quiet && rm -rf public && mkdir public",
     "build": "build-storybook -o public",
     "postbuild": "shx cp -R ../app/public/assets public"
   },

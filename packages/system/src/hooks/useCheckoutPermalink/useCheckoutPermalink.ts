@@ -8,6 +8,7 @@ import { isString, omit } from 'lodash'
 import qs from 'querystring'
 import { useCallback, useEffect, useState } from 'react'
 import { useArray } from 'react-hanger/array/useArray'
+import { useMemoCompare } from '../useMemoCompare'
 
 /**
  * @file Create and update checkout URLs
@@ -50,10 +51,13 @@ export type UseCheckoutPermalink = {
  * @throws {FeathersErrorJSON} If store domain is invalid
  */
 export const useCheckoutPermalink = (
-  inputs: Array<CheckoutPermalinkInput> = []
+  inputs: CheckoutPermalinkInput[] = []
 ): UseCheckoutPermalink => {
+  // Handle incoming input
+  const _inputs = useMemoCompare<CheckoutPermalinkInput[]>(inputs)
+
   // Handle checkout items state
-  const [items, actions] = useArray<CheckoutPermalinkInput>(inputs)
+  const [items, actions] = useArray<CheckoutPermalinkInput>(_inputs)
 
   // Handle checkout permalink URL state
   const [url, setURL] = useState(DEFAULT_CART_CONTEXT.url)
@@ -65,12 +69,12 @@ export const useCheckoutPermalink = (
      *
      * @param data - Array of line items
      */
-    const normalize = (data: typeof inputs) => {
+    const normalize = (data: typeof _inputs) => {
       return data.map(input => ({ ...input, id: input.data.variant_id }))
     }
 
-    actions.setValue(normalize(inputs))
-  }, [actions, inputs])
+    actions.setValue(normalize(_inputs))
+  }, [_inputs, actions])
 
   // Use line items to create checkout permalink query
   useEffect(() => {

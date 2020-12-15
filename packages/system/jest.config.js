@@ -1,5 +1,5 @@
-const babelConfig = require('../../babel.config.json')
 const path = require('path')
+const { animated } = require('react-spring')
 
 /**
  * @file Jest Configuration
@@ -8,6 +8,37 @@ const path = require('path')
 
 module.exports = {
   globals: {
+    animated: {
+      a: 'a',
+      aside: 'aside',
+      button: 'button',
+      details: 'details',
+      dialog: 'dialog',
+      div: 'div',
+      footer: 'footer',
+      h1: 'h1',
+      h2: 'h2',
+      h3: 'h3',
+      h4: 'h4',
+      h5: 'h5',
+      h6: 'h6',
+      header: 'header',
+      img: 'img',
+      input: 'input',
+      label: 'label',
+      li: 'li',
+      main: 'main',
+      nav: 'nav',
+      ol: 'ol',
+      option: 'option',
+      p: 'p',
+      section: 'section',
+      select: 'select',
+      span: 'span',
+      summary: 'summary',
+      textarea: 'textarea',
+      ul: 'ul'
+    },
     'ts-jest': {
       babelConfig: '<rootDir>/babel.config.js',
       tsconfig: '<rootDir>/tsconfig.json'

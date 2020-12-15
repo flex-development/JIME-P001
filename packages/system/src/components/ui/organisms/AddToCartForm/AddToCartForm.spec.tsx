@@ -23,7 +23,7 @@ it('only displays a <textarea> element for "KUSTOMZ" product', () => {
   render(<AshTray {...AshTray.args} />)
 
   const element = screen.getByPlaceholderText(TEXTAREA_PLACEHOLDER)
-  expect(element).toHaveAttribute('hidden', 'true')
+  expect(element.parentElement).toHaveAttribute('hidden', '')
 })
 
 it('updates the selected variant', () => {

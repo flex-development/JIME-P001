@@ -1,15 +1,15 @@
 import { FIREBASE_WEB_CONFIG } from '@flex-development/kustomzcore'
 import { withConsole } from '@storybook/addon-console'
 import { DocsContainer } from '@storybook/addon-docs/blocks'
+import { withTests } from '@storybook/addon-jest'
 import { withHTML } from '@whitespace/storybook-addon-html/react'
 import { FirebaseAppProvider } from 'reactfire'
 import prettier from '../../../.prettierrc.json'
-import { CartContextProvider } from '../src/components/context'
 import { AdobeXDArtboards } from '../src/config'
 import '../src/index.scss'
 import { getThemeColor } from '../src/utils'
-// import results from '../__tests__/jest-test-results.json'
-import ITEMS from '../__tests__/__mocks__/data/checkout-line-items.mock.json'
+import results from '../__tests__/jest-test-results.json'
+import { MockCartContextProvider } from '../__tests__/__mocks__/components'
 import { Documentation } from './components'
 
 /**
@@ -42,9 +42,9 @@ export const decorators = [
   // Add provider components
   Story => (
     <FirebaseAppProvider firebaseConfig={FIREBASE_WEB_CONFIG}>
-      <CartContextProvider items={ITEMS}>
+      <MockCartContextProvider>
         <Story />
-      </CartContextProvider>
+      </MockCartContextProvider>
     </FirebaseAppProvider>
   ),
 
@@ -56,8 +56,8 @@ export const decorators = [
   },
 
   // Display compiled HTML for each story and format with Prettier
-  withHTML({ prettier })
+  withHTML({ prettier }),
 
   // Add Jest output to stories
-  // withTests({ results })
+  withTests({ results })
 ]

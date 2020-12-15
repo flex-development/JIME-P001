@@ -1,10 +1,25 @@
 import { database } from '@app/subdomains/firebase/config/web'
+import { SortOrder } from '@flex-development/json'
+import { IReview } from '@flex-development/kustomzcore'
 import {
-  PageTemplate,
-  PageTemplateProps
+  IndexTemplate,
+  IndexTemplateProps
 } from '@flex-development/kustomzdesign'
-import { CMSPageParams, IPagePropsCMS, PC, SEO } from '@subdomains/app'
-import { getCMSPageSEO, PageService } from '@subdomains/cms'
+import {
+  CMSPageParams,
+  IPagePropsCMS,
+  NotFound,
+  PC,
+  SEO
+} from '@subdomains/app'
+import {
+  getCMSPageSEO,
+  ICMSPage,
+  ICMSPageIndex,
+  ICMSPageSlug,
+  PageService,
+  ProviderSessionGitHub
+} from '@subdomains/cms'
 import { ProductService, ReviewService } from '@subdomains/sales'
 import {
   GetStaticPaths,
@@ -12,13 +27,11 @@ import {
   GetStaticProps,
   GetStaticPropsContext
 } from 'next'
-import {
-  getStaticPaths as getStaticPathsGlobal,
-  getStaticProps as getStaticPropsGlobal
-} from './index'
+import { getSession } from 'next-auth/client'
+import { IProductListing } from 'shopify-api-node'
 
 /**
- * @file Page - Slug (CMS)
+ * @file Page - Home
  * @module pages/slug
  * @see https://nextjs.org/docs/basic-features/data-fetching
  */
@@ -47,7 +60,7 @@ const Products = new ProductService()
 const Slug: PC<IPagePropsCMS> = ({ page }) => (
   <>
     <SEO {...getCMSPageSEO(page)} />
-    <PageTemplate {...(page.content as PageTemplateProps)} />
+    <IndexTemplate {...(page.content as IndexTemplateProps)} />
   </>
 )
 
@@ -56,14 +69,20 @@ const Slug: PC<IPagePropsCMS> = ({ page }) => (
  * should be pre-rendered.
  *
  * Any paths not returned will result in a 404 page.
- *
- * @param context - Static paths context
  */
 export const getStaticPaths: GetStaticPaths<CMSPageParams> = async (
   context: GetStaticPathsContext
 ) => {
+  // Get pages in database
+  const pages = (await Pages.find()) as Array<ICMSPage>
+
+  // Get pages to pre-render
+  const paths = pages.map(({ path }) => {
+    return { params: { slug: path === '/' ? 'index' : path.replace('/', '') } }
+  })
+
   // Return paths to prerender and redirect other routes to 404
-  return getStaticPathsGlobal(context)
+  return { fallback: false, paths }
 }
 
 /**
@@ -80,8 +99,49 @@ export const getStaticProps: GetStaticProps<
   IPagePropsCMS,
   CMSPageParams
 > = async (context: GetStaticPropsContext<CMSPageParams>) => {
+  const { slug } = context.params as CMSPageParams
+
+  // Get incoming page path
+  const path = slug === 'index' ? '/' : `/${slug}`
+
+  // Get current user session
+  const session = (await getSession()) as ProviderSessionGitHub
+
+  // Get page data. Throws if in draft mode and not signed-in with GitHub
+  let page = await Pages.getPage(path, session)
+
+  // If page isn't found, show 404 layout
+  if ((page as NotFound).notFound) return page as NotFound
+
+  // ! Guarenteed to be page data. Error will be thrown otherwise
+  page = page as IPagePropsCMS['page']
+
+  // Get data for homepage
+  if (page.component === 'IndexTemplate') {
+    // Cast page data
+    page = page as ICMSPageIndex
+
+    // Get products and product reviews
+    let products = await Products.find()
+    products = Products.$sort(products, { handle: SortOrder.ASCENDING })
+
+    // Get product reviews
+    let reviews = await ProductReviews.find()
+    reviews = ProductReviews.$sort(reviews, { id: SortOrder.ASCENDING })
+
+    // Get template props
+    page.content = {
+      ...page.content,
+      products: (products as Array<IProductListing>).map(product => ({
+        product,
+        product_link: { href: `products/${product.handle}` }
+      })),
+      reviews: reviews as Array<IReview>
+    }
+  }
+
   // Return page component props
-  return getStaticPropsGlobal(context)
+  return { props: { page: page as ICMSPageSlug, session } }
 }
 
 export default Slug

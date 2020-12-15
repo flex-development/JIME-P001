@@ -82,7 +82,7 @@ const Product: PC<IPagePropsProduct> = ({ page }) => {
  * @see https://nextjs.org/docs/basic-features/data-fetching
  *
  * @param context - Next.js page component context
- * @param context.params - Route parameters if dynamic route
+ * @param context.params - Dynamic route parameters
  * @param context.query - The query string
  * @param context.req - HTTP request object
  * @returns Product listing object and an array of products in the collection

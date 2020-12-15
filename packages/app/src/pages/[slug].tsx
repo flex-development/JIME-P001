@@ -1,20 +1,16 @@
-import { database } from '@app/subdomains/firebase'
 import {
   PageTemplate,
   PageTemplateProps
 } from '@flex-development/kustomzdesign'
 import { CMSPageParams, IPagePropsCMS, PC, SEO } from '@subdomains/app'
-import { getCMSPageSEO, ICMSPage, PageService } from '@subdomains/cms'
-import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from 'next'
-import { getStaticProps as getStaticPropsGlobal } from './index'
+import { getCMSPageSEO } from '@subdomains/cms'
+import { GetServerSideProps, GetServerSidePropsContext } from 'next'
+import { getServerSideProps as getServerSidePropsGlobal } from './index'
 /**
  * @file Page - Slug (CMS)
  * @module pages/slug
  * @see https://nextjs.org/docs/basic-features/data-fetching
  */
-
-// Initialize services
-const Pages = new PageService(database)
 
 /**
  * Renders a CMS page.
@@ -42,39 +38,20 @@ const Slug: PC<IPagePropsCMS> = ({ page }) => (
 )
 
 /**
- * Returns an object containing the dynamic route parameters of each page that
- * should be pre-rendered.
- *
- * Any paths not returned will result in a 404 page.
- */
-export const getStaticPaths: GetStaticPaths<CMSPageParams> = async () => {
-  // Get pages in database
-  const pages = (await Pages.find()) as Array<ICMSPage>
-
-  // Get pages to pre-render
-  const paths = pages.map(({ path }) => {
-    return { params: { slug: path === '/' ? 'index' : path.replace('/', '') } }
-  })
-
-  // Return paths to prerender and redirect other routes to 404
-  return { fallback: false, paths }
-}
-
-/**
  * Retrieves the data for the `PageTemplate`.
  *
  * @param context - Next.js page component context
  * @param context.params - Dynamic route parameters
- * @param context.preview - `true` if in preview mode, `undefined` otherwise
- * @param context.previewData - Preview data set by `setPreviewData`
+ * @param context.query - The query string
+ * @param context.req - HTTP request object
  * @returns Template data and current user session
  */
-export const getStaticProps: GetStaticProps<
+export const getServerSideProps: GetServerSideProps<
   IPagePropsCMS,
   CMSPageParams
-> = async (context: GetStaticPropsContext<CMSPageParams>) => {
+> = async (context: GetServerSidePropsContext<CMSPageParams>) => {
   // Return page component props
-  return getStaticPropsGlobal(context)
+  return getServerSidePropsGlobal(context)
 }
 
 export default Slug

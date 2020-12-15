@@ -20,7 +20,7 @@ import {
   ProviderSessionGitHub
 } from '@subdomains/cms'
 import { ProductService, ReviewService } from '@subdomains/sales'
-import { GetStaticProps, GetStaticPropsContext } from 'next'
+import { GetServerSideProps, GetServerSidePropsContext } from 'next'
 import { getSession } from 'next-auth/client'
 import { IProductListing } from 'shopify-api-node'
 
@@ -65,14 +65,14 @@ const Slug: PC<IPagePropsCMS> = ({ page }) => (
  *
  * @param context - Next.js page component context
  * @param context.params - Dynamic route parameters
- * @param context.preview - `true` if in preview mode, `undefined` otherwise
- * @param context.previewData - Preview data set by `setPreviewData`
+ * @param context.query - The query string
+ * @param context.req - HTTP request object
  * @returns Template data and current user session
  */
-export const getStaticProps: GetStaticProps<
+export const getServerSideProps: GetServerSideProps<
   IPagePropsCMS,
   CMSPageParams
-> = async (context: GetStaticPropsContext<CMSPageParams>) => {
+> = async (context: GetServerSidePropsContext<CMSPageParams>) => {
   const { slug } = (context.params || {}) as CMSPageParams
 
   // Get incoming page path

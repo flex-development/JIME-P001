@@ -42,6 +42,7 @@ export default class PageRepository
    * @param data.content - Object containing template data or MD(X) string
    * @param data.description - Page description in less than 150 characters
    * @param data.draft - True if page should be marked as a draft
+   * @param data.id - Unique page ID
    * @param data.keywords - Comma-delimitted list of SEO keywords
    * @param data.path - URL path page can be accessed from
    * @param data.title - Title of page
@@ -53,6 +54,7 @@ export default class PageRepository
       content = {},
       description = '',
       draft,
+      id,
       keywords = '',
       path,
       title = ''
@@ -80,8 +82,10 @@ export default class PageRepository
       content: content || {},
       description,
       draft,
+      id,
       keywords,
       path: data.path,
+      title,
       uuid: uuid()
     })
   }
@@ -93,7 +97,7 @@ export default class PageRepository
    * @returns Page resource or null if not found
    */
   async findByPath(path: ICMSPage['path']): Promise<ICMSPage | null> {
-    const pages = await this.find({ path: { $eq: path } })
+    const pages = await this.find({ path: { $eq: path, partial: false } })
     return (pages[0] as ICMSPage) || null
   }
 

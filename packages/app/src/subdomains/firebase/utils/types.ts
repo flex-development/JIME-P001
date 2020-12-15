@@ -35,6 +35,13 @@ export type FirebaseAdaptorReference = ReturnType<
 >
 
 /**
+ * Firebase or Firebase Admin RTD snapshot.
+ */
+export type FirebaseDataSnapshot =
+  | Firebase.database.DataSnapshot
+  | FirebaseAdmin.database.DataSnapshot
+
+/**
  * Application returned by `@firebase/rules-unit-testing` module.
  *
  * @see https://www.npmjs.com/package/@firebase/rules-unit-testing

@@ -1,6 +1,7 @@
-import MockMenusRepoRoot from '@app-mocks/data/menus.mock.json'
+import { DATASETS } from '@app-mocks/datamaps'
 import firebaseTestApp from '@app-mocks/firebaseTestApp'
-import { loadMenusTestData, removeMenusTestData } from '@app-mocks/utils'
+import { getMockData, loadMockData } from '@app-mocks/utils'
+import { FeathersErrorJSON } from '@feathersjs/errors'
 import { ICMSMenu } from '@subdomains/cms/models'
 import MenuRepository from './MenuRepository'
 
@@ -11,16 +12,18 @@ import MenuRepository from './MenuRepository'
 
 describe('MenuRepository', () => {
   const app = firebaseTestApp(true)
-  const menus = Object.values(MockMenusRepoRoot) as Array<ICMSMenu>
-  const repo: MenuRepository = new MenuRepository(app.database())
+  const database = app.database()
+  const menus = getMockData<ICMSMenu>(DATASETS.menus.path)
+
+  const REPO: MenuRepository = new MenuRepository(database)
 
   describe('#create', () => {
-    beforeAll(async () => loadMenusTestData(app))
-    afterAll(async () => removeMenusTestData(app))
+    beforeAll(async () => loadMockData<ICMSMenu>(database, 'menus'))
+    afterAll(async () => database.ref(DATASETS.menus.path).remove())
 
     it('creates a new menu', async () => {
       const req = { ...menus[0], id: 'menu-id' }
-      const res = await repo.create(req)
+      const res = await REPO.create(req)
 
       expect(res.id).toBe(req.id)
       expect(res.title).toBe(res.title)
@@ -28,7 +31,15 @@ describe('MenuRepository', () => {
     })
 
     it('throws an error if a menu with req.id already exists', async () => {
-      await expect(() => repo.create(menus[1])).rejects.toThrow()
+      let res = {} as FeathersErrorJSON
+
+      try {
+        await REPO.create(menus[1])
+      } catch (error) {
+        res = error
+      }
+
+      expect(res.code).toBe(400)
     })
   })
 })

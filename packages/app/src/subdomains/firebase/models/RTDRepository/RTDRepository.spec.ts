@@ -1,15 +1,9 @@
-import MockCarsRepoRoot from '@app-mocks/data/cars.mock.json'
+import { DATASETS } from '@app-mocks/datamaps'
 import firebaseTestApp from '@app-mocks/firebaseTestApp'
 import { CarEntity, CarModel } from '@app-mocks/models/Car.model.mock'
-import {
-  CAR_REPO_TEST_PATH,
-  loadCarsTestData,
-  matchTestCarObjects,
-  removeCarsTestData
-} from '@app-mocks/utils'
-import { AnyObject, NullishPrimitive, SortOrder } from '@flex-development/json'
-import { get, gt, gte, isEqual, lt, lte, orderBy } from 'lodash'
-import { RTDRepoUpdateEntityBatch } from './IRTDRepository'
+import { getMockData, loadMockData } from '@app-mocks/utils'
+import { FeathersErrorJSON } from '@feathersjs/errors'
+import { RTDRepoUpdateBatch } from './IRTDRepository'
 import Repo from './RTDRepository'
 
 /**
@@ -18,264 +12,76 @@ import Repo from './RTDRepository'
  */
 
 describe('RTDRepository', () => {
-  const IMAGINARY_CAR_ID = 'IMAGINARY_CAR_ID'
-
   const app = firebaseTestApp(true)
-  const cars: Partial<CarEntity>[] = Object.values(MockCarsRepoRoot)
+  const database = app.database()
 
-  let CarRepo: Repo<CarEntity> | AnyObject = {}
-  let REPO = CarRepo as Repo<CarEntity>
+  const REPO = new Repo<CarEntity>(DATASETS.cars.path, CarModel, database)
 
-  beforeAll(() => {
-    REPO = new Repo<CarEntity>(CAR_REPO_TEST_PATH, CarModel, app.database())
-    CarRepo = REPO
-  })
+  const cars = getMockData<CarEntity>('cars')
+  const IMAGINARY_CAR_ID = 'IMAGINARY_CAR_ID'
 
   describe('#constructor', () => {
     it('creates a reference to the repository location in the database', () => {
-      expect(CarRepo?.path).toBe(CAR_REPO_TEST_PATH)
-      expect(CarRepo?.root.key).toBe(CAR_REPO_TEST_PATH)
+      expect(REPO.path).toBe(DATASETS.cars.path)
+      expect(REPO.root.key).toBe(DATASETS.cars.path)
     })
   })
 
   describe('#create', () => {
-    beforeAll(async () => removeCarsTestData(app))
-    afterAll(async () => removeCarsTestData(app))
+    beforeAll(async () => database.ref(DATASETS.cars.path).remove())
+    afterAll(async () => database.ref(DATASETS.cars.path).remove())
 
     it('creates a new entity', async () => {
       const req = cars[0]
       const res = await REPO.create(req)
 
-      expect(res?.created_at).toBeDefined()
+      expect(res.created_at).toBeDefined()
       expect(res).toMatchObject(req)
     })
   })
 
   describe('#createBatch', () => {
-    afterAll(async () => removeCarsTestData(app))
+    afterAll(async () => database.ref(DATASETS.cars.path).remove())
 
     it('returns an array of created entities', async () => {
       const res = await REPO.createBatch(Object.assign([], cars))
 
-      matchTestCarObjects(res, cars, true)
-      matchTestCarObjects(res, await REPO.find(), true)
-      expect(true).toBe(true)
+      res.forEach(res_car => {
+        const expected_car = cars.find(car => car.id === res_car.id)
+        expect(res_car).toMatchObject(expected_car as CarEntity)
+      })
     })
   })
 
   describe('#delete', () => {
-    beforeAll(async () => loadCarsTestData(app))
-    afterAll(async () => removeCarsTestData(app))
+    beforeAll(async () => loadMockData<CarEntity>(database, 'cars'))
+    afterAll(async () => database.ref(DATASETS.cars.path).remove())
 
     it('removes an entity', async () => {
-      const car = cars[5] as CarEntity
+      const car = cars[4]
+      const res = await REPO.delete(car.id)
 
-      await REPO.delete(car.id)
-
-      expect(await REPO.findById(car.id)).toBe(null)
+      expect(res).toBeTruthy()
     })
   })
 
   describe('#find', () => {
-    beforeAll(async () => loadCarsTestData(app))
-    afterAll(async () => removeCarsTestData(app))
+    beforeAll(async () => loadMockData<CarEntity>(database, 'cars'))
+    afterAll(async () => database.ref(DATASETS.cars.path).remove())
 
     it('returns all entities', async () => {
-      expect((await REPO.find()).length).toBe(cars.length)
-    })
+      const res = await REPO.find()
 
-    it('handles $eq query', async () => {
-      const field = 'owner.first_name'
-      const $eq = cars[0][field]
-
-      const equal = (car: CarEntity | Partial<CarEntity>) => {
-        return isEqual(car[field], $eq)
-      }
-
-      const expected = cars.filter(car => equal(car))
-      const result = await REPO.find({ [field]: { $eq } })
-
-      expect(result.length).toBe(expected.length)
-      result.forEach(res => expect(equal(res)).toBeTruthy())
-    })
-
-    it('handles $gt query', async () => {
-      const field = 'model_year'
-      const $gt = cars[4][field] as number
-
-      const greaterThan = (car: CarEntity | Partial<CarEntity>) => {
-        return gt(car[field], $gt)
-      }
-
-      const expected = cars.filter(car => greaterThan(car))
-      const result = await REPO.find({ [field]: { $gt } })
-
-      expect(result.length).toBe(expected.length)
-      result.forEach(res => expect(greaterThan(res)).toBeTruthy())
-    })
-
-    it('handles $gte query', async () => {
-      const field = 'model_year'
-      const $gte = cars[3][field] as number
-
-      const greaterThanEq = (car: CarEntity | Partial<CarEntity>) => {
-        return gte(car[field], $gte)
-      }
-
-      const expected = cars.filter(car => greaterThanEq(car))
-      const result = await REPO.find({ [field]: { $gte } })
-
-      expect(result.length).toBe(expected.length)
-      result.forEach(res => expect(greaterThanEq(res)).toBeTruthy())
-    })
-
-    it('handles $in query with primtive values', async () => {
-      const field = 'make'
-      const $in = [cars[0][field], cars[4][field]] as NullishPrimitive[]
-
-      const isIncluded = (car: CarEntity | Partial<CarEntity>) => {
-        return $in.includes(car[field] as NullishPrimitive)
-      }
-
-      const expected = cars.filter(car => isIncluded(car))
-      const result = await REPO.find({ [field]: { $in } })
-
-      expect(result.length).toBe(expected.length)
-      result.forEach(res => expect(isIncluded(res)).toBeTruthy())
-    })
-
-    it('handles $in query with primitive array', async () => {
-      const field = 'drivers'
-      const $in = [(cars as Array<CarEntity>)[0].drivers[0]]
-
-      const isIncluded = (car: CarEntity | Partial<CarEntity>) => {
-        return car[field]?.some(v => $in.includes(v))
-      }
-
-      const expected = cars.filter(car => isIncluded(car))
-      const result = await REPO.find({ [field]: { $in } })
-
-      expect(result.length).toBe(expected.length)
-      result.forEach(res => expect(isIncluded(res)).toBeTruthy())
-    })
-
-    it('handles $limit query', async () => {
-      const $limit = 3
-
-      const result = await REPO.find({ $limit })
-
-      expect(result.length).toBe($limit)
-    })
-
-    it('handles $lt query', async () => {
-      const field = 'vin'
-      const $lt = cars[7][field] as string
-
-      const lessThan = (car: CarEntity | Partial<CarEntity>) => {
-        return lt(car[field], $lt)
-      }
-
-      const expected = cars.filter(car => lessThan(car))
-      const result = await REPO.find({ [field]: { $lt } })
-
-      expect(result.length).toBe(expected.length)
-      result.forEach(res => expect(lessThan(res)).toBeTruthy())
-    })
-
-    it('handles $lte query', async () => {
-      const field = 'vin'
-      const $lte = cars[1][field] as string
-
-      const lessThanEq = (car: CarEntity | Partial<CarEntity>) => {
-        return lte(car[field], $lte)
-      }
-
-      const expected = cars.filter(car => lessThanEq(car))
-      const result = await REPO.find({ [field]: { $lte } })
-
-      expect(result.length).toBe(expected.length)
-      result.forEach(res => expect(lessThanEq(res)).toBeTruthy())
-    })
-
-    it('handles $ne query', async () => {
-      const field = 'model_year'
-      const $ne = cars[2][field]
-
-      const notEqual = (car: CarEntity | Partial<CarEntity>) => {
-        return !isEqual(car[field], $ne)
-      }
-
-      const expected = cars.filter(car => notEqual(car))
-      const res = await REPO.find({ [field]: { $ne } })
-
-      expect(res.length).toBe(expected.length)
-      res.forEach(res => expect(notEqual(res)).toBeTruthy())
-    })
-
-    it('handles $nin query with primtive values', async () => {
-      const field = 'owner.last_name'
-      const $nin = [cars[0][field], cars[4][field]] as NullishPrimitive[]
-
-      const notIncluded = (car: CarEntity | Partial<CarEntity>) => {
-        return !$nin.includes(get(car, field))
-      }
-
-      const expected = cars.filter(car => notIncluded(car))
-      const result = await REPO.find({ [field]: { $nin } })
-
-      expect(result.length).toBe(expected.length)
-      result.forEach(res => expect(notIncluded(res)).toBeTruthy())
-    })
-
-    it('handles $nin query with primitive array', async () => {
-      const field = 'drivers'
-      const $nin = cars[3].drivers as CarEntity['drivers']
-
-      const notIncluded = (car: CarEntity | Partial<CarEntity>) => {
-        return car[field]?.every(v => !$nin.includes(v))
-      }
-
-      const expected = cars.filter(car => notIncluded(car))
-      const result = await REPO.find({ [field]: { $nin } })
-
-      expect(result.length).toBe(expected.length)
-      result.forEach(res => expect(notIncluded(res)).toBeTruthy())
-    })
-
-    it('handles $select query', async () => {
-      const $select: (keyof CarEntity)[] = ['vin']
-      const result = await REPO.find({ $select })
-
-      result.forEach(res => {
-        expect(Object.keys(res)).toEqual(expect.arrayContaining($select))
-      })
-    })
-
-    it('handles $skip query', async () => {
-      const $skip = 5
-
-      const res = await REPO.find({ $skip })
-
-      expect(res.length).toBe(cars.length - $skip)
-    })
-
-    it('handles $sort query', async () => {
-      const $sort = { 'owner.last_name': SortOrder.ASCENDING }
-
-      const expected = orderBy(cars, Object.keys($sort), Object.values($sort))
-      const res = await REPO.find({ $sort })
-
-      matchTestCarObjects(res, expected)
-      expect(true).toBe(true)
+      expect(res.length).toBe(cars.length)
     })
   })
 
   describe('#findById', () => {
-    beforeAll(async () => loadCarsTestData(app))
-    afterAll(async () => removeCarsTestData(app))
+    beforeAll(async () => loadMockData<CarEntity>(database, 'cars'))
+    afterAll(async () => database.ref(DATASETS.cars.path).remove())
 
     it('returns an entity', async () => {
-      const car = cars[8] as CarEntity
+      const car = cars[0]
 
       expect(await REPO.findById(car.id)).toMatchObject(car)
     })
@@ -286,86 +92,98 @@ describe('RTDRepository', () => {
   })
 
   describe('#get', () => {
-    beforeAll(async () => loadCarsTestData(app))
-    afterAll(async () => removeCarsTestData(app))
+    beforeAll(async () => loadMockData<CarEntity>(database, 'cars'))
+    afterAll(async () => database.ref(DATASETS.cars.path).remove())
 
     it('returns an entity', async () => {
-      const car = cars[1] as CarEntity
+      const car = cars[1]
+      const res = await REPO.get(car.id)
 
-      expect(await REPO.get(car.id)).toMatchObject(car)
+      expect(res).toMatchObject(car)
     })
 
     it('throws an error if the entity does not exist', async () => {
-      await expect(() => REPO.get(IMAGINARY_CAR_ID)).rejects.toThrow()
+      let res = {} as FeathersErrorJSON
+
+      try {
+        await REPO.get(IMAGINARY_CAR_ID)
+      } catch (error) {
+        res = error
+      }
+
+      expect(res.code).toBe(404)
     })
   })
 
   describe('#update', () => {
-    beforeAll(async () => loadCarsTestData(app))
-    afterAll(async () => removeCarsTestData(app))
+    beforeAll(async () => loadMockData<CarEntity>(database, 'cars'))
+    afterAll(async () => database.ref(DATASETS.cars.path).remove())
 
     it('returns an updated entity', async () => {
-      const car = cars[5] as CarEntity
+      const car = cars[4]
       const data = { id: 'cant-update', model: 'car model name' }
 
-      const result = await REPO.update(car.id, data)
+      const res = await REPO.update(car.id, data)
 
-      expect(result.id !== data.id).toBeTruthy()
-      expect(result).toMatchObject({ ...car, ...data, id: car.id })
+      expect(res.id !== data.id).toBeTruthy()
+      expect(res.model).toBe(data.model)
     })
   })
 
   describe('#updateBatch', () => {
-    beforeAll(async () => loadCarsTestData(app))
-    afterAll(async () => removeCarsTestData(app))
+    beforeAll(async () => loadMockData<CarEntity>(database, 'cars'))
+    afterAll(async () => database.ref(DATASETS.cars.path).remove())
 
     it('returns an array of updated entities', async () => {
       const data = [
-        { ...cars[7], model: 'car model' },
-        { ...cars[5], model: 'another car model' }
-      ] as RTDRepoUpdateEntityBatch<CarEntity>[]
+        { ...cars[2], model: 'car model' },
+        { ...cars[4], model: 'another car model' }
+      ] as RTDRepoUpdateBatch<CarEntity>[]
 
-      const result = await REPO.updateBatch(data)
+      const res = await REPO.updateBatch(data)
 
-      matchTestCarObjects(result, data, true)
-      expect(true).toBe(true)
+      res.forEach(res_car => {
+        const expected_car = data.find(car => car.id === res_car.id)
+        expect(res_car).toMatchObject(expected_car as CarEntity)
+      })
     })
   })
 
   describe('#upsert', () => {
-    beforeAll(async () => loadCarsTestData(app))
-    afterAll(async () => removeCarsTestData(app))
+    beforeAll(async () => loadMockData<CarEntity>(database, 'cars'))
+    afterAll(async () => database.ref(DATASETS.cars.path).remove())
 
     it('returns a new entity', async () => {
-      const data = { ...cars[5], ...cars[1] }
-      const expected = { ...data, id: IMAGINARY_CAR_ID }
+      const data = { ...cars[4], ...cars[1] }
+      const res = await REPO.upsert(IMAGINARY_CAR_ID, data)
 
-      expect(await REPO.upsert(IMAGINARY_CAR_ID, data)).toMatchObject(expected)
+      expect(res).toMatchObject({ ...data, id: IMAGINARY_CAR_ID })
     })
 
     it('returns an updated entity', async () => {
-      const data = { ...cars[3], ...cars[1] } as CarEntity
+      const data = { ...cars[3], ...cars[1] }
+      const res = await REPO.upsert(data.id, data)
 
-      const result = await REPO.upsert(data.id, data)
-
-      expect(result).toMatchObject(data)
+      expect(res).toMatchObject(data)
     })
   })
 
   describe('#upsertBatch', () => {
-    beforeAll(async () => loadCarsTestData(app))
-    afterAll(async () => removeCarsTestData(app))
+    beforeAll(async () => loadMockData<CarEntity>(database, 'cars'))
+    afterAll(async () => database.ref(DATASETS.cars.path).remove())
 
     it('returns an array with a new and updated entity', async () => {
       const data = [
-        { ...cars[7], id: IMAGINARY_CAR_ID },
-        { ...cars[5], ...cars[1] }
-      ] as RTDRepoUpdateEntityBatch<CarEntity>[]
+        { ...cars[2], id: IMAGINARY_CAR_ID },
+        { ...cars[4], ...cars[1] }
+      ] as RTDRepoUpdateBatch<CarEntity>[]
 
-      const result = await REPO.upsertBatch(data)
+      const res = await REPO.upsertBatch(data)
 
-      matchTestCarObjects(result, data, true)
-      expect(true).toBe(true)
+      res.forEach(res_car => {
+        const expected_car = data.find(car => car.id === res_car.id)
+        expect(res_car).toMatchObject(expected_car as CarEntity)
+      })
     })
   })
 })

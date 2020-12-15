@@ -28,48 +28,11 @@
     },
     "vin": "KMHHU6KJ5FU798167"
   },
-  "-MLAdRkJZglyuqLaMXEG": {
-    "drivers": [
-      "bd915169adff90df1817f663ae806d86",
-      "58dbd9248eecd9cfaa67bdb8b9107bea",
-      "58dbd9248eecd9cfaa67bdb8b9107bea",
-      "3d1137e7ff9450896d8dd4b2478071a9",
-      "225ab8aa1a2a9402e30c37b9d33deb54"
-    ],
-    "id": "-MLAdRkJZglyuqLaMXEG",
-    "make": "Ford",
-    "model": "Model T",
-    "model_year": 1909,
-    "owner": {
-      "id": "7d713356b1d1b1aec2b0eef0fa4c6584",
-      "first_name": "Lanny",
-      "last_name": "Angelini"
-    },
-    "vin": "WBSBR93492E807214"
-  },
-  "-MLAdRkOxVqwS4ZL_uqx": {
-    "drivers": [
-      "3d1137e7ff9450896d8dd4b2478071a9",
-      "a0fb37d32c0f5929d84fbc02a0ff517f",
-      "e1e1a882e654b7ffedf9ce2f4b9b6773"
-    ],
-    "id": "-MLAdRkOxVqwS4ZL_uqx",
-    "make": "Scion",
-    "model": "xB",
-    "model_year": 2010,
-    "owner": {
-      "id": "9d03adb0e6ee796b86a8d18069b0abd8",
-      "first_name": "Arthur",
-      "last_name": "Kirkbright"
-    },
-    "vin": "WBADX7C51DJ317960"
-  },
   "-MLAdRkT3cr57nDkx5m9": {
     "drivers": [
       "58dbd9248eecd9cfaa67bdb8b9107bea",
       "3d1137e7ff9450896d8dd4b2478071a9",
-      "bd915169adff90df1817f663ae806d86",
-      "58dbd9248eecd9cfaa67bdb8b9107bea"
+      "bd915169adff90df1817f663ae806d86"
     ],
     "id": "-MLAdRkT3cr57nDkx5m9",
     "make": "Honda",
@@ -97,56 +60,6 @@
       "last_name": "Newlin"
     },
     "vin": "JM1DE1KY2E0916777"
-  },
-  "-MLAdRkc4xdKt6uD9fwY": {
-    "drivers": [
-      "906ad61141e6124615ef7b479b6a1bbe",
-      "88a1422558985e9f6aee90bbe331503e"
-    ],
-    "id": "-MLAdRkc4xdKt6uD9fwY",
-    "make": "Toyota",
-    "model": "Tacoma",
-    "model_year": 2006,
-    "owner": {
-      "id": "dd6212da04a9bb1f01c0d6b7b4f40411",
-      "first_name": "Emmy",
-      "last_name": "Cleghorn"
-    },
-    "vin": "WAUEFBFL8CN937085"
-  },
-  "-MLAdRkiD3PErrXSF3q8": {
-    "drivers": [
-      "906ad61141e6124615ef7b479b6a1bbe",
-      "3d1137e7ff9450896d8dd4b2478071a9",
-      "225ab8aa1a2a9402e30c37b9d33deb54"
-    ],
-    "id": "-MLAdRkiD3PErrXSF3q8",
-    "make": "Ford",
-    "model": "Excursion",
-    "model_year": 2003,
-    "owner": {
-      "id": "587e2eefe6c8bf20c51aab6067a080e4",
-      "first_name": "Merill",
-      "last_name": "Son"
-    },
-    "vin": "JTHBL5EF4F5247087"
-  },
-  "-MLAdRkpxCe2JbzIMWXh": {
-    "drivers": [
-      "bd915169adff90df1817f663ae806d86",
-      "3d1137e7ff9450896d8dd4b2478071a9",
-      "58dbd9248eecd9cfaa67bdb8b9107bea"
-    ],
-    "id": "-MLAdRkpxCe2JbzIMWXh",
-    "make": "Dodge",
-    "model": "Nitro",
-    "model_year": 2008,
-    "owner": {
-      "id": "63896789780897c792858324de21b98d",
-      "first_name": "Odelle",
-      "last_name": "Newlin"
-    },
-    "vin": "SCBLC47J09C518182"
   },
   "-MLAdRkwM8AteJRiqAkU": {
     "drivers": [

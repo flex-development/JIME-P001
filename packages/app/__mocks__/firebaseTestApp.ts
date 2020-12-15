@@ -1,17 +1,18 @@
 import * as testing from '@firebase/rules-unit-testing'
+import { FIREBASE_WEB_CONFIG } from '@flex-development/kustomzcore'
 import { FirebaseAdaptor } from '@subdomains/firebase'
 
 /**
  * @file Initialize Firebase testing app
- * @module tests/__mocks__/firebaseTestApp
+ * @module mocks/firebaseTestApp
  */
 
 /**
  * Firebase testing credentials.
  */
 export const FIREBASE_TEST_CONFIG = {
-  databaseName: 'firebase-testing',
-  projectId: 'firebase-testing'
+  databaseName: FIREBASE_WEB_CONFIG.projectId,
+  projectId: FIREBASE_WEB_CONFIG.projectId
 }
 
 /**

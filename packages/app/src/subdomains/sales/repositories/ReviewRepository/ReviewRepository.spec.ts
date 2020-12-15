@@ -1,6 +1,5 @@
-import MockReviewsRepoRoot from '@app-mocks/data/reviews.mock.json'
 import firebaseTestApp from '@app-mocks/firebaseTestApp'
-import { loadReviewsTestData } from '@app-mocks/utils'
+import { getMockData, loadMockData } from '@app-mocks/utils'
 import { IReview } from '@flex-development/kustomzcore'
 import ReviewRepository from './ReviewRepository'
 
@@ -11,18 +10,20 @@ import ReviewRepository from './ReviewRepository'
 
 describe('ReviewRepository', () => {
   const app = firebaseTestApp(true)
+  const database = app.database()
 
-  const repo: ReviewRepository = new ReviewRepository(app.database())
-  const reviews = Object.values(MockReviewsRepoRoot) as Array<IReview>
+  const REPO: ReviewRepository = new ReviewRepository(database)
+
+  const reviews = getMockData<IReview>('reviews')
 
   describe('#findByProductId', () => {
-    beforeAll(async () => loadReviewsTestData(app))
+    beforeAll(async () => loadMockData(database, 'reviews'))
 
     it('returns the reviews submitted for req.id', async () => {
       const product_id = reviews[0].product_id
 
       const expected = reviews.filter(r => r.product_id === product_id)
-      const res = await repo.findByProductId(product_id)
+      const res = await REPO.findByProductId(product_id)
 
       expect(res.length).toBe(expected.length)
       res.forEach(review => expect(review.product_id).toBe(product_id))

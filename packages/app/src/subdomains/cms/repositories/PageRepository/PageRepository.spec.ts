@@ -1,6 +1,7 @@
-import MockPagesRepoRoot from '@app-mocks/data/pages.mock.json'
+import { DATASETS } from '@app-mocks/datamaps'
 import firebaseTestApp from '@app-mocks/firebaseTestApp'
-import { loadPagesTestData, removePagesTestData } from '@app-mocks/utils'
+import { getMockData, loadMockData } from '@app-mocks/utils'
+import { FeathersErrorJSON } from '@feathersjs/errors'
 import { ICMSPage } from '@subdomains/cms/models'
 import PageRepository from './PageRepository'
 
@@ -11,67 +12,87 @@ import PageRepository from './PageRepository'
 
 describe('PageRepository', () => {
   const app = firebaseTestApp(true)
-  const pages = Object.values(MockPagesRepoRoot) as Array<ICMSPage>
-  const repo: PageRepository = new PageRepository(app.database())
+  const database = app.database()
 
+  const REPO: PageRepository = new PageRepository(database)
+
+  const pages = getMockData<ICMSPage>('pages')
   const IMAGINARY_PAGE_PATH = 'IMAGINARY_PAGE_PATH'
 
   describe('#create', () => {
-    beforeAll(async () => loadPagesTestData(app))
-    afterAll(async () => removePagesTestData(app))
+    beforeAll(async () => loadMockData<ICMSPage>(database, 'pages'))
+    afterAll(async () => database.ref(DATASETS.pages.path).remove())
 
     it('creates a new page', async () => {
-      const page: Partial<ICMSPage> = {
+      const data: Partial<ICMSPage> = {
         component: 'PageTemplate',
         content: { body: '' },
         draft: true,
         title: 'A New Page'
       }
 
-      expect(await repo.create(page)).toMatchObject(page)
+      const res = await REPO.create(data)
+
+      expect(res).toMatchObject(data)
     })
 
     it('throws an error if a page with req.path already exists', async () => {
-      await expect(() => repo.create(pages[0])).rejects.toThrow()
+      let res = {} as FeathersErrorJSON
+
+      try {
+        await REPO.create(pages[0])
+      } catch (error) {
+        res = error
+      }
+
+      expect(res.code).toBe(400)
     })
   })
 
   describe('#findByPath', () => {
-    beforeAll(async () => loadPagesTestData(app))
+    beforeAll(async () => loadMockData<ICMSPage>(database, 'pages'))
 
     it('returns the page', async () => {
       const page = pages[0]
-      const res = await repo.findByPath(page.path)
+      const res = await REPO.findByPath(page.path)
 
       expect(res?.id).toBe(page.id)
       expect(res?.path).toBe(page.path)
     })
 
     it('return nulls if the page is not found', async () => {
-      expect(await repo.findByPath(IMAGINARY_PAGE_PATH)).toBe(null)
+      expect(await REPO.findByPath(IMAGINARY_PAGE_PATH)).toBe(null)
     })
   })
 
   describe('#update', () => {
-    beforeAll(async () => loadPagesTestData(app))
+    beforeAll(async () => loadMockData<ICMSPage>(database, 'pages'))
 
     it('updates a page', async () => {
-      const page: Partial<ICMSPage> = { ...pages[1], path: '/page-path' }
-      const res = await repo.update(page.id as string, page)
+      const data = { path: '/page-path' }
+      const res = await REPO.update(pages[1].id, data)
 
-      expect(res.path).toBe(page.path)
+      expect(res.path).toBe(data.path)
     })
 
     it('throws an error if a page with req.path already exists', async () => {
       const data = { ...pages[2], path: pages[0].path }
+      let res = {} as FeathersErrorJSON
 
-      await expect(() => repo.update(data.id, data)).rejects.toThrow()
+      try {
+        await REPO.update(data.id, data)
+      } catch (error) {
+        res = error
+      }
+
+      expect(res.code).toBe(400)
     })
 
-    it('does not throw an error if the page with page req.path is the page being updated', async () => {
-      const data = { ...pages[2], path: pages[0].path }
+    it('does not throw an error if the page with path req.path is the page being updated', async () => {
+      const data = pages[2]
+      const res = await REPO.update(data.id, data)
 
-      await expect(() => repo.update(data.id, data)).rejects.toThrow()
+      expect(res).toMatchObject(data)
     })
   })
 })

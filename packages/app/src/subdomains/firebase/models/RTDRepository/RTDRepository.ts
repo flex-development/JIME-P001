@@ -12,11 +12,11 @@ import { getFromContainer } from 'class-validator'
 import { isEmpty, merge, omit } from 'lodash'
 import {
   IRTDRepository,
-  RTDRepoCreateEntity,
+  RTDRepoCreate,
   RTDRepoJSONValue,
   RTDRepoRootData as RepoRootData,
-  RTDRepoUpdateEntity,
-  RTDRepoUpdateEntityBatch
+  RTDRepoUpdate,
+  RTDRepoUpdateBatch
 } from './IRTDRepository'
 
 /**
@@ -123,7 +123,7 @@ export default class RTDRepository<E extends IEntity = IEntity>
    * @returns Newly created data
    * @throws {ValidationError}
    */
-  async create(data: RTDRepoCreateEntity<E>): Promise<E> {
+  async create(data: RTDRepoCreate<E>): Promise<E> {
     // Timestamp database entry
     let entity = { ...data, created_at: new Date().valueOf() } as E
 
@@ -139,10 +139,13 @@ export default class RTDRepository<E extends IEntity = IEntity>
     // Validate data and create new entity
     if (this.metadata) entity = await this.validator(this.model, entity)
 
-    await ref.set(entity)
+    // Create entity
+    await ref.set(entity, err => {
+      if (err) throw createError(err.message, { errors: err }, 400)
+    })
 
-    // Guarenteed to be an entity because data was just added
-    return (await this.get(entity.id)) as E
+    // Return new entity
+    return entity
   }
 
   /**
@@ -152,7 +155,7 @@ export default class RTDRepository<E extends IEntity = IEntity>
    * @param data - Array of entities to insert into repo
    * @returns Array of newly created entities
    */
-  async createBatch(batch: RTDRepoCreateEntity<E>[]): Promise<E[]> {
+  async createBatch(batch: RTDRepoCreate<E>[]): Promise<E[]> {
     return await Promise.all(batch.map(async data => this.create(data)))
   }
 
@@ -161,17 +164,18 @@ export default class RTDRepository<E extends IEntity = IEntity>
    *
    * @async
    * @param id - ID of entity to find
-   * @returns ID of deleted entity
    */
-  async delete(id: IEntity['id']): Promise<void> {
-    // Prevent root of repository from being deleted
-    if (isEmpty(id)) throw new Error('ID required to delete entity.')
+  async delete(id: IEntity['id']): Promise<boolean> {
+    let deleted = false
 
-    // Check if entity exists before deleting
-    const data = await this.get(id)
+    if (isEmpty(id)) return deleted
 
-    // Delete entity if it exists
-    if (data?.id) await this.root.child(data.id).remove()
+    await this.root.child(id).remove(err => {
+      if (err) throw createError(err.message, { errors: err }, 400)
+      deleted = true
+    })
+
+    return deleted
   }
 
   /**
@@ -182,7 +186,7 @@ export default class RTDRepository<E extends IEntity = IEntity>
    * @param keep - If true, remove entries that are NOT in {@param ids}
    * @returns Empty promise
    */
-  async deleteBatch(batch: E['id'][], keep = false): Promise<void> {
+  async deleteBatch(batch: E['id'][], keep = false): Promise<boolean[]> {
     if (keep) {
       const entities = (await this.find()) as Array<E>
       const new_batch: string[] = []
@@ -194,7 +198,7 @@ export default class RTDRepository<E extends IEntity = IEntity>
       batch = new_batch
     }
 
-    await Promise.all(batch.map(async id => this.delete(id)))
+    return await Promise.all(batch.map(async id => this.delete(id)))
   }
 
   /**
@@ -236,8 +240,8 @@ export default class RTDRepository<E extends IEntity = IEntity>
    * @throws {FeathersErrorJSON}
    */
   async findById(id: IEntity['id']): Promise<E | null> {
-    const entities = await this.find({ id: { $eq: id } })
-    return (entities[0] as E) || null
+    const entities = (await this.find()) as Array<E>
+    return entities.find(entity => entity.id === id) || null
   }
 
   /**
@@ -249,7 +253,7 @@ export default class RTDRepository<E extends IEntity = IEntity>
    * @throws {FeathersErrorJSON}
    */
   async get(id: IEntity['id']): Promise<E> {
-    const data = (await this.normalize(this.root.child(id))) as E | null
+    const data = await this.findById(id)
 
     if (!data) {
       const message = `Entity with id "${id}" not found.`
@@ -282,7 +286,7 @@ export default class RTDRepository<E extends IEntity = IEntity>
    * @returns Updated entity
    * @throws {FeathersErrorJSON} If entity to update doesn't exist
    */
-  async update(id: IEntity['id'], data: RTDRepoUpdateEntity<E>): Promise<E> {
+  async update(id: IEntity['id'], data: RTDRepoUpdate<E>): Promise<E> {
     // Check if entity exists before attempting to perform update
     const existing = await this.get(id)
 
@@ -293,10 +297,12 @@ export default class RTDRepository<E extends IEntity = IEntity>
     if (this.metadata) data = await this.validator(this.model, data)
 
     // Perform update
-    await this.root.child(id).update(data)
+    await this.root.child(id).update(data, err => {
+      if (err) throw createError(err.message, { errors: err }, 400)
+    })
 
-    // Guarenteed to be an entity because data was just added
-    return (await this.get(id)) as E
+    // Return updated entity
+    return data as E
   }
 
   /**
@@ -306,7 +312,7 @@ export default class RTDRepository<E extends IEntity = IEntity>
    * @param batch - Array of entities to update
    * @returns Array of updated entities
    */
-  async updateBatch(batch: RTDRepoUpdateEntityBatch<E>[]): Promise<E[]> {
+  async updateBatch(batch: RTDRepoUpdateBatch<E>[]): Promise<E[]> {
     return await Promise.all(batch.map(async e => this.update(e.id, e)))
   }
 
@@ -319,13 +325,13 @@ export default class RTDRepository<E extends IEntity = IEntity>
    * @param data - Data to create or update entity
    * @returns New or updated entity
    */
-  async upsert(id: IEntity['id'], data: RTDRepoUpdateEntity<E>): Promise<E> {
+  async upsert(id: IEntity['id'], data: RTDRepoUpdate<E>): Promise<E> {
     let entity = {} as E
 
     if (await this.findById(id)) {
       entity = await this.update(id, data)
     } else {
-      entity = await this.create({ ...data, id } as RTDRepoCreateEntity<E>)
+      entity = await this.create({ ...data, id } as RTDRepoCreate<E>)
     }
 
     return entity
@@ -338,7 +344,7 @@ export default class RTDRepository<E extends IEntity = IEntity>
    * @param batch - Array of entities to upsert
    * @returns Array of upserted entities
    */
-  async upsertBatch(batch: RTDRepoUpdateEntityBatch<E>[]): Promise<E[]> {
+  async upsertBatch(batch: RTDRepoUpdateBatch<E>[]): Promise<E[]> {
     return await Promise.all(batch.map(async e => this.upsert(e.id, e)))
   }
 }

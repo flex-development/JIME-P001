@@ -1,5 +1,6 @@
 import CustomersMock from '@app-mocks/data/customers.mock.json'
 import firebaseTestApp from '@app-mocks/firebaseTestApp'
+import { FeathersErrorJSON } from '@feathersjs/errors'
 import { CreateReviewRequest } from '@flex-development/kustomzcore'
 import ProductListingsMock from '@system-mocks/data/product-listings.mock.json'
 import { IReviewService } from './IReviewService'
@@ -38,17 +39,41 @@ describe('ReviewService', () => {
 
     it('throws an error if req.email does not belong to an existing customer', async () => {
       const req = { ...new_review, email: 'johndoe@email.com' }
-      await expect(() => ProductReviews.create(req)).rejects.toThrow()
+      let res = {} as FeathersErrorJSON
+
+      try {
+        await ProductReviews.create(req)
+      } catch (error) {
+        res = error
+      }
+
+      expect(res.code).toBe(404)
     })
 
     it('throws an error if req.product_id is not the id of an existing product', async () => {
       const req = { ...new_review, product_id: -1 }
-      await expect(() => ProductReviews.create(req)).rejects.toThrow()
+      let res = {} as FeathersErrorJSON
+
+      try {
+        await ProductReviews.create(req)
+      } catch (error) {
+        res = error
+      }
+
+      expect(res.code).toBe(404)
     })
 
     it('throws an error if req.product_sku is not the sku of a variant of the product being reviewed', async () => {
       const req = { ...new_review, product_sku: 'BAD_SKU' }
-      await expect(() => ProductReviews.create(req)).rejects.toThrow()
+      let res = {} as FeathersErrorJSON
+
+      try {
+        await ProductReviews.create(req)
+      } catch (error) {
+        res = error
+      }
+
+      expect(res.code).toBe(404)
     })
   })
 })

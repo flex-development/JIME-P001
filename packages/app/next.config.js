@@ -99,7 +99,7 @@ module.exports = {
       use: [
         {
           loader: 'awesome-typescript-loader',
-          options: { configFileName: 'tsconfig.dev.json' }
+          options: { configFileName: `tsconfig.${dev ? 'dev' : 'prod'}.json` }
         }
       ]
     })

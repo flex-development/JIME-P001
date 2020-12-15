@@ -23,7 +23,7 @@ import {
 import { ProductService, ReviewService } from '@subdomains/sales'
 import {
   GetStaticPaths,
-  GetStaticPathsContext,
+
   GetStaticProps,
   GetStaticPropsContext
 } from 'next'
@@ -70,9 +70,7 @@ const Slug: PC<IPagePropsCMS> = ({ page }) => (
  *
  * Any paths not returned will result in a 404 page.
  */
-export const getStaticPaths: GetStaticPaths<CMSPageParams> = async (
-  context: GetStaticPathsContext
-) => {
+export const getStaticPaths: GetStaticPaths<CMSPageParams> = async () => {
   // Get pages in database
   const pages = (await Pages.find()) as Array<ICMSPage>
 

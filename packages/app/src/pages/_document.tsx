@@ -91,6 +91,9 @@ export default class Document extends NextDocument<DocumentInitialProps> {
           <meta property='og:site_name' content="Morena's Kustomz" />
           <meta property='og:type' content='website' />
 
+          {/* Project fonts */}
+          <link rel='stylesheet' href='//use.typekit.net/oee3tpl.css' />
+
           {/* Material Icons */}
           <link
             rel='stylesheet'

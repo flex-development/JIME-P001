@@ -4,10 +4,10 @@ import {
   CheckoutPermalinkQuery
 } from '@flex-development/kustomzcore'
 import { DEFAULT_CART_CONTEXT } from '@system/components/context/CartContext/CartContext'
-import { omit } from 'lodash'
+import { isString, omit } from 'lodash'
 import qs from 'querystring'
 import { useCallback, useEffect, useState } from 'react'
-import { useArray, UseArrayActions } from 'react-hanger/array/useArray'
+import { useArray } from 'react-hanger/array/useArray'
 
 /**
  * @file Create and update checkout URLs
@@ -29,7 +29,7 @@ export type UseCheckoutPermalink = {
    *
    * @param id - ID of variant to remove
    */
-  removeItem: UseArrayActions<CheckoutPermalinkInput>['removeById']
+  removeItem: (id: number | string) => void
 
   /**
    * Adds or updates a checkout line item.
@@ -118,10 +118,25 @@ export const useCheckoutPermalink = (
     }
   }
 
+  /* Callback version of `upsertItem` */
+  const upsertItemCB = useCallback(upsertItem, [actions, items])
+
+  /**
+   * Removes an items from the user's cart.
+   *
+   * @param id - ID of product variant to remove
+   */
+  const removeItem = (id: number | string) => {
+    return actions.removeById(isString(id) ? JSON.parse(id) : id)
+  }
+
+  /* Callback version of `removeItem` */
+  const removeItemCB = useCallback(removeItem, [actions])
+
   return {
     items: items.map(item => omit(item, ['id']) as CheckoutLineItemInput),
-    removeItem: actions.removeById,
-    upsertItem: useCallback(upsertItem, [actions, items]),
+    removeItem: removeItemCB,
+    upsertItem: upsertItemCB,
     url
   }
 }

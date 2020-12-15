@@ -8,9 +8,7 @@
 
 $sidebar-font-size: $font-size-sm;
 
-$sidebar-padding-bottom: $spacers-80;
-$sidebar-padding-top: $spacers-72;
-
+$sidebar-padding-y: $spacers-80;
 $sidebar-padding-x: $spacers-36;
 
 /// ----------------------------------------------------------------------------
@@ -28,7 +26,7 @@ $sidebar-padding-x: $spacers-36;
 
   @include padding-x($sidebar-padding-x);
 
-  @include padding-y($sidebar-padding-top, $sidebar-padding-bottom);
+  @include padding-y($sidebar-padding-y);
 
   background-color: $body-bg;
   font-size: $sidebar-font-size;
@@ -85,8 +83,8 @@ $sidebar-padding-x: $spacers-36;
 .developer-credit {
   @include margin-y($sidebar-padding-x, $spacers-0);
 
-  @include media-breakpoint-down(sm) {
-    font-size: $font-size-sm;
+  @include media-breakpoint-between(lg, xl) {
+    font-size: $font-size-xs;
   }
 
   text-transform: uppercase;

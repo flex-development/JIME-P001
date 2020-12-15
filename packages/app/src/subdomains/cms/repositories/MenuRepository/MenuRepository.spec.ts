@@ -13,12 +13,12 @@ import MenuRepository from './MenuRepository'
 describe('MenuRepository', () => {
   const app = firebaseTestApp(true)
   const database = app.database()
-  const menus = getMockData<ICMSMenu>(DATASETS.menus.path)
+  const menus = getMockData<ICMSMenu>(DATASETS.menus.name)
 
   const REPO: MenuRepository = new MenuRepository(database)
 
   describe('#create', () => {
-    beforeAll(async () => loadMockData<ICMSMenu>(database, 'menus'))
+    beforeAll(async () => loadMockData<ICMSMenu>(database, DATASETS.menus.name))
     afterAll(async () => database.ref(DATASETS.menus.path).remove())
 
     it('creates a new menu', async () => {

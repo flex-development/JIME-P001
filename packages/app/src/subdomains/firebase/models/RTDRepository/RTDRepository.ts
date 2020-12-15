@@ -91,8 +91,8 @@ export default class RTDRepository<E extends IEntity = IEntity>
 
     this.database = database
     this.model = model
-    this.path = path
-    this.root = this.database.ref().child(this.path)
+    this.path = `${process.env.NODE_ENV}/${path}`
+    this.root = this.database.ref(this.path)
 
     const metadata = getFromContainer<E>(this.model)
 

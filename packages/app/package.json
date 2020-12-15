@@ -37,6 +37,7 @@
     "mock:db": "firebase emulators:start --only database,ui",
     "pretest": "yarn kill:firebase",
     "test": "firebase emulators:exec \"yarn test:run\" --only database",
+    "test:quiet": "yarn test || true",
     "test:run": "jest --detectOpenHandles --passWithNoTests",
     "prestart": "NODE_ENV=production",
     "start": "next start",

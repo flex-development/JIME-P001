@@ -15,7 +15,7 @@ describe('RTDRepository', () => {
   const app = firebaseTestApp(true)
   const database = app.database()
 
-  const REPO = new Repo<CarEntity>(DATASETS.cars.path, CarModel, database)
+  const REPO = new Repo<CarEntity>(DATASETS.cars.name, CarModel, database)
 
   const cars = getMockData<CarEntity>('cars')
   const IMAGINARY_CAR_ID = 'IMAGINARY_CAR_ID'
@@ -23,7 +23,6 @@ describe('RTDRepository', () => {
   describe('#constructor', () => {
     it('creates a reference to the repository location in the database', () => {
       expect(REPO.path).toBe(DATASETS.cars.path)
-      expect(REPO.root.key).toBe(DATASETS.cars.path)
     })
   })
 

@@ -1,13 +1,11 @@
 import { database } from '@app/subdomains/firebase/config/web'
 import { SortOrder } from '@flex-development/json'
 import { IReview } from '@flex-development/kustomzcore'
-import {
-  IndexTemplate,
-  IndexTemplateProps
-} from '@flex-development/kustomzdesign'
+import { IndexTemplate } from '@flex-development/kustomzdesign'
 import {
   CMSPageParams,
   IPagePropsCMS,
+  IPagePropsIndex,
   NotFound,
   PC,
   SEO
@@ -15,7 +13,6 @@ import {
 import {
   getCMSPageSEO,
   ICMSPageIndex,
-  ICMSPageSlug,
   PageService,
   ProviderSessionGitHub
 } from '@subdomains/cms'
@@ -53,10 +50,10 @@ const Products = new ProductService()
  * @param props.preview - True if CMS is enabled
  * @param props.session - CMS user session or null
  */
-const Slug: PC<IPagePropsCMS> = ({ page }) => (
+const Home: PC<IPagePropsIndex> = ({ page }: IPagePropsIndex) => (
   <>
     <SEO {...getCMSPageSEO(page)} />
-    <IndexTemplate {...(page.content as IndexTemplateProps)} />
+    <IndexTemplate {...page.content} />
   </>
 )
 
@@ -115,7 +112,7 @@ export const getServerSideProps: GetServerSideProps<
   }
 
   // Return page component props
-  return { props: { page: page as ICMSPageSlug } }
+  return { props: { page } }
 }
 
-export default Slug
+export default Home

@@ -45,7 +45,7 @@ export default class ProfileSnippetRepository
    *
    * @async
    */
-  async delete(id: IProfileSnippet['id']): Promise<void> {
+  async delete(id: IProfileSnippet['id']): Promise<boolean> {
     id = this.id
     return await super.delete(id)
   }

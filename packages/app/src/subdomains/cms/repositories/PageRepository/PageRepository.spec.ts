@@ -16,11 +16,11 @@ describe('PageRepository', () => {
 
   const REPO: PageRepository = new PageRepository(database)
 
-  const pages = getMockData<ICMSPage>('pages')
+  const pages = getMockData<ICMSPage>(DATASETS.pages.name)
   const IMAGINARY_PAGE_PATH = 'IMAGINARY_PAGE_PATH'
 
   describe('#create', () => {
-    beforeAll(async () => loadMockData<ICMSPage>(database, 'pages'))
+    beforeAll(async () => loadMockData<ICMSPage>(database, DATASETS.pages.name))
     afterAll(async () => database.ref(DATASETS.pages.path).remove())
 
     it('creates a new page', async () => {
@@ -50,7 +50,7 @@ describe('PageRepository', () => {
   })
 
   describe('#findByPath', () => {
-    beforeAll(async () => loadMockData<ICMSPage>(database, 'pages'))
+    beforeAll(async () => loadMockData<ICMSPage>(database, DATASETS.pages.name))
 
     it('returns the page', async () => {
       const page = pages[0]
@@ -66,7 +66,7 @@ describe('PageRepository', () => {
   })
 
   describe('#update', () => {
-    beforeAll(async () => loadMockData<ICMSPage>(database, 'pages'))
+    beforeAll(async () => loadMockData<ICMSPage>(database, DATASETS.pages.name))
 
     it('updates a page', async () => {
       const data = { path: '/page-path' }

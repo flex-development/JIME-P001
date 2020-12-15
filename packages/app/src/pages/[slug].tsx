@@ -1,11 +1,9 @@
-import {
-  PageTemplate,
-  PageTemplateProps
-} from '@flex-development/kustomzdesign'
-import { CMSPageParams, IPagePropsCMS, PC, SEO } from '@subdomains/app'
+import { PageTemplate } from '@flex-development/kustomzdesign'
+import { CMSPageParams, IPagePropsSlug, PC, SEO } from '@subdomains/app'
 import { getCMSPageSEO } from '@subdomains/cms'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
 import { getServerSideProps as getServerSidePropsGlobal } from './index'
+
 /**
  * @file Page - Slug (CMS)
  * @module pages/slug
@@ -30,10 +28,10 @@ import { getServerSideProps as getServerSidePropsGlobal } from './index'
  * @param props.preview - True if CMS is enabled
  * @param props.session - CMS user session or null
  */
-const Slug: PC<IPagePropsCMS> = ({ page }) => (
+const Slug: PC<IPagePropsSlug> = ({ page }: IPagePropsSlug) => (
   <>
     <SEO {...getCMSPageSEO(page)} />
-    <PageTemplate {...(page.content as PageTemplateProps)} />
+    <PageTemplate {...page.content} />
   </>
 )
 
@@ -47,7 +45,7 @@ const Slug: PC<IPagePropsCMS> = ({ page }) => (
  * @returns Template data and current user session
  */
 export const getServerSideProps: GetServerSideProps<
-  IPagePropsCMS,
+  IPagePropsSlug,
   CMSPageParams
 > = async (context: GetServerSidePropsContext<CMSPageParams>) => {
   // Return page component props

@@ -36,7 +36,7 @@
     "dev:app": "lerna run dev --scope @flex-development/morenaskustomz",
     "dev:ui": "lerna run dev --scope @flex-development/kustomzdesign",
     "dev": "lerna run dev",
-    "test:app": "lerna run test --scope @flex-development/morenaskustomz",
+    "test:app": "lerna run test:quiet --scope @flex-development/morenaskustomz",
     "test:ui": "lerna run test:quiet --scope @flex-development/kustomzdesign",
     "test": "run-p test:*",
     "start:app": "lerna run start --scope @flex-development/morenaskustomz",

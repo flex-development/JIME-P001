@@ -1,3 +1,4 @@
+import { DATASETS } from '@app-mocks/datamaps'
 import firebaseTestApp from '@app-mocks/firebaseTestApp'
 import { getMockData, loadMockData } from '@app-mocks/utils'
 import { IReview } from '@flex-development/kustomzcore'
@@ -14,10 +15,10 @@ describe('ReviewRepository', () => {
 
   const REPO: ReviewRepository = new ReviewRepository(database)
 
-  const reviews = getMockData<IReview>('reviews')
+  const reviews = getMockData<IReview>(DATASETS.reviews.name)
 
   describe('#findByProductId', () => {
-    beforeAll(async () => loadMockData(database, 'reviews'))
+    beforeAll(async () => loadMockData(database, DATASETS.reviews.name))
 
     it('returns the reviews submitted for req.id', async () => {
       const product_id = reviews[0].product_id

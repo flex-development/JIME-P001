@@ -52,7 +52,7 @@ export default class PlaylistSettingsRepository
    *
    * @async
    */
-  async delete(id: IPlaylistSettings['id']): Promise<void> {
+  async delete(id: IPlaylistSettings['id']): Promise<boolean> {
     id = this.id
     return await super.delete(id)
   }

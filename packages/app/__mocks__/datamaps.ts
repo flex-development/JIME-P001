@@ -9,35 +9,33 @@ import MockReviewsRepoRoot from './data/reviews.mock.json'
  * @module mocks/datamaps
  */
 
-export type MockDataMap<P extends string = string> = {
+export type MockDataMap = {
   data: AnyObject
-  path: P
+  name: string
+  path: string
 }
 
 export type MockDataMapObject = Record<string, MockDataMap>
 
-export const DATASET_CARS: MockDataMap<'cars'> = {
-  data: { ...MockCarsRepoRoot },
-  path: 'cars'
-}
-
-export const DATASET_MENUS: MockDataMap<'menus'> = {
-  data: { ...MockMenusRepoRoot },
-  path: 'menus'
-}
-
-export const DATASET_PAGES: MockDataMap<'pages'> = {
-  data: { ...MockPagesRepoRoot },
-  path: 'pages'
-}
-export const DATASET_REVIEWS: MockDataMap<'reviews'> = {
-  data: { ...MockReviewsRepoRoot },
-  path: 'reviews'
-}
-
 export const DATASETS: MockDataMapObject = {
-  cars: DATASET_CARS,
-  menus: DATASET_MENUS,
-  pages: DATASET_PAGES,
-  reviews: DATASET_REVIEWS
+  cars: {
+    data: { ...MockCarsRepoRoot },
+    name: 'cars',
+    path: `${process.env.NODE_ENV}/cars`
+  },
+  menus: {
+    data: { ...MockMenusRepoRoot },
+    name: 'menus',
+    path: `${process.env.NODE_ENV}/menus`
+  },
+  pages: {
+    data: { ...MockPagesRepoRoot },
+    name: 'pages',
+    path: `${process.env.NODE_ENV}/pages`
+  },
+  reviews: {
+    data: { ...MockReviewsRepoRoot },
+    name: 'reviews',
+    path: `${process.env.NODE_ENV}/reviews`
+  }
 }

@@ -1,5 +1,5 @@
-import { RTDRepository as Repo } from '@subdomains/app/models/RTDRepository'
 import { IProfileSnippet, ProfileSnippet } from '@subdomains/cms/models'
+import { RTDRepository as Repo } from '@subdomains/firebase/models/RTDRepository'
 import { IProfileSnippetRepository } from './IProfileSnippetRepository'
 
 /**

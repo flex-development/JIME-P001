@@ -6,7 +6,7 @@ import { useAuth } from 'reactfire'
 
 /**
  * @file Sign in a Firebase user with a custom token
- * @module subdomains/app/hooks/useSignInWithCustomToken/impl
+ * @module subdomains/firebase/hooks/useSignInWithCustomToken/impl
  * @see https://firebase.google.com/docs/reference/js/firebase.auth
  */
 

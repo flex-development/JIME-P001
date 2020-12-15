@@ -2,7 +2,7 @@ import FirebaseAdmin, { ServiceAccount } from 'firebase-admin'
 
 /**
  * @file Firebase Admin Configuration
- * @module config/firebase-admin
+ * @module subdomains/firebase/config/admin
  */
 
 /**

@@ -4,7 +4,6 @@
  * @see https://shopify.dev/docs/admin-api/rest/reference/sales-channels
  */
 
-export * from './config'
 export * from './hooks'
 export * from './repositories'
 export * from './services'

@@ -1,5 +1,5 @@
-import { IRTDRepository } from '@subdomains/app'
 import { ICMSMenu } from '@subdomains/cms/models'
+import { IRTDRepository } from '@subdomains/firebase'
 
 /**
  * @file Subdomain Interface - Menu Repository

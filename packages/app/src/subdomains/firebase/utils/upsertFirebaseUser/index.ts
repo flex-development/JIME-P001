@@ -1,6 +1,6 @@
 /**
  * @file Entry Point - upsertFirebaseUser
- * @module subdomains/cms/utils/upsertFirebaseUser
+ * @module subdomains/firebase/utils/upsertFirebaseUser
  */
 
 export { default as upsertFirebaseUser } from './upsertFirebaseUser'

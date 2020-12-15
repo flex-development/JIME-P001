@@ -50,7 +50,7 @@ export const AppLayout: FC<AppLayoutProps> = (props: AppLayoutProps) => {
   const { page: Component, pageProps } = props
 
   // Handle CMS user session and access CMS instance
-  const { cms, session } = useCMSAuth()
+  const { cms, preview, session } = useCMSAuth()
 
   // Get site navigation as menu links
   const menus = useMenus()
@@ -76,7 +76,7 @@ export const AppLayout: FC<AppLayoutProps> = (props: AppLayoutProps) => {
       event.preventDefault()
       window.location.href = `/search?term=${term}`
     },
-    style: { top: cms.enabled ? '62px' : 0 }
+    style: { top: preview ? '62px' : 0 }
   })
 
   // Get `Sidebar` component props

@@ -14,7 +14,7 @@ import Repo from './RTDRepository'
 
 /**
  * @file Unit Tests - RTDRepository
- * @module subdomains/app/models/RTDRepository/spec
+ * @module subdomains/firebase/models/RTDRepository/spec
  */
 
 describe('RTDRepository', () => {

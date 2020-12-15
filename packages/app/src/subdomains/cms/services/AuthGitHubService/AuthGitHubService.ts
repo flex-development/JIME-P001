@@ -1,7 +1,7 @@
 import { octokit } from '@app/config/github'
 import { createError, Logger } from '@flex-development/kustomzcore'
 import { Endpoints, RequestInterface } from '@octokit/types'
-import { upsertFirebaseUser } from '@subdomains/cms/utils/upsertFirebaseUser'
+import { upsertFirebaseUser } from '@subdomains/firebase/utils/upsertFirebaseUser'
 import admin from 'firebase-admin'
 import { isString } from 'lodash'
 import { Session } from 'next-auth/client'

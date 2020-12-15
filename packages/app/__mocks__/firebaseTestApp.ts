@@ -1,5 +1,5 @@
 import * as testing from '@firebase/rules-unit-testing'
-import { FirebaseAdaptor } from '@subdomains/app'
+import { FirebaseAdaptor } from '@subdomains/firebase'
 
 /**
  * @file Initialize Firebase testing app

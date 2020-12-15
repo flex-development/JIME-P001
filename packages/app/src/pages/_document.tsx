@@ -1,6 +1,7 @@
+import { DocumentInitialProps } from '@subdomains/app/utils/types'
+import { getSession } from 'next-auth/client'
 import NextDocument, {
   DocumentContext as Context,
-  DocumentInitialProps as InitialProps,
   Head,
   Html,
   Main,
@@ -19,7 +20,7 @@ import { ServerStyleSheet } from 'styled-components'
  *
  * @class Document
  */
-export default class Document extends NextDocument {
+export default class Document extends NextDocument<DocumentInitialProps> {
   /**
    * Injects the server side rendered styles into the `<head>` element. This is
    * required to server side render styled components.
@@ -35,7 +36,7 @@ export default class Document extends NextDocument {
    * @param ctx.req - HTTP request object
    * @param ctx.res - HTTP response object
    */
-  static async getInitialProps(ctx: Context): Promise<InitialProps> {
+  static async getInitialProps(ctx: Context): Promise<DocumentInitialProps> {
     const { renderPage } = ctx
     const sheet = new ServerStyleSheet()
 
@@ -48,8 +49,12 @@ export default class Document extends NextDocument {
 
       const initialProps = await super.getInitialProps(ctx)
 
+      // Get user session
+      const session = (await getSession(ctx)) as DocumentInitialProps['session']
+
       return {
         ...initialProps,
+        session,
         styles: (
           <>
             {initialProps.styles}
@@ -109,7 +114,7 @@ export default class Document extends NextDocument {
             crossOrigin='anonymous'
           />
         </Head>
-        <body>
+        <body data-cms-enabled={!!this.props.session}>
           <Main />
           <NextScript />
         </body>

@@ -1,6 +1,6 @@
 import { createError } from '@flex-development/kustomzcore'
-import { RTDRepository as Repo } from '@subdomains/app/models/RTDRepository'
 import { IPlaylistSettings, PlaylistSettings } from '@subdomains/cms/models'
+import { RTDRepository as Repo } from '@subdomains/firebase/models/RTDRepository'
 import {
   IPlaylistSettingsRepository,
   PlaylistSettingsData

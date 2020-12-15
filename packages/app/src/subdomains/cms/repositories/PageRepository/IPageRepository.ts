@@ -1,6 +1,6 @@
 import { AnyObject } from '@flex-development/json'
-import { IRTDRepository } from '@subdomains/app/models'
 import { ICMSPage } from '@subdomains/cms/models'
+import { IRTDRepository } from '@subdomains/firebase'
 
 /**
  * @file Subdomain Interfaces - Page Repository

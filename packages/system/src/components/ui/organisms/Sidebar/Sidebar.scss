@@ -9,7 +9,7 @@
 $sidebar-font-size: $font-size-sm;
 
 $sidebar-padding-bottom: $spacers-80;
-$sidebar-padding-top: $spacers-96;
+$sidebar-padding-top: $spacers-72;
 
 $sidebar-padding-x: $spacers-36;
 
@@ -24,8 +24,6 @@ $sidebar-padding-x: $spacers-36;
 
   @include media-breakpoint-up(sm) {
     @include border($border-color, $border-width, right);
-
-    padding-top: rem(120);
   }
 
   @include padding-x($sidebar-padding-x);

@@ -1,6 +1,6 @@
 /**
  * @file Entry Point - useSignInWithCustomToken
- * @module subdomains/app/hooks/useSignInWithCustomToken
+ * @module subdomains/app/firebase/useSignInWithCustomToken
  */
 
 export * from './useSignInWithCustomToken'

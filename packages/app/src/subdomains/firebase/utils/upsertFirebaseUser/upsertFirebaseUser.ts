@@ -5,7 +5,7 @@ import { isNumber } from 'lodash'
 
 /**
  * @file Create or update a Firebase user
- * @module subdomains/users/utils/upsertFirebaseUser/impl
+ * @module subdomains/firebase/utils/upsertFirebaseUser/impl
  */
 
 /**
@@ -27,7 +27,7 @@ const upsertFirebaseUser = async (
   auth?: admin.auth.Auth
 ): Promise<admin.auth.UserRecord> => {
   // Dynamically import admin auth service
-  if (!auth) auth = (await import('@app/config/firebase-admin')).auth
+  if (!auth) auth = (await import('@app/subdomains/firebase/config/admin')).auth
 
   // UIDs must be strings
   uid = isNumber(uid) ? `${uid}` : uid

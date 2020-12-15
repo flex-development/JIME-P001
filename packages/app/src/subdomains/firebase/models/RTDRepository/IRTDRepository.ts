@@ -7,12 +7,12 @@ import { IEntity } from '@flex-development/kustomzcore'
 import {
   FirebaseAdaptorDatabase,
   FirebaseAdaptorReference
-} from '@subdomains/app/utils'
+} from '@subdomains/firebase'
 import { ClassType, transformAndValidate } from 'class-transformer-validator'
 
 /**
  * @file Subdomain Interface  - Firebase RTD Repository
- * @module subdomains/app/models/RTDRepository/interface
+ * @module subdomains/firebase/models/RTDRepository/interface
  */
 
 /**

@@ -1,5 +1,5 @@
-import { auth } from '@app/config/firebase-admin'
 import { AUTH_PROVIDERS } from '@app/config/providers'
+import { auth } from '@app/subdomains/firebase/config/admin'
 import { GenericToken } from '@subdomains/cms'
 import {
   AuthGitHubService,

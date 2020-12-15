@@ -1,6 +1,6 @@
 import { DataArray } from '@flex-development/json'
 import { IReview } from '@flex-development/kustomzcore'
-import { IRTDRepository } from '@subdomains/app/models/RTDRepository'
+import { IRTDRepository } from '@subdomains/firebase/models/RTDRepository'
 import { IProductListing } from 'shopify-api-node'
 
 /**

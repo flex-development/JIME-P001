@@ -1,7 +1,7 @@
 import { createError } from '@flex-development/kustomzcore'
 import { uuid } from '@flex-development/kustomzdesign'
-import { RTDRepository } from '@subdomains/app/models/RTDRepository'
 import { CMSMenu, ICMSMenu } from '@subdomains/cms/models'
+import { RTDRepository } from '@subdomains/firebase/models/RTDRepository'
 import { isEmpty } from 'lodash'
 import { IMenuRepository } from './IMenuRepository'
 

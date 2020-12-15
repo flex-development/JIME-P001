@@ -17,3 +17,10 @@ div[class^='Media Manager'] {
     width: 90%;
   }
 }
+
+/* Hide toolbar if CMS user isn't signed-in */
+body[data-cms-enabled='false'] div[class^='MenuPanel'],
+body[data-cms-enabled='false'] div[class^='StyledToolbar'],
+body[data-cms-enabled='false'] div[class^='ToolbarPlaceholder'] {
+  display: none;
+}

@@ -1,4 +1,4 @@
-import { firebase } from '@app/config/firebase'
+import { app } from '@app/subdomains/firebase/config/web'
 import {
   CART_PERSISTENCE_KEY as CART_KEY,
   CheckoutLineItemInput
@@ -60,7 +60,7 @@ const App: AC = ({ Component, pageProps }: IAppProps) => {
   const persistCartCB = useCallback(persistCart, [setItems])
 
   return (
-    <FirebaseAppProvider firebaseApp={firebase}>
+    <FirebaseAppProvider firebaseApp={app}>
       <CartContextProvider items={_items.current} persist={persistCartCB}>
         <TinaProvider cms={cms}>
           <AppLayout page={Component} pageProps={pageProps} />

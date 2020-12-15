@@ -1,4 +1,4 @@
-import { database } from '@app/config/firebase'
+import { database } from '@app/subdomains/firebase/config/web'
 import { AnyObject, serialize } from '@flex-development/json'
 import { IReview } from '@flex-development/kustomzcore'
 import {

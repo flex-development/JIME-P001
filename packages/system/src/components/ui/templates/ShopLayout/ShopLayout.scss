@@ -29,10 +29,6 @@
     }
 
     @include media-breakpoint-up(lg) {
-      @include make-col(4);
-    }
-
-    @include media-breakpoint-up(xl) {
       @include make-col(3);
     }
 
@@ -51,10 +47,6 @@
 
     &[data-visible='true'] + .content-col {
       @include media-breakpoint-up(lg) {
-        @include make-col(8);
-      }
-
-      @include media-breakpoint-up(xl) {
         @include make-col(9);
       }
     }

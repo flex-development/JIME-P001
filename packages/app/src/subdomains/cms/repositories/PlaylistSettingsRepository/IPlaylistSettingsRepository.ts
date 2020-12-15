@@ -1,5 +1,5 @@
-import { IRTDRepository as IRepo } from '@subdomains/app'
 import { IPlaylistSettings } from '@subdomains/cms/models'
+import { IRTDRepository as IRepo } from '@subdomains/firebase'
 
 /**
  * @file Subdomain Interfaces - Playlist Settings Repository

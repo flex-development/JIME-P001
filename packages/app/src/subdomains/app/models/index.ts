@@ -4,6 +4,5 @@
  */
 
 export * from './MutatedProps'
-export * from './RTDRepository'
 
 /* eslint-disable prettier/prettier */

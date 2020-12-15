@@ -8,7 +8,7 @@ import { isEmpty } from 'lodash'
 
 /**
  * @file Firebase Web Configuration
- * @module config/firebase
+ * @module subdomains/firebase/config/web
  */
 
 // Don't initialize Analytics in Node environments or if config is invalid
@@ -30,10 +30,10 @@ export const getFirebaseApp = (): Firebase.app.App => {
   return app
 }
 
-export const firebase = getFirebaseApp()
+export const app = getFirebaseApp()
 
-export const auth = firebase.auth()
-export const database = firebase.database()
-export const storage = firebase.storage()
+export const auth = app.auth()
+export const database = app.database()
+export const storage = app.storage()
 
 export default Firebase

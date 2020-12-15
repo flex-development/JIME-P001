@@ -6,7 +6,7 @@ import { createError, IEntity } from '@flex-development/kustomzcore'
 import {
   FirebaseAdaptorDatabase,
   FirebaseAdaptorReference
-} from '@subdomains/app/utils'
+} from '@subdomains/firebase/utils/types'
 import { ClassType, transformAndValidate } from 'class-transformer-validator'
 import { getFromContainer } from 'class-validator'
 import { isEmpty, merge, omit } from 'lodash'
@@ -21,7 +21,7 @@ import {
 
 /**
  * @file Firebase RTD Repository Model
- * @module subdomains/app/models/RTDRepository/impl
+ * @module subdomains/firebase/models/RTDRepository/impl
  * @see https://firebase.google.com/docs/database
  */
 

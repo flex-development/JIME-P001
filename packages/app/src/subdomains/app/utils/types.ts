@@ -1,8 +1,7 @@
-import * as FirebaseTesting from '@firebase/rules-unit-testing'
+import { ProviderSessionGitHub } from '@app/subdomains/cms/services'
 import { AnyObject } from '@flex-development/json'
-import FirebaseAdmin from 'firebase-admin'
-import Firebase from 'firebase/app'
 import { Redirect } from 'next'
+import { DocumentInitialProps as InitialProps } from 'next/document'
 import { ParsedUrlQuery } from 'querystring'
 import {
   ICollectionListing,
@@ -49,40 +48,11 @@ export interface CMSPageParams extends ParsedUrlQuery {
 }
 
 /**
- * Types of Firebase modules.
+ * Initial `Document` props.
  */
-export type FirebaseAdaptor =
-  | typeof Firebase
-  | typeof FirebaseAdmin
-  | FirebaseTestApp
-
-/**
- * Firebase or Firebase Admin Realtime Database service.
- */
-export type FirebaseAdaptorDatabase = ReturnType<FirebaseAdaptor['database']>
-
-/**
- * Firebase or Firebase Admin RTD query object.
- */
-export type FirebaseAdaptorDatabaseQuery =
-  | FirebaseAdmin.database.Query
-  | Firebase.database.Query
-
-/**
- * Firebase or Firebase Admin RTD reference.
- */
-export type FirebaseAdaptorReference = ReturnType<
-  FirebaseAdaptorDatabase['ref']
->
-
-/**
- * Application returned by `@firebase/rules-unit-testing` module.
- *
- * @see https://www.npmjs.com/package/@firebase/rules-unit-testing
- */
-export type FirebaseTestApp =
-  | ReturnType<typeof FirebaseTesting.initializeTestApp>
-  | ReturnType<typeof FirebaseTesting.initializeAdminApp>
+export type DocumentInitialProps = InitialProps & {
+  session: ProviderSessionGitHub
+}
 
 /**
  * Object indicating that the user should be redirected to the `/404` page.

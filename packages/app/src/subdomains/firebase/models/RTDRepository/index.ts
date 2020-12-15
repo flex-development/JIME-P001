@@ -1,6 +1,6 @@
 /**
  * @file Entry Point - RTDRepository
- * @module subdomains/app/models/RTDRepository
+ * @module subdomains/firebase/models/RTDRepository
  */
 
 export * from './IRTDRepository'

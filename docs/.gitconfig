@@ -70,6 +70,9 @@
   # Code improvements
   refactor = "!f() { git ac \"refactor: $@\"; }; f"
 
+  # Revert past changes
+  revert = "!f() { git ac \"revert: $@\"; }; f"
+
   # Changes that do not affect the meaning of the code
   style = "!f() { git ac \"style: $@\"; }; f"
 

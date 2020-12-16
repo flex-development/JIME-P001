@@ -140,6 +140,8 @@ export const Link: FREC<LinkProps> = forwardRef((props, ref) => {
 
   if (sanitized['onClick'] && _href.current === '#') _href.current = undefined
 
+  if (sanitized['target'] === '_blank') sanitized['rel'] = 'noopener noreferrer'
+
   useEffect(() => {
     _href.current = href
   }, [href])

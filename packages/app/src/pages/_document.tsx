@@ -118,6 +118,8 @@ export default class Document extends NextDocument<DocumentInitialProps> {
           />
         </Head>
         <body data-cms-enabled={!!this.props.session}>
+          <noscript>You need to enable JavaScript to view this site.</noscript>
+
           <Main />
           <NextScript />
         </body>

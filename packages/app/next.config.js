@@ -40,6 +40,15 @@ module.exports = {
   },
 
   /**
+   * Experimental features config.
+   */
+  experimental: {
+    granularChunks: true,
+    optimizeFonts: true,
+    optimizeImages: true
+  },
+
+  /**
    * Returns the headers configuration.
    *
    * @see https://nextjs.org/docs/api-reference/next.config.js/headers

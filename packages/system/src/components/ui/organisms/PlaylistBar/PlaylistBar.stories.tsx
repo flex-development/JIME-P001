@@ -1,4 +1,4 @@
-import SONGS from '@system-mocks/data/song-attributes.mock.json'
+import { SONGS } from '@system-mocks/utils'
 import { StoryFN } from '@system/types/storybook'
 import { PlaylistBar, PlaylistBarProps } from './PlaylistBar'
 
@@ -8,6 +8,9 @@ import { PlaylistBar, PlaylistBarProps } from './PlaylistBar'
  */
 
 export default {
+  args: {
+    songs: SONGS
+  },
   component: PlaylistBar,
   parameters: {
     jest: ['PlaylistBar']
@@ -19,15 +22,4 @@ export const Default: StoryFN<PlaylistBarProps> = (args: PlaylistBarProps) => (
   <PlaylistBar {...args} />
 )
 
-Default.args = {
-  song: SONGS[3]
-}
-
-export const Playing: StoryFN<PlaylistBarProps> = (args: PlaylistBarProps) => (
-  <PlaylistBar {...args} />
-)
-
-Playing.args = {
-  playback: 'playing',
-  song: SONGS[1]
-}
+Default.args = {}

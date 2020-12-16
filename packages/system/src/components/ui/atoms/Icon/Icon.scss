@@ -3,6 +3,10 @@
 /// ----------------------------------------------------------------------------
 
 .icon {
+  &[class^='bi'] {
+    display: inline-flex;
+  }
+
   &[data-position]:not(&.navbar-toggler-icon) {
     font-size: map-get($font-sizes, xl);
   }

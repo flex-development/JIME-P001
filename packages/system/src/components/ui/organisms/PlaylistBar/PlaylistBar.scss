@@ -5,12 +5,16 @@
 .playlistbar {
   @include border($border-color, $border-width, top);
 
-  @include flex(center, space-between);
+  @include flex(center, center, column);
 
   @include padding-y($spacers-0);
 
   background-color: $body-bg;
   color: $light;
+
+  > .row {
+    @include flex(center, space-between);
+  }
 
   // Image
   &-artwork {

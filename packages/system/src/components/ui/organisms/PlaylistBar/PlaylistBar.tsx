@@ -1,134 +1,188 @@
 import { ANYTHING } from '@flex-development/json'
+import { MusicKitSongAttributes as SongAttributes } from '@flex-development/kustomzcore'
 import {
-  MusicKitPlaybackState,
-  MusicKitSongAttributes
-} from '@flex-development/kustomzcore'
-import {
+  Audio,
   Button,
   Column,
   FlexBox,
-  IconProps,
   Image,
   Link,
   Paragraph,
+  Row,
   Section
 } from '@system/components/ui/atoms'
-import { useSanitizedProps } from '@system/hooks'
+import { useSanitizedProps, useSongs } from '@system/hooks'
 import { EventHandlers, MutatedProps } from '@system/types'
-import { isEmpty } from 'lodash'
-import { FC } from 'react'
+import { getSongArtworkURL } from '@system/utils'
+import { isFunction, merge } from 'lodash'
+import { FC, useCallback, useMemo } from 'react'
+import { useSpring } from 'react-spring'
+import { useAudio, useEvent } from 'react-use'
 
 /**
- * @file Display the current song in the shop playlist
+ * @file Display an Apple Music playlist stream
  * @module components/ui/organisms/PlaylistBar/impl
  */
 
 export interface PlaylistBarProps extends MutatedProps {
   /**
+   * If true, begin playback immediately.
+   *
+   * @default true
+   */
+  auto?: boolean
+
+  /**
+   * Index of the song currently playing.
+   */
+  curr?: number
+
+  /**
    * Playback button handler.
    *
-   * @param event - `click` event from playback button
+   * The playback state can be accessed by evaluating `event.target.value`.
+   * If a song is playing, the value will be 'play', otherwise it will be
+   * 'pause'.
    */
   handlePlayback?(event: EventHandlers.Click.Button): ANYTHING
 
   /**
-   * Skip button handler. This function will be fired when a the `skip_previous`
-   * or `skip_next` button is clicked. The name of the button clicked can be
-   * found by evaluting `event.target.name`.
+   * Skip button handler.
    *
-   * @param event - `click` event from skip button
+   * This function will be fired when the `skip_previous` or `skip_next` button
+   * is clicked. The name of the button clicked can be found by evaluting
+   * `event.target.name`.
    */
   handleSkip?(event: EventHandlers.Click.Button): ANYTHING
 
   /**
-   * Queue playback state. If `playing`, the playback button will display a
-   * pause icon. Otherwise, a play icon will be displayed inside the button.
+   * Array of song attributes.
    *
-   * @default 'none'
+   * @default []
    */
-  playback?: MusicKitPlaybackState
-
-  /**
-   * Attributes of the current song.
-   */
-  song: MusicKitSongAttributes
+  songs?: SongAttributes[]
 }
 
 /**
- * Displays the current song of the shop playlist. Users can pause the playlist,
- * as well skip forward or backward.
+ * Audio player for the shop playlist. Users can pause the playlist, as well
+ * skip forward or backward.
  *
  * Renders a `Section` component with the class `playlistbar`.
  *
  * - https://github.com/wsmd/musickit-typescript
  */
 export const PlaylistBar: FC<PlaylistBarProps> = (props: PlaylistBarProps) => {
-  const {
-    handlePlayback = (event: EventHandlers.Click.Button) => {
-      event.preventDefault && event.preventDefault()
-      console.log(`Playback state: ${event.target.value}`)
-    },
-    handleSkip = (event: EventHandlers.Click.Button) => {
-      event.preventDefault && event.preventDefault()
-      console.log(event.target.name)
-    },
-    playback = 'none',
-    song = {} as MusicKitSongAttributes,
-    ...rest
-  } = props
+  const { auto, curr, handlePlayback, handleSkip, songs = [], ...rest } = props
 
-  const sanitized = useSanitizedProps<typeof rest>(rest, 'playlistbar')
+  // Handle tracks state
+  const { next, previous, song } = useSongs(songs, curr)
 
-  if (isEmpty(song)) return null
+  // Get song artwork URL
+  const artwork_url = useMemo<string>(() => getSongArtworkURL(song), [song])
 
-  let artwork_url = song.artwork?.url.replace('{w}', `${song.artwork.width}`)
-  artwork_url = artwork_url?.replace('{h}', `${song.artwork.height}`)
+  // Get <audio> src URL
+  const audio_src = song.previews?.[0]?.url
+
+  // Get reference to <audio> element and control <audio> actions
+  const [audio, audio_state, , audio_ref] = useAudio(
+    <Audio autoPlay={auto} hidden preload='auto' src={audio_src} />
+  )
+
+  // Animate ready state
+  const style = useSpring({
+    opacity: audio_ref.current?.readyState === 4 ? 1 : 0
+  })
+
+  // Get component props
+  const sanitized = useSanitizedProps<typeof rest>(
+    { ...rest, style: merge(rest.style, style) },
+    'playlistbar'
+  )
+
+  /**
+   * Pauses or plays the current song.
+   *
+   * @param event - `<button>` click event
+   */
+  const onClickPlayback = (event: EventHandlers.Click.Button) => {
+    event.preventDefault()
+
+    if (isFunction(handlePlayback)) handlePlayback(event)
+
+    if (event.target.value === 'pause') return audio_ref.current?.play()
+    return audio_ref.current?.pause()
+  }
+
+  /* Callback version of `onClickPlayback` */
+  const onClickPlaybackCB = useCallback(onClickPlayback, [
+    audio_ref,
+    handlePlayback
+  ])
+
+  /**
+   * Handles skipping backward or forward in the playlist.
+   *
+   * @param event - `<button>` click event
+   */
+  const onClickSkip = (event: EventHandlers.Click.Button) => {
+    event.preventDefault()
+
+    if (isFunction(handleSkip)) handleSkip(event)
+    return event.target.name === 'skip_previous' ? previous() : next()
+  }
+
+  /* Callback version of `onClickSkip` */
+  const onClickSkipCB = useCallback(onClickSkip, [handleSkip, next, previous])
+
+  // Update active song index when current song changes
+  useEvent('ended', next, audio_ref.current)
 
   return (
     <Section {...sanitized}>
-      <Column align='center' flex span={8}>
-        <Link
-          className='playlistbar-artwork'
-          href={artwork_url}
-          target='_blank'
-        >
-          <Image alt={`Artwork for ${song.name}`} fluid src={artwork_url} />
-        </Link>
-        <FlexBox direction='column'>
-          <Paragraph className='playlistbar-song'>{song.name}</Paragraph>
-          <Paragraph className='playlistbar-artist'>
-            {song.artistName}
-          </Paragraph>
-        </FlexBox>
-      </Column>
+      <Row className='pl-0-first pr-0-last w-100' max={2}>
+        <Column align='center' flex>
+          <Link
+            className='playlistbar-artwork'
+            href={artwork_url}
+            target='_blank'
+          >
+            <Image alt={`Artwork for ${song.name}`} fluid src={artwork_url} />
+          </Link>
+          <FlexBox direction='column'>
+            <Paragraph className='playlistbar-song'>{song.name}</Paragraph>
+            <Paragraph className='playlistbar-artist'>
+              {song.artistName}
+            </Paragraph>
+          </FlexBox>
+        </Column>
 
-      <Column align='center' flex justify='end' span={4}>
-        <Button
-          className='playlistbar-control-skip'
-          icon={{ children: 'skip_previous', outlined: false }}
-          name='skip_previous'
-          onClick={handleSkip}
-          variant='ghost'
-        />
-        <Button
-          className='playlistbar-control-playback'
-          icon={((): IconProps => {
-            const prefix = playback === 'playing' ? 'pause' : 'play'
-            return { children: `${prefix}_circle_outline` }
-          })()}
-          onClick={handlePlayback}
-          name='playback'
-          value={playback}
-          variant='ghost'
-        />
-        <Button
-          className='playlistbar-control-skip'
-          icon={{ children: 'skip_next', outlined: false }}
-          name='skip_next'
-          onClick={handleSkip}
-          variant='ghost'
-        />
-      </Column>
+        <Column align='center' flex justify='end'>
+          <Button
+            className='playlistbar-control-skip'
+            icon={{ bi: 'skip-backward-fill' }}
+            name='skip_previous'
+            onClick={onClickSkipCB}
+            variant='ghost'
+          />
+          <Button
+            className='playlistbar-control-playback'
+            icon={{ bi: audio_state.paused ? 'play-circle' : 'pause-circle' }}
+            onClick={onClickPlaybackCB}
+            name='playback'
+            value={audio_state.paused ? 'pause' : 'play'}
+            variant='ghost'
+          />
+          <Button
+            className='playlistbar-control-skip'
+            icon={{ bi: 'skip-forward-fill' }}
+            name='skip_next'
+            onClick={onClickSkipCB}
+            variant='ghost'
+          />
+        </Column>
+      </Row>
+
+      {audio}
     </Section>
   )
 }
@@ -136,6 +190,6 @@ export const PlaylistBar: FC<PlaylistBarProps> = (props: PlaylistBarProps) => {
 PlaylistBar.displayName = 'PlaylistBar'
 
 PlaylistBar.defaultProps = {
-  playback: 'none',
-  song: {} as MusicKitSongAttributes
+  auto: true,
+  songs: []
 }

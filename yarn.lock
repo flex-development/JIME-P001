@@ -4706,11 +4706,6 @@
     "@types/mime" "*"
     "@types/node" "*"
 
-"@types/shopify-buy@^2.10.3":
-  version "2.10.3"
-  resolved "https://registry.yarnpkg.com/@types/shopify-buy/-/shopify-buy-2.10.3.tgz#9c5f1f45c80feb914f6699c4c52a5a3158877e53"
-  integrity sha512-PzVmJ+B1NN5DijENIHXDtE8hWrWxFocMhYvPJqV5kOhGN7DRdCaKMXQlxhZjP1DLGs7mKDmU8VDv1Mk+TgRZww==
-
 "@types/sizzle@*":
   version "2.3.2"
   resolved "https://registry.yarnpkg.com/@types/sizzle/-/sizzle-2.3.2.tgz#a811b8c18e2babab7d542b3365887ae2e4d9de47"
@@ -6305,6 +6300,11 @@ boolbase@~1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/boolbase/-/boolbase-1.0.0.tgz#68dff5fbe60c51eb37725ea9e3ed310dcc1e776e"
   integrity sha1-aN/1++YMUes3cl6p4+0xDcwed24=
+
+bootstrap-icons@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/bootstrap-icons/-/bootstrap-icons-1.2.1.tgz#20eac9ec348744edc8b9e184a0f7057d1430f609"
+  integrity sha512-c63G57gFN9Yz1Dmi1RRpBd+cm/Lil31nRsnYxX8VeC/2wTk1Z54OU4twyLAVpgj2lX2lyHx0M8+xhEdkr79RAg==
 
 bootstrap@^5.0.0-alpha1:
   version "5.0.0-beta1"
@@ -18373,11 +18373,6 @@ shopify-api-node@^3.4.4:
     lodash "^4.17.10"
     qs "^6.5.2"
     stopcock "^1.0.0"
-
-shopify-buy@^2.11.0:
-  version "2.11.0"
-  resolved "https://registry.yarnpkg.com/shopify-buy/-/shopify-buy-2.11.0.tgz#0f7cb52741395e4ae778c336f32ddf3fe67c2f35"
-  integrity sha512-bGjS1b/VCPvCjazSstlKwgLtK1WBotWom06/12loja8yfo/cWkLuJsakBbQe1uEIDiOLhKaR0M0CAXZFheYDug==
 
 shx@^0.3.2:
   version "0.3.3"

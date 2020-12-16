@@ -72,7 +72,7 @@ export default class Document extends NextDocument<DocumentInitialProps> {
    */
   render(): JSX.Element {
     return (
-      <Html lang='en'>
+      <Html dir='ltr' lang='en'>
         <Head>
           {/* Set character encoding for the document */}
           <meta charSet='utf-8' />

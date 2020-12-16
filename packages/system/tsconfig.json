@@ -22,5 +22,11 @@
   "exclude": ["node_modules"],
   "extends": "../../tsconfig.json",
   "files": ["jest-env.d.ts"],
-  "include": ["__tests__", ".storybook", "src", "jest.setup.ts"]
+  "include": [
+    "__tests__",
+    ".storybook",
+    ".storybook/components",
+    "src",
+    "jest.setup.ts"
+  ]
 }

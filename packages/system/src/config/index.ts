@@ -4,9 +4,8 @@
  */
 
 export * from './args'
-export { default as colors } from './colors'
 export * from './constants'
-export * from './typography'
+export * from './sb'
 export * from './viewports'
 
 /* eslint-disable prettier/prettier */

@@ -16,38 +16,30 @@ export default {
   title: 'Library/Atoms/Icon'
 }
 
-/**
- * Menu {@link Icon} story.
- */
-export const Menu: StoryFN<IconProps> = (args: IconProps) => <Icon {...args} />
-
-Menu.args = {
-  c: 'light',
-  children: 'menu'
-}
-
-/**
- * Person {@link Icon} story.
- */
-export const Person: StoryFN<IconProps> = (args: IconProps) => (
+export const Bootstrap: StoryFN<IconProps> = (args: IconProps) => (
   <Icon {...args} />
 )
 
-Person.args = {
-  c: 'light',
-  children: 'person',
-  className: 'o-25',
-  outlined: false
+Bootstrap.args = {
+  bi: 'bootstrap-fill',
+  c: 'primary',
+  className: 'd-inline-flex text-lg'
 }
 
-/**
- * Search {@link Icon} story.
- */
-export const Search: StoryFN<IconProps> = (args: IconProps) => (
+export const FontAwesome: StoryFN<IconProps> = (args: IconProps) => (
   <Icon {...args} />
 )
 
-Search.args = {
+FontAwesome.args = {
+  c: 'secondary',
+  fa: 'spinner fas fa-spin'
+}
+
+export const Material: StoryFN<IconProps> = (args: IconProps) => (
+  <Icon {...args} />
+)
+
+Material.args = {
   c: 'light',
-  children: 'search'
+  mat: 'search'
 }

@@ -59,10 +59,11 @@ module.exports = {
     './jest.setup.ts'
   ],
   testPathIgnorePatterns: [
+    '__tests__/__mocks__/',
     'build/',
     'dist/',
     'node_modules/',
-    '__tests__/__mocks__/',
+    'src/theme/',
     '(.*).d.ts'
   ],
   transform: {

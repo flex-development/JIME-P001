@@ -1,6 +1,9 @@
 /**
  * @file Custom Storybook components
- * @module utils/components
+ * @module storybook/components
  */
 
 export * from './Documentation'
+export * from './ThemeTypset'
+
+/* eslint-disable prettier/prettier */

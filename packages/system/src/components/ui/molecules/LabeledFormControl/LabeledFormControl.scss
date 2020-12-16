@@ -23,7 +23,7 @@ $inner-control-font-size: $font-size-sm - 0.075;
     @include border($ghost);
 
     @include border(
-      $light-25,
+      rgba($light, 0.25),
       $border-width-thin,
       if($direction == column-reverse, bottom, top)
     );

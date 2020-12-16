@@ -18,14 +18,22 @@ export interface IconProps extends SpanProps {
   bi?: string
 
   /**
-   * If true, render a Font Awesome icon.
+   * If defined, render a Font Awesome icon.
    *
-   * - https://fontawesome.com/
+   * - https://fontawesome.com/icons
    */
   fa?: string
 
   /**
-   * Get the outlined version of the Material UI icon.
+   * If defined, render a Material Icon.
+   *
+   * - https://material.io/resources/icons
+   */
+  mat?: string
+
+  /**
+   * If rendering a Material Icon, add the class `material-icons-outlined`
+   * instead of `material-icons`.
    *
    * - https://material.io/resources/icons/?style=outline
    */
@@ -48,29 +56,36 @@ export interface IconProps extends SpanProps {
  * - https://fontawesome.com/
  * - https://icons.getbootstrap.com
  * - https://material.io/resources/icons
- * - https://developer.mozilla.org/docs/Web/HTML/Element/span
- * - https://developer.mozilla.org/docs/Web/API/HTMLSpanElement
  */
 export const Icon: FREC<IconProps> = forwardRef((props, ref) => {
-  const { bi, fa, outlined, position, ...rest } = props
+  const { bi, fa, mat, outlined, position, ...rest } = props
+
+  const _bi = !isEmpty(bi)
+  const _fa = !isEmpty(fa)
+  const _mat = !isEmpty(mat)
+
+  const boostrap = _bi && !_fa && !_mat
+  const fontawesome = _fa && !_bi && !_mat
+  const material = _mat && !_bi && !_fa
 
   const sanitized = useSanitizedProps<typeof rest, SpanProps>(rest, {
-    [`bi-${bi}`]: !isEmpty(bi),
-    [`fa-${fa}`]: !isEmpty(fa),
+    [`bi-${bi}`]: boostrap,
+    [`fa-${fa}`]: fontawesome,
     icon: true,
-    'material-icons': !outlined && isEmpty(bi) && isEmpty(fa),
-    'material-icons-outlined': outlined && isEmpty(bi) && isEmpty(fa)
+    'material-icons': material && !outlined,
+    'material-icons-outlined': material && outlined
   })
 
   sanitized['aria-hidden'] = rest.children ? rest?.['aria-hidden'] : false
   sanitized['data-position'] = position
 
-  if (!isEmpty(bi)) sanitized['data-bi'] = true
+  if (boostrap) sanitized['data-bi'] = true
+  if (fontawesome) sanitized['data-fa'] = true
 
-  if (!isEmpty(fa)) sanitized['data-fa'] = true
+  if (material) {
+    sanitized['children'] = mat
 
-  if (isEmpty(bi) && isEmpty(fa)) {
-    sanitized['data-ligature'] = sanitized.children
+    sanitized['data-ligature'] = sanitized['children']
     sanitized['data-material'] = true
   }
 

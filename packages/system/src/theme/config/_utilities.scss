@@ -39,24 +39,6 @@ $borders: (
 // Colors
 // -----------------------------------------------------------------------------
 
-$theme-colors: (
-  danger: bootstrap.$danger,
-  dark: $dark,
-  darker: $darker,
-  dark-25: $dark-25,
-  ghost: $ghost,
-  info: bootstrap.$info,
-  light: $light,
-  light-5: $light-5,
-  light-25: $light-25,
-  primary: $primary,
-  primary-25: $primary-25,
-  secondary: $secondary,
-  secondary-25: $secondary-25,
-  success: bootstrap.$success,
-  warning: bootstrap.$warning
-);
-
 $color-utils: map-merge(
   $theme-colors,
   (
@@ -200,7 +182,7 @@ $sizes: (
 // -----------------------------------------------------------------------------
 
 $font-families: (
-  monospace: var(--bs-font-monospace),
+  monospace: $font-family-monospace,
   sans: $font-family-sans-serif,
   special: $font-family-sans-serif-special
 );

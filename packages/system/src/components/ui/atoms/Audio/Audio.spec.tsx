@@ -1,5 +1,4 @@
 import { render } from '@testing-library/react'
-import { ReactElement } from 'react'
 import { Audio } from './Audio'
 
 /**
@@ -9,7 +8,6 @@ import { Audio } from './Audio'
 
 it('renders an <audio> element', () => {
   const { container } = render(<Audio />)
-  const element = (container.firstChild as unknown) as ReactElement
 
-  expect(element.type).toBe('audio')
+  expect(container.firstChild).toMatchInlineSnapshot('<audio />')
 })

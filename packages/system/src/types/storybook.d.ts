@@ -12,7 +12,7 @@ export type ColorItemProps = {
   colors: string[] | Record<string, string>
 }
 
-export type StorybookBackgroundColorConfig = {
+export type SBBackgroundColor = {
   name: string
   value: string
 }

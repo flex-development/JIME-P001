@@ -11,7 +11,6 @@ export * from './getProductVariantImage'
 export * from './getResponsiveUtilities'
 export * from './getSongArtworkURL'
 export * from './getSubtotal'
-export * from './getThemeColor'
 export * from './sanitizeQuantity'
 export * from './uuid'
 

@@ -15,22 +15,21 @@ $darker: #121629;
 $light: #fffffe;
 $primary: #eebbc3;
 $secondary: #b8c1ec;
-
-$darker-75: rgba($darker, 0.75);
-$light-75: rgba($light, 0.75);
-
-$darker-50: rgba($darker, 0.5);
-$light-50: rgba($light, 0.5);
-$secondary-50: rgba($secondary, 0.5);
-
-$dark-25: rgba($dark, 0.25);
-$light-25: rgba($light, 0.25);
-$primary-25: rgba($primary, 0.25);
-$secondary-25: rgba($secondary, 0.25);
-
-$light-5: rgba($light, 0.05);
-
 $ghost: transparent;
+
+$theme-colors: (
+  'black': bootstrap.$black,
+  danger: bootstrap.$danger,
+  dark: $dark,
+  darker: $darker,
+  ghost: $ghost,
+  info: bootstrap.$info,
+  light: $light,
+  primary: $primary,
+  secondary: $secondary,
+  success: bootstrap.$success,
+  warning: bootstrap.$warning
+);
 
 // -----------------------------------------------------------------------------
 // Options
@@ -143,30 +142,35 @@ $border-radius-lg: $border-radius;
 // Typography
 // -----------------------------------------------------------------------------
 
+$font-family-monospace: SFMono-Regular, Menlo, "Courier New", monospace;
 $font-family-sans-serif: ibm-plex-sans, sans-serif;
 $font-family-sans-serif-special: quimby-gubernatorial, sans-serif;
 
-$font-size-xs: rem(12);
-$font-size-sm: rem(14);
-$font-size-lg: rem(18);
-$font-size-xl: rem(20);
-$font-size-xxl: rem(24);
+$font-size-xs: rem(12); // 12px
+$font-size-sm: rem(14); // 14px
+$font-size-md: bootstrap.$font-size-base; // 16px
+$font-size-lg: rem(18); // 18px
+$font-size-xl: rem(20); // 20px
+$font-size-xxl: rem(24); // 24px
 
-$h1-font-size: rem(60);
-$h2-font-size: rem(48);
-$h3-font-size: rem(36);
+$h1-font-size: rem(60); // 60px
+$h2-font-size: rem(48); // 48px
+$h3-font-size: rem(36); // 36px
 $h4-font-size: $font-size-xxl;
 $h5-font-size: $font-size-xl;
 $h6-font-size: $font-size-lg;
 
 $font-weight-hairline: 100;
 $font-weight-thin: 200;
+$font-weight-light: 300;
+$font-weight-normal: 400;
 $font-weight-medium: 500;
 $font-weight-semibold: 600;
+$font-weight-bold: 700;
 $font-weight-extrabold: 800;
 $font-weight-black: 900;
 
-$headings-font-weight: bootstrap.$font-weight-bold;
+$headings-font-weight: $font-weight-bold;
 $headings-color: $light;
 $headings-text-transform: uppercase;
 
@@ -210,7 +214,7 @@ $input-border-color: $border-color;
 
 $input-focus-border-color: $input-border-color;
 
-$input-placeholder-color: $secondary-50;
+$input-placeholder-color: rgba($secondary, 0.5);
 
 $form-control-border: bootstrap.$input-border-width solid
   bootstrap.$input-border-color;

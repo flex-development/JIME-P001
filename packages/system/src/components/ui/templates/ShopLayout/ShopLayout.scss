@@ -24,7 +24,7 @@
     @include make-col(12);
 
     @include media-breakpoint-between(sm, lg) {
-      background-color: $darker-75;
+      background-color: rgba($darker, 0.75);
     }
 
     @include media-breakpoint-up(lg) {

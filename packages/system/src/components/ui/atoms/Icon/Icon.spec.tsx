@@ -1,43 +1,34 @@
 import { render } from '@testing-library/react'
-import { Menu, Person, Search } from './Icon.stories'
+import { Bootstrap, FontAwesome, Material } from './Icon.stories'
 
 /**
  * @file Tests - Icon
  * @module components/ui/atoms/Icon/spec
  */
 
-it('renders a menu icon', () => {
-  const { getByText } = render(<Menu {...Menu.args} />)
-  const { children } = Menu.args as ArgsMatcher
+it('renders a bootstrap icon', () => {
+  const { container } = render(<Bootstrap {...Bootstrap.args} />)
 
-  const element = getByText(children)
+  expect(container.firstChild).toHaveAttribute('data-bi')
 
-  expect(element).toHaveAttribute('data-ligature', children)
-
-  expect(element).not.toHaveClass('material-icons')
-  expect(element).toHaveClass('material-icons-outlined')
+  expect(container.firstChild).not.toHaveAttribute('data-fa')
+  expect(container.firstChild).not.toHaveAttribute('data-material')
 })
 
-it('renders a solid style person icon', () => {
-  const { getByText } = render(<Person {...Person.args} />)
-  const { children } = Person.args as ArgsMatcher
+it('renders a font awesome icon', () => {
+  const { container } = render(<FontAwesome {...FontAwesome.args} />)
 
-  const element = getByText(children)
+  expect(container.firstChild).toHaveAttribute('data-fa')
 
-  expect(element).toHaveAttribute('data-ligature', children)
-
-  expect(element).toHaveClass('material-icons')
-  expect(element).not.toHaveClass('material-icons-outlined')
+  expect(container.firstChild).not.toHaveAttribute('data-bi')
+  expect(container.firstChild).not.toHaveAttribute('data-material')
 })
 
-it('renders a search icon', () => {
-  const { getByText } = render(<Search {...Search.args} />)
-  const { children } = Search.args as ArgsMatcher
+it('renders a material icon', () => {
+  const { container } = render(<Material {...Material.args} />)
 
-  const element = getByText(children)
+  expect(container.firstChild).toHaveAttribute('data-material')
 
-  expect(element).toHaveAttribute('data-ligature', children)
-
-  expect(element).not.toHaveClass('material-icons')
-  expect(element).toHaveClass('material-icons-outlined')
+  expect(container.firstChild).not.toHaveAttribute('data-bi')
+  expect(container.firstChild).not.toHaveAttribute('data-fa')
 })

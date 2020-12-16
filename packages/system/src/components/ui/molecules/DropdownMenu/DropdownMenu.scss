@@ -49,7 +49,7 @@
     }
 
     &:not(:last-of-type) {
-      @include border($secondary-25, $border-width-thin, bottom);
+      @include border(rgba($secondary, 0.25), $border-width-thin, bottom);
     }
 
     a {
@@ -58,7 +58,7 @@
   }
 
   &-toggle {
-    border-bottom: $border-width-thin solid $light-25;
+    border-bottom: $border-width-thin solid rgba($light, 0.25);
     font-size: $dropdown-font-size;
 
     &::after {

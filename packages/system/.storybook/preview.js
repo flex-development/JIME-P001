@@ -5,36 +5,23 @@ import { withTests } from '@storybook/addon-jest'
 import { withHTML } from '@whitespace/storybook-addon-html/react'
 import { FirebaseAppProvider } from 'reactfire'
 import prettier from '../../../.prettierrc.json'
-import { AdobeXDArtboards } from '../src/config'
+import { AdobeXDArtboards, colors_sb_bkg } from '../src/config'
 import '../src/index.scss'
-import { getThemeColor } from '../src/utils'
 import results from '../__tests__/jest-test-results.json'
 import { MockCartContextProvider } from '../__tests__/__mocks__/components'
 import { Documentation } from './components'
 
 /**
- * @file Storybook Configuration
+ * @file Storybook Preview Configuration
  * @module storybook/preview
  */
 
 export const parameters = {
   a11y: {},
   actions: { argTypesRegex: '^(handle|on).*' },
-  backgrounds: {
-    default: 'Dark',
-    values: [
-      getThemeColor('dark', false),
-      getThemeColor('darker', false),
-      getThemeColor('light', false),
-      getThemeColor('primary', false),
-      getThemeColor('secondary', false)
-    ]
-  },
+  backgrounds: { default: 'Dark', values: Object.values(colors_sb_bkg) },
   controls: { expanded: false },
-  docs: {
-    container: DocsContainer,
-    page: Documentation
-  },
+  docs: { container: DocsContainer, page: Documentation },
   viewport: { viewports: AdobeXDArtboards }
 }
 

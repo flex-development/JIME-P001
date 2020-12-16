@@ -48,6 +48,7 @@
     "@types/bootstrap": "^4.5.0",
     "@types/classnames": "^2.2.10",
     "@types/mdx-js__react": "^1.5.3",
+    "@types/styled-system": "^5.1.10",
     "bootstrap": "^5.0.0-alpha1",
     "bootstrap-icons": "^1.2.1",
     "classnames": "^2.2.6",

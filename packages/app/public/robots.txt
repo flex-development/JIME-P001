@@ -1,0 +1,8 @@
+# Webcrawler Config
+# See: https://varvy.com/robottxt.html
+# See: https://linguinecode.com/post/add-robots-txt-file-sitemaps-nextjs
+
+User-agent: *
+Allow: /*
+
+Disallow: /api/*

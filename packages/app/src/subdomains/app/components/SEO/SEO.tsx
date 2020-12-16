@@ -105,6 +105,9 @@ export const SEO: FC<SEOProps> = (props: SEOProps) => {
       <meta name='description' content={description} />
       <meta name='keywords' content={keywords} />
 
+      {/* Prevent duplicate content issues */}
+      <link rel='canonical' href={cannonical_url} />
+
       {/* Facebook social meta tags */}
       {Object.keys(og).map(key => {
         const content = og[key]

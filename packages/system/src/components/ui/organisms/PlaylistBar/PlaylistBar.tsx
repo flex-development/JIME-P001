@@ -14,7 +14,7 @@ import {
 import { useSanitizedProps, useSongs } from '@system/hooks'
 import { EventHandlers, MutatedProps } from '@system/types'
 import { getSongArtworkURL } from '@system/utils'
-import { isFunction, merge } from 'lodash'
+import { isFunction } from 'lodash'
 import { FC, useCallback, useMemo } from 'react'
 import { useSpring } from 'react-spring'
 import { useAudio, useEvent } from 'react-use'
@@ -94,10 +94,7 @@ export const PlaylistBar: FC<PlaylistBarProps> = (props: PlaylistBarProps) => {
   })
 
   // Get component props
-  const sanitized = useSanitizedProps<typeof rest>(
-    { ...rest, style: merge(rest.style, style) },
-    'playlistbar'
-  )
+  const sanitized = useSanitizedProps<typeof rest>(rest, 'playlistbar')
 
   /**
    * Pauses or plays the current song.
@@ -140,7 +137,7 @@ export const PlaylistBar: FC<PlaylistBarProps> = (props: PlaylistBarProps) => {
   return (
     <Section {...sanitized}>
       <Row className='pl-0-first pr-0-last w-100' max={2}>
-        <Column align='center' flex>
+        <Column align='center' flex style={style}>
           <Link
             className='playlistbar-artwork'
             href={artwork_url}

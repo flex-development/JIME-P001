@@ -1,7 +1,9 @@
 import { AnyObject } from '@flex-development/json'
 import { MusicKitInstance } from '@flex-development/kustomzcore'
+import { useMemoCompare } from '@flex-development/kustomzdesign'
 import { createDeveloperToken } from '@subdomains/streaming/utils'
-import { useEffect, useState } from 'react'
+import { isEmpty } from 'lodash'
+import { useEffect, useRef } from 'react'
 import pkg from '../../../../../package.json'
 
 /**
@@ -20,19 +22,20 @@ export type UseMusicKit = MusicKitInstance | AnyObject
  * @see https://developer.apple.com/documentation/musickitjs/
  */
 export const useMusicKit = (): UseMusicKit => {
-  const [instance, setInstance] = useState<UseMusicKit>({})
+  const instance = useRef<UseMusicKit>({})
+  const _instance = useMemoCompare<typeof instance['current']>(instance.current)
 
   // Configure MusicKit and get instance
   useEffect(() => {
-    if (!MusicKit) return
+    // If MusicKit module isn't loaded or instance is already set, do nothing
+    if (!MusicKit || !isEmpty(_instance)) return
 
-    const new_instance: UseMusicKit = MusicKit.configure({
+    // Configure new MusicKit instance
+    instance.current = MusicKit.configure({
       app: { name: pkg.name, version: pkg.version },
       developerToken: createDeveloperToken()
     })
+  }, [_instance])
 
-    setInstance(new_instance)
-  }, [])
-
-  return instance
+  return _instance
 }

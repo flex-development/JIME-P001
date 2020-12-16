@@ -1,3 +1,4 @@
+import { usePlaylist } from '@app/subdomains/streaming'
 import {
   LinkProps,
   ShopHeaderProps,
@@ -14,6 +15,7 @@ import {
 import { merge } from 'lodash'
 import { Provider as NextAuthProvider, Session } from 'next-auth/client'
 import Head from 'next/head'
+import { MusicKitInstance } from 'packages/core/src'
 import { FC, useCallback } from 'react'
 
 /**
@@ -31,6 +33,14 @@ export interface AppLayoutProps {
    * Props from Next.js data-fetching methods.
    */
   pageProps: IPageProps
+}
+
+const fetchPlaylist = async (
+  id: string,
+  kit: MusicKitInstance
+): Promise<MusicKit.Resource> => {
+  if (!kit) return {}
+  return kit.api.playlist(id)
 }
 
 /**
@@ -60,13 +70,10 @@ export const AppLayout: FC<AppLayoutProps> = (props: AppLayoutProps) => {
   const { modified: snippet } = useProfileSnippetForm()
 
   // Register playlist settings form
-  const { modified: playlist } = usePlaylistSettingsForm()
+  const { modified: playlist_settings } = usePlaylistSettingsForm()
 
-  // Handle playlist streaming
-  // const { kit, queue } = usePlaylist(playlist.url)
-
-  // Don't render content until queue is ready to be played
-  // if (isEmpty(queue)) return null
+  // Handle songs to stream
+  const playlist = usePlaylist(playlist_settings.url)
 
   /**
    * Redirects the user to the search page with their search {@param term}.
@@ -94,6 +101,7 @@ export const AppLayout: FC<AppLayoutProps> = (props: AppLayoutProps) => {
 
       <ShopLayout
         header={{ handleSearch: handleSearchCB }}
+        playlistbar={{ songs: playlist.songs }}
         sidebar={{
           age: snippet.age,
           img: snippet.img || undefined,

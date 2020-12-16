@@ -42,7 +42,8 @@
     "prestart": "NODE_ENV=production",
     "start": "next start",
     "build": "next build",
-    "now-build": "NODE_ENV=production; lerna link && yarn build"
+    "now-build": "NODE_ENV=production; lerna link && yarn build",
+    "find:unused": "next-unused"
   },
   "dependencies": {
     "@feathersjs/errors": "^4.5.3",
@@ -91,7 +92,27 @@
   },
   "devDependencies": {
     "@firebase/rules-unit-testing": "^1.0.9",
-    "babel-plugin-styled-components": "^1.11.1"
+    "babel-plugin-styled-components": "^1.11.1",
+    "next-unused": "^0.0.3"
   },
-  "peerDependencies": {}
+  "peerDependencies": {},
+  "next-unused": {
+    "alias": {
+      "@app": "src/",
+      "@app-mocks": "__mocks__/",
+      "@subdomains": "src/subdomains/",
+      "@system": "../system/src",
+      "@system-mocks": "../system/__tests__/__mocks__"
+    },
+    "debug": true,
+    "entrypoints": [
+      "__mocks__",
+      "src"
+    ],
+    "exclude": [],
+    "include": [
+      "__mocks__",
+      "src"
+    ]
+  }
 }

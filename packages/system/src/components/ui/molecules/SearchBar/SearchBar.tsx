@@ -63,7 +63,7 @@ export const SearchBar: FC<SearchBarProps> = (props: SearchBarProps) => {
       <Button
         aria-label='Search button'
         className='searchbar-btn'
-        icon={{ 'aria-label': 'Search icon', children: 'search' }}
+        icon={{ 'aria-label': 'Search icon', mat: 'search' }}
         onClick={(event: EventHandlers.Click.Button) => {
           return handleSearch(input.value, event)
         }}

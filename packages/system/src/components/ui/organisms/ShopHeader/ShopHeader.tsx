@@ -61,7 +61,7 @@ export const ShopHeader: FC<ShopHeaderProps> = (props: ShopHeaderProps) => {
       <Column align='center' flex>
         <Button
           className='shop-header-btn'
-          icon={{ children: 'menu' }}
+          icon={{ mat: 'menu' }}
           onClick={handleSidebar}
           name='sidebar'
           variant='ghost'

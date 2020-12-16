@@ -132,7 +132,7 @@ export const Sidebar: FREC<SidebarProps> = forwardRef((props, ref) => {
             xs={12}
           >
             <Paragraph className='sidebar-profile-online-status'>
-              <Icon outlined={false}>person</Icon>
+              <Icon mat='person' />
               Online Now!
             </Paragraph>
             <Paragraph className='sidebar-profile-name'>Morena</Paragraph>

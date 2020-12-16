@@ -4,6 +4,7 @@
  */
 
 export * from './Aside'
+export * from './Audio'
 export * from './Box'
 export * from './Button'
 export * from './Column'

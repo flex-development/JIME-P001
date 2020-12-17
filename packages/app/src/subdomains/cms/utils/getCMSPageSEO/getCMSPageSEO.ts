@@ -25,7 +25,7 @@ const getCMSPageSEO = (
   const seo: SEOProps = pick(page, ['description', 'keywords', 'title'])
 
   seo.og = {
-    image: `${process.env.SITE_URL}/assets/morena.jpeg`,
+    image: `${process.env.SITE_URL}/assets/img/morena.jpeg`,
     'image:alt': "Morena's profile picture",
     'image:height': '1080px',
     'image:width': '1080px'

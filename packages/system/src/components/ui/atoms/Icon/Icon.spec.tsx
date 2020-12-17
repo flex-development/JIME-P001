@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react'
-import { Bootstrap, FontAwesome, Material } from './Icon.stories'
+import { Bootstrap, Material } from './Icon.stories'
 
 /**
  * @file Tests - Icon
@@ -12,15 +12,6 @@ it('renders a bootstrap icon', () => {
   expect(container.firstChild).toHaveAttribute('data-bi')
 
   expect(container.firstChild).not.toHaveAttribute('data-fa')
-  expect(container.firstChild).not.toHaveAttribute('data-material')
-})
-
-it('renders a font awesome icon', () => {
-  const { container } = render(<FontAwesome {...FontAwesome.args} />)
-
-  expect(container.firstChild).toHaveAttribute('data-fa')
-
-  expect(container.firstChild).not.toHaveAttribute('data-bi')
   expect(container.firstChild).not.toHaveAttribute('data-material')
 })
 

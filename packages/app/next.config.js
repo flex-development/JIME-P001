@@ -19,6 +19,8 @@ const {
   VERCEL_URL
 } = process.env
 
+const SITE_URL_SAFE = SITE_URL || VERCEL_URL || 'http://localhost:3001'
+
 module.exports = {
   /**
    * Add environment variables to the JavaScript bundle.
@@ -35,7 +37,7 @@ module.exports = {
     FIREBASE_PROJECT_ID,
     FIREBASE_STORAGE_BUCKET: `${FIREBASE_PROJECT_ID}.appspot.com`,
     SHOPIFY_DOMAIN,
-    SITE_URL: SITE_URL || VERCEL_URL || 'http://localhost:3001',
+    SITE_URL: SITE_URL_SAFE,
     VERCEL_URL
   },
 
@@ -57,6 +59,20 @@ module.exports = {
    */
   async headers() {
     return vercel.headers || []
+  },
+
+  /**
+   * Image Optimization configuration.
+   *
+   * @see https://nextjs.org/docs/basic-features/image-optimization
+   */
+  images: {
+    domains: [
+      SITE_URL_SAFE,
+      'cdn.shopify.com',
+      'firebasestorage.googleapis.com',
+      'is4-ssl.mzstatic.com'
+    ]
   },
 
   /**
@@ -101,20 +117,21 @@ module.exports = {
    * @param {object} helpers.webpack - Webpack
    * @returns {object} Altered Webpack configuration
    */
-  webpack: (config, { dev, isServer }) => {
-    // Push custom TypeScript loader
+  webpack: (config, { dev }) => {
     config.module.rules.push({
       test: /\.(ts|tsx)$/,
       use: [
         {
           loader: 'awesome-typescript-loader',
-          options: { configFileName: `tsconfig.${dev ? 'dev' : 'prod'}.json` }
+          options: {
+            cacheDirectory: 'node_modules/.cache/awesome-typescript-loader',
+            configFileName: `tsconfig.${dev ? 'dev' : 'prod'}.json`
+          }
         }
       ]
     })
 
-    // Do not run type checking twice
-    if (dev && isServer) config.plugins.push(new CheckerPlugin())
+    config.plugins.push(new CheckerPlugin())
 
     return config
   }

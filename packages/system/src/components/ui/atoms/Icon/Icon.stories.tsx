@@ -26,15 +26,6 @@ Bootstrap.args = {
   className: 'd-inline-flex text-lg'
 }
 
-export const FontAwesome: StoryFN<IconProps> = (args: IconProps) => (
-  <Icon {...args} />
-)
-
-FontAwesome.args = {
-  c: 'secondary',
-  fa: 'spinner fas fa-spin'
-}
-
 export const Material: StoryFN<IconProps> = (args: IconProps) => (
   <Icon {...args} />
 )

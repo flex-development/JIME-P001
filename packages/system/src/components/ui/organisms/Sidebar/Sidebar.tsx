@@ -119,7 +119,13 @@ export const Sidebar: FREC<SidebarProps> = forwardRef((props, ref) => {
             xs={12}
           >
             <Link className='sidebar-profile-img' href={img} target='_blank'>
-              <Image alt='Profile image for Morena' fluid src={img} />
+              <Image
+                alt='Profile image for Morena'
+                fluid
+                height={1920}
+                src={img}
+                width={1920}
+              />
             </Link>
           </Column>
           <Column
@@ -162,7 +168,7 @@ Sidebar.displayName = 'Sidebar'
 
 Sidebar.defaultProps = {
   age: 22,
-  img: 'assets/morena.jpeg',
+  img: 'assets/img/morena.jpeg',
   location: 'New York',
   menu: [],
   mood: 'High 🤪'

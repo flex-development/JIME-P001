@@ -91,31 +91,8 @@ export default class Document extends NextDocument<DocumentInitialProps> {
           <meta property='og:site_name' content="Morena's Kustomz" />
           <meta property='og:type' content='website' />
 
-          {/* Project fonts */}
-          <link rel='stylesheet' href='//use.typekit.net/oee3tpl.css' />
-
-          {/* Material Icons */}
-          <link
-            rel='stylesheet'
-            href='//fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined'
-          />
-
-          {/* Font Awesome */}
-          <script
-            crossOrigin='anonymous'
-            src='//kit.fontawesome.com/0691581d45.js'
-          />
-
           {/* Apple MusicKit */}
           <script src='//js-cdn.music.apple.com/musickit/v1/musickit.js' />
-
-          {/* Preload requests to preview handler */}
-          <link
-            rel='preload'
-            href='/api/preview'
-            as='fetch'
-            crossOrigin='anonymous'
-          />
         </Head>
         <body data-cms-enabled={!!this.props.session}>
           <noscript>You need to enable JavaScript to view this site.</noscript>

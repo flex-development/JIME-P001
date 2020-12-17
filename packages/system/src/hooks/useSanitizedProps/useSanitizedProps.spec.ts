@@ -55,7 +55,7 @@ it('adds the class "bg-gradient" using the `gradient` property', () => {
 })
 
 it('sets props.style.backgroundImage', () => {
-  const img = 'assets/placeholder.png'
+  const img = 'assets/img/placeholder.png'
   const hook = renderHook(() => useSanitizedProps({ img }))
 
   expect(hook.result.current).toMatchObject({

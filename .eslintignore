@@ -1,8 +1,7 @@
 # ESLint Ignore
 # https://eslint.org/docs/user-guide/configuring#ignoring-files-and-directories
 
-.awcache/
-dist/
-.next/
-node_modules/
-public/
+**/node_modules/**
+**/dist/**
+**/public/**
+packages/app/.next/

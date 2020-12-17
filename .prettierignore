@@ -1,14 +1,17 @@
 # Prettier Ignore
 # See: https://prettier.io/docs/en/ignore.html
 
+**/.vercel/**
+**/node_modules/**
+**/build/**
+**/dist/**
+**/public/**
+
 !.storybook/
 
-.vercel/
 .vscode/
-build/
-dist/
-packages/app/.next
-public/
+
+packages/app/.next/
 
 package-lock.json
 

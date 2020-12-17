@@ -65,9 +65,6 @@ export const ProductImageCarousel: FC<ProductImageCarouselProps> = (
         variant ? `${product_title} - ${variant?.title}` : product_title
       )
 
-      if (image.height) image['data-height'] = image.height
-      if (image.width) image['data-width'] = image.width
-
       carousel_slides.push(omit(image, ['height', 'width']))
     })
 

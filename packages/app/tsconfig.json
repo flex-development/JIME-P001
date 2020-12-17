@@ -17,5 +17,5 @@
   "exclude": ["node_modules"],
   "extends": "../../tsconfig.json",
   "files": ["next-env.d.ts"],
-  "include": ["__mocks__", "src", "jest.setup.ts"]
+  "include": ["__mocks__", "src", "jest.setup.ts", "postcss.config.js"]
 }

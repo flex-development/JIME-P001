@@ -18,13 +18,6 @@ export interface IconProps extends SpanProps {
   bi?: string
 
   /**
-   * If defined, render a Font Awesome icon.
-   *
-   * - https://fontawesome.com/icons
-   */
-  fa?: string
-
-  /**
    * If defined, render a Material Icon.
    *
    * - https://material.io/resources/icons
@@ -58,19 +51,16 @@ export interface IconProps extends SpanProps {
  * - https://material.io/resources/icons
  */
 export const Icon: FREC<IconProps> = forwardRef((props, ref) => {
-  const { bi, fa, mat, outlined, position, ...rest } = props
+  const { bi, mat, outlined, position, ...rest } = props
 
   const _bi = !isEmpty(bi)
-  const _fa = !isEmpty(fa)
   const _mat = !isEmpty(mat)
 
-  const boostrap = _bi && !_fa && !_mat
-  const fontawesome = _fa && !_bi && !_mat
-  const material = _mat && !_bi && !_fa
+  const boostrap = _bi && !_mat
+  const material = _mat && !_bi
 
   const sanitized = useSanitizedProps<typeof rest, SpanProps>(rest, {
     [`bi-${bi}`]: boostrap,
-    [`fa-${fa}`]: fontawesome,
     icon: true,
     'material-icons': material && !outlined,
     'material-icons-outlined': material && outlined
@@ -80,7 +70,6 @@ export const Icon: FREC<IconProps> = forwardRef((props, ref) => {
   sanitized['data-position'] = position
 
   if (boostrap) sanitized['data-bi'] = true
-  if (fontawesome) sanitized['data-fa'] = true
 
   if (material) {
     sanitized['children'] = mat

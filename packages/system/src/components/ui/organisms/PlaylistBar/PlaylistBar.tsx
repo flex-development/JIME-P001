@@ -90,7 +90,7 @@ export const PlaylistBar: FC<PlaylistBarProps> = (props: PlaylistBarProps) => {
 
   // Animate ready state
   const style = useSpring({
-    opacity: audio_ref.current?.readyState === 4 ? 1 : 0
+    opacity: (audio_ref.current?.readyState ?? -1) > 0 ? 1 : 0
   })
 
   // Get component props
@@ -143,7 +143,13 @@ export const PlaylistBar: FC<PlaylistBarProps> = (props: PlaylistBarProps) => {
             href={artwork_url}
             target='_blank'
           >
-            <Image alt={`Artwork for ${song.name}`} fluid src={artwork_url} />
+            <Image
+              alt={`Artwork for ${song.name}`}
+              fluid
+              height={song.artwork?.height}
+              src={artwork_url}
+              width={song.artwork?.width}
+            />
           </Link>
           <FlexBox direction='column'>
             <Paragraph className='playlistbar-song'>{song.name}</Paragraph>

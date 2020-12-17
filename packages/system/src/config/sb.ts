@@ -90,4 +90,4 @@ fontSizes.h4 = fontSizes.xxl
 fontSizes.h5 = fontSizes.xl
 fontSizes.h6 = fontSizes.lg
 
-export const fontWeights: number[] = [200, 400, 500, 600, 700]
+export const fontWeights: number[] = [300, 400, 500, 600, 700]

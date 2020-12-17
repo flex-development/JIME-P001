@@ -28,10 +28,10 @@ export const useMusicKit = (): UseMusicKit => {
   // Configure MusicKit and get instance
   useEffect(() => {
     // If MusicKit module isn't loaded or instance is already set, do nothing
-    if (!MusicKit || !isEmpty(_instance)) return
+    if (!window?.MusicKit || !isEmpty(_instance)) return
 
     // Configure new MusicKit instance
-    instance.current = MusicKit.configure({
+    instance.current = window.MusicKit.configure({
       app: { name: pkg.name, version: pkg.version },
       developerToken: createDeveloperToken()
     })

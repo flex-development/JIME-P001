@@ -30,8 +30,8 @@ export const ProfileSnippetFormPlugin = (
         'img',
         'Profile Picture',
         undefined,
-        'assets/morena-transparent.png',
-        'assets/morena-transparent.png'
+        'assets/img/morena-transparent.png',
+        'assets/img/morena-transparent.png'
       ),
       TextField('location', 'Location', '', '', 'New York'),
       TextField('mood', 'Mood', '', '', 'High 🤪')

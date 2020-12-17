@@ -22,7 +22,9 @@ module.exports = {
     node: true
   },
   extends: EXTENDS_CONFIG,
-  globals: {},
+  globals: {
+    loadCSS: true
+  },
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: {

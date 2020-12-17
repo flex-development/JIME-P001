@@ -97,7 +97,7 @@ export const CartTemplate: TC<CartTemplateProps> = (
   return (
     <Main {...sanitized} data-template={CartTemplate.template_id}>
       <Section>
-        <Heading mb={24} size={2}>
+        <Heading className='h2' mb={24}>
           Cart ({`${cart.items_total}`})
         </Heading>
         <Box>

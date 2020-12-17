@@ -92,7 +92,10 @@ export default class Document extends NextDocument<DocumentInitialProps> {
           <meta property='og:type' content='website' />
 
           {/* Apple MusicKit */}
-          <script src='//js-cdn.music.apple.com/musickit/v1/musickit.js' />
+          <script
+            defer
+            src='//js-cdn.music.apple.com/musickit/v1/musickit.js'
+          />
         </Head>
         <body data-cms-enabled={!!this.props.session}>
           <noscript>You need to enable JavaScript to view this site.</noscript>

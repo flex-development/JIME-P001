@@ -34,7 +34,7 @@ export const SearchTemplate: TC<SearchTemplateProps> = (
   return (
     <Main {...sanitized} data-template={SearchTemplate.template_id}>
       <Section>
-        <Heading mb={24} size={2}>
+        <Heading className='h2' mb={24}>
           Search Results&nbsp;
           <Span className='c-primary'>({`${results.length}`})</Span>
         </Heading>

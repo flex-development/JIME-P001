@@ -59,7 +59,7 @@ export const CollectionTemplate: TC<CollectionTemplateProps> = (
   return (
     <Main {...sanitized} data-template={CollectionTemplate.template_id}>
       <Section>
-        <Heading size={2}>{title}</Heading>
+        <Heading className='h2'>{title}</Heading>
         {body_html && <Paragraph>{body_html}</Paragraph>}
         <ProductGrid
           mt={24}

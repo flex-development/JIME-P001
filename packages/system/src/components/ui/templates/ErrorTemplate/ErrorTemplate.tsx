@@ -35,7 +35,7 @@ export const ErrorTemplate: TC<ErrorTemplateProps> = (
   return (
     <Main {...sanitized} data-template={ErrorTemplate.template_id}>
       <Section>
-        <Heading size={2}>
+        <Heading className='h2'>
           <Span className='error-code'>{code}</Span>
           <Span className='error-divider'>/</Span>
           <Span className='error-message'>{message}</Span>

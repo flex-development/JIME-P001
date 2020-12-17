@@ -110,7 +110,7 @@ export const IndexTemplate: TC<IndexTemplateProps> = (
   return (
     <Main {...sanitized} data-template={IndexTemplate.template_id}>
       <Section id='about'>
-        <Heading size={2}>{about_section_title}</Heading>
+        <Heading className='h2'>{about_section_title}</Heading>
         <Paragraph>{about_section_text}</Paragraph>
       </Section>
 

@@ -207,10 +207,10 @@ export const AddToCartForm: FC<AddToCartFormProps> = (
         <Column md={8} xs>
           {/* Product title and variant price */}
           <ProductHeading
+            className='h2'
             mb={no_description ? 16 : 4}
             price={item.data.quantity * selected.price}
             title={product.title}
-            size={2}
           />
 
           {/* Product description */}

@@ -2,9 +2,9 @@ import { AnyObject } from '@flex-development/json'
 import {
   Box,
   BoxProps,
-  Item,
-  ItemProps,
-  List
+  FlexBox,
+  Span,
+  SpanProps
 } from '@system/components/ui/atoms'
 import { useActiveIndex, useSanitizedProps } from '@system/hooks'
 import classnames from 'classnames'
@@ -35,7 +35,7 @@ export interface CarouselProps extends BoxProps {
   position?: number
 }
 
-export interface CarouselIndicatorProps extends ItemProps {
+export interface CarouselIndicatorProps extends SpanProps {
   /**
    * If `true`, add "active" class.
    */
@@ -55,7 +55,7 @@ const CarouselIndicator: FC<CarouselIndicatorProps> = (
   const { active = false, ...rest } = props
 
   return (
-    <Item
+    <Span
       {...rest}
       aria-label='Carousel indicator'
       className={classnames('carousel-indicator', { active })}
@@ -131,7 +131,7 @@ export const Carousel: FC<CarouselProps> & {
         })()}
       </Box>
       {items_adaptor.length > 1 && (
-        <List className='carousel-indicators' is='ol'>
+        <FlexBox className='carousel-indicators'>
           {items_adaptor.map((child, i: number) => (
             <CarouselIndicator
               active={isActive(i)}
@@ -139,7 +139,7 @@ export const Carousel: FC<CarouselProps> & {
               onClick={() => onClickItem(i)}
             />
           ))}
-        </List>
+        </FlexBox>
       )}
     </Box>
   )

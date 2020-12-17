@@ -1,4 +1,4 @@
-import { uuid } from '@flex-development/kustomzdesign/utils'
+import { uuid } from '@flex-development/kustomzdesign'
 import { AnyField } from '@tinacms/forms'
 import { TextField } from '../helpers'
 import ClassNameField from './ClassNameField'

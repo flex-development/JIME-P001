@@ -5,7 +5,7 @@ import { IReview } from '@flex-development/kustomzcore'
 import ReviewRepository from './ReviewRepository'
 
 /**
- * @file Unit Tests - ReviewRepository
+ * @file Tests - ReviewRepository
  * @module subdomains/sales/repositories/ReviewRepository/spec
  */
 

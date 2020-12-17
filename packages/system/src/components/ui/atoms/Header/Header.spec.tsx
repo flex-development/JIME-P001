@@ -2,12 +2,14 @@ import { render } from '@testing-library/react'
 import { Header } from './Header'
 
 /**
- * @file Unit Tests - Header
+ * @file Tests - Header
  * @module components/ui/atoms/Header/spec
  */
 
-it('renders a <header> element', () => {
-  const { container } = render(<Header />)
+describe('Header', () => {
+  it('renders a <header> element', () => {
+    const { container } = render(<Header />)
 
-  expect(container.firstChild).toMatchInlineSnapshot('<header />')
+    expect(container.firstChild?.nodeName.toLowerCase()).toBe('header')
+  })
 })

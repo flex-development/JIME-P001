@@ -21,6 +21,7 @@ export type BackgroundColor =
  */
 export type ButtonVariant =
   | GrayscaleColor
+  | SemanticColor
   | ThemeColor
   | ThemeOutline
   | 'link'

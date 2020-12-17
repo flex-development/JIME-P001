@@ -1,4 +1,4 @@
-import { uuid } from '@flex-development/kustomzdesign/utils'
+import { uuid } from '@flex-development/kustomzdesign'
 import { PagesAPI } from '@subdomains/cms/config'
 import {
   MarkdownField,

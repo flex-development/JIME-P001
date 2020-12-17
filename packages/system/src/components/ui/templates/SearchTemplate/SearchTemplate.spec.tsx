@@ -7,19 +7,21 @@ import { Search } from './SearchTemplate.stories'
  * @module components/ui/templates/SearchTemplate/spec
  */
 
-it('renders without crashing', () => {
-  const { template_id } = SearchTemplate
+describe('SearchTemplate', () => {
+  it('renders with class "template" and data-template=${template_id}', () => {
+    const { template_id } = SearchTemplate
 
-  const { container } = render(<Search {...Search.args} />)
+    const { container } = render(<Search {...Search.args} />)
 
-  expect(container.firstChild).toHaveClass('template')
-  expect(container.firstChild).toHaveAttribute('data-template', template_id)
-})
+    expect(container.firstChild).toHaveClass('template')
+    expect(container.firstChild).toHaveAttribute('data-template', template_id)
+  })
 
-it('renders the template title with the number of search results', () => {
-  const { getByText } = render(<Search {...Search.args} />)
+  it('renders the template title with the number of search results', () => {
+    const { getByText } = render(<Search {...Search.args} />)
 
-  const title = getByText(`(${Search.args.results?.length})`)
+    const title = getByText(`(${Search.args.results?.length})`)
 
-  expect(title).toBeInTheDocument()
+    expect(title).toBeInTheDocument()
+  })
 })

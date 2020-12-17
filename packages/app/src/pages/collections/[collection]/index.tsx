@@ -1,5 +1,9 @@
 import { serialize } from '@flex-development/json'
 import {
+  ICollectionListing,
+  IProductListing
+} from '@flex-development/kustomzcore'
+import {
   CollectionTemplate,
   CollectionTemplateProps,
   LinkProps
@@ -16,7 +20,6 @@ import { CollectionService, ProductService } from '@subdomains/sales'
 import { join } from 'lodash'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
 import { useRouter } from 'next/router'
-import { ICollectionListing, IProductListing } from 'shopify-api-node'
 import stripHtml from 'string-strip-html'
 
 /**

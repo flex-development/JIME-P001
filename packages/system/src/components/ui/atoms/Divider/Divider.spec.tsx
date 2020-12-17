@@ -6,8 +6,16 @@ import { Default } from './Divider.stories'
  * @module components/ui/atoms/Divider/spec
  */
 
-it('renders <hr class="divider">', () => {
-  const { container } = render(<Default {...Default.args} />)
+describe('Divider', () => {
+  it('renders an <hr> element', () => {
+    const { container } = render(<Default {...Default.args} />)
 
-  expect(container.firstChild).toHaveClass('divider')
+    expect(container.firstChild?.nodeName.toLowerCase()).toBe('hr')
+  })
+
+  it('renders with class "divider"', () => {
+    const { container } = render(<Default {...Default.args} />)
+
+    expect(container.firstChild).toHaveClass('divider')
+  })
 })

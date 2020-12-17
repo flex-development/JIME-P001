@@ -5,14 +5,15 @@ import {
   DataArray,
   DataArrayQueryParams
 } from '@flex-development/json'
-import { createError, Logger } from '@flex-development/kustomzcore'
-import { NotFound } from '@subdomains/app/utils'
-import { omit, pick } from 'lodash'
 import {
+  createError,
   ICollectionListing,
   IProductListing,
-  IProductListingVariant
-} from 'shopify-api-node'
+  IProductListingVariant,
+  Logger
+} from '@flex-development/kustomzcore'
+import { NotFound } from '@subdomains/app/utils'
+import { omit, pick } from 'lodash'
 import { IProductService, ListProductsResponse } from './IProductService'
 
 /**

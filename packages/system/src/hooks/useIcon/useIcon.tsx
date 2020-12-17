@@ -1,5 +1,5 @@
 import { AnyObject } from '@flex-development/json'
-import { Icon, IconProps } from '@system/components'
+import { Icon, IconProps } from '@system/components/ui/atoms/Icon'
 import { MutatedProps } from '@system/types'
 import classnames from 'classnames'
 import { isNull, isUndefined, join, uniq } from 'lodash'
@@ -79,6 +79,7 @@ export function useIcon<P extends UseIconProps = UseIconProps>(props: P): P {
 
       _props['data-icon'] = true
       _props['data-icon-only'] = isNull(_pc) || isUndefined(_pc)
+      _props['data-position'] = _icon.position
     }
 
     return _props as P

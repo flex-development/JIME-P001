@@ -39,7 +39,10 @@ export interface SearchBarProps extends FormProps {
 /**
  * Renders a `Form` component that allows users to search the store.
  */
-export const SearchBar: FC<SearchBarProps> = (props: SearchBarProps) => {
+export const SearchBar: FC<SearchBarProps> & {
+  BUTTON_LABEL: string
+  INPUT_LABEL: string
+} = (props: SearchBarProps) => {
   const {
     handleSearch = (query: string, event: SearchBarEvent) => {
       event.preventDefault()
@@ -61,7 +64,7 @@ export const SearchBar: FC<SearchBarProps> = (props: SearchBarProps) => {
   return (
     <Form {...sanitized}>
       <Button
-        aria-label='Search button'
+        aria-label={SearchBar.BUTTON_LABEL}
         className='searchbar-btn'
         icon={{ 'aria-label': 'Search icon', mat: 'search' }}
         onClick={(event: EventHandlers.Click.Button) => {
@@ -73,7 +76,7 @@ export const SearchBar: FC<SearchBarProps> = (props: SearchBarProps) => {
 
       <Input
         {...input.eventBind}
-        aria-label='Search query'
+        aria-label={SearchBar.INPUT_LABEL}
         className='searchbar-input'
         onChange={input.onChange}
         placeholder={placeholder}
@@ -85,5 +88,9 @@ export const SearchBar: FC<SearchBarProps> = (props: SearchBarProps) => {
 }
 
 SearchBar.displayName = 'SearchBar'
+
+SearchBar.BUTTON_LABEL = 'Search button'
+
+SearchBar.INPUT_LABEL = 'Search query'
 
 SearchBar.defaultProps = {}

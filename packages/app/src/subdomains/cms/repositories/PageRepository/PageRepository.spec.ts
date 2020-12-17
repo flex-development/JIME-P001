@@ -6,7 +6,7 @@ import { ICMSPage } from '@subdomains/cms/models'
 import PageRepository from './PageRepository'
 
 /**
- * @file Unit Tests - PageRepository
+ * @file Tests - PageRepository
  * @module subdomains/cms/repositories/PageRepository/spec
  */
 

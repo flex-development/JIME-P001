@@ -1,4 +1,8 @@
 import {
+  IProductListing,
+  IProductListingVariant
+} from '@flex-development/kustomzcore'
+import {
   Box,
   BoxProps,
   FlexBox,
@@ -17,7 +21,6 @@ import { EventHandlers } from '@system/types'
 import { getProductVariantImage } from '@system/utils'
 import { FC, useCallback, useEffect, useMemo, useState } from 'react'
 import useBoolean from 'react-hanger/array/useBoolean'
-import { IProductListing, IProductListingVariant } from 'shopify-api-node'
 import { DropdownMenu } from '../DropdownMenu'
 
 /**

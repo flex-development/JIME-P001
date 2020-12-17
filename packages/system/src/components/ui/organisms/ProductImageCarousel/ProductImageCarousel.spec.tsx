@@ -6,8 +6,10 @@ import { AshTray } from './ProductImageCarousel.stories'
  * @module components/ui/organisms/ProductImageCarousel/spec
  */
 
-it('renders <div class="product-image-carousel">', () => {
-  const { container } = render(<AshTray {...AshTray.args} />)
+describe('ProductImageCarousel', () => {
+  it('renders with class "product-image-carousel"', () => {
+    const { container } = render(<AshTray {...AshTray.args} />)
 
-  expect(container.firstChild).toHaveClass('product-image-carousel')
+    expect(container.firstChild).toHaveClass('product-image-carousel')
+  })
 })

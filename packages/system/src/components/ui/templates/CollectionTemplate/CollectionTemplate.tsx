@@ -1,4 +1,8 @@
 import {
+  ICollectionListing,
+  IProductListing
+} from '@flex-development/kustomzcore'
+import {
   Heading,
   LinkProps,
   Main,
@@ -8,7 +12,6 @@ import {
 import { ProductGrid } from '@system/components/ui/organisms'
 import { useSanitizedProps } from '@system/hooks'
 import { MutatedProps, TC } from '@system/types'
-import { ICollectionListing, IProductListing } from 'shopify-api-node'
 
 /**
  * @file Display the items in a user's cart

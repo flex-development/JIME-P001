@@ -4,10 +4,13 @@ import {
   DataArray,
   DataArrayQueryParams
 } from '@flex-development/json'
-import { createError, Logger } from '@flex-development/kustomzcore'
+import {
+  createError,
+  ICollectionListing,
+  Logger
+} from '@flex-development/kustomzcore'
 import { NotFound } from '@subdomains/app/utils'
 import { omit } from 'lodash'
-import { ICollectionListing } from 'shopify-api-node'
 import {
   ICollectionService,
   ListCollectionsResponse

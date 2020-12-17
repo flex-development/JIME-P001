@@ -1,8 +1,8 @@
 import { AnyObject } from '@flex-development/json'
+import { IProductListingVariant } from '@flex-development/kustomzcore'
 import { OptionProps } from '@system/components'
 import { isNumber } from 'lodash'
 import { useCallback, useMemo, useState } from 'react'
-import { IProductListingVariant } from 'shopify-api-node'
 import { useMemoCompare } from '../useMemoCompare'
 
 /**

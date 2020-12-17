@@ -9,7 +9,7 @@
     "shopify api node",
     "typescript"
   ],
-  "homepage": "https://morenaskustomz.com",
+  "homepage": "https://github.com/flex-development/JIME-P001",
   "bugs": {
     "url": "https://github.com/flex-development/JIME-P001/issues",
     "email": "developers@flexdevelopment.llc"
@@ -26,25 +26,31 @@
     "directory": "packages/core"
   },
   "publishConfig": {
-    "directory": "src"
+    "access": "public",
+    "directory": "./"
   },
-  "main": "src/index.ts",
-  "scripts": {},
-  "dependencies": {},
-  "devDependencies": {
+  "source": "src/index.ts",
+  "main": "dist/index.js",
+  "module": "dist/kustomzcore.esm.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "bundle": "tsdx build --tsconfig tsconfig.prod.json --transpileOnly",
+    "prepare": "yarn bundle"
+  },
+  "dependencies": {
     "@feathersjs/errors": "^4.5.3",
     "@flex-development/json": "^1.0.5",
     "@types/feathersjs__errors": "^3.3.2",
-    "class-validator": "^0.12.2"
-  },
-  "peerDependencies": {
-    "@feathersjs/errors": "^4.5.3",
-    "@flex-development/json": "^1.0.5",
-    "@types/feathersjs__errors": "^3.3.2",
+    "@types/pino": "^6.0.1",
     "class-validator": "^0.12.2",
-    "musickit-typescript": "^1.2.4",
     "pino": "^6.4.1",
     "pino-pretty": "^4.1.0",
     "shopify-api-node": "^3.4.4"
-  }
+  },
+  "devDependencies": {},
+  "peerDependencies": {}
 }

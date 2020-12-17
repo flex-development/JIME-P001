@@ -6,22 +6,24 @@ import { Default } from './ProductReview.stories'
  * @module components/ui/molecules/ProductReview/spec
  */
 
-it('renders without crashing', () => {
-  const { container } = render(<Default {...Default.args} />)
+describe('ProductReview', () => {
+  it('renders with class "product-review"', () => {
+    const { container } = render(<Default {...Default.args} />)
 
-  expect(container.firstChild).toHaveClass('product-review')
-})
+    expect(container.firstChild).toHaveClass('product-review')
+  })
 
-it('displays the product review title', () => {
-  const { getByText } = render(<Default {...Default.args} />)
-  const { title } = Default.args.review
+  it('renders the product review title', () => {
+    const { getByText } = render(<Default {...Default.args} />)
+    const { title } = Default.args.review
 
-  expect(getByText(title)).toHaveClass('product-review-title')
-})
+    expect(getByText(title)).toHaveClass('product-review-title')
+  })
 
-it('displays the product review body', () => {
-  const { getByText } = render(<Default {...Default.args} />)
-  const { body } = Default.args.review
+  it('renders the product review body', () => {
+    const { getByText } = render(<Default {...Default.args} />)
+    const { body } = Default.args.review
 
-  expect(getByText(body)).toHaveClass('product-review-body')
+    expect(getByText(body)).toHaveClass('product-review-body')
+  })
 })

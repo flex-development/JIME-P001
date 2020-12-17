@@ -2,8 +2,8 @@ import {
   ICustomer,
   IProductImage,
   IProductListing,
-  IProductVariant
-} from 'shopify-api-node'
+  IProductListingVariant
+} from '../../types/shopify'
 import { IEntity } from '../Entity'
 
 /**
@@ -18,7 +18,7 @@ export interface IReview extends IEntity {
   product_handle: IProductListing['handle']
   product_id: IProductListing['product_id']
   product_image_url: IProductImage['src']
-  product_sku: IProductVariant['sku']
+  product_sku: IProductListingVariant['sku']
   product_title: IProductListing['title']
   product_url: string
   rating: ReviewRating
@@ -32,7 +32,7 @@ export type CreateReviewRequest = {
   body: IReview['body']
   email: ICustomer['email']
   product_id: IProductListing['product_id']
-  product_sku: IProductVariant['sku']
+  product_sku: IProductListingVariant['sku']
   rating: IReview['rating']
   title: IReview['title']
 }

@@ -1,7 +1,6 @@
 import { DataArray } from '@flex-development/json'
-import { IReview } from '@flex-development/kustomzcore'
+import { IProductListing, IReview } from '@flex-development/kustomzcore'
 import { IRTDRepository } from '@subdomains/firebase/models/RTDRepository'
-import { IProductListing } from 'shopify-api-node'
 
 /**
  * @file Subdomain Interfaces - Product Review Repository

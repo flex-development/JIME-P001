@@ -7,7 +7,7 @@ import { RTDRepoUpdateBatch } from './IRTDRepository'
 import Repo from './RTDRepository'
 
 /**
- * @file Unit Tests - RTDRepository
+ * @file Tests - RTDRepository
  * @module subdomains/firebase/models/RTDRepository/spec
  */
 

@@ -7,10 +7,12 @@ import { Default } from './CartPreview.stories'
  * @module components/ui/molecules/CartPreview/spec
  */
 
-it('renders <a class="cart-preview" href="/cart">', () => {
-  const { container } = render(<Default {...Default.args} />)
-  const { href } = CartPreview.defaultProps || ({} as CartPreviewProps)
+describe('CartPreview', () => {
+  it('renders <a class="cart-preview" href="/cart">', () => {
+    const { container } = render(<Default {...Default.args} />)
+    const { href } = CartPreview.defaultProps || ({} as CartPreviewProps)
 
-  expect(container.firstChild).toHaveClass('cart-preview')
-  expect(container.firstChild).toHaveAttribute('href', href as string)
+    expect(container.firstChild).toHaveClass('cart-preview')
+    expect(container.firstChild).toHaveAttribute('href', href as string)
+  })
 })

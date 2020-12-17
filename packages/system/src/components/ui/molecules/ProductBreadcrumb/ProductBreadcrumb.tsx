@@ -1,4 +1,8 @@
 import {
+  IProductListing,
+  IProductListingVariant
+} from '@flex-development/kustomzcore'
+import {
   FlexBox,
   FlexBoxProps,
   Link,
@@ -8,7 +12,6 @@ import {
 } from '@system/components/ui/atoms'
 import { useSanitizedProps } from '@system/hooks'
 import { FC } from 'react'
-import { IProductListing, IProductListingVariant } from 'shopify-api-node'
 
 /**
  * @file Display a collection link, product title, and product variant title

@@ -6,8 +6,16 @@ import { Row } from './Row'
  * @module components/ui/atoms/Row/spec
  */
 
-it('renders without crashing', () => {
-  const { container } = render(<Row />)
+describe('Row', () => {
+  it('renders a <div> element', () => {
+    const { container } = render(<Row />)
 
-  expect(container.firstChild).toHaveClass('row')
+    expect(container.firstChild?.nodeName.toLowerCase()).toBe('div')
+  })
+
+  it('renders with class "row"', () => {
+    const { container } = render(<Row />)
+
+    expect(container.firstChild).toHaveClass('row')
+  })
 })

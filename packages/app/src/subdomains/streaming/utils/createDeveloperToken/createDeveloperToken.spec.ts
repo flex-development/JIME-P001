@@ -2,7 +2,7 @@ import { isString } from 'lodash'
 import createDeveloperToken from './createDeveloperToken'
 
 /**
- * @file Unit Tests - createDeveloperToken
+ * @file Tests - createDeveloperToken
  * @module subdomains/streaming/utils/createDeveloperToken/spec
  */
 

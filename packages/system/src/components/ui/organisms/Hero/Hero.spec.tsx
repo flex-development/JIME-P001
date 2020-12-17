@@ -6,20 +6,22 @@ import { Default } from './Hero.stories'
  * @module components/ui/organisms/Hero/spec
  */
 
-it('renders without crashing', () => {
-  const { container } = render(<Default {...Default.args} />)
+describe('Hero', () => {
+  it('renders with class "hero"', () => {
+    const { container } = render(<Default {...Default.args} />)
 
-  expect(container.firstChild).toHaveClass('hero')
-})
+    expect(container.firstChild).toHaveClass('hero')
+  })
 
-it('renders the hero title', () => {
-  const { getByText } = render(<Default {...Default.args} />)
+  it('renders the hero title', () => {
+    const { getByText } = render(<Default {...Default.args} />)
 
-  expect(getByText(Default.args.title)).toHaveClass('hero-title')
-})
+    expect(getByText(Default.args.title)).toHaveClass('hero-title')
+  })
 
-it('renders the hero subtitle', () => {
-  const { getByText } = render(<Default {...Default.args} />)
+  it('renders the hero subtitle', () => {
+    const { getByText } = render(<Default {...Default.args} />)
 
-  expect(getByText(Default.args.subtitle)).toHaveClass('hero-subtitle')
+    expect(getByText(Default.args.subtitle)).toHaveClass('hero-subtitle')
+  })
 })

@@ -6,9 +6,17 @@ import { Default } from './Dialog.stories'
  * @module components/ui/atoms/Dialog/spec
  */
 
-it('renders without crashing', () => {
-  const { container, getByText } = render(<Default {...Default.args} />)
-  const { children } = Default.args
+describe('Dialog', () => {
+  it('renders a <dialog> element', () => {
+    const { container } = render(<Default {...Default.args} />)
 
-  expect(container.firstChild).toContainElement(getByText(children as string))
+    expect(container.firstChild?.nodeName.toLowerCase()).toBe('dialog')
+  })
+
+  it('renders inner content', () => {
+    const { container, getByText } = render(<Default {...Default.args} />)
+    const { children } = Default.args
+
+    expect(container.firstChild).toContainElement(getByText(children as string))
+  })
 })

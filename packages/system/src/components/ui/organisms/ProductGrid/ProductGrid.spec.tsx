@@ -6,16 +6,18 @@ import { Default } from './ProductGrid.stories'
  * @module components/ui/organisms/ProductGrid/spec
  */
 
-it('renders without crashing', () => {
-  const { container } = render(<Default {...Default.args} />)
+describe('ProductGrid', () => {
+  it('renders with class "product-grid"', () => {
+    const { container } = render(<Default {...Default.args} />)
 
-  expect(container.firstChild).toHaveClass('product-grid')
-})
+    expect(container.firstChild).toHaveClass('product-grid')
+  })
 
-it('renders the products in the grid', () => {
-  const { container } = render(<Default {...Default.args} />)
+  it('renders the products in the grid', () => {
+    const { container } = render(<Default {...Default.args} />)
 
-  container.firstChild?.childNodes.forEach(node => {
-    expect(node.firstChild).toHaveClass('product-card')
+    container.firstChild?.childNodes.forEach(({ firstChild }) => {
+      expect(firstChild).toHaveClass('product-card')
+    })
   })
 })

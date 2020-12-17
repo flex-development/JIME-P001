@@ -18,7 +18,8 @@ import {
 } from '@system/components/ui/organisms'
 import { GRID_BREAKPOINTS } from '@system/config'
 import { useSlideInOut } from '@system/hooks'
-import { FC, ReactNode, useCallback } from 'react'
+import { TC } from '@system/types'
+import { ReactNode, useCallback } from 'react'
 import { useSpring } from 'react-spring'
 import { useEvent, useMedia } from 'react-use'
 
@@ -68,7 +69,7 @@ export interface ShopLayoutProps {
 /**
  * Renders the store layout and current page.
  */
-export const ShopLayout: FC<ShopLayoutProps> = (props: ShopLayoutProps) => {
+export const ShopLayout: TC<ShopLayoutProps> = (props: ShopLayoutProps) => {
   const {
     children,
     header = {} as ShopHeaderProps,
@@ -97,7 +98,11 @@ export const ShopLayout: FC<ShopLayoutProps> = (props: ShopLayoutProps) => {
   useEvent('resize', useCallback(onResize, [breakpoint_lg, sidebar_a]))
 
   return (
-    <Box className='shop-layout' data-loading={loading}>
+    <Box
+      className='shop-layout'
+      data-loading={loading}
+      data-template={ShopLayout.template_id}
+    >
       {(() => {
         if (loading)
           return (
@@ -152,6 +157,8 @@ export const ShopLayout: FC<ShopLayoutProps> = (props: ShopLayoutProps) => {
 }
 
 ShopLayout.displayName = 'ShopLayout'
+
+ShopLayout.template_id = 'shop-layout'
 
 ShopLayout.defaultProps = {
   header: {},

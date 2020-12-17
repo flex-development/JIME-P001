@@ -1,7 +1,7 @@
+import { ICollectionListing } from '@flex-development/kustomzcore'
 import collections from '@system-mocks/data/collection-listings.mock.json'
 import { PRODUCTS } from '@system-mocks/utils'
 import { StoryFN } from '@system/types/storybook'
-import { ICollectionListing } from 'shopify-api-node'
 import {
   CollectionTemplate,
   CollectionTemplateProps

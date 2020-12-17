@@ -1,5 +1,8 @@
+import {
+  IProductListing,
+  IProductListingVariant
+} from '@flex-development/kustomzcore'
 import { ImageProps } from '@system/components'
-import { IProductListing, IProductListingVariant } from 'shopify-api-node'
 
 /**
  * @file Get `ImageProps` for a Product Listing Variant

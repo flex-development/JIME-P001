@@ -8,7 +8,7 @@ import {
   UseCart,
   useMemoCompare
 } from '@flex-development/kustomzdesign'
-import '@flex-development/kustomzdesign/index.scss'
+import '@flex-development/kustomzdesign/src/index.scss'
 import { AC, AppLayout, IAppProps } from '@subdomains/app'
 import '@subdomains/app/styles.css'
 import { CMS_CONFIG } from '@subdomains/cms'

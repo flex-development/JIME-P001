@@ -1,13 +1,13 @@
 import { ProviderSessionGitHub } from '@app/subdomains/cms/services'
 import { AnyObject } from '@flex-development/json'
-import { Redirect } from 'next'
-import { DocumentInitialProps as InitialProps } from 'next/document'
-import { ParsedUrlQuery } from 'querystring'
 import {
   ICollectionListing,
   IProductListing,
   IProductListingVariant
-} from 'shopify-api-node'
+} from '@flex-development/kustomzcore'
+import { Redirect } from 'next'
+import { DocumentInitialProps as InitialProps } from 'next/document'
+import { ParsedUrlQuery } from 'querystring'
 
 /**
  * @file Subdomain Utility Types - App

@@ -1,11 +1,7 @@
+import { IProductListing } from '@flex-development/kustomzcore'
 import { PRODUCTS } from '@system-mocks/utils'
-import {
-  Heading,
-  ProductHeading,
-  ProductHeadingProps
-} from '@system/components'
+import { ProductHeading, ProductHeadingProps } from '@system/components'
 import { StoryFN } from '@system/types/storybook'
-import { IProductListing } from 'shopify-api-node'
 
 /**
  * @file Stories - ProductHeading
@@ -25,7 +21,6 @@ export default {
   parameters: {
     jest: ['ProductHeading']
   },
-  subcomponents: { Heading },
   title: 'Library/Molecules/ProductHeading'
 }
 

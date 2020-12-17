@@ -1,5 +1,5 @@
+import { SONGS } from '@system-mocks/utils'
 import { Default as Hero } from '@system/components/ui/organisms/Hero/Hero.stories'
-import { Default as PlaylistBar } from '@system/components/ui/organisms/PlaylistBar/PlaylistBar.stories'
 import { Default as ShopHeader } from '@system/components/ui/organisms/ShopHeader/ShopHeader.stories'
 import { Default as Sidebar } from '@system/components/ui/organisms/Sidebar/Sidebar.stories'
 import { Homepage } from '@system/components/ui/templates/IndexTemplate/IndexTemplate.stories'
@@ -27,7 +27,7 @@ export default {
   args: {
     header: ShopHeader.args,
     hero: Hero.args,
-    playlistbar: PlaylistBar.args,
+    playlistbar: { songs: SONGS },
     sidebar: Sidebar.args
   },
   component: ShopLayout,

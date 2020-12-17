@@ -1,6 +1,6 @@
 import { AnyObject } from '@flex-development/json'
+import { ICheckout } from '@flex-development/kustomzcore'
 import { FirebaseAdaptorDatabase } from '@subdomains/firebase'
-import { ICheckout } from 'shopify-api-node'
 import { DATASETS } from './datamaps'
 
 /**

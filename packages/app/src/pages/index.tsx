@@ -1,6 +1,6 @@
 import { database } from '@app/subdomains/firebase/config/web'
 import { SortOrder } from '@flex-development/json'
-import { IReview } from '@flex-development/kustomzcore'
+import { IProductListing, IReview } from '@flex-development/kustomzcore'
 import { IndexTemplate } from '@flex-development/kustomzdesign'
 import {
   CMSPageParams,
@@ -19,7 +19,6 @@ import {
 import { ProductService, ReviewService } from '@subdomains/sales'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
 import { getSession } from 'next-auth/client'
-import { IProductListing } from 'shopify-api-node'
 
 /**
  * @file Page - Home

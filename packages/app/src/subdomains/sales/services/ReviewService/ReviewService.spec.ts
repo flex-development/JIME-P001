@@ -7,7 +7,7 @@ import { IReviewService } from './IReviewService'
 import ReviewService from './ReviewService'
 
 /**
- * @file Unit Tests - ReviewService
+ * @file Tests - ReviewService
  * @module subdomains/sales/services/ReviewService/spec
  */
 

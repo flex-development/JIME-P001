@@ -6,9 +6,16 @@ import { Default } from './Span.stories'
  * @module components/ui/atoms/Span/spec
  */
 
-it('renders a <span> element', () => {
-  const { getByText } = render(<Default {...Default.args} />)
-  const { children } = Default.args as ArgsMatcher
+describe('Span', () => {
+  it('renders a <span> element', () => {
+    const { container } = render(<Default {...Default.args} />)
 
-  expect(getByText(children)).toBeInTheDocument()
+    expect(container.firstChild?.nodeName.toLowerCase()).toBe('span')
+  })
+
+  it('renders the span text', () => {
+    const { getByText } = render(<Default {...Default.args} />)
+
+    expect(getByText(Default.args.children as string)).toBeInTheDocument()
+  })
 })

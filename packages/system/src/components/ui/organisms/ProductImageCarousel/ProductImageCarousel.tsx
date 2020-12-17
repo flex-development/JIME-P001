@@ -1,10 +1,10 @@
+import { IProductListing } from '@flex-development/kustomzcore'
 import { Image, ImageProps } from '@system/components/ui/atoms'
 import { useSanitizedProps } from '@system/hooks'
 import { getProductVariantImage } from '@system/utils'
 import { omit } from 'lodash'
 import { FC, useEffect } from 'react'
 import { useArray } from 'react-hanger/array/useArray'
-import { IProductListing } from 'shopify-api-node'
 import { Carousel, CarouselProps } from '../Carousel'
 
 /**

@@ -5,6 +5,8 @@
 
 export const CART_PERSISTENCE_KEY = 'morenaskustomz-cart'
 
+export const CHECKOUT_BASE_URL = '/checkouts'
+
 const FIREBASE_API_KEY = 'AIzaSyDNl_K5dReovDsT4w8osSRVz2D2pSyK5A0'
 const FIREBASE_APP_ID = '1:1099150772855:web:c61ca4f74fd5ae10bf5472'
 const FIREBASE_PROJECT_ID = 'morenaskustomz'

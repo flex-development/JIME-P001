@@ -6,9 +6,16 @@ import { Default } from './Item.stories'
  * @module components/ui/atoms/Item/spec
  */
 
-it('renders a <li> element', () => {
-  const { getByText } = render(<Default {...Default.args} />)
-  const { children } = Default.args as ArgsMatcher
+describe('Item', () => {
+  it('renders a <li> element', () => {
+    const { container } = render(<Default {...Default.args} />)
 
-  expect(getByText(children)).toBeInTheDocument()
+    expect(container.firstChild?.nodeName.toLowerCase()).toBe('li')
+  })
+
+  it('renders the item text', () => {
+    const { getByText } = render(<Default {...Default.args} />)
+
+    expect(getByText(Default.args.children as string)).toBeInTheDocument()
+  })
 })

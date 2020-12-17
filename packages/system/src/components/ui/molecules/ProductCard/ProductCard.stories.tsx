@@ -1,6 +1,6 @@
+import { IProductListing } from '@flex-development/kustomzcore'
 import { PRODUCTS } from '@system-mocks/utils'
 import { StoryFN } from '@system/types/storybook'
-import { IProductListing } from 'shopify-api-node'
 import { ProductCard, ProductCardProps } from './ProductCard'
 
 /**

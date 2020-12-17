@@ -62,9 +62,9 @@ export interface CheckoutLineItemProps extends BoxProps {
  *
  * - Calculate line item price with custom properties
  */
-export const CheckoutLineItem: FC<CheckoutLineItemProps> = (
-  props: CheckoutLineItemProps
-) => {
+export const CheckoutLineItem: FC<CheckoutLineItemProps> & {
+  QUANTITY_LABEL: string
+} = (props: CheckoutLineItemProps) => {
   const {
     data,
     handleRemove = () => console.log(`TODO: CheckoutLineItem.handleRemove`),
@@ -160,7 +160,7 @@ export const CheckoutLineItem: FC<CheckoutLineItemProps> = (
             <LabeledFormControl
               className='line-item-quantity'
               control={{
-                'aria-label': 'Line item quantity',
+                'aria-label': CheckoutLineItem.QUANTITY_LABEL,
                 min: 1,
                 name: 'quantity',
                 onChange: onChangeQuantity,
@@ -189,5 +189,7 @@ export const CheckoutLineItem: FC<CheckoutLineItemProps> = (
 }
 
 CheckoutLineItem.displayName = 'CheckoutLineItem'
+
+CheckoutLineItem.QUANTITY_LABEL = 'Line item quantity'
 
 CheckoutLineItem.defaultProps = {}

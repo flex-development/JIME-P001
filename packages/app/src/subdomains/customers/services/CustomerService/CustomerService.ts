@@ -4,8 +4,7 @@ import {
   DataArray,
   DataArrayQueryParams
 } from '@flex-development/json'
-import { createError, Logger } from '@flex-development/kustomzcore'
-import { ICustomer } from 'shopify-api-node'
+import { createError, ICustomer, Logger } from '@flex-development/kustomzcore'
 import { ICustomerService, ListCustomersResponse } from './ICustomerService'
 
 /**

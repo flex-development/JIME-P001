@@ -6,7 +6,7 @@ import { ICMSMenu } from '@subdomains/cms/models'
 import MenuRepository from './MenuRepository'
 
 /**
- * @file Unit Tests - MenuRepository
+ * @file Tests - MenuRepository
  * @module subdomains/cms/repositories/MenuRepository/spec
  */
 

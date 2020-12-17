@@ -1,3 +1,4 @@
+import { CHECKOUT_BASE_URL } from '@flex-development/kustomzcore'
 import LINE_ITEMS from '@system-mocks/data/checkout-line-items.mock.json'
 import { renderHook } from '@testing-library/react-hooks'
 import { useCheckoutPermalink } from './useCheckoutPermalink'
@@ -6,8 +7,6 @@ import { useCheckoutPermalink } from './useCheckoutPermalink'
  * @file Tests - useCheckoutPermalink
  * @module hooks/useCheckoutPermalink/spec
  */
-
-const CHECKOUT_BASE_URL = '/checkouts'
 
 describe('useCheckoutPermalink', () => {
   it('creates the default checkout URL', () => {

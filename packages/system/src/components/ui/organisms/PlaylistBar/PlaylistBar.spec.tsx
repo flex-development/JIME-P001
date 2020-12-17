@@ -6,8 +6,10 @@ import { Default } from './PlaylistBar.stories'
  * @module components/ui/organisms/PlaylistBar/spec
  */
 
-it('renders <section class="playlistbar">', () => {
-  const { container } = render(<Default {...Default.args} />)
+describe('PlaylistBar', () => {
+  it('renders with class "playlistbar"', () => {
+    const { container } = render(<Default {...Default.args} />)
 
-  expect(container.firstChild).toHaveClass('playlistbar')
+    expect(container.firstChild).toHaveClass('playlistbar')
+  })
 })

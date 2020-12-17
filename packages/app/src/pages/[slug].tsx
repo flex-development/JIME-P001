@@ -1,8 +1,12 @@
 import { PageTemplate } from '@flex-development/kustomzdesign'
 import { CMSPageParams, IPagePropsSlug, PC, SEO } from '@subdomains/app'
 import { getCMSPageSEO } from '@subdomains/cms'
-import { GetServerSideProps, GetServerSidePropsContext } from 'next'
-import { getServerSideProps as getServerSidePropsGlobal } from './index'
+import {
+  GetServerSideProps,
+  GetServerSidePropsContext,
+  GetServerSidePropsResult
+} from 'next'
+import { getServerSideProps as ssp } from './index'
 
 /**
  * @file Page - Slug (CMS)
@@ -48,8 +52,7 @@ export const getServerSideProps: GetServerSideProps<
   IPagePropsSlug,
   CMSPageParams
 > = async (context: GetServerSidePropsContext<CMSPageParams>) => {
-  // Return page component props
-  return getServerSidePropsGlobal(context)
+  return (await ssp(context)) as GetServerSidePropsResult<IPagePropsSlug>
 }
 
 export default Slug

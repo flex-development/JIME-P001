@@ -2,12 +2,14 @@ import { render } from '@testing-library/react'
 import { Section } from './Section'
 
 /**
- * @file Unit Tests - Section
+ * @file Tests - Section
  * @module components/ui/atoms/Section/spec
  */
 
-it('renders a <section> element', () => {
-  const { container } = render(<Section />)
+describe('Section', () => {
+  it('renders a <section> element', () => {
+    const { container } = render(<Section />)
 
-  expect(container.firstChild).toMatchInlineSnapshot('<section />')
+    expect(container.firstChild?.nodeName.toLowerCase()).toBe('section')
+  })
 })

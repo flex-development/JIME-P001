@@ -1,5 +1,9 @@
 import { ANYTHING } from '@flex-development/json'
-import { IReview } from '@flex-development/kustomzcore'
+import {
+  IProductListing,
+  IProductListingVariant,
+  IReview
+} from '@flex-development/kustomzcore'
 import {
   Button,
   FlexBox,
@@ -21,7 +25,6 @@ import { useCartContext, useSanitizedProps } from '@system/hooks'
 import { EventHandlers, MutatedProps, TC } from '@system/types'
 import { isFunction } from 'lodash'
 import { useCallback, useState } from 'react'
-import { IProductListing, IProductListingVariant } from 'shopify-api-node'
 
 /**
  * @file Product page template

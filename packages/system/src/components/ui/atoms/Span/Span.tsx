@@ -1,4 +1,4 @@
-import { useSanitizedProps } from '@system/hooks'
+import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
 import { AnimatedFREC, FREC, MutatedProps } from '@system/types'
 import { forwardRef } from 'react'
 import { animated } from 'react-spring'

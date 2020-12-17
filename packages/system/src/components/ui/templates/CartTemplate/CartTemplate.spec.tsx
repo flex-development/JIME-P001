@@ -7,11 +7,13 @@ import { Cart } from './CartTemplate.stories'
  * @module components/ui/templates/CartTemplate/spec
  */
 
-it('renders without crashing', () => {
-  const { template_id } = CartTemplate
+describe('CartTemplate', () => {
+  it('renders with class "template" and data-template=${template_id}', () => {
+    const { template_id } = CartTemplate
 
-  const { container } = render(<Cart {...Cart.args} />)
+    const { container } = render(<Cart {...Cart.args} />)
 
-  expect(container.firstChild).toHaveClass('template')
-  expect(container.firstChild).toHaveAttribute('data-template', template_id)
+    expect(container.firstChild).toHaveClass('template')
+    expect(container.firstChild).toHaveAttribute('data-template', template_id)
+  })
 })

@@ -7,22 +7,30 @@ import { Container } from './Container'
  * @see https://v5.getbootstrap.com/docs/5.0/layout/containers/
  */
 
-it('renders <div class="container">', () => {
-  const { container } = render(<Container />)
+describe('Container', () => {
+  it('renders a <div> element', () => {
+    const { container } = render(<Container />)
 
-  expect(container.firstChild).toHaveClass('container')
-})
+    expect(container.firstChild?.nodeName.toLowerCase()).toBe('div')
+  })
 
-it('renders <div class="container-fluid">', () => {
-  const { container } = render(<Container fluid />)
+  it('renders with class "container"', () => {
+    const { container } = render(<Container />)
 
-  expect(container.firstChild).not.toHaveClass('container')
-  expect(container.firstChild).toHaveClass('container-fluid')
-})
+    expect(container.firstChild).toHaveClass('container')
+  })
 
-it('renders a responsive container', () => {
-  const { container } = render(<Container size='lg' />)
+  it('renders with class "container-fluid"', () => {
+    const { container } = render(<Container fluid />)
 
-  expect(container.firstChild).not.toHaveClass('container')
-  expect(container.firstChild).toHaveClass('container-lg')
+    expect(container.firstChild).not.toHaveClass('container')
+    expect(container.firstChild).toHaveClass('container-fluid')
+  })
+
+  it('renders a responsive container', () => {
+    const { container } = render(<Container size='lg' />)
+
+    expect(container.firstChild).not.toHaveClass('container')
+    expect(container.firstChild).toHaveClass('container-lg')
+  })
 })

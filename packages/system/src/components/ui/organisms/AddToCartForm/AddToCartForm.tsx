@@ -1,5 +1,9 @@
 import { ANYTHING } from '@flex-development/json'
-import { CheckoutLineItemInput } from '@flex-development/kustomzcore'
+import {
+  CheckoutLineItemInput,
+  IProductListing,
+  IProductListingVariant
+} from '@flex-development/kustomzcore'
 import {
   Button,
   Column,
@@ -24,7 +28,6 @@ import { EventHandlers } from '@system/types'
 import { getProductVariantImage } from '@system/utils'
 import { findIndex, isEmpty } from 'lodash'
 import { FC, useCallback } from 'react'
-import { IProductListing, IProductListingVariant } from 'shopify-api-node'
 import { ProductImageCarousel } from '../ProductImageCarousel'
 
 /**
@@ -67,9 +70,11 @@ export interface AddToCartFormProps extends FormProps {
  * - https://shopify.dev/docs/storefront-api/reference/object/product
  * - https://shopify.dev/docs/storefront-api/reference/object/productvariant
  */
-export const AddToCartForm: FC<AddToCartFormProps> = (
-  props: AddToCartFormProps
-) => {
+export const AddToCartForm: FC<AddToCartFormProps> & {
+  QUANTITY_LABEL: string
+  SELECT_PLACEHOLDER: string
+  TEXTAREA_PLACEHOLDER: string
+} = (props: AddToCartFormProps) => {
   const {
     active: position = 0,
     handleSubmit = (
@@ -284,6 +289,10 @@ export const AddToCartForm: FC<AddToCartFormProps> = (
 }
 
 AddToCartForm.displayName = 'AddToCartForm'
+
+AddToCartForm.QUANTITY_LABEL = 'Product quantity'
+AddToCartForm.SELECT_PLACEHOLDER = 'Select an option'
+AddToCartForm.TEXTAREA_PLACEHOLDER = 'Describe your kustom ash or rolling tray'
 
 AddToCartForm.defaultProps = {
   active: 0

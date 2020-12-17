@@ -6,17 +6,24 @@ import { Default } from './Label.stories'
  * @module components/ui/atoms/Label/spec
  */
 
-it('adds the class "form-label" when props.form is true', () => {
-  const { getByText } = render(<Default {...Default.args} form />)
-  const { children } = Default.args as ArgsMatcher
+describe('Label', () => {
+  it('renders a <label> element', () => {
+    const { container } = render(<Default {...Default.args} />)
 
-  expect(getByText(children)).toHaveClass('form-label')
-})
+    expect(container.firstChild?.nodeName.toLowerCase()).toBe('label')
+  })
 
-it('adds the attribute data-required and renders text with an asterisk when props.required is true', () => {
-  const { getByText } = render(<Default {...Default.args} required />)
+  it('adds the class "form-label" when props.form is true', () => {
+    const { container } = render(<Default {...Default.args} form />)
 
-  expect(getByText(`*${Default.args?.children}`)).toHaveAttribute(
-    'data-required'
-  )
+    expect(container.firstChild).toHaveClass('form-label')
+  })
+
+  it('renders text with an asterisk when props.required is true and adds data-required attribute', () => {
+    const { getByText } = render(<Default {...Default.args} required />)
+
+    const text_with_asterisk = `*${Default.args?.children}`
+
+    expect(getByText(text_with_asterisk)).toHaveAttribute('data-required')
+  })
 })

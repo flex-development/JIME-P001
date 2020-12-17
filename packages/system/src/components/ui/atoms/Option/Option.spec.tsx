@@ -6,8 +6,16 @@ import { Default } from './Option.stories'
  * @module components/ui/atoms/Option/spec
  */
 
-it('renders an <option> element', () => {
-  const { getByLabelText } = render(<Default {...Default.args} />)
+describe('Option', () => {
+  it('renders an <option> element', () => {
+    const { container } = render(<Default {...Default.args} />)
 
-  expect(getByLabelText(Default.args.label as Matcher)).toBeInTheDocument()
+    expect(container.firstChild?.nodeName.toLowerCase()).toBe('option')
+  })
+
+  it('renders the label text', () => {
+    const { getByLabelText } = render(<Default {...Default.args} />)
+
+    expect(getByLabelText(Default.args.label as Matcher)).toBeInTheDocument()
+  })
 })

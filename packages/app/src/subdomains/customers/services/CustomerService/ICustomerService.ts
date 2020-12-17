@@ -3,7 +3,7 @@ import {
   DataArrayQueryParams,
   IArrayQueryExecutor
 } from '@flex-development/json'
-import { ICustomer } from 'shopify-api-node'
+import { ICustomer } from '@flex-development/kustomzcore'
 
 /**
  * @file Subdomain Interface - Customer Service

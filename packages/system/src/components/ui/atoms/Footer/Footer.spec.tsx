@@ -2,12 +2,14 @@ import { render } from '@testing-library/react'
 import { Footer } from './Footer'
 
 /**
- * @file Unit Tests - Footer
+ * @file Tests - Footer
  * @module components/ui/atoms/Footer/spec
  */
 
-it('renders a <footer> element', () => {
-  const { container } = render(<Footer />)
+describe('Footer', () => {
+  it('renders a <footer> element', () => {
+    const { container } = render(<Footer />)
 
-  expect(container.firstChild).toMatchInlineSnapshot('<footer />')
+    expect(container.firstChild?.nodeName.toLowerCase()).toBe('footer')
+  })
 })

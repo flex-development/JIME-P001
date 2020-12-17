@@ -1,5 +1,5 @@
 import { CartContextState } from '@flex-development/kustomzcore'
-import { CartContext } from '@system/components/context'
+import { CartContext } from '@system/components/context/CartContext'
 import { useContext } from 'react'
 
 /**

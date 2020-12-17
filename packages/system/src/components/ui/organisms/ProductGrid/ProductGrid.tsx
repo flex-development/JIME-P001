@@ -1,9 +1,9 @@
 import { AnyObject } from '@flex-development/json'
+import { IProductListing } from '@flex-development/kustomzcore'
 import { Column, Row, RowProps } from '@system/components/ui/atoms'
 import { ProductCard, ProductCardProps } from '@system/components/ui/molecules'
 import { useSanitizedProps } from '@system/hooks'
 import { FC } from 'react'
-import { IProductListing } from 'shopify-api-node'
 
 /**
  * @file Product layout component

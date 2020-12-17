@@ -7,10 +7,12 @@ import { Sidebar } from './Menu.stories'
  * @module components/ui/molecules/Menu/spec
  */
 
-it('renders the sidebar menu links', () => {
-  const { getByText } = render(<Sidebar {...Sidebar.args} />)
+describe('Menu', () => {
+  it('renders the sidebar menu links', () => {
+    const { getByText } = render(<Sidebar {...Sidebar.args} />)
 
-  Sidebar.args.links?.map((link: LinkProps) => {
-    expect(getByText(link.title as string)).toHaveClass('nav-link')
+    Sidebar.args.links?.map((link: LinkProps) => {
+      expect(getByText(link.title as string)).toHaveClass('nav-link')
+    })
   })
 })

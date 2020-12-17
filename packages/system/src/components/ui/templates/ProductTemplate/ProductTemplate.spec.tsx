@@ -7,11 +7,13 @@ import { AshTray } from './ProductTemplate.stories'
  * @module components/ui/templates/ProductTemplate/spec
  */
 
-it('renders without crashing', () => {
-  const { template_id } = ProductTemplate
+describe('ProductTemplate', () => {
+  it('renders with class "template" and data-template=${template_id}', () => {
+    const { template_id } = ProductTemplate
 
-  const { container } = render(<AshTray {...AshTray.args} />)
+    const { container } = render(<AshTray {...AshTray.args} />)
 
-  expect(container.firstChild).toHaveClass('template')
-  expect(container.firstChild).toHaveAttribute('data-template', template_id)
+    expect(container.firstChild).toHaveClass('template')
+    expect(container.firstChild).toHaveAttribute('data-template', template_id)
+  })
 })

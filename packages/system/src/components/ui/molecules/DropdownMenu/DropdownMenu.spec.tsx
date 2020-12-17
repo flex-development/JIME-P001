@@ -7,10 +7,12 @@ import { ProductVariants } from './DropdownMenu.stories'
  * @module components/ui/molecules/DropdownMenu/spec
  */
 
-it('renders the product variant titles', () => {
-  const { getByText } = render(<ProductVariants {...ProductVariants.args} />)
+describe('DropdownMenu', () => {
+  it('renders the product variant titles', () => {
+    const { getByText } = render(<ProductVariants {...ProductVariants.args} />)
 
-  ProductVariants.args.items?.map((item: ItemProps) => {
-    expect(getByText(item.children as string)).toHaveClass('dropdown-item')
+    ProductVariants.args.items?.map((item: ItemProps) => {
+      expect(getByText(item.children as string)).toHaveClass('dropdown-item')
+    })
   })
 })

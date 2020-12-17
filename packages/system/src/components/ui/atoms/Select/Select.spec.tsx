@@ -6,8 +6,20 @@ import { Default } from './Select.stories'
  * @module components/ui/atoms/Select/spec
  */
 
-it('renders a <select> element with nested <option> elements', () => {
-  const { container } = render(<Default {...Default.args} />)
+describe('Select', () => {
+  it('renders a <select> element', () => {
+    const { container } = render(<Default {...Default.args} />)
 
-  expect(container.firstChild).not.toBeEmptyDOMElement()
+    expect(container.firstChild?.nodeName.toLowerCase()).toBe('select')
+  })
+
+  it('renders with nested elements', () => {
+    const { container } = render(<Default {...Default.args} />)
+
+    expect(container.firstChild).not.toBeEmptyDOMElement()
+
+    container.firstChild?.childNodes.forEach(({ nodeName }) => {
+      expect(nodeName.toLowerCase()).toBe('option')
+    })
+  })
 })

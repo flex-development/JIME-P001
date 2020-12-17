@@ -1,4 +1,4 @@
-const defaultConfig = require('../../babel.config.json')
+const defaultBabelConfig = require('../../babel.config.json')
 
 /**
  * @file Babel Configuration
@@ -6,8 +6,8 @@ const defaultConfig = require('../../babel.config.json')
  */
 
 module.exports = {
-  extends: '../../babel.config.json',
-  plugins: defaultConfig.plugins.concat([
+  ...defaultBabelConfig,
+  plugins: defaultBabelConfig.plugins.concat([
     [
       'module-resolver',
       {

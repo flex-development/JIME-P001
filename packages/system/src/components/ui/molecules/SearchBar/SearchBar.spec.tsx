@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import User from '@testing-library/user-event'
+import { SearchBar } from './SearchBar'
 import { Default, InitialQuery } from './SearchBar.stories'
 
 /**
@@ -7,54 +8,53 @@ import { Default, InitialQuery } from './SearchBar.stories'
  * @module components/ui/molecules/SearchBar/spec
  */
 
-// ! Keep in sync with SearchBar implementation
-const SEARCH_BUTTON_LABEL = 'Search button'
-const SEARCH_INPUT_LABEL = 'Search query'
+describe('SearchBar', () => {
+  const { BUTTON_LABEL, INPUT_LABEL } = SearchBar
 
-it('renders <form class="searchbar"> with search button', () => {
-  const { container } = render(<Default {...Default.args} />)
+  it('renders with class "searchbar"', () => {
+    const { container } = render(<Default {...Default.args} />)
 
-  // Expect <form> to be rendered
-  expect(container.firstChild).toHaveClass('searchbar')
+    expect(container.firstChild).toHaveClass('searchbar')
+  })
 
-  // Expect <button> and <input> elements to be in the document
-  expect(container.firstChild).toContainElement(
-    screen.getByLabelText(SEARCH_BUTTON_LABEL)
-  )
+  it('renders with search button and input', () => {
+    const { container } = render(<Default {...Default.args} />)
+    const { firstChild } = container
 
-  expect(container.firstChild).toContainElement(
-    screen.getByLabelText(SEARCH_INPUT_LABEL)
-  )
-})
+    // Expect <button> and <input> elements to be in the document
+    expect(firstChild).toContainElement(screen.getByLabelText(BUTTON_LABEL))
+    expect(firstChild).toContainElement(screen.getByLabelText(INPUT_LABEL))
+  })
 
-it('renders props.placeholder if defined', () => {
-  const placeholder = 'Shop ash trays, rolling trays, and more'
+  it('renders props.placeholder if defined', () => {
+    const placeholder = 'Shop ash trays, rolling trays, and more'
 
-  render(<Default {...Default.args} placeholder={placeholder} />)
+    render(<Default {...Default.args} placeholder={placeholder} />)
 
-  expect(screen.getByPlaceholderText(placeholder)).toBeInTheDocument()
-})
+    expect(screen.getByPlaceholderText(placeholder)).toBeInTheDocument()
+  })
 
-it('updates the search query', () => {
-  render(<Default {...Default.args} />)
+  it('updates the search query', () => {
+    render(<Default {...Default.args} />)
 
-  // Get search query <input> element
-  const query_input = screen.getByLabelText(SEARCH_INPUT_LABEL)
+    // Get search query <input> element
+    const query_input = screen.getByLabelText(INPUT_LABEL)
 
-  // Click search query <input> and enter query
-  User.click(query_input)
-  User.type(query_input, SEARCH_INPUT_LABEL)
+    // Click search query <input> and enter query
+    User.click(query_input)
+    User.type(query_input, INPUT_LABEL)
 
-  // Expect updated <input> value
-  expect((query_input as HTMLInputElement).value).toBe(SEARCH_INPUT_LABEL)
-})
+    // Expect updated <input> value
+    expect((query_input as HTMLInputElement).value).toBe(INPUT_LABEL)
+  })
 
-it('sets props.query as the initial search query', () => {
-  render(<InitialQuery {...InitialQuery.args} />)
+  it('sets props.query as the initial search query', () => {
+    render(<InitialQuery {...InitialQuery.args} />)
 
-  // Get search query <input> element
-  const input = screen.getByLabelText(SEARCH_INPUT_LABEL)
+    // Get search query <input> element
+    const input = screen.getByLabelText(INPUT_LABEL)
 
-  // Expect <input> value to match initial query
-  expect((input as HTMLInputElement).value).toBe(InitialQuery.args?.query)
+    // Expect <input> value to match initial query
+    expect((input as HTMLInputElement).value).toBe(InitialQuery.args?.query)
+  })
 })

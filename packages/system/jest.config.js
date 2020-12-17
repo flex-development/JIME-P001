@@ -1,5 +1,4 @@
 const path = require('path')
-const { animated } = require('react-spring')
 
 /**
  * @file Jest Configuration

@@ -332,6 +332,8 @@ export interface InputProps
  */
 export type InputValue = InputProps['value']
 
+export const EMAIL_PLACEHOLDER = 'you@email.com'
+
 /**
  * Renders an `<input>` element with the class `form-control`.
  *

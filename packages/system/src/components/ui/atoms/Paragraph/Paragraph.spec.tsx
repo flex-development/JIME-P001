@@ -6,9 +6,17 @@ import { Default } from './Paragraph.stories'
  * @module components/ui/atoms/Paragraph/spec
  */
 
-it('renders a <p> element', () => {
-  const { getByText } = render(<Default {...Default.args} />)
-  const { children } = Default.args as ArgsMatcher
+describe('Paragraph', () => {
+  it('renders a <p> element', () => {
+    const { container } = render(<Default {...Default.args} />)
 
-  expect(getByText(children)).toBeInTheDocument()
+    expect(container.firstChild?.nodeName.toLowerCase()).toBe('p')
+  })
+
+  it('renders the paragraph text', () => {
+    const { getByText } = render(<Default {...Default.args} />)
+    const { children } = Default.args as ArgsMatcher
+
+    expect(getByText(children)).toBeInTheDocument()
+  })
 })

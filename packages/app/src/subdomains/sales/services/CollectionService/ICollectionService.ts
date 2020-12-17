@@ -3,8 +3,8 @@ import {
   DataArrayQueryParams,
   IArrayQueryExecutor
 } from '@flex-development/json'
+import { ICollectionListing } from '@flex-development/kustomzcore'
 import { NotFound } from '@subdomains/app'
-import { ICollectionListing } from 'shopify-api-node'
 
 /**
  * @file Subdomain Interface - Collection Listings Service

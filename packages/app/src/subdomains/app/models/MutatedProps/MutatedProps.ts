@@ -1,4 +1,4 @@
-import { MutatedProps as IMP } from '@flex-development/kustomzdesign/types'
+import { MutatedProps as IMP } from '@flex-development/kustomzdesign/src/types'
 import { IsOptional, IsString } from 'class-validator'
 
 /**

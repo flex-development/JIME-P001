@@ -1,10 +1,9 @@
 import ReviewsMockRepoRoot from '@app-mocks/data/reviews.mock.json'
-import { IReview } from '@flex-development/kustomzcore'
+import { IProductListing, IReview } from '@flex-development/kustomzcore'
 import products from '@system-mocks/data/product-listings.mock.json'
 import SONGS from '@system-mocks/data/song-attributes.mock.json'
 import { CartContextProviderProps } from '@system/components/context'
 import { render } from '@testing-library/react'
-import { IProductListing } from 'shopify-api-node'
 import { MockCartContextProvider } from './components'
 
 /**

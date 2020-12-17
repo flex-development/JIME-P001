@@ -6,14 +6,28 @@ import { Ordered, Unordered } from './List.stories'
  * @module components/ui/atoms/List/spec
  */
 
-it('renders an <ol> element with nested <li> elements', () => {
-  const { container } = render(<Ordered {...Ordered.args} />)
+describe('List', () => {
+  const testChildNodeNames = (node: ChildNode | null) => {
+    expect(node).not.toBeEmptyDOMElement()
 
-  expect(container.firstChild).not.toBeEmptyDOMElement()
-})
+    return node?.childNodes.forEach(({ nodeName }) => {
+      expect(nodeName.toLowerCase()).toBe('li')
+    })
+  }
 
-it('renders an <ul> element with nested <li> elements', () => {
-  const { container } = render(<Unordered {...Unordered.args} />)
+  it('renders an <ol> element with nested <li> elements', () => {
+    const { container } = render(<Ordered {...Ordered.args} />)
 
-  expect(container.firstChild).not.toBeEmptyDOMElement()
+    expect(container.firstChild?.nodeName.toLowerCase()).toBe('ol')
+
+    testChildNodeNames(container.firstChild)
+  })
+
+  it('renders an <ul> element with nested <li> elements', () => {
+    const { container } = render(<Unordered {...Unordered.args} />)
+
+    expect(container.firstChild?.nodeName.toLowerCase()).toBe('ul')
+
+    testChildNodeNames(container.firstChild)
+  })
 })

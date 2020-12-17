@@ -1,6 +1,6 @@
 import { database } from '@app/subdomains/firebase/config/web'
 import { AnyObject, serialize } from '@flex-development/json'
-import { IReview } from '@flex-development/kustomzcore'
+import { IProductListing, IReview } from '@flex-development/kustomzcore'
 import {
   getProductVariantImage,
   ProductTemplate,
@@ -18,7 +18,6 @@ import {
 import { ProductService, ReviewService } from '@subdomains/sales'
 import { findIndex } from 'lodash'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
-import { IProductListing } from 'shopify-api-node'
 import stripHtml from 'string-strip-html'
 
 /**

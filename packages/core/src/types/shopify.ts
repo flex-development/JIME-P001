@@ -51,3 +51,13 @@ export type CheckoutLineItemInput = {
 export type CheckoutLineItemInputWithId = CheckoutLineItemInput & {
   id: CheckoutLineItemInput['data']['variant_id']
 }
+
+export type {
+  ICheckout,
+  ICheckoutLineItem,
+  ICollectionListing,
+  ICustomer,
+  IProductImage,
+  IProductListing,
+  IProductListingVariant
+} from 'shopify-api-node'

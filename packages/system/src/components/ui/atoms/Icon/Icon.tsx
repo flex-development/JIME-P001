@@ -1,4 +1,4 @@
-import { useSanitizedProps } from '@system/hooks'
+import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
 import { FREC } from '@system/types'
 import { isEmpty } from 'lodash'
 import { forwardRef } from 'react'
@@ -56,20 +56,19 @@ export const Icon: FREC<IconProps> = forwardRef((props, ref) => {
   const _bi = !isEmpty(bi)
   const _mat = !isEmpty(mat)
 
-  const boostrap = _bi && !_mat
+  const bootstrap = _bi && !_mat
   const material = _mat && !_bi
 
   const sanitized = useSanitizedProps<typeof rest, SpanProps>(rest, {
-    [`bi-${bi}`]: boostrap,
+    [`bi-${bi}`]: bootstrap,
     icon: true,
     'material-icons': material && !outlined,
     'material-icons-outlined': material && outlined
   })
 
   sanitized['aria-hidden'] = rest.children ? rest?.['aria-hidden'] : false
-  sanitized['data-position'] = position
 
-  if (boostrap) sanitized['data-bi'] = true
+  if (bootstrap) sanitized['data-bi'] = true
 
   if (material) {
     sanitized['children'] = mat

@@ -7,24 +7,26 @@ import { NotFound } from './ErrorTemplate.stories'
  * @module components/ui/templates/ErrorTemplate/spec
  */
 
-it('renders without crashing', () => {
-  const { template_id } = ErrorTemplate
+describe('ErrorTemplate', () => {
+  it('renders with class "template" and data-template=${template_id}', () => {
+    const { template_id } = ErrorTemplate
 
-  const { container } = render(<NotFound {...NotFound.args} />)
+    const { container } = render(<NotFound {...NotFound.args} />)
 
-  expect(container.firstChild).toHaveClass('template')
-  expect(container.firstChild).toHaveAttribute('data-template', template_id)
-})
+    expect(container.firstChild).toHaveClass('template')
+    expect(container.firstChild).toHaveAttribute('data-template', template_id)
+  })
 
-it('renders the error code', () => {
-  const { getByText } = render(<NotFound {...NotFound.args} />)
+  it('renders the error code', () => {
+    const { getByText } = render(<NotFound {...NotFound.args} />)
 
-  expect(getByText(`${NotFound.args.code}`)).toHaveClass('error-code')
-})
+    expect(getByText(`${NotFound.args.code}`)).toHaveClass('error-code')
+  })
 
-it('renders the error message', () => {
-  const { getByText } = render(<NotFound {...NotFound.args} />)
-  const { message } = NotFound.args || {}
+  it('renders the error message', () => {
+    const { getByText } = render(<NotFound {...NotFound.args} />)
+    const { message } = NotFound.args || {}
 
-  expect(getByText(message as string)).toHaveClass('error-message')
+    expect(getByText(message as string)).toHaveClass('error-message')
+  })
 })

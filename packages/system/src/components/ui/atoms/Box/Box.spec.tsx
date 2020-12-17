@@ -2,12 +2,14 @@ import { render } from '@testing-library/react'
 import { Box } from './Box'
 
 /**
- * @file Unit Tests - Box
+ * @file Tests - Box
  * @module components/ui/atoms/Box/spec
  */
 
-it('renders <div />', () => {
-  const { container } = render(<Box />)
+describe('Box', () => {
+  it('renders a <div> element', () => {
+    const { container } = render(<Box />)
 
-  expect(container.firstChild).toMatchInlineSnapshot('<div />')
+    expect(container.firstChild?.nodeName.toLowerCase()).toBe('div')
+  })
 })

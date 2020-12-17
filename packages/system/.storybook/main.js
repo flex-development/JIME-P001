@@ -1,6 +1,7 @@
+const merge = require('lodash').merge
 const path = require('path')
-const { merge } = require('lodash')
-const sassOptions = require('../.sassrc.js')
+const implementation = require('sass')
+const babelConfig = require('../babel.config.js')
 
 /**
  * @file Storybook Configuration
@@ -98,13 +99,20 @@ module.exports = {
           loader: 'postcss-loader',
           options: {
             config: {
-              path: path.join(__dirname, '../.postcssrc.json')
+              path: path.join(__dirname, '../.postcss.config.js')
             }
           }
         },
         {
           loader: 'sass-loader',
-          options: sassOptions
+          options: {
+            implementation,
+            sassOptions: {
+              includePaths: ['src/theme/'],
+              indentedSyntax: false,
+              outputStyle: 'expanded'
+            }
+          }
         }
       ]
     })
@@ -112,7 +120,18 @@ module.exports = {
     config.module.rules.push({
       test: /\.(ts|tsx)$/,
       include: [path.join(__dirname, '../src')],
-      use: [{ loader: 'awesome-typescript-loader' }]
+      use: [
+        {
+          loader: 'awesome-typescript-loader',
+          options: {
+            babelCore: '@babel/core',
+            babelOptions: { ...babelConfig, babelrc: false },
+            cacheDirectory: 'node_modules/.cache/awesome-typescript-loader',
+            useBabel: true,
+            useCache: true
+          }
+        }
+      ]
     })
 
     return config

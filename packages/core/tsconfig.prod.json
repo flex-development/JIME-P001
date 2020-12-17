@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    "outDir": "./dist",
+    "plugins": [
+      {
+        "afterDeclarations": true,
+        "transform": "typescript-transform-paths",
+        "useRootDirs": true
+      }
+    ],
+    "rootDir": "./src",
+    "sourceMap": true
+  },
+  "exclude": [],
+  "extends": "./tsconfig.json",
+  "include": ["src"]
+}

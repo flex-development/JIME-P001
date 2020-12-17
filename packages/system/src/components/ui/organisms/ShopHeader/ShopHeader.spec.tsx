@@ -6,8 +6,10 @@ import { Default } from './ShopHeader.stories'
  * @module components/ui/organisms/ShopHeader/spec
  */
 
-it('renders <header class="shop-header">', () => {
-  const { container } = render(<Default {...Default.args} />)
+describe('ShopHeader', () => {
+  it('renders with class "shop-header"', () => {
+    const { container } = render(<Default {...Default.args} />)
 
-  expect(container.firstChild).toHaveClass('shop-header')
+    expect(container.firstChild).toHaveClass('shop-header')
+  })
 })

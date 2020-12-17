@@ -1,47 +1,54 @@
 import { render } from '@testing-library/react'
-import { Button } from './Button'
-import { Disabled, Fluid, Large, Small } from './Button.stories'
+import { Default, Disabled, Fluid, Large, Small } from './Button.stories'
 
 /**
  * @file Tests - Button
  * @module  components/ui/atoms/Button/spec
  */
 
-it('renders a primary button', () => {
-  const args: ArgsMatcher = { children: 'Button text' }
+describe('Button', () => {
+  it('renders a <button> element', () => {
+    const { container } = render(<Default {...Default.args} />)
 
-  const { getByText } = render(<Button {...args} />)
+    expect(container.firstChild?.nodeName.toLowerCase()).toBe('button')
+    expect(container.firstChild).toHaveClass('btn')
+  })
 
-  expect(getByText(args.children)).toHaveClass('btn btn-primary')
-})
+  it('renders with the default button variant', () => {
+    const { container } = render(<Default {...Default.args} />)
 
-it('renders a disabled button', () => {
-  const { getByText } = render(<Disabled {...Disabled.args} />)
-  const { children } = Disabled.args as ArgsMatcher
+    expect(container.firstChild).toHaveClass('btn-primary')
+  })
 
-  const button = getByText(children)
+  it('renders with a button background utility class', () => {
+    const bg = 'danger'
+    const { container } = render(<Default {...Default.args} variant={bg} />)
 
-  expect(button).toBeDisabled()
-  expect(button).toHaveAttribute('aria-disabled')
-})
+    expect(container.firstChild).toHaveClass(`btn-${bg}`)
+  })
 
-it('renders a full width button', () => {
-  const { getByText } = render(<Fluid {...Fluid.args} />)
-  const { children } = Fluid.args as ArgsMatcher
+  it('renders a disabled button', () => {
+    const { container } = render(<Disabled {...Disabled.args} />)
 
-  expect(getByText(children)).toHaveClass('btn w-100')
-})
+    expect(container.firstChild).toBeDisabled()
+    expect(container.firstChild).toHaveAttribute('aria-disabled')
+  })
 
-it('renders a large button', () => {
-  const { getByText } = render(<Large {...Large.args} />)
-  const { children } = Large.args as ArgsMatcher
+  it('renders a full width button', () => {
+    const { container } = render(<Fluid {...Fluid.args} />)
 
-  expect(getByText(children)).toHaveClass('btn btn-lg')
-})
+    expect(container.firstChild).toHaveClass('btn w-100')
+  })
 
-it('renders a small button', () => {
-  const { getByText } = render(<Small {...Small.args} />)
-  const { children } = Small.args as ArgsMatcher
+  it('renders a large button', () => {
+    const { container } = render(<Large {...Large.args} />)
 
-  expect(getByText(children)).toHaveClass('btn btn-sm')
+    expect(container.firstChild).toHaveClass('btn btn-lg')
+  })
+
+  it('renders a small button', () => {
+    const { container } = render(<Small {...Small.args} />)
+
+    expect(container.firstChild).toHaveClass('btn btn-sm')
+  })
 })

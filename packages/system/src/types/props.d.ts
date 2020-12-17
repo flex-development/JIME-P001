@@ -8,7 +8,7 @@ import {
   ResponsiveUtility,
   Spacer,
   TextColor
-} from '@flex-development/kustomzcore/theme'
+} from '@flex-development/kustomzcore'
 import {
   MDXProviderComponents as MDXComponents,
   MDXProviderProps

@@ -6,9 +6,16 @@ import { Default } from './TextArea.stories'
  * @module components/ui/atoms/TextArea/spec
  */
 
-it('renders <textarea class="form-control">', () => {
-  const { getByPlaceholderText } = render(<Default {...Default.args} />)
-  const { placeholder } = Default.args as ArgsMatcher
+describe('TextArea', () => {
+  it('renders a <textarea> element', () => {
+    const { container } = render(<Default {...Default.args} />)
 
-  expect(getByPlaceholderText(placeholder)).toHaveClass('form-control')
+    expect(container.firstChild?.nodeName.toLowerCase()).toBe('textarea')
+  })
+
+  it('renders with class "form-control"', () => {
+    const { container } = render(<Default {...Default.args} />)
+
+    expect(container.firstChild).toHaveClass('form-control')
+  })
 })

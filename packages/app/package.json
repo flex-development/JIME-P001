@@ -77,7 +77,8 @@
     "@types/jsonwebtoken": "^8.5.0",
     "@types/styled-components": "^5.1.4",
     "babel-plugin-styled-components": "^1.11.1",
-    "generate-robotstxt": "^8.0.3"
+    "generate-robotstxt": "^8.0.3",
+    "shopify-api-node": "^3.4.4"
   },
   "peerDependencies": {}
 }

@@ -2,7 +2,6 @@ import { IProductListing } from '@flex-development/kustomzcore'
 import { Image, ImageProps } from '@system/components/ui/atoms'
 import { useSanitizedProps } from '@system/hooks'
 import { getProductVariantImage } from '@system/utils'
-import { omit } from 'lodash'
 import { FC, useEffect } from 'react'
 import { useArray } from 'react-hanger/array/useArray'
 import { Carousel, CarouselProps } from '../Carousel'
@@ -65,7 +64,7 @@ export const ProductImageCarousel: FC<ProductImageCarouselProps> = (
         variant ? `${product_title} - ${variant?.title}` : product_title
       )
 
-      carousel_slides.push(omit(image, ['height', 'width']))
+      carousel_slides.push(image)
     })
 
     setSlides(carousel_slides)

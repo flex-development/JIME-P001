@@ -1,13 +1,15 @@
-const nextConfig = require('./next.config').default
-
 /**
  * @file Config to generate robots.txt
  * @see https://github.com/itgalaxy/generate-robotstxt
  * @see https://linguinecode.com/post/add-robots-txt-file-sitemaps-nextjs
  */
 
+const { SITE_URL, VERCEL_URL } = process.env
+
+const HOST = SITE_URL || VERCEL_URL || 'http://localhost:3001'
+
 module.exports = {
-  host: nextConfig.env.SITE_URL,
+  host: HOST,
   policy: [
     {
       allow: '/*',
@@ -15,5 +17,5 @@ module.exports = {
       userAgent: '*'
     }
   ],
-  sitemap: `${nextConfig.env.SITE_URL}/api/sitemap`
+  sitemap: `${HOST}/api/sitemap`
 }

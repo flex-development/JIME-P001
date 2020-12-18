@@ -36,6 +36,10 @@
     {
       "source": "/products",
       "destination": "/collections/all-products"
+    },
+    {
+      "source": "/sitemap.xml",
+      "destination": "/api/sitemap"
     }
   ],
   "headers": [

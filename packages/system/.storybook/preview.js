@@ -1,9 +1,7 @@
-import { FIREBASE_WEB_CONFIG } from '@flex-development/kustomzcore'
 import { withConsole } from '@storybook/addon-console'
 import { DocsContainer } from '@storybook/addon-docs/blocks'
 import { withTests } from '@storybook/addon-jest'
 import { withHTML } from '@whitespace/storybook-addon-html/react'
-import { FirebaseAppProvider } from 'reactfire'
 import prettier from '../../../.prettierrc.json'
 import { AdobeXDArtboards, colors_sb_bkg } from '../src/config'
 import '../src/index.scss'
@@ -28,11 +26,9 @@ export const parameters = {
 export const decorators = [
   // Add provider components
   Story => (
-    <FirebaseAppProvider firebaseConfig={FIREBASE_WEB_CONFIG}>
-      <MockCartContextProvider>
-        <Story />
-      </MockCartContextProvider>
-    </FirebaseAppProvider>
+    <MockCartContextProvider>
+      <Story />
+    </MockCartContextProvider>
   ),
 
   // Receive console outputs as a console, warn and error in the actions panel

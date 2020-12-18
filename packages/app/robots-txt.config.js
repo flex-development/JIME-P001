@@ -20,5 +20,5 @@ module.exports = {
       userAgent: '*'
     }
   ],
-  sitemap: `${HOST}/api/sitemap`
+  sitemap: `${HOST}/sitemap.xml`
 }

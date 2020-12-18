@@ -48,24 +48,9 @@
     "@types/pino": "^6.0.1",
     "class-validator": "^0.12.2",
     "pino": "^6.4.1",
-    "pino-pretty": "^4.1.0"
-  },
-  "devDependencies": {
+    "pino-pretty": "^4.1.0",
     "shopify-api-node": "^3.4.4"
   },
-  "peerDependencies": {
-    "shopify-api-node": "^3.4.4"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  }
+  "devDependencies": {},
+  "peerDependencies": {}
 }

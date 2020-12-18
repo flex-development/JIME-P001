@@ -15,7 +15,7 @@ import { useSanitizedProps, useSongs } from '@system/hooks'
 import { EventHandlers, MutatedProps } from '@system/types'
 import { getSongArtworkURL } from '@system/utils'
 import { isFunction } from 'lodash'
-import { FC, useCallback, useMemo } from 'react'
+import { FC, useCallback, useRef } from 'react'
 import { useSpring } from 'react-spring'
 import { useAudio, useEvent } from 'react-use'
 
@@ -78,7 +78,7 @@ export const PlaylistBar: FC<PlaylistBarProps> = (props: PlaylistBarProps) => {
   const { next, previous, song } = useSongs(songs, curr)
 
   // Get song artwork URL
-  const artwork_url = useMemo<string>(() => getSongArtworkURL(song), [song])
+  const artwork_url = useRef<string>(getSongArtworkURL(song))
 
   // Get <audio> src URL
   const audio_src = song.previews?.[0]?.url
@@ -140,14 +140,14 @@ export const PlaylistBar: FC<PlaylistBarProps> = (props: PlaylistBarProps) => {
         <Column align='center' flex style={style}>
           <Link
             className='playlistbar-artwork'
-            href={artwork_url}
+            href={artwork_url.current}
             target='_blank'
           >
             <Image
               alt={`Artwork for ${song.name}`}
               fluid
               height={song.artwork?.height}
-              src={artwork_url}
+              src={artwork_url.current}
               width={song.artwork?.width}
             />
           </Link>

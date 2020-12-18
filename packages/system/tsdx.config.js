@@ -71,14 +71,13 @@ module.exports = {
     const {
       extractErrors: extract,
       format,
-      name,
       target,
       transpileOnly,
       tsconfig
     } = options
 
     // Remove `false` and empty objects from plugins array
-    config.plugins = config.plugins.filter(p => !isEmpty(p) && p?.name)
+    config.plugins = config.plugins.filter(p => !isEmpty(p) && !isEmpty(p.name))
 
     /**
      * Transform tsconfig.compilerOptions.paths for type declarations

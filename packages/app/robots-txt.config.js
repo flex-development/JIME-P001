@@ -1,4 +1,4 @@
-const nextConfig = require('./next.config')
+const nextConfig = require('./next.config').default
 
 /**
  * @file Config to generate robots.txt
@@ -10,9 +10,9 @@ module.exports = {
   host: nextConfig.env.SITE_URL,
   policy: [
     {
-      userAgent: '*',
       allow: '/*',
-      disallow: ['/api/*']
+      disallow: ['/api/*'],
+      userAgent: '*'
     }
   ],
   sitemap: `${nextConfig.env.SITE_URL}/api/sitemap`

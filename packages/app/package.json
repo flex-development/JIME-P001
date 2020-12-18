@@ -40,8 +40,8 @@
     "prestart": "NODE_ENV=production",
     "start": "next start",
     "build": "next build",
-    "now-build": "NODE_ENV=production; lerna link && yarn build",
-    "find:unused": "next-unused"
+    "now-build": "NODE_ENV=production lerna run prepare; lerna link; yarn build",
+    "unused": "next-unused"
   },
   "dependencies": {
     "@flex-development/kustomzcore": "*",
@@ -53,7 +53,6 @@
     "class-transformer": "^0.3.1",
     "class-transformer-validator": "^0.9.1",
     "class-validator": "^0.12.2",
-    "critical": "^2.0.6",
     "firebase": "^7.23.0",
     "firebase-admin": "^9.2.0",
     "jsonwebtoken": "^8.5.1",

@@ -29,8 +29,7 @@
   },
   "scripts": {
     "clean": "lerna clean --yes && rm -rf node_modules/ && yarn",
-    "postinstall": "lerna bootstrap; lerna link",
-    "prepare": "lerna run prepare",
+    "prepare": "lerna run prepare; lerna link",
     "format": "prettier --write \"./\"",
     "lint": "eslint . --ext js,ts,tsx --fix --cache",
     "dev:app": "lerna run dev --scope @flex-development/morenaskustomz",

@@ -45,7 +45,7 @@ const typescriptOptions = (tsconfig, transpileOnly) => ({
   tsconfig,
   tsconfigDefaults: tsconfigProd,
   typescript: ttypescript,
-  useTsconfigDeclarationDir: Boolean(tsconfigProd?.declarationDir)
+  useTsconfigDeclarationDir: tsconfigProd.declarationDir ? true : false
 })
 
 module.exports = {

@@ -25,6 +25,8 @@ export default class Document extends NextDocument<DocumentInitialProps> {
    * Injects the server side rendered styles into the `<head>` element. This is
    * required to server side render styled components.
    *
+   * The current user session will also be retrieved.
+   *
    * @see https://styled-components.com/docs/advanced#server-side-rendering
    *
    * @param ctx - Next.js Document context
@@ -49,7 +51,6 @@ export default class Document extends NextDocument<DocumentInitialProps> {
 
       const initialProps = await super.getInitialProps(ctx)
 
-      // Get user session
       const session = (await getSession(ctx)) as DocumentInitialProps['session']
 
       return {

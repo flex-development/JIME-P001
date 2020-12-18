@@ -31,7 +31,7 @@
     "kill:firebase": "run-p kill:firebase:*",
     "kill:d": "kill $(lsof -ti:3001) || true",
     "predev": "yarn kill:d; NODE_ENV=development vc env pull .env.local --yes",
-    "dev": "NODE_OPTIONS='--inspect' next dev -p 3001",
+    "dev": "next dev -p 3001",
     "mock:db": "firebase emulators:start --only database,ui",
     "pretest": "yarn kill:firebase",
     "test": "firebase emulators:exec \"yarn test:run\" --only database",
@@ -39,9 +39,10 @@
     "test:run": "jest --detectOpenHandles --passWithNoTests",
     "prestart": "NODE_ENV=production",
     "start": "next start",
+    "prebuild": "NODE_ENV=production generate-robotstxt public/robots.txt",
     "build": "next build",
-    "now-build": "NODE_ENV=production lerna run prepare; lerna link; yarn build",
-    "unused": "next-unused"
+    "prenow-build": "lerna run prepare; lerna link",
+    "now-build": "yarn build"
   },
   "dependencies": {
     "@flex-development/kustomzcore": "*",
@@ -63,6 +64,8 @@
     "react-tinacms-editor": "^0.32.0",
     "react-tinacms-inline": "^0.32.0",
     "reactfire": "^3.0.0-rc.0",
+    "sass": "^1.26.10",
+    "sitemap": "^6.3.3",
     "slugify": "^1.4.5",
     "string-strip-html": "^7.0.3",
     "styled-components": "^5.2.0",
@@ -74,26 +77,7 @@
     "@types/jsonwebtoken": "^8.5.0",
     "@types/styled-components": "^5.1.4",
     "babel-plugin-styled-components": "^1.11.1",
-    "next-unused": "^0.0.3"
+    "generate-robotstxt": "^8.0.3"
   },
-  "peerDependencies": {},
-  "next-unused": {
-    "alias": {
-      "@app": "src/",
-      "@app-mocks": "__mocks__/",
-      "@subdomains": "src/subdomains/",
-      "@system": "../system/src",
-      "@system-mocks": "../system/__tests__/__mocks__"
-    },
-    "debug": true,
-    "entrypoints": [
-      "__mocks__",
-      "src"
-    ],
-    "exclude": [],
-    "include": [
-      "__mocks__",
-      "src"
-    ]
-  }
+  "peerDependencies": {}
 }

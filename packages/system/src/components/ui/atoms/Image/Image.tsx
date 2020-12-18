@@ -81,7 +81,7 @@ export interface ImageProps extends MutatedVoidElementProps<HTMLImageElement> {
    * descriptor is already defined in `srcSet`, or unless `srcSet` contains w
    * descriptors.
    *
-   * @default 'assets/img/img-placeholder.png'
+   * @default 'assets/img-placeholder.png'
    */
   src?: string
 
@@ -138,5 +138,5 @@ Image.displayName = 'Image'
 
 Image.defaultProps = {
   alt: '',
-  src: 'assets/img/img-placeholder.png'
+  src: 'assets/img-placeholder.png'
 }

@@ -7,6 +7,9 @@
   "functions": {
     "src/pages/api/**/*.ts": {
       "maxDuration": 10
+    },
+    "src/pages/api/sitemap.ts": {
+      "includeFiles": "src/pages/**"
     }
   },
   "redirects": [

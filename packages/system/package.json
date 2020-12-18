@@ -50,7 +50,10 @@
     "prebuild": "yarn test:quiet && rm -rf public && mkdir public",
     "build": "build-storybook -o public",
     "postbuild": "shx cp -R ../app/public/assets public",
+    "prenow-build": "lerna run prepare; lerna link",
+    "now-build": "yarn build",
     "bundle": "tsdx build --tsconfig tsconfig.prod.json --transpileOnly",
+    "postbundle": "shx cp -R ./src/types ./dist/types",
     "size": "size-limit",
     "prepare": "yarn bundle",
     "prepublishOnly": "yarn size"
@@ -110,7 +113,8 @@
     "firebase": "^7.23.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "reactfire": "^3.0.0-rc.0"
+    "reactfire": "^3.0.0-rc.0",
+    "sass": "^1.26.10"
   },
   "browserslist": {
     "production": [

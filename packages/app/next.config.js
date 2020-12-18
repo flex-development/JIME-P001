@@ -45,7 +45,6 @@ module.exports = {
    * Experimental features config.
    */
   experimental: {
-    granularChunks: true,
     optimizeFonts: true,
     optimizeImages: true
   },

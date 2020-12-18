@@ -168,7 +168,7 @@ Sidebar.displayName = 'Sidebar'
 
 Sidebar.defaultProps = {
   age: 22,
-  img: 'assets/img/morena.jpeg',
+  img: 'assets/morena.jpeg',
   location: 'New York',
   menu: [],
   mood: 'High 🤪'

@@ -38,20 +38,16 @@ grinders, and rolling trays, or have them custom made.
 
 ## Built With
 
-- [Axios][1] - Promise based HTTP client
-- [Firebase][2] - Platform for web and mobile development
-- [FlexJSON][3] - JSON data starter kit
-- [MusicKitJS][4] - Stream songs from Apple Music
-- [Next.js][5] - Framework for building React applications
-- [Shopify Admin REST API][6] - Shopify REST API
-- [TypeScript][7] - Typed JavaScript
-- [Vercel][8] - Hosting platform for static sites and serverless functions
+- [Firebase][1] - Platform for web and mobile development
+- [MusicKitJS][2] - Stream songs from Apple Music
+- [Next.js][3] - Framework for building React applications
+- [Shopify Admin REST API][4] - Shopify REST API
+- [TypeScript][5] - Typed JavaScript
+- [Vercel][6] - Hosting platform for static sites and serverless functions
 
-[1]: https://github.com/axios/axios
-[2]: https://firebase.google.com
-[3]: https://github.com/flex-development/json
-[4]: https://developer.apple.com/documentation/musickitjs/
-[5]: https://nextjs.org/
-[6]: https://shopify.dev/docs/admin-api/rest/reference
-[7]: https://www.typescriptlang.org/
-[8]: https://vercel.com/
+[1]: https://firebase.google.com
+[2]: https://developer.apple.com/documentation/musickitjs/
+[3]: https://nextjs.org/
+[4]: https://shopify.dev/docs/admin-api/rest/reference
+[5]: https://www.typescriptlang.org/
+[6]: https://vercel.com/

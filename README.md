@@ -20,20 +20,19 @@ Morena's Kustomz is an online store that specializes in "pot head" necessities.
 While enjoying a MySpace inspired UI, users can shop pre-made ash trays,
 grinders, and rolling trays, or have them custom made.
 
-This project is formatted as a monorepo with packages for a [Storybook][2]
-design system, Shopify storefront powered by [Next.js][1], and shared
-[TypeScript][3] declarations.
-
 ## Usage
+
+This project is formatted as a monorepo. For more information on using each
+package, see below:
 
 - [Next.js Storefront](packages/app/README.md)
 - [Storybook Design System](packages/system/README.md)
-- [TypeScript Declarations](packages/types/README.md)
+- [Support](packages/core/README.md)
 
 ## Built With
 
 - [Next.js][1] - Framework for building React applications
-- [Storybook][2] - UI development and documentation tool
+- [Storybook][2] - UI development, testing, and documentation tool
 - [TypeScript][3] - Typed JavaScript
 - [Vercel][4] - Hosting platform for static sites and serverless functions
 

@@ -7,6 +7,7 @@ well follow our coding guidelines.
 
 [Getting Started](#getting-started)  
 [Coding Standards](#coding-standards)  
+[Making Changes](#making-changes)  
 [Testing](#testing)  
 [Documentation](#documentation)  
 [Branch Naming Conventions](#branch-naming-conventions)  
@@ -14,8 +15,8 @@ well follow our coding guidelines.
 
 ## Getting Started
 
-This project is structured as monorepo and [Lerna](https://lerna.js.org/) with
-Yarn workspaces.
+This project is structured as a monorepo and uses [Lerna](https://lerna.js.org/)
+with Yarn workspaces.
 
 ### Git Configuration
 
@@ -97,6 +98,15 @@ To review our linting guidelines, see our configuration files:
 - Configuration: [`.eslintrc.json`](../.eslintrc.json)`
 - Ignore Patterns: [`.eslintignore`](../.eslintignore)`
 
+## Making Changes
+
+For more information on how to make changes within different package scopes, see
+the Contributing Guide for each package:
+
+- [`app`](../packages/app/docs/CONTRIBUTING.md)
+- [`core`](../packages/core/docs/CONTRIBUTING.md)
+- [`system`](../packages/system/docs/CONTRIBUTING.md)
+
 ## Documentation
 
 - JavaScript & TypeScript: [JSDoc](https://jsdoc.app)
@@ -131,7 +141,7 @@ will create a new branch titled `feature/repo-setup` and push it to `origin`.
 
 If you need help, make note of any issues in their respective files. Whenever
 possible, create a test to reproduce the error. Make sure to label your pr as
-`bug` and `help wanted`.
+`help wanted`.
 
 When you're ready to have your changes reviewed, make sure your code is
 [well documented](#documentation). The `pre-commit` and `pre-push` hooks will

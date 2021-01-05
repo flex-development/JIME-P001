@@ -1,6 +1,6 @@
-import { MenusAPI, NavigationFormPlugin } from '@subdomains/cms/config'
-import { CMSMenusDTO, ICMSMenu } from '@subdomains/cms/models'
-import { UseFormScreenPlugin } from '@subdomains/cms/utils'
+import { MenusAPI, NavigationFormPlugin } from '@app/subdomains/cms/config'
+import { CMSMenusDTO, ICMSMenu } from '@app/subdomains/cms/models'
+import { UseFormScreenPlugin } from '@app/subdomains/cms/utils'
 import { FormOptions, useForm, useFormScreenPlugin } from 'tinacms'
 
 /**

@@ -1,0 +1,24 @@
+/// ----------------------------------------------------------------------------
+/// @name breakpoint-up
+/// @group mixins
+/// ----------------------------------------------------------------------------
+
+@use '../functions/breakpoint-min' as *;
+
+
+/// Makes the `@content` apply to the given breakpoint and wider.
+/// @require {function} breakpoint-min
+/// @require {variable} $grid-breakpoints
+/// @param {String} name - Name of key from grid breakpoints map
+/// @param {Map} $breakpoints [$grid-breakpoints] - Grid breakpoints map
+@mixin breakpoint-up($name, $breakpoints: $grid-breakpoints) {
+  $min: breakpoint-min($name, $breakpoints);
+
+  @if $min {
+    @media screen and (min-width: $min) {
+      @content;
+    }
+  } @else {
+    @content;
+  }
+}

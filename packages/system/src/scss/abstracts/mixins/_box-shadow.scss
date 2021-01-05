@@ -1,0 +1,27 @@
+/// ----------------------------------------------------------------------------
+/// @name box-shadow
+/// @group mixins
+/// ----------------------------------------------------------------------------
+
+/// Box shadow wrapper.
+/// @param {List} $shadow - `box-shadow` property values
+@mixin box-shadow($shadow...) {
+  @if $enable-shadows {
+    $result: ();
+
+    // Validate list values
+    @each $value in $shadow {
+      @if $value != null {
+        $result: append($result, $value, 'comma');
+      }
+
+      @if $value == none and length($shadow) > 1 {
+        @warn "The keyword 'none' must be used as a single argument.";
+      }
+    }
+
+    @if (length($result) > 0) {
+      box-shadow: $result;
+    }
+  }
+}

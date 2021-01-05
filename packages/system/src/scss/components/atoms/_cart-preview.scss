@@ -1,0 +1,26 @@
+/* -----------------------------------------------------------------------------
+CART PREVIEW
+----------------------------------------------------------------------------- */
+
+.cart-preview {
+  @include breakpoint-up(md) {
+    font-size: $font-size-base;
+  }
+
+  @include height(max-content);
+
+  @include no-breaking;
+
+  @include user-event {
+    color: $primary !important;
+  }
+
+  color: inherit;
+  font-size: $font-size-sm;
+  text-align: right;
+  text-transform: uppercase;
+
+  span {
+    font-weight: $font-weight-semibold;
+  }
+}

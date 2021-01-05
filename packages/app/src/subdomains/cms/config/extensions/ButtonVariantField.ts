@@ -1,10 +1,21 @@
-import { BUTTON_VARIANTS } from '@flex-development/kustomzdesign'
 import { AnyField } from '@tinacms/forms/build/field'
 
 /**
  * @file Button variant selection field
  * @module subdomains/cms/config/extensions/ButtonVariantField
  */
+
+const BUTTON_VARIANTS = [
+  'black',
+  'danger',
+  'dark',
+  'darker',
+  'ghost',
+  'light',
+  'primary',
+  'secondary',
+  'white'
+]
 
 const VARIANT_OPTIONS = BUTTON_VARIANTS.map((variant: string) => ({
   label: variant,

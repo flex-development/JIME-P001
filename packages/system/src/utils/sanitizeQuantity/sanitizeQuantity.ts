@@ -2,7 +2,7 @@ import { ANYTHING } from '@flex-development/json'
 import { isBoolean, isNumber, isString } from 'lodash'
 
 /**
- * @file Convert a value into a product quantity
+ * @file Implementation - sanitizeQuantity
  * @module utils/sanitizeQuantity/impl
  */
 

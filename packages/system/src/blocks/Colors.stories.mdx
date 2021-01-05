@@ -7,11 +7,49 @@ import { colors } from '@system/config/sb'
 
 <br />
 
-## Design Tokens
+## Theme Colors
 
-File: `packages/system/theme/config/_settings.scss`
+<br />
+
+<ColorPalette>
+  <ColorItem title='Primary' subtitle='$primary' colors={[colors.primary]} />
+  <ColorItem
+    title='Secondary'
+    subtitle='$secondary'
+    colors={[colors.secondary]}
+  />
+  <ColorItem title='Light' subtitle='$light' colors={[colors.light]} />
+  <ColorItem title='Dark' subtitle='$dark' colors={[colors.dark]} />
+  <ColorItem title='Darker' subtitle='$darker' colors={[colors.darker]} />
+</ColorPalette>
+
+### Grayscale
+
+<ColorPalette>
+  <ColorItem title='Black' subtitle='$black' colors={[colors.black]} />
+  <ColorItem title='Gray' subtitle='$gray' colors={[colors.gray]} />
+  <ColorItem title='Muted' subtitle='$muted' colors={[colors.muted]} />
+  <ColorItem title='White' subtitle='$white' colors={[colors.white]} />
+</ColorPalette>
+
+## Variables
+
+File: `packages/system/src/scss/variables/_settings.scss`
 
 ```scss
+$black: #000;
+$gray-100: #f8f9fa;
+$gray-200: #e9ecef;
+$gray-300: #dee2e6;
+$gray-400: #ced4da;
+$gray-500: #adb5bd;
+$gray-600: #6c757d;
+$gray-700: #495057;
+$gray-800: #343a40;
+$gray-900: #212529;
+$red: #dc3545;
+$white: #fff;
+
 $dark: #232946;
 $darker: #121629;
 $light: #fffffe;
@@ -19,41 +57,20 @@ $primary: #eebbc3;
 $secondary: #b8c1ec;
 $ghost: transparent;
 
+$danger: $red;
+$muted: $gray-400;
+
 $theme-colors: (
-  'black': bootstrap.$black,
-  danger: bootstrap.$danger,
+  'black': $black,
+  danger: $danger,
   dark: $dark,
   darker: $darker,
   ghost: $ghost,
-  info: bootstrap.$info,
+  'gray': $gray-600,
   light: $light,
+  muted: $muted,
   primary: $primary,
   secondary: $secondary,
-  success: bootstrap.$success,
-  warning: bootstrap.$warning
+  'white': $white
 );
 ```
-
-## Theme Colors
-
-<br />
-
-<ColorPalette>
-  <ColorItem
-    title='Primary'
-    subtitle='var(--bs-primary)'
-    colors={[colors.primary]}
-  />
-  <ColorItem
-    title='Secondary'
-    subtitle='var(--bs-secondary)'
-    colors={[colors.secondary]}
-  />
-  <ColorItem title='Light' subtitle='var(--bs-light)' colors={[colors.light]} />
-  <ColorItem title='Dark' subtitle='var(--bs-dark)' colors={[colors.dark]} />
-  <ColorItem
-    title='Darker'
-    subtitle='var(--bs-darker)'
-    colors={[colors.darker]}
-  />
-</ColorPalette>

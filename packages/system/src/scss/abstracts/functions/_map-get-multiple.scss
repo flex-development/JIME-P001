@@ -1,0 +1,20 @@
+/// ----------------------------------------------------------------------------
+/// @name map-get-multiple
+/// @group functions
+/// ----------------------------------------------------------------------------
+
+/// Retrieves multiple properties from `$map`.
+/// @param {Map} $map [()] - Map to pick values from
+/// @param {List} $props [''] - List of properties to pick
+/// @return {Map} Map with chosen values
+@function map-get-multiple($map: (), $props: '') {
+  $result: ();
+
+  @each $key, $value in $map {
+    @if (index($props, $key) != null) {
+      $result: map-merge($result, ($key: $value));
+    }
+  }
+
+  @return $result;
+}

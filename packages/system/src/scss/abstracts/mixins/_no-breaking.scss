@@ -1,0 +1,10 @@
+/// ----------------------------------------------------------------------------
+/// @name no-breaking
+/// @group mixins
+/// ----------------------------------------------------------------------------
+
+/// Prevent a text element from breaking onto the next line.
+/// @param {Boolean} $important [false] - If true, add `!important`
+@mixin no-breaking($important: false) {
+  white-space: if($important, nowrap !important, nowrap);
+}

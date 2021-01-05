@@ -1,93 +1,79 @@
-import {
-  ButtonVariant,
-  GridBreakpoint,
-  SpacerPrefix,
-  ThemeColor
-} from '@flex-development/kustomzcore'
+import { GridBreakpointKey, GridBreakpoints } from '@system/types'
 
 /**
- * @file Design System Constants
+ * @file Config - Constant Values
  * @module config/constants
  */
 
-export const BUTTON_VARIANTS: ButtonVariant[] = [
-  'accent',
-  'black',
-  'dark',
-  'ghost',
-  'outline-accent',
-  'outline-black',
-  'outline-dark',
-  'outline-ghost',
-  'outline-primary',
-  'outline-secondary',
-  'outline-white',
-  'link',
-  'primary',
-  'secondary',
-  'white'
+export const CHECK_INPUT_TYPES = ['checkbox', 'radio']
+
+export const CONTROL_INPUT_TYPES = [
+  'email',
+  'number',
+  'password',
+  'search',
+  'tel',
+  'text',
+  'url'
 ]
 
-export const FLEXBOX_CONFIG_KEYS = [
-  'align',
-  'direction',
-  'display',
-  'justify',
-  'wrap'
-]
+export const EMAIL_PLACEHOLDER = 'you@email.com'
 
-export const FLEXBOX_PROPERTY_MAP = {
-  align: 'align-items',
-  direction: 'flex-direction',
-  display: 'display',
-  justify: 'justify-content',
-  wrap: 'flex-wrap'
+export const EMPTY_SPACE = ' '
+
+export const GRID_BREAKPOINT_KEYS = Object.keys(
+  GridBreakpoints
+) as GridBreakpointKey[]
+
+export const GRID_COLUMN_UTILITY_CLASS = 'col'
+
+export const GRID_ROW_UTILITY_CLASS = 'row'
+
+export const IMAGE_PLACEHOLDER_URL = 'assets/img-placeholder.png'
+
+export const SVG_CIRCLE_PROPS = {
+  cx: '20.5',
+  cy: '20.5',
+  r: '19.5',
+  transform:
+    'translate(20.500000, 20.500000) rotate(-270.000000) translate(-20.500000, -20.500000)'
 }
 
-/* eslint-disable sort-keys */
-
-// ! Keep in sync with Sass theme settings
-export const GRID_BREAKPOINTS: Record<GridBreakpoint, number> = {
-  xs: 0,
-  sm: 576,
-  md: 834,
-  lg: 1010,
-  xl: 1368,
-  xxl: 1440
+/**
+ * Object mapping prop names to class prefixes.
+ */
+export const UTILITY_PROP_ALIASES = {
+  $bg: 'bg',
+  $color: 'text',
+  $columns: 'grid-cols',
+  $cursor: 'cursor',
+  $display: 'd',
+  $falign: 'align-items',
+  $fdirection: 'flex',
+  $fill: 'fill',
+  $fjustify: 'justify-content',
+  $fs: 'text',
+  $fwrap: 'flex',
+  $gap: 'gap',
+  $gx: 'gx',
+  $gy: 'gy',
+  $m: 'm',
+  $mb: 'mb',
+  $ml: 'ml',
+  $mr: 'mr',
+  $mt: 'mt',
+  $mx: 'mx',
+  $my: 'my',
+  $opacity: 'opacity',
+  $p: 'p',
+  $pb: 'pb',
+  $pl: 'pl',
+  $pr: 'pr',
+  $pt: 'pt',
+  $px: 'px',
+  $py: 'py',
+  $rows: 'grid-rows',
+  $stroke: 'stroke',
+  $weight: 'text',
+  $z: 'z'
 }
-
-/* eslint-enable sort-keys */
-
-export const GRID_BREAKPOINT_KEYS: Array<GridBreakpoint> = [
-  'xs',
-  'sm',
-  'md',
-  'lg',
-  'xl',
-  'xxl'
-]
-
-export const SPACING_UTILITY_KEYS: SpacerPrefix[] = [
-  'gx',
-  'gy',
-  'mb',
-  'ml',
-  'mr',
-  'mt',
-  'mx',
-  'my',
-  'pb',
-  'pl',
-  'pr',
-  'pt',
-  'px',
-  'py'
-]
-
-export const THEME_COLORS: ThemeColor[] = [
-  'accent',
-  'dark',
-  'ghost',
-  'primary',
-  'secondary'
-]

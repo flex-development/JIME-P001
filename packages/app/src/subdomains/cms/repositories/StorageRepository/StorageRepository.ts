@@ -55,7 +55,7 @@ export default class StorageRepository implements MediaStore {
    * @param reference.fullPath - The full path of file or folder
    * @param reference.name - Name of file (including extension) or folder
    * @param subfolder - True if {@param reference} is reference to subfolder
-   * @returns Media object
+   * @return Media object
    */
   static async normalizeMedia(
     reference: firebase.storage.Reference,
@@ -80,7 +80,7 @@ export default class StorageRepository implements MediaStore {
    * Remove a file from the media store.
    *
    * @param media - Media to remove
-   * @returns Empty promise
+   * @return Empty promise
    */
   async delete({ directory }: Media): Promise<void> {
     return await this.public.child(directory.replace('public/', '')).delete()
@@ -94,7 +94,7 @@ export default class StorageRepository implements MediaStore {
    * @param options.directory - Directory to find files
    * @param options.limit - Number of files to retrieve
    * @param options.offset - Position to begin listing files
-   * @returns Object containing files, number of files, and pagination offsets
+   * @return Object containing files, number of files, and pagination offsets
    */
   async list({ directory: dir }: MediaListOptions = {}): Promise<MediaList> {
     // Get reference to directory of files to list
@@ -134,7 +134,7 @@ export default class StorageRepository implements MediaStore {
    * the uploaded items.
    *
    * @param files - Files to upload
-   * @returns Array of uploaded files
+   * @return Array of uploaded files
    */
   async persist(files: MediaUploadOptions[]): Promise<Media[]> {
     return Promise.all(files.map(async file => this.uploadFile(file)))
@@ -146,7 +146,7 @@ export default class StorageRepository implements MediaStore {
    * @param src - Media source URL
    * @param fieldPath - Form path where media is being used
    * @param formValues - Current form values
-   * @returns Media preview URL
+   * @return Media preview URL
    */
   previewSrc(src: string, fieldPath?: string, formValues?: ANYTHING): string {
     console.debug(src, fieldPath, formValues)
@@ -162,7 +162,7 @@ export default class StorageRepository implements MediaStore {
    * @param media - Media upload settings
    * @param media.directory - Directory where file should be uploaded
    * @param media.file - File to upload
-   * @returns Uploaded file as Media object
+   * @return Uploaded file as Media object
    */
   async uploadFile(media: MediaUploadOptions): Promise<Media> {
     const { directory: dir, file } = media

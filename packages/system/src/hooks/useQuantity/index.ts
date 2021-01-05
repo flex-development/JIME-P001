@@ -1,5 +1,5 @@
 /**
- * @file Hook - useQuantity
+ * @file Hook Entry Point - useQuantity
  * @module hooks/useQuantity
  */
 

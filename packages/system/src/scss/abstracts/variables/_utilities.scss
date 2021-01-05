@@ -1,0 +1,476 @@
+/// ----------------------------------------------------------------------------
+/// Utilities Configuration
+/// @group base-utilities
+/// ----------------------------------------------------------------------------
+
+$utilities: (
+  'align-content': (
+    property: align-content,
+    values: (
+      around: space-around,
+      between: space-between,
+      center: center,
+      end: flex-end,
+      start: flex-start,
+      stretch: stretch,
+    ),
+    responsive: true
+  ),
+  'align-items': (
+    property: align-items,
+    values: (
+      baseline: baseline,
+      center: center,
+      end: flex-end,
+      start: flex-start,
+      stretch: stretch
+    ),
+    responsive: true
+  ),
+  'align-self': (
+    property: align-self,
+    values: (
+      auto: auto,
+      baseline: baseline,
+      center: center,
+      end: flex-end,
+      start: flex-start,
+      stretch: stretch
+    ),
+    responsive: true
+  ),
+  'background-color': (
+    property: background-color,
+    class: bg,
+    values: $theme-colors,
+    state: active hover focus focus-within visited
+  ),
+  'background-position': (
+    property: background-position,
+    class: bg,
+    values: $bg-positions,
+    responsive: true
+  ),
+  'background-repeat': (
+    property: background-repeat,
+    class: bg,
+    values: $bg-repeats
+  ),
+  'background-size': (
+    property: background-size,
+    class: bg,
+    values: $bg-sizes,
+    responsive: true
+  ),
+  'border-bottom': (
+    property: border-bottom,
+    values: $borders
+  ),
+  'border-color': (
+    property: border-color,
+    class: border,
+    values: $theme-colors
+  ),
+  'border-left': (
+    property: border-left,
+    values: $borders
+  ),
+  'border-right': (
+    property: border-right,
+    values: $borders
+  ),
+  'border-top': (
+    property: border-top,
+    values: $borders
+  ),
+  'border-width': (
+    property: border-width,
+    class: border,
+    values: (
+      0: 0,
+      light: $border-width-light,
+      thin: $border-width-light,
+      thick: $border-width-thick
+    )
+  ),
+  'border': (
+    property: border,
+    values: $borders
+  ),
+  'color': (
+    property: color,
+    class: text,
+    values: $theme-colors,
+    state: active hover focus focus-within visited
+  ),
+  'display': (
+    property: display,
+    class: d,
+    values: block flex grid inline-block inline-flex inline table-cell table-row table none,
+    responsive: true,
+    print: true
+  ),
+  'fill': (
+    property: fill,
+    values: $theme-colors,
+    state: active hover focus focus-within visited
+  ),
+  'font-family': (
+    property: font-family,
+    class: font,
+    values: (
+      monospace: $font-family-monospace,
+      sans: $font-family-sans-serif,
+      special: $font-family-sans-serif-special
+    )
+  ),
+  'font-size': (
+    property: font-size,
+    class: text,
+    responsive: true,
+    state: hover,
+    values: (
+      xs: $font-size-xs,
+      sm: $font-size-sm,
+      lg: $font-size-lg,
+      xl: $font-size-xl,
+      xxl: $font-size-xxl
+    )
+  ),
+  'font-weight': (
+    property: font-weight,
+    class: text,
+    state: active focus hover,
+    values: (
+      300: $font-weight-light,
+      400: $font-weight-normal,
+      500: $font-weight-medium,
+      600: $font-weight-semibold,
+      700: $font-weight-bold
+    )
+  ),
+  'flex-direction': (
+    property: flex-direction,
+    class: flex,
+    values: column column-reverse row row-reverse,
+    responsive: true
+  ),
+  'flex-grow': (
+    property: flex-grow,
+    class: flex,
+    values: (
+      grow-0: 0,
+      grow-1: 1
+    ),
+    responsive: true
+  ),
+  'flex-shrink': (
+    property: flex-shrink,
+    class: flex,
+    values: (
+      shrink-0: 0,
+      shrink-1: 1
+    ),
+    responsive: true
+  ),
+  'flex-wrap': (
+    property: flex-wrap,
+    class: flex,
+    values: nowrap wrap wrap-reverse,
+    responsive: true
+  ),
+  'gap-x': (
+    property: column-gap,
+    class: gx,
+    values: $gutters,
+    responsive: true
+  ),
+  'gap-y': (
+    property: row-gap,
+    class: gy,
+    values: $gutters,
+    responsive: true
+  ),
+  'gap': (
+    property: gap,
+    class: gap,
+    values: $gutters,
+    responsive: true
+  ),
+  'grid-column': (
+    property: grid-column,
+    class: col,
+    values: $grid-column-span,
+    responsive: true
+  ),
+  'grid-row': (
+    property: grid-row,
+    class: row,
+    values: $grid-row-span,
+    responsive: true
+  ),
+  'grid-template-columns': (
+    property: grid-template-columns,
+    class: grid-cols,
+    values: $grid-template-columns,
+    responsive: true
+  ),
+  'grid-template-rows': (
+    property: grid-template-rows,
+    class: grid-rows,
+    values: $grid-template-rows,
+    responsive: true
+  ),
+  'height-max': (
+    property: max-height,
+    class: mh,
+    values: $sizes,
+    responsive: true
+  ),
+  'height-viewport-min': (
+    property: min-height,
+    class: min-vh,
+    values: (100: 100vh),
+    responsive: true
+  ),
+  'height-viewport': (
+    property: height,
+    class: vh,
+    values: (100: 100vh),
+    responsive: true
+  ),
+  'height': (
+    property: height,
+    class: h,
+    values: $sizes,
+    responsive: true
+  ),
+  'justify-content': (
+    property: justify-content,
+    values: (
+      around: space-around,
+      between: space-between,
+      center: center,
+      end: flex-end,
+      evenly: space-evenly,
+      start: flex-start
+    ),
+    responsive: true
+  ),
+  'line-height': (
+    property: line-height,
+    class: lh,
+    values: (
+      1: 1,
+      base: $line-height-base,
+      lg: $line-height-lg,
+      sm: $line-height-sm
+    )
+  ),
+  'margin-bottom': (
+    property: margin-bottom,
+    class: mb,
+    values: $spacers,
+    responsive: true
+  ),
+  'margin-left': (
+    property: margin-left,
+    class: ml,
+    values: $spacers,
+    responsive: true
+  ),
+  'margin-right': (
+    property: margin-right,
+    class: mr,
+    values: $spacers,
+    responsive: true
+  ),
+  'margin-top': (
+    property: margin-top,
+    class: mt,
+    values: $spacers,
+    responsive: true
+  ),
+  'margin-x': (
+    property: margin-left margin-right,
+    class: mx,
+    values: $spacers,
+    responsive: true
+  ),
+  'margin-y': (
+    property: margin-bottom margin-top,
+    class: my,
+    values: $spacers,
+    responsive: true
+  ),
+  'margin': (
+    property: margin,
+    class: m,
+    values: $spacers,
+    responsive: true
+  ),
+  'opacity': (
+    property: opacity,
+    class: o,
+    values: (
+      0: $opacity-0,
+      25: $opacity-25,
+      50: $opacity-50,
+      75: $opacity-75,
+      100: $opacity-100,
+      disabled: $opacity-disabled
+    ),
+    responsive: true,
+    state: active focus hover
+  ),
+  'order': (
+    property: order,
+    class: order,
+    values: (
+      0: 0,
+      1: 1,
+      2: 2,
+      3: 3,
+      4: 4,
+      5: 5,
+      6: 6,
+      7: 7,
+      8: 8,
+      9: 9,
+      10: 10,
+      11: 11,
+      12: 12,
+      first: -9999,
+      last: 9999
+    ),
+    responsive: true
+  ),
+  'overflow': (
+    property: overflow,
+    values: auto hidden scroll visible
+  ),
+  'padding': (
+    property: padding,
+    class: p,
+    values: $spacers,
+    responsive: true
+  ),
+  'padding-bottom': (
+    property: padding-bottom,
+    class: pb,
+    values: $spacers,
+    responsive: true
+  ),
+  'padding-left': (
+    property: padding-left,
+    class: pl,
+    values: $spacers,
+    responsive: true
+  ),
+  'padding-right': (
+    property: padding-right,
+    class: pr,
+    values: $spacers,
+    responsive: true
+  ),
+  'padding-top': (
+    property: padding-top,
+    class: pt,
+    values: $spacers,
+    responsive: true
+  ),
+  'padding-x': (
+    property: padding-left padding-right,
+    class: px,
+    values: $spacers,
+    responsive: true
+  ),
+  'padding-y': (
+    property: padding-bottom padding-top,
+    class: py,
+    values: $spacers,
+    responsive: true
+  ),
+  'position-bottom': (
+    property: bottom,
+    values: $position-values
+  ),
+  'position-left': (
+    property: left,
+    values: $position-values
+  ),
+  'position-right': (
+    property: right,
+    values: $position-values
+  ),
+  'position-top': (
+    property: top,
+    values: $position-values
+  ),
+  'position': (
+    property: position,
+    values: absolute fixed relative static sticky 
+  ),
+  'shadow': (
+    property: box-shadow,
+    class: shadow,
+    values: (
+      lg: $box-shadow-lg,
+      none: none,
+      null: $box-shadow,
+      sm: $box-shadow-sm
+    ),
+  ),
+  'stroke': (
+    property: stroke,
+    values: $theme-colors,
+    state: active hover focus focus-within visited
+  ),
+  'text-align': (
+    property: text-align,
+    class: text,
+    values: center left right,
+    responsive: true
+  ),
+  'text-transform': (
+    property: text-transform,
+    class: text,
+    values: capitalize lowercase uppercase,
+    responsive: true,
+    state: active focus hover
+  ),
+  'user-select': (
+    property: user-select,
+    values: all auto none,
+  ),
+  'visibility': (
+    property: visibility,
+    class: null,
+    values: hidden visible,
+    responsive: true
+  ),
+  'width-max': (
+    property: max-width,
+    class: mw,
+    values: $sizes,
+    responsive: true
+  ),
+  'width-viewport-min': (
+    property: min-width,
+    class: min-vw,
+    values: (100: 100vw),
+    responsive: true
+  ),
+  'width-viewport': (
+    property: width,
+    class: vw,
+    values: (100: 100vw),
+    responsive: true
+  ),
+  'width': (
+    property: width,
+    class: w,
+    values: $sizes,
+    responsive: true
+  )
+);

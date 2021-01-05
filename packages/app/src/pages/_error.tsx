@@ -29,10 +29,10 @@ const Error: NextPage<ErrorPageProps> = ({ error }) => {
         <title>Server Error | Morena&#39;s Kustomz</title>
       </NextHead>
       <ErrorTemplate code={code} message={message}>
-        <Paragraph c='white'>
+        <Paragraph $color='white'>
           {/* eslint-disable-next-line prettier/prettier */}
           Go{' '}
-          <Link c='secondary' href='/'>
+          <Link $color='secondary' href='/'>
             home
           </Link>{' '}
           and smoke or something.

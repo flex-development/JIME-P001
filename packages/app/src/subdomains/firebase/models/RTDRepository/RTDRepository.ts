@@ -105,7 +105,7 @@ export default class RTDRepository<E extends IEntity = IEntity>
    * Returns a timestamp as the number of milliseconds between 1 January 1970
    * 00:00:00 UTC and today's date.
    *
-   * @returns {string} Timestamp in milliseconds
+   * @return {string} Timestamp in milliseconds
    */
   static timestamp(): number {
     return new Date().valueOf()
@@ -120,7 +120,7 @@ export default class RTDRepository<E extends IEntity = IEntity>
    * @async
    * @param data - Entity data
    * @param data.id - Unique entity ID
-   * @returns Newly created data
+   * @return Newly created data
    * @throws {ValidationError}
    */
   async create(data: RTDRepoCreate<E>): Promise<E> {
@@ -153,7 +153,7 @@ export default class RTDRepository<E extends IEntity = IEntity>
    *
    * @async
    * @param data - Array of entities to insert into repo
-   * @returns Array of newly created entities
+   * @return Array of newly created entities
    */
   async createBatch(batch: RTDRepoCreate<E>[]): Promise<E[]> {
     return await Promise.all(batch.map(async data => this.create(data)))
@@ -184,7 +184,7 @@ export default class RTDRepository<E extends IEntity = IEntity>
    * @async
    * @param ids - Array of IDs indicating entities to delete from repo
    * @param keep - If true, remove entries that are NOT in {@param ids}
-   * @returns Empty promise
+   * @return Empty promise
    */
   async deleteBatch(batch: E['id'][], keep = false): Promise<boolean[]> {
     if (keep) {
@@ -221,7 +221,7 @@ export default class RTDRepository<E extends IEntity = IEntity>
    * @param query[foo].$lte - Matches values where value <= query.$lte
    * @param query[foo].$ne - Matches all values where value !== query.$ne
    * @param query[foo].$nin - Matches none of the values specified in an array
-   * @returns Array of entities
+   * @return Array of entities
    */
   async find(query?: DataArrayQueryParams): Promise<Array<E | Partial<E>>> {
     // Get root repository data
@@ -236,7 +236,7 @@ export default class RTDRepository<E extends IEntity = IEntity>
    *
    * @async
    * @param id - ID of entity to find
-   * @returns Entity or null
+   * @return Entity or null
    * @throws {FeathersErrorJSON}
    */
   async findById(id: IEntity['id']): Promise<E | null> {
@@ -249,7 +249,7 @@ export default class RTDRepository<E extends IEntity = IEntity>
    *
    * @async
    * @param id - ID of entity to retrieve
-   * @returns Entity
+   * @return Entity
    * @throws {FeathersErrorJSON}
    */
   async get(id: IEntity['id']): Promise<E> {
@@ -267,7 +267,7 @@ export default class RTDRepository<E extends IEntity = IEntity>
    * Returns a snapshot value.
    *
    * @param ref - Reference to get snapshot value from
-   * @returns JSON data
+   * @return JSON data
    */
   async normalize(ref: FirebaseAdaptorReference): Promise<RTDRepoJSONValue<E>> {
     return JSON.parse(JSON.stringify((await ref.once('value')).val()))
@@ -283,7 +283,7 @@ export default class RTDRepository<E extends IEntity = IEntity>
    * @async
    * @param id - ID of entity to update
    * @param data - Data to update entity with
-   * @returns Updated entity
+   * @return Updated entity
    * @throws {FeathersErrorJSON} If entity to update doesn't exist
    */
   async update(id: IEntity['id'], data: RTDRepoUpdate<E>): Promise<E> {
@@ -310,7 +310,7 @@ export default class RTDRepository<E extends IEntity = IEntity>
    *
    * @async
    * @param batch - Array of entities to update
-   * @returns Array of updated entities
+   * @return Array of updated entities
    */
   async updateBatch(batch: RTDRepoUpdateBatch<E>[]): Promise<E[]> {
     return await Promise.all(batch.map(async e => this.update(e.id, e)))
@@ -323,7 +323,7 @@ export default class RTDRepository<E extends IEntity = IEntity>
    * @async
    * @param id - ID of entity to create or update
    * @param data - Data to create or update entity
-   * @returns New or updated entity
+   * @return New or updated entity
    */
   async upsert(id: IEntity['id'], data: RTDRepoUpdate<E>): Promise<E> {
     let entity = {} as E
@@ -342,7 +342,7 @@ export default class RTDRepository<E extends IEntity = IEntity>
    *
    * @async
    * @param batch - Array of entities to upsert
-   * @returns Array of upserted entities
+   * @return Array of upserted entities
    */
   async upsertBatch(batch: RTDRepoUpdateBatch<E>[]): Promise<E[]> {
     return await Promise.all(batch.map(async e => this.upsert(e.id, e)))

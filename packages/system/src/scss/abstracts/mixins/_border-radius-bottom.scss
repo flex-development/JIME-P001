@@ -1,0 +1,15 @@
+/// ----------------------------------------------------------------------------
+/// @name border-radius-bottom
+/// @group mixins
+/// ----------------------------------------------------------------------------
+
+/// Sets `border-bottom-left-radius` and `border-bottom-right-radius`.
+/// @require {variable} $border-radius
+/// @require {variable} $enable-rounded
+/// @param {Number} $radius - Border radius value
+@mixin border-radius-bottom($radius: $border-radius) {
+  @if $enable-rounded {
+    border-bottom-left-radius: $radius;
+    border-bottom-right-radius: $radius;
+  }
+}

@@ -1,0 +1,87 @@
+/* -----------------------------------------------------------------------------
+GRIDS
+----------------------------------------------------------------------------- */
+
+.layout-grid {
+  @include fluid-height;
+
+  @include make-grid(12, 0);
+
+  overflow-x: hidden;
+  
+  .content-col {
+    @include breakpoint-up(sm) {
+      border-left: $border-width solid $border-color;
+    }
+
+    @include make-grid-col;
+  }
+
+  .sidebar-col {
+    -ms-overflow-style: none; // Hide scrollbar for IE, Edge
+    scrollbar-width: none; // Hide scrollbar for Firefox
+
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  .content-col,
+  .sidebar-col {
+    overflow-y: scroll;
+  }
+
+  &[data-sidebar] {
+    @include breakpoint-up(sm) {
+      overflow-y: hidden;
+    }
+
+    overflow-y: scroll;
+
+    .content-col {
+      @include breakpoint-up(lg) {
+        @include make-grid-col(9);
+      }
+      
+      display: none;
+    }
+
+    .sidebar-col {
+      @include breakpoint-up(sm) {
+        @include make-grid-col(6);
+      }
+
+      @include breakpoint-up(lg) {
+        @include make-grid-col(3);
+
+        border: $border-width-none;
+      }
+
+      @include make-grid-col;
+
+      border-right: $border-width solid $border-color;
+    }
+  }
+}
+
+.line-item-grid {
+  @include breakpoint-up(sm) {
+    row-gap: $space-36;
+  }
+
+  @include make-grid(1, 0, null, 72);
+}
+
+.product-grid {
+  @include breakpoint-up(sm) {
+    column-gap: $space-24;
+    grid-template-columns: map-get($grid-template-columns, 2);
+  }
+
+  @include breakpoint-up(md) {
+    grid-template-columns: map-get($grid-template-columns, 3);
+  }
+
+  @include make-grid(1, 0, null, 24);
+}

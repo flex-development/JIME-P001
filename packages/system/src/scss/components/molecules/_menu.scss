@@ -1,0 +1,38 @@
+/* -----------------------------------------------------------------------------
+MENUS
+----------------------------------------------------------------------------- */
+
+.menu {
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 0;
+  margin-bottom: 0;
+  list-style: none;
+
+  &-link {
+    @include user-event {
+      font-weight: $menu-link-hover-font-weight;
+    }
+
+    display: block;
+    padding: $menu-link-padding-y $menu-link-padding-x;
+    font-size: $menu-link-font-size;
+    font-weight: $menu-link-font-weight;
+    color: $menu-link-color;
+    text-decoration: if($link-decoration == none, null, none);
+    text-transform: uppercase;
+    transition: $menu-link-transition;
+
+    &:hover,
+    &:focus {
+      color: $menu-link-hover-color;
+      text-decoration: if($link-hover-decoration == underline, none, null);
+    }
+
+    &.disabled {
+      color: $menu-link-disabled-color;
+      cursor: default;
+      pointer-events: none;
+    }
+  }
+}

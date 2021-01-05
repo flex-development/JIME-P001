@@ -45,7 +45,7 @@ export const UseTransformScaleXDefaults = Object.freeze({
  * @param initialSX - Number representing the abscissa of the scaling vector
  * @param intconfig - Interpolator config
  * @param duration - Number of milliseconds the animation should run
- * @returns Object containing current sx value, style object, and function to
+ * @return Object containing current sx value, style object, and function to
  * toggle when animation runs
  */
 export function useTransformScaleX<T extends AnyObject = AnyObject>(

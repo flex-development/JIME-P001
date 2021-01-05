@@ -1,7 +1,7 @@
 import { CheckoutLineItemInput } from '@flex-development/kustomzcore'
 
 /**
- * @file Get total number of line items using quanity property
+ * @file Implementation - getItemsTotal
  * @module utils/getItemsTotal/impl
  */
 

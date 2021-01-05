@@ -14,7 +14,7 @@ import { DATASETS } from './datamaps'
  * ! Mock data entities will not have a `created_at` property`.
  *
  * @param key - Key of mock dataset
- * @returns Array of mock data
+ * @return Array of mock data
  */
 export function getMockData<T = AnyObject>(key: keyof typeof DATASETS): T[] {
   // Return array of mock entities
@@ -27,7 +27,7 @@ export function getMockData<T = AnyObject>(key: keyof typeof DATASETS): T[] {
  * @async
  * @param app - Firebase test application
  * @param key - Key of mock dataset
- * @returns Array of mock data
+ * @return Array of mock data
  */
 export async function loadMockData<T = AnyObject>(
   database: FirebaseAdaptorDatabase,

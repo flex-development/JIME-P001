@@ -1,0 +1,19 @@
+/// ----------------------------------------------------------------------------
+/// @name padding-y
+/// @group mixins
+/// ----------------------------------------------------------------------------
+
+/// Set an element's top and bottom padding values.
+/// @param {Number | String} $top - Top padding value
+/// @param {Number | String} $bottom [$top] - Bottom padding value
+@mixin padding-y($top, $bottom: $top) {
+  @if ($bottom) {
+    padding-bottom: $bottom;
+  }
+
+  @if ($top) {
+    padding-top: $top;
+  }
+
+  @content;
+}

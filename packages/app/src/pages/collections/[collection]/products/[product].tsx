@@ -42,7 +42,7 @@ const CollectionProduct: PC<IPagePropsProduct> = props => {
  * @param context.params - Route parameters if dynamic route
  * @param context.query - The query string
  * @param context.req - HTTP request object
- * @returns Product listing object and an array of products in the collection
+ * @return Product listing object and an array of products in the collection
  */
 export const getServerSideProps: GetServerSideProps<
   IPagePropsProduct,

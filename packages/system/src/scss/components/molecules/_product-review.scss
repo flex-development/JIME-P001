@@ -1,0 +1,75 @@
+/* -----------------------------------------------------------------------------
+PRODUCT REVIEWS
+----------------------------------------------------------------------------- */
+
+.product-review {
+  @include breakpoint-up(sm) {
+    column-gap: $space-36;
+    grid-template-columns: map-get($grid-template-columns, 12);
+    padding-bottom: $space-0;
+    row-gap: $space-0;
+  }
+
+  @include make-grid(1, 0, null, 24);
+
+  border: $border-width-thick solid $border-color;
+  padding-bottom: $space-36;
+
+  &-body {
+    @include breakpoint-up(md) {
+      font-size: $font-size-sm;
+    }
+
+    font-size: $font-size-sm;
+    margin-bottom: $space-0;
+  }
+
+  &-col {
+    &:first-of-type {
+      @include breakpoint-up(sm) {
+        @include make-grid-col(4);
+      }
+
+      @include breakpoint-up(lg) {
+        @include make-grid-col(3);
+      }
+    }
+
+    &:last-of-type {
+      @include breakpoint-up(sm) {
+        @include make-grid-col(8);
+
+        @include padding-x($space-0, $space-36);
+      }
+
+      @include breakpoint-up(lg) {
+        @include make-grid-col(9);
+      }
+
+      @include padding-x($space-16);
+
+      justify-content: center;
+    }
+
+    @include make-grid-col;
+  }
+
+  &-img {
+    @include fluid-img;
+  }
+
+  &-title {
+    font-size: $font-size-xl;
+    font-weight: $font-weight-bold;
+    margin-bottom: $space-12 / 2;
+  }
+
+  &-body,
+  &-title {
+    color: $light;
+
+    &::first-letter {
+      text-transform: capitalize;
+    }
+  }
+}

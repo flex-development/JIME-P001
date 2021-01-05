@@ -1,0 +1,14 @@
+/// ----------------------------------------------------------------------------
+/// @name breakpoint-min
+/// @group functions
+/// ----------------------------------------------------------------------------
+
+/// Returns the minimum breakpoint width, or null if `$name` has a breakpoint
+/// width of zero.
+/// @require {variable} $grid-breakpoints
+/// @param {String} name - Name of key from grid breakpoints map
+/// @param {Map} $breakpoints [$grid-breakpoints] - Grid breakpoints map
+@function breakpoint-min($name, $breakpoints: $grid-breakpoints) {
+  $min: map-get($breakpoints, $name);
+  @return if($min != 0, $min, null);
+}

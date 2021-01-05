@@ -1,4 +1,4 @@
-import { IProfileSnippet } from '@subdomains/cms/models'
+import { IProfileSnippet } from '@app/subdomains/cms/models'
 import { IRTDRepository as IRepo } from '@subdomains/firebase'
 
 /**

@@ -1,0 +1,110 @@
+/* -----------------------------------------------------------------------------
+ADD TO CART FORM
+----------------------------------------------------------------------------- */
+
+.add-to-cart-form {
+  @include breakpoint-up(md) {
+    align-items: center;
+    column-gap: $space-24;
+    grid-template-columns: map-get($grid-template-columns, 12);
+  }
+
+  @include make-grid(1, 0, null, 36);
+
+  &-btn-container {
+    align-items: center;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: $space-24;
+  }
+
+  &-btn {
+    @include breakpoint-up(sm) {
+      @include width(map-get($sizes, auto));
+    }
+
+    @include flex-align(flex-end, self);
+
+    @include fluid-width;
+
+    &:disabled {
+      @include opacity($opacity-25);
+    }
+  }
+
+  &-col {
+    &:first-of-type {
+      @include breakpoint-up(md) {
+        @include make-grid-col(4);
+      }
+    }
+
+    &:last-of-type {
+      @include breakpoint-up(md) {
+        @include flex-center;
+
+        @include make-grid-col(8);
+      }      
+    }
+
+    @include make-grid-col;
+  }
+
+  &-controls {
+    @include breakpoint-up(sm) {
+      @include flex-spread;
+
+      flex-direction: row;
+    }
+
+    @include flex-column;
+  }
+
+  &-control {
+    &[name='kpd'] {
+      margin-top: $space-16;
+    }
+
+    &[name='kustom'] {
+      @include height(rem(120));
+    }
+
+    &[name='variant_id'] {
+      @include breakpoint-up(sm) {
+        border-bottom-width: $form-select-border-width;
+        border-right-width: $border-width-none;
+        font-size: $font-size-sm;
+      }
+
+      border-bottom-width: $border-width-none;
+      font-size: $font-size-base;
+    }
+  }
+
+  &-heading {
+    @extend h3;
+
+    @include breakpoint-up(md) {
+      font-size: $h2-font-size;
+      padding-top: $space-18;
+    }
+
+    margin-bottom: $space-0;
+
+    & + .form-text {
+      @include margin-y($space-12, $space-4);
+    
+      &:empty {
+        margin-top: $space-16;
+      }
+
+      color: $secondary;
+      font-size: $font-size-base;
+    }
+  }
+
+  &-btn-container,
+  &-controls {
+    @include fluid-width;
+  }
+}

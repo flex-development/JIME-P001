@@ -85,7 +85,7 @@ This project uses [Prettier](https://prettier.io/) to format all code.
 
 To review our formatting guidelines, see our configuration files:
 
-- Configuration:[`.prettierrc.json`](../.prettierrc.json)
+- Configuration:[`.prettierrc.js`](../.prettierrc.js)
 - Ignore Patterns: [`.prettierignore`](../.prettierignore)
 
 #### Linting

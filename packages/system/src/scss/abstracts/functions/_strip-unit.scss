@@ -1,0 +1,15 @@
+/// ----------------------------------------------------------------------------
+/// @name strip-unit
+/// @group functions
+/// ----------------------------------------------------------------------------
+
+/// Remove the unit from a number.
+/// @param {Number} $value - Number to remove unit from
+/// @return {Number} - Unitless number
+@function strip-unit($value) {
+  @if type-of($value) == 'number' and not unitless($value) {
+    @return $value / ($value * 0 + 1);
+  }
+
+  @return $value;
+}

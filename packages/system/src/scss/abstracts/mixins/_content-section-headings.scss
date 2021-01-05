@@ -1,0 +1,56 @@
+/// ----------------------------------------------------------------------------
+/// @name content-section-headings
+/// @group mixins
+/// ----------------------------------------------------------------------------
+
+/// Add `.content-section` heading styles to an element.
+/// @require {mixin} breakpoint-up
+/// @require {variable} $font-size-base
+/// @require {variable} $font-size-lg
+/// @require {variable} $font-size-xl
+/// @require {variable} $font-size-xxl
+/// @require {variable} $space-36
+@mixin content-section-headings {
+  @for $level from 1 through 6 {
+    h#{$level},
+    .h#{$level} {
+      text-transform: uppercase;
+    }
+  }
+
+  h1,
+  .h1 {
+    @include breakpoint-up(md) {
+      font-size: $font-size-xxl;
+    }
+
+    font-size: $font-size-xl;
+  }
+
+  h2,
+  .h2 {
+    @include breakpoint-up(md) {
+      font-size: $font-size-xl;
+    }
+
+    font-size: $font-size-lg;
+  }
+
+  h3
+  h4,
+  .h3,
+  .h4 {
+    @include breakpoint-up(md) {
+      font-size: $font-size-lg;
+    }
+
+    font-size: $font-size-base;
+  }
+
+  h5,
+  h6,
+  .h5,
+  .h6 {
+    font-size: $font-size-base;
+  }
+}

@@ -1,10 +1,10 @@
+import { ICMSPageIndex, ICMSPageSlug } from '@app/subdomains/cms/models/CMSPage'
 import { AnyObject } from '@flex-development/json'
 import {
   CollectionTemplateProps,
   ProductTemplateProps,
   SearchTemplateProps
 } from '@flex-development/kustomzdesign'
-import { ICMSPageIndex, ICMSPageSlug } from '@subdomains/cms/models/CMSPage'
 
 /**
  * @file Subdomain Interfaces - Next.js Page Props

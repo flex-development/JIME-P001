@@ -2,7 +2,7 @@ import { database } from '@app/subdomains/firebase/config/web'
 import { AnyObject, serialize } from '@flex-development/json'
 import { IProductListing, IReview } from '@flex-development/kustomzcore'
 import {
-  getProductVariantImage,
+  getProductImage,
   ProductTemplate,
   ProductTemplateProps
 } from '@flex-development/kustomzdesign'
@@ -39,7 +39,7 @@ const Product: PC<IPagePropsProduct> = ({ page }) => {
   // Get current product variant to build page SEO
   const variant = page.product.variants[page.active || 0]
   const page_title = `${page.product.title} - ${variant.title}`
-  const variant_img = getProductVariantImage(
+  const variant_img = getProductImage(
     variant.image_id,
     page.product.images,
     page_title
@@ -84,7 +84,7 @@ const Product: PC<IPagePropsProduct> = ({ page }) => {
  * @param context.params - Dynamic route parameters
  * @param context.query - The query string
  * @param context.req - HTTP request object
- * @returns Product listing object and an array of products in the collection
+ * @return Product listing object and an array of products in the collection
  */
 export const getServerSideProps: GetServerSideProps<
   IPagePropsProduct,

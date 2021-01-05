@@ -1,6 +1,6 @@
-import { PlaylistAPI } from '@subdomains/cms/config/config'
-import { URLField } from '@subdomains/cms/config/extensions'
-import { IPlaylistSettings } from '@subdomains/cms/models'
+import { PlaylistAPI } from '@app/subdomains/cms/config/config'
+import { URLField } from '@app/subdomains/cms/config/extensions'
+import { IPlaylistSettings } from '@app/subdomains/cms/models'
 import { FormOptions } from 'tinacms'
 
 /**
@@ -13,7 +13,7 @@ import { FormOptions } from 'tinacms'
  *
  * @param label - Label for the form that will appear in the CMS sidebar
  * @param onSubmit - Function to invoke when the form is saved
- * @returns Store playlist settings form configuration
+ * @return Store playlist settings form configuration
  */
 export const PlaylistSettingsFormPlugin = (
   label = 'Playlist Settings',

@@ -1,0 +1,737 @@
+/// ----------------------------------------------------------------------------
+/// Theme Settings
+/// @group variables-settings
+/// ----------------------------------------------------------------------------
+
+@use '../functions/map-get-multiple' as *;
+@use '../functions/em' as *;
+@use '../functions/rem' as *;
+
+@import 'options';
+
+// -----------------------------------------------------------------------------
+// Color system
+// -----------------------------------------------------------------------------
+
+$black: #000;
+$gray-100: #f8f9fa;
+$gray-200: #e9ecef;
+$gray-300: #dee2e6;
+$gray-400: #ced4da;
+$gray-500: #adb5bd;
+$gray-600: #6c757d;
+$gray-700: #495057;
+$gray-800: #343a40;
+$gray-900: #212529;
+$red: #dc3545;
+$white: #fff;
+
+$dark: #232946;
+$darker: #121629;
+$light: #fffffe;
+$primary: #eebbc3;
+$secondary: #b8c1ec;
+$ghost: transparent;
+
+$danger: $red;
+$muted: $gray-400;
+
+$theme-colors: (
+  'black': $black,
+  danger:  $danger,
+  dark: $dark,
+  darker: $darker,
+  ghost: $ghost,
+  'gray': $gray-600,
+  light: $light,
+  muted: $muted,
+  primary: $primary,
+  secondary: $secondary,
+  'white': $white
+);
+
+// -----------------------------------------------------------------------------
+// Spacing
+// -----------------------------------------------------------------------------
+
+$space-0: 0;
+$space-1: rem(1);
+$space-2: rem(2);
+$space-4: rem(4);
+$space-8: rem(8);
+$space-10: rem(10);
+$space-12: rem(12);
+$space-16: rem(16);
+$space-18: rem(18);
+$space-20: rem(20);
+$space-24: rem(24);
+$space-32: rem(32);
+$space-36: rem(36);
+$space-40: rem(40);
+$space-48: rem(48);
+$space-60: rem(60);
+$space-64: rem(64);
+$space-72: rem(72);
+$space-80: rem(80);
+$space-96: rem(96);
+
+$spacers: (
+  auto: auto,
+  0: $space-0,
+  1: $space-1,
+  2: $space-2,
+  4: $space-4,
+  8: $space-8,
+  12: $space-12,
+  16: $space-16,
+  18: $space-18,
+  20: $space-20,
+  24: $space-24,
+  32: $space-32,
+  36: $space-36,
+  40: $space-40,
+  48: $space-48,
+  60: $space-60,
+  64: $space-64,
+  72: $space-72,
+  80: $space-80,
+  96: $space-96
+);
+
+$spacer: $space-16;
+
+// -----------------------------------------------------------------------------
+// Typography
+// -----------------------------------------------------------------------------
+
+$font-family-monospace: SFMono-Regular, Menlo, 'Courier New', monospace;
+$font-family-sans-serif: ibm-plex-sans, sans-serif;
+$font-family-sans-serif-special: quimby-gubernatorial, sans-serif;
+
+$font-family-base: var(--#{$variable-prefix}font-sans-serif);
+$font-family-code: var(--#{$variable-prefix}font-monospace);
+
+// $font-size-root effects the value of `rem`
+$font-size-root: null;
+
+// $font-size-base effects the font size of the body text
+$font-size-base: rem(16);
+
+$font-size-xs: rem(12); // 12px
+$font-size-sm: rem(14); // 14px
+$font-size-md: $font-size-base; // 16px
+$font-size-lg: rem(18); // 18px
+$font-size-xl: rem(20); // 20px
+$font-size-xxl: rem(24); // 24px
+
+$font-weight-hairline: 100;
+$font-weight-thin: 200;
+$font-weight-light: 300;
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+$font-weight-extrabold: 800;
+$font-weight-black: 900;
+
+$font-weight-base: $font-weight-normal;
+
+$line-height-base: 1.5;
+$line-height-sm: 1.25;
+$line-height-lg: 2;
+
+$h1-font-size: rem(60); // 60px
+$h2-font-size: rem(48); // 48px
+$h3-font-size: rem(36); // 36px
+$h4-font-size: $font-size-xxl;
+$h5-font-size: $font-size-xl;
+$h6-font-size: $font-size-lg;
+
+$headings-margin-bottom: $spacer / 2;
+$headings-font-family: null;
+$headings-font-style: null;
+$headings-font-weight: $font-weight-bold;
+$headings-line-height: $line-height-sm;
+$headings-color: $light;
+$headings-text-transform: uppercase;
+
+// -----------------------------------------------------------------------------
+// Sizes
+// -----------------------------------------------------------------------------
+
+$sizes: map-merge($spacers, (
+  0: 0%,
+  25: 25%,
+  50: 50%,
+  75: 75%,
+  100: 100%,
+  available: -moz-available,
+  auto: auto,
+  fluid: 100%,
+  maxc: max-content,
+  minc: min-content
+));
+
+// -----------------------------------------------------------------------------
+// Backgrounds
+// -----------------------------------------------------------------------------
+
+$bg-positions: (
+  bottom: bottom,
+  center: center,
+  left: left,
+  lb: left bottom,
+  lt: left top,
+  right: right,
+  rb: right bottom,
+  rt: right top,
+  top: top
+);
+
+$bg-repeats: no-repeat, repeat, repeat-x, repeat-y;
+
+$bg-sizes: auto, contain, cover;
+
+// -----------------------------------------------------------------------------
+// Opacity
+// -----------------------------------------------------------------------------
+
+$opacity-0: 0;
+$opacity-25: 0.25;
+$opacity-50: 0.5;
+$opacity-75: 0.75;
+$opacity-100: 1;
+
+$opacity-disabled: 0.65;
+
+// -----------------------------------------------------------------------------
+// Position
+// -----------------------------------------------------------------------------
+
+$position-values: (
+  0: 0,
+  25: 25%,
+  50: 50%,
+  75: 75%,
+  100: 100%,
+  auto: auto,
+  unset: unset
+);
+
+
+// -----------------------------------------------------------------------------
+// Grid Breakpoints
+// -----------------------------------------------------------------------------
+
+$grid-breakpoints: (
+  xs: 0,
+  // gt-360: 361px,
+  sm: 576px,
+  md: 834px,
+  lg: 1010px,
+  xl: 1368px,
+  xxl: 1440px
+);
+
+// -----------------------------------------------------------------------------
+// Grids
+// -----------------------------------------------------------------------------
+
+$grid-columns: 12;
+$grid-gutter-width: $space-24;
+$grid-row-columns: $grid-columns / 2;
+
+$gutters: $spacers;
+
+$grid-column-span: (
+  1: span 1 / span 1,
+  2: span 2 / span 2,
+  3: span 3 / span 3,
+  4: span 4 / span 4,
+  5: span 5 / span 5,
+  6: span 6 / span 6,
+  7: span 7 / span 7,
+  8: span 8 / span 8,
+  9: span 9 / span 9,
+  10: span 10 / span 10,
+  11: span 11 / span 11,
+  12: span 12 / span 12,
+  auto: auto,
+  full: 1 / -1
+);
+
+$grid-row-span: (
+  1: span 1 / span 1,
+  2: span 2 / span 2,
+  3: span 3 / span 3,
+  4: span 4 / span 4,
+  5: span 5 / span 5,
+  6: span 6 / span 6,
+  7: span 7 / span 7,
+  auto: auto,
+  full: 1 / -1
+);
+
+$grid-template-columns: (
+  0: none,
+  1: repeat(1, minmax(0, 1fr)),
+  2: repeat(2, minmax(0, 1fr)),
+  3: repeat(3, minmax(0, 1fr)),
+  4: repeat(4, minmax(0, 1fr)),
+  5: repeat(5, minmax(0, 1fr)),
+  6: repeat(6, minmax(0, 1fr)),
+  7: repeat(7, minmax(0, 1fr)),
+  8: repeat(8, minmax(0, 1fr)),
+  9: repeat(9, minmax(0, 1fr)),
+  10: repeat(10, minmax(0, 1fr)),
+  11: repeat(11, minmax(0, 1fr)),
+  12: repeat(12, minmax(0, 1fr))
+);
+
+$grid-template-rows: (
+  0: none,
+  1: repeat(1, minmax(0, 1fr)),
+  2: repeat(2, minmax(0, 1fr)),
+  3: repeat(3, minmax(0, 1fr)),
+  4: repeat(4, minmax(0, 1fr)),
+  5: repeat(5, minmax(0, 1fr)),
+  6: repeat(6, minmax(0, 1fr))
+);
+
+// -----------------------------------------------------------------------------
+// Containers
+// -----------------------------------------------------------------------------
+
+$container-padding-x: $grid-gutter-width / 2;
+
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1140px,
+  xxl: 1320px
+);
+
+// -----------------------------------------------------------------------------
+// Borders
+// -----------------------------------------------------------------------------
+
+$border-color: $darker;
+$border-color-inverse: $light;
+
+$border-width-none: $space-0;
+$border-width-lighter: 0.5px;
+$border-width-light: 1px;
+$border-width-thin: 2px;
+$border-width-thick: 4px;
+
+$border-width: $border-width-thin;
+
+$border-radius: $space-4;
+$border-radius-none: $space-0;
+$border-radius-sm: $space-2;
+$border-radius-lg: rem(6);
+
+$borders: (
+  0: 0,
+  null: $border-width solid $border-color
+);
+
+$border-widths: (
+  0: 0,
+  light: $border-width-light,
+  thin: $border-width-light,
+  thick: $border-width-thick
+);
+
+// -----------------------------------------------------------------------------
+// Box Shadows
+// -----------------------------------------------------------------------------
+
+$box-shadow:  0 .5rem 1rem rgba($black, .15);
+$box-shadow-sm: 0 .125rem .25rem rgba($black, .075);
+$box-shadow-lg: 0 1rem 3rem rgba($black, .175);
+$box-shadow-inset: inset 0 1px 2px rgba($black, .075);
+
+// -----------------------------------------------------------------------------
+// Z-Index
+// -----------------------------------------------------------------------------
+
+$zindex-dropdown: 1000;
+$zindex-sticky: 1020;
+$zindex-fixed: 1030;
+$zindex-modal-backdrop: 1040;
+$zindex-modal: 1050;
+
+// -----------------------------------------------------------------------------
+// Body
+// -----------------------------------------------------------------------------
+
+$body-bg: $dark;
+$body-color: $secondary;
+$body-text-align: null;
+
+// -----------------------------------------------------------------------------
+// Components
+// -----------------------------------------------------------------------------
+
+$component-active-color: $white;
+$component-active-bg: $primary;
+
+$caret-width: $space-4;
+$caret-vertical-align: $caret-width * .85;
+$caret-spacing: $caret-width * .85;
+
+$template-padding-y: $space-60;
+$template-padding-x: $space-24;
+
+$transition-base: all .2s ease-in-out;
+$transition-fade: opacity .15s linear;
+$transition-collapse: height .35s ease;
+
+$aspect-ratios: (
+  '1x1': 100%,
+  '4x3': calc(3 / 4 * 100%),
+  '16x9': calc(9 / 16 * 100%),
+  '21x9': calc(9 / 21 * 100%)
+);
+
+$star-polygon: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+
+// -----------------------------------------------------------------------------
+// Links
+// -----------------------------------------------------------------------------
+
+$link-color: $primary;
+$link-decoration: none;
+$link-shade-percentage: 20%;
+$link-hover-color: mix($black, $link-color, $link-shade-percentage);
+$link-hover-decoration: none;
+
+$stretched-link-pseudo-element: after;
+$stretched-link-z-index: 1;
+
+// -----------------------------------------------------------------------------
+// Paragraphs
+// -----------------------------------------------------------------------------
+
+$paragraph-margin-bottom: $space-16;
+
+// -----------------------------------------------------------------------------
+// HR
+// -----------------------------------------------------------------------------
+
+$hr-margin-y: $spacer;
+$hr-color: $light;
+$hr-height: $border-width;
+$hr-opacity: $opacity-50;
+
+// -----------------------------------------------------------------------------
+// Buttons
+// -----------------------------------------------------------------------------
+
+$btn-padding-y: $space-8;
+$btn-padding-x: $space-12;
+
+$btn-bg-color: $primary;
+$btn-color: $dark;
+
+$btn-font-family: null;
+$btn-font-size: $font-size-sm;
+$btn-font-weight: $font-weight-semibold;
+
+$btn-line-height: $line-height-base;
+
+$btn-border-width: $border-width;
+$btn-border-radius: $border-radius-none;
+
+$btn-box-shadow: inset 0 1px 0 rgba($white, .15), 0 1px 1px rgba($black, .075);
+
+$btn-disabled-box-shadow: none;
+$btn-disabled-opacity: $opacity-disabled;
+
+$btn-active-box-shadow: inset 0 3px 5px rgba($black, .125);
+
+$btn-focus-width: $space-4;
+$btn-focus-color-opacity: $opacity-25;
+$btn-focus-color: rgba($component-active-bg, $btn-focus-color-opacity);
+$btn-focus-box-shadow: 0 0 0 $btn-focus-width $btn-focus-color;
+
+$btn-link-color: $link-color;
+$btn-link-hover-color: $link-hover-color;
+$btn-link-disabled-color: $gray-600;
+
+$btn-white-space: null;
+
+$btn-transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+
+// -----------------------------------------------------------------------------
+// Menus
+// -----------------------------------------------------------------------------
+
+$menu-link-padding-y: $space-8;
+$menu-link-padding-x: $space-16;
+$menu-link-font-size: null;
+$menu-link-font-weight: null;
+$menu-link-hover-font-weight: $font-weight-bold;
+$menu-link-color: null;
+$menu-link-hover-color: null;
+$menu-link-transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out;
+$menu-link-disabled-color: $muted;
+
+// -----------------------------------------------------------------------------
+// Dropdowns
+// -----------------------------------------------------------------------------
+
+$dropdown-width: map-get($sizes, fluid);
+$dropdown-min-width: 10rem;
+$dropdown-padding-x: $space-0;
+$dropdown-padding-y: $space-0;
+$dropdown-spacer: $space-0;
+$dropdown-font-size: $font-size-sm;
+$dropdown-color: $body-color;
+$dropdown-bg: $ghost;
+$dropdown-border-color: $secondary;
+$dropdown-border-radius: $border-radius-none;
+$dropdown-border-width: $border-width;
+$dropdown-inner-border-radius: $space-0;
+$dropdown-divider-bg: $dropdown-border-color;
+$dropdown-divider-margin-y: $spacer / 2;
+$dropdown-box-shadow: $box-shadow;
+
+$dropdown-link-color: $link-color;
+$dropdown-link-hover-color: $dark;
+$dropdown-link-hover-bg: $primary;
+
+$dropdown-link-active-color: $dropdown-link-hover-color;
+$dropdown-link-active-bg: $dropdown-link-hover-bg;
+
+$dropdown-link-disabled-color: $gray-600;
+
+$dropdown-item-padding-y: $space-12;
+$dropdown-item-padding-x: $space-12;
+$dropdown-item-bg: $darker;
+$dropdown-item-hover-bg: $dropdown-link-hover-bg;
+$dropdown-item-color: $dropdown-link-color;
+$dropdown-item-font-size: em(14);
+
+$dropdown-header-color: $primary;
+$dropdown-header-hover-color: $dropdown-header-color;
+$dropdown-header-padding: $dropdown-padding-y $dropdown-item-padding-x;
+
+// -----------------------------------------------------------------------------
+// Product Cards
+// -----------------------------------------------------------------------------
+
+$product-card-bg: $ghost;
+$product-card-color: null;
+$product-card-height: auto;
+
+$product-card-border-color: rgba($black, .125);
+$product-card-border-radius: $border-radius;
+$product-card-border-width: $border-width;
+
+$product-card-inner-border-radius: subtract($product-card-border-radius, $product-card-border-width);
+
+$product-card-footer-bg: $darker;
+
+$product-card-footer-padding-y: $space-24;
+$product-card-footer-padding-x: $product-card-footer-padding-y;
+
+$product-card-footer-text-color: $light;
+$product-card-footer-title-color: $secondary;
+$product-card-footer-title-font-size: $font-size-lg;
+
+// -----------------------------------------------------------------------------
+// Input
+// -----------------------------------------------------------------------------
+
+$input-padding-y: $btn-padding-y;
+$input-padding-x: $btn-padding-x;
+$input-font-family: $btn-font-family;
+$input-font-size: $btn-font-size;
+$input-font-weight: $font-weight-base;
+$input-line-height: $btn-line-height;
+
+$input-bg: $ghost;
+$input-disabled-bg: $input-bg;
+$input-disabled-border-color: $muted;
+
+$input-color: $secondary;
+$input-border-color: $border-color;
+$input-border-width: $btn-border-width;
+$input-box-shadow: $box-shadow-inset;
+
+$input-border-radius: $border-radius-none;
+
+$input-focus-bg: $input-bg;
+$input-focus-border-color: $input-border-color;
+$input-focus-color: $input-color;
+$input-focus-width: $btn-focus-width;
+$input-focus-box-shadow: $btn-focus-box-shadow;
+$input-focus-font-weight: $font-weight-semibold;
+
+$input-plaintext-bg-color: $primary;
+$input-placeholder-color: rgba($secondary, 0.5);
+$input-plaintext-color: $dark;
+
+$input-height-border: $input-border-width * 2;
+
+$input-height-inner: add($input-line-height * 1em, $input-padding-y * 2);
+$input-height-inner-half: add($input-line-height * .5em, $input-padding-y);
+$input-height-inner-quarter: add($input-line-height * .25em, $input-padding-y / 2);
+
+$input-height: add($input-line-height * 1em, add($input-padding-y * 2, $input-height-border, false));
+ 
+$input-transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+
+// -----------------------------------------------------------------------------
+// Forms
+// -----------------------------------------------------------------------------
+
+$form-text-margin-top: $space-4;
+$form-text-font-size: $font-size-sm;
+$form-text-font-style: null;
+$form-text-font-weight: null;
+$form-text-color: $light;
+
+$form-label-margin-bottom: $space-8;
+$form-label-font-size: $font-size-sm;
+$form-label-font-style: null;
+$form-label-font-weight: $font-weight-semibold;
+$form-label-color: $secondary;
+
+$form-control-border: $input-border-width solid $input-border-color;
+
+$form-check-input-width: em(16);
+$form-check-min-height: $font-size-base * $line-height-base;
+$form-check-padding-start: $form-check-input-width + .5em;
+$form-check-margin-bottom: $space-0;
+$form-check-label-color:  null;
+$form-check-label-cursor: null;
+$form-check-transition: background-color .15s ease-in-out, background-position .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+
+$form-check-input-active-filter: brightness(90%);
+
+$form-check-input-bg: $light;
+$form-check-input-border: 1px solid rgba(0, 0, 0, .25);
+$form-check-input-border-radius: .25em;
+$form-check-radio-border-radius: 50%;
+$form-check-input-focus-border: $input-focus-border-color;
+$form-check-input-focus-box-shadow: $btn-focus-box-shadow;
+
+$form-check-input-checked-color: $component-active-color;
+$form-check-input-checked-bg-color: $primary;
+$form-check-input-checked-border-color: $form-check-input-checked-bg-color;
+$form-check-input-checked-bg-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'><path fill='none' stroke='#{$form-check-input-checked-color}' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M6 10l3 3l6-6'/></svg>");
+$form-check-radio-checked-bg-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'><circle r='2' fill='#{$form-check-input-checked-color}'/></svg>");
+
+$form-check-input-disabled-opacity: $btn-disabled-opacity;
+
+$form-select-padding-y: $input-padding-y;
+$form-select-padding-x:  $input-padding-x;
+$form-select-font-family: $input-font-family;
+$form-select-font-size: $font-size-xs;
+$form-select-indicator-padding: $space-36;
+$form-select-font-weight: $font-weight-semibold;
+$form-select-line-height: $input-line-height;
+$form-select-color: $dark;
+$form-select-disabled-color: $gray-600;
+$form-select-bg: $primary;
+$form-select-disabled-bg: $gray-200 ;
+$form-select-disabled-border-color: $input-disabled-border-color ;
+$form-select-bg-position: right $form-select-padding-x center;
+$form-select-bg-size: 16px 12px; // In pixels because image dimensions
+$form-select-indicator-color: $input-border-color;
+$form-select-indicator: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='none' stroke='#{$form-select-indicator-color}' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/></svg>");
+
+$form-select-feedback-icon-padding-end: add(1em * .75, (2 * $form-select-padding-y * .75) + $form-select-padding-x + $form-select-indicator-padding);
+$form-select-feedback-icon-position: center right ($form-select-padding-x + $form-select-indicator-padding);
+$form-select-feedback-icon-size: $input-height-inner-half $input-height-inner-half;
+
+$form-select-border-width: $input-border-width;
+$form-select-border-color: $input-border-color;
+$form-select-border-radius: $border-radius-none;
+$form-select-box-shadow: unset;
+
+$form-select-focus-border-color:  $input-focus-border-color;
+$form-select-focus-width:         $input-focus-width;
+$form-select-focus-box-shadow: $form-select-box-shadow;
+
+// -----------------------------------------------------------------------------
+// Form Validation
+// -----------------------------------------------------------------------------
+
+$form-feedback-margin-top: $form-text-margin-top;
+$form-feedback-font-size: $form-text-font-size;
+$form-feedback-font-style: $form-text-font-style;
+$form-feedback-valid-color: $primary;
+$form-feedback-invalid-color: $danger;
+
+$form-feedback-icon-valid-color: $form-feedback-valid-color;
+$form-feedback-icon-valid: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'><path fill='#{$form-feedback-icon-valid-color}' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/></svg>");
+$form-feedback-icon-invalid-color:  $form-feedback-invalid-color;
+$form-feedback-icon-invalid: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='#{$form-feedback-icon-invalid-color}'><circle cx='6' cy='6' r='4.5'/><path stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/><circle cx='6' cy='8.2' r='.6' fill='#{$form-feedback-icon-invalid-color}' stroke='none'/></svg>");
+
+$form-validation-states: (
+  valid: (
+    color: $form-feedback-valid-color,
+    icon: $form-feedback-icon-valid
+  ),
+  invalid: (
+    color: $form-feedback-invalid-color,
+    icon: $form-feedback-icon-invalid
+  )
+);
+
+// -----------------------------------------------------------------------------
+// SearchBar
+// -----------------------------------------------------------------------------
+
+$search-bar-control-padding-x: $space-8;
+
+$search-bar-bg-position: left $search-bar-control-padding-x center;
+$search-bar-icon-width: 16px;
+$search-bar-icon-height: $search-bar-icon-width;
+$search-bar-bg-size: $search-bar-icon-width $search-bar-icon-height;
+$search-bar-icon-fill-color: $light;
+$search-bar-icon-stroke-color: $light;
+$search-bar-icon-stroke-width: $border-width-light;
+$search-bar-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'><path fill='#{$search-bar-icon-fill-color}' stroke='#{$search-bar-icon-stroke-color}' stroke-width='#{$search-bar-icon-stroke-width}' d='M2 8c0-3.309 2.691-6 6-6s6 2.691 6 6-2.691 6-6 6-6-2.691-6-6zm17.707 10.293l-5.395-5.396A7.946 7.946 0 0016 8c0-4.411-3.589-8-8-8S0 3.589 0 8s3.589 8 8 8a7.954 7.954 0 004.897-1.688l5.396 5.395A.998.998 0 0020 19a1 1 0 00-.293-.707z'/></svg>");
+
+// -----------------------------------------------------------------------------
+// Sidebar
+// -----------------------------------------------------------------------------
+
+$sidebar-font-size: $font-size-sm;
+
+$sidebar-padding-y: $space-48;
+$sidebar-padding-x: $space-36;
+
+// -----------------------------------------------------------------------------
+// Carousel
+// -----------------------------------------------------------------------------
+
+$carousel-control-color: $white;
+$carousel-control-width: 15%;
+$carousel-control-opacity: $opacity-50;
+$carousel-control-hover-opacity: .9;
+$carousel-control-transition: opacity .15s ease;
+
+$carousel-indicator-width: $font-size-base;
+$carousel-indicator-height: $carousel-indicator-width;
+$carousel-indicator-hit-area-height: 10px;
+$carousel-indicator-spacer: $space-12;
+$carousel-indicator-opacity: $opacity-50;
+$carousel-indicator-bg: rgba($primary, 0.25);
+$carousel-indicator-active-bg: $primary;
+$carousel-indicator-active-opacity: $opacity-100;
+$carousel-indicator-transition: opacity .6s ease;
+
+$carousel-transition-duration: .6s;
+$carousel-transition: transform $carousel-transition-duration ease-in-out;
+
+
+// -----------------------------------------------------------------------------
+// Modals
+// -----------------------------------------------------------------------------

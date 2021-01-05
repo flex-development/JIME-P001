@@ -1,6 +1,6 @@
+import { ICMSPage } from '@app/subdomains/cms/models'
+import { IPageRepository } from '@app/subdomains/cms/repositories'
 import { NotFound } from '@subdomains/app/utils'
-import { ICMSPage } from '@subdomains/cms/models'
-import { IPageRepository } from '@subdomains/cms/repositories'
 import { ProviderSessionGitHub } from '../AuthGitHubService/IAuthGitHubService'
 
 /**

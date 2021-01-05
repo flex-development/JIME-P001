@@ -1,0 +1,15 @@
+/// ----------------------------------------------------------------------------
+/// @name height
+/// @group mixins
+/// ----------------------------------------------------------------------------
+
+@use 'size' as *;
+
+/// Sets the height, max-height, and/or min-height of an element.
+/// @require {mixin} size
+/// @param {Number} $size - Height of element
+/// @param {Number} $max [none] - max-height
+/// @param {Number} $min [unset] - min-height
+@mixin height($size, $max: none, $min: unset) {
+  @include size($size, height, $max, $min);
+}

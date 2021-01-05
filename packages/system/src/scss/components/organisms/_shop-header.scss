@@ -1,0 +1,49 @@
+/* -----------------------------------------------------------------------------
+SHOP HEADER
+----------------------------------------------------------------------------- */
+
+.shop-header {
+  @include flex(center, space-between);
+
+  background-color: $body-bg;
+  border-bottom: $border-width solid $border-color;
+
+  &-btn {
+    @include breakpoint-up(sm) {
+      margin-right: $space-24;
+      padding-top: 0.125em;
+    }
+
+    margin-right: $space-8;
+
+    .icon {
+      @include dimensions($space-18);
+
+      fill: $light;
+      stroke: $light;
+      stroke-width: $border-width-lighter;
+    }
+  }
+
+  &-col {
+    &:first-of-type {
+      align-items: center;
+    }
+
+    &:last-of-type {
+      @include width(map-get($sizes, maxc));
+
+      justify-content: flex-end;
+    }
+
+    display: flex;
+  }
+
+  &-search-bar {
+    @include fluid-width;
+  }
+
+  .cart-preview {
+    color: $light;
+  }
+}

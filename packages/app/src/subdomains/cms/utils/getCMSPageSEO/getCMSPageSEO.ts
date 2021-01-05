@@ -1,5 +1,5 @@
+import { ICMSPage } from '@app/subdomains/cms/models'
 import { SEOProps } from '@subdomains/app/components/SEO'
-import { ICMSPage } from '@subdomains/cms/models'
 import { pick } from 'lodash'
 
 /**

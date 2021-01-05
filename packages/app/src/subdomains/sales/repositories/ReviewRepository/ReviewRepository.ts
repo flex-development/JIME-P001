@@ -26,7 +26,7 @@ export default class ReviewRepository
    *
    * @async
    * @param id - ID of the product listing to retrieve reviews for
-   * @returns Array of product review objects
+   * @return Array of product review objects
    * @throws {FeathersErrorJSON}
    */
   async findByProductId(

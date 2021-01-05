@@ -21,7 +21,7 @@ export const FIREBASE_TEST_CONFIG = {
  * @see https://firebase.google.com/docs/rules/unit-tests#test_sdk_methods
  *
  * @param admin - If true, initialize Admin testing app
- * @returns Firebase test app
+ * @return Firebase test app
  */
 export const firebaseTestApp = (admin?: boolean): FirebaseAdaptor => {
   if (admin) return testing.initializeAdminApp(FIREBASE_TEST_CONFIG)

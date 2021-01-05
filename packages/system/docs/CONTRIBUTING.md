@@ -59,8 +59,7 @@ from the Storybook docs.
 Directory: `src/theme`
 
 Stylesheets are written in [Sass](https://sass-lang.com/); this project
-currently supports the `.scss` syntax. The theme is built on top of
-[Bootstrap 5](https://v5.getbootstrap.com/).
+currently supports the `.scss` syntax.
 
 ### Utilities
 

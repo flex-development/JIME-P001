@@ -1,4 +1,4 @@
-import { ProviderSessionGitHub } from '@subdomains/cms/services'
+import { ProviderSessionGitHub } from '@app/subdomains/cms/services'
 import { isString, merge } from 'lodash'
 import { NextApiRequest as Req, NextApiResponse as Res } from 'next'
 import { getSession } from 'next-auth/client'

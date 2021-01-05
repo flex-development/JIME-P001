@@ -47,7 +47,7 @@ export default class ReviewService
    * @param data.product_sku - SKU of product variant being reviewed
    * @param data.rating - Product rating, a value 1 through 5
    * @param data.title - Title of review
-   * @returns Product review resource
+   * @return Product review resource
    * @throws {FeathersErrorJSON}
    */
   async create(data: CreateReviewRequest): Promise<IReview> {

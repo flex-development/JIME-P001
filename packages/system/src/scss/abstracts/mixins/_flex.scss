@@ -1,0 +1,38 @@
+/// ----------------------------------------------------------------------------
+/// @name flex
+/// @group mixins
+/// ----------------------------------------------------------------------------
+
+/// Flexbox properties wrapper.
+/// @param {String} $align [stretch] - align-items value
+/// @param {String} $justify [null] - justify-content value
+/// @param {String} $direction - justify-content value
+/// @param {String} $display [flex] - Flexbox display
+/// @param {String} $wrap [null] - flex-wrap value
+@mixin flex(
+  $align: stretch,
+  $justify: flex-start,
+  $direction: null,
+  $display: flex,
+  $wrap: null
+) {
+  display: $display;
+
+  @if $direction {
+    flex-direction: $direction;
+  }
+
+  @if $wrap {
+    flex-wrap: $wrap;
+  }
+
+  @if $align {
+    align-items: $align;
+  }
+
+  @if $justify {
+    justify-content: $justify;
+  }
+
+  @content;
+}

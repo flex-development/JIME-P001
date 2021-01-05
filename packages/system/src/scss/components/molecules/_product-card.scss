@@ -1,0 +1,78 @@
+/* -----------------------------------------------------------------------------
+PRODUCT CARDS
+----------------------------------------------------------------------------- */
+
+.product-card {
+  @include height($product-card-height);
+
+  @include position-relative;
+
+  background-color: $product-card-bg;
+  border: none;
+  color: $product-card-color;
+
+  &-dropdown {
+    &-menu {
+      .dropdown-item {
+        @include user-event {
+          cursor: pointer;
+        }
+
+        @include padding-x($product-card-footer-padding-x);
+      }
+    }
+
+    &-toggle {
+      border-bottom: none;
+      font-weight: $font-weight-medium;
+    }
+  }
+
+  &-footer {
+    @include flex-spread;
+
+    background-color: $product-card-footer-bg;
+    border-top: $product-card-border-width solid $product-card-border-color;
+    display: flex;
+    padding: $product-card-footer-padding-y $product-card-footer-padding-x;
+
+    > div {
+      @include flex-column;
+    }
+  }
+
+  &-img {
+    @include border-radius-top($product-card-inner-border-radius);
+
+    @include fluid-img;
+  }
+
+  &-price {
+    color: $product-card-footer-text-color;
+  }
+
+  &-title {
+    color: $product-card-footer-title-color;
+    letter-spacing: $space-4 / 3;
+    margin-bottom: $space-8;
+    min-height: $space-32;
+  }
+
+  &-link-img,
+  &-title {
+    display: inline-block;
+  }
+
+  &-price,
+  &-title {
+    font-size: $product-card-footer-title-font-size;
+    font-weight: $font-weight-semibold;
+    margin-bottom: $space-0;
+  }
+
+  &-dropdown-toggle,
+  &-price,
+  &-title {
+    text-transform: uppercase;
+  }
+}

@@ -1,0 +1,19 @@
+/// ----------------------------------------------------------------------------
+/// @name margin-y
+/// @group mixins
+/// ----------------------------------------------------------------------------
+
+/// Set an element's top and bottom margin values.
+/// @param {Number | String} $top - Top margin value
+/// @param {Number | String} $bottom [$top] - Bottom margin value
+@mixin margin-y($top, $bottom: $top) {
+  @if ($bottom) {
+    margin-bottom: $bottom;
+  }
+
+  @if ($top) {
+    margin-top: $top;
+  }
+
+  @content;
+}

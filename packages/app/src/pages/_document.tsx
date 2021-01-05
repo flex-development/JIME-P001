@@ -161,6 +161,9 @@ export default class Document extends NextDocument<DocumentInitialProps> {
           <meta property='og:site_name' content="Morena's Kustomz" />
           <meta property='og:type' content='website' />
 
+          {/* WebFont Loader */}
+          <script src='https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js' />
+
           {/* Apple MusicKit */}
           <script
             defer

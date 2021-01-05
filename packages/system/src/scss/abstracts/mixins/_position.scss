@@ -1,0 +1,24 @@
+/// ----------------------------------------------------------------------------
+/// @name position
+/// @group mixins
+/// ----------------------------------------------------------------------------
+
+/// Shorthand for positioning.
+/// @param {String} $position - Position type
+/// @param {Length} $top [null] - Top offset
+/// @param {Length} $right [null] - Right offset
+/// @param {Length} $bottom [null] - Bottom offset
+/// @param {Length} $left [null] - Left offset
+@mixin position(
+  $position,
+  $top: null,
+  $right: null,
+  $bottom: null,
+  $left: null
+) {
+  bottom: $bottom;
+  left: $left;
+  position: $position;
+  right: $right;
+  top: $top;
+}

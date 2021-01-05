@@ -17,7 +17,7 @@ import { isNumber } from 'lodash'
  * @param email - User email
  * @param photoURL - Profile photo URL
  * @param auth - Firebase Admin Auth service to use instead of default
- * @returns Firebase admin user record
+ * @return Firebase admin user record
  */
 const upsertFirebaseUser = async (
   uid: string | number,

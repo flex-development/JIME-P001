@@ -1,0 +1,13 @@
+/// ----------------------------------------------------------------------------
+/// @name color-shade
+/// @group functions
+/// @link https://sass-lang.com/documentation/modules/color#mix
+/// ----------------------------------------------------------------------------
+
+/// Mix a color with black.
+/// @param {Color} $color - Color to mix
+/// @param {Number} $weight - Determines how much of each color is included
+/// @return {Color} Hex code of new color
+@function color-shade($color, $weight) {
+  @return mix(black, $color, $weight);
+}

@@ -1,7 +1,7 @@
+import { CMSPage, ICMSPage } from '@app/subdomains/cms/models'
 import { AnyObject } from '@flex-development/json'
 import { createError } from '@flex-development/kustomzcore'
 import { uuid } from '@flex-development/kustomzdesign'
-import { CMSPage, ICMSPage } from '@subdomains/cms/models'
 import { RTDRepository } from '@subdomains/firebase/models/RTDRepository'
 import { isEmpty } from 'lodash'
 import slugify from 'slugify'
@@ -94,7 +94,7 @@ export default class PageRepository
    * Find a page by `path`.
    *
    * @param path - Slug of page to search for
-   * @returns Page resource or null if not found
+   * @return Page resource or null if not found
    */
   async findByPath(path: ICMSPage['path']): Promise<ICMSPage | null> {
     const pages = await this.find({ path: { $eq: path, partial: false } })
@@ -105,7 +105,7 @@ export default class PageRepository
    * Returns the page with the path {@param path} or throws an error.
    *
    * @param path - Slug of page to search for
-   * @returns Page resource
+   * @return Page resource
    * @throws {FeathersErrorJSON}
    */
   async getByPath(path: ICMSPage['path']): Promise<ICMSPage> {

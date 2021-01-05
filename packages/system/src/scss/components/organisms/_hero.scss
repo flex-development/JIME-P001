@@ -1,0 +1,47 @@
+/* -----------------------------------------------------------------------------
+HERO
+----------------------------------------------------------------------------- */
+
+.hero {
+  @include flex(center, center, column);
+
+  border-bottom: $border-width solid $border-color;
+  padding: $space-48 $template-padding-x;
+  min-height: rem(668);
+  text-align: center;
+
+  &-subtitle {
+    @include breakpoint-up(sm) {
+      font-size: $font-size-lg;
+    }
+
+    @include breakpoint-up(md) {
+      font-size: $font-size-xxl;
+    }
+
+    color: $secondary;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-bold;
+    text-transform: uppercase;
+  }
+
+  &-title {
+    @include breakpoint-up(md) {
+      font-size: $font-size-base * 4;
+      margin-bottom: $space-0;
+    }
+
+    @include breakpoint-up(lg) {
+      font-size: $font-size-base * 5;
+    }
+
+    @include breakpoint-up(xl) {
+      font-size: $font-size-base * 6;
+    }
+
+    color: $headings-color;
+    font-size: rem(42);
+    font-family: $font-family-sans-serif-special;
+    margin-bottom: $space-12;
+  }
+}

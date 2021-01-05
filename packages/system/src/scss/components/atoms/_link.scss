@@ -1,0 +1,31 @@
+/* -----------------------------------------------------------------------------
+LINKS
+----------------------------------------------------------------------------- */
+
+a {
+  &[data-icon] {
+    @include flex(center);
+  }
+
+  &.btn.disabled {
+    @extend %disabled-button;
+
+    cursor: not-allowed;
+  }
+
+  &-fluid {
+    @include fluid-width;
+
+    display: inline-block;
+  }
+}
+
+ @each $key, $color in $theme-colors {
+  .link-#{$key} {
+    @include user-event {
+      color: color-shade($color, 5%);
+    }
+
+    color: $color;
+  }
+}

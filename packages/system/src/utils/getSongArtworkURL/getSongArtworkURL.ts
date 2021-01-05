@@ -3,7 +3,7 @@ import { MusicKitSongAttributes } from '@flex-development/kustomzcore'
 import { isEmpty } from 'lodash'
 
 /**
- * @file Generate song artwork URL for Apple Music Media
+ * @file Implementation - getSongArtworkURL
  * @module utils/getSongArtworkURL/impl
  */
 

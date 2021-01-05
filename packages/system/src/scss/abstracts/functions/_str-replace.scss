@@ -1,0 +1,31 @@
+/// ----------------------------------------------------------------------------
+/// @name str-replace
+/// @group functions
+/// @link http://www.sassmeister.com/gist/1b4f2da5527830088e4d
+/// ----------------------------------------------------------------------------
+
+/// Replaces `$pattern` with `$replace` in `$string`.
+/// @param {String} $string - Initial string
+/// @param {String} $pattern - Substring to replace
+/// @param {String} $replace [''] - New value
+/// @return {String} - Updated string
+@function str-replace($string, $pattern, $replace: '') {
+  // Check if pattern exists
+  $index: str-index($string, $pattern);
+
+  // If pattern exists, return new substring
+  @if $index {
+    // Get beginning of new string
+    $prefix: str-slice($string, 1, $index - 1);
+
+    // Create new search string
+    $new_string: str-slice($string, $index + str-length($pattern));
+
+    // Get suffix of new string
+    $suffix: str-replace($new_string, $pattern, $replace);
+
+    @return $prefix + $replace + $suffix;
+  }
+
+  @return $string;
+}

@@ -1,0 +1,27 @@
+/// ----------------------------------------------------------------------------
+/// @name make-grid-col
+/// @group mixins
+/// ----------------------------------------------------------------------------
+
+/// Create a grid column.
+/// @require {mixin} flex-column
+/// @require {mixin} fluid-height
+/// @require {variable} $grid-column-span
+/// @param {Number | String} $span [full] - Key from `$grid-column-span` map
+/// @param {Boolean} $flex [true] - If true, turn grid column into flexbox
+/// @throw If `$span` is not a key in `$grid-column-span` map
+@mixin make-grid-col($span: full, $flex: true) {
+  @if map-has-key($grid-column-span, $span) == false {
+    @error 'Key `#{$span}` not found in `#{$grid-column-span}`';
+  }
+
+  @include fluid-height;
+
+  @if $flex {
+    @include flex-column;
+  }
+
+  grid-column: map-get($grid-column-span, $span);
+
+  @content;
+}

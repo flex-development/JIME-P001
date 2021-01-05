@@ -1,0 +1,36 @@
+/// ----------------------------------------------------------------------------
+/// @name breakpoint-only
+/// @group mixins
+/// ----------------------------------------------------------------------------
+
+@use 'breakpoint-down' as *;
+@use 'breakpoint-up' as *;
+
+@use '../functions/breakpoint-max' as *;
+@use '../functions/breakpoint-min' as *;
+@use '../functions/breakpoint-next' as *;
+
+/// Makes the `@content` apply only to the given breakpoint, not viewports any
+/// wider or narrower.
+/// @require {variable} $grid-breakpoints
+/// @param {String} name - Name of key from grid breakpoints map
+/// @param {Map} $breakpoints [$grid-breakpoints] - Grid breakpoints map
+@mixin breakpoint-only($name, $breakpoints: $grid-breakpoints) {
+  $min:  breakpoint-min($name, $breakpoints);
+  $next: breakpoint-next($name, $breakpoints);
+  $max:  breakpoint-max($next);
+
+  @if ($min != null and $max != null) {
+    @media (min-width: $min) and (max-width: $max) {
+      @content;
+    }
+  } @else if ($max == null) {
+    @include breakpoint-up($name, $breakpoints) {
+      @content;
+    }
+  } @else if ($min == null) {
+    @include breakpoint-down($next, $breakpoints) {
+      @content;
+    }
+  }
+}

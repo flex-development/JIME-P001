@@ -1,5 +1,5 @@
 /**
- * @file Hook - useSongs
+ * @file Hook Entry Point - useSongs
  * @module hooks/useSongs
  */
 

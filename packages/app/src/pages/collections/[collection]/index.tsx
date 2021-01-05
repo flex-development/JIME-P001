@@ -51,7 +51,7 @@ const Collection: PC<IPagePropsCollection> = ({ page }) => {
    * Generates product `LinkProps` using the `handle` of the current collection.
    *
    * @param product - Product listing object
-   * @returns `LinkProps` for the product listing
+   * @return `LinkProps` for the product listing
    */
   const handleProductLink = (product: IProductListing): LinkProps => {
     const base = !asPath.includes('collections') ? '/' : `${query.collection}/`
@@ -96,7 +96,7 @@ const Collection: PC<IPagePropsCollection> = ({ page }) => {
  * @param context - Next.js page component context
  * @param context.params - Route parameters if dynamic route
  * @param context.req - HTTP request object
- * @returns Collection listing object and an array of products in the collection
+ * @return Collection listing object and an array of products in the collection
  */
 export const getServerSideProps: GetServerSideProps<
   IPagePropsCollection,

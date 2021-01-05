@@ -1,0 +1,15 @@
+/// ----------------------------------------------------------------------------
+/// @name border-radius-top
+/// @group mixins
+/// ----------------------------------------------------------------------------
+
+/// Sets `border-top-left-radius` and `border-top-right-radius`.
+/// @require {variable} $border-radius
+/// @require {variable} $enable-rounded
+/// @param {Number} $radius - Border radius value
+@mixin border-radius-top($radius: $border-radius) {
+  @if $enable-rounded {
+    border-top-left-radius: $radius;
+    border-top-right-radius: $radius;
+  }
+}

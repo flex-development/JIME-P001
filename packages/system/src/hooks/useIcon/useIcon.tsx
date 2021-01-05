@@ -1,42 +1,39 @@
 import { AnyObject } from '@flex-development/json'
-import { Icon, IconProps } from '@system/components/ui/atoms/Icon'
-import { MutatedProps } from '@system/types'
+import { Icon, IconProps } from '@system/lib/atoms/Icon'
+import { ComponentPropsBase } from '@system/types'
 import classnames from 'classnames'
-import { isNull, isUndefined, join, uniq } from 'lodash'
+import { join, uniq } from 'lodash'
 import { useMemo } from 'react'
 import { useMemoCompare } from '../useMemoCompare'
 
 /**
- * @file Render icon with props.children
- * @module hooks/useIcon
- *
- * @see https://reactjs.org/docs/hooks-reference.html#usestate
- * @see https://reactjs.org/docs/hooks-reference.html#useeffect
+ * @file Implementation - useIcon
+ * @module hooks/useIcon/impl
  */
 
 export type UseIconProps = {
-  children?: MutatedProps['children']
-  className?: MutatedProps['className']
-  icon?: IconProps
+  $icon?: IconProps
+  children?: ComponentPropsBase['children']
+  className?: ComponentPropsBase['className']
 }
 
 /**
  * Renders an `Icon` component with {@param props.children}.
  *
- * If the {@param props.icon.position} isn't defined, the icon will be rendered
+ * If the {@param props.$icon.position} isn't defined, the icon will be rendered
  * on the right.
  *
  * @param props - Component properties
+ * @param props.$icon - Icon component properties
+ * @param props.$icon.position - String indication where to position icon
  * @param props.children - Inner content
  * @param props.className - Classes to pass to component
- * @param props.icon - Icon component properties
- * @param props.icon.position - String indication where to position icon
  */
 export function useIcon<P extends UseIconProps = UseIconProps>(props: P): P {
-  const { children, className = '', icon, ...rest } = props
+  const { $icon, children, className = '', ...rest } = props
 
   const _children = useMemoCompare<typeof children>(children)
-  const _icon = useMemoCompare<IconProps>(icon || {})
+  const _icon = useMemoCompare<IconProps>($icon || {})
   const _rest = useMemoCompare<typeof rest>(rest)
 
   return useMemo<P>(() => {
@@ -54,16 +51,16 @@ export function useIcon<P extends UseIconProps = UseIconProps>(props: P): P {
       // Update component children
       if (!_children) {
         _props.children = [component]
-      } else if (_children && _icon.position === 'left') {
+      } else if (_children && _icon['data-position'] === 'left') {
         _props.children = [component, _children]
       } else {
         _props.children = [_children, component]
 
-        if (['bottom', 'top'].includes(_icon.position ?? '')) {
+        if (['bottom', 'top'].includes(_icon['data-position'] ?? '')) {
           _props.className = classnames({
             'd-flex': true,
-            'flex-column': _icon.position === 'bottom',
-            'flex-column-reverse': _icon.position === 'top'
+            'flex-column': _icon['data-position'] === 'bottom',
+            'flex-column-reverse': _icon['data-position'] === 'top'
           })
         }
       }
@@ -75,11 +72,8 @@ export function useIcon<P extends UseIconProps = UseIconProps>(props: P): P {
 
     // Add additional data attributes
     if (!skip) {
-      const { children: _pc } = _props
-
       _props['data-icon'] = true
-      _props['data-icon-only'] = isNull(_pc) || isUndefined(_pc)
-      _props['data-position'] = _icon.position
+      _props['data-position'] = _icon['data-position']
     }
 
     return _props as P

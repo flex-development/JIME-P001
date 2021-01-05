@@ -1,5 +1,5 @@
 /**
- * @file Hook - useSanitizedProps
+ * @file Hook Entry Point - useSanitizedProps
  * @module hooks/useSanitizedProps
  */
 

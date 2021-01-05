@@ -1,6 +1,6 @@
+import { CMSMenu, ICMSMenu } from '@app/subdomains/cms/models'
 import { createError } from '@flex-development/kustomzcore'
 import { uuid } from '@flex-development/kustomzdesign'
-import { CMSMenu, ICMSMenu } from '@subdomains/cms/models'
 import { RTDRepository } from '@subdomains/firebase/models/RTDRepository'
 import { isEmpty } from 'lodash'
 import { IMenuRepository } from './IMenuRepository'

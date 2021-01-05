@@ -8,46 +8,6 @@ import { fonts, fontWeights } from '@system/config/sb'
 
 <br />
 
-## Design Tokens
-
-File: `packages/system/theme/config/_settings.scss`
-
-```scss
-$font-family-monospace: SFMono-Regular, Menlo, 'Courier New', monospace;
-$font-family-sans-serif: ibm-plex-sans, sans-serif;
-$font-family-sans-serif-special: quimby-gubernatorial, sans-serif;
-
-$font-size-xs: rem(12); // 12px
-$font-size-sm: rem(14); // 14px
-$font-size-md: bootstrap.$font-size-base; // 16px
-$font-size-lg: rem(18); // 18px
-$font-size-xl: rem(20); // 20px
-$font-size-xxl: rem(24); // 24px
-
-$h1-font-size: rem(60); // 60px
-$h2-font-size: rem(48); // 48px
-$h3-font-size: rem(36); // 36px
-$h4-font-size: $font-size-xxl;
-$h5-font-size: $font-size-xl;
-$h6-font-size: $font-size-lg;
-
-$font-weight-hairline: 100;
-$font-weight-thin: 200;
-$font-weight-light: 300;
-$font-weight-normal: 400;
-$font-weight-medium: 500;
-$font-weight-semibold: 600;
-$font-weight-bold: 700;
-$font-weight-extrabold: 800;
-$font-weight-black: 900;
-
-$headings-font-weight: $font-weight-bold;
-$headings-color: $light;
-$headings-text-transform: uppercase;
-
-$hr-color: $light;
-```
-
 ## Font Families
 
 <br />
@@ -63,3 +23,60 @@ Weights: `300`, `400`, `500`, `600`, `700`
 Weights: `400`
 
 <ThemeTypeset fontFamily={fonts.special} fontWeight={400} text={false} />
+
+## Variables
+
+File: `packages/system/src/scss/variables/_settings.scss`
+
+```scss
+$font-family-monospace: SFMono-Regular, Menlo, 'Courier New', monospace;
+$font-family-sans-serif: ibm-plex-sans, sans-serif;
+$font-family-sans-serif-special: quimby-gubernatorial, sans-serif;
+
+$font-family-base: var(--#{$variable-prefix}font-sans-serif);
+$font-family-code: var(--#{$variable-prefix}font-monospace);
+
+// $font-size-root effects the value of `rem`
+$font-size-root: null;
+
+// $font-size-base effects the font size of the body text
+$font-size-base: rem(16);
+
+$font-size-xs: rem(12); // 12px
+$font-size-sm: rem(14); // 14px
+$font-size-md: $font-size-base; // 16px
+$font-size-lg: rem(18); // 18px
+$font-size-xl: rem(20); // 20px
+$font-size-xxl: rem(24); // 24px
+
+$font-weight-hairline: 100;
+$font-weight-thin: 200;
+$font-weight-light: 300;
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+$font-weight-extrabold: 800;
+$font-weight-black: 900;
+
+$font-weight-base: $font-weight-normal;
+
+$line-height-base: 1.5;
+$line-height-sm: 1.25;
+$line-height-lg: 2;
+
+$h1-font-size: rem(60); // 60px
+$h2-font-size: rem(48); // 48px
+$h3-font-size: rem(36); // 36px
+$h4-font-size: $font-size-xxl;
+$h5-font-size: $font-size-xl;
+$h6-font-size: $font-size-lg;
+
+$headings-margin-bottom: $spacer / 2;
+$headings-font-family: null;
+$headings-font-style: null;
+$headings-font-weight: $font-weight-bold;
+$headings-line-height: $line-height-sm;
+$headings-color: $light;
+$headings-text-transform: uppercase;
+```

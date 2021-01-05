@@ -1,0 +1,36 @@
+/// ----------------------------------------------------------------------------
+/// @name breakpoint-between
+/// @group mixins
+/// ----------------------------------------------------------------------------
+
+@use 'breakpoint-down' as *;
+@use 'breakpoint-up' as *;
+
+@use '../functions/breakpoint-max' as *;
+@use '../functions/breakpoint-min' as *;
+
+/// Makes the `@content` apply between the `$lower` and `$upper` breakpoints.
+/// @require {function} breakpoint-max
+/// @require {function} breakpoint-min
+/// @require {variable} $grid-breakpoints
+/// @param {String} $lower - Name of key from grid breakpoints map
+/// @param {String} $upper - Name of key from grid breakpoints map
+/// @param {Map} $breakpoints [$grid-breakpoints] - Grid breakpoints map
+@mixin breakpoint-between($lower, $upper, $breakpoints: $grid-breakpoints) {
+  $min: breakpoint-min($lower, $breakpoints);
+  $max: breakpoint-max($upper, $breakpoints);
+
+  @if ($min != null and $max != null) {
+    @media (min-width: $min) and (max-width: $max) {
+      @content;
+    }
+  } @else if ($max == null) {
+    @include breakpoint-up($lower, $breakpoints) {
+      @content;
+    }
+  } @else if ($min == null) {
+    @include breakpoint-down($upper, $breakpoints) {
+      @content;
+    }
+  }
+}

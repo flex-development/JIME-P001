@@ -44,7 +44,7 @@ export default class CollectionService
    * @param query[foo].$lte - Matches values where value <= query.$lte
    * @param query[foo].$ne - Matches all values where value !== query.$ne
    * @param query[foo].$nin - Matches none of the values specified in an array
-   * @returns Array of Collection resource objects
+   * @return Array of Collection resource objects
    */
   async find(
     query: DataArrayQueryParams = {}

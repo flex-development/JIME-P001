@@ -1,0 +1,24 @@
+/// ----------------------------------------------------------------------------
+/// @name size
+/// @group mixins
+/// ----------------------------------------------------------------------------
+
+/// Sets the height or width of an element
+/// @access private
+/// @param {Number | String} $size - Height or width of element
+/// @param {Number | String} $key [width] - Dimension to set
+/// @param {Number | String} $max-size [none] - max-height
+/// @param {Number | String} $min-size [unset] - min-height
+@mixin size($size, $key: width, $max-size: none, $min-size: unset) {
+  @if $size {
+    #{$key}: $size;
+  }
+
+  @if $max-size {
+    max-#{$key}: $max-size;
+  }
+
+  @if $min-size {
+    min-#{$key}: $min-size;
+  }
+}

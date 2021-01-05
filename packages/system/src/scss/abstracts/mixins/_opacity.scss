@@ -1,0 +1,18 @@
+/// ----------------------------------------------------------------------------
+/// @name opacity
+/// @group mixins
+/// ----------------------------------------------------------------------------
+
+/// Mixin for cross-browser opacity (IE 8).
+/// @param {Number} $value - Opacity level
+/// @param {Boolean} $important [false] - If true, add `!important` flag
+@mixin opacity($value, $important: false) {
+  $opacity-ie: $value * 100;
+
+  opacity: if($important, $value !important, $value);
+  filter: if(
+    $important,
+    alpha(opacity=$opacity-ie) !important,
+    alpha(opacity=$opacity-ie)
+  );
+}

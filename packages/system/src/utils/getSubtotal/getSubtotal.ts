@@ -1,7 +1,7 @@
 import { CheckoutLineItemInput } from '@flex-development/kustomzcore'
 
 /**
- * @file Get cart subtotal
+ * @file Implementation - getSubtotal
  * @module utils/getSubtotal/impl
  */
 

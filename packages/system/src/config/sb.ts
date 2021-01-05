@@ -1,60 +1,33 @@
-import { ColorItemProps, SBBackgroundColor } from '@system/types/storybook'
-
 /**
  * @file Storybook Canvas & Docs Config
  * @module config/sb
  */
 
+type SBBackgroundColor = {
+  name: string
+  value: string
+}
+
 export const colors: Record<string, string> = {
-  dark: '#232946',
-  darker: '#121629',
-  light: '#fffffe',
-  primary: '#eebbc3',
-  secondary: '#b8c1ec'
+  black: 'var(--mk-black)',
+  danger: 'var(--mk-danger)',
+  dark: 'var(--mk-dark)',
+  darker: 'var(--mk-darker)',
+  ghost: 'var(--mk-ghost)',
+  gray: 'var(--mk-gray)',
+  light: 'var(--mk-light)',
+  muted: 'var(--mk-muted)',
+  primary: 'var(--mk-primary)',
+  secondary: 'var(--mk-secondary)',
+  white: 'var(--mk-white)'
 }
 
-colors.body = colors.secondary
-colors.headings = colors.light
-
-export const colors_docs: Record<keyof typeof colors, ColorItemProps> = {
-  dark: { colors: [colors.dark], subtitle: 'var(--bs-dark)', title: 'Dark' },
-  darker: {
-    colors: [colors.darker],
-    subtitle: 'var(--bs-darker)',
-    title: 'Darker'
-  },
-  light: {
-    colors: [colors.light],
-    subtitle: 'var(--bs-light)',
-    title: 'Light'
-  },
-  primary: {
-    colors: [colors.primary],
-    subtitle: 'var(--bs-primary)',
-    title: 'Primary'
-  },
-  secondary: {
-    colors: [colors.secondary],
-    subtitle: 'var(--bs-secondary)',
-    title: 'Secondary'
-  }
-}
-
-export const colors_sb_bkg: Record<string, SBBackgroundColor> = {
-  dark: { name: colors_docs.dark.title, value: colors_docs.dark.colors[0] },
-  darker: {
-    name: colors_docs.darker.title,
-    value: colors_docs.darker.colors[0]
-  },
-  light: { name: colors_docs.light.title, value: colors_docs.light.colors[0] },
-  primary: {
-    name: colors_docs.primary.title,
-    value: colors_docs.primary.colors[0]
-  },
-  secondary: {
-    name: colors_docs.secondary.title,
-    value: colors_docs.secondary.colors[0]
-  }
+export const backgrounds: Record<string, SBBackgroundColor> = {
+  dark: { name: 'Dark', value: colors.dark },
+  darker: { name: 'Darker', value: colors.darker },
+  light: { name: 'Light', value: colors.light },
+  primary: { name: 'Primary', value: colors.primary },
+  secondary: { name: 'Secondary', value: colors.secondary }
 }
 
 export const fonts: Record<string, string> = {

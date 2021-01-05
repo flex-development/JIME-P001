@@ -1,4 +1,4 @@
-import { ICMSPageIndex } from '@subdomains/cms/models'
+import { ICMSPageIndex } from '@app/subdomains/cms/models'
 import { isEmpty } from 'lodash'
 import { FormOptions, useForm, useFormScreenPlugin } from 'tinacms'
 import { UseFormScreenPlugin } from '../../utils'
@@ -13,7 +13,7 @@ import { UseFormScreenPlugin } from '../../utils'
  * Creates and registers a new `IndexPageFormPlugin` instance.
  *
  * @param config - Form configuration
- * @returns Form API, config, and values
+ * @return Form API, config, and values
  */
 export const useIndexPageForm = (
   config: FormOptions<ICMSPageIndex>

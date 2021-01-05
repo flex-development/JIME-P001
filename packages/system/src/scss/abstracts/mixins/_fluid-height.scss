@@ -1,0 +1,13 @@
+/// ----------------------------------------------------------------------------
+/// @name fluid-height
+/// @group mixins
+/// ----------------------------------------------------------------------------
+
+@use 'height' as *;
+
+/// Make an element span the full height of its parent container.
+/// @require {mixin} height
+/// @require {variable} $sizes
+@mixin fluid-height {
+  @include height(map-get($sizes, fluid));
+}

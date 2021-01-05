@@ -1,0 +1,14 @@
+/// ----------------------------------------------------------------------------
+/// @name no-content
+/// @group mixins
+/// ----------------------------------------------------------------------------
+
+/// Remove the content from before or after an element.
+/// @param {String} $pos [after] - Position to remove content
+@mixin no-content($pos: after) {
+  &::#{$pos} {
+    content: none;
+  }
+
+  @content;
+}

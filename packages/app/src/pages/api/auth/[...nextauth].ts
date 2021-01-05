@@ -1,13 +1,13 @@
 import { AUTH_PROVIDERS } from '@app/config/providers'
-import { auth } from '@app/subdomains/firebase/config/admin'
-import { GenericToken } from '@subdomains/cms'
+import { GenericToken } from '@app/subdomains/cms'
 import {
   AuthGitHubService,
   JWTGitHub,
   OAuthProfileGitHub,
   ProviderAccountGitHub,
   ProviderSessionGitHub
-} from '@subdomains/cms/services/AuthGitHubService'
+} from '@app/subdomains/cms/services/AuthGitHubService'
+import { auth } from '@app/subdomains/firebase/config/admin'
 import { NextApiRequest, NextApiResponse } from 'next'
 import NextAuth, { InitOptions } from 'next-auth'
 import { Session as SessionClientSide } from 'next-auth/client'
@@ -36,7 +36,7 @@ const options = {
      * @param account - Provider account (only available on sign in)
      * @param profile - OAuth profile data (only available on sign in)
      * @param isNewUser - True if new user (only available on sign in)
-     * @returns JSON Web Token that will be saved
+     * @return JSON Web Token that will be saved
      */
     jwt: async (
       orignal_token: GenericToken,
@@ -63,7 +63,7 @@ const options = {
      *
      * @param session - Session object
      * @param user - GitHub JWT
-     * @returns Session that will be returned to the client
+     * @return Session that will be returned to the client
      */
     session: async (
       session: SessionClientSide,

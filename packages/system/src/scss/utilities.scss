@@ -1,0 +1,49 @@
+/* -----------------------------------------------------------------------------
+UTILITY CLASSES
+----------------------------------------------------------------------------- */
+
+/* -----------------------------------------------------------------------------
+UTILITIES API
+----------------------------------------------------------------------------- */
+
+/* GLOBAL */
+
+@each $breakpoint in map-keys($grid-breakpoints) {
+  @include breakpoint-up($breakpoint) {
+    $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+
+    @each $key, $util in $utilities {
+      $is-map: type-of($util) == 'map';
+      $responsive: map-get($util, responsive);
+
+      @if $is-map and ($responsive or $infix == '') {
+        @include generate-utility($util, $infix);
+      }
+    }
+  }
+}
+
+/* PRINT */
+
+@media print {
+  @each $key, $util in $utilities {
+    $is-map: type-of($util) == 'map';
+    $print: map-get($util, print) == true;
+
+    @if $is-map and $print {
+      @include generate-utility($util, 'print:');
+    }
+  }
+}
+
+/* -----------------------------------------------------------------------------
+PLACEHOLDERS
+----------------------------------------------------------------------------- */
+
+.content-section {
+  @extend %content-section;
+}
+
+.template {
+  @extend %template;
+}

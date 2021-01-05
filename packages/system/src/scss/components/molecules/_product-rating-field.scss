@@ -1,0 +1,26 @@
+/* -----------------------------------------------------------------------------
+PRODUCT RATING FIELD
+----------------------------------------------------------------------------- */
+
+.product-rating-field {
+  @include flex-spread;
+
+  @include fluid-width;
+
+  display: inline-flex;
+
+  &-checkbox {
+    @include breakpoint-up(md) {
+      @include dimensions($space-24);
+    }
+
+    @include draw-star(rgba($muted, $opacity-75), $space-32);
+
+    cursor: pointer;
+
+    &:checked {
+      background-color: $form-check-input-checked-bg-color;
+      background-image: none !important;
+    }
+  }
+}

@@ -1,6 +1,6 @@
+import { getCMSPageSEO } from '@app/subdomains/cms'
 import { PageTemplate } from '@flex-development/kustomzdesign'
 import { CMSPageParams, IPagePropsSlug, PC, SEO } from '@subdomains/app'
-import { getCMSPageSEO } from '@subdomains/cms'
 import {
   GetServerSideProps,
   GetServerSidePropsContext,
@@ -46,7 +46,7 @@ const Slug: PC<IPagePropsSlug> = ({ page }: IPagePropsSlug) => (
  * @param context.params - Dynamic route parameters
  * @param context.query - The query string
  * @param context.req - HTTP request object
- * @returns Template data and current user session
+ * @return Template data and current user session
  */
 export const getServerSideProps: GetServerSideProps<
   IPagePropsSlug,

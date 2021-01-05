@@ -5,15 +5,16 @@
  * @todo [docs] ProductReviewForm - Update documentation
  * @todo [docs] Storybook Types - Update documentation
  * @todo [docs] Typography - Update fonts weights and headings font config
+ * @todo [test] Input, TextArea - Test $invalid styles
  * @todo [test] PlaylistBar - Test callback functions
- * @todo [test] ProductReviewForm - Add unit tests for invalid form state
  * @todo [test] SearchBar - Test callback functions
  * @todo [test] ShopHeader - Test callback functions
  */
 
-export * from './components'
 export * from './config'
 export * from './hooks'
+export * from './lib'
+export * from './providers'
 export * from './utils'
 
 /* eslint-disable prettier/prettier */

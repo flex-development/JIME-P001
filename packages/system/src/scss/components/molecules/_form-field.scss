@@ -1,0 +1,55 @@
+/* -----------------------------------------------------------------------------
+FORM FIELDS
+----------------------------------------------------------------------------- */
+
+.form-field {
+  @include flex-column;
+
+  &-label {
+    @include breakpoint-up(md) {
+      font-size: $font-size-xs;
+    }
+  
+    display: inline-block;
+    font-size: $font-size-base;
+    margin-top: $space-4;;
+  }
+
+  &[data-control='input'][data-type='number'] {
+    @include flex(center, space-between, row-reverse, inline-flex);
+
+    @include fluid-width;
+
+    border: $input-border-width solid $input-border-color;
+    font-size: $input-font-size;
+    min-height: $input-height;
+    padding: $input-padding-y $input-padding-x;
+    transition: $input-transition;
+
+    .form-field {
+      &-control {
+        > * {
+          @include fluid-width;
+        }
+      }
+
+      &-label {
+        margin-top: $space-0;
+      }
+    }
+
+    input {
+      @include border($space-0, solid, $ghost);
+
+      appearance: textfield;
+      color: $primary;
+      min-height: unset;
+      padding: 0;
+      text-align: right;
+
+      &:focus {
+        box-shadow: none;
+      }
+    }
+  }
+}

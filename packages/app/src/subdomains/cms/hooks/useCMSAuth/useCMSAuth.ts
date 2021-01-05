@@ -1,5 +1,5 @@
 import fetcher from '@app/config/fetcher'
-import { PreviewRes } from '@subdomains/cms/services'
+import { PreviewRes } from '@app/subdomains/cms/services'
 import { useSignInWithCustomToken } from '@subdomains/firebase/hooks'
 import useSWR, { ConfigInterface } from 'swr'
 import { TinaCMS, useCMS } from 'tinacms'

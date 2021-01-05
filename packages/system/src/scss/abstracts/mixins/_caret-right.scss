@@ -1,0 +1,14 @@
+/// ----------------------------------------------------------------------------
+/// @name caret-right
+/// @group mixins
+/// ----------------------------------------------------------------------------
+
+/// Creates a caret pointing towards the right.
+/// @require {variable} $caret-width
+/// @require {variable} $ghost
+@mixin caret-right {
+  border-bottom: $caret-width solid $ghost;
+  border-left: $caret-width solid;
+  border-right: 0;
+  border-top: $caret-width solid $ghost;
+}

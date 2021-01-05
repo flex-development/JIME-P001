@@ -1,0 +1,87 @@
+/* -----------------------------------------------------------------------------
+CAROUSEL
+----------------------------------------------------------------------------- */
+
+.carousel {
+  @include position-relative;
+
+  &.pointer-events {
+    touch-action: pan-y;
+  }
+
+  &-indicators {
+    @include width(100%);
+
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    margin-top: $space-8;
+    padding-left: 0;
+
+    .active {
+      @include opacity($carousel-indicator-active-opacity);
+    }
+
+    .carousel-indicator {
+      @include dimensions(
+        $carousel-indicator-width, 
+        $carousel-indicator-height
+      );
+
+      @include margin-x($carousel-indicator-spacer);
+
+      @include opacity($carousel-indicator-opacity);
+  
+      background-color: $carousel-indicator-active-bg;
+      background-clip: padding-box;
+      border-bottom: $carousel-indicator-hit-area-height solid $ghost;
+      border-top: $carousel-indicator-hit-area-height solid $ghost;
+      box-sizing: content-box;
+      cursor: pointer;
+      flex: 0 1 auto;
+      text-indent: -999px;
+      transition: $carousel-indicator-transition;
+
+      &:not(:last-of-type) {
+        margin-right: $carousel-indicator-spacer;
+      }
+    }
+  }
+
+  &-indicator {
+    @include draw-circle($carousel-indicator-width !important);
+
+    background-color: $carousel-indicator-bg;
+
+    &.active {
+      @include opacity(1);
+
+      background-color: $carousel-indicator-active-bg;
+    }
+  }
+
+  &-inner {
+    @include clearfix;
+
+    overflow: hidden;
+  }
+
+  &-item {
+    display: none;
+    backface-visibility: hidden;
+    float: left;
+    margin-right: -100%;
+    transition: $carousel-transition;
+    
+    &.active {
+      display: block;
+    }
+  }
+
+  &-inner,
+  &-item {
+    @include fluid-width;
+
+    @include position-relative; 
+  }
+}

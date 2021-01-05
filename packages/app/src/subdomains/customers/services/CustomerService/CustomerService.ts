@@ -36,7 +36,7 @@ export default class CustomerService
    * @param query[foo].$lte - Matches values where value <= query.$lte
    * @param query[foo].$ne - Matches all values where value !== query.$ne
    * @param query[foo].$nin - Matches none of the values specified in an array
-   * @returns Array of customer resource objects
+   * @return Array of customer resource objects
    */
   async find(query?: DataArrayQueryParams): Promise<DataArray<ICustomer>> {
     const config: Parameters<typeof axiosShopify>[0] = {
@@ -53,7 +53,7 @@ export default class CustomerService
    * Find a customer by email address.
    *
    * @param email - Email address of customer to find
-   * @returns Customer object or null
+   * @return Customer object or null
    */
   async findByEmail(email: ICustomer['email']): Promise<ICustomer | null> {
     const query: DataArrayQueryParams = { email: { $eq: email } }
@@ -67,7 +67,7 @@ export default class CustomerService
    * Throws an error if the customer isn't found.
    *
    * @param id - ID of customer to get
-   * @returns Customer object
+   * @return Customer object
    * @throws {FeathersErrorJSON}
    */
   async get(id: ICustomer['id']): Promise<ICustomer> {
@@ -90,7 +90,7 @@ export default class CustomerService
    * Throws an error if the customer isn't found.
    *
    * @param email - Email address of customer to get
-   * @returns Customer object
+   * @return Customer object
    * @throws {FeathersErrorJSON}
    */
   async getByEmail(email: ICustomer['email']): Promise<ICustomer> {

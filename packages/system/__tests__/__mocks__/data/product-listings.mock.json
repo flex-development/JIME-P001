@@ -36,11 +36,11 @@
         "inventory_quantity": 1,
         "inventory_management": "shopify",
         "fulfillment_service": "manual",
-        "weight": 0,
+        "weight": 0.0,
         "weight_unit": "lb",
-        "image_id": 19498080698523,
+        "image_id": 24044856082587,
         "created_at": "2020-09-29T11:13:11-04:00",
-        "updated_at": "2020-10-04T17:37:01-04:00"
+        "updated_at": "2021-01-02T18:28:45-05:00"
       },
       {
         "id": 36197732941979,
@@ -66,11 +66,11 @@
         "inventory_quantity": 1,
         "inventory_management": "shopify",
         "fulfillment_service": "manual",
-        "weight": 0,
+        "weight": 0.0,
         "weight_unit": "lb",
-        "image_id": 19498082762907,
+        "image_id": 24044856672411,
         "created_at": "2020-09-29T11:13:11-04:00",
-        "updated_at": "2020-10-04T17:37:25-04:00"
+        "updated_at": "2021-01-02T18:28:45-05:00"
       },
       {
         "id": 36197732974747,
@@ -96,44 +96,50 @@
         "inventory_quantity": 0,
         "inventory_management": "shopify",
         "fulfillment_service": "manual",
-        "weight": 0,
+        "weight": 0.0,
         "weight_unit": "lb",
-        "image_id": 19498086924443,
+        "image_id": 24063103467675,
         "created_at": "2020-09-29T11:13:11-04:00",
-        "updated_at": "2020-10-04T17:37:51-04:00"
+        "updated_at": "2021-01-02T22:08:56-05:00"
       }
     ],
     "images": [
       {
-        "id": 19498080698523,
-        "created_at": "2020-10-04T17:36:52-04:00",
+        "id": 24044856082587,
+        "created_at": "2021-01-02T18:27:42-05:00",
         "position": 1,
-        "updated_at": "2020-10-04T17:36:52-04:00",
+        "updated_at": "2021-01-02T18:27:42-05:00",
         "product_id": 5664609534107,
-        "src": "https://cdn.shopify.com/s/files/1/0470/4790/1339/products/ash-tray-funfetti.png?v=1601847412",
-        "variant_ids": [36197732909211],
-        "width": 1080,
-        "height": 1080
+        "src": "https:\/\/cdn.shopify.com\/s\/files\/1\/0470\/4790\/1339\/products\/ash-tray-funfetti.jpg?v=1609630062",
+        "variant_ids": [
+          36197732909211
+        ],
+        "width": 2048,
+        "height": 2048
       },
       {
-        "id": 19498082762907,
-        "created_at": "2020-10-04T17:37:20-04:00",
+        "id": 24044856672411,
+        "created_at": "2021-01-02T18:27:42-05:00",
         "position": 2,
-        "updated_at": "2020-10-04T17:37:20-04:00",
+        "updated_at": "2021-01-02T18:27:42-05:00",
         "product_id": 5664609534107,
-        "src": "https://cdn.shopify.com/s/files/1/0470/4790/1339/products/ash-tray-jelly-slides.png?v=1601847440",
-        "variant_ids": [36197732941979],
-        "width": 1080,
-        "height": 1080
+        "src": "https:\/\/cdn.shopify.com\/s\/files\/1\/0470\/4790\/1339\/products\/ash-tray-jelly-slides.jpg?v=1609630062",
+        "variant_ids": [
+          36197732941979
+        ],
+        "width": 2048,
+        "height": 2048
       },
       {
-        "id": 19498086924443,
-        "created_at": "2020-10-04T17:37:48-04:00",
+        "id": 24063103467675,
+        "created_at": "2021-01-02T22:08:40-05:00",
         "position": 3,
-        "updated_at": "2020-10-04T17:37:48-04:00",
+        "updated_at": "2021-01-02T22:08:40-05:00",
         "product_id": 5664609534107,
-        "src": "https://cdn.shopify.com/s/files/1/0470/4790/1339/products/img-placeholder.png?v=1601847468",
-        "variant_ids": [36197732974747],
+        "src": "https:\/\/cdn.shopify.com\/s\/files\/1\/0470\/4790\/1339\/products\/img-placeholder.png?v=1609643320",
+        "variant_ids": [
+          36197732974747
+        ],
         "width": 1080,
         "height": 1080
       }
@@ -144,7 +150,11 @@
         "name": "Style",
         "product_id": 5664609534107,
         "position": 1,
-        "values": ["FUNFETTI", "JELLY $LIDES", "LA $ONRISA"]
+        "values": [
+          "FUNFETTI",
+          "JELLY $LIDES",
+          "LA $ONRISA"
+        ]
       }
     ]
   },
@@ -176,20 +186,20 @@
         "compare_at_price": null,
         "grams": 0,
         "requires_shipping": true,
-        "sku": "kustom-rolling-tray",
+        "sku": "kustomz-rolling-tray",
         "barcode": "",
         "taxable": true,
         "position": 1,
         "available": true,
         "inventory_policy": "deny",
-        "inventory_quantity": 0,
+        "inventory_quantity": 1,
         "inventory_management": "shopify",
         "fulfillment_service": "manual",
-        "weight": 0,
+        "weight": 0.0,
         "weight_unit": "lb",
-        "image_id": null,
+        "image_id": 24044970377371,
         "created_at": "2020-09-29T15:02:19-04:00",
-        "updated_at": "2020-09-29T15:02:35-04:00"
+        "updated_at": "2021-01-02T18:29:41-05:00"
       },
       {
         "id": 36200669446299,
@@ -206,20 +216,20 @@
         "compare_at_price": null,
         "grams": 0,
         "requires_shipping": true,
-        "sku": "kustom-ash-tray-heart",
+        "sku": "kustomz-ash-tray-heart",
         "barcode": "",
         "taxable": true,
         "position": 2,
         "available": true,
         "inventory_policy": "deny",
-        "inventory_quantity": 0,
+        "inventory_quantity": 1,
         "inventory_management": "shopify",
         "fulfillment_service": "manual",
-        "weight": 0,
+        "weight": 0.0,
         "weight_unit": "lb",
-        "image_id": null,
+        "image_id": 24044970377371,
         "created_at": "2020-09-29T15:00:51-04:00",
-        "updated_at": "2020-09-29T15:02:35-04:00"
+        "updated_at": "2021-01-02T18:29:41-05:00"
       },
       {
         "id": 36200676655259,
@@ -236,20 +246,20 @@
         "compare_at_price": null,
         "grams": 0,
         "requires_shipping": true,
-        "sku": "kustom-ash-tray-square",
+        "sku": "kustomz-ash-tray-square",
         "barcode": "",
         "taxable": true,
         "position": 3,
         "available": true,
         "inventory_policy": "deny",
-        "inventory_quantity": 0,
+        "inventory_quantity": 1,
         "inventory_management": "shopify",
         "fulfillment_service": "manual",
-        "weight": 0,
+        "weight": 0.0,
         "weight_unit": "lb",
-        "image_id": null,
+        "image_id": 24044970377371,
         "created_at": "2020-09-29T15:01:33-04:00",
-        "updated_at": "2020-09-29T15:02:35-04:00"
+        "updated_at": "2021-01-02T18:29:41-05:00"
       },
       {
         "id": 36200397996187,
@@ -266,33 +276,38 @@
         "compare_at_price": null,
         "grams": 0,
         "requires_shipping": true,
-        "sku": "kustom-ash-tray-circle",
+        "sku": "kustomz-ash-tray-circle",
         "barcode": "",
         "taxable": true,
         "position": 4,
         "available": true,
         "inventory_policy": "deny",
-        "inventory_quantity": 0,
+        "inventory_quantity": 1,
         "inventory_management": "shopify",
         "fulfillment_service": "manual",
-        "weight": 0,
+        "weight": 0.0,
         "weight_unit": "lb",
-        "image_id": null,
+        "image_id": 24044970377371,
         "created_at": "2020-09-29T14:36:23-04:00",
-        "updated_at": "2020-09-29T15:02:35-04:00"
+        "updated_at": "2021-01-02T18:29:41-05:00"
       }
     ],
     "images": [
       {
-        "id": 19498088857755,
-        "created_at": "2020-10-04T17:38:13-04:00",
+        "id": 24044970377371,
+        "created_at": "2021-01-02T18:29:07-05:00",
         "position": 1,
-        "updated_at": "2020-10-04T17:38:13-04:00",
+        "updated_at": "2021-01-02T18:29:07-05:00",
         "product_id": 5665197424795,
-        "src": "https://cdn.shopify.com/s/files/1/0470/4790/1339/products/kustomz.png?v=1601847493",
-        "variant_ids": [],
-        "width": 1080,
-        "height": 1080
+        "src": "https:\/\/cdn.shopify.com\/s\/files\/1\/0470\/4790\/1339\/products\/kustomz.jpg?v=1609630147",
+        "variant_ids": [
+          36200397996187,
+          36200669446299,
+          36200676655259,
+          36200683176091
+        ],
+        "width": 2048,
+        "height": 2048
       }
     ],
     "options": [
@@ -301,7 +316,12 @@
         "name": "Style",
         "product_id": 5665197424795,
         "position": 1,
-        "values": ["Rolling Tray", "♡ Ash Tray", "▢ Ash Tray", "◯ Ash Tray"]
+        "values": [
+          "Rolling Tray",
+          "♡ Ash Tray",
+          "▢ Ash Tray",
+          "◯ Ash Tray"
+        ]
       }
     ]
   },
@@ -342,11 +362,11 @@
         "inventory_quantity": 1,
         "inventory_management": "shopify",
         "fulfillment_service": "manual",
-        "weight": 0,
+        "weight": 0.0,
         "weight_unit": "lb",
-        "image_id": 19498093969563,
+        "image_id": 24045074383003,
         "created_at": "2020-09-29T11:23:08-04:00",
-        "updated_at": "2020-10-04T17:39:25-04:00"
+        "updated_at": "2021-01-02T18:30:45-05:00"
       },
       {
         "id": 36197906022555,
@@ -372,11 +392,11 @@
         "inventory_quantity": 1,
         "inventory_management": "shopify",
         "fulfillment_service": "manual",
-        "weight": 0,
+        "weight": 0.0,
         "weight_unit": "lb",
-        "image_id": 19498093936795,
+        "image_id": 24045074546843,
         "created_at": "2020-09-29T11:23:08-04:00",
-        "updated_at": "2020-10-04T17:39:34-04:00"
+        "updated_at": "2021-01-02T18:30:45-05:00"
       },
       {
         "id": 36197906055323,
@@ -402,46 +422,52 @@
         "inventory_quantity": 1,
         "inventory_management": "shopify",
         "fulfillment_service": "manual",
-        "weight": 0,
+        "weight": 0.0,
         "weight_unit": "lb",
-        "image_id": 19498093904027,
+        "image_id": 24045073662107,
         "created_at": "2020-09-29T11:23:08-04:00",
-        "updated_at": "2020-10-04T17:39:42-04:00"
+        "updated_at": "2021-01-02T18:30:45-05:00"
       }
     ],
     "images": [
       {
-        "id": 19498093969563,
-        "created_at": "2020-10-04T17:39:14-04:00",
+        "id": 24045074383003,
+        "created_at": "2021-01-02T18:30:20-05:00",
         "position": 1,
-        "updated_at": "2020-10-04T17:39:14-04:00",
+        "updated_at": "2021-01-02T18:30:20-05:00",
         "product_id": 5664639090843,
-        "src": "https://cdn.shopify.com/s/files/1/0470/4790/1339/products/rolling-tray-funfetti.png?v=1601847554",
-        "variant_ids": [36197905989787],
-        "width": 1080,
-        "height": 1080
+        "src": "https:\/\/cdn.shopify.com\/s\/files\/1\/0470\/4790\/1339\/products\/rolling-tray-funfetti.jpg?v=1609630220",
+        "variant_ids": [
+          36197905989787
+        ],
+        "width": 2048,
+        "height": 2048
       },
       {
-        "id": 19498093936795,
-        "created_at": "2020-10-04T17:39:14-04:00",
+        "id": 24045074546843,
+        "created_at": "2021-01-02T18:30:20-05:00",
         "position": 2,
-        "updated_at": "2020-10-04T17:39:14-04:00",
+        "updated_at": "2021-01-02T18:30:20-05:00",
         "product_id": 5664639090843,
-        "src": "https://cdn.shopify.com/s/files/1/0470/4790/1339/products/rolling-tray-jelly-slides.png?v=1601847554",
-        "variant_ids": [36197906022555],
-        "width": 1080,
-        "height": 1080
+        "src": "https:\/\/cdn.shopify.com\/s\/files\/1\/0470\/4790\/1339\/products\/rolling-tray-jelly-slides.jpg?v=1609630220",
+        "variant_ids": [
+          36197906022555
+        ],
+        "width": 2048,
+        "height": 2048
       },
       {
-        "id": 19498093904027,
-        "created_at": "2020-10-04T17:39:13-04:00",
+        "id": 24045073662107,
+        "created_at": "2021-01-02T18:30:20-05:00",
         "position": 3,
-        "updated_at": "2020-10-04T17:39:14-04:00",
+        "updated_at": "2021-01-02T18:30:20-05:00",
         "product_id": 5664639090843,
-        "src": "https://cdn.shopify.com/s/files/1/0470/4790/1339/products/rolling-tray-la-sonrisa.png?v=1601847554",
-        "variant_ids": [36197906055323],
-        "width": 1080,
-        "height": 1080
+        "src": "https:\/\/cdn.shopify.com\/s\/files\/1\/0470\/4790\/1339\/products\/rolling-tray-la-sonrisa.jpg?v=1609630220",
+        "variant_ids": [
+          36197906055323
+        ],
+        "width": 2048,
+        "height": 2048
       }
     ],
     "options": [
@@ -450,7 +476,11 @@
         "name": "Style",
         "product_id": 5664639090843,
         "position": 1,
-        "values": ["FUNFETTI", "JELLY $LIDES", "LA $ONRISA"]
+        "values": [
+          "FUNFETTI",
+          "JELLY $LIDES",
+          "LA $ONRISA"
+        ]
       }
     ]
   }

@@ -1,0 +1,76 @@
+/* -----------------------------------------------------------------------------
+BUTTONS
+SEE: http://css-tricks.com/slightly-careful-sub-elements-clickable-things/
+----------------------------------------------------------------------------- */
+
+.btn {
+  @include button-variant;
+
+  border: $btn-border-width solid $ghost;
+  display: inline-block;
+  font-family: $btn-font-family;
+  font-size: $btn-font-size;
+  font-weight: $btn-font-weight;
+  line-height: $btn-line-height;
+  padding: $btn-padding-y $btn-padding-x;
+  text-align: center;
+  text-decoration: if($link-decoration == none, null, none);
+  text-transform: uppercase;
+  transition: $btn-transition;
+  user-select: none;
+  vertical-align: middle;
+  white-space: $btn-white-space;
+
+  > * {
+    pointer-events: none;
+  }
+
+  &:active,
+  &.active {
+    @include box-shadow($btn-active-box-shadow);
+
+    &:focus {
+      @include box-shadow($btn-focus-box-shadow, $btn-active-box-shadow);
+    }
+  }
+
+  // Disabled buttons
+  &:disabled {
+    @extend %disabled-button;
+  }
+
+  &:focus {
+    @include box-shadow($btn-focus-box-shadow);
+
+    outline: 0;
+  }
+
+  &:hover {
+    text-decoration: if($link-hover-decoration == underline, none, null);
+  }
+
+  &[data-icon] {
+    display: inline-flex;
+  }
+
+  &-fluid {
+    @include fluid-width;
+  }
+
+  &-ghost {
+    background-color: $ghost !important;
+    border-width: $space-0;
+    padding: $space-0;
+  }
+
+  // Add button variant classes
+  @each $key, $color in $theme-colors {
+    &-#{$key} {
+      @include button-variant($color, if(
+        $key == 'dark' or $key == 'darker' or $key == 'ghost',
+        $body-color,
+        $dark
+      ))
+    }
+  }
+}

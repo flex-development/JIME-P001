@@ -1,8 +1,8 @@
 import { DATASETS } from '@app-mocks/datamaps'
 import firebaseTestApp from '@app-mocks/firebaseTestApp'
 import { getMockData, loadMockData } from '@app-mocks/utils'
+import { ICMSMenu } from '@app/subdomains/cms/models'
 import { FeathersErrorJSON } from '@feathersjs/errors'
-import { ICMSMenu } from '@subdomains/cms/models'
 import MenuRepository from './MenuRepository'
 
 /**

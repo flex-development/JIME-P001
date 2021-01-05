@@ -1,6 +1,9 @@
-import { PlaylistAPI, PlaylistSettingsFormPlugin } from '@subdomains/cms/config'
-import { IPlaylistSettings } from '@subdomains/cms/models'
-import { UseFormScreenPlugin } from '@subdomains/cms/utils'
+import {
+  PlaylistAPI,
+  PlaylistSettingsFormPlugin
+} from '@app/subdomains/cms/config'
+import { IPlaylistSettings } from '@app/subdomains/cms/models'
+import { UseFormScreenPlugin } from '@app/subdomains/cms/utils'
 import { useForm, useFormScreenPlugin } from 'tinacms'
 
 /**

@@ -1,4 +1,4 @@
-import { ICMSMenu } from '@subdomains/cms/models'
+import { ICMSMenu } from '@app/subdomains/cms/models'
 import { useNavigationForm } from '../useNavigationForm'
 
 /**
@@ -17,7 +17,7 @@ export type UseMenus = {
  * Registers a new `NavigationFormPlugin` instance and returns an object with
  * the links for the main menu.
  *
- * @returns Object with main menu links
+ * @return Object with main menu links
  */
 export const useMenus = (): UseMenus => {
   // Load menus from CMS

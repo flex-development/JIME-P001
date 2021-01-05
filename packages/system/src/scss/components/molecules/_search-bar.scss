@@ -1,0 +1,41 @@
+/* -----------------------------------------------------------------------------
+SEARCH BAR
+----------------------------------------------------------------------------- */
+
+.search-bar {
+  @include flex(center, flex-start, row);
+
+  &-control {
+    $padding-left: $search-bar-control-padding-x * 2;
+
+    @include bkg-img(
+      escape-svg($search-bar-icon),
+      $search-bar-bg-size,
+      $search-bar-bg-position
+    );
+
+    @include padding-x(
+      add(($padding-left), rem(strip-unit($search-bar-icon-width))),
+      $search-bar-control-padding-x
+    );
+
+    @include user-event {
+      color: $primary;
+    }
+
+    border: none;
+    color: $primary;
+    font-size: $font-size-xs;
+    font-weight: $input-focus-font-weight;
+    text-transform: uppercase;
+
+    &:focus {
+      box-shadow: none;
+    }
+  }
+
+  &-btn,
+  &-control {
+    @include height(map-get($sizes, maxc));
+  }
+}

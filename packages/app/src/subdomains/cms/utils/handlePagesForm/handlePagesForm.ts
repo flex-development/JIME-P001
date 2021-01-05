@@ -1,5 +1,5 @@
-import { PagesAPI } from '@subdomains/cms/config'
-import { CMSPagesDTO, ICMSPage, ICMSPageSlug } from '@subdomains/cms/models'
+import { PagesAPI } from '@app/subdomains/cms/config'
+import { CMSPagesDTO, ICMSPage, ICMSPageSlug } from '@app/subdomains/cms/models'
 import { FormApi } from 'final-form'
 import { isEmpty } from 'lodash'
 import { FormOptions } from 'tinacms'
@@ -21,7 +21,7 @@ import { FormOptions } from 'tinacms'
  * @param value.pages - Updated pages
  * @param form - Form configuration
  * @param error - Error callback function
- * @returns Submission errors, undefined, or void
+ * @return Submission errors, undefined, or void
  */
 const handlePagesForm = async (
   value: CMSPagesDTO,

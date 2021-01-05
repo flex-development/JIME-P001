@@ -1,0 +1,13 @@
+/// ----------------------------------------------------------------------------
+/// @name color-opaque
+/// @group functions
+/// @link https://sass-lang.com/documentation/modules/color#mix
+/// ----------------------------------------------------------------------------
+
+/// Creates an opaque color.
+/// @param {Color} $background - Background color
+/// @param {Color} $foreground - Foreground color
+/// @return {Color} Hex code of new color
+@function color-opaque($background, $foreground) {
+  @return mix(rgba($foreground, 1), $background, opacity($foreground) * 100);
+}

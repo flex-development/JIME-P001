@@ -1,5 +1,4 @@
 const config = require('@flex-development/kustomzdesign/postcss.config')
-const omit = require('lodash').omit
 
 /**
  * @file PostCSS Configuration
@@ -7,4 +6,4 @@ const omit = require('lodash').omit
  * @see https://purgecss.com/guides/next.html
  */
 
-module.exports = omit(config, ['syntax'])
+module.exports = config

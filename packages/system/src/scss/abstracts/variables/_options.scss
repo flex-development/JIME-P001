@@ -1,0 +1,31 @@
+/// ----------------------------------------------------------------------------
+/// Global Options
+/// @group variables-options
+/// ----------------------------------------------------------------------------
+
+// Quickly modify global styling by enabling or disabling optional features.
+$enable-button-pointers: true;
+$enable-caret: true;
+$enable-gradients: false;
+$enable-grid-classes: true;
+$enable-important-utils: true;
+$enable-reduced-motion: true;
+$enable-rounded: true;
+$enable-shadows: false;
+$enable-smooth-scroll: true;
+$enable-transitions: true;
+
+// Characters which are escaped by the escape-svg function
+$escaped-characters: (
+  ('<', '%3c'),
+  ('>', '%3e'),
+  ('#', '%23'),
+  ('(', '%28'),
+  (')', '%29'),
+);
+
+// Separator used for creating responsive utilities
+$rus: \:;
+
+// Prefix for :root CSS variables
+$variable-prefix: mk-;

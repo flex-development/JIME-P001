@@ -1,0 +1,14 @@
+/// ----------------------------------------------------------------------------
+/// @name caret-up
+/// @group mixins
+/// ----------------------------------------------------------------------------
+
+/// Creates an upwards facing caret.
+/// @require {variable} $caret-width
+/// @require {variable} $ghost
+@mixin caret-up {
+  border-bottom: $caret-width solid;
+  border-left: $caret-width solid $ghost;
+  border-right: $caret-width solid $ghost;
+  border-top: 0;
+}

@@ -21,10 +21,10 @@ const NotFound: NextComponentType<NextPageContext> = () => (
       code={404}
       message="Sorry, the page you're looking for does not exist."
     >
-      <Paragraph c='white'>
+      <Paragraph $color='white'>
         {/* eslint-disable-next-line prettier/prettier */}
         Go{' '}
-        <Link c='secondary' href='/'>
+        <Link $color='secondary' href='/'>
           home
         </Link>{' '}
         and smoke or something.

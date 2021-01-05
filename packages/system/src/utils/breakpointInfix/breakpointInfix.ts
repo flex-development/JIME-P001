@@ -1,13 +1,13 @@
-import { GridBreakpoint } from '@flex-development/kustomzcore'
+import { GridBreakpointKey } from '@system/types'
 
 /**
- * @file Responsive utility helper
+ * @file Implementation - breakpointInfix
  * @module utils/breakpointInfix/impl
  */
 
 /**
  * Returns an empty string if {@param breakpoint} is the smallest breakpoint
- * (`xs`), otherwise returns the value with a dash in front.
+ * (`xs`), otherwise returns the value with a `:` appended.
  *
  * Refer to the Sass theme settings to see the dimensions for each breakpoint.
  *
@@ -15,8 +15,8 @@ import { GridBreakpoint } from '@flex-development/kustomzcore'
  *
  * @param breakpoint - Breakpoint key
  */
-const breakpointInfix = (breakpoint: GridBreakpoint): string => {
-  return breakpoint !== 'xs' ? `-${breakpoint}` : ''
+const breakpointInfix = (breakpoint: GridBreakpointKey): string => {
+  return breakpoint !== 'xs' ? `${breakpoint}:` : ''
 }
 
 export default breakpointInfix

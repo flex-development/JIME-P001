@@ -1,5 +1,5 @@
 /**
- * @file Hook - useActiveIndex
+ * @file Hook Entry Point - useActiveIndex
  * @module hooks/useActiveIndex
  */
 

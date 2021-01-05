@@ -1,8 +1,8 @@
 import { DATASETS } from '@app-mocks/datamaps'
 import firebaseTestApp from '@app-mocks/firebaseTestApp'
 import { getMockData, loadMockData } from '@app-mocks/utils'
+import { ICMSPage } from '@app/subdomains/cms/models'
 import { FeathersErrorJSON } from '@feathersjs/errors'
-import { ICMSPage } from '@subdomains/cms/models'
 import PageRepository from './PageRepository'
 
 /**

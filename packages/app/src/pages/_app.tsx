@@ -1,3 +1,5 @@
+import { CMS_CONFIG } from '@app/subdomains/cms'
+import '@app/subdomains/cms/styles.css'
 import { app } from '@app/subdomains/firebase/config/web'
 import {
   CART_PERSISTENCE_KEY as CART_KEY,
@@ -8,11 +10,9 @@ import {
   UseCart,
   useMemoCompare
 } from '@flex-development/kustomzdesign'
-import '@flex-development/kustomzdesign/src/index.scss'
-import { AC, AppLayout, IAppProps } from '@subdomains/app'
+import '@flex-development/kustomzdesign/kustomzdesign.css'
+import { AC, AppLayout, IAppProps, useWebFontLoader } from '@subdomains/app'
 import '@subdomains/app/styles.css'
-import { CMS_CONFIG } from '@subdomains/cms'
-import '@subdomains/cms/styles.css'
 import { useCallback, useRef } from 'react'
 import { useLocalStorage } from 'react-use'
 import { FirebaseAppProvider } from 'reactfire'
@@ -38,6 +38,9 @@ import { TinaCMS, TinaProvider } from 'tinacms'
  * @param param0.pageProps - Page component props from data fetching methods
  */
 const App: AC = ({ Component, pageProps }: IAppProps) => {
+  // Load Web Fonts
+  useWebFontLoader({ typekit: { id: 'oee3tpl' } })
+
   // Get configured CMS instance
   const cms = useMemoCompare<TinaCMS>(new TinaCMS(CMS_CONFIG))
 

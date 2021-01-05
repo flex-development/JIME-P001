@@ -1,0 +1,23 @@
+/// ----------------------------------------------------------------------------
+/// @name rem
+/// @group functions
+/// ----------------------------------------------------------------------------
+
+@use 'strip-unit' as *;
+
+/// Converts a value into a `rem` value.
+/// @require {function} strip-unit
+/// @param {Number} $value [0] - Value to convert
+/// @param {Number} $base [16] - Base font size
+@function rem($value: 0, $base: 16) {
+  $rem-multipier: 1rem;
+  $unit: unit($value);
+
+  @if ($unit == rem) {
+    @return $value;
+  } @else if ($unit == em) {
+    @return strip-unit($value) * $rem-multipier;
+  }
+
+  @return (strip-unit(if($value, $value, 0)) / $base) * $rem-multipier;
+}

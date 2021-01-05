@@ -1,0 +1,15 @@
+/* -----------------------------------------------------------------------------
+ERROR TEMPLATE
+----------------------------------------------------------------------------- */
+
+.error-template {
+  &-divider {
+    @include margin-x($space-4);
+
+    color: rgba($border-color-inverse, 0.3) !important;
+  }
+
+  &-message {
+    color: $light !important;
+  }
+}

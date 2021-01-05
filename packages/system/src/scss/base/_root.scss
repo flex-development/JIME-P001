@@ -1,0 +1,22 @@
+/* -----------------------------------------------------------------------------
+ROOT
+----------------------------------------------------------------------------- */
+
+:root {
+  @each $color, $value in $theme-colors {
+    --#{$variable-prefix}#{$color}: #{$value};
+  }
+
+  // Use `inspect` for lists so that quoted items keep the quotes.
+  // See https://github.com/sass/sass/issues/2383#issuecomment-336349172
+  --#{$variable-prefix}font-sans-serif: #{inspect($font-family-sans-serif)};
+  --#{$variable-prefix}font-monospace: #{inspect($font-family-monospace)};
+
+  font-size: $font-size-root;
+
+  @if $enable-smooth-scroll {
+    @media (prefers-reduced-motion: no-preference) {
+      scroll-behavior: smooth;
+    }
+  }
+}

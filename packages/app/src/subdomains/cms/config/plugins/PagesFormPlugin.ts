@@ -1,13 +1,13 @@
-import { uuid } from '@flex-development/kustomzdesign'
-import { PagesAPI } from '@subdomains/cms/config'
+import { PagesAPI } from '@app/subdomains/cms/config'
 import {
   MarkdownField,
   TextAreaField,
   TextField,
   ToggleField
-} from '@subdomains/cms/config/helpers'
-import { CMSPagesDTO, ICMSPageSlug } from '@subdomains/cms/models'
-import { GroupListItemProps } from '@subdomains/cms/utils'
+} from '@app/subdomains/cms/config/helpers'
+import { CMSPagesDTO, ICMSPageSlug } from '@app/subdomains/cms/models'
+import { GroupListItemProps } from '@app/subdomains/cms/utils'
+import { uuid } from '@flex-development/kustomzdesign'
 import { FormOptions } from 'tinacms'
 
 /**
@@ -23,7 +23,7 @@ import { FormOptions } from 'tinacms'
  * @param label - Label for the form that will appear in the sidebar
  * @param onSubmit - Function to invoke when the form is saved
  * @param onChange - Function that runs when the form values are changed
- * @returns `PagesFormPlugin` instance
+ * @return `PagesFormPlugin` instance
  */
 export const PagesFormPlugin = (
   label = 'Pages',

@@ -1,5 +1,5 @@
 /**
- * @file Entry Point - useCart
+ * @file Hook Entry Point - useCart
  * @module hooks/useCart
  */
 

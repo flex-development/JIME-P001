@@ -1,21 +1,20 @@
-import { usePlaylist } from '@app/subdomains/streaming'
-import {
-  LinkProps,
-  ShopHeaderProps,
-  ShopLayout
-} from '@flex-development/kustomzdesign'
-import { IPageProps, PC } from '@subdomains/app/interfaces'
 import {
   useCMSAuth,
   useMenus,
   usePage,
   usePlaylistSettingsForm,
   useProfileSnippetForm
-} from '@subdomains/cms/hooks'
+} from '@app/subdomains/cms/hooks'
+import { usePlaylist } from '@app/subdomains/streaming'
+import {
+  Layout,
+  LinkProps,
+  ShopHeaderProps
+} from '@flex-development/kustomzdesign'
+import { IPageProps, PC } from '@subdomains/app/interfaces'
 import { merge } from 'lodash'
 import { Provider as NextAuthProvider, Session } from 'next-auth/client'
 import Head from 'next/head'
-import { MusicKitInstance } from 'packages/core/src'
 import { FC, useCallback } from 'react'
 
 /**
@@ -33,14 +32,6 @@ export interface AppLayoutProps {
    * Props from Next.js data-fetching methods.
    */
   pageProps: IPageProps
-}
-
-const fetchPlaylist = async (
-  id: string,
-  kit: MusicKitInstance
-): Promise<MusicKit.Resource> => {
-  if (!kit) return {}
-  return kit.api.playlist(id)
 }
 
 /**
@@ -99,7 +90,7 @@ export const AppLayout: FC<AppLayoutProps> = (props: AppLayoutProps) => {
         />
       </Head>
 
-      <ShopLayout
+      <Layout
         header={{ handleSearch: handleSearchCB }}
         playlistbar={{ songs: playlist.songs }}
         sidebar={{
@@ -111,7 +102,7 @@ export const AppLayout: FC<AppLayoutProps> = (props: AppLayoutProps) => {
         }}
       >
         <Component {...merge(pageProps, { page })} />
-      </ShopLayout>
+      </Layout>
     </NextAuthProvider>
   )
 }

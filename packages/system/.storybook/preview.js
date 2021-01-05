@@ -2,11 +2,12 @@ import { withConsole } from '@storybook/addon-console'
 import { DocsContainer } from '@storybook/addon-docs/blocks'
 import { withTests } from '@storybook/addon-jest'
 import { withHTML } from '@whitespace/storybook-addon-html/react'
-import prettier from '../../../.prettierrc.json'
-import { AdobeXDArtboards, colors_sb_bkg } from '../src/config'
-import '../src/index.scss'
+import prettier from '../../../.prettierrc.js'
+import { AdobeXDArtboards, backgrounds } from '../src/config'
+import { CartContextProvider } from '../src/providers'
+import '../src/scss/index.scss'
 import results from '../__tests__/jest-test-results.json'
-import { MockCartContextProvider } from '../__tests__/__mocks__/components'
+import ITEMS from '../__tests__/__mocks__/data/checkout-line-items.mock.json'
 import { Documentation } from './components'
 
 /**
@@ -17,7 +18,7 @@ import { Documentation } from './components'
 export const parameters = {
   a11y: {},
   actions: { argTypesRegex: '^(handle|on).*' },
-  backgrounds: { default: 'Dark', values: Object.values(colors_sb_bkg) },
+  backgrounds: { default: 'Dark', values: Object.values(backgrounds) },
   controls: { expanded: false },
   docs: { container: DocsContainer, page: Documentation },
   viewport: { viewports: AdobeXDArtboards }
@@ -26,9 +27,9 @@ export const parameters = {
 export const decorators = [
   // Add provider components
   Story => (
-    <MockCartContextProvider>
+    <CartContextProvider items={ITEMS}>
       <Story />
-    </MockCartContextProvider>
+    </CartContextProvider>
   ),
 
   // Receive console outputs as a console, warn and error in the actions panel

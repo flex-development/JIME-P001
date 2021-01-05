@@ -1,5 +1,5 @@
+import { ICMSPage } from '@app/subdomains/cms/models'
 import { AnyObject } from '@flex-development/json'
-import { ICMSPage } from '@subdomains/cms/models'
 import { IRTDRepository } from '@subdomains/firebase'
 
 /**

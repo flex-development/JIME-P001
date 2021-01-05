@@ -1,0 +1,15 @@
+/// ----------------------------------------------------------------------------
+/// @name clearfix
+/// @group mixins
+/// @link https://css-tricks.com/snippets/css/clear-fix/
+/// ----------------------------------------------------------------------------
+
+/// Fix the height of the parent container when two floated elements are stacked
+/// next to each other.
+@mixin clearfix() {
+  &::after {
+    clear: both;
+    content: '';
+    display: block;
+  }
+}

@@ -1,0 +1,23 @@
+/// ----------------------------------------------------------------------------
+/// @name breakpoint-down
+/// @group mixins
+/// ----------------------------------------------------------------------------
+
+@use '../functions/breakpoint-max' as *;
+
+/// Makes the `@content` apply to the given breakpoint and narrower.
+/// @require {function} breakpoint-max
+/// @require {variable} $grid-breakpoints
+/// @param {String} name - Name of key from grid breakpoints map
+/// @param {Map} $breakpoints [$grid-breakpoints] - Grid breakpoints map
+@mixin breakpoint-down($name, $breakpoints: $grid-breakpoints) {
+  $max: breakpoint-max($name, $breakpoints);
+
+  @if $max {
+    @media (max-width: $max) {
+      @content;
+    }
+  } @else {
+    @content;
+  }
+}

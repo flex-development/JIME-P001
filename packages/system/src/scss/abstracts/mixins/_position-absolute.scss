@@ -1,0 +1,17 @@
+/// ----------------------------------------------------------------------------
+/// @name position-absolute
+/// @group mixins
+/// ----------------------------------------------------------------------------
+
+@use 'position' as *;
+
+/// Shorthand for absolute positioning.
+/// @require {mixin} position
+/// @param {List} $args - Offsets
+@mixin position-absolute($args...) {
+  @if $args {
+    @include position(absolute, $args...);
+  } @else {
+    @include position(absolute);
+  }
+}

@@ -1,7 +1,7 @@
+import { IndexPageFormPlugin } from '@app/subdomains/cms/config'
+import { ICMSPage, ICMSPageIndex } from '@app/subdomains/cms/models'
+import { handleIndexPageForm } from '@app/subdomains/cms/utils'
 import { AnyObject } from '@flex-development/json'
-import { IndexPageFormPlugin } from '@subdomains/cms/config'
-import { ICMSPage, ICMSPageIndex } from '@subdomains/cms/models'
-import { handleIndexPageForm } from '@subdomains/cms/utils'
 import { merge } from 'lodash'
 import { useMemo } from 'react'
 import { FormOptions } from 'tinacms'
@@ -20,7 +20,7 @@ import { usePagesForm } from '../usePagesForm'
  * the database. The original data will be returned otherwise.
  *
  * @param page - Page data for current Next.js page component
- * @returns CMS page content or empty object if not rendering a CMS page
+ * @return CMS page content or empty object if not rendering a CMS page
  */
 export const usePage = (page: AnyObject = {}): ICMSPage | AnyObject => {
   // Generate `Index` page form configuration

@@ -1,0 +1,13 @@
+/// ----------------------------------------------------------------------------
+/// @name animation
+/// @group mixins
+/// ----------------------------------------------------------------------------
+
+/// Wrapper for animation property
+/// @param {String} $name - animation-name
+/// @param {Number} $duration [1.25s] - animation-duration
+/// @param {String} $timing [ease] - animation-timing-function
+/// @param {Number} $delay [0s] - animation-delay
+@mixin animation($name, $duration: 1.25s, $timing: ease, $delay: 0s) {
+  animation: $name $duration $timing $delay;
+}

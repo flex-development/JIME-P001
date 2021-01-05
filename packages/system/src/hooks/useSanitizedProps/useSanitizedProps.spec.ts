@@ -14,62 +14,44 @@ describe('useSanitizedProps', () => {
   })
 
   it('adds the class "mb-24" using the `mb` property', () => {
-    const hook = renderHook(() => useSanitizedProps({ mb: 24 }))
+    const hook = renderHook(() => useSanitizedProps({ $mb: 24 }))
 
     expect(hook.result.current).toMatchObject({ className: 'mb-24' })
   })
 
   it('adds the class "pt-sm-72" using the `pt` property', () => {
-    const hook = renderHook(() => useSanitizedProps({ pt: { sm: 72 } }))
+    const hook = renderHook(() => useSanitizedProps({ $pt: { sm: 72 } }))
 
-    expect(hook.result.current).toMatchObject({ className: 'pt-sm-72' })
+    expect(hook.result.current).toMatchObject({ className: 'sm:pt-72' })
   })
 
-  it('adds the class "bg-danger" using the `bg` property', () => {
-    const hook = renderHook(() => useSanitizedProps({ bg: 'danger' }))
+  it('adds the class "bg-black" using the `bg` property', () => {
+    const hook = renderHook(() => useSanitizedProps({ $bg: 'black' }))
 
-    expect(hook.result.current).toMatchObject({ className: 'bg-danger' })
+    expect(hook.result.current).toMatchObject({ className: 'bg-black' })
   })
 
   it('adds the class "c-muted" using the `c` property', () => {
-    const hook = renderHook(() => useSanitizedProps({ c: 'muted' }))
+    const hook = renderHook(() => useSanitizedProps({ $color: 'muted' }))
 
-    expect(hook.result.current).toMatchObject({ className: 'c-muted' })
-  })
-
-  it('adds the class "d-flex" using the `flex` property', () => {
-    const hook = renderHook(() => useSanitizedProps({ flex: true }))
-
-    expect(hook.result.current).toMatchObject({ className: 'd-flex' })
-  })
-
-  it('adds the class "d-inline-flex" using the `flex` property', () => {
-    const hook = renderHook(() => useSanitizedProps({ flex: 'inline' }))
-
-    expect(hook.result.current).toMatchObject({ className: 'd-inline-flex' })
-  })
-
-  it('adds the class "bg-gradient" using the `gradient` property', () => {
-    const hook = renderHook(() => useSanitizedProps({ gradient: true }))
-
-    expect(hook.result.current).toMatchObject({ className: 'bg-gradient' })
+    expect(hook.result.current).toMatchObject({ className: 'text-muted' })
   })
 
   it('sets props.style.backgroundImage', () => {
-    const img = 'assets/placeholder.png'
-    const hook = renderHook(() => useSanitizedProps({ img }))
+    const $img = 'assets/placeholder.png'
+    const hook = renderHook(() => useSanitizedProps({ $img }))
 
     expect(hook.result.current).toMatchObject({
-      style: { backgroundImage: `url(${img})` }
+      style: { backgroundImage: `url(${$img})` }
     })
   })
 
   it('sets props.dangerouslySetInnerHTML', () => {
-    const innerHTML = '<h1>Hello, World</h1>'
-    const hook = renderHook(() => useSanitizedProps({ innerHTML }))
+    const $html = '<h1>Hello, World</h1>'
+    const hook = renderHook(() => useSanitizedProps({ $html }))
 
     expect(hook.result.current).toMatchObject({
-      dangerouslySetInnerHTML: { __html: innerHTML }
+      dangerouslySetInnerHTML: { __html: $html }
     })
   })
 

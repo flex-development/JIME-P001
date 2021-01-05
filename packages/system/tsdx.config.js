@@ -19,7 +19,7 @@ const tsconfigProd = require('./tsconfig.prod.json')
  * @param {boolean} extractErrors - True if error extraction is running
  * @param {string} format - Module format; "cjs", "esm", 'system', "umd"
  * @param {string} target - JavaScript target; "browser", "node"
- * @returns {object} TSDX Babel plugin options
+ * @return {object} TSDX Babel plugin options
  */
 const babelTSDXOptions = (extractErrors, format, target) => ({
   babelHelpers: 'bundled',
@@ -38,7 +38,7 @@ const babelTSDXOptions = (extractErrors, format, target) => ({
  *
  * @param {string} tsconfig - Path to TypeScript config file
  * @param {boolean} transpileOnly - True to disable type checking
- * @returns {object} Options for Rollup TypeScript plugin
+ * @return {object} Options for Rollup TypeScript plugin
  */
 const typescriptOptions = (tsconfig, transpileOnly) => ({
   check: !transpileOnly,
@@ -65,7 +65,7 @@ module.exports = {
    * @param {string} options.tsconfig - Path to TypeScript config file
    * @param {boolean} options.writeMeta - True if this is the first rollup
    * config (and thus one-off metadata should be extracted)
-   * @returns {object} Updated Rollup config
+   * @return {object} Updated Rollup config
    */
   rollup: (config, options) => {
     const {

@@ -1,0 +1,19 @@
+/// ----------------------------------------------------------------------------
+/// @name dimensions
+/// @group mixins
+/// ----------------------------------------------------------------------------
+
+/// Set an element's height and width.
+/// @param {Number} $width - Element width
+/// @param {Number} $height [$width] - Element height
+@mixin dimensions($width, $height: $width) {
+  @if $height {
+    height: $height;
+  }
+
+  @if $width {
+    width: $width;
+  }
+
+  @content;
+}

@@ -1,0 +1,14 @@
+/// ----------------------------------------------------------------------------
+/// @name caret-left
+/// @group mixins
+/// ----------------------------------------------------------------------------
+
+/// Creates a caret pointing towards the left.
+/// @require {variable} $caret-width
+/// @require {variable} $ghost
+@mixin caret-left {
+  border-bottom: $caret-width solid $ghost;
+  border-left: $caret-width solid;
+  border-left: 0;
+  border-top: $caret-width solid $ghost;
+}

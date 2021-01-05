@@ -1,0 +1,17 @@
+/// ----------------------------------------------------------------------------
+/// @name position-relative
+/// @group mixins
+/// ----------------------------------------------------------------------------
+
+@use 'position' as *;
+
+/// Shorthand for relative positioning.
+/// @require {mixin} position
+/// @param {List} $args - Offsets
+@mixin position-relative($args...) {
+  @if $args {
+    @include position(relative, $args...);
+  } @else {
+    @include position(relative);
+  }
+}

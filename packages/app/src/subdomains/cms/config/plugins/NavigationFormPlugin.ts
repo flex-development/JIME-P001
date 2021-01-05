@@ -1,13 +1,13 @@
-import { uuid } from '@flex-development/kustomzdesign'
-import { MenusAPI } from '@subdomains/cms/config/config'
+import { MenusAPI } from '@app/subdomains/cms/config/config'
 import {
   ClassNameField,
   IDField,
   LinkListField
-} from '@subdomains/cms/config/extensions'
-import { TextField } from '@subdomains/cms/config/helpers'
-import { CMSMenusDTO, ICMSMenu } from '@subdomains/cms/models'
-import { GroupListItemProps } from '@subdomains/cms/utils'
+} from '@app/subdomains/cms/config/extensions'
+import { TextField } from '@app/subdomains/cms/config/helpers'
+import { CMSMenusDTO, ICMSMenu } from '@app/subdomains/cms/models'
+import { GroupListItemProps } from '@app/subdomains/cms/utils'
+import { uuid } from '@flex-development/kustomzdesign'
 import { FormOptions } from 'tinacms'
 
 /**
@@ -22,7 +22,7 @@ import { FormOptions } from 'tinacms'
  * @param label - Label for the form that will appear in the sidebar
  * @param initialValues - Initial template data
  * @param onSubmit - Function to invoke when the form is saved
- * @returns `NavigationFormPlugin` instance
+ * @return `NavigationFormPlugin` instance
  */
 export const NavigationFormPlugin = (
   label = 'Navigation',

@@ -1,6 +1,6 @@
+import { getCMSPageSEO } from '@app/subdomains/cms'
 import { CartTemplate, useCartContext } from '@flex-development/kustomzdesign'
 import { PC, SEO } from '@subdomains/app'
-import { getCMSPageSEO } from '@subdomains/cms'
 
 /**
  * @file Page - Shopping Cart

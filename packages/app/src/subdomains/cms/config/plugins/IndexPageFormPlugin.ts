@@ -1,11 +1,11 @@
-import { PagesAPI } from '@subdomains/cms/config/config'
+import { PagesAPI } from '@app/subdomains/cms/config/config'
 import {
   NumberField,
   TextAreaField,
   TextField
-} from '@subdomains/cms/config/helpers'
-import { ICMSPageIndex } from '@subdomains/cms/models'
-import { InitialFormValues } from '@subdomains/cms/utils'
+} from '@app/subdomains/cms/config/helpers'
+import { ICMSPageIndex } from '@app/subdomains/cms/models'
+import { InitialFormValues } from '@app/subdomains/cms/utils'
 import { isFunction } from 'lodash'
 import { FormOptions } from 'tinacms'
 
@@ -23,7 +23,7 @@ import { FormOptions } from 'tinacms'
  * @param initialValues - Object containing the initial form state or a function
  * to load the initial form state asynchronously
  * @param onChange - Function that runs when the form values are changed
- * @returns `IndexTemplate` form configuration
+ * @return `IndexTemplate` form configuration
  */
 export const IndexPageFormPlugin = (
   label = 'Home',

@@ -1,5 +1,5 @@
 /**
- * @file Entry Point - useCheckoutPermalink
+ * @file Hook Entry Point - useCheckoutPermalink
  * @module hooks/useCheckoutPermalink
  */
 

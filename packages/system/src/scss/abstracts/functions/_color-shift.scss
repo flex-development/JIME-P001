@@ -1,0 +1,19 @@
+/// ----------------------------------------------------------------------------
+/// @name color-shift
+/// @group functions
+/// ----------------------------------------------------------------------------
+
+@use 'color-shade' as *;
+@use 'color-tint' as *;
+
+/// Mixes `$color` with black or white, depending on the value of `$weight`.
+/// If `$weight` is less than 0, `$color` will be mixed with white.
+/// @param {Color} $color - Color to mix
+/// @param {Number} $weight - Determines how much of each color is included
+/// @return {Color} Hex code of new color
+@function color-shift($color, $weight) {
+  $shaded: color-shade($color, $weight);
+  $tinted: color-tint($color, -$weight);
+
+  @return if($weight > 0, $shaded, $tinted);
+}

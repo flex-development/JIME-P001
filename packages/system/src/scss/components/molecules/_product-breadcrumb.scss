@@ -1,0 +1,36 @@
+/* -----------------------------------------------------------------------------
+PRODUCT BREADCRUMB
+----------------------------------------------------------------------------- */
+
+.product-breadcrumb {
+  @include flex(center, flex-start);
+
+  color: $light;
+  text-transform: uppercase;
+
+  > * {
+    @include no-breaking;
+  }
+
+  > p {
+    margin-bottom: $space-0;
+  }
+
+  &-c {
+    font-weight: $font-weight-semibold;
+  }
+
+  &-divider {
+    color: rgba($muted, 0.5);
+    font-weight: $font-weight-medium;
+  }
+
+  &-p {
+    color: $light;
+  }
+
+  &-v {
+    color: $secondary;
+    font-weight: $font-weight-bold;
+  }
+}

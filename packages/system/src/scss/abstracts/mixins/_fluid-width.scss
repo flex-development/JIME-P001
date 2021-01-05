@@ -1,0 +1,13 @@
+/// ----------------------------------------------------------------------------
+/// @name fluid-width
+/// @group mixins
+/// ----------------------------------------------------------------------------
+
+@use 'width' as *;
+
+/// Make an element span the full width of its parent container.
+/// @require {mixin} width
+/// @require {variable} $sizes
+@mixin fluid-width {
+  @include width(map-get($sizes, fluid));
+}

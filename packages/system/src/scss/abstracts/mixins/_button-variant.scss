@@ -1,0 +1,23 @@
+/// ----------------------------------------------------------------------------
+/// @name button-variant
+/// @group mixins
+/// ----------------------------------------------------------------------------
+
+@use '../functions/color-shade' as *;
+
+/// Set the background and text color of a button.
+/// @require {function} color-shade
+/// @require {mixin} user-event
+/// @require {variable} $btn-bg-color
+/// @require {variable} $btn-color 
+/// @param {Color} $bg-color
+/// @param {Color} $color
+@mixin button-variant($bg-color: $btn-bg-color, $color: $btn-color) {
+  @include user-event {
+    background-color: color-shade($bg-color, 7%);
+    color: $color;
+  }
+
+  background-color: $btn-bg-color;
+  color: $color;
+}

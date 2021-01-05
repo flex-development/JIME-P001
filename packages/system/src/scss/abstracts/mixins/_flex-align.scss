@@ -1,0 +1,20 @@
+/// ----------------------------------------------------------------------------
+/// @name flex-align
+/// @group mixins
+/// ----------------------------------------------------------------------------
+
+/// Defines how flex items are laid out along the cross axis.
+/// @param {String} $alignment [stretch] - Flexbox alignment
+/// @param {Boolean} $self [false] - If true, use align-self
+/// @param {Boolean} $important [false], If true add `!important`
+@mixin flex-align($alignment: stretch, $self: false, $important: false) {
+  $align: if($important, $alignment !important, $alignment);
+
+  @if $self == false {
+    align-items: $align;
+  } @else {
+    align-self: $align;
+  }
+
+  @content;
+}

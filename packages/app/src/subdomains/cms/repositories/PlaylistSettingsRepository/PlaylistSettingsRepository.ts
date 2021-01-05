@@ -1,5 +1,5 @@
+import { IPlaylistSettings, PlaylistSettings } from '@app/subdomains/cms/models'
 import { createError } from '@flex-development/kustomzcore'
-import { IPlaylistSettings, PlaylistSettings } from '@subdomains/cms/models'
 import { RTDRepository as Repo } from '@subdomains/firebase/models/RTDRepository'
 import {
   IPlaylistSettingsRepository,
@@ -35,7 +35,7 @@ export default class PlaylistSettingsRepository
    *
    * @param data - New playlist settings
    * @param data.url - URL of Apple Music playlist
-   * @returns Playlist settings entity
+   * @return Playlist settings entity
    * @throws {FeathersErrorJSON}
    */
   async create(data: PlaylistSettingsData): Promise<IPlaylistSettings> {
@@ -61,7 +61,7 @@ export default class PlaylistSettingsRepository
    * Returns the current playlist settings, or null if not found.
    *
    * @async
-   * @returns Playlist settings entity  or null
+   * @return Playlist settings entity  or null
    */
   async findById(): Promise<IPlaylistSettings | null> {
     return await super.findById(this.id)
@@ -72,7 +72,7 @@ export default class PlaylistSettingsRepository
    * Throws an error if the settings are not found.
    *
    * @async
-   * @returns Playlist settings entity
+   * @return Playlist settings entity
    * @throws {FeathersErrorJSON}
    */
   async get(): Promise<IPlaylistSettings> {
@@ -86,7 +86,7 @@ export default class PlaylistSettingsRepository
    * @param id - Settings ID. Will be set to "playlist"
    * @param data - New playlist settings
    * @param data.url - URL of Apple Music playlist
-   * @returns Playlist settings entity
+   * @return Playlist settings entity
    * @throws {FeathersErrorJSON}
    */
   async update(
@@ -109,7 +109,7 @@ export default class PlaylistSettingsRepository
    * @param id - Settings ID. Will be set to "playlist"
    * @param data - New playlist settings
    * @param data.url - URL of Apple Music playlist
-   * @returns Playlist settings entity
+   * @return Playlist settings entity
    * @throws {FeathersErrorJSON}
    */
   async upsert(

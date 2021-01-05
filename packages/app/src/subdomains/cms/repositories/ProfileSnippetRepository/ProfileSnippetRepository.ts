@@ -1,4 +1,4 @@
-import { IProfileSnippet, ProfileSnippet } from '@subdomains/cms/models'
+import { IProfileSnippet, ProfileSnippet } from '@app/subdomains/cms/models'
 import { RTDRepository as Repo } from '@subdomains/firebase/models/RTDRepository'
 import { IProfileSnippetRepository } from './IProfileSnippetRepository'
 
@@ -34,7 +34,7 @@ export default class ProfileSnippetRepository
    * @param data.img - Profile image URL
    * @param data.location - Profile location
    * @param data.mood - Profile mood
-   * @returns Profile snippet settings entity
+   * @return Profile snippet settings entity
    */
   async create(data: IProfileSnippet): Promise<IProfileSnippet> {
     return await super.create({ ...data, id: this.id })
@@ -54,7 +54,7 @@ export default class ProfileSnippetRepository
    * Returns the current profile snippet settings, or null if not found.
    *
    * @async
-   * @returns Profile snippet settings entity  or null
+   * @return Profile snippet settings entity  or null
    */
   async findById(): Promise<IProfileSnippet | null> {
     return await super.findById(this.id)
@@ -65,7 +65,7 @@ export default class ProfileSnippetRepository
    * Throws an error if the settings are not found.
    *
    * @async
-   * @returns Profile snippet settings entity
+   * @return Profile snippet settings entity
    * @throws {FeathersErrorJSON}
    */
   async get(): Promise<IProfileSnippet> {
@@ -82,7 +82,7 @@ export default class ProfileSnippetRepository
    * @param data.img - Profile image URL
    * @param data.location - Profile location
    * @param data.mood - Profile mood
-   * @returns Profile snippet settings entity
+   * @return Profile snippet settings entity
    * @throws {FeathersErrorJSON}
    */
   async update(id: string, data: IProfileSnippet): Promise<IProfileSnippet> {
@@ -100,7 +100,7 @@ export default class ProfileSnippetRepository
    * @param data.img - Profile image URL
    * @param data.location - Profile location
    * @param data.mood - Profile mood
-   * @returns Profile snippet settings entity
+   * @return Profile snippet settings entity
    * @throws {FeathersErrorJSON}
    */
   async upsert(id: string, data: IProfileSnippet): Promise<IProfileSnippet> {

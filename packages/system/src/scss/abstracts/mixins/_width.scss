@@ -1,0 +1,15 @@
+/// ----------------------------------------------------------------------------
+/// @name width
+/// @group mixins
+/// ----------------------------------------------------------------------------
+
+@use 'size' as *;
+
+/// Sets the width, max-width, and/or min-width of an element.
+/// @require {mixin} size
+/// @param {Number} $size - Width of element
+/// @param {Number} $max [none] - max-width
+/// @param {Number} $min [unset] - min-width
+@mixin width($size, $max: none, $min: unset) {
+  @include size($size, width, $max, $min);
+}

@@ -1,0 +1,56 @@
+/// ----------------------------------------------------------------------------
+/// @name caret
+/// @group mixins
+/// ----------------------------------------------------------------------------
+
+@use 'caret-down' as *;
+@use 'caret-left' as *;
+@use 'caret-right' as *;
+@use 'caret-up' as *;
+
+/// Display a caret icon.
+/// @require {mixin} caret-down
+/// @require {mixin} caret-left
+/// @require {mixin} caret-right
+/// @require {mixin} caret-up
+/// @require {variable} $caret-spacing
+/// @require {variable} $caret-vertical-align
+/// @require {variable} $enable-caret
+/// @param {String} $direction [down] Direction caret should point
+@mixin caret($direction: down) {
+  @if $enable-caret {
+    &::after {
+      content: '';
+      display: inline-block;
+      margin-left: $caret-spacing;
+      vertical-align: $caret-vertical-align;
+
+      @if $direction == down {
+        @include caret-down;
+      } @else if $direction == up {
+        @include caret-up;
+      } @else if $direction == right {
+        @include caret-right;
+      }
+    }
+
+    @if $direction == left {
+      &::after {
+        display: none;
+      }
+
+      &::before {
+        @include caret-left;
+
+        content: '';
+        display: inline-block;
+        margin-right: $caret-spacing;
+        vertical-align: $caret-vertical-align;
+      }
+    }
+
+    &:empty::after {
+      margin-left: 0;
+    }
+  }
+}

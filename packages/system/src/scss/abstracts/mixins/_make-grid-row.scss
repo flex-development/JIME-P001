@@ -1,0 +1,18 @@
+/// ----------------------------------------------------------------------------
+/// @name make-grid-row
+/// @group mixins
+/// ----------------------------------------------------------------------------
+
+/// Create a grid row.
+/// @require {variable} $grid-row-span
+/// @param {Number | String} $span [full] - Key from `$grid-row-span` map
+/// @throw If `$span` is not a key in `$grid-row-span` map
+@mixin make-grid-row($span: full) {
+  @if map-has-key($grid-row-span, $span) == false {
+    @error 'Key `#{$span}` not found in `#{$grid-row-span}`';
+  }
+
+  grid-row: map-get($grid-row-span, $span);
+
+  @content;
+}

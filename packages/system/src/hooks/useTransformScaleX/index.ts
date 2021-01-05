@@ -1,5 +1,5 @@
 /**
- * @file Hook - useTransformScaleX
+ * @file Hook Entry Point - useTransformScaleX
  * @module hooks/useTransformScaleX
  */
 

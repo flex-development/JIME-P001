@@ -1,5 +1,5 @@
 /**
- * @file Hook - useIcon
+ * @file Hook Entry Point - useIcon
  * @module hooks/useIcon
  */
 

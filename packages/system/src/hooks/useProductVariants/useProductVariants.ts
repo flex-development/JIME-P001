@@ -1,6 +1,6 @@
 import { AnyObject } from '@flex-development/json'
 import { IProductListingVariant } from '@flex-development/kustomzcore'
-import { OptionProps } from '@system/components'
+import { OptionProps } from '@system/lib'
 import { isNumber } from 'lodash'
 import { useCallback, useMemo, useState } from 'react'
 import { useMemoCompare } from '../useMemoCompare'

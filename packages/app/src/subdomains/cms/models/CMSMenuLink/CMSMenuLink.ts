@@ -1,4 +1,3 @@
-import { MutatedProps } from '@subdomains/app/models/MutatedProps'
 import { IsOptional, IsString, IsUUID } from 'class-validator'
 import { ICMSMenuLink } from './ICMSMenuLink'
 
@@ -7,7 +6,7 @@ import { ICMSMenuLink } from './ICMSMenuLink'
  * @module subdomains/cms/models/CMSMenuLink/impl
  */
 
-export class CMSMenuLink extends MutatedProps implements ICMSMenuLink {
+export class CMSMenuLink implements ICMSMenuLink {
   @IsUUID('4')
   readonly uuid: ICMSMenuLink['uuid']
 

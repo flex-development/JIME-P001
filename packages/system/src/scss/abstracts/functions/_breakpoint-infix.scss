@@ -1,0 +1,19 @@
+/// ----------------------------------------------------------------------------
+/// @name breakpoint-infix
+/// @group functions
+/// ----------------------------------------------------------------------------
+
+@use 'breakpoint-min' as *;
+
+/// Returns a blank string if smallest breakpoint, otherwise returns `$name`
+/// concated with `$rus`.
+/// @require {function} breakpoint-min
+/// @require {variable} $grid-breakpoints
+/// @require {variable} $rus
+/// @param {String} name - Name of key from grid breakpoints map
+/// @param {Map} $breakpoints [$grid-breakpoints] - Grid breakpoints map
+/// @return {String} Responsive utility substring
+@function breakpoint-infix($name, $breakpoints: $grid-breakpoints) {
+  $infix: '#{$name}#{$rus}';
+  @return if(breakpoint-min($name, $breakpoints) == null, '', $infix);
+}

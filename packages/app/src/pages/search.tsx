@@ -1,9 +1,9 @@
+import { getCMSPageSEO } from '@app/subdomains/cms'
 import {
   SearchTemplate,
   SearchTemplateProps
 } from '@flex-development/kustomzdesign'
 import { IPagePropsSearch, PC, SearchPageUrlQuery, SEO } from '@subdomains/app'
-import { getCMSPageSEO } from '@subdomains/cms'
 import { ProductService } from '@subdomains/sales'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
 import { useRouter } from 'next/router'
@@ -47,7 +47,7 @@ const Search: PC = ({ page }) => {
  * @param context - Next.js page component context
  * @param context.query - The query string
  * @param context.req - HTTP request object
- * @returns Array of search results
+ * @return Array of search results
  */
 export const getServerSideProps: GetServerSideProps<
   IPagePropsSearch,

@@ -34,7 +34,7 @@ import { AnyObject } from '@flex-development/json'
  * @param data.errors - Typically validation errors or if you want to group
  * multiple errors together
  * @param status - Error status code. Defaults to 500
- * @returns {FeathersErrorJSON}
+ * @return {FeathersErrorJSON}
  */
 const createError = (
   error?: string | Error,

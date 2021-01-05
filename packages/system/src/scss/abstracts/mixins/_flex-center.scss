@@ -1,0 +1,17 @@
+/// ----------------------------------------------------------------------------
+/// @name flex-center
+/// @group mixins
+/// ----------------------------------------------------------------------------
+
+/// Center flexbox items on both axes.
+/// @param {String} $direction [null] If specified, set `flex-direction`
+@mixin flex-center($direction: null) {
+  align-items: center;
+  justify-content: center;
+
+  @if $direction {
+    flex-direction: $direction;
+  }
+
+  @content;
+}

@@ -5,6 +5,7 @@
 
 export * from './args'
 export * from './constants'
+export * from './icons'
 export * from './sb'
 export * from './viewports'
 

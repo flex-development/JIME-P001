@@ -1,8 +1,8 @@
-import react_uuid from 'react-uuid'
+import u from 'react-uuid'
 
 /**
- * @file Create a uuid
- * @module utils/uuid
+ * @file Implementation - uuid
+ * @module utils/uuid/impl
  * @see https://www.npmjs.com/package/react-uuid
  */
 
@@ -13,7 +13,7 @@ import react_uuid from 'react-uuid'
  * @param suffix - String to append to uuid
  */
 const uuid = (prefix = '', suffix = ''): string => {
-  return `${prefix}${react_uuid()}${suffix}`.trim()
+  return `${prefix}${u()}${suffix}`.trim()
 }
 
 export default uuid

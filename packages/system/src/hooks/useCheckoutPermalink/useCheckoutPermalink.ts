@@ -1,9 +1,9 @@
 import {
   CheckoutLineItemInput,
   CheckoutPermalinkInput,
-  CheckoutPermalinkQuery
+  CheckoutPermalinkQuery,
+  CHECKOUT_BASE_URL
 } from '@flex-development/kustomzcore'
-import { DEFAULT_CART_CONTEXT } from '@system/components/context/CartContext/CartContext'
 import { isString, omit } from 'lodash'
 import qs from 'querystring'
 import { useCallback, useEffect, useState } from 'react'
@@ -33,7 +33,16 @@ export type UseCheckoutPermalink = {
   removeItem: (id: number | string) => void
 
   /**
+   * Updates the checkout line items state.
+   *
+   * @param items - New checkout line items
+   */
+  setItems: (items: CheckoutPermalinkInput[]) => void
+
+  /**
    * Adds or updates a checkout line item.
+   *
+   * @param data - Line item to add
    */
   upsertItem: (data: CheckoutPermalinkInput) => void
 
@@ -47,7 +56,7 @@ export type UseCheckoutPermalink = {
  * Create and update checkout URLs.
  *
  * @param inputs - Array of checkout line items
- * @returns Checkout URL
+ * @return Checkout URL
  * @throws {FeathersErrorJSON} If store domain is invalid
  */
 export const useCheckoutPermalink = (
@@ -60,7 +69,7 @@ export const useCheckoutPermalink = (
   const [items, actions] = useArray<CheckoutPermalinkInput>(_inputs)
 
   // Handle checkout permalink URL state
-  const [url, setURL] = useState(DEFAULT_CART_CONTEXT.url)
+  const [url, setURL] = useState(CHECKOUT_BASE_URL)
 
   // Normalize checkout line item input data
   useEffect(() => {
@@ -137,9 +146,22 @@ export const useCheckoutPermalink = (
   /* Callback version of `removeItem` */
   const removeItemCB = useCallback(removeItem, [actions])
 
+  /**
+   * Updates the checkout line items state.
+   *
+   * @param items - New checkout line items
+   */
+  const setItems = (items: CheckoutPermalinkInput[]) => {
+    return actions.setValue(items)
+  }
+
+  /* Callback version of `setItems` */
+  const setItemsCB = useCallback(setItems, [actions])
+
   return {
     items: items.map(item => omit(item, ['id']) as CheckoutLineItemInput),
     removeItem: removeItemCB,
+    setItems: setItemsCB,
     upsertItem: upsertItemCB,
     url
   }

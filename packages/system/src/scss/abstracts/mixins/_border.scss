@@ -1,0 +1,37 @@
+/// ----------------------------------------------------------------------------
+/// @name border
+/// @group mixins
+/// ----------------------------------------------------------------------------
+
+/// Set the border color, radius, style, width, and placement.
+/// @require {variable} $border-color
+/// @require {variable} $border-width
+/// @require {variable} $space-0
+/// @param {Number} $width [$border-width] - Border width
+/// @param {String} $style [normal] - Border style
+/// @param {Color} $color [$border-color] - Border color
+/// @param {String | null} $radius [null] - Border radius
+/// @param {String | null} $pos [null] - Border placement
+@mixin border(
+  $width: $border-width, 
+  $style: normal, 
+  $color: $border-color, 
+  $radius: null,
+  $pos: null
+) {
+  $property: 'border#{if($pos, '-#{$pos}', '')}';
+
+  @if $color {
+    #{$property}-color: $color;
+  }
+
+  @if $width {
+    #{$property}-width: $width;
+  }
+
+  @if $radius {
+    #{$property}-radius: $radius;
+  }
+  
+  #{$property}-style: if($style, $style, solid);
+}

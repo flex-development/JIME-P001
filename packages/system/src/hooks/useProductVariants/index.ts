@@ -1,5 +1,5 @@
 /**
- * @file Hook - useProductVariants
+ * @file Hook Entry Point - useProductVariants
  * @module hooks/useProductVariants
  */
 

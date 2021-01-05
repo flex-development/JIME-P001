@@ -1,0 +1,30 @@
+/// ----------------------------------------------------------------------------
+/// @name template
+/// @group placeholders
+/// ----------------------------------------------------------------------------
+
+/// @require {mixin} breakpoint-up
+/// @require {mixin} content-section-headings
+/// @require {mixin} padding-x
+/// @require {mixin} padding-y
+/// @require {variable} $font-size-xl
+/// @require {variable} $space-36
+/// @require {variable} $template-padding-x
+/// @require {variable} $template-padding-y
+%template {
+  @include padding-x($template-padding-x);
+
+  @include padding-y($template-padding-y);
+
+  .template-heading {
+    @include breakpoint-up(md) {
+      font-size: $font-size-xl;
+    }
+  }
+
+  > section {
+    @include content-section-headings;
+
+    margin-bottom: $space-36;
+  }
+}

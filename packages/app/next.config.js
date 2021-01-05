@@ -1,4 +1,5 @@
 const { CheckerPlugin } = require('awesome-typescript-loader')
+const { merge } = require('lodash')
 const vercel = require('./vercel.json')
 
 /**
@@ -56,7 +57,7 @@ module.exports = {
    *
    * @see https://nextjs.org/docs/api-reference/next.config.js/headers
    *
-   * @returns {Array<object>} Array of headers
+   * @return {Array<object>} Array of headers
    */
   async headers() {
     return vercel.headers || []
@@ -88,7 +89,7 @@ module.exports = {
    *
    * @see https://nextjs.org/docs/api-reference/next.config.js/redirects
    *
-   * @returns {Array<object>} Array of redirects
+   * @return {Array<object>} Array of redirects
    */
   async redirects() {
     return vercel.redirects || []
@@ -99,7 +100,7 @@ module.exports = {
    *
    * @see https://nextjs.org/docs/api-reference/next.config.js/rewrites
    *
-   * @returns {Array<object>} Array of rewrites
+   * @return {Array<object>} Array of rewrites
    */
   async rewrites() {
     return vercel.rewrites || []
@@ -116,9 +117,13 @@ module.exports = {
    * @param {boolean} helpers.dev - True if the compiling in development mode
    * @param {boolean} helpers.isServer - `true` for server-side compilation
    * @param {object} helpers.webpack - Webpack
-   * @returns {object} Altered Webpack configuration
+   * @return {object} Altered Webpack configuration
    */
   webpack: (config, { dev }) => {
+    config.resolve.alias = merge(config.resolve.alias, {
+      '@flex-development/kustomzdesign': '@flex-development/kustomzdesign/dist'
+    })
+
     config.module.rules.push({
       test: /\.(ts|tsx)$/,
       use: [

@@ -1,0 +1,43 @@
+/* -----------------------------------------------------------------------------
+LAYOUT
+----------------------------------------------------------------------------- */
+
+.layout {
+  @include flex-column;
+
+  @include height(100vh);
+
+  overflow-x: hidden;
+
+  .playlist-bar {
+    @include fluid-width;
+
+    padding-right: $space-24;
+  }
+
+  .shop-header {
+    @include fluid-width;
+
+    padding: $space-20 $space-24;
+  }
+}
+
+.loading-container {
+  @include flex(center, center, column);
+
+  @include fluid-height;
+
+  @include fluid-width;
+    
+  &-icon {
+    @include dimensions(rem(42)); // Must be size of inner <circle> element
+  }
+
+  &-text {
+    color: $primary;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    margin-top: $space-8;
+    text-transform: uppercase;
+  }
+}

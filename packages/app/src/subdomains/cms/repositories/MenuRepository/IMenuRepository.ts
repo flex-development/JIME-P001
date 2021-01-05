@@ -1,4 +1,4 @@
-import { ICMSMenu } from '@subdomains/cms/models'
+import { ICMSMenu } from '@app/subdomains/cms/models'
 import { IRTDRepository } from '@subdomains/firebase'
 
 /**

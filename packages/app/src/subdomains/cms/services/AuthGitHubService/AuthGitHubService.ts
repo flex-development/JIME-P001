@@ -94,7 +94,7 @@ export default class AuthGitHubService implements IAuthGitHubService {
    *
    * @param session - Base session object
    * @param user - GitHub JWT
-   * @returns Session that will be returned to the client
+   * @return Session that will be returned to the client
    */
   async createSession(
     session: Session,
@@ -116,7 +116,7 @@ export default class AuthGitHubService implements IAuthGitHubService {
    *
    * @async
    * @param access_token - OAuth access token
-   * @returns Public and private profile information
+   * @return Public and private profile information
    */
   async getUser(
     access_token: string
@@ -135,7 +135,7 @@ export default class AuthGitHubService implements IAuthGitHubService {
    * repository.
    *
    * @param username - Username of user to check collaborator status
-   * @returns True if user is a repository collaborator, false otherwise
+   * @return True if user is a repository collaborator, false otherwise
    */
   async isCollaborator(username: string): Promise<boolean> {
     // Get repository owner and name
@@ -159,7 +159,7 @@ export default class AuthGitHubService implements IAuthGitHubService {
    * @param access_token - OAuth access token
    * @param profie - GitHub OAuth Profile
    * @param profile.login - GitHub username
-   * @returns True if allowed to sign-in with GitHub
+   * @return True if allowed to sign-in with GitHub
    */
   async signIn(
     access_token: string,

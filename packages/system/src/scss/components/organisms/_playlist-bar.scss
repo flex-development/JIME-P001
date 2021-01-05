@@ -1,0 +1,82 @@
+/* -----------------------------------------------------------------------------
+PLAYLIST BAR
+----------------------------------------------------------------------------- */
+
+.playlist-bar {
+  @include flex(center, space-between, row);
+
+  background-color: $body-bg;
+  border-top: $border-width solid $border-color;
+  color: $light;
+
+  &-artwork {
+    @include breakpoint-up(sm) {
+      @include dimensions($space-64);
+
+      margin-right: $space-12;
+    }
+
+    @include dimensions($space-72);
+
+    @include position-relative;
+
+    display: inline-block;
+    margin-right: $space-8;
+
+    > img {
+      @include fluid-img;
+    }
+  }
+
+  &-col {
+    &:last-of-type {
+      fill: $light;
+      justify-content: flex-end;
+    }
+
+    align-items: center;
+    display: flex;
+  }
+
+  &-control {
+    &-playback {
+      @include margin-x($space-8);
+
+      font-size: $font-size-xxl;
+    }
+
+    &-skip {
+      font-size: $font-size-base;
+    }
+
+    &-playback,
+    &-skip {
+      .icon {
+        @include dimensions(rem(26));
+      }
+    }
+  }
+
+  &-media-details {
+    @include breakpoint-up(sm) {
+      font-size: em($font-size-xs);
+    }
+
+    @include flex-column;
+
+    font-size: em($font-size-sm);
+  }
+
+  &-song {
+    @include breakpoint-up(sm) {
+      font-size: $font-size-sm;
+    }
+
+    font-weight: $font-weight-semibold;
+  }
+
+  &-artist,
+  &-song {
+    margin-bottom: $space-0;
+  }
+}

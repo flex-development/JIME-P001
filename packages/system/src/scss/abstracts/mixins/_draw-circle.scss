@@ -1,0 +1,15 @@
+/// ----------------------------------------------------------------------------
+/// @name draw-circle
+/// @group mixins
+/// ----------------------------------------------------------------------------
+
+@use 'dimensions' as *;
+
+/// Shape an element like a circle.
+/// @require {mixin} dimensions
+/// @param {Number} $size - Circle size
+@mixin draw-circle($size) {
+  @include dimensions($size);
+
+  border-radius: 50%;
+}

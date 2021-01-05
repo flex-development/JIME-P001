@@ -136,7 +136,7 @@ module.exports = {
       }
     },
     {
-      files: ['**/.eslintrc.js'],
+      files: ['**/.eslintrc.js', '**/webpack.*.js'],
       rules: {
         'sort-keys': 0
       }

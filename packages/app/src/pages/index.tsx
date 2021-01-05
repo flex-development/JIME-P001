@@ -1,3 +1,9 @@
+import {
+  getCMSPageSEO,
+  ICMSPageIndex,
+  PageService,
+  ProviderSessionGitHub
+} from '@app/subdomains/cms'
 import { database } from '@app/subdomains/firebase/config/web'
 import { SortOrder } from '@flex-development/json'
 import { IProductListing, IReview } from '@flex-development/kustomzcore'
@@ -10,12 +16,6 @@ import {
   PC,
   SEO
 } from '@subdomains/app'
-import {
-  getCMSPageSEO,
-  ICMSPageIndex,
-  PageService,
-  ProviderSessionGitHub
-} from '@subdomains/cms'
 import { ProductService, ReviewService } from '@subdomains/sales'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
 import { getSession } from 'next-auth/client'
@@ -63,7 +63,7 @@ const Home: PC<IPagePropsIndex> = ({ page }: IPagePropsIndex) => (
  * @param context.params - Dynamic route parameters
  * @param context.query - The query string
  * @param context.req - HTTP request object
- * @returns Template data and current user session
+ * @return Template data and current user session
  */
 export const getServerSideProps: GetServerSideProps<
   IPagePropsCMS,

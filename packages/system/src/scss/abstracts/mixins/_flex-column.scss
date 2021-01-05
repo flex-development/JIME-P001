@@ -1,0 +1,19 @@
+/// ----------------------------------------------------------------------------
+/// @name flex-column
+/// @group mixins
+/// ----------------------------------------------------------------------------
+
+/// Create a flexbox column.
+/// @param {Boolean} $reverse [false] - If true, use `column-reverse`
+/// @param {String} $display [flex] - Flexbox display value
+/// @throw If `$display` isn't a valid flexbox display value
+@mixin flex-column($reverse: false, $display: flex) {
+  @if $display != flex and $display != inline-flex {
+    @error '`#{$display}` is not a valid flexbox display value';
+  }
+
+  display: $display;
+  flex-direction: if($reverse, column-reverse, column);
+
+  @content;
+}

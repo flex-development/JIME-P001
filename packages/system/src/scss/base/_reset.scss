@@ -1,0 +1,285 @@
+/* -----------------------------------------------------------------------------
+RESET
+----------------------------------------------------------------------------- */
+
+/* GLOBAL */
+
+// Change from `box-sizing: content-box` so that `width` is not affected by
+// `padding` or `border`.
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* BODY */
+
+// 1. Change the default tap highlight to be completely transparent in iOS
+// 2. Prevent adjustments of font size after orientation changes in iOS
+// 3. Apply a default `background-color`
+// 4. Remove the margin in all browsers
+
+body {
+  -webkit-tap-highlight-color: rgba($black, 0); // 1
+  -webkit-text-size-adjust: 100%; // 2
+
+  background-color: $body-bg; // 3
+  color: $body-color;
+  font-family: $font-family-base;
+  font-size: $font-size-base;
+  font-weight: $font-weight-base;
+  line-height: $line-height-base;
+  margin: 0; // 4
+  text-align: $body-text-align;
+}
+
+// In browsers that support :focus-visible, suppress the focus outline on
+// elements that programmatically receive focus but wouldn't normally show a
+// visible focus outline
+//
+// The outline is only applied if the interaction that led to the element
+// receiving programmatic focus was a keyboard interaction, or the browser has
+// determined that the user is primarily a keyboard user and/or wants focus
+// outlines to always be presented
+//
+// See: https://developer.mozilla.org/en-US/docs/Web/CSS/:focus-visible
+// See: https://developer.paciellogroup.com/blog/2018/03/focus-visible-and-backwards-compatibility/
+[tabindex="-1"]:focus:not(:focus-visible) {
+  outline: 0 !important;
+}
+
+/* CONTENT GROUPING */
+
+// 1. Reset Firefox's gray color
+// 2. Set correct height and prevent the `size` attribute from making the `hr`
+//    look like an input field
+
+hr {
+  background-color: currentColor;
+  border: 0;
+  color: $hr-color; // 1
+  opacity: $hr-opacity;
+  margin: $hr-margin-y 0;
+}
+
+hr:not([size]) {
+  height: $hr-height; // 2
+}
+
+/* TYPOGRAPHY */
+
+// 1. Remove top margins from headings
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: $headings-color;
+  font-family: $headings-font-family;
+  font-style: $headings-font-style;
+  font-weight: $headings-font-weight;
+  line-height: $headings-line-height;
+  margin-bottom: $headings-margin-bottom;
+  margin-top: 0; // 1
+}
+
+h1 {
+  font-size: $h1-font-size;
+}
+
+h2 {
+  font-size: $h2-font-size;
+}
+
+h3 {
+  font-size: $h3-font-size;
+}
+
+h4 {
+  font-size: $h4-font-size;
+}
+
+h5 {
+  font-size: $h5-font-size;
+}
+
+h6 {
+  font-size: $h6-font-size;
+}
+
+// Reset margins on paragraphs
+p {
+  margin-top: 0;
+  margin-bottom: $paragraph-margin-bottom;
+}
+
+/* LISTS */
+
+ol,
+ul {
+  padding-left: 2rem;
+}
+
+ol,
+ul,
+dl {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+ol ol,
+ul ul,
+ol ul,
+ul ol {
+  margin-bottom: 0;
+}
+
+/* STRONG */
+
+// Add the correct font weight in Chrome, Edge, and Safari
+b,
+strong {
+  font-weight: $font-weight-bold;
+}
+
+/* LINKS */
+
+a {
+  @include user-event {
+    color: $link-hover-color;
+    cursor: pointer;
+    text-decoration: $link-hover-decoration;
+  }
+
+  color: $link-color;
+  text-decoration: $link-decoration;
+}
+
+// Undo styles for placeholder links/named anchors (without href)
+a:not([href]):not([class]) {
+  &,
+  &:hover {
+    color: inherit;
+    text-decoration: none;
+  }
+}
+
+// Set font weight for links with pargraphs
+p a {
+  font-weight: $font-weight-semibold;
+}
+
+/* FIGURES, IMAGES, AND CONTENT */
+
+// Apply a consistent margin strategy
+figure {
+  margin: 0 0 1rem;
+}
+
+// Images and content
+img,
+svg {
+  vertical-align: middle;
+}
+
+/* FORMS */
+
+// 1. Allow labels to use `margin` for spacing.
+label {
+  display: inline-block; // 1
+}
+
+// Remove the default `border-radius` that macOS Chrome adds.
+button {
+  border-radius: 0;
+}
+
+// Work around a Firefox bug where the transparent `button` background
+// results in a loss of the default `button` focus styles.
+// Credit: https://github.com/suitcss/base/
+button:focus {
+  outline: dotted 1px;
+  outline: -webkit-focus-ring-color auto 5px;
+}
+
+// 1. Remove the margin in Firefox and Safari
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  margin: 0; // 1
+}
+
+
+// Remove the inheritance of text transform in Firefox
+button,
+select {
+  text-transform: none; // 1
+}
+
+// 1. Add "hand" cursor to non-disabled button elements
+// 2. Add "not-allowed" cursor to disabled button elements
+button,
+[role='button'],
+select {
+  @if $enable-button-pointers {
+    &:not(:disabled) {
+      cursor: pointer; // 1
+    }
+
+    &:disabled {
+      cursor: not-allowed; // 2
+    }
+  }
+}
+
+// 1 . Remove the inheritance of word-wrap in Safari.
+select {
+  word-wrap: normal;
+}
+
+// 1. Prevent a WebKit bug where (2) destroys native `audio` and `video`
+//    controls in Android 4.
+// 2. Correct the inability to style clickable types in iOS and Safari.
+// 3. Add "hand" cursor to non-disabled button elements.
+// 4. Add "not-allowed" cursor to disabled button elements.
+button,
+[type='button'], // 1
+[type='reset'],
+[type='submit'] {
+  -webkit-appearance: button; // 2
+}
+
+// Remove inner border and padding from Firefox
+::-moz-focus-inner {
+  padding: 0;
+  border-style: none;
+}
+
+// 1. Textareas should really only resize vertically so they don't break their
+// (horizontal) containers. 
+textarea {
+  resize: vertical; // 1
+}
+
+// 1. Correct the outline style in Safari.
+// 2. Overrides the extra rounded corners on search inputs in iOS
+[type="search"] {
+  outline-offset: -2px; // 1
+  -webkit-appearance: textfield; // 2
+}
+
+// Remove the inner padding in Chrome and Safari on macOS.
+::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+// Always hide an element with the `hidden` HTML attribute.
+[hidden] {
+  display: none !important;
+}

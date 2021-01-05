@@ -1,0 +1,14 @@
+/// ----------------------------------------------------------------------------
+/// @name fluid-img
+/// @group mixins
+/// ----------------------------------------------------------------------------
+
+/// Creates a responsive, full width image.
+@mixin fluid-img {
+  // Set height to auto, otherwise images will be stretched when setting a width
+  // and height attribute on the <img> element
+  height: auto;
+
+  // Set a maximum relative to the parent
+  max-width: 100%;
+}

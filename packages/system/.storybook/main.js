@@ -1,7 +1,7 @@
-const merge = require('lodash').merge
 const path = require('path')
-const implementation = require('sass')
-const babelConfig = require('../babel.config.js')
+const { merge: mergeWebpack } = require('webpack-merge')
+const babelConfig = require('../babel.config')
+const wc = require('../webpack.common')
 
 /**
  * @file Storybook Configuration
@@ -9,7 +9,8 @@ const babelConfig = require('../babel.config.js')
  * @see https://storybook.js.org/docs/react/configure/overview
  */
 
-/* eslint-disable sort-keys */
+const DEV = process.env.NODE_ENV.toLowerCase() === 'development'
+const TSCONFIG_REL_PATH = DEV ? '../tsconfig.json' : '../tsconfig.prod.json'
 
 module.exports = {
   /**
@@ -20,20 +21,16 @@ module.exports = {
    * @property {Array<Object, String>} addons
    */
   addons: [
-    '@storybook/addon-links',
     '@storybook/addon-viewport',
     '@storybook/addon-backgrounds',
-    {
-      name: '@storybook/addon-docs',
-      options: {
-        configureJSX: true
-      }
-    },
-    '@storybook/addon-controls',
+    '@storybook/addon-docs',
     '@whitespace/storybook-addon-html',
-    '@storybook/addon-jest',
+    '@storybook/addon-controls',
+    '@storybook/addon-actions',
+    'storybook-mobile',
     '@storybook/addon-a11y',
-    '@storybook/addon-actions'
+    '@storybook/addon-jest',
+    'storybook-addon-performance'
   ],
 
   /**
@@ -44,7 +41,7 @@ module.exports = {
   stories: [
     '../src/index.stories.mdx',
     '../src/blocks/*.stories.mdx',
-    '../src/components/ui/**/**/*.stories.@(mdx|tsx)'
+    '../src/lib/**/**/*.stories.@(mdx|tsx)'
   ],
 
   /**
@@ -64,18 +61,21 @@ module.exports = {
     checkOptions: {},
     reactDocgen: 'react-docgen-typescript',
     reactDocgenTypescriptOptions: {
-      propFilter: prop => {
+      propFilter: ({ name, parent }) => {
         const omit = ['__docgenInfo', 'displayName', 'forwardedRef']
 
-        if (prop.parent && prop.parent.fileName.includes('node_modules')) {
-          omit.push(prop.name)
+        if (parent && parent.fileName.includes('node_modules')) {
+          const react = parent.fileName.includes('@types/react')
+          const aria_attr = name.startsWith('aria-')
+
+          if (!react || !aria_attr) omit.push(name)
         }
 
-        return !omit.includes(prop.name)
+        return !omit.includes(name)
       },
       shouldExtractLiteralValuesFromEnum: true,
       shouldRemoveUndefinedFromOptional: true,
-      tsconfigPath: path.join(__dirname, '../tsconfig.json')
+      tsconfigPath: path.join(__dirname, TSCONFIG_REL_PATH)
     }
   },
 
@@ -83,57 +83,37 @@ module.exports = {
    * Alters the Storybook Webpack configuration.
    *
    * @param {object} config - Base Webpack config
-   * @returns {object} Webpack configuration
+   * @return {object} Webpack configuration
    */
-  webpackFinal: async config => {
-    config.resolve.alias = merge(config.resolve.alias, {
-      '@system': path.join(__dirname, '../src')
-    })
-
-    config.module.rules.push({
-      test: /\.s[ac]ss$/i,
-      use: [
-        { loader: 'style-loader' },
-        { loader: 'css-loader' },
+  webpackFinal: config => mergeWebpack(config, {
+    resolve: {
+      alias: {
+        '@system': path.join(__dirname, '../src')
+      }
+    },
+    module: {
+      rules: [
         {
-          loader: 'postcss-loader',
-          options: {
-            config: {
-              path: path.join(__dirname, '../.postcss.config.js')
-            }
-          }
+          test: /\.s[ac]ss$/i,
+          use: [{ loader: 'style-loader' }].concat(wc.module.rules[0].use)
         },
         {
-          loader: 'sass-loader',
-          options: {
-            implementation,
-            sassOptions: {
-              includePaths: ['src/theme/'],
-              indentedSyntax: false,
-              outputStyle: 'expanded'
+          test: /\.(ts|tsx)$/,
+          include: [path.join(__dirname, '../src')],
+          use: [
+            {
+              loader: 'awesome-typescript-loader',
+              options: {
+                babelCore: '@babel/core',
+                babelOptions: { ...babelConfig, babelrc: false },
+                cacheDirectory: 'node_modules/.cache/awesome-typescript-loader',
+                useBabel: true,
+                useCache: true
+              }
             }
-          }
+          ]
         }
       ]
-    })
-
-    config.module.rules.push({
-      test: /\.(ts|tsx)$/,
-      include: [path.join(__dirname, '../src')],
-      use: [
-        {
-          loader: 'awesome-typescript-loader',
-          options: {
-            babelCore: '@babel/core',
-            babelOptions: { ...babelConfig, babelrc: false },
-            cacheDirectory: 'node_modules/.cache/awesome-typescript-loader',
-            useBabel: true,
-            useCache: true
-          }
-        }
-      ]
-    })
-
-    return config
-  }
+    }
+  })
 }

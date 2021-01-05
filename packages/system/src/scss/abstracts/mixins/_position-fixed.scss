@@ -1,0 +1,17 @@
+/// ----------------------------------------------------------------------------
+/// @name position-fixed
+/// @group mixins
+/// ----------------------------------------------------------------------------
+
+@use 'position' as *;
+
+/// Shorthand for fixed positioning.
+/// @require {mixin} position
+/// @param {List} $args - Offsets
+@mixin position-fixed($args...) {
+  @if $args {
+    @include position(fixed, $args...);
+  } @else {
+    @include position(fixed);
+  }
+}

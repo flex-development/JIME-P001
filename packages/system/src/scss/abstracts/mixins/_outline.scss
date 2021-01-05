@@ -1,0 +1,24 @@
+/// ----------------------------------------------------------------------------
+/// @name outline
+/// @group mixins
+/// ----------------------------------------------------------------------------
+
+@use 'border' as *;
+
+/// Adds an outline to an element.
+/// @require {mixin} border
+/// @require {variable} $border-color
+/// @require {variable} $border-width
+/// @require {variable} $border-radius
+/// @param {Color} $color - Border color
+/// @param {Number} $width [$border-width] - Outline border width
+/// @param {Number} $radius [$border-radius] - Outline border radius
+@mixin outline(
+  $color: $border-color,
+  $width: $border-width,
+  $radius: $border-radius
+) {
+  @include border($border-width, solid, $color, $radius);
+
+  border-radius: $radius;
+}

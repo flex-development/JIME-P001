@@ -1,9 +1,9 @@
-import { PagesFormPlugin } from '@subdomains/cms/config'
-import { CMSPagesDTO, ICMSPageSlug } from '@subdomains/cms/models'
+import { PagesFormPlugin } from '@app/subdomains/cms/config'
+import { CMSPagesDTO, ICMSPageSlug } from '@app/subdomains/cms/models'
 import {
   handlePagesForm as onSubmit,
   UseFormScreenPlugin
-} from '@subdomains/cms/utils'
+} from '@app/subdomains/cms/utils'
 import { useForm, useFormScreenPlugin } from 'tinacms'
 
 /**

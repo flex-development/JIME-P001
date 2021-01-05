@@ -1,0 +1,19 @@
+/// ----------------------------------------------------------------------------
+/// @name padding-x
+/// @group mixins
+/// ----------------------------------------------------------------------------
+
+/// Set an element's left and right padding values.
+/// @param {Number | String} $left - Left padding value
+/// @param {Number | String} $right [$left] - Right padding value
+@mixin padding-x($left, $right: $left) {
+  @if ($left) {
+    padding-left: $left;
+  }
+
+  @if ($right) {
+    padding-right: $right;
+  }
+
+  @content;
+}

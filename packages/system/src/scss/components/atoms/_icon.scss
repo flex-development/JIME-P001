@@ -1,0 +1,34 @@
+/* -----------------------------------------------------------------------------
+ICONS
+----------------------------------------------------------------------------- */
+
+.icon {
+  @include dimensions($space-20);
+
+  &[data-position='left'] {
+    margin-right: $space-1;
+  }
+
+  &[data-position='right'] {
+    margin-left: $space-1;
+  }
+
+  @each $key, $color in $theme-colors {
+    &-#{$key} {
+      fill: $color;
+    }
+
+    &-stroke-#{$key} {
+      stroke: $color;
+      stroke-width: 1.5;
+    }
+  }
+}
+
+.donut {
+  fill: $body-bg;
+  stroke: $light;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: rem(3);
+}

@@ -1,5 +1,5 @@
 /**
- * @file Hook - useCheckoutLineItemInput
+ * @file Hook Entry Point - useCheckoutLineItemInput
  * @module hooks/useCheckoutLineItemInput
  */
 

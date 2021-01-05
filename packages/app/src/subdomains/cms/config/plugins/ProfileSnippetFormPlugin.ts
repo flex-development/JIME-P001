@@ -1,7 +1,7 @@
-import { ProfileSnippetAPI } from '@subdomains/cms/config/config'
-import { URLField } from '@subdomains/cms/config/extensions'
-import { NumberField, TextField } from '@subdomains/cms/config/helpers'
-import { IProfileSnippet } from '@subdomains/cms/models'
+import { ProfileSnippetAPI } from '@app/subdomains/cms/config/config'
+import { URLField } from '@app/subdomains/cms/config/extensions'
+import { NumberField, TextField } from '@app/subdomains/cms/config/helpers'
+import { IProfileSnippet } from '@app/subdomains/cms/models'
 import { FormOptions } from 'tinacms'
 
 /**
@@ -14,7 +14,7 @@ import { FormOptions } from 'tinacms'
  *
  * @param label - Label for the form that will appear in the CMS sidebar
  * @param onSubmit - Function to invoke when the form is saved
- * @returns Sidebar profile snippet form configuration
+ * @return Sidebar profile snippet form configuration
  */
 export const ProfileSnippetFormPlugin = (
   label = 'Profile Snippet',

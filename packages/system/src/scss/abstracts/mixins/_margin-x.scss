@@ -1,0 +1,20 @@
+/// ----------------------------------------------------------------------------
+/// @name margin-x
+/// @group mixins
+/// ----------------------------------------------------------------------------
+
+/// Set an element's left and right margin values.
+/// @param {Number | String} $left - Left margin value
+/// @param {Number | String} $right [$left] - Right margin value
+@mixin margin-x($left, $right: $left) {
+  @if ($left) {
+    margin-left: $left;
+  }
+
+  @if ($right) {
+    margin-right: $right;
+  }
+
+  @content;
+}
+

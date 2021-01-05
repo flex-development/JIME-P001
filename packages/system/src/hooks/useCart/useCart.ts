@@ -1,7 +1,11 @@
-import { CheckoutLineItemInput } from '@flex-development/kustomzcore'
+import {
+  CheckoutLineItemInput,
+  CheckoutPermalinkInput,
+  CHECKOUT_BASE_URL
+} from '@flex-development/kustomzcore'
 import { getItemsTotal } from '@system/utils'
 import { isFunction } from 'lodash'
-import { useMemo } from 'react'
+import { createContext, useContext, useMemo } from 'react'
 import {
   UseCheckoutPermalink,
   useCheckoutPermalink
@@ -19,6 +23,21 @@ export type UseCart = UseCheckoutPermalink & {
    */
   items_total: number
 }
+
+export const CartContext = createContext<UseCart>({
+  items: [],
+  items_total: 0,
+  removeItem: (variant_id: number | string) => {
+    console.log({ 'CartContext.removeItem': variant_id })
+  },
+  setItems: (items: CheckoutPermalinkInput[]) => {
+    console.log({ 'CartContext.setItems': items })
+  },
+  upsertItem: (data: CheckoutPermalinkInput) => {
+    console.log({ 'CartContext.upsertItem': data })
+  },
+  url: CHECKOUT_BASE_URL
+})
 
 /**
  * Returns an object containing the line items in the user's cart, functions to
@@ -40,4 +59,11 @@ export const useCart = (
   }, [checkout.items])
 
   return { ...checkout, items_total }
+}
+
+/**
+ * Returns an object representing the shopping cart context state.
+ */
+export const useCartContext = (): UseCart => {
+  return useContext(CartContext)
 }

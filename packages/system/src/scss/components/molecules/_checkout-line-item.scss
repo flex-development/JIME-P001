@@ -1,0 +1,106 @@
+/* -----------------------------------------------------------------------------
+CHECKOUT LINE ITEM
+----------------------------------------------------------------------------- */
+
+.checkout-line-item {
+  @include breakpoint-up(md) {
+    @include make-grid;
+  }
+
+  @include make-grid(1, 0, null, 24);
+
+  @include width(100%, 100%);
+
+  &-attribute {
+    @include margin-y($space-10, $space-18);
+
+    font-weight: $font-weight-semibold;
+    text-transform: uppercase;
+
+    span {
+      font-weight: $font-weight-normal;
+    }
+  }
+
+  &-btn {
+    @include breakpoint-up(md) {
+      margin-top: $space-0;
+    }
+
+    @include padding-x($space-20);
+
+    margin-top: $space-24;
+  }
+
+  &-col {
+    &:first-of-type {
+      @include breakpoint-up(md) {
+        @include make-grid-col(3);
+      }
+    }
+
+    &:last-of-type {    
+      @include breakpoint-up(md) {
+        @include make-grid-col(9);
+      }
+
+      justify-content: center;
+    }
+
+    @include make-grid-col;
+  }
+
+  &-form {
+    @include breakpoint-up(md) {
+      @include flex-spread;
+
+      flex-direction: row;
+    }
+
+    @include flex-column;
+
+    &-field {
+      @include breakpoint-up(sm) {
+        flex-direction: row;
+      }
+
+      @include flex-column;
+    }
+  }
+
+  &-heading {
+    margin-bottom: $space-0;
+  }
+
+  &-img {
+    @include fluid-img;
+  }
+
+  &-quantity {
+    .form-control:read-only {
+      background-color: $input-bg;
+      border: none;
+    }
+  }
+
+  &-title {
+    @include breakpoint-down(sm) {
+      border-bottom: none !important;
+    }
+
+    @include breakpoint-up(sm) {
+      border-right: none !important;
+    }
+
+    font-size: $h3-font-size;
+  }
+
+  &-attribute,
+  &-btn {
+    @include breakpoint-up(sm) {
+      font-size: $font-size-sm;
+    }
+
+    font-size: $font-size-base
+  }
+}

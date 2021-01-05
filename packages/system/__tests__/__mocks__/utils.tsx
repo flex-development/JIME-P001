@@ -1,10 +1,13 @@
 import ReviewsMockRepoRoot from '@app-mocks/data/reviews.mock.json'
 import { IProductListing, IReview } from '@flex-development/kustomzcore'
+import ITEMS from '@system-mocks/data/checkout-line-items.mock.json'
 import products from '@system-mocks/data/product-listings.mock.json'
 import SONGS from '@system-mocks/data/song-attributes.mock.json'
-import { CartContextProviderProps } from '@system/components/context'
+import {
+  CartContextProvider,
+  CartContextProviderProps
+} from '@system/providers'
 import { render } from '@testing-library/react'
-import { MockCartContextProvider } from './components'
 
 /**
  * @file Testing Utilities
@@ -27,7 +30,7 @@ export const renderWithMockCartContext = (
   options: Parameters<typeof render>[1] = {}
 ): ReturnType<typeof render> => {
   props.children = consumer
-  return render(<MockCartContextProvider {...props} />, options)
+  return render(<CartContextProvider {...props} items={ITEMS} />, options)
 }
 
 export { SONGS }

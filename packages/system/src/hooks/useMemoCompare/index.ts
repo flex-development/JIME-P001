@@ -1,5 +1,5 @@
 /**
- * @file Hook - useMemoCompare
+ * @file Hook Entry Point - useMemoCompare
  * @module hooks/useMemoCompare
  */
 

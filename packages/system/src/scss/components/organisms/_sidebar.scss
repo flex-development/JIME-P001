@@ -1,0 +1,92 @@
+/* -----------------------------------------------------------------------------
+SIDEBAR
+----------------------------------------------------------------------------- */
+
+.sidebar {
+  @include flex-column;
+
+  @include height(max-content, none, 100%);
+
+  background-color: $body-bg;
+  font-size: $sidebar-font-size;
+  padding: $sidebar-padding-y $sidebar-padding-x;
+
+  &-footer {
+    @include breakpoint-up(lg) {
+      margin-top: $space-80 * 1.75;
+    }
+
+    @include margin-y($space-80, $space-0);
+  }
+
+  &-menu {
+    @include flex-column;
+
+    .menu-link {
+      @include padding-x($space-0);
+
+      font-weight: $font-weight-light;
+    }
+  }
+
+  &-profile {
+    p {
+      &:not(:last-of-type) {
+        margin-bottom: $space-8;
+      }
+
+      &:last-of-type {
+        margin-bottom: $space-0;
+      }
+    }
+
+    &-details {
+      @include breakpoint-up(sm) {
+        margin-bottom: $space-36;
+      }
+
+      margin-bottom: $space-20;
+    }
+
+    &-link-img {
+      @include breakpoint-up(sm) {
+        @include dimensions(rem(210));
+      }
+
+      display: inline-block;
+      margin-bottom: $space-36;
+
+      img {
+        @include fluid-img;
+      }
+    }
+
+    &-name {
+      font-size: $font-size-xl;
+    }
+
+    &-online-status {
+      display: inline-flex;
+
+      .icon {
+        fill: $secondary;
+        margin-right: $space-12 / 2;
+      }
+    }
+
+    &-name,
+    &-online-status {
+      font-weight: $font-weight-bold;
+    }
+  }
+
+  .developer-credit {
+    @include breakpoint-up(lg) {
+      font-size: $font-size-xs;      
+    }
+  }
+}
+
+.developer-credit {
+  text-transform: uppercase;
+}

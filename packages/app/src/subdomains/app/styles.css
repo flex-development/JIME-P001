@@ -1,41 +1,17 @@
 /* APP STYLES */
 
-/* ShopLayout */
+/* WEB FONTS */
 
-.hero {
-  height: 668px !important;
+.wf-loading {  
+  opacity: 0;
 }
 
-/* .sidebar {
-  width: 100%;
+.wf-active,
+.wf-loading .layout {
+  opacity: 1;
 }
 
-.sidebar-col {
-  height: 100vh;
-  left: 0;
-  position: fixed;
+.wf-active,
+.wf-loading {
+  transition: opacity .15s linear;
 }
-
-.playlistbar,
-.shop-header,
-.sidebar-col {
-  z-index: 2;
-}
-
-@media screen and (max-width: 1010px) {
-  .sidebar-col:not(.d-none) {
-    background-color: rgba(0, 0, 0, 25%);
-  }
-}
-
-@media screen and (max-width: 834px) {
-  .sidebar-col {
-    position: absolute;
-  }
-}
-
-@media screen and (min-width: 576px) and (max-width: 1010px) {
-  .sidebar {
-    width: 40vw;
-  }
-} */

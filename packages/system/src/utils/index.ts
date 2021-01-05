@@ -1,14 +1,14 @@
 /**
- * @file Utilities Library
+ * @file Entry Point - Utilities
  * @module utils
  */
 
 export * from './breakpointInfix'
-export * from './creativeResponsiveUtility'
 export * from './formatPrice'
+export * from './genclass'
+export * from './genclasses'
 export * from './getItemsTotal'
-export * from './getProductVariantImage'
-export * from './getResponsiveUtilities'
+export * from './getProductImage'
 export * from './getSongArtworkURL'
 export * from './getSubtotal'
 export * from './sanitizeQuantity'

@@ -1,0 +1,23 @@
+/// ----------------------------------------------------------------------------
+/// @name em
+/// @group functions
+/// ----------------------------------------------------------------------------
+
+@use 'strip-unit' as *;
+
+/// Converts a value into an `em` value.
+/// @require {function} strip-unit
+/// @param {Number} $value [0] - Value to convert
+/// @param {Number} $base [16] - Base font size
+@function em($value: 0, $base: 16) {
+  $em-multipier: 1em;
+  $unit: unit($value);
+
+  @if ($unit == em) {
+    @return $value;
+  } @else if ($unit == rem) {
+    @return strip-unit($value) * $em-multipier;
+  }
+
+  @return (strip-unit(if($value, $value, 0)) / $base) * $em-multipier;
+}

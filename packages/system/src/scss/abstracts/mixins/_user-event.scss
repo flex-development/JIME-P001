@@ -1,0 +1,23 @@
+/// ----------------------------------------------------------------------------
+/// @name user-event
+/// @group mixins
+/// ----------------------------------------------------------------------------
+
+/// User event wrapper for &:hover, &:active, &:focus
+/// @param {Boolean} $self [false] - If true, include current selector
+@mixin user-event($self: false) {
+  @if $self {
+    &,
+    &:hover,
+    &:active,
+    &:focus {
+      @content;
+    }
+  } @else {
+    &:hover,
+    &:active,
+    &:focus {
+      @content;
+    }
+  }
+}

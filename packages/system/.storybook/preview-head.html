@@ -4,3 +4,10 @@ for adding web fonts or some external scripts.
   
 You can accomplish this by creating a file called preview-head.html inside the Storybook config directory and add tags like this:
 -->
+
+<script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js">
+</script>
+
+<script>
+  WebFont.load({ typekit: { id: 'oee3tpl' } })
+</script>

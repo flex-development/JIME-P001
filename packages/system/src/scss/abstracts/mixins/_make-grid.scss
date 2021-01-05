@@ -1,0 +1,55 @@
+/// ----------------------------------------------------------------------------
+/// @name make-grid
+/// @group mixins
+/// ----------------------------------------------------------------------------
+
+/// Turn an element into a grid.
+/// @require {variable} $grid-gutter-width
+/// @require {variable} $grid-template-columns
+/// @require {variable} $grid-template-rows
+/// @require {variable} $gutters
+/// @param {Number | String | null} $cols [12] - `$grid-template-columns` key
+/// @param {Number | null} $column-gap [24] - `$gutters` key
+/// @param {Number} $rows [null] - `$grid-template-rows` key
+/// @param {Number} $row-gap [null] - `$gutters` key
+/// @param {String} $display [grid] - Grid display value
+/// @throw If map keys or grid display value is invalid
+@mixin make-grid(
+  $cols: 12, 
+  $column-gap: 24,
+  $rows: null, 
+  $row-gap: null,
+  $display: grid
+) {
+  @if $display != grid and $display != inline-grid {
+    @error '`#{$display}` is not a valid grid display value';
+  } @else if $cols and map-has-key($grid-template-columns, $cols) == false {
+    @error 'Key `#{$cols}` not found in $grid-template-columns';
+  } @else if $column-gap and map-has-key($gutters, $column-gap) == false {
+    @error 'Key `#{$column-gap}` not found in $gutters';
+  } @else if $rows and map-has-key($grid-template-rows, $rows) == false {
+    @error 'Key `#{$rows}` not found in $grid-template-rows';
+  } @else if $row-gap and map-has-key($gutters, $row-gap) == false {
+    @error 'Key `#{$row-gap}` not found in $gutters';
+  }
+
+  display: if($display, $display, grid);
+
+  @if $cols {
+    grid-template-columns: map-get($grid-template-columns, $cols);
+  }
+
+  @if $column-gap {
+    column-gap: map-get($gutters, $column-gap);
+  }
+
+  @if $rows {
+    grid-template-rows: map-get($grid-template-rows, $rows);
+  }
+
+  @if $row-gap {
+    row-gap: map-get($gutters, $row-gap);
+  }
+
+  @content;
+}

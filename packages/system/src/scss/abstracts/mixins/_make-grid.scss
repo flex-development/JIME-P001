@@ -15,9 +15,9 @@
 /// @param {String} $display [grid] - Grid display value
 /// @throw If map keys or grid display value is invalid
 @mixin make-grid(
-  $cols: 12, 
+  $cols: 12,
   $column-gap: 24,
-  $rows: null, 
+  $rows: null,
   $row-gap: null,
   $display: grid
 ) {

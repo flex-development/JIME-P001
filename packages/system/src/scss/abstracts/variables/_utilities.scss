@@ -12,7 +12,7 @@ $utilities: (
       center: center,
       end: flex-end,
       start: flex-start,
-      stretch: stretch,
+      stretch: stretch
     ),
     responsive: true
   ),
@@ -106,7 +106,8 @@ $utilities: (
   'display': (
     property: display,
     class: d,
-    values: block flex grid inline-block inline-flex inline table-cell table-row table none,
+    values: block flex grid inline-block inline-flex inline table-cell table-row
+      table none,
     responsive: true,
     print: true
   ),
@@ -230,13 +231,17 @@ $utilities: (
   'height-viewport-min': (
     property: min-height,
     class: min-vh,
-    values: (100: 100vh),
+    values: (
+      100: 100vh
+    ),
     responsive: true
   ),
   'height-viewport': (
     property: height,
     class: vh,
-    values: (100: 100vh),
+    values: (
+      100: 100vh
+    ),
     responsive: true
   ),
   'height': (
@@ -409,7 +414,7 @@ $utilities: (
   ),
   'position': (
     property: position,
-    values: absolute fixed relative static sticky 
+    values: absolute fixed relative static sticky
   ),
   'shadow': (
     property: box-shadow,
@@ -419,7 +424,7 @@ $utilities: (
       none: none,
       null: $box-shadow,
       sm: $box-shadow-sm
-    ),
+    )
   ),
   'stroke': (
     property: stroke,
@@ -441,7 +446,7 @@ $utilities: (
   ),
   'user-select': (
     property: user-select,
-    values: all auto none,
+    values: all auto none
   ),
   'visibility': (
     property: visibility,
@@ -458,13 +463,17 @@ $utilities: (
   'width-viewport-min': (
     property: min-width,
     class: min-vw,
-    values: (100: 100vw),
+    values: (
+      100: 100vw
+    ),
     responsive: true
   ),
   'width-viewport': (
     property: width,
     class: vw,
-    values: (100: 100vw),
+    values: (
+      100: 100vw
+    ),
     responsive: true
   ),
   'width': (

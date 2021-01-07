@@ -4,19 +4,19 @@ FORMS
 
 .form-check-input {
   @include bkg-img(null, contain);
-  
+
   @include height($form-check-input-width);
 
   @include width($form-check-input-width);
 
-  appearance: none;  
+  appearance: none;
   background-color: $form-check-input-bg;
   border: $form-check-input-border;
   color-adjust: exact;
   margin-top: ($line-height-base - $form-check-input-width) / 2;
   transition: $form-check-transition;
   vertical-align: top;
- 
+
   &[type='checkbox'] {
     border-radius: $form-check-input-border-radius;
   }
@@ -57,9 +57,9 @@ FORMS
 
 .form-control {
   @include border(
-    $input-border-width, 
-    solid, 
-    $input-border-color, 
+    $input-border-width,
+    solid,
+    $input-border-color,
     $input-border-radius
   );
 

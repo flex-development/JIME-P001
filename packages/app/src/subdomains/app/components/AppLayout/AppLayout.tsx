@@ -1,19 +1,9 @@
-import {
-  useCMSAuth,
-  useMenus,
-  usePage,
-  usePlaylistSettingsForm,
-  useProfileSnippetForm
-} from '@app/subdomains/cms/hooks'
-import { usePlaylist } from '@app/subdomains/streaming'
-import {
-  Layout,
-  LinkProps,
-  ShopHeaderProps
-} from '@flex-development/kustomzdesign'
+import { useWebFontLoader } from '@app/subdomains/app/hooks/useWebFontLoader'
+import { useMenu } from '@app/subdomains/cms/hooks/useMenu'
+import { usePlaylist } from '@app/subdomains/streaming/hooks/usePlaylist'
+import { Layout, ShopHeaderProps } from '@flex-development/kustomzdesign'
 import { IPageProps, PC } from '@subdomains/app/interfaces'
 import { merge } from 'lodash'
-import { Provider as NextAuthProvider, Session } from 'next-auth/client'
 import Head from 'next/head'
 import { FC, useCallback } from 'react'
 
@@ -35,36 +25,24 @@ export interface AppLayoutProps {
 }
 
 /**
- * Renders the store layout and current page and initializes the NextAuth
- * provider component.
- *
- * @todo Get hero data from CMS
- * @todo Finish implementing PlaylistBar functionality
+ * Renders the store layout and current page.
  *
  * @param props - Component properties
  * @param props.page - Next.js page component
  * @param props.pageProps - Props from Next.js data-fetching methods
+ * @param props.pageProps.globals - Shopify `globals` namespace metafields obj
  */
 export const AppLayout: FC<AppLayoutProps> = (props: AppLayoutProps) => {
   const { page: Component, pageProps } = props
 
-  // Handle CMS user session
-  const { session } = useCMSAuth()
+  // Load Web Fonts
+  const webfonts = useWebFontLoader({ typekit: { id: 'oee3tpl' } })
 
-  // Get site navigation as menu links
-  const menus = useMenus()
-
-  // Get page data
-  const page = usePage(pageProps.page)
-
-  // Register profile snippet settings form (data used in Sidebar)
-  const { modified: snippet } = useProfileSnippetForm()
-
-  // Register playlist settings form
-  const { modified: playlist_settings } = usePlaylistSettingsForm()
+  // Get main menu
+  const menu = useMenu('main-menu')
 
   // Handle songs to stream
-  const playlist = usePlaylist(playlist_settings.url)
+  const playlist = usePlaylist(`${pageProps.globals.playlist_url.value}`)
 
   /**
    * Redirects the user to the search page with their search {@param term}.
@@ -81,7 +59,7 @@ export const AppLayout: FC<AppLayoutProps> = (props: AppLayoutProps) => {
   const handleSearchCB = useCallback(handleSearch, [])
 
   return (
-    <NextAuthProvider session={(session || {}) as Session}>
+    <>
       <Head>
         {/* Viewport for responsive web design */}
         <meta
@@ -92,18 +70,28 @@ export const AppLayout: FC<AppLayoutProps> = (props: AppLayoutProps) => {
 
       <Layout
         header={{ handleSearch: handleSearchCB }}
+        loading={!webfonts || menu.isValidating}
         playlistbar={{ songs: playlist.songs }}
         sidebar={{
-          age: snippet.age,
-          img: snippet.img || undefined,
-          location: snippet.location,
-          menu: menus.main as Array<LinkProps>,
-          mood: snippet.mood
+          age: JSON.parse(pageProps.globals.profile_age.value as string),
+          img: (() => {
+            const img = pageProps.globals.profile_img.value as string
+
+            if (!img?.length) return undefined
+
+            return JSON.parse(img)[0].cloudinary_src
+          })(),
+          location: pageProps.globals.profile_location.value as string,
+          menu: (menu.data?.links ?? []).map(({ title, url }) => ({
+            href: url,
+            title
+          })),
+          mood: pageProps.globals.profile_mood.value as string
         }}
       >
-        <Component {...merge(pageProps, { page })} />
+        <Component {...merge(pageProps, { data: {} })} />
       </Layout>
-    </NextAuthProvider>
+    </>
   )
 }
 

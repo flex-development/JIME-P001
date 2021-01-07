@@ -9,7 +9,7 @@ import { Markdown, MDX } from './PageTemplate.stories'
  */
 
 describe('PageTemplate', () => {
-  it('renders with class "template" and data-template=${template_id}', () => {
+  it('renders with class "template" and template_id', () => {
     const { container } = render(<Markdown {...Markdown.args} />)
     const { template_id } = PageTemplate
 

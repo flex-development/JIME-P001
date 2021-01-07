@@ -4,11 +4,6 @@
     "enabled": true,
     "silent": false
   },
-  "functions": {
-    "src/pages/api/**/*.ts": {
-      "maxDuration": 10
-    }
-  },
   "redirects": [
     {
       "source": "/checkouts/:permalink",
@@ -23,12 +18,8 @@
   ],
   "rewrites": [
     {
-      "source": "/",
-      "destination": "/index"
-    },
-    {
-      "source": "/admin",
-      "destination": "/api/admin/login"
+      "source": "/pages/:handle*",
+      "destination": "/:handle*"
     },
     {
       "source": "/products",

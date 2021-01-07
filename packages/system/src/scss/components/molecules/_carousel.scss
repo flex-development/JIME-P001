@@ -24,14 +24,14 @@ CAROUSEL
 
     .carousel-indicator {
       @include dimensions(
-        $carousel-indicator-width, 
+        $carousel-indicator-width,
         $carousel-indicator-height
       );
 
       @include margin-x($carousel-indicator-spacer);
 
       @include opacity($carousel-indicator-opacity);
-  
+
       background-color: $carousel-indicator-active-bg;
       background-clip: padding-box;
       border-bottom: $carousel-indicator-hit-area-height solid $ghost;
@@ -72,7 +72,7 @@ CAROUSEL
     float: left;
     margin-right: -100%;
     transition: $carousel-transition;
-    
+
     &.active {
       display: block;
     }
@@ -82,6 +82,6 @@ CAROUSEL
   &-item {
     @include fluid-width;
 
-    @include position-relative; 
+    @include position-relative;
   }
 }

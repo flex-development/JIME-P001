@@ -13,13 +13,13 @@
 /// @param {String | null} $radius [null] - Border radius
 /// @param {String | null} $pos [null] - Border placement
 @mixin border(
-  $width: $border-width, 
-  $style: normal, 
-  $color: $border-color, 
+  $width: $border-width,
+  $style: normal,
+  $color: $border-color,
   $radius: null,
   $pos: null
 ) {
-  $property: 'border#{if($pos, '-#{$pos}', '')}';
+  $property: 'border#{if($pos, '-#{$pos}', ' ')}';
 
   @if $color {
     #{$property}-color: $color;
@@ -32,6 +32,6 @@
   @if $radius {
     #{$property}-radius: $radius;
   }
-  
+
   #{$property}-style: if($style, $style, solid);
 }

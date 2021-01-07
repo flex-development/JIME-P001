@@ -8,7 +8,7 @@ import { Search } from './SearchTemplate.stories'
  */
 
 describe('SearchTemplate', () => {
-  it('renders with class "template" and data-template=${template_id}', () => {
+  it('renders with class "template" and template_id', () => {
     const { template_id } = SearchTemplate
 
     const { container } = render(<Search {...Search.args} />)

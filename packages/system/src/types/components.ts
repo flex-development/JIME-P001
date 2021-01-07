@@ -20,7 +20,7 @@ export type AC<T extends ElementType> = AnimatedComponent<T>
  */
 export type AnimatedFREC<
   T extends AnyObject | string
-  > = T extends keyof JSX.IntrinsicElements
+> = T extends keyof JSX.IntrinsicElements
   ? AnimatedComponent<T>
   : AnimatedComponent<FC<T>>
 

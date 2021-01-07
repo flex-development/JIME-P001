@@ -3,9 +3,6 @@
  * @module subdomains/cms/utils
  */
 
-export * from './getCMSPageSEO'
-export * from './handleIndexPageForm'
-export * from './handlePagesForm'
-export * from './types'
+export default {}
 
 /* eslint-disable prettier/prettier */

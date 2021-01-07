@@ -2,16 +2,15 @@
 
 /* WEB FONTS */
 
-.wf-loading {  
+.layout > * {
+  transition: opacity 0.125s linear;
+}
+
+.wf-active .layout[data-loading='false'] > * {
+  opacity: 1 !important;
+}
+
+html .layout > *:not(.loading-container),
+.wf-loading .layout > * {
   opacity: 0;
-}
-
-.wf-active,
-.wf-loading .layout {
-  opacity: 1;
-}
-
-.wf-active,
-.wf-loading {
-  transition: opacity .15s linear;
 }

@@ -1,98 +1,66 @@
-import { database } from '@app/subdomains/firebase/config/web'
-import { AnyObject, serialize } from '@flex-development/json'
-import { IProductListing, IReview } from '@flex-development/kustomzcore'
+import { getSEOData } from '@app/subdomains/app/utils/getSEOData'
+import { getGlobalMetafields } from '@app/subdomains/metafields/utils/getGlobalMetafields'
+import { serialize } from '@flex-development/json'
+import { IProductListing } from '@flex-development/kustomzcore'
+import { ProductTemplateProps } from '@flex-development/kustomzdesign'
 import {
-  getProductImage,
-  ProductTemplate,
-  ProductTemplateProps
-} from '@flex-development/kustomzdesign'
-import {
-  IPagePropsProduct,
+  IPagePropsProduct as PageProps,
   NotFound,
   PC,
   ProductPageParams,
   ProductPageUrlQuery,
-  SEO,
-  SEOProps
+  SEO
 } from '@subdomains/app'
-import { ProductService, ReviewService } from '@subdomains/sales'
+import { ProductService } from '@subdomains/sales/services/ProductService'
 import { findIndex } from 'lodash'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
-import stripHtml from 'string-strip-html'
+import dynamic from 'next/dynamic'
 
 /**
  * @file Page - Product
  * @module pages/products/handle
  */
 
+const ProductTemplate = dynamic(async () => {
+  return (await import('@flex-development/kustomzdesign')).ProductTemplate
+})
+
 /**
  * Renders a product page.
  *
  * @param props - Page component props
- * @param props.page - Page data
- * @param props.collection - `LinkProps` for product collection
- * @param props.collection.href - Link to collection
- * @param props.collection.title - Title of collection
- * @param props.product - Product listing data
+ * @param props.globals - Shopify `globals` namespace metafields obj
+ * @param props.page - Shopify API product listing resource data
+ * @param props.seo - `SEO` component properties
+ * @param props.template - `ProductTemplate` component properties
  */
-const Product: PC<IPagePropsProduct> = ({ page }) => {
-  // Get current product variant to build page SEO
-  const variant = page.product.variants[page.active || 0]
-  const page_title = `${page.product.title} - ${variant.title}`
-  const variant_img = getProductImage(
-    variant.image_id,
-    page.product.images,
-    page_title
-  )
-
-  // Get SEO metadata
-  const { available, body_html, tags, vendor } = page.product as AnyObject
-
-  const seo: SEOProps = {
-    description: stripHtml(body_html).result,
-    keywords: tags,
-    og: {
-      image: variant_img.src,
-      'image:alt': variant_img.alt || undefined,
-      'image:height': variant_img.height,
-      'image:secure_url': variant_img.src,
-      'image:width': variant_img.width,
-      'product:availability': `${available}`,
-      'product:brand': vendor,
-      'product:condition': 'new',
-      'product:price:amount': variant.price,
-      'product:price:currency': 'USD'
-    },
-    title: page_title,
-    twitter: { card: 'summary', image: variant_img.src }
-  }
-
-  return (
-    <>
-      <SEO {...seo} />
-      <ProductTemplate {...page} />
-    </>
-  )
-}
+const Product: PC<PageProps> = ({ seo, template }) => (
+  <>
+    <SEO {...seo} />
+    <ProductTemplate {...template} />
+  </>
+)
 
 /**
- * Retrieves the data for the `ProductTemplate`.
+ * Fetches the data required to display a product listing using the
+ * `ProductTemplate` component.
+ *
+ * @todo Fetch product reviews
  *
  * @see https://nextjs.org/docs/basic-features/data-fetching
+ * @see https://shopify.dev/docs/admin-api/rest/reference/sales-channels
  *
  * @param context - Next.js page component context
  * @param context.params - Dynamic route parameters
  * @param context.query - The query string
  * @param context.req - HTTP request object
- * @return Product listing object and an array of products in the collection
  */
 export const getServerSideProps: GetServerSideProps<
-  IPagePropsProduct,
+  PageProps,
   ProductPageUrlQuery
 > = async (context: GetServerSidePropsContext<ProductPageParams>) => {
   // Initialize services
   const Products = new ProductService()
-  const Reviews = new ReviewService(database)
 
   // Get product handle and variant sku
   const { handle, sku } = context.query as ProductPageUrlQuery
@@ -103,11 +71,8 @@ export const getServerSideProps: GetServerSideProps<
   // If product isn't found, show 404 layout
   if ((product as NotFound).notFound) return product as NotFound
 
-  // ! Guarenteed to be product data. Error will be thrown otherwise
+  // ! Guarenteed to be product page. Error will be thrown otherwise
   product = product as IProductListing
-
-  // Get product reviews
-  const reviews = await Reviews.findByProductId(product.product_id)
 
   // Get index of active carousel item
   const active = findIndex(
@@ -116,15 +81,24 @@ export const getServerSideProps: GetServerSideProps<
   )
 
   // Build template data object
-  const page = serialize<ProductTemplateProps>({
+  const template = serialize<ProductTemplateProps>({
     active,
     collection: { href: 'products', title: 'Products' },
     product,
-    reviews: reviews as Array<IReview>
+    reviews: []
   })
 
-  // Return page component props and user session
-  return { props: { page } }
+  // Get global metafields
+  const globals = await getGlobalMetafields()
+
+  // Get SEO object
+  const seo = await getSEOData(
+    globals,
+    { ...product, variant: active },
+    'product'
+  )
+
+  return { props: { globals, page: product, seo, template } }
 }
 
 export default Product

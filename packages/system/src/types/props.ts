@@ -43,9 +43,10 @@ export type Attributes<E = HTMLElement> = AriaAttributes &
  */
 export type ComponentPropsBase<
   T extends keyof JSX.IntrinsicElements = 'div'
-  > = {
-    style?: AnimatedProps<AnyObject>['style']
-  } & TransientProps & GlobalAttributes<HTMLElements[T]>
+> = {
+  style?: AnimatedProps<AnyObject>['style']
+} & TransientProps &
+  GlobalAttributes<HTMLElements[T]>
 
 /* eslint-enable prettier/prettier */
 
@@ -166,14 +167,14 @@ export interface GlobalAttributes<E = HTMLElement> extends Attributes<E> {
    * in contenteditable mode.
    */
   inputMode?:
-  | 'none'
-  | 'text'
-  | 'decimal'
-  | 'numeric'
-  | 'tel'
-  | 'search'
-  | 'email'
-  | 'url'
+    | 'none'
+    | 'text'
+    | 'decimal'
+    | 'numeric'
+    | 'tel'
+    | 'search'
+    | 'email'
+    | 'url'
 
   /* eslint-enable prettier/prettier */
 

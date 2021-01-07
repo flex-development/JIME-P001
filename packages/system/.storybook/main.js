@@ -85,35 +85,37 @@ module.exports = {
    * @param {object} config - Base Webpack config
    * @return {object} Webpack configuration
    */
-  webpackFinal: config => mergeWebpack(config, {
-    resolve: {
-      alias: {
-        '@system': path.join(__dirname, '../src')
-      }
-    },
-    module: {
-      rules: [
-        {
-          test: /\.s[ac]ss$/i,
-          use: [{ loader: 'style-loader' }].concat(wc.module.rules[0].use)
-        },
-        {
-          test: /\.(ts|tsx)$/,
-          include: [path.join(__dirname, '../src')],
-          use: [
-            {
-              loader: 'awesome-typescript-loader',
-              options: {
-                babelCore: '@babel/core',
-                babelOptions: { ...babelConfig, babelrc: false },
-                cacheDirectory: 'node_modules/.cache/awesome-typescript-loader',
-                useBabel: true,
-                useCache: true
-              }
-            }
-          ]
+  webpackFinal: config =>
+    mergeWebpack(config, {
+      resolve: {
+        alias: {
+          '@system': path.join(__dirname, '../src')
         }
-      ]
-    }
-  })
+      },
+      module: {
+        rules: [
+          {
+            test: /\.s[ac]ss$/i,
+            use: [{ loader: 'style-loader' }].concat(wc.module.rules[0].use)
+          },
+          {
+            test: /\.(ts|tsx)$/,
+            include: [path.join(__dirname, '../src')],
+            use: [
+              {
+                loader: 'awesome-typescript-loader',
+                options: {
+                  babelCore: '@babel/core',
+                  babelOptions: { ...babelConfig, babelrc: false },
+                  cacheDirectory:
+                    'node_modules/.cache/awesome-typescript-loader',
+                  useBabel: true,
+                  useCache: true
+                }
+              }
+            ]
+          }
+        ]
+      }
+    })
 }

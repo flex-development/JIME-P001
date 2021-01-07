@@ -1,12 +1,10 @@
 /**
- * @file Subdomain Entry Point - CMS
+ * @file Subdomain Entry Point - Content Management
  * @module subdomains/cms
- * @see https://tina.io/docs/
+ * @see https://shopify.dev/docs/admin-api/rest/reference/online-store
  */
 
-export * from './config'
 export * from './hooks'
-export * from './models'
 export * from './services'
 export * from './utils'
 

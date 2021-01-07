@@ -66,11 +66,14 @@ SEE: http://css-tricks.com/slightly-careful-sub-elements-clickable-things/
   // Add button variant classes
   @each $key, $color in $theme-colors {
     &-#{$key} {
-      @include button-variant($color, if(
-        $key == 'dark' or $key == 'darker' or $key == 'ghost',
-        $body-color,
-        $dark
-      ))
+      @include button-variant(
+        $color,
+        if(
+          $key == 'dark' or $key == 'darker' or $key == 'ghost',
+          $body-color,
+          $dark
+        )
+      );
     }
   }
 }

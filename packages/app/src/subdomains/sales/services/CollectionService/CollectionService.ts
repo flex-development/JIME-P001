@@ -7,14 +7,12 @@ import {
 import {
   createError,
   ICollectionListing,
-  Logger
+  Logger,
+  ShopifyAPIResponses
 } from '@flex-development/kustomzcore'
 import { NotFound } from '@subdomains/app/utils'
 import { omit } from 'lodash'
-import {
-  ICollectionService,
-  ListCollectionsResponse
-} from './ICollectionService'
+import { ICollectionService } from './ICollectionService'
 
 /**
  * @file Subdomain Service - Collection Listings
@@ -51,13 +49,13 @@ export default class CollectionService
   ): Promise<DataArray<ICollectionListing>> {
     if (!query?.$limit) query.$limit = 250
 
-    const { collection_listings } = await axiosShopify<ListCollectionsResponse>(
-      {
-        method: 'get',
-        params: { limit: query.$limit },
-        url: 'collection_listings'
-      }
-    )
+    const {
+      collection_listings
+    } = await axiosShopify<ShopifyAPIResponses.CollectionListing>({
+      method: 'get',
+      params: { limit: query.$limit },
+      url: 'collection_listings'
+    })
 
     return this.query(collection_listings, omit(query, ['$limit']))
   }

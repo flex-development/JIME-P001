@@ -1,4 +1,3 @@
-const { CheckerPlugin } = require('awesome-typescript-loader')
 const { merge } = require('lodash')
 const vercel = require('./vercel.json')
 
@@ -15,13 +14,13 @@ const {
   FIREBASE_APP_ID,
   FIREBASE_PROJECT_ID,
   FIREBASE_MESSAGING_SENDER_ID,
+  SHOPIFY_API_VERSION,
   SHOPIFY_DOMAIN,
   SITE_URL,
   VERCEL_URL
 } = process.env
 
 let SITE_URL_SAFE = SITE_URL || VERCEL_URL || 'http://localhost:3001'
-
 if (!SITE_URL_SAFE.startsWith('http')) SITE_URL_SAFE = `https://${VERCEL_URL}`
 
 module.exports = {
@@ -39,6 +38,7 @@ module.exports = {
     FIREBASE_MESSAGING_SENDER_ID,
     FIREBASE_PROJECT_ID,
     FIREBASE_STORAGE_BUCKET: `${FIREBASE_PROJECT_ID}.appspot.com`,
+    SHOPIFY_API_VERSION,
     SHOPIFY_DOMAIN,
     SITE_URL: SITE_URL_SAFE,
     VERCEL_URL
@@ -71,8 +71,10 @@ module.exports = {
   images: {
     domains: [
       SITE_URL_SAFE,
+      'cdn.accentuate.io',
       'cdn.shopify.com',
       'firebasestorage.googleapis.com',
+      'images.accentuate.io',
       'is4-ssl.mzstatic.com'
     ]
   },
@@ -119,7 +121,7 @@ module.exports = {
    * @param {object} helpers.webpack - Webpack
    * @return {object} Altered Webpack configuration
    */
-  webpack: (config, { dev }) => {
+  webpack: (config, { dev, isServer }) => {
     config.resolve.alias = merge(config.resolve.alias, {
       '@flex-development/kustomzdesign': '@flex-development/kustomzdesign/dist'
     })
@@ -137,7 +139,13 @@ module.exports = {
       ]
     })
 
-    config.plugins.push(new CheckerPlugin())
+    if (!isServer) {
+      config.node = {
+        child_process: 'empty',
+        dns: 'empty',
+        fs: 'empty'
+      }
+    }
 
     return config
   }

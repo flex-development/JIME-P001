@@ -8,7 +8,7 @@ import { NotFound } from './ErrorTemplate.stories'
  */
 
 describe('ErrorTemplate', () => {
-  it('renders with class "template" and data-template=${template_id}', () => {
+  it('renders with class "template" and template_id', () => {
     const { template_id } = ErrorTemplate
 
     const { container } = render(<NotFound {...NotFound.args} />)

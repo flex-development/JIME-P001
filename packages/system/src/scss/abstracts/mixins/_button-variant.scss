@@ -9,7 +9,7 @@
 /// @require {function} color-shade
 /// @require {mixin} user-event
 /// @require {variable} $btn-bg-color
-/// @require {variable} $btn-color 
+/// @require {variable} $btn-color
 /// @param {Color} $bg-color
 /// @param {Color} $color
 @mixin button-variant($bg-color: $btn-bg-color, $color: $btn-color) {

@@ -5,7 +5,6 @@
 
 @use '../functions/breakpoint-min' as *;
 
-
 /// Makes the `@content` apply to the given breakpoint and wider.
 /// @require {function} breakpoint-min
 /// @require {variable} $grid-breakpoints

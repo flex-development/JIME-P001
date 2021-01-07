@@ -20,6 +20,18 @@ LAYOUT
 
     padding: $space-20 $space-24;
   }
+
+  &[data-loading='false'] {
+    .loading-container {
+      opacity: 0;
+    }
+  }
+
+  &[data-loading='true'] {
+    .loading-container {
+      opacity: 1;
+    }
+  }
 }
 
 .loading-container {
@@ -28,7 +40,9 @@ LAYOUT
   @include fluid-height;
 
   @include fluid-width;
-    
+
+  transition: opacity 0.125s linear;
+
   &-icon {
     @include dimensions(rem(42)); // Must be size of inner <circle> element
   }

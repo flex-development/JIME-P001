@@ -1,10 +1,19 @@
-import { ICMSPageIndex, ICMSPageSlug } from '@app/subdomains/cms/models/CMSPage'
-import { AnyObject } from '@flex-development/json'
+import { FeathersErrorJSON } from '@feathersjs/errors'
+import { AnyObject, PartialOr } from '@flex-development/json'
+import {
+  ICollectionListing,
+  IMetafield,
+  IPage,
+  IProductListing
+} from '@flex-development/kustomzcore'
 import {
   CollectionTemplateProps,
+  IndexTemplateProps,
+  PageTemplateProps,
   ProductTemplateProps,
   SearchTemplateProps
 } from '@flex-development/kustomzdesign'
+import { SEOProps } from '../components'
 
 /**
  * @file Subdomain Interfaces - Next.js Page Props
@@ -16,51 +25,71 @@ import {
  */
 export interface IPageProps {
   /**
-   * Page data for a collection, production, or online store page.
+   * Global shop metafields.
+   */
+  globals: Record<string, PartialOr<IMetafield>>
+
+  /**
+   * Page data for a collection, product, policy, or online store page.
    *
    * @see https://shopify.dev/docs/admin-api/rest/reference/online-store
    */
-  page: AnyObject
+  page?: AnyObject
+
+  /**
+   * `SEO` component properties.
+   */
+  seo?: SEOProps
 }
 
 /**
  * Props passed to product collection pages.
  */
 export interface IPagePropsCollection extends IPageProps {
-  page: CollectionTemplateProps
+  page: ICollectionListing
+  seo: SEOProps
+  template: CollectionTemplateProps
 }
 
 /**
- * Props passed to CMS pages.
+ * Props passed to the `Error` page.
  */
-export interface IPagePropsCMS extends IPageProps {
-  page: ICMSPageIndex | ICMSPageSlug
+export interface IPagePropsError {
+  globals: IPageProps['globals']
+  error: FeathersErrorJSON
+}
+
+/**
+ * Props passed to dynamic `[handle]` (online store) pages.
+ */
+export interface IPagePropsHandle extends IPageProps {
+  page: IPage
+  seo: SEOProps
+  template: PageTemplateProps
 }
 
 /**
  * Props passed to the index page.
  */
 export interface IPagePropsIndex extends IPageProps {
-  page: ICMSPageIndex
+  page: IPage
+  seo: SEOProps
+  template: IndexTemplateProps
 }
 
 /**
  * Props passed to product and collection product pages.
  */
 export interface IPagePropsProduct extends IPageProps {
-  page: ProductTemplateProps
+  page: IProductListing
+  seo: SEOProps
+  template: ProductTemplateProps
 }
 
 /**
  * Props passed to the product search page.
  */
 export interface IPagePropsSearch extends IPageProps {
-  page: SearchTemplateProps
-}
-
-/**
- * Props passed to dynamic `[slug]` pages.
- */
-export interface IPagePropsSlug extends IPageProps {
-  page: ICMSPageSlug
+  seo: SEOProps
+  template: SearchTemplateProps
 }

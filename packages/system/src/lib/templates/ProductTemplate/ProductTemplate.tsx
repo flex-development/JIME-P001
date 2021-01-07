@@ -42,7 +42,7 @@ export const ProductTemplate: TC<ProductTemplateProps> = props => {
       console.log('TODO: ProductTemplate.handleSubmitReview')
     },
     product,
-    reviews,
+    reviews = [],
     reviews_chunk_max,
     ...rest
   } = props
@@ -129,17 +129,15 @@ export const ProductTemplate: TC<ProductTemplateProps> = props => {
             </Button>
           </Box>
 
-          {reviews?.length && (
-            <Carousel
-              chunk_max={reviews_chunk_max}
-              className='product-template-carousel'
-              id='product-review-carousel'
-            >
-              {reviews.map((review, i: number) => (
-                <ProductReview key={`product-review-${i}`} review={review} />
-              ))}
-            </Carousel>
-          )}
+          <Carousel
+            chunk_max={reviews_chunk_max}
+            className='product-template-carousel'
+            id='product-review-carousel'
+          >
+            {reviews.map((review, i: number) => (
+              <ProductReview key={`product-review-${i}`} review={review} />
+            ))}
+          </Carousel>
         </Section>
       )}
     </Main>

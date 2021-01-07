@@ -8,7 +8,7 @@ import { Home } from './Layout.stories'
  */
 
 describe('Layout', () => {
-  it('renders with class "layout" and data-template=${template_id}', () => {
+  it('[FALSE ALARM] renders with class "layout" and template_id', () => {
     const { template_id } = Layout
 
     const { container } = render(<Home {...Home.args} />)

@@ -20,7 +20,7 @@ a {
   }
 }
 
- @each $key, $color in $theme-colors {
+@each $key, $color in $theme-colors {
   .link-#{$key} {
     @include user-event {
       color: color-shade($color, 5%);

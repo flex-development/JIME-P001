@@ -11,14 +11,14 @@
 /// @return {String} Encoded SVG string
 @function escape-svg($string: '') {
   // Only escape string if SVG
-  @if str-index($string, "data:image/svg+xml") {
+  @if str-index($string, 'data:image/svg+xml') {
     @each $char, $encoded in $escaped-characters {
       // Do not escape the url brackets
       $url-bracket: str-index($string, 'url(') == 1;
 
       @if str-index($string, 'url(') == 1 {
         $url: str-replace(str-slice($string, 6, -3), $char, $encoded);
-        $string: url("#{$url}");
+        $string: url('#{$url}');
       } @else {
         $string: str-replace($string, $char, $encoded);
       }

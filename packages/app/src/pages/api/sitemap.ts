@@ -1,9 +1,6 @@
-import { CollectionService, ProductService } from '@app/subdomains/sales'
-import {
-  createError,
-  ICollectionListing,
-  Logger
-} from '@flex-development/kustomzcore'
+import shopify from '@app/config/shopify'
+import { AnyObject } from '@flex-development/json'
+import { createError, Logger } from '@flex-development/kustomzcore'
 import { sortBy } from 'lodash'
 import { NextApiRequest as Req, NextApiResponse as Res } from 'next'
 import { SitemapStream, streamToPromise } from 'sitemap'
@@ -13,10 +10,6 @@ import { SitemapStream, streamToPromise } from 'sitemap'
  * @module pages/api/sitemap
  * @see https://linguinecode.com/post/add-robots-txt-file-sitemaps-nextjs
  */
-
-// Initialize services
-const Collections = new CollectionService()
-const Products = new ProductService()
 
 export default async (req: Req, res: Res): Promise<void> => {
   // Get sitemap base URL
@@ -29,8 +22,39 @@ export default async (req: Req, res: Res): Promise<void> => {
   const slugs = ['', '404', 'cart', 'search']
 
   try {
+    // Get online store pages and policies
+    const pages = [
+      ...(await shopify.page.list()),
+      ...(await shopify.policy.list())
+    ]
+
+    // Add page URLs to slugs array
+    pages.forEach(({ handle }: AnyObject) => {
+      if (['api-menus', 'index'].includes(handle)) return
+      slugs.push(handle)
+    })
+
+    // Get blogs
+    const blogs = await shopify.blog.list()
+
+    // Add blogs and artivles to stream
+    await Promise.all(
+      blogs.map(async blog => {
+        // Add blog URL to slugs array
+        slugs.push(`blogs/${blog.handle}`)
+
+        // Get articles
+        const articles = await shopify.article.list(blog.id)
+
+        // Add article URLs to slugs array
+        articles.forEach(article => {
+          slugs.push(`blogs/${blog.handle}/articles/${article.handle}`)
+        })
+      })
+    )
+
     // Get product collections and products
-    const collections = (await Collections.find()) as ICollectionListing[]
+    const collections = await shopify.collectionListing.list()
 
     // Add collections and products to stream
     await Promise.all(
@@ -41,7 +65,7 @@ export default async (req: Req, res: Res): Promise<void> => {
         slugs.push(`collections/${ch}`)
 
         // Get products in collection
-        const products = await Products.findByCollection(collection_id)
+        const products = await shopify.productListing.list({ collection_id })
 
         // Add product URLs to slugs array
         products.forEach(({ handle: ph }) => {

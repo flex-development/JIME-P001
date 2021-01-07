@@ -8,7 +8,7 @@ import { Cart } from './CartTemplate.stories'
  */
 
 describe('CartTemplate', () => {
-  it('renders with class "template" and data-template=${template_id}', () => {
+  it('renders with class "template" and template_id', () => {
     const { template_id } = CartTemplate
 
     const { container } = render(<Cart {...Cart.args} />)

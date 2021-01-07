@@ -19,11 +19,3 @@ export interface ICollectionService
     handle: ICollectionListing['handle']
   ): Promise<ICollectionListing | NotFound>
 }
-
-/**
- * Object representing a response from the Shopify REST API
- * `collection_listings` endpoint.
- */
-export type ListCollectionsResponse = {
-  collection_listings: Array<ICollectionListing>
-}

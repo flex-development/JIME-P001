@@ -16,11 +16,11 @@ See: https://storybook.js.org/docs/configurations/add-custom-body/
     height: 100vh;
   }
 
-  .sb-show-main #root>div {
+  .sb-show-main #root > div {
     height: 100%;
   }
 
-  #root:not([hidden])+#docs-root {
+  #root:not([hidden]) + #docs-root {
     display: none;
   }
 
@@ -45,15 +45,15 @@ See: https://storybook.js.org/docs/configurations/add-custom-body/
 
   /* Fix text overflow in ArgsTable */
 
-  .docblock-argstable-body tr td>div {
+  .docblock-argstable-body tr td > div {
     flex-direction: column;
   }
 
-  .docblock-argstable-body tr td>div span {
+  .docblock-argstable-body tr td > div span {
     white-space: normal;
   }
 
-  .docblock-argstable-body tr td>div:last-of-type div span {
+  .docblock-argstable-body tr td > div:last-of-type div span {
     white-space: nowrap;
   }
 
@@ -62,11 +62,11 @@ See: https://storybook.js.org/docs/configurations/add-custom-body/
     margin-bottom: 12px !important;
   }
 
-  .sbdocs-subtitle+.sbdocs.sbdocs-preview {
+  .sbdocs-subtitle + .sbdocs.sbdocs-preview {
     margin-top: 0 !important;
   }
 
-  .sbdocs-subtitle+.sbdocs.sbdocs-preview>div>div {
+  .sbdocs-subtitle + .sbdocs.sbdocs-preview > div > div {
     margin: unset !important;
   }
 </style>

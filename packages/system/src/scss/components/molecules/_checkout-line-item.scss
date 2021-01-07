@@ -39,7 +39,7 @@ CHECKOUT LINE ITEM
       }
     }
 
-    &:last-of-type {    
+    &:last-of-type {
       @include breakpoint-up(md) {
         @include make-grid-col(9);
       }
@@ -101,6 +101,6 @@ CHECKOUT LINE ITEM
       font-size: $font-size-sm;
     }
 
-    font-size: $font-size-base
+    font-size: $font-size-base;
   }
 }

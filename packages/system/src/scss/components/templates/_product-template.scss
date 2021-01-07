@@ -23,6 +23,10 @@ PRODUCT TEMPLATE
   }
 
   &-carousel {
+    &:empty {
+      display: none;
+    }
+
     .product-review {
       margin-bottom: $space-36;
     }

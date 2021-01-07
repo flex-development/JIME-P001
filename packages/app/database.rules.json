@@ -2,63 +2,6 @@
   "rules": {
     "$environment": {
       ".read": true,
-      "menus": {
-        ".indexOn": ["created_at", "id", "title", "uuid"],
-        ".write": "auth.token.collaborator == true",
-        "$id": {
-          "created_at": {
-            ".validate": "newData.val() <= now"
-          },
-          "id": {
-            ".validate": "newData.val() == $id"
-          },
-          "links": {
-            ".validate": true
-          },
-          "title": {
-            ".validate": "newData.isString()"
-          },
-          "uuid": {
-            ".validate": "newData.isString() && newData.val().length > 0"
-          }
-        }
-      },
-      "pages": {
-        ".indexOn": ["created_at", "id", "title", "uuid"],
-        ".write": "auth.token.collaborator == true",
-        "$id": {
-          "component": {
-            ".validate": "newData.val() == 'IndexTemplate' || newData.val() == 'PageTemplate'"
-          },
-          "content": {
-            ".validate": true
-          },
-          "created_at": {
-            ".validate": "newData.val() <= now"
-          },
-          "description": {
-            ".validate": "newData.val().length <= 150"
-          },
-          "draft": {
-            ".validate": "newData.isBoolean()"
-          },
-          "id": {
-            ".validate": "newData.val() == $id"
-          },
-          "keywords": {
-            ".validate": "newData.isString()"
-          },
-          "path": {
-            ".validate": "newData.isString()"
-          },
-          "title": {
-            ".validate": "newData.isString() && newData.val().length > 0"
-          },
-          "uuid": {
-            ".validate": "newData.isString() && newData.val().length > 0"
-          }
-        }
-      },
       "reviews": {
         ".indexOn": [
           "created_at",
@@ -72,10 +15,6 @@
           "title"
         ],
         ".write": "auth.token.collaborator == true || auth.token.customer == true"
-      },
-      "settings": {
-        ".indexOn": ["id"],
-        ".write": "auth.token.collaborator == true"
       }
     }
   }

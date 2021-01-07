@@ -1,117 +1,93 @@
+import { getSEOData, objectFromArray } from '@app/subdomains/app/utils'
+import { PageService } from '@app/subdomains/cms/services'
+import { getGlobalMetafields } from '@app/subdomains/metafields/utils'
+import { ProductService } from '@app/subdomains/sales/services'
+import { IPage, IProductListing } from '@flex-development/kustomzcore'
 import {
-  getCMSPageSEO,
-  ICMSPageIndex,
-  PageService,
-  ProviderSessionGitHub
-} from '@app/subdomains/cms'
-import { database } from '@app/subdomains/firebase/config/web'
-import { SortOrder } from '@flex-development/json'
-import { IProductListing, IReview } from '@flex-development/kustomzcore'
-import { IndexTemplate } from '@flex-development/kustomzdesign'
-import {
-  CMSPageParams,
-  IPagePropsCMS,
-  IPagePropsIndex,
-  NotFound,
-  PC,
-  SEO
-} from '@subdomains/app'
-import { ProductService, ReviewService } from '@subdomains/sales'
-import { GetServerSideProps, GetServerSidePropsContext } from 'next'
-import { getSession } from 'next-auth/client'
+  IndexTemplate,
+  IndexTemplateProps
+} from '@flex-development/kustomzdesign'
+import { SEO, SEOProps } from '@subdomains/app/components'
+import { IPagePropsIndex as PageProps, PC } from '@subdomains/app/interfaces'
+import { GetStaticProps } from 'next'
 
 /**
  * @file Page - Home
- * @module pages/slug
- * @see https://nextjs.org/docs/basic-features/data-fetching
+ * @module pages/index
  */
-
-// Initialize services
-const Pages = new PageService(database)
-const ProductReviews = new ReviewService(database)
-const Products = new ProductService()
 
 /**
  * Renders the homepage.
  *
- * The value of {@param props.page.component} will be always be `IndexTemplate`.
- *
  * @param props - Page component props
- * @param props.page - Page data
- * @param props.page.component - Display name of template component
- * @param props.page.content - `IndexTemplate` component props
- * @param props.page.draft - True if page is in draft mode
- * @param props.page.id - Unique page entity ID
- * @param props.page.keywords - Comma-delimitted list of SEO keywords
- * @param props.page.path - URL path page can be accessed from
- * @param props.page.title - Title of page
- * @param props.page.uuid - Unique page entity UUID
- * @param props.preview - True if CMS is enabled
- * @param props.session - CMS user session or null
+ * @param props.globals - Shopify `globals` namespace metafields obj
+ * @param props.page - Shopify API page resource data
+ * @param props.seo - `SEO` component properties
+ * @param props.template - `IndexTemplate` component properties
  */
-const Home: PC<IPagePropsIndex> = ({ page }: IPagePropsIndex) => (
+const Home: PC<PageProps> = ({ seo, template }) => (
   <>
-    <SEO {...getCMSPageSEO(page)} />
-    <IndexTemplate {...page.content} />
+    <SEO {...seo} />
+    <IndexTemplate {...template} />
   </>
 )
 
 /**
- * Retrieves the data for the `IndexTemplate` or `PageTemplate`.
+ * Fetches the data required to pre-render the homepage.
  *
- * @param context - Next.js page component context
- * @param context.params - Dynamic route parameters
- * @param context.query - The query string
- * @param context.req - HTTP request object
- * @return Template data and current user session
+ * @see https://nextjs.org/docs/basic-features/data-fetching
+ * @see https://shopify.dev/docs/admin-api/rest/reference/online-store/page
+ *
+ * @async
  */
-export const getServerSideProps: GetServerSideProps<
-  IPagePropsCMS,
-  CMSPageParams
-> = async (context: GetServerSidePropsContext<CMSPageParams>) => {
-  const { slug } = (context.params || {}) as CMSPageParams
+export const getStaticProps: GetStaticProps<PageProps> = async () => {
+  // Initialize services
+  const Pages = new PageService()
+  const Products = new ProductService()
 
-  // Get incoming page path
-  const path = !slug || slug === 'index' ? '/' : `/${slug}`
+  // Initialize page data object
+  let page: IPage | null = null
 
-  // Get current user session
-  const session = (await getSession()) as ProviderSessionGitHub
-
-  // Get page data. Throws if in draft mode and not signed-in with GitHub
-  let page = await Pages.getPage(path, session)
-
-  // If page isn't found, show 404 layout
-  if ((page as NotFound).notFound) return page as NotFound
-
-  // ! Guarenteed to be page data. Error will be thrown otherwise
-  page = page as IPagePropsCMS['page']
-
-  // Get data for homepage
-  if (page.component === 'IndexTemplate') {
-    // Cast page data
-    page = page as ICMSPageIndex
-
-    // Get products and product reviews
-    let products = await Products.find()
-    products = Products.$sort(products, { handle: SortOrder.ASCENDING })
-
-    // Get product reviews
-    let reviews = await ProductReviews.find()
-    reviews = ProductReviews.$sort(reviews, { id: SortOrder.ASCENDING })
-
-    // Get template props
-    page.content = {
-      ...page.content,
-      products: (products as Array<IProductListing>).map(product => ({
-        product,
-        product_link: { href: `products/${product.handle}` }
-      })),
-      reviews: reviews as Array<IReview>
-    }
+  try {
+    // Get page data
+    page = (await Pages.get('index')) as IPage
+  } catch (error) {
+    // Redirect to /404 if page data isn't found
+    if (error.code === 404) return { notFound: true }
+    throw error
   }
 
-  // Return page component props
-  return { props: { page } }
+  // Parse page metafields
+  const {
+    about_section_text,
+    about_section_title,
+    max_products,
+    max_reviews,
+    products_section_text,
+    products_section_title,
+    reviews_section_title
+  } = objectFromArray(page.metafield, 'key')
+
+  // Get `IndexTemplate` props
+  const template: IndexTemplateProps = {
+    about_section_text: about_section_text.value as string,
+    about_section_title: about_section_title.value as string,
+    max_products: JSON.parse(max_products.value as string),
+    max_reviews: JSON.parse(max_reviews.value as string),
+    products: (await Products.find()) as IProductListing[],
+    products_section_text: products_section_text.value as string,
+    products_section_title: products_section_title.value as string,
+    reviews: [],
+    reviews_section_title: reviews_section_title.value as string
+  }
+
+  // Get global metafields
+  const globals = await getGlobalMetafields()
+
+  // Get SEO object
+  const seo: SEOProps = await getSEOData(globals, page, 'page')
+
+  return { props: { globals, page, seo, template }, revalidate: 1 }
 }
 
 export default Home

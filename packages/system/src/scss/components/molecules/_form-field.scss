@@ -9,10 +9,10 @@ FORM FIELDS
     @include breakpoint-up(md) {
       font-size: $font-size-xs;
     }
-  
+
     display: inline-block;
     font-size: $font-size-base;
-    margin-top: $space-4;;
+    margin-top: $space-4;
   }
 
   &[data-control='input'][data-type='number'] {

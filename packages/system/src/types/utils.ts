@@ -177,8 +177,9 @@ export type IntrinsicElements = JSX.IntrinsicElements
 /**
  * Selects the props of a JSX element or returns the original props type.
  */
-export type JSXIEPropsOr<T extends AnyObject | string> =
-  T extends keyof IntrinsicElements ? IntrinsicElements[T] : T
+export type JSXIEPropsOr<
+  T extends AnyObject | string
+> = T extends keyof IntrinsicElements ? IntrinsicElements[T] : T
 
 /* eslint-enable prettier/prettier */
 

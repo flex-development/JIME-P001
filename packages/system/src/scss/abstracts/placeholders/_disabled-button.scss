@@ -9,7 +9,7 @@
 /// @require {variable} $btn-disabled-opacity
 %disabled-button {
   @include box-shadow($btn-disabled-box-shadow);
-    
+
   @include opacity($btn-disabled-opacity);
 
   opacity: $btn-disabled-opacity;

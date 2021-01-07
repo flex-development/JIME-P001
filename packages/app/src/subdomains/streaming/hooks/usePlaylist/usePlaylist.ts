@@ -1,10 +1,12 @@
 import {
+  Logger,
   MusicKitMediaItem,
   MusicKitSongAttributes
 } from '@flex-development/kustomzcore'
 import { isEmpty } from 'lodash'
-import { useCallback, useMemo } from 'react'
-import useSWR from 'swr'
+import { useMemoCompare } from 'packages/system/dist'
+import { useEffect, useMemo } from 'react'
+import { useSetState } from 'react-hanger/array/useSetState'
 import { useMusicKit } from '../useMusicKit'
 
 /**
@@ -17,6 +19,7 @@ import { useMusicKit } from '../useMusicKit'
  */
 export type UsePlaylist = {
   id: string
+  loading: boolean
   songs: MusicKitSongAttributes[]
 }
 
@@ -30,32 +33,34 @@ export const usePlaylist = (url = ''): UsePlaylist => {
   const kit = useMusicKit()
 
   // Get playlist ID
-  const p_id = useMemo(() => `pl.${url?.split('pl.')[1]}`, [url])
+  const id = useMemo(() => `pl.${url?.split('pl.')[1]}`, [url])
 
-  /**
-   * Fetches a playlist from the Apple Music API.
-   *
-   * @param async
-   * @param id - ID of playlist to fetch
-   */
-  const fetchPlaylist = async (id: string): Promise<MusicKit.Resource> => {
-    if (isEmpty(id) || isEmpty(kit)) return {}
-    return await kit.api.playlist(id)
-  }
+  // Store playlist object
+  const [playlist, setPlaylist] = useSetState<MusicKit.Resource>({})
+  const $playlist = useMemoCompare<typeof playlist>(playlist)
 
-  /* Callback version of `fetchPlaylist` */
-  const fetchPlaylistCB = useCallback(fetchPlaylist, [kit])
-
-  // Handle SWR data state
-  const { data: playlist } = useSWR([p_id], fetchPlaylistCB)
+  useEffect(() => {
+    // If no playlist, or playlists are the same, do nothing
+    if (isEmpty(id) || isEmpty(kit) || $playlist.id === id) {
+      return
+    } /* eslint-disable prettier/prettier */
+    ;(async () => {
+      try {
+        setPlaylist(await kit.api.playlist(id))
+      } catch (error) {
+        Logger.error({ usePlaylist: error })
+        throw error
+      }
+    })()
+  }, [$playlist, id, kit, setPlaylist])
 
   // Get array of song attributes
   const songs = useMemo<MusicKitSongAttributes[]>(() => {
-    if (!playlist) return []
+    if (!$playlist || isEmpty($playlist)) return []
 
-    const { data: _songs = [] } = playlist?.relationships?.tracks ?? {}
+    const { data: _songs = [] } = $playlist?.relationships?.tracks ?? {}
     return _songs.map((song: MusicKitMediaItem) => song.attributes)
-  }, [playlist])
+  }, [$playlist])
 
-  return { id: p_id, songs }
+  return { id, loading: !!id.length && !songs.length, songs }
 }

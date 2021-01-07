@@ -1,3 +1,5 @@
+import { IPagePropsError as PageProps } from '@app/subdomains/app/interfaces'
+import { getGlobalMetafields } from '@app/subdomains/metafields/utils'
 import { FeathersErrorJSON } from '@feathersjs/errors'
 import { serialize } from '@flex-development/json'
 import { createError, Logger } from '@flex-development/kustomzcore'
@@ -8,42 +10,35 @@ import NextHead from 'next/head'
 import { Fragment } from 'react'
 
 /**
- * @file Custom server error page
+ * @file Page - Server Error
  * @module pages/error
  * @see https://nextjs.org/docs/advanced-features/custom-error-page
  */
 
-export type ErrorPageProps = {
-  error: FeathersErrorJSON
-}
-
 /**
  * Renders a server error page.
  */
-const Error: NextPage<ErrorPageProps> = ({ error }) => {
-  const { code, message } = error
-
-  return (
-    <Fragment>
-      <NextHead>
-        <title>Server Error | Morena&#39;s Kustomz</title>
-      </NextHead>
-      <ErrorTemplate code={code} message={message}>
-        <Paragraph $color='white'>
-          {/* eslint-disable-next-line prettier/prettier */}
-          Go{' '}
-          <Link $color='secondary' href='/'>
-            home
-          </Link>{' '}
-          and smoke or something.
-        </Paragraph>
-      </ErrorTemplate>
-    </Fragment>
-  )
-}
+const Error: NextPage<PageProps> = ({ error }) => (
+  <Fragment>
+    <NextHead>
+      <title>Server Error | Morena&#39;s Kustomz</title>
+    </NextHead>
+    <ErrorTemplate code={error.code} message={error.message}>
+      <Paragraph $color='white'>
+        {/* eslint-disable-next-line prettier/prettier */}
+        Go{' '}
+        <Link $color='secondary' href='/'>
+          home
+        </Link>{' '}
+        and smoke or something.
+      </Paragraph>
+    </ErrorTemplate>
+  </Fragment>
+)
 
 /**
- * Retrieves the
+ * Sanitizes {@param context.err} before being displayed on the `Error` page.
+ *
  * @param context - Next.js page context
  * @param context.asPath - URL shown in browser, including the query
  * @param context.err - Error thrown during the rendering, if any
@@ -52,7 +47,7 @@ const Error: NextPage<ErrorPageProps> = ({ error }) => {
  * @param context.req - HTTP request object (server only)
  * @param context.res - HTTP response object (server only)
  */
-Error.getInitialProps = (context): ErrorPageProps => {
+Error.getInitialProps = async (context): Promise<PageProps> => {
   const { asPath, err, pathname, query, req } = context
 
   // Copy error data
@@ -77,8 +72,11 @@ Error.getInitialProps = (context): ErrorPageProps => {
     error = createError(message, { ...data, stack, statusCode }, statusCode)
   }
 
+  // Get global metafields
+  const globals = await getGlobalMetafields()
+
   Logger.error({ 'Error.getInitialProps': error })
-  return { error: serialize<ErrorPageProps['error']>(error) }
+  return { error: serialize<PageProps['error']>(error), globals }
 }
 
 export default Error

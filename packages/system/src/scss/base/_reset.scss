@@ -44,7 +44,7 @@ body {
 //
 // See: https://developer.mozilla.org/en-US/docs/Web/CSS/:focus-visible
 // See: https://developer.paciellogroup.com/blog/2018/03/focus-visible-and-backwards-compatibility/
-[tabindex="-1"]:focus:not(:focus-visible) {
+[tabindex='-1']:focus:not(:focus-visible) {
   outline: 0 !important;
 }
 
@@ -215,7 +215,6 @@ textarea {
   margin: 0; // 1
 }
 
-
 // Remove the inheritance of text transform in Firefox
 button,
 select {
@@ -262,14 +261,14 @@ button,
 }
 
 // 1. Textareas should really only resize vertically so they don't break their
-// (horizontal) containers. 
+// (horizontal) containers.
 textarea {
   resize: vertical; // 1
 }
 
 // 1. Correct the outline style in Safari.
 // 2. Overrides the extra rounded corners on search inputs in iOS
-[type="search"] {
+[type='search'] {
   outline-offset: -2px; // 1
   -webkit-appearance: textfield; // 2
 }

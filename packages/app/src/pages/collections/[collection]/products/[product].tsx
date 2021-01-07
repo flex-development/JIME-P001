@@ -1,6 +1,4 @@
-import ProductPage, {
-  getServerSideProps as getServerSideProductPageProps
-} from '@app/pages/products/[handle]'
+import { getServerSideProps as getSSProps } from '@app/pages/products/[handle]'
 import { ICollectionListing } from '@flex-development/kustomzcore'
 import { ProductTemplateProps } from '@flex-development/kustomzdesign'
 import {
@@ -12,18 +10,25 @@ import {
   ProductPageParams,
   ServerSidePageProps
 } from '@subdomains/app'
-import { CollectionService } from '@subdomains/sales'
+import { CollectionService } from '@subdomains/sales/services/CollectionService'
+import { pick } from 'lodash'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
+import dynamic from 'next/dynamic'
 
 /**
  * @file Page - Collection Product
  * @module pages/collections/collection/products/product
  */
 
+const ProductPage = dynamic(async () => {
+  return (await import('@app/pages/products/[handle]')).default
+})
+
 /**
  * Renders a collection product page.
  *
  * @param props - Page component props
+ * @param props.globals - Shopify `globals` namespace metafields obj
  * @param props.page - Page data
  * @param props.collection - `LinkProps` for product collection
  * @param props.collection.href - Link to collection
@@ -34,15 +39,16 @@ const CollectionProduct: PC<IPagePropsProduct> = props => {
 }
 
 /**
- * Retrieves the data for the `ProductTemplate`.
+ * Fetches the data required to display a collection product listing using the
+ * `ProductTemplate` component.
  *
  * @see https://nextjs.org/docs/basic-features/data-fetching
+ * @see https://shopify.dev/docs/admin-api/rest/reference/sales-channels
  *
  * @param context - Next.js page component context
  * @param context.params - Route parameters if dynamic route
  * @param context.query - The query string
  * @param context.req - HTTP request object
- * @return Product listing object and an array of products in the collection
  */
 export const getServerSideProps: GetServerSideProps<
   IPagePropsProduct,
@@ -61,7 +67,7 @@ export const getServerSideProps: GetServerSideProps<
   }
 
   // Get page component props
-  let pageProps = await getServerSideProductPageProps(pctx)
+  let pageProps = await getSSProps(pctx)
 
   // If product isn't found, show 404 layout
   if ((pageProps as NotFound).notFound) return pageProps as NotFound
@@ -82,13 +88,14 @@ export const getServerSideProps: GetServerSideProps<
   collection = collection as ICollectionListing
 
   // Get data for template
-  const page: ProductTemplateProps = {
-    ...((pageProps.props?.page || {}) as ProductTemplateProps),
+  const template: ProductTemplateProps = {
+    ...((pageProps.props?.template || {}) as ProductTemplateProps),
     collection: { href: `collections/${chandle}`, title: collection.title }
   }
 
-  // Return page component props and user session
-  return { props: { page } }
+  return {
+    props: { ...pick(pageProps.props, ['globals', 'page', 'seo']), template }
+  }
 }
 
 export default CollectionProduct

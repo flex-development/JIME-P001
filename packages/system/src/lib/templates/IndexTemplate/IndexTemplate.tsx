@@ -27,7 +27,7 @@ export const IndexTemplate: TC<IndexTemplateProps> = props => {
     about_section_title = 'About Morena',
     max_products = 3,
     max_reviews = 5,
-    product_reviews_title = 'Reviews',
+    reviews_section_title = 'Reviews',
     products = [],
     products_section_text,
     products_section_title = 'Products',
@@ -58,7 +58,7 @@ export const IndexTemplate: TC<IndexTemplateProps> = props => {
       {/* ONLY SHOW PRODUCT REVIEWS SECTION IN DEVELOPMENT */}
       {process.env.NODE_ENV === 'development' && reviews.length !== 0 && (
         <Section $content id='reviews'>
-          <Heading $size={2}>{product_reviews_title}</Heading>
+          <Heading $size={2}>{reviews_section_title}</Heading>
           <Carousel
             className='index-template-carousel'
             id='product-review-carousel'
@@ -79,10 +79,10 @@ IndexTemplate.defaultProps = {
   about_section_title: 'About Morena',
   max_products: 3,
   max_reviews: 5,
-  product_reviews_title: 'Reviews',
   products: [],
   products_section_title: 'Products',
-  reviews: []
+  reviews: [],
+  reviews_section_title: 'Reviews'
 }
 
 IndexTemplate.template_id = 'index'

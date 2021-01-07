@@ -1,22 +1,18 @@
-import { CMS_CONFIG } from '@app/subdomains/cms'
-import '@app/subdomains/cms/styles.css'
 import { app } from '@app/subdomains/firebase/config/web'
 import {
   CART_PERSISTENCE_KEY as CART_KEY,
-  CheckoutLineItemInput
+  CheckoutLineItemInput,
+  Logger
 } from '@flex-development/kustomzcore'
-import {
-  CartContextProvider,
-  UseCart,
-  useMemoCompare
-} from '@flex-development/kustomzdesign'
+import { CartContextProvider, UseCart } from '@flex-development/kustomzdesign'
 import '@flex-development/kustomzdesign/kustomzdesign.css'
-import { AC, AppLayout, IAppProps, useWebFontLoader } from '@subdomains/app'
+import { AppLayout } from '@subdomains/app/components'
+import { AC, IAppProps } from '@subdomains/app/interfaces'
 import '@subdomains/app/styles.css'
+import { NextWebVitalsMetric } from 'next/app'
 import { useCallback, useRef } from 'react'
 import { useLocalStorage } from 'react-use'
 import { FirebaseAppProvider } from 'reactfire'
-import { TinaCMS, TinaProvider } from 'tinacms'
 
 /**
  * @file Next.js Custom App
@@ -31,19 +27,12 @@ import { TinaCMS, TinaProvider } from 'tinacms'
  *
  * - `FirebaseAppProvider`
  * - `CartContextProvider`
- * - `TinaProvider`
  *
  * @param param0 - Component props
  * @param param0.Component - Current page component
  * @param param0.pageProps - Page component props from data fetching methods
  */
 const App: AC = ({ Component, pageProps }: IAppProps) => {
-  // Load Web Fonts
-  useWebFontLoader({ typekit: { id: 'oee3tpl' } })
-
-  // Get configured CMS instance
-  const cms = useMemoCompare<TinaCMS>(new TinaCMS(CMS_CONFIG))
-
   // Get line items from peristed storage
   const [items, setItems] = useLocalStorage<CheckoutLineItemInput[]>(CART_KEY)
   const _items = useRef<CheckoutLineItemInput[]>(items || [])
@@ -64,12 +53,21 @@ const App: AC = ({ Component, pageProps }: IAppProps) => {
   return (
     <FirebaseAppProvider firebaseApp={app}>
       <CartContextProvider items={_items.current} persist={persistCartCB}>
-        <TinaProvider cms={cms}>
-          <AppLayout page={Component} pageProps={pageProps} />
-        </TinaProvider>
+        <AppLayout page={Component} pageProps={pageProps} />
       </CartContextProvider>
     </FirebaseAppProvider>
   )
+}
+
+/**
+ * Logs Next.js web metrics.
+ *
+ * @see https://nextjs.org/blog/next-9-4#integrated-web-vitals-reporting
+ *
+ * @param metric - Web metric object
+ */
+export const reportWebVitals = (metric: NextWebVitalsMetric): void => {
+  Logger.info({ reportWebVitals: metric })
 }
 
 export default App

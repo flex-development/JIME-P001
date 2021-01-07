@@ -38,7 +38,7 @@ $muted: $gray-400;
 
 $theme-colors: (
   'black': $black,
-  danger:  $danger,
+  danger: $danger,
   dark: $dark,
   darker: $darker,
   ghost: $ghost,
@@ -159,18 +159,21 @@ $headings-text-transform: uppercase;
 // Sizes
 // -----------------------------------------------------------------------------
 
-$sizes: map-merge($spacers, (
-  0: 0%,
-  25: 25%,
-  50: 50%,
-  75: 75%,
-  100: 100%,
-  available: -moz-available,
-  auto: auto,
-  fluid: 100%,
-  maxc: max-content,
-  minc: min-content
-));
+$sizes: map-merge(
+  $spacers,
+  (
+    0: 0%,
+    25: 25%,
+    50: 50%,
+    75: 75%,
+    100: 100%,
+    available: -moz-available,
+    auto: auto,
+    fluid: 100%,
+    maxc: max-content,
+    minc: min-content
+  )
+);
 
 // -----------------------------------------------------------------------------
 // Backgrounds
@@ -217,7 +220,6 @@ $position-values: (
   auto: auto,
   unset: unset
 );
-
 
 // -----------------------------------------------------------------------------
 // Grid Breakpoints
@@ -348,10 +350,10 @@ $border-widths: (
 // Box Shadows
 // -----------------------------------------------------------------------------
 
-$box-shadow:  0 .5rem 1rem rgba($black, .15);
-$box-shadow-sm: 0 .125rem .25rem rgba($black, .075);
-$box-shadow-lg: 0 1rem 3rem rgba($black, .175);
-$box-shadow-inset: inset 0 1px 2px rgba($black, .075);
+$box-shadow: 0 0.5rem 1rem rgba($black, 0.15);
+$box-shadow-sm: 0 0.125rem 0.25rem rgba($black, 0.075);
+$box-shadow-lg: 0 1rem 3rem rgba($black, 0.175);
+$box-shadow-inset: inset 0 1px 2px rgba($black, 0.075);
 
 // -----------------------------------------------------------------------------
 // Z-Index
@@ -379,15 +381,15 @@ $component-active-color: $white;
 $component-active-bg: $primary;
 
 $caret-width: $space-4;
-$caret-vertical-align: $caret-width * .85;
-$caret-spacing: $caret-width * .85;
+$caret-vertical-align: $caret-width * 0.85;
+$caret-spacing: $caret-width * 0.85;
 
 $template-padding-y: $space-60;
 $template-padding-x: $space-24;
 
-$transition-base: all .2s ease-in-out;
-$transition-fade: opacity .15s linear;
-$transition-collapse: height .35s ease;
+$transition-base: all 0.2s ease-in-out;
+$transition-fade: opacity 0.15s linear;
+$transition-collapse: height 0.35s ease;
 
 $aspect-ratios: (
   '1x1': 100%,
@@ -396,7 +398,18 @@ $aspect-ratios: (
   '21x9': calc(9 / 21 * 100%)
 );
 
-$star-polygon: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+$star-polygon: polygon(
+  50% 0%,
+  61% 35%,
+  98% 35%,
+  68% 57%,
+  79% 91%,
+  50% 70%,
+  21% 91%,
+  32% 57%,
+  2% 35%,
+  39% 35%
+);
 
 // -----------------------------------------------------------------------------
 // Links
@@ -445,12 +458,12 @@ $btn-line-height: $line-height-base;
 $btn-border-width: $border-width;
 $btn-border-radius: $border-radius-none;
 
-$btn-box-shadow: inset 0 1px 0 rgba($white, .15), 0 1px 1px rgba($black, .075);
+$btn-box-shadow: inset 0 1px 0 rgba($white, 0.15), 0 1px 1px rgba($black, 0.075);
 
 $btn-disabled-box-shadow: none;
 $btn-disabled-opacity: $opacity-disabled;
 
-$btn-active-box-shadow: inset 0 3px 5px rgba($black, .125);
+$btn-active-box-shadow: inset 0 3px 5px rgba($black, 0.125);
 
 $btn-focus-width: $space-4;
 $btn-focus-color-opacity: $opacity-25;
@@ -463,7 +476,8 @@ $btn-link-disabled-color: $gray-600;
 
 $btn-white-space: null;
 
-$btn-transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+$btn-transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+  border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 
 // -----------------------------------------------------------------------------
 // Menus
@@ -476,7 +490,8 @@ $menu-link-font-weight: null;
 $menu-link-hover-font-weight: $font-weight-bold;
 $menu-link-color: null;
 $menu-link-hover-color: null;
-$menu-link-transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out;
+$menu-link-transition: color 0.15s ease-in-out,
+  background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
 $menu-link-disabled-color: $muted;
 
 // -----------------------------------------------------------------------------
@@ -527,11 +542,14 @@ $product-card-bg: $ghost;
 $product-card-color: null;
 $product-card-height: auto;
 
-$product-card-border-color: rgba($black, .125);
+$product-card-border-color: rgba($black, 0.125);
 $product-card-border-radius: $border-radius;
 $product-card-border-width: $border-width;
 
-$product-card-inner-border-radius: subtract($product-card-border-radius, $product-card-border-width);
+$product-card-inner-border-radius: subtract(
+  $product-card-border-radius,
+  $product-card-border-width
+);
 
 $product-card-footer-bg: $darker;
 
@@ -578,12 +596,18 @@ $input-plaintext-color: $dark;
 $input-height-border: $input-border-width * 2;
 
 $input-height-inner: add($input-line-height * 1em, $input-padding-y * 2);
-$input-height-inner-half: add($input-line-height * .5em, $input-padding-y);
-$input-height-inner-quarter: add($input-line-height * .25em, $input-padding-y / 2);
+$input-height-inner-half: add($input-line-height * 0.5em, $input-padding-y);
+$input-height-inner-quarter: add(
+  $input-line-height * 0.25em,
+  $input-padding-y / 2
+);
 
-$input-height: add($input-line-height * 1em, add($input-padding-y * 2, $input-height-border, false));
- 
-$input-transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+$input-height: add(
+  $input-line-height * 1em,
+  add($input-padding-y * 2, $input-height-border, false)
+);
+
+$input-transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 
 // -----------------------------------------------------------------------------
 // Forms
@@ -605,17 +629,19 @@ $form-control-border: $input-border-width solid $input-border-color;
 
 $form-check-input-width: em(16);
 $form-check-min-height: $font-size-base * $line-height-base;
-$form-check-padding-start: $form-check-input-width + .5em;
+$form-check-padding-start: $form-check-input-width + 0.5em;
 $form-check-margin-bottom: $space-0;
-$form-check-label-color:  null;
+$form-check-label-color: null;
 $form-check-label-cursor: null;
-$form-check-transition: background-color .15s ease-in-out, background-position .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+$form-check-transition: background-color 0.15s ease-in-out,
+  background-position 0.15s ease-in-out, border-color 0.15s ease-in-out,
+  box-shadow 0.15s ease-in-out;
 
 $form-check-input-active-filter: brightness(90%);
 
 $form-check-input-bg: $light;
-$form-check-input-border: 1px solid rgba(0, 0, 0, .25);
-$form-check-input-border-radius: .25em;
+$form-check-input-border: 1px solid rgba(0, 0, 0, 0.25);
+$form-check-input-border-radius: 0.25em;
 $form-check-radio-border-radius: 50%;
 $form-check-input-focus-border: $input-focus-border-color;
 $form-check-input-focus-box-shadow: $btn-focus-box-shadow;
@@ -629,7 +655,7 @@ $form-check-radio-checked-bg-image: url("data:image/svg+xml,<svg xmlns='http://w
 $form-check-input-disabled-opacity: $btn-disabled-opacity;
 
 $form-select-padding-y: $input-padding-y;
-$form-select-padding-x:  $input-padding-x;
+$form-select-padding-x: $input-padding-x;
 $form-select-font-family: $input-font-family;
 $form-select-font-size: $font-size-xs;
 $form-select-indicator-padding: $space-36;
@@ -638,24 +664,30 @@ $form-select-line-height: $input-line-height;
 $form-select-color: $dark;
 $form-select-disabled-color: $gray-600;
 $form-select-bg: $primary;
-$form-select-disabled-bg: $gray-200 ;
-$form-select-disabled-border-color: $input-disabled-border-color ;
+$form-select-disabled-bg: $gray-200;
+$form-select-disabled-border-color: $input-disabled-border-color;
 $form-select-bg-position: right $form-select-padding-x center;
 $form-select-bg-size: 16px 12px; // In pixels because image dimensions
 $form-select-indicator-color: $input-border-color;
 $form-select-indicator: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='none' stroke='#{$form-select-indicator-color}' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/></svg>");
 
-$form-select-feedback-icon-padding-end: add(1em * .75, (2 * $form-select-padding-y * .75) + $form-select-padding-x + $form-select-indicator-padding);
-$form-select-feedback-icon-position: center right ($form-select-padding-x + $form-select-indicator-padding);
-$form-select-feedback-icon-size: $input-height-inner-half $input-height-inner-half;
+$form-select-feedback-icon-padding-end: add(
+  1em * 0.75,
+  (2 * $form-select-padding-y * 0.75) + $form-select-padding-x +
+    $form-select-indicator-padding
+);
+$form-select-feedback-icon-position: center right
+  ($form-select-padding-x + $form-select-indicator-padding);
+$form-select-feedback-icon-size: $input-height-inner-half
+  $input-height-inner-half;
 
 $form-select-border-width: $input-border-width;
 $form-select-border-color: $input-border-color;
 $form-select-border-radius: $border-radius-none;
 $form-select-box-shadow: unset;
 
-$form-select-focus-border-color:  $input-focus-border-color;
-$form-select-focus-width:         $input-focus-width;
+$form-select-focus-border-color: $input-focus-border-color;
+$form-select-focus-width: $input-focus-width;
 $form-select-focus-box-shadow: $form-select-box-shadow;
 
 // -----------------------------------------------------------------------------
@@ -670,7 +702,7 @@ $form-feedback-invalid-color: $danger;
 
 $form-feedback-icon-valid-color: $form-feedback-valid-color;
 $form-feedback-icon-valid: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'><path fill='#{$form-feedback-icon-valid-color}' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/></svg>");
-$form-feedback-icon-invalid-color:  $form-feedback-invalid-color;
+$form-feedback-icon-invalid-color: $form-feedback-invalid-color;
 $form-feedback-icon-invalid: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='#{$form-feedback-icon-invalid-color}'><circle cx='6' cy='6' r='4.5'/><path stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/><circle cx='6' cy='8.2' r='.6' fill='#{$form-feedback-icon-invalid-color}' stroke='none'/></svg>");
 
 $form-validation-states: (
@@ -715,8 +747,8 @@ $sidebar-padding-x: $space-36;
 $carousel-control-color: $white;
 $carousel-control-width: 15%;
 $carousel-control-opacity: $opacity-50;
-$carousel-control-hover-opacity: .9;
-$carousel-control-transition: opacity .15s ease;
+$carousel-control-hover-opacity: 0.9;
+$carousel-control-transition: opacity 0.15s ease;
 
 $carousel-indicator-width: $font-size-base;
 $carousel-indicator-height: $carousel-indicator-width;
@@ -726,11 +758,10 @@ $carousel-indicator-opacity: $opacity-50;
 $carousel-indicator-bg: rgba($primary, 0.25);
 $carousel-indicator-active-bg: $primary;
 $carousel-indicator-active-opacity: $opacity-100;
-$carousel-indicator-transition: opacity .6s ease;
+$carousel-indicator-transition: opacity 0.6s ease;
 
-$carousel-transition-duration: .6s;
+$carousel-transition-duration: 0.6s;
 $carousel-transition: transform $carousel-transition-duration ease-in-out;
-
 
 // -----------------------------------------------------------------------------
 // Modals

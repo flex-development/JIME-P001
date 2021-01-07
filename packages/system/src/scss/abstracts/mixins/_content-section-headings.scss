@@ -36,8 +36,7 @@
     font-size: $font-size-lg;
   }
 
-  h3
-  h4,
+  h3 h4,
   .h3,
   .h4 {
     @include breakpoint-up(md) {

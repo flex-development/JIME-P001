@@ -8,6 +8,7 @@ PLAYLIST BAR
   background-color: $body-bg;
   border-top: $border-width solid $border-color;
   color: $light;
+  overflow-y: hidden;
 
   &-artwork {
     @include breakpoint-up(sm) {

@@ -12,10 +12,8 @@ import {
 } from '@system/lib/organisms'
 import { GridBreakpoints, TC } from '@system/types'
 import { useCallback } from 'react'
-import { useSpring } from 'react-spring'
 import { useEvent, useMedia } from 'react-use'
 import { LayoutProps } from './Layout.props'
-
 /**
  * @file Implementation - Layout
  * @module lib/templates/Layout/impl
@@ -42,9 +40,6 @@ export const Layout: TC<LayoutProps> = (props: LayoutProps) => {
   // Animate sidebar visibility
   const sidebar_a = useSlideInOut<HTMLDivElement>(breakpoint_lg)
 
-  // Animate loading container in/out
-  const loading_a = useSpring({ opacity: loading ? 1 : 0 })
-
   /**
    * The sidebar will be closed automatically when the window width is less than
    * or equal to the `GRID_BREAKPOINTS.lg` breakpoint.
@@ -63,7 +58,7 @@ export const Layout: TC<LayoutProps> = (props: LayoutProps) => {
       {(() => {
         if (loading)
           return (
-            <Box className='loading-container' style={loading_a}>
+            <Box className='loading-container'>
               <SVG $loading className='loading-container-icon' />
               <Span className='loading-container-text'>Loading</Span>
             </Box>

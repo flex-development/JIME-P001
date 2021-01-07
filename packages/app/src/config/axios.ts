@@ -36,12 +36,16 @@ export const handleErrorResponse = (error: AxiosError): void => {
   }
 
   if (isPlainObject(feathersError.data)) {
-    feathersError.data.config = pick(config, [
-      'url',
-      'method',
-      'params',
-      'headers'
-    ])
+    if (process.env.NODE_ENV === 'development') {
+      feathersError.data.config = config
+    } else {
+      feathersError.data.config = pick(config, [
+        'url',
+        'method',
+        'params',
+        'headers'
+      ])
+    }
   }
 
   throw feathersError
@@ -97,11 +101,56 @@ export async function axios<T = ANYTHING>(
  * @see https://shopify.dev/docs/admin-api/rest/reference
  *
  * @param config - Axios request config
+ * @param menus - If menus is true, use alternate `baseURL`
  * @throws {FeathersError}
  */
 export async function axiosShopify<T = ANYTHING>(
-  config: Omit<AxiosRequestConfig, 'baseURL'> = {}
+  config: Omit<AxiosRequestConfig, 'baseURL'> = {},
+  menus = false
 ): Promise<T> {
+  // ! While in development, the menus endpoint cannot be accessed
+  if (menus) {
+    /* eslint-disable sort-keys */
+    return ({
+      menus: [
+        {
+          handle: 'main-menu',
+          levels: 1,
+          title: 'Main Menu',
+          links: [
+            {
+              title: 'Home',
+              url: '/',
+              links: []
+            },
+            {
+              title: 'Products',
+              url: '/products',
+              links: []
+            },
+            {
+              title: 'About',
+              url: '/about',
+              links: []
+            },
+            {
+              title: 'Instagram',
+              url: '/instagram',
+              links: []
+            }
+          ]
+        },
+        {
+          handle: 'footer',
+          levels: 0,
+          title: 'Footer Menu',
+          links: []
+        }
+      ]
+    } as unknown) as T
+    /* eslint-enable sort-keys */
+  }
+
   const hostname = process.env.SHOPIFY_DOMAIN
   const password = process.env.SHOPIFY_PASSWORD
   const username = process.env.SHOPIFY_API_KEY
@@ -109,10 +158,13 @@ export async function axiosShopify<T = ANYTHING>(
 
   const login = `${username}:${password}@${hostname}`
 
+  const baseURL = `https://${login}/admin/api/${version}/`
+  const baseURLMenus = `https://${login}/`
+
   config = {
     ...config,
-    baseURL: `https://${login}/admin/api/${version}/`,
-    url: `${config.url}.json`
+    baseURL: menus ? baseURLMenus : baseURL,
+    url: menus ? 'pages/api-menus' : `${config.url}.json`
   } as typeof config
 
   return await axios<T>(config, true)

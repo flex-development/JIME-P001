@@ -44,7 +44,7 @@ ADD TO CART FORM
         @include flex-center;
 
         @include make-grid-col(8);
-      }      
+      }
     }
 
     @include make-grid-col;
@@ -93,7 +93,7 @@ ADD TO CART FORM
 
     & + .form-text {
       @include margin-y($space-12, $space-4);
-    
+
       &:empty {
         margin-top: $space-16;
       }

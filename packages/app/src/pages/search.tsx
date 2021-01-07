@@ -1,12 +1,13 @@
-import { getCMSPageSEO } from '@app/subdomains/cms'
+import { getSEOData, SearchPageUrlQuery } from '@app/subdomains/app/utils'
+import { getGlobalMetafields } from '@app/subdomains/metafields/utils'
 import {
   SearchTemplate,
   SearchTemplateProps
 } from '@flex-development/kustomzdesign'
-import { IPagePropsSearch, PC, SearchPageUrlQuery, SEO } from '@subdomains/app'
-import { ProductService } from '@subdomains/sales'
+import { SEO, SEOProps } from '@subdomains/app/components'
+import { IPagePropsSearch as PageProps, PC } from '@subdomains/app/interfaces'
+import { ProductService } from '@subdomains/sales/services'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
-import { useRouter } from 'next/router'
 
 /**
  * @file Page - Product Search
@@ -17,32 +18,22 @@ import { useRouter } from 'next/router'
  * Renders the product search page.
  *
  * @param props - Page component props
- * @param props.page.results - Search results
+ * @param props.globals - Shopify `globals` namespace metafields obj
+ * @param props.seo - `SEO` component properties
+ * @param props.template - `SearchTemplate` component properties
  */
-const Search: PC = ({ page }) => {
-  const { query } = useRouter()
-  const { term = null } = (query || {}) as SearchPageUrlQuery
-
-  const seo = getCMSPageSEO({
-    description: `Search products for Morena's Kustomz.`,
-    keywords: 'grinders, ash trays, rolling trays, weed, cannabis, marijuana',
-    title: term?.length ? `Search results for "${term}"` : 'Search'
-  })
-
-  return (
-    <>
-      <SEO {...seo} />
-      <SearchTemplate {...(page as SearchTemplateProps)} />
-    </>
-  )
-}
+const Search: PC<PageProps> = ({ seo, template }) => (
+  <>
+    <SEO {...seo} />
+    <SearchTemplate {...template} />
+  </>
+)
 
 /**
- * Returns the data for the `SearchTemplate`.
+ * Fetches the data required to display a product listing using the
+ * `SearchTemplate` component.
  *
  * @see https://nextjs.org/docs/basic-features/data-fetching
- *
- * @todo Parse {@param context.query} and perform product search
  *
  * @param context - Next.js page component context
  * @param context.query - The query string
@@ -50,7 +41,7 @@ const Search: PC = ({ page }) => {
  * @return Array of search results
  */
 export const getServerSideProps: GetServerSideProps<
-  IPagePropsSearch,
+  PageProps,
   SearchPageUrlQuery
 > = async (context: GetServerSidePropsContext) => {
   // Initialize services
@@ -75,9 +66,17 @@ export const getServerSideProps: GetServerSideProps<
   }
 
   // Get template data
-  const page: SearchTemplateProps = { results: await Products.find(query) }
+  const template: SearchTemplateProps = { results: await Products.find(query) }
 
-  return { props: { page } }
+  // Get global metafields
+  const globals = await getGlobalMetafields()
+
+  // Get SEO data
+  const seo: SEOProps = await getSEOData(globals, {
+    seo: { title: term?.length ? `Search results for "${term}"` : 'Search' }
+  })
+
+  return { props: { globals, seo, template } }
 }
 
 export default Search

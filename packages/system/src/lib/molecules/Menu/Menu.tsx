@@ -21,7 +21,9 @@ export const Menu: FC<MenuProps> = props => {
   return (
     <Nav {...sanitized}>
       {/* eslint-disable-next-line prettier/prettier */}
-      {$items.map((link: LinkProps) => <Link {...link} $menu key={uuid()} />)}
+      {$items.map((link: LinkProps) => (
+        <Link {...link} $menu key={uuid()} />
+      ))}
     </Nav>
   )
 }

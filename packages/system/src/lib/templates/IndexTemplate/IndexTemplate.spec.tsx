@@ -8,7 +8,7 @@ import { Homepage } from './IndexTemplate.stories'
  */
 
 describe('IndexTemplate', () => {
-  it('renders with class "template" and data-template=${template_id}', () => {
+  it('renders with class "template" and template_id', () => {
     const { template_id } = IndexTemplate
 
     const { container } = render(<Homepage {...Homepage.args} />)

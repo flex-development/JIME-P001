@@ -1,10 +1,11 @@
+import { getSEOData } from '@app/subdomains/app/utils/getSEOData'
+import { getGlobalMetafields } from '@app/subdomains/metafields/utils/getGlobalMetafields'
 import { serialize } from '@flex-development/json'
 import {
   ICollectionListing,
   IProductListing
 } from '@flex-development/kustomzcore'
 import {
-  CollectionTemplate,
   CollectionTemplateProps,
   LinkProps
 } from '@flex-development/kustomzdesign'
@@ -13,37 +14,32 @@ import {
   IPagePropsCollection,
   NotFound,
   PC,
-  SEO,
-  SEOProps
+  SEO
 } from '@subdomains/app'
-import { CollectionService, ProductService } from '@subdomains/sales'
-import { join } from 'lodash'
+import { CollectionService, ProductService } from '@subdomains/sales/services'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
+import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
-import stripHtml from 'string-strip-html'
 
 /**
  * @file Page - Product Collection
  * @module pages/collections/collection
  */
 
+const CollectionTemplate = dynamic(async () => {
+  return (await import('@flex-development/kustomzdesign')).CollectionTemplate
+})
+
 /**
  * Renders a product collection.
- * The value of {@param props.session} will always be `null`.
  *
  * @param props - Page component props
- * @param props.page - Page data
- * @param props.page.collection - Shopify collection listing object
- * @param props.page.products - Product listings in collection
+ * @param props.globals - Shopify `globals` namespace metafields obj
+ * @param props.page - Shopify API collection listing resource data
+ * @param props.seo - `SEO` component properties
+ * @param props.template - `CollectionTemplate` component properties
  */
-const Collection: PC<IPagePropsCollection> = ({ page }) => {
-  const {
-    body_html,
-    default_product_image,
-    image: cimage,
-    title
-  } = page.collection
-
+const Collection: PC<IPagePropsCollection> = ({ seo, template }) => {
   // Get router instance to generate `LinkProps` for each collection product
   const { asPath, query } = useRouter()
 
@@ -58,45 +54,24 @@ const Collection: PC<IPagePropsCollection> = ({ page }) => {
     return { href: `${base}products/${product.handle}` }
   }
 
-  // Get collection image
-  const image = default_product_image || cimage
-
-  // Build keywords from product tags
-  const keywords: string[] = []
-  page.products?.forEach(product => keywords.concat(product.tags.split(',')))
-
-  // Get SEO metadata
-  const seo: SEOProps = {
-    description: stripHtml(body_html).result,
-    keywords: join(keywords),
-    og: {
-      image: image.src,
-      'image:alt': image.alt || undefined,
-      'image:height': image.height,
-      'image:secure_url': image.src,
-      'image:width': image.width
-    },
-    title: asPath === '/products' ? 'All Products' : `Collections - ${title}`,
-    twitter: { card: 'summary', image: image.src }
-  }
-
   return (
     <>
       <SEO {...seo} />
-      <CollectionTemplate {...page} handleProductLink={handleProductLink} />
+      <CollectionTemplate {...template} handleProductLink={handleProductLink} />
     </>
   )
 }
 
 /**
- * Retrieves the data for the `CollectionTemplate`.
+ * Fetches the data required to display a collection using the
+ * `CollectionTemplate` component.
  *
  * @see https://nextjs.org/docs/basic-features/data-fetching
+ * @see https://shopify.dev/docs/admin-api/rest/reference/sales-channels
  *
  * @param context - Next.js page component context
  * @param context.params - Route parameters if dynamic route
  * @param context.req - HTTP request object
- * @return Collection listing object and an array of products in the collection
  */
 export const getServerSideProps: GetServerSideProps<
   IPagePropsCollection,
@@ -116,22 +91,36 @@ export const getServerSideProps: GetServerSideProps<
   // If collection isn't found, show 404 layout
   if ((collection as NotFound).notFound) return collection as NotFound
 
-  // ! Guarenteed to be collection data. Error will be thrown otherwise
+  // ! Guarenteed to be collection page. Error will be thrown otherwise
   collection = collection as ICollectionListing
 
   // Get products in collection
-  const products = await Products.findByCollection(collection.collection_id)
+  const c_products = await Products.findByCollection(collection.collection_id)
+  const products = c_products as IProductListing[]
 
   // Get template data
-  const page = serialize<CollectionTemplateProps>({
+  const template = serialize<CollectionTemplateProps>({
     collection: {
       ...collection,
       title: !req.url?.includes('collections') ? 'Products' : collection.title
     },
-    products: products as Array<IProductListing>
+    products
   })
 
-  return { props: { page } }
+  // Get global metafields
+  const globals = await getGlobalMetafields()
+
+  // Get SEO object
+  const seo = await getSEOData(
+    globals,
+    { ...collection, products },
+    'collection'
+  )
+
+  // Update seo title
+  if (req.url === '/products') seo.title = 'All Products'
+
+  return { props: { globals, page: collection, seo, template } }
 }
 
 export default Collection

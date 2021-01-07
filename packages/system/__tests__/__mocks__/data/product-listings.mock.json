@@ -110,10 +110,8 @@
         "position": 1,
         "updated_at": "2021-01-02T18:27:42-05:00",
         "product_id": 5664609534107,
-        "src": "https:\/\/cdn.shopify.com\/s\/files\/1\/0470\/4790\/1339\/products\/ash-tray-funfetti.jpg?v=1609630062",
-        "variant_ids": [
-          36197732909211
-        ],
+        "src": "https://cdn.shopify.com/s/files/1/0470/4790/1339/products/ash-tray-funfetti.jpg?v=1609630062",
+        "variant_ids": [36197732909211],
         "width": 2048,
         "height": 2048
       },
@@ -123,10 +121,8 @@
         "position": 2,
         "updated_at": "2021-01-02T18:27:42-05:00",
         "product_id": 5664609534107,
-        "src": "https:\/\/cdn.shopify.com\/s\/files\/1\/0470\/4790\/1339\/products\/ash-tray-jelly-slides.jpg?v=1609630062",
-        "variant_ids": [
-          36197732941979
-        ],
+        "src": "https://cdn.shopify.com/s/files/1/0470/4790/1339/products/ash-tray-jelly-slides.jpg?v=1609630062",
+        "variant_ids": [36197732941979],
         "width": 2048,
         "height": 2048
       },
@@ -136,10 +132,8 @@
         "position": 3,
         "updated_at": "2021-01-02T22:08:40-05:00",
         "product_id": 5664609534107,
-        "src": "https:\/\/cdn.shopify.com\/s\/files\/1\/0470\/4790\/1339\/products\/img-placeholder.png?v=1609643320",
-        "variant_ids": [
-          36197732974747
-        ],
+        "src": "https://cdn.shopify.com/s/files/1/0470/4790/1339/products/img-placeholder.png?v=1609643320",
+        "variant_ids": [36197732974747],
         "width": 1080,
         "height": 1080
       }
@@ -150,11 +144,7 @@
         "name": "Style",
         "product_id": 5664609534107,
         "position": 1,
-        "values": [
-          "FUNFETTI",
-          "JELLY $LIDES",
-          "LA $ONRISA"
-        ]
+        "values": ["FUNFETTI", "JELLY $LIDES", "LA $ONRISA"]
       }
     ]
   },
@@ -299,7 +289,7 @@
         "position": 1,
         "updated_at": "2021-01-02T18:29:07-05:00",
         "product_id": 5665197424795,
-        "src": "https:\/\/cdn.shopify.com\/s\/files\/1\/0470\/4790\/1339\/products\/kustomz.jpg?v=1609630147",
+        "src": "https://cdn.shopify.com/s/files/1/0470/4790/1339/products/kustomz.jpg?v=1609630147",
         "variant_ids": [
           36200397996187,
           36200669446299,
@@ -316,12 +306,7 @@
         "name": "Style",
         "product_id": 5665197424795,
         "position": 1,
-        "values": [
-          "Rolling Tray",
-          "♡ Ash Tray",
-          "▢ Ash Tray",
-          "◯ Ash Tray"
-        ]
+        "values": ["Rolling Tray", "♡ Ash Tray", "▢ Ash Tray", "◯ Ash Tray"]
       }
     ]
   },
@@ -436,10 +421,8 @@
         "position": 1,
         "updated_at": "2021-01-02T18:30:20-05:00",
         "product_id": 5664639090843,
-        "src": "https:\/\/cdn.shopify.com\/s\/files\/1\/0470\/4790\/1339\/products\/rolling-tray-funfetti.jpg?v=1609630220",
-        "variant_ids": [
-          36197905989787
-        ],
+        "src": "https://cdn.shopify.com/s/files/1/0470/4790/1339/products/rolling-tray-funfetti.jpg?v=1609630220",
+        "variant_ids": [36197905989787],
         "width": 2048,
         "height": 2048
       },
@@ -449,10 +432,8 @@
         "position": 2,
         "updated_at": "2021-01-02T18:30:20-05:00",
         "product_id": 5664639090843,
-        "src": "https:\/\/cdn.shopify.com\/s\/files\/1\/0470\/4790\/1339\/products\/rolling-tray-jelly-slides.jpg?v=1609630220",
-        "variant_ids": [
-          36197906022555
-        ],
+        "src": "https://cdn.shopify.com/s/files/1/0470/4790/1339/products/rolling-tray-jelly-slides.jpg?v=1609630220",
+        "variant_ids": [36197906022555],
         "width": 2048,
         "height": 2048
       },
@@ -462,10 +443,8 @@
         "position": 3,
         "updated_at": "2021-01-02T18:30:20-05:00",
         "product_id": 5664639090843,
-        "src": "https:\/\/cdn.shopify.com\/s\/files\/1\/0470\/4790\/1339\/products\/rolling-tray-la-sonrisa.jpg?v=1609630220",
-        "variant_ids": [
-          36197906055323
-        ],
+        "src": "https://cdn.shopify.com/s/files/1/0470/4790/1339/products/rolling-tray-la-sonrisa.jpg?v=1609630220",
+        "variant_ids": [36197906055323],
         "width": 2048,
         "height": 2048
       }
@@ -476,11 +455,7 @@
         "name": "Style",
         "product_id": 5664639090843,
         "position": 1,
-        "values": [
-          "FUNFETTI",
-          "JELLY $LIDES",
-          "LA $ONRISA"
-        ]
+        "values": ["FUNFETTI", "JELLY $LIDES", "LA $ONRISA"]
       }
     ]
   }

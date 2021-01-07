@@ -30,19 +30,19 @@ export interface SEOProps {
    * @default {}
    */
   og?: {
-    category?: string
-    image?: string
-    'image:alt'?: string
-    'image:height'?: number | string
-    'image:secure_url'?: string
-    'image:width'?: number | string
-    'product:availability'?: string
-    'product:brand'?: string
-    'product:condition'?: string
-    'product:price:amount'?: string
-    'product:price:currency'?: string
-    'product:item_group_id'?: string
-    'product:retailer_item_id'?: string
+    category?: NullishString
+    image?: NullishString
+    'image:alt'?: NullishString
+    'image:height'?: NullishString | number
+    'image:secure_url'?: NullishString
+    'image:width'?: NullishString | number
+    'product:availability'?: NullishString
+    'product:brand'?: NullishString
+    'product:condition'?: NullishString
+    'product:price:amount'?: NullishString
+    'product:price:currency'?: NullishString
+    'product:item_group_id'?: NullishString
+    'product:retailer_item_id'?: NullishString
   }
 
   /**

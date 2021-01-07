@@ -11,8 +11,8 @@
 /// @param {Map} $breakpoints [$grid-breakpoints] - Grid breakpoints map
 /// @param {List} $names [map-keys($breakpoints)] - Map keys
 @function breakpoint-next(
-  $name, 
-  $breakpoints: $grid-breakpoints, 
+  $name,
+  $breakpoints: $grid-breakpoints,
   $names: map-keys($breakpoints)
 ) {
   $bindex: index($names, $name);

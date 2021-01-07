@@ -1,7 +1,6 @@
-import { DocumentInitialProps } from '@subdomains/app/utils/types'
-import { getSession } from 'next-auth/client'
 import NextDocument, {
   DocumentContext as Context,
+  DocumentInitialProps,
   Head,
   Html,
   Main,
@@ -24,8 +23,6 @@ export default class Document extends NextDocument<DocumentInitialProps> {
   /**
    * Injects the server side rendered styles into the `<head>` element. This is
    * required to server side render styled components.
-   *
-   * The current user session will also be retrieved.
    *
    * @see https://styled-components.com/docs/advanced#server-side-rendering
    *
@@ -51,11 +48,8 @@ export default class Document extends NextDocument<DocumentInitialProps> {
 
       const initialProps = await super.getInitialProps(ctx)
 
-      const session = (await getSession(ctx)) as DocumentInitialProps['session']
-
       return {
         ...initialProps,
-        session,
         styles: (
           <>
             {initialProps.styles}
@@ -170,7 +164,7 @@ export default class Document extends NextDocument<DocumentInitialProps> {
             src='//js-cdn.music.apple.com/musickit/v1/musickit.js'
           />
         </Head>
-        <body data-cms-enabled={!!this.props.session}>
+        <body>
           <noscript>You need to enable JavaScript to view this site.</noscript>
 
           <Main />

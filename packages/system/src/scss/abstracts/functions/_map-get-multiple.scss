@@ -12,7 +12,12 @@
 
   @each $key, $value in $map {
     @if (index($props, $key) != null) {
-      $result: map-merge($result, ($key: $value));
+      $result: map-merge(
+        $result,
+        (
+          $key: $value
+        )
+      );
     }
   }
 

@@ -1,10 +1,9 @@
 /**
- * @file Subdomain Services - Sales
+ * @file Service Entry Point - Sales
  * @module subdomains/sales/services
  */
 
 export * from './CollectionService'
 export * from './ProductService'
-export * from './ReviewService'
 
 /* eslint-disable prettier/prettier */

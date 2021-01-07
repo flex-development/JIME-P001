@@ -36,13 +36,6 @@ export interface IndexTemplateProps extends MainProps {
   max_reviews?: number
 
   /**
-   * "Reviews" section title.
-   *
-   * @default 'Reviews'
-   */
-  product_reviews_title?: string
-
-  /**
    * Array of product listings or product card data.
    *
    * @default []
@@ -68,4 +61,11 @@ export interface IndexTemplateProps extends MainProps {
    * @default []
    */
   reviews?: Array<IReview>
+
+  /**
+   * "Reviews" section title.
+   *
+   * @default 'Reviews'
+   */
+  reviews_section_title?: string
 }

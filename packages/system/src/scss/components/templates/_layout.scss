@@ -9,7 +9,21 @@ LAYOUT
 
   overflow-x: hidden;
 
+  > * {
+    transition: opacity 0.125s linear;
+  }
+
+  .content-col {
+    @include breakpoint-up(lg) {
+      @include position-relative;
+    }
+  }
+
   .playlist-bar {
+    @include breakpoint-up(md) {
+      @include position-fixed(null, null, $space-0, null);
+    }
+
     @include fluid-width;
 
     padding-right: $space-24;
@@ -18,18 +32,31 @@ LAYOUT
   .shop-header {
     @include fluid-width;
 
+    @include position-absolute($space-0);
+
     padding: $space-20 $space-24;
+    z-index: $zindex-modal-backdrop;
+  }
+
+  .sidebar {
+    @include breakpoint-up(md) {
+      @include position-fixed;
+    }
   }
 
   &[data-loading='false'] {
     .loading-container {
-      opacity: 0;
+      @include opacity(0);
+
+      display: none;
     }
   }
 
   &[data-loading='true'] {
     .loading-container {
-      opacity: 1;
+      @include opacity(1);
+
+      display: flex;
     }
   }
 }
@@ -40,8 +67,6 @@ LAYOUT
   @include fluid-height;
 
   @include fluid-width;
-
-  transition: opacity 0.125s linear;
 
   &-icon {
     @include dimensions(rem(42)); // Must be size of inner <circle> element

@@ -9,7 +9,7 @@ SIDEBAR
 
   background-color: $body-bg;
   font-size: $sidebar-font-size;
-  padding: $sidebar-padding-y $sidebar-padding-x;
+  padding: rem(120) $sidebar-padding-x $sidebar-padding-y;
 
   &-footer {
     @include breakpoint-up(lg) {
@@ -77,12 +77,6 @@ SIDEBAR
     &-name,
     &-online-status {
       font-weight: $font-weight-bold;
-    }
-  }
-
-  .developer-credit {
-    @include breakpoint-up(lg) {
-      font-size: $font-size-xs;
     }
   }
 }

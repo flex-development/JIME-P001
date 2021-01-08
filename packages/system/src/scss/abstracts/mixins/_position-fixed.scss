@@ -7,6 +7,7 @@
 
 /// Shorthand for fixed positioning.
 /// @require {mixin} position
+/// @require {variable} $zindex-fixed
 /// @param {List} $args - Offsets
 @mixin position-fixed($args...) {
   @if $args {
@@ -14,4 +15,8 @@
   } @else {
     @include position(fixed);
   }
+
+  z-index: $zindex-fixed;
+
+  @content;
 }

@@ -13,6 +13,8 @@ PRODUCT CARDS
 
   &-dropdown {
     &-menu {
+      z-index: $zindex-modal-backdrop;
+
       .dropdown-item {
         @include user-event {
           cursor: pointer;

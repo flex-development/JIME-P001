@@ -10,7 +10,17 @@
   opacity: 1 !important;
 }
 
+.wf-active .layout[data-loading='false'] > .layout-grid {
+  display: grid;
+}
+
+.wf-active .layout[data-loading='false'] > .playlist-bar,
+.wf-active .layout[data-loading='false'] > .shop-header {
+  display: flex;
+}
+
 html .layout > *:not(.loading-container),
 .wf-loading .layout > * {
+  display: none;
   opacity: 0;
 }

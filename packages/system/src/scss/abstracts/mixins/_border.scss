@@ -19,7 +19,7 @@
   $radius: null,
   $pos: null
 ) {
-  $property: 'border#{if($pos, '-#{$pos}', ' ')}';
+  $property: 'border#{if($pos, '-#{$pos}', null)}';
 
   @if $color {
     #{$property}-color: $color;

@@ -160,7 +160,7 @@ export enum GridBreakpoints {
   xs = 0,
   sm = 576,
   md = 834,
-  lg = 1010,
+  lg = 1180,
   xl = 1368,
   xxl = 1440
 }

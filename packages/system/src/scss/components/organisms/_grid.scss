@@ -27,18 +27,7 @@ GRIDS
     }
   }
 
-  .content-col,
-  .sidebar-col {
-    overflow-y: scroll;
-  }
-
   &[data-sidebar] {
-    @include breakpoint-up(sm) {
-      overflow-y: hidden;
-    }
-
-    overflow-y: scroll;
-
     .content-col {
       @include breakpoint-up(lg) {
         @include make-grid-col(9);

@@ -6,6 +6,7 @@ import {
   IProductListing
 } from '@flex-development/kustomzcore'
 import {
+  CollectionTemplate,
   CollectionTemplateProps,
   LinkProps
 } from '@flex-development/kustomzdesign'
@@ -18,24 +19,19 @@ import {
 } from '@subdomains/app'
 import { CollectionService, ProductService } from '@subdomains/sales/services'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
-import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 
 /**
  * @file Page - Product Collection
- * @module pages/collections/collection
+ * @module pages/collections/[collection]
  */
-
-const CollectionTemplate = dynamic(async () => {
-  return (await import('@flex-development/kustomzdesign')).CollectionTemplate
-})
 
 /**
  * Renders a product collection.
  *
  * @param props - Page component props
+ * @param props.collection - Shopify API collection listing resource data
  * @param props.globals - Shopify `globals` namespace metafields obj
- * @param props.page - Shopify API collection listing resource data
  * @param props.seo - `SEO` component properties
  * @param props.template - `CollectionTemplate` component properties
  */
@@ -120,7 +116,7 @@ export const getServerSideProps: GetServerSideProps<
   // Update seo title
   if (req.url === '/products') seo.title = 'All Products'
 
-  return { props: { globals, page: collection, seo, template } }
+  return { props: { collection, globals, seo, template } }
 }
 
 export default Collection

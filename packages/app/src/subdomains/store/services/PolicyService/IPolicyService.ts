@@ -1,6 +1,5 @@
 import { PartialOr } from '@flex-development/json'
 import { IPolicy } from '@flex-development/kustomzcore'
-import Shopify from 'shopify-api-node'
 
 /**
  * @file Interface - PolicyService
@@ -8,9 +7,11 @@ import Shopify from 'shopify-api-node'
  */
 
 export interface IPolicyService {
-  Policies: Shopify['policy']
-
   find(): Promise<PartialOr<IPolicy>[]>
+  findByHandle(
+    handle: IPolicy['handle'],
+    params?: Pick<FindPolicyParams, 'fields'>
+  ): Promise<PartialOr<IPolicy> | null>
   get(
     handle: IPolicy['handle'],
     params?: Pick<FindPolicyParams, 'fields'>

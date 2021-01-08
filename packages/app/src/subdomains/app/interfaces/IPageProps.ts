@@ -1,9 +1,10 @@
 import { FeathersErrorJSON } from '@feathersjs/errors'
-import { AnyObject, PartialOr } from '@flex-development/json'
+import { PartialOr } from '@flex-development/json'
 import {
   ICollectionListing,
   IMetafield,
   IPage,
+  IPolicy,
   IProductListing
 } from '@flex-development/kustomzcore'
 import {
@@ -28,25 +29,13 @@ export interface IPageProps {
    * Global shop metafields.
    */
   globals: Record<string, PartialOr<IMetafield>>
-
-  /**
-   * Page data for a collection, product, policy, or online store page.
-   *
-   * @see https://shopify.dev/docs/admin-api/rest/reference/online-store
-   */
-  page?: AnyObject
-
-  /**
-   * `SEO` component properties.
-   */
-  seo?: SEOProps
 }
 
 /**
  * Props passed to product collection pages.
  */
 export interface IPagePropsCollection extends IPageProps {
-  page: ICollectionListing
+  collection: ICollectionListing
   seo: SEOProps
   template: CollectionTemplateProps
 }
@@ -78,10 +67,19 @@ export interface IPagePropsIndex extends IPageProps {
 }
 
 /**
+ * Props passed to store policy pages.
+ */
+export interface IPagePropsPolicy extends IPageProps {
+  policy: IPolicy
+  seo: SEOProps
+  template: PageTemplateProps
+}
+
+/**
  * Props passed to product and collection product pages.
  */
 export interface IPagePropsProduct extends IPageProps {
-  page: IProductListing
+  product: IProductListing
   seo: SEOProps
   template: ProductTemplateProps
 }

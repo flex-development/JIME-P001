@@ -6,6 +6,11 @@
   },
   "redirects": [
     {
+      "source": "/admin",
+      "destination": "https://morenaskustomz.myshopify.com/admin",
+      "permanent": true
+    },
+    {
       "source": "/checkouts/:permalink",
       "destination": "https://morenaskustomz.myshopify.com/cart/:permalink",
       "permanent": true
@@ -17,6 +22,10 @@
     }
   ],
   "rewrites": [
+    {
+      "source": "/pages/index",
+      "destination": "/"
+    },
     {
       "source": "/pages/:handle*",
       "destination": "/:handle*"

@@ -15,19 +15,6 @@ import { FindPolicyParams, IPolicyService } from './IPolicyService'
  */
 
 export default class PolicyService implements IPolicyService {
-  Policies: IPolicyService['Policies']
-
-  /**
-   * Creates a new `PolicyService` instance.
-   */
-  constructor() {
-    let Policies = {} as IPolicyService['Policies']
-
-    import('@app/config/shopify').then(mod => (Policies = mod.default.policy))
-
-    this.Policies = Policies
-  }
-
   /**
    * Get all store policies.
    *
@@ -76,6 +63,22 @@ export default class PolicyService implements IPolicyService {
   }
 
   /**
+   * Find a policy by handle. Returns `null` if the page isn't found.
+   *
+   * @async
+   * @param handle - Handle of policy to find
+   * @param params - Query parameters
+   * @param params.fields - Comma-separated list of fields to show
+   */
+  async findByHandle(
+    handle: IPolicy['handle'],
+    params?: Pick<FindPolicyParams, 'fields'>
+  ): Promise<PartialOr<IPolicy> | null> {
+    const policies = await this.find({ ...pick(params, ['fields']), handle })
+    return policies[0] || null
+  }
+
+  /**
    * Retrieve a policy by handle. Throws an error if the policy isn't found.
    *
    * @async
@@ -88,18 +91,17 @@ export default class PolicyService implements IPolicyService {
     handle: IPolicy['handle'],
     params?: Pick<FindPolicyParams, 'fields'>
   ): Promise<PartialOr<IPolicy>> {
-    const policies = await this.find({ ...params, handle })
+    const policy = await this.findByHandle(handle, params)
 
-    if (!policies.length) {
+    if (!policy) {
       const error_data = { handle, params }
-      const error_message = `Policy with handle "${handle}" not found`
-
+      const error_message = `Policy with handle "${handle}" not found.`
       const error = createError(error_message, error_data, 404)
 
       Logger.error({ 'PolicyService.get': error })
       throw error
     }
 
-    return policies[0]
+    return policy
   }
 }

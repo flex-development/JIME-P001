@@ -30,7 +30,7 @@ const ProductTemplate = dynamic(async () => {
  *
  * @param props - Page component props
  * @param props.globals - Shopify `globals` namespace metafields obj
- * @param props.page - Shopify API product listing resource data
+ * @param props.product - Shopify API product listing resource data
  * @param props.seo - `SEO` component properties
  * @param props.template - `ProductTemplate` component properties
  */
@@ -98,7 +98,7 @@ export const getServerSideProps: GetServerSideProps<
     'product'
   )
 
-  return { props: { globals, page: product, seo, template } }
+  return { props: { globals, product, seo, template } }
 }
 
 export default Product

@@ -55,43 +55,33 @@ export const Layout: TC<LayoutProps> = (props: LayoutProps) => {
       data-loading={loading}
       data-template={Layout.template_id}
     >
-      {(() => {
-        if (loading)
-          return (
-            <Box className='loading-container'>
-              <SVG $loading className='loading-container-icon' />
-              <Span className='loading-container-text'>Loading</Span>
-            </Box>
-          )
+      <Box className='loading-container'>
+        <SVG $loading className='loading-container-icon' />
+        <Span className='loading-container-text'>Loading</Span>
+      </Box>
+      <ShopHeader {...header} handleSidebar={sidebar_a.toggle} />
 
-        return (
-          <>
-            <ShopHeader {...header} handleSidebar={sidebar_a.toggle} />
+      <Box
+        className='layout-grid'
+        data-sidebar={sidebar_a.visible || undefined}
+      >
+        <Box
+          className='sidebar-col'
+          data-visible={sidebar_a.visible}
+          hidden={!breakpoint_lg && !sidebar_a.visible}
+          ref={sidebar_a.ref}
+          style={sidebar_a.style}
+        >
+          <Sidebar {...sidebar} />
+        </Box>
 
-            <Box
-              className='layout-grid'
-              data-sidebar={sidebar_a.visible || undefined}
-            >
-              <Box
-                className='sidebar-col'
-                data-visible={sidebar_a.visible}
-                hidden={!breakpoint_lg && !sidebar_a.visible}
-                ref={sidebar_a.ref}
-                style={sidebar_a.style}
-              >
-                <Sidebar {...sidebar} />
-              </Box>
+        <Box className='content-col'>
+          <Hero {...hero} />
+          {children}
+        </Box>
+      </Box>
 
-              <Box className='content-col'>
-                <Hero {...hero} />
-                {children}
-              </Box>
-            </Box>
-
-            <PlaylistBar {...playlistbar} />
-          </>
-        )
-      })()}
+      <PlaylistBar {...playlistbar} />
     </Box>
   )
 }

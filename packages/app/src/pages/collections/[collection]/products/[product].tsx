@@ -1,4 +1,6 @@
-import { getServerSideProps as getSSProps } from '@app/pages/products/[handle]'
+import ProductPage, {
+  getServerSideProps as getSSProps
+} from '@app/pages/products/[handle]'
 import { ICollectionListing } from '@flex-development/kustomzcore'
 import { ProductTemplateProps } from '@flex-development/kustomzdesign'
 import {
@@ -13,16 +15,11 @@ import {
 import { CollectionService } from '@subdomains/sales/services/CollectionService'
 import { pick } from 'lodash'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
-import dynamic from 'next/dynamic'
 
 /**
  * @file Page - Collection Product
- * @module pages/collections/collection/products/product
+ * @module pages/collections/[collection]/products/[product]
  */
-
-const ProductPage = dynamic(async () => {
-  return (await import('@app/pages/products/[handle]')).default
-})
 
 /**
  * Renders a collection product page.
@@ -94,7 +91,7 @@ export const getServerSideProps: GetServerSideProps<
   }
 
   return {
-    props: { ...pick(pageProps.props, ['globals', 'page', 'seo']), template }
+    props: { ...pick(pageProps.props, ['globals', 'product', 'seo']), template }
   }
 }
 

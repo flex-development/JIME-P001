@@ -27,6 +27,8 @@ SHOP HEADER
 
   &-col {
     &:first-of-type {
+      @include fluid-width;
+
       align-items: center;
     }
 

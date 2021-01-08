@@ -3,20 +3,17 @@ SIDEBAR
 ----------------------------------------------------------------------------- */
 
 .sidebar {
-  @include flex-column;
+  @include flex(flex-start, space-between, column);
 
-  @include height(max-content, none, 100%);
+  @include height(95vh);
 
   background-color: $body-bg;
   font-size: $sidebar-font-size;
-  padding: rem(120) $sidebar-padding-x $sidebar-padding-y;
+  padding: rem(104) $sidebar-padding-x $sidebar-padding-y;
+  overflow-y: scroll;
 
   &-footer {
-    @include breakpoint-up(lg) {
-      margin-top: $space-80 * 1.75;
-    }
-
-    @include margin-y($space-80, $space-0);
+    @include padding-y($space-24);
   }
 
   &-menu {
@@ -38,14 +35,6 @@ SIDEBAR
       &:last-of-type {
         margin-bottom: $space-0;
       }
-    }
-
-    &-details {
-      @include breakpoint-up(sm) {
-        margin-bottom: $space-36;
-      }
-
-      margin-bottom: $space-20;
     }
 
     &-link-img {
@@ -78,6 +67,10 @@ SIDEBAR
     &-online-status {
       font-weight: $font-weight-bold;
     }
+  }
+
+  .developer-credit {
+    margin-bottom: $space-0;
   }
 }
 

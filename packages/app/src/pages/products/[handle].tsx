@@ -2,7 +2,10 @@ import { getSEOData } from '@app/subdomains/app/utils/getSEOData'
 import { getGlobalMetafields } from '@app/subdomains/metafields/utils/getGlobalMetafields'
 import { serialize } from '@flex-development/json'
 import { IProductListing } from '@flex-development/kustomzcore'
-import { ProductTemplateProps } from '@flex-development/kustomzdesign'
+import {
+  ProductTemplate,
+  ProductTemplateProps
+} from '@flex-development/kustomzdesign'
 import {
   IPagePropsProduct as PageProps,
   NotFound,
@@ -14,16 +17,11 @@ import {
 import { ProductService } from '@subdomains/sales/services/ProductService'
 import { findIndex } from 'lodash'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
-import dynamic from 'next/dynamic'
 
 /**
  * @file Page - Product
  * @module pages/products/handle
  */
-
-const ProductTemplate = dynamic(async () => {
-  return (await import('@flex-development/kustomzdesign')).ProductTemplate
-})
 
 /**
  * Renders a product page.
@@ -83,7 +81,7 @@ export const getServerSideProps: GetServerSideProps<
   // Build template data object
   const template = serialize<ProductTemplateProps>({
     active,
-    collection: { href: 'products', title: 'Products' },
+    collection: { href: '/products', title: 'Products' },
     product,
     reviews: []
   })

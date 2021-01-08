@@ -20,13 +20,12 @@ LAYOUT
   }
 
   .playlist-bar {
-    @include breakpoint-up(md) {
-      @include position-fixed(null, null, $space-0, null);
-    }
-
     @include fluid-width;
 
+    @include position-relative;
+
     padding-right: $space-24;
+    z-index: $zindex-modal;
   }
 
   .shop-header {

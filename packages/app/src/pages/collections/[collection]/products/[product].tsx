@@ -87,7 +87,7 @@ export const getServerSideProps: GetServerSideProps<
   // Get data for template
   const template: ProductTemplateProps = {
     ...((pageProps.props?.template || {}) as ProductTemplateProps),
-    collection: { href: `collections/${chandle}`, title: collection.title }
+    collection: { href: `/collections/${chandle}`, title: collection.title }
   }
 
   return {

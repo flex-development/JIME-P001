@@ -1,18 +1,16 @@
-import { app } from '@app/subdomains/firebase/config/web'
-import {
-  CART_PERSISTENCE_KEY as CART_KEY,
-  CheckoutLineItemInput,
-  Logger
-} from '@flex-development/kustomzcore'
-import { CartContextProvider, UseCart } from '@flex-development/kustomzdesign'
+import { CART_PKEY } from '@flex-development/kustomzcore/config/constants'
+import { CheckoutLineItemInput } from '@flex-development/kustomzcore/types/shopify'
 import '@flex-development/kustomzdesign/kustomzdesign.css'
-import { AppLayout } from '@subdomains/app/components'
+import {
+  CartContextProvider,
+  CartContextProviderProps
+} from '@providers/CartContextProvider'
+import { AppLayout } from '@subdomains/app/components/AppLayout'
 import { AC, IAppProps } from '@subdomains/app/interfaces'
 import '@subdomains/app/styles.css'
 import { NextWebVitalsMetric } from 'next/app'
 import { useCallback, useRef } from 'react'
-import { useLocalStorage } from 'react-use'
-import { FirebaseAppProvider } from 'reactfire'
+import useLocalStorage from 'react-use/useLocalStorage'
 
 /**
  * @file Next.js Custom App
@@ -25,7 +23,6 @@ import { FirebaseAppProvider } from 'reactfire'
  *
  * The following providers will be initialized (in order):
  *
- * - `FirebaseAppProvider`
  * - `CartContextProvider`
  *
  * @param param0 - Component props
@@ -34,7 +31,7 @@ import { FirebaseAppProvider } from 'reactfire'
  */
 const App: AC = ({ Component, pageProps }: IAppProps) => {
   // Get line items from peristed storage
-  const [items, setItems] = useLocalStorage<CheckoutLineItemInput[]>(CART_KEY)
+  const [items, setItems] = useLocalStorage<CheckoutLineItemInput[]>(CART_PKEY)
   const _items = useRef<CheckoutLineItemInput[]>(items || [])
 
   /**
@@ -43,7 +40,7 @@ const App: AC = ({ Component, pageProps }: IAppProps) => {
    * @param cart - `CartContextProvider` state
    * @param cart.items - Checkout line items
    */
-  const persistCart = async (cart: UseCart) => {
+  const persistCart: CartContextProviderProps['persist'] = async cart => {
     if (typeof window !== 'undefined') return setItems(cart.items)
   }
 
@@ -51,11 +48,9 @@ const App: AC = ({ Component, pageProps }: IAppProps) => {
   const persistCartCB = useCallback(persistCart, [setItems])
 
   return (
-    <FirebaseAppProvider firebaseApp={app}>
-      <CartContextProvider items={_items.current} persist={persistCartCB}>
-        <AppLayout page={Component} pageProps={pageProps} />
-      </CartContextProvider>
-    </FirebaseAppProvider>
+    <CartContextProvider items={_items.current} persist={persistCartCB}>
+      <AppLayout page={Component} pageProps={pageProps} />
+    </CartContextProvider>
   )
 }
 
@@ -66,8 +61,11 @@ const App: AC = ({ Component, pageProps }: IAppProps) => {
  *
  * @param metric - Web metric object
  */
-export const reportWebVitals = (metric: NextWebVitalsMetric): void => {
-  Logger.info({ reportWebVitals: metric })
+export const reportWebVitals = async (
+  metric: NextWebVitalsMetric
+): Promise<void> => {
+  const Logger = await import('@flex-development/kustomzcore/config/logger')
+  Logger.default.info({ reportWebVitals: metric })
 }
 
 export default App

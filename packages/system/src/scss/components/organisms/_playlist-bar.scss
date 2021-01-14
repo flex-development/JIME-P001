@@ -55,6 +55,8 @@ PLAYLIST BAR
       .icon {
         @include dimensions(rem(26));
       }
+
+      display: inline-flex;
     }
   }
 

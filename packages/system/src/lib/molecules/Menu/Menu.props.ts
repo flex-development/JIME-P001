@@ -1,4 +1,5 @@
-import { LinkProps, NavProps } from '@system/lib/atoms'
+import { LinkProps } from '@system/lib/atoms/Link'
+import { NavProps } from '@system/lib/atoms/Nav'
 
 /**
  * @file Component Props - Menu

@@ -1,4 +1,8 @@
-const { merge } = require('lodash')
+const { DuplicatesPlugin } = require('inspectpack/plugin')
+const merge = require('lodash').merge
+const path = require('path')
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
+const createDeveloperToken = require('./scripts/create-developer-token')
 const vercel = require('./vercel.json')
 
 /**
@@ -7,9 +11,10 @@ const vercel = require('./vercel.json')
  */
 
 const {
-  APPLE_AUTHKEY_MUSICKIT,
-  APPLE_AUTHKEY_MUSICKIT_KEY_ID,
-  APPLE_TEAM_ID,
+  APPLE_AUTHKEY_MUSICKIT: private_key,
+  APPLE_AUTHKEY_MUSICKIT_KEY_ID: kid,
+  APPLE_TEAM_ID: iss,
+  ANALYZE,
   FIREBASE_API_KEY,
   FIREBASE_APP_ID,
   FIREBASE_PROJECT_ID,
@@ -28,9 +33,7 @@ module.exports = {
    * Add environment variables to the JavaScript bundle.
    */
   env: {
-    APPLE_AUTHKEY_MUSICKIT,
-    APPLE_AUTHKEY_MUSICKIT_KEY_ID,
-    APPLE_TEAM_ID,
+    APPLE_DEVELOPER_TOKEN: createDeveloperToken(iss, kid, private_key),
     FIREBASE_API_KEY,
     FIREBASE_APP_ID,
     FIREBASE_AUTH_DOMAIN: `${FIREBASE_PROJECT_ID}.firebaseapp.com`,
@@ -48,6 +51,7 @@ module.exports = {
    * Experimental features config.
    */
   experimental: {
+    granularChunks: true,
     optimizeFonts: true,
     optimizeImages: true
   },
@@ -122,10 +126,41 @@ module.exports = {
    * @return {object} Altered Webpack configuration
    */
   webpack: (config, { dev, isServer }) => {
+    // Module resolutions
     config.resolve.alias = merge(config.resolve.alias, {
-      '@flex-development/kustomzdesign': '@flex-development/kustomzdesign/dist'
+      '@babel': path.join(__dirname, '../../node_modules/@babel'),
+      '@baggie/string': '@baggie/string/lib',
+      '@commitlint': false,
+      '@flex-development/json': '@flex-development/json/dist',
+      '@flex-development/kustomzcore': '@flex-development/kustomzcore/dist',
+      '@flex-development/kustomzdesign': '@flex-development/kustomzdesign/dist',
+      '@hooks': '@flex-development/kustomzdesign/dist/hooks',
+      '@lib': '@flex-development/kustomzdesign/dist/lib',
+      '@mdx-js/react': '@mdx-js/react/dist/esm',
+      '@providers': '@flex-development/kustomzdesign/dist/providers',
+      '@shopify/theme-images': '@shopify/theme-images/dist/images.es5',
+      lodash: 'lodash-es',
+      'react-hanger': 'react-hanger/esm',
+      'react-use': 'react-use/esm',
+      swr: 'swr/esm',
+      validator: 'validator/es'
     })
 
+    // Add Node.js polyfills
+    config.resolve.fallback = merge(config.resolve.fallback, {
+      util: require.resolve('util')
+    })
+
+    // Prevent client-side errors
+    if (!isServer) {
+      config.resolve.fallback = merge(config.resolve.fallback, {
+        child_process: false,
+        dns: false,
+        fs: false
+      })
+    }
+
+    // Push custom TypeScript loader
     config.module.rules.push({
       test: /\.(ts|tsx)$/,
       use: [
@@ -139,12 +174,30 @@ module.exports = {
       ]
     })
 
-    if (!isServer) {
-      config.node = {
-        child_process: 'empty',
-        dns: 'empty',
-        fs: 'empty'
+    // Optimization settings
+    config.optimization = merge(config.optimization, {
+      mergeDuplicateChunks: true,
+      minimize: true,
+      sideEffects: true,
+      usedExports: true
+    })
+
+    // Report duplicate dependencies
+    if (!dev) config.plugins.push(new DuplicatesPlugin({ verbose: true }))
+
+    // Analyze Webpack bundle output
+    if (ANALYZE) {
+      const reportFilenameClient = './analyze/client.html'
+      const reportFilenameServer = '../analyze/server.html'
+
+      const options = {
+        analyzerMode: 'static',
+        defaultSizes: 'stat',
+        openAnalyzer: false,
+        reportFilename: isServer ? reportFilenameServer : reportFilenameClient
       }
+
+      config.plugins.push(new BundleAnalyzerPlugin(options))
     }
 
     return config

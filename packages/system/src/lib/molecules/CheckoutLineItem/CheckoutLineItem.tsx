@@ -1,19 +1,17 @@
-import { CheckoutLineItemInput } from '@flex-development/kustomzcore'
-import { useCheckoutLineItemInput, useSanitizedProps } from '@system/hooks'
-import {
-  Box,
-  BoxProps,
-  Button,
-  Form,
-  Image,
-  Input,
-  Paragraph,
-  ProductHeading,
-  Span
-} from '@system/lib/atoms'
+import { CheckoutLineItemInput } from '@flex-development/kustomzcore/types/shopify'
+import { useCheckoutLineItemInput } from '@system/hooks/useCheckoutLineItemInput'
+import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
+import { Box, BoxProps } from '@system/lib/atoms/Box'
+import { Button } from '@system/lib/atoms/Button'
+import { Form } from '@system/lib/atoms/Form'
+import { Image } from '@system/lib/atoms/Image'
+import { Input } from '@system/lib/atoms/Input'
+import { Paragraph } from '@system/lib/atoms/Paragraph'
+import { ProductHeading } from '@system/lib/atoms/ProductHeading'
+import { Span } from '@system/lib/atoms/Span'
+import { FormField } from '@system/lib/molecules/FormField'
 import { EventHandlers } from '@system/types'
 import { FC, ReactNode, useCallback } from 'react'
-import { FormField } from '../FormField'
 import { CheckoutLineItemProps } from './CheckoutLineItem.props'
 
 /**

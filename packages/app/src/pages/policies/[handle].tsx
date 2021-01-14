@@ -1,16 +1,12 @@
-import HandlePage from '@app/pages/[handle]'
-import { getSEOData, HandlePageParams } from '@app/subdomains/app/utils'
-import { getGlobalMetafields } from '@app/subdomains/metafields/utils'
-import { PolicyService } from '@app/subdomains/store'
-import { IPolicy } from '@flex-development/kustomzcore'
-import { PageTemplateProps } from '@flex-development/kustomzdesign'
-import { SEOProps } from '@subdomains/app/components'
-import {
-  IPagePropsHandle,
-  IPagePropsPolicy,
-  PC
-} from '@subdomains/app/interfaces'
-import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from 'next'
+import { PageTemplate } from '@lib/templates/PageTemplate'
+import { SEO } from '@subdomains/app/components/SEO'
+import { IPagePropsPolicy as PageProps, PC } from '@subdomains/app/interfaces'
+import getSEO from '@subdomains/app/utils/getSEO'
+import transformMDX from '@subdomains/app/utils/transformMDX'
+import { HandlePageParams, NotFound } from '@subdomains/app/utils/types'
+import globalMetafields from '@subdomains/metafields/utils/globalMetafields'
+import getPolicy from '@subdomains/store/utils/getPolicyByHandle'
+import { GetServerSideProps, GetServerSidePropsContext } from 'next'
 
 /**
  * @file Store Policy Page
@@ -26,29 +22,15 @@ import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from 'next'
  * @param props.seo - `SEO` component properties
  * @param props.template - `PageTemplate` component properties
  */
-const Policy: PC<IPagePropsHandle> = props => <HandlePage {...props} />
+const Policy: PC<PageProps> = ({ seo, template }) => (
+  <>
+    <SEO {...seo} />
+    <PageTemplate {...template} />
+  </>
+)
 
 /**
- * Returns an array of routes to pre-render.
- *
- * @async
- */
-export const getStaticPaths: GetStaticPaths = async () => {
-  // Initialize services
-  const Policies = new PolicyService()
-
-  // Get all policies
-  const policies = (await Policies.find()) as IPolicy[]
-
-  // Return pre-render config
-  return {
-    fallback: false,
-    paths: policies.map(policy => ({ params: { handle: policy.handle } }))
-  }
-}
-
-/**
- * Fetches the data required to pre-render a store page using the `PageTemplate`
+ * Fetches the data required to render a store page using the `PageTemplate`
  * component.
  *
  * @see https://nextjs.org/docs/basic-features/data-fetching
@@ -56,40 +38,36 @@ export const getStaticPaths: GetStaticPaths = async () => {
  * https://shopify.dev/docs/admin-api/rest/reference/store-properties/policy
  *
  * @async
- * @param context - Next.js page component context
- * @param context.params - Dynamic route parameters
- * @param context.preview - `true` if preview enabled, `undefined` otherwise
- * @param context.previewData - Preview data set by `setPreviewData`
+ * @param context - Server side page context
+ * @param context.params - Route parameters if dynamic route
+ * @param context.query - The query string
+ * @param context.req - HTTP request object
  */
-export const getStaticProps: GetStaticProps<
-  IPagePropsPolicy,
+export const getServerSideProps: GetServerSideProps<
+  PageProps,
   HandlePageParams
-> = async (context: GetStaticPropsContext<HandlePageParams>) => {
-  // Initialize services
-  const Policies = new PolicyService()
+> = async (context: GetServerSidePropsContext<HandlePageParams>) => {
+  // Get policy page data
+  const data = await getPolicy(context.params?.handle ?? '')
 
-  // Initialize policy data object
-  let policy: IPolicy | null = null
+  // Redirect to /404 if policy page data isn't found
+  if ((data as NotFound).notFound) return data as NotFound
 
-  try {
-    // Get policy data
-    policy = (await Policies.get(context.params?.handle ?? '')) as IPolicy
-  } catch (error) {
-    // Redirect to /404 if policy data isn't found
-    if (error.code === 404) return { notFound: true }
-    throw error
-  }
+  // ! Guarenteed to be policy page data. Error will be thrown otherwise
+  const policy = data as PageProps['policy']
 
   // Get `PageTemplate` props
-  const template: PageTemplateProps = { body: policy.body }
+  const template: PageProps['template'] = {
+    body: (await transformMDX(policy.body)).code
+  }
 
   // Get global metafields
-  const globals = await getGlobalMetafields()
+  const globals = await globalMetafields()
 
   // Get SEO object
-  const seo: SEOProps = await getSEOData(globals, policy, 'policy')
+  const seo = await getSEO(globals, policy, 'policy')
 
-  return { props: { globals, policy, seo, template }, revalidate: 1 }
+  return { props: { globals, policy, seo, template } }
 }
 
 export default Policy

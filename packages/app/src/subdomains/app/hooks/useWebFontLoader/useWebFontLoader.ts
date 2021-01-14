@@ -1,5 +1,5 @@
-import { useMemoCompare } from '@flex-development/kustomzdesign'
-import { isFunction } from 'lodash'
+import { useMemoCompare } from '@hooks/useMemoCompare'
+import isFunction from 'lodash/isFunction'
 import { useCallback, useEffect } from 'react'
 import { useBoolean } from 'react-hanger/array/useBoolean'
 
@@ -15,7 +15,7 @@ import { useBoolean } from 'react-hanger/array/useBoolean'
  */
 export const useWebFontLoader = (config: WebFont.Config): boolean => {
   // Track Webfont loading state
-  const [webfonts, { setTrue: setWebFontsTrue }] = useBoolean(false)
+  const [webfonts, { setTrue: setWebFonts }] = useBoolean(false)
 
   // Web Font Loader config state
   const $config = useMemoCompare<typeof config>(config)
@@ -25,11 +25,11 @@ export const useWebFontLoader = (config: WebFont.Config): boolean => {
    */
   const handleLoading = () => {
     if (isFunction($config.loading)) $config.loading()
-    setWebFontsTrue()
+    setWebFonts()
   }
 
   /* Callback version of `handleLoading` */
-  const loading = useCallback(handleLoading, [$config, setWebFontsTrue])
+  const loading = useCallback(handleLoading, [$config, setWebFonts])
 
   // Handle Webfont loading
   useEffect(() => {

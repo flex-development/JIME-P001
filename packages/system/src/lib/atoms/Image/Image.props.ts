@@ -1,4 +1,4 @@
-import { NullishString } from '@flex-development/json'
+import { NullishString } from '@flex-development/json/utils/types'
 import { ComponentPropsBase } from '@system/types'
 
 /**

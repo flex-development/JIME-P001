@@ -5,6 +5,5 @@
  */
 
 export * from './hooks'
-export * from './utils'
 
 /* eslint-disable prettier/prettier */

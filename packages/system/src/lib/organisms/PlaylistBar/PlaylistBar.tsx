@@ -1,20 +1,25 @@
-import { useSanitizedProps, useSongs } from '@system/hooks'
+import { useSpring } from '@react-spring/web'
 import {
-  Audio,
-  Box,
-  Button,
-  Image,
-  Link,
-  Paragraph,
-  Section,
-  SectionProps
-} from '@system/lib/atoms'
+  PaginationEndMinor,
+  PaginationStartMinor,
+  PauseCircleMajor,
+  PlayCircleMajor
+} from '@shopify/polaris-icons'
+import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
+import { useSongs } from '@system/hooks/useSongs'
+import { Audio } from '@system/lib/atoms/Audio'
+import { Box } from '@system/lib/atoms/Box'
+import { Button } from '@system/lib/atoms/Button'
+import { Image } from '@system/lib/atoms/Image'
+import { Link } from '@system/lib/atoms/Link'
+import { Paragraph } from '@system/lib/atoms/Paragraph'
+import { Section, SectionProps } from '@system/lib/atoms/Section'
 import { EventHandlers } from '@system/types'
-import { getSongArtworkURL } from '@system/utils'
-import { isFunction } from 'lodash'
+import { getSongArtworkURL } from '@system/utils/getSongArtworkURL'
+import isFunction from 'lodash/isFunction'
 import { FC, useCallback, useMemo } from 'react'
-import { useSpring } from 'react-spring'
-import { useAudio, useEvent } from 'react-use'
+import useAudio from 'react-use/useAudio'
+import useEvent from 'react-use/useEvent'
 import { PlaylistBarProps } from './PlaylistBar.props'
 
 /**
@@ -130,34 +135,36 @@ export const PlaylistBar: FC<PlaylistBarProps> = props => {
 
       <Box className='playlist-bar-col'>
         <Button
-          $icon={{ children: 'PaginationStartMinor' }}
           $variant='ghost'
           className='playlist-bar-control-skip'
           disabled={!isAudioReadyCB()}
           name='skip_previous'
           onClick={onClickSkipCB}
-        />
+        >
+          <PaginationStartMinor className='icon' />
+        </Button>
         <Button
-          $icon={{
-            children: audio_state.paused
-              ? 'PlayCircleMajor'
-              : 'PauseCircleMajor'
-          }}
           $variant='ghost'
           className='playlist-bar-control-playback'
           disabled={!isAudioReadyCB()}
           onClick={onClickPlaybackCB}
           name='playback'
           value={audio_state.paused ? 'pause' : 'play'}
-        />
+        >
+          {(() => {
+            if (audio_state.paused) return <PlayCircleMajor className='icon' />
+            return <PauseCircleMajor className='icon' />
+          })()}
+        </Button>
         <Button
-          $icon={{ children: 'PaginationEndMinor' }}
           $variant='ghost'
           className='playlist-bar-control-skip'
           disabled={!isAudioReadyCB()}
           name='skip_next'
           onClick={onClickSkipCB}
-        />
+        >
+          <PaginationEndMinor className='icon' />
+        </Button>
       </Box>
 
       {audio}

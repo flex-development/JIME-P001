@@ -1,7 +1,9 @@
-import { useActiveIndex, useSanitizedProps } from '@system/hooks'
-import { Box, BoxProps, Span } from '@system/lib/atoms'
+import { useActiveIndex } from '@system/hooks/useActiveIndex'
+import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
+import { Box, BoxProps } from '@system/lib/atoms/Box'
+import { Span } from '@system/lib/atoms/Span'
 import classnames from 'classnames'
-import { chunk } from 'lodash'
+import chunk from 'lodash/chunk'
 import { Children, FC, ReactElement, useCallback } from 'react'
 import { CarouselProps } from './Carousel.props'
 

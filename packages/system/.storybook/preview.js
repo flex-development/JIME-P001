@@ -3,12 +3,12 @@ import { DocsContainer } from '@storybook/addon-docs/blocks'
 import { withTests } from '@storybook/addon-jest'
 import { withHTML } from '@whitespace/storybook-addon-html/react'
 import prettier from '../../../.prettierrc.js'
-import { AdobeXDArtboards, backgrounds } from '../src/config'
 import { CartContextProvider } from '../src/providers'
 import '../src/scss/index.scss'
 import results from '../__tests__/jest-test-results.json'
 import ITEMS from '../__tests__/__mocks__/data/checkout-line-items.mock.json'
 import { Documentation } from './components'
+import { AdobeXDArtboards } from './config/viewports'
 
 /**
  * @file Storybook Preview Configuration
@@ -18,7 +18,16 @@ import { Documentation } from './components'
 export const parameters = {
   a11y: {},
   actions: { argTypesRegex: '^(handle|on).*' },
-  backgrounds: { default: 'Dark', values: Object.values(backgrounds) },
+  backgrounds: {
+    default: 'Dark',
+    values: [
+      { name: 'Dark', value: 'var(--mk-dark)' },
+      { name: 'Darker', value: 'var(--mk-darker)' },
+      { name: 'Light', value: 'var(--mk-light)' },
+      { name: 'Primary', value: 'var(--mk-primary)' },
+      { name: 'Secondary', value: 'var(--mk-secondary)' }
+    ]
+  },
   controls: { expanded: false },
   docs: { container: DocsContainer, page: Documentation },
   viewport: { viewports: AdobeXDArtboards }

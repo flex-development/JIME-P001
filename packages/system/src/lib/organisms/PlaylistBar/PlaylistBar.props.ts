@@ -1,6 +1,6 @@
-import { ANYTHING } from '@flex-development/json'
-import { MusicKitSongAttributes as SongAttributes } from '@flex-development/kustomzcore'
-import { SectionProps } from '@system/lib/atoms'
+import { ANYTHING } from '@flex-development/json/utils/types'
+import { MusicKitSongAttributes } from '@flex-development/kustomzcore/types'
+import { SectionProps } from '@system/lib/atoms/Section'
 import { EventHandlers } from '@system/types'
 
 /**
@@ -44,5 +44,5 @@ export interface PlaylistBarProps extends SectionProps {
    *
    * @default []
    */
-  songs?: SongAttributes[]
+  songs?: MusicKitSongAttributes[]
 }

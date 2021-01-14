@@ -1,10 +1,6 @@
-import { FIREBASE_WEB_CONFIG } from '@flex-development/kustomzcore'
+import { FIREBASE_WEB_CONFIG as CONFIG } from '@flex-development/kustomzcore/config/constants'
 import 'firebase/analytics'
 import Firebase from 'firebase/app'
-import 'firebase/auth'
-import 'firebase/database'
-import 'firebase/storage'
-import { isEmpty } from 'lodash'
 
 /**
  * @file Firebase Web Configuration
@@ -12,7 +8,7 @@ import { isEmpty } from 'lodash'
  */
 
 // Don't initialize Analytics in Node environments or if config is invalid
-const ANALYTICS_CONFIG_VALID = !isEmpty(FIREBASE_WEB_CONFIG.measurementId)
+const ANALYTICS_CONFIG_VALID = Object.keys(CONFIG.measurementId).length > 0
 
 // True if Node devlopment enivronment
 export const DEV_ENV = process.env.NODE_ENV === 'development'
@@ -21,7 +17,7 @@ export const SERVER = typeof window === 'undefined'
 export const getFirebaseApp = (): Firebase.app.App => {
   if (Firebase.apps.length > 0) return Firebase.app()
 
-  const app = Firebase.initializeApp({ ...FIREBASE_WEB_CONFIG, auth: {} })
+  const app = Firebase.initializeApp({ ...CONFIG, auth: {} })
 
   if (!SERVER && Firebase.analytics.isSupported() && ANALYTICS_CONFIG_VALID) {
     Firebase.analytics()
@@ -31,9 +27,5 @@ export const getFirebaseApp = (): Firebase.app.App => {
 }
 
 export const app = getFirebaseApp()
-
-export const auth = app.auth()
-export const database = app.database()
-export const storage = app.storage()
 
 export default Firebase

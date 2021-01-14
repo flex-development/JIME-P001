@@ -1,8 +1,9 @@
 import {
   IProductListing,
   IProductListingVariant
-} from '@flex-development/kustomzcore'
-import { BoxProps, LinkProps } from '@system/lib/atoms'
+} from '@flex-development/kustomzcore/types'
+import { BoxProps } from '@system/lib/atoms/Box'
+import { LinkProps } from '@system/lib/atoms/Link'
 
 /**
  * @file Component Props - ProductBreadcrumb

@@ -1,9 +1,13 @@
-import { useSanitizedProps } from '@system/hooks'
-import { Heading, Main, MainProps, Paragraph, Section } from '@system/lib/atoms'
-import { Carousel, ProductReview } from '@system/lib/molecules'
-import { ProductGrid } from '@system/lib/organisms'
+import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
+import { Heading } from '@system/lib/atoms/Heading'
+import { Main, MainProps } from '@system/lib/atoms/Main'
+import { Paragraph } from '@system/lib/atoms/Paragraph'
+import { Section } from '@system/lib/atoms/Section'
+import { Carousel } from '@system/lib/molecules/Carousel'
+import { ProductReview } from '@system/lib/molecules/ProductReview'
+import { ProductGrid } from '@system/lib/organisms/ProductGrid'
 import { TC } from '@system/types'
-import { uuid } from '@system/utils'
+import uniqueId from 'lodash/uniqueId'
 import { IndexTemplateProps } from './IndexTemplate.props'
 
 /**
@@ -64,7 +68,7 @@ export const IndexTemplate: TC<IndexTemplateProps> = props => {
             id='product-review-carousel'
           >
             {reviews.slice(0, max_reviews).map(review => (
-              <ProductReview key={uuid()} review={review} />
+              <ProductReview key={uniqueId('product-review')} review={review} />
             ))}
           </Carousel>
         </Section>

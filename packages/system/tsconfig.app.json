@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "rootDir": "./src",
+    "sourceMap": true
+  },
+  "exclude": ["**/*.spec.ts", "**/*.spec.tsx"],
+  "extends": "./tsconfig.json",
+  "include": ["src"]
+}

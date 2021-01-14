@@ -16,5 +16,5 @@
   },
   "exclude": ["node_modules"],
   "extends": "../../tsconfig.json",
-  "include": ["__tests__", ".storybook", "src", "typings", "jest.setup.ts"]
+  "include": ["__tests__", ".storybook", "src"]
 }

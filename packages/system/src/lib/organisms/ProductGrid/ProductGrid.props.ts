@@ -1,6 +1,6 @@
-import { IProductListing } from '@flex-development/kustomzcore'
-import { SectionProps } from '@system/lib/atoms'
-import { ProductCardProps } from '@system/lib/molecules'
+import { IProductListing } from '@flex-development/kustomzcore/types'
+import { SectionProps } from '@system/lib/atoms/Section'
+import { ProductCardProps } from '@system/lib/molecules/ProductCard'
 
 /**
  * @file Implementation - ProductGrid

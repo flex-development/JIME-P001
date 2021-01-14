@@ -1,15 +1,15 @@
+import { CHECKOUT_BASE_URL } from '@flex-development/kustomzcore/config/constants'
 import {
   CheckoutLineItemInput,
-  CheckoutPermalinkInput,
-  CHECKOUT_BASE_URL
-} from '@flex-development/kustomzcore'
-import { getItemsTotal } from '@system/utils'
-import { isFunction } from 'lodash'
-import { createContext, useContext, useMemo } from 'react'
+  CheckoutPermalinkInput
+} from '@flex-development/kustomzcore/types/shopify'
 import {
   UseCheckoutPermalink,
   useCheckoutPermalink
-} from '../useCheckoutPermalink'
+} from '@system/hooks/useCheckoutPermalink'
+import { getItemsTotal } from '@system/utils/getItemsTotal'
+import isFunction from 'lodash/isFunction'
+import { createContext, useContext, useMemo } from 'react'
 
 /**
  * @file Handle a user's shopping cart

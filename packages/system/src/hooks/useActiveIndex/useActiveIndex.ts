@@ -1,4 +1,3 @@
-import { isString } from 'lodash'
 import { useCallback, useEffect } from 'react'
 import useNumber, { UseNumberActions } from 'react-hanger/array/useNumber'
 
@@ -69,7 +68,7 @@ export const useActiveIndex = (
   const parse = (val: number | string) => {
     let parsed = val as number
 
-    if (isString(val)) {
+    if (typeof val === 'string') {
       // Get number from string. Empty strings will be set to '-1'
       const _val = JSON.parse(val.length ? val : '-1')
 

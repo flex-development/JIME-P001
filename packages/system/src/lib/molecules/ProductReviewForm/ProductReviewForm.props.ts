@@ -1,9 +1,9 @@
-import { ANYTHING } from '@flex-development/json'
+import { ANYTHING } from '@flex-development/json/utils/types'
 import {
   CreateReviewRequest,
   IProductListing
-} from '@flex-development/kustomzcore'
-import { FormProps } from '@system/lib/atoms'
+} from '@flex-development/kustomzcore/types'
+import { FormProps } from '@system/lib/atoms/Form'
 import { EventHandlers } from '@system/types'
 
 /**

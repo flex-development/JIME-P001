@@ -1,6 +1,5 @@
 import { Meta } from '@storybook/addon-docs/blocks'
 import { ThemeTypeset } from '../../.storybook/components'
-import { fonts, fontWeights } from '@system/config/sb'
 
 <Meta title='Blocks/Typography' />
 
@@ -16,13 +15,20 @@ import { fonts, fontWeights } from '@system/config/sb'
 
 Weights: `300`, `400`, `500`, `600`, `700`
 
-<ThemeTypeset fontFamily={fonts.sans} fontWeight={fontWeights} />
+<ThemeTypeset
+  fontFamily={'var(--mk-font-sans)'}
+  fontWeight={[300, 400, 500, 600, 700]}
+/>
 
 ### Quimby Gubernatorial
 
 Weights: `400`
 
-<ThemeTypeset fontFamily={fonts.special} fontWeight={400} text={false} />
+<ThemeTypeset
+  fontFamily={'var(--mk-font-sans-special)'}
+  fontWeight={400}
+  text={false}
+/>
 
 ## Variables
 
@@ -33,8 +39,9 @@ $font-family-monospace: SFMono-Regular, Menlo, 'Courier New', monospace;
 $font-family-sans-serif: ibm-plex-sans, sans-serif;
 $font-family-sans-serif-special: quimby-gubernatorial, sans-serif;
 
-$font-family-base: var(--#{$variable-prefix}font-sans-serif);
-$font-family-code: var(--#{$variable-prefix}font-monospace);
+$font-family-base: var(--#{$variable-prefix}font-sans);
+$font-family-code: var(--#{$variable-prefix}font-mono);
+$font-family-special: var(--#{$variable-prefix}font-sans-special);
 
 // $font-size-root effects the value of `rem`
 $font-size-root: null;

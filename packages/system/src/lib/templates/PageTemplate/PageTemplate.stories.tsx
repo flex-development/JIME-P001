@@ -1,7 +1,7 @@
 import {
   PureMarkdown,
   PureMDX
-} from '../../atoms/MDXContent/MDXContent.stories'
+} from '../../molecules/MDXContent/MDXContent.stories'
 import { PageTemplate } from './PageTemplate'
 import { PageTemplateProps } from './PageTemplate.props'
 
@@ -28,11 +28,11 @@ export const Markdown: FCS<PageTemplateProps> = args => (
 )
 
 Markdown.args = {
-  body: PureMarkdown.args.children
+  body: PureMarkdown.args.code
 }
 
 export const MDX: FCS<PageTemplateProps> = args => <PageTemplate {...args} />
 
 MDX.args = {
-  body: PureMDX.args.children
+  body: PureMDX.args.code
 }

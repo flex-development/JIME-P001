@@ -1,5 +1,3 @@
-import { isString } from 'lodash'
-
 /**
  * @file Implementation - formatPrice
  * @module utils/formatPrice/impl
@@ -25,7 +23,7 @@ const formatPrice = (
   }
 ): ReturnType<Intl.NumberFormat['format']> => {
   // Convert strings into numbers
-  if (isString(value)) value = JSON.parse(value) as number
+  if (typeof value === 'string') value = JSON.parse(value) as number
 
   // If value is less than 0, convert into positive number
   if (value < 0) value = value * -1

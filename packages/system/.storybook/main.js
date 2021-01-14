@@ -1,6 +1,6 @@
 const path = require('path')
 const { merge: mergeWebpack } = require('webpack-merge')
-const babelConfig = require('../babel.config')
+const babelOptions = require('../babel.config')
 const wc = require('../webpack.common')
 
 /**
@@ -10,7 +10,7 @@ const wc = require('../webpack.common')
  */
 
 const DEV = process.env.NODE_ENV.toLowerCase() === 'development'
-const TSCONFIG_REL_PATH = DEV ? '../tsconfig.json' : '../tsconfig.prod.json'
+const TSCONFIG_REL_PATH = DEV ? '../tsconfig.json' : '../tsconfig.app.json'
 
 module.exports = {
   /**
@@ -85,11 +85,26 @@ module.exports = {
    * @param {object} config - Base Webpack config
    * @return {object} Webpack configuration
    */
-  webpackFinal: config =>
-    mergeWebpack(config, {
+  webpackFinal: config => {
+    const ATL_CACHE_DIRECTORY = 'node_modules/.cache/awesome-typescript-loader'
+    const CORE = '../../../node_modules/@flex-development/kustomzcore/dist'
+    const JSON = '../../../node_modules/@flex-development/json/dist'
+    const POLARIS_ICONS = '../../../node_modules/@shopify/polaris-icons/dist'
+    const REACT_HANGER = '../../../node_modules/react-hanger/esm'
+    const REACT_USE = '../../../node_modules/react-use/esm'
+    const VALIDATOR = '../../../node_modules/validator/es'
+
+    return mergeWebpack(config, {
       resolve: {
         alias: {
-          '@system': path.join(__dirname, '../src')
+          '@flex-development/kustomzcore': path.join(__dirname, CORE),
+          '@flex-development/json': path.join(__dirname, JSON),
+          '@flex-development/kustomzcore': path.join(__dirname, CORE),
+          '@shopify/polaris-icons': path.join(__dirname, POLARIS_ICONS),
+          '@system': path.join(__dirname, '../src'),
+          'react-hanger': path.join(__dirname, REACT_HANGER),
+          'react-use': path.join(__dirname, REACT_USE),
+          validator: path.join(__dirname, VALIDATOR)
         }
       },
       module: {
@@ -106,9 +121,8 @@ module.exports = {
                 loader: 'awesome-typescript-loader',
                 options: {
                   babelCore: '@babel/core',
-                  babelOptions: { ...babelConfig, babelrc: false },
-                  cacheDirectory:
-                    'node_modules/.cache/awesome-typescript-loader',
+                  babelOptions: { ...babelOptions(), babelrc: false },
+                  cacheDirectory: ATL_CACHE_DIRECTORY,
                   useBabel: true,
                   useCache: true
                 }
@@ -116,6 +130,10 @@ module.exports = {
             ]
           }
         ]
+      },
+      node: {
+        fs: 'empty'
       }
     })
+  }
 }

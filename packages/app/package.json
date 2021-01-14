@@ -37,39 +37,43 @@
     "test": "firebase emulators:exec \"yarn test:run\" --only database",
     "test:quiet": "yarn test || true",
     "test:run": "jest --detectOpenHandles --passWithNoTests",
-    "prestart": "NODE_ENV=production",
+    "prestart": "NODE_ENV=production yarn build",
     "start": "next start",
     "prebuild": "NODE_ENV=production generate-robotstxt public/robots.txt",
-    "build": "next build",
+    "build": "ANALYZE=true next build --debug",
     "prenow-build": "lerna run prepare; lerna link",
     "now-build": "yarn build"
   },
   "dependencies": {
+    "@baggie/string": "^1.1.0",
     "@flex-development/kustomzcore": "*",
     "@flex-development/kustomzdesign": "*",
+    "@mdx-js/mdx": "^1.6.22",
+    "@mdx-js/react": "^1.6.22",
+    "@react-spring/web": "^9.0.0-rc.3",
+    "@shopify/polaris-icons": "^4.1.0",
     "axios": "^0.19.2",
     "axios-rate-limit": "^1.3.0",
+    "buble-jsx-only": "^0.19.8",
     "firebase": "^7.23.0",
     "firebase-admin": "^9.2.0",
     "jsonwebtoken": "^8.5.1",
-    "next": "^10.0.3",
+    "next": "^10.0.5",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "reactfire": "^3.0.0-rc.0",
-    "sass": "^1.26.10",
     "sitemap": "^6.3.3",
-    "slugify": "^1.4.5",
-    "string-strip-html": "^7.0.3",
-    "styled-components": "^5.2.0",
-    "swr": "^0.3.9"
+    "swr": "^0.3.9",
+    "util": "^0.12.3",
+    "webfontloader": "^1.6.28",
+    "webpack-bundle-analyzer": "^4.3.0"
   },
   "devDependencies": {
     "@firebase/rules-unit-testing": "^1.0.9",
-    "@fullhuman/postcss-purgecss": "^3.1.3",
+    "@types/buble": "^0.19.2",
     "@types/jsonwebtoken": "^8.5.0",
-    "@types/styled-components": "^5.1.4",
-    "babel-plugin-styled-components": "^1.11.1",
-    "generate-robotstxt": "^8.0.3"
-  },
-  "peerDependencies": {}
+    "@types/webfontloader": "^1.6.32",
+    "generate-robotstxt": "^8.0.3",
+    "inspectpack": "^4.5.2",
+    "ts-jest": "^26.4.1"
+  }
 }

@@ -1,8 +1,7 @@
-import { useSanitizedProps } from '@system/hooks'
+import { a } from '@react-spring/web'
+import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
 import { FREC } from '@system/types'
-import { isEmpty } from 'lodash'
 import { forwardRef } from 'react'
-import { a } from 'react-spring'
 import { MainProps } from './Main.props'
 
 /**
@@ -19,7 +18,7 @@ import { MainProps } from './Main.props'
 export const Main: FREC<MainProps> = forwardRef((props, ref) => {
   const sanitized = useSanitizedProps<'main'>(
     { ...props, id: props['data-template'] || props.id },
-    { template: !isEmpty(props['data-template']) }
+    { template: (props?.['data-template'] ?? '').length > 0 }
   )
 
   return <a.main {...sanitized} ref={ref} />

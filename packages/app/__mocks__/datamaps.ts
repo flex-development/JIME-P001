@@ -1,4 +1,4 @@
-import { AnyObject } from '@flex-development/json'
+import { AnyObject } from '@flex-development/json/utils/types'
 import MockCarsRepoRoot from './data/cars.mock.json'
 import MockMenusRepoRoot from './data/menus.mock.json'
 import MockPagesRepoRoot from './data/pages.mock.json'

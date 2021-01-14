@@ -108,8 +108,9 @@ $font-family-monospace: SFMono-Regular, Menlo, 'Courier New', monospace;
 $font-family-sans-serif: ibm-plex-sans, sans-serif;
 $font-family-sans-serif-special: quimby-gubernatorial, sans-serif;
 
-$font-family-base: var(--#{$variable-prefix}font-sans-serif);
-$font-family-code: var(--#{$variable-prefix}font-monospace);
+$font-family-base: var(--#{$variable-prefix}font-sans);
+$font-family-code: var(--#{$variable-prefix}font-mono);
+$font-family-special: var(--#{$variable-prefix}font-sans-special);
 
 // $font-size-root effects the value of `rem`
 $font-size-root: null;

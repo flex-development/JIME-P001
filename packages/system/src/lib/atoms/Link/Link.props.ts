@@ -1,6 +1,5 @@
 import { Color, ComponentPropsBase } from '@system/types'
 import { ButtonProps } from '../Button'
-import { IconProps } from '../Icon'
 
 /**
  * @file Component Props - Link
@@ -28,11 +27,6 @@ export interface LinkProps extends ComponentPropsBase<'a'> {
    * Make the link span the full width of its parent container.
    */
   $fluid?: boolean
-
-  /**
-   * Icon to render beside the element text.
-   */
-  $icon?: IconProps
 
   /**
    * If true, render as `Menu` link.

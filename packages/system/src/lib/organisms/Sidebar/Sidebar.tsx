@@ -1,17 +1,12 @@
-import { SHOPIFY_POLARIS_ICONS } from '@system/config'
-import { useSanitizedProps } from '@system/hooks'
-import {
-  Aside,
-  AsideProps,
-  Box,
-  Footer,
-  Icon,
-  Image,
-  Link,
-  LinkProps,
-  Paragraph
-} from '@system/lib/atoms'
-import { Menu } from '@system/lib/molecules'
+import { CustomersMajor } from '@shopify/polaris-icons'
+import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
+import { Aside, AsideProps } from '@system/lib/atoms/Aside'
+import { Box } from '@system/lib/atoms/Box'
+import { Footer } from '@system/lib/atoms/Footer'
+import { Image } from '@system/lib/atoms/Image'
+import { Link, LinkProps } from '@system/lib/atoms/Link'
+import { Paragraph } from '@system/lib/atoms/Paragraph'
+import { Menu } from '@system/lib/molecules/Menu'
 import { FREC } from '@system/types'
 import { forwardRef } from 'react'
 import { SidebarProps } from './Sidebar.props'
@@ -50,7 +45,7 @@ export const Sidebar: FREC<SidebarProps> = forwardRef((props, ref) => {
 
       <Box className='sidebar-profile-details'>
         <Paragraph className='sidebar-profile-online-status'>
-          <Icon>{'CustomersMajor' as keyof typeof SHOPIFY_POLARIS_ICONS}</Icon>
+          <CustomersMajor className='icon' />
           Online Now!
         </Paragraph>
         <Paragraph className='sidebar-profile-name'>Morena</Paragraph>

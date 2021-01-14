@@ -1,5 +1,4 @@
 import { ComponentPropsBase } from '@system/types'
-import { IconProps } from '../Icon'
 
 /**
  * @file Component Props - Label
@@ -11,11 +10,6 @@ export interface LabelProps extends ComponentPropsBase<'label'> {
    * If true, add the class `form-label`.
    */
   $form?: boolean
-
-  /**
-   * Icon to render beside the element text.
-   */
-  $icon?: IconProps
 
   /**
    * The `id` of a labelable form-related element in the same document as the

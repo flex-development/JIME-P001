@@ -1,11 +1,14 @@
-import { AnyObject } from '@flex-development/json'
+import { AnyObject } from '@flex-development/json/utils/types'
+import { AnimatedProps } from '@react-spring/web'
+import { useUtilityClasses } from '@system/hooks/useUtilityClasses'
 import { JSXIEPropsOr } from '@system/types'
 import classnames from 'classnames'
 import { ClassDictionary } from 'classnames/types'
-import { isEmpty, isObject, join, merge, omit, uniq } from 'lodash'
-import { AnimatedProps } from 'react-spring'
-import { useIcon } from '../useIcon'
-import { useUtilityClasses } from '../useUtilityClasses'
+import isObject from 'lodash/isObject'
+import join from 'lodash/join'
+import merge from 'lodash/merge'
+import omit from 'lodash/omit'
+import uniq from 'lodash/uniq'
 
 /**
  * @file Implementation - useSanitizedProps
@@ -37,9 +40,6 @@ export function useSanitizedProps<
   // Generate utility class string
   const className = useUtilityClasses(rest)
 
-  // Handle icons
-  const _rest = useIcon<typeof rest>(rest)
-
   // Initialize array containing properties to remove
   const _keys = keys || []
 
@@ -62,13 +62,13 @@ export function useSanitizedProps<
   }
 
   // Handle background image
-  if (!isEmpty($img)) {
-    const style = { backgroundImage: `url(${$img})` }
+  if ($img?.trim().length) {
+    const style = { backgroundImage: `url(${$img.trim()})` }
     sanitized.style = merge(style, sanitized.style || {})
   }
 
   // Merge rest of incoming of props and new sanitized props obj
-  sanitized = merge(_rest, sanitized)
+  sanitized = merge(rest, sanitized)
 
   // Remove all transient props
   Object.keys(sanitized).forEach(key => {

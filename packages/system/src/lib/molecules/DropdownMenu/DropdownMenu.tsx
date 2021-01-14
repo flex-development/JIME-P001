@@ -1,9 +1,10 @@
-import { useSanitizedProps } from '@system/hooks'
-import { Item, List, ListProps } from '@system/lib/atoms'
-import { uuid } from '@system/utils'
-import { isEmpty, merge } from 'lodash'
+import { useSpring } from '@react-spring/web'
+import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
+import { Item } from '@system/lib/atoms/Item'
+import { List, ListProps } from '@system/lib/atoms/List'
+import merge from 'lodash/merge'
+import uniqueId from 'lodash/uniqueId'
 import { FC } from 'react'
-import { useSpring } from 'react-spring'
 import { DropdownMenuProps } from './DropdownMenu.props'
 
 /**
@@ -33,8 +34,8 @@ export const DropdownMenu: FC<DropdownMenuProps> = props => {
   return (
     <List {...sanitized} style={merge(sanitized['style'], style)}>
       {$items.map(item => {
-        if (isEmpty(item)) return null
-        return <Item {...item} key={uuid()} />
+        if (Object.keys(item).length === 0) return null
+        return <Item {...item} key={uniqueId('list-item')} />
       })}
     </List>
   )

@@ -1,5 +1,4 @@
-import { ANYTHING } from '@flex-development/json'
-import { isBoolean, isNumber, isString } from 'lodash'
+import { ANYTHING } from '@flex-development/json/utils/types'
 
 /**
  * @file Implementation - sanitizeQuantity
@@ -19,14 +18,14 @@ import { isBoolean, isNumber, isString } from 'lodash'
  */
 const sanitizeQuantity = (value?: ANYTHING): number => {
   // Check if value is a boolean
-  if (isBoolean(value)) return value ? 1 : 0
+  if (typeof value === 'boolean') return value ? 1 : 0
 
   // Return 0 if value isn't a number or a string possibly containing a number
-  if (!isNumber(value) && !isString(value)) return 0
+  if (typeof value !== 'number' && typeof value !== 'string') return 0
 
   const parsed = JSON.parse(`${value}`)
 
-  return !isNumber(parsed) || parsed < 0 ? 0 : parsed
+  return typeof parsed !== 'number' || parsed < 0 ? 0 : parsed
 }
 
 export default sanitizeQuantity

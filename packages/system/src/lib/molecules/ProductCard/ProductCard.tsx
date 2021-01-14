@@ -1,19 +1,13 @@
-import { IProductListingVariant } from '@flex-development/kustomzcore'
-import {
-  useMemoCompare,
-  useProductVariants,
-  useSanitizedProps
-} from '@system/hooks'
-import {
-  Box,
-  BoxProps,
-  Image,
-  ImageProps,
-  Link,
-  Paragraph
-} from '@system/lib/atoms'
+import { IProductListingVariant } from '@flex-development/kustomzcore/types'
+import { useMemoCompare } from '@system/hooks/useMemoCompare'
+import { useProductVariants } from '@system/hooks/useProductVariants'
+import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
+import { Box, BoxProps } from '@system/lib/atoms/Box'
+import { Image, ImageProps } from '@system/lib/atoms/Image'
+import { Link } from '@system/lib/atoms/Link'
+import { Paragraph } from '@system/lib/atoms/Paragraph'
 import { EventHandlers } from '@system/types'
-import { getProductImage } from '@system/utils'
+import { getProductImage } from '@system/utils/getProductImage'
 import { FC, useCallback, useEffect, useMemo, useState } from 'react'
 import useBoolean from 'react-hanger/array/useBoolean'
 import { DropdownMenu } from '../DropdownMenu'

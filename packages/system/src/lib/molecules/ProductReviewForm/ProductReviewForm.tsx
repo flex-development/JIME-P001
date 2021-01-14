@@ -1,21 +1,18 @@
-import { AnyObject } from '@flex-development/json'
-import { CreateReviewRequest } from '@flex-development/kustomzcore'
-import { useProductVariants, useSanitizedProps } from '@system/hooks'
-import {
-  Button,
-  Form,
-  FormProps,
-  Heading,
-  Input,
-  Paragraph,
-  Select,
-  Span,
-  TextArea
-} from '@system/lib/atoms'
+import { AnyObject } from '@flex-development/json/utils/types'
+import { CreateReviewRequest } from '@flex-development/kustomzcore/types'
+import { useProductVariants } from '@system/hooks/useProductVariants'
+import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
+import { Button } from '@system/lib/atoms/Button'
+import { Form, FormProps } from '@system/lib/atoms/Form'
+import { Heading } from '@system/lib/atoms/Heading'
+import { Input } from '@system/lib/atoms/Input'
+import { Paragraph } from '@system/lib/atoms/Paragraph'
+import { Select } from '@system/lib/atoms/Select'
+import { Span } from '@system/lib/atoms/Span'
+import { TextArea } from '@system/lib/atoms/TextArea'
 import { FormField } from '@system/lib/molecules/FormField'
 import { ProductRatingField } from '@system/lib/molecules/ProductRatingField'
 import { EventHandlers } from '@system/types'
-import { isEmpty } from 'lodash'
 import { FC } from 'react'
 import { useSetState } from 'react-hanger'
 import isEmail from 'validator/lib/isEmail'
@@ -169,7 +166,9 @@ export const ProductReviewForm: FC<ProductReviewFormProps> & {
       <Button
         aria-label='Submit product review'
         className='product-review-form-btn'
-        disabled={isEmpty(errors) || Object.values(errors).includes(true)}
+        disabled={
+          !Object.keys(errors).length || Object.values(errors).includes(true)
+        }
         onClick={(e: EventHandlers.Click.Button) => handleSubmit(review, e)}
         type='submit'
       >

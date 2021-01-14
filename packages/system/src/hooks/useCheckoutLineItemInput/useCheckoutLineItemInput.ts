@@ -1,7 +1,7 @@
-import { AnyObject } from '@flex-development/json'
-import { CheckoutLineItemInput } from '@flex-development/kustomzcore'
+import { AnyObject } from '@flex-development/json/utils/types'
+import { CheckoutLineItemInput } from '@flex-development/kustomzcore/types'
+import { useQuantity, UseQuantity } from '@system/hooks/useQuantity'
 import { useSetState } from 'react-hanger'
-import { useQuantity, UseQuantity } from '../useQuantity'
 
 /**
  * @file Specify the item fields to create a line item on a checkout

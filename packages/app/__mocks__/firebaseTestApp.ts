@@ -1,5 +1,5 @@
 import * as testing from '@firebase/rules-unit-testing'
-import { FIREBASE_WEB_CONFIG } from '@flex-development/kustomzcore'
+import { FIREBASE_WEB_CONFIG } from '@flex-development/kustomzcore/config/constants'
 import { FirebaseAdaptor } from '@subdomains/firebase'
 
 /**

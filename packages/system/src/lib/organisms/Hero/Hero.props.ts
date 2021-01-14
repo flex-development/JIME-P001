@@ -1,4 +1,4 @@
-import { SectionProps } from '@system/lib/atoms'
+import { SectionProps } from '@system/lib/atoms/Section'
 
 /**
  * @file Component Props - Hero

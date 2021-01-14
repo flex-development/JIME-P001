@@ -1,5 +1,5 @@
 /**
- * @file Subdomain Utilities - App
+ * @file Utilities Entry Point - App
  * @module subdomains/app/utils
  */
 

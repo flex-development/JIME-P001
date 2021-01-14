@@ -35,6 +35,10 @@
       "destination": "/collections/all-products"
     },
     {
+      "source": "/products/:handle*",
+      "destination": "/collections/all-products/products/:handle*"
+    },
+    {
       "source": "/sitemap.xml",
       "destination": "/api/sitemap"
     }

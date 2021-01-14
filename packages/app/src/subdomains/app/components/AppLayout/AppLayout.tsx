@@ -1,9 +1,9 @@
-import { useWebFontLoader } from '@app/subdomains/app/hooks/useWebFontLoader'
-import { useMenu } from '@app/subdomains/cms/hooks/useMenu'
-import { usePlaylist } from '@app/subdomains/streaming/hooks/usePlaylist'
-import { Layout, ShopHeaderProps } from '@flex-development/kustomzdesign'
+import { ShopHeaderProps } from '@lib/organisms/ShopHeader'
+import { Layout } from '@lib/templates/Layout'
+import { useWebFontLoader } from '@subdomains/app/hooks/useWebFontLoader'
 import { IPageProps, PC } from '@subdomains/app/interfaces'
-import { merge } from 'lodash'
+import { useMenu } from '@subdomains/cms/hooks/useMenu'
+import { usePlaylist } from '@subdomains/streaming/hooks/usePlaylist'
 import Head from 'next/head'
 import { FC, useCallback } from 'react'
 
@@ -89,7 +89,7 @@ export const AppLayout: FC<AppLayoutProps> = (props: AppLayoutProps) => {
           mood: pageProps.globals.profile_mood.value as string
         }}
       >
-        <Component {...merge(pageProps, { data: {} })} />
+        <Component {...pageProps} />
       </Layout>
     </>
   )

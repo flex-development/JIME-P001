@@ -1,19 +1,20 @@
-import { useSlideInOut } from '@system/hooks'
-import { Box, Span, SVG } from '@system/lib/atoms'
+import { useSlideInOut } from '@system/hooks/useSlideInOut'
+import { Box } from '@system/lib/atoms/Box'
+import { Span } from '@system/lib/atoms/Span'
+import { SVG } from '@system/lib/atoms/SVG'
+import { Hero, HeroProps } from '@system/lib/organisms/Hero'
 import {
-  Hero,
-  HeroProps,
   PlaylistBar,
-  PlaylistBarProps,
-  ShopHeader,
-  ShopHeaderProps,
-  Sidebar,
-  SidebarProps
-} from '@system/lib/organisms'
+  PlaylistBarProps
+} from '@system/lib/organisms/PlaylistBar'
+import { ShopHeader, ShopHeaderProps } from '@system/lib/organisms/ShopHeader'
+import { Sidebar, SidebarProps } from '@system/lib/organisms/Sidebar'
 import { GridBreakpoints, TC } from '@system/types'
 import { useCallback } from 'react'
-import { useEvent, useMedia } from 'react-use'
+import useEvent from 'react-use/useEvent'
+import useMedia from 'react-use/useMedia'
 import { LayoutProps } from './Layout.props'
+
 /**
  * @file Implementation - Layout
  * @module lib/templates/Layout/impl

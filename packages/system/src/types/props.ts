@@ -1,10 +1,10 @@
-import { AnyObject, Booleanish, NullishString } from '@flex-development/json'
 import {
-  MDXProviderComponents as MDXComponents,
-  MDXProviderProps
-} from '@mdx-js/react'
-import { AriaAttributes, DOMAttributes, FC, RefAttributes } from 'react'
-import { AnimatedProps } from 'react-spring'
+  AnyObject,
+  Booleanish,
+  NullishString
+} from '@flex-development/json/utils/types'
+import { AnimatedProps } from '@react-spring/web'
+import { AriaAttributes, DOMAttributes, RefAttributes } from 'react'
 import {
   Color,
   Cursor,
@@ -248,15 +248,6 @@ export interface GlobalAttributes<E = HTMLElement> extends Attributes<E> {
  * Ref attributes for HTML elements.
  */
 export type HTMLElementRefAttributes = RefAttributes<HTMLElement>
-
-/**
- * MDX component props.
- */
-export type MDXProps = Omit<MDXProviderProps, 'children' | 'components'> & {
-  children?: string
-  components?: MDXComponents
-  scope?: Record<string, FC<AnyObject>> | AnyObject
-}
 
 /**
  * Props used to add additional styles and add additional functionality to

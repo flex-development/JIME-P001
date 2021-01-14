@@ -1,4 +1,4 @@
-import { BoxProps } from '@system/lib/atoms'
+import { BoxProps } from '@system/lib/atoms/Box'
 import { ReactElement } from 'react'
 
 /**

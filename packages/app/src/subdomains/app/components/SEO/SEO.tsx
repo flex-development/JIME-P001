@@ -1,4 +1,4 @@
-import { NullishString } from '@flex-development/json'
+import { NullishString } from '@flex-development/json/utils/types'
 import NextHead from 'next/head'
 import { useRouter } from 'next/router'
 import { FC } from 'react'

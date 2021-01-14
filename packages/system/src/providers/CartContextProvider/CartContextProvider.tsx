@@ -1,7 +1,7 @@
-import { ANYTHING } from '@flex-development/json'
+import { ANYTHING } from '@flex-development/json/utils/types'
 import { CartContext, UseCart, useCart } from '@system/hooks/useCart'
 import { useMemoCompare } from '@system/hooks/useMemoCompare'
-import { isFunction } from 'lodash'
+import isFunction from 'lodash/isFunction'
 import { FC, ReactNode, useEffect } from 'react'
 
 /**

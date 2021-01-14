@@ -1,4 +1,4 @@
-import { MainProps } from '@system/lib/atoms'
+import { MainProps } from '@system/lib/atoms/Main'
 
 /**
  * @file Component Props - ErrorTemplate

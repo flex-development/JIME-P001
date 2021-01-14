@@ -1,4 +1,4 @@
-import { AnyObject } from '@flex-development/json'
+import { AnyObject } from '@flex-development/json/utils/types'
 import { ChangeEvent, FocusEvent, MouseEvent, UIEvent } from 'react'
 
 /**

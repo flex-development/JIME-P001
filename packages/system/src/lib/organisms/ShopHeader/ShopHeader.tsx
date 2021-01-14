@@ -1,12 +1,10 @@
-import { useSanitizedProps } from '@system/hooks'
-import {
-  Box,
-  Button,
-  CartPreview,
-  Header,
-  HeaderProps
-} from '@system/lib/atoms'
-import { SearchBar } from '@system/lib/molecules'
+import { MobileHamburgerMajor } from '@shopify/polaris-icons'
+import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
+import { Box } from '@system/lib/atoms/Box'
+import { Button } from '@system/lib/atoms/Button'
+import { CartPreview } from '@system/lib/atoms/CartPreview'
+import { Header, HeaderProps } from '@system/lib/atoms/Header'
+import { SearchBar } from '@system/lib/molecules/SearchBar'
 import { EventHandlers } from '@system/types'
 import { FC } from 'react'
 import { ShopHeaderProps } from './ShopHeader.props'
@@ -42,12 +40,13 @@ export const ShopHeader: FC<ShopHeaderProps> = props => {
     <Header {...sanitized}>
       <Box className='shop-header-col'>
         <Button
-          $icon={{ children: 'MobileHamburgerMajor' }}
           $variant='ghost'
           className='shop-header-btn'
           name='sidebar'
           onClick={handleSidebar}
-        />
+        >
+          <MobileHamburgerMajor className='icon' />
+        </Button>
         <SearchBar
           className='shop-header-search-bar'
           handleSearch={handleSearch}

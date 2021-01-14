@@ -1,4 +1,4 @@
-import { MDXContent } from '@system/lib/atoms'
+import { MDXContent } from '@system/lib/molecules'
 import { render } from '@testing-library/react'
 import { PageTemplate } from './PageTemplate'
 import { Markdown, MDX } from './PageTemplate.stories'

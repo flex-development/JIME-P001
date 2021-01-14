@@ -1,14 +1,14 @@
+import { CHECKOUT_BASE_URL } from '@flex-development/kustomzcore/config/constants'
 import {
   CheckoutLineItemInput,
   CheckoutPermalinkInput,
-  CheckoutPermalinkQuery,
-  CHECKOUT_BASE_URL
-} from '@flex-development/kustomzcore'
-import { isString, omit } from 'lodash'
+  CheckoutPermalinkQuery
+} from '@flex-development/kustomzcore/types'
+import { useMemoCompare } from '@system/hooks/useMemoCompare'
+import omit from 'lodash/omit'
 import qs from 'querystring'
 import { useCallback, useEffect, useState } from 'react'
 import { useArray } from 'react-hanger/array/useArray'
-import { useMemoCompare } from '../useMemoCompare'
 
 /**
  * @file Create and update checkout URLs
@@ -140,7 +140,7 @@ export const useCheckoutPermalink = (
    * @param id - ID of product variant to remove
    */
   const removeItem = (id: number | string) => {
-    return actions.removeById(isString(id) ? JSON.parse(id) : id)
+    return actions.removeById(typeof id === 'string' ? JSON.parse(id) : id)
   }
 
   /* Callback version of `removeItem` */

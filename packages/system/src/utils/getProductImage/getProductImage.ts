@@ -1,10 +1,10 @@
 import {
   IProductListing,
   IProductListingVariant
-} from '@flex-development/kustomzcore'
+} from '@flex-development/kustomzcore/types'
 import { getSizedImageUrl } from '@shopify/theme-images'
-import { IMAGE_PLACEHOLDER_URL } from '@system/config'
-import { ImageProps } from '@system/lib'
+import { IMAGE_PLACEHOLDER_URL } from '@system/config/constants'
+import { ImageProps } from '@system/lib/atoms/Image'
 
 /**
  * @file Implementation - getProductImage

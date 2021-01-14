@@ -1,11 +1,11 @@
-import { OneOrMany } from '@flex-development/json'
+import { OneOrMany } from '@flex-development/json/utils/types'
 import {
   Typeset,
   TypesetProps
 } from '@storybook/components/dist/blocks/Typeset'
-import { isArray, pick } from 'lodash'
+import isArray from 'lodash/isArray'
+import pick from 'lodash/pick'
 import { FC } from 'react'
-import { fontSizes } from '../../src/config/sb'
 
 /**
  * @file Get Typeset doc blocks with theme context
@@ -16,6 +16,33 @@ export interface ThemeTypesetProps extends Omit<TypesetProps, 'fontWeight'> {
   fontWeight?: OneOrMany<number>
   text?: boolean
 }
+
+export const fontSizes: Record<number | string, string> = {
+  12: '0.75rem',
+  14: '0.875rem',
+  16: '1rem',
+  18: '1.125rem',
+  20: '1.25rem',
+  24: '1.5rem',
+  32: '2rem',
+  36: '2.25rem',
+  48: '3rem',
+  60: '3.75rem'
+}
+
+fontSizes.xs = fontSizes[12]
+fontSizes.sm = fontSizes[14]
+fontSizes.md = fontSizes[16]
+fontSizes.lg = fontSizes[18]
+fontSizes.xl = fontSizes[20]
+fontSizes.xxl = fontSizes[24]
+
+fontSizes.h1 = fontSizes[60]
+fontSizes.h2 = fontSizes[48]
+fontSizes.h3 = fontSizes[36]
+fontSizes.h4 = fontSizes.xxl
+fontSizes.h5 = fontSizes.xl
+fontSizes.h6 = fontSizes.lg
 
 export const ThemeTypeset: FC<ThemeTypesetProps> = props => {
   const { fontWeight, text, ...rest } = props

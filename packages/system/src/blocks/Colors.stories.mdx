@@ -1,5 +1,4 @@
 import { ColorPalette, ColorItem, Meta } from '@storybook/addon-docs/blocks'
-import { colors } from '@system/config/sb'
 
 <Meta title='Blocks/Colors' />
 
@@ -12,24 +11,28 @@ import { colors } from '@system/config/sb'
 <br />
 
 <ColorPalette>
-  <ColorItem title='Primary' subtitle='$primary' colors={[colors.primary]} />
+  <ColorItem
+    title='Primary'
+    subtitle='$primary'
+    colors={['var(--mk-primary)']}
+  />
   <ColorItem
     title='Secondary'
     subtitle='$secondary'
-    colors={[colors.secondary]}
+    colors={['var(--mk-secondary)']}
   />
-  <ColorItem title='Light' subtitle='$light' colors={[colors.light]} />
-  <ColorItem title='Dark' subtitle='$dark' colors={[colors.dark]} />
-  <ColorItem title='Darker' subtitle='$darker' colors={[colors.darker]} />
+  <ColorItem title='Light' subtitle='$light' colors={['var(--mk-light)']} />
+  <ColorItem title='Dark' subtitle='$dark' colors={['var(--mk-dark)']} />
+  <ColorItem title='Darker' subtitle='$darker' colors={['var(--mk-darker)']} />
 </ColorPalette>
 
 ### Grayscale
 
 <ColorPalette>
-  <ColorItem title='Black' subtitle='$black' colors={[colors.black]} />
-  <ColorItem title='Gray' subtitle='$gray' colors={[colors.gray]} />
-  <ColorItem title='Muted' subtitle='$muted' colors={[colors.muted]} />
-  <ColorItem title='White' subtitle='$white' colors={[colors.white]} />
+  <ColorItem title='Black' subtitle='$black' colors={['var(--mk-black)']} />
+  <ColorItem title='Gray' subtitle='$gray' colors={['var(--mk-gray)']} />
+  <ColorItem title='Muted' subtitle='$muted' colors={['var(--mk-muted)']} />
+  <ColorItem title='White' subtitle='$white' colors={['var(--mk-white)']} />
 </ColorPalette>
 
 ## Variables

@@ -1,4 +1,4 @@
-import { EMAIL_PLACEHOLDER } from '@system/config'
+import { EMAIL_PLACEHOLDER } from '@system/config/constants'
 import { render, screen } from '@testing-library/react'
 import User from '@testing-library/user-event'
 import { ProductReviewForm } from './ProductReviewForm'

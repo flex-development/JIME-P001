@@ -1,9 +1,7 @@
-import {
-  HeroProps,
-  PlaylistBarProps,
-  ShopHeaderProps,
-  SidebarProps
-} from '@system/lib/organisms'
+import { HeroProps } from '@system/lib/organisms/Hero'
+import { PlaylistBarProps } from '@system/lib/organisms/PlaylistBar'
+import { ShopHeaderProps } from '@system/lib/organisms/ShopHeader'
+import { SidebarProps } from '@system/lib/organisms/Sidebar'
 import { ReactNode } from 'react'
 
 /**

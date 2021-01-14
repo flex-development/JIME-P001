@@ -1,10 +1,10 @@
-import { AnyObject } from '@flex-development/json'
+import { AnyObject } from '@flex-development/json/utils/types'
 import {
   ICollectionListing,
   IPage,
   IProductListing,
   IProductListingVariant
-} from '@flex-development/kustomzcore'
+} from '@flex-development/kustomzcore/types'
 import { Redirect } from 'next'
 import { ParsedUrlQuery } from 'querystring'
 

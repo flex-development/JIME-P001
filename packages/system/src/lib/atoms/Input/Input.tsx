@@ -1,13 +1,13 @@
+import { a } from '@react-spring/web'
 import {
   CHECK_INPUT_TYPES,
   CONTROL_INPUT_TYPES,
   EMAIL_PLACEHOLDER
-} from '@system/config'
-import { useSanitizedProps } from '@system/hooks'
+} from '@system/config/constants'
+import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
 import { FREC } from '@system/types'
-import { omit } from 'lodash'
+import omit from 'lodash/omit'
 import { forwardRef } from 'react'
-import { a } from 'react-spring'
 import { InputProps } from './Input.props'
 
 /**

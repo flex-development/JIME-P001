@@ -1,5 +1,6 @@
-import { useSanitizedProps } from '@system/hooks'
-import { Form, FormProps, Input } from '@system/lib/atoms'
+import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
+import { Form, FormProps } from '@system/lib/atoms/Form'
+import { Input } from '@system/lib/atoms/Input'
 import { FC, FormEvent } from 'react'
 import { useInput } from 'react-hanger'
 import { SearchBarProps } from './SearchBar.props'

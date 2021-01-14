@@ -4,7 +4,7 @@
  *
  * @todo [docs] ProductReviewForm - Update documentation
  * @todo [docs] Storybook Types - Update documentation
- * @todo [docs] Typography - Update fonts weights and headings font config
+ * @todo [test] Add remaining unit tests for modules missing spec files
  * @todo [test] Input, TextArea - Test $invalid styles
  * @todo [test] PlaylistBar - Test callback functions
  * @todo [test] SearchBar - Test callback functions

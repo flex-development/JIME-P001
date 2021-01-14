@@ -10,8 +10,11 @@
     "strictPropertyInitialization": false,
     "target": "esnext",
     "typeRoots": [
-      "../../node_modules/musickit-typescript",
-      "../../node_modules/@types"
+      "../../node_modules/@flex-development/kustomzcore/dist/types",
+      "../../node_modules/@flex-development/kustomzdesign/dist",
+      "../../node_modules/@flex-development/json/dist",
+      "../../node_modules/@types",
+      "../../node_modules/musickit-typescript"
     ]
   },
   "exclude": ["node_modules"],

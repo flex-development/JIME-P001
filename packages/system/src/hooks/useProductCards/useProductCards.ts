@@ -1,7 +1,7 @@
-import { AnyObject } from '@flex-development/json'
-import { IProductListing } from '@flex-development/kustomzcore'
+import { AnyObject } from '@flex-development/json/utils/types'
+import { IProductListing } from '@flex-development/kustomzcore/types'
+import { useMemoCompare } from '@system/hooks/useMemoCompare'
 import { ProductCardProps } from '@system/lib/molecules/ProductCard'
-import { useMemoCompare } from '../useMemoCompare'
 
 /**
  * @file Implementation - useProductCards

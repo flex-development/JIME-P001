@@ -1,14 +1,16 @@
-import { AnyObject } from '@flex-development/json'
-import { MusicKitSongAttributes as Song } from '@flex-development/kustomzcore'
+import { AnyObject } from '@flex-development/json/utils/types'
+import { MusicKitSongAttributes } from '@flex-development/kustomzcore/types'
 import { UseActiveIndex, useActiveIndex } from '@system/hooks/useActiveIndex'
 import { useMemoCompare } from '@system/hooks/useMemoCompare'
-import { clamp } from 'lodash'
+import clamp from 'lodash/clamp'
 import { useCallback } from 'react'
 
 /**
  * @file Use array of Apple Music song attributes
  * @module hooks/useSongs/impl
  */
+
+type Song = MusicKitSongAttributes
 
 export type UseSongs = {
   active: UseActiveIndex['active']

@@ -31,26 +31,28 @@
   },
   "source": "src/index.ts",
   "main": "dist/index.js",
-  "module": "dist/kustomzcore.esm.js",
+  "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
   "files": [
     "dist",
     "src"
   ],
   "scripts": {
-    "bundle": "tsdx build --tsconfig tsconfig.prod.json --transpileOnly",
-    "prepare": "yarn bundle"
+    "precompile": "rm -rf ./dist",
+    "compile": "babel src -d dist --extensions '.ts'",
+    "postcompile": "tsc -p tsconfig.prod.json",
+    "prepare": "NODE_ENV=production yarn compile"
   },
   "dependencies": {
     "@feathersjs/errors": "^4.5.3",
     "@flex-development/json": "^1.0.5",
     "@types/feathersjs__errors": "^3.3.2",
     "@types/pino": "^6.0.1",
-    "class-validator": "^0.12.2",
     "pino": "^6.4.1",
     "pino-pretty": "^4.1.0",
     "shopify-api-node": "^3.4.4"
   },
   "devDependencies": {},
-  "peerDependencies": {}
+  "peerDependencies": {},
+  "sideEffects": false
 }

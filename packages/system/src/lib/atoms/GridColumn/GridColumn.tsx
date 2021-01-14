@@ -1,7 +1,6 @@
-import { GRID_COLUMN_UTILITY_CLASS } from '@system/config'
+import { GRID_COLUMN_UTILITY_CLASS } from '@system/config/constants'
 import { useSanitizedProps, useUtilityClasses } from '@system/hooks'
 import { FREC } from '@system/types'
-import { isBoolean } from 'lodash'
 import { forwardRef } from 'react'
 import { Box, BoxProps } from '../Box'
 import { GridColumnProps } from './GridColumn.props'
@@ -21,13 +20,13 @@ export const GridColumn: FREC<GridColumnProps> = forwardRef((props, ref) => {
   const { $lg, $md, $span, $sm, $xl, $xs, $xxl, ...rest } = props
 
   // Get column values
-  const lg = isBoolean($lg) ? ($lg ? 'full' : undefined) : $lg
-  const md = isBoolean($md) ? ($md ? 'full' : undefined) : $md
-  const span = isBoolean($span) ? ($span ? 'full' : undefined) : $span
-  const sm = isBoolean($sm) ? ($sm ? 'full' : undefined) : $sm
-  const xl = isBoolean($xl) ? ($xl ? 'full' : undefined) : $xl
-  const xs = isBoolean($xs) ? ($xs ? 'full' : undefined) : $xs
-  const xxl = isBoolean($xxl) ? ($xxl ? 'full' : undefined) : $xxl
+  const lg = typeof $lg === 'boolean' ? ($lg ? 'full' : undefined) : $lg
+  const md = typeof $md === 'boolean' ? ($md ? 'full' : undefined) : $md
+  const span = typeof $span === 'boolean' ? ($span ? 'full' : undefined) : $span
+  const sm = typeof $sm === 'boolean' ? ($sm ? 'full' : undefined) : $sm
+  const xl = typeof $xl === 'boolean' ? ($xl ? 'full' : undefined) : $xl
+  const xs = typeof $xs === 'boolean' ? ($xs ? 'full' : undefined) : $xs
+  const xxl = typeof $xxl === 'boolean' ? ($xxl ? 'full' : undefined) : $xxl
 
   // Generate grid column utility classes
   const utils = useUtilityClasses(

@@ -1,19 +1,21 @@
-import { CHECKOUT_BASE_URL } from '@flex-development/kustomzcore'
-import { useCartContext, useSanitizedProps } from '@system/hooks'
+import { CHECKOUT_BASE_URL } from '@flex-development/kustomzcore/config/constants'
+import { useCartContext } from '@system/hooks/useCart'
+import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
+import { Box } from '@system/lib/atoms/Box'
+import { Heading } from '@system/lib/atoms/Heading'
+import { Link } from '@system/lib/atoms/Link'
+import { Main, MainProps } from '@system/lib/atoms/Main'
+import { Paragraph } from '@system/lib/atoms/Paragraph'
+import { Section } from '@system/lib/atoms/Section'
+import { Span } from '@system/lib/atoms/Span'
 import {
-  Box,
-  Heading,
-  Link,
-  Main,
-  MainProps,
-  Paragraph,
-  Section,
-  Span
-} from '@system/lib/atoms'
-import { CheckoutLineItem, CheckoutLineItemProps } from '@system/lib/molecules'
+  CheckoutLineItem,
+  CheckoutLineItemProps
+} from '@system/lib/molecules/CheckoutLineItem'
 import { TC } from '@system/types'
-import { formatPrice, getSubtotal } from '@system/utils'
-import { isFunction } from 'lodash'
+import { formatPrice } from '@system/utils/formatPrice'
+import { getSubtotal } from '@system/utils/getSubtotal'
+import isFunction from 'lodash/isFunction'
 import { useCallback, useRef } from 'react'
 import { CartTemplateProps } from './CartTemplate.props'
 

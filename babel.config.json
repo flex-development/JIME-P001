@@ -1,5 +1,8 @@
 {
-  "exclude": "/node_modules/(?![@flex-development/kustomzdesign])/",
+  "exclude": [
+    "/node_modules/(?!@baggie/string)/",
+    "/node_modules/(?!@flex-development)/"
+  ],
   "ignore": ["**/node_modules/*"],
   "plugins": [
     [
@@ -11,7 +14,8 @@
     "@babel/plugin-proposal-export-default-from",
     "@babel/plugin-proposal-export-namespace-from",
     "@babel/plugin-proposal-throw-expressions",
-    "@babel/plugin-syntax-dynamic-import"
+    "@babel/plugin-syntax-dynamic-import",
+    "babel-plugin-pure-calls-annotation"
   ],
   "presets": [
     [
@@ -26,7 +30,7 @@
         ],
         "targets": {
           "esmodules": true,
-          "node": true
+          "node": "current"
         }
       }
     ],

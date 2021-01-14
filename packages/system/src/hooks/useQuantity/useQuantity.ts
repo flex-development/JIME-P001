@@ -1,4 +1,4 @@
-import { sanitizeQuantity } from '@system/utils'
+import { sanitizeQuantity } from '@system/utils/sanitizeQuantity'
 import { useCallback } from 'react'
 import useNumber from 'react-hanger/array/useNumber'
 

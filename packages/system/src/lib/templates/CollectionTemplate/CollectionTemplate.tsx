@@ -1,6 +1,9 @@
-import { useSanitizedProps } from '@system/hooks'
-import { Heading, Main, MainProps, Paragraph, Section } from '@system/lib/atoms'
-import { ProductGrid } from '@system/lib/organisms'
+import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
+import { Heading } from '@system/lib/atoms/Heading'
+import { Main, MainProps } from '@system/lib/atoms/Main'
+import { Paragraph } from '@system/lib/atoms/Paragraph'
+import { Section } from '@system/lib/atoms/Section'
+import { ProductGrid } from '@system/lib/organisms/ProductGrid'
 import { TC } from '@system/types'
 import { CollectionTemplateProps } from './CollectionTemplate.props'
 

@@ -1,7 +1,7 @@
 import { GRID_BREAKPOINT_KEYS } from '@system/config/constants'
 import { UtilityClassConfig } from '@system/types'
-import { isObject } from 'lodash'
-import { genclass } from '../genclass'
+import { genclass } from '@system/utils/genclass'
+import isObject from 'lodash/isObject'
 
 /**
  * @file Implementation - genclasses

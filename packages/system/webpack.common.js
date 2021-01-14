@@ -1,7 +1,7 @@
 const implementation = require('sass')
 
 /**
- * @file Webpack Configuration - Design System Styles (Common)
+ * @file Common Webpack Configuration - Design System Styles
  * @see {@link https://webpack.js.org/configuration}
  */
 

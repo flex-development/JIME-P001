@@ -1,19 +1,27 @@
 {
   "compilerOptions": {
     "declaration": true,
-    "jsx": "react-jsx",
+    "emitDeclarationOnly": true,
+    "noEmit": false,
     "outDir": "./dist",
     "plugins": [
       {
         "afterDeclarations": true,
-        "transform": "typescript-transform-paths",
+        "exclude": ["*"],
+        "transform": "@zerollup/ts-transform-paths",
         "useRootDirs": true
       }
-    ],
-    "rootDir": "./src",
-    "sourceMap": true
+    ]
   },
-  "exclude": ["**/*.spec.ts", "**/*.spec.tsx"],
-  "extends": "./tsconfig.json",
-  "include": ["src"]
+  "exclude": ["**/*.stories.tsx", "**/*.spec.ts", "**/*.spec.tsx"],
+  "extends": "./tsconfig.app.json",
+  "include": [
+    "src/config",
+    "src/hooks",
+    "src/lib",
+    "src/providers",
+    "src/types",
+    "src/utils",
+    "src/index.ts"
+  ]
 }

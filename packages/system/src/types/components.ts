@@ -1,6 +1,6 @@
-import { AnyObject } from '@flex-development/json'
-import { ElementType, FC, ForwardRefExoticComponent } from 'react'
-import { AnimatedComponent } from 'react-spring'
+import { AnyObject } from '@flex-development/json/utils/types'
+import { AnimatedComponent } from '@react-spring/web'
+import { ElementType, FC, ForwardRefExoticComponent, SVGProps } from 'react'
 import { ComponentPropsBase } from './props'
 
 /**
@@ -30,6 +30,11 @@ export type AnimatedFREC<
  * `ForwardRefExoticComponent` type alias.
  */
 export type FREC<T extends AnyObject = AnyObject> = ForwardRefExoticComponent<T>
+
+/**
+ * Shopify Polaris Icon
+ */
+export type ShopifyPolarisIcon = FC<SVGProps<SVGSVGElement>>
 
 /**
  * `TemplateComponent` type alias.

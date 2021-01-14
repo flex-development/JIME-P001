@@ -1,4 +1,5 @@
 import { MainProps } from '@system/lib/atoms'
+import { MDXContentProps } from '@system/lib/molecules'
 
 /**
  * @file Component Props - PageTemplate
@@ -9,5 +10,12 @@ export interface PageTemplateProps extends MainProps {
   /**
    * Markdown or MDX string containing page content.
    */
-  body?: string
+  body?: MDXContentProps['code']
+
+  /**
+   * `MDXContent` component scope.
+   *
+   * @default {}
+   */
+  scope?: MDXContentProps['scope']
 }

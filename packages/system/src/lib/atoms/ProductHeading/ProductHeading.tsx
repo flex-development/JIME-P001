@@ -1,5 +1,5 @@
-import { useSanitizedProps } from '@system/hooks'
-import { formatPrice } from '@system/utils'
+import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
+import { formatPrice } from '@system/utils/formatPrice'
 import { FC } from 'react'
 import { Heading, HeadingProps } from '../Heading'
 import { Span } from '../Span'

@@ -1,5 +1,6 @@
-import { useSanitizedProps } from '@system/hooks'
-import { Main, MainProps, MDXContent } from '@system/lib/atoms'
+import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
+import { Main, MainProps } from '@system/lib/atoms/Main'
+import { MDXContent } from '@system/lib/molecules/MDXContent'
 import { TC } from '@system/types'
 import { PageTemplateProps } from './PageTemplate.props'
 
@@ -17,13 +18,13 @@ import { PageTemplateProps } from './PageTemplate.props'
  * - https://mdxjs.com/playground
  */
 export const PageTemplate: TC<PageTemplateProps> = props => {
-  const { body, ...rest } = props
+  const { body = '', scope, ...rest } = props
 
   const sanitized = useSanitizedProps<'main', MainProps>(rest, 'page-template')
 
   return (
     <Main {...sanitized} data-template={PageTemplate.template_id}>
-      <MDXContent>{body}</MDXContent>
+      <MDXContent code={body} scope={scope} />
     </Main>
   )
 }
@@ -31,7 +32,7 @@ export const PageTemplate: TC<PageTemplateProps> = props => {
 PageTemplate.displayName = 'PageTemplate'
 
 PageTemplate.defaultProps = {
-  body: ''
+  scope: {}
 }
 
 PageTemplate.template_id = 'page'

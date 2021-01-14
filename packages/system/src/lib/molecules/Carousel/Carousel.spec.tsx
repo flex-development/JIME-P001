@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from '@testing-library/react'
-import { findIndex } from 'lodash'
+import findIndex from 'lodash/findIndex'
 import { ReactElement } from 'react'
 import { ProductReviews } from './Carousel.stories'
 

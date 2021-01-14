@@ -19,12 +19,35 @@
     "noUnusedLocals": false,
     "noUnusedParameters": false,
     "paths": {
-      "@api/*": ["packages/app/src/pages/api/*"],
       "@app/*": ["packages/app/src/*"],
       "@app-mocks/*": ["packages/app/__mocks__/*"],
+      "@baggie/string/*": ["node_modules/@baggie/string/lib/*"],
+      "@flex-development/json/*": [
+        "node_modules/@flex-development/json/dist/*"
+      ],
+      "@hooks/*": ["node_modules/@flex-development/kustomzdesign/dist/hooks/*"],
+      "@flex-development/kustomzcore/*": [
+        "node_modules/@flex-development/kustomzcore/dist/*"
+      ],
+      "@flex-development/kustomzdesign/*": [
+        "node_modules/@flex-development/kustomzdesign/dist/*"
+      ],
+      "@lerna-config": ["lerna.json"],
+      "@lib/*": ["node_modules/@flex-development/kustomzdesign/dist/lib/*"],
+      "@mdx-js/react": ["node_modules/@mdx-js/react/dist/esm"],
+      "@providers/*": [
+        "node_modules/@flex-development/kustomzdesign/dist/providers/*"
+      ],
+      "@shopify/polaris-icons/*": [
+        "node_modules/@shopify/polaris-icons/dist/*"
+      ],
       "@subdomains/*": ["packages/app/src/subdomains/*"],
       "@system/*": ["packages/system/src/*"],
-      "@system-mocks/*": ["packages/system/__tests__/__mocks__/*"]
+      "@system-mocks/*": ["packages/system/__tests__/__mocks__/*"],
+      "react-hanger/*": ["node_modules/react-hanger/esm/*"],
+      "react-use/*": ["node_modules/react-use/esm/*"],
+      "swr/*": ["node_modules/swr/esm/*"],
+      "validator/*": ["node_modules/validator/es/*"]
     },
     "preserveConstEnums": true,
     "pretty": true,

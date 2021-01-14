@@ -1,6 +1,7 @@
-import { useSanitizedProps } from '@system/hooks'
-import { Link, LinkProps, Nav, NavProps } from '@system/lib/atoms'
-import { uuid } from '@system/utils'
+import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
+import { Link, LinkProps } from '@system/lib/atoms/Link'
+import { Nav, NavProps } from '@system/lib/atoms/Nav'
+import uniqueId from 'lodash/uniqueId'
 import { FC } from 'react'
 import { MenuProps } from './Menu.props'
 
@@ -22,7 +23,7 @@ export const Menu: FC<MenuProps> = props => {
     <Nav {...sanitized}>
       {/* eslint-disable-next-line prettier/prettier */}
       {$items.map((link: LinkProps) => (
-        <Link {...link} $menu key={uuid()} />
+        <Link {...link} $menu key={uniqueId('menu-item')} />
       ))}
     </Nav>
   )

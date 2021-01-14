@@ -41,7 +41,7 @@ module.exports = {
    * If {@param commit} includes `wip:` the commit message will be ignored.
    *
    * @param {string} commit - The commit message
-   * @returns {boolean} True if message should be ignored
+   * @return {boolean} True if message should be ignored
    */
   ignores: [commit => commit.startsWith('wip:')],
 
@@ -65,7 +65,7 @@ module.exports = {
      * well as `deps` and `release`.
      *
      * @param {object} ctx - Commitlint context
-     * @returns {Rule} Scope rules
+     * @return {Rule} Scope rules
      */
     'scope-enum': async ctx => [
       2,

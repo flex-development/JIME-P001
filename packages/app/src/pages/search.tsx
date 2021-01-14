@@ -1,12 +1,10 @@
-import { getSEOData, SearchPageUrlQuery } from '@app/subdomains/app/utils'
-import { getGlobalMetafields } from '@app/subdomains/metafields/utils'
-import {
-  SearchTemplate,
-  SearchTemplateProps
-} from '@flex-development/kustomzdesign'
-import { SEO, SEOProps } from '@subdomains/app/components'
+import { SearchTemplate } from '@lib/templates/SearchTemplate'
+import { SEO } from '@subdomains/app/components/SEO'
 import { IPagePropsSearch as PageProps, PC } from '@subdomains/app/interfaces'
-import { ProductService } from '@subdomains/sales/services'
+import getSEO from '@subdomains/app/utils/getSEO'
+import { SearchPageUrlQuery } from '@subdomains/app/utils/types'
+import globalMetafields from '@subdomains/metafields/utils/globalMetafields'
+import findProducts from '@subdomains/sales/utils/findProducts'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
 
 /**
@@ -35,7 +33,7 @@ const Search: PC<PageProps> = ({ seo, template }) => (
  *
  * @see https://nextjs.org/docs/basic-features/data-fetching
  *
- * @param context - Next.js page component context
+ * @param context - Server side page context
  * @param context.query - The query string
  * @param context.req - HTTP request object
  * @return Array of search results
@@ -44,9 +42,6 @@ export const getServerSideProps: GetServerSideProps<
   PageProps,
   SearchPageUrlQuery
 > = async (context: GetServerSidePropsContext) => {
-  // Initialize services
-  const Products = new ProductService()
-
   // Get search term from query
   const { term } = context.query as SearchPageUrlQuery
 
@@ -66,13 +61,15 @@ export const getServerSideProps: GetServerSideProps<
   }
 
   // Get template data
-  const template: SearchTemplateProps = { results: await Products.find(query) }
+  const template: PageProps['template'] = {
+    results: await findProducts(query)
+  }
 
   // Get global metafields
-  const globals = await getGlobalMetafields()
+  const globals = await globalMetafields()
 
   // Get SEO data
-  const seo: SEOProps = await getSEOData(globals, {
+  const seo = getSEO(globals, {
     seo: { title: term?.length ? `Search results for "${term}"` : 'Search' }
   })
 

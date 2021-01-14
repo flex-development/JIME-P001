@@ -1,7 +1,7 @@
-import shopify from '@app/config/shopify'
-import { AnyObject } from '@flex-development/json'
-import { createError, Logger } from '@flex-development/kustomzcore'
-import { sortBy } from 'lodash'
+import { AnyObject } from '@flex-development/json/utils/types'
+import Logger from '@flex-development/kustomzcore/config/logger'
+import { createError } from '@flex-development/kustomzcore/utils/createError'
+import sortBy from 'lodash/sortBy'
 import { NextApiRequest as Req, NextApiResponse as Res } from 'next'
 import { SitemapStream, streamToPromise } from 'sitemap'
 
@@ -10,6 +10,13 @@ import { SitemapStream, streamToPromise } from 'sitemap'
  * @module pages/api/sitemap
  * @see https://linguinecode.com/post/add-robots-txt-file-sitemaps-nextjs
  */
+
+const {
+  SHOPIFY_API_KEY: apiKey = '',
+  SHOPIFY_API_VERSION: apiVersion = '',
+  SHOPIFY_DOMAIN: shopName = '',
+  SHOPIFY_PASSWORD: password = ''
+} = process.env
 
 export default async (req: Req, res: Res): Promise<void> => {
   // Get sitemap base URL
@@ -20,6 +27,18 @@ export default async (req: Req, res: Res): Promise<void> => {
 
   // Initialize page slugs array
   const slugs = ['', '404', 'cart', 'search']
+
+  // Get Shopify module
+  const { default: Shopify } = await import('shopify-api-node')
+
+  // Initialize Shopify client
+  const shopify = new Shopify({
+    apiKey,
+    apiVersion,
+    autoLimit: true,
+    password,
+    shopName
+  })
 
   try {
     // Get online store pages and policies

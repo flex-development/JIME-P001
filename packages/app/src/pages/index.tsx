@@ -1,15 +1,13 @@
-import { getSEOData, objectFromArray } from '@app/subdomains/app/utils'
-import { PageService } from '@app/subdomains/cms/services'
-import { getGlobalMetafields } from '@app/subdomains/metafields/utils'
-import { ProductService } from '@app/subdomains/sales/services'
-import { IPage, IProductListing } from '@flex-development/kustomzcore'
-import {
-  IndexTemplate,
-  IndexTemplateProps
-} from '@flex-development/kustomzdesign'
-import { SEO, SEOProps } from '@subdomains/app/components'
+import { IndexTemplate } from '@lib/templates/IndexTemplate'
+import { SEO } from '@subdomains/app/components/SEO'
 import { IPagePropsIndex as PageProps, PC } from '@subdomains/app/interfaces'
-import { GetStaticProps } from 'next'
+import getSEO from '@subdomains/app/utils/getSEO'
+import objectFromArray from '@subdomains/app/utils/objectFromArray'
+import { NotFound } from '@subdomains/app/utils/types'
+import getPage from '@subdomains/cms/utils/getPageByHandle'
+import globalMetafields from '@subdomains/metafields/utils/globalMetafields'
+import findProducts from '@subdomains/sales/utils/findProducts'
+import { GetServerSideProps } from 'next'
 
 /**
  * @file Page - Home
@@ -33,29 +31,22 @@ const Home: PC<PageProps> = ({ seo, template }) => (
 )
 
 /**
- * Fetches the data required to pre-render the homepage.
+ * Fetches the data required to render the homepage.
  *
  * @see https://nextjs.org/docs/basic-features/data-fetching
  * @see https://shopify.dev/docs/admin-api/rest/reference/online-store/page
  *
  * @async
  */
-export const getStaticProps: GetStaticProps<PageProps> = async () => {
-  // Initialize services
-  const Pages = new PageService()
-  const Products = new ProductService()
+export const getServerSideProps: GetServerSideProps<PageProps> = async () => {
+  // Get page data
+  const data = await getPage('index')
 
-  // Initialize page data object
-  let page: IPage | null = null
+  // Redirect to /404 if page data isn't found
+  if ((data as NotFound).notFound) return data as NotFound
 
-  try {
-    // Get page data
-    page = (await Pages.get('index')) as IPage
-  } catch (error) {
-    // Redirect to /404 if page data isn't found
-    if (error.code === 404) return { notFound: true }
-    throw error
-  }
+  // Guarenteed to be page data. Error will be thrown otherwise
+  const page = data as PageProps['page']
 
   // Parse page metafields
   const {
@@ -69,12 +60,12 @@ export const getStaticProps: GetStaticProps<PageProps> = async () => {
   } = objectFromArray(page.metafield, 'key')
 
   // Get `IndexTemplate` props
-  const template: IndexTemplateProps = {
+  const template: PageProps['template'] = {
     about_section_text: about_section_text.value as string,
     about_section_title: about_section_title.value as string,
     max_products: JSON.parse(max_products.value as string),
     max_reviews: JSON.parse(max_reviews.value as string),
-    products: (await Products.find()) as IProductListing[],
+    products: (await findProducts()) as PageProps['template']['products'],
     products_section_text: products_section_text.value as string,
     products_section_title: products_section_title.value as string,
     reviews: [],
@@ -82,12 +73,12 @@ export const getStaticProps: GetStaticProps<PageProps> = async () => {
   }
 
   // Get global metafields
-  const globals = await getGlobalMetafields()
+  const globals = await globalMetafields()
 
   // Get SEO object
-  const seo: SEOProps = await getSEOData(globals, page, 'page')
+  const seo = await getSEO(globals, page, 'page')
 
-  return { props: { globals, page, seo, template }, revalidate: 1 }
+  return { props: { globals, page, seo, template } }
 }
 
 export default Home

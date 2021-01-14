@@ -1,20 +1,20 @@
 import { FeathersErrorJSON } from '@feathersjs/errors'
-import { PartialOr } from '@flex-development/json'
+import { PartialOr } from '@flex-development/json/utils/types'
 import {
   ICollectionListing,
   IMetafield,
   IPage,
   IPolicy,
   IProductListing
-} from '@flex-development/kustomzcore'
+} from '@flex-development/kustomzcore/types/shopify'
 import {
   CollectionTemplateProps,
   IndexTemplateProps,
   PageTemplateProps,
   ProductTemplateProps,
   SearchTemplateProps
-} from '@flex-development/kustomzdesign'
-import { SEOProps } from '../components'
+} from '@lib/templates'
+import { SEOProps } from '@subdomains/app/components/SEO'
 
 /**
  * @file Subdomain Interfaces - Next.js Page Props
@@ -52,7 +52,7 @@ export interface IPagePropsError {
  * Props passed to dynamic `[handle]` (online store) pages.
  */
 export interface IPagePropsHandle extends IPageProps {
-  page: IPage
+  page: IPage | IPolicy
   seo: SEOProps
   template: PageTemplateProps
 }

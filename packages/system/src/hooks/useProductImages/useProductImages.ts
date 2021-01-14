@@ -1,8 +1,8 @@
-import { IProductListing } from '@flex-development/kustomzcore'
+import { IProductListing } from '@flex-development/kustomzcore/types/shopify'
+import { useMemoCompare } from '@system/hooks/useMemoCompare'
 import { ImageProps } from '@system/lib/atoms/Image'
-import { getProductImage } from '@system/utils'
+import { getProductImage } from '@system/utils/getProductImage'
 import { useMemo } from 'react'
-import { useMemoCompare } from '../useMemoCompare'
 
 /**
  * @file Implementation - useProductImages

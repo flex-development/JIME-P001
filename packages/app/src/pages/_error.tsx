@@ -1,10 +1,13 @@
-import { IPagePropsError as PageProps } from '@app/subdomains/app/interfaces'
-import { getGlobalMetafields } from '@app/subdomains/metafields/utils'
-import { FeathersErrorJSON } from '@feathersjs/errors'
-import { serialize } from '@flex-development/json'
-import { createError, Logger } from '@flex-development/kustomzcore'
-import { ErrorTemplate, Link, Paragraph } from '@flex-development/kustomzdesign'
-import { merge, pick } from 'lodash'
+import { serialize } from '@flex-development/json/utils/serialize'
+import Logger from '@flex-development/kustomzcore/config/logger'
+import { createError } from '@flex-development/kustomzcore/utils/createError'
+import { Link } from '@lib/atoms/Link'
+import { Paragraph } from '@lib/atoms/Paragraph'
+import { ErrorTemplate } from '@lib/templates/ErrorTemplate'
+import { IPagePropsError as PageProps } from '@subdomains/app/interfaces'
+import globalMetafields from '@subdomains/metafields/utils/globalMetafields'
+import merge from 'lodash/merge'
+import pick from 'lodash/pick'
 import { NextPage } from 'next'
 import NextHead from 'next/head'
 import { Fragment } from 'react'
@@ -51,7 +54,7 @@ Error.getInitialProps = async (context): Promise<PageProps> => {
   const { asPath, err, pathname, query, req } = context
 
   // Copy error data
-  let error = { ...(err || {}) } as FeathersErrorJSON
+  let error = { ...(err || {}) } as PageProps['error']
 
   // Get intial error data
   let data = {
@@ -67,13 +70,13 @@ Error.getInitialProps = async (context): Promise<PageProps> => {
   if (!err) error = createError('Did not receive error object.', data, 500)
 
   // Convert to FeathersErrorJSON if not already
-  if (err && !(err as FeathersErrorJSON).code) {
+  if (err && !(err as PageProps['error']).code) {
     const { message, stack = null, statusCode = 500 } = err
     error = createError(message, { ...data, stack, statusCode }, statusCode)
   }
 
   // Get global metafields
-  const globals = await getGlobalMetafields()
+  const globals = await globalMetafields()
 
   Logger.error({ 'Error.getInitialProps': error })
   return { error: serialize<PageProps['error']>(error), globals }

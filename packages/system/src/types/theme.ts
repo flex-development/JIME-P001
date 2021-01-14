@@ -1,4 +1,4 @@
-import { Primitive } from '@flex-development/json'
+import { Primitive } from '@flex-development/json/utils/types'
 
 /**
  * @file Theme Types

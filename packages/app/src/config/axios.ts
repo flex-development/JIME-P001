@@ -1,9 +1,10 @@
 import { FeathersErrorJSON } from '@feathersjs/errors'
-import { AnyObject, ANYTHING } from '@flex-development/json'
-import { createError } from '@flex-development/kustomzcore'
+import { AnyObject, ANYTHING } from '@flex-development/json/utils/types'
+import { createError } from '@flex-development/kustomzcore/utils/createError'
 import Axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios'
 import rateLimit from 'axios-rate-limit'
-import { isPlainObject, pick } from 'lodash'
+import isPlainObject from 'lodash/isPlainObject'
+import pick from 'lodash/pick'
 
 /**
  * @file Axios Configuration
@@ -17,8 +18,8 @@ import { isPlainObject, pick } from 'lodash'
  * @param error - Error to transform
  * @throws {FeathersErrorJSON}
  */
-export const handleErrorResponse = (error: AxiosError): void => {
-  const { config, message, request, response, stack } = error
+const handleErrorResponse = (error: AxiosError): void => {
+  const { config = {}, message, request, response, stack } = error
 
   let feathersError = {} as FeathersErrorJSON
 
@@ -57,7 +58,7 @@ export const handleErrorResponse = (error: AxiosError): void => {
  * @param response - Success response
  * @throws {FeathersError}
  */
-export const handleSuccessResponse = (res: AxiosResponse): ANYTHING => {
+const handleSuccessResponse = (res: AxiosResponse): ANYTHING => {
   return res?.data ?? res
 }
 

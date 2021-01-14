@@ -1,5 +1,10 @@
-import { NullishNumber, NullishString } from '@flex-development/json'
-import { AsideProps, ImageProps, LinkProps } from '@system/lib/atoms'
+import {
+  NullishNumber,
+  NullishString
+} from '@flex-development/json/utils/types'
+import { AsideProps } from '@system/lib/atoms/Aside'
+import { ImageProps } from '@system/lib/atoms/Image'
+import { LinkProps } from '@system/lib/atoms/Link'
 
 /**
  * @file Component Props - Sidebar

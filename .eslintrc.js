@@ -35,7 +35,7 @@ module.exports = {
     project: ['./tsconfig.json', './packages/**/tsconfig.json'],
     sourceType: 'module'
   },
-  plugins: ['react-hooks'],
+  plugins: ['tree-shaking', 'react-hooks'],
   rules: {
     '@typescript-eslint/ban-ts-ignore': 0,
     '@typescript-eslint/ban-types': 1,

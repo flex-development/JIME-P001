@@ -1,8 +1,7 @@
-import { useSanitizedProps } from '@system/hooks'
+import { a } from '@react-spring/web'
+import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
 import { FREC } from '@system/types'
-import { isBoolean } from 'lodash'
 import { forwardRef } from 'react'
-import { a } from 'react-spring'
 import { LinkProps } from './Link.props'
 
 /**
@@ -38,7 +37,7 @@ export const Link: FREC<LinkProps> = forwardRef((props, ref) => {
       active: $active,
       [`btn btn-${$btn}`]: $btn,
       disabled,
-      'dropdown-item': isBoolean($dropdown) && $dropdown,
+      'dropdown-item': typeof $dropdown === 'boolean' && $dropdown,
       'dropdown-toggle': $dropdown === 'toggle',
       [`link-${$color}`]: $color,
       'link-fluid': $fluid,

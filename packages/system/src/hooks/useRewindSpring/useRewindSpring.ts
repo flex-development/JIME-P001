@@ -1,5 +1,5 @@
+import { config, SpringValue, useSpring } from '@react-spring/web'
 import useBoolean from 'react-hanger/array/useBoolean'
-import { config, SpringValue, useSpring } from 'react-spring'
 
 /**
  * @file Implementation - useRewindSpring

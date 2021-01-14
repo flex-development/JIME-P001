@@ -12,6 +12,5 @@ export * from './getProductImage'
 export * from './getSongArtworkURL'
 export * from './getSubtotal'
 export * from './sanitizeQuantity'
-export * from './uuid'
 
 /* eslint-disable prettier/prettier */

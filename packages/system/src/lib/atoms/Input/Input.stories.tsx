@@ -1,4 +1,3 @@
-import { input_type as type } from '@system/config'
 import { Input } from './Input'
 import { InputProps } from './Input.props'
 
@@ -8,7 +7,37 @@ import { InputProps } from './Input.props'
  */
 
 export default {
-  argTypes: { type },
+  argTypes: {
+    type: {
+      control: {
+        options: [
+          'button',
+          'checkbox',
+          'color',
+          'date',
+          'datetime-local',
+          'email',
+          'file',
+          'hidden',
+          'image',
+          'month',
+          'number',
+          'password',
+          'radio',
+          'range',
+          'reset',
+          'search',
+          'submit',
+          'tel',
+          'text',
+          'time',
+          'url',
+          'week'
+        ],
+        type: 'select'
+      }
+    }
+  },
   component: Input,
   parameters: {
     jest: ['Input']

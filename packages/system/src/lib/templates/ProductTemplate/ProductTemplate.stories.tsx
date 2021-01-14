@@ -1,4 +1,4 @@
-import { IProductListing } from '@flex-development/kustomzcore'
+import { IProductListing } from '@flex-development/kustomzcore/types/shopify'
 import { PRODUCTS, REVIEWS } from '@system-mocks/utils'
 import { ProductTemplate } from './ProductTemplate'
 import { ProductTemplateProps } from './ProductTemplate.props'

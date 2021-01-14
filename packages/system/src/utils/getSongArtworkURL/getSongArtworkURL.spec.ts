@@ -1,5 +1,5 @@
+import { MusicKitSongAttributes } from '@flex-development/kustomzcore/types'
 import { SONGS } from '@system-mocks/utils'
-import { MusicKitSongAttributes } from 'packages/core/src'
 import getSongArtworkURL from './getSongArtworkURL'
 
 /**

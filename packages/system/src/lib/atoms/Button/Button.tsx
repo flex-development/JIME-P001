@@ -1,9 +1,9 @@
-import { AnyObject } from '@flex-development/json'
-import { useSanitizedProps, useTransformScaleX } from '@system/hooks'
+import { AnyObject } from '@flex-development/json/utils/types'
+import { a, animated } from '@react-spring/web'
+import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
+import { useTransformScaleX } from '@system/hooks/useTransformScaleX'
 import { EventHandlers, FREC } from '@system/types'
-import { isBoolean, isUndefined } from 'lodash'
 import { forwardRef, useCallback } from 'react'
-import { a, animated } from 'react-spring'
 import { ButtonProps } from './Button.props'
 
 /**
@@ -31,7 +31,13 @@ export const Button: FREC<ButtonProps> = forwardRef((props, ref) => {
   )
 
   // Handle scale animation
-  const _scale = isBoolean($scale) || isUndefined($scale) ? [] : $scale
+  const bool = typeof $scale === 'boolean'
+  const undef = typeof $scale === 'undefined'
+
+  const _scale = (bool || undef ? [] : $scale) as Parameters<
+    typeof useTransformScaleX
+  >
+
   const scalex = useTransformScaleX(_scale[0], _scale[1], _scale[2])
 
   /**

@@ -1,6 +1,7 @@
-import { ANYTHING } from '@flex-development/json'
-import { HeaderProps, LinkProps } from '@system/lib/atoms'
-import { SearchBarProps } from '@system/lib/molecules'
+import { ANYTHING } from '@flex-development/json/utils/types'
+import { HeaderProps } from '@system/lib/atoms/Header'
+import { LinkProps } from '@system/lib/atoms/Link'
+import { SearchBarProps } from '@system/lib/molecules/SearchBar'
 import { EventHandlers } from '@system/types'
 
 /**

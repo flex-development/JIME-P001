@@ -1,6 +1,8 @@
-import { useProductCards, useSanitizedProps } from '@system/hooks'
-import { GridColumn, Section, SectionProps } from '@system/lib/atoms'
-import { ProductCard } from '@system/lib/molecules'
+import { useProductCards } from '@system/hooks/useProductCards'
+import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
+import { GridColumn } from '@system/lib/atoms/GridColumn'
+import { Section, SectionProps } from '@system/lib/atoms/Section'
+import { ProductCard } from '@system/lib/molecules/ProductCard'
 import { FC } from 'react'
 import { ProductGridProps } from './ProductGrid.props'
 

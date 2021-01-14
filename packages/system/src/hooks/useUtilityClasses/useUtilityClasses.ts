@@ -1,15 +1,18 @@
-import { AnyObject } from '@flex-development/json'
+import { AnyObject } from '@flex-development/json/utils/types'
 import {
   GRID_BREAKPOINT_KEYS,
   UTILITY_PROP_ALIASES as ALIASES
-} from '@system/config'
+} from '@system/config/constants'
+import { useMemoCompare } from '@system/hooks/useMemoCompare'
 import { GridBreakpointKey } from '@system/types'
-import { genclasses } from '@system/utils'
+import { genclasses } from '@system/utils/genclasses'
 import classnames from 'classnames'
 import { ClassDictionary } from 'classnames/types'
-import { isEmpty, isPlainObject, join, pick, uniq } from 'lodash'
+import isPlainObject from 'lodash/isPlainObject'
+import join from 'lodash/join'
+import pick from 'lodash/pick'
+import uniq from 'lodash/uniq'
 import { useMemo } from 'react'
-import { useMemoCompare } from '../useMemoCompare'
 
 /**
  * @file Implementation - useUtilityClasses
@@ -59,7 +62,7 @@ export const useUtilityClasses = (
       const prefix = _aliases[alias]
 
       genclasses(prefix, config[alias], _breakpoints).map(c => {
-        dictionary[c] = !isEmpty(c)
+        dictionary[c] = c?.length > 0
       })
     })
 

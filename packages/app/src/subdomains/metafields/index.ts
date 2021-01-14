@@ -4,7 +4,6 @@
  * @see https://shopify.dev/docs/admin-api/rest/reference/metafield
  */
 
-export * from './services'
 export * from './utils'
 
 /* eslint-disable prettier/prettier */

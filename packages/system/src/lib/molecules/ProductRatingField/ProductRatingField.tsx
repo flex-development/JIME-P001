@@ -1,7 +1,8 @@
-import { useSanitizedProps } from '@system/hooks'
-import { Box, BoxProps, Input } from '@system/lib/atoms'
+import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
+import { Box, BoxProps } from '@system/lib/atoms/Box'
+import { Input } from '@system/lib/atoms/Input'
 import { EventHandlers } from '@system/types'
-import { uuid } from '@system/utils'
+import uniqueId from 'lodash/uniqueId'
 import { FC, useCallback } from 'react'
 import useNumber from 'react-hanger/array/useNumber'
 import { ProductRatingFieldProps } from './ProductRatingField.props'
@@ -62,7 +63,7 @@ export const ProductRatingField: FC<ProductRatingFieldProps> = props => {
           aria-label={`Give a ${value} star rating`}
           className='product-rating-field-checkbox'
           defaultChecked={value <= rating}
-          key={uuid()}
+          key={uniqueId('product-rating-field-checkbox')}
           name={name}
           onChange={onChangeRatingCB}
           type='checkbox'

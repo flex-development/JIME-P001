@@ -1,4 +1,4 @@
-import { AnyObject, NullishString } from '@flex-development/json'
+import { AnyObject, NullishString } from '@flex-development/json/utils/types'
 import {
   ICheckoutLineItem,
   ICollectionListing,

@@ -7,12 +7,6 @@
       "plugins": [
         "@babel/plugin-transform-react-jsx",
         [
-          "babel-plugin-styled-components",
-          {
-            "ssr": true
-          }
-        ],
-        [
           "module-resolver",
           {
             "alias": {
@@ -30,5 +24,6 @@
   "compilerOptions": {
     "jsx": "react-jsx"
   },
-  "extends": "./tsconfig.dev.json"
+  "extends": "./tsconfig.dev.json",
+  "include": ["src", "scripts"]
 }

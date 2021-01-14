@@ -7,12 +7,6 @@
       "plugins": [
         "@babel/plugin-transform-react-jsx",
         [
-          "babel-plugin-styled-components",
-          {
-            "ssr": true
-          }
-        ],
-        [
           "module-resolver",
           {
             "alias": {

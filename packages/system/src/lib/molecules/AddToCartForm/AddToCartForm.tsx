@@ -1,26 +1,22 @@
-import { CheckoutLineItemInput } from '@flex-development/kustomzcore'
-import {
-  useActiveIndex,
-  useCheckoutLineItemInput,
-  useProductImages,
-  useProductVariants
-} from '@system/hooks'
-import {
-  Box,
-  Button,
-  Form,
-  Image,
-  Input,
-  Paragraph,
-  ProductHeading,
-  Select,
-  TextArea
-} from '@system/lib/atoms'
+import { CheckoutLineItemInput } from '@flex-development/kustomzcore/types'
+import { useActiveIndex } from '@system/hooks/useActiveIndex'
+import { useCheckoutLineItemInput } from '@system/hooks/useCheckoutLineItemInput'
+import { useProductImages } from '@system/hooks/useProductImages'
+import { useProductVariants } from '@system/hooks/useProductVariants'
+import { Box } from '@system/lib/atoms/Box'
+import { Button } from '@system/lib/atoms/Button'
+import { Form } from '@system/lib/atoms/Form'
+import { Image } from '@system/lib/atoms/Image'
+import { Input } from '@system/lib/atoms/Input'
+import { Paragraph } from '@system/lib/atoms/Paragraph'
+import { ProductHeading } from '@system/lib/atoms/ProductHeading'
+import { Select } from '@system/lib/atoms/Select'
+import { TextArea } from '@system/lib/atoms/TextArea'
+import { Carousel } from '@system/lib/molecules/Carousel'
+import { FormField } from '@system/lib/molecules/FormField'
 import { EventHandlers } from '@system/types'
-import { findIndex } from 'lodash'
+import findIndex from 'lodash/findIndex'
 import { FC, useCallback } from 'react'
-import { Carousel } from '../Carousel'
-import { FormField } from '../FormField'
 import { AddToCartFormProps } from './AddToCartForm.props'
 
 /**

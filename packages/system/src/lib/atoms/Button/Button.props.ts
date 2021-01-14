@@ -1,10 +1,9 @@
-import { useTransformScaleX } from '@system/hooks'
+import { useTransformScaleX } from '@system/hooks/useTransformScaleX'
 import {
   Color,
   ComponentPropsBase as CPB,
   FormComponentProps
 } from '@system/types'
-import { IconProps } from '../Icon'
 
 /**
  * @file Component Props - Button
@@ -16,11 +15,6 @@ export interface ButtonProps extends CPB<'button'>, FormComponentProps {
    * If true, make the `Button` span the full width of its parent container.
    */
   $fluid?: boolean
-
-  /**
-   * Icon to render beside the element text.
-   */
-  $icon?: IconProps
 
   /**
    * If true, use default `transform: scale` animation properties. Default

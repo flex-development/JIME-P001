@@ -1,9 +1,8 @@
-import { AnyObject } from '@flex-development/json'
-import { IProductListingVariant } from '@flex-development/kustomzcore'
-import { OptionProps } from '@system/lib'
-import { isNumber } from 'lodash'
+import { AnyObject } from '@flex-development/json/utils/types'
+import { IProductListingVariant } from '@flex-development/kustomzcore/types'
+import { useMemoCompare } from '@system/hooks/useMemoCompare'
+import { OptionProps } from '@system/lib/atoms/Option'
 import { useCallback, useMemo, useState } from 'react'
-import { useMemoCompare } from '../useMemoCompare'
 
 /**
  * @file Use product variants as options
@@ -71,7 +70,9 @@ export const useProductVariants = (
   ): IProductListingVariant['id'] => {
     const newVariant = _variants.find(v => v.id === id)
 
-    if (newVariant && isNumber(newVariant?.id)) setSelected(newVariant)
+    if (newVariant && typeof newVariant?.id === 'number') {
+      setSelected(newVariant)
+    }
 
     return newVariant?.id ?? -1
   }

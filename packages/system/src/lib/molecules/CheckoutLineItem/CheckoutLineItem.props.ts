@@ -1,9 +1,10 @@
-import { ANYTHING } from '@flex-development/json'
+import { ANYTHING } from '@flex-development/json/utils/types'
 import {
   CheckoutLineItemDisplay,
   CheckoutLineItemInput
-} from '@flex-development/kustomzcore'
-import { BoxProps, ImageProps } from '@system/lib/atoms'
+} from '@flex-development/kustomzcore/types'
+import { BoxProps } from '@system/lib/atoms/Box'
+import { ImageProps } from '@system/lib/atoms/Image'
 import { EventHandlers } from '@system/types'
 
 /**

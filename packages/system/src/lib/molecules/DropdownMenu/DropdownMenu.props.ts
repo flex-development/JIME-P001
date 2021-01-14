@@ -1,4 +1,4 @@
-import { ListProps } from '@system/lib/atoms'
+import { ListProps } from '@system/lib/atoms/List'
 
 /**
  * @file Component Props - DropdownMenu

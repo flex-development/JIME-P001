@@ -1,7 +1,10 @@
 import { getSizedImageUrl } from '@shopify/theme-images'
-import { IMAGE_PLACEHOLDER_URL } from '@system/config'
-import { useSanitizedProps } from '@system/hooks'
-import { Box, BoxProps, Image, Link, Paragraph } from '@system/lib/atoms'
+import { IMAGE_PLACEHOLDER_URL } from '@system/config/constants'
+import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
+import { Box, BoxProps } from '@system/lib/atoms/Box'
+import { Image } from '@system/lib/atoms/Image'
+import { Link } from '@system/lib/atoms/Link'
+import { Paragraph } from '@system/lib/atoms/Paragraph'
 import { FC } from 'react'
 import { ProductReviewProps } from './ProductReview.props'
 

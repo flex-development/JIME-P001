@@ -1,12 +1,8 @@
 /**
- * @file Design System Config
+ * @file Entry Point - Design System Config
  * @module config
  */
 
-export * from './args'
 export * from './constants'
-export * from './icons'
-export * from './sb'
-export * from './viewports'
 
 /* eslint-disable prettier/prettier */

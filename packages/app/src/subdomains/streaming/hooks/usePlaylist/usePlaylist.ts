@@ -1,13 +1,12 @@
+import Logger from '@flex-development/kustomzcore/config/logger'
 import {
-  Logger,
   MusicKitMediaItem,
   MusicKitSongAttributes
-} from '@flex-development/kustomzcore'
-import { isEmpty } from 'lodash'
-import { useMemoCompare } from 'packages/system/dist'
+} from '@flex-development/kustomzcore/types/musickit'
+import { useMemoCompare } from '@hooks/useMemoCompare'
+import { useMusicKit } from '@subdomains/streaming/hooks/useMusicKit'
 import { useEffect, useMemo } from 'react'
 import { useSetState } from 'react-hanger/array/useSetState'
-import { useMusicKit } from '../useMusicKit'
 
 /**
  * @file Get array of song attributes for an Apple Music playlist
@@ -41,7 +40,7 @@ export const usePlaylist = (url = ''): UsePlaylist => {
 
   useEffect(() => {
     // If no playlist, or playlists are the same, do nothing
-    if (isEmpty(id) || isEmpty(kit) || $playlist.id === id) {
+    if (!id.length || !Object.keys(kit).length || $playlist.id === id) {
       return
     } /* eslint-disable prettier/prettier */
     ;(async () => {
@@ -56,7 +55,7 @@ export const usePlaylist = (url = ''): UsePlaylist => {
 
   // Get array of song attributes
   const songs = useMemo<MusicKitSongAttributes[]>(() => {
-    if (!$playlist || isEmpty($playlist)) return []
+    if (!$playlist || !Object.keys($playlist).length) return []
 
     const { data: _songs = [] } = $playlist?.relationships?.tracks ?? {}
     return _songs.map((song: MusicKitMediaItem) => song.attributes)

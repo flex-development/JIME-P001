@@ -1,7 +1,7 @@
 import {
   ICollectionListing,
   IProductListing
-} from '@flex-development/kustomzcore'
+} from '@flex-development/kustomzcore/types/shopify'
 import { LinkProps, MainProps } from '@system/lib/atoms'
 
 /**

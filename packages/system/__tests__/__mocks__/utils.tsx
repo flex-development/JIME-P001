@@ -1,5 +1,5 @@
 import ReviewsMockRepoRoot from '@app-mocks/data/reviews.mock.json'
-import { IProductListing, IReview } from '@flex-development/kustomzcore'
+import { IProductListing, IReview } from '@flex-development/kustomzcore/types'
 import ITEMS from '@system-mocks/data/checkout-line-items.mock.json'
 import products from '@system-mocks/data/product-listings.mock.json'
 import SONGS from '@system-mocks/data/song-attributes.mock.json'

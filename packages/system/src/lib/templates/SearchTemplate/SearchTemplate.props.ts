@@ -1,5 +1,5 @@
-import { IProductListing } from '@flex-development/kustomzcore'
-import { MainProps } from '@system/lib/atoms'
+import { IProductListing } from '@flex-development/kustomzcore/types'
+import { MainProps } from '@system/lib/atoms/Main'
 
 /**
  * @file Component Props - SearchTemplate

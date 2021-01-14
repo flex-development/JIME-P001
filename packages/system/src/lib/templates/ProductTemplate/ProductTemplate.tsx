@@ -1,22 +1,20 @@
-import { IProductListingVariant } from '@flex-development/kustomzcore'
-import { useCartContext, useSanitizedProps } from '@system/hooks'
-import {
-  Box,
-  Button,
-  Heading,
-  Main,
-  MainProps,
-  Section
-} from '@system/lib/atoms'
+import { IProductListingVariant } from '@flex-development/kustomzcore/types'
+import { useCartContext } from '@system/hooks/useCart'
+import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
+import { Box } from '@system/lib/atoms/Box'
+import { Button } from '@system/lib/atoms/Button'
+import { Heading } from '@system/lib/atoms/Heading'
+import { Main, MainProps } from '@system/lib/atoms/Main'
+import { Section } from '@system/lib/atoms/Section'
 import {
   AddToCartForm,
-  AddToCartFormProps,
-  Carousel,
-  ProductBreadcrumb,
-  ProductReview
-} from '@system/lib/molecules'
+  AddToCartFormProps
+} from '@system/lib/molecules/AddToCartForm'
+import { Carousel } from '@system/lib/molecules/Carousel'
+import { ProductBreadcrumb } from '@system/lib/molecules/ProductBreadcrumb'
+import { ProductReview } from '@system/lib/molecules/ProductReview'
 import { EventHandlers, TC } from '@system/types'
-import { isFunction } from 'lodash'
+import isFunction from 'lodash/isFunction'
 import { useCallback, useState } from 'react'
 import { ProductTemplateProps } from './ProductTemplate.props'
 

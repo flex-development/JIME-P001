@@ -8,9 +8,11 @@ const wc = require('./webpack.common')
  * @see {@link https://webpack.js.org/configuration}
  */
 
+const PRODUCTION = process.env.NODE_ENV?.toLowerCase() === 'production'
+
 module.exports = {
   entry: './src/scss/index.scss',
-  mode: 'production',
+  mode: PRODUCTION ? 'production' : 'development',
   output: {
     filename: 'css.js',
     path: path.resolve(__dirname, './dist')

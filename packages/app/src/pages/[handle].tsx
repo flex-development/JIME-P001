@@ -1,14 +1,13 @@
-import { getSEOData, HandlePageParams } from '@app/subdomains/app/utils'
-import { PageService } from '@app/subdomains/cms/services'
-import { getGlobalMetafields } from '@app/subdomains/metafields/utils'
-import { IPage } from '@flex-development/kustomzcore'
-import {
-  PageTemplate,
-  PageTemplateProps
-} from '@flex-development/kustomzdesign'
-import { SEO, SEOProps } from '@subdomains/app/components'
-import { IPagePropsHandle, PC } from '@subdomains/app/interfaces'
-import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from 'next'
+import { IPage } from '@flex-development/kustomzcore/types/shopify'
+import { PageTemplate } from '@lib/templates/PageTemplate'
+import { SEO } from '@subdomains/app/components/SEO'
+import { IPagePropsHandle as PageProps, PC } from '@subdomains/app/interfaces'
+import getSEO from '@subdomains/app/utils/getSEO'
+import transformMDX from '@subdomains/app/utils/transformMDX'
+import { HandlePageParams, NotFound } from '@subdomains/app/utils/types'
+import getPage from '@subdomains/cms/utils/getPageByHandle'
+import globalMetafields from '@subdomains/metafields/utils/globalMetafields'
+import { GetServerSideProps, GetServerSidePropsContext } from 'next'
 
 /**
  * @file Online Store Page
@@ -24,7 +23,7 @@ import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from 'next'
  * @param props.seo - `SEO` component properties
  * @param props.template - `PageTemplate` component properties
  */
-const HandlePage: PC<IPagePropsHandle> = ({ seo, template }) => (
+const HandlePage: PC<PageProps> = ({ seo, template }) => (
   <>
     <SEO {...seo} />
     <PageTemplate {...template} />
@@ -32,71 +31,45 @@ const HandlePage: PC<IPagePropsHandle> = ({ seo, template }) => (
 )
 
 /**
- * Returns an array of routes to pre-render.
- *
- * @async
- */
-export const getStaticPaths: GetStaticPaths = async () => {
-  // Initialize services
-  const Pages = new PageService()
-
-  // Get all pages
-  let pages = (await Pages.find()) as IPage[]
-
-  // Filter pages
-  pages = pages.filter(page => !['api-menus', 'index'].includes(page.handle))
-
-  // Return pre-render config
-  return {
-    fallback: false,
-    paths: pages.map(page => ({ params: { handle: page.handle } }))
-  }
-}
-
-/**
- * Fetches the data required to pre-render an online store page.
+ * Fetches the data required to render an online store page.
  *
  * @see https://nextjs.org/docs/basic-features/data-fetching
  * @see https://shopify.dev/docs/admin-api/rest/reference/online-store/page
  *
  * @async
- * @param context - Next.js page component context
- * @param context.params - Dynamic route parameters
- * @param context.preview - `true` if preview enabled, `undefined` otherwise
- * @param context.previewData - Preview data set by `setPreviewData`
+ * @param context - Server side page context
+ * @param context.params - Route parameters if dynamic route
+ * @param context.query - The query string
+ * @param context.req - HTTP request object
  */
-export const getStaticProps: GetStaticProps<
-  IPagePropsHandle,
+export const getServerSideProps: GetServerSideProps<
+  PageProps,
   HandlePageParams
-> = async (context: GetStaticPropsContext<HandlePageParams>) => {
-  // Initialize services
-  const Pages = new PageService()
+> = async (context: GetServerSidePropsContext<HandlePageParams>) => {
+  // Get page data
+  const data = await getPage(context.params?.handle ?? '')
 
-  // Initialize page data object
-  let page: IPage | null = null
+  // Redirect to /404 if page data isn't found
+  if ((data as NotFound).notFound) return data as NotFound
 
-  try {
-    // Get page data
-    page = (await Pages.get(context.params?.handle ?? '')) as IPage
-  } catch (error) {
-    // Redirect to /404 if page data isn't found
-    if (error.code === 404) return { notFound: true }
-    throw error
-  }
+  // ! Guarenteed to be page data. Error will be thrown otherwise
+  const page = data as PageProps['page']
 
   // Restrict access to Menus API page
   if (page.handle === 'api-menus') return { notFound: true }
 
   // Get `PageTemplate` props
-  const template: PageTemplateProps = { body: page.body_html }
+  const template: PageProps['template'] = {
+    body: (await transformMDX((page as IPage).body_html)).code
+  }
 
   // Get global metafields
-  const globals = await getGlobalMetafields()
+  const globals = await globalMetafields()
 
   // Get SEO object
-  const seo: SEOProps = await getSEOData(globals, page, 'page')
+  const seo = await getSEO(globals, page, 'page')
 
-  return { props: { globals, page, seo, template }, revalidate: 1 }
+  return { props: { globals, page, seo, template } }
 }
 
 export default HandlePage

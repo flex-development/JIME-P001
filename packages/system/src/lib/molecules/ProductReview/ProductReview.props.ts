@@ -1,5 +1,5 @@
-import { IReview } from '@flex-development/kustomzcore'
-import { BoxProps } from '@system/lib/atoms'
+import { IReview } from '@flex-development/kustomzcore/types/reviews'
+import { BoxProps } from '@system/lib/atoms/Box'
 
 /**
  * @file Component Props - ProductReview

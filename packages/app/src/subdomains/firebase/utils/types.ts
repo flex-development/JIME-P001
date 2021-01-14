@@ -21,27 +21,6 @@ export type FirebaseAdaptor =
 export type FirebaseAdaptorDatabase = ReturnType<FirebaseAdaptor['database']>
 
 /**
- * Firebase or Firebase Admin RTD query object.
- */
-export type FirebaseAdaptorDatabaseQuery =
-  | FirebaseAdmin.database.Query
-  | Firebase.database.Query
-
-/**
- * Firebase or Firebase Admin RTD reference.
- */
-export type FirebaseAdaptorReference = ReturnType<
-  FirebaseAdaptorDatabase['ref']
->
-
-/**
- * Firebase or Firebase Admin RTD snapshot.
- */
-export type FirebaseDataSnapshot =
-  | Firebase.database.DataSnapshot
-  | FirebaseAdmin.database.DataSnapshot
-
-/**
  * Application returned by `@firebase/rules-unit-testing` module.
  *
  * @see https://www.npmjs.com/package/@firebase/rules-unit-testing

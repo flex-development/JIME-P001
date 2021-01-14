@@ -1,7 +1,6 @@
-import { Primitive } from '@flex-development/json'
+import { Primitive } from '@flex-development/json/utils/types'
 import { GridBreakpointKey } from '@system/types'
-import { isBoolean, isNumber, isString } from 'lodash'
-import { breakpointInfix } from '../breakpointInfix'
+import { breakpointInfix } from '@system/utils/breakpointInfix'
 
 /**
  * @file Implementation - genclass
@@ -30,9 +29,11 @@ const genclass = (
   let classes = ''
   let append = ''
 
-  if (isNumber(value) || isString(value)) append = `-${value}`
+  if (typeof value === 'number' || typeof value === 'string') {
+    append = `-${value}`
+  }
 
-  if (append !== '-' || (isBoolean(value) && value)) {
+  if (append !== '-' || (typeof value === 'boolean' && value)) {
     classes = `${breakpointInfix(breakpoint)}${prefix}${append}`
   } else if (append === '-') {
     classes = `${breakpointInfix(breakpoint)}${prefix}`

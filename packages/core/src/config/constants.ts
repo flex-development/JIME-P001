@@ -3,7 +3,7 @@
  * @module config/constants
  */
 
-export const CART_PERSISTENCE_KEY = 'morenaskustomz-cart'
+export const CART_PKEY = 'morenaskustomz-cart'
 
 export const CHECKOUT_BASE_URL = '/checkouts'
 

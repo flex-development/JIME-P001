@@ -1,5 +1,7 @@
-import { useSanitizedProps } from '@system/hooks'
-import { Heading, Paragraph, Section, SectionProps } from '@system/lib/atoms'
+import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
+import { Heading } from '@system/lib/atoms/Heading'
+import { Paragraph } from '@system/lib/atoms/Paragraph'
+import { Section, SectionProps } from '@system/lib/atoms/Section'
 import { FC } from 'react'
 import { HeroProps } from './Hero.props'
 

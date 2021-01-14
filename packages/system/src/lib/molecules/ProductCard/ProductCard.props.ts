@@ -1,4 +1,4 @@
-import { IProductListing } from '@flex-development/kustomzcore'
+import { IProductListing } from '@flex-development/kustomzcore/types/shopify'
 import { BoxProps, LinkProps } from '@system/lib/atoms'
 
 /**

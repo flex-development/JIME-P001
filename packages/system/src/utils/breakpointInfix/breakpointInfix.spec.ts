@@ -1,4 +1,4 @@
-import { GRID_BREAKPOINT_KEYS } from '@system/config'
+import { GRID_BREAKPOINT_KEYS } from '@system/config/constants'
 import breakpointInfix from './breakpointInfix'
 
 /**

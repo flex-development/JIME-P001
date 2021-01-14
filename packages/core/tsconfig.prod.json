@@ -1,14 +1,9 @@
 {
   "compilerOptions": {
     "declaration": true,
+    "emitDeclarationOnly": true,
+    "noEmit": false,
     "outDir": "./dist",
-    "plugins": [
-      {
-        "afterDeclarations": true,
-        "transform": "typescript-transform-paths",
-        "useRootDirs": true
-      }
-    ],
     "rootDir": "./src",
     "sourceMap": true
   },

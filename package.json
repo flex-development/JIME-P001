@@ -28,7 +28,8 @@
     "url": "https://flexdevelopment.llc"
   },
   "scripts": {
-    "clean": "lerna clean --yes && rm -rf node_modules/ && yarn",
+    "postinstall": "node scripts/postinstall.js",
+    "clean": "lerna clean --yes; rm -rf node_modules/ || true; yarn",
     "prepare": "lerna run prepare; lerna link",
     "format": "prettier --write \"./\"",
     "lint": "eslint . --ext js,ts,tsx --fix --cache",
@@ -71,6 +72,7 @@
     "babel-eslint": "^10.1.0",
     "babel-jest": "^26.6.2",
     "babel-plugin-module-resolver": "^4.0.0",
+    "babel-plugin-pure-calls-annotation": "^0.3.1",
     "dotenv-cli": "^4.0.0",
     "eslint": "^7.9.0",
     "eslint-config-prettier": "^6.12.0",
@@ -81,6 +83,7 @@
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-react": "^7.21.2",
     "eslint-plugin-react-hooks": "^4.0.8",
+    "eslint-plugin-tree-shaking": "^1.8.0",
     "husky": "^4.3.0",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^26.4.2",
@@ -92,19 +95,17 @@
     "postcss": "^8.2.1",
     "postcss-100vh-fix": "^1.0.2",
     "postcss-flexbugs-fixes": "^4.2.1",
-    "postcss-loader": "^4.1.0",
     "postcss-preset-env": "^6.7.0",
     "prettier": "^2.0.5",
     "regenerator-runtime": "^0.13.5",
-    "rollup-plugin-typescript2": "^0.29.0",
+    "replace-in-file": "^6.1.0",
     "shx": "^0.3.2",
-    "size-limit": "^4.7.0",
-    "ts-jest": "^26.4.1",
-    "tsdx": "^0.14.1",
-    "ttypescript": "^1.5.12",
-    "typescript": "^4.2.0-dev.20201130",
-    "typescript-transform-paths": "^2.1.0",
+    "ts-node-dev": "^1.1.1",
+    "typescript": "^4.2.0-dev.20210108",
     "yarn": "^1.22.10"
+  },
+  "resolutions": {
+    "**/next/**/webpack": "^5.13.0"
   },
   "private": true,
   "workspaces": [

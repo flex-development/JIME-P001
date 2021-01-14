@@ -31,22 +31,22 @@ export class CriticalCSSHead extends Head {
    */
   getCssLinks({ allFiles }: Parameters<Head['getCssLinks']>[0]): JSX.Element[] {
     // Get all critical CSS files
-    const css = allFiles.filter(file => file.endsWith('.css'))
+    const cssfiles = allFiles.filter(file => file.endsWith('.css'))
 
     // Get Node environment
     const env = process.env.NODE_ENV.toLowerCase()
 
-    // Change Next directory to read files from depending on environment
-    const dir = `${env === 'development' ? '.' : '_'}next`
-
-    // ! `.next` directory doesn't exist until build (`next build`) is completed
-    /** @see https://github.com/vercel/next.js/discussions/17142 */
-    if (!existsSync(dir)) return []
-
     // Return <style> elements
-    return css.map(file => {
-      const path = join(dir, file)
-      const __html = existsSync(path) ? readFileSync(path, 'utf-8') : ''
+    return cssfiles.map(file => {
+      let filepath = ''
+
+      if (typeof window === 'undefined') {
+        filepath = join(__dirname, `../../${file}`)
+      } else {
+        filepath = join(`/${env === 'development' ? '.' : '_'}next`, file)
+      }
+
+      const __html = existsSync(filepath) ? readFileSync(filepath, 'utf-8') : ''
 
       return (
         <style

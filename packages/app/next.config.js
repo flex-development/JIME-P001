@@ -30,11 +30,6 @@ if (!SITE_URL_SAFE.startsWith('http')) SITE_URL_SAFE = `https://${VERCEL_URL}`
 
 module.exports = {
   /**
-   * Enable gzip compression.
-   */
-  compress: true,
-
-  /**
    * Add environment variables to the JavaScript bundle.
    */
   env: {
@@ -56,9 +51,9 @@ module.exports = {
    * Experimental features config.
    */
   experimental: {
-    granularChunks: true,
     optimizeFonts: true,
-    optimizeImages: true
+    optimizeImages: true,
+    scrollRestoration: true
   },
 
   /**
@@ -115,6 +110,13 @@ module.exports = {
    */
   async rewrites() {
     return vercel.rewrites || []
+  },
+
+  /**
+   * Server-side only configuration.
+   */
+  serverRuntimeConfig: {
+    PROJECT_ROOT: __dirname
   },
 
   /**

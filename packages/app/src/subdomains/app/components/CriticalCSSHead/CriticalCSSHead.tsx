@@ -36,21 +36,20 @@ export class CriticalCSSHead extends Head {
     // Get Node environment
     const env = process.env.NODE_ENV.toLowerCase()
 
+    // Change Next directory to read files from depending on environment
+    const dir = `/${env === 'development' ? '.' : '_'}next`
+
     // Return <style> elements
     return cssfiles.map(file => {
-      let filepath = ''
+      const path = join(dir, file)
 
-      if (typeof window === 'undefined') {
-        filepath = join(__dirname, `../../${file}`)
-      } else {
-        filepath = join(`/${env === 'development' ? '.' : '_'}next`, file)
+      if (!existsSync(path)) {
+        return <link href={file} key={file} rel='stylesheet' />
       }
-
-      const __html = existsSync(filepath) ? readFileSync(filepath, 'utf-8') : ''
 
       return (
         <style
-          dangerouslySetInnerHTML={{ __html }}
+          dangerouslySetInnerHTML={{ __html: readFileSync(path, 'utf-8') }}
           key={file}
           nonce={this.props.nonce}
         />

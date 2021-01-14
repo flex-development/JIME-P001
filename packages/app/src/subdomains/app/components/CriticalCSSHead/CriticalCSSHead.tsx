@@ -33,21 +33,28 @@ export class CriticalCSSHead extends Head {
     // Get all critical CSS files
     const css = allFiles.filter(file => file.endsWith('.css'))
 
-    // Next directory to read files from
-    const dir = '.next'
+    // Get Node environment
+    const env = process.env.NODE_ENV.toLowerCase()
 
-    // `.next` directory doesn't exist until build (`next build`) is completed
+    // Change Next directory to read files from depending on environment
+    const dir = `${env === 'development' ? '.' : '_'}next`
+
+    // ! `.next` directory doesn't exist until build (`next build`) is completed
+    /** @see https://github.com/vercel/next.js/discussions/17142 */
     if (!existsSync(dir)) return []
 
     // Return <style> elements
-    return css.map(file => (
-      <style
-        dangerouslySetInnerHTML={{
-          __html: readFileSync(join(dir, file), 'utf-8')
-        }}
-        key={file}
-        nonce={this.props.nonce}
-      />
-    ))
+    return css.map(file => {
+      const path = join(dir, file)
+      const __html = existsSync(path) ? readFileSync(path, 'utf-8') : ''
+
+      return (
+        <style
+          dangerouslySetInnerHTML={{ __html }}
+          key={file}
+          nonce={this.props.nonce}
+        />
+      )
+    })
   }
 }

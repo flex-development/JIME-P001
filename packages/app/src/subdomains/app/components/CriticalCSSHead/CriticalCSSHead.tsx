@@ -1,6 +1,6 @@
-import { readFileSync } from 'fs'
+import fs from 'fs'
 import { Head } from 'next/document'
-import { resolve } from 'path'
+import path from 'path'
 
 /**
  * @file Implementation - CriticalCSSHead
@@ -37,16 +37,18 @@ export class CriticalCSSHead extends Head {
     const env = process.env.NODE_ENV.toLowerCase()
 
     // Change Next directory to read files from depending on environment
-    const dir = `${env === 'development' ? '.' : '_'}next`
+    const dir = `./${env === 'development' ? '.' : '_'}next`
 
     // Return <style> elements
     return cssfiles.map(file => {
-      const $file = resolve(process.cwd(), dir, file)
+      const $file = path.resolve(dir, file)
 
       try {
         return (
           <style
-            dangerouslySetInnerHTML={{ __html: readFileSync($file, 'utf-8') }}
+            dangerouslySetInnerHTML={{
+              __html: fs.readFileSync($file, 'utf-8')
+            }}
             key={file}
             nonce={this.props.nonce}
           />

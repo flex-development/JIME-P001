@@ -33,11 +33,14 @@ export class InlineStylesHead extends Head {
    * @param files.allFiles - All filepaths
    */
   getCssLinks(files: Parameters<Head['getCssLinks']>[0]): JSX.Element[] | null {
-    // Next.js build directory
-    let dir = `${process.env.VERCEL_URL?.length ? '_' : '.'}next`
+    // Next.js build directory prefix
+    const dir_prefix = process.env.VERCEL_URL?.length ? '_' : '.'
+
+    // Get project directory path
+    const proj_dir = nextConfig().serverRuntimeConfig.PROJECT_ROOT as string
 
     // Get full directory path
-    dir = `${nextConfig().serverRuntimeConfig.PROJECT_ROOT}/${dir}`
+    const dir = `${proj_dir}/${dir_prefix}next`
 
     // Filter out CSS files
     const css = files.allFiles.filter(file => file.endsWith('.css'))

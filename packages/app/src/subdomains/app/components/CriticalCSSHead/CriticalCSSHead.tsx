@@ -30,31 +30,28 @@ export class CriticalCSSHead extends Head {
    * @param context.allFiles - All filepaths
    */
   getCssLinks({ allFiles }: Parameters<Head['getCssLinks']>[0]): JSX.Element[] {
-    // Get all critical CSS files
-    const cssfiles = allFiles.filter(file => file.endsWith('.css'))
-
-    // Get Node environment
-    const env = process.env.NODE_ENV.toLowerCase()
-
-    // Change Next directory to read files from depending on environment
-    const dir = `./${env === 'development' ? '.' : '_'}next`
-
-    // Return <style> elements
-    return cssfiles.map(file => {
-      const $file = path.resolve(dir, file)
+    return allFiles.map(file => {
+      if (!file.endsWith('.css')) return <></>
 
       try {
         return (
           <style
             dangerouslySetInnerHTML={{
-              __html: fs.readFileSync($file, 'utf-8')
+              __html: fs.readFileSync(path.resolve('.next', file), 'utf-8')
             }}
             key={file}
             nonce={this.props.nonce}
           />
         )
       } catch (error) {
-        return <link href={$file} key={file} rel='stylesheet' />
+        // Get Node environment
+        const env = process.env.NODE_ENV.toLowerCase()
+
+        // Change Next directory to read files from depending on environment
+        const dir = `./${env === 'development' ? '.' : '_'}next`
+
+        // Return `<link>` fallback
+        return <link href={`${dir}${file}`} key={file} rel='stylesheet' />
       }
     })
   }

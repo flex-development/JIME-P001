@@ -40,14 +40,17 @@ export class CriticalCSSHead extends Head {
     if (!existsSync(dir)) return []
 
     // Return <style> elements
-    return css.map(file => (
-      <style
-        dangerouslySetInnerHTML={{
-          __html: readFileSync(join(dir, file), 'utf-8')
-        }}
-        key={file}
-        nonce={this.props.nonce}
-      />
-    ))
+    return css.map(file => {
+      const path = join(dir, file)
+      const __html = existsSync(path) ? readFileSync(path, 'utf-8') : ''
+
+      return (
+        <style
+          dangerouslySetInnerHTML={{ __html }}
+          key={file}
+          nonce={this.props.nonce}
+        />
+      )
+    })
   }
 }

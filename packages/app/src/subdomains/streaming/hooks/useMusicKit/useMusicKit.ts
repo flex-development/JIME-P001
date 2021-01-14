@@ -26,6 +26,8 @@ export const useMusicKit = (): UseMusicKit => {
   const _instance = useMemoCompare<typeof instance['current']>(instance.current)
 
   useEvent('musickitloaded', () => {
+    if (typeof window === 'undefined') return
+
     // Configure new MusicKit instance
     instance.current = window.MusicKit.configure({
       app: { name: pkg.name, version: lernaconf.version },

@@ -4,7 +4,7 @@
  */
 
 export * from './AppLayout'
-export * from './CriticalCSSHead'
+export * from './InlineStylesHead'
 export * from './SEO'
 
 /* eslint-disable prettier/prettier */

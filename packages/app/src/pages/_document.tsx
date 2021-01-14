@@ -1,4 +1,4 @@
-import { CriticalCSSHead } from '@subdomains/app/components/CriticalCSSHead'
+import { InlineStylesHead } from '@subdomains/app/components/InlineStylesHead'
 import NextDocument, {
   DocumentInitialProps,
   Html,
@@ -24,7 +24,7 @@ export default class Document extends NextDocument<DocumentInitialProps> {
   render(): JSX.Element {
     return (
       <Html dir='ltr' lang='en'>
-        <CriticalCSSHead>
+        <InlineStylesHead>
           {/* Set character encoding for the document */}
           <meta charSet='utf-8' />
 
@@ -122,7 +122,7 @@ export default class Document extends NextDocument<DocumentInitialProps> {
             defer
             src='//js-cdn.music.apple.com/musickit/v1/musickit.js'
           />
-        </CriticalCSSHead>
+        </InlineStylesHead>
         <body>
           <noscript>You need to enable JavaScript to view this site.</noscript>
 

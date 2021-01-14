@@ -1,6 +1,6 @@
-import { existsSync, readFileSync } from 'fs'
+import { readFileSync } from 'fs'
 import { Head } from 'next/document'
-import { join } from 'path'
+import { resolve } from 'path'
 
 /**
  * @file Implementation - CriticalCSSHead
@@ -40,20 +40,14 @@ export class CriticalCSSHead extends Head {
     const dir = `/${env === 'development' ? '.' : '_'}next`
 
     // Return <style> elements
-    return cssfiles.map(file => {
-      const path = join(dir, file)
-
-      if (!existsSync(path)) {
-        return <link href={path} key={file} rel='stylesheet' />
-      }
-
-      return (
-        <style
-          dangerouslySetInnerHTML={{ __html: readFileSync(path, 'utf-8') }}
-          key={file}
-          nonce={this.props.nonce}
-        />
-      )
-    })
+    return cssfiles.map(file => (
+      <style
+        dangerouslySetInnerHTML={{
+          __html: readFileSync(resolve(dir, file), 'utf-8')
+        }}
+        key={file}
+        nonce={this.props.nonce}
+      />
+    ))
   }
 }

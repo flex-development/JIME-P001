@@ -41,10 +41,10 @@ export class CriticalCSSHead extends Head {
 
     // Return <style> elements
     return cssfiles.map(file => {
-      const path = join(process.cwd(), dir, file)
+      const path = join(dir, file)
 
       if (!existsSync(path)) {
-        return <link href={join(dir, file)} key={file} rel='stylesheet' />
+        return <link href={path} key={file} rel='stylesheet' />
       }
 
       return (

@@ -1,4 +1,4 @@
-import { readFileSync } from 'fs'
+import { existsSync, readFileSync } from 'fs'
 import { Head } from 'next/document'
 import { join } from 'path'
 
@@ -33,11 +33,11 @@ export class CriticalCSSHead extends Head {
     // Get all critical CSS files
     const css = allFiles.filter(file => file.endsWith('.css'))
 
-    // Get Node environment
-    const env = process.env.NODE_ENV.toLowerCase()
+    // Next directory to read files from
+    const dir = '.next'
 
-    // Change Next directory to read files from depending on environment
-    const dir = `${env === 'development' ? '.' : '_'}next`
+    // `.next` directory doesn't exist until build (`next build`) is completed
+    if (!existsSync(dir)) return []
 
     // Return <style> elements
     return css.map(file => (

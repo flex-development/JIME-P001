@@ -30,6 +30,11 @@ if (!SITE_URL_SAFE.startsWith('http')) SITE_URL_SAFE = `https://${VERCEL_URL}`
 
 module.exports = {
   /**
+   * Enable gzip compression.
+   */
+  compress: true,
+
+  /**
    * Add environment variables to the JavaScript bundle.
    */
   env: {

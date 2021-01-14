@@ -33,11 +33,17 @@ export class CriticalCSSHead extends Head {
     // Get all critical CSS files
     const css = allFiles.filter(file => file.endsWith('.css'))
 
+    // Get Node environment
+    const env = process.env.NODE_ENV.toLowerCase()
+
+    // Change Next directory to read files from depending on environment
+    const dir = `${env === 'development' ? '.' : '_'}next`
+
     // Return <style> elements
     return css.map(file => (
       <style
         dangerouslySetInnerHTML={{
-          __html: readFileSync(join('.next', file), 'utf-8')
+          __html: readFileSync(join(dir, file), 'utf-8')
         }}
         key={file}
         nonce={this.props.nonce}

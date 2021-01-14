@@ -47,7 +47,7 @@ export class InlineStylesHead extends Head {
 
     // TODO: Remove log statement
     try {
-      Logger.info({ dir, dir_content: fs.readdirSync(dir) })
+      Logger.info({ dir, dir_content: fs.readdirSync(path.resolve(dir)) })
     } catch (error) {
       Logger.error({ 'InlineStylesHead.getCssLinks/readdirSync/test': error })
     }
@@ -57,7 +57,7 @@ export class InlineStylesHead extends Head {
       let __html = ''
 
       try {
-        __html = fs.readFileSync(path.join(dir, file), 'utf-8')
+        __html = fs.readFileSync(path.resolve(dir, file), 'utf-8')
       } catch (err) {
         const error = createError(err.message, { dir, file })
 

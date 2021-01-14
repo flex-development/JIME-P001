@@ -61,5 +61,5 @@ export const usePlaylist = (url = ''): UsePlaylist => {
     return _songs.map((song: MusicKitMediaItem) => song.attributes)
   }, [$playlist])
 
-  return { id, loading: !!id.length && !songs.length, songs }
+  return { id, loading: !(id.length && songs.length), songs }
 }

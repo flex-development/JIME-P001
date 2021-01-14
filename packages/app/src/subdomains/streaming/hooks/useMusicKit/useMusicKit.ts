@@ -2,7 +2,8 @@ import { AnyObject } from '@flex-development/json/utils/types'
 import { MusicKitInstance } from '@flex-development/kustomzcore/types/musickit'
 import { useMemoCompare } from '@hooks/useMemoCompare'
 import lernaconf from '@lerna-config'
-import { useEffect, useRef } from 'react'
+import { useRef } from 'react'
+import useEvent from 'react-use/useEvent'
 import pkg from '../../../../../package.json'
 
 /**
@@ -24,17 +25,13 @@ export const useMusicKit = (): UseMusicKit => {
   const instance = useRef<UseMusicKit>({})
   const _instance = useMemoCompare<typeof instance['current']>(instance.current)
 
-  // Configure MusicKit and get instance
-  useEffect(() => {
-    // If MusicKit module isn't loaded or instance is already set, do nothing
-    if (!window?.MusicKit || !Object.keys(_instance).length) return
-
+  useEvent('musickitloaded', () => {
     // Configure new MusicKit instance
     instance.current = window.MusicKit.configure({
       app: { name: pkg.name, version: lernaconf.version },
       developerToken: process.env.APPLE_DEVELOPER_TOKEN
     })
-  }, [_instance])
+  })
 
   return _instance
 }

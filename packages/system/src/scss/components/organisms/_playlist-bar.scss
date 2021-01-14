@@ -68,6 +68,7 @@ PLAYLIST BAR
     @include flex-column;
 
     font-size: em($font-size-sm);
+    transition: $transition-collapse;
   }
 
   &-song {

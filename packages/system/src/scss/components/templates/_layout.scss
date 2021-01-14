@@ -10,7 +10,7 @@ LAYOUT
   overflow-x: hidden;
 
   > * {
-    transition: opacity 0.125s linear;
+    transition: $transition-fade;
   }
 
   .content-col {

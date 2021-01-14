@@ -37,11 +37,11 @@ export class CriticalCSSHead extends Head {
     const env = process.env.NODE_ENV.toLowerCase()
 
     // Change Next directory to read files from depending on environment
-    const dir = `/${env === 'development' ? '.' : '_'}next`
+    const dir = `${env === 'development' ? '.' : '_'}next`
 
     // Return <style> elements
     return cssfiles.map(file => {
-      const $file = resolve(dir, file)
+      const $file = resolve(process.cwd(), dir, file)
 
       try {
         return (

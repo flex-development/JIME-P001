@@ -44,7 +44,8 @@ const createDeveloperToken = (iss = '', kid = '', private_key = '') => {
     throw error
   }
 
-  private_key = private_key?.replace(/\\n/g, '\n')
+  private_key = private_key || ''
+  private_key = private_key.replace(/\\n/g, '\n')
 
   if (isEmpty(private_key)) {
     const error = new Error('Missing Apple Auth Key', { options, payload })

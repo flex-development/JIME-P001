@@ -40,14 +40,20 @@ export class CriticalCSSHead extends Head {
     const dir = `/${env === 'development' ? '.' : '_'}next`
 
     // Return <style> elements
-    return cssfiles.map(file => (
-      <style
-        dangerouslySetInnerHTML={{
-          __html: readFileSync(resolve(dir, file), 'utf-8')
-        }}
-        key={file}
-        nonce={this.props.nonce}
-      />
-    ))
+    return cssfiles.map(file => {
+      const $file = resolve(dir, file)
+
+      try {
+        return (
+          <style
+            dangerouslySetInnerHTML={{ __html: readFileSync($file, 'utf-8') }}
+            key={file}
+            nonce={this.props.nonce}
+          />
+        )
+      } catch (error) {
+        return <link href={$file} key={file} rel='stylesheet' />
+      }
+    })
   }
 }

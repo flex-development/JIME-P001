@@ -1,4 +1,5 @@
 const { GeneralError: Error } = require('@feathersjs/errors')
+const isEmpty = require('lodash/isEmpty')
 const jwt = require('jsonwebtoken')
 
 /**
@@ -22,7 +23,7 @@ const createDeveloperToken = (iss = '', kid = '', private_key = '') => {
 
   const payload = { exp: 15777000, iat: new Date().valueOf(), iss }
 
-  if (!payload.iss?.length) {
+  if (isEmpty(payload.iss)) {
     const error = new Error('Missing Apple Team ID', { payload })
 
     console.error({ 'scripts/createDeveloperToken': error })
@@ -36,7 +37,7 @@ const createDeveloperToken = (iss = '', kid = '', private_key = '') => {
     issuer: payload.iss
   }
 
-  if (!options.header.kid?.length) {
+  if (isEmpty(options.header.kid)) {
     const error = new Error('Missing Apple Auth Key identifier', { options })
 
     console.error({ 'scripts/createDeveloperToken': error })
@@ -45,7 +46,7 @@ const createDeveloperToken = (iss = '', kid = '', private_key = '') => {
 
   private_key = private_key?.replace(/\\n/g, '\n')
 
-  if (!private_key.length) {
+  if (isEmpty(private_key)) {
     const error = new Error('Missing Apple Auth Key', { options, payload })
 
     console.error({ 'scripts/createDeveloperToken': error })

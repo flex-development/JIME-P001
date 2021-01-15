@@ -35,19 +35,22 @@ export class InlineStylesHead extends Head {
    * @param files.allFiles - All filepaths
    */
   getCssLinks(files: Parameters<Head['getCssLinks']>[0]): JSX.Element[] | null {
+    // Next build directory
+    const dir = `${process.env.VERCEL_URL?.length ? '_' : '.'}next`
+
     // Filter out CSS files
     const css = files.allFiles.filter(file => file.endsWith('.css'))
 
     // Return <style> elements with CSS or fallback <link> elements
     return css.map(file => {
-      const $file = `.next/${file}`
+      const $file = `${dir}/${file}`
       let __html = ''
 
       try {
         __html = fs.readFileSync(path.resolve(process.cwd(), $file), 'utf-8')
       } catch (err) {
         const error = createError(err.message, {
-          dir: `${process.cwd()}/.next`,
+          dir: `${process.cwd()}/${dir}`,
           file
         })
 

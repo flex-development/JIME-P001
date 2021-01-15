@@ -31,7 +31,7 @@ export const GRID_COLUMN_UTILITY_CLASS = 'col'
 
 export const GRID_ROW_UTILITY_CLASS = 'row'
 
-export const IMAGE_PLACEHOLDER_URL = 'assets/img-placeholder.png'
+export const IMAGE_PLACEHOLDER_URL = 'assets/img/img-placeholder.png'
 
 export const SVG_CIRCLE_PROPS = {
   cx: '20.5',

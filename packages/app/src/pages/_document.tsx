@@ -118,10 +118,7 @@ export default class Document extends NextDocument<DocumentInitialProps> {
           />
 
           {/* Apple MusicKit */}
-          <script
-            defer
-            src='//js-cdn.music.apple.com/musickit/v1/musickit.js'
-          />
+          <script async src='/lib/musickit.js' />
         </InlineStylesHead>
         <body>
           <noscript>You need to enable JavaScript to view this site.</noscript>

@@ -1,7 +1,7 @@
-const wc = require('@flex-development/kustomzdesign/webpack.common')
+const debug = require('debug')('next.config')
+const fse = require('fs-extra')
 const { DuplicatesPlugin } = require('inspectpack/plugin')
 const merge = require('lodash').merge
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const path = require('path')
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
 const createDeveloperToken = require('./scripts/create-developer-token')
@@ -11,6 +11,8 @@ const vercel = require('./vercel.json')
  * @file Next.js Configuration
  * @see https://nextjs.org/docs/api-reference/next.config.js/introduction
  */
+
+debug.info = console.info.bind(console)
 
 const {
   APPLE_AUTHKEY_MUSICKIT: private_key,
@@ -29,6 +31,47 @@ const {
 
 let SITE_URL_SAFE = SITE_URL || VERCEL_URL || 'http://localhost:3001'
 if (!SITE_URL_SAFE.startsWith('http')) SITE_URL_SAFE = `https://${VERCEL_URL}`
+
+class TapDoneWebpackPlugin {
+  constructor(callback) {
+    this.callback = callback
+  }
+
+  apply(compiler) {
+    compiler.hooks.done.tap('TapDoneWebpackPlugin', stats => {
+      this.callback(stats)
+    })
+  }
+}
+
+/**
+ * Copies all files in `.next/static/css` to `.next/${target}/static/css`.
+ *
+ * This function is required to read CSS files from the server (in Vercel
+ * hosting) environments. It's used in lieu of adding a custom CSS configuration
+ * to Webpack, which would disbale built-in CSS support.
+ *
+ * @return {boolean} True if files were succesfully copied, false otherwise
+ */
+const tapDone = () => {
+  // Change server directory if in Vercel environment
+  const target = `server${VERCEL_URL && VERCEL_URL.length ? 'less' : ''}`
+
+  // Get CSS directory from / to
+  const src = path.resolve(process.cwd(), '.next/static/css')
+  const dest = path.resolve(process.cwd(), `.next/${target}/static/css`)
+
+  // Copy CSS assets
+  fse.copy(src, dest, err => {
+    if (err) {
+      debug.extend('tapDone')(err)
+      return false
+    }
+
+    debug.extend('tapDone')(`Copied ${src} files to ${dest} directory.`)
+    return true
+  })
+}
 
 module.exports = {
   /**
@@ -115,13 +158,6 @@ module.exports = {
   },
 
   /**
-   * Server-side only configuration.
-   */
-  serverRuntimeConfig: {
-    PROJECT_ROOT: __dirname
-  },
-
-  /**
    * Extends the native Webpack configuration.
    *
    * @param {object} config - Webpack config object
@@ -183,25 +219,11 @@ module.exports = {
       ]
     })
 
-    // Overwrite CSS rules to handle inlining CSS using `InlineStylesHead`
-    config.module.rules.push({
-      test: /\.css$/i,
-      use: [MiniCssExtractPlugin.loader].concat(wc.module.rules[0].use)
-    })
-
-    // ! Extract styles BOTH client-side and server-side
-    config.plugins.push(
-      new MiniCssExtractPlugin({
-        chunkFilename: 'static/css/[contenthash].css',
-        filename: 'static/css/[contenthash].css'
-      })
-    )
-
     // Report duplicate dependencies
     if (!dev) config.plugins.push(new DuplicatesPlugin({ verbose: true }))
 
     // Analyze Webpack bundle output
-    if (ANALYZE) {
+    if (!dev && ANALYZE) {
       const reportFilenameClient = './analyze/client.html'
       const reportFilenameServer = '../analyze/server.html'
 
@@ -213,6 +235,12 @@ module.exports = {
       }
 
       config.plugins.push(new BundleAnalyzerPlugin(options))
+    }
+
+    // ! Client-side only, in non-dev environments: Copy CSS assets so we can
+    // ! inline styles via `InlineStylesHead` w/o disabling built-in CSS support
+    if (!dev && !isServer) {
+      config.plugins.push(new TapDoneWebpackPlugin(tapDone))
     }
 
     // Optimization settings

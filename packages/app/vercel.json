@@ -58,7 +58,7 @@
       ]
     },
     {
-      "source": "/musickit.js",
+      "source": "/lib/musickit.js",
       "headers": [
         {
           "key": "Cache-Control",

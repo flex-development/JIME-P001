@@ -36,7 +36,7 @@ export class InlineStylesHead extends Head {
    */
   getCssLinks(files: Parameters<Head['getCssLinks']>[0]): JSX.Element[] | null {
     // Next build directory
-    const dir = '.next'
+    const dir = '.next/serverless'
 
     // Filter out CSS files
     const css = files.allFiles.filter(file => file.endsWith('.css'))

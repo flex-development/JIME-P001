@@ -4,6 +4,7 @@
  */
 
 export * from './AppLayout'
+export * from './ErrorContent'
 export * from './InlineStylesHead'
 export * from './SEO'
 

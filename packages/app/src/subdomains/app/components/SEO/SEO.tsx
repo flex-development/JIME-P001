@@ -129,6 +129,8 @@ export const SEO: FC<SEOProps> = (props: SEOProps) => {
   )
 }
 
+SEO.displayName = 'SEO'
+
 SEO.defaultProps = {
   description: '',
   keywords: '',

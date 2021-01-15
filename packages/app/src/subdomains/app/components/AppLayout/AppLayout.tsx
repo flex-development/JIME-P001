@@ -95,4 +95,6 @@ export const AppLayout: FC<AppLayoutProps> = (props: AppLayoutProps) => {
   )
 }
 
+AppLayout.displayName = 'AppLayout'
+
 AppLayout.defaultProps = {}

@@ -1,6 +1,5 @@
-import { Link } from '@lib/atoms/Link'
-import { Paragraph } from '@lib/atoms/Paragraph'
 import { ErrorTemplate } from '@lib/templates/ErrorTemplate'
+import { ErrorContent } from '@subdomains/app/components/ErrorContent'
 import { SEO } from '@subdomains/app/components/SEO'
 import { IPageProps as PageProps, PC } from '@subdomains/app/interfaces'
 import globalMetafields from '@subdomains/metafields/utils/globalMetafields'
@@ -24,14 +23,7 @@ const NotFound: PC = () => (
       code={404}
       message="Sorry, the page you're looking for does not exist."
     >
-      <Paragraph $color='white'>
-        {/* eslint-disable-next-line prettier/prettier */}
-        Go{' '}
-        <Link $color='secondary' href='/'>
-          home
-        </Link>{' '}
-        and smoke or something.
-      </Paragraph>
+      <ErrorContent />
     </ErrorTemplate>
   </Fragment>
 )

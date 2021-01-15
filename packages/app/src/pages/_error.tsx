@@ -1,40 +1,31 @@
 import { serialize } from '@flex-development/json/utils/serialize'
-import Logger from '@flex-development/kustomzcore/config/logger'
 import { createError } from '@flex-development/kustomzcore/utils/createError'
-import { Link } from '@lib/atoms/Link'
-import { Paragraph } from '@lib/atoms/Paragraph'
 import { ErrorTemplate } from '@lib/templates/ErrorTemplate'
+import { ErrorContent } from '@subdomains/app/components/ErrorContent'
+import { SEO } from '@subdomains/app/components/SEO'
 import { IPagePropsError as PageProps } from '@subdomains/app/interfaces'
 import globalMetafields from '@subdomains/metafields/utils/globalMetafields'
+import debug from 'debug'
 import merge from 'lodash/merge'
 import pick from 'lodash/pick'
 import { NextPage } from 'next'
-import NextHead from 'next/head'
 import { Fragment } from 'react'
 
 /**
  * @file Page - Server Error
  * @module pages/error
- * @see https://nextjs.org/docs/advanced-features/custom-error-page
  */
 
 /**
  * Renders a server error page.
+ *
+ * @see https://nextjs.org/docs/advanced-features/custom-error-page
  */
-const Error: NextPage<PageProps> = ({ error }) => (
+const ServerError: NextPage<PageProps> = ({ error }) => (
   <Fragment>
-    <NextHead>
-      <title>Server Error | Morena&#39;s Kustomz</title>
-    </NextHead>
+    <SEO title='Server Error' />
     <ErrorTemplate code={error.code} message={error.message}>
-      <Paragraph $color='white'>
-        {/* eslint-disable-next-line prettier/prettier */}
-        Go{' '}
-        <Link $color='secondary' href='/'>
-          home
-        </Link>{' '}
-        and smoke or something.
-      </Paragraph>
+      <ErrorContent />
     </ErrorTemplate>
   </Fragment>
 )
@@ -50,7 +41,7 @@ const Error: NextPage<PageProps> = ({ error }) => (
  * @param context.req - HTTP request object (server only)
  * @param context.res - HTTP response object (server only)
  */
-Error.getInitialProps = async (context): Promise<PageProps> => {
+ServerError.getInitialProps = async (context): Promise<PageProps> => {
   const { asPath, err, pathname, query, req } = context
 
   // Copy error data
@@ -78,8 +69,8 @@ Error.getInitialProps = async (context): Promise<PageProps> => {
   // Get global metafields
   const globals = await globalMetafields()
 
-  Logger.error({ 'Error.getInitialProps': error })
+  debug('pages/_error')({ getInitialProps: error })
   return { error: serialize<PageProps['error']>(error), globals }
 }
 
-export default Error
+export default ServerError

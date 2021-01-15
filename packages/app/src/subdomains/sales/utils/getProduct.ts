@@ -1,7 +1,7 @@
 import { DataArrayQueryParams } from '@flex-development/json/interfaces'
-import Logger from '@flex-development/kustomzcore/config/logger'
 import { IProductListing } from '@flex-development/kustomzcore/types/shopify'
 import { createError } from '@flex-development/kustomzcore/utils/createError'
+import debug from 'debug'
 import findProducts from './findProducts'
 
 /**
@@ -26,7 +26,7 @@ const getProduct = async (
     const data = { errors: { id } }
     const error = createError(`Product with id "${id}" not found`, data, 404)
 
-    Logger.error({ getProduct: error })
+    debug('subdomains/sales/utils/getProduct')(error)
     throw error
   }
 

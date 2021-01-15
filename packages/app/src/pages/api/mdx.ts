@@ -1,7 +1,7 @@
-import Logger from '@flex-development/kustomzcore/config/logger'
 import { createError } from '@flex-development/kustomzcore/utils/createError'
 import mdx from '@mdx-js/mdx'
 import { transform } from 'buble-jsx-only'
+import debug from 'debug'
 import { NextApiRequest as Req, NextApiResponse as Res } from 'next'
 
 /**
@@ -16,7 +16,7 @@ export default async ({ body }: Req, res: Res): Promise<void> => {
   } catch (err) {
     const error = createError(err.messsage, { body })
 
-    Logger.error({ 'api/mdx': error })
+    debug('pages/api/mdx')(error)
     res.status(error.code).json(error)
   }
 }

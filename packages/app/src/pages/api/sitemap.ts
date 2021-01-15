@@ -1,6 +1,6 @@
 import { AnyObject } from '@flex-development/json/utils/types'
-import Logger from '@flex-development/kustomzcore/config/logger'
 import { createError } from '@flex-development/kustomzcore/utils/createError'
+import debug from 'debug'
 import sortBy from 'lodash/sortBy'
 import { NextApiRequest as Req, NextApiResponse as Res } from 'next'
 import { SitemapStream, streamToPromise } from 'sitemap'
@@ -94,7 +94,7 @@ export default async (req: Req, res: Res): Promise<void> => {
       })
     )
   } catch (err) {
-    Logger.error({ 'api/sitemap': err })
+    debug('pages/api/sitemap')(err)
     res.status(err.code).json(err)
   }
 
@@ -121,7 +121,7 @@ export default async (req: Req, res: Res): Promise<void> => {
   } catch (err) {
     const error = createError(err.message, { errors: err })
 
-    Logger.error({ 'api/sitemap': error })
+    debug('pages/api/sitemap')(error)
     res.status(error.code).json(error)
   }
 }

@@ -1,6 +1,5 @@
 import { axiosShopify } from '@app/config/axios'
 import { PartialOr } from '@flex-development/json/utils/types'
-import Logger from '@flex-development/kustomzcore/config/logger'
 import {
   IObjectMetafield,
   IPage,
@@ -8,6 +7,7 @@ import {
 } from '@flex-development/kustomzcore/types/shopify'
 import { FindPageParams } from '@subdomains/cms/utils/types'
 import pageMetafields from '@subdomains/metafields/utils/pageMetafields'
+import debug from 'debug'
 
 /**
  * @file Implementation - findPages
@@ -51,7 +51,7 @@ const findPages = async (
   try {
     pages = (await axiosShopify<SAR.Pages>(config)).pages
   } catch (error) {
-    Logger.error({ findPages: error })
+    debug('subdomains/cms/utils/findPages')(error)
     throw error
   }
 

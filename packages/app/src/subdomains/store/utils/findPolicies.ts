@@ -1,11 +1,11 @@
 import { axiosShopify } from '@app/config/axios'
 import { PartialOr } from '@flex-development/json/utils/types'
-import Logger from '@flex-development/kustomzcore/config/logger'
 import {
   IPolicy,
   ShopifyAPIResponses as SAR
 } from '@flex-development/kustomzcore/types'
 import { FindPolicyParams } from '@subdomains/store/utils/types'
+import debug from 'debug'
 import pick from 'lodash/pick'
 
 /**
@@ -42,7 +42,7 @@ const findPolicies = async (
   } catch (err) {
     const error = (err.message, { name: err.name, params })
 
-    Logger.error({ 'PolicyService.find': error })
+    debug('subdomains/store/utils/findPolicies')(error)
     throw error
   }
 

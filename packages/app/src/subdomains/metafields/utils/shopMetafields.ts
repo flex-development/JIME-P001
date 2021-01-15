@@ -1,11 +1,11 @@
 import { axiosShopify } from '@app/config/axios'
 import { PartialOr } from '@flex-development/json/utils/types'
-import Logger from '@flex-development/kustomzcore/config/logger'
 import {
   IMetafield,
   ShopifyAPIResponses as SAR
 } from '@flex-development/kustomzcore/types/shopify'
 import { FindMetafieldParams } from '@subdomains/metafields/utils/types'
+import debug from 'debug'
 
 /**
  * @file Implementation - shopMetafields
@@ -45,7 +45,7 @@ const shopMetafields = async (
   try {
     metafields = (await axiosShopify<SAR.Metafields>(config)).metafields
   } catch (error) {
-    Logger.error({ 'MetafieldService.shop': error })
+    debug('subdomains/metafields/utils/shopMetafields')(error)
     throw error
   }
 

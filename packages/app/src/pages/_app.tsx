@@ -1,4 +1,4 @@
-import { CART_PKEY } from '@flex-development/kustomzcore/config/constants'
+import { CART_PKEY } from '@flex-development/kustomzcore/constants'
 import { CheckoutLineItemInput } from '@flex-development/kustomzcore/types/shopify'
 import '@flex-development/kustomzdesign/kustomzdesign.css'
 import {
@@ -8,6 +8,7 @@ import {
 import { AppLayout } from '@subdomains/app/components/AppLayout'
 import { AC, IAppProps } from '@subdomains/app/interfaces'
 import '@subdomains/app/styles.css'
+import debug from 'debug'
 import { NextWebVitalsMetric } from 'next/app'
 import { useCallback, useRef } from 'react'
 import useLocalStorage from 'react-use/useLocalStorage'
@@ -64,8 +65,7 @@ const App: AC = ({ Component, pageProps }: IAppProps) => {
 export const reportWebVitals = async (
   metric: NextWebVitalsMetric
 ): Promise<void> => {
-  const Logger = await import('@flex-development/kustomzcore/config/logger')
-  Logger.default.info({ reportWebVitals: metric })
+  debug('App.reportWebVitals')(metric)
 }
 
 export default App

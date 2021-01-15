@@ -1,8 +1,8 @@
 import { DataArrayQueryParams } from '@flex-development/json/interfaces'
-import Logger from '@flex-development/kustomzcore/config/logger'
 import { ICollectionListing } from '@flex-development/kustomzcore/types/shopify'
 import { createError } from '@flex-development/kustomzcore/utils/createError'
 import { NotFound } from '@subdomains/app/utils/types'
+import debug from 'debug'
 import findCollections from './findCollections'
 
 /**
@@ -28,7 +28,7 @@ const getCollectionByHandle = async (
     const message = `Collection with handle "${handle}" not found`
     const error = createError(message, data, 404)
 
-    Logger.error({ getCollectionByHandle: error })
+    debug('subdomains/sales/utils/getCollectionByHandle')(error)
     return { notFound: true }
   }
 

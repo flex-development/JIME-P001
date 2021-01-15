@@ -1,7 +1,7 @@
 import { DataArrayQueryParams } from '@flex-development/json/interfaces'
-import Logger from '@flex-development/kustomzcore/config/logger'
 import { ICollectionListing } from '@flex-development/kustomzcore/types/shopify'
 import { createError } from '@flex-development/kustomzcore/utils/createError'
+import debug from 'debug'
 import findCollections from './findCollections'
 
 /**
@@ -26,7 +26,7 @@ const getCollection = async (
     const data = { errors: { id } }
     const error = createError(`Collection with id ${id} not found`, data, 404)
 
-    Logger.error({ getCollection: error })
+    debug('subdomains/sales/utils/getCollection')(error)
     throw error
   }
 

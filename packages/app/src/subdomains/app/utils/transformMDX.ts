@@ -1,6 +1,6 @@
 import { axios } from '@app/config/axios'
-import Logger from '@flex-development/kustomzcore/config/logger'
 import { TransformOutput } from 'buble'
+import debug from 'debug'
 
 /**
  * @file Implementation - transformMDX
@@ -18,7 +18,7 @@ const transformMDX = async (data = ''): Promise<TransformOutput> => {
   try {
     return axios<TransformOutput>({ data, method: 'get', url })
   } catch (error) {
-    Logger.error({ transformMDX: error })
+    debug('subdomains/app/utils/transformMDX')(error)
     throw error
   }
 }

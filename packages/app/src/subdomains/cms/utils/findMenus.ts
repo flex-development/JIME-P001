@@ -1,11 +1,11 @@
 import { axiosShopify } from '@app/config/axios'
 import { PartialOr } from '@flex-development/json/utils/types'
-import Logger from '@flex-development/kustomzcore/config/logger'
 import {
   ShopifyAPIResponses as SAR,
   ShopifyMenu
 } from '@flex-development/kustomzcore/types/shopify'
 import { FindMenuParams } from '@subdomains/cms/utils/types'
+import debug from 'debug'
 import pick from 'lodash/pick'
 
 /**
@@ -37,7 +37,7 @@ const findMenus = async (
     // Get shop menus
     menus = (await axiosShopify<SAR.Menus>(config, true)).menus || []
   } catch (error) {
-    Logger.error({ findMenus: error })
+    debug('subdomains/cms/utils/findMenus')(error)
     throw error
   }
 

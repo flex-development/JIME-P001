@@ -1,8 +1,8 @@
 import { DataArrayQueryParams } from '@flex-development/json/interfaces'
-import Logger from '@flex-development/kustomzcore/config/logger'
 import { IProductListing } from '@flex-development/kustomzcore/types/shopify'
 import { createError } from '@flex-development/kustomzcore/utils/createError'
 import { NotFound } from '@subdomains/app/utils/types'
+import debug from 'debug'
 import findProducts from './findProducts'
 
 /**
@@ -28,7 +28,7 @@ const getProductByHandle = async (
     const message = `Product with handle "${handle}" not found`
     const error = createError(message, data, 404)
 
-    Logger.error({ getProductByHandle: error })
+    debug('subdomains/sales/utils/getProductByHandle')(error)
     return { notFound: true }
   }
 

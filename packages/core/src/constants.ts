@@ -1,6 +1,6 @@
 /**
  * @file Constant Values
- * @module config/constants
+ * @module constants
  */
 
 export const CART_PKEY = 'morenaskustomz-cart'

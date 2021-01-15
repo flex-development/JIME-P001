@@ -1,9 +1,9 @@
 import { PartialOr } from '@flex-development/json/utils/types'
-import Logger from '@flex-development/kustomzcore/config/logger'
 import { ShopifyMenu } from '@flex-development/kustomzcore/types/shopify'
 import { createError } from '@flex-development/kustomzcore/utils/createError'
 import findMenus from '@subdomains/cms/utils/findMenus'
 import { FindMenuParams } from '@subdomains/cms/utils/types'
+import debug from 'debug'
 import pick from 'lodash/pick'
 
 /**
@@ -32,7 +32,7 @@ const getMenu = async (
 
     const error = createError(error_message, error_data, 404)
 
-    Logger.error({ getMenu: error })
+    debug('subdomains/cms/utils/getMenu')(error)
     throw error
   }
 

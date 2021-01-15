@@ -1,9 +1,9 @@
 import { PartialOr } from '@flex-development/json/utils/types'
-import Logger from '@flex-development/kustomzcore/config/logger'
 import { IPolicy } from '@flex-development/kustomzcore/types'
 import { createError } from '@flex-development/kustomzcore/utils/createError'
 import { NotFound } from '@subdomains/app/utils/types'
 import { FindPolicyParams } from '@subdomains/store/utils/types'
+import debug from 'debug'
 import pick from 'lodash/pick'
 import findPolicies from './findPolicies'
 
@@ -32,7 +32,7 @@ const getPolicyByHandle = async (
     const message = `Policy with handle "${handle}" not found`
     const error = createError(message, data, 404)
 
-    Logger.error({ getPolicyByHandle: error })
+    debug('subdomains/store/utils/getPolicyByHandle')(error)
     return { notFound: true }
   }
 

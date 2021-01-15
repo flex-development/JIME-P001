@@ -1,4 +1,4 @@
-import { CHECKOUT_BASE_URL } from '@flex-development/kustomzcore/config/constants'
+import { CHECKOUT_BASE_URL } from '@flex-development/kustomzcore/constants'
 import LINE_ITEMS from '@system-mocks/data/checkout-line-items.mock.json'
 import { renderHook } from '@testing-library/react-hooks'
 import { useCheckoutPermalink } from './useCheckoutPermalink'

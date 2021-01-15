@@ -1,10 +1,10 @@
-import Logger from '@flex-development/kustomzcore/config/logger'
 import {
   MusicKitMediaItem,
   MusicKitSongAttributes
 } from '@flex-development/kustomzcore/types/musickit'
 import { useMemoCompare } from '@hooks/useMemoCompare'
 import { useMusicKit } from '@subdomains/streaming/hooks/useMusicKit'
+import debug from 'debug'
 import { useEffect, useMemo } from 'react'
 import { useSetState } from 'react-hanger/array/useSetState'
 
@@ -47,7 +47,7 @@ export const usePlaylist = (url = ''): UsePlaylist => {
       try {
         setPlaylist(await kit.api.playlist(id))
       } catch (error) {
-        Logger.error({ usePlaylist: error })
+        debug('subdomains/streaming/hooks/usePlaylist')(error)
         throw error
       }
     })()

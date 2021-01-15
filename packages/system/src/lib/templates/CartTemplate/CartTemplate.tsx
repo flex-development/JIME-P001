@@ -1,4 +1,4 @@
-import { CHECKOUT_BASE_URL } from '@flex-development/kustomzcore/config/constants'
+import { CHECKOUT_BASE_URL } from '@flex-development/kustomzcore/constants'
 import { useCartContext } from '@system/hooks/useCart'
 import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
 import { Box } from '@system/lib/atoms/Box'

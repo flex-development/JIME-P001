@@ -1,4 +1,4 @@
-import { FIREBASE_WEB_CONFIG as CONFIG } from '@flex-development/kustomzcore/config/constants'
+import { FIREBASE_WEB_CONFIG as CONFIG } from '@flex-development/kustomzcore/constants'
 import 'firebase/analytics'
 import Firebase from 'firebase/app'
 

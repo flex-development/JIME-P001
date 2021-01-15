@@ -9,3 +9,20 @@ declare module '@mdx-js/mdx' {
 
   export { sync }
 }
+
+declare module 'critical' {
+  import { AnyObject, ANYTHING } from '@flex-development/json/utils/types'
+
+  type Result = {
+    css: string
+    html: string
+    uncritical?: string
+  }
+
+  let generate: (
+    options: AnyObject,
+    cb: (err: Error, res: Result) => ANYTHING
+  ) => ReturnType<typeof cb>
+
+  export { Result, generate }
+}

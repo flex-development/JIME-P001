@@ -36,12 +36,12 @@ export class InlineStylesHead extends Head {
    */
   getCssLinks(files: Parameters<Head['getCssLinks']>[0]): JSX.Element[] | null {
     // Next build directory
-    const dir = `${process.env.VERCEL_URL?.length ? '_' : '.'}next`
+    const dir = '.next'
 
     // Filter out CSS files
     const css = files.allFiles.filter(file => file.endsWith('.css'))
 
-    console.debug(fs.readdirSync(path.resolve(process.cwd())))
+    console.debug(fs.readdirSync(path.resolve(process.cwd(), dir)))
 
     // Return <style> elements with CSS or fallback <link> elements
     return css.map(file => {

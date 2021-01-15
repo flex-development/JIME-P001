@@ -1,5 +1,7 @@
+const wc = require('@flex-development/kustomzdesign/webpack.common')
 const { DuplicatesPlugin } = require('inspectpack/plugin')
 const merge = require('lodash').merge
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const path = require('path')
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
 const createDeveloperToken = require('./scripts/create-developer-token')
@@ -181,13 +183,19 @@ module.exports = {
       ]
     })
 
-    // Optimization settings
-    config.optimization = merge(config.optimization, {
-      mergeDuplicateChunks: true,
-      minimize: true,
-      sideEffects: true,
-      usedExports: true
+    // Overwrite CSS rules to handle inlining CSS using `InlineStylesHead`
+    config.module.rules.push({
+      test: /\.css$/i,
+      use: [MiniCssExtractPlugin.loader].concat(wc.module.rules[0].use)
     })
+
+    // ! Extract styles BOTH client-side and server-side
+    config.plugins.push(
+      new MiniCssExtractPlugin({
+        chunkFilename: 'static/css/[contenthash].css',
+        filename: 'static/css/[contenthash].css'
+      })
+    )
 
     // Report duplicate dependencies
     if (!dev) config.plugins.push(new DuplicatesPlugin({ verbose: true }))
@@ -206,6 +214,14 @@ module.exports = {
 
       config.plugins.push(new BundleAnalyzerPlugin(options))
     }
+
+    // Optimization settings
+    config.optimization = merge(config.optimization, {
+      mergeDuplicateChunks: true,
+      minimize: true,
+      sideEffects: true,
+      usedExports: true
+    })
 
     return config
   }

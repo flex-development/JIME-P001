@@ -36,28 +36,24 @@ export class InlineStylesHead extends Head {
    */
   getCssLinks(files: Parameters<Head['getCssLinks']>[0]): JSX.Element[] | null {
     // Next build directory
-    const dir = '.next/serverless'
+    const dir = '.next'
 
     // Filter out CSS files
     const css = files.allFiles.filter(file => file.endsWith('.css'))
 
-    console.debug(fs.readdirSync(path.resolve(process.cwd(), dir)))
-
     // Return <style> elements with CSS or fallback <link> elements
     return css.map(file => {
-      const $file = `${dir}/${file}`
+      const $file = path.resolve(process.cwd(), dir, file)
       let __html = ''
 
       try {
-        __html = fs.readFileSync(path.resolve(process.cwd(), $file), 'utf-8')
+        __html = fs.readFileSync($file, 'utf-8')
       } catch (err) {
-        const error = createError(err.message, {
-          dir: `${process.cwd()}/${dir}`,
-          file
-        })
+        const error = createError(err.message, { file: $file })
+        const href = `/_next/${file}`
 
         Logger.error({ 'InlineStylesHead.getCssLinks': error })
-        return <link href={`./_next/${file}`} key={file} rel='stylesheet' />
+        return <link as='stylesheet' href={href} key={file} rel='preload' />
       }
 
       return (
@@ -65,6 +61,7 @@ export class InlineStylesHead extends Head {
           dangerouslySetInnerHTML={{ __html }}
           key={file}
           nonce={this.props.nonce}
+          type='text/css'
         />
       )
     })

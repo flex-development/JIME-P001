@@ -21,8 +21,8 @@ declare module 'critical' {
 
   let generate: (
     options: AnyObject,
-    cb: (err: Error, res: Result) => ANYTHING
-  ) => ReturnType<typeof cb>
+    cb?: (err: Error, res: Result) => ANYTHING
+  ) => Promise<Result> | ReturnType<typeof cb>
 
   export { Result, generate }
 }

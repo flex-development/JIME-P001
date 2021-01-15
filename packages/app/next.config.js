@@ -192,8 +192,8 @@ module.exports = {
     // ! Extract styles BOTH client-side and server-side
     config.plugins.push(
       new MiniCssExtractPlugin({
-        chunkFilename: `${isServer ? '../' : ''}static/css/[contenthash].css`,
-        filename: `${isServer ? '../' : ''}static/css/[contenthash].css`
+        chunkFilename: 'static/css/[contenthash].css',
+        filename: 'static/css/[contenthash].css'
       })
     )
 

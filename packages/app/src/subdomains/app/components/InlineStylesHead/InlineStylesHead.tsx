@@ -41,7 +41,9 @@ export class InlineStylesHead extends Head {
     // Filter out CSS files
     const css = files.allFiles.filter(file => file.endsWith('.css'))
 
-    console.debug(fs.readdirSync(path.resolve(process.cwd(), dir)))
+    console.debug(
+      fs.readdirSync(path.resolve(process.cwd(), dir, 'static/css'))
+    )
 
     // Return <style> elements with CSS or fallback <link> elements
     return css.map(file => {

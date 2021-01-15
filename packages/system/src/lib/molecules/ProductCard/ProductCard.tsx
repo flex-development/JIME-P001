@@ -8,15 +8,19 @@ import { Link } from '@system/lib/atoms/Link'
 import { Paragraph } from '@system/lib/atoms/Paragraph'
 import { EventHandlers } from '@system/types'
 import { getProductImage } from '@system/utils/getProductImage'
+import dynamic from 'next/dynamic'
 import { FC, useCallback, useEffect, useMemo, useState } from 'react'
 import useBoolean from 'react-hanger/array/useBoolean'
-import { DropdownMenu } from '../DropdownMenu'
 import { ProductCardProps } from './ProductCard.props'
 
 /**
  * @file Implementation - ProductCard
  * @module lib/molecules/ProductCard/impl
  */
+
+const DropdownMenu = dynamic(async () => {
+  return (await import('../DropdownMenu')).DropdownMenu
+})
 
 /**
  * Displays a product preview. The product image, title, and price will be

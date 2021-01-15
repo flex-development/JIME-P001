@@ -7,7 +7,7 @@ const replace = require('replace-in-file')
 
 /**
  * Adds `sideEffects: false` to `sideEffects: true` to the `package.json` file
- * of the`@flex-development/json` module.
+ * within the `@flex-development/json` module.
  *
  * @return {Promise<ReplaceResult[]>} Results from file replacements
  */

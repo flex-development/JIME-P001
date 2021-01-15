@@ -28,7 +28,7 @@
     "url": "https://flexdevelopment.llc"
   },
   "scripts": {
-    "postinstall": "node scripts/postinstall.js",
+    "postinstall": "node packages/app/scripts/postinstall",
     "clean": "lerna clean --yes; rm -rf node_modules/ || true; yarn",
     "prepare": "lerna run prepare; lerna link",
     "format": "prettier --write \"./\"",

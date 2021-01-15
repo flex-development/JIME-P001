@@ -11,7 +11,7 @@ const replace = require('replace-in-file')
  *
  * @return {Promise<ReplaceResult[]>} Results from file replacements
  */
-const fldvJSONRuntimeSideEffects = async () => {
+const flexDevelopmentJSONSideEffects = async () => {
   let results = []
 
   try {
@@ -21,10 +21,10 @@ const fldvJSONRuntimeSideEffects = async () => {
       to: `"name": "@flex-development/json","sideEffects": false,`
     })
   } catch (error) {
-    console.error({ mdxScopedRuntimeSideEffects: error })
+    console.error({ flexDevelopmentJSONSideEffects: error })
   }
 
-  console.info({ mdxScopedRuntimeSideEffects: results })
+  console.info({ flexDevelopmentJSONSideEffects: results })
   return results
 }
 
@@ -54,5 +54,5 @@ const reactSpringSideEffects = async () => {
 }
 
 // Call postinstall scripts
-fldvJSONRuntimeSideEffects()
+flexDevelopmentJSONSideEffects()
 reactSpringSideEffects()

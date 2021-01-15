@@ -5,6 +5,7 @@ import {
   PauseCircleMajor,
   PlayCircleMajor
 } from '@shopify/polaris-icons'
+import { IMAGE_PLACEHOLDER_URL } from '@system/config/constants'
 import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
 import { useSongs } from '@system/hooks/useSongs'
 import { Audio } from '@system/lib/atoms/Audio'
@@ -18,6 +19,7 @@ import { EventHandlers } from '@system/types'
 import { getSongArtworkURL } from '@system/utils/getSongArtworkURL'
 import isFunction from 'lodash/isFunction'
 import { FC, useCallback, useMemo } from 'react'
+import { useBoolean } from 'react-hanger/array/useBoolean'
 import useAudio from 'react-use/useAudio'
 import useEvent from 'react-use/useEvent'
 import { PlaylistBarProps } from './PlaylistBar.props'
@@ -44,6 +46,10 @@ export const PlaylistBar: FC<PlaylistBarProps> = props => {
   // Get song artwork URL
   const artwork_url = useMemo<string>(() => getSongArtworkURL(song), [song])
 
+  // Handle artwork image loading state
+  // Track Webfont loading state
+  const [artworkReady, { setValue: setArtworkReady }] = useBoolean(false)
+
   // Get <audio> src URL
   const audio_src = song.previews?.[0]?.url
 
@@ -51,6 +57,22 @@ export const PlaylistBar: FC<PlaylistBarProps> = props => {
   const [audio, audio_state, , audio_ref] = useAudio(
     <Audio autoPlay={auto} hidden preload='auto' src={audio_src} />
   )
+
+  /**
+   * Sets the `artworkReady` state to `false`.
+   */
+  const onErrorArtworkImg = () => setArtworkReady(false)
+
+  /* Callback version of `onErrorArtworkImg` */
+  const onErrorArtworkImgCB = useCallback(onErrorArtworkImg, [setArtworkReady])
+
+  /**
+   * Sets the `artworkReady` state to `true`.
+   */
+  const onLoadArtworkImg = () => setArtworkReady(true)
+
+  /* Callback version of `onLoadArtworkImg` */
+  const onLoadArtworkImgCB = useCallback(onLoadArtworkImg, [setArtworkReady])
 
   /**
    * Returns true if audio is ready to play.
@@ -63,7 +85,7 @@ export const PlaylistBar: FC<PlaylistBarProps> = props => {
   const isAudioReadyCB = useCallback(isAudioReady, [audio_ref])
 
   // Animate ready state
-  const style = useSpring({ opacity: isAudioReadyCB() ? 1 : 0 })
+  const style = useSpring({ opacity: artworkReady && isAudioReadyCB() ? 1 : 0 })
 
   // Get component props
   const sanitized = useSanitizedProps<'section', SectionProps>(
@@ -111,21 +133,23 @@ export const PlaylistBar: FC<PlaylistBarProps> = props => {
 
   return (
     <Section {...sanitized}>
-      <Box className='playlist-bar-col' style={style}>
+      <Box className='playlist-bar-col'>
         <Link
           className='playlist-bar-artwork'
-          href={artwork_url}
+          href={isAudioReadyCB() ? artwork_url : IMAGE_PLACEHOLDER_URL}
           target='_blank'
         >
           <Image
             alt={`Artwork for ${song.name}`}
+            onError={onErrorArtworkImgCB}
+            onLoad={onLoadArtworkImgCB}
             loading='eager'
             height={song.artwork?.height}
-            src={artwork_url}
+            src={isAudioReadyCB() ? artwork_url : IMAGE_PLACEHOLDER_URL}
             width={song.artwork?.width}
           />
         </Link>
-        <Box className='playlist-bar-media-details'>
+        <Box className='playlist-bar-media-details' style={style}>
           <Paragraph className='playlist-bar-song'>{song.name}</Paragraph>
           <Paragraph className='playlist-bar-artist'>
             {song.artistName}
@@ -137,7 +161,7 @@ export const PlaylistBar: FC<PlaylistBarProps> = props => {
         <Button
           $variant='ghost'
           className='playlist-bar-control-skip'
-          disabled={!isAudioReadyCB()}
+          disabled={!artworkReady || !isAudioReadyCB()}
           name='skip_previous'
           onClick={onClickSkipCB}
         >
@@ -146,20 +170,23 @@ export const PlaylistBar: FC<PlaylistBarProps> = props => {
         <Button
           $variant='ghost'
           className='playlist-bar-control-playback'
-          disabled={!isAudioReadyCB()}
+          disabled={!artworkReady || !isAudioReadyCB()}
           onClick={onClickPlaybackCB}
           name='playback'
           value={audio_state.paused ? 'pause' : 'play'}
         >
           {(() => {
-            if (audio_state.paused) return <PlayCircleMajor className='icon' />
+            if (!isAudioReadyCB() || audio_state.paused) {
+              return <PlayCircleMajor className='icon' />
+            }
+
             return <PauseCircleMajor className='icon' />
           })()}
         </Button>
         <Button
           $variant='ghost'
           className='playlist-bar-control-skip'
-          disabled={!isAudioReadyCB()}
+          disabled={!artworkReady || !isAudioReadyCB()}
           name='skip_next'
           onClick={onClickSkipCB}
         >

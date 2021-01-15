@@ -70,7 +70,7 @@ export const AppLayout: FC<AppLayoutProps> = (props: AppLayoutProps) => {
 
       <Layout
         header={{ handleSearch: handleSearchCB }}
-        loading={!webfonts || menu.isValidating}
+        loading={!webfonts || menu.isValidating || playlist.loading}
         playlistbar={{ songs: playlist.songs }}
         sidebar={{
           age: JSON.parse(pageProps.globals.profile_age.value as string),

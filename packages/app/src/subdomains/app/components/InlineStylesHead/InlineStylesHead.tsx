@@ -41,6 +41,8 @@ export class InlineStylesHead extends Head {
     // Filter out CSS files
     const css = files.allFiles.filter(file => file.endsWith('.css'))
 
+    console.debug(fs.readdirSync(path.resolve(process.cwd(), dir)))
+
     // Return <style> elements with CSS or fallback <link> elements
     return css.map(file => {
       const $file = path.resolve(process.cwd(), dir, file)
@@ -50,10 +52,9 @@ export class InlineStylesHead extends Head {
         __html = fs.readFileSync($file, 'utf-8')
       } catch (err) {
         const error = createError(err.message, { file: $file })
-        const href = `/_next/${file}`
 
         Logger.error({ 'InlineStylesHead.getCssLinks': error })
-        return <link as='stylesheet' href={href} key={file} rel='preload' />
+        return <link href={`/_next/${file}`} key={file} rel='stylesheet' />
       }
 
       return (

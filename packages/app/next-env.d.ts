@@ -1,4 +1,3 @@
-/// <reference types='buble' />
 /// <reference types='next' />
 /// <reference types='next/types/global' />
 

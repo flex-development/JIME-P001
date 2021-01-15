@@ -1,6 +1,6 @@
 import { createError } from '@flex-development/kustomzcore/utils/createError'
 import debug from 'debug'
-import { readdirSync, readFileSync } from 'fs'
+import { existsSync, readdirSync, readFileSync } from 'fs'
 import { Head } from 'next/document'
 import { resolve } from 'path'
 
@@ -33,9 +33,13 @@ export class InlineStylesHead extends Head {
    */
   getCssLinks(): JSX.Element[] | null {
     const vercel = (process.env.VERCEL_URL || '').length > 0
-    const dir = `.next/server${vercel ? 'less' : ''}/static/css`
 
-    return readdirSync(resolve(process.cwd(), dir)).map(file => {
+    const dir = `.next/server${vercel ? 'less' : ''}/static/css`
+    const resdir = resolve(process.cwd(), dir)
+
+    if (!existsSync(resdir)) return []
+
+    return readdirSync(resdir).map(file => {
       const $file = resolve(process.cwd(), dir, file)
       let __html = ''
 

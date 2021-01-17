@@ -26,7 +26,8 @@
     "directory": "packages/kapi"
   },
   "scripts": {
-    "vercel-build": "lerna run prepare; lerna link"
+    "vercel-prepare": "lerna run prepare --scope @flex-development/kustomzcore",
+    "vercel-build": "yarn vercel-prepare; lerna link"
   },
   "dependencies": {
     "@flex-development/kustomzcore": "*",

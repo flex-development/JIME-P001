@@ -1,6 +1,6 @@
+import { ErrorTemplate } from '@components/templates/ErrorTemplate'
 import { serialize } from '@flex-development/json/utils/serialize'
 import { createError } from '@flex-development/kustomzcore/utils/createError'
-import { ErrorTemplate } from '@lib/templates/ErrorTemplate'
 import { ErrorContent } from '@subdomains/app/components/ErrorContent'
 import { SEO } from '@subdomains/app/components/SEO'
 import { IPagePropsError as PageProps } from '@subdomains/app/interfaces'

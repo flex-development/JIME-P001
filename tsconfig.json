@@ -22,6 +22,9 @@
       "@app/*": ["packages/app/src/*"],
       "@app-mocks/*": ["packages/app/__mocks__/*"],
       "@baggie/string/*": ["node_modules/@baggie/string/lib/*"],
+      "@components/*": [
+        "node_modules/@flex-development/kustomzdesign/dist/lib/*"
+      ],
       "@flex-development/json/*": [
         "node_modules/@flex-development/json/dist/*"
       ],
@@ -32,8 +35,9 @@
       "@flex-development/kustomzdesign/*": [
         "node_modules/@flex-development/kustomzdesign/dist/*"
       ],
+      "@kapi/*": ["packages/api/lib/*"],
       "@lerna-config": ["lerna.json"],
-      "@lib/*": ["node_modules/@flex-development/kustomzdesign/dist/lib/*"],
+
       "@mdx-js/react": ["node_modules/@mdx-js/react/dist/esm"],
       "@providers/*": [
         "node_modules/@flex-development/kustomzdesign/dist/providers/*"
@@ -44,9 +48,6 @@
       "@subdomains/*": ["packages/app/src/subdomains/*"],
       "@system/*": ["packages/system/src/*"],
       "@system-mocks/*": ["packages/system/__tests__/__mocks__/*"],
-      "@yujinakayama/apple-music/*": [
-        "node_modules/@yujinakayama/apple-music/dist/*"
-      ],
       "react-hanger/*": ["node_modules/react-hanger/esm/*"],
       "react-use/*": ["node_modules/react-use/esm/*"],
       "swr/*": ["node_modules/swr/esm/*"],

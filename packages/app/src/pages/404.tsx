@@ -1,4 +1,4 @@
-import { ErrorTemplate } from '@lib/templates/ErrorTemplate'
+import { ErrorTemplate } from '@components/templates/ErrorTemplate'
 import { ErrorContent } from '@subdomains/app/components/ErrorContent'
 import { SEO } from '@subdomains/app/components/SEO'
 import { IPageProps as PageProps, PC } from '@subdomains/app/interfaces'

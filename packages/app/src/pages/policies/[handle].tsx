@@ -1,4 +1,4 @@
-import { PageTemplate } from '@lib/templates/PageTemplate'
+import { PageTemplate } from '@components/templates/PageTemplate'
 import { SEO } from '@subdomains/app/components/SEO'
 import { IPagePropsPolicy as PageProps, PC } from '@subdomains/app/interfaces'
 import getSEO from '@subdomains/app/utils/getSEO'

@@ -1,5 +1,5 @@
+import { CartTemplate } from '@components/templates/CartTemplate'
 import { useCartContext } from '@hooks/useCart'
-import { CartTemplate } from '@lib/templates/CartTemplate'
 import { SEO } from '@subdomains/app/components/SEO'
 import { IPageProps as PageProps, PC } from '@subdomains/app/interfaces'
 import globalMetafields from '@subdomains/metafields/utils/globalMetafields'

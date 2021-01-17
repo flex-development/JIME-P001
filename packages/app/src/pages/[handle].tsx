@@ -1,5 +1,5 @@
+import { PageTemplate } from '@components/templates/PageTemplate'
 import { IPage } from '@flex-development/kustomzcore/types/shopify'
-import { PageTemplate } from '@lib/templates/PageTemplate'
 import { SEO } from '@subdomains/app/components/SEO'
 import { IPagePropsHandle as PageProps, PC } from '@subdomains/app/interfaces'
 import getSEO from '@subdomains/app/utils/getSEO'

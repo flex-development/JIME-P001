@@ -1,5 +1,5 @@
-import { Link } from '@lib/atoms/Link'
-import { Paragraph, ParagraphProps } from '@lib/atoms/Paragraph'
+import { Link } from '@components/atoms/Link'
+import { Paragraph, ParagraphProps } from '@components/atoms/Paragraph'
 import { FC } from 'react'
 
 /**

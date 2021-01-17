@@ -1,0 +1,40 @@
+{
+  "github": {
+    "autoAlias": true,
+    "enabled": true,
+    "silent": false
+  },
+  "functions": {
+    "api/*.ts": {
+      "includeFiles": "static/**"
+    }
+  },
+  "redirects": [
+    {
+      "source": "/repo",
+      "destination": "https://github.com/flex-development/JIME-P001",
+      "permanent": true
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/:path*",
+      "destination": "/api/:path*"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        {
+          "key": "Access-Control-Allow-Credentials",
+          "value": "true"
+        },
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        }
+      ]
+    }
+  ]
+}

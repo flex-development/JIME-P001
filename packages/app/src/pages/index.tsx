@@ -1,4 +1,4 @@
-import { IndexTemplate } from '@lib/templates/IndexTemplate'
+import { IndexTemplate } from '@components/templates/IndexTemplate'
 import { SEO } from '@subdomains/app/components/SEO'
 import { IPagePropsIndex as PageProps, PC } from '@subdomains/app/interfaces'
 import getSEO from '@subdomains/app/utils/getSEO'

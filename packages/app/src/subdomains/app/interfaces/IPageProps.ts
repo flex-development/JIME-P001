@@ -1,3 +1,10 @@
+import {
+  CollectionTemplateProps,
+  IndexTemplateProps,
+  PageTemplateProps,
+  ProductTemplateProps,
+  SearchTemplateProps
+} from '@components/templates'
 import { FeathersErrorJSON } from '@feathersjs/errors'
 import { PartialOr } from '@flex-development/json/utils/types'
 import {
@@ -7,13 +14,6 @@ import {
   IPolicy,
   IProductListing
 } from '@flex-development/kustomzcore/types/shopify'
-import {
-  CollectionTemplateProps,
-  IndexTemplateProps,
-  PageTemplateProps,
-  ProductTemplateProps,
-  SearchTemplateProps
-} from '@lib/templates'
 import { SEOProps } from '@subdomains/app/components/SEO'
 
 /**

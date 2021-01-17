@@ -1,6 +1,6 @@
+import { ProductTemplate } from '@components/templates/ProductTemplate'
 import { serialize } from '@flex-development/json/utils/serialize'
 import { ICollectionListing } from '@flex-development/kustomzcore/types/shopify'
-import { ProductTemplate } from '@lib/templates/ProductTemplate'
 import { SEO } from '@subdomains/app/components/SEO'
 import { IPagePropsProduct as PageProps, PC } from '@subdomains/app/interfaces'
 import getSEO from '@subdomains/app/utils/getSEO'

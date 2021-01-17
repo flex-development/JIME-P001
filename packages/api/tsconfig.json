@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "lib": ["esnext"],
+    "module": "esnext",
+    "target": "es5"
+  },
+  "exclude": ["node_modules"],
+  "extends": "../../tsconfig.json",
+  "include": ["api", "lib"]
+}

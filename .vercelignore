@@ -1,16 +1,7 @@
 # Directories and files to ignore when deploying
 
-# GitHub
-.github
-
-# VSCode
-.vscode
-
-# ESLint
-.eslintignore
-.eslintrc.json
-
-# Package distribution files
+# Package distribution
+docs
 README.md
 
 # Force Vercel to use Yarn

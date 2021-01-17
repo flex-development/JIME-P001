@@ -1,5 +1,5 @@
+import { CollectionTemplate } from '@components/templates/CollectionTemplate'
 import { serialize } from '@flex-development/json/utils/serialize'
-import { CollectionTemplate } from '@lib/templates/CollectionTemplate'
 import { SEO } from '@subdomains/app/components/SEO'
 import {
   IPagePropsCollection as PageProps,

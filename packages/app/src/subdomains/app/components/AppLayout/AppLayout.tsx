@@ -1,5 +1,5 @@
-import { ShopHeaderProps } from '@lib/organisms/ShopHeader'
-import { Layout } from '@lib/templates/Layout'
+import { ShopHeaderProps } from '@components/organisms/ShopHeader'
+import { Layout } from '@components/templates/Layout'
 import { useWebFontLoader } from '@subdomains/app/hooks/useWebFontLoader'
 import { IPageProps, PC } from '@subdomains/app/interfaces'
 import { useMenu } from '@subdomains/cms/hooks/useMenu'

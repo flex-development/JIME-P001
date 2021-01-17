@@ -1,4 +1,4 @@
-import { SearchTemplate } from '@lib/templates/SearchTemplate'
+import { SearchTemplate } from '@components/templates/SearchTemplate'
 import { SEO } from '@subdomains/app/components/SEO'
 import { IPagePropsSearch as PageProps, PC } from '@subdomains/app/interfaces'
 import getSEO from '@subdomains/app/utils/getSEO'

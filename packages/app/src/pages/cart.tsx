@@ -3,7 +3,7 @@ import { CartTemplate } from '@lib/templates/CartTemplate'
 import { SEO } from '@subdomains/app/components/SEO'
 import { IPageProps as PageProps, PC } from '@subdomains/app/interfaces'
 import globalMetafields from '@subdomains/metafields/utils/globalMetafields'
-import { GetStaticProps } from 'next'
+import { GetServerSideProps } from 'next'
 
 /**
  * @file Page - Shopping Cart
@@ -35,8 +35,8 @@ const Cart: PC = () => {
  *
  * @async
  */
-export const getStaticProps: GetStaticProps<PageProps> = async () => {
-  return { props: { globals: await globalMetafields() }, revalidate: 1 }
+export const getServerSideProps: GetServerSideProps<PageProps> = async () => {
+  return { props: { globals: await globalMetafields() } }
 }
 
 export default Cart

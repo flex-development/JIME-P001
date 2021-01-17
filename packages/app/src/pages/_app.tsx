@@ -58,6 +58,8 @@ const App: AC = ({ Component, pageProps }: IAppProps) => {
 /**
  * Logs Next.js web metrics.
  *
+ * @todo Integrate with User Timing API
+ *
  * @see https://nextjs.org/blog/next-9-4#integrated-web-vitals-reporting
  *
  * @param metric - Web metric object

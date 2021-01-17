@@ -13,7 +13,7 @@ import debug from 'debug'
  * @param data - String containing MDX
  */
 const transformMDX = async (data = ''): Promise<TransformOutput> => {
-  const url = `${process.env.SITE_URL}/api/mdx`
+  const url = 'https://mdjsx.flexdevelopment.vercel.app/'
 
   try {
     return axios<TransformOutput>({ data, method: 'get', url })

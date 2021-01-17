@@ -52,7 +52,7 @@ export interface IPagePropsError {
  * Props passed to dynamic `[handle]` (online store) pages.
  */
 export interface IPagePropsHandle extends IPageProps {
-  page: IPage | IPolicy
+  page: IPage
   seo: SEOProps
   template: PageTemplateProps
 }

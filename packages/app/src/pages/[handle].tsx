@@ -67,7 +67,7 @@ export const getServerSideProps: GetServerSideProps<
   const globals = await globalMetafields()
 
   // Get SEO object
-  const seo = await getSEO(globals, page, 'page')
+  const seo = getSEO(globals, page, 'page')
 
   return { props: { globals, page, seo, template } }
 }

@@ -46,11 +46,18 @@
   "dependencies": {
     "@feathersjs/errors": "^4.5.3",
     "@flex-development/json": "^1.0.5",
-    "@types/feathersjs__errors": "^3.3.2",
     "shopify-api-node": "^3.4.4"
   },
-  "devDependencies": {},
-  "peerDependencies": {},
-  "peerDependenciesMeta": {},
+  "devDependencies": {
+    "@types/feathersjs__errors": "^3.3.2"
+  },
+  "peerDependencies": {
+    "@types/feathersjs__errors": "^3.3.2"
+  },
+  "peerDependenciesMeta": {
+    "@types/feathersjs__errors": {
+      "optional": true
+    }
+  },
   "sideEffects": false
 }

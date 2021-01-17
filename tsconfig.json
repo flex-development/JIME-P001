@@ -44,6 +44,9 @@
       "@subdomains/*": ["packages/app/src/subdomains/*"],
       "@system/*": ["packages/system/src/*"],
       "@system-mocks/*": ["packages/system/__tests__/__mocks__/*"],
+      "@yujinakayama/apple-music/*": [
+        "node_modules/@yujinakayama/apple-music/dist/*"
+      ],
       "react-hanger/*": ["node_modules/react-hanger/esm/*"],
       "react-use/*": ["node_modules/react-use/esm/*"],
       "swr/*": ["node_modules/swr/esm/*"],

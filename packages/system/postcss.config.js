@@ -20,6 +20,7 @@ module.exports = {
         }
       }
     ],
-    ['cssnano', process.env.NODE_ENV !== 'development']
-  ]
+    ['cssnano-simple', process.env.NODE_ENV !== 'development']
+  ],
+  syntax: 'postcss-scss'
 }

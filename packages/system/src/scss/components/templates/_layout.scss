@@ -70,12 +70,4 @@ LAYOUT
   &-icon {
     @include dimensions(rem(42)); // Must be size of inner <circle> element
   }
-
-  &-text {
-    color: $primary;
-    font-size: $font-size-sm;
-    font-weight: $font-weight-semibold;
-    margin-top: $space-8;
-    text-transform: uppercase;
-  }
 }

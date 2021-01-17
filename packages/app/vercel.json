@@ -45,6 +45,15 @@
   ],
   "headers": [
     {
+      "source": "/404",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-cache, always"
+        }
+      ]
+    },
+    {
       "source": "/api/(.*)",
       "headers": [
         {

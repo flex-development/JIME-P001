@@ -119,6 +119,12 @@ export default class Document extends NextDocument<DocumentInitialProps> {
 
           {/* Apple MusicKit */}
           <script async src='/lib/musickit.js' />
+
+          <script
+            integrity='sha384-by67kQnR+pyfy8yWP4kPO12fHKRLHZPfEsiSXR8u2IKcTdxD805MGUXBzVPnkLHw'
+            src='//instant.page/5.1.0'
+            type='module'
+          />
         </InlineStylesHead>
         <body>
           <noscript>You need to enable JavaScript to view this site.</noscript>

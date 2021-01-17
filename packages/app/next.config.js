@@ -184,6 +184,7 @@ module.exports = {
       '@mdx-js/react': '@mdx-js/react/dist/esm',
       '@providers': '@flex-development/kustomzdesign/dist/providers',
       '@shopify/theme-images': '@shopify/theme-images/dist/images.es5',
+      '@yujinakayama/apple-music': '@yujinakayama/apple-music/dist',
       lodash: 'lodash-es',
       'react-hanger': 'react-hanger/esm',
       'react-use': 'react-use/esm',

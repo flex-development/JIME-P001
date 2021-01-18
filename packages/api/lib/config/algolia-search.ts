@@ -1,4 +1,4 @@
-import algolia from 'algoliasearch/lite'
+import algolia from 'algoliasearch'
 
 /**
  * @file Algolia Client Configuration

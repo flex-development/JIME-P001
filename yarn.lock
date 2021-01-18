@@ -11682,7 +11682,7 @@ is-buffer@^1.1.5:
   resolved "https://registry.yarnpkg.com/is-buffer/-/is-buffer-1.1.6.tgz#efaa2ea9daa0d7ab2ea13a97b2b8ad51fefbe8be"
   integrity sha512-NcdALwpXkTm5Zvvbk7owOUSvVvBKDgKP5/ewfXEznmQFfs4ZRmanOeKBTjRVjka3QFoN6XJ+9F3USqfHqTaU5w==
 
-is-buffer@^2.0.0:
+is-buffer@^2.0.0, is-buffer@^2.0.5:
   version "2.0.5"
   resolved "https://registry.yarnpkg.com/is-buffer/-/is-buffer-2.0.5.tgz#ebc252e400d22ff8d77fa09888821a24a658c191"
   integrity sha512-i2R6zNFDwgEHJyQUtJEk0XFi1i0dPFn/oqjK3/vPCcDeJvW5NQ83V8QbicfF1SupOaB0h8ntgBC2YiE7dfyctQ==
@@ -19317,6 +19317,15 @@ terser@^4.1.2, terser@^4.6.3, terser@^4.8.0:
     source-map "~0.6.1"
     source-map-support "~0.5.12"
 
+tersify@^3.7.1:
+  version "3.7.7"
+  resolved "https://registry.yarnpkg.com/tersify/-/tersify-3.7.7.tgz#04ce73fbf7f6991289199af9db3b16031a67fa9d"
+  integrity sha512-ixxQXIlGkOPiZRprDG9ppLgyqRkbJB31Ymo7V09/Hosp4GK19C29UM82bXKR1qwLk1BsnkeBKSo+viMv9pp4bA==
+  dependencies:
+    acorn "^8.0.4"
+    is-buffer "^2.0.5"
+    unpartial "^0.6.3"
+
 test-exclude@^6.0.0:
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/test-exclude/-/test-exclude-6.0.0.tgz#04a8698661d805ea6fa293b6cb9e63ac044ef15e"
@@ -19792,6 +19801,14 @@ type-is@~1.6.17, type-is@~1.6.18:
     media-typer "0.3.0"
     mime-types "~2.1.24"
 
+type-plus@^3.5.0:
+  version "3.5.0"
+  resolved "https://registry.yarnpkg.com/type-plus/-/type-plus-3.5.0.tgz#ae660f56f37d33f28f3be1298c97a3f42edbbd94"
+  integrity sha512-sjaD91YkctvwlozlRFQpB8llPd3hXzrBeE9TTW1VFq66znSH1Tfzkm0S/0lDHijnyjxoC6CHjptk+Tg2ZkjJBA==
+  dependencies:
+    tersify "^3.7.1"
+    unpartial "^0.6.3"
+
 type@^1.0.1:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/type/-/type-1.2.0.tgz#848dd7698dafa3e54a6c479e759c4bc3f18847a0"
@@ -20019,6 +20036,11 @@ universalify@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/universalify/-/universalify-2.0.0.tgz#75a4984efedc4b08975c5aeb73f530d02df25717"
   integrity sha512-hAZsKq7Yy11Zu1DE0OzWjw7nnLZmJZYTDZZyEFHZdUhV8FkH5MCfoU1XMaxXovpyW5nq5scPqq0ZDP9Zyl04oQ==
+
+unpartial@^0.6.3:
+  version "0.6.3"
+  resolved "https://registry.yarnpkg.com/unpartial/-/unpartial-0.6.3.tgz#75557ac68fce3e9fcc983cd76e3d505b3a5ce4a3"
+  integrity sha512-U4pMxDxAyV7n5Hp6q9OMjCHLkTU6JwTxzignyXv60u44HlhUmaT+u18AAKM87+EtPkdkOlsSRmzJL4OoHROxbw==
 
 unpipe@1.0.0, unpipe@~1.0.0:
   version "1.0.0"

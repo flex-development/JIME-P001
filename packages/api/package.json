@@ -38,7 +38,8 @@
     "debug": "^4.3.1",
     "firebase-admin": "^9.2.0",
     "jsonwebtoken": "^8.5.1",
-    "lodash": "^4.17.15"
+    "lodash": "^4.17.15",
+    "type-plus": "^3.5.0"
   },
   "devDependencies": {
     "@types/algoliasearch": "^3.34.11",

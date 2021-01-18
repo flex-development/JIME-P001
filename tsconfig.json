@@ -35,7 +35,6 @@
       "@flex-development/kustomzdesign/*": [
         "node_modules/@flex-development/kustomzdesign/dist/*"
       ],
-      "@kapi/*": ["packages/api/lib/*"],
       "@lerna-config": ["lerna.json"],
 
       "@mdx-js/react": ["node_modules/@mdx-js/react/dist/esm"],

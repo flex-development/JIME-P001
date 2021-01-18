@@ -1,12 +1,12 @@
 import isEmpty from 'lodash/isEmpty'
 import join from 'lodash/join'
 import pick from 'lodash/pick'
-import { DEFAULT_SEARCH_OPTIONS, PAGINATION_PARAMS } from '../../config'
+import { DEFAULT_SEARCH_OPTIONS as DSO, PAGINATION_PARAMS } from '../../config'
 import type { FindCollectionsQuery as Query, SearchOptions } from '../../types'
 
 /**
  * @file Implementation - findCollectionsOptions
- * @module utils/findCollectionsOptions/impl
+ * @module utils/collections/findCollectionsOptions
  */
 
 /**
@@ -19,10 +19,11 @@ import type { FindCollectionsQuery as Query, SearchOptions } from '../../types'
  *
  * @param query - Collection query from API request
  * @param query.collection_id - Filter results by collection ID
+ * @param query.fields - Comma-separated list of collection fields to include
  * @param query.handle - Filter results by collection handle
  */
 const findCollectionsOptions = (query: Query = {}): SearchOptions => {
-  const { collection_id, handle, ...rest } = query
+  const { collection_id, fields, handle, ...rest } = query
 
   // Initialize search filters array
   const filters: string[] = []
@@ -33,9 +34,18 @@ const findCollectionsOptions = (query: Query = {}): SearchOptions => {
   // Add handle filter
   if (!isEmpty(handle)) filters.push(`handle:${handle}`)
 
+  // Update default attributes to retrieve
+  let attributesToRetrieve = DSO.attributesToRetrieve
+
+  // Add attributes from query
+  if (fields?.trim().length) {
+    attributesToRetrieve = DSO.attributesToRetrieve.concat(fields.split(','))
+  }
+
   return {
-    ...DEFAULT_SEARCH_OPTIONS,
+    ...DSO,
     ...pick(rest, PAGINATION_PARAMS),
+    attributesToRetrieve,
     filters: join(filters, ' ')
   }
 }

@@ -38,14 +38,16 @@
     "src"
   ],
   "scripts": {
-    "precompile": "rm -rf ./dist",
+    "precompile": "dotenv -e ../packages/api/.env.production.local -- rm -rf ./dist",
     "compile": "babel src -d dist --extensions '.ts'",
-    "postcompile": "tsc -p tsconfig.prod.json",
+    "postcompile": "ttsc -p tsconfig.prod.json",
     "prepare": "NODE_ENV=production yarn compile"
   },
   "dependencies": {
     "@feathersjs/errors": "^4.5.3",
     "@flex-development/json": "^1.0.5",
+    "axios": "^0.19.2",
+    "axios-rate-limit": "^1.3.0",
     "shopify-api-node": "^3.4.4"
   },
   "devDependencies": {

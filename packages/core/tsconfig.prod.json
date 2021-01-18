@@ -4,8 +4,15 @@
     "emitDeclarationOnly": true,
     "noEmit": false,
     "outDir": "./dist",
-    "rootDir": "./src",
-    "sourceMap": true
+    "plugins": [
+      {
+        "afterDeclarations": true,
+        "exclude": ["*"],
+        "transform": "@zerollup/ts-transform-paths",
+        "useRootDirs": true
+      }
+    ],
+    "rootDir": "./src"
   },
   "exclude": [],
   "extends": "./tsconfig.json",

@@ -54,7 +54,7 @@
     "now-build": "NODE_ENV=production yarn build",
     "precompile:ts": "rm -rf ./dist",
     "compile:ts": "babel --config-file ./babel.config.prod.js src -d dist --extensions '.ts,.tsx'; shx cp -R ./src/types/typings ./dist/types/typings",
-    "postcompile:ts": "tsc -p tsconfig.prod.json",
+    "postcompile:ts": "ttsc -p tsconfig.prod.json",
     "compile:scss": "webpack -c webpack.prod.js",
     "postcompile:scss": "rm ./dist/css.js",
     "prepare": "NODE_ENV=production run-s compile:*"

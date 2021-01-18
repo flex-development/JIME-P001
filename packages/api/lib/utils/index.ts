@@ -3,6 +3,7 @@
  * @module utils
  */
 
-export * from './findCollectionsOptions'
+export * from './collections'
+export * from './metafields'
 
 /* eslint-disable prettier/prettier */

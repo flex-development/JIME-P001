@@ -4,9 +4,10 @@ import {
 } from '@flex-development/kustomzcore'
 import { VercelResponse as Res } from '@vercel/node'
 import debug from 'debug'
-import { ALGOLIA, SHOPIFY } from '../../lib/config'
+import omit from 'lodash/omit'
+import { ALGOLIA, INDEX_SETTINGS, SHOPIFY } from '../../lib/config'
 import type { FindCollectionsReq as Req } from '../../lib/types'
-import { findCollectionsOptions } from '../../lib/utils'
+import { collectionMetafields, findCollectionsOptions } from '../../lib/utils'
 
 /**
  * @file API Endpoint - Find Collections
@@ -19,21 +20,32 @@ export default async ({ query }: Req, res: Res): Promise<Res> => {
 
   try {
     // Initialize search index
-    const index = ALGOLIA.initIndex('collection_listings')
+    const index = ALGOLIA.initIndex(INDEX_SETTINGS.collection_listings.name)
+
+    // Set index settings
+    index.setSettings(omit(INDEX_SETTINGS.collection_listings, ['name']))
 
     // Get collection listings to update index
-    const listings = await SHOPIFY.collectionListing.list()
+    let listings = await SHOPIFY.collectionListing.list()
+
+    // Keep objectID consistent with collection listing ID
+    listings = listings.map(obj => ({ ...obj, objectID: obj.collection_id }))
 
     // Update index data
-    await index.clearObjects()
-    await index.saveObjects(listings, { autoGenerateObjectIDIfNotExist: true })
+    await index.saveObjects(listings)
 
     // Perform search
     const { hits } = await index.search<Hit>(query?.text ?? '', options)
 
-    return res.json(hits)
+    // Get metafields for each collection + remove objectID field
+    const payload = hits.map(async hit => ({
+      ...omit(hit, ['objectID']),
+      metafield: await collectionMetafields(hit.collection_id)
+    }))
+
+    return res.json(await Promise.all(payload))
   } catch (err) {
-    const error = createError(err, { options, query })
+    const error = createError(err, { options, query }, err.status)
 
     debug('api/collections')(error)
     return res.status(error.code).json(error)

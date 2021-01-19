@@ -15,52 +15,6 @@ import type { VercelRequest as Req } from '@vercel/node'
  */
 
 /**
- * Query parameters accepted by the `/collections/[handle]` endpoint.
- */
-export type GetCollectionQuery = {
-  fields?: string
-  handle: ICollectionListing['handle']
-}
-
-/**
- * Query parameters accepted by the `/menus/[handle]` endpoint.
- */
-export type GetMenuQuery = {
-  fields?: string
-  handle: ShopifyMenu['handle']
-}
-
-/**
- * Query parameters accepted by the `/products/[handle]` endpoint.
- */
-export type GetProductQuery = {
-  fields?: string
-  handle: IProductListing['handle']
-  sku?: IProductListingVariant['sku']
-}
-
-/**
- * Shape of requests sent to the `/collections/[handle]` endpoint.
- */
-export interface GetCollectionReq extends Omit<Req, 'query'> {
-  query: GetCollectionQuery
-}
-
-/**
- * Shape of requests sent to the `/menus/[handle]` endpoint.
- */
-export interface GetMenuReq extends Omit<Req, 'query'> {
-  query: GetMenuQuery
-}
-
-/**
- * Shape of requests sent to the `/products/[handle]` endpoint.
- */
-export interface GetProductReq extends Omit<Req, 'query'> {
-  query: GetProductQuery
-}
-
-/**
  * Query parameters accepted by the `/collections` endpoint.
  */
 export type FindCollectionsQuery = PaginationSearchOptions & {
@@ -95,7 +49,7 @@ export interface FindMenusReq extends Omit<Req, 'query'> {
 }
 
 /**
- * Query parameters accepted by the Shopify API Metafields endpoint.
+ * Query parameters accepted by the `/metafields/*` endpoints.
  */
 export type FindMetafieldParams = {
   /**
@@ -162,6 +116,59 @@ export type FindProductsQuery = PaginationSearchOptions & {
   handle?: IProductListing['handle']
   product_id?: IProductListing['product_id']
   text?: SearchOptions['query']
+}
+
+/**
+ * Query parameters accepted by the `/collections/[handle]` endpoint.
+ */
+export type GetCollectionQuery = {
+  fields?: string
+  handle: ICollectionListing['handle']
+}
+
+/**
+ * Query parameters accepted by the `/menus/[handle]` endpoint.
+ */
+export type GetMenuQuery = {
+  fields?: string
+  handle: ShopifyMenu['handle']
+}
+
+/**
+ * Query parameters accepted by the `/products/[handle]` endpoint.
+ */
+export type GetProductQuery = {
+  fields?: string
+  handle: IProductListing['handle']
+  sku?: IProductListingVariant['sku']
+}
+
+/**
+ * Shape of requests sent to the `/collections/[handle]` endpoint.
+ */
+export interface GetCollectionReq extends Omit<Req, 'query'> {
+  query: GetCollectionQuery
+}
+
+/**
+ * Shape of requests sent to the `/metafields/global` endpoint.
+ */
+export interface GetGlobalMetafieldsReq extends Omit<Req, 'query'> {
+  query: Omit<FindMetafieldParams, 'namespace'>
+}
+
+/**
+ * Shape of requests sent to the `/menus/[handle]` endpoint.
+ */
+export interface GetMenuReq extends Omit<Req, 'query'> {
+  query: GetMenuQuery
+}
+
+/**
+ * Shape of requests sent to the `/products/[handle]` endpoint.
+ */
+export interface GetProductReq extends Omit<Req, 'query'> {
+  query: GetProductQuery
 }
 
 /**

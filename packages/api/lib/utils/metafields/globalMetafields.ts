@@ -1,8 +1,8 @@
 import type { PartialOr } from '@flex-development/json'
 import type { IMetafield } from '@flex-development/kustomzcore'
-import { objectFromArray } from '@flex-development/kustomzcore'
+import { axios } from '@flex-development/kustomzcore'
+import { API_URL } from '../../config'
 import type { FindMetafieldParams } from '../../types'
-import shopMetafields from './shopMetafields'
 
 /**
  * @file Implementation - globalMetafields
@@ -27,11 +27,10 @@ import shopMetafields from './shopMetafields'
 const globalMetafields = async (
   params: Omit<FindMetafieldParams, 'namespace'> = {}
 ): Promise<Record<string, PartialOr<IMetafield>>> => {
-  // Get global metafields
-  const fields = await shopMetafields({ ...params, namespace: 'globals' })
-
-  // Return object with metafields
-  return objectFromArray(fields || [], 'key')
+  return await axios<Record<string, PartialOr<IMetafield>>>({
+    params,
+    url: `${API_URL}/metafields/globals`
+  })
 }
 
 export default globalMetafields

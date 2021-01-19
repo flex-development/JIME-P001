@@ -19,6 +19,10 @@ export default async ({ query }: Req, res: Res): Promise<Res> => {
   // Convert menus query into search options object
   const options = shopifySearchOptions(query)
 
+  const str = 'Index menus does not exist'
+
+  console.debug(str.match('Index %s does not exist'))
+
   try {
     // Get menus to update search index
     let menus = (await axiosShopify<SAR.Menus>({}, true)).menus || []

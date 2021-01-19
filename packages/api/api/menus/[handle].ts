@@ -1,37 +1,37 @@
-import type { ICollectionListing } from '@flex-development/kustomzcore'
+import type { ShopifyMenu } from '@flex-development/kustomzcore'
 import { axios, createError } from '@flex-development/kustomzcore'
 import { VercelResponse as Res } from '@vercel/node'
 import debug from 'debug'
 import pick from 'lodash/pick'
 import { API_URL } from '../../lib/config'
-import type { GetCollectionReq as Req, ResourceWithSEO } from '../../lib/types'
+import type { GetMenuReq as Req } from '../../lib/types'
 
 /**
- * @file API Endpoint - Get Collection By Handle
- * @module api/collections/[handle]
+ * @file API Endpoint - Get Menu By Handle
+ * @module api/menus/[handle]
  */
 
 export default async ({ query }: Req, res: Res): Promise<Res> => {
   const params = pick(query, ['fields', 'handle'])
 
   try {
-    const collections = await axios<ResourceWithSEO<ICollectionListing>[]>({
+    const menus = await axios<ShopifyMenu[]>({
       params,
-      url: `${API_URL}/collections`
+      url: `${API_URL}/menus`
     })
 
-    if (!collections.length) {
+    if (!menus.length) {
       const data = { errors: { handle: query.handle }, query: params }
-      const message = `Collection with handle "${query.handle}" not found`
+      const message = `Menu with handle "${query.handle}" not found`
       const error = createError(message, data, 404)
 
-      debug('api/collections/[handle]')(error)
+      debug('api/menus/[handle]')(error)
       return res.status(error.code).json(error)
     }
 
-    return res.json(collections[0])
+    return res.json(menus[0])
   } catch (error) {
-    debug('api/collections/[handle]')(error)
+    debug('api/menus/[handle]')(error)
     return res.status(error.code).json(error)
   }
 }

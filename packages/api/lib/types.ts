@@ -4,7 +4,8 @@ import type {
   ICollectionListing,
   IMetafield,
   IProductListing,
-  IProductListingVariant
+  IProductListingVariant,
+  ShopifyMenu
 } from '@flex-development/kustomzcore'
 import type { VercelRequest as Req } from '@vercel/node'
 
@@ -22,6 +23,14 @@ export type GetCollectionQuery = {
 }
 
 /**
+ * Query parameters accepted by the `/menus/[handle]` endpoint.
+ */
+export type GetMenuQuery = {
+  fields?: string
+  handle: ShopifyMenu['handle']
+}
+
+/**
  * Query parameters accepted by the `/products/[handle]` endpoint.
  */
 export type GetProductQuery = {
@@ -35,6 +44,13 @@ export type GetProductQuery = {
  */
 export interface GetCollectionReq extends Omit<Req, 'query'> {
   query: GetCollectionQuery
+}
+
+/**
+ * Shape of requests sent to the `/menus/[handle]` endpoint.
+ */
+export interface GetMenuReq extends Omit<Req, 'query'> {
+  query: GetMenuQuery
 }
 
 /**
@@ -59,6 +75,23 @@ export type FindCollectionsQuery = PaginationSearchOptions & {
  */
 export interface FindCollectionsReq extends Omit<Req, 'query'> {
   query: FindCollectionsQuery
+}
+
+/**
+ * Query parameters accepted by the `/menus` endpoint.
+ */
+export type FindMenusQuery = PaginationSearchOptions & {
+  fields?: string
+  handle?: ShopifyMenu['handle']
+  text?: SearchOptions['query']
+  title?: ShopifyMenu['title']
+}
+
+/**
+ * Shape of requests sent to the `/menus` endpoint.
+ */
+export interface FindMenusReq extends Omit<Req, 'query'> {
+  query: FindMenusQuery
 }
 
 /**

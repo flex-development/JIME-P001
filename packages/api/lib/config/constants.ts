@@ -23,13 +23,7 @@ export const INDEX_SETTINGS = {
     name: 'collection_listings'
   },
   product_listings: {
-    attributesForFaceting: [
-      'handle',
-      'product_id',
-      'product_type',
-      'title',
-      'vendor'
-    ],
+    attributesForFaceting: ['handle', 'product_id', 'product_type', 'title'],
     name: 'product_listings'
   }
 }

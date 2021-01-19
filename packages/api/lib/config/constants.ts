@@ -15,6 +15,8 @@ export const DEFAULT_SEARCH_OPTIONS = {
   attributesToSnippet: []
 }
 
+export const DEFAULT_SEO_IMAGE = `${API_URL}/assets/images/morena.jpeg`
+
 export const INDEX_SETTINGS = {
   collection_listings: {
     attributesForFaceting: ['collection_id', 'handle'],

@@ -19,6 +19,16 @@ export const INDEX_SETTINGS = {
   collection_listings: {
     attributesForFaceting: ['collection_id', 'handle'],
     name: 'collection_listings'
+  },
+  product_listings: {
+    attributesForFaceting: [
+      'handle',
+      'product_id',
+      'product_type',
+      'title',
+      'vendor'
+    ],
+    name: 'product_listings'
   }
 }
 

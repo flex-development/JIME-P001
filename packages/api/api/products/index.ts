@@ -1,6 +1,6 @@
 import {
   createError,
-  ICollectionListing as Hit
+  IProductListing as Hit
 } from '@flex-development/kustomzcore'
 import { VercelResponse as Res } from '@vercel/node'
 import debug from 'debug'
@@ -8,32 +8,32 @@ import omit from 'lodash/omit'
 import { ALGOLIA, INDEX_SETTINGS, SHOPIFY } from '../../lib/config'
 import type { FindCollectionsReq as Req } from '../../lib/types'
 import {
-  collectionMetafields,
-  findCollectionsOptions,
-  includeMetafields
+  findProductsOptions,
+  includeMetafields,
+  productMetafields
 } from '../../lib/utils'
 
 /**
- * @file API Endpoint - Find Collections
- * @module api/collections
+ * @file API Endpoint - Find Products
+ * @module api/products
  */
 
 export default async ({ query }: Req, res: Res): Promise<Res> => {
-  // Convert collection query into search options object
-  const options = findCollectionsOptions(query)
+  // Convert product query into search options object
+  const options = findProductsOptions(query)
 
   try {
     // Initialize search index
-    const index = ALGOLIA.initIndex(INDEX_SETTINGS.collection_listings.name)
+    const index = ALGOLIA.initIndex(INDEX_SETTINGS.product_listings.name)
 
     // Set index settings
-    index.setSettings(omit(INDEX_SETTINGS.collection_listings, ['name']))
+    index.setSettings(omit(INDEX_SETTINGS.product_listings, ['name']))
 
-    // Get collection listings to update index
-    let listings = await SHOPIFY.collectionListing.list()
+    // Get product listings to update index
+    let listings = await SHOPIFY.productListing.list()
 
-    // Keep objectID consistent with collection listing ID
-    listings = listings.map(obj => ({ ...obj, objectID: obj.collection_id }))
+    // Keep objectID consistent with product listing ID
+    listings = listings.map(obj => ({ ...obj, objectID: obj.product_id }))
 
     // Update index data
     await index.saveObjects(listings)
@@ -42,11 +42,11 @@ export default async ({ query }: Req, res: Res): Promise<Res> => {
     const { hits } = await index.search<Hit>(query?.text ?? '', options)
     let payload: Hit[] | Promise<Hit>[] = []
 
-    // Get metafields for each collection + remove objectID field
+    // Get metafields for each product + remove objectID field
     if (includeMetafields(options)) {
       payload = hits.map(async hit => ({
         ...omit(hit, ['objectID']),
-        metafield: await collectionMetafields(hit.collection_id)
+        metafield: await productMetafields(hit.product_id)
       }))
 
       payload = await Promise.all(payload)
@@ -58,7 +58,7 @@ export default async ({ query }: Req, res: Res): Promise<Res> => {
   } catch (err) {
     const error = createError(err, { options, query }, err.status)
 
-    debug('api/collections')(error)
+    debug('api/products')(error)
     return res.status(error.code).json(error)
   }
 }

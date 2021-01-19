@@ -1,7 +1,8 @@
 import type { SearchOptions } from '@algolia/client-search'
 import type {
   ICollectionListing,
-  IMetafield
+  IMetafield,
+  IProductListing
 } from '@flex-development/kustomzcore'
 import type { VercelRequest as Req } from '@vercel/node'
 
@@ -19,10 +20,25 @@ export type GetCollectionQuery = {
 }
 
 /**
+ * Query parameters accepted by the `/products/[handle]` endpoint.
+ */
+export type GetProductQuery = {
+  fields?: string
+  handle: IProductListing['handle']
+}
+
+/**
  * Shape of requests sent to the `/collections/[handle]` endpoint.
  */
 export interface GetCollectionReq extends Omit<Req, 'query'> {
   query: GetCollectionQuery
+}
+
+/**
+ * Shape of requests sent to the `/products/[handle]` endpoint.
+ */
+export interface GetProductReq extends Omit<Req, 'query'> {
+  query: GetProductQuery
 }
 
 /**
@@ -100,6 +116,16 @@ export type FindMetafieldParams = {
    * - `string`: Show only metafields with string value types
    */
   value_type?: 'integer' | 'string'
+}
+
+/**
+ * Query parameters accepted by the `/products` endpoint.
+ */
+export type FindProductsQuery = PaginationSearchOptions & {
+  fields?: string
+  handle?: IProductListing['handle']
+  product_id?: IProductListing['product_id']
+  text?: SearchOptions['query']
 }
 
 /**

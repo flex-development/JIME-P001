@@ -1,10 +1,9 @@
-import { createError } from '@flex-development/kustomzcore'
+import { axios, createError } from '@flex-development/kustomzcore'
 import type { VercelRequest as Req, VercelResponse as Res } from '@vercel/node'
-import type { Song } from '@yujinakayama/apple-music/dist/serverTypes/song'
+import { AxiosRequestConfig } from 'axios'
 import debug from 'debug'
 import pick from 'lodash/pick'
-import { APPLE_MUSIC } from '../lib/config'
-import { globalMetafields } from '../lib/utils'
+import { appleDeveloperToken, globalMetafields } from '../lib/utils'
 
 /**
  * @file API Endpoint - Get Store Playlist Data
@@ -20,17 +19,22 @@ export default async (req: Req, res: Res): Promise<Res> => {
     // Get playlist ID
     const id = `pl.${url?.split('pl.')[1]}`
 
-    // Get playlist data
-    const { data } = await APPLE_MUSIC.playlists.get(id)
-    const { attributes, relationships } = data[0]
+    // Build request config
+    const config: AxiosRequestConfig = {
+      headers: {
+        Authorization: `Bearer ${appleDeveloperToken()}`
+      },
+      url: `https://api.music.apple.com/v1/catalog/us/playlists/${id}`
+    }
 
-    // Convert to array and cast as array of songs
-    const tracks = [relationships?.tracks?.data].flat() as Song[]
+    // Get playlist data
+    const { data = [] } = await axios<AppleMusicApi.PlaylistResponse>(config)
+    const { attributes, relationships } = data[0]
 
     return res.json({
       attributes: pick(attributes, ['name', 'url']),
       id,
-      tracks: tracks.map(track => track.attributes)
+      tracks: relationships?.tracks?.data.map(track => track.attributes)
     })
   } catch (err) {
     const error = err.code ? err : createError(err)

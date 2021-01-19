@@ -97,16 +97,15 @@ export type ShopifyMenu = {
   levels: number
   links: ShopifyMenuLink[]
   title: string
-  url: string
 }
 
 /**
  * Shopify menu link type.
  */
 export type ShopifyMenuLink = {
+  href: string
   links: ShopifyMenuLink[]
   title: string
-  url: string
 }
 
 /**

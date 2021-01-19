@@ -36,22 +36,22 @@ async function axiosShopify<T = ANYTHING>(
           links: [
             {
               title: 'Home',
-              url: '/',
+              href: '/',
               links: []
             },
             {
               title: 'Products',
-              url: '/products',
+              href: '/products',
               links: []
             },
             {
               title: 'About',
-              url: '/about',
+              href: '/about',
               links: []
             },
             {
               title: 'Instagram',
-              url: '/instagram',
+              href: '/instagram',
               links: []
             }
           ]

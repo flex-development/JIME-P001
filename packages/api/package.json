@@ -31,6 +31,7 @@
   },
   "dependencies": {
     "@flex-development/kustomzcore": "*",
+    "@flex-development/kustomzdesign": "*",
     "@yujinakayama/apple-music": "^0.4.0",
     "algoliasearch": "^4.8.3",
     "axios": "^0.19.2",

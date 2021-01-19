@@ -6,11 +6,16 @@ import { VercelResponse as Res } from '@vercel/node'
 import debug from 'debug'
 import omit from 'lodash/omit'
 import { ALGOLIA, INDEX_SETTINGS, SHOPIFY } from '../../lib/config'
-import type { FindCollectionsReq as Req } from '../../lib/types'
+import type {
+  FindCollectionsReq as Req,
+  GetProductQuery
+} from '../../lib/types'
 import {
   findProductsOptions,
   includeMetafields,
-  productMetafields
+  includeSEO,
+  productMetafields,
+  productSEO
 } from '../../lib/utils'
 
 /**
@@ -40,21 +45,29 @@ export default async ({ query }: Req, res: Res): Promise<Res> => {
 
     // Perform search
     const { hits } = await index.search<Hit>(query?.text ?? '', options)
-    let payload: Hit[] | Promise<Hit>[] = []
+    let payload: Hit[] | Promise<Hit>[] = hits
 
-    // Get metafields for each product + remove objectID field
+    // Get metafields for each product
     if (includeMetafields(options)) {
-      payload = hits.map(async hit => ({
-        ...omit(hit, ['objectID']),
+      payload = payload.map(async hit => ({
+        ...hit,
         metafield: await productMetafields(hit.product_id)
       }))
 
       payload = await Promise.all(payload)
-    } else {
-      payload = hits.map(hit => omit(hit, ['objectID']))
     }
 
-    return res.json(payload)
+    // Get SEO data for each product
+    if (includeSEO(options)) {
+      payload = payload.map(async hit => ({
+        ...hit,
+        seo: productSEO(hit, (query as GetProductQuery).sku)
+      }))
+
+      payload = await Promise.all(payload)
+    }
+
+    return res.json(payload.map(data => omit(data, ['objectID'])))
   } catch (err) {
     const error = createError(err, { options, query }, err.status)
 

@@ -16,7 +16,7 @@ import type { GetProductReq as Req } from '../../lib/types'
 
 export default async ({ query }: Req, res: Res): Promise<Res> => {
   // Get request params
-  const params = pick(query, ['fields', 'handle'])
+  const params = pick(query, ['fields', 'handle', 'sku'])
 
   try {
     // Search product listings

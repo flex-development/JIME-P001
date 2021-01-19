@@ -5,7 +5,7 @@ import {
   IMetafield,
   IPage,
   IPolicy as IShopifyPolicy,
-  IProductListing
+  IProductListing as IShopifyProductListing
 } from 'shopify-api-node'
 
 /**
@@ -70,9 +70,12 @@ export interface IPolicy extends IShopifyPolicy {
 }
 
 /**
- * Object containing Shopify store metafields under the `settings` namespace.
+ * Shopify `Product` resource with missing properties.
  */
-export type SettingsNamespaceMetafields = Record<string, IMetafield>
+export interface IProductListing extends IShopifyProductListing {
+  available: boolean
+  vendor: string
+}
 
 /**
  * Shopify API responses.
@@ -127,6 +130,5 @@ export type {
   IObjectMetafield,
   IPage,
   IProductImage,
-  IProductListing,
   IProductListingVariant
 } from 'shopify-api-node'

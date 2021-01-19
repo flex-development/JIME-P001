@@ -3,7 +3,8 @@ import type { AnyObject, NullishString } from '@flex-development/json'
 import type {
   ICollectionListing,
   IMetafield,
-  IProductListing
+  IProductListing,
+  IProductListingVariant
 } from '@flex-development/kustomzcore'
 import type { VercelRequest as Req } from '@vercel/node'
 
@@ -26,6 +27,7 @@ export type GetCollectionQuery = {
 export type GetProductQuery = {
   fields?: string
   handle: IProductListing['handle']
+  sku?: IProductListingVariant['sku']
 }
 
 /**

@@ -1,5 +1,5 @@
 import { createError, IProductListing } from '@flex-development/kustomzcore'
-import { VercelResponse as Res } from '@vercel/node'
+import type { VercelResponse as Res } from '@vercel/node'
 import debug from 'debug'
 import omit from 'lodash/omit'
 import type { IProductListing as Hit } from 'shopify-api-node'

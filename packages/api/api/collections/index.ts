@@ -4,7 +4,7 @@ import type {
   ShopifyAPIResponses as SAR
 } from '@flex-development/kustomzcore'
 import { createError } from '@flex-development/kustomzcore'
-import { VercelResponse as Res } from '@vercel/node'
+import type { VercelResponse as Res } from '@vercel/node'
 import debug from 'debug'
 import omit from 'lodash/omit'
 import {

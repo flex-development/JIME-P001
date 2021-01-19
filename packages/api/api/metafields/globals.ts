@@ -1,5 +1,5 @@
 import { createError, objectFromArray } from '@flex-development/kustomzcore'
-import { VercelResponse as Res } from '@vercel/node'
+import type { VercelResponse as Res } from '@vercel/node'
 import debug from 'debug'
 import type { GetGlobalMetafieldsReq as Req } from '../../lib/types'
 import { shopMetafields } from '../../lib/utils'

@@ -1,6 +1,6 @@
 import type { IProductListing } from '@flex-development/kustomzcore'
 import { axios, createError } from '@flex-development/kustomzcore'
-import { VercelResponse as Res } from '@vercel/node'
+import type { VercelResponse as Res } from '@vercel/node'
 import debug from 'debug'
 import pick from 'lodash/pick'
 import { API_URL } from '../../lib/config'

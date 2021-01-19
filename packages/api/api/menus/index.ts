@@ -3,7 +3,7 @@ import type {
   ShopifyMenu as Hit
 } from '@flex-development/kustomzcore'
 import { createError } from '@flex-development/kustomzcore'
-import { VercelResponse as Res } from '@vercel/node'
+import type { VercelResponse as Res } from '@vercel/node'
 import debug from 'debug'
 import omit from 'lodash/omit'
 import { ALGOLIA, axiosShopify, INDEX_SETTINGS } from '../../lib/config'
@@ -18,10 +18,6 @@ import { shopifySearchOptions } from '../../lib/utils'
 export default async ({ query }: Req, res: Res): Promise<Res> => {
   // Convert menus query into search options object
   const options = shopifySearchOptions(query)
-
-  const str = 'Index menus does not exist'
-
-  console.debug(str.match('Index %s does not exist'))
 
   try {
     // Get menus to update search index

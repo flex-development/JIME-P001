@@ -21,6 +21,8 @@ export default ({ query }: Req, res: Res): void => {
   const dir = 'static/images'
 
   try {
+    debug('api/assets/images/[filename]')(readFileSync(process.cwd()))
+
     const file = readFileSync(join(process.cwd(), dir, filename))
 
     res.writeHead(200, { 'Content-Type': `image/${extension}` })

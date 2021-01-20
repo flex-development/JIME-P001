@@ -3,16 +3,19 @@ import { axios, createError } from '@flex-development/kustomzcore'
 import type { VercelResponse as Res } from '@vercel/node'
 import debug from 'debug'
 import omit from 'lodash/omit'
-import { ALGOLIA, INDEX_SETTINGS, SHOPIFY } from '../../lib/config'
+import { ALGOLIA, INDEX_SETTINGS, PAGES } from '../../lib/config'
 import type { FindCollectionsReq as Req } from '../../lib/types'
-import { findPagesOptions, pageMetafields, pageSEO } from '../../lib/utils'
+import {
+  findPagesOptions,
+  isSearchIndex404Error,
+  pageMetafields,
+  pageSEO
+} from '../../lib/utils'
 
 /**
  * @file API Endpoint - Find Pages
  * @module api/pages
  */
-
-const PAGES = SHOPIFY.page
 
 export default async ({ query, url }: Req, res: Res): Promise<Res> => {
   const INDEX_AS_HANDLE = url?.includes('/pages/index')
@@ -74,9 +77,10 @@ export default async ({ query, url }: Req, res: Res): Promise<Res> => {
 
     return res.json(INDEX_AS_HANDLE ? payload[0] : payload)
   } catch (err) {
-    const error = createError(err, { options, query }, err.status)
+    const index404 = isSearchIndex404Error(err)
+    const error = createError(err, { options, query }, err.status || err.code)
 
     debug('api/pages')(error)
-    return res.status(error.code).json(error)
+    return index404 ? res.json([]) : res.status(error.code).json(error)
   }
 }

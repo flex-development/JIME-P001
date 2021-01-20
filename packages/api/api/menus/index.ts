@@ -8,7 +8,7 @@ import debug from 'debug'
 import omit from 'lodash/omit'
 import { ALGOLIA, axiosShopify, INDEX_SETTINGS } from '../../lib/config'
 import type { FindMenusReq as Req } from '../../lib/types'
-import { shopifySearchOptions } from '../../lib/utils'
+import { isSearchIndex404Error, shopifySearchOptions } from '../../lib/utils'
 
 /**
  * @file API Endpoint - Find Menus
@@ -41,9 +41,10 @@ export default async ({ query }: Req, res: Res): Promise<Res> => {
     // Return results and remove `objectID` field
     return res.json(hits.map(data => omit(data, ['objectID'])))
   } catch (err) {
-    const error = createError(err, { options, query }, err.code || err.status)
+    const error = createError(err, { options, query }, err.status || err.code)
+    const index404 = isSearchIndex404Error(err)
 
     debug('api/menus')(error)
-    return res.status(error.code).json(error)
+    return index404 ? res.json([]) : res.status(error.code).json(error)
   }
 }

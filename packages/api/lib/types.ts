@@ -4,6 +4,7 @@ import type {
   ICollectionListing,
   IMetafield,
   IPage,
+  IPolicy,
   IProductListing,
   IProductListingVariant,
   ShopifyMenu
@@ -128,6 +129,22 @@ export interface FindPagesReq extends Omit<Req, 'query'> {
 }
 
 /**
+ * Query parameters accepted by the `/policies` endpoint.
+ */
+export type FindPoliciesQuery = PaginationSearchOptions & {
+  fields?: string
+  handle?: IPolicy['handle']
+  text?: SearchOptions['query']
+}
+
+/**
+ * Shape of requests sent to the `/policies` endpoint.
+ */
+export interface FindPoliciesReq extends Omit<Req, 'query'> {
+  query: FindPoliciesQuery
+}
+
+/**
  * Query parameters accepted by the `/products` endpoint.
  */
 export type FindProductsQuery = PaginationSearchOptions & {
@@ -146,31 +163,6 @@ export type GetCollectionQuery = {
 }
 
 /**
- * Query parameters accepted by the `/menus/[handle]` endpoint.
- */
-export type GetMenuQuery = {
-  fields?: string
-  handle: ShopifyMenu['handle']
-}
-
-/**
- * Query parameters accepted by the `/pages/[handle]` endpoint.
- */
-export type GetPageQuery = {
-  fields?: string
-  handle: IPage['handle']
-}
-
-/**
- * Query parameters accepted by the `/products/[handle]` endpoint.
- */
-export type GetProductQuery = {
-  fields?: string
-  handle: IProductListing['handle']
-  sku?: IProductListingVariant['sku']
-}
-
-/**
  * Shape of requests sent to the `/collections/[handle]` endpoint.
  */
 export interface GetCollectionReq extends Omit<Req, 'query'> {
@@ -185,6 +177,14 @@ export interface GetGlobalMetafieldsReq extends Omit<Req, 'query'> {
 }
 
 /**
+ * Query parameters accepted by the `/menus/[handle]` endpoint.
+ */
+export type GetMenuQuery = {
+  fields?: string
+  handle: ShopifyMenu['handle']
+}
+
+/**
  * Shape of requests sent to the `/menus/[handle]` endpoint.
  */
 export interface GetMenuReq extends Omit<Req, 'query'> {
@@ -192,10 +192,42 @@ export interface GetMenuReq extends Omit<Req, 'query'> {
 }
 
 /**
+ * Query parameters accepted by the `/pages/[handle]` endpoint.
+ */
+export type GetPageQuery = {
+  fields?: string
+  handle: IPage['handle']
+}
+
+/**
  * Shape of requests sent to the `/pages/[handle]` endpoint.
  */
 export interface GetPageReq extends Omit<Req, 'query'> {
   query: GetPageQuery
+}
+
+/**
+ * Query parameters accepted by the `/policies/[handle]` endpoint.
+ */
+export type GetPolicyQuery = {
+  fields?: string
+  handle: IPolicy['handle']
+}
+
+/**
+ * Shape of requests sent to the `/policies/[handle]` endpoint.
+ */
+export interface GetPolicyReq extends Omit<Req, 'query'> {
+  query: GetPolicyQuery
+}
+
+/**
+ * Query parameters accepted by the `/products/[handle]` endpoint.
+ */
+export type GetProductQuery = {
+  fields?: string
+  handle: IProductListing['handle']
+  sku?: IProductListingVariant['sku']
 }
 
 /**

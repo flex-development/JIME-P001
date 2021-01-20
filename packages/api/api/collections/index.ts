@@ -10,14 +10,15 @@ import omit from 'lodash/omit'
 import {
   ALGOLIA,
   axiosShopify,
-  INDEX_SETTINGS,
-  SHOPIFY
+  COLLECTION_LISTINGS,
+  INDEX_SETTINGS
 } from '../../lib/config'
 import type { FindCollectionsReq as Req } from '../../lib/types'
 import {
   collectionMetafields,
   collectionSEO,
-  findCollectionsOptions
+  findCollectionsOptions,
+  isSearchIndex404Error
 } from '../../lib/utils'
 
 /**
@@ -25,15 +26,13 @@ import {
  * @module api/collections
  */
 
-const COLLECTIONS = SHOPIFY.collectionListing
-
 export default async ({ query }: Req, res: Res): Promise<Res> => {
   // Convert collection query into search options object
   const options = findCollectionsOptions(query)
 
   try {
     // Get collection listings to update search index
-    let listings: Hit[] | Promise<Hit>[] = await COLLECTIONS.list()
+    let listings: Hit[] | Promise<Hit>[] = await COLLECTION_LISTINGS.list()
 
     // Keep objectID consistent with collection listing ID
     listings = listings.map(obj => ({ ...obj, objectID: obj.collection_id }))
@@ -87,9 +86,10 @@ export default async ({ query }: Req, res: Res): Promise<Res> => {
     // Return results and remove `objectID` field
     return res.json(hits.map(data => omit(data, ['objectID'])))
   } catch (err) {
-    const error = createError(err, { options, query }, err.status)
+    const index404 = isSearchIndex404Error(err)
+    const error = createError(err, { options, query }, err.status | err.code)
 
     debug('api/collections')(error)
-    return res.status(error.code).json(error)
+    return index404 ? res.json([]) : res.status(error.code).json(error)
   }
 }

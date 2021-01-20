@@ -32,6 +32,10 @@ export const INDEX_SETTINGS = {
     attributesForFaceting: ['author', 'handle', 'id', 'title'],
     name: 'pages'
   },
+  policies: {
+    attributesForFaceting: ['handle', 'title'],
+    name: 'policies'
+  },
   product_listings: {
     attributesForFaceting: ['handle', 'product_id', 'product_type', 'title'],
     name: 'product_listings'

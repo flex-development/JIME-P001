@@ -4,13 +4,14 @@ import type { VercelResponse as Res } from '@vercel/node'
 import debug from 'debug'
 import omit from 'lodash/omit'
 import type { IProductListing as Hit } from 'shopify-api-node'
-import { ALGOLIA, INDEX_SETTINGS, SHOPIFY } from '../../lib/config'
+import { ALGOLIA, INDEX_SETTINGS, PRODUCT_LISTINGS } from '../../lib/config'
 import type {
   FindCollectionsReq as Req,
   GetProductQuery
 } from '../../lib/types'
 import {
   findProductsOptions,
+  isSearchIndex404Error,
   productMetafields,
   productSEO
 } from '../../lib/utils'
@@ -20,15 +21,13 @@ import {
  * @module api/products
  */
 
-const PRODUCTS = SHOPIFY.productListing
-
 export default async ({ query }: Req, res: Res): Promise<Res> => {
   // Convert product query into search options object
   const options = findProductsOptions(query)
 
   try {
     // Get product listings to update search index
-    let listings: Hit[] | Promise<Hit>[] = await PRODUCTS.list()
+    let listings: Hit[] | Promise<Hit>[] = await PRODUCT_LISTINGS.list()
 
     // Keep objectID consistent with product listing ID
     listings = listings.map(obj => ({ ...obj, objectID: obj.product_id }))
@@ -70,9 +69,10 @@ export default async ({ query }: Req, res: Res): Promise<Res> => {
     // Return results and remove `objectID` field
     return res.json(hits.map(data => omit(data, ['objectID'])))
   } catch (err) {
-    const error = createError(err, { options, query }, err.status)
+    const index404 = isSearchIndex404Error(err)
+    const error = createError(err, { options, query }, err.status || err.code)
 
     debug('api/products')(error)
-    return res.status(error.code).json(error)
+    return index404 ? res.json([]) : res.status(error.code).json(error)
   }
 }

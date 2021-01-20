@@ -17,11 +17,8 @@ export default ({ query }: Req, res: Res): void => {
   const filename_split = filename.split('.')
   const extension = filename_split[filename_split.length - 1]
 
-  // Static image directory
-  const dir = 'static/images'
-
   try {
-    const file = readFileSync(join(process.cwd(), dir, filename))
+    const file = readFileSync(join(__dirname, '_files', filename))
 
     res.writeHead(200, { 'Content-Type': `image/${extension}` })
     res.end(file)

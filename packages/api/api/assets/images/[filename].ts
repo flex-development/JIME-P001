@@ -10,8 +10,6 @@ import type { GetStaticAssetReq as Req } from '../../../lib/types'
  * @module api/assets/images/[filename]
  */
 
-const DEV = process.env.VERCEL_ENV === 'development'
-
 export default ({ query }: Req, res: Res): void => {
   const { filename } = query
 
@@ -19,11 +17,8 @@ export default ({ query }: Req, res: Res): void => {
   const filename_split = filename.split('.')
   const extension = filename_split[filename_split.length - 1]
 
-  // Static image directory
-  const dir = `${DEV ? '../../../' : ''}static/images`
-
   try {
-    const file = readFileSync(join(__dirname, dir, filename))
+    const file = readFileSync(join(__dirname, '_files', filename))
 
     res.writeHead(200, { 'Content-Type': `image/${extension}` })
     res.end(file)

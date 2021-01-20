@@ -9,7 +9,7 @@ import { findPagesOptions, pageMetafields, pageSEO } from '../../lib/utils'
 
 /**
  * @file API Endpoint - Find Pages
- * @module api/products
+ * @module api/pages
  */
 
 const PAGES = SHOPIFY.page

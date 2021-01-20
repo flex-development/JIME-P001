@@ -3,6 +3,7 @@ import type { AnyObject, NullishString } from '@flex-development/json'
 import type {
   ICollectionListing,
   IMetafield,
+  IPage,
   IProductListing,
   IProductListingVariant,
   ShopifyMenu
@@ -109,6 +110,24 @@ export type FindMetafieldParams = {
 }
 
 /**
+ * Query parameters accepted by the `/pages` endpoint.
+ */
+export type FindPagesQuery = PaginationSearchOptions & {
+  author?: IPage['author']
+  fields?: string
+  handle?: IPage['handle']
+  id?: IPage['id']
+  text?: SearchOptions['query']
+}
+
+/**
+ * Shape of requests sent to the `/pages` endpoint.
+ */
+export interface FindPagesReq extends Omit<Req, 'query'> {
+  query: FindPagesQuery
+}
+
+/**
  * Query parameters accepted by the `/products` endpoint.
  */
 export type FindProductsQuery = PaginationSearchOptions & {
@@ -132,6 +151,14 @@ export type GetCollectionQuery = {
 export type GetMenuQuery = {
   fields?: string
   handle: ShopifyMenu['handle']
+}
+
+/**
+ * Query parameters accepted by the `/pages/[handle]` endpoint.
+ */
+export type GetPageQuery = {
+  fields?: string
+  handle: IPage['handle']
 }
 
 /**
@@ -162,6 +189,13 @@ export interface GetGlobalMetafieldsReq extends Omit<Req, 'query'> {
  */
 export interface GetMenuReq extends Omit<Req, 'query'> {
   query: GetMenuQuery
+}
+
+/**
+ * Shape of requests sent to the `/pages/[handle]` endpoint.
+ */
+export interface GetPageReq extends Omit<Req, 'query'> {
+  query: GetPageQuery
 }
 
 /**

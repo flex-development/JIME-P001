@@ -22,9 +22,11 @@ import globalSEO from './globalSEO'
  * @param products - Products in collection
  */
 const collectionSEO = async (
-  listing: ICollectionListing,
+  listing: ICollectionListing | Promise<ICollectionListing>,
   products: IProductListing[] = []
 ): Promise<SEOData> => {
+  listing = await listing
+
   // Get global SEO data
   const global = await globalSEO()
 

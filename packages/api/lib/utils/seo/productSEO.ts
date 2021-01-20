@@ -21,10 +21,11 @@ import type { SEOData } from '../../types'
  * @param listing - Product listing data
  * @param sku - SKU of variant to generate SEO for (optional)
  */
-const productSEO = (
-  listing: IProductListing,
+const productSEO = async (
+  listing: IProductListing | Promise<IProductListing>,
   sku: IProductListingVariant['sku'] = ''
-): SEOData => {
+): Promise<SEOData> => {
+  listing = await listing
   const { available, images = [], vendor } = listing
 
   // Initialize SEO object

@@ -18,9 +18,10 @@ import type { SearchOptions } from '../../types'
  * @param query - Query from API request
  * @param query.fields - Comma-separated list of resource fields to include
  * @param query.handle - Find resource by handle
+ * @param query.id - Find resource by ID
  */
 const shopifySearchOptions = (query: AnyObject = {}): SearchOptions => {
-  const { fields, handle, ...rest } = query
+  const { fields, handle, id, ...rest } = query
 
   // Initialize search filters array
   const filters: string[] = []
@@ -35,6 +36,9 @@ const shopifySearchOptions = (query: AnyObject = {}): SearchOptions => {
 
   // Add handle filter
   if (!isEmpty(handle)) filters.push(`handle:${handle}`)
+
+  // Add id filter
+  if (!isEmpty(id)) filters.push(`id:${id}`)
 
   return {
     ...DSO,

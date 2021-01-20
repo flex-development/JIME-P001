@@ -5,6 +5,7 @@
 
 export { default as collectionSEO } from './collectionSEO'
 export { default as globalSEO } from './globalSEO'
+export { default as pageSEO } from './pageSEO'
 export { default as productSEO } from './productSEO'
 
 /* eslint-disable prettier/prettier */

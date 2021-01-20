@@ -1,4 +1,5 @@
-import { createError, IProductListing } from '@flex-development/kustomzcore'
+import type { IProductListing } from '@flex-development/kustomzcore'
+import { createError } from '@flex-development/kustomzcore'
 import type { VercelResponse as Res } from '@vercel/node'
 import debug from 'debug'
 import omit from 'lodash/omit'
@@ -42,10 +43,14 @@ export default async ({ query }: Req, res: Res): Promise<Res> => {
     listings = await Promise.all(listings)
 
     // Get SEO data for each product
-    listings = listings.map(async hit => ({
-      ...hit,
-      seo: productSEO(hit as IProductListing, (query as GetProductQuery).sku)
-    }))
+    listings = listings.map(async hit => {
+      const product = hit as IProductListing
+
+      return {
+        ...hit,
+        seo: await productSEO(product, (query as GetProductQuery).sku)
+      }
+    })
 
     // Complete SEO data promise
     listings = await Promise.all(listings)

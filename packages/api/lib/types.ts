@@ -238,6 +238,20 @@ export interface GetProductReq extends Omit<Req, 'query'> {
 }
 
 /**
+ * Query parameters accepted by the `/assets/*` endpoints.
+ */
+export type GetStaticAssetQuery = {
+  filename: string
+}
+
+/**
+ * Shape of requests sent to the the `/assets/*` endpoints.
+ */
+export interface GetStaticAssetReq extends Omit<Req, 'query'> {
+  query: GetStaticAssetQuery
+}
+
+/**
  * Names of Algolia pagination search parameters.
  */
 export type PaginationParameter = 'hitsPerPage' | 'length' | 'page' | 'offset'

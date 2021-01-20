@@ -8,29 +8,33 @@ import type { IProductListing, IProductListingVariant } from '../types'
  * @module utils/getProductImage
  */
 
+type Image = ImgHTMLAttributes<HTMLImageElement>
+
 /**
  * Returns an `ImgHTMLAttributes` object for a product listing variant.
  *
  * @param image_id - Variant image ID
  * @param images - Array of product listing images
+ * @param sized - If true, retrieve sized image URLs
  * @param fallback - Fallback image options
  * @param fallback.alt - Image alt text
  * @param fallback.src - Fallback image source
  * @return `ImgHTMLAttributes` object for selected variant
  */
 const getProductImage = (
-  image_id: IProductListingVariant['image_id'],
-  images: IProductListing['images'],
-  fallback: {
-    alt?: ImgHTMLAttributes<HTMLImageElement>['alt']
-    src: ImgHTMLAttributes<HTMLImageElement>['src']
-  }
-): ImgHTMLAttributes<HTMLImageElement> => {
-  const image = image_id ? images.find(img => img.id === image_id) : images[0]
-  const { alt: image_alt, height, id, src = '', width } = image || {}
+  image_id: IProductListingVariant['image_id'] = null,
+  images: IProductListing['images'] = [],
+  sized = true,
+  fallback: Image = {}
+): Image => {
+  const image = image_id ? images.find(img => img.id === image_id) : fallback
+  const { alt: image_alt, height, id, src = '', width } = image as Image
 
-  const url = getSizedImageUrl(src, '1024x1024') || fallback.src
-  const url_2x = getSizedImageUrl(src, '2048x2048') || fallback.src
+  let url = sized ? getSizedImageUrl(src, '1024x1024') : src
+  let url_2x = sized ? getSizedImageUrl(src, '2048x2048') : src
+
+  if (sized && !url.startsWith('https')) url = `https${url}`
+  if (sized && !url_2x.startsWith('https')) url_2x = `https${url_2x}`
 
   return {
     alt: !isEmpty(image_alt) ? image_alt || undefined : fallback.alt,

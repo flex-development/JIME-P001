@@ -42,12 +42,13 @@ const productSEO = async (
 
     // Get active product variant
     const variant = listing.variants[active < 0 ? 0 : active]
+    const { image_id } = variant
 
     // Get SEO title
     const title = `${listing.title} - ${variant.title}`
 
     // Get product variant image
-    const variant_img = getProductImage(variant?.image_id, images, {
+    const variant_img = getProductImage(image_id, images, image_id !== null, {
       alt: title,
       src: DEFAULT_IMAGE_URL
     })

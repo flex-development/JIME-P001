@@ -18,7 +18,7 @@ export default ({ query }: Req, res: Res): void => {
   const extension = filename_split[filename_split.length - 1]
 
   // Static image directory
-  const dir = '../../static/images'
+  const dir = '../static/images'
 
   try {
     const file = readFileSync(join(__dirname, dir, filename))

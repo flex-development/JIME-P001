@@ -1,3 +1,7 @@
+// Type definitions for @shopify/theme-images
+// Project: KustomzCore
+// Definitions by: Lexus Drumgold <https://github.com/lexusdrumgold>
+
 declare module '@shopify/theme-images' {
   /**
    * Adds a Shopify size attribute to a URL.

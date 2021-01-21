@@ -1,7 +1,8 @@
-import { IProductListing } from '@flex-development/kustomzcore/types/shopify'
+import type { IProductListing } from '@flex-development/kustomzcore'
+import ProductImage from '@flex-development/kustomzcore/utils/getProductImage'
+import { IMAGE_PLACEHOLDER_URL } from '@system/config/constants'
 import { useMemoCompare } from '@system/hooks/useMemoCompare'
-import { ImageProps } from '@system/lib/atoms/Image'
-import { getProductImage } from '@system/utils/getProductImage'
+import type { ImageProps } from '@system/lib/atoms/Image'
 import { useMemo } from 'react'
 
 /**
@@ -28,11 +29,15 @@ export const useProductImages = (product?: IProductListing): ImageProps[] => {
     return images.map(({ id }) => {
       const variant = variants.find(({ image_id }) => image_id === id)
 
-      return getProductImage(
+      return ProductImage(
         variant?.image_id || null,
         images,
-        variant ? `${title} - ${variant?.title}` : title
-      )
+        variant?.image_id === null,
+        {
+          alt: variant ? `${title} - ${variant?.title}` : title,
+          src: IMAGE_PLACEHOLDER_URL
+        }
+      ) as ImageProps
     })
   }, [_product])
 

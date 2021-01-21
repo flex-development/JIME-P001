@@ -22,7 +22,7 @@ export interface SidebarProps extends AsideProps {
   /**
    * Profile image URL.
    *
-   * @default {}
+   * @default 'https://api.morenaskustomz.com/assets/images/morena.jpeg'
    */
   img?: ImageProps['src']
 

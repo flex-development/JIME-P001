@@ -15,7 +15,7 @@ export * from './useQuantity'
 export * from './useRewindSpring'
 export * from './useSanitizedProps'
 export * from './useSlideInOut'
-export * from './useSongs'
+export * from './useSongAttributes'
 export * from './useTransformScaleX'
 export * from './useUtilityClasses'
 

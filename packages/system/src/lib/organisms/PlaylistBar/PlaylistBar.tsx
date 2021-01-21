@@ -7,22 +7,24 @@ import {
 } from '@shopify/polaris-icons'
 import { IMAGE_PLACEHOLDER_URL } from '@system/config/constants'
 import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
-import { useSongs } from '@system/hooks/useSongs'
+import { useSongAttributes } from '@system/hooks/useSongAttributes'
 import { Audio } from '@system/lib/atoms/Audio'
 import { Box } from '@system/lib/atoms/Box'
 import { Button } from '@system/lib/atoms/Button'
 import { Image } from '@system/lib/atoms/Image'
 import { Link } from '@system/lib/atoms/Link'
 import { Paragraph } from '@system/lib/atoms/Paragraph'
-import { Section, SectionProps } from '@system/lib/atoms/Section'
-import { EventHandlers } from '@system/types'
+import type { SectionProps } from '@system/lib/atoms/Section'
+import { Section } from '@system/lib/atoms/Section'
+import type { EventHandlers } from '@system/types'
 import { getSongArtworkURL } from '@system/utils/getSongArtworkURL'
 import isFunction from 'lodash/isFunction'
-import { FC, useCallback, useMemo } from 'react'
+import type { FC } from 'react'
+import { useCallback, useMemo } from 'react'
 import { useBoolean } from 'react-hanger/array/useBoolean'
 import useAudio from 'react-use/useAudio'
 import useEvent from 'react-use/useEvent'
-import { PlaylistBarProps } from './PlaylistBar.props'
+import type { PlaylistBarProps } from './PlaylistBar.props'
 
 /**
  * @file Implementation - PlaylistBar
@@ -41,7 +43,7 @@ export const PlaylistBar: FC<PlaylistBarProps> = props => {
   const { auto, curr, handlePlayback, handleSkip, songs = [], ...rest } = props
 
   // Handle tracks state
-  const { next, previous, song } = useSongs(songs, curr)
+  const { next, previous, song } = useSongAttributes(songs, curr)
 
   // Get song artwork URL
   const artwork_url = useMemo<string>(() => getSongArtworkURL(song), [song])

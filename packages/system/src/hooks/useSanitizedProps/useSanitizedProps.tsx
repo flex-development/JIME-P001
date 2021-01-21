@@ -1,9 +1,10 @@
-import { AnyObject } from '@flex-development/json/utils/types'
-import { AnimatedProps } from '@react-spring/web'
+import type { AnyObject } from '@flex-development/json'
+import { EMPTY_SPACE as ES } from '@flex-development/kustomzcore'
+import type { AnimatedProps } from '@react-spring/web'
 import { useUtilityClasses } from '@system/hooks/useUtilityClasses'
-import { JSXIEPropsOr } from '@system/types'
+import type { JSXIEPropsOr } from '@system/types'
 import classnames from 'classnames'
-import { ClassDictionary } from 'classnames/types'
+import type { ClassDictionary } from 'classnames/types'
 import isObject from 'lodash/isObject'
 import join from 'lodash/join'
 import merge from 'lodash/merge'
@@ -53,7 +54,7 @@ export function useSanitizedProps<
   const dstring = classnames(className, _inject).trim()
 
   // Get unique class names and update CSS classes
-  sanitized.className = join(uniq(dstring.split(' ')), ' ').trim()
+  sanitized.className = join(uniq(dstring.split(ES)), ES).trim()
 
   // Handle dangerouslySetInnerHTML
   if ($html) {

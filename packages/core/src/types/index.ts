@@ -1,9 +1,9 @@
 /**
- * @file Shared Type Definitions
+ * @file Type Definitions
  * @module types
  */
 
-export * from './musickit'
+export * from './apple-music'
 export * from './reviews'
 export * from './shopify'
 

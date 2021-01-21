@@ -1,3 +1,4 @@
+import { EMPTY_SPACE } from '@flex-development/kustomzcore'
 import isEmpty from 'lodash/isEmpty'
 import join from 'lodash/join'
 import uniq from 'lodash/uniq'
@@ -38,7 +39,7 @@ const findPagesOptions = (query: Query = {}): SearchOptions => {
   return {
     ...options,
     attributesToRetrieve: uniq(attributes),
-    filters: join(filters, ' ')
+    filters: join(filters, EMPTY_SPACE)
   }
 }
 

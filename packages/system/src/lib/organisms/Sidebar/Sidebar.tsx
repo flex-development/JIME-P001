@@ -73,7 +73,7 @@ Sidebar.displayName = 'Sidebar'
 
 Sidebar.defaultProps = {
   age: 22,
-  img: 'assets/morena.jpeg',
+  img: 'https://api.morenaskustomz.com/assets/images/morena.jpeg',
   location: 'New York',
   menu: [],
   mood: 'High 🤪'

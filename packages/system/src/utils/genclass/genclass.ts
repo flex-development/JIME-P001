@@ -1,5 +1,5 @@
-import { Primitive } from '@flex-development/json/utils/types'
-import { GridBreakpointKey } from '@system/types'
+import type { Primitive } from '@flex-development/json/utils/types'
+import type { GridBreakpointKey } from '@system/types'
 import { breakpointInfix } from '@system/utils/breakpointInfix'
 
 /**

@@ -1,4 +1,4 @@
-import { ANYTHING } from '@flex-development/json/utils/types'
+import type { ANYTHING } from '@flex-development/json'
 import isEqual from 'lodash/isEqual'
 import isFunction from 'lodash/isFunction'
 import { useEffect, useMemo, useRef } from 'react'

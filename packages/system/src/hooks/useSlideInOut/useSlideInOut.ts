@@ -1,6 +1,9 @@
-import { useSpring, UseSpringProps } from '@react-spring/web'
-import { RefObject, useRef } from 'react'
-import useBoolean, { UseBooleanActions } from 'react-hanger/array/useBoolean'
+import type { UseSpringProps } from '@react-spring/web'
+import { useSpring } from '@react-spring/web'
+import type { RefObject } from 'react'
+import { useRef } from 'react'
+import type { UseBooleanActions } from 'react-hanger/array/useBoolean'
+import useBoolean from 'react-hanger/array/useBoolean'
 
 /**
  * @file Slide an element on and off screen

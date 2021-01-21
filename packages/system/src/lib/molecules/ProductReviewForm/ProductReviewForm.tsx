@@ -1,4 +1,4 @@
-import { AnyObject } from '@flex-development/json/utils/types'
+import type { AnyObject } from '@flex-development/json'
 import { CreateReviewRequest } from '@flex-development/kustomzcore/types'
 import { useProductVariants } from '@system/hooks/useProductVariants'
 import { useSanitizedProps } from '@system/hooks/useSanitizedProps'

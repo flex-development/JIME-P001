@@ -48,6 +48,7 @@ module.exports = {
   },
   prettierPath: '<rootDir>/../../node_modules/prettier',
   setupFilesAfterEnv: ['@testing-library/jest-dom/extend-expect'],
+  testEnvironment: 'jsdom',
   testPathIgnorePatterns: [
     '__tests__/__mocks__/',
     'dist/',

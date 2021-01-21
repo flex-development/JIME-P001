@@ -1,5 +1,6 @@
 import { Link } from '@components/atoms/Link'
 import { Paragraph, ParagraphProps } from '@components/atoms/Paragraph'
+import { EMPTY_SPACE } from '@flex-development/kustomzcore/constants'
 import { FC } from 'react'
 
 /**
@@ -13,10 +14,11 @@ import { FC } from 'react'
 export const ErrorContent: FC<ParagraphProps> = props => (
   <Paragraph {...props} $color='white'>
     {/* eslint-disable-next-line prettier/prettier */}
-    Go{' '}
+    Go{EMPTY_SPACE}
     <Link $color='secondary' href='/'>
       home
-    </Link>{' '}
+    </Link>
+    {EMPTY_SPACE}
     and smoke or something.
   </Paragraph>
 )

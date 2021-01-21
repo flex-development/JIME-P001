@@ -1,12 +1,10 @@
-import { CHECKOUT_BASE_URL } from '@flex-development/kustomzcore/constants'
-import {
+import type {
   CheckoutLineItemInput,
   CheckoutPermalinkInput
-} from '@flex-development/kustomzcore/types/shopify'
-import {
-  UseCheckoutPermalink,
-  useCheckoutPermalink
-} from '@system/hooks/useCheckoutPermalink'
+} from '@flex-development/kustomzcore'
+import { CHECKOUT_BASE_URL } from '@flex-development/kustomzcore/constants'
+import type { UseCheckoutPermalink } from '@system/hooks/useCheckoutPermalink'
+import { useCheckoutPermalink } from '@system/hooks/useCheckoutPermalink'
 import { getItemsTotal } from '@system/utils/getItemsTotal'
 import isFunction from 'lodash/isFunction'
 import { createContext, useContext, useMemo } from 'react'

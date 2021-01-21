@@ -1,13 +1,14 @@
-import { AnyObject } from '@flex-development/json/utils/types'
+import type { AnyObject } from '@flex-development/json'
+import { EMPTY_SPACE } from '@flex-development/kustomzcore'
 import {
   GRID_BREAKPOINT_KEYS,
   UTILITY_PROP_ALIASES as ALIASES
 } from '@system/config/constants'
 import { useMemoCompare } from '@system/hooks/useMemoCompare'
-import { GridBreakpointKey } from '@system/types'
+import type { GridBreakpointKey } from '@system/types'
 import { genclasses } from '@system/utils/genclasses'
 import classnames from 'classnames'
-import { ClassDictionary } from 'classnames/types'
+import type { ClassDictionary } from 'classnames/types'
 import isPlainObject from 'lodash/isPlainObject'
 import join from 'lodash/join'
 import pick from 'lodash/pick'
@@ -76,6 +77,6 @@ export const useUtilityClasses = (
     const dstring = classnames(dictionary, _props.className)
 
     // Return string containing unique class names
-    return join(uniq(dstring.split(' ')), ' ').trim()
+    return join(uniq(dstring.split(EMPTY_SPACE)), EMPTY_SPACE).trim()
   }, [_aliases, _breakpoints, _props])
 }

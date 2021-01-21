@@ -1,4 +1,4 @@
-import { AnyObject } from '@flex-development/json/utils/types'
+import type { AnyObject } from '@flex-development/json/utils/types'
 
 /**
  * @file Implementation - objectFromArray

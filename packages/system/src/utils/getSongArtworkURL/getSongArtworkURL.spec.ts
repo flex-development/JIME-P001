@@ -1,4 +1,3 @@
-import { MusicKitSongAttributes } from '@flex-development/kustomzcore/types'
 import { SONGS } from '@system-mocks/utils'
 import getSongArtworkURL from './getSongArtworkURL'
 
@@ -23,8 +22,6 @@ describe('getSongArtworkURL', () => {
   })
 
   it('returns an empty string if song data is missing', () => {
-    bad_args.forEach(arg => {
-      expect(getSongArtworkURL(arg as MusicKitSongAttributes)).toBe('')
-    })
+    bad_args.forEach(arg => expect(getSongArtworkURL(arg)).toBe(''))
   })
 })

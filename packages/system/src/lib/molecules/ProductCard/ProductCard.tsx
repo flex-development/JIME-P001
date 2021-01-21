@@ -1,4 +1,6 @@
 import { IProductListingVariant } from '@flex-development/kustomzcore/types'
+import getProductImage from '@flex-development/kustomzcore/utils/getProductImage'
+import { IMAGE_PLACEHOLDER_URL } from '@system/config/constants'
 import { useMemoCompare } from '@system/hooks/useMemoCompare'
 import { useProductVariants } from '@system/hooks/useProductVariants'
 import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
@@ -7,12 +9,10 @@ import { Image, ImageProps } from '@system/lib/atoms/Image'
 import { Link } from '@system/lib/atoms/Link'
 import { Paragraph } from '@system/lib/atoms/Paragraph'
 import { EventHandlers } from '@system/types'
-import { getProductImage } from '@system/utils/getProductImage'
 import dynamic from 'next/dynamic'
 import { FC, useCallback, useEffect, useMemo, useState } from 'react'
 import useBoolean from 'react-hanger/array/useBoolean'
 import { ProductCardProps } from './ProductCard.props'
-
 /**
  * @file Implementation - ProductCard
  * @module lib/molecules/ProductCard/impl
@@ -50,7 +50,12 @@ export const ProductCard: FC<ProductCardProps> = props => {
   // Get product variant display image
   const image_alt = `${product.title} - ${selected.title}`
   const image = useMemoCompare<ImageProps>(
-    getProductImage(selected.image_id, product.images, image_alt)
+    getProductImage(
+      selected.image_id,
+      product.images,
+      selected.image_id === null,
+      { alt: image_alt, src: IMAGE_PLACEHOLDER_URL }
+    ) as ImageProps
   )
 
   // Update product url when new variant is selected

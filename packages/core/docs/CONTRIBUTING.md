@@ -22,4 +22,5 @@ well as add new features.
 
 Directory: `src`
 
-Add types used by both packages under the `src` directory.
+Add modules and type definitions used by both packages under the `src`
+directory.

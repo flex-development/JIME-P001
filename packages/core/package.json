@@ -38,7 +38,7 @@
     "src"
   ],
   "scripts": {
-    "precompile": "dotenv -e ../packages/api/.env.production.local -- rm -rf ./dist",
+    "precompile": "rm -rf ./dist",
     "compile": "babel src -d dist --extensions '.ts'",
     "postcompile": "ttsc -p tsconfig.prod.json",
     "prepare": "NODE_ENV=production yarn compile"

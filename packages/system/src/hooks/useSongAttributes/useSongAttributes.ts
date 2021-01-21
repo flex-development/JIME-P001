@@ -1,5 +1,5 @@
-import { AnyObject } from '@flex-development/json/utils/types'
-import { MusicKitSongAttributes } from '@flex-development/kustomzcore/types'
+import type { AnyObject } from '@flex-development/json'
+import type { SongAttributes } from '@flex-development/kustomzcore/types'
 import { UseActiveIndex, useActiveIndex } from '@system/hooks/useActiveIndex'
 import { useMemoCompare } from '@system/hooks/useMemoCompare'
 import clamp from 'lodash/clamp'
@@ -7,17 +7,15 @@ import { useCallback } from 'react'
 
 /**
  * @file Use array of Apple Music song attributes
- * @module hooks/useSongs/impl
+ * @module hooks/useSongAttributes/impl
  */
 
-type Song = MusicKitSongAttributes
-
-export type UseSongs = {
+export type UseSongAttributes = {
   active: UseActiveIndex['active']
   isActive: UseActiveIndex['isActive']
   next: () => void
   previous: () => void
-  song: Song | AnyObject
+  song: SongAttributes | AnyObject
 }
 
 /**
@@ -26,9 +24,12 @@ export type UseSongs = {
  * @param songs - Array of song attributes
  * @param curr - Current song index
  */
-export const useSongs = (songs: Song[] = [], curr = 0): UseSongs => {
+export const useSongAttributes = (
+  songs: SongAttributes[] = [],
+  curr = 0
+): UseSongAttributes => {
   // Handle internal songs state
-  const _songs = useMemoCompare<Song[]>(songs)
+  const _songs = useMemoCompare<SongAttributes[]>(songs)
 
   /**
    * Clamps {@param index} between 0 and the number of the songs in the songs
@@ -45,7 +46,9 @@ export const useSongs = (songs: Song[] = [], curr = 0): UseSongs => {
   const active = useActiveIndex(clampIndexCB(curr))
 
   // Handle current song state
-  const song = useMemoCompare<Song | AnyObject>(_songs[active.active] || {})
+  const song = useMemoCompare<SongAttributes | AnyObject>(
+    _songs[active.active] || {}
+  )
 
   /**
    * Increases the active index by 1.

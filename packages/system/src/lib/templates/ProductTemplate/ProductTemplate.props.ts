@@ -1,4 +1,4 @@
-import { ANYTHING } from '@flex-development/json/utils/types'
+import type { ANYTHING } from '@flex-development/json'
 import { IProductListing, IReview } from '@flex-development/kustomzcore/types'
 import { LinkProps } from '@system/lib/atoms/Link'
 import { MainProps } from '@system/lib/atoms/Main'

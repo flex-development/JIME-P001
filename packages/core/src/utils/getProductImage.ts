@@ -19,7 +19,6 @@ type Image = ImgHTMLAttributes<HTMLImageElement>
  * @param fallback - Fallback image options
  * @param fallback.alt - Image alt text
  * @param fallback.src - Fallback image source
- * @return `ImgHTMLAttributes` object for selected variant
  */
 const getProductImage = (
   image_id: IProductListingVariant['image_id'] = null,

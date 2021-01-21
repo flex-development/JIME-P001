@@ -8,16 +8,14 @@ import { Main, MainProps } from '@system/lib/atoms/Main'
 import { Paragraph } from '@system/lib/atoms/Paragraph'
 import { Section } from '@system/lib/atoms/Section'
 import { Span } from '@system/lib/atoms/Span'
-import {
-  CheckoutLineItem,
-  CheckoutLineItemProps
-} from '@system/lib/molecules/CheckoutLineItem'
-import { TC } from '@system/types'
+import type { CheckoutLineItemProps } from '@system/lib/molecules/CheckoutLineItem'
+import { CheckoutLineItem } from '@system/lib/molecules/CheckoutLineItem'
+import type { TC } from '@system/types'
 import { formatPrice } from '@system/utils/formatPrice'
 import { getSubtotal } from '@system/utils/getSubtotal'
 import isFunction from 'lodash/isFunction'
 import { useCallback, useRef } from 'react'
-import { CartTemplateProps } from './CartTemplate.props'
+import type { CartTemplateProps } from './CartTemplate.props'
 
 /**
  * @file Implementation - CartTemplate

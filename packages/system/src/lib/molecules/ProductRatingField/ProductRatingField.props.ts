@@ -1,4 +1,4 @@
-import { ANYTHING } from '@flex-development/json/utils/types'
+import type { ANYTHING } from '@flex-development/json'
 import { BoxProps } from '@system/lib/atoms'
 import { EventHandlers } from '@system/types'
 

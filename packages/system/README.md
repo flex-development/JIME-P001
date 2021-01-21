@@ -28,6 +28,8 @@ from the [Learn Storybook](https://www.learnstorybook.com) docs.
 
 ## Usage
 
+### Installation
+
 1. Add `"@flex-development/kustomzdesign": "*"` to your project `dependencies`
 
 2. Run `yarn` to re-install the project dependencies
@@ -38,14 +40,12 @@ from the [Learn Storybook](https://www.learnstorybook.com) docs.
 
 ## Built With
 
-- [FlexJSON][1] - JSON data starter kit
-- [React][2] - JavaScript library for building user interfaces
-- [Storybook][3] - UI development and documentation tool
-- [TypeScript][4] - Typed JavaScript
-- [Vercel][5] - Hosting platform for static sites and serverless functions
+- [React][1] - JavaScript library for building user interfaces
+- [Storybook][2] - UI development and documentation tool
+- [TypeScript][3] - Typed JavaScript
+- [Vercel][4] - Hosting platform for static sites and serverless functions
 
-[1]: https://github.com/flex-development/json
-[2]: https://reactjs.org/
-[3]: https://storybook.js.org/
-[4]: https://www.typescriptlang.org/
-[5]: https://vercel.com/
+[1]: https://reactjs.org/
+[2]: https://storybook.js.org/
+[3]: https://www.typescriptlang.org/
+[4]: https://vercel.com/

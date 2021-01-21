@@ -1,4 +1,4 @@
-import { AnyObject } from '@flex-development/json/utils/types'
+import type { AnyObject } from '@flex-development/json'
 import { CheckoutLineItemInput } from '@flex-development/kustomzcore/types/shopify'
 import { act, renderHook } from '@testing-library/react-hooks'
 import isPlainObject from 'lodash/isPlainObject'

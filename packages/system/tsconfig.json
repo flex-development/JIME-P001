@@ -6,9 +6,6 @@
     "sourceMap": false,
     "target": "es6",
     "typeRoots": [
-      "../../node_modules/@flex-development/kustomzcore/types",
-      "../../node_modules/@flex-development/json/dist",
-      "../../node_modules/@storybook/react/types",
       "../../node_modules/@testing-library/react/types",
       "../../node_modules/@types",
       "../../node_modules/musickit-typescript"
@@ -16,5 +13,5 @@
   },
   "exclude": ["node_modules"],
   "extends": "../../tsconfig.json",
-  "include": ["__tests__", ".storybook", "src"]
+  "include": ["__tests__", ".storybook", "src", "typings"]
 }

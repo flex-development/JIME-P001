@@ -1,6 +1,6 @@
 import { SONGS } from '@system-mocks/utils'
 import { PlaylistBar } from './PlaylistBar'
-import { PlaylistBarProps } from './PlaylistBar.props'
+import type { PlaylistBarProps } from './PlaylistBar.props'
 
 /**
  * @file Stories - PlaylistBar

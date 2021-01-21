@@ -1,13 +1,14 @@
-import { AnyObject } from '@flex-development/json/utils/types'
-import {
+import type { AnyObject } from '@flex-development/json'
+import type {
   AnimatedProps,
   InterpolatorConfig as IC,
   SpringValue,
-  useSpring,
   UseSpringProps
 } from '@react-spring/web'
+import { useSpring } from '@react-spring/web'
 import { useMemoCompare } from '@system/hooks/useMemoCompare'
-import useBoolean, { UseBooleanActions } from 'react-hanger/array/useBoolean'
+import type { UseBooleanActions } from 'react-hanger/array/useBoolean'
+import useBoolean from 'react-hanger/array/useBoolean'
 
 /**
  * @file Animate the CSS `scale` transformation

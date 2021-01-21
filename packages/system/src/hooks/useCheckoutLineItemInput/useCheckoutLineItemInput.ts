@@ -1,6 +1,7 @@
-import { AnyObject } from '@flex-development/json/utils/types'
-import { CheckoutLineItemInput } from '@flex-development/kustomzcore/types'
-import { useQuantity, UseQuantity } from '@system/hooks/useQuantity'
+import type { AnyObject } from '@flex-development/json'
+import type { CheckoutLineItemInput } from '@flex-development/kustomzcore'
+import type { UseQuantity } from '@system/hooks/useQuantity'
+import { useQuantity } from '@system/hooks/useQuantity'
 import { useSetState } from 'react-hanger'
 
 /**

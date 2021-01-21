@@ -1,4 +1,5 @@
-import { config, SpringValue, useSpring } from '@react-spring/web'
+import type { SpringValue } from '@react-spring/web'
+import { config, useSpring } from '@react-spring/web'
 import useBoolean from 'react-hanger/array/useBoolean'
 
 /**

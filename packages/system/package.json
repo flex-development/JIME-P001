@@ -53,7 +53,7 @@
     "prenow-build": "lerna run prepare --scope @flex-development/kustomzcore; lerna link",
     "now-build": "NODE_ENV=production yarn build",
     "precompile:ts": "rm -rf ./dist",
-    "compile:ts": "babel --config-file ./babel.config.prod.js src -d dist --extensions '.ts,.tsx'; shx cp -R ./src/types/typings ./dist/types/typings",
+    "compile:ts": "babel --config-file ./babel.config.prod.js src -d dist --extensions '.ts,.tsx'",
     "postcompile:ts": "ttsc -p tsconfig.prod.json",
     "compile:scss": "webpack -c webpack.prod.js",
     "postcompile:scss": "rm ./dist/css.js",
@@ -62,7 +62,6 @@
   "dependencies": {
     "@react-spring/web": "^9.0.0-rc.3",
     "@shopify/polaris-icons": "^4.1.0",
-    "@shopify/theme-images": "^4.1.0",
     "classnames": "^2.2.6",
     "react-hanger": "^2.2.1",
     "react-use": "^15.3.4",
@@ -84,7 +83,6 @@
     "@testing-library/react-hooks": "^3.4.2",
     "@testing-library/user-event": "^12.3.0",
     "@types/classnames": "^2.2.10",
-    "@types/feathersjs__errors": "^3.3.2",
     "@types/mdx-js__react": "^1.5.3",
     "@whitespace/storybook-addon-html": "^2.0.1",
     "babel-loader": "^8.2.2",
@@ -109,8 +107,6 @@
     "@flex-development/kustomzcore": "*",
     "@mdx-js/react": "^1.6.22",
     "@types/mdx-js__react": "^1.5.3",
-    "@yujinakayama/apple-music": "^0.4.0",
-    "next": "^10.0.5",
     "react": "^17.0.1",
     "react-dom": "^17.0.1"
   },
@@ -119,9 +115,6 @@
       "optional": true
     },
     "@types/mdx-js__react": {
-      "optional": true
-    },
-    "@yujinakayama/apple-music": {
       "optional": true
     }
   },
@@ -140,8 +133,5 @@
   "engines": {
     "node": ">=10"
   },
-  "sideEffects": [
-    "**/*.css",
-    "**/*.scss"
-  ]
+  "sideEffects": false
 }

@@ -1,4 +1,5 @@
 import type { AnyObject } from '@flex-development/json'
+import { EMPTY_SPACE } from '@flex-development/kustomzcore'
 import isEmpty from 'lodash/isEmpty'
 import join from 'lodash/join'
 import pick from 'lodash/pick'
@@ -44,7 +45,7 @@ const shopifySearchOptions = (query: AnyObject = {}): SearchOptions => {
     ...DSO,
     ...pick(rest, PAGINATION_PARAMS),
     attributesToRetrieve,
-    filters: join(filters, ' ')
+    filters: join(filters, EMPTY_SPACE)
   }
 }
 

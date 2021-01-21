@@ -1,5 +1,6 @@
 import { useCallback, useEffect } from 'react'
-import useNumber, { UseNumberActions } from 'react-hanger/array/useNumber'
+import type { UseNumberActions } from 'react-hanger/array/useNumber'
+import useNumber from 'react-hanger/array/useNumber'
 
 /**
  * @file Create a Bootstrap carousel instance

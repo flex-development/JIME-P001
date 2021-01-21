@@ -18,11 +18,11 @@ import {
   Unavailable,
   Unprocessable
 } from '@feathersjs/errors'
-import { AnyObject } from '@flex-development/json/utils/types'
+import type { AnyObject } from '@flex-development/json/utils/types'
 
 /**
  * @file Creates a Feathers error
- * @module utils/createError/impl
+ * @module utils/createError
  * @see https://docs.feathersjs.com/api/errors.html
  */
 
@@ -31,10 +31,8 @@ import { AnyObject } from '@flex-development/json/utils/types'
  *
  * @param error - Error to transform or error message
  * @param data - Additional error data
- * @param data.errors - Typically validation errors or if you want to group
- * multiple errors together
+ * @param data.errors - Validation errors or group of multiple errors
  * @param status - Error status code. Defaults to 500
- * @return {FeathersErrorJSON}
  */
 const createError = (
   error?: string | Error,

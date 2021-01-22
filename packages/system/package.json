@@ -57,7 +57,8 @@
     "compile:scss": "webpack -c webpack.prod.js",
     "postcompile:scss": "rm ./dist/css.js",
     "compile": "NODE_ENV=production run-s compile:*",
-    "prepare": "if-env $VERCEL && exit 0 || yarn compile"
+    "vercel-prepare": "lerna run prepare --scope @flex-development/kustomzcore; lerna link",
+    "prepare": "if-env $VERCEL && yarn vercel-prepare || yarn compile"
   },
   "dependencies": {
     "@react-spring/web": "9.0.0-rc.3",

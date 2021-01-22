@@ -1,5 +1,5 @@
 import { GRID_BREAKPOINT_KEYS } from '@system/config/constants'
-import { UtilityClassConfig } from '@system/types'
+import type { UtilityClassConfig } from '@system/types'
 import { genclass } from '@system/utils/genclass'
 import isObject from 'lodash/isObject'
 

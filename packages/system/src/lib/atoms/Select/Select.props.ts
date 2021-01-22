@@ -1,5 +1,8 @@
-import { ComponentPropsBase as CPB, FormComponentProps } from '@system/types'
-import { OptionProps } from '../Option'
+import type {
+  ComponentPropsBase as CPB,
+  FormComponentProps
+} from '@system/types'
+import type { OptionProps } from '../Option'
 
 /**
  * @file Component Props - Select

@@ -8,7 +8,7 @@ import { ListProps } from '@system/lib/atoms/List'
 import { SectionProps } from '@system/lib/atoms/Section'
 import React, { FC, useEffect } from 'react'
 import { useSetState } from 'react-hanger/array/useSetState'
-import { MDXContentProps } from './MDXContent.props'
+import type { MDXContentProps } from './MDXContent.props'
 
 /**
  * @file Implementation - MDXContent

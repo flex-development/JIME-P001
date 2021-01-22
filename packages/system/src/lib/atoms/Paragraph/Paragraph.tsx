@@ -1,8 +1,8 @@
 import { a } from '@react-spring/web'
 import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
-import { FREC } from '@system/types'
+import type { FREC } from '@system/types'
 import { forwardRef } from 'react'
-import { ParagraphProps } from './Paragraph.props'
+import type { ParagraphProps } from './Paragraph.props'
 
 /**
  * @file Implementation - Paragraph

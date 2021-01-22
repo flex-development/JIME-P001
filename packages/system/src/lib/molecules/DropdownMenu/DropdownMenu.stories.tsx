@@ -1,6 +1,6 @@
 import { PRODUCTS } from '@system-mocks/utils'
 import { DropdownMenu } from './DropdownMenu'
-import { DropdownMenuProps } from './DropdownMenu.props'
+import type { DropdownMenuProps } from './DropdownMenu.props'
 
 /**
  * @file Stories - Menu

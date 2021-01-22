@@ -1,6 +1,6 @@
 import { renderWithMockCartContext as render } from '@system-mocks/utils'
 import { CartPreview } from './CartPreview'
-import { CartPreviewProps } from './CartPreview.props'
+import type { CartPreviewProps } from './CartPreview.props'
 import { Default } from './CartPreview.stories'
 
 /**

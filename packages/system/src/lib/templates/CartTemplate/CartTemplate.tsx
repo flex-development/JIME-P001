@@ -16,7 +16,7 @@ import { getSubtotal } from '@system/utils/getSubtotal'
 import isFunction from 'lodash/isFunction'
 import { useCallback, useEffect } from 'react'
 import { useBoolean } from 'react-hanger/array/useBoolean'
-import type { CartTemplateProps } from './CartTemplate.props'
+import type { CartTemplateProps } from '././CartTemplate.props'
 
 /**
  * @file Implementation - CartTemplate

@@ -10,7 +10,7 @@ const wc = require('../webpack.common')
  */
 
 const DEV = process.env.NODE_ENV.toLowerCase() === 'development'
-const TSCONFIG_REL_PATH = DEV ? '../tsconfig.json' : '../tsconfig.app.json'
+const TSCONFIG = DEV ? 'tsconfig.json' : 'tsconfig.app.json'
 
 module.exports = {
   /**
@@ -75,7 +75,7 @@ module.exports = {
       },
       shouldExtractLiteralValuesFromEnum: true,
       shouldRemoveUndefinedFromOptional: true,
-      tsconfigPath: path.join(__dirname, TSCONFIG_REL_PATH)
+      tsconfigPath: path.join(__dirname, '..', TSCONFIG)
     }
   },
 
@@ -97,7 +97,6 @@ module.exports = {
     return mergeWebpack(config, {
       resolve: {
         alias: {
-          '@flex-development/kustomzcore': path.join(__dirname, CORE),
           '@flex-development/json': path.join(__dirname, JSON),
           '@flex-development/kustomzcore': path.join(__dirname, CORE),
           '@shopify/polaris-icons': path.join(__dirname, POLARIS_ICONS),
@@ -123,6 +122,7 @@ module.exports = {
                   babelCore: '@babel/core',
                   babelOptions: { ...babelOptions(), babelrc: false },
                   cacheDirectory: ATL_CACHE_DIRECTORY,
+                  configFileName: TSCONFIG,
                   useBabel: true,
                   useCache: true
                 }

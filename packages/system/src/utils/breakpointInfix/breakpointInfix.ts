@@ -1,4 +1,4 @@
-import { GridBreakpointKey } from '@system/types'
+import type { GridBreakpointKey } from '@system/types'
 
 /**
  * @file Implementation - breakpointInfix

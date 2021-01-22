@@ -1,6 +1,6 @@
 import { REVIEWS } from '@system-mocks/utils'
 import { ProductReview } from './ProductReview'
-import { ProductReviewProps } from './ProductReview.props'
+import type { ProductReviewProps } from './ProductReview.props'
 
 /**
  * @file Stories - ProductReview

@@ -11,17 +11,10 @@
         "transform": "@zerollup/ts-transform-paths",
         "useRootDirs": true
       }
-    ]
+    ],
+    "rootDir": "./src"
   },
   "exclude": ["**/*.stories.tsx", "**/*.spec.ts", "**/*.spec.tsx"],
   "extends": "./tsconfig.app.json",
-  "include": [
-    "src/config",
-    "src/hooks",
-    "src/lib",
-    "src/providers",
-    "src/types",
-    "src/utils",
-    "src/index.ts"
-  ]
+  "include": ["src"]
 }

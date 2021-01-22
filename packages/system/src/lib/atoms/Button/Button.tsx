@@ -4,7 +4,7 @@ import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
 import { useTransformScaleX } from '@system/hooks/useTransformScaleX'
 import { EventHandlers, FREC } from '@system/types'
 import { forwardRef, useCallback } from 'react'
-import { ButtonProps } from './Button.props'
+import type { ButtonProps } from './Button.props'
 
 /**
  * @file Implementation - Button

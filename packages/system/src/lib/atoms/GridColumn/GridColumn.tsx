@@ -1,9 +1,9 @@
 import { GRID_COLUMN_UTILITY_CLASS } from '@system/config/constants'
 import { useSanitizedProps, useUtilityClasses } from '@system/hooks'
-import { FREC } from '@system/types'
+import type { FREC } from '@system/types'
 import { forwardRef } from 'react'
 import { Box, BoxProps } from '../Box'
-import { GridColumnProps } from './GridColumn.props'
+import type { GridColumnProps } from './GridColumn.props'
 
 /**
  * @file Implementation - GridColumn

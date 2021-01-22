@@ -1,4 +1,4 @@
-import { CheckoutLineItemInput } from '@flex-development/kustomzcore/types'
+import type { CheckoutLineItemInput } from '@flex-development/kustomzcore/types'
 import { useActiveIndex } from '@system/hooks/useActiveIndex'
 import { useCheckoutLineItemInput } from '@system/hooks/useCheckoutLineItemInput'
 import { useProductImages } from '@system/hooks/useProductImages'
@@ -14,10 +14,11 @@ import { Select } from '@system/lib/atoms/Select'
 import { TextArea } from '@system/lib/atoms/TextArea'
 import { Carousel } from '@system/lib/molecules/Carousel'
 import { FormField } from '@system/lib/molecules/FormField'
-import { EventHandlers } from '@system/types'
+import type { EventHandlers } from '@system/types'
 import findIndex from 'lodash/findIndex'
-import { FC, useCallback } from 'react'
-import { AddToCartFormProps } from './AddToCartForm.props'
+import type { FC } from 'react'
+import { useCallback } from 'react'
+import type { AddToCartFormProps } from './AddToCartForm.props'
 
 /**
  * @file Implementation - AddToCartForm

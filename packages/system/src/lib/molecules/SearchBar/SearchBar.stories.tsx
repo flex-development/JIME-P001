@@ -1,5 +1,5 @@
 import { SearchBar } from './SearchBar'
-import { SearchBarProps } from './SearchBar.props'
+import type { SearchBarProps } from './SearchBar.props'
 
 /**
  * @file Stories - SearchBar

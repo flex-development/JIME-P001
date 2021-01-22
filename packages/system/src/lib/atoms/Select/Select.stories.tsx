@@ -1,6 +1,6 @@
 import { Option } from '../Option'
 import { Select } from './Select'
-import { SelectProps } from './Select.props'
+import type { SelectProps } from './Select.props'
 
 /**
  * @file Stories - Select

@@ -1,8 +1,10 @@
 import type { ANYTHING } from '@flex-development/json'
-import { CartContext, UseCart, useCart } from '@system/hooks/useCart'
+import type { UseCart } from '@system/hooks/useCart'
+import { CartContext, useCart } from '@system/hooks/useCart'
 import { useMemoCompare } from '@system/hooks/useMemoCompare'
 import isFunction from 'lodash/isFunction'
-import { FC, ReactNode, useEffect } from 'react'
+import type { FC } from 'react'
+import { ReactNode, useEffect } from 'react'
 
 /**
  * @file Shopping Cart Context Provider

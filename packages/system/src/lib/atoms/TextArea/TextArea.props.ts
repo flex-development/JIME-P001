@@ -1,4 +1,7 @@
-import { ComponentPropsBase as CPB, FormComponentProps } from '@system/types'
+import type {
+  ComponentPropsBase as CPB,
+  FormComponentProps
+} from '@system/types'
 
 /**
  * @file Component Props - TextArea

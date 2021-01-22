@@ -1,5 +1,5 @@
 import { Link } from './Link'
-import { LinkProps } from './Link.props'
+import type { LinkProps } from './Link.props'
 
 /**
  * @file Stories - Link

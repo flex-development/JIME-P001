@@ -3,7 +3,7 @@ import { Heading } from '@system/lib/atoms/Heading'
 import { Paragraph } from '@system/lib/atoms/Paragraph'
 import { Section, SectionProps } from '@system/lib/atoms/Section'
 import { FC } from 'react'
-import { HeroProps } from './Hero.props'
+import type { HeroProps } from './Hero.props'
 
 /**
  * @file Implementation - Hero

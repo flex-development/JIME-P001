@@ -1,6 +1,6 @@
 import { PRODUCTS } from '@system-mocks/utils'
 import { SearchTemplate } from './SearchTemplate'
-import { SearchTemplateProps } from './SearchTemplate.props'
+import type { SearchTemplateProps } from './SearchTemplate.props'
 
 /**
  * @file Stories - SearchTemplate

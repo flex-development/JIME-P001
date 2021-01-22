@@ -1,9 +1,9 @@
 import { a } from '@react-spring/web'
 import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
-import { FREC } from '@system/types'
+import type { FREC } from '@system/types'
 import omit from 'lodash/omit'
 import { forwardRef } from 'react'
-import { DividerProps } from './Divider.props'
+import type { DividerProps } from './Divider.props'
 
 /**
  * @file Implementation - Divider

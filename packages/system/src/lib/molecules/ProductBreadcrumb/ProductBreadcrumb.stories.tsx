@@ -1,5 +1,5 @@
 import { ProductBreadcrumb } from './ProductBreadcrumb'
-import { ProductBreadcrumbProps } from './ProductBreadcrumb.props'
+import type { ProductBreadcrumbProps } from './ProductBreadcrumb.props'
 
 /**
  * @file Stories - ProductBreadcrumb

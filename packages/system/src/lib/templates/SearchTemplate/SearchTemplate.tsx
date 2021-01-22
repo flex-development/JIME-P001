@@ -1,12 +1,13 @@
-import { IProductListing } from '@flex-development/kustomzcore/types'
+import type { IProductListing } from '@flex-development/kustomzcore/types'
 import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
 import { Heading } from '@system/lib/atoms/Heading'
-import { Main, MainProps } from '@system/lib/atoms/Main'
+import type { MainProps } from '@system/lib/atoms/Main'
+import { Main } from '@system/lib/atoms/Main'
 import { Section } from '@system/lib/atoms/Section'
 import { Span } from '@system/lib/atoms/Span'
 import { ProductGrid } from '@system/lib/organisms/ProductGrid'
-import { TC } from '@system/types'
-import { SearchTemplateProps } from './SearchTemplate.props'
+import type { TC } from '@system/types'
+import type { SearchTemplateProps } from './SearchTemplate.props'
 
 /**
  * @file Implementation - SearchTemplate

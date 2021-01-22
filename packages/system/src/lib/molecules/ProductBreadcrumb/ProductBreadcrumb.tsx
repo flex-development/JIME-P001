@@ -5,7 +5,7 @@ import { Paragraph } from '@system/lib/atoms/Paragraph'
 import { Span } from '@system/lib/atoms/Span'
 import classnames from 'classnames'
 import { FC } from 'react'
-import { ProductBreadcrumbProps } from './ProductBreadcrumb.props'
+import type { ProductBreadcrumbProps } from './ProductBreadcrumb.props'
 
 /**
  * @file Implementation - ProductBreadcrumb

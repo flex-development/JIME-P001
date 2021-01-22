@@ -12,7 +12,7 @@ import { GridBreakpoints, TC } from '@system/types'
 import { useCallback } from 'react'
 import useEvent from 'react-use/useEvent'
 import useMedia from 'react-use/useMedia'
-import { LayoutProps } from './Layout.props'
+import type { LayoutProps } from './Layout.props'
 
 /**
  * @file Implementation - Layout

@@ -1,5 +1,5 @@
 import { Heading } from './Heading'
-import { HeadingProps } from './Heading.props'
+import type { HeadingProps } from './Heading.props'
 
 /**
  * @file Stories - Heading

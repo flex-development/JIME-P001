@@ -3,7 +3,7 @@ import { formatPrice } from '@system/utils/formatPrice'
 import { FC } from 'react'
 import { Heading, HeadingProps } from '../Heading'
 import { Span } from '../Span'
-import { ProductHeadingProps } from './ProductHeading.props'
+import type { ProductHeadingProps } from './ProductHeading.props'
 
 /**
  * @file Implementation - ProductHeading

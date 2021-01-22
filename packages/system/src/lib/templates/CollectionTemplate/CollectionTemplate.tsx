@@ -5,7 +5,7 @@ import { Paragraph } from '@system/lib/atoms/Paragraph'
 import { Section } from '@system/lib/atoms/Section'
 import { ProductGrid } from '@system/lib/organisms/ProductGrid'
 import { TC } from '@system/types'
-import { CollectionTemplateProps } from './CollectionTemplate.props'
+import type { CollectionTemplateProps } from './CollectionTemplate.props'
 
 /**
  * @file Implementation - CollectionTemplate

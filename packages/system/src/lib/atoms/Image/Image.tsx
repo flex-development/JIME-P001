@@ -1,10 +1,10 @@
 import { a } from '@react-spring/web'
 import { IMAGE_PLACEHOLDER_URL } from '@system/config/constants'
 import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
-import { FREC } from '@system/types'
+import type { FREC } from '@system/types'
 import omit from 'lodash/omit'
 import { forwardRef } from 'react'
-import { ImageProps } from './Image.props'
+import type { ImageProps } from './Image.props'
 
 /**
  * @file Implementation - Image

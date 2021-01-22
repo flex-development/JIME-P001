@@ -1,8 +1,8 @@
 import { a } from '@react-spring/web'
 import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
-import { FREC } from '@system/types'
+import type { FREC } from '@system/types'
 import { forwardRef } from 'react'
-import { FormProps } from './Form.props'
+import type { FormProps } from './Form.props'
 
 /**
  * @file Implementation - Form

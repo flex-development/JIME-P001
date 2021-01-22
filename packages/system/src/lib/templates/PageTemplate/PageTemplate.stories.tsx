@@ -3,7 +3,7 @@ import {
   PureMDX
 } from '../../molecules/MDXContent/MDXContent.stories'
 import { PageTemplate } from './PageTemplate'
-import { PageTemplateProps } from './PageTemplate.props'
+import type { PageTemplateProps } from './PageTemplate.props'
 
 /**
  * @file Stories - PageTemplate

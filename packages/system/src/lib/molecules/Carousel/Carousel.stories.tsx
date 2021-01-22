@@ -1,9 +1,9 @@
 import { PRODUCTS, REVIEWS } from '@system-mocks/utils'
 import { useProductImages } from '@system/hooks'
-import { ProductReview } from '@system/lib'
 import { Image } from '@system/lib/atoms'
+import { ProductReview } from '@system/lib/molecules/ProductReview'
 import { Carousel } from './Carousel'
-import { CarouselProps } from './Carousel.props'
+import type { CarouselProps } from './Carousel.props'
 
 /**
  * @file Stories - Carousel

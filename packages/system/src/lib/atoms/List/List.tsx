@@ -1,9 +1,9 @@
 import { a } from '@react-spring/web'
 import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
-import { FREC } from '@system/types'
+import type { FREC } from '@system/types'
 import { forwardRef } from 'react'
 import { Item, ItemProps } from '../Item'
-import { ListProps } from './List.props'
+import type { ListProps } from './List.props'
 
 /**
  * @file Implementation - List

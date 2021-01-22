@@ -1,6 +1,6 @@
 import { Link, Paragraph } from '@system/lib/atoms'
 import { ErrorTemplate } from './ErrorTemplate'
-import { ErrorTemplateProps } from './ErrorTemplate.props'
+import type { ErrorTemplateProps } from './ErrorTemplate.props'
 
 /**
  * @file Stories - ErrorTemplate

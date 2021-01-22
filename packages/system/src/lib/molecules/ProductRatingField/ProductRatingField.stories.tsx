@@ -1,5 +1,5 @@
 import { ProductRatingField } from './ProductRatingField'
-import { ProductRatingFieldProps } from './ProductRatingField.props'
+import type { ProductRatingFieldProps } from './ProductRatingField.props'
 
 /**
  * @file Stories - ProductRatingField

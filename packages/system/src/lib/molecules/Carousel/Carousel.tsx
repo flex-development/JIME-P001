@@ -5,7 +5,7 @@ import { Span } from '@system/lib/atoms/Span'
 import classnames from 'classnames'
 import chunk from 'lodash/chunk'
 import { Children, FC, ReactElement, useCallback } from 'react'
-import { CarouselProps } from './Carousel.props'
+import type { CarouselProps } from './Carousel.props'
 
 /**
  * @file Implementation - Carousel

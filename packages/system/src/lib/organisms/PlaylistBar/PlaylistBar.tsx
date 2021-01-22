@@ -24,7 +24,7 @@ import { useCallback, useMemo } from 'react'
 import { useBoolean } from 'react-hanger/array/useBoolean'
 import useAudio from 'react-use/useAudio'
 import useEvent from 'react-use/useEvent'
-import type { PlaylistBarProps } from './PlaylistBar.props'
+import type { PlaylistBarProps } from '././PlaylistBar.props'
 
 /**
  * @file Implementation - PlaylistBar

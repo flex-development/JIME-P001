@@ -1,10 +1,10 @@
 import type { ANYTHING } from '@flex-development/json'
-import {
+import type {
   CreateReviewRequest,
   IProductListing
 } from '@flex-development/kustomzcore/types'
-import { FormProps } from '@system/lib/atoms/Form'
-import { EventHandlers } from '@system/types'
+import type { FormProps } from '@system/lib/atoms/Form'
+import type { EventHandlers } from '@system/types'
 
 /**
  * @file Component Props - ProductReviewForm

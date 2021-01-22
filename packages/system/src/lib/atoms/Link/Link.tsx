@@ -1,8 +1,8 @@
 import { a } from '@react-spring/web'
 import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
-import { FREC } from '@system/types'
+import type { FREC } from '@system/types'
 import { forwardRef } from 'react'
-import { LinkProps } from './Link.props'
+import type { LinkProps } from './Link.props'
 
 /**
  * @file Implementation - Link

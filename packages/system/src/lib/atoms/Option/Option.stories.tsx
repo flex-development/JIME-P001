@@ -1,5 +1,5 @@
 import { Option } from './Option'
-import { OptionProps } from './Option.props'
+import type { OptionProps } from './Option.props'
 
 /**
  * @file Stories - Option

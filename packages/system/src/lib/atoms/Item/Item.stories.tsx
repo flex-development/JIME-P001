@@ -1,5 +1,5 @@
 import { Item } from './Item'
-import { ItemProps } from './Item.props'
+import type { ItemProps } from './Item.props'
 
 /**
  * @file Stories - Item

@@ -1,8 +1,8 @@
 import { a } from '@react-spring/web'
 import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
-import { FREC } from '@system/types'
+import type { FREC } from '@system/types'
 import { forwardRef } from 'react'
-import { HeadingProps } from './Heading.props'
+import type { HeadingProps } from './Heading.props'
 
 /**
  * @file Implementation - Heading

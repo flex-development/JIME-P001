@@ -1,9 +1,12 @@
 import type { ANYTHING } from '@flex-development/json'
-import { IProductListing, IReview } from '@flex-development/kustomzcore/types'
-import { LinkProps } from '@system/lib/atoms/Link'
-import { MainProps } from '@system/lib/atoms/Main'
-import { AddToCartFormProps } from '@system/lib/molecules/AddToCartForm'
-import { EventHandlers } from '@system/types'
+import type {
+  IProductListing,
+  IReview
+} from '@flex-development/kustomzcore/types'
+import type { LinkProps } from '@system/lib/atoms/Link'
+import type { MainProps } from '@system/lib/atoms/Main'
+import type { AddToCartFormProps } from '@system/lib/molecules/AddToCartForm'
+import type { EventHandlers } from '@system/types'
 
 /**
  * @file Component Props - ProductTemplate

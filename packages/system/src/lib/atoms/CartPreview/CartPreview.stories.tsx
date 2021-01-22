@@ -1,5 +1,5 @@
 import { CartPreview } from './CartPreview'
-import { CartPreviewProps } from './CartPreview.props'
+import type { CartPreviewProps } from './CartPreview.props'
 
 /**
  * @file Stories - CartPreview

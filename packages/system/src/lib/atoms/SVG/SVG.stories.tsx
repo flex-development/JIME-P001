@@ -1,5 +1,5 @@
 import { SVG } from './SVG'
-import { SVGProps } from './SVG.props'
+import type { SVGProps } from './SVG.props'
 
 /**
  * @file Stories - SVG

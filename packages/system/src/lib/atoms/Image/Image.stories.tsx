@@ -1,5 +1,5 @@
 import { Image } from './Image'
-import { ImageProps } from './Image.props'
+import type { ImageProps } from './Image.props'
 
 /**
  * @file Stories - Image

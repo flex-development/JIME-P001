@@ -3,8 +3,6 @@
  * @module subdomains/store/utils
  */
 
-export { default as findPolicies } from './findPolicies'
-export { default as getPolicyByHandle } from './getPolicyByHandle'
-export * from './types'
+export { default as getPolicy } from './getPolicy'
 
 /* eslint-disable prettier/prettier */

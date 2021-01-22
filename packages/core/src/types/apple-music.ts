@@ -8,6 +8,8 @@ export type Artwork = AppleMusicApi.Artwork
 
 export type Playlist = AppleMusicApi.Playlist
 
+export type PlaylistAttributes = NonNullable<Playlist['attributes']>
+
 export type Song = AppleMusicApi.Song
 
 export type SongAttributes = NonNullable<Song['attributes']>

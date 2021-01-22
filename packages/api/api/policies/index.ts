@@ -30,18 +30,24 @@ export default async ({ query }: Req, res: Res): Promise<Res> => {
       return { ...obj, objectID: (obj as IPolicy).handle }
     })
 
-    // Parse MDX body content
-    policies = policies.map(async hit => {
-      const { code: body } = await axios({
-        data: hit.body,
-        url: 'https://mdjsx.flexdevelopment.vercel.app'
+    try {
+      // Parse MDX body content
+      policies = policies.map(async hit => {
+        const { code: body } = await axios({
+          data: JSON.stringify(hit.body.replace('\n', '<br/>')),
+          headers: { 'Content-Type': 'application/json' },
+          method: 'post',
+          url: 'https://mdjsx.flexdevelopment.vercel.app'
+        })
+
+        return { ...hit, body }
       })
 
-      return { ...hit, body }
-    })
-
-    // Complete MDX promise
-    policies = await Promise.all(policies)
+      // Complete MDX promise
+      policies = await Promise.all(policies)
+    } catch (error) {
+      return res.status(error.code).json(error)
+    }
 
     // Get SEO data for each policy
     policies = policies.map(async hit => ({
@@ -68,7 +74,9 @@ export default async ({ query }: Req, res: Res): Promise<Res> => {
     return res.json(hits.map(data => omit(data, ['objectID'])))
   } catch (err) {
     const index404 = isSearchIndex404Error(err)
-    const error = createError(err, { options, query }, err.status || err.code)
+    let error = err
+
+    if (!err.className) error = createError(err, { options, query }, err.status)
 
     debug('api/policies')(error)
     return index404 ? res.json([]) : res.status(error.code).json(error)

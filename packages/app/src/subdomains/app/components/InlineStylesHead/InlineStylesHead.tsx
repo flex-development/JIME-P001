@@ -1,4 +1,4 @@
-import { createError } from '@flex-development/kustomzcore/utils/createError'
+import createError from '@flex-development/kustomzcore/utils/createError'
 import debug from 'debug'
 import { existsSync, readdirSync, readFileSync } from 'fs'
 import { Head } from 'next/document'

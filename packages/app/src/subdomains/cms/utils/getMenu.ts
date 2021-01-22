@@ -1,10 +1,8 @@
-import { PartialOr } from '@flex-development/json/utils/types'
-import { ShopifyMenu } from '@flex-development/kustomzcore/types/shopify'
-import { createError } from '@flex-development/kustomzcore/utils/createError'
-import findMenus from '@subdomains/cms/utils/findMenus'
-import { FindMenuParams } from '@subdomains/cms/utils/types'
+import kapi from '@app/config/axios-kapi'
+import type { PartialOr } from '@flex-development/json/utils/types'
+import type { ShopifyMenu } from '@flex-development/kustomzcore/types'
+import type { GetMenuQuery } from '@kapi/types'
 import debug from 'debug'
-import pick from 'lodash/pick'
 
 /**
  * @file Implementation - getMenu
@@ -15,28 +13,25 @@ import pick from 'lodash/pick'
  * Retrieve a menu by handle. Throws an error if the menu isn't found.
  *
  * @async
- * @param handle - Handle of menu to find
+ * @param handle - Handle of menu to retrieve
  * @param params - Query parameters
  * @param params.fields - Comma-separated list of fields to show
  * @throws {FeathersErrorJSON}
  */
 const getMenu = async (
   handle: ShopifyMenu['handle'],
-  params?: Pick<FindMenuParams, 'fields'>
+  fields?: GetMenuQuery['fields']
 ): Promise<PartialOr<ShopifyMenu>> => {
-  const menus = await findMenus({ ...pick(params, ['fields']), handle })
-
-  if (!menus.length) {
-    const error_data = { handle, params }
-    const error_message = `Menu with handle "${handle}" not found`
-
-    const error = createError(error_message, error_data, 404)
-
+  try {
+    return await kapi<PartialOr<ShopifyMenu>>({
+      method: 'get',
+      params: { fields },
+      url: `/menus/${handle}`
+    })
+  } catch (error) {
     debug('subdomains/cms/utils/getMenu')(error)
     throw error
   }
-
-  return menus[0]
 }
 
 export default getMenu

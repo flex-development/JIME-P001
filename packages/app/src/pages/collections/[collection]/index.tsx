@@ -1,16 +1,16 @@
 import { CollectionTemplate } from '@components/templates/CollectionTemplate'
 import { serialize } from '@flex-development/json/utils/serialize'
+import type { GetCollectionResJSON, SEOData } from '@kapi/types'
 import { SEO } from '@subdomains/app/components/SEO'
-import {
+import type {
+  CollectionPageParams,
   IPagePropsCollection as PageProps,
-  PC
-} from '@subdomains/app/interfaces'
-import getSEO from '@subdomains/app/utils/getSEO'
-import { CollectionPageParams, NotFound } from '@subdomains/app/utils/types'
-import globalMetafields from '@subdomains/metafields/utils/globalMetafields'
-import findProducts from '@subdomains/sales/utils/findProductsByCollection'
-import getCollection from '@subdomains/sales/utils/getCollectionByHandle'
-import { GetServerSideProps, GetServerSidePropsContext } from 'next'
+  NotFound,
+  PageComponent
+} from '@subdomains/app/types'
+import getLayoutData from '@subdomains/app/utils/getLayoutData'
+import getCollection from '@subdomains/sales/utils/getCollection'
+import type { GetServerSideProps, GetServerSidePropsContext } from 'next'
 import { useRouter } from 'next/router'
 
 /**
@@ -22,12 +22,11 @@ import { useRouter } from 'next/router'
  * Renders a product collection page.
  *
  * @param props - Page component props
- * @param props.collection - Shopify API collection listing resource data
- * @param props.globals - Shopify `globals` namespace metafields obj
+ * @param props.layout - Data to populate `AppLayout` component
  * @param props.seo - `SEO` component properties
  * @param props.template - `CollectionTemplate` component properties
  */
-const Collection: PC<PageProps> = ({ seo, template }) => {
+const Collection: PageComponent<PageProps> = ({ seo, template }) => {
   // Get router instance to generate `LinkProps` for each collection product
   const { asPath, query } = useRouter()
 
@@ -65,43 +64,45 @@ export const getServerSideProps: GetServerSideProps<
   PageProps,
   CollectionPageParams
 > = async (context: GetServerSidePropsContext<CollectionPageParams>) => {
-  const { req, params = {} } = context
-
-  // Get collection handle
-  const { collection: handle = '' } = params as CollectionPageParams
+  // Get collection handle and current page URL
+  const { collection: handle = '' } = context.params as CollectionPageParams
+  const { url } = context.req
 
   // Get collection data
-  let collection = await getCollection(handle)
+  const data = await getCollection({
+    fields: 'body_html,products,seo,title',
+    handle
+  })
 
-  // If collection isn't found, show 404 layout
-  if ((collection as NotFound).notFound) return collection as NotFound
+  // Redirect to /404 if page data isn't found
+  if ((data as NotFound).notFound) return data as NotFound
 
   // ! Guarenteed to be collection page. Error will be thrown otherwise
-  collection = collection as PageProps['collection']
-
-  // Get products in collection
-  const c_products = await findProducts(collection.collection_id)
-  const products = c_products as NonNullable<PageProps['template']['products']>
+  const { body_html, products, title } = data as GetCollectionResJSON
+  const seo = (data as GetCollectionResJSON).seo as NonNullable<SEOData>
 
   // Get template data
   const template = serialize<PageProps['template']>({
     collection: {
-      ...collection,
-      title: !req.url?.includes('collections') ? 'Products' : collection.title
+      body_html,
+      title: !url?.includes('collections') ? 'Products' : title
     },
     products
   })
 
-  // Get global metafields
-  const globals = await globalMetafields()
+  // Get layout data
+  const layout = await getLayoutData()
 
-  // Get SEO object
-  const seo = await getSEO(globals, { ...collection, products }, 'collection')
-
-  // Update seo title
-  if (req.url === '/products') seo.title = 'All Products'
-
-  return { props: { collection, globals, seo, template } }
+  return {
+    props: {
+      layout,
+      seo: {
+        ...seo,
+        title: url === '/products' ? 'All Products' : seo?.title
+      },
+      template
+    }
+  }
 }
 
 export default Collection

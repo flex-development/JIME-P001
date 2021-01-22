@@ -1,5 +1,9 @@
 import type { SearchOptions } from '@algolia/client-search'
-import type { AnyObject, NullishString } from '@flex-development/json'
+import type {
+  AnyObject,
+  NullishString,
+  PartialOr
+} from '@flex-development/json/dist/utils/types'
 import type {
   ICollectionListing,
   IMetafield,
@@ -7,8 +11,12 @@ import type {
   IPolicy,
   IProductListing,
   IProductListingVariant,
-  ShopifyMenu
-} from '@flex-development/kustomzcore'
+  Playlist,
+  PlaylistAttributes,
+  ShopifyMenu,
+  ShopifyMenuLink,
+  SongAttributes
+} from '@flex-development/kustomzcore/dist/types'
 import type { VercelRequest as Req } from '@vercel/node'
 
 /**
@@ -170,10 +178,36 @@ export interface GetCollectionReq extends Omit<Req, 'query'> {
 }
 
 /**
- * Shape of requests sent to the `/metafields/global` endpoint.
+ * Shape of JSON responses from the `/collections/*` endpoint.
+ */
+export type GetCollectionResJSON = PartialOr<
+  ResourceWithSEO<ICollectionListing & { products?: IProductListing[] }>
+>
+
+/**
+ * Shape of JSON responses from the `/metafields/globals` endpoint.
+ */
+export type GetGlobalMetafieldsResJSON = Record<string, IMetafield>
+
+/**
+ * Shape of requests sent to the `/metafields/globals` endpoint.
  */
 export interface GetGlobalMetafieldsReq extends Omit<Req, 'query'> {
   query: Omit<FindMetafieldParams, 'namespace'>
+}
+
+/**
+ * Shape of JSON responses from the `/layout` endpoint.
+ */
+export type GetLayoutDataResJSON = {
+  playlist: GetPlaylistResJSON
+  sidebar: {
+    age: number
+    img: string
+    location: string
+    menu: ShopifyMenuLink[]
+    mood: string
+  }
 }
 
 /**
@@ -192,6 +226,15 @@ export interface GetMenuReq extends Omit<Req, 'query'> {
 }
 
 /**
+ * Shape of JSON responses from the `/playlist` endpoint.
+ */
+export type GetPlaylistResJSON = {
+  attributes: Pick<PlaylistAttributes, 'name' | 'url'>
+  id: Playlist['id']
+  tracks: SongAttributes[]
+}
+
+/**
  * Query parameters accepted by the `/pages/[handle]` endpoint.
  */
 export type GetPageQuery = {
@@ -205,6 +248,11 @@ export type GetPageQuery = {
 export interface GetPageReq extends Omit<Req, 'query'> {
   query: GetPageQuery
 }
+
+/**
+ * Shape of JSON responses from the `/pages/*` endpoint.
+ */
+export type GetPageResJSON = PartialOr<ResourceWithSEO<IPage>>
 
 /**
  * Query parameters accepted by the `/policies/[handle]` endpoint.
@@ -222,6 +270,11 @@ export interface GetPolicyReq extends Omit<Req, 'query'> {
 }
 
 /**
+ * Shape of JSON responses from the `/pages/*` endpoint.
+ */
+export type GetPolicyResJSON = PartialOr<ResourceWithSEO<IPolicy>>
+
+/**
  * Query parameters accepted by the `/products/[handle]` endpoint.
  */
 export type GetProductQuery = {
@@ -236,6 +289,11 @@ export type GetProductQuery = {
 export interface GetProductReq extends Omit<Req, 'query'> {
   query: GetProductQuery
 }
+
+/**
+ * Shape of JSON responses from the `/products/*` endpoint.
+ */
+export type GetProductResJSON = PartialOr<ResourceWithSEO<IProductListing>>
 
 /**
  * Query parameters accepted by the `/assets/*` endpoints.

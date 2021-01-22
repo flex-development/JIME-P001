@@ -1,4 +1,4 @@
-import type { IProductListing } from '@flex-development/kustomzcore'
+import type { IProductListing } from '@flex-development/kustomzcore/types'
 import ProductImage from '@flex-development/kustomzcore/utils/getProductImage'
 import { IMAGE_PLACEHOLDER_URL } from '@system/config/constants'
 import { useMemoCompare } from '@system/hooks/useMemoCompare'

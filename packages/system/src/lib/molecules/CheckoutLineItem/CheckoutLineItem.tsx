@@ -1,4 +1,4 @@
-import { CheckoutLineItemInput } from '@flex-development/kustomzcore/types/shopify'
+import { CheckoutLineItemInput } from '@flex-development/kustomzcore/types'
 import { useCheckoutLineItemInput } from '@system/hooks/useCheckoutLineItemInput'
 import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
 import { Box, BoxProps } from '@system/lib/atoms/Box'

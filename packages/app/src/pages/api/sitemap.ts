@@ -1,5 +1,5 @@
 import { AnyObject } from '@flex-development/json/utils/types'
-import { createError } from '@flex-development/kustomzcore/utils/createError'
+import createError from '@flex-development/kustomzcore/utils/createError'
 import debug from 'debug'
 import sortBy from 'lodash/sortBy'
 import { NextApiRequest as Req, NextApiResponse as Res } from 'next'

@@ -1,5 +1,5 @@
-import { AnyObject } from '@flex-development/json/utils/types'
-import { ICheckout } from '@flex-development/kustomzcore'
+import type { AnyObject } from '@flex-development/json/utils/types'
+import type { ICheckout } from '@flex-development/kustomzcore/dist/types'
 import { FirebaseAdaptorDatabase } from '@subdomains/firebase'
 import { DATASETS } from './datamaps'
 

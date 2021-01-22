@@ -54,6 +54,11 @@ export const AddToCartForm: FC<AddToCartFormProps> & {
     ...rest
   } = props
 
+  // Carousel position state
+  const { active, setIndex: setCarouselPosition } = useActiveIndex(position, {
+    upperLimit: product.images.length - 1
+  })
+
   // Use product images as carousel slides
   const images = useProductImages(product)
 
@@ -75,12 +80,7 @@ export const AddToCartForm: FC<AddToCartFormProps> & {
       title: `${product.title} - ${selected.title}`,
       variant_id: selected.id
     },
-    image: images.find(image => image.id === selected?.image_id) || {}
-  })
-
-  // Carousel position state
-  const { active, setIndex: setCarouselPosition } = useActiveIndex(position, {
-    upperLimit: product.images.length - 1
+    image: images[active]
   })
 
   /**

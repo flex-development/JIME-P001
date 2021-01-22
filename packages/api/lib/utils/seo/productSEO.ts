@@ -1,13 +1,13 @@
 import type {
   IProductListing,
   IProductListingVariant
-} from '@flex-development/kustomzcore'
-import { getProductImage } from '@flex-development/kustomzcore'
+} from '@flex-development/kustomzcore/dist/types'
+import { getProductImage } from '@flex-development/kustomzcore/dist/utils'
 import findIndex from 'lodash/findIndex'
 import isEmpty from 'lodash/isEmpty'
 import merge from 'lodash/merge'
 import stripHtml from 'string-strip-html'
-import { DEFAULT_IMAGE_URL } from '../../config'
+import { DEFAULT_IMAGE_URL } from '../../config/constants'
 import type { SEOData } from '../../types'
 
 /**

@@ -1,12 +1,15 @@
 import { PageTemplate } from '@components/templates/PageTemplate'
+import type { GetPolicyResJSON, SEOData } from '@kapi/types'
 import { SEO } from '@subdomains/app/components/SEO'
-import { IPagePropsPolicy as PageProps, PC } from '@subdomains/app/interfaces'
-import getSEO from '@subdomains/app/utils/getSEO'
-import transformMDX from '@subdomains/app/utils/transformMDX'
-import { HandlePageParams, NotFound } from '@subdomains/app/utils/types'
-import globalMetafields from '@subdomains/metafields/utils/globalMetafields'
-import getPolicy from '@subdomains/store/utils/getPolicyByHandle'
-import { GetServerSideProps, GetServerSidePropsContext } from 'next'
+import type {
+  HandlePageParams,
+  IPagePropsPolicy as PageProps,
+  NotFound,
+  PageComponent
+} from '@subdomains/app/types'
+import getLayoutData from '@subdomains/app/utils/getLayoutData'
+import getPolicy from '@subdomains/store/utils/getPolicy'
+import type { GetServerSideProps, GetServerSidePropsContext } from 'next'
 
 /**
  * @file Store Policy Page
@@ -14,15 +17,14 @@ import { GetServerSideProps, GetServerSidePropsContext } from 'next'
  */
 
 /**
- * Renders a store policy page page.
+ * Renders a store policy page.
  *
  * @param props - Page component props
- * @param props.globals - Shopify `globals` namespace metafields obj
- * @param props.policy - Shopify API page resource data
+ * @param props.layout - Data to populate `AppLayout` component
  * @param props.seo - `SEO` component properties
  * @param props.template - `PageTemplate` component properties
  */
-const Policy: PC<PageProps> = ({ seo, template }) => (
+const Policy: PageComponent<PageProps> = ({ seo, template }) => (
   <>
     <SEO {...seo} />
     <PageTemplate {...template} />
@@ -34,8 +36,6 @@ const Policy: PC<PageProps> = ({ seo, template }) => (
  * component.
  *
  * @see https://nextjs.org/docs/basic-features/data-fetching
- * @see
- * https://shopify.dev/docs/admin-api/rest/reference/store-properties/policy
  *
  * @async
  * @param context - Server side page context
@@ -48,26 +48,24 @@ export const getServerSideProps: GetServerSideProps<
   HandlePageParams
 > = async (context: GetServerSidePropsContext<HandlePageParams>) => {
   // Get policy page data
-  const data = await getPolicy(context.params?.handle ?? '')
+  const data = await getPolicy({
+    fields: 'body,seo',
+    handle: context.params?.handle ?? ''
+  })
 
   // Redirect to /404 if policy page data isn't found
   if ((data as NotFound).notFound) return data as NotFound
 
   // ! Guarenteed to be policy page data. Error will be thrown otherwise
-  const policy = data as PageProps['policy']
+  const { body, seo } = data as GetPolicyResJSON
 
   // Get `PageTemplate` props
-  const template: PageProps['template'] = {
-    body: (await transformMDX(policy.body)).code
-  }
+  const template: PageProps['template'] = { body }
 
-  // Get global metafields
-  const globals = await globalMetafields()
+  // Get layout data
+  const layout = await getLayoutData()
 
-  // Get SEO object
-  const seo = await getSEO(globals, policy, 'policy')
-
-  return { props: { globals, policy, seo, template } }
+  return { props: { layout, seo: seo as NonNullable<SEOData>, template } }
 }
 
 export default Policy

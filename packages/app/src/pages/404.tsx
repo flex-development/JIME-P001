@@ -1,9 +1,14 @@
 import { ErrorTemplate } from '@components/templates/ErrorTemplate'
 import { ErrorContent } from '@subdomains/app/components/ErrorContent'
 import { SEO } from '@subdomains/app/components/SEO'
-import { IPageProps as PageProps, PC } from '@subdomains/app/interfaces'
-import globalMetafields from '@subdomains/metafields/utils/globalMetafields'
-import { GetStaticProps } from 'next'
+import type {
+  IPageProps as PageProps,
+  PageComponent
+} from '@subdomains/app/types'
+import getLayoutData from '@subdomains/app/utils/getLayoutData'
+import globalSEO from '@subdomains/app/utils/globalSEO'
+import merge from 'lodash/merge'
+import type { GetStaticProps } from 'next'
 import { Fragment } from 'react'
 
 /**
@@ -15,10 +20,14 @@ import { Fragment } from 'react'
  * Renders a `404` error page.
  *
  * @see https://nextjs.org/docs/advanced-features/custom-error-page#404-page
+ *
+ * @param props - Page component props
+ * @param props.layout - Data to populate `AppLayout` component
+ * @param props.seo - `SEO` component properties
  */
-const NotFound: PC = () => (
+const NotFound: PageComponent = ({ seo }) => (
   <Fragment>
-    <SEO title='Page Not Found' />
+    <SEO {...seo} />
     <ErrorTemplate
       code={404}
       message="Sorry, the page you're looking for does not exist."
@@ -36,7 +45,8 @@ const NotFound: PC = () => (
  * @async
  */
 export const getStaticProps: GetStaticProps<PageProps> = async () => {
-  return { props: { globals: await globalMetafields() }, revalidate: 1 }
+  const seo = merge(await globalSEO(), { title: 'Page Not Found' })
+  return { props: { layout: await getLayoutData(), seo }, revalidate: 1 }
 }
 
 export default NotFound

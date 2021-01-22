@@ -26,8 +26,10 @@ const handleErrorResponse = (error: AxiosError): void => {
   if (response) {
     // The request was made and the server responded with a status code
     const { data, status } = response as AxiosResponse<AnyObject>
+    const err = data as FeathersErrorJSON
+    const { className } = err as FeathersErrorJSON
 
-    feathersError = createError(message, data, status)
+    feathersError = className ? err : createError(message, data, status)
   } else if (request) {
     // The request was made but no response was received
     feathersError = createError('No response received.')

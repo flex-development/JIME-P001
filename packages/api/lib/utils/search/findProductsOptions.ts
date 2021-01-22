@@ -1,4 +1,4 @@
-import { EMPTY_SPACE } from '@flex-development/kustomzcore'
+import { EMPTY_SPACE } from '@flex-development/kustomzcore/dist/constants'
 import isEmpty from 'lodash/isEmpty'
 import join from 'lodash/join'
 import uniq from 'lodash/uniq'

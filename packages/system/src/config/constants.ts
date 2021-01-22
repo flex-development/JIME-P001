@@ -6,7 +6,14 @@ import { GridBreakpoints } from '@system/types'
  * @module config/constants
  */
 
-const { API_URL } = process.env
+export const API_URL = (() => {
+  const env = process.env.NODE_ENV?.toLowerCase()
+
+  if (env === 'development') return 'http://localhost:8080'
+  if (env === 'test') return 'https://kapi.flexdevelopment.vercel.app'
+
+  return 'https://api.morenaskustomz.com'
+})()
 
 export const CHECK_INPUT_TYPES = ['checkbox', 'radio']
 

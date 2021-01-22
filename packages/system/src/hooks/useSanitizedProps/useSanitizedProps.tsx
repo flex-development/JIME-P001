@@ -1,5 +1,5 @@
 import type { AnyObject } from '@flex-development/json'
-import { EMPTY_SPACE as ES } from '@flex-development/kustomzcore'
+import { EMPTY_SPACE as ES } from '@flex-development/kustomzcore/constants'
 import type { AnimatedProps } from '@react-spring/web'
 import { useUtilityClasses } from '@system/hooks/useUtilityClasses'
 import type { JSXIEPropsOr } from '@system/types'

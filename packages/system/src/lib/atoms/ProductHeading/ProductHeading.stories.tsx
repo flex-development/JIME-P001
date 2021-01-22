@@ -1,4 +1,4 @@
-import { IProductListing } from '@flex-development/kustomzcore/types/shopify'
+import { IProductListing } from '@flex-development/kustomzcore/types'
 import { PRODUCTS } from '@system-mocks/utils'
 import { ProductHeading } from '@system/lib'
 import { ProductHeadingProps } from './ProductHeading.props'

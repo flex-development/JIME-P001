@@ -16,7 +16,7 @@ export default async ({ query }: Req, res: Res): Promise<Res> => {
   } catch (err) {
     const error = createError(err, { query })
 
-    debug('api/metafields/global')(error)
+    debug('api/metafields/globals')(error)
     return res.status(error.code).json(error)
   }
 }

@@ -1,9 +1,12 @@
-import type { AnyObject } from '@flex-development/json'
-import { EMPTY_SPACE } from '@flex-development/kustomzcore'
+import type { AnyObject } from '@flex-development/json/dist/utils/types'
+import { EMPTY_SPACE } from '@flex-development/kustomzcore/dist/constants'
 import isEmpty from 'lodash/isEmpty'
 import join from 'lodash/join'
 import pick from 'lodash/pick'
-import { DEFAULT_SEARCH_OPTIONS as DSO, PAGINATION_PARAMS } from '../../config'
+import {
+  DEFAULT_SEARCH_OPTIONS as DSO,
+  PAGINATION_PARAMS
+} from '../../config/constants'
 import type { SearchOptions } from '../../types'
 
 /**

@@ -50,17 +50,17 @@
     "prebuild": "yarn test:quiet && rm -rf public && mkdir public",
     "build": "build-storybook -o public",
     "postbuild": "shx cp -R ../app/public/assets public",
-    "prenow-build": "lerna run prepare --scope @flex-development/kustomzcore; lerna link",
-    "now-build": "NODE_ENV=production yarn build",
+    "vercel-build": "NODE_ENV=production yarn build",
     "precompile:ts": "rm -rf ./dist",
     "compile:ts": "babel --config-file ./babel.config.prod.js src -d dist --extensions '.ts,.tsx'",
     "postcompile:ts": "ttsc -p tsconfig.prod.json",
     "compile:scss": "webpack -c webpack.prod.js",
     "postcompile:scss": "rm ./dist/css.js",
-    "prepare": "NODE_ENV=production run-s compile:*"
+    "compile": "NODE_ENV=production run-s compile:*",
+    "prepare": "if-env VERCEL=1 && exit 0 || yarn compile"
   },
   "dependencies": {
-    "@react-spring/web": "^9.0.0-rc.3",
+    "@react-spring/web": "latest",
     "@shopify/polaris-icons": "^4.1.0",
     "classnames": "^2.2.6",
     "react-hanger": "^2.2.1",

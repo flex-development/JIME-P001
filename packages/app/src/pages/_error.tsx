@@ -1,14 +1,14 @@
 import { ErrorTemplate } from '@components/templates/ErrorTemplate'
 import { serialize } from '@flex-development/json/utils/serialize'
-import { createError } from '@flex-development/kustomzcore/utils/createError'
+import createError from '@flex-development/kustomzcore/utils/createError'
 import { ErrorContent } from '@subdomains/app/components/ErrorContent'
 import { SEO } from '@subdomains/app/components/SEO'
-import { IPagePropsError as PageProps } from '@subdomains/app/interfaces'
-import globalMetafields from '@subdomains/metafields/utils/globalMetafields'
+import type { IPagePropsError as PageProps } from '@subdomains/app/types'
+import getLayoutData from '@subdomains/app/utils/getLayoutData'
 import debug from 'debug'
 import merge from 'lodash/merge'
 import pick from 'lodash/pick'
-import { NextPage } from 'next'
+import type { NextPage } from 'next'
 import { Fragment } from 'react'
 
 /**
@@ -20,6 +20,10 @@ import { Fragment } from 'react'
  * Renders a server error page.
  *
  * @see https://nextjs.org/docs/advanced-features/custom-error-page
+ *
+ * @param props - Page component props
+ * @param props.error - Error object
+ * @param props.layout - Data to populate `AppLayout` component
  */
 const ServerError: NextPage<PageProps> = ({ error }) => (
   <Fragment>
@@ -66,11 +70,11 @@ ServerError.getInitialProps = async (context): Promise<PageProps> => {
     error = createError(message, { ...data, stack, statusCode }, statusCode)
   }
 
-  // Get global metafields
-  const globals = await globalMetafields()
+  // Get layout data
+  const layout = await getLayoutData()
 
   debug('pages/_error')({ getInitialProps: error })
-  return { error: serialize<PageProps['error']>(error), globals }
+  return { error: serialize<PageProps['error']>(error), layout }
 }
 
 export default ServerError

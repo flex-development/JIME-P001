@@ -1,8 +1,7 @@
-import { DataArrayQueryParams } from '@flex-development/json/interfaces'
-import { ICollectionListing } from '@flex-development/kustomzcore/types/shopify'
-import { createError } from '@flex-development/kustomzcore/utils/createError'
+import kapi from '@app/config/axios-kapi'
+import type { GetCollectionQuery, GetCollectionResJSON } from '@kapi/types'
+import type { NotFound } from '@subdomains/app/types'
 import debug from 'debug'
-import findCollections from './findCollections'
 
 /**
  * @file Implementation - getCollection
@@ -10,27 +9,28 @@ import findCollections from './findCollections'
  */
 
 /**
- * Retrieve a collection by ID. Throws an error if the collection isn't found.
+ * Retrieve a collection listing by handle.
+ * Returns `{ notFound: true }` if the collection listing isn't found.
  *
  * @async
- * @param id - ID of collection to retrieve
- * @throws {FeathersErrorJSON}
+ * @param query - Query parameters
+ * @param query.handle - Handle of collection listing to retrieve
+ * @param query.fields - Comma-separated list of fields to show
  */
 const getCollection = async (
-  id: ICollectionListing['collection_id']
-): Promise<ICollectionListing> => {
-  const query: DataArrayQueryParams = { collection_id: { $eq: id } }
-  const collections = await findCollections(query)
+  query: GetCollectionQuery
+): Promise<GetCollectionResJSON | NotFound> => {
+  const { handle, ...params } = query
 
-  if (!collections.length) {
-    const data = { errors: { id } }
-    const error = createError(`Collection with id ${id} not found`, data, 404)
-
-    debug('subdomains/sales/utils/getCollection')(error)
-    throw error
+  try {
+    return await kapi<GetCollectionResJSON>({
+      params,
+      url: `/collections/${handle}`
+    })
+  } catch (error) {
+    debug('subdomains/cms/utils/getCollection')(error)
+    return { notFound: true }
   }
-
-  return collections[0] as ICollectionListing
 }
 
 export default getCollection

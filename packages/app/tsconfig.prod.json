@@ -1,29 +1,7 @@
 {
-  "awesomeTypescriptLoaderOptions": {
-    "babelCore": "@babel/core",
-    "babelOptions": {
-      "babelrc": false,
-      "extends": "../../babel.config.json",
-      "plugins": [
-        "@babel/plugin-transform-react-jsx",
-        [
-          "module-resolver",
-          {
-            "alias": {
-              "@app": "./src",
-              "@app-mocks": "./__mocks__",
-              "@system-mocks": "../system/__tests__/__mocks__"
-            }
-          }
-        ]
-      ]
-    },
-    "useBabel": true,
-    "useCache": true
-  },
   "compilerOptions": {
     "jsx": "react-jsx"
   },
   "extends": "./tsconfig.dev.json",
-  "include": ["src", "scripts"]
+  "include": ["src"]
 }

@@ -33,18 +33,27 @@ export default async ({ query, url }: Req, res: Res): Promise<Res> => {
     // Keep objectID consistent with page ID
     pages = pages.map(obj => ({ ...obj, objectID: obj.id }))
 
-    // Parse MDX body content
-    pages = pages.map(async hit => {
-      const { code: body_html } = await axios({
-        data: hit.body_html,
-        url: 'https://mdjsx.flexdevelopment.vercel.app'
+    // ! Remove API Menus page
+    pages = pages.filter(obj => obj.handle !== 'api-menus')
+
+    try {
+      // Parse MDX body content
+      pages = pages.map(async hit => {
+        const { code: body_html } = await axios({
+          data: JSON.stringify(hit.body_html.replace('\n', '<br/>')),
+          headers: { 'Content-Type': 'application/json' },
+          method: 'post',
+          url: 'https://mdjsx.flexdevelopment.vercel.app'
+        })
+
+        return { ...hit, body_html }
       })
 
-      return { ...hit, body_html }
-    })
-
-    // Complete MDX promise
-    pages = await Promise.all(pages)
+      // Complete MDX promise
+      pages = await Promise.all(pages)
+    } catch (error) {
+      return res.status(error.code).json(error)
+    }
 
     // Get metafields for each page
     pages = pages.map(async hit => {
@@ -78,7 +87,9 @@ export default async ({ query, url }: Req, res: Res): Promise<Res> => {
     return res.json(INDEX_AS_HANDLE ? payload[0] : payload)
   } catch (err) {
     const index404 = isSearchIndex404Error(err)
-    const error = createError(err, { options, query }, err.status || err.code)
+    let error = err
+
+    if (!err.className) error = createError(err, { options, query }, err.status)
 
     debug('api/pages')(error)
     return index404 ? res.json([]) : res.status(error.code).json(error)

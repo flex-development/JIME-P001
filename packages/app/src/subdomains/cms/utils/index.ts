@@ -3,10 +3,7 @@
  * @module subdomains/cms/utils
  */
 
-export { default as findMenus } from './findMenus'
-export { default as findPages } from './findPages'
 export { default as getMenu } from './getMenu'
-export { default as getPageByHandle } from './getPageByHandle'
-export * from './types'
+export { default as getPage } from './getPage'
 
 /* eslint-disable prettier/prettier */

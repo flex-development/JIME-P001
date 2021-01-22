@@ -1,4 +1,4 @@
-import { ICollectionListing } from '@flex-development/kustomzcore/types/shopify'
+import { ICollectionListing } from '@flex-development/kustomzcore/types'
 import collections from '@system-mocks/data/collection-listings.mock.json'
 import { PRODUCTS } from '@system-mocks/utils'
 import { CollectionTemplate } from './CollectionTemplate'

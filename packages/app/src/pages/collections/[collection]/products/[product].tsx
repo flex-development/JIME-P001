@@ -1,19 +1,20 @@
 import { ProductTemplate } from '@components/templates/ProductTemplate'
 import { serialize } from '@flex-development/json/utils/serialize'
-import { ICollectionListing } from '@flex-development/kustomzcore/types/shopify'
+import type { ICollectionListing } from '@flex-development/kustomzcore/types'
+import type { GetProductResJSON, SEOData } from '@kapi/types'
 import { SEO } from '@subdomains/app/components/SEO'
-import { IPagePropsProduct as PageProps, PC } from '@subdomains/app/interfaces'
-import getSEO from '@subdomains/app/utils/getSEO'
-import {
-  CollectionProductPageParams,
-  CollectionProductPageUrlQuery,
-  NotFound
-} from '@subdomains/app/utils/types'
-import globalMetafields from '@subdomains/metafields/utils/globalMetafields'
-import getCollection from '@subdomains/sales/utils/getCollectionByHandle'
-import getProduct from '@subdomains/sales/utils/getProductByHandle'
+import type {
+  IPagePropsProduct as PageProps,
+  NotFound,
+  PageComponent,
+  ProductPageParams,
+  ProductPageUrlQuery
+} from '@subdomains/app/types'
+import getLayoutData from '@subdomains/app/utils/getLayoutData'
+import getCollection from '@subdomains/sales/utils/getCollection'
+import getProduct from '@subdomains/sales/utils/getProduct'
 import findIndex from 'lodash/findIndex'
-import { GetServerSideProps, GetServerSidePropsContext } from 'next'
+import type { GetServerSideProps, GetServerSidePropsContext } from 'next'
 
 /**
  * @file Page - Collection Product
@@ -24,12 +25,11 @@ import { GetServerSideProps, GetServerSidePropsContext } from 'next'
  * Renders a collection product page.
  *
  * @param props - Page component props
- * @param props.globals - Shopify `globals` namespace metafields obj
- * @param props.product - Shopify API product listing resource data
+ * @param props.layout - Data to populate `AppLayout` component
  * @param props.seo - `SEO` component properties
  * @param props.template - `ProductTemplate` component properties
  */
-const CollectionProduct: PC<PageProps> = ({ seo, template }) => (
+const CollectionProduct: PageComponent<PageProps> = ({ seo, template }) => (
   <>
     <SEO {...seo} />
     <ProductTemplate {...template} />
@@ -39,6 +39,8 @@ const CollectionProduct: PC<PageProps> = ({ seo, template }) => (
 /**
  * Fetches the data required to display a product or collection product listing
  * using the `ProductTemplate` component.
+ *
+ * @todo Change collection link for `ProductBreadcrumb` using {@param req.url}
  *
  * @see https://nextjs.org/docs/basic-features/data-fetching
  * @see https://shopify.dev/docs/admin-api/rest/reference/sales-channels
@@ -51,31 +53,29 @@ const CollectionProduct: PC<PageProps> = ({ seo, template }) => (
  */
 export const getServerSideProps: GetServerSideProps<
   PageProps,
-  CollectionProductPageUrlQuery
-> = async (context: GetServerSidePropsContext<CollectionProductPageParams>) => {
+  ProductPageUrlQuery
+> = async (context: GetServerSidePropsContext<ProductPageParams>) => {
   const {
     collection: chandle,
     product: phandle,
     sku
-  } = context.query as CollectionProductPageUrlQuery
+  } = context.query as ProductPageUrlQuery
 
   // Get product data
-  const data = await getProduct(phandle)
+  const data = await getProduct({
+    fields: 'body_html,images,seo,variants,title',
+    handle: phandle,
+    sku
+  })
 
   // If product isn't found, show 404 layout
   if ((data as NotFound).notFound) return data as NotFound
 
   // ! Guarenteed to be product data. Error will be thrown otherwise
-  const product = data as PageProps['product']
-
-  // Get index of active carousel item
-  const active = findIndex(
-    product.variants,
-    product.variants.find(variant => variant.sku === sku)
-  )
+  const { seo, ...product } = data as GetProductResJSON
 
   // Get product collection title
-  let collection = await getCollection(chandle)
+  let collection = await getCollection({ handle: chandle })
 
   // If collection isn't found, show 404 layout
   if ((collection as NotFound).notFound) return collection as NotFound
@@ -84,22 +84,21 @@ export const getServerSideProps: GetServerSideProps<
   collection = collection as ICollectionListing
 
   // Get data for template
-  // Build template data object
-  // TODO: Change collection link using req.url
   const template = serialize<PageProps['template']>({
-    active,
+    active: findIndex(
+      product.variants,
+      product.variants?.find(variant => variant.sku === sku)
+    ),
+    // TODO: Change collection link using req.url
     collection: { href: '/products', title: 'Products' },
     product,
     reviews: []
   })
 
-  // Get global metafields
-  const globals = await globalMetafields()
+  // Get layout data
+  const layout = await getLayoutData()
 
-  // Get SEO object
-  const seo = await getSEO(globals, { ...product, variant: active }, 'product')
-
-  return { props: { globals, product, seo, template } }
+  return { props: { layout, seo: seo as NonNullable<SEOData>, template } }
 }
 
 export default CollectionProduct

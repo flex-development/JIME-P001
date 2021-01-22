@@ -1,15 +1,15 @@
 import { CART_PKEY } from '@flex-development/kustomzcore/constants'
-import { CheckoutLineItemInput } from '@flex-development/kustomzcore/types/shopify'
+import type { CheckoutLineItemInput } from '@flex-development/kustomzcore/types'
 import '@flex-development/kustomzdesign/kustomzdesign.css'
 import {
   CartContextProvider,
   CartContextProviderProps
 } from '@providers/CartContextProvider'
 import { AppLayout } from '@subdomains/app/components/AppLayout'
-import { AC, IAppProps } from '@subdomains/app/interfaces'
 import '@subdomains/app/styles.css'
+import type { AppComponent, IAppProps } from '@subdomains/app/types'
 import debug from 'debug'
-import { NextWebVitalsMetric } from 'next/app'
+import type { NextWebVitalsMetric } from 'next/app'
 import { useCallback, useRef } from 'react'
 import useLocalStorage from 'react-use/useLocalStorage'
 
@@ -30,7 +30,7 @@ import useLocalStorage from 'react-use/useLocalStorage'
  * @param param0.Component - Current page component
  * @param param0.pageProps - Page component props from data fetching methods
  */
-const App: AC = ({ Component, pageProps }: IAppProps) => {
+const App: AppComponent = ({ Component, pageProps }: IAppProps) => {
   // Get line items from peristed storage
   const [items, setItems] = useLocalStorage<CheckoutLineItemInput[]>(CART_PKEY)
   const _items = useRef<CheckoutLineItemInput[]>(items || [])

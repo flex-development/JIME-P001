@@ -1,5 +1,8 @@
-import type { IMetafield, IPage } from '@flex-development/kustomzcore'
-import { objectFromArray } from '@flex-development/kustomzcore'
+import type {
+  IMetafield,
+  IPage
+} from '@flex-development/kustomzcore/dist/types'
+import ofa from '@flex-development/kustomzcore/dist/utils/objectFromArray'
 import join from 'lodash/join'
 import merge from 'lodash/merge'
 import type { SEOData } from '../../types'
@@ -27,7 +30,7 @@ const pageSEO = async (page: IPage | Promise<IPage>): Promise<SEOData> => {
     description_tag = { value: '' } as IMetafield,
     keywords: page_keywords = { value: '' } as IMetafield,
     title_tag = { value: '' } as IMetafield
-  } = objectFromArray(page.metafield, 'key')
+  } = ofa(page.metafield, 'key')
 
   // Get array of page keywords
   const keywords: string[] = (page_keywords?.value as string)?.split(',') ?? []

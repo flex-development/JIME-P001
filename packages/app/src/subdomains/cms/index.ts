@@ -4,7 +4,6 @@
  * @see https://shopify.dev/docs/admin-api/rest/reference/online-store
  */
 
-export * from './hooks'
 export * from './utils'
 
 /* eslint-disable prettier/prettier */

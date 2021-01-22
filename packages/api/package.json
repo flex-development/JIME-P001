@@ -39,6 +39,7 @@
     "firebase-admin": "^9.2.0",
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.15",
+    "node-html-markdown": "^0.1.5",
     "string-strip-html": "^7.0.3"
   },
   "devDependencies": {

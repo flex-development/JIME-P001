@@ -1,27 +1,38 @@
-import { DEFAULT_SEO_IMAGE } from '../../config/constants'
-import type { SEOData } from '../../types'
-import { globalMetafields } from '../metafields'
+import kapi from '@app/config/axios-kapi'
+import type { GetGlobalMetafieldsResJSON, SEOData } from '@kapi/types'
+import debug from 'debug'
 
 /**
  * @file Implementation - globalSEO
- * @module utils/seo/globalSEO
+ * @module subdomains/app/utils/globalSEO
  */
 
 /**
  * Returns an object with global SEO data.
  *
  * @async
+ * @throws {FeathersErrorJSON}
  */
 const globalSEO = async (): Promise<SEOData> => {
-  // Get global SEO data
+  let globals = {} as GetGlobalMetafieldsResJSON
+
+  try {
+    globals = await kapi<GetGlobalMetafieldsResJSON>({
+      url: '/metafields/globals'
+    })
+  } catch (error) {
+    debug('subdomains/app/utils/globalSEO')(error)
+    throw error
+  }
+
   const {
     description: { value: description },
     keywords: { value: keywords },
     social_share_image: { value: social_share_image }
-  } = await globalMetafields()
+  } = globals
 
   // Parse social share image
-  let og_image = DEFAULT_SEO_IMAGE
+  let og_image = `${process.env.API_URL}/assets/images/morena.jpeg`
   if ((social_share_image as string).length) {
     const social_image = JSON.parse(social_share_image as string)
     og_image = social_image[0].cloudinary_src

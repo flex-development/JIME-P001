@@ -87,7 +87,9 @@ export default async ({ query }: Req, res: Res): Promise<Res> => {
     return res.json(hits.map(data => omit(data, ['objectID'])))
   } catch (err) {
     const index404 = isSearchIndex404Error(err)
-    const error = createError(err, { options, query }, err.status | err.code)
+    let error = err
+
+    if (!err.className) error = createError(err, { options, query }, err.status)
 
     debug('api/collections')(error)
     return index404 ? res.json([]) : res.status(error.code).json(error)

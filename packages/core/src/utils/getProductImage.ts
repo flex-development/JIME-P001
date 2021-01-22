@@ -29,8 +29,8 @@ const getProductImage = (
   const image = image_id ? images.find(img => img.id === image_id) : fallback
   const { alt: image_alt, height, id, src = '', width } = image as Image
 
-  let url = sized ? getSizedImageUrl(src, '1024x1024') : src
-  let url_2x = sized ? getSizedImageUrl(src, '2048x2048') : src
+  let url = (sized ? getSizedImageUrl(src, '1024x1024') : src) as string
+  let url_2x = (sized ? getSizedImageUrl(src, '2048x2048') : src) as string
 
   if (sized && !url.startsWith('https')) url = `https${url}`
   if (sized && !url_2x.startsWith('https')) url_2x = `https${url_2x}`
@@ -39,8 +39,8 @@ const getProductImage = (
     alt: !isEmpty(image_alt) ? image_alt || undefined : fallback.alt,
     height,
     id: id ? `${id}` : undefined,
-    src: src.length ? url : fallback,
-    srcSet: `${url} ${url_2x} 2x`,
+    src: url || undefined,
+    srcSet: `${url}, ${url_2x} 2x`,
     width
   }
 }

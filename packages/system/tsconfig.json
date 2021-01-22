@@ -13,5 +13,5 @@
   },
   "exclude": ["node_modules"],
   "extends": "../../tsconfig.json",
-  "include": ["__tests__", ".storybook", "src", "typings"]
+  "include": ["__tests__", ".storybook", "scripts", "src", "typings"]
 }

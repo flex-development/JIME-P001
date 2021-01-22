@@ -1,13 +1,16 @@
 import { IndexTemplate } from '@components/templates/IndexTemplate'
+import ofa from '@flex-development/kustomzcore/utils/objectFromArray'
+import type { GetPageResJSON, SEOData } from '@kapi/types'
 import { SEO } from '@subdomains/app/components/SEO'
-import { IPagePropsIndex as PageProps, PC } from '@subdomains/app/interfaces'
-import getSEO from '@subdomains/app/utils/getSEO'
-import objectFromArray from '@subdomains/app/utils/objectFromArray'
-import { NotFound } from '@subdomains/app/utils/types'
-import getPage from '@subdomains/cms/utils/getPageByHandle'
-import globalMetafields from '@subdomains/metafields/utils/globalMetafields'
+import type {
+  IPagePropsIndex as PageProps,
+  NotFound,
+  PageComponent
+} from '@subdomains/app/types'
+import getLayoutData from '@subdomains/app/utils/getLayoutData'
+import getPage from '@subdomains/cms/utils/getPage'
 import findProducts from '@subdomains/sales/utils/findProducts'
-import { GetServerSideProps } from 'next'
+import type { GetServerSideProps } from 'next'
 
 /**
  * @file Page - Home
@@ -18,12 +21,11 @@ import { GetServerSideProps } from 'next'
  * Renders the homepage.
  *
  * @param props - Page component props
- * @param props.globals - Shopify `globals` namespace metafields obj
- * @param props.page - Shopify API page resource data
+ * @param props.layout - Data to populate `AppLayout` component
  * @param props.seo - `SEO` component properties
  * @param props.template - `IndexTemplate` component properties
  */
-const Home: PC<PageProps> = ({ seo, template }) => (
+const Home: PageComponent<PageProps> = ({ seo, template }) => (
   <>
     <SEO {...seo} />
     <IndexTemplate {...template} />
@@ -33,6 +35,8 @@ const Home: PC<PageProps> = ({ seo, template }) => (
 /**
  * Fetches the data required to render the homepage.
  *
+ * @todo Fetch product reviews
+ *
  * @see https://nextjs.org/docs/basic-features/data-fetching
  * @see https://shopify.dev/docs/admin-api/rest/reference/online-store/page
  *
@@ -40,13 +44,13 @@ const Home: PC<PageProps> = ({ seo, template }) => (
  */
 export const getServerSideProps: GetServerSideProps<PageProps> = async () => {
   // Get page data
-  const data = await getPage('index')
+  const data = await getPage({ fields: 'metafield,seo', handle: 'index' })
 
   // Redirect to /404 if page data isn't found
   if ((data as NotFound).notFound) return data as NotFound
 
   // Guarenteed to be page data. Error will be thrown otherwise
-  const page = data as PageProps['page']
+  const { metafield, seo } = data as NonNullable<GetPageResJSON>
 
   // Parse page metafields
   const {
@@ -57,7 +61,12 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async () => {
     products_section_text,
     products_section_title,
     reviews_section_title
-  } = objectFromArray(page.metafield, 'key')
+  } = ofa(metafield ?? [], 'key')
+
+  // Get product listing data for product grid
+  const products = await findProducts({
+    fields: 'handle,images,seo,title,variants'
+  })
 
   // Get `IndexTemplate` props
   const template: PageProps['template'] = {
@@ -65,20 +74,17 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async () => {
     about_section_title: about_section_title.value as string,
     max_products: JSON.parse(max_products.value as string),
     max_reviews: JSON.parse(max_reviews.value as string),
-    products: (await findProducts()) as PageProps['template']['products'],
+    products: products as PageProps['template']['products'],
     products_section_text: products_section_text.value as string,
     products_section_title: products_section_title.value as string,
     reviews: [],
     reviews_section_title: reviews_section_title.value as string
   }
 
-  // Get global metafields
-  const globals = await globalMetafields()
+  // Get layout data
+  const layout = await getLayoutData()
 
-  // Get SEO object
-  const seo = await getSEO(globals, page, 'page')
-
-  return { props: { globals, page, seo, template } }
+  return { props: { layout, seo: seo as NonNullable<SEOData>, template } }
 }
 
 export default Home

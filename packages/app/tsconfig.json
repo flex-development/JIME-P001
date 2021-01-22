@@ -8,17 +8,10 @@
     "noEmit": true,
     "module": "esnext",
     "strictPropertyInitialization": false,
-    "target": "esnext",
-    "typeRoots": [
-      "../../node_modules/@flex-development/kustomzcore/dist/types",
-      "../../node_modules/@flex-development/kustomzdesign/dist",
-      "../../node_modules/@flex-development/json/dist",
-      "../../node_modules/@types",
-      "../../node_modules/musickit-typescript"
-    ]
+    "target": "esnext"
   },
   "exclude": ["node_modules"],
   "extends": "../../tsconfig.json",
   "files": ["next-env.d.ts"],
-  "include": ["__mocks__", "src", "jest.setup.ts", "postcss.config.js"]
+  "include": ["__mocks__", "src", "jest.setup.ts"]
 }

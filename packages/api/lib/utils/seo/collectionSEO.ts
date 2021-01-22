@@ -1,7 +1,7 @@
 import type {
   ICollectionListing,
   IProductListing
-} from '@flex-development/kustomzcore'
+} from '@flex-development/kustomzcore/dist/types'
 import isEmpty from 'lodash/isEmpty'
 import join from 'lodash/join'
 import merge from 'lodash/merge'

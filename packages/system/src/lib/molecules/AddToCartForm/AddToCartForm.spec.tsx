@@ -1,4 +1,4 @@
-import { IProductListingVariant } from '@flex-development/kustomzcore/types/shopify'
+import { IProductListingVariant } from '@flex-development/kustomzcore/types'
 import { fireEvent, render, screen } from '@testing-library/react'
 import User from '@testing-library/user-event'
 import { AddToCartForm } from './AddToCartForm'

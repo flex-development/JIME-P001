@@ -2,9 +2,9 @@ const debug = require('debug')('next.config')
 const fse = require('fs-extra')
 const { DuplicatesPlugin } = require('inspectpack/plugin')
 const merge = require('lodash').merge
+const transpileModules = require('next-transpile-modules')
 const path = require('path')
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
-const createDeveloperToken = require('./scripts/create-developer-token')
 const vercel = require('./vercel.json')
 
 /**
@@ -15,10 +15,8 @@ const vercel = require('./vercel.json')
 debug.info = console.info.bind(console)
 
 const {
-  APPLE_AUTHKEY_MUSICKIT: private_key,
-  APPLE_AUTHKEY_MUSICKIT_KEY_ID: kid,
-  APPLE_TEAM_ID: iss,
   ANALYZE,
+  API_URL,
   FIREBASE_API_KEY,
   FIREBASE_APP_ID,
   FIREBASE_PROJECT_ID,
@@ -73,12 +71,18 @@ const tapDone = () => {
   })
 }
 
-module.exports = {
+/** @see https://github.com/martpie/next-transpile-modules */
+const withTM = transpileModules(['@flex-development/kustomzcore'], {
+  resolveSymlinks: true,
+  unstable_webpack5: true
+})
+
+module.exports = withTM({
   /**
    * Add environment variables to the JavaScript bundle.
    */
   env: {
-    APPLE_DEVELOPER_TOKEN: createDeveloperToken(iss, kid, private_key),
+    API_URL,
     FIREBASE_API_KEY,
     FIREBASE_APP_ID,
     FIREBASE_AUTH_DOMAIN: `${FIREBASE_PROJECT_ID}.firebaseapp.com`,
@@ -171,18 +175,18 @@ module.exports = {
    * @return {object} Altered Webpack configuration
    */
   webpack: (config, { dev, isServer }) => {
-    // Module resolutions
+    // Update module resolutions
     config.resolve.alias = merge(config.resolve.alias, {
       '@babel': path.join(__dirname, '../../node_modules/@babel'),
       '@baggie/string': '@baggie/string/lib',
       '@commitlint': false,
-      '@components': '@flex-development/kustomzdesign/dist/lib',
+      '@components': `@flex-development/kustomzdesign/dist/lib`,
       '@flex-development/json': '@flex-development/json/dist',
-      '@flex-development/kustomzcore': '@flex-development/kustomzcore/dist',
-      '@flex-development/kustomzdesign': '@flex-development/kustomzdesign/dist',
-      '@hooks': '@flex-development/kustomzdesign/dist/hooks',
+      '@flex-development/kustomzcore': `@flex-development/kustomzcore/dist`,
+      '@flex-development/kustomzdesign': `@flex-development/kustomzdesign/dist`,
+      '@hooks': `@flex-development/kustomzdesign/dist/hooks`,
       '@mdx-js/react': '@mdx-js/react/dist/esm',
-      '@providers': '@flex-development/kustomzdesign/dist/providers',
+      '@providers': `@flex-development/kustomzdesign/dist/providers`,
       '@shopify/theme-images': '@shopify/theme-images/dist/images.es5',
       lodash: 'lodash-es',
       'react-hanger': 'react-hanger/esm',
@@ -253,4 +257,4 @@ module.exports = {
 
     return config
   }
-}
+})

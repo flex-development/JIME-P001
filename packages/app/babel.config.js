@@ -1,13 +1,14 @@
-const defaultBabelConfig = require('../../babel.config.json')
+const rootBabelOptions = require('../../babel.config.json')
 
 /**
  * @file Babel Configuration
  * @see https://babeljs.io/docs/en/configuration
  */
 
-module.exports = {
-  ...defaultBabelConfig,
-  plugins: defaultBabelConfig.plugins.concat([
+module.exports = api => ({
+  ...rootBabelOptions,
+  comments: api.env('development'),
+  plugins: rootBabelOptions.plugins.concat([
     [
       'module-resolver',
       {
@@ -21,4 +22,4 @@ module.exports = {
       }
     ]
   ])
-}
+})

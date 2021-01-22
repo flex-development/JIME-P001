@@ -1,8 +1,7 @@
-import { DataArrayQueryParams } from '@flex-development/json/interfaces'
-import { IProductListing } from '@flex-development/kustomzcore/types/shopify'
-import { createError } from '@flex-development/kustomzcore/utils/createError'
+import kapi from '@app/config/axios-kapi'
+import type { GetProductQuery, GetProductResJSON } from '@kapi/types'
+import type { NotFound } from '@subdomains/app/types'
 import debug from 'debug'
-import findProducts from './findProducts'
 
 /**
  * @file Implementation - getProduct
@@ -10,27 +9,26 @@ import findProducts from './findProducts'
  */
 
 /**
- * Retrieve a product by ID. Throws an error if the product listing isn't found.
+ * Retrieve a product listing by handle.
+ * Returns `{ notFound: true }` if the product listing isn't found.
  *
  * @async
- * @param id - ID of product to retrieve
- * @throws {FeathersErrorJSON}
+ * @param query - Query parameters
+ * @param query.handle - Handle of product listing to retrieve
+ * @param query.fields - Comma-separated list of fields to show
+ * @param query.sku - Generate SEO for a product listing variant
  */
 const getProduct = async (
-  id: IProductListing['product_id']
-): Promise<IProductListing> => {
-  const query: DataArrayQueryParams = { product_id: { $eq: id } }
-  const products = await findProducts(query)
+  query: GetProductQuery
+): Promise<GetProductResJSON | NotFound> => {
+  const { handle, ...params } = query
 
-  if (!products.length) {
-    const data = { errors: { id } }
-    const error = createError(`Product with id "${id}" not found`, data, 404)
-
+  try {
+    return await kapi<GetProductResJSON>({ params, url: `/products/${handle}` })
+  } catch (error) {
     debug('subdomains/sales/utils/getProduct')(error)
-    throw error
+    return { notFound: true }
   }
-
-  return products[0] as IProductListing
 }
 
 export default getProduct

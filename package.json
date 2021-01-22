@@ -36,8 +36,9 @@
     "predev:api": "yarn rm:vercel",
     "dev:api": "cp ~/.vercel/kapi.json .vercel/project.json; vc dev -l 8080",
     "dev:app": "lerna run dev --scope @flex-development/morenaskustomz",
-    "dev:store": "run-p dev:api dev:app",
     "dev:ui": "lerna run dev --scope @flex-development/kustomzdesign",
+    "dev:store": "run-p dev:api dev:app",
+    "dev:store-ui": "run-p dev:api dev:ui",
     "test:app": "lerna run test:quiet --scope @flex-development/morenaskustomz",
     "test:ui": "lerna run test:quiet --scope @flex-development/kustomzdesign",
     "test": "run-p test:*",
@@ -46,7 +47,8 @@
     "start": "lerna run start"
   },
   "dependencies": {
-    "@commitlint/format": "^11.0.0"
+    "@commitlint/format": "^11.0.0",
+    "if-env": "^1.0.4"
   },
   "devDependencies": {
     "@babel/cli": "^7.12.8",

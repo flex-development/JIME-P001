@@ -1,9 +1,14 @@
 import { CartTemplate } from '@components/templates/CartTemplate'
 import { useCartContext } from '@hooks/useCart'
 import { SEO } from '@subdomains/app/components/SEO'
-import { IPageProps as PageProps, PC } from '@subdomains/app/interfaces'
-import globalMetafields from '@subdomains/metafields/utils/globalMetafields'
-import { GetServerSideProps } from 'next'
+import type {
+  IPageProps as PageProps,
+  PageComponent
+} from '@subdomains/app/types'
+import getLayoutData from '@subdomains/app/utils/getLayoutData'
+import globalSEO from '@subdomains/app/utils/globalSEO'
+import merge from 'lodash/merge'
+import type { GetServerSideProps } from 'next'
 
 /**
  * @file Page - Shopping Cart
@@ -14,14 +19,15 @@ import { GetServerSideProps } from 'next'
  * Renders a user's shopping cart.
  *
  * @param props - Page component props
- * @param props.globals - Shopify `globals` namespace metafields obj
+ * @param props.layout - Data to populate `AppLayout` component
+ * @param props.seo - `SEO` component properties
  */
-const Cart: PC = () => {
+const Cart: PageComponent = ({ seo }) => {
   const { items_total } = useCartContext()
 
   return (
     <>
-      <SEO title={`Cart (${items_total})`} />
+      <SEO {...seo} title={`Cart (${items_total})`} />
       <CartTemplate />
     </>
   )
@@ -36,7 +42,8 @@ const Cart: PC = () => {
  * @async
  */
 export const getServerSideProps: GetServerSideProps<PageProps> = async () => {
-  return { props: { globals: await globalMetafields() } }
+  const seo = merge(await globalSEO(), { title: 'Cart (O)' })
+  return { props: { layout: await getLayoutData(), seo } }
 }
 
 export default Cart

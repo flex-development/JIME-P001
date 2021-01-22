@@ -1,4 +1,4 @@
-import { createError } from '@flex-development/kustomzcore'
+import createError from '@flex-development/kustomzcore/dist/utils/createError'
 import debug from 'debug'
 import jwt, { Algorithm, SignOptions } from 'jsonwebtoken'
 import isEmpty from 'lodash/isEmpty'

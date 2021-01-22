@@ -3,9 +3,7 @@
  * @module subdomains/app/utils
  */
 
-export { default as getSEO } from './getSEO'
-export { default as objectFromArray } from './objectFromArray'
-export { default as transformMDX } from './transformMDX'
-export * from './types'
+export { default as getLayoutData } from './getLayoutData'
+export { default as globalSEO } from './globalSEO'
 
 /* eslint-disable prettier/prettier */

@@ -59,7 +59,17 @@ module.exports = api => {
   })
 
   // Add `module-resolver` plugin
-  const plugins = rootBabelOptions.plugins.concat([moduleResolverPlugin()])
+  let plugins = rootBabelOptions.plugins.concat([moduleResolverPlugin()])
+
+  // Add `transform-define` plugin
+  plugins = plugins.concat([
+    [
+      'transform-define',
+      {
+        'process.env.NODE_ENV': process.env.NODE_ENV
+      }
+    ]
+  ])
 
   // Return Babel options
   return { ...rootBabelOptions, plugins, presets }

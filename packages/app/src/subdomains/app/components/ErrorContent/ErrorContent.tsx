@@ -1,7 +1,8 @@
 import { Link } from '@components/atoms/Link'
-import { Paragraph, ParagraphProps } from '@components/atoms/Paragraph'
+import type { ParagraphProps } from '@components/atoms/Paragraph'
+import { Paragraph } from '@components/atoms/Paragraph'
 import { EMPTY_SPACE } from '@flex-development/kustomzcore/constants'
-import { FC } from 'react'
+import type { FC } from 'react'
 
 /**
  * @file Implementation - ErrorContent

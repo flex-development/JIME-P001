@@ -10,7 +10,7 @@ import { Markdown } from '../PageTemplate/PageTemplate.stories'
 import { RollingTray } from '../ProductTemplate/ProductTemplate.stories'
 import { Search as ProductSearch } from '../SearchTemplate/SearchTemplate.stories'
 import { Layout } from './Layout'
-import { LayoutProps } from './Layout.props'
+import type { LayoutProps } from './Layout.props'
 
 /**
  * @file Stories - Layout

@@ -25,7 +25,7 @@ describe('GridRow', () => {
     expect(container.firstChild).toHaveClass('lg:row-5')
   })
 
-  it('renders with classes "lg:row-5" and row-7', () => {
+  it('renders with classes "lg:row-5" and "row-7"', () => {
     const { container } = render(<GridRow $lg={5} $xs={7} />)
 
     expect(container.firstChild).toHaveClass('lg:row-5')

@@ -1,5 +1,6 @@
-import { IProductListing } from '@flex-development/kustomzcore/types'
-import { BoxProps, LinkProps } from '@system/lib/atoms'
+import type { IProductListing } from '@flex-development/kustomzcore/types'
+import type { BoxProps } from '@system/lib/atoms/Box'
+import type { LinkProps } from '@system/lib/atoms/Link'
 
 /**
  * @file Component Props - ProductCard

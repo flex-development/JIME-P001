@@ -1,5 +1,5 @@
 import { Hero } from './Hero'
-import { HeroProps } from './Hero.props'
+import type { HeroProps } from './Hero.props'
 
 /**
  * @file Stories - Hero

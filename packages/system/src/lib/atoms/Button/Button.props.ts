@@ -1,5 +1,5 @@
 import { useTransformScaleX } from '@system/hooks/useTransformScaleX'
-import {
+import type {
   Color,
   ComponentPropsBase as CPB,
   FormComponentProps

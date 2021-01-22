@@ -1,5 +1,5 @@
 import { Divider } from './Divider'
-import { DividerProps } from './Divider.props'
+import type { DividerProps } from './Divider.props'
 
 /**
  * @file Stories - Divider

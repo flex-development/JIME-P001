@@ -1,5 +1,5 @@
 import { Span } from './Span'
-import { SpanProps } from './Span.props'
+import type { SpanProps } from './Span.props'
 
 /**
  * @file Stories - Span

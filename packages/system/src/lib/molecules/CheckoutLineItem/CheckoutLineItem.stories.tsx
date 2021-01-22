@@ -1,6 +1,6 @@
 import LINE_ITEMS from '@system-mocks/data/checkout-line-items.mock.json'
 import { CheckoutLineItem } from './CheckoutLineItem'
-import { CheckoutLineItemProps } from './CheckoutLineItem.props'
+import type { CheckoutLineItemProps } from './CheckoutLineItem.props'
 
 /**
  * @file Stories - CheckoutLineItem

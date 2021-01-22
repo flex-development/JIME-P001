@@ -4,7 +4,7 @@ import { Main, MainProps } from '@system/lib/atoms/Main'
 import { Section } from '@system/lib/atoms/Section'
 import { Span } from '@system/lib/atoms/Span'
 import { TC } from '@system/types'
-import { ErrorTemplateProps } from './ErrorTemplate.props'
+import type { ErrorTemplateProps } from './ErrorTemplate.props'
 
 /**
  * @file Implementation - ErrorTemplate

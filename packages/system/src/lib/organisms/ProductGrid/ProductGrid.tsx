@@ -4,7 +4,7 @@ import { GridColumn } from '@system/lib/atoms/GridColumn'
 import { Section, SectionProps } from '@system/lib/atoms/Section'
 import { ProductCard } from '@system/lib/molecules/ProductCard'
 import { FC } from 'react'
-import { ProductGridProps } from './ProductGrid.props'
+import type { ProductGridProps } from './ProductGrid.props'
 
 /**
  * @file Implementation - ProductGrid

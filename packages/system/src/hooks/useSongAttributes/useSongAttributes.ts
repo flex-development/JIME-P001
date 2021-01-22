@@ -1,6 +1,7 @@
 import type { AnyObject } from '@flex-development/json'
 import type { SongAttributes } from '@flex-development/kustomzcore/types'
-import { UseActiveIndex, useActiveIndex } from '@system/hooks/useActiveIndex'
+import type { UseActiveIndex } from '@system/hooks/useActiveIndex'
+import { useActiveIndex } from '@system/hooks/useActiveIndex'
 import { useMemoCompare } from '@system/hooks/useMemoCompare'
 import clamp from 'lodash/clamp'
 import { useCallback } from 'react'

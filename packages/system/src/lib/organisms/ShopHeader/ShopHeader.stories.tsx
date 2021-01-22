@@ -1,5 +1,5 @@
 import { ShopHeader } from './ShopHeader'
-import { ShopHeaderProps } from './ShopHeader.props'
+import type { ShopHeaderProps } from './ShopHeader.props'
 
 /**
  * @file Stories - ShopHeader

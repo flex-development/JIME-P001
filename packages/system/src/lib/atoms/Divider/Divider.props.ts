@@ -1,4 +1,4 @@
-import { ComponentPropsBase } from '@system/types'
+import type { ComponentPropsBase } from '@system/types'
 
 /**
  * @file Component Props - Divider

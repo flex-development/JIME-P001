@@ -2,7 +2,7 @@ import product_options from '@system-mocks/data/product-options.mock.json'
 import { Input, Select, TextArea } from '@system/lib/atoms'
 import { Email as EmailInput } from '@system/lib/atoms/Input/Input.stories'
 import { FormField } from './FormField'
-import { FormFieldProps } from './FormField.props'
+import type { FormFieldProps } from './FormField.props'
 
 /**
  * @file Stories -  FormField

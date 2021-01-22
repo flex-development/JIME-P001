@@ -5,7 +5,7 @@ import { List, ListProps } from '@system/lib/atoms/List'
 import merge from 'lodash/merge'
 import uniqueId from 'lodash/uniqueId'
 import { FC } from 'react'
-import { DropdownMenuProps } from './DropdownMenu.props'
+import type { DropdownMenuProps } from './DropdownMenu.props'
 
 /**
  * @file Implementation - DropdownMenu

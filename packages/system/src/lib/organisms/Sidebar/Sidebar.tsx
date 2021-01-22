@@ -7,9 +7,9 @@ import { Image } from '@system/lib/atoms/Image'
 import { Link, LinkProps } from '@system/lib/atoms/Link'
 import { Paragraph } from '@system/lib/atoms/Paragraph'
 import { Menu } from '@system/lib/molecules/Menu'
-import { FREC } from '@system/types'
+import type { FREC } from '@system/types'
 import { forwardRef } from 'react'
-import { SidebarProps } from './Sidebar.props'
+import type { SidebarProps } from './Sidebar.props'
 
 /**
  * @file Implementation - Sidebar

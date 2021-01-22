@@ -1,9 +1,9 @@
 import { a } from '@react-spring/web'
 import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
-import { FREC } from '@system/types'
+import type { FREC } from '@system/types'
 import { forwardRef } from 'react'
 import { Option, OptionProps } from '../Option'
-import { SelectProps } from './Select.props'
+import type { SelectProps } from './Select.props'
 
 /**
  * @file Implementation - Select

@@ -7,7 +7,7 @@ import { Header, HeaderProps } from '@system/lib/atoms/Header'
 import { SearchBar } from '@system/lib/molecules/SearchBar'
 import { EventHandlers } from '@system/types'
 import { FC } from 'react'
-import { ShopHeaderProps } from './ShopHeader.props'
+import type { ShopHeaderProps } from './ShopHeader.props'
 
 /**
  * @file Implementation - ShopHeader

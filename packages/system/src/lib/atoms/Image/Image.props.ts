@@ -1,5 +1,5 @@
 import type { NullishString } from '@flex-development/json/utils/types'
-import { ComponentPropsBase } from '@system/types'
+import type { ComponentPropsBase } from '@system/types'
 
 /**
  * @file Component Props - Image

@@ -1,5 +1,5 @@
 import { Sidebar } from './Sidebar'
-import { SidebarProps } from './Sidebar.props'
+import type { SidebarProps } from './Sidebar.props'
 
 /**
  * @file Stories - Sidebar

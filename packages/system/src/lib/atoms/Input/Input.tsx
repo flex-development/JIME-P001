@@ -5,10 +5,10 @@ import {
   EMAIL_PLACEHOLDER
 } from '@system/config/constants'
 import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
-import { FREC } from '@system/types'
+import type { FREC } from '@system/types'
 import omit from 'lodash/omit'
 import { forwardRef } from 'react'
-import { InputProps } from './Input.props'
+import type { InputProps } from './Input.props'
 
 /**
  * @file Implementation - Input

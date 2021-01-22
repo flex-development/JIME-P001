@@ -1,11 +1,11 @@
 import { useSpring } from '@react-spring/web'
 import { useCartContext, useSanitizedProps } from '@system/hooks'
-import { FREC } from '@system/types'
+import type { FREC } from '@system/types'
 import { forwardRef } from 'react'
 import { usePrevious } from 'react-hanger/usePrevious'
 import { Link, LinkProps } from '../Link'
 import { Span } from '../Span'
-import { CartPreviewProps } from './CartPreview.props'
+import type { CartPreviewProps } from './CartPreview.props'
 
 /**
  * @file Implementation - CartPreview

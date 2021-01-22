@@ -1,6 +1,6 @@
 import { PRODUCTS } from '@system-mocks/utils'
 import { ProductReviewForm } from './ProductReviewForm'
-import { ProductReviewFormProps } from './ProductReviewForm.props'
+import type { ProductReviewFormProps } from './ProductReviewForm.props'
 
 /**
  * @file Stories - ProductReviewForm

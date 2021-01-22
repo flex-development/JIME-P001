@@ -1,26 +1,26 @@
-import { IProductListingVariant } from '@flex-development/kustomzcore/types'
-import getProductImage from '@flex-development/kustomzcore/utils/getProductImage'
+import type { IProductListingVariant } from '@flex-development/kustomzcore'
+import ProductImage from '@flex-development/kustomzcore/utils/getProductImage'
 import { IMAGE_PLACEHOLDER_URL } from '@system/config/constants'
 import { useMemoCompare } from '@system/hooks/useMemoCompare'
 import { useProductVariants } from '@system/hooks/useProductVariants'
 import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
-import { Box, BoxProps } from '@system/lib/atoms/Box'
-import { Image, ImageProps } from '@system/lib/atoms/Image'
+import type { BoxProps } from '@system/lib/atoms/Box'
+import { Box } from '@system/lib/atoms/Box'
+import type { ImageProps } from '@system/lib/atoms/Image'
+import { Image } from '@system/lib/atoms/Image'
 import { Link } from '@system/lib/atoms/Link'
 import { Paragraph } from '@system/lib/atoms/Paragraph'
-import { EventHandlers } from '@system/types'
-import dynamic from 'next/dynamic'
-import { FC, useCallback, useEffect, useMemo, useState } from 'react'
+import { DropdownMenu } from '@system/lib/molecules'
+import type { EventHandlers } from '@system/types'
+import type { FC } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import useBoolean from 'react-hanger/array/useBoolean'
-import { ProductCardProps } from './ProductCard.props'
+import type { ProductCardProps } from '././ProductCard.props'
+
 /**
  * @file Implementation - ProductCard
  * @module lib/molecules/ProductCard/impl
  */
-
-const DropdownMenu = dynamic(async () => {
-  return (await import('../DropdownMenu')).DropdownMenu
-})
 
 /**
  * Displays a product preview. The product image, title, and price will be
@@ -50,7 +50,7 @@ export const ProductCard: FC<ProductCardProps> = props => {
   // Get product variant display image
   const image_alt = `${product.title} - ${selected.title}`
   const image = useMemoCompare<ImageProps>(
-    getProductImage(
+    ProductImage(
       selected.image_id,
       product.images,
       selected.image_id === null,

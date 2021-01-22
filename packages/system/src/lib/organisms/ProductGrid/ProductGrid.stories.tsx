@@ -1,6 +1,6 @@
 import { PRODUCTS } from '@system-mocks/utils'
 import { ProductGrid } from './ProductGrid'
-import { ProductGridProps } from './ProductGrid.props'
+import type { ProductGridProps } from './ProductGrid.props'
 
 /**
  * @file Stories - ProductGrid

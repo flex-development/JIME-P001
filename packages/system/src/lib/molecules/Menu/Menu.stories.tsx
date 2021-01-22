@@ -1,5 +1,5 @@
 import { Menu } from './Menu'
-import { MenuProps } from './Menu.props'
+import type { MenuProps } from './Menu.props'
 
 /**
  * @file Stories - Menu

@@ -48,8 +48,8 @@
     "test:quiet": "yarn test || true",
     "start": "yarn predev; NODE_ENV=production run-p dev:*",
     "prebuild": "yarn test:quiet && rm -rf public && mkdir public",
-    "build": "build-storybook -o public",
-    "vercel-build": "lerna run prepare --scope @flex-development/kustomzcore; lerna link; NODE_ENV=production yarn build",
+    "build": "NODE_ENV=production build-storybook -o public",
+    "vercel-build": "lerna run prepare --scope @flex-development/kustomzcore; lerna link; yarn build",
     "precompile:ts": "rm -rf ./dist",
     "compile:ts": "babel --config-file ./babel.config.prod.js src -d dist --extensions '.ts,.tsx'",
     "postcompile:ts": "ttsc -p tsconfig.prod.json",
@@ -68,14 +68,14 @@
   },
   "devDependencies": {
     "@mdx-js/react": "^1.6.22",
-    "@storybook/addon-a11y": "^6.1.9",
+    "@storybook/addon-a11y": "^6.1.5",
     "@storybook/addon-console": "^1.2.2",
-    "@storybook/addon-essentials": "^6.1.11",
-    "@storybook/addon-jest": "^6.1.9",
-    "@storybook/addons": "^6.1.9",
-    "@storybook/api": "^6.1.9",
-    "@storybook/cli": "^6.1.9",
-    "@storybook/react": "^6.1.9",
+    "@storybook/addon-essentials": "^6.1.5",
+    "@storybook/addon-jest": "^6.1.5",
+    "@storybook/addons": "^6.1.5",
+    "@storybook/api": "^6.1.5",
+    "@storybook/cli": "^6.1.5",
+    "@storybook/react": "^6.1.5",
     "@testing-library/dom": "^7.24.3",
     "@testing-library/jest-dom": "^5.9.0",
     "@testing-library/react": "^11.2.2",
@@ -132,5 +132,8 @@
   "engines": {
     "node": ">=10"
   },
-  "sideEffects": false
+  "sideEffects": [
+    "*.css",
+    "*.scss"
+  ]
 }

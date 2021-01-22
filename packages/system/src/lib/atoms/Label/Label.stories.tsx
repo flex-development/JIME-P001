@@ -1,5 +1,5 @@
 import { Label } from './Label'
-import { LabelProps } from './Label.props'
+import type { LabelProps } from './Label.props'
 
 /**
  * @file Stories - Label

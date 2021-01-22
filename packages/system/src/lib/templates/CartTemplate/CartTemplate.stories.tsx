@@ -1,6 +1,6 @@
 import { CartContextProvider } from '@system/providers'
 import { CartTemplate } from './CartTemplate'
-import { CartTemplateProps } from './CartTemplate.props'
+import type { CartTemplateProps } from './CartTemplate.props'
 
 /**
  * @file Stories - CartTemplate

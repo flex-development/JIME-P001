@@ -1,6 +1,6 @@
 import { PRODUCTS, REVIEWS } from '@system-mocks/utils'
 import { IndexTemplate } from './IndexTemplate'
-import { IndexTemplateProps } from './IndexTemplate.props'
+import type { IndexTemplateProps } from './IndexTemplate.props'
 
 /**
  * @file Stories - IndexTemplate

@@ -5,7 +5,7 @@ import { EventHandlers } from '@system/types'
 import uniqueId from 'lodash/uniqueId'
 import { FC, useCallback } from 'react'
 import useNumber from 'react-hanger/array/useNumber'
-import { ProductRatingFieldProps } from './ProductRatingField.props'
+import type { ProductRatingFieldProps } from './ProductRatingField.props'
 
 /**
  * @file Implementation - ProductRatingField

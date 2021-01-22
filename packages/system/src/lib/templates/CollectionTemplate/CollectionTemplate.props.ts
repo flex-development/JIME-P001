@@ -1,8 +1,9 @@
-import {
+import type {
   ICollectionListing,
   IProductListing
 } from '@flex-development/kustomzcore/types'
-import { LinkProps, MainProps } from '@system/lib/atoms'
+import type { LinkProps } from '@system/lib/atoms/Link'
+import type { MainProps } from '@system/lib/atoms/Main'
 
 /**
  * @file Component Props - CollectionTemplate

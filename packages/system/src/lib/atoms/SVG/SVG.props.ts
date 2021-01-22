@@ -1,5 +1,5 @@
-import { ComponentPropsBase as CPB, Merge } from '@system/types'
-import { SVGAttributes } from 'react'
+import type { ComponentPropsBase as CPB, Merge } from '@system/types'
+import type { SVGAttributes } from 'react'
 
 /**
  * @file Component Props - SVG

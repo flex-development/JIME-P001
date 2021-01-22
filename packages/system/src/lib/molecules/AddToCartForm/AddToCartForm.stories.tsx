@@ -1,7 +1,7 @@
-import { IProductListing } from '@flex-development/kustomzcore/types'
+import type { IProductListing } from '@flex-development/kustomzcore/types'
 import { PRODUCTS } from '@system-mocks/utils'
 import { AddToCartForm } from './AddToCartForm'
-import { AddToCartFormProps } from './AddToCartForm.props'
+import type { AddToCartFormProps } from './AddToCartForm.props'
 
 /**
  * @file Stories - AddToCartForm

@@ -1,7 +1,7 @@
-import { IProductListing } from '@flex-development/kustomzcore/types'
+import type { IProductListing } from '@flex-development/kustomzcore/types'
 import { PRODUCTS } from '@system-mocks/utils'
 import { ProductHeading } from '@system/lib'
-import { ProductHeadingProps } from './ProductHeading.props'
+import type { ProductHeadingProps } from './ProductHeading.props'
 
 /**
  * @file Stories - ProductHeading

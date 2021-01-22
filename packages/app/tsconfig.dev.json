@@ -1,6 +1,8 @@
 {
   "compilerOptions": {
-    "jsx": "react-jsxdev"
+    "jsx": "react-jsxdev",
+    "rootDir": "./src",
+    "sourceMap": true
   },
   "exclude": ["node_modules"],
   "extends": "./tsconfig.json"

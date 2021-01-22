@@ -1,22 +1,21 @@
-import { IProductListingVariant } from '@flex-development/kustomzcore/types'
+import type { IProductListingVariant } from '@flex-development/kustomzcore/types'
 import { useCartContext } from '@system/hooks/useCart'
 import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
 import { Box } from '@system/lib/atoms/Box'
 import { Button } from '@system/lib/atoms/Button'
 import { Heading } from '@system/lib/atoms/Heading'
-import { Main, MainProps } from '@system/lib/atoms/Main'
+import type { MainProps } from '@system/lib/atoms/Main'
+import { Main } from '@system/lib/atoms/Main'
 import { Section } from '@system/lib/atoms/Section'
-import {
-  AddToCartForm,
-  AddToCartFormProps
-} from '@system/lib/molecules/AddToCartForm'
+import type { AddToCartFormProps } from '@system/lib/molecules/AddToCartForm'
+import { AddToCartForm } from '@system/lib/molecules/AddToCartForm'
 import { Carousel } from '@system/lib/molecules/Carousel'
 import { ProductBreadcrumb } from '@system/lib/molecules/ProductBreadcrumb'
 import { ProductReview } from '@system/lib/molecules/ProductReview'
-import { EventHandlers, TC } from '@system/types'
+import type { EventHandlers, TC } from '@system/types'
 import isFunction from 'lodash/isFunction'
 import { useCallback, useState } from 'react'
-import { ProductTemplateProps } from './ProductTemplate.props'
+import type { ProductTemplateProps } from './ProductTemplate.props'
 
 /**
  * @file Implementation - ProductTemplate

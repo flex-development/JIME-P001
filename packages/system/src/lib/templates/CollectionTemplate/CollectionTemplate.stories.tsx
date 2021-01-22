@@ -1,8 +1,8 @@
-import { ICollectionListing } from '@flex-development/kustomzcore/types'
+import type { ICollectionListing } from '@flex-development/kustomzcore/types'
 import collections from '@system-mocks/data/collection-listings.mock.json'
 import { PRODUCTS } from '@system-mocks/utils'
 import { CollectionTemplate } from './CollectionTemplate'
-import { CollectionTemplateProps } from './CollectionTemplate.props'
+import type { CollectionTemplateProps } from './CollectionTemplate.props'
 
 /**
  * @file Stories - CollectionTemplate

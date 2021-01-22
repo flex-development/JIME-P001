@@ -1,5 +1,5 @@
 import type { ANYTHING } from '@flex-development/json'
-import {
+import type {
   CheckoutLineItemInput,
   IProductListing,
   IProductListingVariant

@@ -1,5 +1,5 @@
 import { TextArea } from './TextArea'
-import { TextAreaProps } from './TextArea.props'
+import type { TextAreaProps } from './TextArea.props'
 
 /**
  * @file Stories - TextArea

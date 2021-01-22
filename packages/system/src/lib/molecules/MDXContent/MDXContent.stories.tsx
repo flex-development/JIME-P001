@@ -1,5 +1,5 @@
 import { MDXContent } from './MDXContent'
-import { MDXContentProps } from './MDXContent.props'
+import type { MDXContentProps } from './MDXContent.props'
 
 /**
  * @file Stories - MDXContent

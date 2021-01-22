@@ -1,5 +1,5 @@
 import { Input } from './Input'
-import { InputProps } from './Input.props'
+import type { InputProps } from './Input.props'
 
 /**
  * @file Stories - Input

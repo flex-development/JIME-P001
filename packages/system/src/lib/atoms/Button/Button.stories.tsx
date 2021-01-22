@@ -1,5 +1,5 @@
 import { Button } from './Button'
-import { ButtonProps } from './Button.props'
+import type { ButtonProps } from './Button.props'
 
 /**
  * @file Stories - Button

@@ -1,9 +1,9 @@
 import { a } from '@react-spring/web'
 import { SVG_CIRCLE_PROPS } from '@system/config/constants'
 import { useRewindSpring, useSanitizedProps } from '@system/hooks'
-import { FREC } from '@system/types'
+import type { FREC } from '@system/types'
 import { forwardRef } from 'react'
-import { SVGProps } from './SVG.props'
+import type { SVGProps } from './SVG.props'
 
 /**
  * @file Implementation - SVG

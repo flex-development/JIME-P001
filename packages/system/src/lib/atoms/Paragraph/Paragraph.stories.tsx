@@ -1,5 +1,5 @@
 import { Paragraph } from './Paragraph'
-import { ParagraphProps } from './Paragraph.props'
+import type { ParagraphProps } from './Paragraph.props'
 
 /**
  * @file Stories - Paragraph

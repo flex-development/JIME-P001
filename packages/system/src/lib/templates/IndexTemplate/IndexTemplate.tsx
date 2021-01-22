@@ -8,7 +8,7 @@ import { ProductReview } from '@system/lib/molecules/ProductReview'
 import { ProductGrid } from '@system/lib/organisms/ProductGrid'
 import { TC } from '@system/types'
 import uniqueId from 'lodash/uniqueId'
-import { IndexTemplateProps } from './IndexTemplate.props'
+import type { IndexTemplateProps } from './IndexTemplate.props'
 
 /**
  * @file Implementation - IndexTemplate

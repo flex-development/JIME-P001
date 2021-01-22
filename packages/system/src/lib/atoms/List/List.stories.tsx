@@ -1,6 +1,6 @@
 import { Item } from '../Item'
 import { List } from './List'
-import { ListProps } from './List.props'
+import type { ListProps } from './List.props'
 
 /**
  * @file Stories - List

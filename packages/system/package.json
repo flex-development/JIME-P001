@@ -49,16 +49,14 @@
     "start": "yarn predev; NODE_ENV=production run-p dev:*",
     "prebuild": "yarn test:quiet && rm -rf public && mkdir public",
     "build": "build-storybook -o public",
-    "postbuild": "shx cp -R ../app/public/assets public",
-    "vercel-build": "NODE_ENV=production yarn build",
+    "vercel-build": "lerna run prepare --scope @flex-development/kustomzcore; lerna link; NODE_ENV=production yarn build",
     "precompile:ts": "rm -rf ./dist",
     "compile:ts": "babel --config-file ./babel.config.prod.js src -d dist --extensions '.ts,.tsx'",
     "postcompile:ts": "ttsc -p tsconfig.prod.json",
     "compile:scss": "webpack -c webpack.prod.js",
     "postcompile:scss": "rm ./dist/css.js",
     "compile": "NODE_ENV=production run-s compile:*",
-    "vercel-prepare": "lerna run prepare --scope @flex-development/kustomzcore; lerna link",
-    "prepare": "if-env $VERCEL && yarn vercel-prepare || yarn compile"
+    "prepare": "if-env $VERCEL && exit 0 || yarn compile"
   },
   "dependencies": {
     "@react-spring/web": "9.0.0-rc.3",

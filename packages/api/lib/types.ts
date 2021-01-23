@@ -300,6 +300,8 @@ export type GetProductResJSON = PartialOr<ResourceWithSEO<IProductListing>>
  */
 export type GetStaticAssetQuery = {
   filename: string
+  height?: number | string
+  width?: number | string
 }
 
 /**

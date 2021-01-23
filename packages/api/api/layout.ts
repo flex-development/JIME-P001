@@ -18,7 +18,7 @@ export default async (req: Req, res: Res): Promise<Res> => {
       profile_img: { value: profile_img },
       profile_location: { value: profile_location },
       profile_mood: { value: profile_mood }
-    } = await globalMetafields()
+    } = await globalMetafields({ fields: 'key,value' })
 
     // Get main menu data
     const menu = await axios<ShopifyMenu>({ url: `${API_URL}/menus/main-menu` })
@@ -30,10 +30,7 @@ export default async (req: Req, res: Res): Promise<Res> => {
       playlist,
       sidebar: {
         age: JSON.parse(profile_age as string),
-        img: (() => {
-          const img = profile_img as string
-          return img?.length ? JSON.parse(img)[0].cloudinary_src : undefined
-        })(),
+        img: profile_img,
         location: profile_location,
         menu: menu.links,
         mood: profile_mood

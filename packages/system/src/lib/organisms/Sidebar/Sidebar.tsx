@@ -7,7 +7,7 @@ import { Image } from '@system/lib/atoms/Image'
 import { Link, LinkProps } from '@system/lib/atoms/Link'
 import { Paragraph } from '@system/lib/atoms/Paragraph'
 import { Menu } from '@system/lib/molecules/Menu'
-import type { FREC } from '@system/types'
+import { FREC, GridBreakpoints } from '@system/types'
 import { forwardRef } from 'react'
 import type { SidebarProps } from './Sidebar.props'
 
@@ -31,6 +31,11 @@ export const Sidebar: FREC<SidebarProps> = forwardRef((props, ref) => {
     title: 'Flex Development'
   }
 
+  const img_responsive_xl = `${img}?width=${GridBreakpoints.xl}`
+  const img_responsive_lg = `${img}?width=${GridBreakpoints.lg}`
+  const img_responsive_md = `${img}?width=${GridBreakpoints.md}`
+  const img_responsive_sm = `${img}?width=${GridBreakpoints.sm}`
+
   return (
     <Aside {...sanitized} ref={ref}>
       <Link className='sidebar-profile-link-img' href={img} target='_blank'>
@@ -39,6 +44,11 @@ export const Sidebar: FREC<SidebarProps> = forwardRef((props, ref) => {
           height={1920}
           loading='eager'
           src={img}
+          srcSet={`${img},
+            ${img_responsive_sm} (max-width: ${GridBreakpoints.sm}px),
+            ${img_responsive_md} (max-width: ${GridBreakpoints.md}px),
+            ${img_responsive_lg} (max-width: ${GridBreakpoints.lg}px),
+            ${img_responsive_xl} (max-width: ${GridBreakpoints.xl}px)`}
           width={1920}
         />
       </Link>

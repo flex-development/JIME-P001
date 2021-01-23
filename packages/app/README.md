@@ -27,27 +27,17 @@ grinders, and rolling trays, or have them custom made.
    ```zsh
     git clone https://github.com/flex-development/JIME-P001.git; cd JIME-P001;
     yarn # or npm install
+    cd packages/app; vc link; cd ../..
    ```
 
-2. Contact an admin to retrieve the environment variables for this project
-
-3. Place the environment files in the root of the `packages/app` directory
-
-4. Run `yarn dev:app` or `yarn start:app` to start the app on
-   `http://localhost:3001`
+2. Run `yarn dev:store` to start the app on `http://localhost:3001`
 
 ## Built With
 
-- [Firebase][1] - Platform for web and mobile development
-- [MusicKitJS][2] - Stream songs from Apple Music
-- [Next.js][3] - Framework for building React applications
-- [Shopify Admin REST API][4] - Shopify REST API
-- [TypeScript][5] - Typed JavaScript
-- [Vercel][6] - Hosting platform for static sites and serverless functions
+- [Next.js][1] - Framework for building React applications
+- [TypeScript][2] - Typed JavaScript
+- [Vercel][3] - Hosting platform for static sites and serverless functions
 
-[1]: https://firebase.google.com
-[2]: https://developer.apple.com/documentation/musickitjs/
-[3]: https://nextjs.org/
-[4]: https://shopify.dev/docs/admin-api/rest/reference
-[5]: https://www.typescriptlang.org/
-[6]: https://vercel.com/
+[1]: https://nextjs.org/
+[2]: https://www.typescriptlang.org/
+[3]: https://vercel.com/

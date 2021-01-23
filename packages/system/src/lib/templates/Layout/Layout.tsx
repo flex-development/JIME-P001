@@ -1,5 +1,6 @@
 import { useSlideInOut } from '@system/hooks/useSlideInOut'
 import { Box } from '@system/lib/atoms/Box'
+import { Span } from '@system/lib/atoms/Span'
 import { SVG } from '@system/lib/atoms/SVG'
 import { Hero, HeroProps } from '@system/lib/organisms/Hero'
 import {
@@ -57,6 +58,7 @@ export const Layout: TC<LayoutProps> = (props: LayoutProps) => {
     >
       <Box className='loading-container'>
         <SVG $loading className='loading-container-icon' />
+        <Span className='loading-container-text'>Loading</Span>
       </Box>
       <ShopHeader {...header} handleSidebar={sidebar_a.toggle} />
 

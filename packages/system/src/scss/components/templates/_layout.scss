@@ -44,6 +44,10 @@ LAYOUT
   }
 
   &[data-loading='false'] {
+    > *:not(.loading-container) {
+      @include opacity(1);
+    }
+
     .loading-container {
       @include opacity(0);
 
@@ -52,6 +56,12 @@ LAYOUT
   }
 
   &[data-loading='true'] {
+    > *:not(.loading-container) {
+      @include opacity(0);
+
+      display: none;
+    }
+
     .loading-container {
       @include opacity(1);
 
@@ -69,5 +79,13 @@ LAYOUT
 
   &-icon {
     @include dimensions(rem(42)); // Must be size of inner <circle> element
+  }
+
+  &-text {
+    color: $primary;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    margin-top: $space-4;
+    text-transform: uppercase;
   }
 }

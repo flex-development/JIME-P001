@@ -87,7 +87,7 @@ export interface ImageProps extends ComponentPropsBase<'img'> {
    * descriptor is already defined in `srcSet`, or unless `srcSet` contains w
    * descriptors.
    *
-   * @default 'assets/img-placeholder.png'
+   * @default 'assets/img-placeholder.webp'
    */
   src?: string
 

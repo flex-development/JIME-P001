@@ -39,7 +39,7 @@ export const GRID_COLUMN_UTILITY_CLASS = 'col'
 
 export const GRID_ROW_UTILITY_CLASS = 'row'
 
-export const IMAGE_PLACEHOLDER_URL = `${API_URL}/assets/images/placeholder.png`
+export const IMAGE_PLACEHOLDER_URL = `${API_URL}/assets/images/placeholder.webp`
 
 export const SVG_CIRCLE_PROPS = {
   cx: '20.5',

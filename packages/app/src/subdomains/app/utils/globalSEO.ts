@@ -32,7 +32,7 @@ const globalSEO = async (): Promise<SEOData> => {
   } = globals
 
   // Parse social share image
-  let og_image = `${process.env.API_URL}/assets/images/morena.jpeg`
+  let og_image = `${process.env.API_URL}/assets/images/morena.webp`
   if ((social_share_image as string).length) {
     const social_image = JSON.parse(social_share_image as string)
     og_image = social_image[0].cloudinary_src

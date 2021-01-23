@@ -33,8 +33,8 @@ const globalSEO = async (): Promise<SEOData> => {
     og: {
       image: og_image,
       'image:alt': "Morena's profile picture",
-      'image:height': 1080,
-      'image:width': 1080
+      'image:height': 1920,
+      'image:width': 1920
     },
     twitter: { card: 'summary', image: og_image }
   }

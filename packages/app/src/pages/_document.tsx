@@ -118,6 +118,12 @@ export default class Document extends NextDocument<DocumentInitialProps> {
             defer
             src='//ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js'
           />
+
+          {/* 
+            Process API connections asap
+            https://web.dev/efficiently-load-third-party-javascript/#preconnect
+          */}
+          <link rel='preconnect' href={process.env.API_URL} />
         </InlineStylesHead>
         <body>
           <noscript>You need to enable JavaScript to view this site.</noscript>

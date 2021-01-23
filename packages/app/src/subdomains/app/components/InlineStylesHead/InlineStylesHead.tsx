@@ -20,6 +20,9 @@ import { resolve } from 'path'
  *
  * @see https://github.com/vercel/next-plugins/issues/238
  * @see https://github.com/vercel/next-plugins/issues/238#issuecomment-696623272
+ *
+ * @class InlineStylesHead
+ * @extends Head
  */
 export class InlineStylesHead extends Head {
   /**

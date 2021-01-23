@@ -1,10 +1,9 @@
-import { InlineStylesHead } from '@subdomains/app/components/InlineStylesHead'
-import NextDocument, {
-  DocumentInitialProps,
-  Html,
-  Main,
-  NextScript
-} from 'next/document'
+import {
+  InlineStylesHead,
+  OptimizedNextScript
+} from '@subdomains/app/components'
+import type { DocumentInitialProps } from 'next/document'
+import NextDocument, { Html, Main } from 'next/document'
 
 /**
  * @file Custom Next.js Document
@@ -121,7 +120,7 @@ export default class Document extends NextDocument<DocumentInitialProps> {
           <noscript>You need to enable JavaScript to view this site.</noscript>
 
           <Main />
-          <NextScript />
+          <OptimizedNextScript mode='defer' />
         </body>
       </Html>
     )

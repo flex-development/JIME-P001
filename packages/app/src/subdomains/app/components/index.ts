@@ -6,6 +6,7 @@
 export * from './AppLayout'
 export * from './ErrorContent'
 export * from './InlineStylesHead'
+export * from './OptimizedNextScript'
 export * from './SEO'
 
 /* eslint-disable prettier/prettier */

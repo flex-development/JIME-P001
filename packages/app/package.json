@@ -40,7 +40,7 @@
     "prestart": "rm .env.development.local || true; yarn build",
     "start": "next start -p 9000",
     "prebuild": "rm -rf .next; generate-robotstxt public/robots.txt",
-    "build": "node scripts/react-spring-side-effects; next build --debug",
+    "build": "next build --debug",
     "prevercel-build": "lerna run prepare; lerna link",
     "vercel-build": "yarn build"
   },

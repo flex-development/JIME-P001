@@ -223,6 +223,13 @@ module.exports = withTM({
       ]
     })
 
+    /**
+     * Fixes `"TypeError: v is not a function"`.
+     * @see https://github.com/pmndrs/react-spring/issues/1078
+     * @see https://github.com/plouc/nivo/issues/1290#issuecomment-756264505
+     */
+    config.module.rules.push({ test: /@react-spring/, sideEffects: true })
+
     // Report duplicate dependencies
     if (!dev) config.plugins.push(new DuplicatesPlugin({ verbose: true }))
 

@@ -56,7 +56,7 @@
     "compile:scss": "webpack -c webpack.prod.js",
     "postcompile:scss": "rm ./dist/css.js",
     "compile": "NODE_ENV=production run-s compile:*",
-    "prepare": "if-env $SKIP_PREPARE && exit 0 || yarn compile"
+    "prepare": "if-env SKIP_PREPARE=true && exit 0 || yarn compile"
   },
   "dependencies": {
     "@react-spring/web": "9.0.0-rc.3",
@@ -128,9 +128,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "engines": {
-    "node": ">=10"
   },
   "sideEffects": [
     "*.css",

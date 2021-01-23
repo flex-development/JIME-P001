@@ -70,15 +70,15 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async () => {
 
   // Get `IndexTemplate` props
   const template: PageProps['template'] = {
-    about_section_text: about_section_text.value as string,
-    about_section_title: about_section_title.value as string,
-    max_products: JSON.parse(max_products.value as string),
-    max_reviews: JSON.parse(max_reviews.value as string),
+    about_section_text: (about_section_text?.value as string) ?? '',
+    about_section_title: (about_section_title?.value as string) ?? '',
+    max_products: JSON.parse(`${max_products?.value ?? 0}`),
+    max_reviews: JSON.parse(`${max_reviews?.value ?? 0}`),
     products: products as PageProps['template']['products'],
-    products_section_text: products_section_text.value as string,
-    products_section_title: products_section_title.value as string,
+    products_section_text: (products_section_text?.value as string) ?? '',
+    products_section_title: (products_section_title?.value as string) ?? '',
     reviews: [],
-    reviews_section_title: reviews_section_title.value as string
+    reviews_section_title: (reviews_section_title?.value as string) ?? ''
   }
 
   // Get layout data

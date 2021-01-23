@@ -26,7 +26,6 @@
     "directory": "packages/app"
   },
   "scripts": {
-    "postinstall": "node scripts/postinstall",
     "kill:firebase:db": "kill $(lsof -ti:5000) || true",
     "kill:firebase:ui": "kill $(lsof -ti:4000) || true",
     "kill:firebase": "run-p kill:firebase:*",
@@ -41,7 +40,7 @@
     "prestart": "rm .env.development.local || true; yarn build",
     "start": "next start -p 9000",
     "prebuild": "rm -rf .next; generate-robotstxt public/robots.txt",
-    "build": "next build --debug",
+    "build": "node scripts/react-spring-side-effects; next build --debug",
     "prevercel-build": "lerna run prepare; lerna link",
     "vercel-build": "yarn build"
   },

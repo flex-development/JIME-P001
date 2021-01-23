@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
     "jsx": "react-jsxdev",
-    "rootDir": "./src",
     "sourceMap": true
   },
   "exclude": ["node_modules"],

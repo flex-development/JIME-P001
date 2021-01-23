@@ -5,6 +5,9 @@
     "silent": false
   },
   "functions": {
+    "api/*.ts": {
+      "memory": 3008
+    },
     "api/assets/images/[filename].ts": {
       "includeFiles": "_files/**"
     }

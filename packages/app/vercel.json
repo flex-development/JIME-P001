@@ -65,24 +65,6 @@
           "value": "*"
         }
       ]
-    },
-    {
-      "source": "/audio-ssl.itunes.apple.com/(.*)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, must-revalidate"
-        }
-      ]
-    },
-    {
-      "source": "/images.accentuate.io/(.*)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, must-revalidate"
-        }
-      ]
     }
   ]
 }

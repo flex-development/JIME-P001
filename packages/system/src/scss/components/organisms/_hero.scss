@@ -3,11 +3,15 @@ HERO
 ----------------------------------------------------------------------------- */
 
 .hero {
+  @include breakpoint-up(md) {
+    min-height: rem(768);
+  }
+
   @include flex(center, center, column);
 
   border-bottom: $border-width solid $border-color;
   padding: $space-48 $template-padding-x;
-  min-height: rem(768);
+  min-height: 100vh;
   text-align: center;
 
   &-subtitle {

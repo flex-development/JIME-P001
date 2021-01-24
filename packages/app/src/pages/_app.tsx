@@ -5,8 +5,8 @@ import {
   CartContextProvider,
   CartContextProviderProps
 } from '@providers/CartContextProvider'
-import { AppLayout } from '@subdomains/app/components/AppLayout'
-import '@subdomains/app/styles.css'
+import { Layout } from '@subdomains/app/components/Layout'
+import '@subdomains/app/styles/index.scss'
 import type { AppComponent, IAppProps } from '@subdomains/app/types'
 import debug from 'debug'
 import type { NextWebVitalsMetric } from 'next/app'
@@ -50,7 +50,7 @@ const App: AppComponent = ({ Component, pageProps }: IAppProps) => {
 
   return (
     <CartContextProvider items={_items.current} persist={persistCartCB}>
-      <AppLayout page={Component} pageProps={pageProps} />
+      <Layout page={Component} pageProps={pageProps} />
     </CartContextProvider>
   )
 }

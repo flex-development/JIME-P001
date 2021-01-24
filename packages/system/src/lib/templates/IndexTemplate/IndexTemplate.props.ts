@@ -1,6 +1,6 @@
-import { IReview } from '@flex-development/kustomzcore/types/reviews'
-import { MainProps } from '@system/lib/atoms/Main'
-import { ProductGridProps } from '@system/lib/organisms/ProductGrid'
+import type { IReview } from '@flex-development/kustomzcore/types'
+import type { MainProps } from '@system/lib/atoms/Main'
+import type { ProductGridProps } from '@system/lib/organisms/ProductGrid'
 
 /**
  * @file Component Props - IndexTemplate

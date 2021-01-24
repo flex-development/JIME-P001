@@ -1,5 +1,4 @@
 // Type definitions for @shopify/theme-images
-// Project: KustomzCore
 // Definitions by: Lexus Drumgold <https://github.com/lexusdrumgold>
 
 declare module '@shopify/theme-images' {

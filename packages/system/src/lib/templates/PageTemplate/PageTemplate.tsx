@@ -1,7 +1,8 @@
 import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
-import { Main, MainProps } from '@system/lib/atoms/Main'
+import type { MainProps } from '@system/lib/atoms/Main'
+import { Main } from '@system/lib/atoms/Main'
 import { MDXContent } from '@system/lib/molecules/MDXContent'
-import { TC } from '@system/types'
+import type { TC } from '@system/types'
 import type { PageTemplateProps } from './PageTemplate.props'
 
 /**

@@ -1,0 +1,14 @@
+/* -----------------------------------------------------------------------------
+WEB FONTS
+----------------------------------------------------------------------------- */
+
+.wf-active .layout[data-loading='false'] > .page-container {
+  display: flex;
+  opacity: 1 !important;
+}
+
+html .layout > .page-container,
+.wf-loading .layout > .page-container {
+  display: none;
+  opacity: 0;
+}

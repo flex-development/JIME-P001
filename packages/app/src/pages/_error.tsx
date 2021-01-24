@@ -23,7 +23,7 @@ import { Fragment } from 'react'
  *
  * @param props - Page component props
  * @param props.error - Error object
- * @param props.layout - Data to populate `AppLayout` component
+ * @param props.layout - Data to populate `Layout` component
  */
 const ServerError: NextPage<PageProps> = ({ error }) => (
   <Fragment>
@@ -74,7 +74,11 @@ ServerError.getInitialProps = async (context): Promise<PageProps> => {
   const layout = await getLayoutData()
 
   debug('pages/_error')({ getInitialProps: error })
-  return { error: serialize<PageProps['error']>(error), layout }
+  return {
+    error: serialize<PageProps['error']>(error),
+    layout,
+    ua: context.req?.headers['user-agent']
+  }
 }
 
 export default ServerError

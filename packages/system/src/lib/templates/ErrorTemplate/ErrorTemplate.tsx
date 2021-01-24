@@ -1,9 +1,10 @@
 import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
 import { Heading } from '@system/lib/atoms/Heading'
-import { Main, MainProps } from '@system/lib/atoms/Main'
+import type { MainProps } from '@system/lib/atoms/Main'
+import { Main } from '@system/lib/atoms/Main'
 import { Section } from '@system/lib/atoms/Section'
 import { Span } from '@system/lib/atoms/Span'
-import { TC } from '@system/types'
+import type { TC } from '@system/types'
 import type { ErrorTemplateProps } from './ErrorTemplate.props'
 
 /**

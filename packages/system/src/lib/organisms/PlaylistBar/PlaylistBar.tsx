@@ -46,10 +46,17 @@ export const PlaylistBar: FC<PlaylistBarProps> = props => {
   const { next, previous, song } = useSongAttributes(songs, curr)
 
   // Get song artwork URL
-  const artwork_url = useMemo<string>(() => getSongArtworkURL(song), [song])
+  const artwork_url = useMemo<string>(() => {
+    let url = getSongArtworkURL(song)
+
+    // Replace size identifier
+    const size = url.match('/([0-9]+)(x)([0-9]+)(bb.jpeg)')
+
+    if (size?.length) url = url.replace(size[0], '/72x72bb.jpeg')
+    return url
+  }, [song])
 
   // Handle artwork image loading state
-  // Track Webfont loading state
   const [artworkReady, { setValue: setArtworkReady }] = useBoolean(false)
 
   // Get <audio> src URL
@@ -87,7 +94,10 @@ export const PlaylistBar: FC<PlaylistBarProps> = props => {
   const isAudioReadyCB = useCallback(isAudioReady, [audio_ref])
 
   // Animate ready state
-  const style = useSpring({ opacity: artworkReady && isAudioReadyCB() ? 1 : 0 })
+  const style = useSpring({
+    opacity: artworkReady && isAudioReadyCB() ? 1 : 0,
+    top: artworkReady && isAudioReadyCB() ? 0 : 150
+  })
 
   // Get component props
   const sanitized = useSanitizedProps<'section', SectionProps>(
@@ -146,9 +156,9 @@ export const PlaylistBar: FC<PlaylistBarProps> = props => {
             onError={onErrorArtworkImgCB}
             onLoad={onLoadArtworkImgCB}
             loading='eager'
-            height={song.artwork?.height}
+            height={72}
             src={isAudioReadyCB() ? artwork_url : IMAGE_PLACEHOLDER_URL}
-            width={song.artwork?.width}
+            width={72}
           />
         </Link>
         <Box className='playlist-bar-media-details' style={style}>

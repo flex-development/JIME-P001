@@ -1,0 +1,106 @@
+/* -----------------------------------------------------------------------------
+LAYOUT
+----------------------------------------------------------------------------- */
+
+.layout {
+  &[data-loading='false'] {
+    > .page-container {
+      @include opacity(1);
+    }
+
+    .loading-container {
+      @include opacity(0);
+
+      display: none;
+    }
+  }
+
+  &[data-loading='true'] {
+    > .page-container {
+      @include opacity(0);
+
+      display: none;
+    }
+
+    .loading-container {
+      @include opacity(1);
+
+      display: flex;
+    }
+  }
+}
+
+.loading-container {
+  @include flex(center, center, column);
+
+  @include fluid-height;
+
+  @include fluid-width;
+
+  padding-top: $space-16;
+
+  &-icon {
+    @include dimensions(rem(42)); // Must be size of inner <circle> element
+  }
+
+  &-text {
+    color: $primary;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    margin-top: $space-4;
+    text-transform: uppercase;
+  }
+}
+
+.page-container {
+  @include flex-column;
+
+  overflow-x: hidden;
+  transition: $transition-fade;
+
+  .content-col {
+    @include breakpoint-up(lg) {
+      @include position-relative;
+    }
+  }
+
+  .hero {
+    @supports (-webkit-touch-callout: none) {
+      min-height: 95vh;
+    }
+
+    @supports not (-webkit-touch-callout: none) {
+      min-height: 100vh;
+    }
+  }
+
+  .playlist-bar {
+    @include fluid-width;
+
+    @include position-relative;
+
+    padding-right: $space-24;
+    min-height: $space-72;
+    z-index: $zindex-modal;
+  }
+
+  .shop-header {
+    @include fluid-width;
+
+    @include position-absolute($space-0);
+
+    padding: $space-20 $space-24;
+    z-index: $zindex-modal-backdrop;
+  }
+
+  .sidebar {
+    @include breakpoint-up(md) {
+      @include position-fixed;
+    }
+  }
+}
+
+.layout,
+.page-container {
+  @include height(100vh);
+}

@@ -1,5 +1,5 @@
-import { MainProps } from '@system/lib/atoms'
-import { MDXContentProps } from '@system/lib/molecules'
+import type { MainProps } from '@system/lib/atoms'
+import type { MDXContentProps } from '@system/lib/molecules'
 
 /**
  * @file Component Props - PageTemplate

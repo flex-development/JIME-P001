@@ -22,7 +22,7 @@ import { useRouter } from 'next/router'
  * Renders a product collection page.
  *
  * @param props - Page component props
- * @param props.layout - Data to populate `AppLayout` component
+ * @param props.layout - Data to populate `Layout` component
  * @param props.seo - `SEO` component properties
  * @param props.template - `CollectionTemplate` component properties
  */
@@ -100,7 +100,8 @@ export const getServerSideProps: GetServerSideProps<
         ...seo,
         title: url === '/products' ? 'All Products' : seo?.title
       },
-      template
+      template,
+      ua: context.req.headers['user-agent']
     }
   }
 }

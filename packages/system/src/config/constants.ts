@@ -1,4 +1,3 @@
-import type { GridBreakpointKey } from '@system/types'
 import { GridBreakpoints } from '@system/types'
 
 /**
@@ -7,12 +6,11 @@ import { GridBreakpoints } from '@system/types'
  */
 
 export const API_URL = (() => {
-  const env = process.env.NODE_ENV?.toLowerCase()
+  if (process.env.NODE_ENV?.toLowerCase() === 'production') {
+    return 'https://api.morenaskustomz.com'
+  }
 
-  if (env === 'development') return 'http://localhost:8080'
-  if (env === 'test') return 'https://kapi.flexdevelopment.vercel.app'
-
-  return 'https://api.morenaskustomz.com'
+  return 'https://kapi.flexdevelopment.vercel.app'
 })()
 
 export const CHECK_INPUT_TYPES = ['checkbox', 'radio']
@@ -33,7 +31,7 @@ export const DEFAULT_MDX_CODE = `/* @jsxRuntime classic */\n/* @jsx mdx */\n\n\n
 
 export const GRID_BREAKPOINT_KEYS = Object.keys(
   GridBreakpoints
-) as GridBreakpointKey[]
+) as (keyof GridBreakpoints)[]
 
 export const GRID_COLUMN_UTILITY_CLASS = 'col'
 

@@ -21,9 +21,8 @@ describe('Link', () => {
 
   it('renders with class "active"', () => {
     const { getByText } = render(<Default {...Default.args} $active />)
-    const { children } = Default.args as ArgsMatcher
 
-    expect(getByText(children)).toHaveClass('active')
+    expect(getByText(Default.args.children as string)).toHaveClass('active')
   })
 
   it('renders with class "disabled"', () => {

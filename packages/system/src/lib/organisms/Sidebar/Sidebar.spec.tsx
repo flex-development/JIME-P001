@@ -1,14 +1,14 @@
-import { LinkProps } from '@system/lib/atoms'
-import { Matcher, render } from '@testing-library/react'
+import type { LinkProps } from '@system/lib/atoms/Link'
+import type { Matcher } from '@testing-library/react'
+import { render } from '@testing-library/react'
 import { Sidebar } from './Sidebar'
+import type { SidebarProps } from './Sidebar.props'
 import { Default } from './Sidebar.stories'
 
 /**
  * @file Tests - Sidebar
  * @module lib/organisms/Sidebar/spec
  */
-
-const DEFAULT_PROPS = Sidebar.defaultProps as ArgsMatcher
 
 describe('Sidebar', () => {
   it('renders with class "sidebar"', () => {
@@ -19,14 +19,15 @@ describe('Sidebar', () => {
 
   it('displays the profile age', () => {
     const { getByText } = render(<Default {...Default.args} />)
+    const { age } = Sidebar?.defaultProps as SidebarProps
 
-    expect(getByText(`${DEFAULT_PROPS.age} years old`)).toBeInTheDocument()
+    expect(getByText(`${age}} years old`)).toBeInTheDocument()
   })
 
   it('displays the profile image', () => {
     const { getByAltText } = render(<Default {...Default.args} />)
 
-    const { img } = DEFAULT_PROPS
+    const img = Sidebar.defaultProps?.img as string
 
     expect(getByAltText('Profile image for Morena')).toHaveAttribute('src', img)
   })
@@ -34,13 +35,17 @@ describe('Sidebar', () => {
   it('displays the profile location', () => {
     const { getByText } = render(<Default {...Default.args} />)
 
-    expect(getByText(DEFAULT_PROPS.location)).toBeInTheDocument()
+    const location = Sidebar.defaultProps?.location as string
+
+    expect(getByText(location)).toBeInTheDocument()
   })
 
   it('displays the profile mood', () => {
     const { getByText } = render(<Default {...Default.args} />)
 
-    expect(getByText(`Mood: ${DEFAULT_PROPS.mood}`)).toBeInTheDocument()
+    const mood = Sidebar.defaultProps?.mood as string
+
+    expect(getByText(`Mood: ${mood}`)).toBeInTheDocument()
   })
 
   it('displays the sidebar menu links', () => {

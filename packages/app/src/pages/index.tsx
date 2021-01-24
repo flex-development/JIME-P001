@@ -21,7 +21,7 @@ import type { GetServerSideProps } from 'next'
  * Renders the homepage.
  *
  * @param props - Page component props
- * @param props.layout - Data to populate `AppLayout` component
+ * @param props.layout - Data to populate `Layout` component
  * @param props.seo - `SEO` component properties
  * @param props.template - `IndexTemplate` component properties
  */
@@ -41,8 +41,12 @@ const Home: PageComponent<PageProps> = ({ seo, template }) => (
  * @see https://shopify.dev/docs/admin-api/rest/reference/online-store/page
  *
  * @async
+ * @param context - Server side page context
+ * @param context.req - HTTP request object
  */
-export const getServerSideProps: GetServerSideProps<PageProps> = async () => {
+export const getServerSideProps: GetServerSideProps<PageProps> = async ({
+  req
+}) => {
   // Get page data
   const data = await getPage({ fields: 'metafield,seo', handle: 'index' })
 
@@ -84,7 +88,14 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async () => {
   // Get layout data
   const layout = await getLayoutData()
 
-  return { props: { layout, seo: seo as NonNullable<SEOData>, template } }
+  return {
+    props: {
+      layout,
+      seo: seo as NonNullable<SEOData>,
+      template,
+      ua: req.headers['user-agent']
+    }
+  }
 }
 
 export default Home

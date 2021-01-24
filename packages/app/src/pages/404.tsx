@@ -22,7 +22,7 @@ import { Fragment } from 'react'
  * @see https://nextjs.org/docs/advanced-features/custom-error-page#404-page
  *
  * @param props - Page component props
- * @param props.layout - Data to populate `AppLayout` component
+ * @param props.layout - Data to populate `Layout` component
  * @param props.seo - `SEO` component properties
  */
 const NotFound: PageComponent = ({ seo }) => (

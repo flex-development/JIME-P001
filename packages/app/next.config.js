@@ -24,6 +24,7 @@ const {
   SHOPIFY_API_VERSION,
   SHOPIFY_DOMAIN,
   SITE_URL,
+  VERCEL,
   VERCEL_URL
 } = process.env
 
@@ -162,6 +163,16 @@ module.exports = withTM({
   },
 
   /**
+   * Sass options.
+   *
+   * @see https://github.com/vercel/next.js/pull/11063
+   * @see https://nextjs.org/blog/next-9-4#configurable-sass-support
+   */
+  sassOptions: {
+    includePaths: [path.join(__dirname, 'node_modules')]
+  },
+
+  /**
    * Extends the native Webpack configuration.
    *
    * @param {object} config - Webpack config object
@@ -234,7 +245,7 @@ module.exports = withTM({
     if (!dev) config.plugins.push(new DuplicatesPlugin({ verbose: true }))
 
     // Analyze Webpack bundle output
-    if (!dev && ANALYZE) {
+    if (ANALYZE && !dev && !VERCEL) {
       const reportFilenameClient = './analyze/client.html'
       const reportFilenameServer = '../analyze/server.html'
 

@@ -27,7 +27,8 @@ module.exports = {
         'webpack.*',
         '*.spec.ts',
         '*.spec.tsx',
-        '*.stories.tsx'
+        '*.stories.tsx',
+        'src/config/constants.ts'
       ],
       rules: {
         'tree-shaking/no-side-effects-in-initialization': 0

@@ -25,7 +25,7 @@ import type { GetServerSideProps, GetServerSidePropsContext } from 'next'
  * Renders a collection product page.
  *
  * @param props - Page component props
- * @param props.layout - Data to populate `AppLayout` component
+ * @param props.layout - Data to populate `Layout` component
  * @param props.seo - `SEO` component properties
  * @param props.template - `ProductTemplate` component properties
  */
@@ -98,7 +98,14 @@ export const getServerSideProps: GetServerSideProps<
   // Get layout data
   const layout = await getLayoutData()
 
-  return { props: { layout, seo: seo as NonNullable<SEOData>, template } }
+  return {
+    props: {
+      layout,
+      seo: seo as NonNullable<SEOData>,
+      template,
+      ua: context.req.headers['user-agent']
+    }
+  }
 }
 
 export default CollectionProduct

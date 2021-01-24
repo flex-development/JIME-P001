@@ -15,9 +15,8 @@ describe('Input', () => {
 
   it('adds the class "form-control" to non <input type="checkbox"> and <input type="radio"> elements, not "form-check-input" or "form-file-input"', () => {
     const { getByPlaceholderText } = render(<Default {...Default.args} />)
-    const { placeholder } = Default.args as ArgsMatcher
 
-    const element = getByPlaceholderText(placeholder)
+    const element = getByPlaceholderText(Default.args.placeholder as string)
 
     expect(element).toHaveAttribute('type', 'text')
 

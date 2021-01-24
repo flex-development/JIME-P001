@@ -3,9 +3,9 @@
  * @module subdomains/app/components
  */
 
-export * from './AppLayout'
 export * from './ErrorContent'
 export * from './InlineStylesHead'
+export * from './Layout'
 export * from './OptimizedNextScript'
 export * from './SEO'
 

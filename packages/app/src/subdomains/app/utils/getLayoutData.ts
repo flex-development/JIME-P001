@@ -8,7 +8,7 @@ import debug from 'debug'
  */
 
 /**
- * Fetches the data to populate the `AppLayout` component. The sidebar profile
+ * Fetches the data to populate the `Layout` component. The sidebar profile
  * snippet and playlist bar songs will be included in the response.
  *
  * @async

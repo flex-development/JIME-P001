@@ -79,6 +79,7 @@ export interface IAppProps extends IAppInitialProps {
 export interface IPageProps {
   layout: GetLayoutDataResJSON
   seo: SEOData
+  ua?: string
 }
 
 /**
@@ -94,6 +95,7 @@ export interface IPagePropsCollection extends IPageProps {
 export interface IPagePropsError {
   error: FeathersErrorJSON
   layout: IPageProps['layout']
+  ua?: string
 }
 
 /**

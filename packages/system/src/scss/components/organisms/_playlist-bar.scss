@@ -12,17 +12,19 @@ PLAYLIST BAR
 
   &-artwork {
     @include breakpoint-up(sm) {
-      @include dimensions($space-64);
-
       margin-right: $space-12;
     }
 
-    @include dimensions($space-72);
+    @include height($space-72, null, $space-72);
 
     @include position-relative;
 
+    @include width($space-72, null, $space-72);
+
+    background-color: $border-color;
     display: inline-block;
     margin-right: $space-8;
+    text-indent: -9999px;
 
     > img {
       @include fluid-img;
@@ -61,14 +63,11 @@ PLAYLIST BAR
   }
 
   &-media-details {
-    @include breakpoint-up(sm) {
-      font-size: em($font-size-xs);
-    }
-
     @include flex-column;
 
-    font-size: em($font-size-sm);
-    transition: $transition-collapse;
+    @include position-relative;
+
+    font-size: em($font-size-xs);
   }
 
   &-song {

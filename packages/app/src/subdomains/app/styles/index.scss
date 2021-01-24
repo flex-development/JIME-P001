@@ -1,9 +1,9 @@
 /* -----------------------------------------------------------------------------
-TEMPLATES
+APP STYLES
 ----------------------------------------------------------------------------- */
 
-@import 'cart-template';
-@import 'collection-template';
-@import 'error-template';
-@import 'index-template';
-@import 'product-template';
+@import '@flex-development/kustomzdesign/src/scss/abstracts/abstracts';
+
+@import 'webfonts';
+@import 'grid';
+@import 'layout';

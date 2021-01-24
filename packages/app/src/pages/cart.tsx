@@ -19,7 +19,7 @@ import type { GetServerSideProps } from 'next'
  * Renders a user's shopping cart.
  *
  * @param props - Page component props
- * @param props.layout - Data to populate `AppLayout` component
+ * @param props.layout - Data to populate `Layout` component
  * @param props.seo - `SEO` component properties
  */
 const Cart: PageComponent = ({ seo }) => {
@@ -40,10 +40,16 @@ const Cart: PageComponent = ({ seo }) => {
  * @see https://shopify.dev/docs/admin-api/rest/reference/online-store/page
  *
  * @async
+ * @param context - Server side page context
+ * @param context.req - HTTP request object
  */
-export const getServerSideProps: GetServerSideProps<PageProps> = async () => {
+export const getServerSideProps: GetServerSideProps<PageProps> = async ({
+  req
+}) => {
   const seo = merge(await globalSEO(), { title: 'Cart (O)' })
-  return { props: { layout: await getLayoutData(), seo } }
+  const layout = await getLayoutData()
+
+  return { props: { layout, seo, ua: req.headers['user-agent'] } }
 }
 
 export default Cart

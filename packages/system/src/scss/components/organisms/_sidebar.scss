@@ -19,6 +19,8 @@ SIDEBAR
   &-menu {
     @include flex-column;
 
+    flex-wrap: nowrap;
+
     .menu-link {
       @include padding-x($space-0);
 

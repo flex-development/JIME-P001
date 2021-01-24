@@ -1,5 +1,5 @@
-import { MainProps } from '@system/lib/atoms/Main'
-import { CheckoutLineItemProps } from '@system/lib/molecules/CheckoutLineItem'
+import type { MainProps } from '@system/lib/atoms/Main'
+import type { CheckoutLineItemProps } from '@system/lib/molecules/CheckoutLineItem'
 
 /**
  * @file Component Props - CartTemplate

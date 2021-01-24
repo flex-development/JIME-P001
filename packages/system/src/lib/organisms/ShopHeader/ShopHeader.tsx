@@ -3,10 +3,11 @@ import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
 import { Box } from '@system/lib/atoms/Box'
 import { Button } from '@system/lib/atoms/Button'
 import { CartPreview } from '@system/lib/atoms/CartPreview'
-import { Header, HeaderProps } from '@system/lib/atoms/Header'
+import type { HeaderProps } from '@system/lib/atoms/Header'
+import { Header } from '@system/lib/atoms/Header'
 import { SearchBar } from '@system/lib/molecules/SearchBar'
-import { EventHandlers } from '@system/types'
-import { FC } from 'react'
+import type { EventHandlers } from '@system/types'
+import type { FC } from 'react'
 import type { ShopHeaderProps } from './ShopHeader.props'
 
 /**
@@ -42,7 +43,7 @@ export const ShopHeader: FC<ShopHeaderProps> = props => {
         <Button
           $variant='ghost'
           className='shop-header-btn'
-          name='sidebar'
+          name='toggle-sidebar-display'
           onClick={handleSidebar}
         >
           <MobileHamburgerMajor className='icon' />

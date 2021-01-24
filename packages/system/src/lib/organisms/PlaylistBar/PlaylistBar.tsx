@@ -164,7 +164,7 @@ export const PlaylistBar: FC<PlaylistBarProps> = props => {
           $variant='ghost'
           className='playlist-bar-control-skip'
           disabled={!artworkReady || !isAudioReadyCB()}
-          name='skip_previous'
+          name='to-previous-song'
           onClick={onClickSkipCB}
         >
           <PaginationStartMinor className='icon' />
@@ -174,7 +174,7 @@ export const PlaylistBar: FC<PlaylistBarProps> = props => {
           className='playlist-bar-control-playback'
           disabled={!artworkReady || !isAudioReadyCB()}
           onClick={onClickPlaybackCB}
-          name='playback'
+          name='play-pause-song'
           value={audio_state.paused ? 'pause' : 'play'}
         >
           {(() => {
@@ -189,7 +189,7 @@ export const PlaylistBar: FC<PlaylistBarProps> = props => {
           $variant='ghost'
           className='playlist-bar-control-skip'
           disabled={!artworkReady || !isAudioReadyCB()}
-          name='skip_next'
+          name='to-next-song'
           onClick={onClickSkipCB}
         >
           <PaginationEndMinor className='icon' />

@@ -33,8 +33,8 @@ export interface PlaylistBarProps extends SectionProps {
   /**
    * Skip button handler.
    *
-   * This function will be fired when the `skip_previous` or `skip_next` button
-   * is clicked. The name of the button clicked can be found by evaluting
+   * This function will be fired when the `to-previous-song` or `to-next-song`
+   * button is clicked. The name of the button clicked can be found by evaluting
    * `event.target.name`.
    */
   handleSkip?(event: EventHandlers.Click.Button): ANYTHING

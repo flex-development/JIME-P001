@@ -49,10 +49,10 @@ export const Sidebar: FREC<SidebarProps> = forwardRef((props, ref) => {
           src={img}
           srcSet={`
             ${img},
-            ${img_responsive_sm} (max-width: ${GridBreakpoints.sm}px),
-            ${img_responsive_md} (max-width: ${GridBreakpoints.md}px),
-            ${img_responsive_lg} (max-width: ${GridBreakpoints.lg}px),
-            ${img_responsive_xl} (max-width: ${GridBreakpoints.xl}px)
+            ${img_responsive_sm} ${GridBreakpoints.sm}w,
+            ${img_responsive_md} ${GridBreakpoints.md}w,
+            ${img_responsive_lg} ${GridBreakpoints.lg}w,
+            ${img_responsive_xl} ${GridBreakpoints.xl}w
           `.trim()}
           width={1920}
         />

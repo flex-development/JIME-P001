@@ -53,10 +53,10 @@ export const useProductImages = (product?: IProductListing): ImageProps[] => {
 
       image.srcSet = `
         ${image.src},
-        ${img_responsive_sm} (max-width: ${GridBreakpoints.sm}px),
-        ${img_responsive_md} (max-width: ${GridBreakpoints.md}px),
-        ${img_responsive_lg} (max-width: ${GridBreakpoints.lg}px),
-        ${img_responsive_xl} (max-width: ${GridBreakpoints.xl}px)
+        ${img_responsive_sm} ${GridBreakpoints.sm}w,
+        ${img_responsive_md} ${GridBreakpoints.md}w,
+        ${img_responsive_lg} ${GridBreakpoints.lg}w,
+        ${img_responsive_xl} ${GridBreakpoints.xl}w
       `.trim()
 
       return image

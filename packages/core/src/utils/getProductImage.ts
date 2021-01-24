@@ -39,7 +39,7 @@ const getProductImage = (
     alt: !isEmpty(image_alt) ? image_alt : undefined,
     height,
     id: id ? `${id}` : undefined,
-    src: url || undefined,
+    src: getSizedImageUrl(src, 'master') || fallback.src,
     srcSet: `${url}, ${url_2x} 2x`,
     width
   }

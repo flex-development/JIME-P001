@@ -31,7 +31,7 @@ export const DEFAULT_MDX_CODE = `/* @jsxRuntime classic */\n/* @jsx mdx */\n\n\n
 
 export const GRID_BREAKPOINT_KEYS = Object.keys(
   GridBreakpoints
-) as (keyof GridBreakpoints)[]
+) as (keyof typeof GridBreakpoints)[]
 
 export const GRID_COLUMN_UTILITY_CLASS = 'col'
 

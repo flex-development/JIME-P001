@@ -50,12 +50,10 @@ export const ProductCard: FC<ProductCardProps> = props => {
   // Get product variant display image
   const image_alt = `${product.title} - ${selected.title}`
   const image = useMemoCompare<ImageProps>(
-    ProductImage(
-      selected.image_id,
-      product.images,
-      selected.image_id === null,
-      { alt: image_alt, src: IMAGE_PLACEHOLDER_URL }
-    ) as ImageProps
+    ProductImage(selected.image_id, product.images, !!selected.image_id, {
+      alt: image_alt,
+      src: IMAGE_PLACEHOLDER_URL
+    }) as ImageProps
   )
 
   // Update product url when new variant is selected

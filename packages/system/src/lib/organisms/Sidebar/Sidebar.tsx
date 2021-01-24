@@ -1,13 +1,16 @@
 import { CustomersMajor } from '@shopify/polaris-icons'
 import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
-import { Aside, AsideProps } from '@system/lib/atoms/Aside'
+import type { AsideProps } from '@system/lib/atoms/Aside'
+import { Aside } from '@system/lib/atoms/Aside'
 import { Box } from '@system/lib/atoms/Box'
 import { Footer } from '@system/lib/atoms/Footer'
 import { Image } from '@system/lib/atoms/Image'
-import { Link, LinkProps } from '@system/lib/atoms/Link'
+import type { LinkProps } from '@system/lib/atoms/Link'
+import { Link } from '@system/lib/atoms/Link'
 import { Paragraph } from '@system/lib/atoms/Paragraph'
 import { Menu } from '@system/lib/molecules/Menu'
-import { FREC, GridBreakpoints } from '@system/types'
+import type { FREC } from '@system/types'
+import { GridBreakpoints } from '@system/types'
 import { forwardRef } from 'react'
 import type { SidebarProps } from './Sidebar.props'
 
@@ -44,11 +47,13 @@ export const Sidebar: FREC<SidebarProps> = forwardRef((props, ref) => {
           height={1920}
           loading='eager'
           src={img}
-          srcSet={`${img},
+          srcSet={`
+            ${img},
             ${img_responsive_sm} (max-width: ${GridBreakpoints.sm}px),
             ${img_responsive_md} (max-width: ${GridBreakpoints.md}px),
             ${img_responsive_lg} (max-width: ${GridBreakpoints.lg}px),
-            ${img_responsive_xl} (max-width: ${GridBreakpoints.xl}px)`}
+            ${img_responsive_xl} (max-width: ${GridBreakpoints.xl}px)
+          `.trim()}
           width={1920}
         />
       </Link>

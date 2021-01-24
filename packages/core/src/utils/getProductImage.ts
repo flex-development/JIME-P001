@@ -32,11 +32,11 @@ const getProductImage = (
   let url = (sized ? getSizedImageUrl(src, '1024x1024') : src) as string
   let url_2x = (sized ? getSizedImageUrl(src, '2048x2048') : src) as string
 
-  if (sized && !url.startsWith('https')) url = `https${url}`
-  if (sized && !url_2x.startsWith('https')) url_2x = `https${url_2x}`
+  url = url.split('?')[0]
+  url_2x = url_2x.split('?')[0]
 
   return {
-    alt: !isEmpty(image_alt) ? image_alt || undefined : fallback.alt,
+    alt: !isEmpty(image_alt) ? image_alt : undefined,
     height,
     id: id ? `${id}` : undefined,
     src: url || undefined,

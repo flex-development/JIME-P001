@@ -4,8 +4,9 @@
 /// ----------------------------------------------------------------------------
 
 /// Handles element overflow and adds support for momentum scrolling on iOS.
+/// @param {String} $axis [y] - x | y
 @mixin overflow-scroll($axis: y) {
-  @if ($axis != x or $axis != y) {
+  @if $axis != x and $axis != y {
     @error 'Invalid overflow axis: "#{$axis}"';
   }
 

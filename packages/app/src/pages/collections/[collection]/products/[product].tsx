@@ -63,7 +63,7 @@ export const getServerSideProps: GetServerSideProps<
 
   // Get product data
   const data = await getProduct({
-    fields: 'body_html,images,seo,variants,title',
+    fields: 'body_html,handle,images,seo,variants,title',
     handle: phandle,
     sku
   })

@@ -2,13 +2,27 @@
 WEB FONTS
 ----------------------------------------------------------------------------- */
 
-.wf-active .layout[data-loading='false'] > .page-container {
-  display: flex;
-  opacity: 1 !important;
+// Don't display page content if web fonts are loading
+.wf-loading .layout,
+.layout[data-loading='true'] {
+  @include opacity(0);
+
+  height: $space-0;
+  transition: $transition-collapse;
+
+  + .loading-container {
+    z-index: $zindex-modal;
+  }
 }
 
-html .layout > .page-container,
-.wf-loading .layout > .page-container {
-  display: none;
-  opacity: 0;
+// Display page content when web fonts are active
+.wf-active .layout,
+.layout[data-loading='false'] {
+  @include opacity(1);
+
+  + .loading-container {
+    height: $space-0;
+    transition: $transition-collapse;
+    z-index: -1;
+  }
 }

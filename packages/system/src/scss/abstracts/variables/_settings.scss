@@ -384,7 +384,8 @@ $caret-width: $space-4;
 $caret-vertical-align: $caret-width * 0.85;
 $caret-spacing: $caret-width * 0.85;
 
-$template-padding-y: $space-60;
+$template-padding-y-bottom: $space-72;
+$template-padding-y-top: $space-60;
 $template-padding-x: $space-24;
 
 $transition-base: all 0.2s ease-in-out;

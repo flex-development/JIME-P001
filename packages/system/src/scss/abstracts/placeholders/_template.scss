@@ -10,11 +10,12 @@
 /// @require {variable} $font-size-xl
 /// @require {variable} $space-36
 /// @require {variable} $template-padding-x
-/// @require {variable} $template-padding-y
+/// @require {variable} $template-padding-y-bottom
+/// @require {variable} $template-padding-y-top
 %template {
   @include padding-x($template-padding-x);
 
-  @include padding-y($template-padding-y);
+  @include padding-y($template-padding-y-top, $template-padding-y-bottom);
 
   .template-heading {
     @include breakpoint-up(md) {

@@ -10,6 +10,7 @@ import { Sidebar } from '@components/organisms/Sidebar'
 import { GridBreakpoints } from '@flex-development/kustomzdesign/types'
 import { useSlideInOut } from '@hooks/useSlideInOut'
 import type { AnimatedProps } from '@react-spring/web'
+import { useSpring } from '@react-spring/web'
 import { useWebFontLoader } from '@subdomains/app/hooks/useWebFontLoader'
 import type { IPageProps, PageComponent } from '@subdomains/app/types'
 import Head from 'next/head'
@@ -48,6 +49,11 @@ export const Layout: FC<LayoutProps> = (props: LayoutProps) => {
 
   // Load Web Fonts
   const webfonts = useWebFontLoader({ typekit: { id: 'oee3tpl' } })
+
+  // Webfont styles
+  const webfont_style = useSpring({
+    opacity: webfonts ? 1 : 0
+  }) as AnimatedProps<BoxProps>['style']
 
   /**
    * Redirects the user to the search page with their search {@param term}.
@@ -100,40 +106,39 @@ export const Layout: FC<LayoutProps> = (props: LayoutProps) => {
         className='layout'
         data-loading={!webfonts || typeof window === 'undefined'}
       >
-        <Box className='loading-container'>
-          <SVG $loading className='loading-container-icon' />
-          <Span className='loading-container-text'>Loading</Span>
-        </Box>
-        <Box className='page-container'>
-          <ShopHeader
-            handleSidebar={sidebar_a.toggle}
-            handleSearch={handleSearchCB}
-          />
+        <ShopHeader
+          handleSidebar={sidebar_a.toggle}
+          handleSearch={handleSearchCB}
+        />
 
-          <Box
-            className='layout-grid'
-            data-sidebar={sidebar_a.visible || undefined}
+        <Box
+          className='layout-grid'
+          data-sidebar={sidebar_a.visible || undefined}
+        >
+          <BoxAnimated
+            className='sidebar-col'
+            data-visible={sidebar_a.visible}
+            ref={sidebar_a.ref}
+            style={sidebar_a.style as AnimatedProps<BoxProps>['style']}
           >
-            <BoxAnimated
-              className='sidebar-col'
-              data-visible={sidebar_a.visible}
-              ref={sidebar_a.ref}
-              style={sidebar_a.style as AnimatedProps<BoxProps>['style']}
-            >
-              <Sidebar {...pageProps.layout.sidebar} />
-            </BoxAnimated>
+            <Sidebar {...pageProps.layout.sidebar} />
+          </BoxAnimated>
 
-            <Box className='content-col'>
-              <Hero
-                subtitle='Kustom made pot head necessities.'
-                title="Morena's Kustomz"
-              />
-              <Component {...pageProps} />
-            </Box>
+          <Box className='content-col'>
+            <Hero
+              subtitle='Kustom made pot head necessities.'
+              title="Morena's Kustomz"
+            />
+            <Component {...pageProps} />
           </Box>
-
-          <PlaylistBar songs={pageProps.layout.playlist.tracks} />
         </Box>
+
+        <PlaylistBar songs={pageProps.layout.playlist.tracks} />
+      </Box>
+
+      <Box className='loading-container'>
+        <SVG $loading className='loading-container-icon' />
+        <Span className='loading-container-text'>Loading</Span>
       </Box>
     </>
   )

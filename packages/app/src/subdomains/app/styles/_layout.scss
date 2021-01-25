@@ -3,60 +3,30 @@ LAYOUT
 ----------------------------------------------------------------------------- */
 
 .layout {
-  &[data-loading='false'] {
-    > .page-container {
-      @include opacity(1);
-    }
-
-    .loading-container {
-      @include opacity(0);
-
-      display: none;
-    }
-  }
-
-  &[data-loading='true'] {
-    > .page-container {
-      @include opacity(0);
-
-      display: none;
-    }
-
-    .loading-container {
-      @include opacity(1);
-
-      display: flex;
-    }
-  }
-}
-
-.loading-container {
-  @include flex(center, center, column);
-
-  @include fluid-height;
-
-  @include fluid-width;
-
-  padding-top: $space-16;
-
-  &-icon {
-    @include dimensions(rem(42)); // Must be size of inner <circle> element
-  }
-
-  &-text {
-    color: $primary;
-    font-size: $font-size-sm;
-    font-weight: $font-weight-semibold;
-    margin-top: $space-4;
-    text-transform: uppercase;
-  }
-}
-
-.page-container {
   @include flex-column;
 
   overflow-x: hidden;
-  transition: $transition-fade;
+
+  // &[data-loading='false'] {
+  //   @include opacity(1);
+
+  //   + .loading-container {
+  //     height: $space-0;
+  //     transition: $transition-collapse;
+  //     z-index: -1;
+  //   }
+  // }
+
+  // &[data-loading='true'] {
+  //   @include opacity(0);
+
+  //   height: $space-0;
+  //   transition: $transition-collapse;
+
+  //   + .loading-container {
+  //     z-index: $zindex-modal;
+  //   }
+  // }
 
   .content-col {
     @include breakpoint-up(lg) {
@@ -100,7 +70,33 @@ LAYOUT
   }
 }
 
+.loading-container {
+  @include flex(center, center, column);
+
+  @include fluid-height;
+
+  @include fluid-width;
+
+  @include position-absolute;
+
+  padding-top: $space-16;
+
+  &-icon {
+    @include dimensions(rem(42)); // Must be size of inner <circle> element
+  }
+
+  &-text {
+    color: $primary;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    margin-top: $space-4;
+    text-transform: uppercase;
+  }
+}
+
 .layout,
-.page-container {
+.loading-container {
   @include height(100vh);
+
+  transition: $transition-fade;
 }

@@ -390,7 +390,8 @@ $template-padding-x: $space-24;
 
 $transition-base: all 0.2s ease-in-out;
 $transition-fade: opacity 0.125s linear;
-$transition-collapse: height 0.35s ease;
+$transition-collapse: height 0.25s ease;
+$transition-collapse-fade: height,opacity 0.25s ease;
 
 $aspect-ratios: (
   '1x1': 100%,

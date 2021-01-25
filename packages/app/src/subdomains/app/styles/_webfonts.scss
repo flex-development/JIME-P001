@@ -8,7 +8,7 @@ WEB FONTS
   @include opacity(0);
 
   height: $space-0;
-  transition: $transition-collapse;
+  transition: $transition-collapse-fade;
 
   + .loading-container {
     z-index: $zindex-modal;
@@ -21,8 +21,17 @@ WEB FONTS
   @include opacity(1);
 
   + .loading-container {
-    height: $space-0;
-    transition: $transition-collapse;
+    @include dimensions($space-0);
+    transition: $transition-collapse-fade;
     z-index: -1;
+
+    > * {
+      @include dimensions($space-0);
+
+      @include opacity(0);
+
+      transition: $transition-collapse-fade;
+      transition-duration: 0.15s;
+    }
   }
 }

@@ -64,6 +64,12 @@ LAYOUT
   }
 
   .sidebar {
+    @include breakpoint-down(sm) {
+      @include height(unset);
+
+      padding-bottom: $space-0;
+    }
+
     @include breakpoint-up(md) {
       @include position-fixed;
     }
@@ -89,7 +95,7 @@ LAYOUT
     color: $primary;
     font-size: $font-size-sm;
     font-weight: $font-weight-semibold;
-    margin-top: $space-4;
+    margin-top: $space-8;
     text-transform: uppercase;
   }
 }

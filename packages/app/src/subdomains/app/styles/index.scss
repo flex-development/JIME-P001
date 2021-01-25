@@ -7,3 +7,7 @@ APP STYLES
 @import 'webfonts';
 @import 'grid';
 @import 'layout';
+
+body {
+  overflow: hidden;
+}

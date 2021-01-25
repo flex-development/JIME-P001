@@ -1,6 +1,5 @@
 import type { AnyObject } from '@flex-development/json'
 import { EMPTY_SPACE as ES } from '@flex-development/kustomzcore/constants'
-import type { AnimatedProps } from '@react-spring/web'
 import { useUtilityClasses } from '@system/hooks/useUtilityClasses'
 import type { JSXIEPropsOr } from '@system/types'
 import classnames from 'classnames'
@@ -33,7 +32,7 @@ import uniq from 'lodash/uniq'
  */
 export function useSanitizedProps<
   E extends keyof JSX.IntrinsicElements = 'div',
-  P = AnimatedProps<JSXIEPropsOr<E>>
+  P = JSXIEPropsOr<E>
 >(props: AnyObject, inject?: string | ClassDictionary, keys?: string[]): P {
   // Pluck transient props
   const { $html, $img, ...rest } = props

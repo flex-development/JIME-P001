@@ -1,10 +1,12 @@
+import { EMPTY_SPACE } from '@flex-development/kustomzcore/constants'
 import { useSpring } from '@react-spring/web'
 import { useCartContext, useSanitizedProps } from '@system/hooks'
+import type { LinkProps } from '@system/lib/atoms/Link'
+import { Link } from '@system/lib/atoms/Link'
+import { Span, SpanAnimated } from '@system/lib/atoms/Span'
 import type { FREC } from '@system/types'
 import { forwardRef } from 'react'
 import { usePrevious } from 'react-hanger/usePrevious'
-import { Link, LinkProps } from '../Link'
-import { Span } from '../Span'
 import type { CartPreviewProps } from './CartPreview.props'
 
 /**
@@ -44,7 +46,9 @@ export const CartPreview: FREC<CartPreviewProps> = forwardRef((props, ref) => {
     >
       Cart&nbsp;&nbsp;/&nbsp;&nbsp;
       <Span>
-        <Span>{total}</Span> {`Item${items_total === 1 ? '' : 's'}`}
+        <SpanAnimated>{total}</SpanAnimated>
+        {EMPTY_SPACE}
+        {`Item${items_total === 1 ? '' : 's'}`}
       </Span>
     </Link>
   )

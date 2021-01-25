@@ -1,8 +1,9 @@
 import { a } from '@react-spring/web'
 import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
-import type { FREC } from '@system/types'
+import type { AnimatedFREC, FREC } from '@system/types'
 import { forwardRef } from 'react'
 import type { ItemProps } from './Item.props'
+
 /**
  * @file Implementation - Item
  * @module lib/atoms/Item/impl
@@ -22,9 +23,15 @@ export const Item: FREC<ItemProps> = forwardRef((props, ref) => {
     { 'dropdown-item': $dropdown, 'menu-item': $menu }
   )
 
-  return <a.li {...sanitized} ref={ref} />
+  return <li {...sanitized} ref={ref} />
 })
 
 Item.displayName = 'Item'
 
 Item.defaultProps = {}
+
+export const ItemAnimated: AnimatedFREC<ItemProps> = a(Item)
+
+ItemAnimated.displayName = 'ItemAnimated'
+
+ItemAnimated.defaultProps = Item.defaultProps

@@ -1,8 +1,9 @@
 import { a } from '@react-spring/web'
 import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
-import type { FREC } from '@system/types'
+import type { OptionProps } from '@system/lib/atoms/Option'
+import { Option } from '@system/lib/atoms/Option'
+import type { AnimatedFREC, FREC } from '@system/types'
 import { forwardRef } from 'react'
-import { Option, OptionProps } from '../Option'
 import type { SelectProps } from './Select.props'
 
 /**
@@ -22,7 +23,7 @@ export const Select: FREC<SelectProps> = forwardRef((props, ref) => {
   const sanitized = useSanitizedProps<'select'>(rest, { 'form-select': $form })
 
   return (
-    <a.select {...sanitized} ref={ref}>
+    <select {...sanitized} ref={ref}>
       {(() => {
         if (rest.children) return rest.children
 
@@ -31,7 +32,7 @@ export const Select: FREC<SelectProps> = forwardRef((props, ref) => {
           return <Option {...option} key={key} />
         })
       })()}
-    </a.select>
+    </select>
   )
 })
 
@@ -40,3 +41,9 @@ Select.displayName = 'Select'
 Select.defaultProps = {
   $options: []
 }
+
+export const SelectAnimated: AnimatedFREC<SelectProps> = a(Select)
+
+SelectAnimated.displayName = 'SelectAnimated'
+
+SelectAnimated.defaultProps = Select.defaultProps

@@ -5,7 +5,7 @@ import {
 } from '@storybook/components/dist/blocks/Typeset'
 import isArray from 'lodash/isArray'
 import pick from 'lodash/pick'
-import { FC } from 'react'
+import type { FC } from 'react'
 
 /**
  * @file Get Typeset doc blocks with theme context

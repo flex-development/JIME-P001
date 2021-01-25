@@ -1,11 +1,11 @@
-import {
+import type {
   AnyObject,
   Booleanish,
   NullishString
 } from '@flex-development/json/utils/types'
-import { AnimatedProps } from '@react-spring/web'
-import { AriaAttributes, DOMAttributes, RefAttributes } from 'react'
-import {
+import type { AnimatedProps } from '@react-spring/web'
+import type { AriaAttributes, DOMAttributes, RefAttributes } from 'react'
+import type {
   Color,
   Cursor,
   Display,
@@ -22,7 +22,7 @@ import {
   UtilityClassConfig,
   ZIndex
 } from './theme'
-import { HTMLElements, Merge as M } from './utils'
+import type { HTMLElements, Merge as M } from './utils'
 
 /**
  * @file Type Definitions - Props

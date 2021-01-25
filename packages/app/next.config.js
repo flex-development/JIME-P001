@@ -124,7 +124,7 @@ module.exports = withTM({
    */
   images: {
     domains: [
-      SITE_URL_SAFE,
+      API_URL,
       'cdn.accentuate.io',
       'cdn.shopify.com',
       'firebasestorage.googleapis.com',

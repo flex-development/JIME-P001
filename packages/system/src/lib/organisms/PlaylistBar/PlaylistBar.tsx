@@ -1,3 +1,4 @@
+import type { AnimatedProps } from '@react-spring/web'
 import { useSpring } from '@react-spring/web'
 import {
   PaginationEndMinor,
@@ -9,7 +10,8 @@ import { IMAGE_PLACEHOLDER_URL } from '@system/config/constants'
 import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
 import { useSongAttributes } from '@system/hooks/useSongAttributes'
 import { Audio } from '@system/lib/atoms/Audio'
-import { Box } from '@system/lib/atoms/Box'
+import type { BoxProps } from '@system/lib/atoms/Box'
+import { Box, BoxAnimated } from '@system/lib/atoms/Box'
 import { Button } from '@system/lib/atoms/Button'
 import { Image } from '@system/lib/atoms/Image'
 import { Link } from '@system/lib/atoms/Link'
@@ -97,7 +99,7 @@ export const PlaylistBar: FC<PlaylistBarProps> = props => {
   const style = useSpring({
     opacity: artworkReady && isAudioReadyCB() ? 1 : 0,
     top: artworkReady && isAudioReadyCB() ? 0 : 150
-  })
+  }) as AnimatedProps<BoxProps>['style']
 
   // Get component props
   const sanitized = useSanitizedProps<'section', SectionProps>(
@@ -148,6 +150,7 @@ export const PlaylistBar: FC<PlaylistBarProps> = props => {
       <Box className='playlist-bar-col'>
         <Link
           className='playlist-bar-artwork'
+          data-ready={isAudioReadyCB() || undefined}
           href={isAudioReadyCB() ? artwork_url : IMAGE_PLACEHOLDER_URL}
           target='_blank'
         >
@@ -161,12 +164,12 @@ export const PlaylistBar: FC<PlaylistBarProps> = props => {
             width={72}
           />
         </Link>
-        <Box className='playlist-bar-media-details' style={style}>
+        <BoxAnimated className='playlist-bar-media-details' style={style}>
           <Paragraph className='playlist-bar-song'>{song.name}</Paragraph>
           <Paragraph className='playlist-bar-artist'>
             {song.artistName}
           </Paragraph>
-        </Box>
+        </BoxAnimated>
       </Box>
 
       <Box className='playlist-bar-col'>

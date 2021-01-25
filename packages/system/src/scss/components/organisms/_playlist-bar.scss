@@ -26,6 +26,11 @@ PLAYLIST BAR
     margin-right: $space-8;
     text-indent: -9999px;
 
+    &[data-ready] {
+      background-color: $ghost;
+      text-indent: initial;
+    }
+
     > img {
       @include fluid-img;
     }

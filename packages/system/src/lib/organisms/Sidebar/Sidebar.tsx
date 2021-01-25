@@ -1,7 +1,7 @@
 import { CustomersMajor } from '@shopify/polaris-icons'
 import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
 import type { AsideProps } from '@system/lib/atoms/Aside'
-import { Aside } from '@system/lib/atoms/Aside'
+import { AsideAnimated as Aside } from '@system/lib/atoms/Aside'
 import { Box } from '@system/lib/atoms/Box'
 import { Footer } from '@system/lib/atoms/Footer'
 import { Image } from '@system/lib/atoms/Image'

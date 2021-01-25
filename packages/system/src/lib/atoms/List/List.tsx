@@ -1,8 +1,9 @@
 import { a } from '@react-spring/web'
 import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
-import type { FREC } from '@system/types'
-import { forwardRef } from 'react'
-import { Item, ItemProps } from '../Item'
+import type { ItemProps } from '@system/lib/atoms/Item'
+import { Item } from '@system/lib/atoms/Item'
+import type { AnimatedFREC, FREC } from '@system/types'
+import { createElement, forwardRef } from 'react'
 import type { ListProps } from './List.props'
 
 /**
@@ -22,21 +23,17 @@ export const List: FREC<ListProps> = forwardRef((props, ref) => {
   const { $items = [], is = 'ul', ...rest } = props
 
   const sanitized = useSanitizedProps<'ul'>(rest)
-  const Component = a[is]
 
-  return (
-    // @ts-expect-error: support ability to render <ol> or <ul>
-    <Component {...sanitized} ref={ref}>
-      {(() => {
-        if (rest.children) return rest.children
+  const children = () => {
+    if (rest.children) return rest.children
 
-        return $items.map((item: ItemProps, i: number) => {
-          const key = item['data-key'] || item.id || `item-${i}`
-          return <Item {...item} key={key} />
-        })
-      })()}
-    </Component>
-  )
+    return $items.map((item: ItemProps, i: number) => {
+      const key = item['data-key'] || item.id || `item-${i}`
+      return <Item {...item} key={key} />
+    })
+  }
+
+  return createElement(is, { ...sanitized, ref }, children())
 })
 
 List.displayName = 'List'
@@ -44,3 +41,9 @@ List.displayName = 'List'
 List.defaultProps = {
   $items: []
 }
+
+export const ListAnimated: AnimatedFREC<ListProps> = a(List)
+
+ListAnimated.displayName = 'ListAnimated'
+
+ListAnimated.defaultProps = List.defaultProps

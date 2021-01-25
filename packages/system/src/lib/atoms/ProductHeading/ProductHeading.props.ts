@@ -1,4 +1,4 @@
-import { HeadingProps } from '../Heading'
+import type { HeadingProps } from '@system/lib/atoms/Heading'
 
 /**
  * @file Component Props - ProductHeading

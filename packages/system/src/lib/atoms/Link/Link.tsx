@@ -1,6 +1,6 @@
 import { a } from '@react-spring/web'
 import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
-import type { FREC } from '@system/types'
+import type { AnimatedFREC, FREC } from '@system/types'
 import { forwardRef } from 'react'
 import type { LinkProps } from './Link.props'
 
@@ -55,8 +55,9 @@ export const Link: FREC<LinkProps> = forwardRef((props, ref) => {
     sanitized['role'] = 'button'
   }
 
+  /* eslint-disable jsx-a11y/anchor-has-content */
   return (
-    <a.a
+    <a
       {...sanitized}
       href={sanitized['onClick'] && rest.href === '#' ? undefined : rest.href}
       ref={ref}
@@ -69,3 +70,9 @@ Link.displayName = 'Link'
 Link.defaultProps = {
   href: '#'
 }
+
+export const LinkAnimated: AnimatedFREC<LinkProps> = a(Link)
+
+LinkAnimated.displayName = 'LinkAnimated'
+
+LinkAnimated.defaultProps = Link.defaultProps

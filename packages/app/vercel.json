@@ -45,6 +45,15 @@
   ],
   "headers": [
     {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "s-maxage=1, stale-while-revalidate"
+        }
+      ]
+    },
+    {
       "source": "/404",
       "headers": [
         {
@@ -54,15 +63,11 @@
       ]
     },
     {
-      "source": "/api/(.*)",
+      "source": "/api/sitemap",
       "headers": [
         {
-          "key": "Access-Control-Allow-Credentials",
-          "value": "true"
-        },
-        {
-          "key": "Access-Control-Allow-Origin",
-          "value": "*"
+          "key": "Cache-Control",
+          "value": "no-cache, always"
         }
       ]
     }

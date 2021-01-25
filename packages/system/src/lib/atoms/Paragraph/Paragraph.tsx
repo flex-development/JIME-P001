@@ -1,6 +1,6 @@
 import { a } from '@react-spring/web'
 import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
-import type { FREC } from '@system/types'
+import type { AnimatedFREC, FREC } from '@system/types'
 import { forwardRef } from 'react'
 import type { ParagraphProps } from './Paragraph.props'
 
@@ -20,9 +20,11 @@ export const Paragraph: FREC<ParagraphProps> = forwardRef((props, ref) => {
 
   const sanitized = useSanitizedProps<'p'>(rest, { 'form-text': $form })
 
-  return <a.p {...sanitized} ref={ref} />
+  return <p {...sanitized} ref={ref} />
 })
 
-Paragraph.displayName = 'Paragraph'
+export const ParagraphAnimated: AnimatedFREC<ParagraphProps> = a(Paragraph)
 
-Paragraph.defaultProps = {}
+ParagraphAnimated.displayName = 'ParagraphAnimated'
+
+ParagraphAnimated.defaultProps = Paragraph.defaultProps

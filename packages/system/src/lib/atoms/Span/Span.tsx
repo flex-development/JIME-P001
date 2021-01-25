@@ -1,6 +1,6 @@
 import { a } from '@react-spring/web'
 import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
-import type { FREC } from '@system/types'
+import type { AnimatedFREC, FREC } from '@system/types'
 import { forwardRef } from 'react'
 import type { SpanProps } from './Span.props'
 
@@ -17,9 +17,15 @@ import type { SpanProps } from './Span.props'
  */
 export const Span: FREC<SpanProps> = forwardRef((props, ref) => {
   const sanitized = useSanitizedProps<'span'>(props)
-  return <a.span {...sanitized} ref={ref} />
+  return <span {...sanitized} ref={ref} />
 })
 
 Span.displayName = 'Span'
 
 Span.defaultProps = {}
+
+export const SpanAnimated: AnimatedFREC<SpanProps> = a(Span)
+
+SpanAnimated.displayName = 'SpanAnimated'
+
+SpanAnimated.defaultProps = {}

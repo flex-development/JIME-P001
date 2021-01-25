@@ -4,7 +4,7 @@ import { Link } from '@system/lib/atoms/Link'
 import { Paragraph } from '@system/lib/atoms/Paragraph'
 import { Span } from '@system/lib/atoms/Span'
 import classnames from 'classnames'
-import { FC } from 'react'
+import type { FC } from 'react'
 import type { ProductBreadcrumbProps } from './ProductBreadcrumb.props'
 
 /**

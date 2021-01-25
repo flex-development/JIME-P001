@@ -1,4 +1,9 @@
-import type { ComponentPropsBase as CPB, Merge } from '@system/types'
+import type { AnimatedProps } from '@react-spring/web'
+import type {
+  ComponentPropsBase as CPB,
+  JSXIEPropsOr,
+  Merge
+} from '@system/types'
 import type { SVGAttributes } from 'react'
 
 /**
@@ -13,3 +18,5 @@ export interface SVGProps
    */
   $loading?: boolean
 }
+
+export type SVGAnimatedProps = AnimatedProps<JSXIEPropsOr<'svg'>>

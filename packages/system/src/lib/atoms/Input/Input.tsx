@@ -5,8 +5,7 @@ import {
   EMAIL_PLACEHOLDER
 } from '@system/config/constants'
 import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
-import type { FREC } from '@system/types'
-import omit from 'lodash/omit'
+import type { AnimatedFREC, FREC } from '@system/types'
 import { forwardRef } from 'react'
 import type { InputProps } from './Input.props'
 
@@ -45,7 +44,9 @@ export const Input: FREC<InputProps> = forwardRef((props, ref) => {
     }
   )
 
-  return <a.input {...omit(sanitized, ['children'])} ref={ref} />
+  sanitized['children'] = undefined
+
+  return <input {...sanitized} ref={ref} />
 })
 
 Input.displayName = 'Input'
@@ -54,3 +55,9 @@ Input.defaultProps = {
   autoComplete: 'on',
   type: 'text'
 }
+
+export const InputAnimated: AnimatedFREC<InputProps> = a(Input)
+
+InputAnimated.displayName = 'InputAnimated'
+
+InputAnimated.defaultProps = Input.defaultProps

@@ -3,7 +3,7 @@ import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
 import { GridColumn } from '@system/lib/atoms/GridColumn'
 import { Section, SectionProps } from '@system/lib/atoms/Section'
 import { ProductCard } from '@system/lib/molecules/ProductCard'
-import { FC } from 'react'
+import type { FC } from 'react'
 import type { ProductGridProps } from './ProductGrid.props'
 
 /**

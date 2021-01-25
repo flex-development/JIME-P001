@@ -1,5 +1,5 @@
-import { Color, ComponentPropsBase } from '@system/types'
-import { ButtonProps } from '../Button'
+import type { ButtonProps } from '@system/lib/atoms/Button'
+import type { Color, ComponentPropsBase } from '@system/types'
 
 /**
  * @file Component Props - Link

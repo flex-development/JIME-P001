@@ -1,8 +1,9 @@
 import { GRID_ROW_UTILITY_CLASS } from '@system/config/constants'
 import { useSanitizedProps, useUtilityClasses } from '@system/hooks'
+import type { BoxProps } from '@system/lib/atoms/Box'
+import { Box } from '@system/lib/atoms/Box'
 import type { FREC } from '@system/types'
 import { forwardRef } from 'react'
-import { Box, BoxProps } from '../Box'
 import type { GridRowProps } from './GridRow.props'
 
 /**

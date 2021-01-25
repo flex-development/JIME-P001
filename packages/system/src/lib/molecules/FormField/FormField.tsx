@@ -1,7 +1,7 @@
 import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
 import { Box, BoxProps } from '@system/lib/atoms/Box'
 import { Label } from '@system/lib/atoms/Label'
-import { FC } from 'react'
+import type { FC } from 'react'
 import type { FormFieldProps } from './FormField.props'
 
 /**

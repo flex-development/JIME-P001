@@ -5,7 +5,7 @@ import { Box, BoxProps } from '@system/lib/atoms/Box'
 import { Image } from '@system/lib/atoms/Image'
 import { Link } from '@system/lib/atoms/Link'
 import { Paragraph } from '@system/lib/atoms/Paragraph'
-import { FC } from 'react'
+import type { FC } from 'react'
 import type { ProductReviewProps } from './ProductReview.props'
 
 /**

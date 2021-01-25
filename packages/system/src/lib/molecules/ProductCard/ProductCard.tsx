@@ -1,5 +1,6 @@
 import type { IProductListingVariant } from '@flex-development/kustomzcore'
 import ProductImage from '@flex-development/kustomzcore/utils/getProductImage'
+import { getSizedImageUrl } from '@shopify/theme-images'
 import { IMAGE_PLACEHOLDER_URL } from '@system/config/constants'
 import { useMemoCompare } from '@system/hooks/useMemoCompare'
 import { useProductVariants } from '@system/hooks/useProductVariants'
@@ -12,6 +13,7 @@ import { Link } from '@system/lib/atoms/Link'
 import { Paragraph } from '@system/lib/atoms/Paragraph'
 import { DropdownMenu } from '@system/lib/molecules'
 import type { EventHandlers } from '@system/types'
+import { GridBreakpoints } from '@system/types'
 import type { FC } from 'react'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import useBoolean from 'react-hanger/array/useBoolean'
@@ -106,6 +108,16 @@ export const ProductCard: FC<ProductCardProps> = props => {
 
   // Get `Dropdown` toggle link id
   const DROPDOWN_ID = `product-card-dropdown-toggle-${product.product_id}`
+
+  const xl_dimensions = `${GridBreakpoints.xl}x${GridBreakpoints.xl}`
+  const lg_dimensions = `${GridBreakpoints.lg}x${GridBreakpoints.lg}`
+  const md_dimensions = `${GridBreakpoints.md}x${GridBreakpoints.md}`
+  const sm_dimensions = `${GridBreakpoints.sm}x${GridBreakpoints.sm}`
+
+  const img_responsive_xl = getSizedImageUrl(image.src, xl_dimensions)
+  const img_responsive_lg = getSizedImageUrl(image.src, lg_dimensions)
+  const img_responsive_md = getSizedImageUrl(image.src, md_dimensions)
+  const img_responsive_sm = getSizedImageUrl(image.src, sm_dimensions)
 
   return (
     <Box {...sanitized}>

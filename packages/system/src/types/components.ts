@@ -1,7 +1,12 @@
 import type { AnyObject } from '@flex-development/json'
-import { AnimatedComponent } from '@react-spring/web'
-import { ElementType, FC, ForwardRefExoticComponent, SVGProps } from 'react'
-import { ComponentPropsBase } from './props'
+import type { AnimatedComponent } from '@react-spring/web'
+import type {
+  ElementType,
+  FC,
+  ForwardRefExoticComponent,
+  SVGProps
+} from 'react'
+import type { ComponentPropsBase } from './props'
 
 /**
  * @file Type Definitions - Components

@@ -1,6 +1,6 @@
 import { a } from '@react-spring/web'
 import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
-import type { FREC } from '@system/types'
+import type { AnimatedFREC, FREC } from '@system/types'
 import { forwardRef } from 'react'
 import type { TextAreaProps } from '././TextArea.props'
 
@@ -25,9 +25,15 @@ export const TextArea: FREC<TextAreaProps> = forwardRef((props, ref) => {
 
   sanitized['children'] = undefined
 
-  return <a.textarea {...sanitized} ref={ref} />
+  return <textarea {...sanitized} ref={ref} />
 })
 
 TextArea.displayName = 'TextArea'
 
 TextArea.defaultProps = {}
+
+export const TextAreaAnimated: AnimatedFREC<TextAreaProps> = a(TextArea)
+
+TextAreaAnimated.displayName = 'TextAreaAnimated'
+
+TextAreaAnimated.defaultProps = TextArea.defaultProps

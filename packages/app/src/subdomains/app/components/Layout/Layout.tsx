@@ -1,4 +1,5 @@
-import { Box } from '@components/atoms/Box'
+import type { BoxProps } from '@components/atoms/Box'
+import { Box, BoxAnimated } from '@components/atoms/Box'
 import { Span } from '@components/atoms/Span'
 import { SVG } from '@components/atoms/SVG'
 import { Hero } from '@components/organisms/Hero'
@@ -8,6 +9,7 @@ import { ShopHeader } from '@components/organisms/ShopHeader'
 import { Sidebar } from '@components/organisms/Sidebar'
 import { GridBreakpoints } from '@flex-development/kustomzdesign/types'
 import { useSlideInOut } from '@hooks/useSlideInOut'
+import type { AnimatedProps } from '@react-spring/web'
 import { useWebFontLoader } from '@subdomains/app/hooks/useWebFontLoader'
 import type { IPageProps, PageComponent } from '@subdomains/app/types'
 import Head from 'next/head'
@@ -112,14 +114,14 @@ export const Layout: FC<LayoutProps> = (props: LayoutProps) => {
             className='layout-grid'
             data-sidebar={sidebar_a.visible || undefined}
           >
-            <Box
+            <BoxAnimated
               className='sidebar-col'
               data-visible={sidebar_a.visible}
               ref={sidebar_a.ref}
-              style={sidebar_a.style}
+              style={sidebar_a.style as AnimatedProps<BoxProps>['style']}
             >
               <Sidebar {...pageProps.layout.sidebar} />
-            </Box>
+            </BoxAnimated>
 
             <Box className='content-col'>
               <Hero

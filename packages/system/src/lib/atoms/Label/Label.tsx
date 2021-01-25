@@ -1,6 +1,6 @@
 import { a } from '@react-spring/web'
 import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
-import type { FREC } from '@system/types'
+import type { AnimatedFREC, FREC } from '@system/types'
 import { forwardRef } from 'react'
 import type { LabelProps } from './Label.props'
 
@@ -18,13 +18,17 @@ import type { LabelProps } from './Label.props'
 export const Label: FREC<LabelProps> = forwardRef((props, ref) => {
   const { $form, htmlFor, ...rest } = props
 
-  const sanitized = useSanitizedProps<'label'>(rest, {
-    'form-label': $form
-  })
+  const sanitized = useSanitizedProps<'label'>(rest, { 'form-label': $form })
 
-  return <a.label {...sanitized} htmlFor={htmlFor} ref={ref} />
+  return <label {...sanitized} htmlFor={htmlFor} ref={ref} />
 })
 
 Label.displayName = 'Label'
 
 Label.defaultProps = {}
+
+export const LabelAnimated: AnimatedFREC<LabelProps> = a(Label)
+
+LabelAnimated.displayName = 'LabelAnimated'
+
+LabelAnimated.defaultProps = Label.defaultProps

@@ -8,7 +8,7 @@ import {
   Subtitle,
   Title
 } from '@storybook/addon-docs/blocks'
-import { FC } from 'react'
+import type { FC } from 'react'
 
 /**
  * @file Custom Storybook Docs page

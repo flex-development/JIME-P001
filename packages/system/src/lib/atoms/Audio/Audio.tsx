@@ -1,6 +1,6 @@
 import { a } from '@react-spring/web'
 import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
-import type { FREC } from '@system/types'
+import type { AnimatedFREC, FREC } from '@system/types'
 import { forwardRef } from 'react'
 import type { AudioProps } from './Audio.props'
 
@@ -17,7 +17,9 @@ import type { AudioProps } from './Audio.props'
  */
 export const Audio: FREC<AudioProps> = forwardRef((props, ref) => {
   const sanitized = useSanitizedProps<'audio'>(props)
-  return <a.audio {...sanitized} ref={ref} />
+
+  /* eslint-disable-next-line jsx-a11y/media-has-caption */
+  return <audio {...sanitized} ref={ref} />
 })
 
 Audio.displayName = 'Audio'
@@ -26,3 +28,9 @@ Audio.defaultProps = {
   controls: true,
   preload: 'metadata'
 }
+
+export const AudioAnimated: AnimatedFREC<AudioProps> = a(Audio)
+
+AudioAnimated.displayName = 'AudioAnimated'
+
+AudioAnimated.defaultProps = {}

@@ -28,7 +28,9 @@ module.exports = {
         '*.spec.ts',
         '*.spec.tsx',
         '*.stories.tsx',
-        'src/config/constants.ts'
+        'src/config/constants.ts',
+        'src/lib/atoms/**/*.tsx',
+        'src/lib/organisms/Sidebar/Sidebar.tsx'
       ],
       rules: {
         'tree-shaking/no-side-effects-in-initialization': 0

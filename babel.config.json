@@ -14,8 +14,7 @@
     "@babel/plugin-proposal-export-default-from",
     "@babel/plugin-proposal-export-namespace-from",
     "@babel/plugin-proposal-throw-expressions",
-    "@babel/plugin-syntax-dynamic-import",
-    "babel-plugin-pure-calls-annotation"
+    "@babel/plugin-syntax-dynamic-import"
   ],
   "presets": [
     [

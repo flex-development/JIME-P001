@@ -1,5 +1,5 @@
+import type { ItemProps } from '@system/lib/atoms/Item'
 import type { ComponentPropsBase } from '@system/types'
-import { ItemProps } from '../Item'
 
 /**
  * @file Component Props - List

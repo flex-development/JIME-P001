@@ -14,8 +14,7 @@ module.exports = api => {
     ignore: options.ignore.concat([
       '**/*.spec.ts',
       '**/*.spec.tsx',
-      '**/*.stories.tsx',
-      'src/types/typings'
+      '**/*.stories.tsx'
     ])
   }
 }

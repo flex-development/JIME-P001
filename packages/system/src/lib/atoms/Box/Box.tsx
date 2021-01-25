@@ -1,6 +1,6 @@
 import { a } from '@react-spring/web'
 import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
-import type { FREC } from '@system/types'
+import type { AnimatedFREC, FREC } from '@system/types'
 import { forwardRef } from 'react'
 import type { BoxProps } from './Box.props'
 
@@ -17,9 +17,15 @@ import type { BoxProps } from './Box.props'
  */
 export const Box: FREC<BoxProps> = forwardRef((props, ref) => {
   const sanitized = useSanitizedProps<'div'>(props)
-  return <a.div {...sanitized} ref={ref} />
+  return <div {...sanitized} ref={ref} />
 })
 
 Box.displayName = 'Box'
 
 Box.defaultProps = {}
+
+export const BoxAnimated: AnimatedFREC<BoxProps> = a(Box)
+
+BoxAnimated.displayName = 'BoxAnimated'
+
+BoxAnimated.defaultProps = {}

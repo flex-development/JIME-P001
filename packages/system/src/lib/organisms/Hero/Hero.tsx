@@ -2,7 +2,7 @@ import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
 import { Heading } from '@system/lib/atoms/Heading'
 import { Paragraph } from '@system/lib/atoms/Paragraph'
 import { Section, SectionProps } from '@system/lib/atoms/Section'
-import { FC } from 'react'
+import type { FC } from 'react'
 import type { HeroProps } from './Hero.props'
 
 /**

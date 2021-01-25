@@ -1,9 +1,10 @@
 import { a } from '@react-spring/web'
 import { SVG_CIRCLE_PROPS } from '@system/config/constants'
-import { useRewindSpring, useSanitizedProps } from '@system/hooks'
+import { useRewindSpring } from '@system/hooks/useRewindSpring'
+import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
 import type { FREC } from '@system/types'
 import { forwardRef } from 'react'
-import type { SVGProps } from './SVG.props'
+import type { SVGAnimatedProps as SVGAProps, SVGProps } from './SVG.props'
 
 /**
  * @file Implementation - SVG
@@ -18,8 +19,10 @@ import type { SVGProps } from './SVG.props'
 export const SVG: FREC<SVGProps> = forwardRef((props, ref) => {
   const { $loading, ...rest } = props
 
-  // Get component props
-  const sanitized = useSanitizedProps<'svg'>(rest, $loading ? 'donut' : {})
+  // Get component properties
+  const sanitized = useSanitizedProps<'svg', SVGAProps>(rest, {
+    donut: $loading
+  })
 
   // If display a loading animation, get `strokeDashoffset` spring value
   const { value } = useRewindSpring()
@@ -41,3 +44,7 @@ export const SVG: FREC<SVGProps> = forwardRef((props, ref) => {
     </a.svg>
   )
 })
+
+SVG.displayName = 'SVG'
+
+SVG.defaultProps = {}

@@ -1,7 +1,7 @@
 import { a } from '@react-spring/web'
 import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
-import type { FREC } from '@system/types'
-import { forwardRef } from 'react'
+import type { AnimatedFREC, FREC } from '@system/types'
+import { createElement, forwardRef } from 'react'
 import type { HeadingProps } from './Heading.props'
 
 /**
@@ -19,11 +19,12 @@ export const Heading: FREC<HeadingProps> = forwardRef((props, ref) => {
   const { $size = 1, ...rest } = props
 
   const sanitized = useSanitizedProps<'h1'>(rest)
-  const Component = a[`h${$size}`]
 
-  return <Component {...sanitized} ref={ref} />
+  return createElement(`h${$size}`, { ...sanitized, ref })
 })
 
 Heading.displayName = 'Heading'
 
 Heading.defaultProps = {}
+
+export const HeadingAnimated: AnimatedFREC<HeadingProps> = a(Heading)

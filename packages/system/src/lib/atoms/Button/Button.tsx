@@ -1,8 +1,9 @@
 import type { AnyObject } from '@flex-development/json'
-import { a, animated } from '@react-spring/web'
+import { a } from '@react-spring/web'
 import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
 import { useTransformScaleX } from '@system/hooks/useTransformScaleX'
-import { EventHandlers, FREC } from '@system/types'
+import { BoxAnimated } from '@system/lib/atoms/Box'
+import type { AnimatedFREC, EventHandlers, FREC } from '@system/types'
 import { forwardRef, useCallback } from 'react'
 import type { ButtonProps } from './Button.props'
 
@@ -57,12 +58,12 @@ export const Button: FREC<ButtonProps> = forwardRef((props, ref) => {
   const { children } = sanitized as AnyObject
 
   return (
-    <a.button {...sanitized} onClick={onClickCB} ref={ref}>
+    <button {...sanitized} onClick={onClickCB} ref={ref}>
       {(() => {
         if (!$scale) return children
-        return <animated.div style={scalex.style}>{children}</animated.div>
+        return <BoxAnimated style={scalex.style}>{children}</BoxAnimated>
       })()}
-    </a.button>
+    </button>
   )
 })
 
@@ -71,3 +72,9 @@ Button.displayName = 'Button'
 Button.defaultProps = {
   type: 'button'
 }
+
+const ButtonAnimated: AnimatedFREC<ButtonProps> = a(Button)
+
+ButtonAnimated.displayName = 'ButtonAnimated'
+
+ButtonAnimated.defaultProps = Button.defaultProps

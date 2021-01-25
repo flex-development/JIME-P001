@@ -1,6 +1,6 @@
 import { a } from '@react-spring/web'
 import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
-import type { FREC } from '@system/types'
+import type { AnimatedFREC, FREC } from '@system/types'
 import { forwardRef } from 'react'
 import type { FooterProps } from './Footer.props'
 
@@ -17,10 +17,15 @@ import type { FooterProps } from './Footer.props'
  */
 export const Footer: FREC<FooterProps> = forwardRef((props, ref) => {
   const sanitized = useSanitizedProps<'footer'>(props)
-
-  return <a.footer {...sanitized} ref={ref} />
+  return <footer {...sanitized} ref={ref} />
 })
 
 Footer.displayName = 'Footer'
 
 Footer.defaultProps = {}
+
+export const FooterAnimated: AnimatedFREC<FooterProps> = a(Footer)
+
+FooterAnimated.displayName = 'FooterAnimated'
+
+FooterAnimated.defaultProps = {}

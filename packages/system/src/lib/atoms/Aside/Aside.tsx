@@ -1,6 +1,6 @@
 import { a } from '@react-spring/web'
 import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
-import type { FREC } from '@system/types'
+import type { AnimatedFREC, FREC } from '@system/types'
 import { forwardRef } from 'react'
 import type { AsideProps } from './Aside.props'
 
@@ -17,9 +17,15 @@ import type { AsideProps } from './Aside.props'
  */
 export const Aside: FREC<AsideProps> = forwardRef((props, ref) => {
   const sanitized = useSanitizedProps<'aside'>(props)
-  return <a.aside {...sanitized} ref={ref} />
+  return <aside {...sanitized} ref={ref} />
 })
 
 Aside.displayName = 'Aside'
 
 Aside.defaultProps = {}
+
+export const AsideAnimated: AnimatedFREC<AsideProps> = a(Aside)
+
+AsideAnimated.displayName = 'AsideAnimated'
+
+AsideAnimated.defaultProps = {}

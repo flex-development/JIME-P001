@@ -1,6 +1,6 @@
 import { a } from '@react-spring/web'
 import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
-import type { FREC } from '@system/types'
+import type { AnimatedFREC, FREC } from '@system/types'
 import { forwardRef } from 'react'
 import type { MainProps } from './Main.props'
 
@@ -21,9 +21,15 @@ export const Main: FREC<MainProps> = forwardRef((props, ref) => {
     { template: (props?.['data-template'] ?? '').length > 0 }
   )
 
-  return <a.main {...sanitized} ref={ref} />
+  return <main {...sanitized} ref={ref} />
 })
 
 Main.displayName = 'Main'
 
 Main.defaultProps = {}
+
+export const MainAnimated: AnimatedFREC<MainProps> = a(Main)
+
+MainAnimated.displayName = 'MainAnimated'
+
+MainAnimated.defaultProps = Main.defaultProps

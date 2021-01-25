@@ -1,5 +1,5 @@
+import type { InputValue } from '@system/lib/atoms/Input'
 import type { ComponentPropsBase } from '@system/types'
-import { InputValue } from '../Input'
 
 /**
  * @file Component Props - Option

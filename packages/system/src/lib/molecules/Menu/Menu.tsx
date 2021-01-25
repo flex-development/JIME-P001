@@ -2,7 +2,7 @@ import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
 import { Link, LinkProps } from '@system/lib/atoms/Link'
 import { Nav, NavProps } from '@system/lib/atoms/Nav'
 import uniqueId from 'lodash/uniqueId'
-import { FC } from 'react'
+import type { FC } from 'react'
 import type { MenuProps } from './Menu.props'
 
 /**

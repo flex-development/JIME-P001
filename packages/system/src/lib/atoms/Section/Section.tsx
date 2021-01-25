@@ -1,6 +1,6 @@
 import { a } from '@react-spring/web'
 import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
-import type { FREC } from '@system/types'
+import type { AnimatedFREC, FREC } from '@system/types'
 import { forwardRef } from 'react'
 import type { SectionProps } from './Section.props'
 
@@ -22,9 +22,15 @@ export const Section: FREC<SectionProps> = forwardRef((props, ref) => {
     'content-section': $content
   })
 
-  return <a.section {...sanitized} ref={ref} />
+  return <section {...sanitized} ref={ref} />
 })
 
 Section.displayName = 'Section'
 
 Section.defaultProps = {}
+
+export const SectionAnimated: AnimatedFREC<SectionProps> = a(Section)
+
+SectionAnimated.displayName = 'SectionAnimated'
+
+SectionAnimated.defaultProps = Section.defaultProps

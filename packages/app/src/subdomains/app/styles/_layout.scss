@@ -6,27 +6,7 @@ LAYOUT
   @include flex-column;
 
   overflow-x: hidden;
-
-  // &[data-loading='false'] {
-  //   @include opacity(1);
-
-  //   + .loading-container {
-  //     height: $space-0;
-  //     transition: $transition-collapse;
-  //     z-index: -1;
-  //   }
-  // }
-
-  // &[data-loading='true'] {
-  //   @include opacity(0);
-
-  //   height: $space-0;
-  //   transition: $transition-collapse;
-
-  //   + .loading-container {
-  //     z-index: $zindex-modal;
-  //   }
-  // }
+  justify-content: space-between;
 
   .content-col {
     @include breakpoint-up(lg) {
@@ -47,17 +27,16 @@ LAYOUT
   .playlist-bar {
     @include fluid-width;
 
-    @include position-relative;
+    @include position-fixed(null, null, $space-0);
 
     padding-right: $space-24;
     min-height: $space-72;
-    z-index: $zindex-modal;
   }
 
   .shop-header {
     @include fluid-width;
 
-    @include position-absolute($space-0);
+    @include position-fixed($space-0);
 
     padding: $space-20 $space-24;
     z-index: $zindex-modal-backdrop;
@@ -67,7 +46,7 @@ LAYOUT
     @include breakpoint-down(sm) {
       @include height(unset);
 
-      padding-bottom: $space-0;
+      padding-top: rem($sidebar-padding-y * 3);
     }
 
     @include breakpoint-up(md) {

@@ -77,5 +77,10 @@ GRIDS
 
       border-right: $border-width solid $border-color;
     }
+
+    + .playlist-bar {
+      // position: relative !important;
+      // bottom: unset;
+    }
   }
 }

@@ -1,0 +1,16 @@
+/// ----------------------------------------------------------------------------
+/// @name overflow-scroll
+/// @group mixins
+/// ----------------------------------------------------------------------------
+
+/// Handles element overflow and adds support for momentum scrolling on iOS.
+@mixin overflow-scroll($axis: y) {
+  @if ($axis != x or $axis != y) {
+    @error 'Invalid overflow axis: "#{$axis}"';
+  }
+
+  overflow-#{$axis}: scroll;
+  -webkit-overflow-scrolling: touch;
+
+  @content;
+}

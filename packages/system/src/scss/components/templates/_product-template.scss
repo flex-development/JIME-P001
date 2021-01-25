@@ -3,6 +3,8 @@ PRODUCT TEMPLATE
 ----------------------------------------------------------------------------- */
 
 .product-template {
+  padding-bottom: $template-padding-y-bottom * 2;
+
   &-breadcrumb {
     @include breakpoint-up(sm) {
       font-size: $font-size-base;

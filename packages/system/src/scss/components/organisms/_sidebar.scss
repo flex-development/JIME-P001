@@ -7,10 +7,11 @@ SIDEBAR
 
   @include height(95vh);
 
+  @include overflow-scroll;
+
   background-color: $body-bg;
   font-size: $sidebar-font-size;
   padding: rem(104) $sidebar-padding-x $sidebar-padding-y;
-  overflow-y: scroll;
 
   &-footer {
     @include padding-y($space-24);

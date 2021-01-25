@@ -7,7 +7,7 @@ module.exports = {
   /**
    * Formating and linting commands for all files.
    */
-  [`*.{js,json,jsx,md,mdx,ts,tsx}`]: ['yarn format', 'git add -A'],
+  [`*.{js,json,jsx,md,mdx,scss,ts,tsx}`]: ['yarn format', 'git add -A'],
 
   /**
    * Formating and linting commands for JavaScript and TypeScript files.

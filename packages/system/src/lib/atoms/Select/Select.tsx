@@ -27,10 +27,14 @@ export const Select: FREC<SelectProps> = forwardRef((props, ref) => {
       {(() => {
         if (rest.children) return rest.children
 
-        return $options.map((option: OptionProps, i: number) => {
-          const key = option['data-key'] || option.id || `item-${i}`
-          return <Option {...option} key={key} />
-        })
+        return $options.map((option: OptionProps, i: number) => (
+          <Option
+            {...option}
+            key={option['data-key'] || option.id || `item-${i}`}
+          >
+            {option.label || option.children}
+          </Option>
+        ))
       })()}
     </select>
   )

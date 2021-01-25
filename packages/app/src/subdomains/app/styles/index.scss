@@ -9,5 +9,7 @@ APP STYLES
 @import 'layout';
 
 body {
-  overflow: hidden;
+  @include overflow-scroll;
+
+  overflow-x: clip;
 }

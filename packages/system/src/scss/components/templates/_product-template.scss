@@ -3,7 +3,7 @@ PRODUCT TEMPLATE
 ----------------------------------------------------------------------------- */
 
 .product-template {
-  padding-bottom: $template-padding-y-bottom * 2;
+  padding-bottom: $template-padding-y-bottom * 1.75;
 
   &-breadcrumb {
     @include breakpoint-up(sm) {

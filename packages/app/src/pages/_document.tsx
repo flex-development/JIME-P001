@@ -106,12 +106,10 @@ export default class Document extends NextDocument<DocumentInitialProps> {
           <meta name='theme-color' content='#ffffff' />
 
           {/* Google site verification token */}
-          {process.env.GOOGLE_SITE_VERIFICATION && (
-            <meta
-              name='google-site-verification'
-              content={process.env.GOOGLE_SITE_VERIFICATION}
-            />
-          )}
+          <meta
+            name='google-site-verification'
+            content={process.env.GOOGLE_SITE_VERIFICATION}
+          />
 
           {/* SEO properties that don't need to be easily accessible */}
           <meta property='og:locale' content='en_US' />

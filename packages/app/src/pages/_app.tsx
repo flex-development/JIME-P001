@@ -55,9 +55,7 @@ const App: AppComponent = ({ Component, pageProps }: IAppProps) => {
 }
 
 /**
- * Logs Next.js web metrics.
- *
- * @todo Integrate with Google Analytics
+ * Logs Next.js web metrics and sends results to Google Analytics.
  *
  * @see https://nextjs.org/blog/next-9-4#integrated-web-vitals-reporting
  * @see https://nextjs.org/docs/advanced-features/measuring-performance
@@ -70,6 +68,15 @@ const App: AppComponent = ({ Component, pageProps }: IAppProps) => {
  * @param metric.value - Duration of performance entry
  */
 export const reportWebVitals = (metric: NextWebVitalsMetric): void => {
+  const { id, label, name, value } = metric
+
+  window.gtag('event', name, {
+    event_category: label === 'web-vital' ? 'Web Vitals' : 'Next.js Metric',
+    event_label: id,
+    non_interaction: true,
+    value: Math.round(name === 'CLS' ? value * 1000 : value)
+  })
+
   console.debug({ 'App.reportWebVitals': metric })
 }
 

@@ -27,6 +27,9 @@ export default class Document extends NextDocument<DocumentInitialProps> {
           {/* Set character encoding for the document */}
           <meta charSet='utf-8' />
 
+          {/* Reference humans.txt file */}
+          <link rel='author' href='/humans.txt' />
+
           {/* Favicons & App Icons*/}
           <link
             rel='apple-touch-icon'
@@ -102,8 +105,13 @@ export default class Document extends NextDocument<DocumentInitialProps> {
           <meta name='msapplication-TileImage' content='ms-icon-144x144.png' />
           <meta name='theme-color' content='#ffffff' />
 
-          {/* TODO: Update site verification token */}
-          <meta name='google-site-verification' content='verification_token' />
+          {/* Google site verification token */}
+          {process.env.GOOGLE_SITE_VERIFICATION && (
+            <meta
+              name='google-site-verification'
+              content={process.env.GOOGLE_SITE_VERIFICATION}
+            />
+          )}
 
           {/* SEO properties that don't need to be easily accessible */}
           <meta property='og:locale' content='en_US' />

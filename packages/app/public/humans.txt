@@ -1,0 +1,12 @@
+/* TEAM */
+  Name: Lexus Drumgold
+  Title: UI Designer & Web Engineer
+  Site: https://flexdevelopment.llc
+
+/* SITE */
+  Language: English
+	Doctype: HTML5
+	IDE: Visual Studio Code - Insiders
+  Standards: HTML5, CSS3, Sass/SCSS, Next.js
+  Components: React
+  Software: Software used for the development

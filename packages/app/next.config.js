@@ -22,6 +22,9 @@ const {
   FIREBASE_PROJECT_ID,
   FIREBASE_MESSAGING_SENDER_ID,
   GOOGLE_SITE_VERIFICATION,
+  NEXT_PUBLIC_GA_TRACKING_ID,
+  SENTRY_DSN,
+  SENTRY_RELEASE,
   SHOPIFY_API_VERSION,
   SHOPIFY_DOMAIN,
   SITE_URL,
@@ -93,6 +96,7 @@ module.exports = withTM({
     FIREBASE_PROJECT_ID,
     FIREBASE_STORAGE_BUCKET: `${FIREBASE_PROJECT_ID}.appspot.com`,
     GOOGLE_SITE_VERIFICATION,
+    NEXT_PUBLIC_GA_TRACKING_ID,
     SHOPIFY_API_VERSION,
     SHOPIFY_DOMAIN,
     SITE_URL: SITE_URL_SAFE,
@@ -109,6 +113,13 @@ module.exports = withTM({
     plugins: true,
     scrollRestoration: true,
     workerThreads: true
+  },
+
+  /**
+   * Future features config.
+   */
+  future: {
+    excludeDefaultMomentLocales: true
   },
 
   /**

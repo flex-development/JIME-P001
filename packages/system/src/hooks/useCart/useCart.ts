@@ -1,8 +1,8 @@
-import { CHECKOUT_BASE_URL } from '@flex-development/kustomzcore/constants'
 import type {
   CheckoutLineItemInput,
   CheckoutPermalinkInput
-} from '@flex-development/kustomzcore/types'
+} from '@flex-development/kustomzcore'
+import { CHECKOUT_BASE_URL } from '@flex-development/kustomzcore/constants'
 import type { UseCheckoutPermalink } from '@system/hooks/useCheckoutPermalink'
 import { useCheckoutPermalink } from '@system/hooks/useCheckoutPermalink'
 import { getItemsTotal } from '@system/utils/getItemsTotal'

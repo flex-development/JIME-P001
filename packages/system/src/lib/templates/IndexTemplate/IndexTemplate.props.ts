@@ -1,4 +1,4 @@
-import type { IReview } from '@flex-development/kustomzcore/types'
+import type { IReview } from '@flex-development/kustomzcore'
 import type { MainProps } from '@system/lib/atoms/Main'
 import type { ProductGridProps } from '@system/lib/organisms/ProductGrid'
 

@@ -1,5 +1,5 @@
+import type { CheckoutLineItemInput } from '@flex-development/kustomzcore'
 import { CART_PKEY } from '@flex-development/kustomzcore/constants'
-import type { CheckoutLineItemInput } from '@flex-development/kustomzcore/types'
 import '@flex-development/kustomzdesign/kustomzdesign.css'
 import {
   CartContextProvider,

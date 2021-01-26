@@ -4,13 +4,9 @@
     "lib": ["dom", "dom.iterable", "esnext"],
     "module": "esnext",
     "strictPropertyInitialization": false,
-    "target": "esnext",
-    "typeRoots": [
-      "../../node_modules/musickit-typescript",
-      "../../node_modules/@types"
-    ]
+    "target": "esnext"
   },
   "exclude": ["node_modules"],
   "extends": "../../tsconfig.json",
-  "include": ["../../typings", "src"]
+  "include": ["src"]
 }

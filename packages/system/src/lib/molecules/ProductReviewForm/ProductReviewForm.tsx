@@ -1,5 +1,5 @@
 import type { AnyObject } from '@flex-development/json'
-import type { CreateReviewRequest } from '@flex-development/kustomzcore/types'
+import type { CreateReviewRequest } from '@flex-development/kustomzcore'
 import { useProductVariants } from '@system/hooks/useProductVariants'
 import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
 import { Button } from '@system/lib/atoms/Button'
@@ -55,7 +55,7 @@ export const ProductReviewForm: FC<ProductReviewFormProps> & {
   )
 
   // Get product variants as options
-  const { options, selectVariant, selected = {} } = useProductVariants(variants)
+  const { options, selectVariant, selected } = useProductVariants(variants)
 
   // Product review entity state
   const { state: review, setState: updateReview } = useSetState<

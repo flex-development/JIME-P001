@@ -181,12 +181,15 @@ export type JSXIEPropsOr<
   T extends AnyObject | string
 > = T extends keyof IntrinsicElements ? IntrinsicElements[T] : T
 
-/* eslint-enable prettier/prettier */
-
 /**
  * Merge two objects.
  */
-export type Merge<T1 extends AnyObject, T2 extends AnyObject> = T1 & T2
+export type Merge<
+  T1 extends AnyObject = AnyObject,
+  T2 extends AnyObject = AnyObject
+> = T1 & T2
+
+/* eslint-enable prettier/prettier */
 
 /**
  * HTML SVG elements.

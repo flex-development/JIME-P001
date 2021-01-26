@@ -1,19 +1,22 @@
-import type { CheckoutLineItemInput } from '@flex-development/kustomzcore/types'
+import type {
+  CheckoutLineItemInput,
+  IProductListingVariant
+} from '@flex-development/kustomzcore'
 import { useCheckoutLineItemInput } from '@system/hooks/useCheckoutLineItemInput'
 import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
 import type { BoxProps } from '@system/lib/atoms/Box'
 import { Box } from '@system/lib/atoms/Box'
 import { Button } from '@system/lib/atoms/Button'
 import { Form } from '@system/lib/atoms/Form'
-import { Image } from '@system/lib/atoms/Image'
 import { Input } from '@system/lib/atoms/Input'
 import { Paragraph } from '@system/lib/atoms/Paragraph'
 import { ProductHeading } from '@system/lib/atoms/ProductHeading'
+import { ProductImage } from '@system/lib/atoms/ProductImage'
 import { Span } from '@system/lib/atoms/Span'
 import { FormField } from '@system/lib/molecules/FormField'
 import type { EventHandlers } from '@system/types'
 import type { FC } from 'react'
-import { ReactNode, useCallback } from 'react'
+import { ReactNode, useCallback, useMemo } from 'react'
 import type { CheckoutLineItemProps } from './CheckoutLineItem.props'
 
 /**
@@ -41,21 +44,30 @@ export const CheckoutLineItem: FC<CheckoutLineItemProps> & {
     data,
     handleRemove = () => console.log(`TODO: CheckoutLineItem.handleRemove`),
     handleUpdate = () => console.log(`TODO: CheckoutLineItem.handleUpdate`),
-    image,
     ...rest
   } = props
 
-  // Get component properties
-  const sanitized = useSanitizedProps<'div', BoxProps>(
-    { ...rest, id: `line-item-${data.variant_id}` },
-    'checkout-line-item'
-  )
+  // Product listing variant
+  const variant = useMemo<IProductListingVariant>(() => {
+    console.debug(data.product.variants, data.variant_id)
+
+    return data.product.variants.find(({ id }) => {
+      return id === data.variant_id
+    }) as IProductListingVariant
+  }, [data.product.variants, data.variant_id])
 
   // Handle line item state
-  const { item, updateQuantity } = useCheckoutLineItemInput({ data, image })
+  const { item, updateQuantity } = useCheckoutLineItemInput(data)
 
-  // Get parent product title
-  const { 0: product_title, 1: variant_title } = data.title.split(' - ')
+  // Get component properties
+  const sanitized = useSanitizedProps<'div', BoxProps>(rest, {
+    'checkout-line-item': true
+  })
+
+  console.debug(variant)
+
+  // Update element ID
+  sanitized['id'] = `line-item-${variant.id}`
 
   /**
    * Updates the number of line items to purchase.
@@ -66,20 +78,16 @@ export const CheckoutLineItem: FC<CheckoutLineItemProps> & {
     let quantity = JSON.parse(event.target.value)
     quantity = quantity < 1 ? 1 : quantity
 
-    const updates: CheckoutLineItemInput = {
-      data: { ...item.data, quantity },
-      image
-    }
+    const updates: CheckoutLineItemInput = { ...item, quantity }
 
-    updateQuantity(updates.data.quantity)
+    updateQuantity(updates.quantity)
     return handleUpdate(updates, event)
   }
 
   /* Callback version of `onChangeQuantity` */
   const onChangeQuantityCB = useCallback(onChangeQuantity, [
     handleUpdate,
-    image,
-    item.data,
+    item,
     updateQuantity
   ])
 
@@ -98,27 +106,29 @@ export const CheckoutLineItem: FC<CheckoutLineItemProps> & {
   return (
     <Box {...sanitized}>
       <Box className='checkout-line-item-col'>
-        <Image
-          alt={image.alt || data.title}
+        <ProductImage
           className='checkout-line-item-img'
-          src={image.src}
+          layout='intrinsic'
+          loading='eager'
+          product={data.product}
+          variant={variant}
         />
       </Box>
       <Box className='checkout-line-item-col'>
         <ProductHeading
           $size={3}
           className='checkout-line-item-heading'
-          price={item.data.quantity * JSON.parse(data.price)}
-          title={product_title}
+          price={item.quantity * JSON.parse(variant.price)}
+          title={data.product.title}
         />
 
         <Paragraph className='checkout-line-item-attribute'>
           {((): ReactNode => {
-            if (item.data.properties?.kpd) {
+            if (item.properties?.kpd) {
               return (
                 <>
                   Kustom product description:&nbsp;
-                  <Span>{item.data.properties.kpd}</Span>
+                  <Span>{item.properties.kpd}</Span>
                 </>
               )
             }
@@ -133,7 +143,7 @@ export const CheckoutLineItem: FC<CheckoutLineItemProps> & {
               className='checkout-line-item-title'
               name='title'
               readOnly
-              value={variant_title}
+              value={variant.title}
             />
 
             <FormField
@@ -148,7 +158,7 @@ export const CheckoutLineItem: FC<CheckoutLineItemProps> & {
                 name='quantity'
                 onChange={onChangeQuantityCB}
                 type='number'
-                value={item.data.quantity}
+                value={item.quantity}
               />
             </FormField>
           </Box>
@@ -158,7 +168,7 @@ export const CheckoutLineItem: FC<CheckoutLineItemProps> & {
             className='checkout-line-item-btn'
             onClick={onClickRemoveCB}
             name='remove'
-            value={data.variant_id}
+            value={variant.id}
           >
             Remove
           </Button>

@@ -1,5 +1,6 @@
 import { CollectionTemplate } from '@components/templates/CollectionTemplate'
 import { serialize } from '@flex-development/json/utils/serialize'
+import type { ICollectionListing } from '@flex-development/kustomzcore'
 import type { GetCollectionResJSON, SEOData } from '@kapi/types'
 import { SEO } from '@subdomains/app/components/SEO'
 import type {
@@ -78,16 +79,16 @@ export const getServerSideProps: GetServerSideProps<
   if ((data as NotFound).notFound) return data as NotFound
 
   // ! Guarenteed to be collection page. Error will be thrown otherwise
-  const { body_html, products, title } = data as GetCollectionResJSON
-  const seo = (data as GetCollectionResJSON).seo as NonNullable<SEOData>
+  const collection = data as GetCollectionResJSON
+  const seo = (collection as GetCollectionResJSON).seo as NonNullable<SEOData>
 
   // Get template data
   const template = serialize<PageProps['template']>({
     collection: {
-      body_html,
-      title: !url?.includes('collections') ? 'Products' : title
-    },
-    products
+      ...collection,
+      title: !url?.includes('collections') ? 'Products' : collection?.title
+    } as ICollectionListing,
+    products: collection.products
   })
 
   // Get layout data

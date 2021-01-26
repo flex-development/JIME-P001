@@ -3,7 +3,6 @@
  * @author Lexus Drumgold <lex@flexdevelopment.llc>
  *
  * @todo [docs] ProductReviewForm - Update documentation
- * @todo [docs] Storybook Types - Update documentation
  * @todo [test] Add remaining unit tests for modules missing spec files
  * @todo [test] Input, TextArea - Test $invalid styles
  * @todo [test] PlaylistBar - Test callback functions

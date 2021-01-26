@@ -1,4 +1,4 @@
-import type { CheckoutLineItemInput } from '@flex-development/kustomzcore/types'
+import type { CheckoutLineItemInput } from '@flex-development/kustomzcore'
 
 /**
  * @file Implementation - getSubtotal
@@ -16,7 +16,7 @@ const getSubtotal = (items: Array<CheckoutLineItemInput>): number => {
   if (!items.length) return 0
 
   // Get subtotal for each item
-  const totals = items.map(({ data }) => data.quantity * JSON.parse(data.price))
+  const totals = items.map(item => item.quantity * JSON.parse(item.price))
 
   // Add all item subtotals
   return totals.reduce((accumulator, curr) => accumulator + curr)

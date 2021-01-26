@@ -43,26 +43,16 @@ PRODUCT CARDS
     }
   }
 
-  &-img {
-    @include border-radius-top($product-card-inner-border-radius);
-
-    @include fluid-img;
-  }
-
   &-price {
     color: $product-card-footer-text-color;
   }
 
   &-title {
     color: $product-card-footer-title-color;
+    display: inline-block;
     letter-spacing: $space-4 / 3;
     margin-bottom: $space-8;
     min-height: $space-32;
-  }
-
-  &-link-img,
-  &-title {
-    display: inline-block;
   }
 
   &-price,

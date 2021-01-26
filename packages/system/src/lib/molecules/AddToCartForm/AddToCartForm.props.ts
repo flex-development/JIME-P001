@@ -3,9 +3,9 @@ import type {
   CheckoutLineItemInput,
   IProductListing,
   IProductListingVariant
-} from '@flex-development/kustomzcore/types'
-import { FormProps } from '@system/lib/atoms/Form'
-import { EventHandlers } from '@system/types'
+} from '@flex-development/kustomzcore'
+import type { FormProps } from '@system/lib/atoms/Form'
+import type { EventHandlers } from '@system/types'
 
 /**
  * @file Component Props - AddToCartForm

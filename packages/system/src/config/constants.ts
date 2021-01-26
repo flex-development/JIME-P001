@@ -1,3 +1,4 @@
+import type { IProductImage } from '@flex-development/kustomzcore'
 import { GridBreakpoints } from '@system/types'
 
 /**
@@ -38,6 +39,19 @@ export const GRID_COLUMN_UTILITY_CLASS = 'col'
 export const GRID_ROW_UTILITY_CLASS = 'row'
 
 export const IMAGE_PLACEHOLDER_URL = `${API_URL}/assets/images/placeholder.webp`
+
+export const PRODUCT_IMAGE_DEFAULT: IProductImage = {
+  alt: '',
+  created_at: new Date().toUTCString(),
+  height: 2048,
+  id: -1,
+  position: -1,
+  product_id: -1,
+  src: IMAGE_PLACEHOLDER_URL,
+  updated_at: new Date().toUTCString(),
+  variant_ids: [],
+  width: 2048
+}
 
 export const SVG_CIRCLE_PROPS = {
   cx: '20.5',

@@ -1,6 +1,6 @@
+import { IProductListing } from '@flex-development/kustomzcore/dist/types'
 import { PRODUCTS, REVIEWS } from '@system-mocks/utils'
-import { useProductImages } from '@system/hooks'
-import { Image } from '@system/lib/atoms'
+import { ProductImage } from '@system/lib/atoms/ProductImage'
 import { ProductReview } from '@system/lib/molecules/ProductReview'
 import { Carousel } from './Carousel'
 import type { CarouselProps } from './Carousel.props'
@@ -16,18 +16,24 @@ export default {
   },
   component: Carousel,
   parameters: {
-    jest: ['Carousel', 'useActiveIndex', 'useProductImages']
+    jest: ['Carousel', 'useActiveIndex']
   },
   title: 'Library/Molecules/Carousel'
 }
 
-export const ProductImages: FCS<CarouselProps> = args => {
-  const images = useProductImages(PRODUCTS.find(p => p.handle === 'ash-tray'))
+const product = PRODUCTS.find(p => p.handle === 'ash-tray') as IProductListing
+const { images, variants } = product
 
+export const ProductImages: FCS<CarouselProps> = args => {
   return (
     <Carousel {...args}>
       {images.map(image => (
-        <Image {...image} $display='block' $fluid key={image.id} />
+        <ProductImage
+          $display='block'
+          key={image.id}
+          product={product}
+          variant={variants.find(({ image_id }) => image_id === image.id)}
+        />
       ))}
     </Carousel>
   )

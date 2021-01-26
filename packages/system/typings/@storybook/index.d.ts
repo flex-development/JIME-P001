@@ -6,4 +6,3 @@ declare type FCS<T extends {} = {}, P extends {} = {}> = {
   parameters?: P
   storyName?: string
 }
-

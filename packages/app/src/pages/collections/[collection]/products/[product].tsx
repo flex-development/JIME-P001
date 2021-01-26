@@ -1,6 +1,9 @@
 import { ProductTemplate } from '@components/templates/ProductTemplate'
 import { serialize } from '@flex-development/json/utils/serialize'
-import type { ICollectionListing } from '@flex-development/kustomzcore/types'
+import type {
+  ICollectionListing,
+  IProductListing
+} from '@flex-development/kustomzcore'
 import type { GetProductResJSON, SEOData } from '@kapi/types'
 import { SEO } from '@subdomains/app/components/SEO'
 import type {
@@ -54,12 +57,15 @@ const CollectionProduct: PageComponent<PageProps> = ({ seo, template }) => (
 export const getServerSideProps: GetServerSideProps<
   PageProps,
   ProductPageUrlQuery
-> = async (context: GetServerSidePropsContext<ProductPageParams>) => {
+> = async ({ query, req }: GetServerSidePropsContext<ProductPageParams>) => {
   const {
     collection: chandle,
     product: phandle,
     sku
-  } = context.query as ProductPageUrlQuery
+  } = query as ProductPageUrlQuery
+
+  // True if on collection product page
+  const c_product = req.url?.includes(`/collections/${chandle}/products/`)
 
   // Get product data
   const data = await getProduct({
@@ -89,9 +95,11 @@ export const getServerSideProps: GetServerSideProps<
       product.variants,
       product.variants?.find(variant => variant.sku === sku)
     ),
-    // TODO: Change collection link using req.url
-    collection: { href: '/products', title: 'Products' },
-    product,
+    collection: {
+      href: c_product ? `/collections/${chandle}` : '/products',
+      title: c_product ? collection.title : 'Products'
+    },
+    product: product as IProductListing,
     reviews: []
   })
 
@@ -103,7 +111,7 @@ export const getServerSideProps: GetServerSideProps<
       layout,
       seo: seo as NonNullable<SEOData>,
       template,
-      ua: context.req.headers['user-agent']
+      ua: req.headers['user-agent']
     }
   }
 }

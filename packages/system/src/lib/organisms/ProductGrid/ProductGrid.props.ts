@@ -1,4 +1,4 @@
-import type { IProductListing } from '@flex-development/kustomzcore/types'
+import type { IProductListing } from '@flex-development/kustomzcore'
 import type { SectionProps } from '@system/lib/atoms/Section'
 import type { ProductCardProps } from '@system/lib/molecules/ProductCard'
 

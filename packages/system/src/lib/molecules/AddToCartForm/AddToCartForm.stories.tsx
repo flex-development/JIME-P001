@@ -1,4 +1,4 @@
-import type { IProductListing } from '@flex-development/kustomzcore/types'
+import type { IProductListing } from '@flex-development/kustomzcore'
 import { PRODUCTS } from '@system-mocks/utils'
 import { AddToCartForm } from './AddToCartForm'
 import type { AddToCartFormProps } from './AddToCartForm.props'

@@ -1,11 +1,12 @@
-import { AnyObject, NullishString } from '@flex-development/json/utils/types'
-import {
+import type { AnyObject } from '@flex-development/json/utils/types'
+import type {
   ICheckoutLineItem,
   ICollectionListing,
   IMetafield,
   IPage,
   IPolicy as IShopifyPolicy,
-  IProductListing as IShopifyProductListing
+  IProductListing as IShopifyProductListing,
+  IProductListingVariant
 } from 'shopify-api-node'
 
 /**
@@ -40,26 +41,21 @@ export type CheckoutPermalinkQuery = Record<
 >
 
 /**
- * Object representing the fields needed to display a checkout line item.
- */
-export type CheckoutLineItemDisplay = Pick<
-  ICheckoutLineItem,
-  'price' | 'quantity' | 'title' | 'variant_id'
-> & { properties: AnyObject | null }
-
-/**
  * Object representing the fields needed to create a checkout.
  */
 export type CheckoutLineItemInput = {
-  data: CheckoutLineItemDisplay
-  image: { alt?: NullishString; id?: string; src?: string }
+  price: IProductListingVariant['price']
+  product: IProductListing
+  properties: AnyObject | null
+  quantity: ICheckoutLineItem['quantity']
+  variant_id: IProductListingVariant['id']
 }
 
 /**
  * `CheckoutLineItemInput` with a required `id` property.
  */
 export type CheckoutLineItemInputWithId = CheckoutLineItemInput & {
-  id: CheckoutLineItemInput['data']['variant_id']
+  id: CheckoutLineItemInput['variant_id']
 }
 
 /**
@@ -106,18 +102,6 @@ export type ShopifyMenuLink = {
   href: string
   links: ShopifyMenuLink[]
   title: string
-}
-
-/**
- * Store hero and sidebar metadata.
- */
-export type StoreLayoutSettings = {
-  hero_subtitle: string
-  hero_title: string
-  sidebar_age: string
-  sidebar_img: string
-  sidebar_location: string
-  sidebar_mood: string
 }
 
 export type {

@@ -1,6 +1,6 @@
 import kapi from '@app/config/axios-kapi'
 import type { PartialOr } from '@flex-development/json/utils/types'
-import type { ShopifyMenu } from '@flex-development/kustomzcore/types'
+import type { ShopifyMenu } from '@flex-development/kustomzcore'
 import type { GetMenuQuery } from '@kapi/types'
 import debug from 'debug'
 

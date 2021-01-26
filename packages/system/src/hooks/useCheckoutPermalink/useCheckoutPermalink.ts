@@ -1,9 +1,9 @@
-import { CHECKOUT_BASE_URL } from '@flex-development/kustomzcore/constants'
 import type {
   CheckoutLineItemInput,
   CheckoutPermalinkInput,
   CheckoutPermalinkQuery
-} from '@flex-development/kustomzcore/types'
+} from '@flex-development/kustomzcore'
+import { CHECKOUT_BASE_URL } from '@flex-development/kustomzcore/constants'
 import { useMemoCompare } from '@system/hooks/useMemoCompare'
 import omit from 'lodash/omit'
 import qs from 'querystring'
@@ -79,7 +79,7 @@ export const useCheckoutPermalink = (
      * @param data - Array of line items
      */
     const normalize = (data: typeof _inputs) => {
-      return data.map(input => ({ ...input, id: input.data.variant_id }))
+      return data.map(input => ({ ...input, id: input.variant_id }))
     }
 
     actions.setValue(normalize(_inputs))
@@ -92,7 +92,7 @@ export const useCheckoutPermalink = (
     const path_query: CheckoutPermalinkQuery = {}
     const attr_qs_arr: Array<string> = []
 
-    items.forEach(({ data: { quantity, properties, variant_id } }) => {
+    items.forEach(({ quantity, properties, variant_id }) => {
       path_query[variant_id] = quantity
 
       const attributes = properties || {}
@@ -120,12 +120,12 @@ export const useCheckoutPermalink = (
    */
   const upsertItem = (data: CheckoutPermalinkInput) => {
     const existing = items.find(item => {
-      return item.data.variant_id === data.data.variant_id
+      return item.variant_id === data.variant_id
     })
 
     if (existing) {
-      data.data.quantity = existing.data.quantity + data.data.quantity
-      actions.modifyById(data.data.variant_id, data)
+      data.quantity = existing.quantity + data.quantity
+      actions.modifyById(data.variant_id, data)
     } else {
       actions.add(data)
     }

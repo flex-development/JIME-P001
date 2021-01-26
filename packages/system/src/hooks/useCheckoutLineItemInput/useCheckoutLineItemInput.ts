@@ -1,5 +1,5 @@
 import type { AnyObject } from '@flex-development/json'
-import type { CheckoutLineItemInput } from '@flex-development/kustomzcore/types'
+import type { CheckoutLineItemInput } from '@flex-development/kustomzcore'
 import type { UseQuantity } from '@system/hooks/useQuantity'
 import { useQuantity } from '@system/hooks/useQuantity'
 import { useSetState } from 'react-hanger'
@@ -45,13 +45,13 @@ export const useCheckoutLineItemInput = (
   const {
     state: properties,
     setState: updateProperties
-  } = useSetState<AnyObject>(item.data.properties || {})
+  } = useSetState<AnyObject>(item.properties || {})
 
   // Handle product quantity
-  const { quantity, updateQuantity } = useQuantity(item.data.quantity)
+  const { quantity, updateQuantity } = useQuantity(item.quantity)
 
   return {
-    item: { ...item, data: { ...item.data, properties, quantity } },
+    item: { ...item, properties, quantity },
     updateProperties,
     updateQuantity
   }

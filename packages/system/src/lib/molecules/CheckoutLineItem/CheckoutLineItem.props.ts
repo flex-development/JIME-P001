@@ -1,11 +1,7 @@
 import type { ANYTHING } from '@flex-development/json'
-import type {
-  CheckoutLineItemDisplay,
-  CheckoutLineItemInput
-} from '@flex-development/kustomzcore/types'
-import { BoxProps } from '@system/lib/atoms/Box'
-import { ImageProps } from '@system/lib/atoms/Image'
-import { EventHandlers } from '@system/types'
+import type { CheckoutLineItemInput } from '@flex-development/kustomzcore'
+import type { BoxProps } from '@system/lib/atoms/Box'
+import type { EventHandlers } from '@system/types'
 
 /**
  * @file Component Props - CheckoutLineItem
@@ -14,9 +10,9 @@ import { EventHandlers } from '@system/types'
 
 export interface CheckoutLineItemProps extends BoxProps {
   /**
-   * `ICheckoutLineItem` object display properties.
+   * Checkout line item data.
    */
-  data: CheckoutLineItemDisplay
+  data: CheckoutLineItemInput
 
   /**
    * Function to fire when the user clicks the "REMOVE" button.
@@ -30,9 +26,4 @@ export interface CheckoutLineItemProps extends BoxProps {
     updates: CheckoutLineItemInput,
     event: EventHandlers.Change.Input
   ): ANYTHING
-
-  /**
-   * Variant display image.
-   */
-  image: ImageProps
 }

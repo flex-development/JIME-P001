@@ -1,15 +1,14 @@
-import type { CheckoutLineItemInput } from '@flex-development/kustomzcore/types'
+import type { CheckoutLineItemInput } from '@flex-development/kustomzcore'
 import { useActiveIndex } from '@system/hooks/useActiveIndex'
 import { useCheckoutLineItemInput } from '@system/hooks/useCheckoutLineItemInput'
-import { useProductImages } from '@system/hooks/useProductImages'
 import { useProductVariants } from '@system/hooks/useProductVariants'
 import { Box } from '@system/lib/atoms/Box'
 import { Button } from '@system/lib/atoms/Button'
 import { Form } from '@system/lib/atoms/Form'
-import { Image } from '@system/lib/atoms/Image'
 import { Input } from '@system/lib/atoms/Input'
 import { Paragraph } from '@system/lib/atoms/Paragraph'
 import { ProductHeading } from '@system/lib/atoms/ProductHeading'
+import { ProductImage } from '@system/lib/atoms/ProductImage'
 import { Select } from '@system/lib/atoms/Select'
 import { TextArea } from '@system/lib/atoms/TextArea'
 import { Carousel } from '@system/lib/molecules/Carousel'
@@ -60,28 +59,22 @@ export const AddToCartForm: FC<AddToCartFormProps> & {
     upperLimit: product.images.length - 1
   })
 
-  // Use product images as carousel slides
-  const images = useProductImages(product)
-
   // Use product variants as options
   const {
     options: product_variant_options,
     selectVariant,
-    selected = {},
+    selected,
     variants
   } = useProductVariants(product.variants, position)
 
   // Initialize line item state
   // The item state will be passed to props.addToCart if the fn is defined
   const { item, updateProperties, updateQuantity } = useCheckoutLineItemInput({
-    data: {
-      price: selected.price,
-      properties: null,
-      quantity: 1,
-      title: `${product.title} - ${selected.title}`,
-      variant_id: selected.id
-    },
-    image: images[active]
+    price: selected.price,
+    product,
+    properties: null,
+    quantity: 1,
+    variant_id: selected.id
   })
 
   /**
@@ -161,13 +154,13 @@ export const AddToCartForm: FC<AddToCartFormProps> & {
           className='add-to-cart-form-carousel'
           position={active < 0 ? 0 : active}
         >
-          {images.map((image, index) => (
-            <Image
-              {...image}
+          {product.images.map((image, index) => (
+            <ProductImage
               $display='block'
-              $fluid
               key={image.id}
               loading={index === active ? 'eager' : 'lazy'}
+              product={product}
+              variant={variants.find(({ image_id }) => image_id === image.id)}
             />
           ))}
         </Carousel>
@@ -177,7 +170,7 @@ export const AddToCartForm: FC<AddToCartFormProps> & {
         {/* Product title and variant price */}
         <ProductHeading
           className='add-to-cart-form-heading'
-          price={item.data.quantity * selected.price}
+          price={item.quantity * JSON.parse(selected.price)}
           title={product.title}
         />
 
@@ -210,7 +203,7 @@ export const AddToCartForm: FC<AddToCartFormProps> & {
               min={0}
               onChange={onChangeQuantityCB}
               type='number'
-              value={item.data.quantity}
+              value={item.quantity}
             />
           </FormField>
         </Box>
@@ -225,7 +218,7 @@ export const AddToCartForm: FC<AddToCartFormProps> & {
           onChange={onChangePropertiesCB}
           name='kpd'
           placeholder='Describe your kustom ash or rolling tray'
-          value={item.data.properties?.kpd}
+          value={item.properties?.kpd}
         />
 
         {/* Add to cart button container */}

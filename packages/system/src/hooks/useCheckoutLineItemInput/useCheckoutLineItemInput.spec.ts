@@ -1,5 +1,5 @@
 import type { AnyObject } from '@flex-development/json'
-import type { CheckoutLineItemInput } from '@flex-development/kustomzcore/types'
+import type { CheckoutLineItemInput } from '@flex-development/kustomzcore'
 import { act, renderHook } from '@testing-library/react-hooks'
 import isPlainObject from 'lodash/isPlainObject'
 import { useCheckoutLineItemInput } from './useCheckoutLineItemInput'
@@ -10,15 +10,15 @@ import { useCheckoutLineItemInput } from './useCheckoutLineItemInput'
  */
 
 describe('useCheckoutLineItemInput', () => {
-  const MOCK_INPUT = { data: { variant_id: -1 } } as CheckoutLineItemInput
+  const MOCK_INPUT = { variant_id: -1 } as CheckoutLineItemInput
 
   it('defaults to one product with zero custom attributes', () => {
     const { result } = renderHook(() => useCheckoutLineItemInput(MOCK_INPUT))
-    const { properties, quantity, variant_id } = result.current.item.data
+    const { properties, quantity, variant_id } = result.current.item
 
     expect(isPlainObject(properties)).toBeTruthy()
     expect(quantity).toBe(1)
-    expect(variant_id).toBe(MOCK_INPUT.data.variant_id)
+    expect(variant_id).toBe(MOCK_INPUT.variant_id)
   })
 
   it('updates the line item quantity', () => {
@@ -30,7 +30,7 @@ describe('useCheckoutLineItemInput', () => {
       result.current.updateQuantity(NEW_QUANTITY)
     })
 
-    expect(result.current.item.data.quantity).toBe(2)
+    expect(result.current.item.quantity).toBe(2)
   })
 
   it('adds a new custom property for a line item', () => {
@@ -41,7 +41,7 @@ describe('useCheckoutLineItemInput', () => {
       result.current.updateProperties(new_properties)
     })
 
-    const properties = result.current.item.data.properties as AnyObject
+    const properties = result.current.item.properties as AnyObject
 
     expect(isPlainObject(properties)).toBeTruthy()
     expect(Object.keys(properties).length).toBe(1)

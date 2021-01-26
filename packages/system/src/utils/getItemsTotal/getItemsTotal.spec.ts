@@ -1,4 +1,4 @@
-import LINE_ITEMS from '@system-mocks/data/checkout-line-items.mock.json'
+import { LINE_ITEMS } from '@system-mocks/utils'
 import getItemsTotal from './getItemsTotal'
 
 /**

@@ -10,7 +10,7 @@ import type {
   ICollectionListing,
   IProductListing,
   IProductListingVariant
-} from '@flex-development/kustomzcore/types'
+} from '@flex-development/kustomzcore'
 import type { GetLayoutDataResJSON, SEOData } from '@kapi/types'
 import type { NextComponentType, NextPageContext as PageContext } from 'next'
 import type { AppContext } from 'next/app'

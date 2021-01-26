@@ -8,12 +8,5 @@
   },
   "exclude": ["node_modules"],
   "extends": "../../tsconfig.json",
-  "include": [
-    "../../typings",
-    "__tests__",
-    ".storybook",
-    "scripts",
-    "src",
-    "typings"
-  ]
+  "include": ["__tests__", ".storybook", "scripts", "src", "typings"]
 }

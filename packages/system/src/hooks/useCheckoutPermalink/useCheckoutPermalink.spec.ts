@@ -1,5 +1,5 @@
 import { CHECKOUT_BASE_URL } from '@flex-development/kustomzcore/constants'
-import LINE_ITEMS from '@system-mocks/data/checkout-line-items.mock.json'
+import { LINE_ITEMS } from '@system-mocks/utils'
 import { renderHook } from '@testing-library/react-hooks'
 import { useCheckoutPermalink } from './useCheckoutPermalink'
 
@@ -18,7 +18,7 @@ describe('useCheckoutPermalink', () => {
 
   it('creates a checkout URL', () => {
     const items = [LINE_ITEMS[0]]
-    const item_path = `${items[0].data.variant_id}:${items[0].data.quantity}`
+    const item_path = `${items[0].variant_id}:${items[0].quantity}`
 
     const { result } = renderHook(() => useCheckoutPermalink(items))
 
@@ -27,8 +27,8 @@ describe('useCheckoutPermalink', () => {
 
   it('creates a checkout URL with cart attributes', () => {
     const items = [LINE_ITEMS[1]]
-    let item_path = `${items[0].data.variant_id}:${items[0].data.quantity}`
-    item_path = `${item_path}?attributes[kpd]=${items[0].data.properties?.kpd}`
+    let item_path = `${items[0].variant_id}:${items[0].quantity}`
+    item_path = `${item_path}?attributes[kpd]=${items[0].properties?.kpd}`
 
     const { result } = renderHook(() => useCheckoutPermalink(items))
 

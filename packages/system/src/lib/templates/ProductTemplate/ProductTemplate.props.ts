@@ -1,8 +1,5 @@
 import type { ANYTHING } from '@flex-development/json'
-import type {
-  IProductListing,
-  IReview
-} from '@flex-development/kustomzcore/types'
+import type { IProductListing, IReview } from '@flex-development/kustomzcore'
 import type { LinkProps } from '@system/lib/atoms/Link'
 import type { MainProps } from '@system/lib/atoms/Main'
 import type { AddToCartFormProps } from '@system/lib/molecules/AddToCartForm'

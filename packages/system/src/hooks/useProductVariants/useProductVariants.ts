@@ -1,5 +1,4 @@
-import type { AnyObject } from '@flex-development/json'
-import type { IProductListingVariant } from '@flex-development/kustomzcore/types'
+import type { IProductListingVariant } from '@flex-development/kustomzcore'
 import { useMemoCompare } from '@system/hooks/useMemoCompare'
 import type { OptionProps } from '@system/lib/atoms/Option'
 import { useCallback, useMemo, useState } from 'react'
@@ -28,7 +27,7 @@ export type UseProductVariants = {
   /**
    * The selected product variant
    */
-  selected: IProductListingVariant | AnyObject
+  selected: IProductListingVariant
 
   /**
    * Array of product variant data.
@@ -52,9 +51,9 @@ export const useProductVariants = (
   active = 0
 ): UseProductVariants => {
   // Initialize selected variant state
-  // The default option will be the first object in the array or {}
+  // The default option will be the first object in the array
   const [selected, setSelected] = useState<UseProductVariants['selected']>(
-    variants[active < 0 ? 0 : active] || {}
+    variants[active < 0 ? 0 : active]
   )
 
   // Get reference to product variants

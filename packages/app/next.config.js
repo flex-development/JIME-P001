@@ -123,14 +123,9 @@ module.exports = withTM({
    * @see https://nextjs.org/docs/basic-features/image-optimization
    */
   images: {
-    domains: [
-      API_URL,
-      'cdn.accentuate.io',
-      'cdn.shopify.com',
-      'firebasestorage.googleapis.com',
-      'images.accentuate.io',
-      'is4-ssl.mzstatic.com'
-    ]
+    deviceSizes: [576, 834, 1180, 1368, 1440],
+    domains: [API_URL, 'cdn.shopify.com'],
+    imageSizes: [16, 32, 50, 100, 160, 240, 480, 600, 1024, 2048]
   },
 
   /**

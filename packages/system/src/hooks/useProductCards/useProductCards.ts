@@ -1,5 +1,5 @@
 import type { AnyObject } from '@flex-development/json'
-import type { IProductListing } from '@flex-development/kustomzcore/types'
+import type { IProductListing } from '@flex-development/kustomzcore'
 import { useMemoCompare } from '@system/hooks/useMemoCompare'
 import type { ProductCardProps } from '@system/lib/molecules/ProductCard'
 

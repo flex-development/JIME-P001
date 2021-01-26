@@ -1,4 +1,4 @@
-import LINE_ITEMS from '@system-mocks/data/checkout-line-items.mock.json'
+import { LINE_ITEMS } from '@system-mocks/utils'
 import { CheckoutLineItem } from './CheckoutLineItem'
 import type { CheckoutLineItemProps } from './CheckoutLineItem.props'
 
@@ -24,11 +24,15 @@ export const AshTray: FCS<CheckoutLineItemProps> = args => (
   <CheckoutLineItem {...args} />
 )
 
-AshTray.args = Object.assign({}, LINE_ITEMS[0])
+AshTray.args = {
+  data: Object.assign({}, LINE_ITEMS[0])
+}
 
 export const Kustomz: FCS<CheckoutLineItemProps> = args => (
   <CheckoutLineItem {...args} />
 )
 
 Kustomz.storyName = 'KUSTOMZ'
-Kustomz.args = Object.assign({}, LINE_ITEMS[1])
+Kustomz.args = {
+  data: Object.assign({}, LINE_ITEMS[1])
+}

@@ -1,4 +1,6 @@
-import { DEFAULT_SEO_IMAGE } from '../../config/constants'
+import join from 'lodash/join'
+import uniq from 'lodash/uniq'
+import { DEFAULT_SEO_IMAGE_DATA } from '../../config/constants'
 import type { SEOData } from '../../types'
 import { globalMetafields } from '../metafields'
 
@@ -15,13 +17,13 @@ import { globalMetafields } from '../metafields'
 const globalSEO = async (): Promise<SEOData> => {
   // Get global SEO data
   const {
-    description: { value: description },
-    keywords: { value: keywords },
-    social_share_image: { value: social_share_image }
+    description: { value: description = '' },
+    keywords: { value: keywords = '' },
+    social_share_image: { value: social_share_image = '' }
   } = await globalMetafields()
 
   // Parse social share image
-  let og_image = DEFAULT_SEO_IMAGE
+  let og_image = DEFAULT_SEO_IMAGE_DATA.src
   if ((social_share_image as string).length) {
     const social_image = JSON.parse(social_share_image as string)
     og_image = social_image[0].cloudinary_src
@@ -29,12 +31,12 @@ const globalSEO = async (): Promise<SEOData> => {
 
   return {
     description: description as string,
-    keywords: keywords as string,
+    keywords: join(uniq((keywords as string).trim().split(',')), ','),
     og: {
       image: og_image,
       'image:alt': "Morena's profile picture",
-      'image:height': 1920,
-      'image:width': 1920
+      'image:height': DEFAULT_SEO_IMAGE_DATA.height,
+      'image:width': DEFAULT_SEO_IMAGE_DATA.width
     },
     twitter: { card: 'summary', image: og_image }
   }

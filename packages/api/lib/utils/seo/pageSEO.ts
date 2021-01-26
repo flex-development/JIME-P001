@@ -5,6 +5,7 @@ import type {
 import ofa from '@flex-development/kustomzcore/dist/utils/objectFromArray'
 import join from 'lodash/join'
 import merge from 'lodash/merge'
+import uniq from 'lodash/uniq'
 import type { SEOData } from '../../types'
 import globalSEO from './globalSEO'
 
@@ -33,11 +34,12 @@ const pageSEO = async (page: IPage | Promise<IPage>): Promise<SEOData> => {
   } = ofa(page.metafield, 'key')
 
   // Get array of page keywords
-  const keywords: string[] = (page_keywords?.value as string)?.split(',') ?? []
+  let keywords: string[] = (page_keywords?.value as string)?.split(',') ?? []
+  keywords = uniq(keywords.concat(global.keywords?.split(',') ?? []))
 
   return merge(global, {
     description: description_tag.value,
-    keywords: join([...keywords, ...(global.keywords?.split(',') ?? [])], ','),
+    keywords: join(keywords, ','),
     title: title_tag.value
   })
 }

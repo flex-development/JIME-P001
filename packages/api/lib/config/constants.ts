@@ -19,6 +19,12 @@ export const DEFAULT_IMAGE_URL = `${API_URL}/assets/images/placeholder.webp`
 
 export const DEFAULT_SEO_IMAGE = `${API_URL}/assets/images/morena.webp`
 
+export const DEFAULT_SEO_IMAGE_DATA = {
+  height: 1920,
+  src: DEFAULT_SEO_IMAGE,
+  width: 1920
+}
+
 export const INDEX_SETTINGS = {
   collection_listings: {
     attributesForFaceting: ['collection_id', 'handle'],

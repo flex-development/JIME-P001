@@ -5,6 +5,7 @@ import type {
 import isEmpty from 'lodash/isEmpty'
 import join from 'lodash/join'
 import merge from 'lodash/merge'
+import uniq from 'lodash/uniq'
 import stripHtml from 'string-strip-html'
 import type { SEOData } from '../../types'
 import globalSEO from './globalSEO'
@@ -34,12 +35,17 @@ const collectionSEO = async (
   const image = listing.image || listing.default_product_image || {}
 
   // Build keywords from product tags
-  const keywords: string[] = []
-  products.forEach(product => keywords.concat(product.tags.split(',')))
+  let keywords: string[] = []
+
+  products.forEach(product => {
+    keywords = keywords.concat(product.tags.trim().split(','))
+  })
+
+  keywords = uniq(keywords.concat(global.keywords?.split(',') ?? []))
 
   return merge(global, {
     description: stripHtml(listing.body_html).result.trim(),
-    keywords: join([...keywords, ...(global.keywords?.split(',') ?? [])], ','),
+    keywords: join(keywords, ','),
     og: {
       image: image.src,
       'image:alt': isEmpty(image) ? image.alt : image.alt || '',

@@ -1,13 +1,15 @@
 import type {
+  IProductImage,
   IProductListing,
   IProductListingVariant
 } from '@flex-development/kustomzcore/dist/types'
-import { getProductImage } from '@flex-development/kustomzcore/dist/utils'
 import findIndex from 'lodash/findIndex'
 import isEmpty from 'lodash/isEmpty'
+import join from 'lodash/join'
 import merge from 'lodash/merge'
+import uniq from 'lodash/uniq'
 import stripHtml from 'string-strip-html'
-import { DEFAULT_IMAGE_URL } from '../../config/constants'
+import { DEFAULT_SEO_IMAGE_DATA } from '../../config/constants'
 import type { SEOData } from '../../types'
 
 /**
@@ -31,7 +33,7 @@ const productSEO = async (
   // Initialize SEO object
   let seo: SEOData = {
     description: stripHtml(listing.body_html).result,
-    keywords: listing.tags,
+    keywords: join(uniq(listing.tags.trim().split(',')), ''),
     twitter: { card: 'summary' }
   }
 
@@ -48,10 +50,11 @@ const productSEO = async (
     const title = `${listing.title} - ${variant.title}`
 
     // Get product variant image
-    const variant_img = getProductImage(image_id, images, image_id !== null, {
-      alt: title,
-      src: DEFAULT_IMAGE_URL
-    })
+    let variant_img = images.find(({ id }) => id === image_id)
+
+    if (!variant_img) {
+      variant_img = { ...DEFAULT_SEO_IMAGE_DATA, alt: title } as IProductImage
+    }
 
     // Update SEO data
     seo = merge(seo, {
@@ -71,11 +74,11 @@ const productSEO = async (
       twitter: { image: variant_img.src }
     })
   } else {
-    const image = images[0]
+    const image = images[0] || DEFAULT_SEO_IMAGE_DATA
 
     seo = merge(seo, {
       og: {
-        image: !isEmpty(image.src) ? image.src : DEFAULT_IMAGE_URL,
+        image: image.src,
         'image:alt': image.alt || null,
         'image:height': image.height,
         'image:secure_url': image.src,

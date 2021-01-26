@@ -103,9 +103,12 @@ module.exports = withTM({
    * Experimental features config.
    */
   experimental: {
+    modern: true,
     optimizeFonts: true,
     optimizeImages: true,
-    scrollRestoration: true
+    plugins: true,
+    scrollRestoration: true,
+    workerThreads: true
   },
 
   /**

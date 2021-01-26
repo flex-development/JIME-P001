@@ -8,7 +8,6 @@ import {
 import { Layout } from '@subdomains/app/components/Layout'
 import '@subdomains/app/styles/index.scss'
 import type { AppComponent, IAppProps } from '@subdomains/app/types'
-import debug from 'debug'
 import type { NextWebVitalsMetric } from 'next/app'
 import { useCallback, useRef } from 'react'
 import useLocalStorage from 'react-use/useLocalStorage'
@@ -58,16 +57,20 @@ const App: AppComponent = ({ Component, pageProps }: IAppProps) => {
 /**
  * Logs Next.js web metrics.
  *
- * @todo Integrate with User Timing API
+ * @todo Integrate with Google Analytics
  *
  * @see https://nextjs.org/blog/next-9-4#integrated-web-vitals-reporting
+ * @see https://nextjs.org/docs/advanced-features/measuring-performance
  *
  * @param metric - Web metric object
+ * @param metric.id - Unique identifier in the context of the current page load
+ * @param metric.label - Type of metric, `custom` or `web-vital`
+ * @param metric.name - Metric name
+ * @param metric.startTime - First recorded timestamp of the performance entry
+ * @param metric.value - Duration of performance entry
  */
-export const reportWebVitals = async (
-  metric: NextWebVitalsMetric
-): Promise<void> => {
-  debug('App.reportWebVitals')(metric)
+export const reportWebVitals = (metric: NextWebVitalsMetric): void => {
+  console.debug({ 'App.reportWebVitals': metric })
 }
 
 export default App

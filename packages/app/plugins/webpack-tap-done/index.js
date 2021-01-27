@@ -1,17 +1,16 @@
 /**
  * @file Implementation - TapDoneWebpackPlugin
- * @module plugins/TapDoneWebpackPlugin
+ * @module TapDoneWebpackPlugin
  */
 
 class TapDoneWebpackPlugin {
   constructor(callback) {
+    this.name = 'TapDoneWebpackPlugin'
     this.callback = callback
   }
 
   apply(compiler) {
-    compiler.hooks.done.tap('TapDoneWebpackPlugin', stats => {
-      this.callback(stats)
-    })
+    compiler.hooks.done.tap(this.name, stats => this.callback(stats))
   }
 }
 

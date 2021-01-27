@@ -1,12 +1,13 @@
 const SentryWebpackPlugin = require('@sentry/webpack-plugin')
 const withSourceMaps = require('@zeit/next-source-maps')()
 const { DuplicatesPlugin } = require('inspectpack/plugin')
+const isEmpty = require('lodash').isEmpty
 const merge = require('lodash').merge
 const transpileModules = require('next-transpile-modules')
 const path = require('path')
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
-const TapDoneWebpackPlugin = require('./plugins/TapDoneWebpackPlugin')
-const tapDone = require('./scripts/webpack-tap-done')
+const TapDoneWebpackPlugin = require('webpack-tap-done')
+const copyCSSAssets = require('./scripts/copy-css-assets')
 const vercel = require('./vercel.json')
 
 /**
@@ -23,30 +24,20 @@ const {
   FIREBASE_MESSAGING_SENDER_ID,
   GA_TRACKING_ID,
   GOOGLE_SITE_VERIFICATION,
-  NEXT_PUBLIC_SENTRY_SERVER_ROOT_DIR,
-  NODE_ENV,
   SENTRY_AUTH_TOKEN,
   SENTRY_DSN,
   SENTRY_ORG,
   SENTRY_PROJECT,
+  SENTRY_RELEASE,
   SHOPIFY_API_VERSION,
   SHOPIFY_DOMAIN,
+  SITE_NAME,
   SITE_URL,
   VERCEL,
-  VERCEL_GITHUB_COMMIT_SHA,
-  VERCEL_URL
+  VERCEL_ENV
 } = process.env
 
-const env = NODE_ENV ? NODE_ENV.toLowerCase() : 'development'
-
-let SITE_URL_SAFE = SITE_URL || VERCEL_URL || 'http://localhost:3001'
-if (!SITE_URL_SAFE.startsWith('http')) SITE_URL_SAFE = `https://${VERCEL_URL}`
-
-/** @see https://github.com/martpie/next-transpile-modules */
-const withTM = transpileModules(['@flex-development/kustomzcore'], {
-  resolveSymlinks: true,
-  unstable_webpack5: true
-})
+const ROOT_NODE_MODULES = path.join(__dirname, '../../node_modules')
 
 const config = {
   /**
@@ -63,14 +54,20 @@ const config = {
     FIREBASE_STORAGE_BUCKET: `${FIREBASE_PROJECT_ID}.appspot.com`,
     GOOGLE_SITE_VERIFICATION,
     NEXT_PUBLIC_GA_TRACKING_ID: GA_TRACKING_ID,
-    NEXT_PUBLIC_SENTRY_DSN: SENTRY_DSN,
-    NEXT_PUBLIC_SENTRY_RELEASE: VERCEL_GITHUB_COMMIT_SHA,
-    NEXT_PUBLIC_SENTRY_SERVER_ROOT_DIR,
+    SENTRY_DSN,
+    SENTRY_RELEASE,
     SHOPIFY_API_VERSION,
     SHOPIFY_DOMAIN,
-    SITE_URL: SITE_URL_SAFE,
-    VERCEL_GITHUB_COMMIT_SHA,
-    VERCEL_URL
+    SITE_NAME,
+    SITE_URL: (() => {
+      const url = SITE_URL || 'http://localhost:3001'
+
+      // In Vercel environments, `VERCEL_URL` is aliased to `SITE_URL`, but
+      // Vercel URLs are not specified with "http(s)" protocols
+      return VERCEL ? `https://${url}` : url
+    })(),
+    VERCEL,
+    VERCEL_ENV
   },
 
   /**
@@ -115,12 +112,17 @@ const config = {
   },
 
   /**
-   * Enable source maps.
+   * Next.js plugins configuration. Disables plugin auto-detection.
+   *
+   * @see https://github.com/vercel/next.js/discussions/9133
    */
-  productionBrowserSourceMaps: true,
+  plugins: [
+    { name: '@next/plugin-google-analytics' },
+    { name: '@next/plugin-sentry' }
+  ],
 
   /**
-   * Opt-in to React Strict Mode.
+   * Enable React Strict Mode.
    *
    * @see https://reactjs.org/docs/strict-mode.html
    */
@@ -173,7 +175,7 @@ const config = {
    * @param {object} helpers.webpack - Webpack
    * @return {object} Altered Webpack configuration
    */
-  webpack: (config, { dev, isServer, webpack }) => {
+  webpack: (config, { dev, isServer }) => {
     // Optimization settings
     config.optimization = merge(config.optimization, {
       mergeDuplicateChunks: true,
@@ -184,7 +186,7 @@ const config = {
 
     // Update module resolutions
     config.resolve.alias = merge(config.resolve.alias, {
-      '@babel': path.join(__dirname, '../../node_modules/@babel'),
+      '@babel': path.join(ROOT_NODE_MODULES, '@babel'),
       '@baggie/string': '@baggie/string/lib',
       '@commitlint': false,
       '@components': `@flex-development/kustomzdesign/dist/lib`,
@@ -194,6 +196,10 @@ const config = {
       '@hooks': `@flex-development/kustomzdesign/dist/hooks`,
       '@mdx-js/react': '@mdx-js/react/dist/esm',
       '@providers': `@flex-development/kustomzdesign/dist/providers`,
+      '@sentry/browser': '@sentry/browser/esm',
+      '@sentry/node': '@sentry/node/esm',
+      '@sentry/types': path.join(ROOT_NODE_MODULES, '@sentry/types/esm'),
+      '@sentry/utils': path.join(ROOT_NODE_MODULES, '@sentry/utils/esm'),
       '@shopify/theme-images': '@shopify/theme-images/dist/images.es5',
       lodash: 'lodash-es',
       'react-hanger': 'react-hanger/esm',
@@ -201,24 +207,6 @@ const config = {
       swr: 'swr/esm',
       validator: 'validator/es'
     })
-
-    /**
-     * In `pages/_app.tsx`, Sentry is imported from @sentry/browser.
-     *
-     * While @sentry/node will run in a Node.js environment, @sentry/node will
-     * use Node.js-only APIs to catch even more unhandled exceptions.
-     *
-     * This works well when Next.js is SSRing your page on a server with
-     * Node.js, but it is not what we want when your client-side bundle is being
-     * executed by a browser.
-     *
-     * Next.js will call this webpack function twice, once for the server and
-     * once for the client.
-     *
-     * Webpack will replace @sentry/node imports with @sentry/browser when
-     * building the client-side bundle.
-     */
-    if (!isServer) config.resolve.alias['@sentry/node'] = '@sentry/browser'
 
     // Add Node.js polyfills
     config.resolve.fallback = merge(config.resolve.fallback, {
@@ -255,22 +243,24 @@ const config = {
      */
     config.module.rules.push({ test: /@react-spring/, sideEffects: true })
 
-    // Define an environment variable so source code can check whether or not
-    // it's running on the server so we can correctly initialize Sentry
-    config.plugins.push(
-      new webpack.DefinePlugin({
-        'process.env.NEXT_IS_SERVER': JSON.stringify(isServer.toString())
-      })
-    )
-
     // Report duplicate dependencies
     if (!dev) config.plugins.push(new DuplicatesPlugin({ verbose: true }))
 
-    // ! Client-side only, in non-dev environments: Copy CSS assets so we can
-    // ! inline styles via `InlineStylesHead` w/o disabling built-in CSS support
-    if (!dev && !isServer) {
-      config.plugins.push(new TapDoneWebpackPlugin(tapDone))
+    /**
+     * Callback function to hook to end of Weback build cycle.
+     *
+     * In non-dev environments, CSS assets from the client will copied to the
+     * server's static CSS directory. This allows us to inline styles via
+     * `InlineStylesHead` component w/o disabling built-in CSS support.
+     *
+     * @return {void}
+     */
+    const tapDone = () => {
+      if (!dev && !isServer) copyCSSAssets()
     }
+
+    // Add plugin to hook into end of Webpack build cycle
+    config.plugins.push(new TapDoneWebpackPlugin(tapDone))
 
     // Analyze Webpack bundle output
     if (!VERCEL && !dev && ANALYZE) {
@@ -287,24 +277,27 @@ const config = {
       config.plugins.push(new BundleAnalyzerPlugin(options))
     }
 
-    // When all the Sentry configuration env variables are available/configured
-    // The Sentry webpack plugin gets pushed to the webpack plugins to build
-    // and upload the source maps to sentry.
-    // This is an alternative to manually uploading the source maps
-    // Note: This is disabled in development mode.
+    /**
+     * When all Sentry configuration enviorment variables are available, the
+     * {@module SentryWebpackPlugin} is added to the Webpack plugins config.
+     *
+     * This is an alternative to manually uploading source maps, and only
+     * enabled in `preview` and `production` Vercel environments.
+     */
     if (
-      SENTRY_DSN &&
-      SENTRY_ORG &&
-      SENTRY_PROJECT &&
-      SENTRY_AUTH_TOKEN &&
-      VERCEL_GITHUB_COMMIT_SHA &&
-      env === 'production'
+      !isEmpty(SENTRY_AUTH_TOKEN) &&
+      !isEmpty(SENTRY_DSN) &&
+      !isEmpty(SENTRY_ORG) &&
+      !isEmpty(SENTRY_PROJECT) &&
+      !isEmpty(SENTRY_RELEASE) &&
+      VERCEL &&
+      VERCEL_ENV !== 'development'
     ) {
       config.plugins.push(
         new SentryWebpackPlugin({
           ignore: ['node_modules'],
           include: '.next',
-          release: VERCEL_GITHUB_COMMIT_SHA,
+          release: SENTRY_RELEASE,
           stripPrefix: ['webpack://_N_E/'],
           urlPrefix: `~/_next`
         })
@@ -314,5 +307,11 @@ const config = {
     return config
   }
 }
+
+/** @see https://github.com/martpie/next-transpile-modules */
+const withTM = transpileModules(['@flex-development/kustomzcore'], {
+  resolveSymlinks: true,
+  unstable_webpack5: true
+})
 
 module.exports = withSourceMaps(withTM(config))

@@ -37,13 +37,7 @@ export const CartPreview: FREC<CartPreviewProps> = forwardRef((props, ref) => {
   const sanitized = useSanitizedProps<'a', LinkProps>(rest, 'cart-preview')
 
   return (
-    <Link
-      {...sanitized}
-      $color={$color}
-      data-items={total}
-      target={target}
-      ref={ref}
-    >
+    <Link {...sanitized} $color={$color} target={target} ref={ref}>
       Cart&nbsp;&nbsp;/&nbsp;&nbsp;
       <Span>
         <SpanAnimated>{total}</SpanAnimated>

@@ -4,12 +4,14 @@
  * @see https://linguinecode.com/post/add-robots-txt-file-sitemaps-nextjs
  */
 
-const { SITE_URL, VERCEL_URL } = process.env
+const HOST = (() => {
+  const url = process.env.SITE_URL || 'http://localhost:3001'
 
-let HOST = SITE_URL || VERCEL_URL || 'http://localhost:3001'
-
-// ! Fixes: Option `sitemap` should be an absolute URL
-if (!HOST.startsWith('http')) HOST = `https://${VERCEL_URL}`
+  // ! Fixes: Option `sitemap` should be an absolute URL
+  // In Vercel environments, `VERCEL_URL` is aliased to `SITE_URL`, but
+  // Vercel URLs are not specified with "http(s)" protocols
+  return process.env.VERCEL ? `https://${url}` : url
+})()
 
 module.exports = {
   host: HOST,

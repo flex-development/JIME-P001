@@ -9,7 +9,7 @@ import debug from 'debug'
 import merge from 'lodash/merge'
 import pick from 'lodash/pick'
 import type { NextPage } from 'next'
-import { Fragment } from 'react'
+import { Fragment, useEffect } from 'react'
 
 /**
  * @file Page - Server Error
@@ -25,14 +25,21 @@ import { Fragment } from 'react'
  * @param props.error - Error object
  * @param props.layout - Data to populate `Layout` component
  */
-const ServerError: NextPage<PageProps> = ({ error }) => (
-  <Fragment>
-    <SEO title='Server Error' />
-    <ErrorTemplate code={error.code} message={error.message}>
-      <ErrorContent />
-    </ErrorTemplate>
-  </Fragment>
-)
+const ServerError: NextPage<PageProps> = ({ error = {} }) => {
+  useEffect(() => console.error({ ServerError: error }))
+
+  return (
+    <Fragment>
+      <SEO title='Server Error' />
+      <ErrorTemplate
+        code={error?.code ?? 500}
+        message={error?.message ?? 'Sorry, an unknown error occurred.'}
+      >
+        <ErrorContent />
+      </ErrorTemplate>
+    </Fragment>
+  )
+}
 
 /**
  * Sanitizes {@param context.err} before being displayed on the `Error` page.
@@ -65,18 +72,17 @@ ServerError.getInitialProps = async (context): Promise<PageProps> => {
   if (!err) error = createError('Did not receive error object.', data, 500)
 
   // Convert to FeathersErrorJSON if not already
-  if (err && !(err as PageProps['error']).code) {
+  if (err && !(err as PageProps['error']).className) {
     const { message, stack = null, statusCode = 500 } = err
     error = createError(message, { ...data, stack, statusCode }, statusCode)
   }
 
-  // Get layout data
-  const layout = await getLayoutData()
-
+  // Log final error
   debug('pages/_error')({ getInitialProps: error })
+
   return {
     error: serialize<PageProps['error']>(error),
-    layout,
+    layout: await getLayoutData(),
     ua: context.req?.headers['user-agent']
   }
 }

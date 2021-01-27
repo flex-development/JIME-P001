@@ -10,7 +10,6 @@ import { Sidebar } from '@components/organisms/Sidebar'
 import { GridBreakpoints } from '@flex-development/kustomzdesign/types'
 import { useSlideInOut } from '@hooks/useSlideInOut'
 import type { AnimatedProps } from '@react-spring/web'
-import { useSpring } from '@react-spring/web'
 import { useWebFontLoader } from '@subdomains/app/hooks/useWebFontLoader'
 import type { IPageProps, PageComponent } from '@subdomains/app/types'
 import Head from 'next/head'
@@ -49,11 +48,6 @@ export const Layout: FC<LayoutProps> = (props: LayoutProps) => {
 
   // Load Web Fonts
   const webfonts = useWebFontLoader({ typekit: { id: 'oee3tpl' } })
-
-  // Webfont styles
-  const webfont_style = useSpring({
-    opacity: webfonts ? 1 : 0
-  }) as AnimatedProps<BoxProps>['style']
 
   /**
    * Redirects the user to the search page with their search {@param term}.

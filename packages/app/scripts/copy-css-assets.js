@@ -1,13 +1,11 @@
-const debug = require('debug')('webpack-tap-done')
+const debug = require('debug')('copy-css-assets')
 const fse = require('fs-extra')
 const path = require('path')
 
 /**
- * @file Implementation - webpackTapDone
- * @module scripts/webpack-tap-done
+ * @file Implementation - copyCSSAssets
+ * @module scripts/copy-css-assets
  */
-
-const { VERCEL_URL } = process.env
 
 /**
  * Copies all files in `.next/static/css` to `.next/${target}/static/css`.
@@ -18,12 +16,14 @@ const { VERCEL_URL } = process.env
  *
  * @return {boolean} True if files were succesfully copied, false otherwise
  */
-const webpackTapDone = () => {
+const copyCSSAssets = () => {
   // Change server directory if in Vercel environment
-  const target = `server${VERCEL_URL && VERCEL_URL.length ? 'less' : ''}`
+  const target = `server${process.env.VERCEL ? 'less' : ''}`
 
-  // Get CSS directory from / to
+  // Client CSS directory
   const src = path.resolve(process.cwd(), '.next/static/css')
+
+  // Server CSS directory
   const dest = path.resolve(process.cwd(), `.next/${target}/static/css`)
 
   // Copy CSS assets
@@ -38,4 +38,4 @@ const webpackTapDone = () => {
   })
 }
 
-module.exports = webpackTapDone
+module.exports = copyCSSAssets

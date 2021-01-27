@@ -27,6 +27,11 @@ export default class Document extends NextDocument<DocumentInitialProps> {
           {/* Set character encoding for the document */}
           <meta charSet='utf-8' />
 
+          {/* SEO properties that don't need to be easily accessible */}
+          <meta property='og:locale' content='en_US' />
+          <meta property='og:site_name' content={process.env.SITE_NAME} />
+          <meta property='og:type' content='website' />
+
           {/* Reference humans.txt file */}
           <link rel='author' href='/humans.txt' />
 
@@ -110,11 +115,6 @@ export default class Document extends NextDocument<DocumentInitialProps> {
             name='google-site-verification'
             content={process.env.GOOGLE_SITE_VERIFICATION}
           />
-
-          {/* SEO properties that don't need to be easily accessible */}
-          <meta property='og:locale' content='en_US' />
-          <meta property='og:site_name' content="Morena's Kustomz" />
-          <meta property='og:type' content='website' />
 
           {/* WebFont Loader */}
           <script

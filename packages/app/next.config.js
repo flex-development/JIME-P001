@@ -36,7 +36,7 @@ const {
   VERCEL_URL
 } = process.env
 
-const env = NODE_ENV?.toLowerCase()
+const env = NODE_ENV ? NODE_ENV.toLowerCase() : 'development'
 
 let SITE_URL_SAFE = SITE_URL || VERCEL_URL || 'http://localhost:3001'
 if (!SITE_URL_SAFE.startsWith('http')) SITE_URL_SAFE = `https://${VERCEL_URL}`

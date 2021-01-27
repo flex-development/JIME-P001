@@ -1,4 +1,5 @@
 const SentryWebpackPlugin = require('@sentry/webpack-plugin')
+const withSourceMaps = require('@zeit/next-source-maps')()
 const { DuplicatesPlugin } = require('inspectpack/plugin')
 const merge = require('lodash').merge
 const transpileModules = require('next-transpile-modules')
@@ -47,7 +48,7 @@ const withTM = transpileModules(['@flex-development/kustomzcore'], {
   unstable_webpack5: true
 })
 
-module.exports = withTM({
+const config = {
   /**
    * Add environment variables to the JavaScript bundle.
    */
@@ -312,4 +313,6 @@ module.exports = withTM({
 
     return config
   }
-})
+}
+
+module.exports = withSourceMaps(withTM(config))

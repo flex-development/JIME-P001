@@ -109,6 +109,7 @@
     "SHOPIFY_DOMAIN",
     "SITE_NAME",
     "SITE_URL",
+    "TYPEKIT_ID",
     "VERCEL",
     "VERCEL_ENV"
   ]

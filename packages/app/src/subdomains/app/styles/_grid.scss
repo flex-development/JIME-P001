@@ -2,32 +2,6 @@
 GRIDS
 ----------------------------------------------------------------------------- */
 
-@mixin with-visible-sidebar {
-  .content-col {
-    @include breakpoint-up(lg) {
-      @include make-grid-col(9);
-    }
-
-    display: none;
-  }
-
-  .sidebar-col {
-    @include breakpoint-up(sm) {
-      @include make-grid-col(6);
-    }
-
-    @include breakpoint-up(lg) {
-      @include make-grid-col(3);
-
-      border: $border-width-none;
-    }
-
-    @include make-grid-col;
-
-    border-right: $border-width solid $border-color;
-  }
-}
-
 .layout-grid {
   @include fluid-height;
 

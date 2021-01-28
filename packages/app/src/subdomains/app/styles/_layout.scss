@@ -8,6 +8,17 @@ LAYOUT
   overflow-x: hidden;
   justify-content: space-between;
 
+  &[data-loading='true'] {
+    @include opacity(0);
+
+    height: $space-0;
+    transition: $transition-collapse-fade;
+
+    + .loading-container {
+      z-index: $zindex-modal;
+    }
+  }
+
   .content-col {
     @include breakpoint-up(lg) {
       @include position-relative;

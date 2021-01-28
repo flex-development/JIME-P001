@@ -2,22 +2,8 @@
 WEB FONTS
 ----------------------------------------------------------------------------- */
 
-// Don't display page content if web fonts are loading
-.wf-loading .layout,
-.layout[data-loading='true'] {
-  @include opacity(0);
-
-  height: $space-0;
-  transition: $transition-collapse-fade;
-
-  + .loading-container {
-    z-index: $zindex-modal;
-  }
-}
-
 // Display page content when web fonts are active
-.wf-active .layout,
-.layout[data-loading='false'] {
+.wf-active .layout[data-loading='false'] {
   @include opacity(1);
 
   + .loading-container {

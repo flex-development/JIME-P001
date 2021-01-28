@@ -13,7 +13,8 @@ import type { AnimatedProps } from '@react-spring/web'
 import { useWebFontLoader } from '@subdomains/app/hooks/useWebFontLoader'
 import type { IPageProps, PageComponent } from '@subdomains/app/types'
 import Head from 'next/head'
-import { FC, useCallback, useMemo } from 'react'
+import { FC, useCallback, useEffect, useMemo } from 'react'
+import { useBoolean } from 'react-hanger/array/useBoolean'
 import useEvent from 'react-use/useEvent'
 import useMedia from 'react-use/useMedia'
 import UAParser from 'ua-parser-js'
@@ -42,12 +43,14 @@ export interface LayoutProps {
  * @param props.page - Next.js page component
  * @param props.pageProps - Props from Next.js data-fetching methods
  * @param props.pageProps.layout - `PlaylistBar` and `Sidebar` data
+ * @param props.pageProps.ua - User Agent or undefined
  */
 export const Layout: FC<LayoutProps> = (props: LayoutProps) => {
   const { page: Component, pageProps } = props
+  const { layout, ua } = pageProps
 
   // Load Web Fonts
-  const webfonts = useWebFontLoader({ typekit: { id: 'oee3tpl' } })
+  const webfonts = useWebFontLoader({ typekit: { id: process.env.TYPEKIT_ID } })
 
   /**
    * Redirects the user to the search page with their search {@param term}.
@@ -63,28 +66,40 @@ export const Layout: FC<LayoutProps> = (props: LayoutProps) => {
   /* Callback version of `handleSearch` */
   const handleSearchCB = useCallback(handleSearch, [])
 
-  // GridBreakpoints.lg media query
-  const min_width_lg_query = `(min-width: ${GridBreakpoints.lg}px)`
+  // `Sidebar` ready state
+  const [sready, { setValue: setSidebarReady }] = useBoolean(false)
 
-  // Parse user agent to get device type
-  const device = useMemo<string | undefined>(() => {
-    return new UAParser(pageProps?.ua ?? '').getDevice().type
-  }, [pageProps?.ua])
+  // ! Parse user agent to get device type
+  const dtype = useMemo<string | undefined>(() => {
+    return new UAParser(ua || '').getDevice().type
+  }, [ua])
 
-  // The sidebar will be visible by default on large screens
-  const breakpoint_lg = useMedia(min_width_lg_query, !device)
-
-  // Animate sidebar visibility
-  const sidebar_a = useSlideInOut<HTMLDivElement>(breakpoint_lg)
+  // ! True if browser window width > `${GridBreakpoints.lg}px`
+  const lg = useMedia(`(min-width: ${GridBreakpoints.lg}px)`, !dtype)
 
   /**
-   * The sidebar will be closed automatically when the window width is less than
-   * or equal to the `GRID_BREAKPOINTS.lg` breakpoint.
+   * ! When SSRing on desktop browsers that been resized to a maximum width of
+   * ! `GridBreakpoints.lg` pixels, `lg` will default to true on first load,
+   * ! thus hiding `.layout-grid > .content-col`.
+   *
+   * ! Below, we use the `Sidebar` ready state to first determine if the value
+   * ! of `lg` should be used.
    */
-  const onResize = () => sidebar_a.setVisibility(breakpoint_lg)
+  const sidebar_a = useSlideInOut<HTMLDivElement>(sready ? lg : false)
 
-  // Attach `onResize` fn to window resize event
-  useEvent('resize', useCallback(onResize, [breakpoint_lg, sidebar_a]))
+  /**
+   * ! Afterwards, we wait until we're client-side to update the `Sidebar`
+   * ! animation and ready state so that our content isn't accidentally hidden.
+   */
+  useEffect(() => {
+    if (typeof window === 'undefined' || sready) return
+
+    sidebar_a.setVisibility(window.outerWidth > GridBreakpoints.lg)
+    setSidebarReady(true)
+  })
+
+  // Close `Sidebar` when window width < `${GridBreakpoints.lg}px`
+  useEvent('resize', () => sidebar_a.setVisibility(lg))
 
   return (
     <>
@@ -96,10 +111,7 @@ export const Layout: FC<LayoutProps> = (props: LayoutProps) => {
         />
       </Head>
 
-      <Box
-        className='layout'
-        data-loading={!webfonts || typeof window === 'undefined'}
-      >
+      <Box className='layout' data-loading={!webfonts || !sready}>
         <ShopHeader
           handleSidebar={sidebar_a.toggle}
           handleSearch={handleSearchCB}
@@ -111,11 +123,10 @@ export const Layout: FC<LayoutProps> = (props: LayoutProps) => {
         >
           <BoxAnimated
             className='sidebar-col'
-            data-visible={sidebar_a.visible}
             ref={sidebar_a.ref}
             style={sidebar_a.style as AnimatedProps<BoxProps>['style']}
           >
-            <Sidebar {...pageProps.layout.sidebar} />
+            <Sidebar {...layout.sidebar} />
           </BoxAnimated>
 
           <Box className='content-col'>
@@ -127,7 +138,7 @@ export const Layout: FC<LayoutProps> = (props: LayoutProps) => {
           </Box>
         </Box>
 
-        <PlaylistBar songs={pageProps.layout.playlist.tracks} />
+        <PlaylistBar songs={layout.playlist.tracks} />
       </Box>
 
       <Box className='loading-container'>

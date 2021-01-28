@@ -33,6 +33,7 @@ const {
   SHOPIFY_DOMAIN,
   SITE_NAME,
   SITE_URL,
+  TYPEKIT_ID,
   VERCEL,
   VERCEL_ENV
 } = process.env
@@ -66,6 +67,7 @@ const config = {
       // Vercel URLs are not specified with "http(s)" protocols
       return VERCEL ? `https://${url}` : url
     })(),
+    TYPEKIT_ID,
     VERCEL,
     VERCEL_ENV
   },

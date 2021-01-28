@@ -25,7 +25,7 @@ export const useWebFontLoader = (config: WebFont.Config): boolean => {
    */
   const handleLoading = () => {
     if (isFunction($config.loading)) $config.loading()
-    setWebFonts()
+    setTimeout(() => setWebFonts(), 2000)
   }
 
   /* Callback version of `handleLoading` */
@@ -37,7 +37,7 @@ export const useWebFontLoader = (config: WebFont.Config): boolean => {
 
     if (!webfonts) {
       import('webfontloader').then(WebFont => {
-        return setTimeout(() => WebFont.load({ ...$config, loading }), 2500)
+        return WebFont.load({ ...$config, loading })
       })
     }
   }, [$config, loading, webfonts])

@@ -69,6 +69,7 @@ $space-32: rem(32);
 $space-36: rem(36);
 $space-40: rem(40);
 $space-48: rem(48);
+$space-54: rem(54);
 $space-60: rem(60);
 $space-64: rem(64);
 $space-72: rem(72);
@@ -91,6 +92,7 @@ $spacers: (
   36: $space-36,
   40: $space-40,
   48: $space-48,
+  54: $space-54,
   60: $space-60,
   64: $space-64,
   72: $space-72,
@@ -143,7 +145,7 @@ $line-height-lg: 2;
 
 $h1-font-size: rem(60); // 60px
 $h2-font-size: rem(48); // 48px
-$h3-font-size: rem(36); // 36px
+$h3-font-size: rem(40); // 40px
 $h4-font-size: $font-size-xxl;
 $h5-font-size: $font-size-xl;
 $h6-font-size: $font-size-lg;

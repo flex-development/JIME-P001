@@ -2,6 +2,7 @@ import type { CheckoutLineItemInput } from '@flex-development/kustomzcore'
 import { useActiveIndex } from '@system/hooks/useActiveIndex'
 import { useCheckoutLineItemInput } from '@system/hooks/useCheckoutLineItemInput'
 import { useProductVariants } from '@system/hooks/useProductVariants'
+import { AddThisToolbox } from '@system/lib/atoms/AddThisToolbox'
 import { Box } from '@system/lib/atoms/Box'
 import { Button } from '@system/lib/atoms/Button'
 import { Form } from '@system/lib/atoms/Form'
@@ -223,6 +224,8 @@ export const AddToCartForm: FC<AddToCartFormProps> & {
 
         {/* Add to cart button container */}
         <Box className='add-to-cart-form-btn-container'>
+          <AddThisToolbox className='add-to-cart-form-addthis-toolbox' />
+
           <Button
             $scale
             aria-label='Add to cart'

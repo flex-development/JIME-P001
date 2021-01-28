@@ -132,7 +132,15 @@ export default class Document extends NextDocument<DocumentInitialProps> {
           <noscript>You need to enable JavaScript to view this site.</noscript>
 
           <Main />
+
           <OptimizedNextScript mode='defer' />
+
+          {/* AddThis */}
+          <script
+            defer
+            src='//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-60103a572a723aa0'
+            type='text/javascript'
+          />
         </body>
       </Html>
     )

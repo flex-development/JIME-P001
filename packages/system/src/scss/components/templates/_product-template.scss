@@ -35,15 +35,7 @@ PRODUCT TEMPLATE
   }
 
   &-reviews {
-    @include breakpoint-up(sm) {
-      margin-top: $space-48;
-    }
-
-    @include breakpoint-up(md) {
-      margin-top: $space-36;
-    }
-
-    margin-top: $space-72;
+    margin-top: $space-54;
 
     h2 {
       font-size: $h4-font-size;

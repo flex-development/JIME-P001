@@ -3,6 +3,7 @@
  * @module lib/atoms
  */
 
+export * from './AddThisToolbox'
 export * from './Aside'
 export * from './Audio'
 export * from './Box'

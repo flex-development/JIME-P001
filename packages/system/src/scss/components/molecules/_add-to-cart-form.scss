@@ -9,12 +9,34 @@ ADD TO CART FORM
     grid-template-columns: map-get($grid-template-columns, 12);
   }
 
-  @include make-grid(1, 0, null, 36);
+  @include make-grid(null, 0, null, 36);
+
+  &-addthis-toolbox {
+    @include breakpoint-up(sm) {
+      padding-top: $space-0;
+      width: unset;
+    }
+
+    @include fluid-width;
+
+    padding-top: $space-32;
+
+    .at-share-btn-elements {
+      @include flex-spread;
+
+      display: flex;
+    }
+  }
 
   &-btn-container {
-    align-items: center;
+    @include breakpoint-up(sm) {
+      flex-direction: row;
+    }
+
+    @include flex-spread;
+
     display: flex;
-    justify-content: flex-end;
+    flex-direction: column-reverse;
     margin-top: $space-24;
   }
 
@@ -41,13 +63,15 @@ ADD TO CART FORM
 
     &:last-of-type {
       @include breakpoint-up(md) {
-        @include flex-center;
-
         @include make-grid-col(8);
       }
+
+      align-items: flex-start;
     }
 
     @include make-grid-col;
+
+    justify-content: center;
   }
 
   &-controls {
@@ -85,8 +109,7 @@ ADD TO CART FORM
     @extend h3;
 
     @include breakpoint-up(md) {
-      font-size: $h2-font-size;
-      padding-top: $space-18;
+      padding-top: $space-12;
     }
 
     margin-bottom: $space-0;

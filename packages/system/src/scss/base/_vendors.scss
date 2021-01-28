@@ -1,9 +1,9 @@
 /* -----------------------------------------------------------------------------
-GLOBALS
+THIRD PARTY STYLES OVERRIDES
 ----------------------------------------------------------------------------- */
 
-@import 'fonts';
-@import 'reset';
-@import 'root';
-@import 'typography';
-@import 'vendors';
+/* ADDTHIS */
+
+.at-icon {
+  @include dimensions(unset !important);
+}

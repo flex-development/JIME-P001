@@ -65,7 +65,7 @@ const config = {
 
       // In Vercel environments, `VERCEL_URL` is aliased to `SITE_URL`, but
       // Vercel URLs are not specified with "http(s)" protocols
-      return VERCEL ? `https://${url}` : url
+      return url.startsWith('http') ? url : `https://${url}`
     })(),
     TYPEKIT_ID,
     VERCEL,

@@ -3,6 +3,7 @@ import type { SEOData } from '@kapi/types'
 import NextHead from 'next/head'
 import { useRouter } from 'next/router'
 import type { FC } from 'react'
+import { useEffect, useRef } from 'react'
 
 /**
  * @file Inject SEO elements into <head> tag
@@ -22,10 +23,23 @@ export const SEO: FC<SEOData> = props => {
     twitter = {}
   } = props
 
-  // Get cannonical URL
-  const { asPath } = useRouter()
-  const cannonical_url = `${process.env.SITE_URL}${asPath}`
+  // Access router instance
+  const router = useRouter()
 
+  // Cannonical URL state
+  const cannonical_url = useRef<string>('')
+
+  // Update cannonical URL state
+  useEffect(() => {
+    if (typeof window === 'undefined' || cannonical_url.current?.length) return
+    cannonical_url.current = `${window.location.origin}${router.asPath}`
+  })
+
+  /**
+   * Formats the page SEO title.
+   *
+   * @param title - Page title, null, or undefined
+   */
   const getTitleWithSuffix = (title?: NullishString) => {
     return title?.length ? `${title} | Morena's Kustomz` : `Morena's Kustomz`
   }
@@ -33,7 +47,7 @@ export const SEO: FC<SEOData> = props => {
   // Update social metadata
   og['description'] = description
   og['title'] = getTitleWithSuffix(title)
-  og['url'] = cannonical_url
+  og['url'] = cannonical_url.current
   twitter['description'] = description
   twitter['title'] = title
 
@@ -45,7 +59,7 @@ export const SEO: FC<SEOData> = props => {
       <meta name='keywords' content={keywords} />
 
       {/* Prevent duplicate content issues */}
-      <link rel='canonical' href={cannonical_url} />
+      <link rel='canonical' href={cannonical_url.current} />
 
       {/* Facebook social meta tags */}
       {Object.keys(og).map(key => {

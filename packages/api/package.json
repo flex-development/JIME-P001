@@ -32,6 +32,10 @@
   "dependencies": {
     "@flex-development/kustomzcore": "*",
     "@flex-development/kustomzdesign": "*",
+    "@types/algoliasearch": "^3.34.11",
+    "@types/feathersjs__errors": "^3.3.2",
+    "@types/jsonwebtoken": "^8.5.0",
+    "@types/sharp": "^0.27.1",
     "algoliasearch": "^4.8.3",
     "axios": "^0.19.2",
     "axios-rate-limit": "^1.3.0",
@@ -44,11 +48,22 @@
     "string-strip-html": "^7.0.3"
   },
   "devDependencies": {
-    "@types/algoliasearch": "^3.34.11",
     "@types/debug": "^4.1.5",
-    "@types/feathersjs__errors": "^3.3.2",
-    "@types/jsonwebtoken": "^8.5.0",
-    "@types/sharp": "^0.27.1",
     "@vercel/node": "^1.9.0"
-  }
+  },
+  "required-env": [
+    "ALGOLIA_API_KEY",
+    "ALGOLIA_APP_ID",
+    "APPLE_AUTHKEY_MUSICKIT",
+    "APPLE_AUTHKEY_MUSICKIT_KEY_ID",
+    "DEBUG",
+    "DEBUG_COLORS",
+    "FIREBASE_CLIENT_EMAIL",
+    "FIREBASE_PRIVATE_KEY",
+    "NODE_ENV",
+    "NPM_RC",
+    "SHOPIFY_API_VERSION",
+    "SHOPIFY_DOMAIN",
+    "VERCEL_URL"
+  ]
 }

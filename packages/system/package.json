@@ -133,6 +133,11 @@
       "last 1 safari version"
     ]
   },
+  "required-env": [
+    "API_URL",
+    "NODE_ENV",
+    "SKIP_PREPARE"
+  ],
   "sideEffects": [
     "*.css",
     "*.scss"

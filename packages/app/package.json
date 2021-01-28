@@ -99,6 +99,7 @@
     "GA_TRACKING_ID",
     "GOOGLE_SITE_VERIFICATION",
     "NODE_ENV",
+    "NPM_RC",
     "SENTRY_AUTH_TOKEN",
     "SENTRY_DSN",
     "SENTRY_ORG",

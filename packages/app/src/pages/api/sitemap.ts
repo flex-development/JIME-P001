@@ -1,8 +1,8 @@
 import log from '@app/config/logger'
-import { AnyObject } from '@flex-development/json/utils/types'
+import type { AnyObject } from '@flex-development/json/utils/types'
 import createError from '@flex-development/kustomzcore/utils/createError'
 import sortBy from 'lodash/sortBy'
-import { NextApiRequest as Req, NextApiResponse as Res } from 'next'
+import type { NextApiRequest as Req, NextApiResponse as Res } from 'next'
 import { SitemapStream, streamToPromise } from 'sitemap'
 
 /**

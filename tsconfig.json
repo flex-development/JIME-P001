@@ -20,7 +20,6 @@
     "noUnusedParameters": false,
     "paths": {
       "@app/*": ["packages/app/src/*"],
-      "@app-mocks/*": ["packages/app/__mocks__/*"],
       "@baggie/string/*": ["node_modules/@baggie/string/lib/*"],
       "@components/*": [
         "node_modules/@flex-development/kustomzdesign/dist/lib/*"

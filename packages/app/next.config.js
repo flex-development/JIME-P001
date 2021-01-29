@@ -18,10 +18,6 @@ const vercel = require('./vercel.json')
 const {
   ANALYZE,
   API_URL,
-  FIREBASE_API_KEY,
-  FIREBASE_APP_ID,
-  FIREBASE_PROJECT_ID,
-  FIREBASE_MESSAGING_SENDER_ID,
   GA_TRACKING_ID,
   GOOGLE_SITE_VERIFICATION,
   SENTRY_AUTH_TOKEN,
@@ -35,7 +31,8 @@ const {
   SITE_URL,
   TYPEKIT_ID,
   VERCEL,
-  VERCEL_ENV
+  VERCEL_ENV,
+  VERCEL_URL
 } = process.env
 
 const ROOT_NODE_MODULES = path.join(__dirname, '../../node_modules')
@@ -46,13 +43,6 @@ const config = {
    */
   env: {
     API_URL,
-    FIREBASE_API_KEY,
-    FIREBASE_APP_ID,
-    FIREBASE_AUTH_DOMAIN: `${FIREBASE_PROJECT_ID}.firebaseapp.com`,
-    FIREBASE_DATABASE_URL: `https://${FIREBASE_PROJECT_ID}.firebaseio.com`,
-    FIREBASE_MESSAGING_SENDER_ID,
-    FIREBASE_PROJECT_ID,
-    FIREBASE_STORAGE_BUCKET: `${FIREBASE_PROJECT_ID}.appspot.com`,
     GOOGLE_SITE_VERIFICATION,
     NEXT_PUBLIC_GA_TRACKING_ID: GA_TRACKING_ID,
     SENTRY_DSN,
@@ -297,8 +287,17 @@ const config = {
     ) {
       config.plugins.push(
         new SentryWebpackPlugin({
+          authToken: SENTRY_AUTH_TOKEN,
+          debug: true,
+          deploy: {
+            env: VERCEL_ENV,
+            name: VERCEL_URL.split('.vercel.app')[0],
+            url: VERCEL_URL
+          },
           ignore: ['node_modules'],
           include: '.next',
+          org: SENTRY_ORG,
+          project: SENTRY_PROJECT,
           release: SENTRY_RELEASE,
           stripPrefix: ['webpack://_N_E/'],
           urlPrefix: `~/_next`

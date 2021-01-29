@@ -13,25 +13,25 @@ describe('useSanitizedProps', () => {
     expect(hook.result.current).toMatchObject({})
   })
 
-  it('adds the class "mb-24" using the `mb` property', () => {
+  it('adds the class "mb-24" using the `$mb` property', () => {
     const hook = renderHook(() => useSanitizedProps({ $mb: 24 }))
 
     expect(hook.result.current).toMatchObject({ className: 'mb-24' })
   })
 
-  it('adds the class "pt-sm-72" using the `pt` property', () => {
+  it('adds the class "pt-sm-72" using the `$pt` property', () => {
     const hook = renderHook(() => useSanitizedProps({ $pt: { sm: 72 } }))
 
     expect(hook.result.current).toMatchObject({ className: 'sm:pt-72' })
   })
 
-  it('adds the class "bg-black" using the `bg` property', () => {
+  it('adds the class "bg-black" using the `$bg` property', () => {
     const hook = renderHook(() => useSanitizedProps({ $bg: 'black' }))
 
     expect(hook.result.current).toMatchObject({ className: 'bg-black' })
   })
 
-  it('adds the class "c-muted" using the `c` property', () => {
+  it('adds the class "text-muted" using the `$color` property', () => {
     const hook = renderHook(() => useSanitizedProps({ $color: 'muted' }))
 
     expect(hook.result.current).toMatchObject({ className: 'text-muted' })

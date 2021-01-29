@@ -1,7 +1,6 @@
-import { MDXContent } from '@system/lib/molecules'
 import { render } from '@testing-library/react'
 import { PageTemplate } from './PageTemplate'
-import { Markdown, MDX } from './PageTemplate.stories'
+import { Markdown } from './PageTemplate.stories'
 
 /**
  * @file Tests - PageTemplate
@@ -15,17 +14,5 @@ describe('PageTemplate', () => {
 
     expect(container.firstChild).toHaveClass('template page-template')
     expect(container.firstChild).toHaveAttribute('data-template', template_id)
-  })
-
-  it('renders a page with a markdown body', () => {
-    const { getByText } = render(<Markdown {...Markdown.args} />)
-
-    expect(getByText('Hello, World')).toBeInTheDocument()
-  })
-
-  it('renders a page with a MDX body', () => {
-    const { getByText } = render(<MDX {...MDX.args} />)
-
-    expect(getByText(MDXContent.displayName as string)).toBeInTheDocument()
   })
 })

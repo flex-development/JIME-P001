@@ -30,9 +30,14 @@ export const EMAIL_PLACEHOLDER = 'you@email.com'
 
 export const DEFAULT_MDX_CODE = `/* @jsxRuntime classic */\n/* @jsx mdx */\n\n\n\nfunction objectWithoutProperties (obj, exclude) { var target = {}; for (var k in obj) if (Object.prototype.hasOwnProperty.call(obj, k) && exclude.indexOf(k) === -1) target[k] = obj[k]; return target; }\nconst layoutProps = {\n  \n};\nconst MDXLayout = "wrapper"\nfunction MDXContent(ref) {\n  var components = ref.components;\n  var rest = objectWithoutProperties( ref, ["components"] );\n  var props = rest;\n\n  return mdx( MDXLayout, Object.assign({}, layoutProps, props, { components: components, mdxType: "MDXLayout" })\n\n    );\n}\n\n;\nMDXContent.isMDXComponent = true;`
 
-export const GRID_BREAKPOINT_KEYS = Object.keys(
-  GridBreakpoints
-) as (keyof typeof GridBreakpoints)[]
+export const GRID_BREAKPOINT_KEYS: (keyof typeof GridBreakpoints)[] = [
+  'xs',
+  'sm',
+  'md',
+  'lg',
+  'xl',
+  'xxl'
+]
 
 export const GRID_COLUMN_UTILITY_CLASS = 'col'
 

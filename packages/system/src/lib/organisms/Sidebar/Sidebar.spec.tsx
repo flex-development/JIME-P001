@@ -21,7 +21,7 @@ describe('Sidebar', () => {
     const { getByText } = render(<Default {...Default.args} />)
     const { age } = Sidebar?.defaultProps as SidebarProps
 
-    expect(getByText(`${age}} years old`)).toBeInTheDocument()
+    expect(getByText(`${age} years old`)).toBeInTheDocument()
   })
 
   it('displays the profile image', () => {

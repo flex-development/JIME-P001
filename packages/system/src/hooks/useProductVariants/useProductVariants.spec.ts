@@ -10,17 +10,6 @@ import { useProductVariants } from './useProductVariants'
 describe('useProductVariants', () => {
   const { variants } = PRODUCTS[0]
 
-  it('selected variant is an empty object ({}) when `initialVariants` is an empty array ([])', () => {
-    const variants = []
-
-    const { result } = renderHook(() => useProductVariants(variants))
-
-    expect(result.current.selected).toMatchObject({})
-
-    expect(result.current.options).toEqual(expect.arrayContaining(variants))
-    expect(result.current.variants).toEqual(expect.arrayContaining(variants))
-  })
-
   it('creates an `OptionProps` array from `initialVariants`', () => {
     const { result } = renderHook(() => useProductVariants(variants))
 

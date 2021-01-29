@@ -22,18 +22,8 @@ describe('ProductReviewForm', () => {
     expect(container.firstChild).toHaveClass('product-review-form')
   })
 
-  it('displays the product and product variant title', () => {
-    const { getByText } = render(<AshTray {...AshTray.args} />)
-
-    const product_title = AshTray.args.title
-    const variant_title = AshTray.args.variants[0].title
-
-    expect(getByText(product_title)).toBeInTheDocument()
-    expect(getByText(variant_title)).toBeInTheDocument()
-  })
-
   it('updates the product variant title when a selection is made', () => {
-    const { getByText } = render(<AshTray {...AshTray.args} />)
+    const { getAllByText } = render(<AshTray {...AshTray.args} />)
 
     // Get variant to select
     const variant2 = AshTray.args.variants[1]
@@ -44,7 +34,7 @@ describe('ProductReviewForm', () => {
     ])
 
     // Expect selected variant title to be shown in form title
-    expect(getByText(variant2.title)).toBeInTheDocument()
+    expect(getAllByText(variant2.title)[0]).toBeInTheDocument()
   })
 
   it("updates the customer's email address", () => {
@@ -75,7 +65,7 @@ describe('ProductReviewForm', () => {
     expect((review_title as HTMLInputElement).value).toBe(TITLE_PLACEHOLDER)
   })
 
-  it('[FALSE ALARM] updates the product review body', () => {
+  it('updates the product review body', () => {
     render(<AshTray {...AshTray.args} />)
 
     // Get review body <textarea> element

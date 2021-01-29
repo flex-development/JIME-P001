@@ -9,14 +9,14 @@ import { InlineFollow, InlineShare } from './AddThisToolbox.stories'
 describe('AddThisToolbox', () => {
   describe('InlineFollow', () => {
     it('renders with class "addthis_inline_follow_toolbox"', () => {
-      const { container } = render(<InlineFollow />)
+      const { container } = render(<InlineFollow {...InlineFollow.args} />)
       expect(container.firstChild).toHaveClass('addthis_inline_follow_toolbox')
     })
   })
 
   describe('InlineShare', () => {
     it('renders with class "addthis_inline_share_toolbox"', () => {
-      const { container } = render(<InlineShare />)
+      const { container } = render(<InlineShare {...InlineShare.args} />)
       expect(container.firstChild).toHaveClass('addthis_inline_share_toolbox')
     })
   })

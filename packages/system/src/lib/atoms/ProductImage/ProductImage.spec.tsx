@@ -9,6 +9,9 @@ import { AshTray } from './ProductImage.stories'
 describe('ProductImage', () => {
   it('renders <img> element with class "product-img"', () => {
     const { container } = render(<AshTray {...AshTray.args} />)
-    expect(container.firstChild?.nextSibling).toHaveClass('product-img')
+
+    const element = container.firstChild?.firstChild?.lastChild
+
+    expect(element).toHaveClass('product-img')
   })
 })

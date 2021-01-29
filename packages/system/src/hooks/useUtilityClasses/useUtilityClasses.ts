@@ -44,13 +44,17 @@ export const useUtilityClasses = (
     // Get utilities config
     const config = pick(_props, Object.keys(_aliases))
 
+    // Grid item class prefixes
+    const grid_item_prefix = ['col', 'row']
+
     // Convert into responsive utility class config object
     Object.keys(_aliases).forEach(alias => {
+      const prefix = _aliases[alias]
       const value = config[alias]
 
       if (!value) {
         delete config[alias]
-      } else if (!isPlainObject(value)) {
+      } else if (!grid_item_prefix.includes(prefix) && !isPlainObject(value)) {
         config[alias] = { xs: value }
       }
     })
@@ -61,8 +65,9 @@ export const useUtilityClasses = (
     // Populate dictionary
     Object.keys(_aliases).forEach(alias => {
       const prefix = _aliases[alias]
+      const utils = grid_item_prefix.includes(prefix) ? config : config[alias]
 
-      genclasses(prefix, config[alias], _breakpoints).map(c => {
+      genclasses(prefix, utils, _breakpoints).map(c => {
         dictionary[c] = c?.length > 0
       })
     })
@@ -72,6 +77,7 @@ export const useUtilityClasses = (
     delete dictionary.null
     delete dictionary.true
     delete dictionary.undefined
+    delete dictionary['']
 
     // Get dictionary as string
     const dstring = classnames(dictionary, _props.className)

@@ -156,7 +156,7 @@ describe('AddToCartForm', () => {
     expect(getByText(`$${variant2.price}`)).toBeInTheDocument()
   })
 
-  it('[FALSE ALARM] updates the kustom product description', () => {
+  it('updates the kustom product description', () => {
     render(<Kustomz {...Kustomz.args} />)
 
     // Mock kustom product description

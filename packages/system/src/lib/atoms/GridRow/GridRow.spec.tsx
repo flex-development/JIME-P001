@@ -13,10 +13,10 @@ describe('GridRow', () => {
     expect(container.firstChild?.nodeName.toLowerCase()).toBe('div')
   })
 
-  it('renders with class "md:row-12"', () => {
+  it('renders with class "md:row-full"', () => {
     const { container } = render(<GridRow $md />)
 
-    expect(container.firstChild).toHaveClass('md:row-12')
+    expect(container.firstChild).toHaveClass('md:row-full')
   })
 
   it('renders with class "lg:row-5"', () => {

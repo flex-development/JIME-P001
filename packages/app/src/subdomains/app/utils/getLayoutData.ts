@@ -1,6 +1,6 @@
 import kapi from '@app/config/axios-kapi'
+import log from '@app/config/logger'
 import type { GetLayoutDataResJSON } from '@kapi/types'
-import debug from 'debug'
 
 /**
  * @file Implementation - getLayoutData
@@ -18,7 +18,7 @@ const getLayoutData = async (): Promise<GetLayoutDataResJSON> => {
   try {
     return await kapi<GetLayoutDataResJSON>({ url: 'layout' })
   } catch (error) {
-    debug('subdomains/app/utils/getLayoutData')(error)
+    log('subdomains/app/utils/getLayoutData').error(error)
     throw error
   }
 }

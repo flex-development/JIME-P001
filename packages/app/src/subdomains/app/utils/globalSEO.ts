@@ -1,6 +1,6 @@
 import kapi from '@app/config/axios-kapi'
+import log from '@app/config/logger'
 import type { GetGlobalMetafieldsResJSON, SEOData } from '@kapi/types'
-import debug from 'debug'
 
 /**
  * @file Implementation - globalSEO
@@ -21,7 +21,7 @@ const globalSEO = async (): Promise<SEOData> => {
       url: '/metafields/globals'
     })
   } catch (error) {
-    debug('subdomains/app/utils/globalSEO')(error)
+    log('subdomains/app/utils/globalSEO').error(error)
     throw error
   }
 

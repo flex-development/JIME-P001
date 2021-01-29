@@ -1,7 +1,7 @@
 import kapi from '@app/config/axios-kapi'
+import log from '@app/config/logger'
 import type { GetCollectionQuery, GetCollectionResJSON } from '@kapi/types'
 import type { NotFound } from '@subdomains/app/types'
-import debug from 'debug'
 
 /**
  * @file Implementation - getCollection
@@ -28,7 +28,7 @@ const getCollection = async (
       url: `/collections/${handle}`
     })
   } catch (error) {
-    debug('subdomains/cms/utils/getCollection')(error)
+    log('subdomains/cms/utils/getCollection').error(error)
     return { notFound: true }
   }
 }

@@ -1,3 +1,4 @@
+import log from '@app/config/logger'
 import { ErrorTemplate } from '@components/templates/ErrorTemplate'
 import { serialize } from '@flex-development/json/utils/serialize'
 import createError from '@flex-development/kustomzcore/utils/createError'
@@ -5,7 +6,6 @@ import { ErrorContent } from '@subdomains/app/components/ErrorContent'
 import { SEO } from '@subdomains/app/components/SEO'
 import type { IPagePropsError as PageProps } from '@subdomains/app/types'
 import getLayoutData from '@subdomains/app/utils/getLayoutData'
-import debug from 'debug'
 import merge from 'lodash/merge'
 import pick from 'lodash/pick'
 import type { NextPage } from 'next'
@@ -78,7 +78,7 @@ ServerError.getInitialProps = async (context): Promise<PageProps> => {
   }
 
   // Log final error
-  debug('pages/_error')({ getInitialProps: error })
+  log('pages/_error').error({ getInitialProps: error })
 
   return {
     error: serialize<PageProps['error']>(error),

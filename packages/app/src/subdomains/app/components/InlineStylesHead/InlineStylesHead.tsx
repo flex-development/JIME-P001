@@ -1,5 +1,5 @@
+import log from '@app/config/logger'
 import createError from '@flex-development/kustomzcore/utils/createError'
-import debug from 'debug'
 import { existsSync, readdirSync, readFileSync } from 'fs'
 import { Head } from 'next/document'
 import { resolve } from 'path'
@@ -49,7 +49,7 @@ export class InlineStylesHead extends Head {
       } catch (err) {
         const error = createError(err.message, { file: $file })
 
-        debug('InlineStylesHead').extend('getCssLinks')(error)
+        log('InlineStylesHead.getCssLinks').error(error)
         throw error
       }
 

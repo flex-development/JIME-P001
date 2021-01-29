@@ -1,9 +1,9 @@
 import kapi from '@app/config/axios-kapi'
+import log from '@app/config/logger'
 import type {
   FindProductsQuery as Params,
   GetProductResJSON
 } from '@kapi/types'
-import debug from 'debug'
 
 /**
  * @file Implementation - findProducts
@@ -28,7 +28,7 @@ const findProducts = async (params?: Params): Promise<GetProductResJSON[]> => {
   try {
     return await kapi<GetProductResJSON[]>({ params, url: 'products' })
   } catch (error) {
-    debug('subdomains/sales/utils/findProducts')(error)
+    log('subdomains/sales/utils/findProducts').error(error)
     throw error
   }
 }

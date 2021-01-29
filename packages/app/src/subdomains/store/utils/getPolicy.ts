@@ -1,7 +1,7 @@
 import kapi from '@app/config/axios-kapi'
+import log from '@app/config/logger'
 import type { GetPolicyQuery, GetPolicyResJSON } from '@kapi/types'
 import type { NotFound } from '@subdomains/app/types'
-import debug from 'debug'
 
 /**
  * @file Implementation - getPolicy
@@ -29,7 +29,7 @@ const getPolicy = async (
       url: `/policies/${handle}`
     })
   } catch (error) {
-    debug('subdomains/cms/utils/getPolicy')(error)
+    log('subdomains/cms/utils/getPolicy').error(error)
     return { notFound: true }
   }
 }

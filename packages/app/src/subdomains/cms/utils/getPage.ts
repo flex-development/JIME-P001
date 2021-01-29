@@ -1,7 +1,7 @@
 import kapi from '@app/config/axios-kapi'
+import log from '@app/config/logger'
 import type { GetPageQuery, GetPageResJSON } from '@kapi/types'
 import type { NotFound } from '@subdomains/app/types'
-import debug from 'debug'
 
 /**
  * @file Implementation - getPage
@@ -25,7 +25,7 @@ const getPage = async (
   try {
     return await kapi<GetPageResJSON>({ params, url: `/pages/${handle}` })
   } catch (error) {
-    debug('subdomains/cms/utils/getPage')(error)
+    log('subdomains/cms/utils/getPage').error(error)
     return { notFound: true }
   }
 }

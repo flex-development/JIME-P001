@@ -1,8 +1,8 @@
 import kapi from '@app/config/axios-kapi'
+import log from '@app/config/logger'
 import type { PartialOr } from '@flex-development/json/utils/types'
 import type { ShopifyMenu } from '@flex-development/kustomzcore'
 import type { GetMenuQuery } from '@kapi/types'
-import debug from 'debug'
 
 /**
  * @file Implementation - getMenu
@@ -29,7 +29,7 @@ const getMenu = async (
       url: `/menus/${handle}`
     })
   } catch (error) {
-    debug('subdomains/cms/utils/getMenu')(error)
+    log('subdomains/cms/utils/getMenu').error(error)
     throw error
   }
 }

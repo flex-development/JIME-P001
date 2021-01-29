@@ -46,4 +46,15 @@ CART TEMPLATE
     margin-bottom: $space-24;
     text-transform: uppercase;
   }
+
+  .line-item-grid {
+    &:empty {
+      + .cart-template-details .cart-template-btn {
+        @extend %disabled-button;
+
+        cursor: not-allowed;
+        pointer-events: none;
+      }
+    }
+  }
 }

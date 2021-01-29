@@ -1,8 +1,9 @@
 {
   "compilerOptions": {
-    "lib": ["esnext"],
+    "importHelpers": true,
+    "lib": ["es2016"],
     "module": "commonjs",
-    "target": "es5"
+    "target": "es6"
   },
   "exclude": ["node_modules"],
   "extends": "../../tsconfig.json",

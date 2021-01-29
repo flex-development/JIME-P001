@@ -45,7 +45,9 @@
     "lodash": "^4.17.15",
     "node-html-markdown": "^0.1.5",
     "sharp": "^0.27.0",
-    "string-strip-html": "^7.0.3"
+    "string-strip-html": "^7.0.3",
+    "tslib": "^2.1.0",
+    "typescript": "^4.2.0-beta"
   },
   "devDependencies": {
     "@types/debug": "^4.1.5",

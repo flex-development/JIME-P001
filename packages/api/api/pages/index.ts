@@ -3,6 +3,7 @@ import { axios, createError } from '@flex-development/kustomzcore'
 import type { VercelResponse as Res } from '@vercel/node'
 import debug from 'debug'
 import omit from 'lodash/omit'
+import { NodeHtmlMarkdown } from 'node-html-markdown'
 import { ALGOLIA, INDEX_SETTINGS, PAGES } from '../../lib/config'
 import type { FindCollectionsReq as Req } from '../../lib/types'
 import {
@@ -39,8 +40,10 @@ export default async ({ query, url }: Req, res: Res): Promise<Res> => {
     try {
       // Parse MDX body content
       pages = pages.map(async hit => {
+        const html = hit.body_html.replace('\n', '<br/>')
+
         const { code: body_html } = await axios({
-          data: JSON.stringify(hit.body_html.replace('\n', '<br/>')),
+          data: JSON.stringify(NodeHtmlMarkdown.translate(html)),
           headers: { 'Content-Type': 'application/json' },
           method: 'post',
           url: 'https://mdjsx.flexdevelopment.vercel.app'

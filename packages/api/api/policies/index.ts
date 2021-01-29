@@ -3,6 +3,7 @@ import { axios, createError } from '@flex-development/kustomzcore'
 import type { VercelResponse as Res } from '@vercel/node'
 import debug from 'debug'
 import omit from 'lodash/omit'
+import { NodeHtmlMarkdown } from 'node-html-markdown'
 import type { IPolicy as Hit } from 'shopify-api-node'
 import { ALGOLIA, INDEX_SETTINGS, POLICIES } from '../../lib/config'
 import type { FindPoliciesReq as Req } from '../../lib/types'
@@ -33,8 +34,10 @@ export default async ({ query }: Req, res: Res): Promise<Res> => {
     try {
       // Parse MDX body content
       policies = policies.map(async hit => {
+        const html = hit.body.replace('\n', '<br/>')
+
         const { code: body } = await axios({
-          data: JSON.stringify(hit.body.replace('\n', '<br/>')),
+          data: JSON.stringify(NodeHtmlMarkdown.translate(html)),
           headers: { 'Content-Type': 'application/json' },
           method: 'post',
           url: 'https://mdjsx.flexdevelopment.vercel.app'

@@ -292,7 +292,7 @@ const config = {
           deploy: {
             env: VERCEL_ENV,
             name: VERCEL_URL.split('.vercel.app')[0],
-            url: VERCEL_URL
+            url: `https://${VERCEL_URL}`
           },
           ignore: ['node_modules'],
           include: '.next',

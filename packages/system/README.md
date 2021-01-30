@@ -1,4 +1,4 @@
-# Kustomz Design
+# KustomzDesign
 
 Storybook design system
 
@@ -30,9 +30,11 @@ from the [Learn Storybook](https://www.learnstorybook.com) docs.
 
 ### Installation
 
-1. Add `"@flex-development/kustomzdesign": "*"` to your project `dependencies`
+1. Add `"@flex-development/kustomzdesign": "*"` to your package `dependencies`
 
-2. Run `yarn` to re-install the project dependencies
+   This package isn't published, so it can only be installed within this repo.
+
+2. Run `yarn` from the project root to re-install project dependencies
 
 ### 🚧 Examples
 

@@ -10,14 +10,13 @@ well follow our coding guidelines.
 [Making Changes](#making-changes)  
 [Testing](#testing)  
 [Documentation](#documentation)  
-[Branch Naming Conventions](#branch-naming-conventions)  
 [Getting Help](#getting-help)  
 [Creating a Pull Request](#creating-a-pull-request)
 
 ## Getting Started
 
-This project is structured as a monorepo and uses [Lerna](https://lerna.js.org/)
-with Yarn workspaces. All projects are deployed with Vercel.
+This project is structured as a monorepo and uses [Lerna][1] with Yarn
+workspaces. All projects are deployed with Vercel.
 
 ### Git Configuration
 
@@ -28,21 +27,22 @@ coding guidelines, as well as begin extending your own workflow.
 
 ### Development Environment
 
-1. Copy the snippet below to get your development environment setup:
+1. Copy the snippet below to clone the project onto your local machine:
 
    ```zsh
    git clone https://github.com/flex-development/JIME-P001.git; cd JIME-P001
    yarn # or npm install
    ```
 
-2. Retrieve the following files from a development admin; place them in the root
-   of the project directory:
+2. Retrieve the following files from a development admin:
 
    - `kapi.json`
    - `kustomzdesign.json`
    - `morenaskustomz.json`
 
-3. To finish setting up your Vercel development environment:
+   Place them in the root of the project directory.
+
+3. To finish configuring your Vercel development environment:
 
    ```zsh
    mv kapi.json ~/.vercel/kapi.json;
@@ -59,15 +59,38 @@ coding guidelines, as well as begin extending your own workflow.
    - `yarn dev:store-ui`: Start Storybook app on port `3000`; API on port `8080`
    - `yarn dev:ui`: Start Storyboook app on port `3000`
 
+### Environment Variables
+
+All required environment variables are documented in the `package.json` of each
+project, under the `required-env` field.
+
+Vercel supports adding environment variables for Development, Preview, and
+Production environments. A set of Vercel system environemnt variables can also
+be exposed for each project.
+
+For more information, see [Environment Variables][2] from the Vercel docs.
+
 ## Coding Standards
 
-[Husky](https://github.com/typicode/husky) is used to enforce coding and commit
-message standards.
+[Husky][3] is used to enforce coding and commit message standards.
+
+## Branch Naming Conventions
+
+When creating a new branch, the name should match the following format:
+**`feat/`**, **`hotfix/`**, **`release/`**, or **`support/`** followed by
+**`<branch_name>`**.
+
+For example:
+
+```zsh
+  git feat repo-setup
+```
+
+will create a new branch titled `feat/repo-setup` and push it to `origin`.
 
 ### Commit Messages
 
-This project follows
-[Conventional Commits](https://www.conventionalcommits.org/) standards.
+This project follows [Conventional Commits][4] standards.
 
 Commit messages should be one of the following types:
 
@@ -92,8 +115,7 @@ For example:
 
 will produce the following commit: `chore: add eslint configuration`
 
-[commitlint](https://github.com/conventional-changelog/commitlint) is used to
-enforce commit guidlelines.
+[commitlint][5] is used to enforce commit guidlelines.
 
 To review our commitlint rules, see the configuration file:
 
@@ -103,7 +125,7 @@ To review our commitlint rules, see the configuration file:
 
 #### Formatting
 
-This project uses [Prettier](https://prettier.io/) to format all code.
+This project uses [Prettier][6] to format all code.
 
 To review our formatting guidelines, see our configuration files:
 
@@ -112,8 +134,7 @@ To review our formatting guidelines, see our configuration files:
 
 #### Linting
 
-This project uses [ESLint](https://eslint.org/) to lint JavaScript and
-TypeScript files.
+This project uses [ESLint][7] to lint JavaScript and TypeScript files.
 
 To review our linting guidelines, see our configuration files:
 
@@ -132,33 +153,19 @@ the Contributing Guide for each package:
 
 ## Documentation
 
-- JavaScript & TypeScript: [JSDoc](https://jsdoc.app)
-- Sass: [SassDoc](http://sassdoc.com/annotations/)
+- JavaScript & TypeScript: [JSDoc][8]
+- Sass: [SassDoc][9]
 
 Before making a pull request, be sure your code is well documented, as it will
 be part of your code review.
 
 ## Testing
 
-This project uses [Jest](https://jestjs.io/) as its test runner. To run the
-tests in this project, run `yarn test`.
+This project uses [Jest][10] as its test runner. To run the tests in this
+project, run `yarn test` from the project root.
 
 Husky is configured to run tests before every push. If a bug report concerning a
 failed test is needed, you'll be able to push your code even if a test fails.
-
-## Branch Naming Conventions
-
-When creating a new branch, the name should match the following format:
-**`feat/`**, **`hotfix/`**, **`release/`**, or **`support/`** followed by
-**`<branch_name>`**.
-
-For example:
-
-```zsh
-  git feat repo-setup
-```
-
-will create a new branch titled `feat/repo-setup` and push it to `origin`.
 
 ## Getting Help
 
@@ -178,3 +185,14 @@ this project.
 - Use [**this template**](./pull_request_template.md)
 - Label your pull request appropriately
 - Assign the task to yourself and the appropriate reviewer
+
+[1]: https://lerna.js.org/
+[2]: https://vercel.com/docs/environment-variables
+[3]: https://github.com/typicode/husky
+[4]: https://www.conventionalcommits.org/
+[5]: https://github.com/conventional-changelog/commitlint
+[6]: https://prettier.io/
+[7]: https://eslint.org/
+[8]: https://jsdoc.app
+[9]: http://sassdoc.com/annotations/
+[10]: https://jestjs.io/

@@ -25,8 +25,8 @@ grinders, and rolling trays, or have them custom made.
 This project is formatted as a monorepo. For more information on using each
 package, see below:
 
-- [Serverless API](packages/api/README.md)
 - [Next.js Storefront](packages/app/README.md)
+- [Serverless API](packages/api/README.md)
 - [Storybook Design System](packages/system/README.md)
 - [Support](packages/core/README.md)
 

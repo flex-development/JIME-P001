@@ -22,15 +22,13 @@ grinders, and rolling trays, or have them custom made.
 
 ## Usage
 
-1. Copy the snippet below to get the project running on your local machine
+### Development
 
-   ```zsh
-    git clone https://github.com/flex-development/JIME-P001.git; cd JIME-P001;
-    yarn # or npm install
-    cd packages/app; vc link; cd ../..
-   ```
+Run `yarn dev:store` from the project root.
 
-2. Run `yarn dev:store` to start the app on `http://localhost:3001`
+### Production (Local)
+
+Run `yarn start` from this directory, or `yarn start:app` from the project root.
 
 ## Built With
 

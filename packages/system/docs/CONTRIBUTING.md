@@ -1,27 +1,22 @@
 # Contributing
 
-These instructions will help you install the project on your local machine, as
-well as develop, document, and test new features.
+These instructions will help you develop and test new features.
 
 ## Overview
 
 [Getting Started](../../../docs/CONTRIBUTING.md)  
-[Development Environment](#development-environment)  
+[Run the App](#run-the-app)  
 [Making Changes](#making-changes)  
+[Testing](#testing)  
 [Documentation](#documentation)  
-[Testing](#testing)
+[Build Workflow](#build-workflow)
 
-## Development Environment
+## Run the App
 
-1. Copy the snippet below to get the project running on your local machine
+- From project root: `yarn dev:store-ui`, `yarn dev:ui`
+- From app root: `yarn dev`
 
-   ```zsh
-    git clone https://github.com/flex-development/JIME-P001.git; cd JIME-P001;
-    yarn # or npm install
-   ```
-
-2. Run `yarn dev:ui` or `yarn start:ui` to start the Storybook app on
-   `http://localhost:3000`
+The app will start on `http://localhost:3000`.
 
 ## Making Changes
 
@@ -65,16 +60,6 @@ currently supports the `.scss` syntax.
 
 Directory: `src/utils`
 
-## Documentation
-
-[Storybook Docs](https://storybook.js.org/docs/react/writing-docs/introduction)
-is used to generate documentation for the component library. DocBlock comments
-for components needs to be
-[written using Markdown](https://typedoc.org/guides/doccomments/#markdown) in
-order to be parsed properly by Storybook Docs.
-
-All other documentation should follow [JSDoc](https://jsdoc.app) format.
-
 ## Testing
 
 Unit and interaction tests are conducted while implementing a new component or
@@ -103,3 +88,17 @@ tests will not hinder builds, but be displayed in the addon panel.
 
 The `dev` and `build` scripts for this project are configured to run the test
 suite before starting or building the project.
+
+## Documentation
+
+[Storybook Docs](https://storybook.js.org/docs/react/writing-docs/introduction)
+is used to generate documentation for the component library. DocBlock comments
+for components needs to be
+[written using Markdown](https://typedoc.org/guides/doccomments/#markdown) in
+order to be parsed properly by Storybook Docs.
+
+All other documentation should follow [JSDoc](https://jsdoc.app) format.
+
+## Build Workflow
+
+**TODO**: Update documentation.

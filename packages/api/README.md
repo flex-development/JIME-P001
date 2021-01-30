@@ -1,6 +1,6 @@
 # KAPI
 
-Morena's Kustomz REST API
+Morena's Kustomz Serverless REST API
 
 [![TypeScript](https://badgen.net/badge/-/typescript?icon=typescript&label)](https://www.typescriptlang.org/)
 [![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lerna.js.org/)

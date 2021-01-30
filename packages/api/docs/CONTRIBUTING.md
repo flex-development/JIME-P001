@@ -6,20 +6,20 @@ well as add new features.
 ## Overview
 
 [Getting Started](../../../docs/CONTRIBUTING.md)  
-[Development Environment](#development-environment)  
+[Start the Server](#start-the-server)  
+[Integrations](#integrations)  
 [Making Changes](#making-changes)  
 [Testing](#testing)
 
-## Development Environment
+## Start the Server
 
-1. Copy the snippet below to download the project on your local machine.
+- From project root: `yarn dev:api`
 
-   ```zsh
-    git clone https://github.com/flex-development/JIME-P001.git; cd JIME-P001
-    yarn
-   ```
+The development server will start on `http://localhost:8080`.
 
-2. Run `yarn dev:api` to start the dev server on `http://localhost:8080`
+## Integrations
+
+**TODO**: Update documentation.
 
 ## Making Changes
 

@@ -20,8 +20,8 @@ environment deployments.
 ## Environment Variables
 
 Vercel supports adding environment variables for Development, Preview, and
-Production (`production`) environments. ​Vercel also provides a set of variables
-that can be [automatically populated by the system][2].
+Production environments. ​Vercel also provides a set of variables that can be
+[automatically populated by the system][2].
 
 For more information, see [Environment Variables][3] from the Vercel docs.
 

@@ -85,7 +85,7 @@
 # Git Flow Aliases
 [alias]
   # Create a new feature branch and push upstream
-  feature = "!f() { git b feature/$@; }; f"
+  feat = "!f() { git b feat/$@; }; f"
 
   # Create a new hotfix branch and push upstream
   hotfix = "!f() { git b hotfix/$@; }; f"

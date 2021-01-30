@@ -11,7 +11,7 @@ Below you'll find instructions on how to deploy with Vercel.
 ## Getting Started
 
 Vercel is a hosting platform for static sites and serverless functions. It's
-used to host our Storybook and Next.js applications.
+used to host our Storybook and Next.js applications, as well our serverless API.
 
 The [Vercel for GitHub][1] integration is used to deploy our applications by
 pushing to GitHub. Vercel also provides support for preview and production
@@ -19,9 +19,11 @@ environment deployments.
 
 ## Environment Variables
 
-Vercel supports adding environment variables for Development (`development`),
-Preview (`test`), and Production (`production`) environments. For more
-information, see [Environment Variables][2] from the Vercel docs.
+Vercel supports adding environment variables for Development, Preview, and
+Production (`production`) environments. ​Vercel also provides a set of variables
+that can be [automatically populated by the system][2].
+
+For more information, see [Environment Variables][3] from the Vercel docs.
 
 ## Deployment Types
 
@@ -37,8 +39,9 @@ information, see [Environment Variables][2] from the Vercel docs.
 > merge to the Production Branch (commonly `main`) or make a deployment using
 > the `vercel --prod` command, this is a production deployment.
 
-For more information, visit [Deployment Types][3] from the Vercel docs.
+For more information, visit [Deployment Types][4] from the Vercel docs.
 
 [1]: https://vercel.com/docs/git/vercel-for-github
-[2]: https://vercel.com/docs/environment-variables
-[3]: https://vercel.com/docs/platform/deployments#deployment-types
+[2]: https://vercel.com/docs/environment-variables#system-environment-variables
+[3]: https://vercel.com/docs/environment-variables
+[4]: https://vercel.com/docs/platform/deployments#deployment-types

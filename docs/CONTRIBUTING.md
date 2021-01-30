@@ -11,12 +11,13 @@ well follow our coding guidelines.
 [Testing](#testing)  
 [Documentation](#documentation)  
 [Branch Naming Conventions](#branch-naming-conventions)  
+[Getting Help](#getting-help)  
 [Creating a Pull Request](#creating-a-pull-request)
 
 ## Getting Started
 
 This project is structured as a monorepo and uses [Lerna](https://lerna.js.org/)
-with Yarn workspaces.
+with Yarn workspaces. All projects are deployed with Vercel.
 
 ### Git Configuration
 
@@ -27,15 +28,36 @@ coding guidelines, as well as begin extending your own workflow.
 
 ### Development Environment
 
-Copy the snippet below to get your development environment setup:
+1. Copy the snippet below to get your development environment setup:
 
-```zsh
-git clone https://github.com/flex-development/JIME-P001.git; cd JIME-P001
-yarn # or npm install
-```
+   ```zsh
+   git clone https://github.com/flex-development/JIME-P001.git; cd JIME-P001
+   yarn # or npm install
+   ```
 
-- `yarn dev:app`: Start Next.js app on port `3001`
-- `yarn dev:ui`: Start Storyboook app on port `3000`
+2. Retrieve the following files from a development admin; place them in the root
+   of the project directory:
+
+   - `kapi.json`
+   - `kustomzdesign.json`
+   - `morenaskustomz.json`
+
+3. To finish setting up your Vercel development environment:
+
+   ```zsh
+   mv kapi.json ~/.vercel/kapi.json;
+   mkdir packages/system/.vercel;
+   mv kustomzdesign.json packages/system/.vercel/project.json;
+   mkdir packages/app/.vercel;
+   mv morenaskustomz.json packages/app/.vercel/project.json;
+   ```
+
+4. Run the project!
+
+   - `yarn dev:api`: Start API on port `8080`
+   - `yarn dev:store`: Start Next.js app on port `3001`; API on port `8080`
+   - `yarn dev:store-ui`: Start Storybook app on port `3000`; API on port `8080`
+   - `yarn dev:ui`: Start Storyboook app on port `3000`
 
 ## Coding Standards
 
@@ -44,7 +66,7 @@ message standards.
 
 ### Commit Messages
 
-This project adheres to
+This project follows
 [Conventional Commits](https://www.conventionalcommits.org/) standards.
 
 Commit messages should be one of the following types:
@@ -103,6 +125,7 @@ To review our linting guidelines, see our configuration files:
 For more information on how to make changes within different package scopes, see
 the Contributing Guide for each package:
 
+- [`api`](../packages/api/docs/CONTRIBUTING.md)
 - [`app`](../packages/app/docs/CONTRIBUTING.md)
 - [`core`](../packages/core/docs/CONTRIBUTING.md)
 - [`system`](../packages/system/docs/CONTRIBUTING.md)
@@ -126,22 +149,24 @@ failed test is needed, you'll be able to push your code even if a test fails.
 ## Branch Naming Conventions
 
 When creating a new branch, the name should match the following format:
-**`feature/`**, **`hotfix/`**, **`release/`**, or **`support/`** followed by
+**`feat/`**, **`hotfix/`**, **`release/`**, or **`support/`** followed by
 **`<branch_name>`**.
 
 For example:
 
 ```zsh
-  git feature repo-setup
+  git feat repo-setup
 ```
 
-will create a new branch titled `feature/repo-setup` and push it to `origin`.
+will create a new branch titled `feat/repo-setup` and push it to `origin`.
 
-## Creating a Pull Request
+## Getting Help
 
 If you need help, make note of any issues in their respective files. Whenever
-possible, create a test to reproduce the error. Make sure to label your pr as
-`help wanted`.
+possible, create a test to reproduce the error. Make sure to label your issue as
+`discussion`, `help wanted`, and/or `question`.
+
+## Creating a Pull Request
 
 When you're ready to have your changes reviewed, make sure your code is
 [well documented](#documentation). The `pre-commit` and `pre-push` hooks will

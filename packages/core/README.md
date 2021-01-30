@@ -1,6 +1,6 @@
 # KustomzCore
 
-Shared config for Morena's Kustomz design system and storefront
+Shared modules and type definitons
 
 [![TypeScript](https://badgen.net/badge/-/typescript?icon=typescript&label)](https://www.typescriptlang.org/)
 [![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lerna.js.org/)
@@ -14,10 +14,12 @@ Shared config for Morena's Kustomz design system and storefront
 ## Getting Started
 
 This project houses shared modules and type definitons for Morena's Kustomz
-design system and storefront.
+design system, storefront, and serverless API.
 
 ## Usage
 
-1. Add `"@flex-development/kustomzcore": "*"` to your project `dependencies`
+1. Add `"@flex-development/kustomzcore": "*"` to your package `dependencies`
 
-2. Run `yarn` to re-install project dependencies
+   This package isn't published, so it can only be installed within this repo.
+
+2. Run `yarn` from the project root to re-install project dependencies

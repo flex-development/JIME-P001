@@ -1,15 +1,9 @@
 {
   "name": "@flex-development/kustomzcore",
   "version": "1.0.0",
-  "description": "Shared config for Morena's Kustomz design system and storefront",
-  "keywords": [
-    "lerna",
-    "musickitjs",
-    "shopify",
-    "shopify api node",
-    "typescript"
-  ],
-  "homepage": "https://github.com/flex-development/JIME-P001",
+  "description": "Shared modules and type definitons for Morena's Kustomz design system, storefront, and serverless API",
+  "keywords": [],
+  "homepage": "https://github.com/flex-development/JIME-P001/tree/next/packages/core",
   "bugs": {
     "url": "https://github.com/flex-development/JIME-P001/issues",
     "email": "developers@flexdevelopment.llc"
@@ -29,9 +23,7 @@
     "access": "public",
     "directory": "./"
   },
-  "source": "src/index.ts",
   "main": "dist/index.js",
-  "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
   "files": [
     "dist",

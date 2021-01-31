@@ -5,18 +5,22 @@ These instructions will help you develop and test new features.
 ## Overview
 
 [Getting Started](../../../docs/CONTRIBUTING.md)  
-[Run the App](#run-the-app)  
+[Integrations](#integrations)  
 [Making Changes](#making-changes)  
 [Testing](#testing)  
 [Documentation](#documentation)  
 [Build Workflow](#build-workflow)
 
-## Run the App
+## Integrations
 
-- From project root: `yarn dev:store-ui`, `yarn dev:ui`
-- From app root: `yarn dev`
+### AddThis
 
-The app will start on `http://localhost:3000`.
+[AddThis](https://www.addthis.com/) is a content sharing platform. In addition
+to providing content sharing tools, AddThis provides tool for following, related
+posts, social analytics, and Audience Targeting tools.
+
+This Inline Follow and Share buttons can be used through the `AddThisToolbox`
+component. Inline share buttons are also a part of the `ProductTemplate` UI.
 
 ## Making Changes
 
@@ -26,6 +30,11 @@ Directory: `src/lib`
 
 The component library is organized according to the
 [Atomic Design Methodology](https://atomicdesign.bradfrost.com/chapter-2/).
+
+Component stories live in the same directory as their components. For more
+information on writing stories, visit
+[Writing Stories](https://storybook.js.org/docs/react/writing-stories/introduction)
+from the Storybook docs.
 
 ### Hooks
 
@@ -41,20 +50,22 @@ For more information on writing custom hooks, visit
 [Building Your Own Hooks](https://reactjs.org/docs/hooks-custom.html) from the
 React docs.
 
-### Stories
+### 🚧 Providers
 
-Directory: `storybook/stories`
+Directory: `src/providers`
 
-For more information on writing stories, visit
-[Writing Stories](https://storybook.js.org/docs/react/writing-stories/introduction)
-from the Storybook docs.
+**TODO**: Update documentation.
 
-### Theme Styles
+### Styles
 
-Directory: `src/theme`
+Directory: `src/scss`
 
 Stylesheets are written in [Sass](https://sass-lang.com/); this project
 currently supports the `.scss` syntax.
+
+### Type Definitions
+
+Directory: `src/types`
 
 ### Utilities
 
@@ -99,6 +110,6 @@ order to be parsed properly by Storybook Docs.
 
 All other documentation should follow [JSDoc](https://jsdoc.app) format.
 
-## Build Workflow
+## 🚧 Build Workflow
 
 **TODO**: Update documentation.

@@ -28,6 +28,34 @@ from the [Learn Storybook](https://www.learnstorybook.com) docs.
 
 ## Usage
 
+### Development Environment
+
+To start the Storybook application and the [KAPI](../api/README.md) dev server,
+run the following command from the root of the repository:
+
+```zsh
+yarn dev:store-ui
+```
+
+Storybook will be available at `http://localhost:3000`, and the API at
+`http://localhost:8080`.
+
+#### Storybook Only
+
+To start **only** the Storybook application:
+
+```zsh
+yarn dev:ui
+```
+
+from the root of the repository, or
+
+```zsh
+yarn dev
+```
+
+from this directory.
+
 ### Installation
 
 1. Add `"@flex-development/kustomzdesign": "*"` to your package `dependencies`
@@ -35,10 +63,6 @@ from the [Learn Storybook](https://www.learnstorybook.com) docs.
    This package isn't published, so it can only be installed within this repo.
 
 2. Run `yarn` from the project root to re-install project dependencies
-
-### 🚧 Examples
-
-**TODO**: Update documentation
 
 ## Built With
 

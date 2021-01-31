@@ -2,13 +2,7 @@
   "name": "@flex-development/kapi",
   "version": "1.0.0",
   "description": "Morena's Kustomz REST API",
-  "keywords": [
-    "apple music",
-    "mdx",
-    "shopify",
-    "typescript",
-    "vercel"
-  ],
+  "keywords": [],
   "homepage": "https://github.com/flex-development/JIME-P001",
   "bugs": {
     "url": "https://github.com/flex-development/JIME-P001/issues",
@@ -32,6 +26,7 @@
   "dependencies": {
     "@flex-development/kustomzcore": "*",
     "@types/algoliasearch": "^3.34.11",
+    "@types/debug": "^4.1.5",
     "@types/feathersjs__errors": "^3.3.2",
     "@types/jsonwebtoken": "^8.5.0",
     "@types/sharp": "^0.27.1",
@@ -50,7 +45,6 @@
   },
   "devDependencies": {
     "@firebase/rules-unit-testing": "^1.0.9",
-    "@types/debug": "^4.1.5",
     "@vercel/node": "^1.9.0"
   },
   "required-env": [

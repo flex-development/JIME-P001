@@ -1,16 +1,16 @@
-# 🚧 Morena's Kustomz
+# Morena's Kustomz
 
-Storybook design system and Shopify storefront powered by Next.js
+Serverless API, Storybook design system, and Next.js powered Shopify storefront
 
-[![TypeScript](https://badgen.net/badge/-/typescript?icon=typescript&label)](https://www.typescriptlang.org/)
-[![emoji-log](https://cdn.rawgit.com/ahmadawais/stuff/ca97874/emoji-log/non-flat-round.svg)](https://github.com/ahmadawais/Emoji-Log/)
-[![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lerna.js.org/)
 [![Storybook](https://cdn.jsdelivr.net/gh/storybookjs/brand@master/badge/badge-storybook.svg)](https://storybook.js.org/)
+[![TypeScript](https://badgen.net/badge/-/typescript?icon=typescript&label)](https://www.typescriptlang.org/)
+[![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lerna.js.org/)
 
 ## Overview
 
 [Getting Started](#getting-started)  
 [Usage](#usage)  
+[Built With](#built-with)  
 [Contributing](docs/CONTRIBUTING.md)  
 [Deployment](docs/DEPLOYMENT.md)
 
@@ -26,17 +26,20 @@ This project is formatted as a monorepo. For more information on using each
 package, see below:
 
 - [Next.js Storefront](packages/app/README.md)
+- [Serverless API](packages/api/README.md)
 - [Storybook Design System](packages/system/README.md)
 - [Support](packages/core/README.md)
 
 ## Built With
 
 - [Next.js][1] - Framework for building React applications
-- [Storybook][2] - UI development, testing, and documentation tool
-- [TypeScript][3] - Typed JavaScript
-- [Vercel][4] - Hosting platform for static sites and serverless functions
+- [Shopify][2] - eCommerce Platform
+- [Storybook][3] - UI development, testing, and documentation tool
+- [TypeScript][4] - Typed JavaScript
+- [Vercel][5] - Hosting platform for static sites and serverless functions
 
 [1]: https://nextjs.org/
-[2]: https://storybook.js.org/
-[3]: https://www.typescriptlang.org/
-[4]: https://vercel.com/
+[2]: https://www.shopify.com/
+[3]: https://storybook.js.org/
+[4]: https://www.typescriptlang.org/
+[5]: https://vercel.com/

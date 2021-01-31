@@ -22,22 +22,23 @@ grinders, and rolling trays, or have them custom made.
 
 ## Usage
 
-1. Copy the snippet below to get the project running on your local machine
+### Development
 
-   ```zsh
-    git clone https://github.com/flex-development/JIME-P001.git; cd JIME-P001;
-    yarn # or npm install
-    cd packages/app; vc link; cd ../..
-   ```
+Run `yarn dev:store` from the root of the repository.
 
-2. Run `yarn dev:store` to start the app on `http://localhost:3001`
+### Production (Local)
+
+Run `yarn start` from this directory, or `yarn start:app` from the root of the
+repository.
 
 ## Built With
 
-- [Next.js][1] - Framework for building React applications
-- [TypeScript][2] - Typed JavaScript
-- [Vercel][3] - Hosting platform for static sites and serverless functions
+- [KAPI][1] - Morena's Kustomz Serverless API
+- [Next.js][2] - Framework for building React applications
+- [TypeScript][3] - Typed JavaScript
+- [Vercel][4] - Hosting platform for static sites and serverless functions
 
-[1]: https://nextjs.org/
-[2]: https://www.typescriptlang.org/
-[3]: https://vercel.com/
+[1]: ../api/README.md
+[2]: https://nextjs.org/
+[3]: https://www.typescriptlang.org/
+[4]: https://vercel.com/

@@ -116,7 +116,7 @@ export default class Document extends NextDocument<DocumentInitialProps> {
             content={process.env.GOOGLE_SITE_VERIFICATION}
           />
 
-          {/* WebFont Loader */}
+          {/* Web Font Loader */}
           <script
             defer
             src='//ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js'

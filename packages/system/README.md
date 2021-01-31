@@ -1,4 +1,4 @@
-# Kustomz Design
+# KustomzDesign
 
 Storybook design system
 
@@ -28,15 +28,41 @@ from the [Learn Storybook](https://www.learnstorybook.com) docs.
 
 ## Usage
 
+### Development Environment
+
+To start the Storybook application and the [KAPI](../api/README.md) dev server,
+run the following command from the root of the repository:
+
+```zsh
+yarn dev:store-ui
+```
+
+Storybook will be available at `http://localhost:3000`, and the API at
+`http://localhost:8080`.
+
+#### Storybook Only
+
+To start **only** the Storybook application:
+
+```zsh
+yarn dev:ui
+```
+
+from the root of the repository, or
+
+```zsh
+yarn dev
+```
+
+from this directory.
+
 ### Installation
 
-1. Add `"@flex-development/kustomzdesign": "*"` to your project `dependencies`
+1. Add `"@flex-development/kustomzdesign": "*"` to package `dependencies`
 
-2. Run `yarn` to re-install the project dependencies
+   This package isn't published, so it can only be installed within this repo.
 
-### 🚧 Examples
-
-**TODO**: Update documentation
+2. Run `yarn` from the root of the repository to re-install project dependencies
 
 ## Built With
 

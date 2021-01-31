@@ -1,20 +1,7 @@
 {
   "name": "@flex-development/jime-p001",
   "description": "Storybook design system and Shopify storefront powered by Next.js for Morena's Kustomz.",
-  "keywords": [
-    "design system",
-    "lerna",
-    "musickitjs",
-    "nextjs",
-    "react",
-    "sass",
-    "shopify",
-    "shopify api node",
-    "shopify buy sdk",
-    "storybook",
-    "typescript",
-    "vercel"
-  ],
+  "keywords": [],
   "homepage": "https://github.com/flex-development/JIME-P001",
   "repository": "git://github.com/flex-development/JIME-P001.git",
   "bugs": {

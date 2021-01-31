@@ -1,27 +1,26 @@
 # Contributing
 
-These instructions will help you install the project on your local machine, as
-well as develop, document, and test new features.
+These instructions will help you develop and test new features.
 
 ## Overview
 
 [Getting Started](../../../docs/CONTRIBUTING.md)  
-[Development Environment](#development-environment)  
+[Integrations](#integrations)  
 [Making Changes](#making-changes)  
+[Testing](#testing)  
 [Documentation](#documentation)  
-[Testing](#testing)
+[Build Workflow](#build-workflow)
 
-## Development Environment
+## Integrations
 
-1. Copy the snippet below to get the project running on your local machine
+### AddThis
 
-   ```zsh
-    git clone https://github.com/flex-development/JIME-P001.git; cd JIME-P001;
-    yarn # or npm install
-   ```
+[AddThis](https://www.addthis.com/) is a content sharing platform. In addition
+to providing content sharing tools, AddThis provides tool for following, related
+posts, social analytics, and Audience Targeting tools.
 
-2. Run `yarn dev:ui` or `yarn start:ui` to start the Storybook app on
-   `http://localhost:3000`
+This Inline Follow and Share buttons can be used through the `AddThisToolbox`
+component. Inline share buttons are also a part of the `ProductTemplate` UI.
 
 ## Making Changes
 
@@ -31,6 +30,11 @@ Directory: `src/lib`
 
 The component library is organized according to the
 [Atomic Design Methodology](https://atomicdesign.bradfrost.com/chapter-2/).
+
+Component stories live in the same directory as their components. For more
+information on writing stories, visit
+[Writing Stories](https://storybook.js.org/docs/react/writing-stories/introduction)
+from the Storybook docs.
 
 ### Hooks
 
@@ -46,34 +50,27 @@ For more information on writing custom hooks, visit
 [Building Your Own Hooks](https://reactjs.org/docs/hooks-custom.html) from the
 React docs.
 
-### Stories
+### Providers
 
-Directory: `storybook/stories`
+Directory: `src/providers`
 
-For more information on writing stories, visit
-[Writing Stories](https://storybook.js.org/docs/react/writing-stories/introduction)
-from the Storybook docs.
+For more information, see [Context](https://reactjs.org/docs/context.html) from
+the React docs.
 
-### Theme Styles
+### Styles
 
-Directory: `src/theme`
+Directory: `src/scss`
 
 Stylesheets are written in [Sass](https://sass-lang.com/); this project
 currently supports the `.scss` syntax.
 
+### Type Definitions
+
+Directory: `src/types`
+
 ### Utilities
 
 Directory: `src/utils`
-
-## Documentation
-
-[Storybook Docs](https://storybook.js.org/docs/react/writing-docs/introduction)
-is used to generate documentation for the component library. DocBlock comments
-for components needs to be
-[written using Markdown](https://typedoc.org/guides/doccomments/#markdown) in
-order to be parsed properly by Storybook Docs.
-
-All other documentation should follow [JSDoc](https://jsdoc.app) format.
 
 ## Testing
 
@@ -103,3 +100,23 @@ tests will not hinder builds, but be displayed in the addon panel.
 
 The `dev` and `build` scripts for this project are configured to run the test
 suite before starting or building the project.
+
+## Documentation
+
+[Storybook Docs](https://storybook.js.org/docs/react/writing-docs/introduction)
+is used to generate documentation for the component library. DocBlock comments
+for components needs to be
+[written using Markdown](https://typedoc.org/guides/doccomments/#markdown) in
+order to be parsed properly by Storybook Docs.
+
+All other documentation should follow [JSDoc](https://jsdoc.app) format.
+
+## Build Workflow
+
+To create a local `production` build:
+
+```zsh
+yarn build
+```
+
+The Storybook app distribution files will be output into the `public` directory.

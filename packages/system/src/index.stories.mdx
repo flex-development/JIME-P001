@@ -8,11 +8,11 @@ import { Meta } from '@storybook/addon-docs/blocks'
 
 ## Overview
 
-[Introduction](#introduction)  
-[Usage](#usage)  
+[Getting Started](#getting-started)  
+[Installation & Setup](#installation-&-setup)  
 [Github Repository](https://github.com/flex-development/JIME-P001)
 
-## Introduction
+## Getting Started
 
 > _Modern user interfaces are assembled from hundreds of modular UI components
 > that are rearranged to deliver different user experiences. Design systems
@@ -23,10 +23,110 @@ import { Meta } from '@storybook/addon-docs/blocks'
 > organization’s common components._ -
 > [Design Systems for Developers: Introduction](https://www.learnstorybook.com/design-systems-for-developers/react/en/introduction/)
 
-For more information about building design systems with Storybook, visit
-[Design Systems for Developers](https://www.learnstorybook.com/design-systems-for-developers)
-from the [Learn Storybook](https://www.learnstorybook.com) docs.
+## Installation & Setup
 
-## 🚧 Usage
+<br />
 
-**TODO**: Update documentation.
+### Local Installation
+
+Add `"@flex-development/kustomzdesign": "*"` to your project's `package.json`:
+
+```json
+{
+  "dependencies": {
+    "@flex-development/kustomzdesign": "*"
+  }
+}
+```
+
+The design system package isn't published, so it can only be installed in
+projects within the Morena's Kustomz monorepo.
+
+Run `yarn` from the root of the repository to re-install project dependencies.
+
+### Scripts
+
+```html
+<!-- Web Font Loader -->
+<script
+  type="text/javascript"
+  src="//ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"
+></script>
+
+<!-- Load custom fonts -->
+<script>
+  try {
+    WebFont.load({ typekit: { id: 'oee3tpl' } })
+  } catch (error) {
+    console.error({ 'WebFont.load': error })
+  }
+</script>
+
+<!-- AddThis - Content Sharing -->
+<script
+  type="text/javascript"
+  src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-60103a572a723aa0"
+></script>
+```
+
+### Stylesheets
+
+```typescript
+import '@flex-development/kustomzdesign/kustomzdesign.css'
+```
+
+Sass variables, mixins, placeholders, and functions can also be imported:
+
+```scss
+@import '@flex-development/kustomzdesign/src/scss/abstracts/abstracts';
+```
+
+### Provider Components
+
+The example below is from the Morena's Kustomz storefront application.
+
+```typescript
+import { CART_PKEY } from '@flex-development/kustomzcore'
+import type { CartContextProviderProps } from '@flex-development/kustomzdesign'
+import { CartContextProvider } from '@flex-development/kustomzdesign'
+import { useRef } from 'react'
+import useLocalStorage from 'react-use/esm/useLocalStorage'
+
+/**
+ * @file Next.js Custom App
+ * @module pages/app
+ * @see https://nextjs.org/docs/advanced-features/custom-app
+ */
+
+/**
+ * Custom app initialization component.
+ *
+ * @param props - Component props
+ * @param props.Component - Current page component
+ * @param props.pageProps - Page component props from data fetching methods
+ */
+const App = ({ Component, pageProps }) => {
+  // Get line items from peristed storage
+  const [items, setItems] = useLocalStorage<CheckoutLineItemInput[]>(CART_PKEY)
+  const _items = useRef<CheckoutLineItemInput[]>(items || [])
+
+  /**
+   * Updates the line items state and persists the items to local storage.
+   *
+   * @param cart - `CartContextProvider` state
+   * @param cart.items - Checkout line items
+   */
+  const persistCart: CartContextProviderProps['persist'] = async cart => {
+    if (typeof window !== 'undefined') return setItems(cart.items)
+  }
+
+  /* Callback version of `persistCart` */
+  const persistCartCB = useCallback(persistCart, [setItems])
+
+  return (
+    <CartContextProvider items={_items.current} persist={persistCartCB}>
+      <Component {...pageProps} />
+    </CartContextProvider>
+  )
+}
+```

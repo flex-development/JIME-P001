@@ -1,10 +1,8 @@
 import type { CheckoutLineItemInput } from '@flex-development/kustomzcore'
 import { CART_PKEY } from '@flex-development/kustomzcore/constants'
 import '@flex-development/kustomzdesign/kustomzdesign.css'
-import {
-  CartContextProvider,
-  CartContextProviderProps
-} from '@providers/CartContextProvider'
+import type { CartContextProviderProps } from '@providers/CartContextProvider'
+import { CartContextProvider } from '@providers/CartContextProvider'
 import { Layout } from '@subdomains/app/components/Layout'
 import '@subdomains/app/styles/index.scss'
 import type { AppComponent, IAppProps } from '@subdomains/app/types'
@@ -25,9 +23,9 @@ import useLocalStorage from 'react-use/useLocalStorage'
  *
  * - `CartContextProvider`
  *
- * @param param0 - Component props
- * @param param0.Component - Current page component
- * @param param0.pageProps - Page component props from data fetching methods
+ * @param props - Component props
+ * @param props.Component - Current page component
+ * @param props.pageProps - Page component props from data fetching methods
  */
 const App: AppComponent = ({ Component, pageProps }: IAppProps) => {
   // Get line items from peristed storage

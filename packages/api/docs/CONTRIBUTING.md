@@ -23,9 +23,10 @@ The development server will start on `http://localhost:8080`.
 
 ## Integrations
 
-### 🚧 Algolia
+### Algolia
 
-**TODO**: Update documentation.
+[Algolia][2] is a search-as-a-service platform that allows end users to filter
+and search API resources.
 
 **Environment Variables**
 
@@ -42,17 +43,26 @@ The [Apple Music API][3] is used to fetch store playlist data.
 - `APPLE_AUTHKEY_MUSICKIT_KEY_ID`
 - `APPLE_TEAM_ID`
 
-### 🚧 Firebase
+### Firebase
 
-**TODO**: Update documentation.
+The [Firebase Realtime Database][4] is used to store product reviews.
 
-### 🚧 Opsgenie
+Reviews can only be submitted by pre-existing customers. Shopify webhooks are
+used to create authentication profiles for new customers.
 
-**TODO**: Update documentation.
+**Note**: The product reviews service will be implemented in a later release.
 
-### 🚧 Sentry
+**Environment Variables**
 
-**TODO**: Update documentation.
+- `FIREBASE_CLIENT_EMAIL`
+- `FIREBASE_PRIVATE_KEY`
+- `FIREBASE_PROJECT_ID`
+
+### Opsgenie
+
+[Opsgenie][5] is an on-call and alert management service for software projects.
+
+Its primary use is to [dispatch alerts from GitHub][6].
 
 ### Shopify
 
@@ -96,9 +106,9 @@ For more information, see the [root package Contributing Guide][10].
 [1]: https://github.com/vercel/vercel/discussions/5294#discussioncomment-269338
 [2]: https://www.algolia.com/
 [3]: https://developer.apple.com/documentation/applemusicapi/
-[4]: https://firebase.google.com/docs/admin/setup
+[4]: https://firebase.google.com/docs/database
 [5]: https://www.atlassian.com/software/opsgenie
-[6]: https://docs.opsgenie.com/docs/sentry-integration
+[6]: https://docs.opsgenie.com/docs/github-integration
 [7]: https://sentry.io
 [8]: https://www.shopify.com/
 [9]: https://vercel.com/docs/serverless-functions/introduction

@@ -50,11 +50,11 @@ Shopify resources, as well as fetch the data for the store `Layout` component.
 
 [Opsgenie][5] is an on-call and alert management service for software projects.
 
-Its primary use is to [dispatch issue alerts from Sentry][6].
+Its primary use is to dispatch alerts from [GitHub][6] and [Sentry][7].
 
 ### Sentry
 
-[Sentry][7] is an error monitoring service. When an issue is reported, a message
+[Sentry][8] is an error monitoring service. When an issue is reported, a message
 will be sent to the `#opsgenie` channel in this project's Slack workspace.
 
 **Environment Variables**
@@ -75,7 +75,7 @@ Directory: `src/config`
 
 Directory: `src/pages`
 
-For more information, see the [Next.js Pages documentation][8].
+For more information, see the [Next.js Pages documentation][9].
 
 ### Subdomains
 
@@ -89,14 +89,14 @@ Components, utilities, and other modules grouped by feature set:
 - `store`: Store policies and other properties
 
 For more information about the subdomain architecure pattern, read [Does DDD
-Belong on the Frontend?][9] by Khalil Stemmler.
+Belong on the Frontend?][10] by Khalil Stemmler.
 
 ## Testing
 
 Directory: `__tests__`  
 Command: `yarn test`
 
-For more information, see the [root package Contributing Guide][10].
+For more information, see the [root package Contributing Guide][11].
 
 ## Build Workflow
 
@@ -123,9 +123,10 @@ The storefront application will be available at `http://localhost:9000`.
 [3]: https://support.google.com/analytics/answer/10220206
 [4]: ../../api/README.md
 [5]: https://www.atlassian.com/software/opsgenie
-[6]: https://docs.opsgenie.com/docs/sentry-integration
-[7]: https://sentry.io
-[8]: https://nextjs.org/docs/basic-features/pages
-[9]:
+[6]: https://docs.opsgenie.com/docs/github-integration
+[7]: https://docs.opsgenie.com/docs/sentry-integration
+[8]: https://sentry.io
+[9]: https://nextjs.org/docs/basic-features/pages
+[10]:
   https://khalilstemmler.com/articles/typescript-domain-driven-design/ddd-frontend/
-[10]: ../../../docs/CONTRIBUTING.md#testing
+[11]: ../../../docs/CONTRIBUTING.md#testing

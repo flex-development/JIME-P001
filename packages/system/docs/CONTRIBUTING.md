@@ -50,11 +50,12 @@ For more information on writing custom hooks, visit
 [Building Your Own Hooks](https://reactjs.org/docs/hooks-custom.html) from the
 React docs.
 
-### 🚧 Providers
+### Providers
 
 Directory: `src/providers`
 
-**TODO**: Update documentation.
+For more information, see [Context](https://reactjs.org/docs/context.html) from
+the React docs.
 
 ### Styles
 
@@ -110,6 +111,12 @@ order to be parsed properly by Storybook Docs.
 
 All other documentation should follow [JSDoc](https://jsdoc.app) format.
 
-## 🚧 Build Workflow
+## Build Workflow
 
-**TODO**: Update documentation.
+To create a local `production` build:
+
+```zsh
+yarn build
+```
+
+The Storybook app distribution files will be output into the `public` directory.

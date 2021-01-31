@@ -27,9 +27,20 @@ The development server will start on `http://localhost:8080`.
 
 **TODO**: Update documentation.
 
-### 🚧 Apple Music API
+**Environment Variables**
 
-**TODO**: Update documentation.
+- `ALGOLIA_API_KEY`
+- `ALGOLIA_APP_ID`
+
+### Apple Music API
+
+The [Apple Music API][3] is used to fetch store playlist data.
+
+**Environment Variables**
+
+- `APPLE_AUTHKEY_MUSICKIT`
+- `APPLE_AUTHKEY_MUSICKIT_KEY_ID`
+- `APPLE_TEAM_ID`
 
 ### 🚧 Firebase
 
@@ -45,7 +56,7 @@ The development server will start on `http://localhost:8080`.
 
 ### Shopify
 
-[Shopify][7] is an eCommerce platform. Aside from functioning as our commerce
+[Shopify][8] is an eCommerce platform. Aside from functioning as our commerce
 backend, it is also our content management system.
 
 **Environment Variables**
@@ -57,11 +68,11 @@ backend, it is also our content management system.
 
 ## Making Changes
 
-### 🚧 API Endpoints
+### API Endpoints
 
 Directory: `api`
 
-**TODO**: Update documentation.
+For more information, see the [Vercel Serverless Functions][9] documentation.
 
 ### Config
 
@@ -75,9 +86,20 @@ Directory: `lib/types`
 
 Directory: `lib/utils`
 
-## 🚧 Testing
+## Testing
 
-**TODO**: Update documentation.
+Directory: `__tests__`  
+Command: `yarn test`
+
+For more information, see the [root package Contributing Guide][10].
 
 [1]: https://github.com/vercel/vercel/discussions/5294#discussioncomment-269338
-[7]: https://www.shopify.com/
+[2]: https://www.algolia.com/
+[3]: https://developer.apple.com/documentation/applemusicapi/
+[4]: https://firebase.google.com/docs/admin/setup
+[5]: https://www.atlassian.com/software/opsgenie
+[6]: https://docs.opsgenie.com/docs/sentry-integration
+[7]: https://sentry.io
+[8]: https://www.shopify.com/
+[9]: https://vercel.com/docs/serverless-functions/introduction
+[10]: ../../../docs/CONTRIBUTING.md#testing

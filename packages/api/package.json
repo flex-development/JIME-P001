@@ -20,6 +20,8 @@
     "directory": "packages/kapi"
   },
   "scripts": {
+    "test": "BABEL_ENV=jest jest --detectOpenHandles --passWithNoTests",
+    "test:quiet": "yarn test || true",
     "vercel-prepare": "lerna run prepare --scope @flex-development/kustomzcore",
     "vercel-build": "yarn vercel-prepare; lerna link"
   },

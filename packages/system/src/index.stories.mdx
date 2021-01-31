@@ -9,7 +9,7 @@ import { Meta } from '@storybook/addon-docs/blocks'
 ## Overview
 
 [Introduction](#introduction)  
-[Usage](#usage)  
+[Installation & Setup](#installation-&-setup)  
 [Github Repository](https://github.com/flex-development/JIME-P001)
 
 ## Introduction
@@ -27,6 +27,62 @@ For more information about building design systems with Storybook, visit
 [Design Systems for Developers](https://www.learnstorybook.com/design-systems-for-developers)
 from the [Learn Storybook](https://www.learnstorybook.com) docs.
 
-## 🚧 Usage
+## Installation & Setup
 
-**TODO**: Update documentation.
+1. Add `"@flex-development/kustomzdesign": "*"` to package `dependencies`
+
+   **Note**: The design system package isn't published, so it can only be
+   installed in projects within the Morena's Kustomz monorepo.
+
+2. Run `yarn` from the root of the repository to re-install project dependencies
+
+3. Add the WebFont Loader and AddThis scripts to your project:
+
+   ```html
+   <!-- WebFont Loader -->
+   <script
+     type="text/javascript"
+     src="//ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"
+   ></script>
+
+   <!-- Load custom fonts -->
+   <script>
+     try {
+       WebFont.load({ typekit: { id: 'oee3tpl' } })
+     } catch (error) {
+       console.error({ 'WebFont.load': error })
+     }
+   </script>
+
+   <!-- AddThis -->
+   <script
+     type="text/javascript"
+     src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-60103a572a723aa0"
+   ></script>
+   ```
+
+4. Import the design system stylesheet
+
+   ```typescript
+   import '@flex-development/kustomzdesign/kustomzdesign.css'
+   ```
+
+   Sass variables, mixins, placeholders, and functions can also be imported:
+
+   ```scss
+   @import '@flex-development/kustomzdesign/src/scss/abstracts/abstracts';
+   ```
+
+5. Import and initalize provider components
+
+   ```typescript
+   import { CartContextProvider } from '@flex-development/kustomzdesign'
+
+   const App = props => {
+     return (
+       <CartContextProvider items={[]} persist={persistCartCB}>
+         {/* content */}
+       </CartContextProvider>
+     )
+   }
+   ```

@@ -58,11 +58,11 @@ from this directory.
 
 ### Installation
 
-1. Add `"@flex-development/kustomzdesign": "*"` to your package `dependencies`
+1. Add `"@flex-development/kustomzdesign": "*"` to package `dependencies`
 
    This package isn't published, so it can only be installed within this repo.
 
-2. Run `yarn` from the project root to re-install project dependencies
+2. Run `yarn` from the root of the repository to re-install project dependencies
 
 ## Built With
 

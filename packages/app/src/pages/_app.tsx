@@ -1,10 +1,8 @@
 import type { CheckoutLineItemInput } from '@flex-development/kustomzcore'
 import { CART_PKEY } from '@flex-development/kustomzcore/constants'
 import '@flex-development/kustomzdesign/kustomzdesign.css'
-import {
-  CartContextProvider,
-  CartContextProviderProps
-} from '@providers/CartContextProvider'
+import type { CartContextProviderProps } from '@providers/CartContextProvider'
+import { CartContextProvider } from '@providers/CartContextProvider'
 import { Layout } from '@subdomains/app/components/Layout'
 import '@subdomains/app/styles/index.scss'
 import type { AppComponent, IAppProps } from '@subdomains/app/types'

@@ -12,7 +12,7 @@
     },
     {
       "source": "/checkouts/:permalink",
-      "destination": "https://morenaskustomz.myshopify.com/cart/:permalink",
+      "destination": "https://shop.morenaskustomz.com/cart/:permalink",
       "permanent": true
     },
     {

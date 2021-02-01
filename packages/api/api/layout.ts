@@ -14,6 +14,8 @@ export default async (req: Req, res: Res): Promise<Res> => {
   try {
     // Fetch global metafields to get profile snippet
     const {
+      hero_subtitle: { value: hero_subtitle },
+      hero_title: { value: hero_title },
       profile_age: { value: profile_age },
       profile_img: { value: profile_img },
       profile_location: { value: profile_location },
@@ -27,6 +29,10 @@ export default async (req: Req, res: Res): Promise<Res> => {
     const playlist = await axios({ url: `${API_URL}/playlist` })
 
     return res.json({
+      hero: {
+        subtitle: hero_subtitle,
+        title: hero_title
+      },
       playlist,
       sidebar: {
         age: JSON.parse(profile_age as string),

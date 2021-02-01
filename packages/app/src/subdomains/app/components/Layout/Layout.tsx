@@ -43,7 +43,10 @@ export interface LayoutProps {
  * @param props - Component properties
  * @param props.page - Next.js page component
  * @param props.pageProps - Props from Next.js data-fetching methods
- * @param props.pageProps.layout - `PlaylistBar` and `Sidebar` data
+ * @param props.pageProps.layout - `Hero`, `PlaylistBar` and `Sidebar` data
+ * @param props.pageProps.layout.hero - `Hero` component properties
+ * @param props.pageProps.layout.playlist - Apple Music `Playlist` resource data
+ * @param props.pageProps.layout.sidebar - `Sidebar` component properties
  * @param props.pageProps.ua - User Agent or undefined
  */
 export const Layout: FC<LayoutProps> = (props: LayoutProps) => {
@@ -131,10 +134,7 @@ export const Layout: FC<LayoutProps> = (props: LayoutProps) => {
           </BoxAnimated>
 
           <Box className='content-col'>
-            <Hero
-              subtitle='Kustom made pot head necessities.'
-              title="Morena's Kustomz"
-            />
+            <Hero subtitle={layout.hero.subtitle} title={layout.hero.title} />
             <Component {...pageProps} />
           </Box>
         </Box>

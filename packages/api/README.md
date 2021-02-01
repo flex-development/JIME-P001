@@ -14,7 +14,7 @@ Morena's Kustomz Serverless REST API
 
 ## Getting Started
 
-Serverless REST API for Morenas's Kustomz, an online "pot-head" specialty store.
+Serverless REST API for Morenas's Kustomz, an online cannabis accessory store.
 
 ## 🚧 Usage
 

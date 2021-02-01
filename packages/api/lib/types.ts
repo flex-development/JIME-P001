@@ -200,6 +200,10 @@ export interface GetGlobalMetafieldsReq extends Omit<Req, 'query'> {
  * Shape of JSON responses from the `/layout` endpoint.
  */
 export type GetLayoutDataResJSON = {
+  hero: {
+    subtitle: string
+    title: string
+  }
   playlist: GetPlaylistResJSON
   sidebar: {
     age: number

@@ -3,6 +3,10 @@ PRODUCT HEADINGS
 ----------------------------------------------------------------------------- */
 
 .product-heading {
+  @include breakpoint-down(sm) {
+    font-size: em(30) !important;
+  }
+
   @include flex(center, space-between, null, inline-flex);
 
   text-transform: uppercase;

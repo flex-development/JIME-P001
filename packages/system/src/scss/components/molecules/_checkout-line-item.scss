@@ -16,10 +16,6 @@ CHECKOUT LINE ITEM
 
     font-weight: $font-weight-semibold;
     text-transform: uppercase;
-
-    span {
-      font-weight: $font-weight-normal;
-    }
   }
 
   &-btn {
@@ -69,6 +65,10 @@ CHECKOUT LINE ITEM
   }
 
   &-heading {
+    @include breakpoint-up(sm) {
+      font-size: em($h3-font-size) !important;
+    }
+
     margin-bottom: $space-0;
   }
 
@@ -97,10 +97,6 @@ CHECKOUT LINE ITEM
 
   &-attribute,
   &-btn {
-    @include breakpoint-up(sm) {
-      font-size: $font-size-sm;
-    }
-
     font-size: $font-size-base;
   }
 }

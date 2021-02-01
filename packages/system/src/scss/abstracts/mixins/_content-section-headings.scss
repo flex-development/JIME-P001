@@ -9,7 +9,7 @@
 /// @require {variable} $font-size-lg
 /// @require {variable} $font-size-xl
 /// @require {variable} $font-size-xxl
-/// @require {variable} $space-36
+/// @require {variable} $secondary
 @mixin content-section-headings {
   @for $level from 1 through 6 {
     h#{$level},
@@ -36,7 +36,8 @@
     font-size: $font-size-lg;
   }
 
-  h3 h4,
+  h3,
+  h4,
   .h3,
   .h4 {
     @include breakpoint-up(md) {

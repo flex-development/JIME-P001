@@ -87,7 +87,7 @@ export const CartTemplate: TC<CartTemplateProps> = props => {
   return (
     <Main {...sanitized} data-template={CartTemplate.template_id}>
       <Section id='template-header'>
-        <Heading className='template-heading'>
+        <Heading className='template-heading template-heading-with-number'>
           Cart <Span>({`${cart.items_total}`})</Span>
         </Heading>
       </Section>

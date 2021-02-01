@@ -23,7 +23,6 @@ import { ColorPalette, ColorItem, Meta } from '@storybook/addon-docs/blocks'
   />
   <ColorItem title='Light' subtitle='$light' colors={['var(--mk-light)']} />
   <ColorItem title='Dark' subtitle='$dark' colors={['var(--mk-dark)']} />
-  <ColorItem title='Darker' subtitle='$darker' colors={['var(--mk-darker)']} />
 </ColorPalette>
 
 ### Grayscale
@@ -50,24 +49,21 @@ $gray-600: #6c757d;
 $gray-700: #495057;
 $gray-800: #343a40;
 $gray-900: #212529;
-$red: #dc3545;
 $white: #fff;
 
-$dark: #232946;
-$darker: #121629;
-$light: #fffffe;
-$primary: #eebbc3;
-$secondary: #b8c1ec;
+$dark: #4a4d5b;
+$light: #fcfcfc;
+$primary: #012e65;
+$secondary: #ce1127;
 $ghost: transparent;
 
-$danger: $red;
+$danger: $secondary;
 $muted: $gray-400;
 
 $theme-colors: (
   'black': $black,
   danger: $danger,
   dark: $dark,
-  darker: $darker,
   ghost: $ghost,
   'gray': $gray-600,
   light: $light,

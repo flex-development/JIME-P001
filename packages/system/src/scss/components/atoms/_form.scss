@@ -129,6 +129,10 @@ textarea.form-control {
   @include height(rem(208));
 
   border-color: $primary;
+
+  &::placeholder {
+    font-weight: $input-focus-font-weight;
+  }
 }
 
 .form-label {
@@ -176,7 +180,8 @@ textarea.form-control {
 
 .form-option {
   @include user-event {
-    background-color: $secondary;
+    background-color: rgba($form-select-bg, 0.8);
+    cursor: pointer;
   }
 
   background-color: $form-select-bg;

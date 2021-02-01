@@ -108,20 +108,21 @@ ADD TO CART FORM
   &-heading {
     @extend h3;
 
-    @include breakpoint-up(md) {
+    @include breakpoint-up(sm) {
+      font-size: em($h3-font-size) !important;
       padding-top: $space-12;
     }
 
     margin-bottom: $space-0;
 
     & + .form-text {
-      @include margin-y($space-12, $space-4);
+      @include margin-y($space-12, $space-24);
 
       &:empty {
-        margin-top: $space-16;
+        @include margin-y($space-16, $space-0);
       }
 
-      color: $secondary;
+      color: $body-color;
       font-size: $font-size-base;
     }
   }

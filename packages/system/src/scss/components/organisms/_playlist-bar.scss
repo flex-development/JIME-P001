@@ -5,7 +5,7 @@ PLAYLIST BAR
 .playlist-bar {
   @include flex(center, space-between, row);
 
-  background-color: $body-bg;
+  background-color: $primary;
   border-top: $border-width solid $border-color;
   color: $light;
   overflow-y: hidden;
@@ -21,7 +21,7 @@ PLAYLIST BAR
 
     @include width($space-72, null, $space-72);
 
-    background-color: $border-color;
+    background-color: rgba($primary, $opacity-75);
     display: inline-block;
     margin-right: $space-8;
     text-indent: -9999px;

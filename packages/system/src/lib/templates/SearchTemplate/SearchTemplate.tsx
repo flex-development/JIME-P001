@@ -31,7 +31,7 @@ export const SearchTemplate: TC<SearchTemplateProps> = props => {
   return (
     <Main {...sanitized} data-template={SearchTemplate.template_id}>
       <Section id='template-header'>
-        <Heading className='template-heading'>
+        <Heading className='template-heading template-heading-with-number'>
           Search Results <Span>({`${results.length}`})</Span>
         </Heading>
       </Section>

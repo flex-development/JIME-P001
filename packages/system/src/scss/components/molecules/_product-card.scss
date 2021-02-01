@@ -9,7 +9,6 @@ PRODUCT CARDS
 
   background-color: $product-card-bg;
   border: none;
-  color: $product-card-color;
 
   &-dropdown {
     &-menu {
@@ -25,7 +24,12 @@ PRODUCT CARDS
     }
 
     &-toggle {
+      @include user-event {
+        color: $product-card-color;
+      }
+
       border-bottom: none;
+      color: $product-card-color;
       font-weight: $font-weight-medium;
     }
   }
@@ -44,12 +48,14 @@ PRODUCT CARDS
   }
 
   &-price {
-    color: $product-card-footer-text-color;
+    color: $red;
+    font-weight: $font-weight-bold;
   }
 
   &-title {
-    color: $product-card-footer-title-color;
+    color: $product-card-color;
     display: inline-block;
+    font-weight: $font-weight-semibold;
     letter-spacing: $space-4 / 3;
     margin-bottom: $space-8;
     min-height: $space-32;
@@ -57,8 +63,7 @@ PRODUCT CARDS
 
   &-price,
   &-title {
-    font-size: $product-card-footer-title-font-size;
-    font-weight: $font-weight-semibold;
+    font-size: $font-size-lg;
     margin-bottom: $space-0;
   }
 

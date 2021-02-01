@@ -16,7 +16,7 @@ Next.js powered Shopify storefront
 
 This project is a Next.js powered Shopify storefront for Morena's Kustomz.
 
-Morena's Kustomz is an online store that specializes in "pot head" necessities.
+Morena's Kustomz is an online store that specializes in stoner necessities.
 While enjoying a MySpace inspired UI, users can shop pre-made ash trays,
 grinders, and rolling trays, or have them custom made.
 

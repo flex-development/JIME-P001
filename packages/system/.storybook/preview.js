@@ -19,10 +19,9 @@ export const parameters = {
   a11y: {},
   actions: { argTypesRegex: '^(handle|on).*' },
   backgrounds: {
-    default: 'Dark',
+    default: 'Light',
     values: [
       { name: 'Dark', value: 'var(--mk-dark)' },
-      { name: 'Darker', value: 'var(--mk-darker)' },
       { name: 'Light', value: 'var(--mk-light)' },
       { name: 'Primary', value: 'var(--mk-primary)' },
       { name: 'Secondary', value: 'var(--mk-secondary)' }

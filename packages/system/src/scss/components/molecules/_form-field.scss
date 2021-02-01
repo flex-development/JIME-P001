@@ -11,7 +11,6 @@ FORM FIELDS
     }
 
     display: inline-block;
-    font-size: $font-size-base;
     margin-top: $space-4;
   }
 
@@ -30,6 +29,8 @@ FORM FIELDS
       &-control {
         > * {
           @include fluid-width;
+
+          box-shadow: none;
         }
       }
 
@@ -42,7 +43,7 @@ FORM FIELDS
       @include border($space-0, solid, $ghost);
 
       appearance: textfield;
-      color: $primary;
+      color: $secondary;
       min-height: unset;
       padding: 0;
       text-align: right;

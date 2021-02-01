@@ -16,6 +16,7 @@ import type { NotFound } from '@subdomains/app/types'
  * @param query - Query parameters
  * @param query.handle - Handle of policy to retrieve
  * @param query.fields - Comma-separated list of fields to show
+ * @throws {FeathersErrorJSON}
  */
 const getPolicy = async (
   query: GetPolicyQuery
@@ -30,7 +31,9 @@ const getPolicy = async (
     })
   } catch (error) {
     log('subdomains/cms/utils/getPolicy').error(error)
-    return { notFound: true }
+
+    if (error.code === 404) return { notFound: true }
+    throw error
   }
 }
 

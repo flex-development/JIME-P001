@@ -31,6 +31,10 @@ TYPOGRAPHY
   text-transform: uppercase;
 
   span {
-    color: $primary;
+    color: $secondary;
+  }
+
+  &-with-number {
+    color: $primary !important;
   }
 }

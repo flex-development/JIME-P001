@@ -19,8 +19,8 @@ SHOP HEADER
     .icon {
       @include dimensions($space-18);
 
-      fill: $light;
-      stroke: $light;
+      fill: $primary;
+      stroke: $primary;
       stroke-width: $border-width-lighter;
     }
   }
@@ -43,9 +43,5 @@ SHOP HEADER
 
   &-search-bar {
     @include fluid-width;
-  }
-
-  .cart-preview {
-    color: $light;
   }
 }

@@ -14,7 +14,7 @@ PRODUCT RATING FIELD
       @include dimensions($space-24);
     }
 
-    @include draw-star(rgba($muted, $opacity-75), $space-32);
+    @include draw-star($muted, $space-32);
 
     cursor: pointer;
 

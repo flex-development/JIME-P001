@@ -6,10 +6,10 @@ ERROR TEMPLATE
   &-divider {
     @include margin-x($space-4);
 
-    color: rgba($border-color-inverse, 0.3) !important;
+    color: rgba($dark, $opacity-25) !important;
   }
 
   &-message {
-    color: $light !important;
+    color: $primary !important;
   }
 }

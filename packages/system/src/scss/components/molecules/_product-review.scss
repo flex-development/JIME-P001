@@ -59,6 +59,7 @@ PRODUCT REVIEWS
   }
 
   &-title {
+    color: $primary;
     font-size: $font-size-xl;
     font-weight: $font-weight-bold;
     margin-bottom: $space-12 / 2;
@@ -66,8 +67,6 @@ PRODUCT REVIEWS
 
   &-body,
   &-title {
-    color: $light;
-
     &::first-letter {
       text-transform: capitalize;
     }

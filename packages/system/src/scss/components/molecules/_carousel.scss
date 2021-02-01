@@ -18,10 +18,6 @@ CAROUSEL
     margin-top: $space-8;
     padding-left: 0;
 
-    .active {
-      @include opacity($carousel-indicator-active-opacity);
-    }
-
     .carousel-indicator {
       @include dimensions(
         $carousel-indicator-width,
@@ -30,9 +26,6 @@ CAROUSEL
 
       @include margin-x($carousel-indicator-spacer);
 
-      @include opacity($carousel-indicator-opacity);
-
-      background-color: $carousel-indicator-active-bg;
       background-clip: padding-box;
       border-bottom: $carousel-indicator-hit-area-height solid $ghost;
       border-top: $carousel-indicator-hit-area-height solid $ghost;
@@ -54,8 +47,6 @@ CAROUSEL
     background-color: $carousel-indicator-bg;
 
     &.active {
-      @include opacity(1);
-
       background-color: $carousel-indicator-active-bg;
     }
   }

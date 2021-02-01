@@ -16,6 +16,7 @@ import type { NotFound } from '@subdomains/app/types'
  * @param query - Query parameters
  * @param query.handle - Handle of collection listing to retrieve
  * @param query.fields - Comma-separated list of fields to show
+ * @throws {FeathersErrorJSON}
  */
 const getCollection = async (
   query: GetCollectionQuery
@@ -29,7 +30,9 @@ const getCollection = async (
     })
   } catch (error) {
     log('subdomains/cms/utils/getCollection').error(error)
-    return { notFound: true }
+
+    if (error.code === 404) return { notFound: true }
+    throw error
   }
 }
 

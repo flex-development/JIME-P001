@@ -23,7 +23,6 @@ export type Color =
   | 'curr'
   | 'danger'
   | 'dark'
-  | 'darker'
   | 'ghost'
   | 'gray'
   | 'muted'

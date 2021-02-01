@@ -12,11 +12,10 @@ import { Input } from '@system/lib/atoms/Input'
 import { Paragraph } from '@system/lib/atoms/Paragraph'
 import { ProductHeading } from '@system/lib/atoms/ProductHeading'
 import { ProductImage } from '@system/lib/atoms/ProductImage'
-import { Span } from '@system/lib/atoms/Span'
 import { FormField } from '@system/lib/molecules/FormField'
 import type { EventHandlers } from '@system/types'
 import type { FC } from 'react'
-import { ReactNode, useCallback, useMemo } from 'react'
+import { useCallback, useMemo } from 'react'
 import type { CheckoutLineItemProps } from './CheckoutLineItem.props'
 
 /**
@@ -32,10 +31,6 @@ import type { CheckoutLineItemProps } from './CheckoutLineItem.props'
  * item from their cart.
  *
  * Renders a `Box` component with class `checkout-line-item`.
- *
- * **TODO**:
- *
- * - Calculate line item price with custom properties
  */
 export const CheckoutLineItem: FC<CheckoutLineItemProps> & {
   QUANTITY_LABEL: string
@@ -123,18 +118,7 @@ export const CheckoutLineItem: FC<CheckoutLineItemProps> & {
         />
 
         <Paragraph className='checkout-line-item-attribute'>
-          {((): ReactNode => {
-            if (item.properties?.kpd) {
-              return (
-                <>
-                  Kustom product description:&nbsp;
-                  <Span>{item.properties.kpd}</Span>
-                </>
-              )
-            }
-
-            return 'No Kustomizations.'
-          })()}
+          {item.properties?.kpd ?? 'No Kustomizations.'}
         </Paragraph>
 
         <Form className='checkout-line-item-form' id={`${sanitized.id}-form`}>

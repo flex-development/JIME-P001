@@ -3,29 +3,30 @@ SIDEBAR
 ----------------------------------------------------------------------------- */
 
 .sidebar {
-  @include flex(flex-start, space-between, column);
+  @include flex(flex-start, flex-start, column);
 
-  @include height(95vh);
+  @include height(90vh);
 
   @include overflow-scroll;
 
   background-color: $body-bg;
+  color: $primary;
   font-size: $sidebar-font-size;
-  padding: rem(104) $sidebar-padding-x $sidebar-padding-y;
+  padding: rem(120) $sidebar-padding-x $sidebar-padding-y;
 
   &-footer {
-    @include padding-y($space-24);
+    @include padding-y($space-40, $space-24);
   }
 
   &-menu {
     @include flex-column;
 
+    @include padding-y($space-32);
+
     flex-wrap: nowrap;
 
     .menu-link {
       @include padding-x($space-0);
-
-      font-weight: $font-weight-light;
     }
   }
 
@@ -45,8 +46,9 @@ SIDEBAR
         @include dimensions(rem(210));
       }
 
+      border: $border-width solid $border-color;
       display: inline-block;
-      margin-bottom: $space-36;
+      margin-bottom: $space-72;
 
       img {
         @include fluid-img;

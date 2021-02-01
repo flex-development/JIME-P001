@@ -112,7 +112,7 @@ DROPDOWNS
     .dropdown-item,
     .dropdown-item-text {
       &:not(:last-of-type) {
-        border-bottom: $border-width-light solid rgba($secondary, 0.25);
+        border-bottom: $border-width-light solid rgba($light, $opacity-25);
       }
     }
   }
@@ -120,7 +120,7 @@ DROPDOWNS
   &-toggle {
     @include caret;
 
-    border-bottom: $border-width-light solid rgba($light, 0.25);
+    border-bottom: $border-width-light solid rgba($light, $opacity-25);
     font-size: $dropdown-font-size;
     white-space: nowrap;
 

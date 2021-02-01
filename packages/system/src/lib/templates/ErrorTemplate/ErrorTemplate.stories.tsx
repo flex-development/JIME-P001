@@ -22,9 +22,9 @@ export const NotFound: FCS<ErrorTemplateProps> = args => (
 NotFound.storyName = '404'
 NotFound.args = {
   children: (
-    <Paragraph $color='white'>
+    <Paragraph>
       {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-      Go <Link $color='secondary'>home</Link> and smoke or something.
+      Go <Link>home</Link> and smoke or something.
     </Paragraph>
   ),
   code: 404,

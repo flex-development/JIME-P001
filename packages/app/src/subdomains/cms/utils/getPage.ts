@@ -16,6 +16,7 @@ import type { NotFound } from '@subdomains/app/types'
  * @param query - Query parameters
  * @param query.handle - Handle of page to retrieve
  * @param query.fields - Comma-separated list of fields to show
+ * @throws {FeathersErrorJSON}
  */
 const getPage = async (
   query: GetPageQuery
@@ -26,7 +27,9 @@ const getPage = async (
     return await kapi<GetPageResJSON>({ params, url: `/pages/${handle}` })
   } catch (error) {
     log('subdomains/cms/utils/getPage').error(error)
-    return { notFound: true }
+
+    if (error.code === 404) return { notFound: true }
+    throw error
   }
 }
 

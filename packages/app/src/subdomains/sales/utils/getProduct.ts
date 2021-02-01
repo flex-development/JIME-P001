@@ -17,6 +17,7 @@ import type { NotFound } from '@subdomains/app/types'
  * @param query.handle - Handle of product listing to retrieve
  * @param query.fields - Comma-separated list of fields to show
  * @param query.sku - Generate SEO for a product listing variant
+ * @throws {FeathersErrorJSON}
  */
 const getProduct = async (
   query: GetProductQuery
@@ -27,7 +28,9 @@ const getProduct = async (
     return await kapi<GetProductResJSON>({ params, url: `/products/${handle}` })
   } catch (error) {
     log('subdomains/sales/utils/getProduct').error(error)
-    return { notFound: true }
+
+    if (error.code === 404) return { notFound: true }
+    throw error
   }
 }
 

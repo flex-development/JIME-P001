@@ -1,7 +1,6 @@
 import { Link } from '@components/atoms/Link'
 import type { ParagraphProps } from '@components/atoms/Paragraph'
 import { Paragraph } from '@components/atoms/Paragraph'
-import { EMPTY_SPACE } from '@flex-development/kustomzcore/constants'
 import type { FC } from 'react'
 
 /**
@@ -13,14 +12,9 @@ import type { FC } from 'react'
  * Renders the `NotFound` and `ServerError` page content.
  */
 export const ErrorContent: FC<ParagraphProps> = props => (
-  <Paragraph {...props} $color='white'>
+  <Paragraph {...props}>
     {/* eslint-disable-next-line prettier/prettier */}
-    Go{EMPTY_SPACE}
-    <Link $color='secondary' href='/'>
-      home
-    </Link>
-    {EMPTY_SPACE}
-    and smoke or something.
+    Go <Link href='/'>home</Link> and smoke or something.
   </Paragraph>
 )
 

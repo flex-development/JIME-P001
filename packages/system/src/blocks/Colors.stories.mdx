@@ -29,7 +29,6 @@ import { ColorPalette, ColorItem, Meta } from '@storybook/addon-docs/blocks'
 
 <ColorPalette>
   <ColorItem title='Black' subtitle='$black' colors={['var(--mk-black)']} />
-  <ColorItem title='Gray' subtitle='$gray' colors={['var(--mk-gray)']} />
   <ColorItem title='Muted' subtitle='$muted' colors={['var(--mk-muted)']} />
   <ColorItem title='White' subtitle='$white' colors={['var(--mk-white)']} />
 </ColorPalette>
@@ -58,14 +57,13 @@ $secondary: #ce1127;
 $ghost: transparent;
 
 $danger: $secondary;
-$muted: $gray-400;
+$muted: rgba($dark, 0.375);
 
 $theme-colors: (
   'black': $black,
   danger: $danger,
   dark: $dark,
   ghost: $ghost,
-  'gray': $gray-600,
   light: $light,
   muted: $muted,
   primary: $primary,

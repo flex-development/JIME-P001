@@ -6,7 +6,7 @@
 # See: https://vercel.com/docs/platform/projects#ignored-build-step
 
 # Common files to check for changes in the root of each package
-COMMON_FILES=".vercelignore package.json tsconfig.app.json tsconfig.dev.json tsconfig.json tconfig.prod.json vercel.json"
+COMMON_FILES=".vercelignore package.json tsconfig.app.json tsconfig.dev.json tsconfig.json tsconfig.prod.json vercel.json"
 
 # Check for changes in `packages/core`
 CORE_PACKAGE="../core/src ../core/package.json ../core/tsconfig.json ../core/tsconfig.prod.json"

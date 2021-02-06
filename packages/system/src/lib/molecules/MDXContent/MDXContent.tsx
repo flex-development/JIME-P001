@@ -2,11 +2,14 @@ import type { AnyObject } from '@flex-development/json'
 import { mdx as createMDXElement, MDXProvider } from '@mdx-js/react'
 import { DEFAULT_MDX_CODE } from '@system/config'
 import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
-import { Box, BoxProps } from '@system/lib/atoms/Box'
-import { HeadingProps } from '@system/lib/atoms/Heading'
-import { ListProps } from '@system/lib/atoms/List'
-import { SectionProps } from '@system/lib/atoms/Section'
-import React, { FC, useEffect } from 'react'
+import type { BoxProps } from '@system/lib/atoms/Box'
+import { Box } from '@system/lib/atoms/Box'
+import type { HeadingProps } from '@system/lib/atoms/Heading'
+import type { ImageProps } from '@system/lib/atoms/Image'
+import type { ListProps } from '@system/lib/atoms/List'
+import type { SectionProps } from '@system/lib/atoms/Section'
+import type { FC } from 'react'
+import React, { useEffect } from 'react'
 import { useSetState } from 'react-hanger/array/useSetState'
 import type { MDXContentProps } from './MDXContent.props'
 
@@ -53,7 +56,7 @@ export const MDXContent: FC<MDXContentProps> = (props: MDXContentProps) => {
         h5: (props: HeadingProps) => <atoms.Heading {...props} $size={5} />,
         h6: (props: HeadingProps) => <atoms.Heading {...props} $size={6} />,
         hr: atoms.Divider,
-        img: atoms.Image,
+        img: (props: ImageProps) => <atoms.Image {...props} $fluid />,
         li: atoms.Item,
         main: atoms.Main,
         ol: (props: ListProps) => <atoms.List {...props} is='ol' />,

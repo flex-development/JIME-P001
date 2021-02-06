@@ -3,15 +3,7 @@
 /// @group placeholders
 /// ----------------------------------------------------------------------------
 
-/// @require {mixin} content-section-headings
-/// @require {variable} $space-0
 /// @require {variable} $space-36
 %content-section {
-  @include content-section-headings;
-
   margin-bottom: $space-36;
-
-  p {
-    margin-bottom: $space-0;
-  }
 }

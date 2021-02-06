@@ -16,6 +16,10 @@ SHOP HEADER
   background-color: $body-bg;
   border-bottom: $border-width solid $border-color;
 
+  .cart-preview {
+    font-size: $font-size-sm;
+  }
+
   &-btn {
     $icon-width: em($space-32);
 

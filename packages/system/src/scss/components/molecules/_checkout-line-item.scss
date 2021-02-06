@@ -75,7 +75,7 @@ CHECKOUT LINE ITEM
 
   &-heading {
     @include breakpoint-up(sm) {
-      font-size: em($h3-font-size) !important;
+      font-size: em($font-size-xl * 2) !important;
     }
 
     margin-bottom: $space-0;
@@ -97,6 +97,12 @@ CHECKOUT LINE ITEM
     .form-control:read-only {
       background-color: $input-bg;
       border: none;
+    }
+
+    .form-field-label {
+      @include breakpoint-up(md) {
+        font-size: $font-size-sm;
+      }
     }
   }
 

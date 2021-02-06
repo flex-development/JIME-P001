@@ -144,22 +144,23 @@ $font-weight-base: $font-weight-medium;
 
 $letter-spacing: letter-spacing(-48);
 
-$line-height-base: 1.5;
-$line-height-sm: 1.25;
-$line-height-lg: 2;
+$line-height-base: strip-unit($space-24);
+$line-height-sm: strip-unit($space-20);
+$line-height-lg: strip-unit($space-32);
 
-$h1-font-size: rem(60); // 60px
-$h2-font-size: rem(48); // 48px
-$h3-font-size: rem(40); // 40px
-$h4-font-size: $font-size-xxl;
-$h5-font-size: $font-size-xl;
-$h6-font-size: $font-size-lg;
+$h1-font-size: $space-32;
+$h2-font-size: $space-28;
+$h3-font-size: $font-size-xxl;
+$h4-font-size: $font-size-xl;
+$h5-font-size: $font-size-lg;
+$h6-font-size: $font-size-base;
 
 $headings-margin-bottom: $spacer / 2;
+$headings-margin-top: $space-0;
 $headings-font-family: null;
 $headings-font-style: null;
 $headings-font-weight: $font-weight-bold;
-$headings-line-height: $line-height-sm;
+$headings-line-height: $line-height-base;
 $headings-color: $secondary;
 $headings-text-transform: uppercase;
 
@@ -425,6 +426,7 @@ $stretched-link-z-index: 1;
 // -----------------------------------------------------------------------------
 
 $paragraph-margin-bottom: $space-16;
+$paragraph-margin-top: $space-0;
 
 // -----------------------------------------------------------------------------
 // HR

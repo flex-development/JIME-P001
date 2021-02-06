@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react'
-import { Default, Form } from './TextArea.stories'
+import { Form } from './TextArea.stories'
 
 /**
  * @file Tests - TextArea
@@ -8,7 +8,7 @@ import { Default, Form } from './TextArea.stories'
 
 describe('TextArea', () => {
   it('renders a <textarea> element', () => {
-    const { container } = render(<Default {...Default.args} />)
+    const { container } = render(<Form {...Form.args} />)
 
     expect(container.firstChild?.nodeName.toLowerCase()).toBe('textarea')
   })

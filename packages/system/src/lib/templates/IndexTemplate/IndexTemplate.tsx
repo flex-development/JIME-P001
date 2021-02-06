@@ -50,7 +50,9 @@ export const IndexTemplate: TC<IndexTemplateProps> = props => {
       </Section>
 
       <Section $content id='products'>
-        <Heading $size={2}>{products_section_title}</Heading>
+        <Heading $size={2} className='template-heading'>
+          {products_section_title}
+        </Heading>
         {products_section_text && (
           <Paragraph>{products_section_text}</Paragraph>
         )}
@@ -63,7 +65,9 @@ export const IndexTemplate: TC<IndexTemplateProps> = props => {
       {/* ONLY SHOW PRODUCT REVIEWS SECTION IN DEVELOPMENT */}
       {process.env.NODE_ENV === 'development' && reviews.length !== 0 && (
         <Section $content id='reviews'>
-          <Heading $size={2}>{reviews_section_title}</Heading>
+          <Heading $size={2} className='template-heading'>
+            {reviews_section_title}
+          </Heading>
           <Carousel
             className='index-template-carousel'
             id='product-review-carousel'

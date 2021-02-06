@@ -1,0 +1,70 @@
+/// ----------------------------------------------------------------------------
+/// @name icon-url
+/// @group functions
+/// ----------------------------------------------------------------------------
+
+@use 'escape-svg' as *;
+
+/// Returns the URL for an icon in the `/icons` directory.
+/// @param {String} $name [''] - Name of icon without `icon-` prefix
+/// @param {Number} $width [24] - Icon width
+/// @param {Number} $height [$width] - Icon height
+/// @param {Color} $fill [black] - Icon background color
+/// @param {Color} $stroke [null] - Icon stroke color
+/// @param {Number | String} $stroke-width [null] - Icon stroke width,
+/// @return {URL} SVG URL
+@function icon-url(
+  $name: '',
+  $fill: black,
+  $stroke: null,
+  $stroke-width: null,
+  $width: 24,
+  $height: $width
+) {
+  $url: '';
+
+  $dimensions: "width='#{$width}' height='#{$height}'";
+  $path-properties: "fill='#{$fill}' stroke='#{$stroke}' stroke-width='#{$stroke-width}'";
+
+  @if $name == 'chevron-down-minor' {
+    $url: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 24 24'><defs><clipPath id='a'><rect #{$dimensions} transform='translate(7886 3371)'/></clipPath></defs><g transform='translate(-7886 -3371)' clip-path='url(#a)'><path #{$path-properties} d='M10,14a1,1,0,0,1-.707-.293l-5-5A1,1,0,0,1,5.707,7.293L10,11.586l4.293-4.293a1,1,0,0,1,1.414,1.414l-5,5A1,1,0,0,1,10,14Z' transform='translate(7888 3372)'/></g></svg>");
+  }
+
+  @if $name == 'customers-major' {
+    $url: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 24 24'><defs><clipPath id='a'><rect #{$dimensions} transform='translate(7885 3383)'/></clipPath></defs><g transform='translate(-7885 -3383)' clip-path='url(#a)'><path #{$path-properties} d='M14.145,5.146A4.145,4.145,0,1,1,10,1a4.145,4.145,0,0,1,4.145,4.146ZM2.658,14.232A12.341,12.341,0,0,1,10,11.429a12.35,12.35,0,0,1,7.342,2.8,1.821,1.821,0,0,1,.557,2.02l-.327,1A2.073,2.073,0,0,1,15.6,18.683H4.4a2.073,2.073,0,0,1-1.97-1.429l-.327-1a1.816,1.816,0,0,1,.557-2.02Z' transform='translate(7887 3386)'/></g></svg>");
+  }
+
+  @if $name == 'mobile-cancel-major' {
+    $url: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 24 24'><defs><clipPath id='a'><rect #{$dimensions} transform='translate(7897 3372)'/></clipPath></defs><g transform='translate(-7897 -3372)' clip-path='url(#a)'><path #{$path-properties} d='M11.414,10l6.293-6.293a1,1,0,1,0-1.414-1.414L10,8.586,3.707,2.293A1,1,0,1,0,2.293,3.707L8.586,10,2.293,16.293a1,1,0,1,0,1.414,1.414L10,11.414l6.293,6.293a1,1,0,1,0,1.414-1.414Z' transform='translate(7899 3373.999)'/></g></svg>");
+  }
+
+  @if $name == 'mobile-hamburger-major' {
+    $url: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 24 24'><defs><clipPath id='a'><rect #{$dimensions} transform='translate(7897 3372)'/></clipPath></defs><g transform='translate(-7897 -3372)' clip-path='url(#a)'><path #{$path-properties} d='M15.2,9.2H.8a.8.8,0,1,1,0-1.6H15.2a.8.8,0,1,1,0,1.6Zm0-5.6H.8A.8.8,0,0,1,.8,2H15.2a.8.8,0,1,1,0,1.6Zm0,11.2H.8a.8.8,0,0,1,0-1.6H15.2a.8.8,0,0,1,0,1.6Z' transform='translate(7901 3375.6)'/></g></svg>");
+  }
+
+  @if $name == 'pagination-end-minor' {
+    $url: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 24 24'><defs><clipPath id='a'><rect #{$dimensions} transform='translate(7897 3354)'/></clipPath></defs><g transform='translate(7921 3378) rotate(180)' clip-path='url(#a)'><path #{$path-properties} d='M6,4A1,1,0,0,1,7,5V15a1,1,0,0,1-2,0V5A1,1,0,0,1,6,4Zm7.219.376a1,1,0,1,1,1.562,1.249L11.28,10l3.5,4.375a1,1,0,1,1-1.562,1.249l-4-5a1,1,0,0,1,0-1.25l4-5Z' transform='translate(7899 3356)'/></g></svg>");
+  }
+
+  @if $name == 'pagination-start-minor' {
+    $url: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 24 24'><defs><clipPath id='a'><rect #{$dimensions} transform='translate(7897 3354)'/></clipPath></defs><g transform='translate(-7897 -3354)' clip-path='url(#a)'><path #{$path-properties} d='M6,4A1,1,0,0,1,7,5V15a1,1,0,0,1-2,0V5A1,1,0,0,1,6,4Zm7.219.376a1,1,0,1,1,1.562,1.249L11.28,10l3.5,4.375a1,1,0,1,1-1.562,1.249l-4-5a1,1,0,0,1,0-1.25l4-5Z' transform='translate(7899 3356)'/></g></svg>");
+  }
+
+  @if $name == 'pause-circle-major' {
+    $url: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 24 24'><defs><clipPath id='a'><rect #{$dimensions} transform='translate(7878 3374)'/></clipPath></defs><g transform='translate(-7878 -3374)' clip-path='url(#a)'><path #{$path-properties} d='M0,8A8,8,0,1,0,8,0,8.009,8.009,0,0,0,0,8ZM5.6,5.6a.8.8,0,0,1,1.6,0v4.8a.8.8,0,0,1-1.6,0Zm4-.8a.8.8,0,0,0-.8.8v4.8a.8.8,0,0,0,1.6,0V5.6A.8.8,0,0,0,9.6,4.8Z' transform='translate(7882 3378)' fill-rule='evenodd'/></g></svg>");
+  }
+
+  @if $name == 'play-circle-major' {
+    $url: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 24 24'><defs><clipPath id='a'><rect #{$dimensions} transform='translate(7913 3402)' fill='none'/></clipPath></defs><g transform='translate(-7913 -3402)' clip-path='url(#a)'><path #{$path-properties} d='M8,16A8,8,0,1,0,0,8,8,8,0,0,0,8,16ZM6.4,5.49V10.51a.4.4,0,0,0,.6.347l4.394-2.51a.4.4,0,0,0,0-.694L7,5.142a.4.4,0,0,0-.6.348Z' transform='translate(7917 3406)' fill-rule='evenodd'/></g></svg>");
+  }
+
+  @if $name == 'search-minor' {
+    $url: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><defs><clipPath id='a'><rect #{$dimensions} transform='translate(7897 3372)'/></clipPath></defs><g transform='translate(-7897 -3372)' clip-path='url(#a)'><path #{$path-properties} d='M8,12a4,4,0,1,1,4-4A4,4,0,0,1,8,12Zm9.707,4.293-4.82-4.82a6.012,6.012,0,1,0-1.414,1.414l4.82,4.82a1,1,0,1,0,1.414-1.414Z' transform='translate(7899 3374)'/></g></svg>");
+  }
+
+  @if $name == 'star' {
+    $url: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 24 24'><defs><clipPath id='a'><rect #{$dimensions} transform='translate(0 43)' /></clipPath></defs><g transform='translate(0 -43)' clip-path='url(#a)'><path #{$path-properties} d='M10.958,3.223a1.061,1.061,0,0,1,2.051,0L14.86,9.194h5.972a1.089,1.089,0,0,1,1.074.79,1.166,1.166,0,0,1-.437,1.3l-4.848,3.685,1.851,5.981a1.159,1.159,0,0,1-.388,1.273,1.035,1.035,0,0,1-1.274-.01l-4.858-3.726-4.848,3.7a1.035,1.035,0,0,1-1.274.01,1.159,1.159,0,0,1-.388-1.273L7.3,14.935,2.448,11.25a1.166,1.166,0,0,1-.437-1.3,1.089,1.089,0,0,1,1.074-.79H9.057Z' transform='translate(0.042 42.565)' fill-rule='evenodd'/></g></svg>");
+  }
+
+  @return escape-svg(if($url == '', url($url), $url));
+}

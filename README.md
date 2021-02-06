@@ -38,9 +38,11 @@ package, see below:
 
 ### `next` branch URLs
 
-- **Next.js Storefront**: [`https://morenaskustomz-git-next.flexdevelopment.vercel.app`][4]
+- **Next.js Storefront**:
+  [`https://morenaskustomz-git-next.flexdevelopment.vercel.app`][4]
 - **Serverless API**: [`https://kapi-git-next.flexdevelopment.vercel.app`][5]
-- **Storybook Design System**: [`https://kustomzdesign-git-next.flexdevelopment.vercel.app`][6]
+- **Storybook Design System**:
+  [`https://kustomzdesign-git-next.flexdevelopment.vercel.app`][6]
 
 ### UI Design
 

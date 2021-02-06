@@ -38,8 +38,9 @@ export const CartPreview: FREC<CartPreviewProps> = forwardRef((props, ref) => {
 
   return (
     <Link {...sanitized} $color={$color} target={target} ref={ref}>
-      Cart&nbsp;&nbsp;/&nbsp;&nbsp;
-      <Span>
+      Cart&nbsp;&nbsp;<Span className='cart-preview-divider'>/</Span>
+      &nbsp;&nbsp;
+      <Span className='cart-preview-items'>
         <SpanAnimated>{total}</SpanAnimated>
         {EMPTY_SPACE}
         {`Item${items_total === 1 ? '' : 's'}`}

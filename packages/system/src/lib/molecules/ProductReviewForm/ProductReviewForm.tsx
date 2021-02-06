@@ -12,7 +12,7 @@ import { Select } from '@system/lib/atoms/Select'
 import { Span } from '@system/lib/atoms/Span'
 import { TextArea } from '@system/lib/atoms/TextArea'
 import { FormField } from '@system/lib/molecules/FormField'
-import { ProductRatingField } from '@system/lib/molecules/ProductRatingField'
+import { ProductRating } from '@system/lib/molecules/ProductRating'
 import type { EventHandlers } from '@system/types'
 import type { FC } from 'react'
 import { useSetState } from 'react-hanger'
@@ -87,7 +87,6 @@ export const ProductReviewForm: FC<ProductReviewFormProps> & {
 
       <FormField data-control='select' label='Style'>
         <Select
-          $form
           $options={options}
           data-selected={selected.title}
           name='variant'
@@ -139,7 +138,6 @@ export const ProductReviewForm: FC<ProductReviewFormProps> & {
 
       <FormField data-control='textarea' label='Review Body'>
         <TextArea
-          $form
           data-invalid={errors?.body}
           name='body'
           onChange={({ target: { value } }: EventHandlers.Change.TextArea) => {
@@ -155,8 +153,8 @@ export const ProductReviewForm: FC<ProductReviewFormProps> & {
       </FormField>
 
       <FormField label='Product Rating'>
-        <ProductRatingField
-          className='product-review-form-rating-field'
+        <ProductRating
+          className='product-review-form-rating'
           name='rating'
           onChange={({ target }: EventHandlers.Change.Input) => {
             updateReview({ rating: JSON.parse(target.value) })

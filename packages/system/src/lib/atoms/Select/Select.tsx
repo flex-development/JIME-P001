@@ -12,15 +12,15 @@ import type { SelectProps } from './Select.props'
  */
 
 /**
- * Renders a `<select>` element.
+ * Renders a `<select>` element with the class `form-select`.
  *
  * - https://developer.mozilla.org/docs/Web/HTML/Element/select
  * - https://developer.mozilla.org/docs/Web/API/HTMLSelectElement
  */
 export const Select: FREC<SelectProps> = forwardRef((props, ref) => {
-  const { $form, $options = [], ...rest } = props
+  const { $options = [], ...rest } = props
 
-  const sanitized = useSanitizedProps<'select'>(rest, { 'form-select': $form })
+  const sanitized = useSanitizedProps<'select'>(rest, 'form-select')
 
   return (
     <select {...sanitized} ref={ref}>

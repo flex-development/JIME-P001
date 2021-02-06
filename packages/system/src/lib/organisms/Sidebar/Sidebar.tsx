@@ -1,4 +1,3 @@
-import { CustomersMajor } from '@shopify/polaris-icons'
 import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
 import type { AsideProps } from '@system/lib/atoms/Aside'
 import { AsideAnimated as Aside } from '@system/lib/atoms/Aside'
@@ -41,40 +40,44 @@ export const Sidebar: FREC<SidebarProps> = forwardRef((props, ref) => {
 
   return (
     <Aside {...sanitized} ref={ref}>
-      <Link className='sidebar-profile-link-img' href={img} target='_blank'>
-        <Image
-          alt='Profile image for Morena'
-          height={1920}
-          loading='eager'
-          src={img}
-          srcSet={`
+      <Box className='sidebar-row'>
+        <Box className='sidebar-profile'>
+          <Link className='sidebar-profile-link-img' href={img} target='_blank'>
+            <Image
+              alt='Profile image for Morena'
+              height={1920}
+              loading='eager'
+              src={img}
+              srcSet={`
             ${img},
             ${img_responsive_sm} ${GridBreakpoints.sm}w,
             ${img_responsive_md} ${GridBreakpoints.md}w,
             ${img_responsive_lg} ${GridBreakpoints.lg}w,
             ${img_responsive_xl} ${GridBreakpoints.xl}w
           `.trim()}
-          width={1920}
-        />
-      </Link>
+              width={1920}
+            />
+          </Link>
 
-      <Box className='sidebar-profile-details'>
-        <Paragraph className='sidebar-profile-online-status'>
-          <CustomersMajor className='icon' />
-          Online Now!
-        </Paragraph>
-        <Paragraph className='sidebar-profile-name'>Morena</Paragraph>
-        <Paragraph className='sidebar-profile-age'>
-          {`${age} years old`}
-        </Paragraph>
-        <Paragraph className='sidebar-profile-location'>{location}</Paragraph>
-        <Paragraph className='sidebar-profile-mood'>
-          {`Mood: ${mood}`}
-        </Paragraph>
+          <Box>
+            <Paragraph className='sidebar-profile-online-status'>
+              Online Now!
+            </Paragraph>
+            <Paragraph className='sidebar-profile-name'>Morena</Paragraph>
+            <Paragraph className='sidebar-profile-age'>
+              {`${age} years old`}
+            </Paragraph>
+            <Paragraph className='sidebar-profile-location'>
+              {location}
+            </Paragraph>
+            <Paragraph className='sidebar-profile-mood'>
+              {`Mood: ${mood}`}
+            </Paragraph>
+          </Box>
+        </Box>
+
+        <Menu $items={menu} className='sidebar-menu' />
       </Box>
-
-      <Menu $items={menu} className='sidebar-menu' />
-
       <Footer className='sidebar-footer'>
         <Paragraph className='developer-credit'>
           Made with love by <Link {...developer} />

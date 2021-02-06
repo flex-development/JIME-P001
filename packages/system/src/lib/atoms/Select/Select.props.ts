@@ -11,11 +11,6 @@ import type {
 
 export interface SelectProps extends CPB<'select'>, FormComponentProps {
   /**
-   * If true, render as `Form` element.
-   */
-  $form?: boolean
-
-  /**
    * Array of `Option` component properties.
    *
    * @default []

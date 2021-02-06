@@ -3460,11 +3460,6 @@
   dependencies:
     "@sentry/cli" "^1.58.0"
 
-"@shopify/polaris-icons@^4.1.0":
-  version "4.2.0"
-  resolved "https://registry.yarnpkg.com/@shopify/polaris-icons/-/polaris-icons-4.2.0.tgz#1c5b5b16cc7546bb45c6c78387a3e3ea5e26fc07"
-  integrity sha512-e3F9WRDNs4CpC0za9xOrDqFfYDg29WoXSTU7L4n5+RQsJZV1cPCdkuWS41BcfFwZPbjJYOQSrMI/AyZqzaob6w==
-
 "@shopify/theme-images@^4.1.0":
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/@shopify/theme-images/-/theme-images-4.1.0.tgz#e7406a7a5cec7440f776b7c8523a1dbe882fa02c"

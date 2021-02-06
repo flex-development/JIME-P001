@@ -30,9 +30,9 @@ export const ProductBreadcrumb: FC<ProductBreadcrumbProps> = props => {
         {...collection}
         className={classnames('product-breadcrumb-c', collection.className)}
       />
-      &nbsp;<Span className='product-breadcrumb-divider'>/</Span>&nbsp;
+      &nbsp;<Span className='product-breadcrumb-divider'>|</Span>&nbsp;
       <Paragraph className='product-breadcrumb-p'>{product}</Paragraph>
-      &nbsp;<Span className='product-breadcrumb-divider'>/</Span>&nbsp;
+      &nbsp;<Span className='product-breadcrumb-divider'>|</Span>&nbsp;
       <Paragraph className='product-breadcrumb-v'>{variant}</Paragraph>
     </Box>
   )

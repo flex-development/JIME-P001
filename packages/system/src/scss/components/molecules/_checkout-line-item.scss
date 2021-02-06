@@ -15,7 +15,16 @@ CHECKOUT LINE ITEM
     @include margin-y($space-10, $space-18);
 
     font-weight: $font-weight-semibold;
-    text-transform: uppercase;
+
+    &[data-kpd='false'] {
+      text-transform: uppercase;
+    }
+
+    &[data-kpd='true'] {
+      &::first-letter {
+        text-transform: capitalize;
+      }
+    }
   }
 
   &-btn {
@@ -66,10 +75,18 @@ CHECKOUT LINE ITEM
 
   &-heading {
     @include breakpoint-up(sm) {
-      font-size: em($h3-font-size) !important;
+      font-size: em($font-size-xl * 2) !important;
     }
 
     margin-bottom: $space-0;
+
+    .product-heading-title {
+      @include user-event {
+        color: $secondary;
+      }
+
+      color: $primary;
+    }
   }
 
   &-img {
@@ -80,6 +97,12 @@ CHECKOUT LINE ITEM
     .form-control:read-only {
       background-color: $input-bg;
       border: none;
+    }
+
+    .form-field-label {
+      @include breakpoint-up(md) {
+        font-size: $font-size-sm;
+      }
     }
   }
 

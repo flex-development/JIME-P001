@@ -9,6 +9,7 @@ import { Box } from '@system/lib/atoms/Box'
 import { Button } from '@system/lib/atoms/Button'
 import { Form } from '@system/lib/atoms/Form'
 import { Input } from '@system/lib/atoms/Input'
+import { Link } from '@system/lib/atoms/Link'
 import { Paragraph } from '@system/lib/atoms/Paragraph'
 import { ProductHeading } from '@system/lib/atoms/ProductHeading'
 import { ProductImage } from '@system/lib/atoms/ProductImage'
@@ -98,26 +99,35 @@ export const CheckoutLineItem: FC<CheckoutLineItemProps> & {
   /* Callback version of `onClickRemove` */
   const onClickRemoveCB = useCallback(onClickRemove, [handleRemove])
 
+  const product_link = `/products/${data.product.handle}?sku=${variant.sku}`
+
   return (
     <Box {...sanitized}>
       <Box className='checkout-line-item-col'>
-        <ProductImage
-          className='checkout-line-item-img'
-          layout='intrinsic'
-          loading='eager'
-          product={data.product}
-          variant={variant}
-        />
+        <Link href={product_link} target='_blank'>
+          <ProductImage
+            className='checkout-line-item-img'
+            layout='intrinsic'
+            loading='eager'
+            product={data.product}
+            variant={variant}
+          />
+        </Link>
       </Box>
       <Box className='checkout-line-item-col'>
-        <ProductHeading
-          $size={3}
-          className='checkout-line-item-heading'
-          price={item.quantity * JSON.parse(variant.price)}
-          title={data.product.title}
-        />
+        <Link href={product_link} target='_blank'>
+          <ProductHeading
+            $size={3}
+            className='checkout-line-item-heading'
+            price={item.quantity * JSON.parse(variant.price)}
+            title={data.product.title}
+          />
+        </Link>
 
-        <Paragraph className='checkout-line-item-attribute'>
+        <Paragraph
+          className='checkout-line-item-attribute'
+          data-kpd={!!item.properties?.kpd}
+        >
           {item.properties?.kpd ?? 'No Kustomizations.'}
         </Paragraph>
 

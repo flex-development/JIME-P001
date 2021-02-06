@@ -3,9 +3,13 @@
 /// @group variables-settings
 /// ----------------------------------------------------------------------------
 
-@use '../functions/map-get-multiple' as *;
 @use '../functions/em' as *;
+@use '../functions/icon-url' as *;
+@use '../functions/letter-spacing' as *;
+@use '../functions/map-get-multiple' as *;
 @use '../functions/rem' as *;
+@use '../functions/strip-unit' as *;
+@use '../functions/subtract' as *;
 
 @import 'options';
 
@@ -14,31 +18,25 @@
 // -----------------------------------------------------------------------------
 
 $black: #000;
-$gray-100: #f8f9fa;
-$gray-200: #e9ecef;
-$gray-300: #dee2e6;
-$gray-400: #ced4da;
-$gray-500: #adb5bd;
-$gray-600: #6c757d;
-$gray-700: #495057;
-$gray-800: #343a40;
-$gray-900: #212529;
 $red: #e40923;
+$yellow: #fba422;
 $white: #fff;
 
-$dark: #4a4d5b;
+$dark: #28292c;
 $light: #fcfcfc;
 $primary: #012e65;
 $secondary: #ce1127;
 $ghost: transparent;
 
 $danger: $secondary;
-$muted: rgba($dark, 0.375);
+$disabled: #6c757d;
+$muted: rgba($dark, 0.25);
 
 $theme-colors: (
   'black': $black,
   danger: $danger,
   dark: $dark,
+  disabled: $disabled,
   ghost: $ghost,
   light: $light,
   muted: $muted,
@@ -62,6 +60,7 @@ $space-16: rem(16);
 $space-18: rem(18);
 $space-20: rem(20);
 $space-24: rem(24);
+$space-28: rem(28);
 $space-32: rem(32);
 $space-36: rem(36);
 $space-40: rem(40);
@@ -72,6 +71,9 @@ $space-64: rem(64);
 $space-72: rem(72);
 $space-80: rem(80);
 $space-96: rem(96);
+$space-104: rem(104);
+$space-112: rem(112);
+$space-120: rem(120);
 
 $spacers: (
   auto: auto,
@@ -85,6 +87,7 @@ $spacers: (
   18: $space-18,
   20: $space-20,
   24: $space-24,
+  28: $space-28,
   32: $space-32,
   36: $space-36,
   40: $space-40,
@@ -94,7 +97,10 @@ $spacers: (
   64: $space-64,
   72: $space-72,
   80: $space-80,
-  96: $space-96
+  96: $space-96,
+  104: $space-104,
+  112: $space-112,
+  120: $space-120
 );
 
 $spacer: $space-16;
@@ -136,22 +142,25 @@ $font-weight-black: 900;
 
 $font-weight-base: $font-weight-medium;
 
-$line-height-base: 1.5;
-$line-height-sm: 1.25;
-$line-height-lg: 2;
+$letter-spacing: letter-spacing(-48);
 
-$h1-font-size: rem(60); // 60px
-$h2-font-size: rem(48); // 48px
-$h3-font-size: rem(40); // 40px
-$h4-font-size: $font-size-xxl;
-$h5-font-size: $font-size-xl;
-$h6-font-size: $font-size-lg;
+$line-height-base: strip-unit($space-24);
+$line-height-sm: strip-unit($space-20);
+$line-height-lg: strip-unit($space-32);
+
+$h1-font-size: $space-32;
+$h2-font-size: $space-28;
+$h3-font-size: $font-size-xxl;
+$h4-font-size: $font-size-xl;
+$h5-font-size: $font-size-lg;
+$h6-font-size: $font-size-base;
 
 $headings-margin-bottom: $spacer / 2;
+$headings-margin-top: $space-0;
 $headings-font-family: null;
 $headings-font-style: null;
 $headings-font-weight: $font-weight-bold;
-$headings-line-height: $line-height-sm;
+$headings-line-height: $line-height-base;
 $headings-color: $secondary;
 $headings-text-transform: uppercase;
 
@@ -322,11 +331,11 @@ $border-color-inverse: $light;
 
 $border-width-none: $space-0;
 $border-width-lighter: 0.5px;
-$border-width-light: 1px;
+$border-width-light: 1.5px;
 $border-width-thin: 2px;
 $border-width-thick: 4px;
 
-$border-width: $border-width-thin;
+$border-width: $border-width-light;
 
 $border-radius: $space-4;
 $border-radius-none: $space-0;
@@ -349,10 +358,10 @@ $border-widths: (
 // Box Shadows
 // -----------------------------------------------------------------------------
 
-$box-shadow: 0 0.5rem 1rem rgba($black, 0.15);
-$box-shadow-sm: 0 0.125rem 0.25rem rgba($black, 0.075);
-$box-shadow-lg: 0 1rem 3rem rgba($black, 0.175);
-$box-shadow-inset: inset 0 1px 2px rgba($black, 0.075);
+$box-shadow: 0 0.5rem 1rem rgba($dark, 0.15);
+$box-shadow-sm: 0 0.125rem 0.25rem rgba($dark, 0.075);
+$box-shadow-lg: 0 1rem 3rem rgba($dark, 0.175);
+$box-shadow-inset: inset 0 1px 2px rgba($dark, 0.075);
 
 // -----------------------------------------------------------------------------
 // Z-Index
@@ -399,19 +408,6 @@ $aspect-ratios: (
   '21x9': calc(9 / 21 * 100%)
 );
 
-$star-polygon: polygon(
-  50% 0%,
-  61% 35%,
-  98% 35%,
-  68% 57%,
-  79% 91%,
-  50% 70%,
-  21% 91%,
-  32% 57%,
-  2% 35%,
-  39% 35%
-);
-
 // -----------------------------------------------------------------------------
 // Links
 // -----------------------------------------------------------------------------
@@ -430,6 +426,7 @@ $stretched-link-z-index: 1;
 // -----------------------------------------------------------------------------
 
 $paragraph-margin-bottom: $space-16;
+$paragraph-margin-top: $space-0;
 
 // -----------------------------------------------------------------------------
 // HR
@@ -456,7 +453,7 @@ $btn-font-weight: $font-weight-semibold;
 
 $btn-line-height: $line-height-base;
 
-$btn-border-width: $border-width;
+$btn-border-width: $border-width-thin;
 $btn-border-radius: $border-radius-none;
 
 $btn-box-shadow: inset 0 1px 0 rgba($light, 0.15), 0 1px 1px rgba($dark, 0.075);
@@ -473,7 +470,7 @@ $btn-focus-box-shadow: 0 0 0 $btn-focus-width $btn-focus-color;
 
 $btn-link-color: $link-color;
 $btn-link-hover-color: $link-hover-color;
-$btn-link-disabled-color: $gray-600;
+$btn-link-disabled-color: $disabled;
 
 $btn-white-space: null;
 
@@ -513,23 +510,25 @@ $dropdown-border-width: $border-width;
 $dropdown-inner-border-radius: $space-0;
 $dropdown-divider-bg: $dropdown-border-color;
 $dropdown-divider-margin-y: $spacer / 2;
-$dropdown-box-shadow: $box-shadow;
+$dropdown-box-shadow: 0 $space-12 $space-16 rgba($light, 0.175);
 
 $dropdown-link-color: $light;
 $dropdown-link-hover-color: $light;
-$dropdown-link-hover-bg: rgba($primary, $opacity-75);
+$dropdown-link-hover-bg: $secondary;
 
 $dropdown-link-active-color: $dropdown-link-hover-color;
 $dropdown-link-active-bg: $dropdown-link-hover-bg;
 
-$dropdown-link-disabled-color: $gray-600;
+$dropdown-link-disabled-color: $disabled;
 
 $dropdown-item-padding-y: $space-12;
 $dropdown-item-padding-x: $space-12;
 $dropdown-item-bg: $primary;
 $dropdown-item-hover-bg: $dropdown-link-hover-bg;
 $dropdown-item-color: $dropdown-link-color;
-$dropdown-item-font-size: em(14);
+$dropdown-item-font-size: em($font-size-sm);
+
+$dropdown-item-transition: all 0.125s linear;
 
 $dropdown-header-color: $primary;
 $dropdown-header-hover-color: $dropdown-header-color;
@@ -587,11 +586,11 @@ $input-focus-bg: $input-bg;
 $input-focus-border-color: $input-border-color;
 $input-focus-color: $input-color;
 $input-focus-width: $btn-focus-width;
-$input-focus-box-shadow: $btn-focus-box-shadow;
+$input-focus-box-shadow: 0 0 $space-24 $btn-focus-width $btn-focus-color;
 $input-focus-font-weight: $font-weight-semibold;
 
 $input-plaintext-bg-color: $primary;
-$input-placeholder-color: rgba($input-color, 0.5);
+$input-placeholder-color: rgba($input-color, $opacity-25);
 $input-plaintext-color: $light;
 
 $input-height-border: $input-border-width * 2;
@@ -663,14 +662,14 @@ $form-select-indicator-padding: $space-36;
 $form-select-font-weight: $font-weight-semibold;
 $form-select-line-height: $input-line-height;
 $form-select-color: $light;
-$form-select-disabled-color: $gray-600;
+$form-select-disabled-color: $form-select-color;
 $form-select-bg: $primary;
-$form-select-disabled-bg: $gray-200;
+$form-select-disabled-bg: $disabled;
 $form-select-disabled-border-color: $input-disabled-border-color;
 $form-select-bg-position: right $form-select-padding-x center;
-$form-select-bg-size: 16px 12px; // In pixels because image dimensions
+$form-select-bg-size: $space-24;
 $form-select-indicator-color: $light;
-$form-select-indicator: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='none' stroke='#{$form-select-indicator-color}' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/></svg>");
+$form-select-indicator: icon-url(chevron-down-minor, $light);
 
 $form-select-feedback-icon-padding-end: add(
   1em * 0.75,
@@ -721,24 +720,44 @@ $form-validation-states: (
 // SearchBar
 // -----------------------------------------------------------------------------
 
-$search-bar-control-padding-x: $space-8;
+$search-bar-control-padding-x: $space-12;
 
-$search-bar-bg-position: left $search-bar-control-padding-x center;
-$search-bar-icon-width: 16px;
-$search-bar-icon-height: $search-bar-icon-width;
-$search-bar-bg-size: $search-bar-icon-width $search-bar-icon-height;
-$search-bar-icon-fill-color: $secondary;
-$search-bar-icon-stroke-color: $secondary;
-$search-bar-icon-stroke-width: $border-width-light;
-$search-bar-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'><path fill='#{$search-bar-icon-fill-color}' stroke='#{$search-bar-icon-stroke-color}' stroke-width='#{$search-bar-icon-stroke-width}' d='M2 8c0-3.309 2.691-6 6-6s6 2.691 6 6-2.691 6-6 6-6-2.691-6-6zm17.707 10.293l-5.395-5.396A7.946 7.946 0 0016 8c0-4.411-3.589-8-8-8S0 3.589 0 8s3.589 8 8 8a7.954 7.954 0 004.897-1.688l5.396 5.395A.998.998 0 0020 19a1 1 0 00-.293-.707z'/></svg>");
+$search-bar-control-icon-width: $space-24;
+$search-bar-control-icon-height: $search-bar-control-icon-width;
+$search-bar-control-icon-fill: $secondary;
+$search-bar-control-icon: icon-url(
+  search-minor,
+  $search-bar-control-icon-fill,
+  $search-bar-control-icon-fill,
+  $border-width-lighter,
+  $search-bar-control-icon-width,
+  $search-bar-control-icon-height
+);
+
+$search-bar-control-bg-position: $space-0 center;
+$search-bar-control-bg-size: $search-bar-control-icon-width;
+
+// -----------------------------------------------------------------------------
+// ShopHeader
+// -----------------------------------------------------------------------------
+
+$shop-header-height: $space-60;
+
+// -----------------------------------------------------------------------------
+// PlaylistBar
+// -----------------------------------------------------------------------------
+
+$playlist-bar-height: $space-72;
 
 // -----------------------------------------------------------------------------
 // Sidebar
 // -----------------------------------------------------------------------------
 
-$sidebar-font-size: $font-size-sm;
+$sidebar-height: subtract(100vh, strip-unit($playlist-bar-height));
 
-$sidebar-padding-y: $space-48;
+$sidebar-padding-y-bottom: $space-48;
+$sidebar-padding-y-top: $shop-header-height * 1.75;
+
 $sidebar-padding-x: $space-36;
 
 // -----------------------------------------------------------------------------

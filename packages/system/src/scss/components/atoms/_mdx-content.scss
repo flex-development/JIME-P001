@@ -3,14 +3,5 @@ MDX CONTENT
 ----------------------------------------------------------------------------- */
 
 .mdx-content {
-  @include content-section-headings;
-
-  > div {
-    @include dimensions(100%);
-  }
-
-  > div,
-  > section {
-    @extend %content-section;
-  }
+  @include dimensions(100%);
 }

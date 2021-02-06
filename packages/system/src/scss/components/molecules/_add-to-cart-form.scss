@@ -109,7 +109,7 @@ ADD TO CART FORM
     @extend h3;
 
     @include breakpoint-up(sm) {
-      font-size: em($h3-font-size) !important;
+      font-size: em($font-size-xl * 2) !important;
       padding-top: $space-12;
     }
 

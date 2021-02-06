@@ -123,12 +123,13 @@ FORMS
 
 textarea.form-control {
   @include breakpoint-up(md) {
-    @include height(rem(120));
+    @include height($space-120);
   }
 
   @include height(rem(208));
 
   border-color: $primary;
+  padding: $space-16;
 
   &::placeholder {
     font-weight: $input-focus-font-weight;

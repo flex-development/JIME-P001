@@ -5,11 +5,11 @@ import { EventHandlers } from '@system/types'
 import uniqueId from 'lodash/uniqueId'
 import { FC, useCallback } from 'react'
 import useNumber from 'react-hanger/array/useNumber'
-import type { ProductRatingFieldProps } from './ProductRatingField.props'
+import type { ProductRatingProps } from './ProductRating.props'
 
 /**
- * @file Implementation - ProductRatingField
- * @module lib/molecules/ProductRatingField/impl
+ * @file Implementation - ProductRating
+ * @module lib/molecules/ProductRating/impl
  */
 
 /**
@@ -17,21 +17,18 @@ import type { ProductRatingFieldProps } from './ProductRatingField.props'
  * star and the stars preceding it will be checked. Any stars following the
  * clicked star will be unchecked.
  *
- * Renders a `Box` component with the class `product-rating-field`.
+ * Renders a `Box` component with the class `product-rating`.
  */
-export const ProductRatingField: FC<ProductRatingFieldProps> = props => {
+export const ProductRating: FC<ProductRatingProps> = props => {
   const {
     handleRating,
-    name = ProductRatingField.defaultProps?.name as string,
+    name = ProductRating.defaultProps?.name as string,
     rating: initial_rating,
-    values = ProductRatingField.defaultProps?.values as number[],
+    values = ProductRating.defaultProps?.values as number[],
     ...rest
   } = props
 
-  const sanitized = useSanitizedProps<'div', BoxProps>(
-    rest,
-    'product-rating-field'
-  )
+  const sanitized = useSanitizedProps<'div', BoxProps>(rest, 'product-rating')
 
   const [rating, { setValue: setRating }] = useNumber(
     initial_rating || values[values.length - 1] || 5
@@ -61,9 +58,9 @@ export const ProductRatingField: FC<ProductRatingFieldProps> = props => {
       {values.map(value => (
         <Input
           aria-label={`Give a ${value} star rating`}
-          className='product-rating-field-checkbox'
+          className='product-rating-checkbox'
           defaultChecked={value <= rating}
-          key={uniqueId('product-rating-field-checkbox')}
+          key={uniqueId('product-rating-checkbox')}
           name={name}
           onChange={onChangeRatingCB}
           type='checkbox'
@@ -74,9 +71,9 @@ export const ProductRatingField: FC<ProductRatingFieldProps> = props => {
   )
 }
 
-ProductRatingField.displayName = 'ProductRatingField'
+ProductRating.displayName = 'ProductRating'
 
-ProductRatingField.defaultProps = {
+ProductRating.defaultProps = {
   'aria-label': 'Product rating field',
   name: 'rating',
   values: [1, 2, 3, 4, 5]

@@ -5,6 +5,7 @@ PRODUCT BREADCRUMB
 .product-breadcrumb {
   @include flex(center, flex-start);
 
+  font-weight: $font-weight-semibold;
   text-transform: uppercase;
 
   > * {
@@ -15,20 +16,11 @@ PRODUCT BREADCRUMB
     margin-bottom: $space-0;
   }
 
-  &-c {
-    font-weight: $font-weight-bold;
-  }
-
   &-divider {
-    color: rgba($dark, $opacity-25);
+    color: rgba($dark, $opacity-50);
   }
 
   &-v {
     color: $primary;
-  }
-
-  &-p,
-  &-v {
-    font-weight: $font-weight-semibold;
   }
 }

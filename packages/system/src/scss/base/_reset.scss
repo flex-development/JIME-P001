@@ -28,6 +28,7 @@ body {
   font-family: $font-family-base;
   font-size: $font-size-base;
   font-weight: $font-weight-base;
+  letter-spacing: $letter-spacing;
   line-height: $line-height-base;
   margin: 0; // 4
   text-align: $body-text-align;
@@ -68,7 +69,6 @@ hr:not([size]) {
 
 /* TYPOGRAPHY */
 
-// 1. Remove top margins from headings
 h1,
 h2,
 h3,
@@ -81,23 +81,40 @@ h6 {
   font-weight: $headings-font-weight;
   line-height: $headings-line-height;
   margin-bottom: $headings-margin-bottom;
-  margin-top: 0; // 1
+  margin-top: $headings-margin-top;
+  text-transform: $headings-text-transform;
 }
 
 h1 {
-  font-size: $h1-font-size;
-}
+  @include breakpoint-up(md) {
+    font-size: $h1-font-size;
+  }
 
-h2 {
   font-size: $h2-font-size;
 }
 
-h3 {
+h2 {
+  @include breakpoint-up(md) {
+    font-size: $h2-font-size;
+  }
+
   font-size: $h3-font-size;
 }
 
-h4 {
+h3 {
+  @include breakpoint-up(md) {
+    font-size: $h3-font-size;
+  }
+
   font-size: $h4-font-size;
+}
+
+h4 {
+  @include breakpoint-up(md) {
+    font-size: $h4-font-size;
+  }
+
+  font-size: $h5-font-size;
 }
 
 h5 {
@@ -110,8 +127,8 @@ h6 {
 
 // Reset margins on paragraphs
 p {
-  margin-top: 0;
   margin-bottom: $paragraph-margin-bottom;
+  margin-top: $paragraph-margin-top;
 }
 
 /* LISTS */

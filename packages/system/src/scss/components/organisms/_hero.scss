@@ -4,7 +4,7 @@ HERO
 
 .hero {
   @include breakpoint-up(md) {
-    min-height: rem(768);
+    min-height: rem(600);
   }
 
   @include flex(center, center, column);
@@ -30,21 +30,27 @@ HERO
   }
 
   &-title {
-    @include breakpoint-up(md) {
-      font-size: $font-size-base * 4;
+    @include breakpoint-up(sm) {
+      font-size: $space-48;
       margin-bottom: $space-0;
     }
 
+    @include breakpoint-up(md) {
+      font-size: $space-64;
+    }
+
     @include breakpoint-up(lg) {
-      font-size: $font-size-base * 5;
+      font-size: $space-80;
     }
 
     @include breakpoint-up(xl) {
-      font-size: $font-size-base * 6;
+      font-size: $space-96;
     }
 
+    @include no-breaking;
+
     color: $headings-color;
-    font-size: rem(42);
+    font-size: $space-36;
     font-family: $font-family-sans-serif-special;
     margin-bottom: $space-12;
   }

@@ -10,17 +10,15 @@ import type { OptionProps } from './Option.props'
  */
 
 /**
- * Renders an `<option>` element.
+ * Renders an `<option>` element with the class `form-option`.
  *
  * - https://developer.mozilla.org/docs/Web/HTML/Element/option
  * - https://developer.mozilla.org/docs/Web/API/HTMLOptionElement
  */
 export const Option: FREC<OptionProps> = forwardRef((props, ref) => {
-  const { $form, ...rest } = props
-
   const sanitized = useSanitizedProps<'option'>(
-    { ...rest, 'aria-label': props['aria-label'] || props.label },
-    { 'form-option': $form }
+    { ...props, 'aria-label': props['aria-label'] || props.label },
+    'form-option'
   )
 
   return <option {...sanitized} ref={ref} />

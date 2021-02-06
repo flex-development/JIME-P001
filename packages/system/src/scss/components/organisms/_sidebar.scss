@@ -3,16 +3,16 @@ SIDEBAR
 ----------------------------------------------------------------------------- */
 
 .sidebar {
-  @include flex(flex-start, flex-start, column);
+  @include flex(flex-start, space-between, column);
 
-  @include height(90vh);
+  @include height($sidebar-height, $sidebar-height, $sidebar-height);
 
   @include overflow-scroll;
 
   background-color: $body-bg;
   color: $primary;
-  font-size: $sidebar-font-size;
-  padding: rem(120) $sidebar-padding-x $sidebar-padding-y;
+  font-size: em($font-size-sm);
+  padding: $sidebar-padding-y-top $sidebar-padding-x $sidebar-padding-y-bottom;
 
   &-footer {
     @include padding-y($space-40, $space-24);
@@ -21,9 +21,8 @@ SIDEBAR
   &-menu {
     @include flex-column;
 
-    @include padding-y($space-32);
-
     flex-wrap: nowrap;
+    padding-bottom: $space-32;
 
     .menu-link {
       @include padding-x($space-0);
@@ -31,6 +30,19 @@ SIDEBAR
   }
 
   &-profile {
+    @include breakpoint-up(sm) {
+      flex-direction: row;
+    }
+
+    @include flex(center, flex-start, column);
+
+    font-weight: $font-weight-semibold;
+    margin-bottom: em($space-72);
+
+    > div {
+      @include fluid-width;
+    }
+
     p {
       &:not(:last-of-type) {
         margin-bottom: $space-8;
@@ -43,12 +55,20 @@ SIDEBAR
 
     &-link-img {
       @include breakpoint-up(sm) {
-        @include dimensions(rem(210));
+        $dimensions: rem(180);
+
+        @include height($dimensions, $dimensions, $dimensions);
+
+        @include width($dimensions, $dimensions, $dimensions);
+
+        margin-bottom: $space-0;
+        margin-right: $space-24;
       }
 
-      border: $border-width solid $border-color;
+      border: $border-width-thin solid $border-color;
       display: inline-block;
-      margin-bottom: $space-72;
+      margin-bottom: $space-32;
+      margin-right: $space-0;
 
       img {
         @include fluid-img;
@@ -56,22 +76,26 @@ SIDEBAR
     }
 
     &-name {
-      font-size: $font-size-xl;
+      color: $secondary;
+      font-size: em($font-size-xl);
     }
 
     &-online-status {
-      display: inline-flex;
+      $icon-width: $space-36;
+      $icon: icon-url(customers-major, $secondary, null, null, $icon-width);
 
-      .icon {
-        fill: $secondary;
-        margin-right: $space-12 / 2;
-      }
-    }
+      @include bkg-img($icon, contain, left);
 
-    &-name,
-    &-online-status {
-      font-weight: $font-weight-bold;
+      @include no-breaking;
+
+      font-size: $font-size-base;
+      padding-left: $space-28;
     }
+  }
+
+  &-profile,
+  &-row {
+    @include fluid-width;
   }
 
   .developer-credit {

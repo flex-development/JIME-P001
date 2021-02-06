@@ -5,21 +5,32 @@ PLAYLIST BAR
 .playlist-bar {
   @include flex(center, space-between, row);
 
+  @include height(
+    $playlist-bar-height,
+    $playlist-bar-height,
+    $playlist-bar-height
+  );
+
   background-color: $primary;
   border-top: $border-width solid $border-color;
   color: $light;
   overflow-y: hidden;
+  padding-right: $space-24;
 
   &-artwork {
     @include breakpoint-up(sm) {
       margin-right: $space-12;
     }
 
-    @include height($space-72, null, $space-72);
+    @include fluid-height;
 
     @include position-relative;
 
-    @include width($space-72, null, $space-72);
+    @include width(
+      $playlist-bar-height,
+      $playlist-bar-height,
+      $playlist-bar-height
+    );
 
     background-color: rgba($primary, $opacity-75);
     display: inline-block;
@@ -46,24 +57,66 @@ PLAYLIST BAR
     display: flex;
   }
 
-  &-control {
-    &-playback {
-      @include margin-x($space-8);
+  &-btn {
+    $icon-fill: $light;
+    $icon-width: $space-32;
 
-      font-size: $font-size-xxl;
-    }
+    @include height($icon-width, $icon-width, $icon-width);
 
-    &-skip {
-      font-size: $font-size-base;
-    }
+    @include width($icon-width, $icon-width, $icon-width);
 
-    &-playback,
-    &-skip {
-      .icon {
-        @include dimensions(rem(26));
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+
+    &[name='playback'] {
+      $icon-width: $space-40;
+
+      @include height($icon-width, $icon-width, $icon-width);
+
+      @include padding-x($space-8);
+
+      @include width($icon-width, $icon-width, $icon-width);
+
+      &[value='paused'] {
+        background-image: icon-url(
+          play-circle-major,
+          $icon-fill,
+          null,
+          null,
+          $icon-width
+        );
       }
 
-      display: inline-flex;
+      &[value='playing'] {
+        background-image: icon-url(
+          pause-circle-major,
+          $icon-fill,
+          null,
+          null,
+          $icon-width
+        );
+      }
+    }
+
+    &[name='to-next-song'] {
+      background-image: icon-url(
+        pagination-end-minor,
+        $icon-fill,
+        null,
+        null,
+        $icon-width
+      );
+    }
+
+    &[name='to-previous-song'] {
+      background-image: icon-url(
+        pagination-start-minor,
+        $icon-fill,
+        null,
+        null,
+        $icon-width
+      );
     }
   }
 

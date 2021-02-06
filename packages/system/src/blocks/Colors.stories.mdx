@@ -29,6 +29,11 @@ import { ColorPalette, ColorItem, Meta } from '@storybook/addon-docs/blocks'
 
 <ColorPalette>
   <ColorItem title='Black' subtitle='$black' colors={['var(--mk-black)']} />
+  <ColorItem
+    title='Disabled'
+    subtitle='$disabled'
+    colors={['var(--mk-disabled)']}
+  />
   <ColorItem title='Muted' subtitle='$muted' colors={['var(--mk-muted)']} />
   <ColorItem title='White' subtitle='$white' colors={['var(--mk-white)']} />
 </ColorPalette>
@@ -39,30 +44,25 @@ File: `packages/system/src/scss/variables/_settings.scss`
 
 ```scss
 $black: #000;
-$gray-100: #f8f9fa;
-$gray-200: #e9ecef;
-$gray-300: #dee2e6;
-$gray-400: #ced4da;
-$gray-500: #adb5bd;
-$gray-600: #6c757d;
-$gray-700: #495057;
-$gray-800: #343a40;
-$gray-900: #212529;
+$red: #e40923;
+$yellow: #fba422;
 $white: #fff;
 
-$dark: #4a4d5b;
+$dark: #28292c;
 $light: #fcfcfc;
 $primary: #012e65;
 $secondary: #ce1127;
 $ghost: transparent;
 
 $danger: $secondary;
+$disabled: #6c757d;
 $muted: rgba($dark, 0.375);
 
 $theme-colors: (
   'black': $black,
   danger: $danger,
   dark: $dark,
+  disabled: $disabled,
   ghost: $ghost,
   light: $light,
   muted: $muted,

@@ -16,10 +16,10 @@ import type { TextAreaProps } from '././TextArea.props'
  * - https://developer.mozilla.org/docs/Web/API/HTMLTextAreaElement
  */
 export const TextArea: FREC<TextAreaProps> = forwardRef((props, ref) => {
-  const { $form, $invalid, ...rest } = props
+  const { $invalid, ...rest } = props
 
   const sanitized = useSanitizedProps<'textarea'>(rest, {
-    'form-control': $form,
+    'form-control': true,
     'is-invalid': $invalid
   })
 

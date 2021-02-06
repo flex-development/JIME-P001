@@ -17,6 +17,6 @@ export default {
 export const Default: FCS<HeroProps> = args => <Hero {...args} />
 
 Default.args = {
-  subtitle: 'Kustom made pot head necessities.',
+  subtitle: '♡ Kustom made stoner necessities ♡',
   title: 'Morenas Kustomz'
 }

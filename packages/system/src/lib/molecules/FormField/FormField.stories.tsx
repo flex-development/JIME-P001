@@ -33,7 +33,6 @@ export const ProductVariant: FCS<FormFieldProps> = args => (
 ProductVariant.args = {
   children: (
     <Select
-      $form
       $options={product_options}
       name='variant'
       placeholder='Select a product variant'
@@ -57,7 +56,6 @@ export const ReviewBody: FCS<FormFieldProps> = args => <FormField {...args} />
 ReviewBody.args = {
   children: (
     <TextArea
-      $form
       name='body'
       placeholder='Blue bottle single-origin coffee next level taxidermy four loko seitan cupidatat flannel. Cred asymmetrical literally vexillologist cliche do distillery hashtag raw denim crucifix everyday carry affogato austin. Williamsburg jean shorts raclette, aesthetic quinoa dolore hammock echo park taxidermy messenger bag.'
     />

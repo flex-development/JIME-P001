@@ -16,9 +16,9 @@ export default {
   title: 'Library/Atoms/Select'
 }
 
-export const Default: FCS<SelectProps> = args => <Select {...args} />
+export const Form: FCS<SelectProps> = args => <Select {...args} />
 
-Default.args = {
+Form.args = {
   $options: [
     {
       label: 'Option 1',
@@ -33,11 +33,4 @@ Default.args = {
       value: 3
     }
   ]
-}
-
-export const Form: FCS<SelectProps> = args => <Select {...args} />
-
-Form.args = {
-  $form: true,
-  $options: Default.args.$options
 }

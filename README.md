@@ -38,9 +38,11 @@ package, see below:
 
 ### `next` branch URLs
 
-- **Next.js Storefront**: [`https://morenaskustomz-git-next.flexdevelopment.vercel.app`][4]
+- **Next.js Storefront**:
+  [`https://morenaskustomz-git-next.flexdevelopment.vercel.app`][4]
 - **Serverless API**: [`https://kapi-git-next.flexdevelopment.vercel.app`][5]
-- **Storybook Design System**: [`https://kustomzdesign-git-next.flexdevelopment.vercel.app`][6]
+- **Storybook Design System**:
+  [`https://kustomzdesign-git-next.flexdevelopment.vercel.app`][6]
 
 ### UI Design
 
@@ -54,7 +56,7 @@ Morena's Kustomz was designed using [Adobe XD][7].
 - [Next.js][10] - Framework for building React applications
 - [Shopify][11] - eCommerce Platform
 - [Storybook][12] - UI development, testing, and documentation tool
-- [TypeScript][12] - Typed JavaScript
+- [TypeScript][13] - Typed JavaScript
 - [Vercel][14] - Hosting platform for static sites and serverless functions
 
 [1]: https://morenaskustomz.com

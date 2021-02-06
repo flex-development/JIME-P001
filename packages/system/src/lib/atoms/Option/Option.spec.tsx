@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react'
-import { Default } from './Option.stories'
+import { Form } from './Option.stories'
 
 /**
  * @file Tests - Option
@@ -8,14 +8,14 @@ import { Default } from './Option.stories'
 
 describe('Option', () => {
   it('renders an <option> element', () => {
-    const { container } = render(<Default {...Default.args} />)
+    const { container } = render(<Form {...Form.args} />)
 
     expect(container.firstChild?.nodeName.toLowerCase()).toBe('option')
   })
 
   it('renders the label text', () => {
-    const { getByLabelText } = render(<Default {...Default.args} />)
+    const { getByLabelText } = render(<Form {...Form.args} />)
 
-    expect(getByLabelText(Default.args.label as string)).toBeInTheDocument()
+    expect(getByLabelText(Form.args.label as string)).toBeInTheDocument()
   })
 })

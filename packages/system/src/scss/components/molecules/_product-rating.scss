@@ -1,0 +1,34 @@
+/* -----------------------------------------------------------------------------
+PRODUCT RATING
+----------------------------------------------------------------------------- */
+
+.product-rating {
+  @include flex(center, flex-start);
+
+  @include fluid-width;
+
+  &-checkbox {
+    $icon-width: $space-32;
+    $icon: icon-url(star, $muted, null, null, $icon-width);
+
+    @include bkg-img($icon, contain, center);
+
+    @include height($icon-width, $icon-width, $icon-width);
+
+    @include width($icon-width, $icon-width, $icon-width);
+
+    background-color: $ghost !important;
+    border: none !important;
+    cursor: pointer;
+
+    &:not(:last-of-type) {
+      margin-right: $space-12;
+    }
+
+    &:checked {
+      $icon: icon-url(star, $yellow, null, null, $icon-width);
+
+      background-image: $icon !important;
+    }
+  }
+}

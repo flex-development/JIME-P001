@@ -1,4 +1,3 @@
-import { MobileHamburgerMajor } from '@shopify/polaris-icons'
 import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
 import { Box } from '@system/lib/atoms/Box'
 import { Button } from '@system/lib/atoms/Button'
@@ -42,12 +41,11 @@ export const ShopHeader: FC<ShopHeaderProps> = props => {
       <Box className='shop-header-col'>
         <Button
           $variant='ghost'
+          aria-label='Toggle sidebar display'
           className='shop-header-btn'
           name='toggle-sidebar-display'
           onClick={handleSidebar}
-        >
-          <MobileHamburgerMajor className='icon' />
-        </Button>
+        />
         <SearchBar
           className='shop-header-search-bar'
           handleSearch={handleSearch}

@@ -8,11 +8,6 @@ import type { ComponentPropsBase } from '@system/types'
 
 export interface OptionProps extends ComponentPropsBase<'option'> {
   /**
-   * If true, render as `Form` element.
-   */
-  $form?: boolean
-
-  /**
    * If true, make option uncheckable.
    */
   disabled?: boolean

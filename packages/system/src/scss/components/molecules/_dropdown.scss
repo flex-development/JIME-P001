@@ -11,6 +11,8 @@ DROPDOWNS
   }
 
   &-item {
+    @include fluid-width;
+
     @include no-breaking;
 
     @include user-event {
@@ -31,7 +33,7 @@ DROPDOWNS
     text-align: inherit;
     text-decoration: if($link-decoration == none, null, none);
     text-transform: uppercase;
-    width: 100%;
+    transition: $dropdown-item-transition;
 
     @if $dropdown-padding-y == 0 {
       &:first-child {

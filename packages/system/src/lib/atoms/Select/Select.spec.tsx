@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react'
-import { Default, Form } from './Select.stories'
+import { Form } from './Select.stories'
 
 /**
  * @file Tests - Select
@@ -8,13 +8,13 @@ import { Default, Form } from './Select.stories'
 
 describe('Select', () => {
   it('renders a <select> element', () => {
-    const { container } = render(<Default {...Default.args} />)
+    const { container } = render(<Form {...Form.args} />)
 
     expect(container.firstChild?.nodeName.toLowerCase()).toBe('select')
   })
 
   it('renders with nested elements', () => {
-    const { container } = render(<Default {...Default.args} />)
+    const { container } = render(<Form {...Form.args} />)
 
     expect(container.firstChild).not.toBeEmptyDOMElement()
 

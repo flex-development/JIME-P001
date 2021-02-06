@@ -1,11 +1,5 @@
 import type { AnimatedProps } from '@react-spring/web'
 import { useSpring } from '@react-spring/web'
-import {
-  PaginationEndMinor,
-  PaginationStartMinor,
-  PauseCircleMajor,
-  PlayCircleMajor
-} from '@shopify/polaris-icons'
 import { IMAGE_PLACEHOLDER_URL } from '@system/config/constants'
 import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
 import { useSongAttributes } from '@system/hooks/useSongAttributes'
@@ -26,7 +20,7 @@ import { useCallback, useMemo } from 'react'
 import { useBoolean } from 'react-hanger/array/useBoolean'
 import useAudio from 'react-use/useAudio'
 import useEvent from 'react-use/useEvent'
-import type { PlaylistBarProps } from '././PlaylistBar.props'
+import type { PlaylistBarProps } from './PlaylistBar.props'
 
 /**
  * @file Implementation - PlaylistBar
@@ -117,7 +111,7 @@ export const PlaylistBar: FC<PlaylistBarProps> = props => {
 
     if (isFunction(handlePlayback)) handlePlayback(event)
 
-    if (event.target.value === 'pause') return audio_ref.current?.play()
+    if (event.target.value === 'paused') return audio_ref.current?.play()
     return audio_ref.current?.pause()
   }
 
@@ -175,38 +169,29 @@ export const PlaylistBar: FC<PlaylistBarProps> = props => {
       <Box className='playlist-bar-col'>
         <Button
           $variant='ghost'
-          className='playlist-bar-control-skip'
+          aria-label='Play previous song'
+          className='playlist-bar-btn'
           disabled={!artworkReady || !isAudioReadyCB()}
           name='to-previous-song'
           onClick={onClickSkipCB}
-        >
-          <PaginationStartMinor className='icon' />
-        </Button>
+        />
         <Button
           $variant='ghost'
-          className='playlist-bar-control-playback'
+          aria-label='Toggle audio playback'
+          className='playlist-bar-btn'
           disabled={!artworkReady || !isAudioReadyCB()}
           onClick={onClickPlaybackCB}
-          name='play-pause-song'
-          value={audio_state.paused ? 'pause' : 'play'}
-        >
-          {(() => {
-            if (!isAudioReadyCB() || audio_state.paused) {
-              return <PlayCircleMajor className='icon' />
-            }
-
-            return <PauseCircleMajor className='icon' />
-          })()}
-        </Button>
+          name='playback'
+          value={!isAudioReadyCB() || audio_state.paused ? 'paused' : 'playing'}
+        />
         <Button
           $variant='ghost'
-          className='playlist-bar-control-skip'
+          aria-label='Play next song'
+          className='playlist-bar-btn'
           disabled={!artworkReady || !isAudioReadyCB()}
           name='to-next-song'
           onClick={onClickSkipCB}
-        >
-          <PaginationEndMinor className='icon' />
-        </Button>
+        />
       </Box>
 
       {audio}

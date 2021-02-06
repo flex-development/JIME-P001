@@ -181,7 +181,6 @@ export const AddToCartForm: FC<AddToCartFormProps> & {
         {/* Main form control container */}
         <Box className='add-to-cart-form-controls'>
           <Select
-            $form
             $options={product_variant_options}
             aria-label='Product variant selection'
             className='add-to-cart-form-control'
@@ -211,7 +210,6 @@ export const AddToCartForm: FC<AddToCartFormProps> & {
 
         {/* Only visible for "KUSTOMZ" product - sync with Shopify */}
         <TextArea
-          $form
           aria-label='Kustom product description'
           className='add-to-cart-form-control'
           disabled={product.handle !== 'kustomz'}

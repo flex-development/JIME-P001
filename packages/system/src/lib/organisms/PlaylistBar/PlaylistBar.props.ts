@@ -25,8 +25,8 @@ export interface PlaylistBarProps extends SectionProps {
    * Playback button handler.
    *
    * The playback state can be accessed by evaluating `event.target.value`.
-   * If a song is playing, the value will be 'play', otherwise it will be
-   * 'pause'.
+   * If a song is playing, the value will be 'playing', otherwise it will be
+   * 'paused'.
    */
   handlePlayback?(event: EventHandlers.Click.Button): ANYTHING
 

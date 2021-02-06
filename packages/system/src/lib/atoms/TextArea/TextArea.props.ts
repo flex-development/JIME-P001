@@ -10,11 +10,6 @@ import type {
 
 export interface TextAreaProps extends CPB<'textarea'>, FormComponentProps {
   /**
-   * If true, render as `Form` element.
-   */
-  $form?: boolean
-
-  /**
    * If true, render with red border.
    */
   $invalid?: boolean

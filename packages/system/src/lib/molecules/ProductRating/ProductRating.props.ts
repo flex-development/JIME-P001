@@ -3,11 +3,11 @@ import { BoxProps } from '@system/lib/atoms'
 import { EventHandlers } from '@system/types'
 
 /**
- * @file Component Props - ProductRatingField
- * @module lib/molecules/ProductRatingField/props
+ * @file Component Props - ProductRating
+ * @module lib/molecules/ProductRating/props
  */
 
-export interface ProductRatingFieldProps extends BoxProps {
+export interface ProductRatingProps extends BoxProps {
   /**
    * Accessible name for assistive technologies.
    */

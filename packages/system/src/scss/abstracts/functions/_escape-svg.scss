@@ -4,15 +4,17 @@
 /// @link https://codepen.io/kevinweber/pen/dXWoRw
 /// ----------------------------------------------------------------------------
 
+@use '../variables/options' as options;
 @use 'str-replace' as *;
 
 /// Requires the use of quotes around data URIs.
+/// @require {variable} $escaped-characters
 /// @param {String} $string - SVG string to escape
 /// @return {String} Encoded SVG string
 @function escape-svg($string: '') {
   // Only escape string if SVG
   @if str-index($string, 'data:image/svg+xml') {
-    @each $char, $encoded in $escaped-characters {
+    @each $char, $encoded in options.$escaped-characters {
       // Do not escape the url brackets
       $url-bracket: str-index($string, 'url(') == 1;
 

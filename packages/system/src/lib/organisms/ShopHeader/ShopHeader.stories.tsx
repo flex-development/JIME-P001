@@ -10,7 +10,8 @@ export default {
   args: {
     style: {
       maxWidth: '1434px',
-      padding: '20px 0'
+      paddingBottom: '20px',
+      paddingTop: '20px'
     }
   },
   component: ShopHeader,

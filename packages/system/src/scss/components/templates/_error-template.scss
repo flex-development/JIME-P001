@@ -6,7 +6,7 @@ ERROR TEMPLATE
   &-divider {
     @include margin-x($space-4);
 
-    color: rgba($dark, $opacity-25) !important;
+    color: $muted !important;
   }
 
   &-message {

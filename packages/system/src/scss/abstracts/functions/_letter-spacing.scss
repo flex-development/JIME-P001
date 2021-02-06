@@ -1,0 +1,10 @@
+/// ----------------------------------------------------------------------------
+/// @name letter-spacing
+/// @group functions
+/// ----------------------------------------------------------------------------
+
+/// Returns the CSS equivalent of an Adobe XD character spacing value.
+/// @param {Number} $spacing [0] - Value to convert
+@function letter-spacing($spacing: 0) {
+  @return 1em * ($spacing / 1000);
+}

@@ -15,7 +15,16 @@ CHECKOUT LINE ITEM
     @include margin-y($space-10, $space-18);
 
     font-weight: $font-weight-semibold;
-    text-transform: uppercase;
+
+    &[data-kpd='false'] {
+      text-transform: uppercase;
+    }
+
+    &[data-kpd='true'] {
+      &::first-letter {
+        text-transform: capitalize;
+      }
+    }
   }
 
   &-btn {
@@ -70,6 +79,14 @@ CHECKOUT LINE ITEM
     }
 
     margin-bottom: $space-0;
+
+    .product-heading-title {
+      @include user-event {
+        color: $secondary;
+      }
+
+      color: $primary;
+    }
   }
 
   &-img {

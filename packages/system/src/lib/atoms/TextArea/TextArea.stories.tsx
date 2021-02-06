@@ -14,15 +14,8 @@ export default {
   title: 'Library/Atoms/TextArea'
 }
 
-export const Default: FCS<TextAreaProps> = args => <TextArea {...args} />
-
-Default.args = {
-  placeholder: 'A hint to the user of what can be entered in the control'
-}
-
 export const Form: FCS<TextAreaProps> = args => <TextArea {...args} />
 
 Form.args = {
-  $form: true,
-  placeholder: Default.args.placeholder
+  placeholder: 'A hint to the user of what can be entered in the control'
 }

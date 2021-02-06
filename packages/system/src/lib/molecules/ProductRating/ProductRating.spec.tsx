@@ -1,20 +1,20 @@
 import { fireEvent, render, screen } from '@testing-library/react'
-import { ProductRatingField } from './ProductRatingField'
-import { Default } from './ProductRatingField.stories'
+import { ProductRating } from './ProductRating'
+import { Default } from './ProductRating.stories'
 
 /**
- * @file Tests - ProductRatingField
- * @module lib/molecules/ProductRatingField/spec
+ * @file Tests - ProductRating
+ * @module lib/molecules/ProductRating/spec
  */
 
-describe('ProductRatingField', () => {
-  const { defaultProps } = ProductRatingField
+describe('ProductRating', () => {
+  const { defaultProps } = ProductRating
   const DEFAULT_PROPS_VALUES = defaultProps?.values as number[]
 
-  it('renders with class "product-rating-field"', () => {
+  it('renders with class "product-rating"', () => {
     const { container } = render(<Default {...Default.args} />)
 
-    expect(container.firstChild).toHaveClass('product-rating-field')
+    expect(container.firstChild).toHaveClass('product-rating')
   })
 
   it('renders with inner fields', () => {

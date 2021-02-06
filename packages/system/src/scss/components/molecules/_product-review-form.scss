@@ -23,6 +23,10 @@ PRODUCT REVIEW FORM
     margin-top: $space-12;
   }
 
+  &-rating {
+    justify-content: space-between;
+  }
+
   &-text {
     @include margin-y($space-12);
 

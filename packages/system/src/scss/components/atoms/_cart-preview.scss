@@ -3,10 +3,6 @@ CART PREVIEW
 ----------------------------------------------------------------------------- */
 
 .cart-preview {
-  @include breakpoint-up(md) {
-    font-size: $font-size-base;
-  }
-
   @include height(max-content);
 
   @include no-breaking;
@@ -15,11 +11,16 @@ CART PREVIEW
     color: $primary !important;
   }
 
-  font-size: $font-size-sm;
+  color: $primary;
+  font-weight: $font-weight-semibold;
   text-align: right;
   text-transform: uppercase;
 
-  span {
-    font-weight: $font-weight-semibold;
+  &-divider {
+    color: $border-color;
+  }
+
+  &-items {
+    color: $secondary;
   }
 }

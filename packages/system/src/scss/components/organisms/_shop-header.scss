@@ -5,24 +5,40 @@ SHOP HEADER
 .shop-header {
   @include flex(center, space-between);
 
+  @include height(
+    $shop-header-height,
+    $shop-header-height,
+    $shop-header-height
+  );
+
+  @include padding-x($space-24, $space-48);
+
   background-color: $body-bg;
   border-bottom: $border-width solid $border-color;
 
   &-btn {
+    $icon-width: em($space-32);
+
+    $icon: icon-url(
+      mobile-hamburger-major,
+      $primary,
+      $primary,
+      $border-width-lighter,
+      $icon-width,
+      $icon-width
+    );
+
+    @include bkg-img($icon, contain, center);
+
     @include breakpoint-up(sm) {
       margin-right: $space-24;
-      padding-top: 0.125em;
     }
+
+    @include height($icon-width, $icon-width, $icon-width);
+
+    @include width($icon-width, $icon-width, $icon-width);
 
     margin-right: $space-8;
-
-    .icon {
-      @include dimensions($space-18);
-
-      fill: $primary;
-      stroke: $primary;
-      stroke-width: $border-width-lighter;
-    }
   }
 
   &-col {

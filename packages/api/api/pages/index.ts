@@ -1,18 +1,14 @@
 import type { IPage as Hit } from '@flex-development/kustomzcore'
-import { axios, createError } from '@flex-development/kustomzcore'
+import { axios } from '@flex-development/kustomzcore'
 import type { VercelResponse as Res } from '@vercel/node'
-import debug from 'debug'
 import omit from 'lodash/omit'
-import {
-  ALGOLIA,
-  INDEX_SETTINGS,
-  PAGES,
-  TurndownService
-} from '../../lib/config'
+import { INDEX_SETTINGS, PAGES, TurndownService } from '../../lib/config'
+import { initPathLogger } from '../../lib/middleware'
 import type { FindCollectionsReq as Req } from '../../lib/types'
 import {
   findPagesOptions,
-  isSearchIndex404Error,
+  formatError,
+  getSearchIndex,
   pageMetafields,
   pageSEO
 } from '../../lib/utils'
@@ -22,13 +18,17 @@ import {
  * @module api/pages
  */
 
-export default async ({ query, url }: Req, res: Res): Promise<Res> => {
-  const INDEX_AS_HANDLE = url?.includes('/pages/index')
+export default async (req: Req, res: Res): Promise<Res> => {
+  // ! Attach `logger` and `path` to API request object
+  initPathLogger(req)
+
+  // True if looking for page with handle "index"
+  const INDEX_AS_HANDLE = req.url.includes('/pages/index')
 
   // Convert page query into search options object
   const options = findPagesOptions({
-    ...query,
-    handle: INDEX_AS_HANDLE ? 'index' : query.handle
+    ...req.query,
+    handle: INDEX_AS_HANDLE ? 'index' : req.query.handle
   })
 
   try {
@@ -76,29 +76,24 @@ export default async ({ query, url }: Req, res: Res): Promise<Res> => {
     // Complete SEO data promise
     pages = await Promise.all(pages)
 
-    // Initialize search index
-    const index = ALGOLIA.initIndex(INDEX_SETTINGS.pages.name)
-
-    // Set index settings
-    index.setSettings(omit(INDEX_SETTINGS.pages, ['name']))
+    // Get empty search index
+    const index = await getSearchIndex(INDEX_SETTINGS.pages.name)
 
     // Update index data
     await index.saveObjects(pages)
 
     // Perform search
-    const { hits } = await index.search<Hit>(query?.text ?? '', options)
+    const { hits } = await index.search<Hit>(req.query?.text ?? '', options)
 
     // Remove `objectID` field
     const payload = hits.map(data => omit(data, ['objectID']))
 
     return res.json(INDEX_AS_HANDLE ? payload[0] : payload)
   } catch (err) {
-    const index404 = isSearchIndex404Error(err)
-    let error = err
+    const error = formatError(err, { options, query: req.query })
+    const { search_index_404 } = error.data
 
-    if (!err.className) error = createError(err, { options, query }, err.status)
-
-    debug('api/pages')(error)
-    return index404 ? res.json([]) : res.status(error.code).json(error)
+    if (!search_index_404) req.logger.error({ error })
+    return search_index_404 ? res.json([]) : res.status(error.code).json(error)
   }
 }

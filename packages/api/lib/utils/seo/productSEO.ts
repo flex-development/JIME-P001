@@ -2,7 +2,7 @@ import type {
   IProductImage,
   IProductListing,
   IProductListingVariant
-} from '@flex-development/kustomzcore/dist/types'
+} from '@flex-development/kustomzcore'
 import findIndex from 'lodash/findIndex'
 import isEmpty from 'lodash/isEmpty'
 import join from 'lodash/join'

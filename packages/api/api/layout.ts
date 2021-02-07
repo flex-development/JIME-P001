@@ -1,16 +1,20 @@
 import type { ShopifyMenu } from '@flex-development/kustomzcore'
-import { axios, createError } from '@flex-development/kustomzcore'
-import type { VercelRequest as Req, VercelResponse as Res } from '@vercel/node'
-import debug from 'debug'
+import { axios } from '@flex-development/kustomzcore'
+import type { VercelResponse as Res } from '@vercel/node'
 import { API_URL } from '../lib/config'
-import { globalMetafields } from '../lib/utils'
+import { initPathLogger } from '../lib/middleware'
+import type { APIRequest as Req } from '../lib/types'
+import { formatError, globalMetafields } from '../lib/utils'
 
 /**
  * @file API Endpoint - Get `AppLayout` data
- * @module api/playlist
+ * @module api/layout
  */
 
 export default async (req: Req, res: Res): Promise<Res> => {
+  // ! Attach `logger` and `path` to API request object
+  initPathLogger(req)
+
   try {
     // Fetch global metafields to get profile snippet
     const {
@@ -43,9 +47,9 @@ export default async (req: Req, res: Res): Promise<Res> => {
       }
     })
   } catch (err) {
-    const error = err.code ? err : createError(err)
+    const error = formatError(err)
 
-    debug('api/layout')(error)
+    req.logger.error({ error })
     return res.status(error.code).json(error)
   }
 }

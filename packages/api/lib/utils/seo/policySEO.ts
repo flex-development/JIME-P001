@@ -1,4 +1,4 @@
-import type { IPolicy } from '@flex-development/kustomzcore/dist/types'
+import type { IPolicy } from '@flex-development/kustomzcore'
 import merge from 'lodash/merge'
 import stripHtml from 'string-strip-html'
 import type { SEOData } from '../../types'

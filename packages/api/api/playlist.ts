@@ -1,9 +1,14 @@
-import { axios, createError } from '@flex-development/kustomzcore'
-import type { VercelRequest as Req, VercelResponse as Res } from '@vercel/node'
+import { axios } from '@flex-development/kustomzcore'
+import type { VercelResponse as Res } from '@vercel/node'
 import { AxiosRequestConfig } from 'axios'
-import debug from 'debug'
 import pick from 'lodash/pick'
-import { appleDeveloperToken, globalMetafields } from '../lib/utils'
+import { initPathLogger } from '../lib/middleware'
+import type { APIRequest as Req } from '../lib/types'
+import {
+  appleDeveloperToken,
+  formatError,
+  globalMetafields
+} from '../lib/utils'
 
 /**
  * @file API Endpoint - Get Store Playlist Data
@@ -11,6 +16,9 @@ import { appleDeveloperToken, globalMetafields } from '../lib/utils'
  */
 
 export default async (req: Req, res: Res): Promise<Res> => {
+  // ! Attach `logger` and `path` to API request object
+  initPathLogger(req)
+
   try {
     // Fetch global metafields to get playlist URL
     const { playlist_url } = await globalMetafields()
@@ -37,9 +45,9 @@ export default async (req: Req, res: Res): Promise<Res> => {
       tracks: relationships?.tracks?.data.map(track => track.attributes)
     })
   } catch (err) {
-    const error = err.code ? err : createError(err)
+    const error = formatError(err)
 
-    debug('api/playlist')(error)
+    req.logger.error({ error })
     return res.status(error.code).json(error)
   }
 }

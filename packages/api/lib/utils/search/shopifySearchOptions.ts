@@ -1,4 +1,4 @@
-import type { AnyObject } from '@flex-development/json/dist/utils/types'
+import type { AnyObject } from '@flex-development/json'
 import { EMPTY_SPACE } from '@flex-development/kustomzcore/dist/constants'
 import isEmpty from 'lodash/isEmpty'
 import join from 'lodash/join'

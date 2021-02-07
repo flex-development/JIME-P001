@@ -1,22 +1,25 @@
-import { createError, objectFromArray } from '@flex-development/kustomzcore'
+import { objectFromArray } from '@flex-development/kustomzcore'
 import type { VercelResponse as Res } from '@vercel/node'
-import debug from 'debug'
+import { initPathLogger } from '../../lib/middleware'
 import type { GetGlobalMetafieldsReq as Req } from '../../lib/types'
-import { shopMetafields } from '../../lib/utils'
+import { formatError, shopMetafields } from '../../lib/utils'
 
 /**
  * @file API Endpoint - Get Global Metafields
  * @module api/metafields/globals
  */
 
-export default async ({ query }: Req, res: Res): Promise<Res> => {
+export default async (req: Req, res: Res): Promise<Res> => {
+  // ! Attach `logger` and `path` to API request object
+  initPathLogger(req)
+
   try {
-    const globals = await shopMetafields({ ...query, namespace: 'globals' })
+    const globals = await shopMetafields({ ...req.query, namespace: 'globals' })
     return res.json(objectFromArray(globals || [], 'key'))
   } catch (err) {
-    const error = createError(err, { query })
+    const error = formatError(err, { query: req.query })
 
-    debug('api/metafields/globals')(error)
+    req.logger.error({ error })
     return res.status(error.code).json(error)
   }
 }

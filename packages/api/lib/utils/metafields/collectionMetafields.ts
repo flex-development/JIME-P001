@@ -1,9 +1,9 @@
-import type { PartialOr } from '@flex-development/json/dist/utils/types'
+import type { PartialOr } from '@flex-development/json'
 import type {
   ICollectionListing,
   IMetafield,
   ShopifyAPIResponses as SAR
-} from '@flex-development/kustomzcore/dist/types'
+} from '@flex-development/kustomzcore'
 import axiosShopify from '../../config/axios-shopify'
 import type { FindMetafieldParams } from '../../types'
 

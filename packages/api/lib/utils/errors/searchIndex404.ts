@@ -1,8 +1,8 @@
 import { AlgoliaError } from '../../types'
 
 /**
- * @file Implementation - isSearchIndex404Error
- * @module utils/search/isSearchIndex404Error
+ * @file Implementation - searchIndex404
+ * @module utils/search/searchIndex404
  */
 
 /**
@@ -10,13 +10,13 @@ import { AlgoliaError } from '../../types'
  *
  * @param error - Algolia error
  */
-const isSearchIndex404Error = (error: AlgoliaError): boolean => {
+const searchIndex404 = (error: AlgoliaError): boolean => {
   const { message, status } = error
 
-  const message_start_pass = message.toLowerCase().startsWith('Index')
+  const message_start_pass = message.toLowerCase().startsWith('index')
   const message_end_pass = message.toLowerCase().endsWith('does not exist')
 
   return status === 404 && message_start_pass && message_end_pass
 }
 
-export default isSearchIndex404Error
+export default searchIndex404

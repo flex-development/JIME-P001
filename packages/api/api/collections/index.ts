@@ -3,22 +3,21 @@ import type {
   ICollectionListing as Hit,
   ShopifyAPIResponses as SAR
 } from '@flex-development/kustomzcore'
-import { createError } from '@flex-development/kustomzcore'
 import type { VercelResponse as Res } from '@vercel/node'
-import debug from 'debug'
 import omit from 'lodash/omit'
 import {
-  ALGOLIA,
   axiosShopify,
   COLLECTION_LISTINGS,
   INDEX_SETTINGS
 } from '../../lib/config'
+import { initPathLogger } from '../../lib/middleware'
 import type { FindCollectionsReq as Req } from '../../lib/types'
 import {
   collectionMetafields,
   collectionSEO,
   findCollectionsOptions,
-  isSearchIndex404Error
+  formatError,
+  getSearchIndex
 } from '../../lib/utils'
 
 /**
@@ -26,9 +25,12 @@ import {
  * @module api/collections
  */
 
-export default async ({ query }: Req, res: Res): Promise<Res> => {
+export default async (req: Req, res: Res): Promise<Res> => {
+  // ! Attach `logger` and `path` to API request object
+  initPathLogger(req)
+
   // Convert collection query into search options object
-  const options = findCollectionsOptions(query)
+  const options = findCollectionsOptions(req.query)
 
   try {
     // Get collection listings to update search index
@@ -71,27 +73,22 @@ export default async ({ query }: Req, res: Res): Promise<Res> => {
     // Complete SEO data promise
     listings = await Promise.all(listings)
 
-    // Initialize search index
-    const index = ALGOLIA.initIndex(INDEX_SETTINGS.collection_listings.name)
-
-    // Set index settings
-    index.setSettings(omit(INDEX_SETTINGS.collection_listings, ['name']))
+    // Get empty search index
+    const index = await getSearchIndex(INDEX_SETTINGS.collection_listings.name)
 
     // Update index data
     await index.saveObjects(listings)
 
     // Perform search
-    const { hits } = await index.search<Hit>(query?.text ?? '', options)
+    const { hits } = await index.search<Hit>(req.query?.text ?? '', options)
 
     // Return results and remove `objectID` field
     return res.json(hits.map(data => omit(data, ['objectID'])))
   } catch (err) {
-    const index404 = isSearchIndex404Error(err)
-    let error = err
+    const error = formatError(err, { options, query: req.query })
+    const { search_index_404 } = error.data
 
-    if (!err.className) error = createError(err, { options, query }, err.status)
-
-    debug('api/collections')(error)
-    return index404 ? res.json([]) : res.status(error.code).json(error)
+    if (!search_index_404) req.logger.error({ error })
+    return search_index_404 ? res.json([]) : res.status(error.code).json(error)
   }
 }

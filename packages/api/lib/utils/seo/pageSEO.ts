@@ -1,7 +1,4 @@
-import type {
-  IMetafield,
-  IPage
-} from '@flex-development/kustomzcore/dist/types'
+import type { IMetafield, IPage } from '@flex-development/kustomzcore'
 import ofa from '@flex-development/kustomzcore/dist/utils/objectFromArray'
 import join from 'lodash/join'
 import merge from 'lodash/merge'

@@ -7,6 +7,7 @@ export { default as ALGOLIA } from './algolia-search'
 export { default as axiosShopify } from './axios-shopify'
 export * from './constants'
 export { default as FIREBASE } from './firebase-admin'
+export { default as createLogger } from './logger'
 export * from './shopify-api'
 export { default as TurndownService } from './turndown-service'
 

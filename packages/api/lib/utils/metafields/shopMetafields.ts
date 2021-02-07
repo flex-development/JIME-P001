@@ -1,9 +1,8 @@
-import type { PartialOr } from '@flex-development/json/dist/utils/types'
+import type { PartialOr } from '@flex-development/json'
 import type {
   IMetafield,
   ShopifyAPIResponses as SAR
-} from '@flex-development/kustomzcore/dist/types'
-import debug from 'debug'
+} from '@flex-development/kustomzcore'
 import axiosShopify from '../../config/axios-shopify'
 import type { FindMetafieldParams } from '../../types'
 
@@ -38,18 +37,8 @@ const shopMetafields = async (
     url: 'metafields'
   }
 
-  // Initialize metafields array
-  let metafields: PartialOr<IMetafield>[] = []
-
   // Get shop metafields
-  try {
-    metafields = (await axiosShopify<SAR.Metafields>(config)).metafields
-  } catch (error) {
-    debug('utils/metafields/shopMetafields')(error)
-    throw error
-  }
-
-  return metafields
+  return (await axiosShopify<SAR.Metafields>(config)).metafields
 }
 
 export default shopMetafields

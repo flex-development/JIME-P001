@@ -3,6 +3,7 @@
  * @module utils
  */
 
+export * from './errors'
 export * from './metafields'
 export * from './search'
 export * from './seo'

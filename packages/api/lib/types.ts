@@ -1,9 +1,10 @@
 import type { SearchOptions } from '@algolia/client-search'
 import type {
   AnyObject,
+  ANYTHING,
   NullishString,
   PartialOr
-} from '@flex-development/json/dist/utils/types'
+} from '@flex-development/json'
 import type {
   ICollectionListing,
   IMetafield,
@@ -16,13 +17,25 @@ import type {
   ShopifyMenu,
   ShopifyMenuLink,
   SongAttributes
-} from '@flex-development/kustomzcore/dist/types'
-import type { VercelRequest as Req } from '@vercel/node'
+} from '@flex-development/kustomzcore'
+import type { VercelRequest } from '@vercel/node'
+import type { Logger } from 'pino'
 
 /**
  * @file Type Declarations
  * @module types
  */
+
+/**
+ * Shape of the API `req` object.
+ */
+export interface APIRequest extends VercelRequest {
+  logger: Logger
+  method: string
+  path: string
+  query: Record<string, ANYTHING>
+  url: string
+}
 
 /**
  * Query parameters accepted by the `/collections` endpoint.
@@ -37,7 +50,7 @@ export type FindCollectionsQuery = PaginationSearchOptions & {
 /**
  * Shape of requests sent to the `/collections` endpoint.
  */
-export interface FindCollectionsReq extends Omit<Req, 'query'> {
+export interface FindCollectionsReq extends APIRequest {
   query: FindCollectionsQuery
 }
 
@@ -54,7 +67,7 @@ export type FindMenusQuery = PaginationSearchOptions & {
 /**
  * Shape of requests sent to the `/menus` endpoint.
  */
-export interface FindMenusReq extends Omit<Req, 'query'> {
+export interface FindMenusReq extends APIRequest {
   query: FindMenusQuery
 }
 
@@ -132,7 +145,7 @@ export type FindPagesQuery = PaginationSearchOptions & {
 /**
  * Shape of requests sent to the `/pages` endpoint.
  */
-export interface FindPagesReq extends Omit<Req, 'query'> {
+export interface FindPagesReq extends APIRequest {
   query: FindPagesQuery
 }
 
@@ -148,7 +161,7 @@ export type FindPoliciesQuery = PaginationSearchOptions & {
 /**
  * Shape of requests sent to the `/policies` endpoint.
  */
-export interface FindPoliciesReq extends Omit<Req, 'query'> {
+export interface FindPoliciesReq extends APIRequest {
   query: FindPoliciesQuery
 }
 
@@ -173,12 +186,12 @@ export type GetCollectionQuery = {
 /**
  * Shape of requests sent to the `/collections/[handle]` endpoint.
  */
-export interface GetCollectionReq extends Omit<Req, 'query'> {
+export interface GetCollectionReq extends APIRequest {
   query: GetCollectionQuery
 }
 
 /**
- * Shape of JSON responses from the `/collections/*` endpoint.
+ * Shape of JSON responses from the `/collections/[handle]` endpoint.
  */
 export type GetCollectionResJSON = PartialOr<
   ResourceWithSEO<ICollectionListing & { products?: IProductListing[] }>
@@ -192,7 +205,7 @@ export type GetGlobalMetafieldsResJSON = Record<string, IMetafield>
 /**
  * Shape of requests sent to the `/metafields/globals` endpoint.
  */
-export interface GetGlobalMetafieldsReq extends Omit<Req, 'query'> {
+export interface GetGlobalMetafieldsReq extends APIRequest {
   query: Omit<FindMetafieldParams, 'namespace'>
 }
 
@@ -225,9 +238,14 @@ export type GetMenuQuery = {
 /**
  * Shape of requests sent to the `/menus/[handle]` endpoint.
  */
-export interface GetMenuReq extends Omit<Req, 'query'> {
+export interface GetMenuReq extends APIRequest {
   query: GetMenuQuery
 }
+
+/**
+ * Shape of JSON responses from the `/menus/[handle]` endpoint.
+ */
+export type GetMenuResJSON = PartialOr<ShopifyMenu>
 
 /**
  * Shape of JSON responses from the `/playlist` endpoint.
@@ -249,7 +267,7 @@ export type GetPageQuery = {
 /**
  * Shape of requests sent to the `/pages/[handle]` endpoint.
  */
-export interface GetPageReq extends Omit<Req, 'query'> {
+export interface GetPageReq extends APIRequest {
   query: GetPageQuery
 }
 
@@ -269,7 +287,7 @@ export type GetPolicyQuery = {
 /**
  * Shape of requests sent to the `/policies/[handle]` endpoint.
  */
-export interface GetPolicyReq extends Omit<Req, 'query'> {
+export interface GetPolicyReq extends APIRequest {
   query: GetPolicyQuery
 }
 
@@ -290,7 +308,7 @@ export type GetProductQuery = {
 /**
  * Shape of requests sent to the `/products/[handle]` endpoint.
  */
-export interface GetProductReq extends Omit<Req, 'query'> {
+export interface GetProductReq extends APIRequest {
   query: GetProductQuery
 }
 
@@ -311,7 +329,7 @@ export type GetStaticAssetQuery = {
 /**
  * Shape of requests sent to the the `/assets/*` endpoints.
  */
-export interface GetStaticAssetReq extends Omit<Req, 'query'> {
+export interface GetStaticAssetReq extends APIRequest {
   query: GetStaticAssetQuery
 }
 
@@ -395,14 +413,25 @@ export type SEOData = {
   }
 }
 
+/**
+ * Search index names.
+ */
+export type SearchIndexName =
+  | 'collection_listings'
+  | 'menus'
+  | 'pages'
+  | 'policies'
+  | 'product_listings'
+
 // Algolia types
 export type {
   SearchOptions,
-  Settings as IndexSettings
+  Settings as SearchIndexSettings
 } from '@algolia/client-search'
 export type {
   ApiError as AlgoliaError,
   RequestOptions
 } from '@algolia/transporter'
+export type { SearchIndex } from 'algoliasearch'
 
 /* eslint-disable prettier/prettier */

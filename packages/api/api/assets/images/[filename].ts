@@ -1,19 +1,23 @@
-import { createError } from '@flex-development/kustomzcore'
 import type { VercelResponse as Res } from '@vercel/node'
-import debug from 'debug'
 import { readFileSync } from 'fs'
 import isUndefined from 'lodash/isUndefined'
 import { join } from 'path'
 import sharp from 'sharp'
+import { initPathLogger } from '../../../lib/middleware'
 import type { GetStaticAssetReq as Req } from '../../../lib/types'
+import { formatError } from '../../../lib/utils'
 
 /**
  * @file API Endpoint - Get Static Image Assets
  * @module api/assets/images/[filename]
  */
 
-export default async ({ query }: Req, res: Res): Promise<void> => {
-  const { filename, height, width } = query
+export default async (req: Req, res: Res): Promise<void> => {
+  // ! Attach `logger` and `path` to API request object
+  initPathLogger(req)
+
+  // Get asset filename and resize dimensions
+  const { filename, height, width } = req.query
 
   // Get extension from filename
   const filename_split = filename.split('.')
@@ -24,8 +28,10 @@ export default async ({ query }: Req, res: Res): Promise<void> => {
   const $width = width ? JSON.parse(`${width}`) : width
 
   try {
+    // Get file from directory
     let file = readFileSync(join(__dirname, '_files', filename))
 
+    // Resize image
     if (!isUndefined($height) || !isUndefined($width)) {
       file = await sharp(file).resize($width, $height).toBuffer()
     }
@@ -33,13 +39,12 @@ export default async ({ query }: Req, res: Res): Promise<void> => {
     res.writeHead(200, { 'Content-Type': `image/${extension}` })
     res.end(file)
   } catch (err) {
-    const { message, ...erest } = err
+    const data = { code: err.code, errors: { filename }, height, width }
+    const status = err.code === 'ENOENT' ? 404 : 500
 
-    const data = { ...erest, errors: { filename } }
-    const status = erest.code === 'ENOENT' ? 404 : 500
-    const error = createError(message, data, status)
+    const error = formatError({ ...err, status }, data)
 
-    debug('api/assets/images/[filename]')(error)
+    req.logger.error({ error })
     res.status(error.code).json(error)
   }
 }

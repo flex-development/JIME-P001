@@ -1,18 +1,14 @@
 import type { IPolicy } from '@flex-development/kustomzcore'
-import { axios, createError } from '@flex-development/kustomzcore'
+import { axios } from '@flex-development/kustomzcore'
 import type { VercelResponse as Res } from '@vercel/node'
-import debug from 'debug'
 import omit from 'lodash/omit'
 import type { IPolicy as Hit } from 'shopify-api-node'
-import {
-  ALGOLIA,
-  INDEX_SETTINGS,
-  POLICIES,
-  TurndownService
-} from '../../lib/config'
+import { INDEX_SETTINGS, POLICIES, TurndownService } from '../../lib/config'
+import { initPathLogger } from '../../lib/middleware'
 import type { FindPoliciesReq as Req } from '../../lib/types'
 import {
-  isSearchIndex404Error,
+  formatError,
+  getSearchIndex,
   policySEO,
   shopifySearchOptions
 } from '../../lib/utils'
@@ -22,9 +18,12 @@ import {
  * @module api/policies
  */
 
-export default async ({ query }: Req, res: Res): Promise<Res> => {
+export default async (req: Req, res: Res): Promise<Res> => {
+  // ! Attach `logger` and `path` to API request object
+  initPathLogger(req)
+
   // Convert policy query into search options object
-  const options = shopifySearchOptions(query)
+  const options = shopifySearchOptions(req.query)
 
   try {
     // Get policies to update search index
@@ -65,27 +64,22 @@ export default async ({ query }: Req, res: Res): Promise<Res> => {
     // Complete SEO data promise
     policies = await Promise.all(policies)
 
-    // Initialize search index
-    const index = ALGOLIA.initIndex(INDEX_SETTINGS.policies.name)
-
-    // Set index settings
-    index.setSettings(omit(INDEX_SETTINGS.policies, ['name']))
+    // Get empty search index
+    const index = await getSearchIndex(INDEX_SETTINGS.policies.name)
 
     // Update index data
     await index.saveObjects(policies)
 
     // Perform search
-    const { hits } = await index.search<Hit>(query?.text ?? '', options)
+    const { hits } = await index.search<Hit>(req.query?.text ?? '', options)
 
     // Return results and remove `objectID` field
     return res.json(hits.map(data => omit(data, ['objectID'])))
   } catch (err) {
-    const index404 = isSearchIndex404Error(err)
-    let error = err
+    const error = formatError(err, { options, query: req.query })
+    const { search_index_404 } = error.data
 
-    if (!err.className) error = createError(err, { options, query }, err.status)
-
-    debug('api/policies')(error)
-    return index404 ? res.json([]) : res.status(error.code).json(error)
+    if (!search_index_404) req.logger.error({ error })
+    return search_index_404 ? res.json([]) : res.status(error.code).json(error)
   }
 }

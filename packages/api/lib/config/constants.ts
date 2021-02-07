@@ -1,4 +1,8 @@
-import type { PaginationParameter } from '../types'
+import type {
+  PaginationParameter,
+  SearchIndexName,
+  SearchIndexSettings
+} from '../types'
 
 /**
  * @file Config - Constant Values
@@ -25,7 +29,10 @@ export const DEFAULT_SEO_IMAGE_DATA = {
   width: 1920
 }
 
-export const INDEX_SETTINGS = {
+export const INDEX_SETTINGS: Record<
+  SearchIndexName,
+  SearchIndexSettings & { name: SearchIndexName }
+> = {
   collection_listings: {
     attributesForFaceting: ['collection_id', 'handle'],
     name: 'collection_listings'

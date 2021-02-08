@@ -1,6 +1,6 @@
 /**
  * @file Utilities Entry Point - Error Handling
- * @module utils/errors
+ * @module lib/utils/errors
  */
 
 export { default as formatError } from './formatError'

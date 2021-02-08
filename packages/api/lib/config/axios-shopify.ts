@@ -4,7 +4,7 @@ import type { AxiosRequestConfig } from 'axios'
 
 /**
  * @file Shopify Axios Configuration
- * @module config/axios-shopify
+ * @module lib/config/axios-shopify
  * @see {@link https://github.com/axios/axios}
  */
 

@@ -12,7 +12,7 @@ import globalSEO from './globalSEO'
 
 /**
  * @file Implementation - collectionSEO
- * @module utils/seo/collectionSEO
+ * @module lib/utils/seo/collectionSEO
  */
 
 /**

@@ -7,7 +7,7 @@ import type {
 
 /**
  * @file Implementation - globalMetafields
- * @module utils/metafields/globalMetafields
+ * @module lib/utils/metafields/globalMetafields
  */
 
 /**

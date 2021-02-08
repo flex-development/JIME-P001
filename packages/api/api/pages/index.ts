@@ -1,19 +1,19 @@
 import type { IPage as Hit } from '@flex-development/kustomzcore'
-import { axios } from '@flex-development/kustomzcore'
 import type { VercelResponse as Res } from '@vercel/node'
 import omit from 'lodash/omit'
-import { INDEX_SETTINGS, PAGES, TurndownService } from '../../lib/config'
+import { INDEX_SETTINGS, PAGES } from '../../lib/config'
 import { initPathLogger } from '../../lib/middleware'
 import type { FindCollectionsReq as Req } from '../../lib/types'
 import {
   findPagesOptions,
   formatError,
   getSearchIndex,
+  includeJSX,
   includeMetafields,
-  includeParsedMDX,
   includeSEO,
   pageMetafields,
-  pageSEO
+  pageSEO,
+  toJSX
 } from '../../lib/utils'
 
 /**
@@ -44,20 +44,15 @@ export default async (req: Req, res: Res): Promise<Res> => {
     // ! Remove API Menus page
     pages = pages.filter(obj => obj.handle !== 'api-menus')
 
+    // ! Remove unpublished pages
+    pages = pages.filter(obj => obj.published_at !== null)
+
     // Parse MDX body content
-    if (includeParsedMDX(options)) {
-      pages = pages.map(async hit => {
-        const html = hit.body_html.replace('\n', '<br/>')
-
-        const { code: body_html } = await axios({
-          data: JSON.stringify(TurndownService.turndown(html)),
-          headers: { 'Content-Type': 'application/json' },
-          method: 'post',
-          url: 'https://mdjsx.flexdevelopment.vercel.app'
-        })
-
-        return { ...hit, body_html }
-      })
+    if (includeJSX(options)) {
+      pages = pages.map(async hit => ({
+        ...hit,
+        body_html: await toJSX(hit.body_html)
+      }))
 
       // Complete MDX promise
       pages = await Promise.all(pages)

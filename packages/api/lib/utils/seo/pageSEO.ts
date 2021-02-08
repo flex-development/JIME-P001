@@ -8,7 +8,7 @@ import globalSEO from './globalSEO'
 
 /**
  * @file Implementation - pageSEO
- * @module utils/seo/pageSEO
+ * @module lib/utils/seo/pageSEO
  */
 
 /**

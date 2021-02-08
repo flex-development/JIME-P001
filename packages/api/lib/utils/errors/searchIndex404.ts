@@ -2,7 +2,7 @@ import { AlgoliaError } from '../../types'
 
 /**
  * @file Implementation - searchIndex404
- * @module utils/search/searchIndex404
+ * @module lib/utils/search/searchIndex404
  */
 
 /**

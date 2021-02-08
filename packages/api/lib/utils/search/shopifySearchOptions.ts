@@ -11,7 +11,7 @@ import type { SearchOptions } from '../../types'
 
 /**
  * @file Implementation - shopifySearchOptions
- * @module utils/search/shopifySearchOptions
+ * @module lib/utils/search/shopifySearchOptions
  */
 
 /**

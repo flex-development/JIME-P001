@@ -7,7 +7,7 @@ import searchOptions from './shopifySearchOptions'
 
 /**
  * @file Implementation - findProductsOptions
- * @module utils/sales/findProductsOptions
+ * @module lib/utils/sales/findProductsOptions
  */
 
 /**

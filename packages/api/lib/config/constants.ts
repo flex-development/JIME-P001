@@ -6,7 +6,7 @@ import type {
 
 /**
  * @file Config - Constant Values
- * @module config/constants
+ * @module lib/config/constants
  */
 
 const { VERCEL_ENV: ENV, VERCEL_URL } = process.env

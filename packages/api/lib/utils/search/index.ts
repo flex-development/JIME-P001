@@ -10,6 +10,7 @@ export { default as getSearchIndex } from './getSearchIndex'
 export { default as includeAllFields } from './includeAllFields'
 export { default as includeCollectionProducts } from './includeCollectionProducts'
 export { default as includeMetafields } from './includeMetafields'
+export { default as includeParsedMDX } from './includeParsedMDX'
 export { default as includeSEO } from './includeSEO'
 export { default as shopifySearchOptions } from './shopifySearchOptions'
 

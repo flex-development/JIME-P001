@@ -10,6 +10,7 @@ import {
   formatError,
   getSearchIndex,
   includeMetafields,
+  includeParsedMDX,
   includeSEO,
   pageMetafields,
   pageSEO
@@ -43,8 +44,8 @@ export default async (req: Req, res: Res): Promise<Res> => {
     // ! Remove API Menus page
     pages = pages.filter(obj => obj.handle !== 'api-menus')
 
-    try {
-      // Parse MDX body content
+    // Parse MDX body content
+    if (includeParsedMDX(options)) {
       pages = pages.map(async hit => {
         const html = hit.body_html.replace('\n', '<br/>')
 
@@ -60,8 +61,6 @@ export default async (req: Req, res: Res): Promise<Res> => {
 
       // Complete MDX promise
       pages = await Promise.all(pages)
-    } catch (error) {
-      return res.status(error.code).json(error)
     }
 
     // Get metafields for each page

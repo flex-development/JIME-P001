@@ -9,6 +9,7 @@ import type { FindPoliciesReq as Req } from '../../lib/types'
 import {
   formatError,
   getSearchIndex,
+  includeParsedMDX,
   includeSEO,
   policySEO,
   shopifySearchOptions
@@ -36,21 +37,23 @@ export default async (req: Req, res: Res): Promise<Res> => {
     })
 
     // Parse MDX body content
-    policies = policies.map(async hit => {
-      const html = hit.body.replace('\n', '<br/>')
+    if (includeParsedMDX(options)) {
+      policies = policies.map(async hit => {
+        const html = hit.body.replace('\n', '<br/>')
 
-      const { code: body } = await axios({
-        data: JSON.stringify(TurndownService.turndown(html)),
-        headers: { 'Content-Type': 'application/json' },
-        method: 'post',
-        url: 'https://mdjsx.flexdevelopment.vercel.app'
+        const { code: body } = await axios({
+          data: JSON.stringify(TurndownService.turndown(html)),
+          headers: { 'Content-Type': 'application/json' },
+          method: 'post',
+          url: 'https://mdjsx.flexdevelopment.vercel.app'
+        })
+
+        return { ...hit, body }
       })
 
-      return { ...hit, body }
-    })
-
-    // Complete MDX promise
-    policies = await Promise.all(policies)
+      // Complete MDX promise
+      policies = await Promise.all(policies)
+    }
 
     // Get SEO data for each policy
     if (includeSEO(options)) {

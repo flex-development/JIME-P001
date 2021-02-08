@@ -1,5 +1,5 @@
 import type { ANYTHING } from '@flex-development/json'
-import { axios } from '@flex-development/kustomzcore/dist/axios'
+import { axios } from '@flex-development/kustomzcore'
 import type { AxiosRequestConfig } from 'axios'
 
 /**

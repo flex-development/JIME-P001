@@ -15,7 +15,7 @@ export const API_URL = `http${ENV === 'development' ? '' : 's'}://${VERCEL_URL}`
 
 export const DEFAULT_SEARCH_OPTIONS = {
   attributesToHighlight: [],
-  attributesToRetrieve: ['*', '-_tags'],
+  attributesToRetrieve: ['handle'],
   attributesToSnippet: []
 }
 

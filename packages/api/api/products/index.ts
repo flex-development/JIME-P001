@@ -12,6 +12,8 @@ import {
   findProductsOptions,
   formatError,
   getSearchIndex,
+  includeMetafields,
+  includeSEO,
   productMetafields,
   productSEO
 } from '../../lib/utils'
@@ -36,26 +38,30 @@ export default async (req: Req, res: Res): Promise<Res> => {
     listings = listings.map(obj => ({ ...obj, objectID: obj.product_id }))
 
     // Get metafields for each product
-    listings = listings.map(async hit => ({
-      ...hit,
-      metafield: await productMetafields(hit.product_id)
-    }))
+    if (includeMetafields(options)) {
+      listings = listings.map(async hit => ({
+        ...hit,
+        metafield: await productMetafields(hit.product_id)
+      }))
 
-    // Complete metafields promise
-    listings = await Promise.all(listings)
+      // Complete metafields promise
+      listings = await Promise.all(listings)
+    }
 
     // Get SEO data for each product
-    listings = listings.map(async hit => {
-      const product = hit as IProductListing
+    if (includeSEO(options)) {
+      listings = listings.map(async hit => {
+        const product = hit as IProductListing
 
-      return {
-        ...hit,
-        seo: await productSEO(product, (req.query as GetProductQuery).sku)
-      }
-    })
+        return {
+          ...hit,
+          seo: await productSEO(product, (req.query as GetProductQuery).sku)
+        }
+      })
 
-    // Complete SEO data promise
-    listings = await Promise.all(listings)
+      // Complete SEO data promise
+      listings = await Promise.all(listings)
+    }
 
     // Get empty search index
     const index = await getSearchIndex(INDEX_SETTINGS.product_listings.name)

@@ -17,7 +17,10 @@ import {
   collectionSEO,
   findCollectionsOptions,
   formatError,
-  getSearchIndex
+  getSearchIndex,
+  includeCollectionProducts,
+  includeMetafields,
+  includeSEO
 } from '../../lib/utils'
 
 /**
@@ -40,38 +43,44 @@ export default async (req: Req, res: Res): Promise<Res> => {
     listings = listings.map(obj => ({ ...obj, objectID: obj.collection_id }))
 
     // Get metafields for each collection
-    listings = listings.map(async hit => ({
-      ...hit,
-      metafield: await collectionMetafields(hit.collection_id)
-    }))
+    if (includeMetafields(options)) {
+      listings = listings.map(async hit => ({
+        ...hit,
+        metafield: await collectionMetafields(hit.collection_id)
+      }))
 
-    // Complete metafields promise
-    listings = await Promise.all(listings)
+      // Complete metafields promise
+      listings = await Promise.all(listings)
+    }
 
     // Get products for each collection
-    listings = listings.map(async hit => {
-      const { product_listings } = await axiosShopify<SAR.ProductListing>({
-        method: 'get',
-        params: { collection_id: hit.collection_id, limit: 250 },
-        url: 'product_listings'
+    if (includeCollectionProducts(options)) {
+      listings = listings.map(async hit => {
+        const { product_listings } = await axiosShopify<SAR.ProductListing>({
+          method: 'get',
+          params: { collection_id: hit.collection_id, limit: 250 },
+          url: 'product_listings'
+        })
+
+        return { ...hit, products: product_listings }
       })
 
-      return { ...hit, products: product_listings }
-    })
-
-    // Complete products promise
-    listings = await Promise.all(listings)
+      // Complete products promise
+      listings = await Promise.all(listings)
+    }
 
     // Get SEO data for each collection
-    listings = listings.map(async hit => {
-      const collection = (hit as unknown) as Hit
-      const products = (hit as AnyObject).products
+    if (includeSEO(options)) {
+      listings = listings.map(async hit => {
+        const collection = (hit as unknown) as Hit
+        const products = (hit as AnyObject).products
 
-      return { ...hit, seo: await collectionSEO(collection, products) }
-    })
+        return { ...hit, seo: await collectionSEO(collection, products) }
+      })
 
-    // Complete SEO data promise
-    listings = await Promise.all(listings)
+      // Complete SEO data promise
+      listings = await Promise.all(listings)
+    }
 
     // Get empty search index
     const index = await getSearchIndex(INDEX_SETTINGS.collection_listings.name)

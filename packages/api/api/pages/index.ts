@@ -9,6 +9,8 @@ import {
   findPagesOptions,
   formatError,
   getSearchIndex,
+  includeMetafields,
+  includeSEO,
   pageMetafields,
   pageSEO
 } from '../../lib/utils'
@@ -63,18 +65,22 @@ export default async (req: Req, res: Res): Promise<Res> => {
     }
 
     // Get metafields for each page
-    pages = pages.map(async hit => {
-      return { ...hit, metafield: await pageMetafields(hit.id) } as Hit
-    })
+    if (includeMetafields(options) || includeSEO(options)) {
+      pages = pages.map(async hit => {
+        return { ...hit, metafield: await pageMetafields(hit.id) } as Hit
+      })
 
-    // Complete metafields promise
-    pages = await Promise.all(pages)
+      // Complete metafields promise
+      pages = await Promise.all(pages)
+    }
 
     // Get SEO data for each page
-    pages = pages.map(async hit => ({ ...hit, seo: await pageSEO(hit) }))
+    if (includeSEO(options)) {
+      pages = pages.map(async hit => ({ ...hit, seo: await pageSEO(hit) }))
 
-    // Complete SEO data promise
-    pages = await Promise.all(pages)
+      // Complete SEO data promise
+      pages = await Promise.all(pages)
+    }
 
     // Get empty search index
     const index = await getSearchIndex(INDEX_SETTINGS.pages.name)

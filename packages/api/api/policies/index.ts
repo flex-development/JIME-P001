@@ -9,6 +9,7 @@ import type { FindPoliciesReq as Req } from '../../lib/types'
 import {
   formatError,
   getSearchIndex,
+  includeSEO,
   policySEO,
   shopifySearchOptions
 } from '../../lib/utils'
@@ -34,35 +35,33 @@ export default async (req: Req, res: Res): Promise<Res> => {
       return { ...obj, objectID: (obj as IPolicy).handle }
     })
 
-    try {
-      // Parse MDX body content
-      policies = policies.map(async hit => {
-        const html = hit.body.replace('\n', '<br/>')
+    // Parse MDX body content
+    policies = policies.map(async hit => {
+      const html = hit.body.replace('\n', '<br/>')
 
-        const { code: body } = await axios({
-          data: JSON.stringify(TurndownService.turndown(html)),
-          headers: { 'Content-Type': 'application/json' },
-          method: 'post',
-          url: 'https://mdjsx.flexdevelopment.vercel.app'
-        })
-
-        return { ...hit, body }
+      const { code: body } = await axios({
+        data: JSON.stringify(TurndownService.turndown(html)),
+        headers: { 'Content-Type': 'application/json' },
+        method: 'post',
+        url: 'https://mdjsx.flexdevelopment.vercel.app'
       })
 
-      // Complete MDX promise
-      policies = await Promise.all(policies)
-    } catch (error) {
-      return res.status(error.code).json(error)
-    }
+      return { ...hit, body }
+    })
+
+    // Complete MDX promise
+    policies = await Promise.all(policies)
 
     // Get SEO data for each policy
-    policies = policies.map(async hit => ({
-      ...hit,
-      seo: await policySEO(hit as IPolicy)
-    }))
+    if (includeSEO(options)) {
+      policies = policies.map(async hit => ({
+        ...hit,
+        seo: await policySEO(hit as IPolicy)
+      }))
 
-    // Complete SEO data promise
-    policies = await Promise.all(policies)
+      // Complete SEO data promise
+      policies = await Promise.all(policies)
+    }
 
     // Get empty search index
     const index = await getSearchIndex(INDEX_SETTINGS.policies.name)

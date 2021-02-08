@@ -1,10 +1,10 @@
-import type { ShopifyMenu } from '@flex-development/kustomzcore'
 import { axios } from '@flex-development/kustomzcore'
 import type { VercelResponse as Res } from '@vercel/node'
 import { API_URL } from '../lib/config'
 import { initPathLogger } from '../lib/middleware'
+import MenuService from '../lib/services/MenuService'
 import type { APIRequest as Req } from '../lib/types'
-import { formatError, globalMetafields } from '../lib/utils'
+import { formatError, metafieldsGlobal } from '../lib/utils'
 
 /**
  * @file API Endpoint - Get `AppLayout` data
@@ -24,19 +24,16 @@ export default async (req: Req, res: Res): Promise<Res> => {
       profile_img: { value: profile_img },
       profile_location: { value: profile_location },
       profile_mood: { value: profile_mood }
-    } = await globalMetafields({ fields: 'key,value' })
+    } = await metafieldsGlobal({ fields: 'key,value' })
 
     // Get main menu data
-    const menu = await axios<ShopifyMenu>({ url: `${API_URL}/menus/main-menu` })
+    const menu = await MenuService.get('main-menu', 'links')
 
     // Get playlist data
     const playlist = await axios({ url: `${API_URL}/playlist` })
 
     return res.json({
-      hero: {
-        subtitle: hero_subtitle,
-        title: hero_title
-      },
+      hero: { subtitle: hero_subtitle, title: hero_title },
       playlist,
       sidebar: {
         age: JSON.parse(profile_age as string),

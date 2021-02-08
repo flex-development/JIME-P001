@@ -1,53 +1,41 @@
-import type {
-  ShopifyAPIResponses as SAR,
-  ShopifyMenu as Hit
-} from '@flex-development/kustomzcore'
 import type { VercelResponse as Res } from '@vercel/node'
-import omit from 'lodash/omit'
-import { axiosShopify, INDEX_SETTINGS } from '../../lib/config'
 import { initPathLogger } from '../../lib/middleware'
+import Service from '../../lib/services/MenuService'
 import type { FindMenusReq as Req } from '../../lib/types'
-import {
-  formatError,
-  getSearchIndex,
-  shopifySearchOptions
-} from '../../lib/utils'
+import { formatError } from '../../lib/utils'
 
 /**
  * @file API Endpoint - Find Menus
  * @module api/menus
  */
 
+/**
+ * Returns an array of menu objects.
+ *
+ * @param req - API request
+ * @param req.query - Request query parameters
+ * @param req.query.fields - Specify fields to include for each object
+ * @param req.query.handle - Find menu by handle
+ * @param req.query.hitsPerPage - Number of hits per page
+ * @param req.query.length - Number of hits to retrieve (used only with offset)
+ * @param req.query.offset - Specify the offset of the first hit to return
+ * @param req.query.page - Specify the page to retrieve
+ * @param req.query.text - Search query text
+ * @param req.query.title - Filter results by menu title
+ */
 export default async (req: Req, res: Res): Promise<Res> => {
   // ! Attach `logger` and `path` to API request object
   initPathLogger(req)
 
-  // Convert menus query into search options object
-  const options = shopifySearchOptions(req.query)
+  // Convert query into search options object
+  const options = Service.searchOptions(req.query)
 
   try {
-    // Get menus to update search index
-    let menus = (await axiosShopify<SAR.Menus>({}, true)).menus || []
-
-    // Keep objectID consistent with menu handle
-    menus = menus.map(obj => ({ ...obj, objectID: obj.handle }))
-
-    // Get empty search index
-    const index = await getSearchIndex(INDEX_SETTINGS.menus.name)
-
-    // Update index data
-    await index.saveObjects(menus)
-
-    // Perform search
-    const { hits } = await index.search<Hit>(req.query?.text ?? '', options)
-
-    // Return results and remove `objectID` field
-    return res.json(hits.map(data => omit(data, ['objectID'])))
+    return res.json(await Service.find(req.query.text, options))
   } catch (err) {
-    const error = formatError(err, { options, query: req.query })
-    const { search_index_404 } = error.data
+    const error = formatError(err, { query: req.query })
 
-    if (!search_index_404) req.logger.error({ error })
-    return search_index_404 ? res.json([]) : res.status(error.code).json(error)
+    req.logger.error({ error })
+    return res.status(error.code).json(error)
   }
 }

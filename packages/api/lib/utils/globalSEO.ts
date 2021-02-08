@@ -1,12 +1,12 @@
 import join from 'lodash/join'
 import uniq from 'lodash/uniq'
-import { DEFAULT_SEO_IMAGE_DATA } from '../../config/constants'
-import type { SEOData } from '../../types'
-import { globalMetafields } from '../metafields'
+import { DEFAULT_SEO_IMAGE_DATA } from '../config/constants'
+import type { SEOData } from '../types'
+import metafieldsGlobal from './metafieldsGlobal'
 
 /**
  * @file Implementation - globalSEO
- * @module lib/utils/seo/globalSEO
+ * @module lib/utils/globalSEO
  */
 
 /**
@@ -20,7 +20,7 @@ const globalSEO = async (): Promise<SEOData> => {
     description: { value: description = '' },
     keywords: { value: keywords = '' },
     social_share_image: { value: social_share_image = '' }
-  } = await globalMetafields()
+  } = await metafieldsGlobal()
 
   // Parse social share image
   let og_image = DEFAULT_SEO_IMAGE_DATA.src

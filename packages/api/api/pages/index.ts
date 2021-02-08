@@ -1,99 +1,53 @@
-import type { IPage as Hit } from '@flex-development/kustomzcore'
 import type { VercelResponse as Res } from '@vercel/node'
-import omit from 'lodash/omit'
-import { INDEX_SETTINGS, PAGES } from '../../lib/config'
 import { initPathLogger } from '../../lib/middleware'
-import type { FindCollectionsReq as Req } from '../../lib/types'
-import {
-  findPagesOptions,
-  formatError,
-  getSearchIndex,
-  includeJSX,
-  includeMetafields,
-  includeSEO,
-  pageMetafields,
-  pageSEO,
-  toJSX
-} from '../../lib/utils'
+import Service from '../../lib/services/PageService'
+import type { FindPagesReq as Req } from '../../lib/types'
+import { formatError } from '../../lib/utils'
 
 /**
  * @file API Endpoint - Find Pages
  * @module api/pages
  */
 
+/**
+ * Returns an array of page resource objects.
+ *
+ * @param req - API request object
+ * @param req.query - Request query parameters
+ * @param req.query.collection_id - Find collection by ID
+ * @param req.query.fields - Specify fields to include
+ * @param req.query.handle - Find collection by handle
+ * @param req.query.hitsPerPage - Number of hits per page
+ * @param req.query.length - Number of hits to retrieve (used only with offset)
+ * @param req.query.offset - Specify the offset of the first hit to return
+ * @param req.query.page - Specify the page to retrieve
+ * @param req.query.text - Search query text
+ * @param res - API response object
+ */
 export default async (req: Req, res: Res): Promise<Res> => {
   // ! Attach `logger` and `path` to API request object
   initPathLogger(req)
 
-  // True if looking for page with handle "index"
+  // ! Vercel interpretes this URL as '/pages' instead of the URL of a single
+  // ! page with the `handle` 'index'.
   const INDEX_AS_HANDLE = req.url.includes('/pages/index')
 
-  // Convert page query into search options object
-  const options = findPagesOptions({
-    ...req.query,
-    handle: INDEX_AS_HANDLE ? 'index' : req.query.handle
-  })
+  // If searching for page with the `handle` 'index'
+  if (INDEX_AS_HANDLE) req.query.handle = 'index'
+
+  // Convert query into search options object
+  const options = Service.searchOptions(req.query)
 
   try {
-    // Get pages to update search index
-    let pages: Hit[] | Promise<Hit>[] = await PAGES.list()
+    // Get search results
+    const results = await Service.find(req.query.text, options)
 
-    // Keep objectID consistent with page ID
-    pages = pages.map(obj => ({ ...obj, objectID: obj.id }))
-
-    // ! Remove API Menus page
-    pages = pages.filter(obj => obj.handle !== 'api-menus')
-
-    // ! Remove unpublished pages
-    pages = pages.filter(obj => obj.published_at !== null)
-
-    // Parse MDX body content
-    if (includeJSX(options)) {
-      pages = pages.map(async hit => ({
-        ...hit,
-        body_html: await toJSX(hit.body_html)
-      }))
-
-      // Complete MDX promise
-      pages = await Promise.all(pages)
-    }
-
-    // Get metafields for each page
-    if (includeMetafields(options) || includeSEO(options)) {
-      pages = pages.map(async hit => {
-        return { ...hit, metafield: await pageMetafields(hit.id) } as Hit
-      })
-
-      // Complete metafields promise
-      pages = await Promise.all(pages)
-    }
-
-    // Get SEO data for each page
-    if (includeSEO(options)) {
-      pages = pages.map(async hit => ({ ...hit, seo: await pageSEO(hit) }))
-
-      // Complete SEO data promise
-      pages = await Promise.all(pages)
-    }
-
-    // Get empty search index
-    const index = await getSearchIndex(INDEX_SETTINGS.pages.name)
-
-    // Update index data
-    await index.saveObjects(pages)
-
-    // Perform search
-    const { hits } = await index.search<Hit>(req.query?.text ?? '', options)
-
-    // Remove `objectID` field
-    const payload = hits.map(data => omit(data, ['objectID']))
-
-    return res.json(INDEX_AS_HANDLE ? payload[0] : payload)
+    // If searching for page with the `handle` 'index', return first result
+    return res.json(INDEX_AS_HANDLE ? results[0] : results)
   } catch (err) {
-    const error = formatError(err, { options, query: req.query })
-    const { search_index_404 } = error.data
+    const error = formatError(err, { query: req.query })
 
-    if (!search_index_404) req.logger.error({ error })
-    return search_index_404 ? res.json([]) : res.status(error.code).json(error)
+    req.logger.error({ error })
+    return res.status(error.code).json(error)
   }
 }

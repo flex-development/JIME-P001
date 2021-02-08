@@ -1,22 +1,20 @@
 import type { PartialOr } from '@flex-development/json'
 import type {
   IMetafield,
-  IPage,
   ShopifyAPIResponses as SAR
 } from '@flex-development/kustomzcore'
-import axiosShopify from '../../config/axios-shopify'
-import type { FindMetafieldParams } from '../../types'
+import axiosShopify from '../config/axios-shopify'
+import type { FindMetafieldParams } from '../types'
 
 /**
- * @file Implementation - pageMetafields
- * @module lib/utils/metafields/pageMetafields
+ * @file Implementation - metafieldsShop
+ * @module lib/utils/metafieldsShop
  */
 
 /**
- * Returns an array of metafields for a page resource.
+ * Returns an array of metafields for the shop resource.
  *
  * @async
- * @param id - ID of page to get metafields for
  * @param params - Query parameters
  * @param params.created_at_max - Show metafields created before date
  * @param params.created_at_min - Show metafields created after date
@@ -29,19 +27,18 @@ import type { FindMetafieldParams } from '../../types'
  * @param params.value_type - Show metafields with a value_type of 'integer'
  * or 'string'
  */
-const pageMetafields = async (
-  id: IPage['id'],
+const metafieldsShop = async (
   params: FindMetafieldParams = {}
 ): Promise<PartialOr<IMetafield>[]> => {
   // Build request config
   const config: Parameters<typeof axiosShopify>[0] = {
     method: 'get',
     params,
-    url: `pages/${id}/metafields`
+    url: 'metafields'
   }
 
-  // Get page metafields
+  // Get shop metafields
   return (await axiosShopify<SAR.Metafields>(config)).metafields
 }
 
-export default pageMetafields
+export default metafieldsShop

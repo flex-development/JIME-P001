@@ -1,9 +1,9 @@
+import type { FeathersErrorJSON } from '@feathersjs/errors'
 import {
   BadGateway,
   BadRequest,
   Conflict,
   FeathersError,
-  FeathersErrorJSON,
   Forbidden,
   GeneralError,
   LengthRequired,
@@ -18,16 +18,17 @@ import {
   Unavailable,
   Unprocessable
 } from '@feathersjs/errors'
-import type { AnyObject } from '@flex-development/json/utils/types'
 
 /**
- * @file Creates a Feathers error
+ * @file Implementation - createError
  * @module utils/createError
- * @see https://docs.feathersjs.com/api/errors.html
  */
 
 /**
- * Creates a new Feathers error based on the status argument.
+ * Returns an error object based on {@param status}.
+ *
+ * @see https://developer.mozilla.org/docs/Web/HTTP/Status
+ * @see https://docs.feathersjs.com/api/errors.html
  *
  * @param error - Error to transform or error message
  * @param data - Additional error data
@@ -36,59 +37,65 @@ import type { AnyObject } from '@flex-development/json/utils/types'
  */
 const createError = (
   error?: string | Error,
-  data: AnyObject = {},
+  data: Record<string, unknown> = {},
   status: number | string = 500
 ): FeathersErrorJSON => {
+  if (typeof error === 'string') error = { message: error } as Error
   if (typeof status === 'string') status = JSON.parse(status)
+
+  const { name, message, stack } = error as Error
+
+  data.name = name
+  data.stack = stack
 
   switch (status) {
     case 400:
-      error = new BadRequest(error, data)
+      error = new BadRequest(message, data)
       break
     case 401:
-      error = new NotAuthenticated(error, data)
+      error = new NotAuthenticated(message, data)
       break
     case 402:
-      error = new PaymentError(error, data)
+      error = new PaymentError(message, data)
       break
     case 403:
-      error = new Forbidden(error, data)
+      error = new Forbidden(message, data)
       break
     case 404:
-      error = new NotFound(error, data)
+      error = new NotFound(message, data)
       break
     case 405:
-      error = new MethodNotAllowed(error, data)
+      error = new MethodNotAllowed(message, data)
       break
     case 406:
-      error = new NotAcceptable(error, data)
+      error = new NotAcceptable(message, data)
       break
     case 408:
-      error = new Timeout(error, data)
+      error = new Timeout(message, data)
       break
     case 409:
-      error = new Conflict(error, data)
+      error = new Conflict(message, data)
       break
     case 411:
-      error = new LengthRequired(error, data)
+      error = new LengthRequired(message, data)
       break
     case 422:
-      error = new Unprocessable(error, data)
+      error = new Unprocessable(message, data)
       break
     case 429:
-      error = new TooManyRequests(error, data)
+      error = new TooManyRequests(message, data)
       break
     case 501:
-      error = new NotImplemented(error, data)
+      error = new NotImplemented(message, data)
       break
     case 502:
-      error = new BadGateway(error, data)
+      error = new BadGateway(message, data)
       break
     case 503:
-      error = new Unavailable(error, data)
+      error = new Unavailable(message, data)
       break
     default:
-      error = new GeneralError(error, data)
+      error = new GeneralError(message, data)
   }
 
   return (error as FeathersError).toJSON()

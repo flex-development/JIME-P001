@@ -13,15 +13,10 @@ const {
   SHOPIFY_PASSWORD: password = ''
 } = process.env
 
-export const SHOPIFY = new Shopify({
+export default new Shopify({
   apiKey,
   apiVersion,
   autoLimit: true,
   password,
   shopName
 })
-
-export const COLLECTION_LISTINGS = SHOPIFY.collectionListing
-export const PAGES = SHOPIFY.page
-export const PRODUCT_LISTINGS = SHOPIFY.productListing
-export const POLICIES = SHOPIFY.policy

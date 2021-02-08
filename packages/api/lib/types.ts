@@ -166,6 +166,13 @@ export interface FindPoliciesReq extends APIRequest {
 }
 
 /**
+ * Shape of requests sent to the `/products` endpoint.
+ */
+export interface FindProductsReq extends APIRequest {
+  query: FindProductsQuery
+}
+
+/**
  * Query parameters accepted by the `/products` endpoint.
  */
 export type FindProductsQuery = PaginationSearchOptions & {
@@ -194,7 +201,12 @@ export interface GetCollectionReq extends APIRequest {
  * Shape of JSON responses from the `/collections/[handle]` endpoint.
  */
 export type GetCollectionResJSON = PartialOr<
-  ResourceWithSEO<ICollectionListing & { products?: IProductListing[] }>
+  ResourceWithSEO<
+    ICollectionListing & {
+      metafield?: IMetafield[]
+      products?: IProductListing[]
+    }
+  >
 >
 
 /**
@@ -425,6 +437,7 @@ export type SearchIndexName =
 
 // Algolia types
 export type {
+  Hit,
   SearchOptions,
   Settings as SearchIndexSettings
 } from '@algolia/client-search'

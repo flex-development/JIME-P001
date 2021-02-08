@@ -1,7 +1,7 @@
 import omit from 'lodash/omit'
 import { ALGOLIA, INDEX_SETTINGS } from '../../config'
 import type { SearchIndex, SearchIndexName } from '../../types'
-import formatError from '../errors/formatError'
+import formatError from '../formatError'
 
 /**
  * @file Implementation - getSearchIndex
@@ -24,9 +24,6 @@ const getSearchIndex = async (name: SearchIndexName): Promise<SearchIndex> => {
 
     // Set index settings
     index.setSettings(omit(settings, ['name']))
-
-    // Clear index
-    await index.clearObjects()
 
     return index
   } catch (error) {

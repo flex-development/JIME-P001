@@ -1,13 +1,10 @@
 import { axios } from '@flex-development/kustomzcore/dist/axios'
-import { API_URL } from '../../config/constants'
-import type {
-  FindMetafieldParams,
-  GetGlobalMetafieldsResJSON
-} from '../../types'
+import { API_URL } from '../config/constants'
+import type { FindMetafieldParams, GetGlobalMetafieldsResJSON } from '../types'
 
 /**
- * @file Implementation - globalMetafields
- * @module lib/utils/metafields/globalMetafields
+ * @file Implementation - metafieldsGlobal
+ * @module lib/utils/metafieldsGlobal
  */
 
 /**
@@ -25,7 +22,7 @@ import type {
  * @param params.value_type - Show metafields with a value_type of 'integer'
  * or 'string'
  */
-const globalMetafields = async (
+const metafieldsGlobal = async (
   params: Omit<FindMetafieldParams, 'namespace'> = {}
 ): Promise<GetGlobalMetafieldsResJSON> => {
   return await axios<GetGlobalMetafieldsResJSON>({
@@ -34,4 +31,4 @@ const globalMetafields = async (
   })
 }
 
-export default globalMetafields
+export default metafieldsGlobal

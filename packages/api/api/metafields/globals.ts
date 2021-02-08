@@ -2,7 +2,7 @@ import { objectFromArray } from '@flex-development/kustomzcore'
 import type { VercelResponse as Res } from '@vercel/node'
 import { initPathLogger } from '../../lib/middleware'
 import type { GetGlobalMetafieldsReq as Req } from '../../lib/types'
-import { formatError, shopMetafields } from '../../lib/utils'
+import { formatError, metafieldsShop } from '../../lib/utils'
 
 /**
  * @file API Endpoint - Get Global Metafields
@@ -14,7 +14,7 @@ export default async (req: Req, res: Res): Promise<Res> => {
   initPathLogger(req)
 
   try {
-    const globals = await shopMetafields({ ...req.query, namespace: 'globals' })
+    const globals = await metafieldsShop({ ...req.query, namespace: 'globals' })
     return res.json(objectFromArray(globals || [], 'key'))
   } catch (err) {
     const error = formatError(err, { query: req.query })

@@ -15,32 +15,32 @@ import createError from './utils/createError'
 /**
  * Transforms an Axios error into a Feathers Error.
  *
- * @param error - Error to transform
+ * @param e - Error to transform
  * @throws {FeathersErrorJSON}
  */
-const handleErrorResponse = (error: AxiosError): void => {
-  const { config = {}, message, request, response, stack } = error
+const handleErrorResponse = (e: AxiosError): void => {
+  const { config = {}, message, request, response } = e
 
-  let feathersError = {} as FeathersErrorJSON
+  let error = {} as FeathersErrorJSON
 
   if (response) {
     // The request was made and the server responded with a status code
     const { data, status } = response as AxiosResponse<AnyObject>
     const err = data as FeathersErrorJSON
-    const { className } = err as FeathersErrorJSON
+    const $data = isPlainObject(data) ? data : { data }
 
-    feathersError = className ? err : createError(message, data, status)
+    error = err.className ? err : createError(message, $data, status)
   } else if (request) {
     // The request was made but no response was received
-    feathersError = createError('No response received.')
+    error = createError('No response received.')
   } else {
     // Something happened in setting up the request that triggered an error
-    feathersError = createError(message, { errors: { stack } })
+    error = createError(e)
   }
 
-  if (isPlainObject(feathersError.data)) feathersError.data.config = config
+  error.data.config = config
 
-  throw feathersError
+  throw error
 }
 
 /**

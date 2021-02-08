@@ -1,8 +1,8 @@
-import { AlgoliaError } from '../../types'
+import type { AlgoliaError } from '../types'
 
 /**
  * @file Implementation - searchIndex404
- * @module lib/utils/search/searchIndex404
+ * @module lib/utils/searchIndex404
  */
 
 /**

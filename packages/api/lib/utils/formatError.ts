@@ -2,12 +2,12 @@ import type { FeathersErrorJSON } from '@feathersjs/errors'
 import type { AnyObject } from '@flex-development/json'
 import { createError } from '@flex-development/kustomzcore'
 import merge from 'lodash/merge'
-import type { AlgoliaError } from '../../types'
+import type { AlgoliaError } from '../types'
 import searchIndex404 from './searchIndex404'
 
 /**
  * @file Implementation - formatError
- * @module lib/utils/errors/formatError
+ * @module lib/utils/formatError
  */
 
 /**
@@ -21,21 +21,24 @@ const formatError = (
   data: AnyObject = {}
 ): FeathersErrorJSON => {
   // If already `FeathersErrorJSON`, return error argument
-  if ((error as FeathersErrorJSON).className) return error as FeathersErrorJSON
+  if ((error as FeathersErrorJSON).className) {
+    const $error = error as FeathersErrorJSON
+    return { ...error, data: merge($error.data, data) } as FeathersErrorJSON
+  }
 
   // Cast error
   const $error: AlgoliaError = error as AlgoliaError
 
   // Get error details
-  const { name, message, stack, status, transporterStackTrace } = $error
+  const { status, transporterStackTrace } = $error
 
   // Get error data
-  const $data: AnyObject = merge({ name, stack, transporterStackTrace }, data)
+  const $data: AnyObject = merge(data, { transporterStackTrace })
 
   // Check for "Index <foo> does not exist" error
   $data.search_index_404 = searchIndex404($error) || undefined
 
-  return createError(message, $data, status)
+  return createError($error, $data, status)
 }
 
 export default formatError

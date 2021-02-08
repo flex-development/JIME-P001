@@ -1,84 +1,59 @@
 import type { IProductListing } from '@flex-development/kustomzcore'
 import type { VercelResponse as Res } from '@vercel/node'
-import omit from 'lodash/omit'
-import type { IProductListing as Hit } from 'shopify-api-node'
-import { INDEX_SETTINGS, PRODUCT_LISTINGS } from '../../lib/config'
 import { initPathLogger } from '../../lib/middleware'
-import type {
-  FindCollectionsReq as Req,
-  GetProductQuery
-} from '../../lib/types'
-import {
-  findProductsOptions,
-  formatError,
-  getSearchIndex,
-  includeMetafields,
-  includeSEO,
-  productMetafields,
-  productSEO
-} from '../../lib/utils'
+import Service from '../../lib/services/ProductService'
+import type { FindProductsReq as Req, GetProductQuery } from '../../lib/types'
+import { formatError, includeSEO } from '../../lib/utils'
 
 /**
  * @file API Endpoint - Find Products
  * @module api/products
  */
 
+/**
+ * Returns an array of product listing resource objects.
+ *
+ * @param req - API request object
+ * @param req.query - Request query parameters
+ * @param req.query.fields - Specify fields to include
+ * @param req.query.handle - Find product by handle
+ * @param req.query.hitsPerPage - Number of hits per page
+ * @param req.query.length - Number of hits to retrieve (used only with offset)
+ * @param req.query.offset - Specify the offset of the first hit to return
+ * @param req.query.page - Specify the page to retrieve
+ * @param req.query.product_id - Find product by ID
+ * @param req.query.text - Search query text
+ * @param res - API response object
+ */
 export default async (req: Req, res: Res): Promise<Res> => {
   // ! Attach `logger` and `path` to API request object
   initPathLogger(req)
 
-  // Convert product query into search options object
-  const options = findProductsOptions(req.query)
+  // Convert query into search options object
+  const options = Service.searchOptions(req.query)
 
   try {
-    // Get product listings to update search index
-    let listings: Hit[] | Promise<Hit>[] = await PRODUCT_LISTINGS.list()
-
-    // Keep objectID consistent with product listing ID
-    listings = listings.map(obj => ({ ...obj, objectID: obj.product_id }))
-
-    // Get metafields for each product
-    if (includeMetafields(options)) {
-      listings = listings.map(async hit => ({
-        ...hit,
-        metafield: await productMetafields(hit.product_id)
-      }))
-
-      // Complete metafields promise
-      listings = await Promise.all(listings)
-    }
+    // Execute search and get results
+    let results = await Service.find(req.query.text, options)
 
     // Get SEO data for each product
     if (includeSEO(options)) {
-      listings = listings.map(async hit => {
-        const product = hit as IProductListing
+      const $results = results.map(async obj => {
+        const product = obj as IProductListing
+        const { sku } = req.query as GetProductQuery
 
-        return {
-          ...hit,
-          seo: await productSEO(product, (req.query as GetProductQuery).sku)
-        }
+        return { ...obj, seo: await Service.seo(product, sku) }
       })
 
       // Complete SEO data promise
-      listings = await Promise.all(listings)
+      results = await Promise.all($results)
     }
 
-    // Get empty search index
-    const index = await getSearchIndex(INDEX_SETTINGS.product_listings.name)
-
-    // Update index data
-    await index.saveObjects(listings)
-
-    // Perform search
-    const { hits } = await index.search<Hit>(req.query?.text ?? '', options)
-
-    // Return results and remove `objectID` field
-    return res.json(hits.map(data => omit(data, ['objectID'])))
+    return res.json(results)
   } catch (err) {
-    const error = formatError(err, { options, query: req.query })
-    const { search_index_404 } = error.data
+    const error = formatError(err, { query: req.query })
 
-    if (!search_index_404) req.logger.error({ error })
-    return search_index_404 ? res.json([]) : res.status(error.code).json(error)
+    req.logger.error({ error })
+    return res.status(error.code).json(error)
   }
 }

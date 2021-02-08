@@ -1,13 +1,13 @@
 import { axios } from '@flex-development/kustomzcore'
 import type { VercelResponse as Res } from '@vercel/node'
-import { AxiosRequestConfig } from 'axios'
+import type { AxiosRequestConfig } from 'axios'
 import pick from 'lodash/pick'
 import { initPathLogger } from '../lib/middleware'
 import type { APIRequest as Req } from '../lib/types'
 import {
   appleDeveloperToken,
   formatError,
-  globalMetafields
+  metafieldsGlobal
 } from '../lib/utils'
 
 /**
@@ -21,7 +21,7 @@ export default async (req: Req, res: Res): Promise<Res> => {
 
   try {
     // Fetch global metafields to get playlist URL
-    const { playlist_url } = await globalMetafields()
+    const { playlist_url } = await metafieldsGlobal()
     const url = (playlist_url.value || '') as string
 
     // Get playlist ID

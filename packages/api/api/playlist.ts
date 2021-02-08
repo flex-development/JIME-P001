@@ -2,13 +2,9 @@ import { axios } from '@flex-development/kustomzcore'
 import type { VercelResponse as Res } from '@vercel/node'
 import type { AxiosRequestConfig } from 'axios'
 import pick from 'lodash/pick'
-import { initPathLogger } from '../lib/middleware'
+import { handleAPIError, initPathLogger } from '../lib/middleware'
 import type { APIRequest as Req } from '../lib/types'
-import {
-  appleDeveloperToken,
-  formatError,
-  metafieldsGlobal
-} from '../lib/utils'
+import { appleDeveloperToken, metafieldsGlobal } from '../lib/utils'
 
 /**
  * @file API Endpoint - Get Store Playlist Data
@@ -45,9 +41,6 @@ export default async (req: Req, res: Res): Promise<Res> => {
       tracks: relationships?.tracks?.data.map(track => track.attributes)
     })
   } catch (err) {
-    const error = formatError(err)
-
-    req.logger.error({ error })
-    return res.status(error.code).json(error)
+    return handleAPIError(req, res, err)
   }
 }

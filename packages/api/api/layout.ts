@@ -1,10 +1,10 @@
 import { axios } from '@flex-development/kustomzcore'
 import type { VercelResponse as Res } from '@vercel/node'
 import { API_URL } from '../lib/config'
-import { initPathLogger } from '../lib/middleware'
+import { handleAPIError, initPathLogger } from '../lib/middleware'
 import MenuService from '../lib/services/MenuService'
 import type { APIRequest as Req } from '../lib/types'
-import { formatError, metafieldsGlobal } from '../lib/utils'
+import { metafieldsGlobal } from '../lib/utils'
 
 /**
  * @file API Endpoint - Get `AppLayout` data
@@ -44,9 +44,6 @@ export default async (req: Req, res: Res): Promise<Res> => {
       }
     })
   } catch (err) {
-    const error = formatError(err)
-
-    req.logger.error({ error })
-    return res.status(error.code).json(error)
+    return handleAPIError(req, res, err)
   }
 }

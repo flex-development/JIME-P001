@@ -1,9 +1,9 @@
 import type { IProductListing } from '@flex-development/kustomzcore'
 import type { VercelResponse as Res } from '@vercel/node'
-import { initPathLogger } from '../../lib/middleware'
+import { handleAPIError, initPathLogger } from '../../lib/middleware'
 import Service from '../../lib/services/ProductService'
 import type { FindProductsReq as Req, GetProductQuery } from '../../lib/types'
-import { formatError, includeSEO } from '../../lib/utils'
+import { includeSEO } from '../../lib/utils'
 
 /**
  * @file API Endpoint - Find Products
@@ -51,9 +51,6 @@ export default async (req: Req, res: Res): Promise<Res> => {
 
     return res.json(results)
   } catch (err) {
-    const error = formatError(err, { query: req.query })
-
-    req.logger.error({ error })
-    return res.status(error.code).json(error)
+    return handleAPIError(req, res, err, { query: req.query })
   }
 }

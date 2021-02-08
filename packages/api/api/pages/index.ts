@@ -1,8 +1,7 @@
 import type { VercelResponse as Res } from '@vercel/node'
-import { initPathLogger } from '../../lib/middleware'
+import { handleAPIError, initPathLogger } from '../../lib/middleware'
 import Service from '../../lib/services/PageService'
 import type { FindPagesReq as Req } from '../../lib/types'
-import { formatError } from '../../lib/utils'
 
 /**
  * @file API Endpoint - Find Pages
@@ -45,9 +44,6 @@ export default async (req: Req, res: Res): Promise<Res> => {
     // If searching for page with the `handle` 'index', return first result
     return res.json(INDEX_AS_HANDLE ? results[0] : results)
   } catch (err) {
-    const error = formatError(err, { query: req.query })
-
-    req.logger.error({ error })
-    return res.status(error.code).json(error)
+    return handleAPIError(req, res, err, { query: req.query })
   }
 }

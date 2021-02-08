@@ -1,9 +1,8 @@
 import type { VercelResponse as Res } from '@vercel/node'
 import pick from 'lodash/pick'
-import { initPathLogger } from '../../lib/middleware'
+import { handleAPIError, initPathLogger } from '../../lib/middleware'
 import Service from '../../lib/services/ProductService'
 import type { GetProductReq as Req } from '../../lib/types'
-import { formatError } from '../../lib/utils'
 
 /**
  * @file API Endpoint - Get Product By Handle
@@ -30,9 +29,6 @@ export default async (req: Req, res: Res): Promise<Res> => {
   try {
     return res.json(await Service.get(query.handle, query.fields, query.sku))
   } catch (err) {
-    const error = formatError(err, { query })
-
-    req.logger.error({ error })
-    return res.status(error.code).json(error)
+    return handleAPIError(req, res, err, { query: req.query })
   }
 }

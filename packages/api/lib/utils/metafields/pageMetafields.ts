@@ -9,7 +9,7 @@ import type { FindMetafieldParams } from '../../types'
 
 /**
  * @file Implementation - pageMetafields
- * @module utils/metafields/pageMetafields
+ * @module lib/utils/metafields/pageMetafields
  */
 
 /**

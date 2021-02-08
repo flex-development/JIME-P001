@@ -1,6 +1,6 @@
 /**
  * @file  Middleware Entry Point
- * @module utils/middleware
+ * @module lib/utils/middleware
  */
 
 export { default as initPathLogger } from './initPathLogger'

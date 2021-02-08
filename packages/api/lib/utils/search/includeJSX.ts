@@ -2,8 +2,8 @@ import type { SearchOptions } from '../../types'
 import allFields from './includeAllFields'
 
 /**
- * @file Implementation - includeParsedMDX
- * @module lib/utils/search/includeParsedMDX
+ * @file Implementation - includeJSX
+ * @module lib/utils/search/includeJSX
  */
 
 /**
@@ -14,7 +14,7 @@ import allFields from './includeAllFields'
  * @param options.attributesToRetrieve - Gives control over which attributes to
  * retrieve and which not to retrieve
  */
-const includeParsedMDX = (options: SearchOptions): boolean => {
+const includeJSX = (options: SearchOptions): boolean => {
   const { attributesToRetrieve: fields = [] } = options
 
   const exclude = fields.includes('-body') || fields.includes('-body_html')
@@ -23,4 +23,4 @@ const includeParsedMDX = (options: SearchOptions): boolean => {
   return !exclude && (allFields(options) || include)
 }
 
-export default includeParsedMDX
+export default includeJSX

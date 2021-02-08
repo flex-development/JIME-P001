@@ -2,7 +2,7 @@ import pino from 'pino'
 
 /**
  * @file Pino Logger Configuration
- * @module config/logger
+ * @module lib/config/logger
  *
  * @see {@link https://github.com/pinojs/pino}
  * @see {@link https://github.com/pinojs/pino-pretty}

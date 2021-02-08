@@ -1,6 +1,6 @@
 /**
  * @file Utilities Entry Point - SEO
- * @module utils/seo
+ * @module lib/utils/seo
  */
 
 export { default as collectionSEO } from './collectionSEO'

@@ -6,7 +6,7 @@ import { globalMetafields } from '../metafields'
 
 /**
  * @file Implementation - globalSEO
- * @module utils/seo/globalSEO
+ * @module lib/utils/seo/globalSEO
  */
 
 /**

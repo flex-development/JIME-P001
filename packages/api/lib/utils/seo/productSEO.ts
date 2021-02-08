@@ -14,7 +14,7 @@ import type { SEOData } from '../../types'
 
 /**
  * @file Implementation - productSEO
- * @module utils/seo/productSEO
+ * @module lib/utils/seo/productSEO
  */
 
 /**

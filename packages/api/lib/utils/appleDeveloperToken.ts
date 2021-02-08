@@ -4,7 +4,7 @@ import isEmpty from 'lodash/isEmpty'
 
 /**
  * @file Implementation - appleDeveloperToken
- * @module utils/streaming/appleDeveloperToken
+ * @module lib/utils/appleDeveloperToken
  */
 
 /**

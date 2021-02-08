@@ -9,7 +9,7 @@ import type { FindMetafieldParams } from '../../types'
 
 /**
  * @file Implementation - productMetafields
- * @module utils/metafields/productMetafields
+ * @module lib/utils/metafields/productMetafields
  */
 
 /**

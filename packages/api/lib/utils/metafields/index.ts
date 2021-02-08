@@ -1,6 +1,6 @@
 /**
  * @file Utilities Entry Point - Metafields
- * @module utils/metafields
+ * @module lib/utils/metafields
  */
 
 export { default as collectionMetafields } from './collectionMetafields'

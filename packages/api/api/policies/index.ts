@@ -1,18 +1,18 @@
 import type { IPolicy } from '@flex-development/kustomzcore'
-import { axios } from '@flex-development/kustomzcore'
 import type { VercelResponse as Res } from '@vercel/node'
 import omit from 'lodash/omit'
 import type { IPolicy as Hit } from 'shopify-api-node'
-import { INDEX_SETTINGS, POLICIES, TurndownService } from '../../lib/config'
+import { INDEX_SETTINGS, POLICIES } from '../../lib/config'
 import { initPathLogger } from '../../lib/middleware'
 import type { FindPoliciesReq as Req } from '../../lib/types'
 import {
   formatError,
   getSearchIndex,
-  includeParsedMDX,
+  includeJSX,
   includeSEO,
   policySEO,
-  shopifySearchOptions
+  shopifySearchOptions,
+  toJSX
 } from '../../lib/utils'
 
 /**
@@ -37,19 +37,11 @@ export default async (req: Req, res: Res): Promise<Res> => {
     })
 
     // Parse MDX body content
-    if (includeParsedMDX(options)) {
-      policies = policies.map(async hit => {
-        const html = hit.body.replace('\n', '<br/>')
-
-        const { code: body } = await axios({
-          data: JSON.stringify(TurndownService.turndown(html)),
-          headers: { 'Content-Type': 'application/json' },
-          method: 'post',
-          url: 'https://mdjsx.flexdevelopment.vercel.app'
-        })
-
-        return { ...hit, body }
-      })
+    if (includeJSX(options)) {
+      policies = policies.map(async hit => ({
+        ...hit,
+        body: await toJSX(hit.body)
+      }))
 
       // Complete MDX promise
       policies = await Promise.all(policies)

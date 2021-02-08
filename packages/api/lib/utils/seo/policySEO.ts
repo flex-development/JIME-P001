@@ -6,7 +6,7 @@ import globalSEO from './globalSEO'
 
 /**
  * @file Implementation - policySEO
- * @module utils/seo/policySEO
+ * @module lib/utils/seo/policySEO
  */
 
 /**

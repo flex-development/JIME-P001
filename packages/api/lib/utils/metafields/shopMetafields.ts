@@ -8,7 +8,7 @@ import type { FindMetafieldParams } from '../../types'
 
 /**
  * @file Implementation - shopMetafields
- * @module utils/metafields/shopMetafields
+ * @module lib/utils/metafields/shopMetafields
  */
 
 /**

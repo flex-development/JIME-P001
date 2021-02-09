@@ -3,8 +3,8 @@ import pick from 'lodash/pick'
 import {
   handleAPIError,
   initPathLogger,
-  trackAPIEvent,
-  trackAPIRequest
+  trackAPIRequest,
+  trackAPISuccessEvent
 } from '../../lib/middleware'
 import Service from '../../lib/services/PolicyService'
 import type { GetPolicyReq as Req } from '../../lib/types'
@@ -40,6 +40,6 @@ export default async (req: Req, res: Res): Promise<Res | void> => {
   }
 
   // Send success `event` hit to Google Analytics
-  await trackAPIEvent(req, '/policies/[handle]')
+  await trackAPISuccessEvent(req, '/policies/[handle]')
   return res.end()
 }

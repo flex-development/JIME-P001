@@ -4,8 +4,8 @@ import { API_URL } from '../lib/config'
 import {
   handleAPIError,
   initPathLogger,
-  trackAPIEvent,
-  trackAPIRequest
+  trackAPIRequest,
+  trackAPISuccessEvent
 } from '../lib/middleware'
 import MenuService from '../lib/services/MenuService'
 import type { APIRequest as Req } from '../lib/types'
@@ -56,6 +56,6 @@ export default async (req: Req, res: Res): Promise<Res | void> => {
   }
 
   // Send success `event` hit to Google Analytics
-  await trackAPIEvent(req, '/layout')
+  await trackAPISuccessEvent(req, '/layout')
   return res.end()
 }

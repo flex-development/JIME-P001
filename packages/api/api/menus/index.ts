@@ -2,8 +2,8 @@ import type { VercelResponse as Res } from '@vercel/node'
 import {
   handleAPIError,
   initPathLogger,
-  trackAPIEvent,
-  trackAPIRequest
+  trackAPIRequest,
+  trackAPISuccessEvent
 } from '../../lib/middleware'
 import Service from '../../lib/services/MenuService'
 import type { FindMenusReq as Req } from '../../lib/types'
@@ -44,6 +44,6 @@ export default async (req: Req, res: Res): Promise<Res | void> => {
   }
 
   // Send success `event` hit to Google Analytics
-  await trackAPIEvent(req, '/menus')
+  await trackAPISuccessEvent(req, '/menus')
   return res.end()
 }

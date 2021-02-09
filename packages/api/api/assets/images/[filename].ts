@@ -6,8 +6,8 @@ import sharp from 'sharp'
 import {
   handleAPIError,
   initPathLogger,
-  trackAPIEvent,
-  trackAPIRequest
+  trackAPIRequest,
+  trackAPISuccessEvent
 } from '../../../lib/middleware'
 import type { GetStaticAssetReq as Req } from '../../../lib/types'
 
@@ -54,7 +54,7 @@ export default async (req: Req, res: Res): Promise<Res | void> => {
     }
 
     // Send success `event` hit to Google Analytics
-    await trackAPIEvent(req, '/assets/images/[filename]')
+    await trackAPISuccessEvent(req, '/assets/images/[filename]')
 
     res.writeHead(200, { 'Content-Type': `image/${extension}` })
     return res.end(file)

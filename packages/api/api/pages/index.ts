@@ -2,8 +2,8 @@ import type { VercelResponse as Res } from '@vercel/node'
 import {
   handleAPIError,
   initPathLogger,
-  trackAPIEvent,
-  trackAPIRequest
+  trackAPIRequest,
+  trackAPISuccessEvent
 } from '../../lib/middleware'
 import Service from '../../lib/services/PageService'
 import type { FindPagesReq as Req } from '../../lib/types'
@@ -56,6 +56,6 @@ export default async (req: Req, res: Res): Promise<Res | void> => {
   }
 
   // Send success `event` hit to Google Analytics
-  await trackAPIEvent(req, INDEX_AS_HANDLE ? 'pages/[handle]' : 'pages')
+  await trackAPISuccessEvent(req, INDEX_AS_HANDLE ? 'pages/[handle]' : 'pages')
   return res.end()
 }

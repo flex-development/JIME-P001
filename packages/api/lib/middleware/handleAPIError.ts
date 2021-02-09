@@ -2,6 +2,7 @@ import type { FeathersErrorJSON } from '@feathersjs/errors'
 import type { AnyObject } from '@flex-development/json'
 import type { VercelResponse as Res } from '@vercel/node'
 import pick from 'lodash/pick'
+import URI from 'urijs'
 import ga from '../config/google-analytics'
 import vercel from '../config/vercel-env'
 import type { AlgoliaError, APIRequest as Req } from '../types'
@@ -15,11 +16,8 @@ import formatError from '../utils/formatError'
 /**
  * Handles an API request error.
  *
- * If it isn't already, {@param err} will be converted into a
- * `FeathersErrorJSON` object.
- *
- * If {@param err.status} is greater than or equal to `500`, the exception will
- * be tracked with Google Analytics.
+ * If {@param err.status} is greater than or equal to `500`, the an error
+ * `event` hit will be sent to Google Analytics.
  *
  * @async
  * @param req - API request object
@@ -48,10 +46,17 @@ const handleAPIError = async (
 
   // Track and report Apple Music API auth or server errors
   if (error_server || error_apple_auth) {
-    await ga.exception({
-      ...error,
-      exceptionDescription: error.name,
-      isExceptionFatal: error_apple_auth || error.code >= 502 ? 1 : 0
+    const uri = new URI(req.url)
+
+    await ga.event({
+      error: JSON.stringify(error),
+      eventAction: error.name,
+      eventCategory: uri.directory() || uri.path(),
+      eventLabel: error.message,
+      eventValue: error.code,
+      method: req.method.toUpperCase(),
+      path: uri.path(),
+      ua: error.data.headers['user-agent']
     })
   }
 

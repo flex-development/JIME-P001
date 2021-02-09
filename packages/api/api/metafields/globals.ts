@@ -3,8 +3,8 @@ import type { VercelResponse as Res } from '@vercel/node'
 import {
   handleAPIError,
   initPathLogger,
-  trackAPIEvent,
-  trackAPIRequest
+  trackAPIRequest,
+  trackAPISuccessEvent
 } from '../../lib/middleware'
 import type { GetGlobalMetafieldsReq as Req } from '../../lib/types'
 import { metafieldsShop } from '../../lib/utils'
@@ -29,6 +29,6 @@ export default async (req: Req, res: Res): Promise<Res | void> => {
   }
 
   // Send success `event` hit to Google Analytics
-  await trackAPIEvent(req, '/metafields/globals')
+  await trackAPISuccessEvent(req, '/metafields/globals')
   return res.end()
 }

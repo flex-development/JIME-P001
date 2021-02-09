@@ -5,8 +5,8 @@ import vercel from '../config/vercel-env'
 import type { APIRequest } from '../types'
 
 /**
- * @file Implementation - trackAPIEvent
- * @module lib/middleware/trackAPIEvent
+ * @file Implementation - trackAPISuccessEvent
+ * @module lib/middleware/trackAPISuccessEvent
  */
 
 /**
@@ -15,19 +15,20 @@ import type { APIRequest } from '../types'
  * @param req - API request object
  * @param eventLabel - Event label
  */
-const trackAPIEvent = async (
+const trackAPISuccessEvent = async (
   req: APIRequest,
   eventLabel: EventParam['eventLabel']
 ): Promise<boolean> => {
   // Get URI object
   const uri = new URI(req.url)
 
-  // Build initial `event` params object
+  // Build `event` params object
   const param = {
-    eventAction: req.method.toUpperCase(),
+    eventAction: 'Success',
     eventCategory: uri.directory() || uri.path(),
     eventLabel,
     eventValue: new Date().valueOf(),
+    method: req.method.toUpperCase(),
     path: uri.path()
   }
 
@@ -35,4 +36,4 @@ const trackAPIEvent = async (
   return await ga.event({ ...param, ...vercel } as EventParam)
 }
 
-export default trackAPIEvent
+export default trackAPISuccessEvent

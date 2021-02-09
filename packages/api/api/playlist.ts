@@ -5,8 +5,8 @@ import pick from 'lodash/pick'
 import {
   handleAPIError,
   initPathLogger,
-  trackAPIEvent,
-  trackAPIRequest
+  trackAPIRequest,
+  trackAPISuccessEvent
 } from '../lib/middleware'
 import type { APIRequest as Req } from '../lib/types'
 import { appleDeveloperToken, metafieldsGlobal } from '../lib/utils'
@@ -53,6 +53,6 @@ export default async (req: Req, res: Res): Promise<Res | void> => {
   }
 
   // Send success `event` hit to Google Analytics
-  await trackAPIEvent(req, '/playlist')
+  await trackAPISuccessEvent(req, '/playlist')
   return res.end()
 }

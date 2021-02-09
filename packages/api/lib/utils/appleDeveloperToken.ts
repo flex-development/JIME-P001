@@ -8,6 +8,8 @@ import isEmpty from 'lodash/isEmpty'
  * @module lib/utils/appleDeveloperToken
  */
 
+/* eslint-disable sort-keys */
+
 const {
   APPLE_AUTHKEY_MUSICKIT: private_key,
   APPLE_AUTHKEY_MUSICKIT_KEY_ID: kid,

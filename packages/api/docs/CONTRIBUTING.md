@@ -63,8 +63,8 @@ used to create authentication profiles for new customers.
 [Google Analytics][5] is a web analytics service that tracks and reports website
 traffic.
 
-The FCT API uses the [Measurement Protocol for Universal Analytics][6] to track
-API requests, success responses, and errors.
+KAPI uses the [Measurement Protocol for Universal Analytics][6] to track API
+requests, success responses, and errors.
 
 **Environment Variables**
 

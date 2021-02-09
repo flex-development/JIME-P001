@@ -27,7 +27,7 @@ const trackAPIEvent = async (
   // Build initial `event` params object
   const param = {
     eventAction: req.method.toUpperCase(),
-    eventCategory: uri.directory(),
+    eventCategory: uri.directory() || uri.path(),
     eventLabel,
     eventValue,
     path: uri.path()

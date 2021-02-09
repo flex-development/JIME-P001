@@ -17,7 +17,7 @@ import type { GetPageReq as Req } from '../../lib/types'
 /**
  * Retrieve a page resource by handle.
  *
- * @param req - API request
+ * @param req - API request object
  * @param req.query - Request query parameters
  * @param req.query.fields - Specify fields to include for each object
  * @param req.query.handle - Handle of page to retrieve

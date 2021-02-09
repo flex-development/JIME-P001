@@ -17,7 +17,7 @@ import type { GetMenuReq as Req } from '../../lib/types'
 /**
  * Retrieve a menu resource by handle.
  *
- * @param req - API request
+ * @param req - API request object
  * @param req.query - Request query parameters
  * @param req.query.fields - Specify fields to include
  * @param req.query.handle - Handle of menu to retrieve

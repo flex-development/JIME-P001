@@ -12,10 +12,20 @@ import {
 import type { GetStaticAssetReq as Req } from '../../../lib/types'
 
 /**
- * @file API Endpoint - Get Static Image Assets
+ * @file API Endpoint - Get Static Image Asset
  * @module api/assets/images/[filename]
  */
 
+/**
+ * Retrieve a static image asset by filename.
+ *
+ * @param req - API request object
+ * @param req.query - Request query parameters
+ * @param req.query.filename - Name of image to retrieve, including extension
+ * @param req.query.height - Resized image height
+ * @param req.query.width - Resized image width
+ * @param res - API response object
+ */
 export default async (req: Req, res: Res): Promise<Res | void> => {
   // Attach `logger` and `path` to API request object
   initPathLogger(req)

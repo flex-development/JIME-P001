@@ -11,7 +11,11 @@ import { GridBreakpoints } from '@flex-development/kustomzdesign/types'
 import { useSlideInOut } from '@hooks/useSlideInOut'
 import type { AnimatedProps } from '@react-spring/web'
 import { useWebFontLoader } from '@subdomains/app/hooks/useWebFontLoader'
-import type { IPageProps, PageComponent } from '@subdomains/app/types'
+import type {
+  IAppInitialProps,
+  IPageProps,
+  PageComponent
+} from '@subdomains/app/types'
 import Head from 'next/head'
 import type { FC } from 'react'
 import { useCallback, useEffect, useMemo } from 'react'
@@ -27,6 +31,11 @@ import UAParser from 'ua-parser-js'
 
 export interface LayoutProps {
   /**
+   * `Hero`, `PlaylistBar` and `Sidebar` data.
+   */
+  data: IAppInitialProps['layout']
+
+  /**
    * The current Next.js page component being rendered.
    */
   page: PageComponent
@@ -35,23 +44,27 @@ export interface LayoutProps {
    * Props from Next.js data-fetching methods.
    */
   pageProps: IPageProps
+
+  /**
+   * `User-Agent` header.
+   */
+  ua?: IAppInitialProps['ua']
 }
 
 /**
  * Renders the store layout and current page.
  *
  * @param props - Component properties
+ * @param props.data - `Hero`, `PlaylistBar` and `Sidebar` data
+ * @param props.data.hero - `Hero` component properties
+ * @param props.data.playlist - Apple Music `Playlist` resource data
+ * @param props.data.sidebar - `Sidebar` component properties
  * @param props.page - Next.js page component
  * @param props.pageProps - Props from Next.js data-fetching methods
- * @param props.pageProps.layout - `Hero`, `PlaylistBar` and `Sidebar` data
- * @param props.pageProps.layout.hero - `Hero` component properties
- * @param props.pageProps.layout.playlist - Apple Music `Playlist` resource data
- * @param props.pageProps.layout.sidebar - `Sidebar` component properties
- * @param props.pageProps.ua - User Agent or undefined
+ * @param props.ua - User Agent header or undefined
  */
 export const Layout: FC<LayoutProps> = (props: LayoutProps) => {
-  const { page: Component, pageProps } = props
-  const { layout, ua } = pageProps
+  const { data, page: Component, pageProps, ua } = props
 
   // Load Web Fonts
   const webfonts = useWebFontLoader({ typekit: { id: process.env.TYPEKIT_ID } })
@@ -130,16 +143,16 @@ export const Layout: FC<LayoutProps> = (props: LayoutProps) => {
             ref={sidebar_a.ref}
             style={sidebar_a.style as AnimatedProps<BoxProps>['style']}
           >
-            <Sidebar {...layout.sidebar} />
+            <Sidebar {...data.sidebar} />
           </BoxAnimated>
 
           <Box className='content-col'>
-            <Hero subtitle={layout.hero.subtitle} title={layout.hero.title} />
+            <Hero subtitle={data.hero.subtitle} title={data.hero.title} />
             <Component {...pageProps} />
           </Box>
         </Box>
 
-        <PlaylistBar songs={layout.playlist.tracks} />
+        <PlaylistBar songs={data.playlist.tracks} />
       </Box>
 
       <Box className='loading-container'>

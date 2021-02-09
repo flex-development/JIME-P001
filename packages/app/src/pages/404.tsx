@@ -5,7 +5,6 @@ import type {
   IPageProps as PageProps,
   PageComponent
 } from '@subdomains/app/types'
-import getLayoutData from '@subdomains/app/utils/getLayoutData'
 import globalSEO from '@subdomains/app/utils/globalSEO'
 import merge from 'lodash/merge'
 import type { GetStaticProps } from 'next'
@@ -22,7 +21,6 @@ import { Fragment } from 'react'
  * @see https://nextjs.org/docs/advanced-features/custom-error-page#404-page
  *
  * @param props - Page component props
- * @param props.layout - Data to populate `Layout` component
  * @param props.seo - `SEO` component properties
  */
 const NotFound: PageComponent = ({ seo }) => (
@@ -45,8 +43,10 @@ const NotFound: PageComponent = ({ seo }) => (
  * @async
  */
 export const getStaticProps: GetStaticProps<PageProps> = async () => {
-  const seo = merge(await globalSEO(), { title: 'Page Not Found' })
-  return { props: { layout: await getLayoutData(), seo }, revalidate: 1 }
+  return {
+    props: { seo: merge(await globalSEO(), { title: 'Page Not Found' }) },
+    revalidate: 1
+  }
 }
 
 export default NotFound

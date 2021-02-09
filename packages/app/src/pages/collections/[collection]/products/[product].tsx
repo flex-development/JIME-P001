@@ -1,10 +1,8 @@
+import kapi from '@app/config/axios-kapi'
 import { ProductTemplate } from '@components/templates/ProductTemplate'
 import { serialize } from '@flex-development/json/utils/serialize'
-import type {
-  ICollectionListing,
-  IProductListing
-} from '@flex-development/kustomzcore'
-import type { GetProductResJSON, SEOData } from '@kapi/types'
+import type { IProductListing } from '@flex-development/kustomzcore'
+import type { GetCollectionResJSON, GetProductResJSON } from '@kapi/types'
 import { SEO } from '@subdomains/app/components/SEO'
 import type {
   IPagePropsProduct as PageProps,
@@ -13,9 +11,6 @@ import type {
   ProductPageParams,
   ProductPageUrlQuery
 } from '@subdomains/app/types'
-import getLayoutData from '@subdomains/app/utils/getLayoutData'
-import getCollection from '@subdomains/sales/utils/getCollection'
-import getProduct from '@subdomains/sales/utils/getProduct'
 import findIndex from 'lodash/findIndex'
 import type { GetServerSideProps, GetServerSidePropsContext } from 'next'
 
@@ -28,7 +23,6 @@ import type { GetServerSideProps, GetServerSidePropsContext } from 'next'
  * Renders a collection product page.
  *
  * @param props - Page component props
- * @param props.layout - Data to populate `Layout` component
  * @param props.seo - `SEO` component properties
  * @param props.template - `ProductTemplate` component properties
  */
@@ -52,66 +46,49 @@ const CollectionProduct: PageComponent<PageProps> = ({ seo, template }) => (
  * @param context - Server side page context
  * @param context.params - Route parameters if dynamic route
  * @param context.query - The query string
- * @param context.req - HTTP request object
+ * @param context.req - `HTTP` request object
  */
 export const getServerSideProps: GetServerSideProps<
   PageProps,
   ProductPageUrlQuery
 > = async ({ query, req }: GetServerSidePropsContext<ProductPageParams>) => {
-  const {
-    collection: chandle,
-    product: phandle,
-    sku
-  } = query as ProductPageUrlQuery
+  const { collection, product, sku } = query as ProductPageUrlQuery
 
-  // True if on collection product page
-  const c_product = req.url?.includes(`/collections/${chandle}/products/`)
+  let data: GetProductResJSON | NotFound = { notFound: true }
+  let data_collection: GetCollectionResJSON | NotFound = { notFound: true }
 
-  // Get product data
-  const data = await getProduct({
-    fields: 'body_html,handle,images,seo,variants,title',
-    handle: phandle,
-    sku
-  })
+  try {
+    data = await kapi<GetProductResJSON>({
+      params: { fields: 'body_html,handle,images,seo,variants,title', sku },
+      url: `/products/${product}`
+    })
 
-  // If product isn't found, show 404 layout
-  if ((data as NotFound).notFound) return data as NotFound
+    data_collection = await kapi<GetCollectionResJSON>({
+      params: { fields: 'title' },
+      url: `/collections/${collection}`
+    })
+  } catch (error) {
+    if (error.code === 404) return data as NotFound
+    throw error
+  }
 
-  // ! Guarenteed to be product data. Error will be thrown otherwise
-  const { seo, ...product } = data as GetProductResJSON
-
-  // Get product collection title
-  let collection = await getCollection({ handle: chandle })
-
-  // If collection isn't found, show 404 layout
-  if ((collection as NotFound).notFound) return collection as NotFound
-
-  // ! Guarenteed to be collection data. Error will be thrown otherwise
-  collection = collection as ICollectionListing
-
-  // Get data for template
-  const template = serialize<PageProps['template']>({
-    active: findIndex(
-      product.variants,
-      product.variants?.find(variant => variant.sku === sku)
-    ),
-    collection: {
-      href: c_product ? `/collections/${chandle}` : '/products',
-      title: c_product ? collection.title : 'Products'
-    },
-    product: product as IProductListing,
-    reviews: []
-  })
-
-  // Get layout data
-  const layout = await getLayoutData()
+  const c_product = req.url?.includes(`/collections/${collection}/products/`)
 
   return {
     props: {
-      layout,
-      seo: seo as NonNullable<SEOData>,
-      template,
-      ua: req.headers['user-agent']
+      seo: data.seo as NonNullable<typeof data.seo>,
+      template: serialize<PageProps['template']>({
+        active: findIndex(
+          data.variants,
+          data.variants?.find(variant => variant.sku === sku)
+        ),
+        collection: {
+          href: c_product ? `/collections/${collection}` : '/products',
+          title: c_product ? data_collection.title : 'Products'
+        },
+        product: data as IProductListing,
+        reviews: []
+      })
     }
   }
 }

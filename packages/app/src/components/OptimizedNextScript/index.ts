@@ -1,6 +1,6 @@
 /**
  * @file Entry Point - OptimizedNextScript
- * @module subdomains/app/components/OptimizedNextScript
+ * @module components/OptimizedNextScript
  */
 
 export * from './OptimizedNextScript'

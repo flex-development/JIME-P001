@@ -1,16 +1,16 @@
+import { SEO } from '@app/components/SEO'
 import kapi from '@app/config/axios-kapi'
-import { ProductTemplate } from '@components/templates/ProductTemplate'
-import { serialize } from '@flex-development/json/utils/serialize'
-import type { IProductListing } from '@flex-development/kustomzcore'
-import type { GetCollectionResJSON, GetProductResJSON } from '@kapi/types'
-import { SEO } from '@subdomains/app/components/SEO'
 import type {
   IPagePropsProduct as PageProps,
   NotFound,
   PageComponent,
   ProductPageParams,
   ProductPageUrlQuery
-} from '@subdomains/app/types'
+} from '@app/types'
+import { ProductTemplate } from '@components/templates/ProductTemplate'
+import { serialize } from '@flex-development/json/utils/serialize'
+import type { IProductListing } from '@flex-development/kustomzcore'
+import type { GetCollectionResJSON, GetProductResJSON } from '@kapi/types'
 import findIndex from 'lodash/findIndex'
 import type { GetServerSideProps, GetServerSidePropsContext } from 'next'
 

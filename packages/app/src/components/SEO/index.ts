@@ -1,6 +1,6 @@
 /**
  * @file Entry Point - SEO
- * @module subdomains/app/components/SEO
+ * @module components/SEO
  */
 
 export * from './SEO'

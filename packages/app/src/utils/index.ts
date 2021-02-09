@@ -1,6 +1,6 @@
 /**
  * @file Utilities Entry Point - App
- * @module subdomains/app/utils
+ * @module utils
  */
 
 export { default as globalSEO } from './globalSEO'

@@ -1,13 +1,13 @@
+import { SEO } from '@app/components/SEO'
 import kapi from '@app/config/axios-kapi'
-import { PageTemplate } from '@components/templates/PageTemplate'
-import type { GetPolicyResJSON } from '@kapi/types'
-import { SEO } from '@subdomains/app/components/SEO'
 import type {
   HandlePageParams,
   IPagePropsPolicy as PageProps,
   NotFound,
   PageComponent
-} from '@subdomains/app/types'
+} from '@app/types'
+import { PageTemplate } from '@components/templates/PageTemplate'
+import type { GetPolicyResJSON } from '@kapi/types'
 import type { GetServerSideProps, GetServerSidePropsContext } from 'next'
 
 /**

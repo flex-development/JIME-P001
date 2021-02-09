@@ -1,6 +1,6 @@
 /**
  * @file Subdomain Entry Point - Hooks
- * @module subdomains/app/hooks
+ * @module hooks
  */
 
 export * from './useWebFontLoader'

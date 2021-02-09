@@ -1,7 +1,4 @@
-import {
-  InlineStylesHead,
-  OptimizedNextScript
-} from '@subdomains/app/components'
+import { InlineStylesHead, OptimizedNextScript } from '@app/components'
 import type { DocumentInitialProps } from 'next/document'
 import NextDocument, { Html, Main } from 'next/document'
 

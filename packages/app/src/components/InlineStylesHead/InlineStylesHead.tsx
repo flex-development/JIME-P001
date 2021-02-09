@@ -6,7 +6,7 @@ import { resolve } from 'path'
 
 /**
  * @file Implementation - InlineStylesHead
- * @module subdomains/app/components/InlineStylesHead/impl
+ * @module components/InlineStylesHead/impl
  */
 
 /**

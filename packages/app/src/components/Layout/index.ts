@@ -1,6 +1,6 @@
 /**
  * @file Entry Point - Layout
- * @module subdomains/app/components/Layout
+ * @module components/Layout
  */
 
 export * from './Layout'

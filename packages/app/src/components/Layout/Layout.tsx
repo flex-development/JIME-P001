@@ -1,3 +1,9 @@
+import { useWebFontLoader } from '@app/hooks/useWebFontLoader'
+import type {
+  IAppInitialProps,
+  IPageProps,
+  PageComponent
+} from '@app/types'
 import type { BoxProps } from '@components/atoms/Box'
 import { Box, BoxAnimated } from '@components/atoms/Box'
 import { Span } from '@components/atoms/Span'
@@ -10,12 +16,6 @@ import { Sidebar } from '@components/organisms/Sidebar'
 import { GridBreakpoints } from '@flex-development/kustomzdesign/types'
 import { useSlideInOut } from '@hooks/useSlideInOut'
 import type { AnimatedProps } from '@react-spring/web'
-import { useWebFontLoader } from '@subdomains/app/hooks/useWebFontLoader'
-import type {
-  IAppInitialProps,
-  IPageProps,
-  PageComponent
-} from '@subdomains/app/types'
 import Head from 'next/head'
 import type { FC } from 'react'
 import { useCallback, useEffect, useMemo } from 'react'
@@ -26,7 +26,7 @@ import UAParser from 'ua-parser-js'
 
 /**
  * @file Implementation - Layout
- * @module subdomains/app/components/Layout/impl
+ * @module components/Layout/impl
  */
 
 export interface LayoutProps {

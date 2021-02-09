@@ -4,7 +4,7 @@ import type { GetGlobalMetafieldsResJSON, SEOData } from '@kapi/types'
 
 /**
  * @file Implementation - globalSEO
- * @module subdomains/app/utils/globalSEO
+ * @module utils/globalSEO
  */
 
 /**

@@ -1,14 +1,14 @@
+import { SEO } from '@app/components/SEO'
 import kapi from '@app/config/axios-kapi'
-import { CollectionTemplate } from '@components/templates/CollectionTemplate'
-import { serialize } from '@flex-development/json/utils/serialize'
-import type { GetCollectionResJSON } from '@kapi/types'
-import { SEO } from '@subdomains/app/components/SEO'
 import type {
   CollectionPageParams,
   IPagePropsCollection as PageProps,
   NotFound,
   PageComponent
-} from '@subdomains/app/types'
+} from '@app/types'
+import { CollectionTemplate } from '@components/templates/CollectionTemplate'
+import { serialize } from '@flex-development/json/utils/serialize'
+import type { GetCollectionResJSON } from '@kapi/types'
 import merge from 'lodash/merge'
 import type { GetServerSideProps, GetServerSidePropsContext } from 'next'
 import { useRouter } from 'next/router'

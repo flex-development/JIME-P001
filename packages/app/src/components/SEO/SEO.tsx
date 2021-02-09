@@ -7,7 +7,7 @@ import { useEffect, useRef } from 'react'
 
 /**
  * @file Inject SEO elements into <head> tag
- * @module subdomains/app/components/SEO/impl
+ * @module components/SEO/impl
  * @see {@link https://nextjs.org/docs/api-reference/next/head}
  */
 

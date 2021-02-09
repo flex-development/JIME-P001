@@ -5,7 +5,7 @@ import { useBoolean } from 'react-hanger/array/useBoolean'
 
 /**
  * @file Implementation - useWebFontLoader
- * @module subdomains/app/hooks/useWebFontLoader/impl
+ * @module hooks/useWebFontLoader/impl
  */
 
 /**

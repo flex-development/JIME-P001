@@ -1,14 +1,14 @@
+import { SEO } from '@app/components/SEO'
 import kapi from '@app/config/axios-kapi'
-import { SearchTemplate } from '@components/templates/SearchTemplate'
-import { EMPTY_SPACE } from '@flex-development/kustomzcore/constants'
-import type { GetProductResJSON } from '@kapi/types'
-import { SEO } from '@subdomains/app/components/SEO'
 import type {
   IPagePropsSearch as PageProps,
   PageComponent,
   SearchPageUrlQuery
-} from '@subdomains/app/types'
-import globalSEO from '@subdomains/app/utils/globalSEO'
+} from '@app/types'
+import globalSEO from '@app/utils/globalSEO'
+import { SearchTemplate } from '@components/templates/SearchTemplate'
+import { EMPTY_SPACE } from '@flex-development/kustomzcore/constants'
+import type { GetProductResJSON } from '@kapi/types'
 import isArray from 'lodash/isArray'
 import join from 'lodash/join'
 import merge from 'lodash/merge'

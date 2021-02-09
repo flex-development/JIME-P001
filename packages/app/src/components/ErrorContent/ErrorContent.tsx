@@ -5,7 +5,7 @@ import type { FC } from 'react'
 
 /**
  * @file Implementation - ErrorContent
- * @module subdomains/app/components/ErrorContent/impl
+ * @module components/ErrorContent/impl
  */
 
 /**

@@ -1,6 +1,6 @@
 /**
  * @file Entry Point - ErrorContent
- * @module subdomains/app/components/ErrorContent
+ * @module components/ErrorContent
  */
 
 export * from './ErrorContent'

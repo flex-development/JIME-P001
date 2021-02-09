@@ -43,7 +43,6 @@
       "@shopify/polaris-icons/*": [
         "node_modules/@shopify/polaris-icons/dist/*"
       ],
-      "@subdomains/*": ["packages/app/src/subdomains/*"],
       "@system/*": ["packages/system/src/*"],
       "@system-mocks/*": ["packages/system/__tests__/__mocks__/*"],
       "react-hanger/*": ["node_modules/react-hanger/esm/*"],

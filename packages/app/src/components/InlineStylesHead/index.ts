@@ -1,6 +1,6 @@
 /**
  * @file Entry Point - InlineStylesHead
- * @module subdomains/app/components/InlineStylesHead
+ * @module components/InlineStylesHead
  */
 
 export * from './InlineStylesHead'

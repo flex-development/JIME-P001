@@ -1,11 +1,8 @@
+import { ErrorContent } from '@app/components/ErrorContent'
+import { SEO } from '@app/components/SEO'
+import type { IPageProps as PageProps, PageComponent } from '@app/types'
+import globalSEO from '@app/utils/globalSEO'
 import { ErrorTemplate } from '@components/templates/ErrorTemplate'
-import { ErrorContent } from '@subdomains/app/components/ErrorContent'
-import { SEO } from '@subdomains/app/components/SEO'
-import type {
-  IPageProps as PageProps,
-  PageComponent
-} from '@subdomains/app/types'
-import globalSEO from '@subdomains/app/utils/globalSEO'
 import merge from 'lodash/merge'
 import type { GetStaticProps } from 'next'
 import { Fragment } from 'react'

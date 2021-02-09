@@ -1,6 +1,6 @@
 /**
  * @file Subdomain Components - App
- * @module subdomains/app/components
+ * @module components
  */
 
 export * from './ErrorContent'

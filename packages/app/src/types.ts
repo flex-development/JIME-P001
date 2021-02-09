@@ -19,7 +19,7 @@ import type { ParsedUrlQuery } from 'querystring'
 
 /**
  * @file Subdomain Utility Types - App
- * @module subdomains/app/types
+ * @module types
  */
 
 /**
@@ -142,7 +142,7 @@ export type NotFound = { notFound: true }
  */
 export type PageComponent<
   P extends IPageProps = IPageProps
-> = NextComponentType<PageContext, IAppInitialProps, P>
+  > = NextComponentType<PageContext, IAppInitialProps, P>
 
 /* eslint-enable prettier/prettier */
 

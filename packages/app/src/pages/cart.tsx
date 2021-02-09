@@ -1,11 +1,8 @@
+import { SEO } from '@app/components/SEO'
+import type { IPageProps as PageProps, PageComponent } from '@app/types'
+import globalSEO from '@app/utils/globalSEO'
 import { CartTemplate } from '@components/templates/CartTemplate'
 import { useCartContext } from '@hooks/useCart'
-import { SEO } from '@subdomains/app/components/SEO'
-import type {
-  IPageProps as PageProps,
-  PageComponent
-} from '@subdomains/app/types'
-import globalSEO from '@subdomains/app/utils/globalSEO'
 import merge from 'lodash/merge'
 import type { GetServerSideProps } from 'next'
 

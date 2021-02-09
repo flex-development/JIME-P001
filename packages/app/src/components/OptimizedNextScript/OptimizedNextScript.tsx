@@ -4,7 +4,7 @@ import { cloneElement } from 'react'
 
 /**
  * @file Implementation - NextScript
- * @module subdomains/app/components/OptimizedNextScript
+ * @module components/OptimizedNextScript
  */
 
 export type OptimizedNextScriptProps = OriginProps & {

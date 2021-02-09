@@ -119,7 +119,7 @@ will produce the following commit: `chore: add eslint configuration`
 
 To review our commitlint rules, see the configuration file:
 
-- [`commitlint.config.js`](../commitlint.config.js)`
+- [`commitlint.config.js`](../commitlint.config.js)
 
 ### Formatting & Linting
 

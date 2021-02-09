@@ -1,16 +1,28 @@
-import type { ShopifyMenu } from '@flex-development/kustomzcore'
-import { axios, createError } from '@flex-development/kustomzcore'
-import type { VercelRequest as Req, VercelResponse as Res } from '@vercel/node'
-import debug from 'debug'
+import { axios } from '@flex-development/kustomzcore'
+import type { VercelResponse as Res } from '@vercel/node'
 import { API_URL } from '../lib/config'
-import { globalMetafields } from '../lib/utils'
+import {
+  handleAPIError,
+  initPathLogger,
+  trackAPIEvent,
+  trackAPIRequest
+} from '../lib/middleware'
+import MenuService from '../lib/services/MenuService'
+import type { APIRequest as Req } from '../lib/types'
+import { metafieldsGlobal } from '../lib/utils'
 
 /**
  * @file API Endpoint - Get `AppLayout` data
- * @module api/playlist
+ * @module api/layout
  */
 
-export default async (req: Req, res: Res): Promise<Res> => {
+export default async (req: Req, res: Res): Promise<Res | void> => {
+  // Attach `logger` and `path` to API request object
+  initPathLogger(req)
+
+  // Send `pageview` hit to Google Analytics
+  await trackAPIRequest(req)
+
   try {
     // Fetch global metafields to get profile snippet
     const {
@@ -20,19 +32,16 @@ export default async (req: Req, res: Res): Promise<Res> => {
       profile_img: { value: profile_img },
       profile_location: { value: profile_location },
       profile_mood: { value: profile_mood }
-    } = await globalMetafields({ fields: 'key,value' })
+    } = await metafieldsGlobal({ fields: 'key,value' })
 
     // Get main menu data
-    const menu = await axios<ShopifyMenu>({ url: `${API_URL}/menus/main-menu` })
+    const menu = await MenuService.get('main-menu', 'links')
 
     // Get playlist data
     const playlist = await axios({ url: `${API_URL}/playlist` })
 
-    return res.json({
-      hero: {
-        subtitle: hero_subtitle,
-        title: hero_title
-      },
+    res.json({
+      hero: { subtitle: hero_subtitle, title: hero_title },
       playlist,
       sidebar: {
         age: JSON.parse(profile_age as string),
@@ -43,9 +52,10 @@ export default async (req: Req, res: Res): Promise<Res> => {
       }
     })
   } catch (err) {
-    const error = err.code ? err : createError(err)
-
-    debug('api/layout')(error)
-    return res.status(error.code).json(error)
+    return handleAPIError(req, res, err)
   }
+
+  // Send success `event` hit to Google Analytics
+  await trackAPIEvent(req, '/layout')
+  return res.end()
 }

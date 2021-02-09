@@ -1,19 +1,40 @@
-import { createError } from '@flex-development/kustomzcore'
 import type { VercelResponse as Res } from '@vercel/node'
-import debug from 'debug'
 import { readFileSync } from 'fs'
 import isUndefined from 'lodash/isUndefined'
 import { join } from 'path'
 import sharp from 'sharp'
+import {
+  handleAPIError,
+  initPathLogger,
+  trackAPIEvent,
+  trackAPIRequest
+} from '../../../lib/middleware'
 import type { GetStaticAssetReq as Req } from '../../../lib/types'
 
 /**
- * @file API Endpoint - Get Static Image Assets
+ * @file API Endpoint - Get Static Image Asset
  * @module api/assets/images/[filename]
  */
 
-export default async ({ query }: Req, res: Res): Promise<void> => {
-  const { filename, height, width } = query
+/**
+ * Retrieve a static image asset by filename.
+ *
+ * @param req - API request object
+ * @param req.query - Request query parameters
+ * @param req.query.filename - Name of image to retrieve, including extension
+ * @param req.query.height - Resized image height
+ * @param req.query.width - Resized image width
+ * @param res - API response object
+ */
+export default async (req: Req, res: Res): Promise<Res | void> => {
+  // Attach `logger` and `path` to API request object
+  initPathLogger(req)
+
+  // Send `pageview` hit to Google Analytics
+  await trackAPIRequest(req)
+
+  // Get asset filename and resize dimensions
+  const { filename, height, width } = req.query
 
   // Get extension from filename
   const filename_split = filename.split('.')
@@ -24,22 +45,23 @@ export default async ({ query }: Req, res: Res): Promise<void> => {
   const $width = width ? JSON.parse(`${width}`) : width
 
   try {
+    // Get file from directory
     let file = readFileSync(join(__dirname, '_files', filename))
 
+    // Resize image
     if (!isUndefined($height) || !isUndefined($width)) {
       file = await sharp(file).resize($width, $height).toBuffer()
     }
 
+    // Send success `event` hit to Google Analytics
+    await trackAPIEvent(req, '/assets/images/[filename]')
+
     res.writeHead(200, { 'Content-Type': `image/${extension}` })
-    res.end(file)
+    return res.end(file)
   } catch (err) {
-    const { message, ...erest } = err
+    const data = { code: err.code, errors: { filename }, height, width }
+    const status = err.code === 'ENOENT' ? 404 : 500
 
-    const data = { ...erest, errors: { filename } }
-    const status = erest.code === 'ENOENT' ? 404 : 500
-    const error = createError(message, data, status)
-
-    debug('api/assets/images/[filename]')(error)
-    res.status(error.code).json(error)
+    return handleAPIError(req, res, { ...err, status }, data)
   }
 }

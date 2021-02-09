@@ -1,104 +1,61 @@
-import type { IPage as Hit } from '@flex-development/kustomzcore'
-import { axios, createError } from '@flex-development/kustomzcore'
 import type { VercelResponse as Res } from '@vercel/node'
-import debug from 'debug'
-import omit from 'lodash/omit'
 import {
-  ALGOLIA,
-  INDEX_SETTINGS,
-  PAGES,
-  TurndownService
-} from '../../lib/config'
-import type { FindCollectionsReq as Req } from '../../lib/types'
-import {
-  findPagesOptions,
-  isSearchIndex404Error,
-  pageMetafields,
-  pageSEO
-} from '../../lib/utils'
+  handleAPIError,
+  initPathLogger,
+  trackAPIEvent,
+  trackAPIRequest
+} from '../../lib/middleware'
+import Service from '../../lib/services/PageService'
+import type { FindPagesReq as Req } from '../../lib/types'
 
 /**
  * @file API Endpoint - Find Pages
  * @module api/pages
  */
 
-export default async ({ query, url }: Req, res: Res): Promise<Res> => {
-  const INDEX_AS_HANDLE = url?.includes('/pages/index')
+/**
+ * Returns an array of page resource objects.
+ *
+ * @param req - API request object
+ * @param req.query - Request query parameters
+ * @param req.query.collection_id - Find collection by ID
+ * @param req.query.fields - Specify fields to include
+ * @param req.query.handle - Find collection by handle
+ * @param req.query.hitsPerPage - Number of hits per page
+ * @param req.query.length - Number of hits to retrieve (used only with offset)
+ * @param req.query.offset - Specify the offset of the first hit to return
+ * @param req.query.page - Specify the page to retrieve
+ * @param req.query.text - Search query text
+ * @param res - API response object
+ */
+export default async (req: Req, res: Res): Promise<Res | void> => {
+  // Attach `logger` and `path` to API request object
+  initPathLogger(req)
 
-  // Convert page query into search options object
-  const options = findPagesOptions({
-    ...query,
-    handle: INDEX_AS_HANDLE ? 'index' : query.handle
-  })
+  // Send `pageview` hit to Google Analytics
+  await trackAPIRequest(req)
+
+  // ! Vercel interpretes this URL as '/pages' instead of the URL of a single
+  // ! page with the `handle` 'index'.
+  const INDEX_AS_HANDLE = req.url.includes('/pages/index')
+
+  // If searching for page with the `handle` 'index'
+  if (INDEX_AS_HANDLE) req.query.handle = 'index'
+
+  // Convert query into search options object
+  const options = Service.searchOptions(req.query)
 
   try {
-    // Get pages to update search index
-    let pages: Hit[] | Promise<Hit>[] = await PAGES.list()
+    // Get search results
+    const results = await Service.find(req.query.text, options)
 
-    // Keep objectID consistent with page ID
-    pages = pages.map(obj => ({ ...obj, objectID: obj.id }))
-
-    // ! Remove API Menus page
-    pages = pages.filter(obj => obj.handle !== 'api-menus')
-
-    try {
-      // Parse MDX body content
-      pages = pages.map(async hit => {
-        const html = hit.body_html.replace('\n', '<br/>')
-
-        const { code: body_html } = await axios({
-          data: JSON.stringify(TurndownService.turndown(html)),
-          headers: { 'Content-Type': 'application/json' },
-          method: 'post',
-          url: 'https://mdjsx.flexdevelopment.vercel.app'
-        })
-
-        return { ...hit, body_html }
-      })
-
-      // Complete MDX promise
-      pages = await Promise.all(pages)
-    } catch (error) {
-      return res.status(error.code).json(error)
-    }
-
-    // Get metafields for each page
-    pages = pages.map(async hit => {
-      return { ...hit, metafield: await pageMetafields(hit.id) } as Hit
-    })
-
-    // Complete metafields promise
-    pages = await Promise.all(pages)
-
-    // Get SEO data for each page
-    pages = pages.map(async hit => ({ ...hit, seo: await pageSEO(hit) }))
-
-    // Complete SEO data promise
-    pages = await Promise.all(pages)
-
-    // Initialize search index
-    const index = ALGOLIA.initIndex(INDEX_SETTINGS.pages.name)
-
-    // Set index settings
-    index.setSettings(omit(INDEX_SETTINGS.pages, ['name']))
-
-    // Update index data
-    await index.saveObjects(pages)
-
-    // Perform search
-    const { hits } = await index.search<Hit>(query?.text ?? '', options)
-
-    // Remove `objectID` field
-    const payload = hits.map(data => omit(data, ['objectID']))
-
-    return res.json(INDEX_AS_HANDLE ? payload[0] : payload)
+    // If searching for page with the `handle` 'index', return first result
+    res.json(INDEX_AS_HANDLE ? results[0] : results)
   } catch (err) {
-    const index404 = isSearchIndex404Error(err)
-    let error = err
-
-    if (!err.className) error = createError(err, { options, query }, err.status)
-
-    debug('api/pages')(error)
-    return index404 ? res.json([]) : res.status(error.code).json(error)
+    return handleAPIError(req, res, err, { query: req.query })
   }
+
+  // Send success `event` hit to Google Analytics
+  await trackAPIEvent(req, INDEX_AS_HANDLE ? 'pages/[handle]' : 'pages')
+  return res.end()
 }

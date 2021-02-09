@@ -1,37 +1,46 @@
-import type { IProductListing } from '@flex-development/kustomzcore'
-import { axios, createError } from '@flex-development/kustomzcore'
 import type { VercelResponse as Res } from '@vercel/node'
-import debug from 'debug'
 import pick from 'lodash/pick'
-import { API_URL } from '../../lib/config'
-import type { GetProductReq as Req, ResourceWithSEO } from '../../lib/types'
+import {
+  handleAPIError,
+  initPathLogger,
+  trackAPIEvent,
+  trackAPIRequest
+} from '../../lib/middleware'
+import Service from '../../lib/services/ProductService'
+import type { GetProductReq as Req } from '../../lib/types'
 
 /**
  * @file API Endpoint - Get Product By Handle
  * @module api/products/[handle]
  */
 
-export default async ({ query }: Req, res: Res): Promise<Res> => {
-  const params = pick(query, ['fields', 'handle', 'sku'])
+/**
+ * Retrieve a product listing resource by handle.
+ *
+ * @param req - API request object
+ * @param req.query - Request query parameters
+ * @param req.query.fields - Specify fields to include for each object
+ * @param req.query.handle - Handle of product to retrieve
+ * @param req.query.sku - SKU of product variant to generate SEO for
+ * @param res - API response object
+ */
+export default async (req: Req, res: Res): Promise<Res | void> => {
+  // Attach `logger` and `path` to API request object
+  initPathLogger(req)
+
+  // Send `pageview` hit to Google Analytics
+  await trackAPIRequest(req)
+
+  // Get request query parameters
+  const query = pick(req.query, ['fields', 'handle', 'sku'])
 
   try {
-    const products = await axios<ResourceWithSEO<IProductListing>[]>({
-      params,
-      url: `${API_URL}/products`
-    })
-
-    if (!products.length) {
-      const data = { errors: { handle: query.handle }, query: params }
-      const message = `Product with handle "${query.handle}" not found`
-      const error = createError(message, data, 404)
-
-      debug('api/products/[handle]')(error)
-      return res.status(error.code).json(error)
-    }
-
-    return res.json(products[0])
-  } catch (error) {
-    debug('api/products/[handle]')(error)
-    return res.status(error.code).json(error)
+    res.json(await Service.get(query.handle, query.fields, query.sku))
+  } catch (err) {
+    return handleAPIError(req, res, err, { query: req.query })
   }
+
+  // Send success `event` hit to Google Analytics
+  await trackAPIEvent(req, '/products/[handle]')
+  return res.end()
 }

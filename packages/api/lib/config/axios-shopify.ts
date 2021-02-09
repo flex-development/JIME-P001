@@ -1,10 +1,10 @@
-import type { ANYTHING } from '@flex-development/json/dist/utils/types'
-import { axios } from '@flex-development/kustomzcore/dist/axios'
+import type { ANYTHING } from '@flex-development/json'
+import { axios } from '@flex-development/kustomzcore'
 import type { AxiosRequestConfig } from 'axios'
 
 /**
  * @file Shopify Axios Configuration
- * @module config/axios-shopify
+ * @module lib/config/axios-shopify
  * @see {@link https://github.com/axios/axios}
  */
 

@@ -1,22 +1,34 @@
-import { createError, objectFromArray } from '@flex-development/kustomzcore'
+import { objectFromArray } from '@flex-development/kustomzcore'
 import type { VercelResponse as Res } from '@vercel/node'
-import debug from 'debug'
+import {
+  handleAPIError,
+  initPathLogger,
+  trackAPIEvent,
+  trackAPIRequest
+} from '../../lib/middleware'
 import type { GetGlobalMetafieldsReq as Req } from '../../lib/types'
-import { shopMetafields } from '../../lib/utils'
+import { metafieldsShop } from '../../lib/utils'
 
 /**
  * @file API Endpoint - Get Global Metafields
  * @module api/metafields/globals
  */
 
-export default async ({ query }: Req, res: Res): Promise<Res> => {
-  try {
-    const globals = await shopMetafields({ ...query, namespace: 'globals' })
-    return res.json(objectFromArray(globals || [], 'key'))
-  } catch (err) {
-    const error = createError(err, { query })
+export default async (req: Req, res: Res): Promise<Res | void> => {
+  // Attach `logger` and `path` to API request object
+  initPathLogger(req)
 
-    debug('api/metafields/globals')(error)
-    return res.status(error.code).json(error)
+  // Send `pageview` hit to Google Analytics
+  await trackAPIRequest(req)
+
+  try {
+    const globals = await metafieldsShop({ ...req.query, namespace: 'globals' })
+    res.json(objectFromArray(globals || [], 'key'))
+  } catch (err) {
+    return handleAPIError(req, res, err, { query: req.query })
   }
+
+  // Send success `event` hit to Google Analytics
+  await trackAPIEvent(req, '/metafields/globals')
+  return res.end()
 }

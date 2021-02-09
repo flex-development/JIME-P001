@@ -2,7 +2,7 @@ import algolia from 'algoliasearch'
 
 /**
  * @file Algolia Client Configuration
- * @module config/algolia
+ * @module lib/config/algolia
  * @see https://www.algolia.com/doc/api-client/getting-started
  */
 

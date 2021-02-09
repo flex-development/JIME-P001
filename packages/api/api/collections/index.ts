@@ -1,97 +1,50 @@
-import type { AnyObject } from '@flex-development/json'
-import type {
-  ICollectionListing as Hit,
-  ShopifyAPIResponses as SAR
-} from '@flex-development/kustomzcore'
-import { createError } from '@flex-development/kustomzcore'
 import type { VercelResponse as Res } from '@vercel/node'
-import debug from 'debug'
-import omit from 'lodash/omit'
 import {
-  ALGOLIA,
-  axiosShopify,
-  COLLECTION_LISTINGS,
-  INDEX_SETTINGS
-} from '../../lib/config'
+  handleAPIError,
+  initPathLogger,
+  trackAPIEvent,
+  trackAPIRequest
+} from '../../lib/middleware'
+import Service from '../../lib/services/CollectionService'
 import type { FindCollectionsReq as Req } from '../../lib/types'
-import {
-  collectionMetafields,
-  collectionSEO,
-  findCollectionsOptions,
-  isSearchIndex404Error
-} from '../../lib/utils'
 
 /**
  * @file API Endpoint - Find Collections
  * @module api/collections
  */
 
-export default async ({ query }: Req, res: Res): Promise<Res> => {
-  // Convert collection query into search options object
-  const options = findCollectionsOptions(query)
+/**
+ * Returns an array of collection listing resource objects.
+ *
+ * @param req - API request object
+ * @param req.query - Request query parameters
+ * @param req.query.collection_id - Find collection by ID
+ * @param req.query.fields - Specify fields to include
+ * @param req.query.handle - Find collection by handle
+ * @param req.query.hitsPerPage - Number of hits per page
+ * @param req.query.length - Number of hits to retrieve (used only with offset)
+ * @param req.query.offset - Specify the offset of the first hit to return
+ * @param req.query.page - Specify the page to retrieve
+ * @param req.query.text - Search query text
+ * @param res - API response object
+ */
+export default async (req: Req, res: Res): Promise<Res | void> => {
+  // Attach `logger` and `path` to API request object
+  initPathLogger(req)
+
+  // Send `pageview` hit to Google Analytics
+  await trackAPIRequest(req)
+
+  // Convert query into search options object
+  const options = Service.searchOptions(req.query)
 
   try {
-    // Get collection listings to update search index
-    let listings: Hit[] | Promise<Hit>[] = await COLLECTION_LISTINGS.list()
-
-    // Keep objectID consistent with collection listing ID
-    listings = listings.map(obj => ({ ...obj, objectID: obj.collection_id }))
-
-    // Get metafields for each collection
-    listings = listings.map(async hit => ({
-      ...hit,
-      metafield: await collectionMetafields(hit.collection_id)
-    }))
-
-    // Complete metafields promise
-    listings = await Promise.all(listings)
-
-    // Get products for each collection
-    listings = listings.map(async hit => {
-      const { product_listings } = await axiosShopify<SAR.ProductListing>({
-        method: 'get',
-        params: { collection_id: hit.collection_id, limit: 250 },
-        url: 'product_listings'
-      })
-
-      return { ...hit, products: product_listings }
-    })
-
-    // Complete products promise
-    listings = await Promise.all(listings)
-
-    // Get SEO data for each collection
-    listings = listings.map(async hit => {
-      const collection = (hit as unknown) as Hit
-      const products = (hit as AnyObject).products
-
-      return { ...hit, seo: await collectionSEO(collection, products) }
-    })
-
-    // Complete SEO data promise
-    listings = await Promise.all(listings)
-
-    // Initialize search index
-    const index = ALGOLIA.initIndex(INDEX_SETTINGS.collection_listings.name)
-
-    // Set index settings
-    index.setSettings(omit(INDEX_SETTINGS.collection_listings, ['name']))
-
-    // Update index data
-    await index.saveObjects(listings)
-
-    // Perform search
-    const { hits } = await index.search<Hit>(query?.text ?? '', options)
-
-    // Return results and remove `objectID` field
-    return res.json(hits.map(data => omit(data, ['objectID'])))
+    res.json(await Service.find(req.query.text, options))
   } catch (err) {
-    const index404 = isSearchIndex404Error(err)
-    let error = err
-
-    if (!err.className) error = createError(err, { options, query }, err.status)
-
-    debug('api/collections')(error)
-    return index404 ? res.json([]) : res.status(error.code).json(error)
+    return handleAPIError(req, res, err, { query: req.query })
   }
+
+  // Send success `event` hit to Google Analytics
+  await trackAPIEvent(req, '/collections')
+  return res.end()
 }

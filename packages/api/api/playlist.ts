@@ -1,19 +1,31 @@
-import { axios, createError } from '@flex-development/kustomzcore'
-import type { VercelRequest as Req, VercelResponse as Res } from '@vercel/node'
-import { AxiosRequestConfig } from 'axios'
-import debug from 'debug'
+import { axios } from '@flex-development/kustomzcore'
+import type { VercelResponse as Res } from '@vercel/node'
+import type { AxiosRequestConfig } from 'axios'
 import pick from 'lodash/pick'
-import { appleDeveloperToken, globalMetafields } from '../lib/utils'
+import {
+  handleAPIError,
+  initPathLogger,
+  trackAPIEvent,
+  trackAPIRequest
+} from '../lib/middleware'
+import type { APIRequest as Req } from '../lib/types'
+import { appleDeveloperToken, metafieldsGlobal } from '../lib/utils'
 
 /**
  * @file API Endpoint - Get Store Playlist Data
  * @module api/playlist
  */
 
-export default async (req: Req, res: Res): Promise<Res> => {
+export default async (req: Req, res: Res): Promise<Res | void> => {
+  // Attach `logger` and `path` to API request object
+  initPathLogger(req)
+
+  // Send `pageview` hit to Google Analytics
+  await trackAPIRequest(req)
+
   try {
     // Fetch global metafields to get playlist URL
-    const { playlist_url } = await globalMetafields()
+    const { playlist_url } = await metafieldsGlobal()
     const url = (playlist_url.value || '') as string
 
     // Get playlist ID
@@ -31,15 +43,16 @@ export default async (req: Req, res: Res): Promise<Res> => {
     const { data = [] } = await axios<AppleMusicApi.PlaylistResponse>(config)
     const { attributes, relationships } = data[0]
 
-    return res.json({
+    res.json({
       attributes: pick(attributes, ['name', 'url']),
       id,
       tracks: relationships?.tracks?.data.map(track => track.attributes)
     })
   } catch (err) {
-    const error = err.code ? err : createError(err)
-
-    debug('api/playlist')(error)
-    return res.status(error.code).json(error)
+    return handleAPIError(req, res, err)
   }
+
+  // Send success `event` hit to Google Analytics
+  await trackAPIEvent(req, '/playlist')
+  return res.end()
 }

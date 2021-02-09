@@ -1,8 +1,12 @@
-import type { PaginationParameter } from '../types'
+import type {
+  PaginationParameter,
+  SearchIndexName,
+  SearchIndexSettings
+} from '../types'
 
 /**
  * @file Config - Constant Values
- * @module config/constants
+ * @module lib/config/constants
  */
 
 const { VERCEL_ENV: ENV, VERCEL_URL } = process.env
@@ -11,7 +15,7 @@ export const API_URL = `http${ENV === 'development' ? '' : 's'}://${VERCEL_URL}`
 
 export const DEFAULT_SEARCH_OPTIONS = {
   attributesToHighlight: [],
-  attributesToRetrieve: ['*', '-_tags'],
+  attributesToRetrieve: ['handle'],
   attributesToSnippet: []
 }
 
@@ -25,7 +29,10 @@ export const DEFAULT_SEO_IMAGE_DATA = {
   width: 1920
 }
 
-export const INDEX_SETTINGS = {
+export const INDEX_SETTINGS: Record<
+  SearchIndexName,
+  SearchIndexSettings & { name: SearchIndexName }
+> = {
   collection_listings: {
     attributesForFaceting: ['collection_id', 'handle'],
     name: 'collection_listings'

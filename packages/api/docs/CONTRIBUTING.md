@@ -58,15 +58,30 @@ used to create authentication profiles for new customers.
 - `FIREBASE_PRIVATE_KEY`
 - `FIREBASE_PROJECT_ID`
 
+### Google Analytics
+
+[Google Analytics][5] is a web analytics service that tracks and reports website
+traffic.
+
+KAPI uses the [Measurement Protocol for Universal Analytics][6] to track API
+requests, success responses, and errors.
+
+**Environment Variables**
+
+- `GA_TRACKING_ID`
+- `VERCEL_ENV`
+- `VERCEL_GIT_COMMIT_REF`
+- `VERCEL_GIT_COMMIT_SHA`
+
 ### Opsgenie
 
-[Opsgenie][5] is an on-call and alert management service for software projects.
+[Opsgenie][7] is an on-call and alert management service for software projects.
 
-Its primary use is to [dispatch alerts from GitHub][6].
+Its primary use is to [dispatch alerts from GitHub][8].
 
 ### Shopify
 
-[Shopify][8] is an eCommerce platform. Aside from functioning as our commerce
+[Shopify][9] is an eCommerce platform. Aside from functioning as our commerce
 backend, it is also our content management system.
 
 **Environment Variables**
@@ -82,11 +97,19 @@ backend, it is also our content management system.
 
 Directory: `api`
 
-For more information, see the [Vercel Serverless Functions][9] documentation.
+For more information, see the [Vercel Serverless Functions][10] documentation.
 
 ### Config
 
 Directory: `lib/config`
+
+### Middleware
+
+Directory: `lib/middleware`
+
+### Services
+
+Directory: `lib/services`
 
 ### Type Definitions
 
@@ -101,15 +124,16 @@ Directory: `lib/utils`
 Directory: `__tests__`  
 Command: `yarn test`
 
-For more information, see the [root package Contributing Guide][10].
+For more information, see the [root package Contributing Guide][11].
 
 [1]: https://github.com/vercel/vercel/discussions/5294#discussioncomment-269338
 [2]: https://www.algolia.com/
 [3]: https://developer.apple.com/documentation/applemusicapi/
 [4]: https://firebase.google.com/docs/database
-[5]: https://www.atlassian.com/software/opsgenie
-[6]: https://docs.opsgenie.com/docs/github-integration
-[7]: https://sentry.io
-[8]: https://www.shopify.com/
-[9]: https://vercel.com/docs/serverless-functions/introduction
-[10]: ../../../docs/CONTRIBUTING.md#testing
+[5]: https://analytics.google.com/analytics/web/
+[6]: https://developers.google.com/analytics/devguides/collection/protocol/v1
+[7]: https://www.atlassian.com/software/opsgenie
+[8]: https://docs.opsgenie.com/docs/github-integration
+[9]: https://www.shopify.com/
+[10]: https://vercel.com/docs/serverless-functions/introduction
+[11]: ../../../docs/CONTRIBUTING.md#testing

@@ -1,9 +1,5 @@
 import { useWebFontLoader } from '@app/hooks/useWebFontLoader'
-import type {
-  IAppInitialProps,
-  IPageProps,
-  PageComponent
-} from '@app/types'
+import type { IAppInitialProps, IPageProps, PageComponent } from '@app/types'
 import type { BoxProps } from '@components/atoms/Box'
 import { Box, BoxAnimated } from '@components/atoms/Box'
 import { Span } from '@components/atoms/Span'

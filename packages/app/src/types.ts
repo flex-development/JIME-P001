@@ -142,7 +142,7 @@ export type NotFound = { notFound: true }
  */
 export type PageComponent<
   P extends IPageProps = IPageProps
-  > = NextComponentType<PageContext, IAppInitialProps, P>
+> = NextComponentType<PageContext, IAppInitialProps, P>
 
 /* eslint-enable prettier/prettier */
 

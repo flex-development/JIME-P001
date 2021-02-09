@@ -20,14 +20,7 @@ import type {
   SearchOptions,
   SEOData
 } from '../types'
-import {
-  globalSEO,
-  includeAllFields as includeAll,
-  includeMetafields,
-  includeSEO,
-  search,
-  shopifySearchOptions
-} from '../utils'
+import { globalSEO, search, shopifySearchOptions } from '../utils'
 
 /**
  * @file Implementation - Collection Service
@@ -49,7 +42,7 @@ export default class CollectionService {
     query = '',
     options: SearchOptions = {}
   ): Promise<TObject[]> {
-    const objects = await CollectionService.indexObjects(options)
+    const objects = await CollectionService.indexObjects()
     return search(CollectionService.index_name, objects, query, options)
   }
 
@@ -86,25 +79,13 @@ export default class CollectionService {
    * Returns an array of objects to populate the search index.
    *
    * @async
-   * @param options - Search index options
-   * @param options.attributesToRetrieve - Gives control over which attributes
-   * to retrieve and which not to retrieve
    */
-  static async indexObjects(options: SearchOptions): Promise<TObject[]> {
+  static async indexObjects(): Promise<TObject[]> {
     // Fetch collection listings data from Shopify
-    const data = await CollectionService.api.list()
+    let data = await CollectionService.api.list()
 
-    // Identify what additional fields should or should not be added
-    const include_metafields = includeMetafields(options)
-    const include_products = (() => {
-      const { attributesToRetrieve: fields = [] } = options
-
-      const exclude = fields.includes('-products')
-      const include = fields.includes('products')
-
-      return !exclude && (includeAll(options) || includeSEO(options) || include)
-    })()
-    const include_seo = includeSEO(options)
+    // Remove unpublished collections
+    data = data.filter(data => data.published_at !== null)
 
     // Get objects to populate search index
     const objects: TObject[] | Promise<TObject>[] = data.map(async obj => {
@@ -112,20 +93,14 @@ export default class CollectionService {
       const $obj: AnyObject = { ...obj, objectID: obj.collection_id }
 
       // Get metafields for each collection
-      if (include_metafields) {
-        $obj.metafield = await CollectionService.metafields($obj.collection_id)
-      }
+      $obj.metafield = await CollectionService.metafields($obj.collection_id)
 
       // Get products for each collection
-      if (include_products) {
-        $obj.products = await CollectionService.products($obj.collection_id)
-      }
+      $obj.products = await CollectionService.products($obj.collection_id)
 
       // Get SEO data for each collection
-      if (include_seo) {
-        const collection = $obj as ICollectionListing
-        $obj.seo = await CollectionService.seo(collection, $obj.products)
-      }
+      const collection = $obj as ICollectionListing
+      $obj.seo = await CollectionService.seo(collection, $obj.products)
 
       return $obj as TObject
     })

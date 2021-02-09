@@ -1,11 +1,11 @@
 import omit from 'lodash/omit'
-import { ALGOLIA, INDEX_SETTINGS } from '../../config'
-import type { SearchIndex, SearchIndexName } from '../../types'
-import formatError from '../formatError'
+import { ALGOLIA, INDEX_SETTINGS } from '../config'
+import type { SearchIndex, SearchIndexName } from '../types'
+import formatError from './formatError'
 
 /**
  * @file Implementation - getSearchIndex
- * @module lib/utils/search/getSearchIndex
+ * @module lib/utils/getSearchIndex
  */
 
 /**

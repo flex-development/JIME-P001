@@ -20,15 +20,7 @@ import type {
   SearchOptions,
   SEOData
 } from '../types'
-import {
-  globalSEO,
-  includeJSX,
-  includeMetafields,
-  includeSEO,
-  search,
-  shopifySearchOptions,
-  toJSX
-} from '../utils'
+import { globalSEO, search, shopifySearchOptions, toJSX } from '../utils'
 
 /**
  * @file Implementation - Page Service
@@ -50,7 +42,7 @@ export default class PageService {
     query = '',
     options: SearchOptions = {}
   ): Promise<TObject[]> {
-    const objects = await PageService.indexObjects(options)
+    const objects = await PageService.indexObjects()
     return search(PageService.index_name, objects, query, options)
   }
 
@@ -87,18 +79,16 @@ export default class PageService {
    * Returns an array of objects to populate the search index.
    *
    * @async
-   * @param options - Search index options
-   * @param options.attributesToRetrieve - Gives control over which attributes
-   * to retrieve and which not to retrieve
    */
-  static async indexObjects(options: SearchOptions): Promise<TObject[]> {
+  static async indexObjects(): Promise<TObject[]> {
     // Fetch page data from Shopify
-    const data = await PageService.api.list()
+    let data = await PageService.api.list()
 
-    // Identify what additional fields should or should not be added
-    const include_jsx = includeJSX(options)
-    const include_metafields = includeMetafields(options)
-    const include_seo = includeSEO(options)
+    // ! Remove API Menus page
+    data = data.filter(data => data.handle !== 'api-menus')
+
+    // Remove unpublished pages
+    data = data.filter(data => data.published_at !== null)
 
     // Get objects to populate search index
     const objects: TObject[] | Promise<TObject>[] = data.map(async obj => {
@@ -106,17 +96,13 @@ export default class PageService {
       const $obj: AnyObject = { ...obj, objectID: obj.id }
 
       // Parse MDX body content
-      if (include_jsx) {
-        $obj.body_html = await toJSX($obj.body_html)
-      }
+      $obj.body_html = await toJSX($obj.body_html)
 
       // Get metafields for each page
-      if (include_metafields || include_seo) {
-        $obj.metafield = await PageService.metafields($obj.id)
-      }
+      $obj.metafield = await PageService.metafields($obj.id)
 
       // Get SEO data for each page
-      if (include_seo) $obj.seo = await PageService.seo($obj as IPage)
+      $obj.seo = await PageService.seo($obj as IPage)
 
       return $obj as TObject
     })

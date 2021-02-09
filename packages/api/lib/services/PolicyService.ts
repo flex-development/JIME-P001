@@ -10,14 +10,7 @@ import type {
   SearchOptions,
   SEOData
 } from '../types'
-import {
-  globalSEO,
-  includeJSX,
-  includeSEO,
-  search,
-  shopifySearchOptions,
-  toJSX
-} from '../utils'
+import { globalSEO, search, shopifySearchOptions, toJSX } from '../utils'
 
 /**
  * @file Implementation - Policy Service
@@ -39,7 +32,7 @@ export default class PolicyService {
     query = '',
     options: SearchOptions = {}
   ): Promise<TObject[]> {
-    const objects = await PolicyService.indexObjects(options)
+    const objects = await PolicyService.indexObjects()
     return search(PolicyService.index_name, objects, query, options)
   }
 
@@ -76,17 +69,10 @@ export default class PolicyService {
    * Returns an array of objects to populate the search index.
    *
    * @async
-   * @param options - Search index options
-   * @param options.attributesToRetrieve - Gives control over which attributes
-   * to retrieve and which not to retrieve
    */
-  static async indexObjects(options: SearchOptions): Promise<TObject[]> {
+  static async indexObjects(): Promise<TObject[]> {
     // Fetch policy data from Shopify
     const data = await PolicyService.api.list()
-
-    // Identify what additional fields should or should not be added
-    const include_jsx = includeJSX(options)
-    const include_seo = includeSEO(options)
 
     // Get objects to populate search index
     const objects: TObject[] | Promise<TObject>[] = data.map(async obj => {
@@ -94,10 +80,10 @@ export default class PolicyService {
       const $obj: AnyObject = { ...obj, objectID: (obj as IPolicy).handle }
 
       // Parse MDX body content
-      if (include_jsx) $obj.body = await toJSX($obj.body)
+      $obj.body = await toJSX($obj.body)
 
       // Get SEO data for each policy
-      if (include_seo) $obj.seo = await PolicyService.seo($obj as IPolicy)
+      $obj.seo = await PolicyService.seo($obj as IPolicy)
 
       return $obj as TObject
     })

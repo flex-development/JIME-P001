@@ -1,17 +1,17 @@
 import type { AnyObject } from '@flex-development/json'
-import { EMPTY_SPACE } from '@flex-development/kustomzcore/dist/constants'
+import { EMPTY_SPACE } from '@flex-development/kustomzcore'
 import isEmpty from 'lodash/isEmpty'
 import join from 'lodash/join'
 import pick from 'lodash/pick'
 import {
   DEFAULT_SEARCH_OPTIONS as DSO,
   PAGINATION_PARAMS
-} from '../../config/constants'
-import type { SearchOptions } from '../../types'
+} from '../config/constants'
+import type { SearchOptions } from '../types'
 
 /**
  * @file Implementation - shopifySearchOptions
- * @module lib/utils/search/shopifySearchOptions
+ * @module lib/utils/shopifySearchOptions
  */
 
 /**

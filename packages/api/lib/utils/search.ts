@@ -1,12 +1,12 @@
 import type { AnyObject } from '@flex-development/json'
 import omit from 'lodash/omit'
-import type { SearchIndexName, SearchOptions } from '../../types'
-import formatError from '../formatError'
+import type { SearchIndexName, SearchOptions } from '../types'
+import formatError from './formatError'
 import getSearchIndex from './getSearchIndex'
 
 /**
  * @file Implementation - search
- * @module lib/utils/search/search
+ * @module lib/utils/search
  */
 
 /**

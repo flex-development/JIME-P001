@@ -27,7 +27,7 @@ import type {
   SearchOptions,
   SEOData
 } from '../types'
-import { includeMetafields, search, shopifySearchOptions } from '../utils'
+import { search, shopifySearchOptions } from '../utils'
 
 /**
  * @file Implementation - Product Service
@@ -49,7 +49,7 @@ export default class ProductService {
     query = '',
     options: SearchOptions = {}
   ): Promise<TObject[]> {
-    const objects = await ProductService.indexObjects(options)
+    const objects = await ProductService.indexObjects()
     return search(ProductService.index_name, objects, query, options)
   }
 
@@ -94,16 +94,13 @@ export default class ProductService {
    * Returns an array of objects to populate the search index.
    *
    * @async
-   * @param options - Search index options
-   * @param options.attributesToRetrieve - Gives control over which attributes
-   * to retrieve and which not to retrieve
    */
-  static async indexObjects(options: SearchOptions): Promise<TObject[]> {
+  static async indexObjects(): Promise<TObject[]> {
     // Fetch product listings data from Shopify
-    const data = await ProductService.api.list()
+    let data = await ProductService.api.list()
 
-    // Identify what additional fields should or should not be added
-    const include_metafields = includeMetafields(options)
+    // Remove unpublished products
+    data = data.filter(data => data.published_at !== null)
 
     // Get objects to populate search index
     const objects: TObject[] | Promise<TObject>[] = data.map(async obj => {
@@ -111,9 +108,7 @@ export default class ProductService {
       const $obj: AnyObject = { ...obj, objectID: obj.product_id }
 
       // Get metafields for each product
-      if (include_metafields) {
-        $obj.metafield = await ProductService.metafields($obj.product_id)
-      }
+      $obj.metafield = await ProductService.metafields($obj.product_id)
 
       return $obj as TObject
     })

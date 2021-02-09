@@ -43,8 +43,8 @@ const config = {
    */
   env: {
     API_URL,
+    GA_TRACKING_ID,
     GOOGLE_SITE_VERIFICATION,
-    NEXT_PUBLIC_GA_TRACKING_ID: GA_TRACKING_ID,
     SENTRY_DSN,
     SENTRY_RELEASE,
     SHOPIFY_API_VERSION,
@@ -108,10 +108,7 @@ const config = {
    *
    * @see https://github.com/vercel/next.js/discussions/9133
    */
-  plugins: [
-    { name: '@next/plugin-google-analytics' },
-    { name: '@next/plugin-sentry' }
-  ],
+  plugins: [{ name: '@next/plugin-sentry' }],
 
   /**
    * Enable React Strict Mode.

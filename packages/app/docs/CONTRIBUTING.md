@@ -31,11 +31,17 @@ analytics, and Audience Targeting tools.
 ### Google Analytics
 
 [Google Analytics][2] is a web analytics service that tracks and reports website
-traffic. The storefront application uses the [Universal Analytics][3] method.
+traffic.
+
+The storefront uses the [Measurement Protocol for Universal Analytics][3] to
+track page views, web vitals, and errors.
 
 **Environment Variables**
 
 - `GA_TRACKING_ID`
+- `VERCEL_ENV`
+- `VERCEL_GIT_COMMIT_REF`
+- `VERCEL_GIT_COMMIT_SHA`
 
 ### KAPI
 
@@ -120,7 +126,7 @@ The storefront application will be available at `http://localhost:9000`.
 
 [1]: https://www.addthis.com/
 [2]: https://analytics.google.com/analytics/web/
-[3]: https://support.google.com/analytics/answer/10220206
+[3]: https://developers.google.com/analytics/devguides/collection/protocol/v1
 [4]: ../../api/README.md
 [5]: https://www.atlassian.com/software/opsgenie
 [6]: https://docs.opsgenie.com/docs/github-integration

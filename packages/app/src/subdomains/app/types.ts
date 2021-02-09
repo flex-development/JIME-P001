@@ -53,10 +53,10 @@ export interface HandlePageParams extends ParsedUrlQuery {
  * Props passed from Next.js data-fetching methods.
  */
 export interface IAppInitialProps {
-  /**
-   * Props passed to Next.js page components.
-   */
+  addthis: boolean
+  layout: GetLayoutDataResJSON
   pageProps: IPageProps
+  ua?: string
 }
 
 /**
@@ -77,9 +77,7 @@ export interface IAppProps extends IAppInitialProps {
  * Props passed to Next.js page components.
  */
 export interface IPageProps {
-  layout: GetLayoutDataResJSON
   seo: SEOData
-  ua?: string
 }
 
 /**
@@ -94,8 +92,6 @@ export interface IPagePropsCollection extends IPageProps {
  */
 export interface IPagePropsError {
   error: FeathersErrorJSON
-  layout: IPageProps['layout']
-  ua?: string
 }
 
 /**

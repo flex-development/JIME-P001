@@ -1,15 +1,12 @@
+import kapi from '@app/config/axios-kapi'
 import { IndexTemplate } from '@components/templates/IndexTemplate'
 import ofa from '@flex-development/kustomzcore/utils/objectFromArray'
-import type { GetPageResJSON, SEOData } from '@kapi/types'
+import type { GetPageResJSON, GetProductResJSON } from '@kapi/types'
 import { SEO } from '@subdomains/app/components/SEO'
 import type {
   IPagePropsIndex as PageProps,
-  NotFound,
   PageComponent
 } from '@subdomains/app/types'
-import getLayoutData from '@subdomains/app/utils/getLayoutData'
-import getPage from '@subdomains/cms/utils/getPage'
-import findProducts from '@subdomains/sales/utils/findProducts'
 import type { GetServerSideProps } from 'next'
 
 /**
@@ -21,7 +18,6 @@ import type { GetServerSideProps } from 'next'
  * Renders the homepage.
  *
  * @param props - Page component props
- * @param props.layout - Data to populate `Layout` component
  * @param props.seo - `SEO` component properties
  * @param props.template - `IndexTemplate` component properties
  */
@@ -42,19 +38,21 @@ const Home: PageComponent<PageProps> = ({ seo, template }) => (
  *
  * @async
  * @param context - Server side page context
- * @param context.req - HTTP request object
  */
-export const getServerSideProps: GetServerSideProps<PageProps> = async ({
-  req
-}) => {
-  // Get page data
-  const data = await getPage({ fields: 'metafield,seo', handle: 'index' })
+export const getServerSideProps: GetServerSideProps<PageProps> = async () => {
+  // Initialize page data object
+  let data: GetPageResJSON = {}
 
-  // Redirect to /404 if page data isn't found
-  if ((data as NotFound).notFound) return data as NotFound
-
-  // Guarenteed to be page data. Error will be thrown otherwise
-  const { metafield, seo } = data as NonNullable<GetPageResJSON>
+  try {
+    data = await kapi<GetPageResJSON>({
+      params: { fields: 'metafield,seo' },
+      url: `/pages/index`
+    })
+  } catch (error) {
+    // Instead of redirecting to /404 page, force Sentry to catch this error
+    if (error.code === 404) error.code = 500
+    throw error
+  }
 
   // Parse page metafields
   const {
@@ -65,11 +63,12 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async ({
     products_section_text,
     products_section_title,
     reviews_section_title
-  } = ofa(metafield ?? [], 'key')
+  } = ofa(data.metafield ?? [], 'key')
 
   // Get product listing data for product grid
-  const products = await findProducts({
-    fields: 'handle,images,seo,title,variants'
+  const products = await kapi<GetProductResJSON[]>({
+    params: { fields: 'handle,images,seo,title,variants' },
+    url: 'products'
   })
 
   // Get `IndexTemplate` props
@@ -85,17 +84,7 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async ({
     reviews_section_title: (reviews_section_title?.value as string) ?? ''
   }
 
-  // Get layout data
-  const layout = await getLayoutData()
-
-  return {
-    props: {
-      layout,
-      seo: seo as NonNullable<SEOData>,
-      template,
-      ua: req.headers['user-agent']
-    }
-  }
+  return { props: { seo: data.seo as NonNullable<typeof data.seo>, template } }
 }
 
 export default Home

@@ -1,5 +1,6 @@
+import kapi from '@app/config/axios-kapi'
 import { PageTemplate } from '@components/templates/PageTemplate'
-import type { GetPageResJSON, SEOData } from '@kapi/types'
+import type { GetPageResJSON } from '@kapi/types'
 import { SEO } from '@subdomains/app/components/SEO'
 import type {
   HandlePageParams,
@@ -7,8 +8,6 @@ import type {
   NotFound,
   PageComponent
 } from '@subdomains/app/types'
-import getLayoutData from '@subdomains/app/utils/getLayoutData'
-import getPage from '@subdomains/cms/utils/getPage'
 import type { GetServerSideProps, GetServerSidePropsContext } from 'next'
 
 /**
@@ -20,7 +19,6 @@ import type { GetServerSideProps, GetServerSidePropsContext } from 'next'
  * Renders an online store page.
  *
  * @param props - Page component props
- * @param props.layout - Data to populate `Layout` component
  * @param props.seo - `SEO` component properties
  * @param props.template - `PageTemplate` component properties
  */
@@ -40,37 +38,28 @@ const HandlePage: PageComponent<PageProps> = ({ seo, template }) => (
  * @async
  * @param context - Server side page context
  * @param context.params - Route parameters if dynamic route
- * @param context.query - The query string
- * @param context.req - HTTP request object
+ * @param context.req - `HTTP` request object
  */
 export const getServerSideProps: GetServerSideProps<
   PageProps,
   HandlePageParams
 > = async (context: GetServerSidePropsContext<HandlePageParams>) => {
-  // Get page data
-  const data = await getPage({
-    fields: 'body_html,seo',
-    handle: context.params?.handle ?? ''
-  })
+  let data: GetPageResJSON | NotFound = { notFound: true }
 
-  // Redirect to /404 if page data isn't found
-  if ((data as NotFound).notFound) return data as NotFound
-
-  // ! Guarenteed to be page data. Error will be thrown otherwise
-  const { body_html: body, seo } = data as GetPageResJSON
-
-  // Get `PageTemplate` props
-  const template: PageProps['template'] = { body }
-
-  // Get layout data
-  const layout = await getLayoutData()
+  try {
+    data = await kapi<GetPageResJSON>({
+      params: { fields: 'body_html,seo' },
+      url: `/pages/${context.params?.handle}`
+    })
+  } catch (error) {
+    if (error.code === 404) return data as NotFound
+    throw error
+  }
 
   return {
     props: {
-      layout,
-      seo: seo as NonNullable<SEOData>,
-      template,
-      ua: context.req.headers['user-agent']
+      seo: data.seo as NonNullable<typeof data.seo>,
+      template: { body: data.body_html }
     }
   }
 }

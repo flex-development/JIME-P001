@@ -1,7 +1,7 @@
+import kapi from '@app/config/axios-kapi'
 import { CollectionTemplate } from '@components/templates/CollectionTemplate'
 import { serialize } from '@flex-development/json/utils/serialize'
-import type { ICollectionListing } from '@flex-development/kustomzcore'
-import type { GetCollectionResJSON, SEOData } from '@kapi/types'
+import type { GetCollectionResJSON } from '@kapi/types'
 import { SEO } from '@subdomains/app/components/SEO'
 import type {
   CollectionPageParams,
@@ -9,8 +9,7 @@ import type {
   NotFound,
   PageComponent
 } from '@subdomains/app/types'
-import getLayoutData from '@subdomains/app/utils/getLayoutData'
-import getCollection from '@subdomains/sales/utils/getCollection'
+import merge from 'lodash/merge'
 import type { GetServerSideProps, GetServerSidePropsContext } from 'next'
 import { useRouter } from 'next/router'
 
@@ -23,7 +22,6 @@ import { useRouter } from 'next/router'
  * Renders a product collection page.
  *
  * @param props - Page component props
- * @param props.layout - Data to populate `Layout` component
  * @param props.seo - `SEO` component properties
  * @param props.template - `CollectionTemplate` component properties
  */
@@ -59,50 +57,38 @@ const Collection: PageComponent<PageProps> = ({ seo, template }) => {
  *
  * @param context - Server side page context
  * @param context.params - Route parameters if dynamic route
- * @param context.req - HTTP request object
+ * @param context.req - `HTTP` request object
  */
 export const getServerSideProps: GetServerSideProps<
   PageProps,
   CollectionPageParams
 > = async (context: GetServerSidePropsContext<CollectionPageParams>) => {
-  // Get collection handle and current page URL
-  const { collection: handle = '' } = context.params as CollectionPageParams
-  const { url } = context.req
+  const { params, req } = context
 
-  // Get collection data
-  const data = await getCollection({
-    fields: 'body_html,products,seo,title',
-    handle
-  })
+  let data: GetCollectionResJSON | NotFound = { notFound: true }
 
-  // Redirect to /404 if page data isn't found
-  if ((data as NotFound).notFound) return data as NotFound
-
-  // ! Guarenteed to be collection page. Error will be thrown otherwise
-  const collection = data as GetCollectionResJSON
-  const seo = (collection as GetCollectionResJSON).seo as NonNullable<SEOData>
-
-  // Get template data
-  const template = serialize<PageProps['template']>({
-    collection: {
-      ...collection,
-      title: !url?.includes('collections') ? 'Products' : collection?.title
-    } as ICollectionListing,
-    products: collection.products
-  })
-
-  // Get layout data
-  const layout = await getLayoutData()
+  try {
+    data = await kapi<GetCollectionResJSON>({
+      params: { fields: 'body_html,products,seo,title' },
+      url: `/collections/${params?.handle}`
+    })
+  } catch (error) {
+    if (error.code === 404) return data as NotFound
+    throw error
+  }
 
   return {
     props: {
-      layout,
-      seo: {
-        ...seo,
-        title: url === '/products' ? 'All Products' : seo?.title
-      },
-      template,
-      ua: context.req.headers['user-agent']
+      seo: merge(data.seo, {
+        title: req.url === '/products' ? 'All Products' : data.seo?.title
+      }),
+      template: serialize<PageProps['template']>({
+        collection: {
+          ...data,
+          title: !req.url?.includes('collections') ? 'Products' : data.title
+        } as PageProps['template']['collection'],
+        products: data.products
+      })
     }
   }
 }

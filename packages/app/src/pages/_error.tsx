@@ -1,11 +1,12 @@
+import ga from '@app/config/google-analytics'
 import log from '@app/config/logger'
+import vercel from '@app/config/vercel-env'
 import { ErrorTemplate } from '@components/templates/ErrorTemplate'
 import { serialize } from '@flex-development/json/utils/serialize'
 import createError from '@flex-development/kustomzcore/utils/createError'
 import { ErrorContent } from '@subdomains/app/components/ErrorContent'
 import { SEO } from '@subdomains/app/components/SEO'
 import type { IPagePropsError as PageProps } from '@subdomains/app/types'
-import getLayoutData from '@subdomains/app/utils/getLayoutData'
 import merge from 'lodash/merge'
 import pick from 'lodash/pick'
 import type { NextPage } from 'next'
@@ -22,19 +23,15 @@ import { Fragment, useEffect } from 'react'
  * @see https://nextjs.org/docs/advanced-features/custom-error-page
  *
  * @param props - Page component props
- * @param props.error - Error object
- * @param props.layout - Data to populate `Layout` component
+ * @param props.error - `FeathersErrorJSON` error object
  */
-const ServerError: NextPage<PageProps> = ({ error = {} }) => {
+const ServerError: NextPage<PageProps> = ({ error }) => {
   useEffect(() => console.error({ ServerError: error }))
 
   return (
     <Fragment>
       <SEO title='Server Error' />
-      <ErrorTemplate
-        code={error?.code ?? 500}
-        message={error?.message ?? 'Sorry, an unknown error occurred.'}
-      >
+      <ErrorTemplate code={error.code} message={error.message}>
         <ErrorContent />
       </ErrorTemplate>
     </Fragment>
@@ -49,42 +46,39 @@ const ServerError: NextPage<PageProps> = ({ error = {} }) => {
  * @param context.err - Error thrown during the rendering, if any
  * @param context.pathname - Current route; the path of the page in `/pages`
  * @param context.query - Query string section of URL parsed as an object
- * @param context.req - HTTP request object (server only)
+ * @param context.req - `HTTP` request object (server only)
  * @param context.res - HTTP response object (server only)
  */
 ServerError.getInitialProps = async (context): Promise<PageProps> => {
   const { asPath, err, pathname, query, req } = context
+  const $err = err ? 'Unknown error.' : (err as NonNullable<typeof err>)
 
-  // Copy error data
-  let error = { ...(err || {}) } as PageProps['error']
-
-  // Get intial error data
-  let data = {
+  // Get error data
+  const data = merge(pick(req, ['headers', 'method', 'url']), {
     asPath,
     pathname,
     query
-  }
+  })
 
-  // If on server, add additonal error data properties
-  if (req) data = merge(data, pick(req, ['headers', 'method', 'url']))
+  // Convert into `FeathersErrorJSON` error object
+  const error = createError($err, data, err?.statusCode)
 
-  // Handle navigating to page using address bar
-  if (!err) error = createError('Did not receive error object.', data, 500)
-
-  // Convert to FeathersErrorJSON if not already
-  if (err && !(err as PageProps['error']).className) {
-    const { message, stack = null, statusCode = 500 } = err
-    error = createError(message, { ...data, stack, statusCode }, statusCode)
-  }
+  // Send error `event` hit to Google Analytics
+  await ga.event({
+    ...vercel,
+    error: JSON.stringify(error),
+    eventAction: error.name,
+    eventCategory: pathname,
+    eventLabel: error.message,
+    eventValue: error.code,
+    ua: error.data.headers['user-agent'],
+    url: error.data.url
+  })
 
   // Log final error
   log('pages/_error').error({ getInitialProps: error })
 
-  return {
-    error: serialize<PageProps['error']>(error),
-    layout: await getLayoutData(),
-    ua: context.req?.headers['user-agent']
-  }
+  return { error: serialize<PageProps['error']>(error) }
 }
 
 export default ServerError

@@ -36,10 +36,15 @@ import {
  * @param status - Error status code. Defaults to 500
  */
 const createError = (
-  error?: string | Error,
+  error?: string | Error | FeathersErrorJSON,
   data: Record<string, unknown> = {},
   status: number | string = 500
 ): FeathersErrorJSON => {
+  if ((error as FeathersErrorJSON).className) {
+    const $error = error as FeathersErrorJSON
+    return { ...$error, data: { ...$error.data, ...data } }
+  }
+
   if (typeof error === 'string') error = { message: error } as Error
   if (typeof status === 'string') status = JSON.parse(status)
 

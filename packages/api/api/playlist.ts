@@ -2,7 +2,12 @@ import { axios } from '@flex-development/kustomzcore'
 import type { VercelResponse as Res } from '@vercel/node'
 import type { AxiosRequestConfig } from 'axios'
 import pick from 'lodash/pick'
-import { handleAPIError, initPathLogger } from '../lib/middleware'
+import {
+  handleAPIError,
+  initPathLogger,
+  trackAPIEvent,
+  trackAPIRequest
+} from '../lib/middleware'
 import type { APIRequest as Req } from '../lib/types'
 import { appleDeveloperToken, metafieldsGlobal } from '../lib/utils'
 
@@ -11,9 +16,12 @@ import { appleDeveloperToken, metafieldsGlobal } from '../lib/utils'
  * @module api/playlist
  */
 
-export default async (req: Req, res: Res): Promise<Res> => {
-  // ! Attach `logger` and `path` to API request object
+export default async (req: Req, res: Res): Promise<Res | void> => {
+  // Attach `logger` and `path` to API request object
   initPathLogger(req)
+
+  // Send `pageview` hit to Google Analytics
+  await trackAPIRequest(req)
 
   try {
     // Fetch global metafields to get playlist URL
@@ -35,7 +43,7 @@ export default async (req: Req, res: Res): Promise<Res> => {
     const { data = [] } = await axios<AppleMusicApi.PlaylistResponse>(config)
     const { attributes, relationships } = data[0]
 
-    return res.json({
+    res.json({
       attributes: pick(attributes, ['name', 'url']),
       id,
       tracks: relationships?.tracks?.data.map(track => track.attributes)
@@ -43,4 +51,8 @@ export default async (req: Req, res: Res): Promise<Res> => {
   } catch (err) {
     return handleAPIError(req, res, err)
   }
+
+  // Send success `event` hit to Google Analytics
+  await trackAPIEvent(req, '/playlist')
+  return res.end()
 }

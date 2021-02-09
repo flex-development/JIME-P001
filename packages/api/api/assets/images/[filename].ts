@@ -3,18 +3,25 @@ import { readFileSync } from 'fs'
 import isUndefined from 'lodash/isUndefined'
 import { join } from 'path'
 import sharp from 'sharp'
-import { initPathLogger } from '../../../lib/middleware'
+import {
+  handleAPIError,
+  initPathLogger,
+  trackAPIEvent,
+  trackAPIRequest
+} from '../../../lib/middleware'
 import type { GetStaticAssetReq as Req } from '../../../lib/types'
-import { formatError } from '../../../lib/utils'
 
 /**
  * @file API Endpoint - Get Static Image Assets
  * @module api/assets/images/[filename]
  */
 
-export default async (req: Req, res: Res): Promise<void> => {
-  // ! Attach `logger` and `path` to API request object
+export default async (req: Req, res: Res): Promise<Res | void> => {
+  // Attach `logger` and `path` to API request object
   initPathLogger(req)
+
+  // Send `pageview` hit to Google Analytics
+  await trackAPIRequest(req)
 
   // Get asset filename and resize dimensions
   const { filename, height, width } = req.query
@@ -36,15 +43,15 @@ export default async (req: Req, res: Res): Promise<void> => {
       file = await sharp(file).resize($width, $height).toBuffer()
     }
 
+    // Send success `event` hit to Google Analytics
+    await trackAPIEvent(req, '/assets/images/[filename]')
+
     res.writeHead(200, { 'Content-Type': `image/${extension}` })
-    res.end(file)
+    return res.end(file)
   } catch (err) {
     const data = { code: err.code, errors: { filename }, height, width }
     const status = err.code === 'ENOENT' ? 404 : 500
 
-    const error = formatError({ ...err, status }, data)
-
-    req.logger.error({ error })
-    res.status(error.code).json(error)
+    return handleAPIError(req, res, { ...err, status }, data)
   }
 }

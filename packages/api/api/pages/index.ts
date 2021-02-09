@@ -1,5 +1,10 @@
 import type { VercelResponse as Res } from '@vercel/node'
-import { handleAPIError, initPathLogger } from '../../lib/middleware'
+import {
+  handleAPIError,
+  initPathLogger,
+  trackAPIEvent,
+  trackAPIRequest
+} from '../../lib/middleware'
 import Service from '../../lib/services/PageService'
 import type { FindPagesReq as Req } from '../../lib/types'
 
@@ -23,9 +28,12 @@ import type { FindPagesReq as Req } from '../../lib/types'
  * @param req.query.text - Search query text
  * @param res - API response object
  */
-export default async (req: Req, res: Res): Promise<Res> => {
-  // ! Attach `logger` and `path` to API request object
+export default async (req: Req, res: Res): Promise<Res | void> => {
+  // Attach `logger` and `path` to API request object
   initPathLogger(req)
+
+  // Send `pageview` hit to Google Analytics
+  await trackAPIRequest(req)
 
   // ! Vercel interpretes this URL as '/pages' instead of the URL of a single
   // ! page with the `handle` 'index'.
@@ -42,8 +50,12 @@ export default async (req: Req, res: Res): Promise<Res> => {
     const results = await Service.find(req.query.text, options)
 
     // If searching for page with the `handle` 'index', return first result
-    return res.json(INDEX_AS_HANDLE ? results[0] : results)
+    res.json(INDEX_AS_HANDLE ? results[0] : results)
   } catch (err) {
     return handleAPIError(req, res, err, { query: req.query })
   }
+
+  // Send success `event` hit to Google Analytics
+  await trackAPIEvent(req, INDEX_AS_HANDLE ? 'pages/[handle]' : 'pages')
+  return res.end()
 }

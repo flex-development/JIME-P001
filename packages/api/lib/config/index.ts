@@ -12,5 +12,6 @@ export { default as createLogger } from './logger'
 export * from './shopify-api'
 export { default as ShopifyAPI } from './shopify-api'
 export { default as TurndownService } from './turndown-service'
+export { default as vercel } from './vercel-env'
 
 /* eslint-disable prettier/prettier */

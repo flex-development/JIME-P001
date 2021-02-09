@@ -1,3 +1,4 @@
+import URI from 'urijs'
 import createLogger from '../config/logger'
 import type { APIRequest } from '../types'
 
@@ -13,7 +14,7 @@ import type { APIRequest } from '../types'
  */
 const initPathLogger = (req: APIRequest): void => {
   // Get request path
-  req.path = req.url.split('?')[0]
+  req.path = URI.parse(req.url).path as string
 
   // Attach logger
   req.logger = createLogger(req.path)

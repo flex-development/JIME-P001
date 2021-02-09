@@ -1,4 +1,5 @@
 import pino from 'pino'
+import vercel from './vercel-env'
 
 /**
  * @file Pino Logger Configuration
@@ -8,12 +9,6 @@ import pino from 'pino'
  * @see {@link https://github.com/pinojs/pino-pretty}
  * @see {@link https://docs.feathersjs.com/api/errors.html}
  */
-
-const {
-  VERCEL_ENV: env = '',
-  VERCEL_GIT_COMMIT_REF: branch = '',
-  VERCEL_GIT_COMMIT_SHA: commit = ''
-} = process.env
 
 const Logger = pino({
   level: 'debug',
@@ -31,6 +26,4 @@ const Logger = pino({
  *
  * @param path - API request path
  */
-export default (path: string): pino.Logger => {
-  return Logger.child({ path, vercel: { branch, commit, env } })
-}
+export default (path: string): pino.Logger => Logger.child({ path, vercel })

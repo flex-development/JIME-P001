@@ -34,6 +34,7 @@
     "@types/pino": "^6.3.5",
     "@types/sharp": "^0.27.1",
     "@types/turndown": "^5.0.0",
+    "@types/urijs": "^1.19.14",
     "@types/uuid": "^8.3.0",
     "algoliasearch": "^4.8.3",
     "axios": "^0.19.2",
@@ -47,8 +48,9 @@
     "pino-pretty": "^4.3.0",
     "sharp": "^0.27.0",
     "string-strip-html": "^7.0.3",
-    "turndown": "^7.0.0",
     "tslib": "^2.1.0",
+    "turndown": "^7.0.0",
+    "urijs": "^1.19.5",
     "uuid": "^8.3.2"
   },
   "devDependencies": {

@@ -1,8 +1,9 @@
 import type { FeathersErrorJSON } from '@feathersjs/errors'
 import type { AnyObject } from '@flex-development/json'
 import type { VercelResponse as Res } from '@vercel/node'
-import isEmpty from 'lodash/isEmpty'
+import pick from 'lodash/pick'
 import ga from '../config/google-analytics'
+import vercel from '../config/vercel-env'
 import type { AlgoliaError, APIRequest as Req } from '../types'
 import formatError from '../utils/formatError'
 
@@ -11,12 +12,6 @@ import formatError from '../utils/formatError'
  * @module lib/middleware/handleAPIError
  */
 
-const {
-  VERCEL_ENV: env = '',
-  VERCEL_GIT_COMMIT_REF: branch = '',
-  VERCEL_GIT_COMMIT_SHA: commit = ''
-} = process.env
-
 /**
  * Handles an API request error.
  *
@@ -24,9 +19,7 @@ const {
  * `FeathersErrorJSON` object.
  *
  * If {@param err.status} is greater than or equal to `500`, the exception will
- * be tracked with Google Analytics and reported to Sentry.
- *
- * @todo Sentry integration
+ * be tracked with Google Analytics.
  *
  * @async
  * @param req - API request object
@@ -41,12 +34,13 @@ const handleAPIError = async (
   data: AnyObject = {}
 ): Promise<Res> => {
   // Convert into `FeathersErrorJSON` object
-  const error = formatError(err, data)
+  const error = formatError(err, { ...data, vercel })
 
-  // Attach additional arguments in Vercel environment
-  if (!isEmpty(branch)) error.data.branch = branch
-  if (!isEmpty(commit)) error.data.commit = commit
-  if (!isEmpty(env)) error.data.env = env
+  // Timestamp error
+  error.data.created_at = new Date().valueOf()
+
+  // Attach data from request headers
+  error.data.headers = pick(req.headers, ['host', 'user-agent'])
 
   // True if Apple Music API auth or server error
   const error_apple_auth = req.path.includes('/playlist') && error.code === 401

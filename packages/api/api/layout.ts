@@ -1,7 +1,12 @@
 import { axios } from '@flex-development/kustomzcore'
 import type { VercelResponse as Res } from '@vercel/node'
 import { API_URL } from '../lib/config'
-import { handleAPIError, initPathLogger } from '../lib/middleware'
+import {
+  handleAPIError,
+  initPathLogger,
+  trackAPIEvent,
+  trackAPIRequest
+} from '../lib/middleware'
 import MenuService from '../lib/services/MenuService'
 import type { APIRequest as Req } from '../lib/types'
 import { metafieldsGlobal } from '../lib/utils'
@@ -11,9 +16,12 @@ import { metafieldsGlobal } from '../lib/utils'
  * @module api/layout
  */
 
-export default async (req: Req, res: Res): Promise<Res> => {
-  // ! Attach `logger` and `path` to API request object
+export default async (req: Req, res: Res): Promise<Res | void> => {
+  // Attach `logger` and `path` to API request object
   initPathLogger(req)
+
+  // Send `pageview` hit to Google Analytics
+  await trackAPIRequest(req)
 
   try {
     // Fetch global metafields to get profile snippet
@@ -32,7 +40,7 @@ export default async (req: Req, res: Res): Promise<Res> => {
     // Get playlist data
     const playlist = await axios({ url: `${API_URL}/playlist` })
 
-    return res.json({
+    res.json({
       hero: { subtitle: hero_subtitle, title: hero_title },
       playlist,
       sidebar: {
@@ -46,4 +54,8 @@ export default async (req: Req, res: Res): Promise<Res> => {
   } catch (err) {
     return handleAPIError(req, res, err)
   }
+
+  // Send success `event` hit to Google Analytics
+  await trackAPIEvent(req, '/layout')
+  return res.end()
 }

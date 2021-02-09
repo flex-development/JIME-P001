@@ -1,5 +1,10 @@
 import type { VercelResponse as Res } from '@vercel/node'
-import { handleAPIError, initPathLogger } from '../../lib/middleware'
+import {
+  handleAPIError,
+  initPathLogger,
+  trackAPIEvent,
+  trackAPIRequest
+} from '../../lib/middleware'
 import Service from '../../lib/services/CollectionService'
 import type { FindCollectionsReq as Req } from '../../lib/types'
 
@@ -23,16 +28,23 @@ import type { FindCollectionsReq as Req } from '../../lib/types'
  * @param req.query.text - Search query text
  * @param res - API response object
  */
-export default async (req: Req, res: Res): Promise<Res> => {
-  // ! Attach `logger` and `path` to API request object
+export default async (req: Req, res: Res): Promise<Res | void> => {
+  // Attach `logger` and `path` to API request object
   initPathLogger(req)
+
+  // Send `pageview` hit to Google Analytics
+  await trackAPIRequest(req)
 
   // Convert query into search options object
   const options = Service.searchOptions(req.query)
 
   try {
-    return res.json(await Service.find(req.query.text, options))
+    res.json(await Service.find(req.query.text, options))
   } catch (err) {
     return handleAPIError(req, res, err, { query: req.query })
   }
+
+  // Send success `event` hit to Google Analytics
+  await trackAPIEvent(req, '/collections')
+  return res.end()
 }

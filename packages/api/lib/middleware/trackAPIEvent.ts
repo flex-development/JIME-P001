@@ -14,12 +14,10 @@ import type { APIRequest } from '../types'
  *
  * @param req - API request object
  * @param eventLabel - Event label
- * @param eventValue - Event value
  */
 const trackAPIEvent = async (
   req: APIRequest,
-  eventLabel: EventParam['eventLabel'],
-  eventValue?: EventParam['eventValue']
+  eventLabel: EventParam['eventLabel']
 ): Promise<boolean> => {
   // Get URI object
   const uri = new URI(req.url)
@@ -29,7 +27,7 @@ const trackAPIEvent = async (
     eventAction: req.method.toUpperCase(),
     eventCategory: uri.directory() || uri.path(),
     eventLabel,
-    eventValue,
+    eventValue: new Date().valueOf(),
     path: uri.path()
   }
 

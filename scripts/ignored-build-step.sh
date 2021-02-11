@@ -17,7 +17,7 @@ ROOT_PACKAGE="../../scripts ../../.vercelignore ../../babel.config.json ../../le
 if [[ "$@" == "api" ]]; then
   git diff HEAD^ HEAD --quiet api lib $COMMON_FILES $CORE_PACKAGE $ROOT_PACKAGE
 elif [[ "$@" == "app" ]]; then
-  git diff HEAD^ HEAD --quiet plugins public scripts src babel.config.js next.config.js postcss.config.js robots-txt.config.js tsconfig.dev.json tsconfig.prod.json ../api/lib/types.ts ../system/src/**/* ../system/src/index.ts ../system/package.json ../system/tsconfig.prod.json $COMMON_FILES $CORE_PACKAGE $ROOT_PACKAGE
+  git diff HEAD^ HEAD --quiet public scripts src babel.config.js next.config.js postcss.config.js robots-txt.config.js tsconfig.dev.json tsconfig.prod.json ../api/lib/types.ts ../system/src/**/* ../system/src/index.ts ../system/package.json ../system/tsconfig.prod.json $COMMON_FILES $CORE_PACKAGE $ROOT_PACKAGE
 elif [[ "$@" == "system" ]]; then
   git diff HEAD^ HEAD --quiet .storybook src babel.config.js postcss.config.js tsconfig.app.json webpack.common.js $COMMON_FILES $CORE_PACKAGE $ROOT_PACKAGE
 else

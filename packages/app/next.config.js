@@ -1,3 +1,4 @@
+const TapDoneWebpackPlugin = require('@flex-development/webpack-tap-done')
 const SentryWebpackPlugin = require('@sentry/webpack-plugin')
 const withSourceMaps = require('@zeit/next-source-maps')()
 const { DuplicatesPlugin } = require('inspectpack/plugin')
@@ -6,7 +7,6 @@ const merge = require('lodash').merge
 const transpileModules = require('next-transpile-modules')
 const path = require('path')
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
-const TapDoneWebpackPlugin = require('webpack-tap-done')
 const copyCSSAssets = require('./scripts/copy-css-assets')
 const vercel = require('./vercel.json')
 
@@ -154,15 +154,15 @@ const config = {
    *
    * @see https://github.com/vercel/next.js/tree/canary/examples/with-sentry
    *
-   * @param {object} config - Webpack config object
+   * @param {import('webpack').Configuration} config - Webpack config object
    * @param {object} helpers - Next.js helpers
    * @param {string} helpers.buildId - Unique identifier between builds
    * @param {object} helpers.defaultLoaders - Default loaders used internally
    * @param {object} helpers.defaultLoaders.babel - `babel-loader` config
    * @param {boolean} helpers.dev - True if the compiling in development mode
    * @param {boolean} helpers.isServer - `true` for server-side compilation
-   * @param {object} helpers.webpack - Webpack
-   * @return {object} Altered Webpack configuration
+   * @param {import('webpack')} helpers.webpack - Webpack
+   * @return {import('webpack').Configuration} Altered Webpack configuration
    */
   webpack: (config, { dev, isServer }) => {
     // Optimization settings

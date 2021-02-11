@@ -1,4 +1,3 @@
-import log from '@app/config/logger'
 import createError from '@flex-development/kustomzcore/utils/createError'
 import { existsSync, readdirSync, readFileSync } from 'fs'
 import { Head } from 'next/document'
@@ -47,10 +46,7 @@ export class InlineStylesHead extends Head {
       try {
         __html = readFileSync($file, 'utf-8')
       } catch (err) {
-        const error = createError(err.message, { file: $file })
-
-        log('InlineStylesHead.getCssLinks').error(error)
-        throw error
+        throw createError(err.message, { file: $file })
       }
 
       return (

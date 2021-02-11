@@ -25,8 +25,6 @@ const {
   SENTRY_ORG,
   SENTRY_PROJECT,
   SENTRY_RELEASE,
-  SHOPIFY_API_VERSION,
-  SHOPIFY_DOMAIN,
   SITE_NAME,
   SITE_URL,
   TYPEKIT_ID,
@@ -47,8 +45,6 @@ const config = {
     GOOGLE_SITE_VERIFICATION,
     SENTRY_DSN,
     SENTRY_RELEASE,
-    SHOPIFY_API_VERSION,
-    SHOPIFY_DOMAIN,
     SITE_NAME,
     SITE_URL: (() => {
       const url = SITE_URL || 'http://localhost:3001'

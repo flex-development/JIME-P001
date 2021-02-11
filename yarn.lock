@@ -1849,6 +1849,13 @@
     lodash-es "^4.17.15"
     simplytyped "^3.3.0"
 
+"@flex-development/webpack-tap-done@^1.0.0":
+  version "1.0.0"
+  resolved "https://npm.pkg.github.com/download/@flex-development/webpack-tap-done/1.0.0/467234f7725cc605e1f36d72581292b1297c8af64ac638dca4f941d4a1a3fce9#74249e3229ee072b628759ee068063aefc65dd12"
+  integrity sha512-xMdSNZWkqHvD4RM/z0yIIyU5L3uy4n7nMUa/GWAsH+3iNvlpyoc0w5Zm1QPEWQqaRoITQvtxbmhh7dwrssU1Fg==
+  dependencies:
+    debug latest
+
 "@google-cloud/common@^3.5.0":
   version "3.5.0"
   resolved "https://registry.yarnpkg.com/@google-cloud/common/-/common-3.5.0.tgz#0959e769e8075a06eb0823cc567eef00fd0c2d02"
@@ -8368,7 +8375,7 @@ debug@3.1.0, debug@=3.1.0:
   dependencies:
     ms "2.0.0"
 
-debug@4, debug@^4.0.1, debug@^4.1.0, debug@^4.1.1, debug@^4.2.0, debug@^4.3.1:
+debug@4, debug@^4.0.1, debug@^4.1.0, debug@^4.1.1, debug@^4.2.0, debug@^4.3.1, debug@latest:
   version "4.3.1"
   resolved "https://registry.yarnpkg.com/debug/-/debug-4.3.1.tgz#f0d229c505e0c6d8c49ac553d1b13dc183f6b2ee"
   integrity sha512-doEwdvm4PCeK4K3RQN2ZC2BYUBaxwLARCqZmMjtF8a51J2Rb0xpVloFRnCODwqjpwnAoao4pelN8l3RJdv3gRQ==
@@ -20931,9 +20938,6 @@ webpack-sources@^2.1.1:
     source-list-map "^2.0.1"
     source-map "^0.6.1"
 
-"webpack-tap-done@file:packages/app/plugins/webpack-tap-done":
-  version "1.0.0"
-
 webpack-virtual-modules@^0.2.2:
   version "0.2.2"
   resolved "https://registry.yarnpkg.com/webpack-virtual-modules/-/webpack-virtual-modules-0.2.2.tgz#20863dc3cb6bb2104729fff951fbe14b18bd0299"
@@ -20941,7 +20945,7 @@ webpack-virtual-modules@^0.2.2:
   dependencies:
     debug "^3.0.0"
 
-webpack@4.44.1, webpack@^5.18.0:
+webpack@4.44.1, webpack@^5.21.2:
   version "5.21.2"
   resolved "https://registry.yarnpkg.com/webpack/-/webpack-5.21.2.tgz#647507e50d3637695be28af58a6a8246050394e7"
   integrity sha512-xHflCenx+AM4uWKX71SWHhxml5aMXdy2tu/vdi4lClm7PADKxlyDAFFN1rEFzNV0MAoPpHtBeJnl/+K6F4QBPg==

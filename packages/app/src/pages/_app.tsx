@@ -83,6 +83,8 @@ const App: AppComponent = (props: IAppProps) => {
  * @param actx.ctx.res - `HTTP` response object
  */
 App.getInitialProps = async (actx: AppContext) => {
+  const { SITE_URL = '', VERCEL_ENV, VERCEL_URL = '' } = process.env
+
   // Calls page's `getInitialProps` and fills `appProps.pageProps`
   const appProps = await NextApp.getInitialProps(actx)
 
@@ -92,14 +94,16 @@ App.getInitialProps = async (actx: AppContext) => {
   // Build `pageview` params object
   const param: PageViewParam = {
     dl: actx.ctx.asPath as string,
-    documentHost: actx.ctx.req?.headers.host as string,
+    documentHost: actx.ctx.req?.headers.host ?? SITE_URL.split('//')[1],
     documentPath: actx.ctx.pathname,
     ds: 'storefront',
     ua: actx.ctx.req?.headers['user-agent'] ?? ''
   }
 
   // Send `pageview` hit to Google Analytics
-  await ga.pageview({ ...param, ...vercel })
+  if (VERCEL_ENV === 'development' || VERCEL_URL?.length) {
+    await ga.pageview({ ...param, ...vercel })
+  }
 
   // Enable AddThis script rendering on product pages
   const addthis = actx.ctx.pathname.includes('/products/')

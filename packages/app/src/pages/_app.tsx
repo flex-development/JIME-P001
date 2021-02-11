@@ -94,7 +94,7 @@ App.getInitialProps = async (actx: AppContext) => {
   // Build `pageview` params object
   const param: PageViewParam = {
     dl: actx.ctx.asPath as string,
-    documentHost: actx.ctx.req?.headers.host ?? SITE_URL.split('//')[1],
+    documentHost: actx.ctx.req?.headers.host ?? SITE_URL.split('://')[1],
     documentPath: actx.ctx.pathname,
     ds: 'storefront',
     ua: actx.ctx.req?.headers['user-agent'] ?? ''

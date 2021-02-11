@@ -1,4 +1,5 @@
 import pino from 'pino'
+import vercel from './vercel-env'
 
 /**
  * @file Pino Logger Configuration
@@ -22,12 +23,10 @@ export const Logger = pino({
 
 /**
  * Returns a Pino child logger.
- * Every log will have a `namespace` key with the value of {@param namespace}.
+ * Every log will have a `route` key with the value of {@param route}.
  *
- * @param namespace - Log namespace
+ * @param route - Next.js page or API route log was captured from
  */
-const log = (namespace: string): pino.Logger => {
-  return Logger.child({ commit: process.env.SENTRY_RELEASE, namespace })
-}
+const log = (route: string): pino.Logger => Logger.child({ ...vercel, route })
 
 export default log

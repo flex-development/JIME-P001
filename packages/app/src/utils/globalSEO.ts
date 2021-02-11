@@ -1,5 +1,4 @@
 import kapi from '@app/config/axios-kapi'
-import log from '@app/config/logger'
 import type { GetGlobalMetafieldsResJSON, SEOData } from '@kapi/types'
 
 /**
@@ -14,22 +13,11 @@ import type { GetGlobalMetafieldsResJSON, SEOData } from '@kapi/types'
  * @throws {FeathersErrorJSON}
  */
 const globalSEO = async (): Promise<SEOData> => {
-  let globals = {} as GetGlobalMetafieldsResJSON
-
-  try {
-    globals = await kapi<GetGlobalMetafieldsResJSON>({
-      url: '/metafields/globals'
-    })
-  } catch (error) {
-    log('subdomains/app/utils/globalSEO').error(error)
-    throw error
-  }
-
   const {
     description: { value: description },
     keywords: { value: keywords },
     social_share_image: { value: social_share_image }
-  } = globals
+  } = await kapi<GetGlobalMetafieldsResJSON>({ url: '/metafields/globals' })
 
   // Parse social share image
   let og_image = `${process.env.API_URL}/assets/images/morena.webp`

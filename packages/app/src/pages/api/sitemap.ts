@@ -1,9 +1,20 @@
+import kapi from '@app/config/axios-kapi'
+import ga from '@app/config/google-analytics'
 import log from '@app/config/logger'
-import type { AnyObject } from '@flex-development/json/utils/types'
+import vercel from '@app/config/vercel-env'
+import type { IProductListing } from '@flex-development/kustomzcore'
 import createError from '@flex-development/kustomzcore/utils/createError'
+import type {
+  GetCollectionResJSON,
+  GetPageResJSON,
+  GetPolicyResJSON
+} from '@kapi/types'
+import type { PageViewParam } from 'ga-measurement-protocol'
 import sortBy from 'lodash/sortBy'
+import uniq from 'lodash/uniq'
 import type { NextApiRequest as Req, NextApiResponse as Res } from 'next'
 import { SitemapStream, streamToPromise } from 'sitemap'
+import URI from 'urijs'
 
 /**
  * @file Sitemap Generator
@@ -11,99 +22,70 @@ import { SitemapStream, streamToPromise } from 'sitemap'
  * @see https://linguinecode.com/post/add-robots-txt-file-sitemaps-nextjs
  */
 
-const {
-  SHOPIFY_API_KEY: apiKey = '',
-  SHOPIFY_API_VERSION: apiVersion = '',
-  SHOPIFY_DOMAIN: shopName = '',
-  SHOPIFY_PASSWORD: password = ''
-} = process.env
-
 export default async (req: Req, res: Res): Promise<void> => {
-  // Get sitemap base URL
-  const { host } = req.headers
+  const { headers, method, url = '' } = req
 
-  // Get sitemap hostname
-  const hostname = `http${host?.includes('localhost') ? '' : 's'}://${host}`
+  // Check if creating sitemap from localhost
+  const local = (headers.host as string).includes('localhost')
+
+  // Build `pageview` params object
+  const pageview_param: PageViewParam = {
+    ...vercel,
+    dl: url,
+    documentHost: `http${local ? '' : 's'}://${headers.host}`,
+    documentPath: URI.parse(url).path as string,
+    ds: 'storefront-api',
+    ua: headers['user-agent'] as string
+  }
+
+  // Send `pageview` hit to Google Analytics
+  await ga.pageview(pageview_param)
 
   // Initialize page slugs array
   const slugs = ['', '404', 'cart', 'search']
 
-  // Get Shopify module
-  const { default: Shopify } = await import('shopify-api-node')
-
-  // Initialize Shopify client
-  const shopify = new Shopify({
-    apiKey,
-    apiVersion,
-    autoLimit: true,
-    password,
-    shopName
-  })
-
   try {
-    // Get online store pages and policies
-    const pages = [
-      ...(await shopify.page.list()),
-      ...(await shopify.policy.list())
-    ]
+    // Get online store pages
+    const pages = await kapi<GetPageResJSON[]>({ url: '/pages' })
 
-    // Add page URLs to slugs array
-    pages.forEach(({ handle }: AnyObject) => {
-      if (['api-menus', 'index'].includes(handle)) return
-      slugs.push(handle)
-    })
+    // Add page slugs to slugs array
+    pages.forEach(({ handle }) => slugs.push(handle as string))
 
-    // Get blogs
-    const blogs = await shopify.blog.list()
+    // Get store policies
+    const policies = await kapi<GetPolicyResJSON[]>({ url: '/policies' })
 
-    // Add blogs and artivles to stream
-    await Promise.all(
-      blogs.map(async blog => {
-        // Add blog URL to slugs array
-        slugs.push(`blogs/${blog.handle}`)
-
-        // Get articles
-        const articles = await shopify.article.list(blog.id)
-
-        // Add article URLs to slugs array
-        articles.forEach(article => {
-          slugs.push(`blogs/${blog.handle}/articles/${article.handle}`)
-        })
-      })
-    )
+    // Add store policy slugs to slugs array
+    policies.forEach(({ handle }) => slugs.push(handle as string))
 
     // Get product collections and products
-    const collections = await shopify.collectionListing.list()
+    const collections = await kapi<GetCollectionResJSON[]>({
+      params: { fields: 'handle,products' },
+      url: '/collections'
+    })
 
-    // Add collections and products to stream
-    await Promise.all(
-      collections.map(async collection => {
-        const { collection_id, handle: ch } = collection
+    // Add collection and product slugs to slugs array
+    collections.forEach(({ handle, products }) => {
+      // Add collection slug
+      slugs.push(`collections/${handle}`)
 
-        // Add collection URL to slugs array
-        slugs.push(`collections/${ch}`)
+      // `products` field was requested, so assume `products` is an array
+      const $products = products as IProductListing[]
 
-        // Get products in collection
-        const products = await shopify.productListing.list({ collection_id })
-
-        // Add product URLs to slugs array
-        products.forEach(({ handle: ph }) => {
-          slugs.push(`products/${ph}`)
-          slugs.push(`collections/${ch}/products/${ph}`)
-        })
+      // Add product slugs
+      $products.forEach(({ handle: phandle }) => {
+        slugs.push(`products/${handle}`)
+        slugs.push(`collections/${handle}/products/${phandle}`)
       })
-    )
-  } catch (err) {
-    log('pages/api/sitemap').error(err)
-    res.status(err.code).json(err)
-  }
+    })
 
-  try {
     // Create sitemap stream
-    const stream = new SitemapStream({ hostname })
+    const stream = new SitemapStream({ hostname: pageview_param.documentHost })
 
-    // Create chunks from page slugs
-    sortBy(slugs).forEach(slug => {
+    // Create chunks from slugs array
+    sortBy(uniq(slugs)).forEach(slug => {
+      if (slug === 'api-menus') return
+      if (slug === 'index') slug = ''
+
       stream.write({ changefreq: 'daily', priority: 0.9, url: `/${slug}` })
     })
 
@@ -119,9 +101,28 @@ export default async (req: Req, res: Res): Promise<void> => {
     // Return sitemap output
     return res.end(xml)
   } catch (err) {
-    const error = createError(err.message, { errors: err })
+    // Format error as `FeathersErrorJSON` object
+    const error = createError(err, {
+      errors: err?.className ? undefined : err,
+      headers,
+      method,
+      url
+    })
 
-    log('pages/api/sitemap').error(error)
-    res.status(error.code).json(error)
+    // Send error `event` hit to Google Analytics
+    await ga.event({
+      ...vercel,
+      error: JSON.stringify(error),
+      eventAction: error.name,
+      eventCategory: pageview_param.documentPath,
+      eventLabel: error.message,
+      eventValue: error.code,
+      ua: pageview_param.ua,
+      url: pageview_param.dl
+    })
+
+    // Log error and return error response
+    log('pages/api/sitemap').error({ error })
+    return res.status(error.code).json(error)
   }
 }

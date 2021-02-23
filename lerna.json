@@ -1,16 +1,69 @@
 {
-  "changelogPreset": "conventionalcommits",
+  "changelogPreset": {
+    "name": "conventionalcommits",
+    "releaseCommitMessageFormat": "chore(release): publish v{{currentTag}}",
+    "types": [
+      {
+        "type": "feat",
+        "section": ":package: Features"
+      },
+      {
+        "type": "fix",
+        "section": ":bug: Fixes"
+      },
+      {
+        "type": "perf",
+        "section": ":zap: Performance"
+      },
+      {
+        "type": "style",
+        "hidden": ":art: Style"
+      },
+      {
+        "type": "revert",
+        "section": ":rewind: Revert"
+      },
+      {
+        "type": "test",
+        "section": ":robot: Testing"
+      },
+      {
+        "type": "docs",
+        "section": ":book: Documentation"
+      },
+      {
+        "type": "wip",
+        "section": ":construction: Work in Progress"
+      },
+      {
+        "type": "build",
+        "hidden": true
+      },
+      {
+        "type": "chore",
+        "hidden": true
+      },
+      {
+        "type": "ci",
+        "hidden": true
+      },
+      {
+        "type": "refactor",
+        "hidden": true
+      }
+    ]
+  },
   "command": {
     "publish": {
       "registry": "https://npm.pkg.github.com"
     },
     "version": {
-      "allowBranch": ["main"],
+      "allowBranch": "main",
       "conventionalCommits": true,
       "message": "chore(release): publish %s"
     }
   },
-  "ignoreChanges": ["**/__mocks__/**", "**/*.{md,mdx}", "**/*.spec.{ts,tsx}"],
+  "ignoreChanges": ["**/__tests__/**", "**/*.{md,mdx}"],
   "npmClient": "yarn",
   "npmClientArgs": ["--ignore-engines"],
   "packages": ["packages/*"],
@@ -18,5 +71,5 @@
   "stream": true,
   "tagVersionPrefix": "v",
   "useWorkspaces": true,
-  "version": "1.0.0"
+  "version": "independent"
 }

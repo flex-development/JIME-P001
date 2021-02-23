@@ -51,7 +51,6 @@ const ServerError: NextPage<PageProps> = ({ error }) => {
  */
 ServerError.getInitialProps = async (context): Promise<PageProps> => {
   const { asPath, err, pathname, query, req } = context
-  const $err = err ? 'Unknown error.' : (err as NonNullable<typeof err>)
 
   // Get error data
   const data = merge(pick(req, ['headers', 'method', 'url']), {
@@ -61,22 +60,24 @@ ServerError.getInitialProps = async (context): Promise<PageProps> => {
   })
 
   // Convert into `FeathersErrorJSON` error object
-  const error = createError($err, data, err?.statusCode)
+  const error = createError(err || 'Unknown error.', data, err?.statusCode)
 
   // Send error `event` hit to Google Analytics
-  await ga.event({
-    ...vercel,
-    error: JSON.stringify(error),
-    eventAction: error.name,
-    eventCategory: pathname,
-    eventLabel: error.message,
-    eventValue: error.code,
-    ua: error.data.headers['user-agent'],
-    url: error.data.url
-  })
+  if (process.env.GA_ENABLED) {
+    await ga.event({
+      ...vercel,
+      error: JSON.stringify(error),
+      eventAction: error.name,
+      eventCategory: pathname,
+      eventLabel: error.message,
+      eventValue: error.code,
+      ua: error.data.headers['user-agent'],
+      url: error.data.url
+    })
+  }
 
   // Log final error
-  log('pages/_error').error({ getInitialProps: error })
+  if (err) log('pages/_error').error({ getInitialProps: error })
 
   return { error: serialize<PageProps['error']>(error) }
 }

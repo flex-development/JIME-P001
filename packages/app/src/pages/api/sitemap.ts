@@ -2,13 +2,13 @@ import kapi from '@app/config/axios-kapi'
 import ga from '@app/config/google-analytics'
 import log from '@app/config/logger'
 import vercel from '@app/config/vercel-env'
-import type { IProductListing } from '@flex-development/kustomzcore'
-import createError from '@flex-development/kustomzcore/utils/createError'
 import type {
   GetCollectionResJSON,
   GetPageResJSON,
   GetPolicyResJSON
 } from '@kapi/types'
+import type { IProductListing } from '@kustomzcore'
+import createError from '@kustomzcore/utils/createError'
 import type { PageViewParam } from 'ga-measurement-protocol'
 import sortBy from 'lodash/sortBy'
 import uniq from 'lodash/uniq'

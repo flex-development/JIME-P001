@@ -1,10 +1,10 @@
-const debug = require('debug')('scripts/delete-source-maps')
+const debug = require('debug')('scripts').extend('js/delete-source-maps')
 const fs = require('fs')
 const path = require('path')
 
 /**
  * @file Implementation - deleteSourceMaps
- * @module scripts/delete-source-maps
+ * @module scripts/js/delete-source-maps
  */
 
 /**
@@ -14,7 +14,7 @@ const path = require('path')
  * @return {Promise<void>} Empty promise when source maps are removed
  */
 async function deleteSourceMaps() {
-  const next_dir = path.join(__dirname, '../.next/')
+  const next_dir = path.join(__dirname, '../../.next/')
 
   /**
    * Helper function to delete source map files.

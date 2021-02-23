@@ -3,6 +3,7 @@ const rootBabelOptions = require('../../babel.config.json')
 /**
  * @file Babel Configuration
  * @see https://babeljs.io/docs/en/configuration
+ * @see https://www.robinwieruch.de/babel-module-resolver-typescript
  */
 
 module.exports = api => ({
@@ -14,9 +15,13 @@ module.exports = api => ({
       {
         alias: {
           '@app': './src',
-          '@app-mocks': './__mocks__',
-          '@system': '../system/src',
-          '@system-mocks': '../system/__tests__/__mocks__'
+          '@flex-development/json': '@flex-development/json/dist',
+          '@kapi': '../api',
+          '@kustomzcore': '@flex-development/kustomzcore/dist',
+          '@kustomzdesign': '@flex-development/kustomzdesign/dist',
+          '@mdx-js/react': '@mdx-js/react/dist/esm',
+          'react-hanger': 'react-hanger/esm',
+          'react-use': 'react-use/esm'
         }
       }
     ]

@@ -4,12 +4,14 @@ import ga from '@app/config/google-analytics'
 import vercel from '@app/config/vercel-env'
 import '@app/styles/index.scss'
 import type { AppComponent, IAppProps } from '@app/types'
-import '@flex-development/kustomzdesign/kustomzdesign.css'
 import type { GetLayoutDataResJSON } from '@kapi/types'
 import type { CheckoutLineItemInput } from '@kustomzcore'
 import { CART_PKEY } from '@kustomzcore/constants'
-import type { CartContextProviderProps } from '@kustomzdesign/providers/CartContextProvider'
-import { CartContextProvider } from '@kustomzdesign/providers/CartContextProvider'
+import '@kustomzdesign/kustomzdesign.css'
+import {
+  CartContextProvider,
+  CartContextProviderProps
+} from '@kustomzdesign/providers/CartContextProvider'
 import type { PageViewParam } from 'ga-measurement-protocol'
 import type { AppContext, NextWebVitalsMetric as Metric } from 'next/app'
 import NextApp from 'next/app'
@@ -83,7 +85,8 @@ const App: AppComponent = (props: IAppProps) => {
  * @param actx.ctx.res - `HTTP` response object
  */
 App.getInitialProps = async (actx: AppContext) => {
-  const { SITE_URL = '', VERCEL_ENV, VERCEL_URL = '' } = process.env
+  const { GA_ENABLED, SITE_URL = '' } = process.env
+  const { pathname, req } = actx.ctx
 
   // Calls page's `getInitialProps` and fills `appProps.pageProps`
   const appProps = await NextApp.getInitialProps(actx)
@@ -94,19 +97,17 @@ App.getInitialProps = async (actx: AppContext) => {
   // Build `pageview` params object
   const param: PageViewParam = {
     dl: actx.ctx.asPath as string,
-    documentHost: actx.ctx.req?.headers.host ?? SITE_URL.split('://')[1],
-    documentPath: actx.ctx.pathname,
+    documentHost: (req?.headers.host ?? SITE_URL.split('://')[1]) as string,
+    documentPath: pathname,
     ds: 'storefront',
-    ua: actx.ctx.req?.headers['user-agent'] ?? ''
+    ua: req?.headers['user-agent'] ?? ''
   }
 
   // Send `pageview` hit to Google Analytics
-  if (VERCEL_ENV === 'development' || VERCEL_URL?.length) {
-    await ga.pageview({ ...param, ...vercel })
-  }
+  if (GA_ENABLED) await ga.pageview({ ...param, ...vercel })
 
   // Enable AddThis script rendering on product pages
-  const addthis = actx.ctx.pathname.includes('/products/')
+  const addthis = param.documentPath.includes('/products/')
 
   return { ...appProps, addthis, layout, ua: param.ua as string }
 }

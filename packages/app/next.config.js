@@ -7,7 +7,8 @@ const merge = require('lodash').merge
 const transpileModules = require('next-transpile-modules')
 const path = require('path')
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
-const copyCSSAssets = require('./scripts/copy-css-assets')
+const copyCSSAssets = require('./scripts/js/copy-css-assets')
+const SITE_URL = require('./scripts/js/get-site-url')()
 const vercel = require('./vercel.json')
 
 /**
@@ -16,7 +17,6 @@ const vercel = require('./vercel.json')
  */
 
 const {
-  ANALYZE,
   API_URL,
   GA_TRACKING_ID,
   GOOGLE_SITE_VERIFICATION,
@@ -26,13 +26,15 @@ const {
   SENTRY_PROJECT,
   SENTRY_RELEASE,
   SITE_NAME,
-  SITE_URL,
   TYPEKIT_ID,
   VERCEL,
   VERCEL_ENV,
+  VERCEL_GIT_COMMIT_REF,
+  VERCEL_GIT_COMMIT_SHA,
   VERCEL_URL
 } = process.env
 
+const ENV = VERCEL_ENV.toLowerCase()
 const ROOT_NODE_MODULES = path.join(__dirname, '../../node_modules')
 
 const config = {
@@ -41,21 +43,19 @@ const config = {
    */
   env: {
     API_URL,
+    GA_ENABLED: ENV === 'development' || (VERCEL_URL && VERCEL_URL.length),
     GA_TRACKING_ID,
     GOOGLE_SITE_VERIFICATION,
     SENTRY_DSN,
     SENTRY_RELEASE,
     SITE_NAME,
-    SITE_URL: (() => {
-      const url = SITE_URL || 'http://localhost:3001'
-
-      // In Vercel environments, `VERCEL_URL` is aliased to `SITE_URL`, but
-      // Vercel URLs are not specified with "http(s)" protocols
-      return url.startsWith('http') ? url : `https://${url}`
-    })(),
+    SITE_URL,
     TYPEKIT_ID,
-    VERCEL,
-    VERCEL_ENV
+    VERCEL: JSON.parse(VERCEL && VERCEL.length ? VERCEL : 0),
+    VERCEL_ENV: ENV,
+    VERCEL_GIT_COMMIT_REF,
+    VERCEL_GIT_COMMIT_SHA,
+    VERCEL_URL
   },
 
   /**
@@ -74,7 +74,8 @@ const config = {
    * Future features config.
    */
   future: {
-    excludeDefaultMomentLocales: true
+    excludeDefaultMomentLocales: true,
+    webpack5: true
   },
 
   /**
@@ -172,15 +173,11 @@ const config = {
     // Update module resolutions
     config.resolve.alias = merge(config.resolve.alias, {
       '@babel': path.join(ROOT_NODE_MODULES, '@babel'),
-      '@baggie/string': '@baggie/string/lib',
       '@commitlint': false,
-      '@components': `@flex-development/kustomzdesign/dist/lib`,
       '@flex-development/json': '@flex-development/json/dist',
-      '@flex-development/kustomzcore': `@flex-development/kustomzcore/dist`,
-      '@flex-development/kustomzdesign': `@flex-development/kustomzdesign/dist`,
-      '@hooks': `@flex-development/kustomzdesign/dist/hooks`,
+      '@kustomzcore': '@flex-development/kustomzcore/dist',
+      '@kustomzdesign': '@flex-development/kustomzdesign/dist',
       '@mdx-js/react': '@mdx-js/react/dist/esm',
-      '@providers': `@flex-development/kustomzdesign/dist/providers`,
       '@sentry/browser': '@sentry/browser/esm',
       '@sentry/node': '@sentry/node/esm',
       '@sentry/types': path.join(ROOT_NODE_MODULES, '@sentry/types/esm'),
@@ -188,9 +185,7 @@ const config = {
       '@shopify/theme-images': '@shopify/theme-images/dist/images.es5',
       lodash: 'lodash-es',
       'react-hanger': 'react-hanger/esm',
-      'react-use': 'react-use/esm',
-      swr: 'swr/esm',
-      validator: 'validator/es'
+      'react-use': 'react-use/esm'
     })
 
     // Add Node.js polyfills
@@ -238,17 +233,18 @@ const config = {
      * server's static CSS directory. This allows us to inline styles via
      * `InlineStylesHead` component w/o disabling built-in CSS support.
      *
+     * @async
      * @return {void}
      */
-    const tapDone = () => {
-      if (!dev && !isServer) copyCSSAssets()
+    const tapDone = async () => {
+      if (!dev && !isServer) await copyCSSAssets()
     }
 
     // Add plugin to hook into end of Webpack build cycle
     config.plugins.push(new TapDoneWebpackPlugin(tapDone))
 
     // Analyze Webpack bundle output
-    if (!VERCEL && !dev && ANALYZE) {
+    if (!VERCEL && !dev) {
       const reportFilenameClient = './analyze/client.html'
       const reportFilenameServer = '../analyze/server.html'
 
@@ -276,14 +272,14 @@ const config = {
       !isEmpty(SENTRY_PROJECT) &&
       !isEmpty(SENTRY_RELEASE) &&
       VERCEL &&
-      VERCEL_ENV !== 'development'
+      ENV !== 'development'
     ) {
       config.plugins.push(
         new SentryWebpackPlugin({
           authToken: SENTRY_AUTH_TOKEN,
           debug: true,
           deploy: {
-            env: VERCEL_ENV,
+            env: ENV,
             name: VERCEL_URL.split('.vercel.app')[0],
             url: `https://${VERCEL_URL}`
           },
@@ -303,9 +299,19 @@ const config = {
 }
 
 /** @see https://github.com/martpie/next-transpile-modules */
-const withTM = transpileModules(['@flex-development/kustomzcore'], {
-  resolveSymlinks: true,
-  unstable_webpack5: true
-})
+const withTM = transpileModules(
+  [
+    path.join(ROOT_NODE_MODULES, '@mdx-js/react'),
+    path.join(ROOT_NODE_MODULES, 'react-hanger'),
+    path.join(ROOT_NODE_MODULES, 'react-use'),
+    '@flex-development/json',
+    '@flex-development/kustomzcore',
+    '@flex-development/kustomzdesign'
+  ],
+  {
+    resolveSymlinks: true,
+    unstable_webpack5: true
+  }
+)
 
 module.exports = withSourceMaps(withTM(config))

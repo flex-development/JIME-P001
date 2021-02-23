@@ -1,13 +1,9 @@
 {
   "compilerOptions": {
-    "allowJs": true,
     "checkJs": false,
-    "isolatedModules": true,
     "jsx": "preserve",
     "lib": ["dom", "dom.iterable", "esnext"],
-    "noEmit": true,
     "module": "esnext",
-    "strictPropertyInitialization": false,
     "target": "esnext"
   },
   "exclude": ["node_modules"],

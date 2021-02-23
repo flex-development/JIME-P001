@@ -1,28 +1,39 @@
-const path = require('path')
+const { jsWithTsESM: preset } = require('ts-jest/presets')
+const { pathsToModuleNameMapper } = require('ts-jest/utils')
+const { compilerOptions } = require('../../tsconfig.json')
 
 /**
  * @file Jest Configuration
  * @see https://jestjs.io/docs/en/configuration
  */
 
+const prefix = '<rootDir>/../../'
+
 module.exports = {
+  ...preset,
   globals: {
     'ts-jest': {
       babelConfig: '<rootDir>/babel.config.js',
-      tsconfig: '<rootDir>/tsconfig.dev.json'
+      tsconfig: '<rootDir>/tsconfig.test.json'
     }
   },
   moduleFileExtensions: ['js', 'json', 'ts', 'tsx'],
   moduleNameMapper: {
-    '^@app/(.*)$': '<rootDir>/src/$1',
-    '^@app-tests/(.*)$': '<rootDir>/__tests__/$1'
+    ...pathsToModuleNameMapper(compilerOptions.paths, { prefix }),
+    '^react\\-hanger/(.*)$': `${prefix}node_modules/react-hanger/$1`,
+    '^react\\-use/(.*)$': `${prefix}node_modules/react-use/lib/$1`
   },
-  prettierPath: path.join(__dirname, '../../node_modules/prettier'),
-  setupFilesAfterEnv: ['./jest.setup.ts'],
+  prettierPath: `${prefix}node_modules/prettier`,
+  setupFilesAfterEnv: ['<rootDir>/__tests__/setup.ts'],
   testEnvironment: 'node',
-  testPathIgnorePatterns: ['__mocks__', '.next/', 'node_modules/', '(.*).d.ts'],
-  transform: {
-    '^.+\\.[tj]sx?$': 'ts-jest'
-  },
+  testPathIgnorePatterns: [
+    '__tests__/__fixtures__/',
+    '__tests__/__mocks__/',
+    '__tests__/setup.ts',
+    '.next/',
+    'node_modules/',
+    'public/',
+    '(.*).d.ts'
+  ],
   verbose: true
 }

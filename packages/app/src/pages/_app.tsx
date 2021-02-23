@@ -85,7 +85,6 @@ const App: AppComponent = (props: IAppProps) => {
  * @param actx.ctx.res - `HTTP` response object
  */
 App.getInitialProps = async (actx: AppContext) => {
-  const { GA_ENABLED, SITE_URL = '' } = process.env
   const { pathname, req } = actx.ctx
 
   // Calls page's `getInitialProps` and fills `appProps.pageProps`
@@ -94,17 +93,22 @@ App.getInitialProps = async (actx: AppContext) => {
   // Get layout data
   const layout = await kapi<GetLayoutDataResJSON>({ url: 'layout' })
 
+  // Get hostname
+  const host = req?.headers.host ?? process.env.SITE_URL?.split('://')[1]
+
   // Build `pageview` params object
   const param: PageViewParam = {
     dl: actx.ctx.asPath as string,
-    documentHost: (req?.headers.host ?? SITE_URL.split('://')[1]) as string,
+    documentHost: host as string,
     documentPath: pathname,
     ds: 'storefront',
     ua: req?.headers['user-agent'] ?? ''
   }
 
   // Send `pageview` hit to Google Analytics
-  if (GA_ENABLED) await ga.pageview({ ...param, ...vercel })
+  if (host && JSON.parse(process.env.GA_ENABLED as string)) {
+    await ga.pageview({ ...param, ...vercel })
+  }
 
   // Enable AddThis script rendering on product pages
   const addthis = param.documentPath.includes('/products/')

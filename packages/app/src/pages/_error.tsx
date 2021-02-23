@@ -63,7 +63,7 @@ ServerError.getInitialProps = async (context): Promise<PageProps> => {
   const error = createError(err || 'Unknown error.', data, err?.statusCode)
 
   // Send error `event` hit to Google Analytics
-  if (process.env.GA_ENABLED) {
+  if (err && process.env.GA_ENABLED) {
     await ga.event({
       ...vercel,
       error: JSON.stringify(error),

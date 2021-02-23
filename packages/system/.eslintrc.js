@@ -1,40 +1,33 @@
+const rootConfig = require('../../.eslintrc')
+
 /**
  * @file ESLint Configuration
- * @module eslint-config
  * @see https://eslint.org/docs/user-guide/configuring
  */
 
 module.exports = {
+  ...rootConfig,
   parserOptions: {
-    ecmaFeatures: {
-      impliedStrict: true,
-      jsx: true
-    },
-    ecmaVersion: 2020,
-    project: ['./tsconfig.json', './tsconfig.app.json', './tsconfig.prod.json'],
-    sourceType: 'module'
+    ...rootConfig.parserOptions,
+    project: ['./tsconfig.json', './tsconfig.app.json', './tsconfig.prod.json']
   },
-  rules: {
-    'tree-shaking/no-side-effects-in-initialization': 1
-  },
-  overrides: [
+  overrides: rootConfig.overrides.concat([
     {
       files: [
-        './scripts/*',
-        '.eslintrc.js',
-        'babel.*',
-        'jest.*',
-        'webpack.*',
-        '*.spec.ts',
-        '*.spec.tsx',
-        '*.stories.tsx',
-        'src/config/constants.ts',
-        'src/lib/atoms/**/*.tsx',
-        'src/lib/organisms/Sidebar/Sidebar.tsx'
+        './src/config/constants.ts',
+        './src/lib/**/*.tsx',
+        './src/schema/*.ts',
+        '*.stories.tsx'
       ],
       rules: {
         'tree-shaking/no-side-effects-in-initialization': 0
       }
+    },
+    {
+      files: ['.storybook/config/viewports'],
+      rules: {
+        'sort-keys': 0
+      }
     }
-  ]
+  ])
 }

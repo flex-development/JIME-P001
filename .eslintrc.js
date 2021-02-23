@@ -1,7 +1,10 @@
+const babelOptions = require('./babel.config.json')
+
 /**
  * @file ESLint Configuration
  * @module eslint-config
  * @see https://eslint.org/docs/user-guide/configuring
+ * @see https://github.com/prettier/eslint-config-prettier
  */
 
 const EXTENDS_CONFIG = [
@@ -10,10 +13,18 @@ const EXTENDS_CONFIG = [
   'plugin:@typescript-eslint/recommended',
   'plugin:react/recommended',
   'plugin:jsx-a11y/recommended',
-  'plugin:prettier/recommended',
-  'prettier/@typescript-eslint',
-  'prettier/react'
+  'plugin:prettier/recommended'
 ]
+
+const PARSER_OPTIONS = {
+  babelOptions,
+  ecmaFeatures: {
+    impliedStrict: true,
+    jsx: true
+  },
+  ecmaVersion: 2020,
+  sourceType: 'module'
+}
 
 module.exports = {
   env: {
@@ -27,15 +38,10 @@ module.exports = {
   },
   parser: '@typescript-eslint/parser',
   parserOptions: {
-    ecmaFeatures: {
-      impliedStrict: true,
-      jsx: true
-    },
-    ecmaVersion: 2020,
-    project: ['./tsconfig.json', './packages/**/tsconfig.json'],
-    sourceType: 'module'
+    ...PARSER_OPTIONS,
+    project: ['./tsconfig.json', './packages/**/tsconfig.json']
   },
-  plugins: ['tree-shaking', 'react-hooks'],
+  plugins: ['@typescript-eslint/eslint-plugin', 'tree-shaking', 'react-hooks'],
   rules: {
     '@typescript-eslint/ban-ts-ignore': 0,
     '@typescript-eslint/ban-types': 1,
@@ -110,11 +116,30 @@ module.exports = {
         asyncArrow: 'always',
         named: 'never'
       }
-    ]
+    ],
+    'tree-shaking/no-side-effects-in-initialization': 1
   },
   overrides: [
     {
-      files: ['**/__tests__/**', '*.spec.ts', '*.spec.tsx'],
+      files: [
+        '**/scripts/**',
+        '**/__tests__/**',
+        '.eslintrc.js',
+        'babel.*',
+        'commitlint.*',
+        'jest.*',
+        'lint-staged.*',
+        'postcss.*',
+        'webpack.*',
+        '*.spec.ts',
+        '*.spec.tsx'
+      ],
+      rules: {
+        'tree-shaking/no-side-effects-in-initialization': 0
+      }
+    },
+    {
+      files: ['**/__tests__/**', '*.spec.ts', '*.spec.tsx', '*.stories.tsx'],
       env: {
         es6: true,
         'jest/globals': true,
@@ -127,7 +152,12 @@ module.exports = {
     },
     {
       files: ['**/*.js'],
-      parser: 'babel-eslint',
+      parser: '@babel/eslint-parser',
+      parserOptions: {
+        ...PARSER_OPTIONS,
+        babelOptions,
+        requireConfigFile: false
+      },
       rules: {
         '@typescript-eslint/explicit-module-boundary-types': 0,
         '@typescript-eslint/no-var-requires': 0,
@@ -148,6 +178,7 @@ module.exports = {
       }
     }
   ],
+  root: true,
   settings: {
     react: {
       version: 'detect'

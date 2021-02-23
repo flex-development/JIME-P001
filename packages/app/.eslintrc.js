@@ -1,36 +1,22 @@
+const rootConfig = require('../../.eslintrc')
+
 /**
  * @file ESLint Configuration
- * @module eslint-config
  * @see https://eslint.org/docs/user-guide/configuring
  */
 
 module.exports = {
+  ...rootConfig,
   parserOptions: {
-    ecmaFeatures: {
-      impliedStrict: true,
-      jsx: true
-    },
-    ecmaVersion: 2020,
-    project: ['./tsconfig.json', './tsconfig.dev.json', './tsconfig.prod.json'],
-    sourceType: 'module'
+    ...rootConfig.parserOptions,
+    project: ['./tsconfig.json', './tsconfig.dev.json', './tsconfig.prod.json']
   },
-  rules: {
-    'tree-shaking/no-side-effects-in-initialization': 1
-  },
-  overrides: [
+  overrides: rootConfig.overrides.concat([
     {
-      files: [
-        './scripts/*',
-        '.eslintrc.js',
-        'jest.*',
-        'webpack.*',
-        '*.config.js',
-        '*.spec.ts',
-        '*.spec.tsx'
-      ],
+      files: ['next.config.js', 'robots-txt.config.js'],
       rules: {
         'tree-shaking/no-side-effects-in-initialization': 0
       }
     }
-  ]
+  ])
 }

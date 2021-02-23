@@ -75,7 +75,7 @@ jspm_packages/
 
 ### Jest ###
 # Test result file
-**/__tests__/jest-test-results.json
+**/__tests__/results.json
 
 ### Firebase ###
 .idea

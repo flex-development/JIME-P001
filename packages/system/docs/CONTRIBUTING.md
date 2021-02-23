@@ -94,7 +94,7 @@ This project uses the following testing libraries:
 
 Test results for components are displayed in Storybook using
 [Storybook Addon Jest](https://github.com/storybookjs/storybook/tree/master/addons/jest).
-Before running or building the project, `__tests__/jest-test-results.json` must
+Before running or building the project, `__tests__/results.json` must
 be generated. The Jest addon uses this file to display test results. Failing
 tests will not hinder builds, but be displayed in the addon panel.
 

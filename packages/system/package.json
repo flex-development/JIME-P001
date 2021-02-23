@@ -44,7 +44,7 @@
     "dev:storybook": "start-storybook -p 3000 -s ../app/public --ci",
     "dev:storybook:docs": "yarn dev:storybook --docs",
     "dev": "run-p dev:*",
-    "test": "BABEL_ENV=jest jest --detectOpenHandles --passWithNoTests --json --outputFile=__tests__/jest-test-results.json",
+    "test": "BABEL_ENV=jest jest --detectOpenHandles --passWithNoTests --json --outputFile=__tests__/results.json",
     "test:quiet": "yarn test || true",
     "start": "yarn predev; NODE_ENV=production run-p dev:*",
     "prebuild": "yarn test:quiet && rm -rf public && mkdir public",

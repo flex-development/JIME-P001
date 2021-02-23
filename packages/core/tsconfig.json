@@ -1,7 +1,9 @@
 {
   "compilerOptions": {
     "isolatedModules": true,
-    "lib": ["esnext"]
+    "lib": ["es6"],
+    "module": "es6",
+    "target": "es6"
   },
   "exclude": ["node_modules"],
   "extends": "../../tsconfig.json",

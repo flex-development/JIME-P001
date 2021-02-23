@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "declaration": true,
+    "lib": ["es6"],
     "noEmit": false,
     "outDir": "./dist",
     "plugins": [
@@ -10,8 +11,7 @@
         "transform": "@zerollup/ts-transform-paths"
       }
     ],
-    "rootDir": "./src",
-    "target": "esnext"
+    "rootDir": "./src"
   },
   "extends": "./tsconfig.json",
   "include": ["src"]

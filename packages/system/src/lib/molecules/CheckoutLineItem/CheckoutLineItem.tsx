@@ -1,7 +1,7 @@
 import type {
   CheckoutLineItemInput,
   IProductListingVariant
-} from '@flex-development/kustomzcore'
+} from '@kustomzcore'
 import { useCheckoutLineItemInput } from '@system/hooks/useCheckoutLineItemInput'
 import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
 import type { BoxProps } from '@system/lib/atoms/Box'

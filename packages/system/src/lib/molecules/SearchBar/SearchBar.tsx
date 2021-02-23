@@ -1,4 +1,4 @@
-import { EMPTY_SPACE } from '@flex-development/kustomzcore/constants'
+import { EMPTY_SPACE } from '@kustomzcore/constants'
 import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
 import { Form, FormProps } from '@system/lib/atoms/Form'
 import { Input } from '@system/lib/atoms/Input'

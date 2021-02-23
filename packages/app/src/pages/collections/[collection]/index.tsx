@@ -6,9 +6,9 @@ import type {
   NotFound,
   PageComponent
 } from '@app/types'
-import { CollectionTemplate } from '@components/templates/CollectionTemplate'
 import { serialize } from '@flex-development/json/utils/serialize'
 import type { GetCollectionResJSON } from '@kapi/types'
+import { CollectionTemplate } from '@kustomzdesign/lib/templates/CollectionTemplate'
 import merge from 'lodash/merge'
 import type { GetServerSideProps, GetServerSidePropsContext } from 'next'
 import { useRouter } from 'next/router'

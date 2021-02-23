@@ -1,8 +1,5 @@
 import type { ANYTHING } from '@flex-development/json'
-import type {
-  CreateReviewRequest,
-  IProductListing
-} from '@flex-development/kustomzcore'
+import type { CreateReviewRequest, IProductListing } from '@kustomzcore'
 import type { FormProps } from '@system/lib/atoms/Form'
 import type { EventHandlers } from '@system/types'
 

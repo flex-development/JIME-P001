@@ -1,5 +1,5 @@
-import type { IProductListing } from '@flex-development/kustomzcore'
-import { PRODUCTS } from '@system-mocks/utils'
+import type { IProductListing } from '@kustomzcore'
+import { PRODUCTS } from '@tests/system/__mocks__/utils'
 import { AddToCartForm } from './AddToCartForm'
 import type { AddToCartFormProps } from './AddToCartForm.props'
 

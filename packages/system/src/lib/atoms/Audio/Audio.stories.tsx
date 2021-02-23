@@ -1,4 +1,4 @@
-import SONGS from '@system-mocks/data/song-attributes.mock.json'
+import SONGS from '@tests/system/__mocks__/data/song-attributes.mock.json'
 import { Audio } from './Audio'
 import type { AudioProps } from './Audio.props'
 

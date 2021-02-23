@@ -1,7 +1,4 @@
-import type {
-  IProductListing,
-  IProductListingVariant
-} from '@flex-development/kustomzcore'
+import type { IProductListing, IProductListingVariant } from '@kustomzcore'
 import type { BoxProps } from '@system/lib/atoms/Box'
 import type { LinkProps } from '@system/lib/atoms/Link'
 

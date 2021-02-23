@@ -1,4 +1,4 @@
-import type { CheckoutLineItemInput } from '@flex-development/kustomzcore'
+import type { CheckoutLineItemInput } from '@kustomzcore'
 
 /**
  * @file Implementation - getSubtotal

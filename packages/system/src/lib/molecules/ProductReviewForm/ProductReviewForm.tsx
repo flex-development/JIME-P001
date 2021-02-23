@@ -1,5 +1,5 @@
 import type { AnyObject } from '@flex-development/json'
-import type { CreateReviewRequest } from '@flex-development/kustomzcore'
+import type { CreateReviewRequest } from '@kustomzcore'
 import { useProductVariants } from '@system/hooks/useProductVariants'
 import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
 import { Button } from '@system/lib/atoms/Button'
@@ -16,7 +16,6 @@ import { ProductRating } from '@system/lib/molecules/ProductRating'
 import type { EventHandlers } from '@system/types'
 import type { FC } from 'react'
 import { useSetState } from 'react-hanger'
-import isEmail from 'validator/lib/isEmail'
 import type { ProductReviewFormProps } from './ProductReviewForm.props'
 
 /**
@@ -109,7 +108,11 @@ export const ProductReviewForm: FC<ProductReviewFormProps> & {
           data-invalid={errors.email}
           name='email'
           onChange={({ target: { value } }: EventHandlers.Change.Input) => {
-            const valid = isEmail(value)
+            const valid = (() => {
+              const regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+
+              return regex.test(String(value).toLowerCase())
+            })()
 
             if (valid) updateReview({ email: value })
 

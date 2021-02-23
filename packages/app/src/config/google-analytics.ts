@@ -1,4 +1,4 @@
-import axios from '@flex-development/kustomzcore/axios'
+import axios from '@kustomzcore/axios'
 import GA from 'ga-measurement-protocol'
 import { v4 as uuidv4 } from 'uuid'
 

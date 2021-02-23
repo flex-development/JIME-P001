@@ -1,6 +1,6 @@
-import { Link } from '@components/atoms/Link'
-import type { ParagraphProps } from '@components/atoms/Paragraph'
-import { Paragraph } from '@components/atoms/Paragraph'
+import { Link } from '@kustomzdesign/lib/atoms/Link'
+import type { ParagraphProps } from '@kustomzdesign/lib/atoms/Paragraph'
+import { Paragraph } from '@kustomzdesign/lib/atoms/Paragraph'
 import type { FC } from 'react'
 
 /**

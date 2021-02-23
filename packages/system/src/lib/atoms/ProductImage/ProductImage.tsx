@@ -1,4 +1,4 @@
-import type { IProductListingVariant } from '@flex-development/kustomzcore'
+import type { IProductListingVariant } from '@kustomzcore'
 import { getSizedImageUrl } from '@shopify/theme-images'
 import {
   IMAGE_PLACEHOLDER_URL,

@@ -1,8 +1,6 @@
-import { OneOrMany } from '@flex-development/json/utils/types'
-import {
-  Typeset,
-  TypesetProps
-} from '@storybook/components/dist/blocks/Typeset'
+import type { OneOrMany } from '@flex-development/json'
+import type { TypesetProps } from '@storybook/components/dist/blocks/Typeset'
+import { Typeset } from '@storybook/components/dist/blocks/Typeset'
 import isArray from 'lodash/isArray'
 import pick from 'lodash/pick'
 import type { FC } from 'react'
@@ -51,7 +49,7 @@ export const ThemeTypeset: FC<ThemeTypesetProps> = props => {
   const sizes_h = pick(fontSizes, ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'])
 
   // Pick body text sizes from theme spec
-  const sizes_b = pick(fontSizes, ['xs', 'sm', 'md', 'lg', 'xl', 'xxl'])
+  const sizes_b = pick(fontSizes, ['xxl', 'xl', 'lg', 'md', 'sm', 'xs'])
 
   // Override fontSizes property
   rest['fontSizes'] = Object.values(text ? sizes_b : sizes_h) as string[]
@@ -59,7 +57,7 @@ export const ThemeTypeset: FC<ThemeTypesetProps> = props => {
   // Return single Typset if only one font weight to display
   if (!isArray(fontWeight)) return <Typeset {...rest} fontWeight={fontWeight} />
 
-  // Return fragment with array of Typsets
+  // Return fragment with array of Typesets
   return (
     <>
       {fontWeight.map(w => (

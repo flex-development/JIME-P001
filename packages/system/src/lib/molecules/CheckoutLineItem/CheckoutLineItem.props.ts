@@ -1,5 +1,5 @@
 import type { ANYTHING } from '@flex-development/json'
-import type { CheckoutLineItemInput } from '@flex-development/kustomzcore'
+import type { CheckoutLineItemInput } from '@kustomzcore'
 import type { BoxProps } from '@system/lib/atoms/Box'
 import type { EventHandlers } from '@system/types'
 

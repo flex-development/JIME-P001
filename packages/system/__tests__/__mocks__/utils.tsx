@@ -2,14 +2,14 @@ import type {
   CheckoutLineItemInput,
   IProductListing,
   IReview
-} from '@flex-development/kustomzcore'
-import ITEMS from '@system-mocks/data/checkout-line-items.mock.json'
-import products from '@system-mocks/data/product-listings.mock.json'
-import ReviewsMockRepoRoot from '@system-mocks/data/reviews.mock.json'
-import SONGS from '@system-mocks/data/song-attributes.mock.json'
+} from '@kustomzcore'
 import type { CartContextProviderProps } from '@system/providers'
 import { CartContextProvider } from '@system/providers'
 import { render } from '@testing-library/react'
+import ITEMS from './data/checkout-line-items.mock.json'
+import products from './data/product-listings.mock.json'
+import ReviewsMockRepoRoot from './data/reviews.mock.json'
+import SONGS from './data/song-attributes.mock.json'
 
 /**
  * @file Testing Utilities

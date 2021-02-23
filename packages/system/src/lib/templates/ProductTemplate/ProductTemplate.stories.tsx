@@ -1,5 +1,5 @@
-import type { IProductListing } from '@flex-development/kustomzcore'
-import { PRODUCTS, REVIEWS } from '@system-mocks/utils'
+import type { IProductListing } from '@kustomzcore'
+import { PRODUCTS, REVIEWS } from '@tests/system/__mocks__/utils'
 import { ProductTemplate } from './ProductTemplate'
 import type { ProductTemplateProps } from './ProductTemplate.props'
 

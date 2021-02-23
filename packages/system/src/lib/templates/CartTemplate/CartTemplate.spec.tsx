@@ -1,4 +1,4 @@
-import { renderWithMockCartContext as render } from '@system-mocks/utils'
+import { renderWithMockCartContext as render } from '@tests/system/__mocks__/utils'
 import { CartTemplate } from './CartTemplate'
 import { Cart } from './CartTemplate.stories'
 

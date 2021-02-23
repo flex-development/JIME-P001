@@ -1,5 +1,5 @@
 import type { ANYTHING } from '@flex-development/json'
-import type { SongAttributes } from '@flex-development/kustomzcore'
+import type { SongAttributes } from '@kustomzcore'
 import type { SectionProps } from '@system/lib/atoms/Section'
 import type { EventHandlers } from '@system/types'
 

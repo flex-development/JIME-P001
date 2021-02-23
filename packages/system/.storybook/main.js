@@ -1,6 +1,6 @@
 const path = require('path')
 const { merge: mergeWebpack } = require('webpack-merge')
-const babelOptions = require('../babel.config')
+const rootBabelOptions = require('../../../babel.config.json')
 const wc = require('../webpack.common')
 
 /**
@@ -86,41 +86,53 @@ module.exports = {
    * @return {object} Webpack configuration
    */
   webpackFinal: config => {
+    const ROOT_NM = '../../../node_modules'
+
     const ATL_CACHE_DIRECTORY = 'node_modules/.cache/awesome-typescript-loader'
-    const CORE = '../../../node_modules/@flex-development/kustomzcore/dist'
-    const JSON = '../../../node_modules/@flex-development/json/dist'
-    const POLARIS_ICONS = '../../../node_modules/@shopify/polaris-icons/dist'
-    const REACT_HANGER = '../../../node_modules/react-hanger/esm'
-    const REACT_USE = '../../../node_modules/react-use/esm'
-    const VALIDATOR = '../../../node_modules/validator/es'
+
+    const CORE = '@flex-development/kustomzcore/dist'
+    const JSON = '@flex-development/json/dist'
+    const MDX_JS_REACT = '@mdx-js/react/dist/esm'
+    const REACT_HANGER = 'react-hanger/esm'
+    const REACT_USE = 'react-use/esm'
+    const SRC = '../src'
 
     return mergeWebpack(config, {
       resolve: {
         alias: {
-          '@flex-development/json': path.join(__dirname, JSON),
-          '@flex-development/kustomzcore': path.join(__dirname, CORE),
-          '@shopify/polaris-icons': path.join(__dirname, POLARIS_ICONS),
-          '@system': path.join(__dirname, '../src'),
-          'react-hanger': path.join(__dirname, REACT_HANGER),
-          'react-use': path.join(__dirname, REACT_USE),
-          validator: path.join(__dirname, VALIDATOR)
+          '@flex-development/json': path.join(__dirname, ROOT_NM, JSON),
+          '@kustomzcore': path.join(__dirname, ROOT_NM, CORE),
+          '@mdx-js/react': path.join(__dirname, ROOT_NM, MDX_JS_REACT),
+          '@system': path.join(__dirname, SRC),
+          'react-hanger': path.join(__dirname, ROOT_NM, REACT_HANGER),
+          'react-use': path.join(__dirname, ROOT_NM, REACT_USE)
         }
       },
       module: {
         rules: [
           {
-            test: /\.s[ac]ss$/i,
-            use: [{ loader: 'style-loader' }].concat(wc.module.rules[0].use)
-          },
-          {
             test: /\.(ts|tsx)$/,
-            include: [path.join(__dirname, '../src')],
+            include: [path.join(__dirname, SRC)],
             use: [
               {
                 loader: 'awesome-typescript-loader',
                 options: {
                   babelCore: '@babel/core',
-                  babelOptions: { ...babelOptions(), babelrc: false },
+                  babelOptions: {
+                    ...rootBabelOptions,
+                    babelrc: false,
+                    plugins: rootBabelOptions.plugins.concat([
+                      [
+                        'module-resolver',
+                        {
+                          alias: {
+                            '@tests/system': './__tests__',
+                            '@system': './src'
+                          }
+                        }
+                      ]
+                    ])
+                  },
                   cacheDirectory: ATL_CACHE_DIRECTORY,
                   configFileName: TSCONFIG,
                   useBabel: true,
@@ -128,6 +140,10 @@ module.exports = {
                 }
               }
             ]
+          },
+          {
+            test: /\.s[ac]ss$/i,
+            use: [{ loader: 'style-loader' }].concat(wc.module.rules[0].use)
           }
         ]
       },

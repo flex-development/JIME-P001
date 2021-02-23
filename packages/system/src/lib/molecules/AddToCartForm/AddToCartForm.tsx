@@ -1,4 +1,4 @@
-import type { CheckoutLineItemInput } from '@flex-development/kustomzcore'
+import type { CheckoutLineItemInput } from '@kustomzcore'
 import { useActiveIndex } from '@system/hooks/useActiveIndex'
 import { useCheckoutLineItemInput } from '@system/hooks/useCheckoutLineItemInput'
 import { useProductVariants } from '@system/hooks/useProductVariants'

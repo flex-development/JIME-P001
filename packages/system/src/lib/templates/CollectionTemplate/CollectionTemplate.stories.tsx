@@ -1,6 +1,6 @@
-import type { ICollectionListing } from '@flex-development/kustomzcore'
-import collections from '@system-mocks/data/collection-listings.mock.json'
-import { PRODUCTS } from '@system-mocks/utils'
+import type { ICollectionListing } from '@kustomzcore'
+import collections from '@tests/system/__mocks__/data/collection-listings.mock.json'
+import { PRODUCTS } from '@tests/system/__mocks__/utils'
 import { CollectionTemplate } from './CollectionTemplate'
 import type { CollectionTemplateProps } from './CollectionTemplate.props'
 

@@ -7,10 +7,10 @@ import type {
   ProductPageParams,
   ProductPageUrlQuery
 } from '@app/types'
-import { ProductTemplate } from '@components/templates/ProductTemplate'
 import { serialize } from '@flex-development/json/utils/serialize'
-import type { IProductListing } from '@flex-development/kustomzcore'
 import type { GetCollectionResJSON, GetProductResJSON } from '@kapi/types'
+import type { IProductListing } from '@kustomzcore'
+import { ProductTemplate } from '@kustomzdesign/lib/templates/ProductTemplate'
 import findIndex from 'lodash/findIndex'
 import type { GetServerSideProps, GetServerSidePropsContext } from 'next'
 

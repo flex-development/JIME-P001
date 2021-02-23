@@ -1,4 +1,4 @@
-import { PRODUCTS } from '@system-mocks/utils'
+import { PRODUCTS } from '@tests/system/__mocks__/utils'
 import { ProductGrid } from './ProductGrid'
 import type { ProductGridProps } from './ProductGrid.props'
 

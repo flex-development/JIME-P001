@@ -1,17 +1,17 @@
+import type { FeathersErrorJSON } from '@feathersjs/errors'
+import type { GetLayoutDataResJSON, SEOData } from '@kapi/types'
+import type {
+  ICollectionListing,
+  IProductListing,
+  IProductListingVariant
+} from '@kustomzcore'
 import type {
   CollectionTemplateProps,
   IndexTemplateProps,
   PageTemplateProps,
   ProductTemplateProps,
   SearchTemplateProps
-} from '@components/templates'
-import type { FeathersErrorJSON } from '@feathersjs/errors'
-import type {
-  ICollectionListing,
-  IProductListing,
-  IProductListingVariant
-} from '@flex-development/kustomzcore'
-import type { GetLayoutDataResJSON, SEOData } from '@kapi/types'
+} from '@kustomzdesign/lib/templates'
 import type { NextComponentType, NextPageContext as PageContext } from 'next'
 import type { AppContext } from 'next/app'
 import type { Router } from 'next/dist/client/router'

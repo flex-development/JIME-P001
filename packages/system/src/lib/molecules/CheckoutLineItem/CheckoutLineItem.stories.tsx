@@ -1,4 +1,4 @@
-import { LINE_ITEMS } from '@system-mocks/utils'
+import { LINE_ITEMS } from '@tests/system/__mocks__/utils'
 import { CheckoutLineItem } from './CheckoutLineItem'
 import type { CheckoutLineItemProps } from './CheckoutLineItem.props'
 

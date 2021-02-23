@@ -1,4 +1,4 @@
-import { PRODUCTS, REVIEWS } from '@system-mocks/utils'
+import { PRODUCTS, REVIEWS } from '@tests/system/__mocks__/utils'
 import { IndexTemplate } from './IndexTemplate'
 import type { IndexTemplateProps } from './IndexTemplate.props'
 

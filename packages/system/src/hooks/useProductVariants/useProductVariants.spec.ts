@@ -1,5 +1,5 @@
-import { PRODUCTS } from '@system-mocks/utils'
 import { act, renderHook } from '@testing-library/react-hooks'
+import { PRODUCTS } from '@tests/system/__mocks__/utils'
 import { useProductVariants } from './useProductVariants'
 
 /**

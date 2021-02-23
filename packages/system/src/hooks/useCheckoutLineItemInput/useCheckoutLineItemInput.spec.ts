@@ -1,5 +1,5 @@
 import type { AnyObject } from '@flex-development/json'
-import type { CheckoutLineItemInput } from '@flex-development/kustomzcore'
+import type { CheckoutLineItemInput } from '@kustomzcore'
 import { act, renderHook } from '@testing-library/react-hooks'
 import isPlainObject from 'lodash/isPlainObject'
 import { useCheckoutLineItemInput } from './useCheckoutLineItemInput'

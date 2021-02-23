@@ -1,4 +1,4 @@
-import type { IProductImage } from '@flex-development/kustomzcore'
+import type { IProductImage } from '@kustomzcore'
 import { GridBreakpoints } from '@system/types'
 
 /**

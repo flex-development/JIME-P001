@@ -1,4 +1,4 @@
-import { PRODUCTS } from '@system-mocks/utils'
+import { PRODUCTS } from '@tests/system/__mocks__/utils'
 import { DropdownMenu } from './DropdownMenu'
 import type { DropdownMenuProps } from './DropdownMenu.props'
 

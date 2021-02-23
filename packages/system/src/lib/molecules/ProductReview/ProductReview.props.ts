@@ -1,4 +1,4 @@
-import { IReview } from '@flex-development/kustomzcore/types/reviews'
+import { IReview } from '@kustomzcore/types/reviews'
 import { BoxProps } from '@system/lib/atoms/Box'
 
 /**

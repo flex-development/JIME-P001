@@ -6,8 +6,8 @@ import type {
   NotFound,
   PageComponent
 } from '@app/types'
-import { PageTemplate } from '@components/templates/PageTemplate'
 import type { GetPageResJSON } from '@kapi/types'
+import { PageTemplate } from '@kustomzdesign/lib/templates/PageTemplate'
 import type { GetServerSideProps, GetServerSidePropsContext } from 'next'
 
 /**

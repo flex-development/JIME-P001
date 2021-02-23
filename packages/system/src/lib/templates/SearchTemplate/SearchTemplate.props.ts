@@ -1,4 +1,4 @@
-import type { IProductListing } from '@flex-development/kustomzcore'
+import type { IProductListing } from '@kustomzcore'
 import type { MainProps } from '@system/lib/atoms/Main'
 
 /**

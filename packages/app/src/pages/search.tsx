@@ -6,9 +6,9 @@ import type {
   SearchPageUrlQuery
 } from '@app/types'
 import globalSEO from '@app/utils/globalSEO'
-import { SearchTemplate } from '@components/templates/SearchTemplate'
-import { EMPTY_SPACE } from '@flex-development/kustomzcore/constants'
 import type { GetProductResJSON } from '@kapi/types'
+import { EMPTY_SPACE } from '@kustomzcore/constants'
+import { SearchTemplate } from '@kustomzdesign/lib/templates/SearchTemplate'
 import isArray from 'lodash/isArray'
 import join from 'lodash/join'
 import merge from 'lodash/merge'

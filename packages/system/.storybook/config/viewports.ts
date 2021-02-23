@@ -1,15 +1,11 @@
 /**
  * @file Custom viewports for @storybook/addon-viewport
- * @module config/viewports
+ * @module storybook/config/viewports
  * @see https://www.npmjs.com/package/@storybook/addon-viewport
  */
 
-/* eslint-disable sort-keys */
-
 /**
  * Adobe XD artboard sizes formatted for the Storybook Viewports addon.
- *
- * @enum {object}
  */
 export const AdobeXDArtboards = {
   'Web 1920': {

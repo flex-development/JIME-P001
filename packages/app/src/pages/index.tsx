@@ -1,9 +1,9 @@
 import { SEO } from '@app/components/SEO'
 import kapi from '@app/config/axios-kapi'
 import type { IPagePropsIndex as PageProps, PageComponent } from '@app/types'
-import { IndexTemplate } from '@components/templates/IndexTemplate'
-import ofa from '@flex-development/kustomzcore/utils/objectFromArray'
 import type { GetPageResJSON, GetProductResJSON } from '@kapi/types'
+import ofa from '@kustomzcore/utils/objectFromArray'
+import { IndexTemplate } from '@kustomzdesign/lib/templates/IndexTemplate'
 import type { GetServerSideProps } from 'next'
 
 /**

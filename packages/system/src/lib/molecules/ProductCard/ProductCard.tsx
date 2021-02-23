@@ -1,4 +1,4 @@
-import type { IProductListingVariant } from '@flex-development/kustomzcore'
+import type { IProductListingVariant } from '@kustomzcore'
 import { useProductVariants } from '@system/hooks/useProductVariants'
 import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
 import type { BoxProps } from '@system/lib/atoms/Box'

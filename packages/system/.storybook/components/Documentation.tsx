@@ -12,7 +12,7 @@ import type { FC } from 'react'
 
 /**
  * @file Custom Storybook Docs page
- * @module utils/components/Documentation
+ * @module storybook/components/Documentation
  */
 
 export const Documentation: FC<typeof DocsContext> = () => {

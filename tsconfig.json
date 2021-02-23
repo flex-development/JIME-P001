@@ -4,12 +4,11 @@
     "allowUnreachableCode": false,
     "allowSyntheticDefaultImports": true,
     "baseUrl": "./",
-    "checkJs": false,
     "emitDecoratorMetadata": true,
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "forceConsistentCasingInFileNames": true,
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "isolatedModules": true,
     "module": "esnext",
     "moduleResolution": "node",
     "noEmit": true,
@@ -20,35 +19,29 @@
     "noUnusedParameters": false,
     "paths": {
       "@app/*": ["packages/app/src/*"],
-      "@baggie/string/*": ["node_modules/@baggie/string/lib/*"],
-      "@components/*": [
-        "node_modules/@flex-development/kustomzdesign/dist/lib/*"
+      "@flex-development/json": [
+        "node_modules/@flex-development/json/dist/index.d.ts"
       ],
       "@flex-development/json/*": [
         "node_modules/@flex-development/json/dist/*"
       ],
-      "@hooks/*": ["node_modules/@flex-development/kustomzdesign/dist/hooks/*"],
-      "@flex-development/kustomzcore/*": [
-        "node_modules/@flex-development/kustomzcore/dist/*"
+      "@kapi/*": ["packages/api/lib/*"],
+      "@kustomzcore": [
+        "node_modules/@flex-development/kustomzcore/dist/index.d.ts"
       ],
-      "@flex-development/kustomzdesign/*": [
+      "@kustomzcore/*": ["node_modules/@flex-development/kustomzcore/dist/*"],
+      "@kustomzdesign": [
+        "node_modules/@flex-development/kustomzcore/dist/index.d.ts"
+      ],
+      "@kustomzdesign/*": [
         "node_modules/@flex-development/kustomzdesign/dist/*"
       ],
-      "@lerna-config": ["lerna.json"],
-      "@kapi/*": ["packages/api/lib/*"],
       "@mdx-js/react": ["node_modules/@mdx-js/react/dist/esm"],
-      "@providers/*": [
-        "node_modules/@flex-development/kustomzdesign/dist/providers/*"
-      ],
-      "@shopify/polaris-icons/*": [
-        "node_modules/@shopify/polaris-icons/dist/*"
-      ],
+      "@system": ["packages/system/src/index.ts"],
       "@system/*": ["packages/system/src/*"],
-      "@system-mocks/*": ["packages/system/__tests__/__mocks__/*"],
+      "@tests/system/*": ["packages/system/__tests__/*"],
       "react-hanger/*": ["node_modules/react-hanger/esm/*"],
-      "react-use/*": ["node_modules/react-use/esm/*"],
-      "swr/*": ["node_modules/swr/esm/*"],
-      "validator/*": ["node_modules/validator/es/*"]
+      "react-use/*": ["node_modules/react-use/esm/*"]
     },
     "preserveConstEnums": true,
     "pretty": true,

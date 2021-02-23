@@ -12,7 +12,7 @@ import isEmpty from 'lodash/isEmpty'
 import join from 'lodash/join'
 import merge from 'lodash/merge'
 import uniq from 'lodash/uniq'
-import stripHtml from 'string-strip-html'
+import { stripHtml } from 'string-strip-html'
 import {
   axiosShopify,
   DEFAULT_SEO_IMAGE_DATA,

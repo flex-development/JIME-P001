@@ -1,7 +1,7 @@
 import type { AnyObject } from '@flex-development/json'
 import { createError, IPolicy } from '@flex-development/kustomzcore'
 import merge from 'lodash/merge'
-import stripHtml from 'string-strip-html'
+import { stripHtml } from 'string-strip-html'
 import { INDEX_SETTINGS, ShopifyAPI } from '../config'
 import type {
   FindPoliciesQuery as Query,

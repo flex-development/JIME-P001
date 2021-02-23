@@ -1,6 +1,6 @@
 import { Axios } from '@flex-development/kustomzcore'
 import GA from 'ga-measurement-protocol'
-import { v4 as uuidv4 } from 'uuid'
+import { nanoid } from 'nanoid'
 
 /**
  * @file Google Analytics Configuration
@@ -12,6 +12,6 @@ import { v4 as uuidv4 } from 'uuid'
 const ga = new GA(process.env.GA_TRACKING_ID as string, Axios, '1', true)
 
 // Identifies a particular user, device, or browser instance
-ga.setClientId(uuidv4())
+ga.setClientId(nanoid())
 
 export default ga

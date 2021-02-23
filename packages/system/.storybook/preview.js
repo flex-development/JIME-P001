@@ -1,7 +1,6 @@
 import { withConsole } from '@storybook/addon-console'
 import { DocsContainer } from '@storybook/addon-docs/blocks'
 import { withTests } from '@storybook/addon-jest'
-import { withHTML } from '@whitespace/storybook-addon-html/react'
 import prettier from '../../../.prettierrc.js'
 import { CartContextProvider } from '../src/providers'
 import '../src/scss/index.scss'
@@ -29,16 +28,18 @@ export const parameters = {
   },
   controls: { expanded: false },
   docs: { container: DocsContainer, page: Documentation },
+  html: {
+    highlighter: {
+      showLineNumbers: true
+    },
+    prettier
+  },
   viewport: { viewports: AdobeXDArtboards }
 }
 
 export const decorators = [
-  // Add provider components
-  Story => (
-    <CartContextProvider items={ITEMS}>
-      <Story />
-    </CartContextProvider>
-  ),
+  // Add Jest output to stories
+  withTests({ results }),
 
   // Receive console outputs as a console, warn and error in the actions panel
   (Story, context) => {
@@ -47,9 +48,10 @@ export const decorators = [
     })(Story)(context)
   },
 
-  // Display compiled HTML for each story and format with Prettier
-  withHTML({ prettier }),
-
-  // Add Jest output to stories
-  withTests({ results })
+  // Add provider components
+  Story => (
+    <CartContextProvider items={ITEMS}>
+      <Story />
+    </CartContextProvider>
+  )
 ]

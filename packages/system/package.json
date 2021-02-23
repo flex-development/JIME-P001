@@ -3,12 +3,14 @@
   "version": "1.0.0",
   "description": "Storybook design system for Morena's Kustomz",
   "keywords": [
-    "design system",
-    "component library",
+    "design-system",
+    "component-library",
+    "pattern-library",
     "react",
-    "sass",
+    "scss",
     "storybook",
-    "typescript"
+    "typescript",
+    "ui-kit"
   ],
   "homepage": "https://design.morenaskustomz.com",
   "bugs": {
@@ -28,95 +30,129 @@
   },
   "publishConfig": {
     "access": "public",
-    "directory": "./"
+    "directory": "./",
+    "registry": "https://npm.pkg.github.com"
   },
   "source": "src/index.ts",
   "main": "dist/index.js",
-  "module": "dist/index.esm.js",
+  "module": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
     "dist",
-    "src"
+    "README.md",
+    "package.json",
+    "postcss.config.js"
   ],
   "scripts": {
-    "predev": "vc env pull --yes && yarn test:quiet",
-    "dev:kill": "kill $(lsof -ti:3000) || true",
-    "dev:storybook": "start-storybook -p 3000 -s ../app/public --ci",
-    "dev:storybook:docs": "yarn dev:storybook --docs",
-    "dev": "run-p dev:*",
+    "predev": "vc env pull .env --yes",
+    "dev": "bash ./scripts/start-storybook.sh",
+    "dev:docs": "yarn predev; bash ./scripts/start-storybook.sh --docs",
     "test": "BABEL_ENV=jest jest --detectOpenHandles --passWithNoTests --json --outputFile=__tests__/results.json",
     "test:quiet": "yarn test || true",
-    "start": "yarn predev; NODE_ENV=production run-p dev:*",
-    "prebuild": "yarn test:quiet && rm -rf public && mkdir public",
+    "prestart": "dotenv -e .env.production.local -- true",
+    "start": "bash ./scripts/start-storybook.sh",
+    "prebuild": "yarn test:quiet; rm -rf public && mkdir public",
     "build": "NODE_ENV=production build-storybook -o public",
-    "vercel-build": "lerna run prepare --scope @flex-development/kustomzcore; lerna link; yarn build",
-    "precompile:ts": "rm -rf ./dist",
-    "compile:ts": "babel --config-file ./babel.config.prod.js src -d dist --extensions '.ts,.tsx'",
-    "postcompile:ts": "ttsc -p tsconfig.prod.json",
+    "vercel-build": "bash ./scripts/vercel-build.sh",
+    "precompile": "rm -rf ./dist",
+    "compile:ts": "ttsc -p tsconfig.prod.json",
     "compile:scss": "webpack -c webpack.prod.js",
-    "postcompile:scss": "rm ./dist/css.js",
     "compile": "NODE_ENV=production run-s compile:*",
-    "prepare": "if-env SKIP_PREPARE=true && exit 0 || yarn compile"
+    "postcompile": "node ../../scripts/js/fix-node-module-paths",
+    "prepare": "bash ./scripts/prepare.sh"
   },
   "dependencies": {
     "@react-spring/web": "9.0.0-rc.3",
-    "@shopify/theme-images": "^4.1.0",
-    "classnames": "^2.2.6",
-    "react-hanger": "^2.2.1",
-    "react-use": "^15.3.4",
-    "validator": "^13.5.2"
+    "@shopify/theme-images": "latest",
+    "classnames": "latest",
+    "formik": "latest",
+    "react-hanger": "latest",
+    "react-use": "latest",
+    "webfontloader": "latest",
+    "yup": "latest"
   },
   "devDependencies": {
-    "@mdx-js/react": "^1.6.22",
-    "@storybook/addon-a11y": "^6.1.5",
-    "@storybook/addon-console": "^1.2.2",
-    "@storybook/addon-essentials": "^6.1.5",
-    "@storybook/addon-jest": "^6.1.5",
-    "@storybook/addons": "^6.1.5",
-    "@storybook/api": "^6.1.5",
-    "@storybook/cli": "^6.1.5",
-    "@storybook/react": "^6.1.5",
-    "@testing-library/dom": "^7.24.3",
-    "@testing-library/jest-dom": "^5.9.0",
-    "@testing-library/react": "^11.2.2",
-    "@testing-library/react-hooks": "^3.4.2",
-    "@testing-library/user-event": "^12.3.0",
-    "@types/classnames": "^2.2.10",
-    "@types/mdx-js__react": "^1.5.3",
-    "@types/validator": "^13.1.3",
-    "@whitespace/storybook-addon-html": "^2.0.1",
-    "babel-loader": "^8.2.2",
-    "css-loader": "^4.3.0",
-    "cssnano-simple": "^1.2.1",
-    "mini-css-extract-plugin": "^1.3.3",
-    "next": "^10.0.5",
-    "postcss-loader": "^4.1.0",
-    "postcss-scss": "^3.0.4",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
-    "react-is": "^17.0.1",
-    "react-test-renderer": "^17.0.1",
-    "sass": "^1.26.10",
-    "sass-loader": "^10.0.5",
-    "storybook-addon-performance": "^0.13.0",
-    "storybook-mobile": "^0.1.28",
-    "style-loader": "^1.2.1",
+    "@flex-development/webpack-tap-done": "latest",
+    "@mdx-js/react": "latest",
+    "@storybook/addon-a11y": "latest",
+    "@storybook/addon-console": "latest",
+    "@storybook/addon-essentials": "latest",
+    "@storybook/addon-jest": "latest",
+    "@storybook/addons": "latest",
+    "@storybook/api": "latest",
+    "@storybook/cli": "latest",
+    "@storybook/react": "latest",
+    "@testing-library/dom": "latest",
+    "@testing-library/jest-dom": "latest",
+    "@testing-library/react": "latest",
+    "@testing-library/react-hooks": "latest",
+    "@testing-library/user-event": "latest",
+    "@types/classnames": "latest",
+    "@types/mdx-js__react": "latest",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "@types/validator": "latest",
+    "@types/webfontloader": "latest",
+    "@types/yup": "latest",
+    "@whitespace/storybook-addon-html": "latest",
+    "babel-loader": "latest",
+    "css-loader": "latest",
+    "cssnano-simple": "latest",
+    "file-loader": "latest",
+    "fs-extra": "latest",
+    "mini-css-extract-plugin": "latest",
+    "next": "10.0.7",
+    "postcss-loader": "4.2.0",
+    "postcss-scss": "latest",
+    "react": "17.0.1",
+    "react-dom": "17.0.1",
+    "react-is": "17.0.1",
+    "react-test-renderer": "17.0.1",
+    "sass": "latest",
+    "sass-loader": "10.1.1",
+    "storybook-addon-performance": "latest",
+    "storybook-mobile": "latest",
+    "style-loader": "latest",
     "webpack-cli": "latest",
     "webpack-merge": "latest"
   },
   "peerDependencies": {
     "@flex-development/kustomzcore": "*",
-    "@mdx-js/react": "^1.6.22",
-    "@types/mdx-js__react": "^1.5.3",
-    "next": "^10.0.5",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1"
+    "@mdx-js/react": "latest",
+    "@types/classnames": "latest",
+    "@types/mdx-js__react": "latest",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "@types/webfontloader": "latest",
+    "@types/yup": "latest",
+    "next": "10.0.7",
+    "react": "17.0.1",
+    "react-dom": "17.0.1",
+    "sass": "latest"
   },
   "peerDependenciesMeta": {
     "@mdx-js/react": {
       "optional": true
     },
+    "@types/classnames": {
+      "optional": true
+    },
     "@types/mdx-js__react": {
+      "optional": true
+    },
+    "@types/react": {
+      "optional": true
+    },
+    "@types/react-dom": {
+      "optional": true
+    },
+    "@types/webfontloader": {
+      "optional": true
+    },
+    "@types/yup": {
+      "optional": true
+    },
+    "sass": {
       "optional": true
     }
   },
@@ -134,8 +170,12 @@
   },
   "required-env": [
     "API_URL",
+    "DEBUG",
+    "DEBUG_COLORS",
     "NODE_ENV",
-    "SKIP_PREPARE"
+    "SKIP_PREPARE",
+    "STORYBOOK_PORT",
+    "STORYBOOK_STATIC_DIR"
   ],
   "sideEffects": [
     "*.css",

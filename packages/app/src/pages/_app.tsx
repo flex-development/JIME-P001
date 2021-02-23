@@ -106,7 +106,7 @@ App.getInitialProps = async (actx: AppContext) => {
   }
 
   // Send `pageview` hit to Google Analytics
-  if (host && JSON.parse(process.env.GA_ENABLED as string)) {
+  if (host && JSON.parse(process.env.GA_ENABLED || 'false')) {
     await ga.pageview({ ...param, ...vercel })
   }
 

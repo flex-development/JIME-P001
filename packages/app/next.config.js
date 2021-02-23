@@ -172,7 +172,7 @@ const config = {
 
     // Update module resolutions
     config.resolve.alias = merge(config.resolve.alias, {
-      '@babel': path.join(ROOT_NODE_MODULES, '@babel'),
+      '@babel': '@babel',
       '@commitlint': false,
       '@flex-development/json': '@flex-development/json/dist',
       '@kustomzcore': '@flex-development/kustomzcore/dist',
@@ -180,8 +180,8 @@ const config = {
       '@mdx-js/react': '@mdx-js/react/dist/esm',
       '@sentry/browser': '@sentry/browser/esm',
       '@sentry/node': '@sentry/node/esm',
-      '@sentry/types': path.join(ROOT_NODE_MODULES, '@sentry/types/esm'),
-      '@sentry/utils': path.join(ROOT_NODE_MODULES, '@sentry/utils/esm'),
+      '@sentry/types': '@sentry/types/esm',
+      '@sentry/utils': '@sentry/utils/esm',
       '@shopify/theme-images': '@shopify/theme-images/dist/images.es5',
       lodash: 'lodash-es',
       'react-hanger': 'react-hanger/esm',

@@ -1,8 +1,5 @@
 {
-  "exclude": [
-    "/node_modules/(?!@baggie/string)/",
-    "/node_modules/(?!@flex-development)/"
-  ],
+  "exclude": ["/node_modules/(?!@flex-development)/"],
   "ignore": ["**/node_modules/*"],
   "plugins": [
     [

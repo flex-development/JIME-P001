@@ -1,18 +1,17 @@
 {
   "compilerOptions": {
     "declaration": true,
-    "emitDeclarationOnly": true,
     "noEmit": false,
     "outDir": "./dist",
     "plugins": [
       {
         "afterDeclarations": true,
         "exclude": ["*"],
-        "transform": "@zerollup/ts-transform-paths",
-        "useRootDirs": true
+        "transform": "@zerollup/ts-transform-paths"
       }
     ],
-    "rootDir": "./src"
+    "rootDir": "./src",
+    "target": "esnext"
   },
   "exclude": ["**/*.stories.tsx", "**/*.spec.ts", "**/*.spec.tsx"],
   "extends": "./tsconfig.app.json",

@@ -1,9 +1,16 @@
+const { jsWithTsESM: preset } = require('ts-jest/presets')
+const { pathsToModuleNameMapper } = require('ts-jest/utils')
+const { compilerOptions } = require('../../tsconfig.json')
+
 /**
  * @file Jest Configuration
  * @see https://jestjs.io/docs/en/configuration
  */
 
+const prefix = '<rootDir>/../../'
+
 module.exports = {
+  ...preset,
   globals: {
     animated: {
       a: 'a',
@@ -35,32 +42,30 @@ module.exports = {
       summary: 'summary',
       textarea: 'textarea',
       ul: 'ul'
+    },
+    'ts-jest': {
+      tsconfig: '<rootDir>/tsconfig.test.json'
     }
   },
   moduleFileExtensions: ['js', 'json', 'ts', 'tsx'],
   moduleNameMapper: {
-    '\\.(jpg|ico|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
-      'identity-obj-proxy',
-    '^.+\\.(css|sass|scss|less)$': 'identity-obj-proxy',
-    '^@mdx-js/runtime': '<rootDir>/../../node_modules/@mdx-js/runtime/dist/cjs',
-    '^react-hanger/(.*)$': '<rootDir>/../../node_modules/react-hanger/$1',
-    '^react-use/(.*)$': '<rootDir>/../../node_modules/react-use/lib/$1'
+    ...pathsToModuleNameMapper(compilerOptions.paths, { prefix }),
+    '^@mdx\\-js/react$': `${prefix}node_modules/@mdx-js/react/dist/cjs`,
+    '^react\\-hanger/(.*)$': `${prefix}node_modules/react-hanger/$1`,
+    '^react\\-use/(.*)$': `${prefix}node_modules/react-use/lib/$1`
   },
-  prettierPath: '<rootDir>/../../node_modules/prettier',
+  prettierPath: `${prefix}node_modules/prettier`,
   setupFilesAfterEnv: ['@testing-library/jest-dom/extend-expect'],
   testEnvironment: 'jsdom',
   testPathIgnorePatterns: [
+    '__tests__/__fixtures__/',
     '__tests__/__mocks__/',
+    '__tests__/utils.tsx',
+    '__tests__/setup.ts',
     'dist/',
     'node_modules/',
     'public/',
     '(.*).d.ts'
-  ],
-  transform: {
-    '^.+\\.(js|ts|tsx)$': ['babel-jest', { configFile: './babel.config.js' }]
-  },
-  transformIgnorePatterns: [
-    '<rootDir>/../../node_modules/(?!@flex-development)'
   ],
   verbose: true
 }

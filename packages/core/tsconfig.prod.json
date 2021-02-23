@@ -1,18 +1,18 @@
 {
   "compilerOptions": {
     "declaration": true,
-    "emitDeclarationOnly": true,
     "noEmit": false,
     "outDir": "./dist",
     "plugins": [
       {
         "afterDeclarations": true,
         "exclude": ["*"],
-        "transform": "@zerollup/ts-transform-paths",
-        "useRootDirs": true
+        "transform": "@zerollup/ts-transform-paths"
       }
     ],
-    "rootDir": "./src"
+    "rootDir": "./src",
+    "target": "esnext"
   },
-  "extends": "./tsconfig.json"
+  "extends": "./tsconfig.json",
+  "include": ["src"]
 }

@@ -21,37 +21,45 @@
   },
   "publishConfig": {
     "access": "public",
-    "directory": "./"
+    "directory": "./",
+    "registry": "https://npm.pkg.github.com"
   },
+  "source": "src/index.ts",
   "main": "dist/index.js",
+  "module": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
     "dist",
-    "src"
+    "README.md",
+    "package.json"
   ],
   "scripts": {
     "precompile": "rm -rf ./dist",
-    "compile": "babel src -d dist --extensions '.ts'",
-    "postcompile": "ttsc -p tsconfig.prod.json",
-    "prepare": "NODE_ENV=production yarn compile"
+    "compile": "ttsc -p tsconfig.prod.json",
+    "postcompile": "node ../../scripts/js/fix-node-module-paths"
   },
   "dependencies": {
-    "@feathersjs/errors": "^4.5.3",
+    "@feathersjs/errors": "pre",
     "@flex-development/json": "^1.0.5",
-    "@types/apple-music-api": "^0.4.0",
-    "axios": "^0.19.2",
-    "axios-rate-limit": "^1.3.0",
-    "lodash": "^4.17.15",
-    "shopify-api-node": "^3.4.4"
+    "@types/apple-music-api": "latest",
+    "axios": "latest",
+    "axios-rate-limit": "latest",
+    "lodash": "latest",
+    "shopify-api-node": "latest"
   },
   "devDependencies": {
-    "@types/feathersjs__errors": "^3.3.2"
+    "@types/feathersjs__errors": "latest",
+    "@types/lodash": "latest"
   },
   "peerDependencies": {
-    "@types/feathersjs__errors": "^3.3.2"
+    "@types/feathersjs__errors": "latest",
+    "@types/lodash": "latest"
   },
   "peerDependenciesMeta": {
     "@types/feathersjs__errors": {
+      "optional": true
+    },
+    "@types/lodash": {
       "optional": true
     }
   },

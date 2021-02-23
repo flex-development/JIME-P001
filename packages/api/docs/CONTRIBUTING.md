@@ -43,27 +43,12 @@ The [Apple Music API][3] is used to fetch store playlist data.
 - `APPLE_AUTHKEY_MUSICKIT_KEY_ID`
 - `APPLE_TEAM_ID`
 
-### Firebase
-
-The [Firebase Realtime Database][4] is used to store product reviews.
-
-Reviews can only be submitted by pre-existing customers. Shopify webhooks are
-used to create authentication profiles for new customers.
-
-**Note**: The product reviews service will be implemented in a later release.
-
-**Environment Variables**
-
-- `FIREBASE_CLIENT_EMAIL`
-- `FIREBASE_PRIVATE_KEY`
-- `FIREBASE_PROJECT_ID`
-
 ### Google Analytics
 
-[Google Analytics][5] is a web analytics service that tracks and reports website
+[Google Analytics][4] is a web analytics service that tracks and reports website
 traffic.
 
-KAPI uses the [Measurement Protocol for Universal Analytics][6] to track API
+KAPI uses the [Measurement Protocol for Universal Analytics][5] to track API
 requests, success responses, and errors.
 
 **Environment Variables**
@@ -75,13 +60,13 @@ requests, success responses, and errors.
 
 ### Opsgenie
 
-[Opsgenie][7] is an on-call and alert management service for software projects.
+[Opsgenie][6] is an on-call and alert management service for software projects.
 
-Its primary use is to [dispatch alerts from GitHub][8].
+Its primary use is to [dispatch alerts from GitHub][7].
 
 ### Shopify
 
-[Shopify][9] is an eCommerce platform. Aside from functioning as our commerce
+[Shopify][8] is an eCommerce platform. Aside from functioning as our commerce
 backend, it is also our content management system.
 
 **Environment Variables**
@@ -97,7 +82,7 @@ backend, it is also our content management system.
 
 Directory: `api`
 
-For more information, see the [Vercel Serverless Functions][10] documentation.
+For more information, see the [Vercel Serverless Functions][9] documentation.
 
 ### Config
 
@@ -124,16 +109,15 @@ Directory: `lib/utils`
 Directory: `__tests__`  
 Command: `yarn test`
 
-For more information, see the [root package Contributing Guide][11].
+For more information, see the [root package Contributing Guide][10].
 
 [1]: https://github.com/vercel/vercel/discussions/5294#discussioncomment-269338
 [2]: https://www.algolia.com/
 [3]: https://developer.apple.com/documentation/applemusicapi/
-[4]: https://firebase.google.com/docs/database
-[5]: https://analytics.google.com/analytics/web/
-[6]: https://developers.google.com/analytics/devguides/collection/protocol/v1
-[7]: https://www.atlassian.com/software/opsgenie
-[8]: https://docs.opsgenie.com/docs/github-integration
-[9]: https://www.shopify.com/
-[10]: https://vercel.com/docs/serverless-functions/introduction
-[11]: ../../../docs/CONTRIBUTING.md#testing
+[4]: https://analytics.google.com/analytics/web/
+[5]: https://developers.google.com/analytics/devguides/collection/protocol/v1
+[6]: https://www.atlassian.com/software/opsgenie
+[7]: https://docs.opsgenie.com/docs/github-integration
+[8]: https://www.shopify.com/
+[9]: https://vercel.com/docs/serverless-functions/introduction
+[10]: ../../../docs/CONTRIBUTING.md#testing

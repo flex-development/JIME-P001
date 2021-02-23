@@ -91,11 +91,12 @@
     "ts-jest": "next",
     "ts-node": "latest",
     "ttypescript": "latest",
-    "typescript": "latest",
+    "typescript": "4.2.0-beta",
     "yarn": "latest"
   },
   "resolutions": {
-    "**/next/**/webpack": "^5.21.2"
+    "**/next/**/webpack": "^5.21.2",
+    "**/typescript": "4.2.0-beta"
   },
   "private": true,
   "workspaces": {

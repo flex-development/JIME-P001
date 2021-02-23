@@ -77,17 +77,6 @@ jspm_packages/
 # Test result file
 **/__tests__/results.json
 
-### Firebase ###
-.idea
-**/node_modules/*
-**/.firebaserc
-service-account.json
-service-account-*.json
-
-### Firebase Patch ###
-.runtimeconfig.json
-.firebase/
-
 ### Sass ###
 .sass-cache/
 *.css.map

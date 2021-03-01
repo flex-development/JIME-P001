@@ -68,7 +68,6 @@
     "formik": "latest",
     "react-hanger": "latest",
     "react-use": "latest",
-    "webfontloader": "latest",
     "yup": "latest"
   },
   "devDependencies": {
@@ -91,7 +90,6 @@
     "@types/mdx-js__react": "latest",
     "@types/react": "latest",
     "@types/react-dom": "latest",
-    "@types/webfontloader": "latest",
     "@types/yup": "latest",
     "@whitespace/storybook-addon-html": "latest",
     "babel-loader": "latest",
@@ -122,7 +120,6 @@
     "@types/mdx-js__react": "latest",
     "@types/react": "latest",
     "@types/react-dom": "latest",
-    "@types/webfontloader": "latest",
     "@types/yup": "latest",
     "next": "10.0.7",
     "react": "17.0.1",
@@ -143,9 +140,6 @@
       "optional": true
     },
     "@types/react-dom": {
-      "optional": true
-    },
-    "@types/webfontloader": {
       "optional": true
     },
     "@types/yup": {

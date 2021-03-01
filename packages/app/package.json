@@ -57,6 +57,7 @@
     "ua-parser-js": "latest",
     "urijs": "latest",
     "util": "latest",
+    "webfontloader": "latest",
     "webpack": "5.21.2"
   },
   "devDependencies": {
@@ -65,9 +66,9 @@
     "@types/gtag.js": "latest",
     "@types/jsonwebtoken": "latest",
     "@types/lodash": "latest",
+    "@types/nanoid": "latest",
     "@types/pino": "latest",
     "@types/ua-parser-js": "latest",
-    "@types/uuid": "latest",
     "@types/webfontloader": "latest",
     "webpack-bundle-analyzer": "latest"
   },

@@ -54,6 +54,14 @@ SIDEBAR
     }
 
     &-link-img {
+      @include breakpoint-up(xl) {
+        $dimensions: rem(180);
+
+        @include height($dimensions, $dimensions, $dimensions);
+
+        @include width($dimensions, $dimensions, $dimensions);
+      }
+
       @include breakpoint-up(sm) {
         $dimensions: rem(160);
 
@@ -63,14 +71,6 @@ SIDEBAR
 
         margin-bottom: $space-0;
         margin-right: $space-24;
-      }
-
-      @include breakpoint-up(xl) {
-        $dimensions: rem(180);
-
-        @include height($dimensions, $dimensions, $dimensions);
-
-        @include width($dimensions, $dimensions, $dimensions);
       }
 
       border: $border-width-thin solid $border-color;

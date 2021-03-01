@@ -10,10 +10,6 @@ GRIDS
   overflow-x: hidden;
 
   .content-col {
-    @include breakpoint-up(sm) {
-      border-left: $border-width solid $border-color;
-    }
-
     @include make-grid-col;
   }
 
@@ -39,17 +35,21 @@ GRIDS
     .sidebar-col {
       @include breakpoint-up(sm) {
         @include make-grid-col(6);
+
+        .sidebar {
+          $width: map-get($sizes, 25);
+
+          @include width($width, $width);
+
+          border-right: $border-width solid $border-color;
+        }
       }
 
       @include breakpoint-up(lg) {
         @include make-grid-col(3);
-
-        border: $border-width-none;
       }
 
       @include make-grid-col;
-
-      border-right: $border-width solid $border-color;
     }
   }
 }

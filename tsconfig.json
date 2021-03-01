@@ -31,7 +31,7 @@
       ],
       "@kustomzcore/*": ["node_modules/@flex-development/kustomzcore/dist/*"],
       "@kustomzdesign": [
-        "node_modules/@flex-development/kustomzcore/dist/index.d.ts"
+        "node_modules/@flex-development/kustomzdesign/dist/index.d.ts"
       ],
       "@kustomzdesign/*": [
         "node_modules/@flex-development/kustomzdesign/dist/*"

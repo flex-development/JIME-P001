@@ -1,4 +1,4 @@
-import { Axios } from '@flex-development/kustomzcore'
+import axios from '@flex-development/kustomzcore/dist/axios'
 import GA from 'ga-measurement-protocol'
 import { nanoid } from 'nanoid'
 
@@ -11,7 +11,7 @@ import { nanoid } from 'nanoid'
 const { GA_TRACKING_ID, VERCEL, VERCEL_ENV } = process.env
 
 // Initialize Measure Protocol client
-const ga = new GA(GA_TRACKING_ID || '', Axios, '1', true)
+const ga = new GA(GA_TRACKING_ID || '', axios, '1', true)
 
 // Identifies a particular user, device, or browser instance
 ga.setClientId(nanoid())

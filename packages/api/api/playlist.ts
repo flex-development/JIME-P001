@@ -34,7 +34,7 @@ export default async (req: Req, res: Res): Promise<Res | void> => {
     // Build request config
     const config: AxiosRequestConfig = {
       headers: {
-        Authorization: `Bearer ${appleDeveloperToken()}`
+        Authorization: `Bearer ${await appleDeveloperToken()}`
       },
       url: `https://api.music.apple.com/v1/catalog/us/playlists/${id}`
     }

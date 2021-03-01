@@ -2608,14 +2608,6 @@
   resolved "https://registry.yarnpkg.com/@next/env/-/env-10.0.8-canary.9.tgz#25ef619bab4ad3dd48e0d9967b5c7477395b9221"
   integrity sha512-hcD/lLRSvRyuP5dT1Y3AYJdY7GibkbM9lLitcGaky1mm5L+QLOYJgS+wwtVixCpxwot8JkLAcAYtzvkyWJiXaw==
 
-"@next/plugin-sentry@canary":
-  version "10.0.8-canary.9"
-  resolved "https://registry.yarnpkg.com/@next/plugin-sentry/-/plugin-sentry-10.0.8-canary.9.tgz#f648e8b1d742f4ca2c4fabd232011b9aa9863baf"
-  integrity sha512-4dr4CSYYwGyVMmLF00SUFtlWZdnUkxoG2Z2veiLHQWiO6Xglq//ySPo0EFakTokrjvqlmn6+0QhY7I/xFrxWXA==
-  dependencies:
-    "@sentry/browser" "5.7.1"
-    "@sentry/node" "5.7.1"
-
 "@next/polyfill-module@10.0.8-canary.9":
   version "10.0.8-canary.9"
   resolved "https://registry.yarnpkg.com/@next/polyfill-module/-/polyfill-module-10.0.8-canary.9.tgz#bfade1519d26eb32a331444c51ca1efaf6feb089"
@@ -3019,7 +3011,7 @@
     "@react-spring/core" "9.0.0-rc.3"
     "@react-spring/shared" "9.0.0-rc.3"
 
-"@sentry/browser@5.7.1", "@sentry/browser@6.2.0":
+"@sentry/browser@6.2.0":
   version "6.2.0"
   resolved "https://registry.yarnpkg.com/@sentry/browser/-/browser-6.2.0.tgz#4113a92bc82f55e63f30cb16a94f717bd0b95817"
   integrity sha512-4r3paHcHXLemj471BtNDhUs2kvJxk5XDRplz1dbC/LHXN5PWEXP4anhGILxOlxqi4y33r53PIZu3xXFjznaVZA==
@@ -3079,7 +3071,7 @@
     "@sentry/types" "6.2.0"
     tslib "^1.9.3"
 
-"@sentry/node@5.7.1", "@sentry/node@6.2.0":
+"@sentry/node@6.2.0":
   version "6.2.0"
   resolved "https://registry.yarnpkg.com/@sentry/node/-/node-6.2.0.tgz#4c1860822a4a73d24242e5254124bd3bf9028d52"
   integrity sha512-02lXk+56tPA3lWTvNLMGorp77wUVti8wOs+TlYARkJ+N+16dwqEBSBTy3hCDxlxriB+qHchSIS+ovPGi6WNiYA==

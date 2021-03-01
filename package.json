@@ -93,9 +93,6 @@
     "yarn": "latest"
   },
   "resolutions": {
-    "**/@sentry/browser": "6.2.0",
-    "**/@sentry/integrations": "6.2.0",
-    "**/@sentry/node": "6.2.0",
     "**/@storybook/core/**/webpack": "4.46.0",
     "**/typescript": "4.2.0-beta"
   },

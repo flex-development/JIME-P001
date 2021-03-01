@@ -106,7 +106,7 @@ const config = {
    *
    * @see https://github.com/vercel/next.js/discussions/9133
    */
-  plugins: [{ name: '@next/plugin-sentry' }],
+  plugins: [],
 
   /**
    * Enable React Strict Mode.

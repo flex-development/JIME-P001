@@ -36,6 +36,7 @@ const {
 
 const ENV = VERCEL_ENV.toLowerCase()
 const ROOT_NODE_MODULES = path.join(__dirname, '../../node_modules')
+const VERCEL_PARSED = JSON.parse(VERCEL && VERCEL.length ? VERCEL : 0)
 
 const config = {
   /**
@@ -51,7 +52,7 @@ const config = {
     SITE_NAME,
     SITE_URL,
     TYPEKIT_ID,
-    VERCEL: JSON.parse(VERCEL && VERCEL.length ? VERCEL : 0),
+    VERCEL: VERCEL_PARSED,
     VERCEL_ENV: ENV,
     VERCEL_GIT_COMMIT_REF,
     VERCEL_GIT_COMMIT_SHA,
@@ -271,7 +272,7 @@ const config = {
       !isEmpty(SENTRY_ORG) &&
       !isEmpty(SENTRY_PROJECT) &&
       !isEmpty(SENTRY_RELEASE) &&
-      VERCEL &&
+      VERCEL_PARSED &&
       ENV !== 'development'
     ) {
       config.plugins.push(

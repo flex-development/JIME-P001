@@ -1,6 +1,6 @@
 import axios from '@kustomzcore/axios'
 import GA from 'ga-measurement-protocol'
-import { v4 as uuidv4 } from 'uuid'
+import { nanoid } from 'nanoid'
 
 /**
  * @file Google Analytics Configuration
@@ -8,10 +8,15 @@ import { v4 as uuidv4 } from 'uuid'
  * @see https://github.com/wusuopu/ts-ga-measurement-protocol
  */
 
-// Initialize Measure Protocal client
-const ga = new GA(process.env.GA_TRACKING_ID as string, axios, '1', true)
+const { GA_TRACKING_ID, VERCEL, VERCEL_ENV } = process.env
+
+// Initialize Measure Protocol client
+const ga = new GA(GA_TRACKING_ID || '', axios, '1', true)
 
 // Identifies a particular user, device, or browser instance
-ga.setClientId(uuidv4())
+ga.setClientId(nanoid())
+
+// Disable tracking in non-Vercel environments
+if (!(JSON.parse(VERCEL || '0') && VERCEL_ENV !== 'development')) ga.disable()
 
 export default ga

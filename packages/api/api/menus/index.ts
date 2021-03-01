@@ -1,7 +1,7 @@
 import type { VercelResponse as Res } from '@vercel/node'
 import {
   handleAPIError,
-  initPathLogger,
+  initRoute,
   trackAPIRequest,
   trackAPISuccessEvent
 } from '../../lib/middleware'
@@ -28,8 +28,8 @@ import type { FindMenusReq as Req } from '../../lib/types'
  * @param req.query.title - Filter results by menu title
  */
 export default async (req: Req, res: Res): Promise<Res | void> => {
-  // Attach `logger` and `path` to API request object
-  initPathLogger(req)
+  // Initialize API route
+  initRoute(req)
 
   // Send `pageview` hit to Google Analytics
   await trackAPIRequest(req)
@@ -44,6 +44,6 @@ export default async (req: Req, res: Res): Promise<Res | void> => {
   }
 
   // Send success `event` hit to Google Analytics
-  await trackAPISuccessEvent(req, '/menus')
+  await trackAPISuccessEvent(req)
   return res.end()
 }

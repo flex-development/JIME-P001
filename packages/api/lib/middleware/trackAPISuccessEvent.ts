@@ -1,5 +1,4 @@
 import type { EventParam } from 'ga-measurement-protocol'
-import URI from 'urijs'
 import ga from '../config/google-analytics'
 import vercel from '../config/vercel-env'
 import type { APIRequest } from '../types'
@@ -12,24 +11,48 @@ import type { APIRequest } from '../types'
 /**
  * Sends a `event` hit to Google Analytics.
  *
+ * Responses will be tracked under the "Success Response" category, and labeled
+ * with the request method and path.
+ *
  * @param req - API request object
- * @param eventLabel - Event label
+ * @param status [200] - HTTP response status code
  */
 const trackAPISuccessEvent = async (
   req: APIRequest,
-  eventLabel: EventParam['eventLabel']
+  status = 200
 ): Promise<boolean> => {
-  // Get URI object
-  const uri = new URI(req.url)
-
   // Build `event` params object
   const param = {
-    eventAction: 'Success',
-    eventCategory: uri.directory() || uri.path(),
-    eventLabel,
-    eventValue: new Date().valueOf(),
+    eventAction: (() => {
+      switch (status) {
+        case 201:
+          return 'Created'
+        case 202:
+          return 'Accepted'
+        case 203:
+          return 'NonAuthoritativeInformation'
+        case 204:
+          return 'NoContent'
+        case 205:
+          return 'ResetContent'
+        case 206:
+          return 'PartialContent'
+        case 207:
+          return 'MultiStatus'
+        case 208:
+          return 'AlreadyReported'
+        case 226:
+          return 'ImUsed'
+        default:
+          return 'OK'
+      }
+    })(),
+    eventCategory: 'Success Response',
+    eventLabel: `${req.method.toUpperCase()} ${req.path}`,
+    eventValue: status,
     method: req.method.toUpperCase(),
-    path: uri.path()
+    path: req.path,
+    query: JSON.stringify(req.query)
   }
 
   // Send `event` hit to Google Analytics

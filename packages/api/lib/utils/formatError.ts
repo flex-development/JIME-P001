@@ -20,12 +20,6 @@ const formatError = (
   error: Error | AlgoliaError | FeathersErrorJSON,
   data: AnyObject = {}
 ): FeathersErrorJSON => {
-  // If already `FeathersErrorJSON`, return error argument
-  if ((error as FeathersErrorJSON).className) {
-    const $error = error as FeathersErrorJSON
-    return { ...error, data: merge($error.data, data) } as FeathersErrorJSON
-  }
-
   // Cast error
   const $error: AlgoliaError = error as AlgoliaError
 

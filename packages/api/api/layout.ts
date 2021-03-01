@@ -3,7 +3,7 @@ import type { VercelResponse as Res } from '@vercel/node'
 import { API_URL } from '../lib/config'
 import {
   handleAPIError,
-  initPathLogger,
+  initRoute,
   trackAPIRequest,
   trackAPISuccessEvent
 } from '../lib/middleware'
@@ -17,8 +17,8 @@ import { metafieldsGlobal } from '../lib/utils'
  */
 
 export default async (req: Req, res: Res): Promise<Res | void> => {
-  // Attach `logger` and `path` to API request object
-  initPathLogger(req)
+  // Initialize API route
+  initRoute(req)
 
   // Send `pageview` hit to Google Analytics
   await trackAPIRequest(req)
@@ -56,6 +56,6 @@ export default async (req: Req, res: Res): Promise<Res | void> => {
   }
 
   // Send success `event` hit to Google Analytics
-  await trackAPISuccessEvent(req, '/layout')
+  await trackAPISuccessEvent(req)
   return res.end()
 }

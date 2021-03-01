@@ -2,7 +2,7 @@ import { objectFromArray } from '@flex-development/kustomzcore'
 import type { VercelResponse as Res } from '@vercel/node'
 import {
   handleAPIError,
-  initPathLogger,
+  initRoute,
   trackAPIRequest,
   trackAPISuccessEvent
 } from '../../lib/middleware'
@@ -15,8 +15,8 @@ import { metafieldsShop } from '../../lib/utils'
  */
 
 export default async (req: Req, res: Res): Promise<Res | void> => {
-  // Attach `logger` and `path` to API request object
-  initPathLogger(req)
+  // Initialize API route
+  initRoute(req)
 
   // Send `pageview` hit to Google Analytics
   await trackAPIRequest(req)
@@ -29,6 +29,6 @@ export default async (req: Req, res: Res): Promise<Res | void> => {
   }
 
   // Send success `event` hit to Google Analytics
-  await trackAPISuccessEvent(req, '/metafields/globals')
+  await trackAPISuccessEvent(req)
   return res.end()
 }

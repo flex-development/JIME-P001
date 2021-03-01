@@ -1,0 +1,147 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Morena's Kustomz REST API",
+    "description": "Serverless REST API for Morenas's Kustomz, an online cannabis accessory store.",
+    "termsOfService": "",
+    "contact": {
+      "name": "GitHub",
+      "url": "https://github.com/flex-development/JIME-P001"
+    },
+    "license": {
+      "name": "UNLICENSED",
+      "url": ""
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "description": "Production",
+      "url": "https://kapi.flexdevelopment.vercel.app"
+    },
+    {
+      "description": "Next",
+      "url": "https://kapi-git-next-flexdevelopment.vercel.app"
+    }
+  ],
+  "tags": [],
+  "paths": {},
+  "components": {
+    "schemas": {
+      "BadRequest": {
+        "type": "object",
+        "properties": {
+          "className": {
+            "type": "string",
+            "example": "bad-request"
+          },
+          "code": {
+            "type": "integer",
+            "example": 400
+          },
+          "data": {
+            "type": "object",
+            "example": {}
+          },
+          "errors": {
+            "type": "object",
+            "example": {}
+          },
+          "message": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string",
+            "example": "BadRequest"
+          }
+        }
+      },
+      "GeneralError": {
+        "type": "object",
+        "properties": {
+          "className": {
+            "type": "string",
+            "example": "general-error"
+          },
+          "code": {
+            "type": "integer",
+            "example": 500
+          },
+          "data": {
+            "type": "object",
+            "example": {}
+          },
+          "errors": {
+            "type": "object",
+            "example": {}
+          },
+          "message": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string",
+            "example": "GeneralError"
+          }
+        }
+      },
+      "NotAuthenticated": {
+        "type": "object",
+        "properties": {
+          "className": {
+            "type": "string",
+            "example": "not-authenticated"
+          },
+          "code": {
+            "type": "integer",
+            "example": 401
+          },
+          "data": {
+            "type": "object",
+            "example": {}
+          },
+          "errors": {
+            "type": "object",
+            "example": {}
+          },
+          "message": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string",
+            "example": "NotAuthenticated"
+          }
+        }
+      },
+      "NotImplemented": {
+        "type": "object",
+        "properties": {
+          "className": {
+            "type": "string",
+            "example": "not-implemented"
+          },
+          "code": {
+            "type": "integer",
+            "example": 501
+          },
+          "data": {
+            "type": "object",
+            "example": {}
+          },
+          "errors": {
+            "type": "object",
+            "example": {}
+          },
+          "message": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string",
+            "example": "NotImplemented"
+          }
+        }
+      }
+    },
+    "securitySchemes": {}
+  },
+  "externalDocs": {}
+}

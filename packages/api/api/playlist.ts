@@ -4,7 +4,7 @@ import type { AxiosRequestConfig } from 'axios'
 import pick from 'lodash/pick'
 import {
   handleAPIError,
-  initPathLogger,
+  initRoute,
   trackAPIRequest,
   trackAPISuccessEvent
 } from '../lib/middleware'
@@ -17,8 +17,8 @@ import { appleDeveloperToken, metafieldsGlobal } from '../lib/utils'
  */
 
 export default async (req: Req, res: Res): Promise<Res | void> => {
-  // Attach `logger` and `path` to API request object
-  initPathLogger(req)
+  // Initialize API route
+  initRoute(req)
 
   // Send `pageview` hit to Google Analytics
   await trackAPIRequest(req)
@@ -53,6 +53,6 @@ export default async (req: Req, res: Res): Promise<Res | void> => {
   }
 
   // Send success `event` hit to Google Analytics
-  await trackAPISuccessEvent(req, '/playlist')
+  await trackAPISuccessEvent(req)
   return res.end()
 }

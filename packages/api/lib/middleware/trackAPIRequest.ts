@@ -1,5 +1,4 @@
 import type { PageViewParam } from 'ga-measurement-protocol'
-import URI from 'urijs'
 import ga from '../config/google-analytics'
 import vercel from '../config/vercel-env'
 import type { APIRequest } from '../types'
@@ -17,13 +16,15 @@ import type { APIRequest } from '../types'
  * @param req.url - API request URL
  */
 const trackAPIRequest = async (req: APIRequest): Promise<boolean> => {
+  const { headers, url } = req
+
   // Build initial `pageview` params object
   const param: PageViewParam = {
-    dl: req.url,
-    documentHost: req.headers.host || 'unknown',
-    documentPath: URI.parse(req.url).path as string,
+    dl: url,
+    documentHost: headers.host || 'unknown',
+    documentPath: req.path,
     ds: 'api',
-    ua: req.headers['user-agent'] as string
+    ua: headers['user-agent'] as string
   }
 
   // Send `pageview` hit to Google Analytics

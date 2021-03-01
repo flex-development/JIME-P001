@@ -2,7 +2,7 @@ import type { VercelResponse as Res } from '@vercel/node'
 import pick from 'lodash/pick'
 import {
   handleAPIError,
-  initPathLogger,
+  initRoute,
   trackAPIRequest,
   trackAPISuccessEvent
 } from '../../lib/middleware'
@@ -25,8 +25,8 @@ import type { GetProductReq as Req } from '../../lib/types'
  * @param res - API response object
  */
 export default async (req: Req, res: Res): Promise<Res | void> => {
-  // Attach `logger` and `path` to API request object
-  initPathLogger(req)
+  // Initialize API route
+  initRoute(req)
 
   // Send `pageview` hit to Google Analytics
   await trackAPIRequest(req)
@@ -41,6 +41,6 @@ export default async (req: Req, res: Res): Promise<Res | void> => {
   }
 
   // Send success `event` hit to Google Analytics
-  await trackAPISuccessEvent(req, '/products/[handle]')
+  await trackAPISuccessEvent(req)
   return res.end()
 }

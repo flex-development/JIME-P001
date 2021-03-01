@@ -4,7 +4,7 @@
  */
 
 export { default as handleAPIError } from './handleAPIError'
-export { default as initPathLogger } from './initPathLogger'
+export { default as initRoute } from './initRoute'
 export { default as trackAPIRequest } from './trackAPIRequest'
 export { default as trackAPISuccessEvent } from './trackAPISuccessEvent'
 

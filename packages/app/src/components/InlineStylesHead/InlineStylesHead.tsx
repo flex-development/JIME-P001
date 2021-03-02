@@ -1,5 +1,5 @@
 import createError from '@kustomzcore/utils/createError'
-import { existsSync, readdirSync, readFileSync } from 'fs'
+import { readdirSync, readFileSync } from 'fs'
 import { Head } from 'next/document'
 import { resolve } from 'path'
 
@@ -36,8 +36,6 @@ export class InlineStylesHead extends Head {
   getCssLinks(): JSX.Element[] | null {
     const dir = `.next/server${process.env.VERCEL ? 'less' : ''}/static/css`
     const resdir = resolve(process.cwd(), dir)
-
-    if (!existsSync(resdir)) return []
 
     return readdirSync(resdir).map(file => {
       const $file = resolve(process.cwd(), dir, file)

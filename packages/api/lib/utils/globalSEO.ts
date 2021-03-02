@@ -1,7 +1,7 @@
+import type { SEOData } from '@flex-development/kustomzcore'
 import join from 'lodash/join'
 import uniq from 'lodash/uniq'
 import { DEFAULT_SEO_IMAGE_DATA } from '../config/constants'
-import type { SEOData } from '../types'
 import metafieldsGlobal from './metafieldsGlobal'
 
 /**

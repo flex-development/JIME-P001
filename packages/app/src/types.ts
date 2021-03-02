@@ -1,10 +1,11 @@
 import type { FeathersErrorJSON } from '@feathersjs/errors'
-import type { GetLayoutDataResJSON, SEOData } from '@kapi/types'
 import type {
+  GetLayoutDataResJSON,
   ICollectionListing,
   IProductListing,
-  IProductListingVariant
-} from '@kustomzcore'
+  IProductListingVariant,
+  SEOData
+} from '@kustomzcore/types'
 import type {
   CollectionTemplateProps,
   IndexTemplateProps,

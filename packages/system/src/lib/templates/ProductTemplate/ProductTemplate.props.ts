@@ -1,5 +1,5 @@
-import type { ANYTHING } from '@flex-development/json'
-import type { IProductListing, IReview } from '@kustomzcore'
+import type { AnyObject, ANYTHING } from '@flex-development/json'
+import type { IProductListing } from '@kustomzcore/types'
 import type { LinkProps } from '@system/lib/atoms/Link'
 import type { MainProps } from '@system/lib/atoms/Main'
 import type { AddToCartFormProps } from '@system/lib/molecules/AddToCartForm'
@@ -43,7 +43,7 @@ export interface ProductTemplateProps extends MainProps {
    *
    * @default []
    */
-  reviews?: Array<IReview>
+  reviews?: Array<AnyObject>
 
   /**
    * Maximum number of product reviews to show in a group.

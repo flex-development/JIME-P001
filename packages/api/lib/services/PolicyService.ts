@@ -1,16 +1,20 @@
 import type { AnyObject } from '@flex-development/json'
-import { createError, IPolicy } from '@flex-development/kustomzcore'
-import merge from 'lodash/merge'
-import { stripHtml } from 'string-strip-html'
-import { INDEX_SETTINGS, ShopifyAPI } from '../config'
 import type {
   FindPoliciesQuery as Query,
   GetPolicyResJSON as TObject,
-  SearchIndexName,
-  SearchOptions,
+  IPolicy,
   SEOData
-} from '../types'
-import { globalSEO, search, shopifySearchOptions, toJSX } from '../utils'
+} from '@flex-development/kustomzcore'
+import { createError } from '@flex-development/kustomzcore'
+import merge from 'lodash/merge'
+import { stripHtml } from 'string-strip-html'
+import { INDEX_SETTINGS } from '../config/constants'
+import ShopifyAPI from '../config/shopify-api'
+import type { SearchIndexName, SearchOptions } from '../types'
+import globalSEO from '../utils/globalSEO'
+import search from '../utils/search'
+import shopifySearchOptions from '../utils/shopifySearchOptions'
+import toJSX from '../utils/toJSX'
 
 /**
  * @file Implementation - Policy Service

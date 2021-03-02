@@ -7,7 +7,7 @@ import type {
   PageComponent
 } from '@app/types'
 import { serialize } from '@flex-development/json/utils/serialize'
-import type { GetCollectionResJSON } from '@kapi/types'
+import type { GetCollectionResJSON } from '@kustomzcore/types'
 import { CollectionTemplate } from '@kustomzdesign/lib/templates/CollectionTemplate'
 import merge from 'lodash/merge'
 import type { GetServerSideProps, GetServerSidePropsContext } from 'next'

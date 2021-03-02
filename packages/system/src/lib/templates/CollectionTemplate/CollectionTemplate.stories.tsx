@@ -1,4 +1,4 @@
-import type { ICollectionListing } from '@kustomzcore'
+import type { ICollectionListing } from '@kustomzcore/types'
 import collections from '@tests/system/__mocks__/data/collection-listings.mock.json'
 import { PRODUCTS } from '@tests/system/__mocks__/utils'
 import { CollectionTemplate } from './CollectionTemplate'

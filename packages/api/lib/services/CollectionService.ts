@@ -1,8 +1,12 @@
 import type { AnyObject, PartialOr } from '@flex-development/json'
 import type {
+  FindCollectionsQuery as Query,
+  FindMetafieldParams,
+  GetCollectionResJSON as TObject,
   ICollectionListing,
   IMetafield,
   IProductListing,
+  SEOData,
   ShopifyAPIResponses as SAR
 } from '@flex-development/kustomzcore'
 import { createError, EMPTY_SPACE } from '@flex-development/kustomzcore'
@@ -11,16 +15,13 @@ import join from 'lodash/join'
 import merge from 'lodash/merge'
 import uniq from 'lodash/uniq'
 import { stripHtml } from 'string-strip-html'
-import { axiosShopify, INDEX_SETTINGS, ShopifyAPI } from '../config'
-import type {
-  FindCollectionsQuery as Query,
-  FindMetafieldParams,
-  GetCollectionResJSON as TObject,
-  SearchIndexName,
-  SearchOptions,
-  SEOData
-} from '../types'
-import { globalSEO, search, shopifySearchOptions } from '../utils'
+import axiosShopify from '../config/axios-shopify'
+import { INDEX_SETTINGS } from '../config/constants'
+import ShopifyAPI from '../config/shopify-api'
+import type { SearchIndexName, SearchOptions } from '../types'
+import globalSEO from '../utils/globalSEO'
+import search from '../utils/search'
+import shopifySearchOptions from '../utils/shopifySearchOptions'
 
 /**
  * @file Implementation - Collection Service

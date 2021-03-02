@@ -1,5 +1,4 @@
 import type { AnyObject } from '@flex-development/json'
-import type { CreateReviewRequest } from '@kustomzcore'
 import { useProductVariants } from '@system/hooks/useProductVariants'
 import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
 import { Button } from '@system/lib/atoms/Button'
@@ -35,10 +34,7 @@ export const ProductReviewForm: FC<ProductReviewFormProps> & {
 } = props => {
   const {
     description,
-    handleSubmit = (
-      req: Omit<CreateReviewRequest, 'product_id'>,
-      event: EventHandlers.Click.Button
-    ) => {
+    handleSubmit = (req: AnyObject, event: EventHandlers.Click.Button) => {
       event.preventDefault()
       console.log('TODO: ProductReviewForm.handleSubmit', review)
     },
@@ -57,9 +53,7 @@ export const ProductReviewForm: FC<ProductReviewFormProps> & {
   const { options, selectVariant, selected } = useProductVariants(variants)
 
   // Product review entity state
-  const { state: review, setState: updateReview } = useSetState<
-    Omit<CreateReviewRequest, 'product_id'>
-  >({
+  const { state: review, setState: updateReview } = useSetState<AnyObject>({
     body: '',
     email: '',
     product_sku: selected.sku,

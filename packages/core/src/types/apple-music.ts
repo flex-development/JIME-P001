@@ -1,5 +1,5 @@
 /**
- * @file Type Declarations - Apple Music
+ * @file Type Definitions - Apple Music
  * @module types/apple-music
  * @see https://www.npmjs.com/package/@types/apple-music-api
  */

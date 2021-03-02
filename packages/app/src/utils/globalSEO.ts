@@ -1,5 +1,5 @@
 import kapi from '@app/config/axios-kapi'
-import type { GetGlobalMetafieldsResJSON, SEOData } from '@kapi/types'
+import type { GetGlobalMetafieldsResJSON, SEOData } from '@kustomzcore/types'
 
 /**
  * @file Implementation - globalSEO

@@ -1,4 +1,4 @@
-import { IReview } from '@kustomzcore/types/reviews'
+import type { AnyObject } from '@flex-development/json'
 import { BoxProps } from '@system/lib/atoms/Box'
 
 /**
@@ -10,5 +10,5 @@ export interface ProductReviewProps extends Omit<BoxProps, 'id'> {
   /**
    * Product review data.
    */
-  review: IReview
+  review: AnyObject
 }

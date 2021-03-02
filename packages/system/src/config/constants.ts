@@ -1,4 +1,4 @@
-import type { IProductImage } from '@kustomzcore'
+import type { IProductImage } from '@kustomzcore/types'
 import { GridBreakpoints } from '@system/types'
 
 /**

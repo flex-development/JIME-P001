@@ -1,8 +1,8 @@
 import { SEO } from '@app/components/SEO'
 import kapi from '@app/config/axios-kapi'
 import type { IPagePropsIndex as PageProps, PageComponent } from '@app/types'
-import type { GetPageResJSON, GetProductResJSON } from '@kapi/types'
-import ofa from '@kustomzcore/utils/objectFromArray'
+import type { GetPageResJSON, GetProductResJSON } from '@kustomzcore/types'
+import objectFromArray from '@kustomzcore/utils/objectFromArray'
 import { IndexTemplate } from '@kustomzdesign/lib/templates/IndexTemplate'
 import type { GetServerSideProps } from 'next'
 
@@ -60,7 +60,7 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async () => {
     products_section_text,
     products_section_title,
     reviews_section_title
-  } = ofa(data.metafield ?? [], 'key')
+  } = objectFromArray(data.metafield ?? [], 'key')
 
   // Get product listing data for product grid
   const products = await kapi<GetProductResJSON[]>({

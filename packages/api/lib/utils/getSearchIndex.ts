@@ -1,5 +1,6 @@
 import omit from 'lodash/omit'
-import { ALGOLIA, INDEX_SETTINGS } from '../config'
+import ALGOLIA from '../config/algolia-search'
+import { INDEX_SETTINGS } from '../config/constants'
 import type { SearchIndex, SearchIndexName } from '../types'
 import formatError from './formatError'
 

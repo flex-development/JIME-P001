@@ -1,5 +1,5 @@
-import type { ANYTHING } from '@flex-development/json'
-import type { CreateReviewRequest, IProductListing } from '@kustomzcore'
+import type { AnyObject, ANYTHING } from '@flex-development/json'
+import type { IProductListing } from '@kustomzcore/types'
 import type { FormProps } from '@system/lib/atoms/Form'
 import type { EventHandlers } from '@system/types'
 
@@ -18,10 +18,7 @@ export interface ProductReviewFormProps extends FormProps {
    * Form submission handler. This function will be fired when the user clicks
    * the `submit` button.
    */
-  handleSubmit?(
-    req: Omit<CreateReviewRequest, 'product_id'>,
-    event: EventHandlers.Click.Button
-  ): ANYTHING
+  handleSubmit?(req: AnyObject, event: EventHandlers.Click.Button): ANYTHING
 
   /**
    * The ID of the product the user is submitting a review for.

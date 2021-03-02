@@ -8,8 +8,11 @@ import type {
   ProductPageUrlQuery
 } from '@app/types'
 import { serialize } from '@flex-development/json/utils/serialize'
-import type { GetCollectionResJSON, GetProductResJSON } from '@kapi/types'
-import type { IProductListing } from '@kustomzcore'
+import type {
+  GetCollectionResJSON,
+  GetProductResJSON,
+  IProductListing
+} from '@kustomzcore/types'
 import { ProductTemplate } from '@kustomzdesign/lib/templates/ProductTemplate'
 import findIndex from 'lodash/findIndex'
 import type { GetServerSideProps, GetServerSidePropsContext } from 'next'

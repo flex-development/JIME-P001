@@ -1,4 +1,4 @@
-import type { ICollectionListing, IProductListing } from '@kustomzcore'
+import type { ICollectionListing, IProductListing } from '@kustomzcore/types'
 import type { LinkProps } from '@system/lib/atoms/Link'
 import type { MainProps } from '@system/lib/atoms/Main'
 

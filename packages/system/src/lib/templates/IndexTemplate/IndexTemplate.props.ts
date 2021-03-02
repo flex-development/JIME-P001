@@ -1,4 +1,4 @@
-import type { IReview } from '@kustomzcore'
+import type { AnyObject } from '@flex-development/json'
 import type { MainProps } from '@system/lib/atoms/Main'
 import type { ProductGridProps } from '@system/lib/organisms/ProductGrid'
 
@@ -56,11 +56,11 @@ export interface IndexTemplateProps extends MainProps {
   products_section_title?: string
 
   /**
-   * Array of `IReview` objects.
+   * Array of product review objects.
    *
    * @default []
    */
-  reviews?: Array<IReview>
+  reviews?: Array<AnyObject>
 
   /**
    * "Reviews" section title.

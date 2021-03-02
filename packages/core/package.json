@@ -48,14 +48,19 @@
     "shopify-api-node": "latest"
   },
   "devDependencies": {
+    "@algolia/client-search": "latest",
     "@types/feathersjs__errors": "latest",
     "@types/lodash": "latest"
   },
   "peerDependencies": {
+    "@algolia/client-search": "latest",
     "@types/feathersjs__errors": "latest",
     "@types/lodash": "latest"
   },
   "peerDependenciesMeta": {
+    "@algolia/client-search": {
+      "optional": true
+    },
     "@types/feathersjs__errors": {
       "optional": true
     },

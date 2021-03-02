@@ -1,13 +1,14 @@
-import type { ShopifyAPIResponses as SAR } from '@flex-development/kustomzcore'
-import { createError } from '@flex-development/kustomzcore'
-import { axiosShopify, INDEX_SETTINGS } from '../config'
 import type {
   FindMenusQuery as Query,
   GetMenuResJSON as TObject,
-  SearchIndexName,
-  SearchOptions
-} from '../types'
-import { search, shopifySearchOptions } from '../utils'
+  ShopifyAPIResponses as SAR
+} from '@flex-development/kustomzcore'
+import { createError } from '@flex-development/kustomzcore'
+import axiosShopify from '../config/axios-shopify'
+import { INDEX_SETTINGS } from '../config/constants'
+import type { SearchIndexName, SearchOptions } from '../types'
+import search from '../utils/search'
+import shopifySearchOptions from '../utils/shopifySearchOptions'
 
 /**
  * @file Implementation - Menu Service

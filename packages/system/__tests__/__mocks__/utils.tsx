@@ -1,8 +1,5 @@
-import type {
-  CheckoutLineItemInput,
-  IProductListing,
-  IReview
-} from '@kustomzcore'
+import type { AnyObject } from '@flex-development/json'
+import type { CheckoutLineItemInput, IProductListing } from '@kustomzcore/types'
 import type { CartContextProviderProps } from '@system/providers'
 import { CartContextProvider } from '@system/providers'
 import { render } from '@testing-library/react'
@@ -18,7 +15,7 @@ import SONGS from './data/song-attributes.mock.json'
 
 export const LINE_ITEMS = (ITEMS as unknown) as CheckoutLineItemInput[]
 export const PRODUCTS = (products as unknown) as Array<IProductListing>
-export const REVIEWS = Object.values(ReviewsMockRepoRoot) as Array<IReview>
+export const REVIEWS = Object.values(ReviewsMockRepoRoot) as Array<AnyObject>
 
 /**
  * Renders a test component wrapped in the `MockCartContextProvider`.

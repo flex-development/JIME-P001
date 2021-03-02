@@ -1,5 +1,5 @@
 import { axios } from '@flex-development/kustomzcore'
-import { TurndownService } from '../config'
+import TurndownService from '../config/turndown-service'
 
 /**
  * @file Implementation - toJSX

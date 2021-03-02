@@ -1,10 +1,10 @@
 import type { PartialOr } from '@flex-development/json'
 import type {
+  FindMetafieldParams,
   IMetafield,
   ShopifyAPIResponses as SAR
 } from '@flex-development/kustomzcore'
 import axiosShopify from '../config/axios-shopify'
-import type { FindMetafieldParams } from '../types'
 
 /**
  * @file Implementation - metafieldsShop

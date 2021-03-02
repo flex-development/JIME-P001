@@ -5,9 +5,9 @@ import vercel from '@app/config/vercel-env'
 import type {
   GetCollectionResJSON,
   GetPageResJSON,
-  GetPolicyResJSON
-} from '@kapi/types'
-import type { IProductListing } from '@kustomzcore'
+  GetPolicyResJSON,
+  IProductListing
+} from '@kustomzcore/types'
 import createError from '@kustomzcore/utils/createError'
 import type { PageViewParam } from 'ga-measurement-protocol'
 import sortBy from 'lodash/sortBy'

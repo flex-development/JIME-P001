@@ -1,72 +1,27 @@
-import type { AnyObject } from '@flex-development/json/utils/types'
 import type {
-  ICheckoutLineItem,
   ICollectionListing,
   IMetafield,
   IPage,
   IPolicy as IShopifyPolicy,
-  IProductListing as IShopifyProductListing,
-  IProductListingVariant
+  IProductListing as IShopifyProductListing
 } from 'shopify-api-node'
 
 /**
- * @file Type Declarations - Shopify
+ * @file Type Definitions - Shopify
  * @module types/shopify
  */
 
 /**
- * Shopping cart context state.
- */
-export type CartContextState = {
-  items: Array<CheckoutLineItemInput>
-  items_total: number
-  removeItem: (variant_id: number | string) => void
-  upsertItem: (data: CheckoutPermalinkInput) => void
-  url: string
-}
-
-/**
- * Types of cart line items.
- */
-export type CheckoutPermalinkInput =
-  | CheckoutLineItemInput
-  | CheckoutLineItemInputWithId
-
-/**
- * Object representing a checkout permalink query object.
- */
-export type CheckoutPermalinkQuery = Record<
-  ICheckoutLineItem['variant_id'],
-  ICheckoutLineItem['quantity']
->
-
-/**
- * Object representing the fields needed to create a checkout.
- */
-export type CheckoutLineItemInput = {
-  price: IProductListingVariant['price']
-  product: IProductListing
-  properties: AnyObject | null
-  quantity: ICheckoutLineItem['quantity']
-  variant_id: IProductListingVariant['id']
-}
-
-/**
- * `CheckoutLineItemInput` with a required `id` property.
- */
-export type CheckoutLineItemInputWithId = CheckoutLineItemInput & {
-  id: CheckoutLineItemInput['variant_id']
-}
-
-/**
- * Shopify `Policy` with missing handle property.
+ * Shopify `Policy` resource with properties missing from original type
+ * definition.
  */
 export interface IPolicy extends IShopifyPolicy {
   handle: string
 }
 
 /**
- * Shopify `Product` resource with missing properties.
+ * Shopify `Product` resource with properties missing from original type
+ * definition.
  */
 export interface IProductListing extends IShopifyProductListing {
   available: boolean
@@ -86,7 +41,7 @@ export namespace ShopifyAPIResponses {
 }
 
 /**
- * Shopify menu type.
+ * Object representing a Shopify menu.
  */
 export type ShopifyMenu = {
   handle: string
@@ -96,7 +51,7 @@ export type ShopifyMenu = {
 }
 
 /**
- * Shopify menu link type.
+ * Object representing a Shopify menu link.
  */
 export type ShopifyMenuLink = {
   href: string

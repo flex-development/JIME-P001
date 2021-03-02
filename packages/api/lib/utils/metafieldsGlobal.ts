@@ -1,6 +1,9 @@
+import type {
+  FindMetafieldParams,
+  GetGlobalMetafieldsResJSON
+} from '@flex-development/kustomzcore'
 import { axios } from '@flex-development/kustomzcore/dist/axios'
 import { API_URL } from '../config/constants'
-import type { FindMetafieldParams, GetGlobalMetafieldsResJSON } from '../types'
 
 /**
  * @file Implementation - metafieldsGlobal

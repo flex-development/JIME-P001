@@ -3,7 +3,7 @@ import type {
   CheckoutLineItemInput,
   IProductListing,
   IProductListingVariant
-} from '@kustomzcore'
+} from '@kustomzcore/types'
 import type { FormProps } from '@system/lib/atoms/Form'
 import type { EventHandlers } from '@system/types'
 

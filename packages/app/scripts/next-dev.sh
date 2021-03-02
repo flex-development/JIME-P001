@@ -15,5 +15,4 @@ PID=$(lsof -ti:$PORT)
 if [[ $PID ]]; then
   kill $PID
 fi
-clear
 next dev -p $PORT

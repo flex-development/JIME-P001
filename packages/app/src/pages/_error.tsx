@@ -62,8 +62,9 @@ ServerError.getInitialProps = async (context): Promise<PageProps> => {
   // Convert into `FeathersErrorJSON` error object
   const error = createError(err || 'Unknown error.', data, err?.statusCode)
 
-  // Send error `event` hit to Google Analytics
-  if (err && process.env.GA_ENABLED) {
+  // Report and log error if defined
+  if (err) {
+    // Send error `event` hit to Google Analytics
     await ga.event({
       ...vercel,
       error: JSON.stringify(error),
@@ -74,10 +75,10 @@ ServerError.getInitialProps = async (context): Promise<PageProps> => {
       ua: error.data.headers['user-agent'],
       url: error.data.url
     })
-  }
 
-  // Log final error
-  if (err) log('pages/_error').error({ getInitialProps: error })
+    // Log final error
+    log('pages/_error').error({ getInitialProps: error })
+  }
 
   return { error: serialize<PageProps['error']>(error) }
 }

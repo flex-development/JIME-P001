@@ -44,7 +44,7 @@ const config = {
    */
   env: {
     API_URL,
-    GA_ENABLED: ENV === 'development' || (VERCEL_URL && VERCEL_URL.length),
+    GA_ENABLED: VERCEL_PARSED && ENV !== 'development',
     GA_TRACKING_ID,
     GOOGLE_SITE_VERIFICATION,
     SENTRY_DSN,

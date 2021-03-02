@@ -108,9 +108,7 @@ App.getInitialProps = async (actx: AppContext) => {
   }
 
   // Send `pageview` hit to Google Analytics
-  if (host && JSON.parse(process.env.GA_ENABLED || 'false')) {
-    await ga.pageview({ ...param, ...vercel })
-  }
+  if (req?.headers.host) await ga.pageview({ ...param, ...vercel })
 
   // Enable AddThis script rendering on product pages
   const addthis = param.documentPath.includes('/products/')

@@ -1,4 +1,4 @@
-import type { AnyObject } from '@flex-development/json'
+import type { AnyObject } from '@flex-development/json/utils/types'
 import { MDXProviderComponents } from '@mdx-js/react'
 import { BoxProps } from '@system/lib/atoms/Box'
 

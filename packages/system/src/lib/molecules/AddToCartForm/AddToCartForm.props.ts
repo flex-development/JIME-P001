@@ -1,4 +1,4 @@
-import type { ANYTHING } from '@flex-development/json'
+import type { ANYTHING } from '@flex-development/json/utils/types'
 import type {
   CheckoutLineItemInput,
   IProductListing,

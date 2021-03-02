@@ -1,4 +1,4 @@
-import type { AnyObject } from '@flex-development/json'
+import type { AnyObject } from '@flex-development/json/utils/types'
 import type { CheckoutLineItemInput } from '@kustomzcore/types'
 import type { UseQuantity } from '@system/hooks/useQuantity'
 import { useQuantity } from '@system/hooks/useQuantity'

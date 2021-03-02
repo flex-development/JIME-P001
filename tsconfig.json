@@ -19,6 +19,9 @@
     "noUnusedParameters": false,
     "paths": {
       "@app/*": ["packages/app/src/*"],
+      "@flex-development/json": [
+        "node_modules/@flex-development/json/dist/index.d.ts"
+      ],
       "@flex-development/json/*": [
         "node_modules/@flex-development/json/dist/*"
       ],

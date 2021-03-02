@@ -1,4 +1,4 @@
-import type { ANYTHING } from '@flex-development/json'
+import type { ANYTHING } from '@flex-development/json/utils/types'
 import type { SongAttributes } from '@kustomzcore/types'
 import type { SectionProps } from '@system/lib/atoms/Section'
 import type { EventHandlers } from '@system/types'

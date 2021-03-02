@@ -1,4 +1,4 @@
-import type { ANYTHING } from '@flex-development/json'
+import type { ANYTHING } from '@flex-development/json/utils/types'
 import { HeaderProps } from '@system/lib/atoms/Header'
 import { LinkProps } from '@system/lib/atoms/Link'
 import { SearchBarProps } from '@system/lib/molecules/SearchBar'

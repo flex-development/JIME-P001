@@ -1,4 +1,4 @@
-import type { AnyObject } from '@flex-development/json'
+import type { AnyObject } from '@flex-development/json/utils/types'
 import { mdx as createMDXElement, MDXProvider } from '@mdx-js/react'
 import { DEFAULT_MDX_CODE } from '@system/config'
 import { useSanitizedProps } from '@system/hooks/useSanitizedProps'

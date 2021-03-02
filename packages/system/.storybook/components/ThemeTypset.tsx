@@ -1,4 +1,4 @@
-import type { OneOrMany } from '@flex-development/json'
+import type { OneOrMany } from '@flex-development/json/utils/types'
 import type { TypesetProps } from '@storybook/components/dist/blocks/Typeset'
 import { Typeset } from '@storybook/components/dist/blocks/Typeset'
 import isArray from 'lodash/isArray'

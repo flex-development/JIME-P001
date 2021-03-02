@@ -1,4 +1,4 @@
-import type { AnyObject } from '@flex-development/json'
+import type { AnyObject } from '@flex-development/json/utils/types'
 import { a } from '@react-spring/web'
 import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
 import { useTransformScaleX } from '@system/hooks/useTransformScaleX'

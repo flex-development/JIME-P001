@@ -1,4 +1,7 @@
-import type { AnyObject, NullishString } from '@flex-development/json'
+import type {
+  AnyObject,
+  NullishString
+} from '@flex-development/json/utils/types'
 import type {
   ICheckoutLineItem,
   IProductListing,

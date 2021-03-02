@@ -1,4 +1,4 @@
-import type { ANYTHING } from '@flex-development/json'
+import type { ANYTHING } from '@flex-development/json/utils/types'
 import type { UseCart } from '@system/hooks/useCart'
 import { CartContext, useCart } from '@system/hooks/useCart'
 import { useMemoCompare } from '@system/hooks/useMemoCompare'

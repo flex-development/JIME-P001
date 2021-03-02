@@ -1,5 +1,5 @@
 import type { SearchOptions } from '@algolia/client-search'
-import type { AnyObject, PartialOr } from '@flex-development/json'
+import type { AnyObject, PartialOr } from '@flex-development/json/utils/types'
 import type {
   Playlist,
   PlaylistAttributes,

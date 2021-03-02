@@ -1,4 +1,4 @@
-import type { AnyObject } from '@flex-development/json'
+import type { AnyObject } from '@flex-development/json/utils/types'
 import type { CheckoutLineItemInput, IProductListing } from '@kustomzcore/types'
 import type { CartContextProviderProps } from '@system/providers'
 import { CartContextProvider } from '@system/providers'

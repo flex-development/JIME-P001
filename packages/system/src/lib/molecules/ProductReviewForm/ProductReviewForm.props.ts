@@ -1,4 +1,4 @@
-import type { AnyObject, ANYTHING } from '@flex-development/json'
+import type { AnyObject, ANYTHING } from '@flex-development/json/utils/types'
 import type { IProductListing } from '@kustomzcore/types'
 import type { FormProps } from '@system/lib/atoms/Form'
 import type { EventHandlers } from '@system/types'

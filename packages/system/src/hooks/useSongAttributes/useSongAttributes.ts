@@ -1,4 +1,4 @@
-import type { AnyObject } from '@flex-development/json'
+import type { AnyObject } from '@flex-development/json/utils/types'
 import type { SongAttributes } from '@kustomzcore/types'
 import type { UseActiveIndex } from '@system/hooks/useActiveIndex'
 import { useActiveIndex } from '@system/hooks/useActiveIndex'

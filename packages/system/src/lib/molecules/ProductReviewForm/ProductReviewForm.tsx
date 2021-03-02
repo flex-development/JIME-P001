@@ -1,4 +1,4 @@
-import type { AnyObject } from '@flex-development/json'
+import type { AnyObject } from '@flex-development/json/utils/types'
 import { useProductVariants } from '@system/hooks/useProductVariants'
 import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
 import { Button } from '@system/lib/atoms/Button'

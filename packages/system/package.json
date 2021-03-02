@@ -98,7 +98,7 @@
     "file-loader": "latest",
     "fs-extra": "latest",
     "mini-css-extract-plugin": "latest",
-    "next": "10.0.7",
+    "next": "10.0.8-canary.9",
     "postcss-loader": "4.2.0",
     "postcss-scss": "latest",
     "react": "17.0.1",
@@ -121,7 +121,7 @@
     "@types/react": "latest",
     "@types/react-dom": "latest",
     "@types/yup": "latest",
-    "next": "^10.0.7",
+    "next": "^10.0.8-canary.9",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "sass": "latest"

@@ -45,7 +45,7 @@
     "inspectpack": "latest",
     "lodash-es": "latest",
     "nanoid": "latest",
-    "next": "10.0.7",
+    "next": "10.0.8-canary.9",
     "next-transpile-modules": "latest",
     "pino": "latest",
     "pino-pretty": "latest",

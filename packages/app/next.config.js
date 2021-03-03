@@ -51,6 +51,7 @@ const config = {
     SENTRY_RELEASE,
     SITE_NAME,
     SITE_URL,
+    TARGET_DIR: copyCSSAssets.TARGET_DIR,
     TYPEKIT_ID,
     VERCEL: VERCEL_PARSED,
     VERCEL_ENV: ENV,

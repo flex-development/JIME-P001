@@ -7,8 +7,27 @@ const path = require('path')
  * @module scripts/js/copy-css-assets
  */
 
+const { VERCEL = '0' } = process.env
+
 /**
- * Copies all files in `.next/static/css` to `.next/server/static/css`.
+ * Setting the Next.js `target` option changes the location of pages and static
+ * files to be used in server(less) environments.
+ *
+ * Previously (see commit log), in Vercel environments, the `target` option was
+ * set by Vercel which resulted in files being located in the `serverless`
+ * directory.
+ *
+ * The name of the target build directory was recently changed to `server`,
+ * which originally caused a missing styles issue within the deployed storefront
+ * application (see commit log). In local environments, however, the name
+ * remains as `serverless`.
+ *
+ * Not sure if this is a bug, or an intended change on Vercel's behalf.
+ */
+const TARGET_DIR = `server${JSON.parse(`${VERCEL}`) ? '' : 'less'}`
+
+/**
+ * Copies all files in `.next/static/css` to `.next/{TARGET}/static/css`.
  *
  * This function is required to read CSS files from server environments.
  *
@@ -23,7 +42,7 @@ const copyCSSAssets = async () => {
   const src = path.resolve(process.cwd(), '.next/static/css')
 
   // Server CSS directory
-  const dest = path.resolve(process.cwd(), `.next/server/static/css`)
+  const dest = path.resolve(process.cwd(), `.next/${TARGET_DIR}/static/css`)
 
   // Copy CSS assets
   await fse.copy(src, dest)
@@ -31,3 +50,4 @@ const copyCSSAssets = async () => {
 }
 
 module.exports = copyCSSAssets
+module.exports.TARGET_DIR = TARGET_DIR

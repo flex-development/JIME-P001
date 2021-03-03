@@ -6,7 +6,7 @@ import type {
   NotFound,
   PageComponent
 } from '@app/types'
-import type { GetPolicyResJSON } from '@kapi/types'
+import type { GetPolicyResJSON } from '@kustomzcore/types'
 import { PageTemplate } from '@kustomzdesign/lib/templates/PageTemplate'
 import type { GetServerSideProps, GetServerSidePropsContext } from 'next'
 

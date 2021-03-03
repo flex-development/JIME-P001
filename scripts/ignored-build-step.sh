@@ -22,7 +22,7 @@ if [[ $HEAD_COMMIT_COUNT == 1 ]]; then
 elif [[ "$@" == "api" ]]; then
   git diff HEAD^ HEAD --quiet api lib $COMMON $CORE $ROOT
 elif [[ "$@" == "app" ]]; then
-  git diff HEAD^ HEAD --quiet public scripts src babel.config.js next.config.js postcss.config.js robots-txt.config.js ../system/src/**/* ../system/src/index.ts ../system/package.json ../system/tsconfig.* ../api/lib/types.ts $COMMON $CORE $ROOT
+  git diff HEAD^ HEAD --quiet public scripts src babel.config.js next.config.js postcss.config.js robots-txt.config.js ../system/src/**/* ../system/src/index.ts ../system/package.json ../system/tsconfig.* $COMMON $CORE $ROOT
 elif [[ "$@" == "system" ]]; then
   git diff HEAD^ HEAD --quiet .storybook scripts src postcss.config.js webpack.* $COMMON $CORE $ROOT
 else

@@ -1,4 +1,4 @@
-import type { IProductListingVariant } from '@kustomzcore'
+import type { IProductListingVariant } from '@kustomzcore/types'
 import { useMemoCompare } from '@system/hooks/useMemoCompare'
 import type { OptionProps } from '@system/lib/atoms/Option'
 import { useCallback, useMemo, useState } from 'react'

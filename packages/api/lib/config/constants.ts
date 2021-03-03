@@ -1,8 +1,5 @@
-import type {
-  PaginationParameter,
-  SearchIndexName,
-  SearchIndexSettings
-} from '../types'
+import type { PaginationParameter } from '@flex-development/kustomzcore'
+import type { SearchIndexName, SearchIndexSettings } from '../types'
 
 /**
  * @file Config - Constant Values

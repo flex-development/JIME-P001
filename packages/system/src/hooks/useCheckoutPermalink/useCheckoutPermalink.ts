@@ -1,9 +1,9 @@
+import { CHECKOUT_BASE_URL } from '@kustomzcore/constants'
 import type {
   CheckoutLineItemInput,
   CheckoutPermalinkInput,
   CheckoutPermalinkQuery
-} from '@kustomzcore'
-import { CHECKOUT_BASE_URL } from '@kustomzcore/constants'
+} from '@kustomzcore/types'
 import { useMemoCompare } from '@system/hooks/useMemoCompare'
 import omit from 'lodash/omit'
 import qs from 'querystring'

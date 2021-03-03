@@ -1,9 +1,13 @@
 import type { AnyObject, PartialOr } from '@flex-development/json'
 import type {
+  FindMetafieldParams,
+  FindProductsQuery as Query,
+  GetProductResJSON as TObject,
   IMetafield,
   IProductImage,
   IProductListing,
   IProductListingVariant,
+  SEOData,
   ShopifyAPIResponses as SAR
 } from '@flex-development/kustomzcore'
 import { createError, EMPTY_SPACE } from '@flex-development/kustomzcore'
@@ -13,21 +17,12 @@ import join from 'lodash/join'
 import merge from 'lodash/merge'
 import uniq from 'lodash/uniq'
 import { stripHtml } from 'string-strip-html'
-import {
-  axiosShopify,
-  DEFAULT_SEO_IMAGE_DATA,
-  INDEX_SETTINGS,
-  ShopifyAPI
-} from '../config'
-import type {
-  FindMetafieldParams,
-  FindProductsQuery as Query,
-  GetProductResJSON as TObject,
-  SearchIndexName,
-  SearchOptions,
-  SEOData
-} from '../types'
-import { search, shopifySearchOptions } from '../utils'
+import axiosShopify from '../config/axios-shopify'
+import { DEFAULT_SEO_IMAGE_DATA, INDEX_SETTINGS } from '../config/constants'
+import ShopifyAPI from '../config/shopify-api'
+import type { SearchIndexName, SearchOptions } from '../types'
+import search from '../utils/search'
+import shopifySearchOptions from '../utils/shopifySearchOptions'
 
 /**
  * @file Implementation - Product Service

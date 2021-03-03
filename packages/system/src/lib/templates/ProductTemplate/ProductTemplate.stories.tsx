@@ -1,4 +1,4 @@
-import type { IProductListing } from '@kustomzcore'
+import type { IProductListing } from '@kustomzcore/types'
 import { PRODUCTS, REVIEWS } from '@tests/system/__mocks__/utils'
 import { ProductTemplate } from './ProductTemplate'
 import type { ProductTemplateProps } from './ProductTemplate.props'

@@ -1,4 +1,4 @@
-import type { AnyObject } from '@flex-development/json'
+import type { AnyObject } from '@flex-development/json/utils/types'
 import { EMPTY_SPACE } from '@kustomzcore/constants'
 import {
   GRID_BREAKPOINT_KEYS,

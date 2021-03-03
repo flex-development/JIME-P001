@@ -57,7 +57,7 @@
     "@algolia/requester-common" "4.8.5"
     "@algolia/transporter" "4.8.5"
 
-"@algolia/client-search@4.8.5":
+"@algolia/client-search@4.8.5", "@algolia/client-search@latest":
   version "4.8.5"
   resolved "https://registry.yarnpkg.com/@algolia/client-search/-/client-search-4.8.5.tgz#970a5c91847822dbd82565f97bd2a0c37a5d56e6"
   integrity sha512-Ru2MljGZWrSQ0CVsDla11oGEPL/RinmVkLJfBtQ+/pk1868VfpAQFGKtOS/b8/xLrMA0Vm4EfC3Mgclk/p3KJA==
@@ -13439,7 +13439,7 @@ next-transpile-modules@latest:
     enhanced-resolve "^5.7.0"
     escalade "^3.1.1"
 
-next@canary:
+next@10.0.8-canary.9:
   version "10.0.8-canary.9"
   resolved "https://registry.yarnpkg.com/next/-/next-10.0.8-canary.9.tgz#e3619c55442dec67763d89e0e8d398c6b1236d25"
   integrity sha512-f3J65pxgsV7tPl1/ul8bb2gPDC3BeC9T5kFaGObeMltXlwHUb72r8mlgI/rYUE3tIOxpEBUp6WfOoUBfQ7It1Q==

@@ -1,4 +1,4 @@
-import { axios } from '@flex-development/kustomzcore'
+import { axios } from '@flex-development/kustomzcore/dist/axios'
 import type { AxiosRequestConfig } from 'axios'
 
 /**

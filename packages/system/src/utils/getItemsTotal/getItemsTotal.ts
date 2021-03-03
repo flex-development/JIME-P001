@@ -1,4 +1,4 @@
-import type { CheckoutLineItemInput } from '@kustomzcore'
+import type { CheckoutLineItemInput } from '@kustomzcore/types'
 
 /**
  * @file Implementation - getItemsTotal

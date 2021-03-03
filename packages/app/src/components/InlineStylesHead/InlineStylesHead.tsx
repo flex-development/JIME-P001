@@ -26,7 +26,7 @@ import { resolve } from 'path'
 export class InlineStylesHead extends Head {
   /**
    * Returns an array of `<style>` elements containing the style information
-   * from each critical CSS file in {@param files.allFiles}.
+   * from each CSS file in the `static/css` directory.
    *
    * @see https://github.com/vercel/vercel/issues/3083#issuecomment-654244864
    * @see https://github.com/vercel/next.js/issues/8251
@@ -34,7 +34,7 @@ export class InlineStylesHead extends Head {
    * @todo Only inline CSS files with the extension `.critical.css`
    */
   getCssLinks(): JSX.Element[] | null {
-    const dir = `.next/server${process.env.VERCEL ? 'less' : ''}/static/css`
+    const dir = '.next/server/static/css'
     const resdir = resolve(process.cwd(), dir)
 
     if (!existsSync(resdir)) return []

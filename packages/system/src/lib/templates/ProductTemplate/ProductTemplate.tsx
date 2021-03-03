@@ -1,4 +1,4 @@
-import type { IProductListingVariant } from '@kustomzcore'
+import type { IProductListingVariant } from '@kustomzcore/types'
 import { useCartContext } from '@system/hooks/useCart'
 import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
 import { Box } from '@system/lib/atoms/Box'

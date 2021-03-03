@@ -1,26 +1,30 @@
 import type { AnyObject, PartialOr } from '@flex-development/json'
+import type {
+  FindMetafieldParams,
+  FindPagesQuery as Query,
+  GetPageResJSON as TObject,
+  IMetafield,
+  IPage,
+  SEOData,
+  ShopifyAPIResponses as SAR
+} from '@flex-development/kustomzcore'
 import {
   createError,
   EMPTY_SPACE,
-  IMetafield,
-  IPage,
-  objectFromArray,
-  ShopifyAPIResponses as SAR
+  objectFromArray
 } from '@flex-development/kustomzcore'
 import isEmpty from 'lodash/isEmpty'
 import join from 'lodash/join'
 import merge from 'lodash/merge'
 import uniq from 'lodash/uniq'
-import { axiosShopify, INDEX_SETTINGS, ShopifyAPI } from '../config'
-import type {
-  FindMetafieldParams,
-  FindPagesQuery as Query,
-  GetPageResJSON as TObject,
-  SearchIndexName,
-  SearchOptions,
-  SEOData
-} from '../types'
-import { globalSEO, search, shopifySearchOptions, toJSX } from '../utils'
+import axiosShopify from '../config/axios-shopify'
+import { INDEX_SETTINGS } from '../config/constants'
+import ShopifyAPI from '../config/shopify-api'
+import type { SearchIndexName, SearchOptions } from '../types'
+import globalSEO from '../utils/globalSEO'
+import search from '../utils/search'
+import shopifySearchOptions from '../utils/shopifySearchOptions'
+import toJSX from '../utils/toJSX'
 
 /**
  * @file Implementation - Page Service

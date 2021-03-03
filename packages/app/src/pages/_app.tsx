@@ -4,9 +4,11 @@ import ga from '@app/config/google-analytics'
 import vercel from '@app/config/vercel-env'
 import '@app/styles/index.scss'
 import type { AppComponent, IAppProps } from '@app/types'
-import type { GetLayoutDataResJSON } from '@kapi/types'
-import type { CheckoutLineItemInput } from '@kustomzcore'
 import { CART_PKEY } from '@kustomzcore/constants'
+import type {
+  CheckoutLineItemInput,
+  GetLayoutDataResJSON
+} from '@kustomzcore/types'
 import '@kustomzdesign/kustomzdesign.css'
 import {
   CartContextProvider,
@@ -106,9 +108,7 @@ App.getInitialProps = async (actx: AppContext) => {
   }
 
   // Send `pageview` hit to Google Analytics
-  if (host && JSON.parse(process.env.GA_ENABLED || 'false')) {
-    await ga.pageview({ ...param, ...vercel })
-  }
+  if (req?.headers.host) await ga.pageview({ ...param, ...vercel })
 
   // Enable AddThis script rendering on product pages
   const addthis = param.documentPath.includes('/products/')

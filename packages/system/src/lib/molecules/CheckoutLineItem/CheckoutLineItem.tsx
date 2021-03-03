@@ -1,7 +1,7 @@
 import type {
   CheckoutLineItemInput,
   IProductListingVariant
-} from '@kustomzcore'
+} from '@kustomzcore/types'
 import { useCheckoutLineItemInput } from '@system/hooks/useCheckoutLineItemInput'
 import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
 import type { BoxProps } from '@system/lib/atoms/Box'

@@ -1,4 +1,4 @@
-import type { IProductListing } from '@kustomzcore'
+import type { IProductListing } from '@kustomzcore/types'
 import type { MainProps } from '@system/lib/atoms/Main'
 
 /**

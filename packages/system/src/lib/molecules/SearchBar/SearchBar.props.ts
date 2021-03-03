@@ -1,4 +1,4 @@
-import type { ANYTHING } from '@flex-development/json'
+import type { ANYTHING } from '@flex-development/json/utils/types'
 import { FormProps } from '@system/lib/atoms/Form'
 import { InputProps } from '@system/lib/atoms/Input'
 import { FormEvent } from 'react'

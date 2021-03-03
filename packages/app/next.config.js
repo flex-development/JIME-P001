@@ -44,7 +44,7 @@ const config = {
    */
   env: {
     API_URL,
-    GA_ENABLED: ENV === 'development' || (VERCEL_URL && VERCEL_URL.length),
+    GA_ENABLED: VERCEL_PARSED && ENV !== 'development',
     GA_TRACKING_ID,
     GOOGLE_SITE_VERIFICATION,
     SENTRY_DSN,
@@ -146,6 +146,13 @@ const config = {
   sassOptions: {
     includePaths: [path.join(__dirname, 'node_modules')]
   },
+
+  /**
+   * Enable serverless deployments.
+   *
+   * @see https://nextjs.org/blog/next-8#serverless-nextjs
+   */
+  target: 'experimental-serverless-trace',
 
   /**
    * Extends the native Webpack configuration.

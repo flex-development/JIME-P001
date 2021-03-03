@@ -9,15 +9,15 @@ import {
   trackAPIRequest,
   trackAPISuccessEvent
 } from '../../../lib/middleware'
-import type { GetStaticAssetReq as Req } from '../../../lib/types'
+import type { GetImageAssetReq as Req } from '../../../lib/types'
 
 /**
- * @file API Endpoint - Get Static Image Asset
+ * @file API Endpoint - GetImage Asset
  * @module api/assets/images/[filename]
  */
 
 /**
- * Retrieve a static image asset by filename.
+ * Retrieve an image asset by filename.
  *
  * @param req - API request object
  * @param req.query - Request query parameters

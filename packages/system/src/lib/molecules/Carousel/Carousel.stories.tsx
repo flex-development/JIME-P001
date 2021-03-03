@@ -1,4 +1,4 @@
-import type { IProductListing } from '@kustomzcore'
+import type { IProductListing } from '@kustomzcore/types'
 import { ProductImage } from '@system/lib/atoms/ProductImage'
 import { ProductReview } from '@system/lib/molecules/ProductReview'
 import { PRODUCTS, REVIEWS } from '@tests/system/__mocks__/utils'

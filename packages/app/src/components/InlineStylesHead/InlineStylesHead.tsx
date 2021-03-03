@@ -34,7 +34,7 @@ export class InlineStylesHead extends Head {
    * @todo Only inline CSS files with the extension `.critical.css`
    */
   getCssLinks(): JSX.Element[] | null {
-    const dir = '.next/serverless/static/css'
+    const dir = '.next/server/static/css'
     const resdir = resolve(process.cwd(), dir)
 
     if (!existsSync(resdir)) return []

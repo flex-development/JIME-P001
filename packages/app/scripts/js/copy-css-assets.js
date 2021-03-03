@@ -8,7 +8,7 @@ const path = require('path')
  */
 
 /**
- * Copies all files in `.next/static/css` to `.next/serverless/static/css`.
+ * Copies all files in `.next/static/css` to `.next/server/static/css`.
  *
  * This function is required to read CSS files from server environments.
  *
@@ -23,7 +23,7 @@ const copyCSSAssets = async () => {
   const src = path.resolve(process.cwd(), '.next/static/css')
 
   // Server CSS directory
-  const dest = path.resolve(process.cwd(), `.next/serverless/static/css`)
+  const dest = path.resolve(process.cwd(), `.next/server/static/css`)
 
   // Copy CSS assets
   await fse.copy(src, dest)

@@ -24,6 +24,21 @@ import type { SEOData } from './storefront'
  */
 
 /**
+ * Query parameters accepted by most endpoints that handle API resources.
+ */
+export interface APIResourceQuery extends PaginationSearchOptions {
+  /**
+   * Comma-separated list of property fields to show.
+   */
+  fields?: string
+
+  /**
+   * Text to query search index.
+   */
+  text?: SearchOptions['query']
+}
+
+/**
  * JSON body expected by the `/reviews` endpoint when sending a `POST` request.
  */
 export type CreateReviewBody = Pick<
@@ -41,20 +56,16 @@ export type CreateReviewBody = Pick<
 /**
  * Query parameters accepted by the `/collections` endpoint.
  */
-export type FindCollectionsQuery = PaginationSearchOptions & {
+export interface FindCollectionsQuery extends APIResourceQuery {
   collection_id?: ICollectionListing['collection_id']
-  fields?: string
   handle?: ICollectionListing['handle']
-  text?: SearchOptions['query']
 }
 
 /**
  * Query parameters accepted by the `/menus` endpoint.
  */
-export type FindMenusQuery = PaginationSearchOptions & {
-  fields?: string
+export interface FindMenusQuery extends APIResourceQuery {
   handle?: ShopifyMenu['handle']
-  text?: SearchOptions['query']
   title?: ShopifyMenu['title']
 }
 
@@ -76,7 +87,7 @@ export type FindMetafieldParams = {
    * Show only certain fields, specified by a comma-separated list of field
    * names.
    */
-  fields?: string
+  fields?: APIResourceQuery['fields']
 
   /**
    * Show metafields with given key.
@@ -121,38 +132,31 @@ export type FindMetafieldParams = {
 /**
  * Query parameters accepted by the `/pages` endpoint.
  */
-export type FindPagesQuery = PaginationSearchOptions & {
+export interface FindPagesQuery extends APIResourceQuery {
   author?: IPage['author']
-  fields?: string
   handle?: IPage['handle']
   id?: IPage['id']
-  text?: SearchOptions['query']
 }
 
 /**
  * Query parameters accepted by the `/policies` endpoint.
  */
-export type FindPoliciesQuery = PaginationSearchOptions & {
-  fields?: string
+export interface FindPoliciesQuery extends APIResourceQuery {
   handle?: IPolicy['handle']
-  text?: SearchOptions['query']
 }
 
 /**
  * Query parameters accepted by the `/products` endpoint.
  */
-export type FindProductsQuery = PaginationSearchOptions & {
-  fields?: string
+export interface FindProductsQuery extends APIResourceQuery {
   handle?: IProductListing['handle']
   product_id?: IProductListing['product_id']
-  text?: SearchOptions['query']
 }
 
 /**
  * Query parameters accepted by the `/collections/[handle]` endpoint.
  */
-export type GetCollectionQuery = {
-  fields?: string
+export interface GetCollectionQuery extends Omit<APIResourceQuery, 'text'> {
   handle: ICollectionListing['handle']
 }
 
@@ -203,8 +207,7 @@ export type GetLayoutDataResJSON = {
 /**
  * Query parameters accepted by the `/menus/[handle]` endpoint.
  */
-export type GetMenuQuery = {
-  fields?: string
+export interface GetMenuQuery extends Omit<APIResourceQuery, 'text'> {
   handle: ShopifyMenu['handle']
 }
 
@@ -225,8 +228,7 @@ export type GetPlaylistResJSON = {
 /**
  * Query parameters accepted by the `/pages/[handle]` endpoint.
  */
-export type GetPageQuery = {
-  fields?: string
+export interface GetPageQuery extends Omit<APIResourceQuery, 'text'> {
   handle: IPage['handle']
 }
 
@@ -238,8 +240,7 @@ export type GetPageResJSON = PartialOr<ResourceWithSEO<IPage>>
 /**
  * Query parameters accepted by the `/policies/[handle]` endpoint.
  */
-export type GetPolicyQuery = {
-  fields?: string
+export interface GetPolicyQuery extends Omit<APIResourceQuery, 'text'> {
   handle: IPolicy['handle']
 }
 
@@ -251,8 +252,7 @@ export type GetPolicyResJSON = PartialOr<ResourceWithSEO<IPolicy>>
 /**
  * Query parameters accepted by the `/products/[handle]` endpoint.
  */
-export type GetProductQuery = {
-  fields?: string
+export interface GetProductQuery extends Omit<APIResourceQuery, 'text'> {
   handle: IProductListing['handle']
   sku?: IProductListingVariant['sku']
 }

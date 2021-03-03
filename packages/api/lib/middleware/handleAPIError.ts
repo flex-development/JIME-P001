@@ -49,6 +49,9 @@ const handleAPIError = async (
   // Convert into `FeathersErrorJSON` object
   const error = formatError(err, $data)
 
+  // Log error
+  req.logger.error({ error })
+
   // Track and report errors
   await ga.event({
     error: JSON.stringify(error),
@@ -58,11 +61,10 @@ const handleAPIError = async (
     eventValue: error.code,
     method: req.method.toUpperCase(),
     path: req.path,
-    ua: error.data.headers['user-agent']
+    ua: error.data.req.headers['user-agent']
   })
 
-  // Log error and return error response
-  req.logger.error({ error })
+  // Return error response
   return res.status(error.code).json(error)
 }
 

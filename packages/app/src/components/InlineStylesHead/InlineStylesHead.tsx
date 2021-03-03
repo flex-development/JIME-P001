@@ -37,7 +37,11 @@ export class InlineStylesHead extends Head {
     const dir = `.next/server${process.env.VERCEL ? 'less' : ''}/static/css`
     const resdir = resolve(process.cwd(), dir)
 
-    console.log({ __dirname, cwd: process.cwd() })
+    console.log({
+      __dirname,
+      cwd: process.cwd(),
+      cwd_dirs: readdirSync(process.cwd())
+    })
 
     if (!existsSync(resdir)) return []
 

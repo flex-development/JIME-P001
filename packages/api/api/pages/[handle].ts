@@ -36,7 +36,7 @@ export default async (req: Req, res: Res): Promise<Res | void> => {
   try {
     res.json(await Service.get(query.handle, query.fields))
   } catch (err) {
-    return handleAPIError(req, res, err, { query: req.query })
+    return handleAPIError(req, res, err)
   }
 
   // Send success `event` hit to Google Analytics

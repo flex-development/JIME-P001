@@ -52,7 +52,7 @@ export default async (req: Req, res: Res): Promise<Res | void> => {
     // If searching for page with the `handle` 'index', return first result
     res.json(INDEX_AS_HANDLE ? results[0] : results)
   } catch (err) {
-    return handleAPIError(req, res, err, { query: req.query })
+    return handleAPIError(req, res, err)
   }
 
   // Send success `event` hit to Google Analytics

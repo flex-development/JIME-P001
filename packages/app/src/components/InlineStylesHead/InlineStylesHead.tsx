@@ -1,5 +1,5 @@
 import createError from '@kustomzcore/utils/createError'
-import { readdirSync, readFileSync } from 'fs'
+import { existsSync, readdirSync, readFileSync } from 'fs'
 import { Head } from 'next/document'
 import { resolve } from 'path'
 
@@ -26,7 +26,7 @@ import { resolve } from 'path'
 export class InlineStylesHead extends Head {
   /**
    * Returns an array of `<style>` elements containing the style information
-   * from each critical CSS file in {@param files.allFiles}.
+   * from each CSS file in the `static/css` directory.
    *
    * @see https://github.com/vercel/vercel/issues/3083#issuecomment-654244864
    * @see https://github.com/vercel/next.js/issues/8251
@@ -36,6 +36,10 @@ export class InlineStylesHead extends Head {
   getCssLinks(): JSX.Element[] | null {
     const dir = `.next/server${process.env.VERCEL ? 'less' : ''}/static/css`
     const resdir = resolve(process.cwd(), dir)
+
+    console.debug({ __dirname, cwd: process.cwd() })
+
+    if (!existsSync(resdir)) return []
 
     return readdirSync(resdir).map(file => {
       const $file = resolve(process.cwd(), dir, file)

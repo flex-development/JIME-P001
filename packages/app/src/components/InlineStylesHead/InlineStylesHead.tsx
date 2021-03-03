@@ -34,14 +34,8 @@ export class InlineStylesHead extends Head {
    * @todo Only inline CSS files with the extension `.critical.css`
    */
   getCssLinks(): JSX.Element[] | null {
-    const dir = `.next/server${process.env.VERCEL ? 'less' : ''}/static/css`
+    const dir = '.next/serverless/static/css'
     const resdir = resolve(process.cwd(), dir)
-
-    console.log({
-      __dirname,
-      cwd: process.cwd(),
-      cwd_dirs: readdirSync(process.cwd())
-    })
 
     if (!existsSync(resdir)) return []
 

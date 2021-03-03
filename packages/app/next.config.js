@@ -148,6 +148,13 @@ const config = {
   },
 
   /**
+   * Enable serverless deployments.
+   *
+   * @see https://nextjs.org/blog/next-8#serverless-nextjs
+   */
+  target: 'experimental-serverless-trace',
+
+  /**
    * Extends the native Webpack configuration.
    *
    * @see https://github.com/vercel/next.js/tree/canary/examples/with-sentry

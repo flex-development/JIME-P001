@@ -57,6 +57,7 @@ module.exports = {
       }
     ],
     '@typescript-eslint/no-explicit-any': 1,
+    '@typescript-eslint/no-inferrable-types': 0,
     '@typescript-eslint/no-namespace': 0,
     '@typescript-eslint/no-use-before-define': 0,
     '@typescript-eslint/no-useless-constructor': 1,

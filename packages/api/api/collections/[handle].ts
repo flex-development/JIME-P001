@@ -1,12 +1,11 @@
 import type { VercelResponse as Res } from '@vercel/node'
-import pick from 'lodash/pick'
 import {
   handleAPIError,
   initRoute,
   trackAPIRequest,
   trackAPISuccessEvent
 } from '../../lib/middleware'
-import Service from '../../lib/services/CollectionService'
+import CollectionService from '../../lib/services/CollectionService'
 import type { GetCollectionReq as Req } from '../../lib/types'
 
 /**
@@ -14,14 +13,17 @@ import type { GetCollectionReq as Req } from '../../lib/types'
  * @module api/collections/[handle]
  */
 
+// Initialize API service
+const Service = new CollectionService()
+
 /**
  * Retrieve a collection listing resource by handle.
  *
- * @param req - API request object
- * @param req.query - Request query parameters
- * @param req.query.fields - Specify fields to include for each object
- * @param req.query.handle - Handle of collection to retrieve
- * @param res - API response object
+ * @param {Req} req - API request object
+ * @param {Req['query']} req.query - Query parameters object
+ * @param {string} [req.query.fields] - List of fields to include
+ * @param {string} [req.query.handle] - Find resource by Shopify resource handle
+ * @param {Res} res - API response object
  */
 export default async (req: Req, res: Res): Promise<Res | void> => {
   // Initialize API route
@@ -30,11 +32,8 @@ export default async (req: Req, res: Res): Promise<Res | void> => {
   // Send `pageview` hit to Google Analytics
   await trackAPIRequest(req)
 
-  // Get request query parameters
-  const query = pick(req.query, ['fields', 'handle'])
-
   try {
-    res.json(await Service.get(query.handle, query.fields))
+    res.json(await Service.get(req.query.handle, req.query.fields))
   } catch (err) {
     return handleAPIError(req, res, err)
   }

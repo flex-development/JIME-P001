@@ -1,4 +1,4 @@
-import type { ANYTHING } from '@flex-development/json'
+import type { AnyObject, ANYTHING } from '@flex-development/json'
 import type {
   FindCollectionsQuery,
   FindMenusQuery,
@@ -11,7 +11,9 @@ import type {
   GetMenuQuery,
   GetPageQuery,
   GetPolicyQuery,
-  GetProductQuery
+  GetProductQuery,
+  OrNever,
+  OrPromise
 } from '@flex-development/kustomzcore'
 import type { VercelRequest } from '@vercel/node'
 import type { Logger } from 'pino'
@@ -125,6 +127,13 @@ export type SearchIndexName =
   | 'pages'
   | 'policies'
   | 'product_listings'
+
+/**
+ * Function to populate search index.
+ */
+export type SearchIndexObjectsFN<TObject = AnyObject> = {
+  (): OrNever<OrPromise<TObject[]>>
+}
 
 // Algolia types
 export type {

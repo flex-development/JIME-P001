@@ -9,6 +9,7 @@
     "experimentalDecorators": true,
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": true,
+    "lib": ["esnext"],
     "module": "esnext",
     "moduleResolution": "node",
     "noEmit": true,

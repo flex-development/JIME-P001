@@ -1,4 +1,4 @@
-import type { SearchOptions } from '@algolia/client-search'
+import type { Hit, SearchOptions } from '@algolia/client-search'
 import type { AnyObject, PartialOr } from '@flex-development/json/utils/types'
 import type {
   Playlist,
@@ -31,6 +31,16 @@ export interface APIResourceQuery extends PaginationSearchOptions {
    * Comma-separated list of property fields to show.
    */
   fields?: string
+
+  /**
+   * Find resource by Shopify resource handle.
+   */
+  handle?: string
+
+  /**
+   * Find resource by search index object ID.
+   */
+  objectID?: Hit<AnyObject>['objectID']
 
   /**
    * Text to query search index.
@@ -173,7 +183,7 @@ export interface FindReviewsQuery extends APIResourceQuery {
 /**
  * Query parameters accepted by the `/collections/[handle]` endpoint.
  */
-export interface GetCollectionQuery extends Omit<APIResourceQuery, 'text'> {
+export interface GetCollectionQuery extends Pick<APIResourceQuery, 'fields'> {
   handle: ICollectionListing['handle']
 }
 
@@ -224,7 +234,7 @@ export type GetLayoutDataResJSON = {
 /**
  * Query parameters accepted by the `/menus/[handle]` endpoint.
  */
-export interface GetMenuQuery extends Omit<APIResourceQuery, 'text'> {
+export interface GetMenuQuery extends Pick<APIResourceQuery, 'fields'> {
   handle: ShopifyMenu['handle']
 }
 
@@ -245,7 +255,7 @@ export type GetPlaylistResJSON = {
 /**
  * Query parameters accepted by the `/pages/[handle]` endpoint.
  */
-export interface GetPageQuery extends Omit<APIResourceQuery, 'text'> {
+export interface GetPageQuery extends Pick<APIResourceQuery, 'fields'> {
   handle: IPage['handle']
 }
 
@@ -257,7 +267,7 @@ export type GetPageResJSON = PartialOr<ResourceWithSEO<IPage>>
 /**
  * Query parameters accepted by the `/policies/[handle]` endpoint.
  */
-export interface GetPolicyQuery extends Omit<APIResourceQuery, 'text'> {
+export interface GetPolicyQuery extends Pick<APIResourceQuery, 'fields'> {
   handle: IPolicy['handle']
 }
 
@@ -269,7 +279,7 @@ export type GetPolicyResJSON = PartialOr<ResourceWithSEO<IPolicy>>
 /**
  * Query parameters accepted by the `/products/[handle]` endpoint.
  */
-export interface GetProductQuery extends Omit<APIResourceQuery, 'text'> {
+export interface GetProductQuery extends Pick<APIResourceQuery, 'fields'> {
   handle: IProductListing['handle']
   sku?: IProductListingVariant['sku']
 }

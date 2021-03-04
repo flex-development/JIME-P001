@@ -1,6 +1,6 @@
 import type { AnyObject, PartialOr } from '@flex-development/json'
 import type {
-  FindCollectionsQuery as Query,
+  FindCollectionsQuery,
   FindMetafieldParams,
   GetCollectionResJSON as TObject,
   ICollectionListing,
@@ -9,7 +9,7 @@ import type {
   SEOData,
   ShopifyAPIResponses as SAR
 } from '@flex-development/kustomzcore'
-import { createError, EMPTY_SPACE } from '@flex-development/kustomzcore'
+import { EMPTY_SPACE } from '@flex-development/kustomzcore'
 import isEmpty from 'lodash/isEmpty'
 import join from 'lodash/join'
 import merge from 'lodash/merge'
@@ -18,95 +18,22 @@ import { stripHtml } from 'string-strip-html'
 import axiosShopify from '../config/axios-shopify'
 import { INDEX_SETTINGS } from '../config/constants'
 import ShopifyAPI from '../config/shopify-api'
-import type { SearchIndexName, SearchOptions } from '../types'
+import SearchIndexController from '../controllers/SearchIndexController'
+import type { SearchOptions } from '../types'
 import globalSEO from '../utils/globalSEO'
-import search from '../utils/search'
-import shopifySearchOptions from '../utils/shopifySearchOptions'
 
 /**
  * @file Implementation - Collection Service
  * @module lib/services/CollectionService
  */
 
-export default class CollectionService {
-  static api = ShopifyAPI.collectionListing
-  static index_name: SearchIndexName = INDEX_SETTINGS.collection_listings.name
-
+export default class CollectionService extends SearchIndexController<TObject> {
   /**
-   * Executes a collection listing resource search.
-   *
-   * @async
-   * @param query - Search index query text
-   * @param options - Search index options
+   * Initializes a new Collection Listing service instance.
    */
-  static async find(
-    query = '',
-    options: SearchOptions = {}
-  ): Promise<TObject[]> {
-    const objects = await CollectionService.indexObjects()
-    return search(CollectionService.index_name, objects, query, options)
-  }
-
-  /**
-   * Retrieve a collection listing by handle.
-   *
-   * @async
-   * @param handle - Handle of collection to retrieve
-   * @param fields - Specify fields to include for each object
-   * @throws {FeathersErrorJSON}
-   */
-  static async get(
-    handle: NonNullable<Query['handle']>,
-    fields?: Query['fields']
-  ): Promise<TObject> {
-    // Get search index options
-    const options = CollectionService.searchOptions({ fields, handle })
-
-    // Execute search
-    const results = await CollectionService.find('', options)
-
-    // Throw error if resource isn't found
-    if (!results.length) {
-      const data = { errors: { handle }, fields }
-      const message = `Collection with handle "${handle}" not found`
-
-      throw createError(message, data, 404)
-    }
-
-    return results[0]
-  }
-
-  /**
-   * Returns an array of objects to populate the search index.
-   *
-   * @async
-   */
-  static async indexObjects(): Promise<TObject[]> {
-    // Fetch collection listings data from Shopify
-    let data = await CollectionService.api.list()
-
-    // Remove unpublished collections
-    data = data.filter(data => data.published_at !== null)
-
-    // Get objects to populate search index
-    const objects: TObject[] | Promise<TObject>[] = data.map(async obj => {
-      // Keep objectID consistent with collection listing ID
-      const $obj: AnyObject = { ...obj, objectID: obj.collection_id }
-
-      // Get metafields for each collection
-      $obj.metafield = await CollectionService.metafields($obj.collection_id)
-
-      // Get products for each collection
-      $obj.products = await CollectionService.products($obj.collection_id)
-
-      // Get SEO data for each collection
-      const collection = $obj as ICollectionListing
-      $obj.seo = await CollectionService.seo(collection, $obj.products)
-
-      return $obj as TObject
-    })
-
-    return await Promise.all(objects)
+  constructor() {
+    const { collection_listings } = INDEX_SETTINGS
+    super(collection_listings.name, 'handle', CollectionService.getObjects)
   }
 
   /**
@@ -140,6 +67,40 @@ export default class CollectionService {
   }
 
   /**
+   * Returns an array of augmented Shopify collection listing objects to
+   * populate the search index.
+   *
+   * @async
+   * @return {Promise<TObject[]>} Promise containing initial index objects
+   */
+  static async getObjects(): Promise<TObject[]> {
+    // Fetch collection listings data from Shopify
+    let data = await ShopifyAPI.collectionListing.list()
+
+    // Remove unpublished collections
+    data = data.filter(data => data.published_at !== null)
+
+    // Get objects to populate search index
+    const objects: TObject[] | Promise<TObject>[] = data.map(async obj => {
+      const $obj: AnyObject = { ...obj }
+
+      // Get metafields for each collection
+      $obj.metafield = await CollectionService.metafields($obj.collection_id)
+
+      // Get products for each collection
+      $obj.products = await CollectionService.products($obj.collection_id)
+
+      // Get SEO data for each collection
+      const collection = $obj as ICollectionListing
+      $obj.seo = await CollectionService.seo(collection, $obj.products)
+
+      return $obj as TObject
+    })
+
+    return await Promise.all(objects)
+  }
+
+  /**
    * Returns an array of product listings for a collection resource.
    *
    * @async
@@ -157,38 +118,6 @@ export default class CollectionService {
     })
 
     return product_listings
-  }
-
-  /**
-   * Converts a collection query object into an Algolia search options object.
-   *
-   * @see https://www.algolia.com/doc/api-reference/api-parameters/filters/
-   *
-   * @param query - Collection query from API request
-   * @param query.collection_id - Find collection listing by collection ID
-   * @param query.fields - Comma-separated list of collection fields to include
-   * @param query.handle - Find collection listing by collection handle
-   */
-  static searchOptions(query: Query = {}): SearchOptions {
-    const { collection_id: id, ...rest } = query
-
-    // Get default search options
-    const options = shopifySearchOptions(rest)
-
-    // Initialize search filters array
-    const filters: string[] = options.filters?.length ? [options.filters] : []
-
-    // Add collection_id filter
-    if (!isEmpty(id)) filters.push(`collection_id = ${id}`)
-
-    // Add collection_id to attributes
-    const attributes = options.attributesToRetrieve?.concat(['collection_id'])
-
-    return {
-      ...options,
-      attributesToRetrieve: uniq(attributes),
-      filters: join(filters, EMPTY_SPACE)
-    }
   }
 
   /**
@@ -232,5 +161,45 @@ export default class CollectionService {
       title: `Collections - ${listing.title}`,
       twitter: { image: image.src }
     })
+  }
+
+  /**
+   * Converts a `FindCollectionsQuery` type object into an Algolia search
+   * options object.
+   *
+   * @see https://www.algolia.com/doc/api-reference/api-parameters/filters/
+   *
+   * @param {FindCollectionsQuery} [query] - Query parameters object
+   * @param {string} [query.collection_id] - Find collection listing by ID
+   * @param {string} [query.fields] - Comma-separated list of fields to include
+   * @param {string} [query.handle] - Find resource by Shopify resource handle
+   * @param {number} [query.hitsPerPage] - Number of results per page
+   * @param {number} [query.length] - Result limit (used only with offset)
+   * @param {string} [query.objectID] - Find resource by search index object ID
+   * @param {number} [query.offset] - Offset of the first result to return
+   * @param {number} [query.page] - Specify the page to retrieve
+   * @param {string} [query.text] - Text to search in index
+   * @return {SearchOptions} Algolia search options object
+   */
+  searchOptions(query: FindCollectionsQuery = {}): SearchOptions {
+    const { collection_id, ...rest } = query
+
+    // Get default search options
+    const options = super.searchOptions(rest)
+
+    // Initialize search filters array
+    const filters: string[] = options.filters?.length ? [options.filters] : []
+
+    // Add collection_id filter
+    if (!isEmpty(collection_id)) filters.push(`collection_id:${collection_id}`)
+
+    // Add collection_id to attributes
+    const attributes = options.attributesToRetrieve?.concat(['collection_id'])
+
+    return {
+      ...options,
+      attributesToRetrieve: uniq(attributes),
+      filters: join(filters, EMPTY_SPACE)
+    }
   }
 }

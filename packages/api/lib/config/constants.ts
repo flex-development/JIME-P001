@@ -12,7 +12,7 @@ export const API_URL = `http${ENV === 'development' ? '' : 's'}://${VERCEL_URL}`
 
 export const DEFAULT_SEARCH_OPTIONS = {
   attributesToHighlight: [],
-  attributesToRetrieve: ['handle'],
+  attributesToRetrieve: ['objectID'],
   attributesToSnippet: []
 }
 
@@ -31,23 +31,46 @@ export const INDEX_SETTINGS: Record<
   SearchIndexSettings & { name: SearchIndexName }
 > = {
   collection_listings: {
-    attributesForFaceting: ['collection_id', 'handle'],
+    attributesForFaceting: [
+      'filterOnly(collection_id)',
+      'filterOnly(handle)',
+      'filterOnly(objectID)'
+    ],
     name: 'collection_listings'
   },
   menus: {
-    attributesForFaceting: ['handle', 'title'],
+    attributesForFaceting: [
+      'filterOnly(handle)',
+      'filterOnly(objectID)',
+      'filterOnly(title)'
+    ],
     name: 'menus'
   },
   pages: {
-    attributesForFaceting: ['author', 'handle', 'id', 'title'],
+    attributesForFaceting: [
+      'filterOnly(author)',
+      'filterOnly(handle)',
+      'filterOnly(id)',
+      'filterOnly(title)'
+    ],
     name: 'pages'
   },
   policies: {
-    attributesForFaceting: ['handle', 'title'],
+    attributesForFaceting: [
+      'filterOnly(handle)',
+      'filterOnly(objectID)',
+      'filterOnly(title)'
+    ],
     name: 'policies'
   },
   product_listings: {
-    attributesForFaceting: ['handle', 'product_id', 'product_type', 'title'],
+    attributesForFaceting: [
+      'filterOnly(handle)',
+      'filterOnly(objectID)',
+      'filterOnly(product_id)',
+      'filterOnly(product_type)',
+      'filterOnly(title)'
+    ],
     name: 'product_listings'
   }
 }

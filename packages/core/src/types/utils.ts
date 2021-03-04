@@ -10,3 +10,8 @@ import type { ANYTHING } from '@flex-development/json/dist/utils/types'
  * never returns a value because an error was thrown.
  */
 export type OrNever<T = ANYTHING> = T | never
+
+/**
+ * Type representing an asynchronous or synchronous value.
+ */
+export type OrPromise<T = ANYTHING> = T | Promise<T>

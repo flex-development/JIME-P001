@@ -6,6 +6,7 @@ import type {
   ICollectionListing,
   IMetafield,
   IProductListing,
+  OrNever,
   SEOData,
   ShopifyAPIResponses as SAR
 } from '@flex-development/kustomzcore'
@@ -40,23 +41,24 @@ export default class CollectionService extends SearchIndexController<TObject> {
    * Returns an array of metafields for a collection resource.
    *
    * @async
-   * @param id - ID of collection to get metafields for
-   * @param params - Query parameters
-   * @param params.created_at_max - Show metafields created before date
-   * @param params.created_at_min - Show metafields created after date
-   * @param params.fields - Comma-separated list of fields to show
-   * @param params.key - Show metafields with given key
-   * @param params.limit - Maximum number of results to show. Defaults to `250`
-   * @param params.namespace - Show metafields with given namespace
-   * @param params.updated_at_max - Show metafields updated before date
-   * @param params.updated_at_min - Show metafields updated after date
-   * @param params.value_type - Show metafields with a value_type of 'integer'
-   * or 'string'
+   * @param {number} id - ID of collection to get metafields for
+   * @param {FindMetafieldParams} [params] - Query parameters
+   * @param {string} [params.created_at_max] - Metafields created before date
+   * @param {string} [params.created_at_min] - Metafields created after date
+   * @param {string} [params.fields] - Comma-separated list of fields to show
+   * @param {string} [params.key] - Show metafields with given key
+   * @param {number} [params.limit] - Max number of results. Defaults to `250`
+   * @param {string} [params.namespace] - Show metafields with given namespace
+   * @param {string} [params.updated_at_max] - Metafields updated before date
+   * @param {string} [params.updated_at_min] - Metafields updated after date
+   * @param {string} [params.value_type] - Show metafields with a value_type of
+   * 'integer' or 'string'
+   * @throws {FeathersErrorJSON}
    */
   static async metafields(
     id: ICollectionListing['collection_id'],
     params: FindMetafieldParams = {}
-  ): Promise<PartialOr<IMetafield>[]> {
+  ): OrNever<Promise<PartialOr<IMetafield>[]>> {
     const config: Parameters<typeof axiosShopify>[0] = {
       method: 'get',
       params,
@@ -72,8 +74,9 @@ export default class CollectionService extends SearchIndexController<TObject> {
    *
    * @async
    * @return {Promise<TObject[]>} Promise containing initial index objects
+   * @throws {FeathersErrorJSON}
    */
-  static async getObjects(): Promise<TObject[]> {
+  static async getObjects(): OrNever<Promise<TObject[]>> {
     // Fetch collection listings data from Shopify
     let data = await ShopifyAPI.collectionListing.list()
 
@@ -104,13 +107,15 @@ export default class CollectionService extends SearchIndexController<TObject> {
    * Returns an array of product listings for a collection resource.
    *
    * @async
-   * @param id - ID of collection to get product listings for
-   * @param limit - Maximum number of results to show. Defaults to `250`
+   * @param {number} id - ID of collection to get product listings for
+   * @param {number} [limit] - Max number of results. Defaults to `250`
+   * @return {Promise<IProductListing[]>} Promise containing collection products
+   * @throws {FeathersErrorJSON}
    */
   static async products(
     id: ICollectionListing['collection_id'],
     limit?: number
-  ): Promise<IProductListing[]> {
+  ): OrNever<Promise<IProductListing[]>> {
     const { product_listings } = await axiosShopify<SAR.ProductListing>({
       method: 'get',
       params: { collection_id: id, limit: limit || 250 },
@@ -124,13 +129,16 @@ export default class CollectionService extends SearchIndexController<TObject> {
    * Returns an object with SEO data for a collection listing resource.
    *
    * @async
-   * @param listing - Collecting listing data
-   * @param products - Products in collection
+   * @param {ICollectionListing | Promise<ICollectionListing>} listing -
+   * Collecting listing data
+   * @param {IProductListing[]} [products] - Products in collection
+   * @return {Promise<SEOData>} Promise containing SEO data for listing
+   * @throws {FeathersErrorJSON}
    */
   static async seo(
     listing: ICollectionListing | Promise<ICollectionListing>,
     products: IProductListing[] = []
-  ): Promise<SEOData> {
+  ): OrNever<Promise<SEOData>> {
     listing = await listing
 
     // Get global SEO data

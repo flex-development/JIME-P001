@@ -5,7 +5,7 @@ import type {
   PlaylistAttributes,
   SongAttributes
 } from './apple-music'
-import type { JudgeMeReviewCreateParams } from './reviews'
+import type { JudgeMeReview, JudgeMeReviewCreateParams } from './reviews'
 import type {
   ICollectionListing,
   IMetafield,
@@ -151,6 +151,23 @@ export interface FindPoliciesQuery extends APIResourceQuery {
 export interface FindProductsQuery extends APIResourceQuery {
   handle?: IProductListing['handle']
   product_id?: IProductListing['product_id']
+}
+
+/**
+ * Query parameters accepted by the `/reviews` endpoint.
+ */
+export interface FindReviewsQuery extends APIResourceQuery {
+  created_at?: JudgeMeReview['created_at']
+  curated?: JudgeMeReview['curated']
+  featured?: JudgeMeReview['featured']
+  hidden?: JudgeMeReview['hidden']
+  id?: JudgeMeReview['id']
+  ip_address?: JudgeMeReview['ip_address']
+  product_id?: JudgeMeReview['product_id']
+  reviewer_id?: JudgeMeReview['reviewer_id']
+  source?: JudgeMeReview['source']
+  updated_at?: JudgeMeReview['updated_at']
+  verified?: JudgeMeReview['verified']
 }
 
 /**

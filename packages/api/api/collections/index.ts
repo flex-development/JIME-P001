@@ -1,20 +1,13 @@
 import type { VercelResponse as Res } from '@vercel/node'
-import {
-  handleAPIError,
-  initRoute,
-  trackAPIRequest,
-  trackAPISuccessEvent
-} from '../../lib/middleware'
-import CollectionService from '../../lib/services/CollectionService'
+import SearchIndexController from '../../lib/controllers/SearchIndexController'
+import routeWrapper from '../../lib/middleware/routeWrapper'
+import Service from '../../lib/services/CollectionService'
 import type { FindCollectionsReq as Req } from '../../lib/types'
 
 /**
  * @file API Endpoint - Find Collections
  * @module api/collections
  */
-
-// Initialize API service
-const Service = new CollectionService()
 
 /**
  * Returns an array of collection listing resource objects.
@@ -24,7 +17,7 @@ const Service = new CollectionService()
  * @param {Req['query']} req.query - Query parameters object
  * @param {string} [req.query.collection_id] - Find collection listing by ID
  * @param {string} [req.query.fields] - List of fields to include
- * @param {string} [req.query.handle] - Find resource by Shopify resource handle
+ * @param {string} [req.query.handle] - Find resource by Shopify handle
  * @param {number} [req.query.hitsPerPage] - Number of results per page
  * @param {number} [req.query.length] - Result limit (used only with offset)
  * @param {string} [req.query.objectID] - Find resource by index object ID
@@ -36,23 +29,7 @@ const Service = new CollectionService()
  * error is thrown, or empty promise if request completed successfully
  */
 export default async (req: Req, res: Res): Promise<Res | void> => {
-  // Initialize API route
-  initRoute(req)
-
-  // Send `pageview` hit to Google Analytics
-  await trackAPIRequest(req)
-
-  try {
-    // Convert query into search options object
-    const options = Service.searchOptions(req.query)
-
-    // Execute search
-    res.json(await Service.search(req.query.text, options))
-  } catch (err) {
-    return handleAPIError(req, res, err)
-  }
-
-  // Send success `event` hit to Google Analytics
-  await trackAPISuccessEvent(req)
-  return res.end()
+  return routeWrapper<Req, Res>(req, res, async (req: Req, res: Res) => {
+    return SearchIndexController.find<Req, Res>(req, res, new Service())
+  })
 }

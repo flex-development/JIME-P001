@@ -1,17 +1,13 @@
 import type { AnyObject, ANYTHING } from '@flex-development/json'
 import type {
   FindCollectionsQuery,
-  FindMenusQuery,
   FindMetafieldParams,
   FindPagesQuery,
-  FindPoliciesQuery,
   FindProductsQuery,
-  GetCollectionQuery,
+  FindSearchIndexResourceQuery,
   GetImageAssetQuery,
-  GetMenuQuery,
-  GetPageQuery,
-  GetPolicyQuery,
   GetProductQuery,
+  GetSearchIndexResourceQuery,
   OrNever,
   OrPromise
 } from '@flex-development/kustomzcore'
@@ -45,7 +41,7 @@ export interface FindCollectionsReq extends APIRequest {
  * Shape of requests sent to the `/menus` endpoint.
  */
 export interface FindMenusReq extends APIRequest {
-  query: FindMenusQuery
+  query: FindSearchIndexResourceQuery
 }
 
 /**
@@ -59,7 +55,7 @@ export interface FindPagesReq extends APIRequest {
  * Shape of requests sent to the `/policies` endpoint.
  */
 export interface FindPoliciesReq extends APIRequest {
-  query: FindPoliciesQuery
+  query: FindSearchIndexResourceQuery
 }
 
 /**
@@ -73,7 +69,7 @@ export interface FindProductsReq extends APIRequest {
  * Shape of requests sent to the `/collections/[handle]` endpoint.
  */
 export interface GetCollectionReq extends APIRequest {
-  query: GetCollectionQuery
+  query: GetSearchIndexResourceQuery
 }
 
 /**
@@ -84,24 +80,31 @@ export interface GetGlobalMetafieldsReq extends APIRequest {
 }
 
 /**
+ * Shape of requests sent to the `/assets/images/[filename]` endpoint.
+ */
+export interface GetImageAssetReq extends APIRequest {
+  query: GetImageAssetQuery
+}
+
+/**
  * Shape of requests sent to the `/menus/[handle]` endpoint.
  */
 export interface GetMenuReq extends APIRequest {
-  query: GetMenuQuery
+  query: GetSearchIndexResourceQuery
 }
 
 /**
  * Shape of requests sent to the `/pages/[handle]` endpoint.
  */
 export interface GetPageReq extends APIRequest {
-  query: GetPageQuery
+  query: GetSearchIndexResourceQuery
 }
 
 /**
  * Shape of requests sent to the `/policies/[handle]` endpoint.
  */
 export interface GetPolicyReq extends APIRequest {
-  query: GetPolicyQuery
+  query: GetSearchIndexResourceQuery
 }
 
 /**
@@ -109,13 +112,6 @@ export interface GetPolicyReq extends APIRequest {
  */
 export interface GetProductReq extends APIRequest {
   query: GetProductQuery
-}
-
-/**
- * Shape of requests sent to the `/assets/images/[filename]` endpoint.
- */
-export interface GetImageAssetReq extends APIRequest {
-  query: GetImageAssetQuery
 }
 
 /**

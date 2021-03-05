@@ -180,7 +180,6 @@ export default class CollectionService extends SearchIndexService<TObject> {
    * @param {FindCollectionsQuery} [query] - Query parameters object
    * @param {string} [query.collection_id] - Find collection listing by ID
    * @param {string} [query.fields] - Comma-separated list of fields to include
-   * @param {string} [query.handle] - Find resource by Shopify resource handle
    * @param {number} [query.hitsPerPage] - Number of results per page
    * @param {number} [query.length] - Result limit (used only with offset)
    * @param {string} [query.objectID] - Find resource by search index object ID

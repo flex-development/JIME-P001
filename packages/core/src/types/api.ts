@@ -24,31 +24,6 @@ import type { SEOData } from './storefront'
  */
 
 /**
- * Query parameters accepted by most endpoints that handle API resources.
- */
-export interface APIResourceQuery extends PaginationSearchOptions {
-  /**
-   * Comma-separated list of property fields to show.
-   */
-  fields?: string
-
-  /**
-   * Find resource by Shopify resource handle.
-   */
-  handle?: string
-
-  /**
-   * Find resource by search index object ID.
-   */
-  objectID?: Hit<AnyObject>['objectID']
-
-  /**
-   * Text to query search index.
-   */
-  text?: SearchOptions['query']
-}
-
-/**
  * JSON body expected by the `/reviews` endpoint when sending a `POST` request.
  */
 export type CreateReviewBody = Pick<
@@ -66,17 +41,8 @@ export type CreateReviewBody = Pick<
 /**
  * Query parameters accepted by the `/collections` endpoint.
  */
-export interface FindCollectionsQuery extends APIResourceQuery {
+export interface FindCollectionsQuery extends FindSearchIndexResourceQuery {
   collection_id?: ICollectionListing['collection_id']
-  handle?: ICollectionListing['handle']
-}
-
-/**
- * Query parameters accepted by the `/menus` endpoint.
- */
-export interface FindMenusQuery extends APIResourceQuery {
-  handle?: ShopifyMenu['handle']
-  title?: ShopifyMenu['title']
 }
 
 /**
@@ -97,7 +63,7 @@ export type FindMetafieldParams = {
    * Show only certain fields, specified by a comma-separated list of field
    * names.
    */
-  fields?: APIResourceQuery['fields']
+  fields?: FindSearchIndexResourceQuery['fields']
 
   /**
    * Show metafields with given key.
@@ -142,23 +108,16 @@ export type FindMetafieldParams = {
 /**
  * Query parameters accepted by the `/pages` endpoint.
  */
-export interface FindPagesQuery extends APIResourceQuery {
+export interface FindPagesQuery extends FindSearchIndexResourceQuery {
   author?: IPage['author']
   handle?: IPage['handle']
   id?: IPage['id']
 }
 
 /**
- * Query parameters accepted by the `/policies` endpoint.
- */
-export interface FindPoliciesQuery extends APIResourceQuery {
-  handle?: IPolicy['handle']
-}
-
-/**
  * Query parameters accepted by the `/products` endpoint.
  */
-export interface FindProductsQuery extends APIResourceQuery {
+export interface FindProductsQuery extends FindSearchIndexResourceQuery {
   handle?: IProductListing['handle']
   product_id?: IProductListing['product_id']
 }
@@ -166,7 +125,7 @@ export interface FindProductsQuery extends APIResourceQuery {
 /**
  * Query parameters accepted by the `/reviews` endpoint.
  */
-export interface FindReviewsQuery extends APIResourceQuery {
+export interface FindReviewsQuery extends FindSearchIndexResourceQuery {
   created_at?: JudgeMeReview['created_at']
   curated?: JudgeMeReview['curated']
   featured?: JudgeMeReview['featured']
@@ -181,10 +140,23 @@ export interface FindReviewsQuery extends APIResourceQuery {
 }
 
 /**
- * Query parameters accepted by the `/collections/[handle]` endpoint.
+ * Query parameters accepted by endpoints that handle search index resources.
  */
-export interface GetCollectionQuery extends Pick<APIResourceQuery, 'fields'> {
-  handle: ICollectionListing['handle']
+export interface FindSearchIndexResourceQuery extends PaginationSearchOptions {
+  /**
+   * Comma-separated list of property fields to show.
+   */
+  fields?: string
+
+  /**
+   * Find resource by search index object ID.
+   */
+  objectID?: Hit<AnyObject>['objectID']
+
+  /**
+   * Text to query search index.
+   */
+  text?: SearchOptions['query']
 }
 
 /**
@@ -232,13 +204,6 @@ export type GetLayoutDataResJSON = {
 }
 
 /**
- * Query parameters accepted by the `/menus/[handle]` endpoint.
- */
-export interface GetMenuQuery extends Pick<APIResourceQuery, 'fields'> {
-  handle: ShopifyMenu['handle']
-}
-
-/**
  * Shape of JSON responses from the `/menus/[handle]` endpoint.
  */
 export type GetMenuResJSON = PartialOr<ShopifyMenu>
@@ -253,23 +218,9 @@ export type GetPlaylistResJSON = {
 }
 
 /**
- * Query parameters accepted by the `/pages/[handle]` endpoint.
- */
-export interface GetPageQuery extends Pick<APIResourceQuery, 'fields'> {
-  handle: IPage['handle']
-}
-
-/**
  * Shape of JSON responses from the `/pages/[handle]` endpoint.
  */
 export type GetPageResJSON = PartialOr<ResourceWithSEO<IPage>>
-
-/**
- * Query parameters accepted by the `/policies/[handle]` endpoint.
- */
-export interface GetPolicyQuery extends Pick<APIResourceQuery, 'fields'> {
-  handle: IPolicy['handle']
-}
 
 /**
  * Shape of JSON responses from the `/policies/[handle]` endpoint.
@@ -279,7 +230,7 @@ export type GetPolicyResJSON = PartialOr<ResourceWithSEO<IPolicy>>
 /**
  * Query parameters accepted by the `/products/[handle]` endpoint.
  */
-export interface GetProductQuery extends Pick<APIResourceQuery, 'fields'> {
+export interface GetProductQuery extends GetSearchIndexResourceQuery {
   handle: IProductListing['handle']
   sku?: IProductListingVariant['sku']
 }
@@ -288,6 +239,14 @@ export interface GetProductQuery extends Pick<APIResourceQuery, 'fields'> {
  * Shape of JSON responses from the `/products/[handle]` endpoint.
  */
 export type GetProductResJSON = PartialOr<ResourceWithSEO<IProductListing>>
+
+/**
+ * Query parameters accepted by endpoints that return one search index resource.
+ */
+export type GetSearchIndexResourceQuery = Pick<
+  FindSearchIndexResourceQuery,
+  'fields' | 'objectID'
+>
 
 /**
  * Names of Algolia pagination search parameters.

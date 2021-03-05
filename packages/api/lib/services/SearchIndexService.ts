@@ -1,5 +1,8 @@
 import type { AnyObject } from '@flex-development/json'
-import type { APIResourceQuery, OrNever } from '@flex-development/kustomzcore'
+import type {
+  FindSearchIndexResourceQuery,
+  OrNever
+} from '@flex-development/kustomzcore'
 import { createError, EMPTY_SPACE } from '@flex-development/kustomzcore'
 import isEmpty from 'lodash/isEmpty'
 import join from 'lodash/join'
@@ -44,7 +47,7 @@ class SearchIndexService<TObject extends AnyObject = AnyObject> {
   protected index: SearchIndex
 
   /**
-   * Name of the search index the controller service interacts with.
+   * Name of the search index the service interacts with.
    *
    * @protected
    * @property {SearchIndexName} index_name
@@ -67,7 +70,7 @@ class SearchIndexService<TObject extends AnyObject = AnyObject> {
   oid_key: keyof TObject
 
   /**
-   * Initializes an Algolia search index controller.
+   * Initializes an Algolia search index service.
    *
    * @param {string} name - Name of search index to initialize controller for
    * @param {string} oid_key - Name of key to use when setting objectID
@@ -106,7 +109,7 @@ class SearchIndexService<TObject extends AnyObject = AnyObject> {
    */
   async get(
     objectID: Hit<TObject>['objectID'],
-    fields?: APIResourceQuery['fields']
+    fields?: FindSearchIndexResourceQuery['fields']
   ): OrNever<Promise<TObject>> {
     // Get search index options
     const options = this.searchOptions({ fields, objectID })
@@ -178,9 +181,8 @@ class SearchIndexService<TObject extends AnyObject = AnyObject> {
    *
    * @see https://www.algolia.com/doc/api-reference/api-parameters/filters/
    *
-   * @param {APIResourceQuery} [query] - Query parameters object
+   * @param {FindSearchIndexResourceQuery} [query] - Query parameters object
    * @param {string} [query.fields] - Comma-separated list of fields to include
-   * @param {string} [query.handle] - Find resource by Shopify resource handle
    * @param {number} [query.hitsPerPage] - Number of results per page
    * @param {number} [query.length] - Result limit (used only with offset)
    * @param {string} [query.objectID] - Find resource by search index object ID
@@ -189,8 +191,8 @@ class SearchIndexService<TObject extends AnyObject = AnyObject> {
    * @param {string} [query.text] - Text to search in index
    * @return {SearchOptions} Algolia search options object
    */
-  searchOptions(query: APIResourceQuery = {}): SearchOptions {
-    const { fields, handle, objectID, ...rest } = query
+  searchOptions(query: FindSearchIndexResourceQuery = {}): SearchOptions {
+    const { fields, objectID, ...rest } = query
 
     // Initialize search filters array
     const filters: string[] = []
@@ -202,9 +204,6 @@ class SearchIndexService<TObject extends AnyObject = AnyObject> {
     if (fields?.trim().length) {
       attributesToRetrieve = fields.trim().split(',').flat()
     }
-
-    // Add handle filter
-    if (!isEmpty(handle)) filters.push(`handle:${handle}`)
 
     // Add objectID filter
     if (!isEmpty(objectID)) filters.push(`objectID:${objectID}`)

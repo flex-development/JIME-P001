@@ -3,6 +3,6 @@
  * @module lib/controllers
  */
 
-export default {}
+export { default as SearchIndexController } from './SearchIndexController'
 
 /* eslint-disable prettier/prettier */

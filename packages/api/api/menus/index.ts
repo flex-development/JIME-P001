@@ -1,10 +1,6 @@
 import type { VercelResponse as Res } from '@vercel/node'
-import {
-  handleAPIError,
-  initRoute,
-  trackAPIRequest,
-  trackAPISuccessEvent
-} from '../../lib/middleware'
+import SearchIndexController from '../../lib/controllers/SearchIndexController'
+import routeWrapper from '../../lib/middleware/routeWrapper'
 import Service from '../../lib/services/MenuService'
 import type { FindMenusReq as Req } from '../../lib/types'
 
@@ -16,34 +12,20 @@ import type { FindMenusReq as Req } from '../../lib/types'
 /**
  * Returns an array of menu objects.
  *
- * @param req - API request object
- * @param req.query - Request query parameters
- * @param req.query.fields - Specify fields to include for each object
- * @param req.query.handle - Find menu by handle
- * @param req.query.hitsPerPage - Number of hits per page
- * @param req.query.length - Number of hits to retrieve (used only with offset)
- * @param req.query.offset - Specify the offset of the first hit to return
- * @param req.query.page - Specify the page to retrieve
- * @param req.query.text - Search query text
- * @param req.query.title - Filter results by menu title
+ * @param {Req} req - API request object
+ * @param {Req['query']} req.query - Query parameters object
+ * @param {string} [req.query.fields] - List of fields to include
+ * @param {string} [req.query.handle] - Find resource by Shopify handle
+ * @param {number} [req.query.hitsPerPage] - Number of results per page
+ * @param {number} [req.query.length] - Result limit (used only with offset)
+ * @param {string} [req.query.objectID] - Find resource by index object ID
+ * @param {number} [req.query.offset] - Offset of the first result to return
+ * @param {number} [req.query.page] - Specify the page to retrieve
+ * @param {string} [req.query.text] - Text to search in index
+ * @param {Res} res - API response object
  */
 export default async (req: Req, res: Res): Promise<Res | void> => {
-  // Initialize API route
-  initRoute(req)
-
-  // Send `pageview` hit to Google Analytics
-  await trackAPIRequest(req)
-
-  // Convert query into search options object
-  const options = Service.searchOptions(req.query)
-
-  try {
-    res.json(await Service.find(req.query.text, options))
-  } catch (err) {
-    return handleAPIError(req, res, err)
-  }
-
-  // Send success `event` hit to Google Analytics
-  await trackAPISuccessEvent(req)
-  return res.end()
+  return routeWrapper<Req, Res>(req, res, async (req: Req, res: Res) => {
+    return SearchIndexController.find<Req, Res>(req, res, new Service())
+  })
 }

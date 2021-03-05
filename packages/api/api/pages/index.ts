@@ -1,10 +1,5 @@
 import type { VercelResponse as Res } from '@vercel/node'
-import {
-  handleAPIError,
-  initRoute,
-  trackAPIRequest,
-  trackAPISuccessEvent
-} from '../../lib/middleware'
+import routeWrapper from '../../lib/middleware/routeWrapper'
 import Service from '../../lib/services/PageService'
 import type { FindPagesReq as Req } from '../../lib/types'
 
@@ -29,33 +24,21 @@ import type { FindPagesReq as Req } from '../../lib/types'
  * @param res - API response object
  */
 export default async (req: Req, res: Res): Promise<Res | void> => {
-  // Initialize API route
-  initRoute(req)
+  return routeWrapper<Req, Res>(req, res, async (req: Req, res: Res) => {
+    // ! Vercel interpretes this URL as '/pages' instead of the URL of a single
+    // ! page with the `handle` 'index'.
+    const INDEX_AS_HANDLE = req.url.includes('/pages/index')
 
-  // Send `pageview` hit to Google Analytics
-  await trackAPIRequest(req)
+    // If searching for page with the `handle` 'index'
+    if (INDEX_AS_HANDLE) req.query.handle = 'index'
 
-  // ! Vercel interpretes this URL as '/pages' instead of the URL of a single
-  // ! page with the `handle` 'index'.
-  const INDEX_AS_HANDLE = req.url.includes('/pages/index')
+    // Convert query into search options object
+    const options = Service.searchOptions(req.query)
 
-  // If searching for page with the `handle` 'index'
-  if (INDEX_AS_HANDLE) req.query.handle = 'index'
-
-  // Convert query into search options object
-  const options = Service.searchOptions(req.query)
-
-  try {
     // Get search results
     const results = await Service.find(req.query.text, options)
 
     // If searching for page with the `handle` 'index', return first result
     res.json(INDEX_AS_HANDLE ? results[0] : results)
-  } catch (err) {
-    return handleAPIError(req, res, err)
-  }
-
-  // Send success `event` hit to Google Analytics
-  await trackAPISuccessEvent(req)
-  return res.end()
+  })
 }

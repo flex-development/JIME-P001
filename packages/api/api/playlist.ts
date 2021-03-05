@@ -2,12 +2,7 @@ import { axios } from '@flex-development/kustomzcore'
 import type { VercelResponse as Res } from '@vercel/node'
 import type { AxiosRequestConfig } from 'axios'
 import pick from 'lodash/pick'
-import {
-  handleAPIError,
-  initRoute,
-  trackAPIRequest,
-  trackAPISuccessEvent
-} from '../lib/middleware'
+import routeWrapper from '../lib/middleware/routeWrapper'
 import type { APIRequest as Req } from '../lib/types'
 import { appleDeveloperToken, metafieldsGlobal } from '../lib/utils'
 
@@ -17,13 +12,7 @@ import { appleDeveloperToken, metafieldsGlobal } from '../lib/utils'
  */
 
 export default async (req: Req, res: Res): Promise<Res | void> => {
-  // Initialize API route
-  initRoute(req)
-
-  // Send `pageview` hit to Google Analytics
-  await trackAPIRequest(req)
-
-  try {
+  return routeWrapper<Req, Res>(req, res, async (req: Req, res: Res) => {
     // Fetch global metafields to get playlist URL
     const { playlist_url } = await metafieldsGlobal()
     const url = (playlist_url.value || '') as string
@@ -48,11 +37,5 @@ export default async (req: Req, res: Res): Promise<Res | void> => {
       id,
       tracks: relationships?.tracks?.data.map(track => track.attributes)
     })
-  } catch (err) {
-    return handleAPIError(req, res, err)
-  }
-
-  // Send success `event` hit to Google Analytics
-  await trackAPISuccessEvent(req)
-  return res.end()
+  })
 }

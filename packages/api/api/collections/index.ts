@@ -19,6 +19,7 @@ const Service = new CollectionService()
 /**
  * Returns an array of collection listing resource objects.
  *
+ * @async
  * @param {Req} req - API request object
  * @param {Req['query']} req.query - Query parameters object
  * @param {string} [req.query.collection_id] - Find collection listing by ID
@@ -31,6 +32,8 @@ const Service = new CollectionService()
  * @param {number} [req.query.page] - Specify the page to retrieve
  * @param {string} [req.query.text] - Text to search in index
  * @param {Res} res - API response object
+ * @return {Promise<Res | void>} Promise containing server response object if an
+ * error is thrown, or empty promise if request completed successfully
  */
 export default async (req: Req, res: Res): Promise<Res | void> => {
   // Initialize API route

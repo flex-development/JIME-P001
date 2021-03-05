@@ -8,5 +8,6 @@ export { default as MenuService } from './MenuService'
 export { default as PageService } from './PageService'
 export { default as PolicyService } from './PolicyService'
 export { default as ProductService } from './ProductService'
+export { default as SearchIndexService } from './SearchIndexService'
 
 /* eslint-disable prettier/prettier */

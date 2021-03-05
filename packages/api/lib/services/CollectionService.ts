@@ -7,6 +7,7 @@ import type {
   IMetafield,
   IProductListing,
   OrNever,
+  OrPromise,
   SEOData,
   ShopifyAPIResponses as SAR
 } from '@flex-development/kustomzcore'
@@ -19,16 +20,16 @@ import { stripHtml } from 'string-strip-html'
 import axiosShopify from '../config/axios-shopify'
 import { INDEX_SETTINGS } from '../config/constants'
 import ShopifyAPI from '../config/shopify-api'
-import SearchIndexController from '../controllers/SearchIndexController'
 import type { SearchOptions } from '../types'
 import globalSEO from '../utils/globalSEO'
+import SearchIndexService from './SearchIndexService'
 
 /**
  * @file Implementation - Collection Service
  * @module lib/services/CollectionService
  */
 
-export default class CollectionService extends SearchIndexController<TObject> {
+export default class CollectionService extends SearchIndexService<TObject> {
   /**
    * Initializes a new Collection Listing service instance.
    */
@@ -129,14 +130,13 @@ export default class CollectionService extends SearchIndexController<TObject> {
    * Returns an object with SEO data for a collection listing resource.
    *
    * @async
-   * @param {ICollectionListing | Promise<ICollectionListing>} listing -
-   * Collecting listing data
+   * @param {OrPromise<ICollectionListing>} listing - Collecting listing data
    * @param {IProductListing[]} [products] - Products in collection
    * @return {Promise<SEOData>} Promise containing SEO data for listing
    * @throws {FeathersErrorJSON}
    */
   static async seo(
-    listing: ICollectionListing | Promise<ICollectionListing>,
+    listing: OrPromise<ICollectionListing>,
     products: IProductListing[] = []
   ): OrNever<Promise<SEOData>> {
     listing = await listing

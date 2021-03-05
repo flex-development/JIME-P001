@@ -22,11 +22,11 @@ import type {
 import formatError from '../utils/formatError'
 
 /**
- * @file Implementation - SearchIndexController
- * @module lib/controllers/SearchIndexController
+ * @file Implementation - SearchIndexService
+ * @module lib/services/SearchIndexService
  */
 
-class SearchIndexController<TObject extends AnyObject = AnyObject> {
+class SearchIndexService<TObject extends AnyObject = AnyObject> {
   /**
    * Function to populate the search index.
    *
@@ -218,4 +218,4 @@ class SearchIndexController<TObject extends AnyObject = AnyObject> {
   }
 }
 
-export default SearchIndexController
+export default SearchIndexService

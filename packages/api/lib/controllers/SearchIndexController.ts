@@ -58,7 +58,7 @@ class SearchIndexController {
     res: Res,
     service: SearchIndexService
   ): OrNever<Promise<void>> {
-    res.json(await service.get(req.query.handle, req.query.fields))
+    res.json(await service.get(req.query.objectID, req.query.fields))
   }
 }
 

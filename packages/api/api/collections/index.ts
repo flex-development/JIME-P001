@@ -17,7 +17,6 @@ import type { FindCollectionsReq as Req } from '../../lib/types'
  * @param {Req['query']} req.query - Query parameters object
  * @param {string} [req.query.collection_id] - Find collection listing by ID
  * @param {string} [req.query.fields] - List of fields to include
- * @param {string} [req.query.handle] - Find resource by Shopify handle
  * @param {number} [req.query.hitsPerPage] - Number of results per page
  * @param {number} [req.query.length] - Result limit (used only with offset)
  * @param {string} [req.query.objectID] - Find resource by index object ID

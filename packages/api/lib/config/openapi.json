@@ -24,124 +24,1313 @@
       "url": "https://kapi-git-next-flexdevelopment.vercel.app"
     }
   ],
-  "tags": [],
-  "paths": {},
-  "components": {
-    "schemas": {
-      "BadRequest": {
-        "type": "object",
-        "properties": {
-          "className": {
-            "type": "string",
-            "example": "bad-request"
+  "tags": [
+    {
+      "name": "Assets"
+    },
+    {
+      "name": "Collections"
+    },
+    {
+      "name": "Layout"
+    },
+    {
+      "name": "Menus"
+    },
+    {
+      "name": "Metafields"
+    },
+    {
+      "name": "Pages"
+    },
+    {
+      "name": "Playlist"
+    },
+    {
+      "name": "Policies"
+    },
+    {
+      "name": "Products"
+    }
+  ],
+  "paths": {
+    "/collections": {
+      "get": {
+        "summary": "Find collections",
+        "description": "Returns an array of collection listing resource objects",
+        "operationId": "find-collections",
+        "tags": ["Collections"],
+        "parameters": [
+          {
+            "name": "collection_id",
+            "in": "query",
+            "description": "Find collection listing by ID",
+            "schema": {
+              "type": "string"
+            }
           },
-          "code": {
-            "type": "integer",
-            "example": 400
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "Comma-separated list of fields to include. By default the `collection_id` and `objectID` fields will be included. To request all fields, use the value `*`.",
+            "schema": {
+              "type": "string"
+            }
           },
-          "data": {
-            "type": "object",
-            "example": {}
+          {
+            "name": "hitsPerPage",
+            "in": "query",
+            "description": "Number of results per page",
+            "schema": {
+              "type": "number"
+            }
           },
-          "errors": {
-            "type": "object",
-            "example": {}
+          {
+            "name": "length",
+            "in": "query",
+            "description": "Result limit (used only with offset)",
+            "schema": {
+              "type": "number"
+            }
           },
-          "message": {
-            "type": "string"
+          {
+            "name": "objectID",
+            "in": "query",
+            "description": "Find resource by index object ID (collection listing handle)",
+            "schema": {
+              "type": "string"
+            }
           },
-          "name": {
-            "type": "string",
-            "example": "BadRequest"
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Offset of the first result to return",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Specify the page to retrieve",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "text",
+            "in": "query",
+            "description": "Text to search in index",
+            "schema": {
+              "type": "string"
+            }
           }
-        }
-      },
-      "GeneralError": {
-        "type": "object",
-        "properties": {
-          "className": {
-            "type": "string",
-            "example": "general-error"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/Shopify.ICollectionListing"
+                  },
+                  "type": "array"
+                }
+              }
+            }
           },
-          "code": {
-            "type": "integer",
-            "example": 500
+          "400": {
+            "description": "BadRequest",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Errors.BadRequest"
+                }
+              }
+            }
           },
-          "data": {
-            "type": "object",
-            "example": {}
+          "500": {
+            "description": "GeneralError",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Errors.GeneralError"
+                }
+              }
+            }
           },
-          "errors": {
-            "type": "object",
-            "example": {}
-          },
-          "message": {
-            "type": "string"
-          },
-          "name": {
-            "type": "string",
-            "example": "GeneralError"
-          }
-        }
-      },
-      "NotAuthenticated": {
-        "type": "object",
-        "properties": {
-          "className": {
-            "type": "string",
-            "example": "not-authenticated"
-          },
-          "code": {
-            "type": "integer",
-            "example": 401
-          },
-          "data": {
-            "type": "object",
-            "example": {}
-          },
-          "errors": {
-            "type": "object",
-            "example": {}
-          },
-          "message": {
-            "type": "string"
-          },
-          "name": {
-            "type": "string",
-            "example": "NotAuthenticated"
-          }
-        }
-      },
-      "NotImplemented": {
-        "type": "object",
-        "properties": {
-          "className": {
-            "type": "string",
-            "example": "not-implemented"
-          },
-          "code": {
-            "type": "integer",
-            "example": 501
-          },
-          "data": {
-            "type": "object",
-            "example": {}
-          },
-          "errors": {
-            "type": "object",
-            "example": {}
-          },
-          "message": {
-            "type": "string"
-          },
-          "name": {
-            "type": "string",
-            "example": "NotImplemented"
+          "502": {
+            "description": "BadGateway",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Errors.BadGateway"
+                }
+              }
+            }
           }
         }
       }
     },
-    "securitySchemes": {}
+    "/collections/[objectID]": {
+      "get": {
+        "summary": "Get collection by handle",
+        "description": "Retrieve a collection listing resource by handle",
+        "operationId": "get-collection-by-handle",
+        "tags": ["Collections"],
+        "parameters": [
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "Comma-separated list of fields to include. By default the `collection_id` and `objectID` fields will be included. To request all fields, use the value `*`.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "objectID",
+            "in": "path",
+            "description": "Find resource by index object ID (collection listing handle)",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Shopify.ICollectionListing"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "BadRequest",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Errors.BadRequest"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "GeneralError",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Errors.GeneralError"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "BadGateway",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Errors.BadGateway"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AnyObject": {
+        "properties": {},
+        "type": "object"
+      },
+      "Errors.BadGateway": {
+        "properties": {
+          "className": {
+            "example": "bad-gateway",
+            "type": "string"
+          },
+          "code": {
+            "example": 502,
+            "type": "integer"
+          },
+          "data": {
+            "example": {},
+            "type": "object"
+          },
+          "errors": {
+            "example": {},
+            "type": "object"
+          },
+          "message": {
+            "type": "string"
+          },
+          "name": {
+            "example": "BadGateway",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "Errors.BadRequest": {
+        "properties": {
+          "className": {
+            "example": "bad-request",
+            "type": "string"
+          },
+          "code": {
+            "example": 400,
+            "type": "integer"
+          },
+          "data": {
+            "example": {},
+            "type": "object"
+          },
+          "errors": {
+            "example": {},
+            "type": "object"
+          },
+          "message": {
+            "type": "string"
+          },
+          "name": {
+            "example": "BadRequest",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "Errors.GeneralError": {
+        "properties": {
+          "className": {
+            "example": "general-error",
+            "type": "string"
+          },
+          "code": {
+            "example": 500,
+            "type": "integer"
+          },
+          "data": {
+            "example": {},
+            "type": "object"
+          },
+          "errors": {
+            "example": {},
+            "type": "object"
+          },
+          "message": {
+            "type": "string"
+          },
+          "name": {
+            "example": "GeneralError",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "Errors.NotAuthenticated": {
+        "properties": {
+          "className": {
+            "example": "not-authenticated",
+            "type": "string"
+          },
+          "code": {
+            "example": 401,
+            "type": "integer"
+          },
+          "data": {
+            "example": {},
+            "type": "object"
+          },
+          "errors": {
+            "example": {},
+            "type": "object"
+          },
+          "message": {
+            "type": "string"
+          },
+          "name": {
+            "example": "NotAuthenticated",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "Errors.NotImplemented": {
+        "properties": {
+          "className": {
+            "example": "not-implemented",
+            "type": "string"
+          },
+          "code": {
+            "example": 501,
+            "type": "integer"
+          },
+          "data": {
+            "example": {},
+            "type": "object"
+          },
+          "errors": {
+            "example": {},
+            "type": "object"
+          },
+          "message": {
+            "type": "string"
+          },
+          "name": {
+            "example": "NotImplemented",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "NullishNumber": {
+        "nullable": true,
+        "type": "number"
+      },
+      "NullishString": {
+        "nullable": true,
+        "type": "string"
+      },
+      "SEOData": {
+        "additionalProperties": false,
+        "properties": {
+          "description": {
+            "description": "Description of the page in less than 150 characters.",
+            "type": "string"
+          },
+          "keywords": {
+            "description": "Comma-delimitted list of SEO keywords.",
+            "type": "string"
+          },
+          "og": {
+            "additionalProperties": false,
+            "description": "Object containing Open Graph metadata.",
+            "properties": {
+              "'image:alt'": {
+                "$ref": "#/components/schema/NullishString"
+              },
+              "'image:height'": {
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schema/NullishString"
+                  },
+                  {
+                    "type": "number"
+                  }
+                ]
+              },
+              "'image:secure_url'": {
+                "$ref": "#/components/schema/NullishString"
+              },
+              "'image:width'": {
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schema/NullishString"
+                  },
+                  {
+                    "type": "number"
+                  }
+                ]
+              },
+              "'product:availability'": {
+                "$ref": "#/components/schema/NullishString"
+              },
+              "'product:brand'": {
+                "$ref": "#/components/schema/NullishString"
+              },
+              "'product:condition'": {
+                "$ref": "#/components/schema/NullishString"
+              },
+              "'product:item_group_id'": {
+                "$ref": "#/components/schema/NullishString"
+              },
+              "'product:price:amount'": {
+                "$ref": "#/components/schema/NullishString"
+              },
+              "'product:price:currency'": {
+                "$ref": "#/components/schema/NullishString"
+              },
+              "'product:retailer_item_id'": {
+                "$ref": "#/components/schema/NullishString"
+              },
+              "category": {
+                "$ref": "#/components/schema/NullishString"
+              },
+              "image": {
+                "$ref": "#/components/schema/NullishString"
+              }
+            },
+            "type": "object"
+          },
+          "title": {
+            "description": "A title is used on all pages (SEO: Google calculates the pixel width of the\ncharacters used in the title, and it cuts off between 472 and 482 pixels.\nThe average character limit would be around 55-characters).\n\nThe value `| Morena's Kustomz` will be appended to the title if defined.",
+            "type": "string"
+          },
+          "twitter": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schema/NullishString"
+                }
+              ]
+            },
+            "description": "Object containing Twitter social metadata.",
+            "properties": {
+              "card": {
+                "anyOf": [
+                  {
+                    "const": "app",
+                    "type": "string"
+                  },
+                  {
+                    "const": "player",
+                    "type": "string"
+                  },
+                  {
+                    "const": "summary",
+                    "type": "string"
+                  },
+                  {
+                    "const": "summary_large_image",
+                    "type": "string"
+                  },
+                  {
+                    "nullable": true
+                  }
+                ]
+              },
+              "creator": {
+                "type": "string"
+              },
+              "image": {
+                "type": "string"
+              },
+              "site": {
+                "type": "string"
+              }
+            },
+            "type": "object"
+          }
+        },
+        "type": "object"
+      },
+      "Shopify.CollectionListingSortOrder": {
+        "anyOf": [
+          {
+            "const": "alpha-asc",
+            "type": "string"
+          },
+          {
+            "const": "alpha-desc",
+            "type": "string"
+          },
+          {
+            "const": "best-selling",
+            "type": "string"
+          },
+          {
+            "const": "created",
+            "type": "string"
+          },
+          {
+            "const": "created-desc",
+            "type": "string"
+          },
+          {
+            "const": "manual",
+            "type": "string"
+          },
+          {
+            "const": "price-asc",
+            "type": "string"
+          },
+          {
+            "const": "price-desc",
+            "type": "string"
+          }
+        ]
+      },
+      "Shopify.ICollectionListing": {
+        "additionalProperties": false,
+        "properties": {
+          "body_html": {
+            "type": "string"
+          },
+          "collection_id": {
+            "type": "number"
+          },
+          "default_product_image": {
+            "$ref": "#/components/schema/Shopify.ICollectionListingImage"
+          },
+          "handle": {
+            "type": "string"
+          },
+          "image": {
+            "$ref": "#/components/schema/Shopify.IImage"
+          },
+          "metafields": {
+            "items": {
+              "$ref": "#/components/schema/Shopify.IObjectMetafield"
+            },
+            "type": "array"
+          },
+          "objectID": {
+            "description": "Collection listing handle",
+            "type": "string"
+          },
+          "products": {
+            "items": {
+              "$ref": "#/components/schema/Shopify.IProductListing"
+            },
+            "type": "array"
+          },
+          "published_at": {
+            "type": "string"
+          },
+          "seo": {
+            "$ref": "#/components/schema/SEOData",
+            "type": "object"
+          },
+          "sort_order": {
+            "$ref": "#/components/schema/Shopify.CollectionListingSortOrder",
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "updated_at": {
+            "type": "string"
+          }
+        },
+        "required": ["collection_id", "objectID"],
+        "type": "object"
+      },
+      "Shopify.ICollectionListingImage": {
+        "additionalProperties": false,
+        "properties": {
+          "position": {
+            "type": "number"
+          },
+          "product_it": {
+            "type": "number"
+          },
+          "variant_ids": {
+            "items": {
+              "type": "number"
+            },
+            "type": "array"
+          }
+        },
+        "required": ["position", "product_it", "variant_ids"],
+        "type": "object"
+      },
+      "Shopify.IImage": {
+        "additionalProperties": false,
+        "properties": {
+          "alt": {
+            "$ref": "#/components/schema/NullishString"
+          },
+          "created_at": {
+            "type": "string"
+          },
+          "height": {
+            "type": "number"
+          },
+          "src": {
+            "type": "string"
+          },
+          "updated_at": {
+            "type": "string"
+          },
+          "width": {
+            "type": "number"
+          }
+        },
+        "required": ["alt", "created_at", "height", "src", "width"],
+        "type": "object"
+      },
+      "Shopify.IMetafield": {
+        "additionalProperties": false,
+        "properties": {
+          "created_at": {
+            "type": "string"
+          },
+          "description": {
+            "$ref": "#/components/schema/NullishString"
+          },
+          "id": {
+            "type": "number"
+          },
+          "key": {
+            "type": "string"
+          },
+          "namespace": {
+            "type": "string"
+          },
+          "owner_id": {
+            "type": "number"
+          },
+          "owner_resource": {
+            "type": "string"
+          },
+          "updated_at": {
+            "type": "string"
+          },
+          "value": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "string"
+              }
+            ]
+          },
+          "value_type": {
+            "$ref": "#/components/schema/MetaFieldValueType"
+          }
+        },
+        "required": [
+          "created_at",
+          "description",
+          "id",
+          "key",
+          "namespace",
+          "owner_id",
+          "owner_resource",
+          "updated_at",
+          "value",
+          "value_type"
+        ],
+        "type": "object"
+      },
+      "Shopify.IMoney": {
+        "additionalProperties": false,
+        "properties": {
+          "amount": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "string"
+              }
+            ]
+          },
+          "currency_code": {
+            "type": "string"
+          }
+        },
+        "required": ["amount", "currency_code"],
+        "type": "object"
+      },
+      "Shopify.IObjectMetafield": {
+        "additionalProperties": false,
+        "properties": {
+          "description": {
+            "$ref": "#/components/schema/NullishString"
+          },
+          "key": {
+            "type": "string"
+          },
+          "namespace": {
+            "type": "string"
+          },
+          "value": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "string"
+              }
+            ]
+          },
+          "value_type": {
+            "$ref": "#/components/schema/MetaFieldValueType"
+          }
+        },
+        "required": ["description", "key", "namespace", "value", "value_type"],
+        "type": "object"
+      },
+      "Shopify.IPage": {
+        "additionalProperties": false,
+        "properties": {
+          "author": {
+            "type": "string"
+          },
+          "body_html": {
+            "type": "string"
+          },
+          "created_at": {
+            "type": "string"
+          },
+          "handle": {
+            "type": "string"
+          },
+          "id": {
+            "type": "number"
+          },
+          "metafield": {
+            "items": {
+              "$ref": "#/components/schema/Shopify.IObjectMetafield"
+            },
+            "type": "array"
+          },
+          "objectID": {
+            "description": "Page handle",
+            "type": "string"
+          },
+          "published_at": {
+            "type": "string"
+          },
+          "shop_id": {
+            "type": "number"
+          },
+          "template_suffix": {
+            "nullable": true,
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "updated_at": {
+            "type": "string"
+          }
+        },
+        "required": ["id", "objectID"],
+        "type": "object"
+      },
+      "Shopify.IPolicy": {
+        "additionalProperties": false,
+        "properties": {
+          "body": {
+            "type": "string"
+          },
+          "created_at": {
+            "type": "string"
+          },
+          "handle": {
+            "type": "string"
+          },
+          "objectID": {
+            "description": "Policy handle",
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "updated_at": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          }
+        },
+        "required": ["objectID"],
+        "type": "object"
+      },
+      "Shopify.IProduct": {
+        "additionalProperties": false,
+        "properties": {
+          "body_html": {
+            "type": "string"
+          },
+          "created_at": {
+            "type": "string"
+          },
+          "handle": {
+            "type": "string"
+          },
+          "id": {
+            "type": "number"
+          },
+          "image": {
+            "$ref": "#/components/schema/Shopify.IProductImage"
+          },
+          "images": {
+            "items": {
+              "$ref": "#/components/schema/Shopify.IProductImage"
+            },
+            "type": "array"
+          },
+          "metafields_global_description_tag": {
+            "type": "string"
+          },
+          "metafields_global_title_tag": {
+            "type": "string"
+          },
+          "options": {
+            "items": {
+              "$ref": "#/components/schema/Shopify.IProductOption"
+            },
+            "type": "array"
+          },
+          "product_type": {
+            "type": "string"
+          },
+          "published_at": {
+            "type": "string"
+          },
+          "published_scope": {
+            "type": "string"
+          },
+          "status": {
+            "anyOf": [
+              {
+                "const": "active",
+                "type": "string"
+              },
+              {
+                "const": "archived",
+                "type": "string"
+              },
+              {
+                "const": "draft",
+                "type": "string"
+              }
+            ]
+          },
+          "tags": {
+            "type": "string"
+          },
+          "template_suffix": {
+            "$ref": "#/components/schema/NullishString"
+          },
+          "title": {
+            "type": "string"
+          },
+          "updated_at": {
+            "type": "string"
+          },
+          "variants": {
+            "items": {
+              "$ref": "#/components/schema/Shopify.IProductVariant"
+            },
+            "type": "array"
+          },
+          "vendor": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "body_html",
+          "created_at",
+          "handle",
+          "id",
+          "image",
+          "images",
+          "options",
+          "product_type",
+          "published_at",
+          "published_scope",
+          "status",
+          "tags",
+          "template_suffix",
+          "title",
+          "updated_at",
+          "variants",
+          "vendor"
+        ],
+        "type": "object"
+      },
+      "Shopify.IProductImage": {
+        "additionalProperties": false,
+        "properties": {
+          "alt": {
+            "$ref": "#/components/schema/NullishString"
+          },
+          "created_at": {
+            "type": "string"
+          },
+          "height": {
+            "type": "number"
+          },
+          "id": {
+            "type": "number"
+          },
+          "position": {
+            "type": "number"
+          },
+          "product_id": {
+            "type": "number"
+          },
+          "src": {
+            "type": "string"
+          },
+          "updated_at": {
+            "type": "string"
+          },
+          "variant_ids": {
+            "items": {
+              "type": "number"
+            },
+            "type": "array"
+          },
+          "width": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "alt",
+          "created_at",
+          "height",
+          "id",
+          "position",
+          "product_id",
+          "src",
+          "updated_at",
+          "variant_ids",
+          "width"
+        ],
+        "type": "object"
+      },
+      "Shopify.IProductListing": {
+        "additionalProperties": false,
+        "properties": {
+          "available": {
+            "type": "boolean"
+          },
+          "body_html": {
+            "type": "string"
+          },
+          "created_at": {
+            "type": "string"
+          },
+          "handle": {
+            "type": "string"
+          },
+          "images": {
+            "items": {
+              "$ref": "#/components/schema/Shopify.IProductImage"
+            },
+            "type": "array"
+          },
+          "objectID": {
+            "description": "Product listing handle",
+            "type": "string"
+          },
+          "options": {
+            "items": {
+              "$ref": "#/components/schema/Shopify.IProductOption"
+            },
+            "type": "array"
+          },
+          "product_id": {
+            "type": "number"
+          },
+          "product_type": {
+            "type": "string"
+          },
+          "published_at": {
+            "type": "string"
+          },
+          "tags": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "updated_at": {
+            "type": "string"
+          },
+          "variants": {
+            "items": {
+              "$ref": "#/components/schema/Shopify.IProductListingVariant"
+            },
+            "type": "array"
+          },
+          "vendor": {
+            "type": "string"
+          }
+        },
+        "required": ["objectID", "product_id"],
+        "type": "object"
+      },
+      "Shopify.IProductListingVariant": {
+        "additionalProperties": false,
+        "properties": {
+          "available": {
+            "type": "boolean"
+          },
+          "option_values": {
+            "items": {
+              "$ref": "#/components/schema/Shopify.IProductVariantOption"
+            },
+            "type": "array"
+          }
+        },
+        "required": ["available", "option_values"],
+        "type": "object"
+      },
+      "Shopify.IProductOption": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string"
+          },
+          "position": {
+            "type": "number"
+          },
+          "product_id": {
+            "type": "number"
+          },
+          "values": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "required": ["id", "name", "position", "product_id", "values"],
+        "type": "object"
+      },
+      "Shopify.IProductVariant": {
+        "additionalProperties": false,
+        "properties": {
+          "barcode": {
+            "type": "string"
+          },
+          "compare_at_price": {
+            "$ref": "#/components/schema/NullishString"
+          },
+          "created_at": {
+            "type": "string"
+          },
+          "fulfillment_service": {
+            "type": "string"
+          },
+          "grams": {
+            "type": "number"
+          },
+          "id": {
+            "type": "number"
+          },
+          "image_id": {
+            "$ref": "#/components/schema/NullishNumber"
+          },
+          "inventory_item_id": {
+            "type": "number"
+          },
+          "inventory_management": {
+            "type": "string"
+          },
+          "inventory_policy": {
+            "$ref": "#/components/schema/Shopify.ProductVariantInventoryPolicy"
+          },
+          "inventory_quantity": {
+            "type": "number"
+          },
+          "old_inventory_quantity": {
+            "type": "number"
+          },
+          "option1": {
+            "$ref": "#/components/schema/NullishString"
+          },
+          "option2": {
+            "$ref": "#/components/schema/NullishString"
+          },
+          "option3": {
+            "$ref": "#/components/schema/NullishString"
+          },
+          "position": {
+            "type": "number"
+          },
+          "presentment_prices": {
+            "items": {
+              "$ref": "#/components/schema/Shopify.IProductVariantPresentmentPriceSet"
+            },
+            "type": "array"
+          },
+          "price": {
+            "type": "string"
+          },
+          "product_id": {
+            "type": "number"
+          },
+          "requires_shipping": {
+            "type": "boolean"
+          },
+          "sku": {
+            "type": "string"
+          },
+          "tax_code": {
+            "$ref": "#/components/schema/NullishString"
+          },
+          "taxable": {
+            "type": "boolean"
+          },
+          "title": {
+            "type": "string"
+          },
+          "updated_at": {
+            "type": "string"
+          },
+          "weight": {
+            "type": "number"
+          },
+          "weight_unit": {
+            "$ref": "#/components/schema/Shopify.ProductVariantWeightUnit"
+          }
+        },
+        "required": [
+          "barcode",
+          "compare_at_price",
+          "created_at",
+          "fulfillment_service",
+          "grams",
+          "id",
+          "image_id",
+          "inventory_item_id",
+          "inventory_management",
+          "inventory_policy",
+          "inventory_quantity",
+          "old_inventory_quantity",
+          "option1",
+          "option2",
+          "option3",
+          "position",
+          "presentment_prices",
+          "price",
+          "product_id",
+          "requires_shipping",
+          "sku",
+          "tax_code",
+          "taxable",
+          "title",
+          "updated_at",
+          "weight",
+          "weight_unit"
+        ],
+        "type": "object"
+      },
+      "Shopify.IProductVariantOption": {
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "option_id": {
+            "type": "number"
+          },
+          "value": {
+            "type": "string"
+          }
+        },
+        "required": ["name", "option_id", "value"],
+        "type": "object"
+      },
+      "Shopify.IProductVariantPresentmentPriceSet": {
+        "additionalProperties": false,
+        "properties": {
+          "compare_at_price": {
+            "$ref": "#/components/schema/Shopify.IMoney"
+          },
+          "price": {
+            "$ref": "#/components/schema/Shopify.IMoney"
+          }
+        },
+        "required": ["compare_at_price", "price"],
+        "type": "object"
+      },
+      "Shopify.Menu": {
+        "additionalProperties": false,
+        "properties": {
+          "handle": {
+            "type": "string"
+          },
+          "levels": {
+            "type": "number"
+          },
+          "links": {
+            "items": {
+              "$ref": "#/components/schema/Shopify.MenuLink"
+            },
+            "type": "array"
+          },
+          "objectID": {
+            "description": "Menu handle",
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          }
+        },
+        "required": ["objectID"],
+        "type": "object"
+      },
+      "Shopify.MenuLink": {
+        "additionalProperties": false,
+        "properties": {
+          "href": {
+            "type": "string"
+          },
+          "links": {
+            "items": {
+              "$ref": "#/components/schema/Shopify.MenuLink"
+            },
+            "type": "array"
+          },
+          "title": {
+            "type": "string"
+          }
+        },
+        "required": ["href", "links", "title"],
+        "type": "object"
+      },
+      "Shopify.MetaFieldValueType": {
+        "anyOf": [
+          {
+            "const": "integer",
+            "type": "string"
+          },
+          {
+            "const": "string",
+            "type": "string"
+          }
+        ]
+      },
+      "Shopify.ProductVariantInventoryPolicy": {
+        "anyOf": [
+          {
+            "const": "continue",
+            "type": "string"
+          },
+          {
+            "const": "deny",
+            "type": "string"
+          }
+        ]
+      },
+      "Shopify.ProductVariantWeightUnit": {
+        "anyOf": [
+          {
+            "const": "g",
+            "type": "string"
+          },
+          {
+            "const": "kg",
+            "type": "string"
+          },
+          {
+            "const": "lb",
+            "type": "string"
+          },
+          {
+            "const": "oz",
+            "type": "string"
+          }
+        ]
+      }
+    }
   },
   "externalDocs": {}
 }

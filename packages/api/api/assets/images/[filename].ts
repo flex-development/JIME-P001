@@ -1,14 +1,11 @@
+import { createError } from '@flex-development/kustomzcore'
 import type { VercelResponse as Res } from '@vercel/node'
 import { readFileSync } from 'fs'
 import isUndefined from 'lodash/isUndefined'
 import { join } from 'path'
 import sharp from 'sharp'
-import {
-  handleAPIError,
-  initRoute,
-  trackAPIRequest,
-  trackAPISuccessEvent
-} from '../../../lib/middleware'
+import { trackAPISuccessEvent } from '../../../lib/middleware'
+import routeWrapper from '../../../lib/middleware/routeWrapper'
 import type { GetImageAssetReq as Req } from '../../../lib/types'
 
 /**
@@ -27,41 +24,37 @@ import type { GetImageAssetReq as Req } from '../../../lib/types'
  * @param res - API response object
  */
 export default async (req: Req, res: Res): Promise<Res | void> => {
-  // Initialize API route
-  initRoute(req)
+  return routeWrapper<Req, Res>(req, res, async (req: Req, res: Res) => {
+    // Get asset filename and resize dimensions
+    const { filename, height, width } = req.query
 
-  // Send `pageview` hit to Google Analytics
-  await trackAPIRequest(req)
+    // Get extension from filename
+    const filename_split = filename.split('.')
+    const extension = filename_split[filename_split.length - 1]
 
-  // Get asset filename and resize dimensions
-  const { filename, height, width } = req.query
+    // Parse image resize dimensions
+    const $height = height ? JSON.parse(`${height}`) : height
+    const $width = width ? JSON.parse(`${width}`) : width
 
-  // Get extension from filename
-  const filename_split = filename.split('.')
-  const extension = filename_split[filename_split.length - 1]
+    try {
+      // Get file from directory
+      let file = readFileSync(join(__dirname, '_files', filename))
 
-  // Parse image resize dimensions
-  const $height = height ? JSON.parse(`${height}`) : height
-  const $width = width ? JSON.parse(`${width}`) : width
+      // Resize image
+      if (!isUndefined($height) || !isUndefined($width)) {
+        file = await sharp(file).resize($width, $height).toBuffer()
+      }
 
-  try {
-    // Get file from directory
-    let file = readFileSync(join(__dirname, '_files', filename))
+      // Send success `event` hit to Google Analytics
+      await trackAPISuccessEvent(req)
 
-    // Resize image
-    if (!isUndefined($height) || !isUndefined($width)) {
-      file = await sharp(file).resize($width, $height).toBuffer()
+      res.writeHead(200, { 'Content-Type': `image/${extension}` })
+      return res.end(file)
+    } catch (err) {
+      const data = { code: err.code, errors: { filename }, height, width }
+      const status = err.code === 'ENOENT' ? 404 : 500
+
+      return createError({ ...err, status }, data)
     }
-
-    // Send success `event` hit to Google Analytics
-    await trackAPISuccessEvent(req)
-
-    res.writeHead(200, { 'Content-Type': `image/${extension}` })
-    return res.end(file)
-  } catch (err) {
-    const data = { code: err.code, errors: { filename }, height, width }
-    const status = err.code === 'ENOENT' ? 404 : 500
-
-    return handleAPIError(req, res, { ...err, status }, data)
-  }
+  })
 }

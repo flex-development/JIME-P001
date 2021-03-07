@@ -24,7 +24,7 @@ import type { FindMenusReq as Req } from '../../lib/types'
  * @param {Res} res - API response object
  */
 export default async (req: Req, res: Res): Promise<Res | void> => {
-  return routeWrapper<Req, Res>(req, res, async (req: Req, res: Res) => {
+  return routeWrapper<Req, Res>(req, res, async (req, res) => {
     return new MenusController().find(req, res)
   })
 }

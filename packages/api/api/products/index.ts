@@ -27,7 +27,7 @@ import type { FindProductsReq as Req } from '../../lib/types'
  * error is thrown, or empty promise if request completed successfully
  */
 export default async (req: Req, res: Res): Promise<Res | void> => {
-  return routeWrapper<Req, Res>(req, res, async (req: Req, res: Res) => {
+  return routeWrapper<Req, Res>(req, res, async (req, res) => {
     return new ProductsController().find(req, res)
   })
 }

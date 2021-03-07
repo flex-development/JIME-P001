@@ -1,6 +1,6 @@
 import type { VercelResponse as Res } from '@vercel/node'
+import MetafieldsController from '../../lib/controllers/MetafieldsController'
 import routeWrapper from '../../lib/middleware/routeWrapper'
-import MetafieldService from '../../lib/services/MetafieldService'
 import type { GetGlobalMetafieldsReq as Req } from '../../lib/types'
 
 /**
@@ -20,7 +20,7 @@ import type { GetGlobalMetafieldsReq as Req } from '../../lib/types'
  * error is thrown, or empty promise if request completed successfully
  */
 export default async (req: Req, res: Res): Promise<Res | void> => {
-  return routeWrapper<Req, Res>(req, res, async (req: Req, res: Res) => {
-    res.json(await MetafieldService.globals(req.query))
+  return routeWrapper<Req, Res>(req, res, async (req, res) => {
+    return MetafieldsController.getGlobalMetafields(req, res)
   })
 }

@@ -16,15 +16,18 @@ import type { GetImageAssetReq as Req } from '../../../lib/types'
 /**
  * Retrieve an image asset by filename.
  *
- * @param req - API request object
- * @param req.query - Request query parameters
- * @param req.query.filename - Name of image to retrieve, including extension
- * @param req.query.height - Resized image height
- * @param req.query.width - Resized image width
- * @param res - API response object
+ * @async
+ * @param {Req} req - API request object
+ * @param {Req['query']} req.query - Query parameters object
+ * @param {string} req.query.filename - Filename of image to retrieve
+ * @param {number | string} [req.query.height] - Resized image height
+ * @param {number | string} [req.query.width] - Resized image width
+ * @param {Res} res - API response object
+ * @return {Promise<Res | void>} Promise containing server response object if an
+ * error is thrown, or empty promise if request completed successfully
  */
 export default async (req: Req, res: Res): Promise<Res | void> => {
-  return routeWrapper<Req, Res>(req, res, async (req: Req, res: Res) => {
+  return routeWrapper<Req, Res>(req, res, async (req, res) => {
     // Get asset filename and resize dimensions
     const { filename, height, width } = req.query
 

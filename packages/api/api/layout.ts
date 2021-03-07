@@ -1,9 +1,6 @@
-import { axios } from '@flex-development/kustomzcore'
 import type { VercelResponse as Res } from '@vercel/node'
-import { API_URL } from '../lib/config'
+import LayoutController from '../lib/controllers/LayoutController'
 import routeWrapper from '../lib/middleware/routeWrapper'
-import MenuService from '../lib/services/MenuService'
-import Metafields from '../lib/services/MetafieldService'
 import type { APIRequest as Req } from '../lib/types'
 
 /**
@@ -11,34 +8,18 @@ import type { APIRequest as Req } from '../lib/types'
  * @module api/layout
  */
 
+/**
+ * Returns the storefront layout data.
+ *
+ * @async
+ * @param {Req} req - API request object
+ * @param {Req['query']} [req.query] - Query parameters object
+ * @param {Res} res - API response object
+ * @return {Promise<Res | void>} Promise containing server response object if
+ * an error is thrown, or empty promise if request completed successfully
+ */
 export default async (req: Req, res: Res): Promise<Res | void> => {
-  return routeWrapper<Req, Res>(req, res, async (req: Req, res: Res) => {
-    // Fetch global metafields to get profile snippet
-    const {
-      hero_subtitle: { value: hero_subtitle },
-      hero_title: { value: hero_title },
-      profile_age: { value: profile_age },
-      profile_img: { value: profile_img },
-      profile_location: { value: profile_location },
-      profile_mood: { value: profile_mood }
-    } = await Metafields.globals({ fields: 'key,value' })
-
-    // Get main menu data
-    const menu = await new MenuService().get('main-menu', 'links')
-
-    // Get playlist data
-    const playlist = await axios({ url: `${API_URL}/playlist` })
-
-    res.json({
-      hero: { subtitle: hero_subtitle, title: hero_title },
-      playlist,
-      sidebar: {
-        age: JSON.parse(profile_age as string),
-        img: profile_img,
-        location: profile_location,
-        menu: menu.links,
-        mood: profile_mood
-      }
-    })
+  return routeWrapper<Req, Res>(req, res, async (req, res) => {
+    return LayoutController.getLayoutData(req, res)
   })
 }

@@ -6,6 +6,7 @@ import type {
   FindProductsQuery,
   FindSearchIndexResourceQuery,
   GetImageAssetQuery,
+  GetPlaylistQuery,
   GetProductQuery,
   GetSearchIndexResourceQuery,
   OrNever,
@@ -98,6 +99,13 @@ export interface GetMenuReq extends APIRequest {
  */
 export interface GetPageReq extends APIRequest {
   query: GetSearchIndexResourceQuery
+}
+
+/**
+ * Shape of requests sent to the `/playlist` endpoint.
+ */
+export interface GetPlaylistReq extends APIRequest {
+  query: GetPlaylistQuery
 }
 
 /**

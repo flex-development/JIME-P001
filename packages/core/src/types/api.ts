@@ -207,6 +207,13 @@ export type GetLayoutDataResJSON = {
 export type GetMenuResJSON = PartialOr<ShopifyMenu>
 
 /**
+ * Query parameters accepted by the `/playlist` endpoint.
+ */
+export type GetPlaylistQuery = {
+  fields?: GetSearchIndexResourceQuery['fields']
+}
+
+/**
  * Shape of JSON responses from the `/playlist` endpoint.
  */
 export type GetPlaylistResJSON = {

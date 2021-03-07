@@ -1,31 +1,27 @@
-import type { AnyObject, PartialOr } from '@flex-development/json'
+import type { AnyObject } from '@flex-development/json'
 import type {
   FindCollectionsQuery,
-  FindMetafieldParams,
+  FindSearchIndexResourceQuery,
   GetCollectionResJSON as TObject,
   ICollectionListing,
-  IMetafield,
   IProductListing,
   OrNever,
-  OrPromise,
-  SEOData,
   ShopifyAPIResponses as SAR
 } from '@flex-development/kustomzcore'
 import { EMPTY_SPACE } from '@flex-development/kustomzcore'
 import isEmpty from 'lodash/isEmpty'
 import join from 'lodash/join'
-import merge from 'lodash/merge'
 import uniq from 'lodash/uniq'
-import { stripHtml } from 'string-strip-html'
 import axiosShopify from '../config/axios-shopify'
 import { INDEX_SETTINGS } from '../config/constants'
 import ShopifyAPI from '../config/shopify-api'
 import type { SearchOptions } from '../types'
-import globalSEO from '../utils/globalSEO'
+import Metafields from './MetafieldService'
 import SearchIndexService from './SearchIndexService'
+import SEOService from './SEOService'
 
 /**
- * @file Implementation - Collection Service
+ * @file Implementation - Collection Listing Service
  * @module lib/services/CollectionService
  */
 
@@ -34,39 +30,8 @@ export default class CollectionService extends SearchIndexService<TObject> {
    * Initializes a new Collection Listing service instance.
    */
   constructor() {
-    const { collection_listings } = INDEX_SETTINGS
-    super(collection_listings.name, 'handle', CollectionService.getObjects)
-  }
-
-  /**
-   * Returns an array of metafields for a collection resource.
-   *
-   * @async
-   * @param {number} id - ID of collection to get metafields for
-   * @param {FindMetafieldParams} [params] - Query parameters
-   * @param {string} [params.created_at_max] - Metafields created before date
-   * @param {string} [params.created_at_min] - Metafields created after date
-   * @param {string} [params.fields] - Comma-separated list of fields to show
-   * @param {string} [params.key] - Show metafields with given key
-   * @param {number} [params.limit] - Max number of results. Defaults to `250`
-   * @param {string} [params.namespace] - Show metafields with given namespace
-   * @param {string} [params.updated_at_max] - Metafields updated before date
-   * @param {string} [params.updated_at_min] - Metafields updated after date
-   * @param {string} [params.value_type] - Show metafields with a value_type of
-   * 'integer' or 'string'
-   * @throws {FeathersErrorJSON}
-   */
-  static async metafields(
-    id: ICollectionListing['collection_id'],
-    params: FindMetafieldParams = {}
-  ): OrNever<Promise<PartialOr<IMetafield>[]>> {
-    const config: Parameters<typeof axiosShopify>[0] = {
-      method: 'get',
-      params,
-      url: `collections/${id}/metafields`
-    }
-
-    return (await axiosShopify<SAR.Metafields>(config)).metafields
+    const { collections } = INDEX_SETTINGS
+    super(collections.name, 'handle', CollectionService.getObjects)
   }
 
   /**
@@ -89,14 +54,10 @@ export default class CollectionService extends SearchIndexService<TObject> {
       const $obj: AnyObject = { ...obj }
 
       // Get metafields for each collection
-      $obj.metafield = await CollectionService.metafields($obj.collection_id)
+      $obj.metafield = await Metafields.fetch('collections', $obj.collection_id)
 
       // Get products for each collection
       $obj.products = await CollectionService.products($obj.collection_id)
-
-      // Get SEO data for each collection
-      const collection = $obj as ICollectionListing
-      $obj.seo = await CollectionService.seo(collection, $obj.products)
 
       return $obj as TObject
     })
@@ -127,48 +88,26 @@ export default class CollectionService extends SearchIndexService<TObject> {
   }
 
   /**
-   * Returns an object with SEO data for a collection listing resource.
+   * Retrieve a collection listing by handle.
    *
    * @async
-   * @param {OrPromise<ICollectionListing>} listing - Collecting listing data
-   * @param {IProductListing[]} [products] - Products in collection
-   * @return {Promise<SEOData>} Promise containing SEO data for listing
+   * @param {string} objectID - Handle of collection listing to retrieve
+   * @param {string} [fields] - Specify fields to include
+   * @return {Promise<TObject>} Promise containing collection listing data
    * @throws {FeathersErrorJSON}
    */
-  static async seo(
-    listing: OrPromise<ICollectionListing>,
-    products: IProductListing[] = []
-  ): OrNever<Promise<SEOData>> {
-    listing = await listing
+  async get(
+    objectID: ICollectionListing['handle'],
+    fields?: FindSearchIndexResourceQuery['fields']
+  ): OrNever<Promise<TObject>> {
+    const data = await super.get(objectID, fields)
+    const listing = data as ICollectionListing
 
-    // Get global SEO data
-    const global = await globalSEO()
+    if (SEOService.includeSEO(fields)) {
+      data.seo = await SEOService.collection(listing, data.products)
+    }
 
-    // Get collection image
-    const image = listing.image || listing.default_product_image || {}
-
-    // Build keywords from product tags
-    let keywords: string[] = []
-
-    products.forEach(product => {
-      keywords = keywords.concat(product.tags.trim().split(','))
-    })
-
-    keywords = uniq(keywords.concat(global.keywords?.split(',') ?? []))
-
-    return merge(global, {
-      description: stripHtml(listing.body_html).result.trim(),
-      keywords: join(keywords, ','),
-      og: {
-        image: image.src,
-        'image:alt': isEmpty(image) ? image.alt : image.alt || '',
-        'image:height': isEmpty(image) ? image.height : image.height || null,
-        'image:secure_url': image.src,
-        'image:width': isEmpty(image) ? image.width : image.width || null
-      },
-      title: `Collections - ${listing.title}`,
-      twitter: { image: image.src }
-    })
+    return data
   }
 
   /**

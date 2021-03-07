@@ -1,26 +1,27 @@
 import type { VercelResponse as Res } from '@vercel/node'
+import PagesController from '../../lib/controllers/PagesController'
 import routeWrapper from '../../lib/middleware/routeWrapper'
-import MetafieldService from '../../lib/services/MetafieldService'
-import type { GetGlobalMetafieldsReq as Req } from '../../lib/types'
+import type { GetPageReq as Req } from '../../lib/types'
 
 /**
- * @file API Endpoint - Get Global Metafields
- * @module api/metafields/globals
+ * @file API Endpoint - Get Page By Handle
+ * @module api/pages/[objectID]
  */
 
 /**
- * Returns an object with shop-level metafields.
- * All metafields will be from the `globals` namespace.
+ * Retrieve a page resource by handle.
  *
  * @async
  * @param {Req} req - API request object
- * @param {Req['query']} [req.query] - Query parameters object
+ * @param {Req['query']} req.query - Query parameters object
+ * @param {string} [req.query.fields] - List of fields to include
+ * @param {string} req.query.objectID - Handle of page to retrieve
  * @param {Res} res - API response object
  * @return {Promise<Res | void>} Promise containing server response object if an
  * error is thrown, or empty promise if request completed successfully
  */
 export default async (req: Req, res: Res): Promise<Res | void> => {
   return routeWrapper<Req, Res>(req, res, async (req: Req, res: Res) => {
-    res.json(await MetafieldService.globals(req.query))
+    return new PagesController().findOne(req, res)
   })
 }

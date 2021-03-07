@@ -1,29 +1,18 @@
 import { axios } from '@flex-development/kustomzcore'
 import type { VercelResponse as Res } from '@vercel/node'
 import { API_URL } from '../lib/config'
-import {
-  handleAPIError,
-  initRoute,
-  trackAPIRequest,
-  trackAPISuccessEvent
-} from '../lib/middleware'
+import routeWrapper from '../lib/middleware/routeWrapper'
 import MenuService from '../lib/services/MenuService'
+import Metafields from '../lib/services/MetafieldService'
 import type { APIRequest as Req } from '../lib/types'
-import { metafieldsGlobal } from '../lib/utils'
 
 /**
- * @file API Endpoint - Get `AppLayout` data
+ * @file API Endpoint - Get Storefront Layout Data
  * @module api/layout
  */
 
 export default async (req: Req, res: Res): Promise<Res | void> => {
-  // Initialize API route
-  initRoute(req)
-
-  // Send `pageview` hit to Google Analytics
-  await trackAPIRequest(req)
-
-  try {
+  return routeWrapper<Req, Res>(req, res, async (req: Req, res: Res) => {
     // Fetch global metafields to get profile snippet
     const {
       hero_subtitle: { value: hero_subtitle },
@@ -32,10 +21,10 @@ export default async (req: Req, res: Res): Promise<Res | void> => {
       profile_img: { value: profile_img },
       profile_location: { value: profile_location },
       profile_mood: { value: profile_mood }
-    } = await metafieldsGlobal({ fields: 'key,value' })
+    } = await Metafields.globals({ fields: 'key,value' })
 
     // Get main menu data
-    const menu = await MenuService.get('main-menu', 'links')
+    const menu = await new MenuService().get('main-menu', 'links')
 
     // Get playlist data
     const playlist = await axios({ url: `${API_URL}/playlist` })
@@ -51,11 +40,5 @@ export default async (req: Req, res: Res): Promise<Res | void> => {
         mood: profile_mood
       }
     })
-  } catch (err) {
-    return handleAPIError(req, res, err)
-  }
-
-  // Send success `event` hit to Google Analytics
-  await trackAPISuccessEvent(req)
-  return res.end()
+  })
 }

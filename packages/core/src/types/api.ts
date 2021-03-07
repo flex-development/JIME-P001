@@ -110,7 +110,6 @@ export type FindMetafieldParams = {
  */
 export interface FindPagesQuery extends FindSearchIndexResourceQuery {
   author?: IPage['author']
-  handle?: IPage['handle']
   id?: IPage['id']
 }
 
@@ -118,7 +117,6 @@ export interface FindPagesQuery extends FindSearchIndexResourceQuery {
  * Query parameters accepted by the `/products` endpoint.
  */
 export interface FindProductsQuery extends FindSearchIndexResourceQuery {
-  handle?: IProductListing['handle']
   product_id?: IProductListing['product_id']
 }
 
@@ -174,7 +172,7 @@ export type GetCollectionResJSON = PartialOr<
 /**
  * Shape of JSON responses from the `/metafields/globals` endpoint.
  */
-export type GetGlobalMetafieldsResJSON = Record<string, IMetafield>
+export type GetGlobalMetafieldsResJSON = Record<string, PartialOr<IMetafield>>
 
 /**
  * Query parameters accepted by the `/assets/images/[filename]` endpoint.

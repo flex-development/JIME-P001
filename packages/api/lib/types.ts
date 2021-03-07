@@ -118,11 +118,11 @@ export interface GetProductReq extends APIRequest {
  * Search index names.
  */
 export type SearchIndexName =
-  | 'collection_listings'
+  | 'collections'
   | 'menus'
   | 'pages'
   | 'policies'
-  | 'product_listings'
+  | 'products'
 
 /**
  * Function to populate search index.
@@ -130,6 +130,11 @@ export type SearchIndexName =
 export type SearchIndexObjectsFN<TObject = AnyObject> = {
   (): OrNever<OrPromise<TObject[]>>
 }
+
+/**
+ * Shopify resources that have a `metafield` property.
+ */
+export type ShopifyResourceWithMetafield = 'collections' | 'pages' | 'products'
 
 // Algolia types
 export type {

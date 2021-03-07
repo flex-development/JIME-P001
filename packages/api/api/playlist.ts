@@ -3,8 +3,9 @@ import type { VercelResponse as Res } from '@vercel/node'
 import type { AxiosRequestConfig } from 'axios'
 import pick from 'lodash/pick'
 import routeWrapper from '../lib/middleware/routeWrapper'
+import Metafields from '../lib/services/MetafieldService'
 import type { APIRequest as Req } from '../lib/types'
-import { appleDeveloperToken, metafieldsGlobal } from '../lib/utils'
+import { appleDeveloperToken } from '../lib/utils'
 
 /**
  * @file API Endpoint - Get Store Playlist Data
@@ -14,7 +15,7 @@ import { appleDeveloperToken, metafieldsGlobal } from '../lib/utils'
 export default async (req: Req, res: Res): Promise<Res | void> => {
   return routeWrapper<Req, Res>(req, res, async (req: Req, res: Res) => {
     // Fetch global metafields to get playlist URL
-    const { playlist_url } = await metafieldsGlobal()
+    const { playlist_url } = await Metafields.globals()
     const url = (playlist_url.value || '') as string
 
     // Get playlist ID

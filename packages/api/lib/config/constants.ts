@@ -30,13 +30,13 @@ export const INDEX_SETTINGS: Record<
   SearchIndexName,
   SearchIndexSettings & { name: SearchIndexName }
 > = {
-  collection_listings: {
+  collections: {
     attributesForFaceting: [
       'filterOnly(collection_id)',
       'filterOnly(handle)',
       'filterOnly(objectID)'
     ],
-    name: 'collection_listings'
+    name: 'collections'
   },
   menus: {
     attributesForFaceting: [
@@ -63,7 +63,7 @@ export const INDEX_SETTINGS: Record<
     ],
     name: 'policies'
   },
-  product_listings: {
+  products: {
     attributesForFaceting: [
       'filterOnly(handle)',
       'filterOnly(objectID)',
@@ -71,7 +71,7 @@ export const INDEX_SETTINGS: Record<
       'filterOnly(product_type)',
       'filterOnly(title)'
     ],
-    name: 'product_listings'
+    name: 'products'
   }
 }
 

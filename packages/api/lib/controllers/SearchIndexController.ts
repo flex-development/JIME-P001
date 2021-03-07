@@ -4,20 +4,37 @@ import type SearchIndexService from '../services/SearchIndexService'
 import type { APIRequest as AReq } from '../types'
 
 /**
- * @file Implementation - SearchIndexController
+ * @file Implementation - Controller - SearchIndexService
  * @module lib/controllers/SearchIndexController
  */
 
 /**
  * Handles requests to API services that extend the `SearchIndexService` class.
  */
-class SearchIndexController {
+class SearchIndexController<Req extends AReq = AReq, Res extends VRes = VRes> {
+  /**
+   * `SearchIndexService` service module this controller interacts with.
+   *
+   * @protected
+   * @property {SearchIndexService} service
+   */
+  protected service: SearchIndexService
+
+  /**
+   * Initializes a new SearchIndexController instance.
+   *
+   * @param {SearchIndexService} service - Service controller interacts with
+   */
+  constructor(service: SearchIndexService) {
+    this.service = service
+  }
+
   /**
    * Performs a search.
    *
    * @async
    * @param {Req} req - API request object
-   * @param {Req['query']} req.query - Query parameters object
+   * @param {Req['query']} [req.query] - Query parameters object
    * @param {string} [req.query.fields] - List of fields to include
    * @param {number} [req.query.hitsPerPage] - Number of results per page
    * @param {number} [req.query.length] - Result limit (used only with offset)
@@ -26,19 +43,14 @@ class SearchIndexController {
    * @param {number} [req.query.page] - Specify the page to retrieve
    * @param {string} [req.query.text] - Text to search in index
    * @param {Res} res - API response object
-   * @param {SearchIndexService} service - Service controller interacts with
    * @return {Promise<void>} Empty promise if request completed successfully
    */
-  static async find<Req extends AReq = AReq, Res extends VRes = VRes>(
-    req: Req,
-    res: Res,
-    service: SearchIndexService
-  ): OrNever<Promise<void>> {
+  async find(req: Req, res: Res): OrNever<Promise<void>> {
     // Convert query into search options object
-    const options = service.searchOptions(req.query)
+    const options = this.service.searchOptions(req.query)
 
     // Execute search
-    res.json(await service.search(req.query.text, options))
+    res.json(await this.service.search(req.query.text, options))
   }
 
   /**
@@ -48,17 +60,12 @@ class SearchIndexController {
    * @param {Req} req - API request object
    * @param {Req['query']} req.query - Query parameters object
    * @param {string} [req.query.fields] - List of fields to include
-   * @param {string} [req.query.objectID] - ID of resource to retrieve
+   * @param {string} req.query.objectID - ID of resource to retrieve
    * @param {Res} res - API response object
-   * @param {SearchIndexService} service - Service controller interacts with
    * @return {Promise<void>} Empty promise if request completed successfully
    */
-  static async findOne<Req extends AReq = AReq, Res extends VRes = VRes>(
-    req: Req,
-    res: Res,
-    service: SearchIndexService
-  ): OrNever<Promise<void>> {
-    res.json(await service.get(req.query.objectID, req.query.fields))
+  async findOne(req: Req, res: Res): OrNever<Promise<void>> {
+    res.json(await this.service.get(req.query.objectID, req.query.fields))
   }
 }
 

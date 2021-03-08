@@ -24,6 +24,7 @@ const Logger = pino({
 /**
  * Returns a Pino child logger.
  *
- * @param path - API request path
+ * @param {string} path - Path segement of API request URL
+ * @return {pino.Logger} Pino child logger instance
  */
 export default (path: string): pino.Logger => Logger.child({ path, vercel })

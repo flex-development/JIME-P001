@@ -25,11 +25,14 @@ import Metafields from './MetafieldService'
  * @module lib/services/SEOService
  */
 
+/**
+ * Handles interactions with SEO data for API resources.
+ *
+ * @class
+ */
 class SEOService {
   /**
-   * Default SEO image properties.
-   *
-   * @property {object} DEFAULT_IMAGE_PROPS
+   * @property {object} DEFAULT_IMAGE_PROPS - Default SEO image properties
    * @property {number} DEFAULT_IMAGE_PROPS.height - Image height
    * @property {string} DEFAULT_IMAGE_PROPS.src - Image URL
    * @property {number} DEFAULT_IMAGE_PROPS.width - Image width

@@ -1,4 +1,7 @@
-import type { OrNever } from '@flex-development/kustomzcore'
+import type {
+  GetProductQuery as GetQuery,
+  OrNever
+} from '@flex-development/kustomzcore'
 import type { VercelResponse as Res } from '@vercel/node'
 import ProductService from '../services/ProductService'
 import type {
@@ -12,6 +15,13 @@ import SearchIndexController from './SearchIndexController'
  * @module lib/controllers/ProductsController
  */
 
+/**
+ * Handles all API requests to the '/products/*` endpoints and interactions with
+ * the {@link ProductService}.
+ *
+ * @class
+ * @extends SearchIndexController
+ */
 class ProductsController extends SearchIndexController<FindReq | GetReq> {
   /**
    * Initializes a new `ProductsController` instance.
@@ -25,11 +35,11 @@ class ProductsController extends SearchIndexController<FindReq | GetReq> {
    *
    * @async
    * @param {GetReq} req - API request object
-   * @param {GetReq['query']} req.query - Query parameters object
+   * @param {GetQuery} req.query - Query parameters object
    * @param {string} [req.query.fields] - List of fields to include
    * @param {string} req.query.objectID - Handle of product listing to retrieve
    * @param {string} [req.query.sku] - SKU of variant to generate SEO for
-   * @param {Res} res - API response object
+   * @param {Res} res - Server response object
    * @return {Promise<void>} Empty promise if request completed successfully
    */
   async findOne(req: GetReq, res: Res): OrNever<Promise<void>> {

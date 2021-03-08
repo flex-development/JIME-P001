@@ -19,9 +19,12 @@ import trackAPISuccessEvent from './trackAPISuccessEvent'
  * client. If an error is thrown by {@param handleRequest} it will be caught the
  * API error handling middleware.
  *
+ * @template Req - API request object
+ * @template Res - Server response object
+ *
  * @async
  * @param {APIRequest} req - API request object
- * @param {Res} res - API response object
+ * @param {Res} res - Server response object
  * @param {Function} handleRequest - API route logic
  * @return {Promise<Res | void>} Promise containing server response object if an
  * error is thrown, or empty promise if request completed successfully

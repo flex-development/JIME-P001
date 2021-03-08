@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "importHelpers": true,
-    "lib": ["es2016"],
+    "lib": ["esnext"],
     "module": "commonjs",
     "paths": {},
     "target": "es6"

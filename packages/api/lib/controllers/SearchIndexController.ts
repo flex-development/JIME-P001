@@ -1,3 +1,4 @@
+import type { AnyObject } from '@flex-development/json'
 import type { OrNever } from '@flex-development/kustomzcore'
 import type { VercelResponse as VRes } from '@vercel/node'
 import type SearchIndexService from '../services/SearchIndexService'
@@ -10,13 +11,16 @@ import type { APIRequest as AReq } from '../types'
 
 /**
  * Handles requests to API services that extend the `SearchIndexService` class.
+ *
+ * @template Req - API request object
+ * @template Res - Server response object
+ *
+ * @class
  */
 class SearchIndexController<Req extends AReq = AReq, Res extends VRes = VRes> {
   /**
-   * `SearchIndexService` service module this controller interacts with.
-   *
    * @protected
-   * @property {SearchIndexService} service
+   * @property {SearchIndexService} service - Search index controller service
    */
   protected service: SearchIndexService
 
@@ -34,7 +38,7 @@ class SearchIndexController<Req extends AReq = AReq, Res extends VRes = VRes> {
    *
    * @async
    * @param {Req} req - API request object
-   * @param {Req['query']} [req.query] - Query parameters object
+   * @param {AnyObject} [req.query] - Query parameters object
    * @param {string} [req.query.fields] - List of fields to include
    * @param {number} [req.query.hitsPerPage] - Number of results per page
    * @param {number} [req.query.length] - Result limit (used only with offset)
@@ -42,7 +46,7 @@ class SearchIndexController<Req extends AReq = AReq, Res extends VRes = VRes> {
    * @param {number} [req.query.offset] - Offset of the first result to return
    * @param {number} [req.query.page] - Specify the page to retrieve
    * @param {string} [req.query.text] - Text to search in index
-   * @param {Res} res - API response object
+   * @param {Res} res - Server response object
    * @return {Promise<void>} Empty promise if request completed successfully
    */
   async find(req: Req, res: Res): OrNever<Promise<void>> {
@@ -58,10 +62,10 @@ class SearchIndexController<Req extends AReq = AReq, Res extends VRes = VRes> {
    *
    * @async
    * @param {Req} req - API request object
-   * @param {Req['query']} req.query - Query parameters object
+   * @param {AnyObject} req.query - Query parameters object
    * @param {string} [req.query.fields] - List of fields to include
    * @param {string} req.query.objectID - ID of resource to retrieve
-   * @param {Res} res - API response object
+   * @param {Res} res - Server response object
    * @return {Promise<void>} Empty promise if request completed successfully
    */
   async findOne(req: Req, res: Res): OrNever<Promise<void>> {

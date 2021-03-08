@@ -14,6 +14,12 @@ import SEOService from './SEOService'
  * @module lib/services/PolicyService
  */
 
+/**
+ * Handles interactions with policy resources.
+ *
+ * @class
+ * @extends SearchIndexService
+ */
 export default class PolicyService extends SearchIndexService<TObject> {
   /**
    * Initializes a new Policy service instance.

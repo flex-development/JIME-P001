@@ -21,7 +21,7 @@ import type { GetImageAssetReq as Req } from '../../../lib/types'
  * @param {string} req.query.filename - Filename of image to retrieve
  * @param {NumberString} [req.query.height] - Resized image height
  * @param {NumberString} [req.query.width] - Resized image width
- * @param {Res} res - API response object
+ * @param {Res} res - Server response object
  * @return {Promise<Res | void>} Promise containing server response object if an
  * error is thrown, or empty promise if request completed successfully
  */

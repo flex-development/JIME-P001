@@ -171,6 +171,11 @@ export type GetCollectionResJSON = PartialOr<
 >
 
 /**
+ * Query parameters accepted by the `/metafields/globals` endpoint.
+ */
+export type GetGlobalMetafieldsQuery = Omit<FindMetafieldParams, 'namespace'>
+
+/**
  * Shape of JSON responses from the `/metafields/globals` endpoint.
  */
 export type GetGlobalMetafieldsResJSON = Record<string, PartialOr<IMetafield>>

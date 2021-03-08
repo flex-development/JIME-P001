@@ -1,6 +1,6 @@
 import type { PartialOr } from '@flex-development/json'
 import type {
-  FindMetafieldParams,
+  GetGlobalMetafieldsQuery as FindMetafieldParams,
   GetGlobalMetafieldsResJSON,
   IMetafield,
   OrNever,
@@ -16,6 +16,11 @@ import type { ShopifyResourceWithMetafield } from '../types'
  * @module lib/services/MetafieldService
  */
 
+/**
+ * Handles interactions with Shopify metafields.
+ *
+ * @class
+ */
 class MetafieldService {
   /**
    * Returns an array of metafields.
@@ -24,7 +29,7 @@ class MetafieldService {
    *
    * @async
    * @param {ShopifyResourceWithMetafield} [type] - Type of Shopify resource
-   * @param {number} [id] ID of Shopify resources to get metafields for
+   * @param {number} [id] - ID of Shopify resources to get metafields for
    * @param {FindMetafieldParams} [params] - Query parameters
    * @param {string} [params.created_at_max] - Metafields created before date
    * @param {string} [params.created_at_min] - Metafields created after date
@@ -55,7 +60,7 @@ class MetafieldService {
    * metafields will be returned.
    *
    * @param {ShopifyResourceWithMetafield} [type] - Type of Shopify resource
-   * @param {number} [id] ID of Shopify resources to get metafields for
+   * @param {number} [id] - ID of Shopify resources to get metafields for
    * @param {FindMetafieldParams} [params] - Query parameters
    * @param {string} [params.created_at_max] - Metafields created before date
    * @param {string} [params.created_at_min] - Metafields created after date
@@ -67,8 +72,6 @@ class MetafieldService {
    * @param {string} [params.updated_at_min] - Metafields updated after date
    * @param {string} [params.value_type] - Show metafields with a value_type of
    * 'integer' or 'string'
-   * @param {ShopifyResourceWithMetafield} [type] - Type of Shopify resource
-   * @param {number} [id] ID of Shopify resources to get metafields for
    * @return {AxiosRequestConfig} Axios config object
    */
   static getRequestConfig(
@@ -99,6 +102,8 @@ class MetafieldService {
    * @param {string} [params.updated_at_min] - Metafields updated after date
    * @param {string} [params.value_type] - Show metafields with a value_type of
    * 'integer' or 'string'
+   * @return {Promise<Record<string, PartialOr<IMetafield>>>} - Promise
+   * containing object with shop-level metafields
    */
   static async globals(
     params: Omit<FindMetafieldParams, 'namespace'> = {}

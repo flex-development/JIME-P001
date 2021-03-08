@@ -13,7 +13,7 @@ import type { APIRequest } from '../types'
  * - The property `path` will be attached to {@param req}
  * - The property `logger` will be initialized as a Pino child logger instance
  *
- * @param req - API request object
+ * @param {APIRequest} req - API request object
  */
 const initRoute = (req: APIRequest): void => {
   // Get request path

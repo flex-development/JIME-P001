@@ -14,7 +14,7 @@ import type { APIRequest as Req } from '../lib/types'
  *
  * @async
  * @param {Req} req - API request object
- * @param {Res} res - API response object
+ * @param {Res} res - Server response object
  * @return {Promise<Res | void>} Promise containing server response object if
  * an error is thrown, or empty promise if request completed successfully
  */

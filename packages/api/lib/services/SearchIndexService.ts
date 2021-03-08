@@ -1,6 +1,7 @@
 import type { AnyObject } from '@flex-development/json'
 import type {
   FindSearchIndexResourceQuery,
+  NumberString,
   OrNever
 } from '@flex-development/kustomzcore'
 import { createError, EMPTY_SPACE } from '@flex-development/kustomzcore'
@@ -18,54 +19,54 @@ import type {
   Hit,
   SearchIndex,
   SearchIndexName,
-  SearchIndexObjectsFN,
+  SearchIndexObjectsFN as ObjectsFN,
   SearchIndexSettings,
   SearchOptions
 } from '../types'
-import formatError from '../utils/formatError'
+import ErrorService from './ErrorService'
 
 /**
  * @file Implementation - SearchIndexService
  * @module lib/services/SearchIndexService
  */
 
+/**
+ * Generic service for interacting with Algolia search indices.
+ *
+ * @see https://www.algolia.com/doc/api-reference/api-parameters/
+ *
+ * @template TObject - Search index object
+ *
+ * @class
+ */
 class SearchIndexService<TObject extends AnyObject = AnyObject> {
   /**
-   * Function to populate the search index.
-   *
    * @protected
-   * @property {SearchIndexObjectsFN} objects
+   * @property {ObjectsFN<TObject>} objects - Function to populate
+   * search index. Can be asynchronous
    */
-  protected getObjects: SearchIndexObjectsFN<TObject> = () => []
+  protected getObjects: ObjectsFN<TObject>
 
   /**
-   * Algolia search index object.
-   *
    * @protected
-   * @property {SearchIndex} index
+   * @property {SearchIndex} index - Algolia search index object
    */
   protected index: SearchIndex
 
   /**
-   * Name of the search index the service interacts with.
-   *
    * @protected
-   * @property {SearchIndexName} index_name
+   * @property {SearchIndexName} index_name - Name of the search index
    */
   protected index_name: SearchIndexName
 
   /**
-   * Current search index settings.
-   *
    * @protected
-   * @property {SearchIndexSettings} settings
+   * @property {SearchIndexSettings} settings - Search index settings
    */
   protected settings: SearchIndexSettings = {}
 
   /**
-   * Name of field used when setting each object's `objectID` value.
-   *
-   * @property {string} oid_key
+   * @property {string} oid_key - Name of field to set `objectID` value
    */
   oid_key: keyof TObject
 
@@ -74,7 +75,7 @@ class SearchIndexService<TObject extends AnyObject = AnyObject> {
    *
    * @param {string} name - Name of search index to initialize controller for
    * @param {string} oid_key - Name of key to use when setting objectID
-   * @param {SearchIndexObjectsFN} getObjects - Function that returns objects to
+   * @param {ObjectsFN} getObjects - Function that returns objects to
    * populate search index. Can be asynchronous
    * @param {boolean} [clear] - Clear index objects after updating index
    * settings. Defaults to `false`
@@ -82,7 +83,7 @@ class SearchIndexService<TObject extends AnyObject = AnyObject> {
   constructor(
     name: SearchIndexName,
     oid_key: keyof TObject,
-    getObjects?: SearchIndexObjectsFN<TObject>,
+    getObjects?: SearchIndexService<TObject>['getObjects'],
     clear: boolean = false
   ) {
     this.index = ALGOLIA.initIndex(name)
@@ -91,7 +92,7 @@ class SearchIndexService<TObject extends AnyObject = AnyObject> {
     this.settings = omit(INDEX_SETTINGS[name] || {}, ['name'])
 
     // Update object populate fn
-    if (getObjects) this.getObjects = getObjects
+    this.getObjects = getObjects || (() => [])
 
     // Update settings and clear search index
     this.index.setSettings(this.settings).wait()
@@ -102,7 +103,7 @@ class SearchIndexService<TObject extends AnyObject = AnyObject> {
    * Retrieve a single search index resource.
    *
    * @async
-   * @param {string | number} objectID - Search index object ID
+   * @param {NumberString} objectID - Search index object ID
    * @param {string} [fields] - Specify fields to include for each object
    * @return {Promise<TObject>} Promise containing search index resource
    * @throws {FeathersErrorJSON}
@@ -133,6 +134,7 @@ class SearchIndexService<TObject extends AnyObject = AnyObject> {
    *
    * @async
    * @return {Promise<TObject[]>} Promise containing initial index objects
+   * @throws {FeathersErrorJSON}
    */
   async objects(): OrNever<Promise<(TObject & { objectID: string })[]>> {
     try {
@@ -140,9 +142,7 @@ class SearchIndexService<TObject extends AnyObject = AnyObject> {
       return objects.map(obj => ({ ...obj, objectID: obj[this.oid_key] }))
     } catch (err) {
       const data = { index_name: this.index_name, oid_key: this.oid_key }
-      const status = err.code || err.status
-
-      throw formatError({ ...err, status }, data)
+      throw createError(err, data, err.code || err.status)
     }
   }
 
@@ -167,7 +167,7 @@ class SearchIndexService<TObject extends AnyObject = AnyObject> {
       return (await this.index.search<TObject>(query || '', options)).hits
     } catch (err) {
       const data = { index_name: this.index_name, options, query }
-      const error = formatError(err, data)
+      const error = ErrorService.format(err, data)
 
       const { search_index_404 } = error.data
 

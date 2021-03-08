@@ -7,6 +7,11 @@ import type { AxiosRequestConfig } from 'axios'
  * @module lib/services/AppleAuthService
  */
 
+/**
+ * Handles authentication with Apple APIs.
+ *
+ * @class
+ */
 class AppleAuthService {
   /**
    * Returns a signed JSON web token to authenticate with the Apple Music API.

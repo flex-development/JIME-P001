@@ -9,6 +9,11 @@ import sharp from 'sharp'
  * @module lib/services/AssetService
  */
 
+/**
+ * Handles interactions with static assets.
+ *
+ * @class
+ */
 class AssetService {
   /**
    * @property {string} IMAGE_DIR_PATH - Path to `/images` directory

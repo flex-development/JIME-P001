@@ -22,6 +22,12 @@ import SEOService from './SEOService'
  * @module lib/services/ProductService
  */
 
+/**
+ * Handles interactions with product listing resources.
+ *
+ * @class
+ * @extends SearchIndexService
+ */
 export default class ProductService extends SearchIndexService<TObject> {
   /**
    * Initializes a new Product Listing service instance.

@@ -12,6 +12,12 @@ import type { GetImageAssetReq as Req } from '../types'
  * @module lib/controllers/AssetsController
  */
 
+/**
+ * Handles all API requests to the `/assets/*` endpoints and interactions with
+ * the {@link AssetService}.
+ *
+ * @class
+ */
 class AssetsController {
   /**
    * Retrieve an image asset by filename.
@@ -22,7 +28,7 @@ class AssetsController {
    * @param {string} req.query.filename - Filename of image to retrieve
    * @param {NumberString} [req.query.height] - Resized image height
    * @param {NumberString} [req.query.width] - Resized image width
-   * @param {Res} res - API response object
+   * @param {Res} res - Server response object
    * @return {Promise<void>} Empty promise if request completed successfully
    */
   static async getImage(req: Req, res: Res): Promise<void> {

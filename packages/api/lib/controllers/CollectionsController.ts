@@ -10,6 +10,13 @@ import SearchIndexController from './SearchIndexController'
  * @module lib/controllers/CollectionsController
  */
 
+/**
+ * Handles all API requests to the `/collections/*` endpoints and interactions
+ * with the {@link CollectionService}.
+ *
+ * @class
+ * @extends SearchIndexController
+ */
 class CollectionsController extends SearchIndexController<FindReq | GetReq> {
   /**
    * Initializes a new `CollectionsController` instance.

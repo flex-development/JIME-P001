@@ -22,6 +22,12 @@ import SEOService from './SEOService'
  * @module lib/services/PageService
  */
 
+/**
+ * Handles interactions with page resources.
+ *
+ * @class
+ * @extends SearchIndexService
+ */
 export default class PageService extends SearchIndexService<TObject> {
   /**
    * Initializes a new Page service instance.

@@ -12,6 +12,12 @@ import SearchIndexService from './SearchIndexService'
  * @module lib/services/MenuService
  */
 
+/**
+ * Handles interactions with Shopify menu resources.
+ *
+ * @class
+ * @extends SearchIndexService
+ */
 export default class MenuService extends SearchIndexService<TObject> {
   /**
    * Initializes a new Menu service instance.

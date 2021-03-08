@@ -25,6 +25,12 @@ import SEOService from './SEOService'
  * @module lib/services/CollectionService
  */
 
+/**
+ * Handles interactions with collection listing resources.
+ *
+ * @class
+ * @extends SearchIndexService
+ */
 export default class CollectionService extends SearchIndexService<TObject> {
   /**
    * Initializes a new Collection Listing service instance.

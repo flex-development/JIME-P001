@@ -1,4 +1,7 @@
-import type { OrNever } from '@flex-development/kustomzcore'
+import type {
+  FindPagesQuery as FindQuery,
+  OrNever
+} from '@flex-development/kustomzcore'
 import type { VercelResponse as Res } from '@vercel/node'
 import PageService from '../services/PageService'
 import type { FindPagesReq as FindReq, GetPageReq as GetReq } from '../types'
@@ -9,6 +12,13 @@ import SearchIndexController from './SearchIndexController'
  * @module lib/controllers/PagesController
  */
 
+/**
+ * Handles all API requests to the `/pages/*` endpoints and interactions with
+ * the {@link PageService}.
+ *
+ * @class
+ * @extends SearchIndexController
+ */
 class PagesController extends SearchIndexController<FindReq | GetReq> {
   /**
    * Initializes a new `PagesController` instance.
@@ -22,7 +32,7 @@ class PagesController extends SearchIndexController<FindReq | GetReq> {
    *
    * @async
    * @param {FindReq} req - API request object
-   * @param {FindReq['query']} [req.query] - Query parameters object
+   * @param {FindQuery} [req.query] - Query parameters object
    * @param {string} [req.query.author] - Filter pages by author
    * @param {string} [req.query.fields] - List of fields to include
    * @param {number} [req.query.hitsPerPage] - Number of results per page
@@ -32,7 +42,7 @@ class PagesController extends SearchIndexController<FindReq | GetReq> {
    * @param {number} [req.query.offset] - Offset of the first result to return
    * @param {number} [req.query.page] - Specify the page to retrieve
    * @param {string} [req.query.text] - Text to search in index
-   * @param {Res} res - API response object
+   * @param {Res} res - Server response object
    * @return {Promise<void>} Empty promise if request completed successfully
    */
   async find(req: FindReq, res: Res): OrNever<Promise<void>> {

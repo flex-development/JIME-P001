@@ -7,6 +7,13 @@ import SearchIndexController from './SearchIndexController'
  * @module lib/controllers/MenusController
  */
 
+/**
+ * Handles all API requests to the `menus/*` endpoints and interactions with the
+ * {@link MenuService}.
+ *
+ * @class
+ * @extends SearchIndexController
+ */
 class MenusController extends SearchIndexController<FindReq | GetReq> {
   /**
    * Initializes a new `MenusController` instance.

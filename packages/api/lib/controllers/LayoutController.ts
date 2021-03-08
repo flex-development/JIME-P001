@@ -9,15 +9,19 @@ import type { APIRequest as Req } from '../types'
  * @module lib/services/LayoutController
  */
 
+/**
+ * Handles all API requests to the `/layout/*` endpoints.
+ *
+ * @class
+ */
 class LayoutController {
   /**
    * Fetches the store playlist data.
    *
    * @async
    * @param {Req} req - API request object
-   * @param {Res} res - API response object
-   * @return {Promise<Res | void>} Promise containing server response object if
-   * an error is thrown, or empty promise if request completed successfully
+   * @param {Res} res - Server response object
+   * @return {Promise<void>} Empty promise if request completed successfully
    */
   static async getLayoutData(req: Req, res: Res): Promise<void> {
     // Fetch global metafields to get profile snippet

@@ -3,10 +3,10 @@ import type { FeathersErrorJSON } from '@feathersjs/errors'
 import type { AnyObject, ANYTHING } from '@flex-development/json'
 import type {
   FindCollectionsQuery,
-  FindMetafieldParams,
   FindPagesQuery,
   FindProductsQuery,
   FindSearchIndexResourceQuery,
+  GetGlobalMetafieldsQuery,
   GetImageAssetQuery,
   GetPlaylistQuery,
   GetProductQuery,
@@ -84,7 +84,7 @@ export interface GetCollectionReq extends APIRequest {
  * Shape of requests sent to the `/metafields/globals` endpoint.
  */
 export interface GetGlobalMetafieldsReq extends APIRequest {
-  query: Omit<FindMetafieldParams, 'namespace'>
+  query: GetGlobalMetafieldsQuery
 }
 
 /**

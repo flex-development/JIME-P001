@@ -16,13 +16,15 @@ import type { AxiosRequestConfig } from 'axios'
  *
  * @see https://shopify.dev/docs/admin-api/rest/reference
  *
- * @param config - Axios request config
- * @param menus - If menus is true, use alternate `baseURL`
- * @throws {FeathersError}
+ * @template T
+ * @param {AxiosRequestConfig} config - Axios request config
+ * @param {boolean} menus - If menus is true, use alternate `baseURL`
+ * @return {Promise<T>} Promise containing requested data
+ * @throws {FeathersErrorJSON}
  */
 async function axiosShopify<T = ANYTHING>(
   config: Omit<AxiosRequestConfig, 'baseURL'> = {},
-  menus = false
+  menus: boolean = false
 ): Promise<T> {
   // ! While in development, the menus endpoint cannot be accessed
   if (menus) {

@@ -16,6 +16,11 @@ import Metafields from './MetafieldService'
  * @module lib/services/PlaylistService
  */
 
+/**
+ * Handles interactions with playlists.
+ *
+ * @class
+ */
 class PlaylistService {
   /**
    * Returns playlist data from the Apple Music API.

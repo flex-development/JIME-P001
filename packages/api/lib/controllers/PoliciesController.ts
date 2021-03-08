@@ -10,6 +10,13 @@ import SearchIndexController from './SearchIndexController'
  * @module lib/controllers/PoliciesController
  */
 
+/**
+ * Handles all API requests to the `policies/*` endpoints and interactions with
+ * the {@link PolicyService}.
+ *
+ * @class
+ * @extends SearchIndexController
+ */
 class PoliciesController extends SearchIndexController<FindReq | GetReq> {
   /**
    * Initializes a new `PoliciesController` instance.

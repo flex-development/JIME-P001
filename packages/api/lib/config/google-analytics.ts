@@ -19,4 +19,11 @@ ga.setClientId(nanoid())
 // Disable tracking in non-Vercel environments
 if (!(JSON.parse(VERCEL || '0') && VERCEL_ENV !== 'development')) ga.disable()
 
+export const GA_CATEGORIES = {
+  responses: {
+    error: 'Error Response',
+    success: 'Success Response'
+  }
+}
+
 export default ga

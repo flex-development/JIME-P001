@@ -1,3 +1,5 @@
+import type { ApiError as AlgoliaError } from '@algolia/transporter'
+import type { FeathersErrorJSON } from '@feathersjs/errors'
 import type { AnyObject, ANYTHING } from '@flex-development/json'
 import type {
   FindCollectionsQuery,
@@ -19,6 +21,11 @@ import type { Logger } from 'pino'
  * @file Type Declarations
  * @module types
  */
+
+/**
+ * Shape of API error objects (with or without formatting).
+ */
+export type APIError = Error | AlgoliaError | FeathersErrorJSON
 
 /**
  * Shape of the API `req` object.

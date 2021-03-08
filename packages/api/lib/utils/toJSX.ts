@@ -9,7 +9,8 @@ import TurndownService from '../config/turndown-service'
 /**
  * Returns a JSX code string containing transpiled MDX.
  *
- * @param str - String with MDX content
+ * @param {string} str - String with MDX content
+ * @return {Promise<string>} Promise containing JSX code
  */
 const toJSX = async (str?: string | Promise<string>): Promise<string> => {
   const html = (await str)?.replace('\n', '<br/>') ?? ''

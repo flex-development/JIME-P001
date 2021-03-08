@@ -3,8 +3,6 @@
  * @module lib/utils
  */
 
-export { default as formatError } from './formatError'
-export { default as searchIndex404 } from './searchIndex404'
 export { default as toJSX } from './toJSX'
 
 /* eslint-disable prettier/prettier */

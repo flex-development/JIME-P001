@@ -4,7 +4,9 @@
  */
 
 export { default as AppleAuthService } from './AppleAuthService'
+export { default as AssetService } from './AssetService'
 export { default as CollectionService } from './CollectionService'
+export { default as ErrorService } from './ErrorService'
 export { default as MenuService } from './MenuService'
 export { default as MetafieldService } from './MetafieldService'
 export { default as PageService } from './PageService'

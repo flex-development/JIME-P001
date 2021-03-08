@@ -15,7 +15,7 @@ import createError from './utils/createError'
 /**
  * Transforms an Axios error into a Feathers Error.
  *
- * @param e - Error to transform
+ * @param {AxiosError} e - HTTP error to transform
  * @throws {FeathersErrorJSON}
  */
 const handleErrorResponse = (e: AxiosError): void => {
@@ -46,10 +46,13 @@ const handleErrorResponse = (e: AxiosError): void => {
 /**
  * Returns the data from a successful request.
  *
- * @param response - Success response
- * @throws {FeathersError}
+ * @param {AxiosResponse} res - Success response object
+ * @param {ANYTHING} res.data - HTTP payload
+ * @return {ANYTHING | AxiosResponse<ANYTHING>} HTTP payload or res object
  */
-const handleSuccessResponse = (res: AxiosResponse): ANYTHING => {
+const handleSuccessResponse = (
+  res: AxiosResponse
+): ANYTHING | AxiosResponse<ANYTHING> => {
   return res?.data ?? res
 }
 
@@ -65,13 +68,16 @@ export const RateLimitedAxios = rateLimit(Axios, {
  * Passes the request config to our configured Axios client. Used to properly
  * type response data when using {@link handleSuccessResponse}.
  *
- * @param config - Axios request config
- * @param limit - If true, apply rate limit of 2 requests per second
- * @throws {FeathersError}
+ * @template T - Payload type
+ *
+ * @param {AxiosRequestConfig} config - Axios request config
+ * @param {boolean} limit - If `true`, apply rate limit of 2 requests per second
+ * @return {Promise<T>} Promise containing payload or res object
+ * @throws {FeathersErrorJSON}
  */
 export async function axios<T = ANYTHING>(
   config: AxiosRequestConfig,
-  limit = false
+  limit: boolean = false
 ): Promise<T> {
   let response: ANYTHING = null
 

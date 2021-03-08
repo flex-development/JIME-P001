@@ -146,6 +146,7 @@ module.exports = {
         'jest.*',
         'lint-staged.*',
         'packages/api/**',
+        'packages/core/src/axios.ts',
         'postcss.*',
         'webpack.*',
         '*.spec.ts',

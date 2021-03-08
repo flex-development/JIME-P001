@@ -9,8 +9,11 @@ import type { NumberString } from '../types/utils'
 /**
  * Converts an {@param array} of objects to a single object.
  *
- * @param array - Array of objects
- * @param key - Name of array object field to use as key
+ * @template T - Array item
+ *
+ * @param {T[]} array - Array of objects
+ * @param {string} key - Name of array object field to use as key
+ * @return {Record<keyof T, T>} Object from array items
  */
 function objectFromArray<T extends AnyObject = AnyObject>(
   array: T[],
@@ -20,7 +23,7 @@ function objectFromArray<T extends AnyObject = AnyObject>(
 
   array.forEach(item => (obj[item[key]] = item))
 
-  return obj as Record<string, T>
+  return obj as Record<keyof T, T>
 }
 
 export default objectFromArray

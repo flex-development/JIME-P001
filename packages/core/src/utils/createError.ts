@@ -18,6 +18,7 @@ import {
   Unavailable,
   Unprocessable
 } from '@feathersjs/errors'
+import type { AnyObject } from '@flex-development/json'
 import type { NumberString } from '../types/utils'
 
 /**
@@ -31,14 +32,15 @@ import type { NumberString } from '../types/utils'
  * @see https://developer.mozilla.org/docs/Web/HTTP/Status
  * @see https://docs.feathersjs.com/api/errors.html
  *
- * @param error - Error to transform or error message
- * @param data - Additional error data
- * @param data.errors - Validation errors or group of multiple errors
- * @param status - Error status code. Defaults to 500
+ * @param {string | Error | FeathersErrorJSON} error - Error to transform
+ * @param {AnyObject} [data] - Additional error data
+ * @param {AnyObject} [data.errors] - Validation errors or group of errors
+ * @param {number} [status] - Error status code. Defaults to `500`
+ * @return {FeathersErrorJSON} Formatted error object
  */
 const createError = (
   error?: string | Error | FeathersErrorJSON,
-  data: Record<string, unknown> = {},
+  data: AnyObject = {},
   status: NumberString = 500
 ): FeathersErrorJSON => {
   if ((error as FeathersErrorJSON).className) {

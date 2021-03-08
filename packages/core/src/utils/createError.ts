@@ -18,6 +18,7 @@ import {
   Unavailable,
   Unprocessable
 } from '@feathersjs/errors'
+import type { NumberString } from '../types/utils'
 
 /**
  * @file Implementation - createError
@@ -38,7 +39,7 @@ import {
 const createError = (
   error?: string | Error | FeathersErrorJSON,
   data: Record<string, unknown> = {},
-  status: number | string = 500
+  status: NumberString = 500
 ): FeathersErrorJSON => {
   if ((error as FeathersErrorJSON).className) {
     const $error = error as FeathersErrorJSON

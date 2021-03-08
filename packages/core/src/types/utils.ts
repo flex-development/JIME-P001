@@ -6,6 +6,11 @@ import type { ANYTHING } from '@flex-development/json/dist/utils/types'
  */
 
 /**
+ * Type representing a `number` or `string`.
+ */
+export type NumberString = number | string
+
+/**
  * Represents data returned by a function, or the return type of a function that
  * never returns a value because an error was thrown.
  */

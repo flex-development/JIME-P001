@@ -1,4 +1,5 @@
 import type { AnyObject } from '@flex-development/json/utils/types'
+import type { NumberString } from '../types/utils'
 
 /**
  * @file Implementation - objectFromArray
@@ -14,8 +15,8 @@ import type { AnyObject } from '@flex-development/json/utils/types'
 function objectFromArray<T extends AnyObject = AnyObject>(
   array: T[],
   key: keyof T
-): Record<number | string, T> {
-  const obj: Record<number | string, T> = {}
+): Record<NumberString, T> {
+  const obj: Record<NumberString, T> = {}
 
   array.forEach(item => (obj[item[key]] = item))
 

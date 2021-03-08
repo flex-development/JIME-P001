@@ -3,6 +3,7 @@
  * @module lib/controllers
  */
 
+export { default as AssetsController } from './AssetsController'
 export { default as CollectionsController } from './CollectionsController'
 export { default as LayoutController } from './LayoutController'
 export { default as MenusController } from './MenusController'

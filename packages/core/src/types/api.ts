@@ -17,6 +17,7 @@ import type {
   ShopifyMenuLink
 } from './shopify'
 import type { SEOData } from './storefront'
+import type { NumberString } from './utils'
 
 /**
  * @file Type Definitions - API
@@ -179,8 +180,8 @@ export type GetGlobalMetafieldsResJSON = Record<string, PartialOr<IMetafield>>
  */
 export type GetImageAssetQuery = {
   filename: string
-  height?: number | string
-  width?: number | string
+  height?: NumberString
+  width?: NumberString
 }
 
 /**

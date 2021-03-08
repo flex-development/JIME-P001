@@ -13,7 +13,11 @@ import type {
   ProductTemplateProps,
   SearchTemplateProps
 } from '@kustomzdesign/lib/templates'
-import type { NextComponentType, NextPageContext as PageContext } from 'next'
+import type {
+  GetServerSidePropsContext,
+  NextComponentType,
+  NextPageContext as PageContext
+} from 'next'
 import type { AppContext } from 'next/app'
 import type { Router } from 'next/dist/client/router'
 import type { ParsedUrlQuery } from 'querystring'
@@ -129,6 +133,11 @@ export interface IPagePropsProduct extends IPageProps {
 export interface IPagePropsSearch extends IPageProps {
   template: SearchTemplateProps
 }
+
+/**
+ * Shape of incoming HTTP request objects.
+ */
+export type NextIncomingMessage = GetServerSidePropsContext['req']
 
 /**
  * Object indicating that the user should be redirected to the `/404` page.

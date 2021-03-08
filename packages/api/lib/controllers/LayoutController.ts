@@ -1,4 +1,5 @@
 import type { VercelResponse as Res } from '@vercel/node'
+import { SEOService } from '../services'
 import MenuService from '../services/MenuService'
 import MetafieldService from '../services/MetafieldService'
 import PlaylistService from '../services/PlaylistService'
@@ -16,7 +17,7 @@ import type { APIRequest as Req } from '../types'
  */
 class LayoutController {
   /**
-   * Fetches the store playlist data.
+   * Fetches the storefront layout data.
    *
    * @async
    * @param {Req} req - API request object
@@ -49,6 +50,7 @@ class LayoutController {
         id,
         tracks: relationships?.tracks?.data.map(track => track.attributes)
       },
+      seo: await SEOService.global(),
       sidebar: {
         age: JSON.parse(profile_age as string),
         img: profile_img,

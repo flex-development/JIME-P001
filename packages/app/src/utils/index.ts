@@ -1,8 +1,8 @@
 /**
- * @file Utilities Entry Point - App
+ * @file Entry Point - Utilities
  * @module utils
  */
 
-export { default as globalSEO } from './globalSEO'
+export default {}
 
 /* eslint-disable prettier/prettier */

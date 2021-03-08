@@ -198,6 +198,7 @@ export type GetLayoutDataResJSON = {
     title: string
   }
   playlist: GetPlaylistResJSON
+  seo: SEOData
   sidebar: {
     age: number
     img: string

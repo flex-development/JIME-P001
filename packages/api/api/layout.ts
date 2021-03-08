@@ -1,4 +1,3 @@
-import type { AnyObject } from '@flex-development/json'
 import type { VercelResponse as Res } from '@vercel/node'
 import LayoutController from '../lib/controllers/LayoutController'
 import routeWrapper from '../lib/middleware/routeWrapper'
@@ -14,7 +13,6 @@ import type { APIRequest as Req } from '../lib/types'
  *
  * @async
  * @param {Req} req - API request object
- * @param {AnyObject} [req.query] - Query parameters object
  * @param {Res} res - Server response object
  * @return {Promise<Res | void>} Promise containing server response object if
  * an error is thrown, or empty promise if request completed successfully

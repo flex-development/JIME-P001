@@ -1,9 +1,11 @@
 import type {
   FindPagesQuery as FindQuery,
+  IPage,
   OrNever
 } from '@flex-development/kustomzcore'
 import type { VercelResponse as Res } from '@vercel/node'
 import PageService from '../services/PageService'
+import SEOService from '../services/SEOService'
 import type { FindPagesReq as FindReq, GetPageReq as GetReq } from '../types'
 import SearchIndexController from './SearchIndexController'
 
@@ -56,7 +58,14 @@ class PagesController extends SearchIndexController<FindReq | GetReq> {
     const results = await this.service.search(req.query.text, options)
 
     // If searching for page with the `objectID` 'index', return first result
-    res.json(req.query.objectID ? results[0] : results)
+    const data = req.query.objectID ? results[0] : results
+
+    // Get SEO data for single page resouce if requested
+    if (req.query.objectID && SEOService.includeSEO(req.query.fields)) {
+      data.seo = await SEOService.page(data as IPage)
+    }
+
+    res.json(data)
   }
 }
 

@@ -72,7 +72,7 @@ module.exports = {
     'jsdoc/no-undefined-types': [
       1,
       {
-        definedTypes: ['FeathersErrorJSON']
+        definedTypes: ['FeathersErrorJSON', 'JSX']
       }
     ],
     'jsdoc/require-hyphen-before-param-description': 1,

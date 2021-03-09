@@ -8,12 +8,10 @@ const replace = require('replace-in-file')
  */
 
 /**
- * Replacement options.
- *
  * @see https://github.com/adamreisnz/replace-in-file#custom-regular-expressions
  * @see https://github.com/adamreisnz/replace-in-file#replace-all-occurrences
  *
- * @property {Record<string, RegExpConstructor|string>} OPTIONS
+ * @property {replace.ReplaceInFileConfig} OPTIONS - Replacement options
  */
 const OPTIONS = {
   files: 'dist/**/*',

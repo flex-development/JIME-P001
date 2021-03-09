@@ -20,7 +20,8 @@ export type UseProductVariants = {
   /**
    * Updates the selected product variant.
    *
-   * @param id - ID of the variant to select
+   * @param {number} id - ID of the variant to select
+   * @return {number} ID of selected variant, or `-1` if variant doesn't exist
    */
   selectVariant(id: IProductListingVariant['id']): IProductListingVariant['id']
 
@@ -32,7 +33,7 @@ export type UseProductVariants = {
   /**
    * Array of product variant data.
    */
-  variants: Array<IProductListingVariant>
+  variants: IProductListingVariant[]
 }
 
 /**
@@ -43,12 +44,13 @@ export type UseProductVariants = {
  *
  * @see https://shopify.dev/docs/storefront-api/reference/object/productvariant
  *
- * @param variants - Array of `ProductVariant` data
- * @param active - Index of active item
+ * @param {IProductListingVariant[]} [variants] - Array of `ProductVariant` data
+ * @param {number} [active] - Index of active item
+ * @return {UseProductVariants} Hook state
  */
 export const useProductVariants = (
-  variants: Array<IProductListingVariant> = [],
-  active = 0
+  variants: IProductListingVariant[] = [],
+  active: number = 0
 ): UseProductVariants => {
   // Initialize selected variant state
   // The default option will be the first object in the array
@@ -62,7 +64,8 @@ export const useProductVariants = (
   /**
    * Updates the selected variant.
    *
-   * @param id - ID of variant to select
+   * @param {string} id - ID of variant to select
+   * @return {number} ID of selected variant, or `-1` if variant doesn't exist
    */
   const selectVariant = (
     id: IProductListingVariant['id']

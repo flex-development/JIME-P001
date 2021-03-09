@@ -58,9 +58,10 @@ export const ProductCard: FC<ProductCardProps> = props => {
   /**
    * Toggles the dropdown visibility.
    *
-   * @param event - `click` event from `<a>` element
+   * @param {EventHandlers.Click.Anchor} event - `click` event
+   * @return {void}
    */
-  const onClickProduct = (event: EventHandlers.Click.Anchor) => {
+  const onClickProduct = (event: EventHandlers.Click.Anchor): void => {
     event.preventDefault()
     return toggle()
   }
@@ -69,9 +70,10 @@ export const ProductCard: FC<ProductCardProps> = props => {
    * Selects a product variant title from the dropdown and toggles the dropdown
    * visibility.
    *
-   * @param id - ID of product variant to select from dropdown
+   * @param {number} id - ID of product variant to select from dropdown
+   * @return {void}
    */
-  const onClickDropItem = (id: IProductListingVariant['id']) => {
+  const onClickDropItem = (id: IProductListingVariant['id']): void => {
     selectVariant(id) && toggle()
   }
 

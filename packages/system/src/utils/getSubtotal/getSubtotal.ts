@@ -8,12 +8,14 @@ import type { CheckoutLineItemInput } from '@kustomzcore/types'
 /**
  * Iterates over {@param items} to get the order subtotal.
  *
- * ! The `properties` key of item will not be factored in the order subtotal.
+ * ! The `properties` key will not be factored into the order subtotal.
+ * ! This must be done manually via Shopify Admin.
  *
- * @param items - Array of checkout line items
+ * @param {CheckoutLineItemInput[]} [items] - Array of checkout line items
+ * @return {number} Order subtotal
  */
-const getSubtotal = (items: Array<CheckoutLineItemInput>): number => {
-  if (!items.length) return 0
+const getSubtotal = (items: CheckoutLineItemInput[] = []): number => {
+  if (!items?.length) return 0
 
   // Get subtotal for each item
   const totals = items.map(item => item.quantity * JSON.parse(item.price))

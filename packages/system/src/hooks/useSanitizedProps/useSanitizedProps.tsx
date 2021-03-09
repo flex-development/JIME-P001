@@ -26,9 +26,13 @@ import uniq from 'lodash/uniq'
  * - {@param props.$img} will be used to set a background image
  * - Keys specified in {@param keys} will be removed {@param props}
  *
- * @param props - Component properties
- * @param inject - Class dictionary or class string of additional CSS classes
- * @param keys - Array of keys to remove from {@param props}
+ * @template E - HTML element tag name
+ * @template P - Props shape
+ *
+ * @param {AnyObject} props - Component properties
+ * @param {string | ClassDictionary} [inject] - Additional CSS classes
+ * @param {string[]} [keys] - Array of keys to remove from {@param props}
+ * @return {P} Sanitized component properties
  */
 export function useSanitizedProps<
   E extends keyof JSX.IntrinsicElements = 'div',

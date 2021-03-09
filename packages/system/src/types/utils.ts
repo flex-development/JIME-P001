@@ -254,8 +254,3 @@ export interface SVGElements {
   use: SVGUseElement
   view: SVGViewElement
 }
-
-/**
- * Type representing a number that can also be represented as a string.
- */
-export type StringNumOr = number | string

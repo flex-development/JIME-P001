@@ -1,4 +1,4 @@
-import type { Primitive } from '@flex-development/json/utils/types'
+import type { NullishPrimitive } from '@flex-development/json/utils/types'
 import type { GridBreakpointKey } from '@system/types'
 import { breakpointInfix } from '@system/utils/breakpointInfix'
 
@@ -14,13 +14,14 @@ import { breakpointInfix } from '@system/utils/breakpointInfix'
  * {@param breakpoint} key other than "xs". Consult the Sass `$utilities` map
  * for a list of utility class prefixes and values.
  *
- * @param prefix - Class prefix from Sass `$utilities` map
- * @param value - Breakpoint class value, e.g 5 or 'wrap'
- * @param breakpoint - Grid breakpoint key, xs | sm | md | lg | xl | xxl
+ * @param {string} prefix - Class prefix from Sass `$utilities` map
+ * @param {NullishPrimitive} [value] - Breakpoint class value, e.g 5 or 'wrap'
+ * @param {GridBreakpointKey} [breakpoint] - Grid breakpoint key
+ * @return {string} CSS class name
  */
 const genclass = (
   prefix: string,
-  value?: Primitive | null,
+  value?: NullishPrimitive,
   breakpoint: GridBreakpointKey = 'xs'
 ): string => {
   // If false, null, or undefined, return empty string

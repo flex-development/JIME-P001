@@ -9,7 +9,8 @@ import type { CheckoutLineItemInput } from '@kustomzcore/types'
  * Returns the number of items in the cart using the `quantity` property
  * of each line item.
  *
- * @param items - Array of line items
+ * @param {CheckoutLineItemInput[]} [items] - Array of line items
+ * @return {number} Total number of line items
  */
 const getItemsTotal = (items: CheckoutLineItemInput[] = []): number => {
   if (!items.length) return 0

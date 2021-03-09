@@ -1,7 +1,7 @@
 import type { ANYTHING } from '@flex-development/json/utils/types'
-import { FormProps } from '@system/lib/atoms/Form'
-import { InputProps } from '@system/lib/atoms/Input'
-import { FormEvent } from 'react'
+import type { FormProps } from '@system/lib/atoms/Form'
+import type { InputProps } from '@system/lib/atoms/Input'
+import type { FormEvent } from 'react'
 
 /**
  * @file Component Props - SearchBar

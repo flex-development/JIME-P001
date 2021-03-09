@@ -82,9 +82,10 @@ export const AddToCartForm: FC<AddToCartFormProps> & {
    * Updates the selected variant state and sets the carousel position to the
    * image of the new variant.
    *
-   * @param event - `change` event from `<select>` element
+   * @param {EventHandlers.Change.Select} event - `change` event
+   * @return {void}
    */
-  const onChangeVariant = (event: EventHandlers.Change.Select) => {
+  const onChangeVariant = (event: EventHandlers.Change.Select): void => {
     const variant_id = JSON.parse(event.target.value)
     const variant = variants.find(({ id }) => id === variant_id)
 
@@ -110,9 +111,10 @@ export const AddToCartForm: FC<AddToCartFormProps> & {
   /**
    * Updates the number of product variants to order.
    *
-   * @param event - `change` event from `<input>` element
+   * @param {EventHandlers.Change.Input} event - `change` event
+   * @return {void}
    */
-  const onChangeQuantity = (event: EventHandlers.Change.Input) => {
+  const onChangeQuantity = (event: EventHandlers.Change.Input): void => {
     const value = JSON.parse(event.target.value)
     return updateQuantity(value < 1 ? 1 : value)
   }
@@ -124,9 +126,10 @@ export const AddToCartForm: FC<AddToCartFormProps> & {
    * Updates the custom properties for the product if the `props.product.handle`
    * is `kustomz`.
    *
-   * @param event - `change` event from `<textarea>` element
+   * @param {EventHandlers.Change.TextArea} event - `change` event
+   * @return {void}
    */
-  const onChangeProperties = (event: EventHandlers.Change.TextArea) => {
+  const onChangeProperties = (event: EventHandlers.Change.TextArea): void => {
     return updateProperties({ [event.target.name]: event.target.value })
   }
 
@@ -138,11 +141,12 @@ export const AddToCartForm: FC<AddToCartFormProps> & {
   /**
    * Updates the form submission state and calls `props.handleSubmit`.
    *
-   * @param e - `click` event from `<button>` element
+   * @param {EventHandlers.Click.Button} event - `click` event
+   * @return {void}
    */
-  const onClickSubmit = (e: EventHandlers.Click.Button) => {
-    e.preventDefault()
-    if (handleSubmit) handleSubmit(item, e)
+  const onClickSubmit = (event: EventHandlers.Click.Button): void => {
+    event.preventDefault()
+    if (handleSubmit) handleSubmit(item, event)
   }
 
   /* Callback version of `onClickSubmit` */

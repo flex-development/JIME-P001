@@ -33,6 +33,9 @@ export const MDXContent: FC<MDXContentProps> = (props: MDXContentProps) => {
   const [baseComponents, setBaseComponents] = useSetState<AnyObject>({})
 
   useEffect(() => {
+    /**
+     *
+     */
     async function loadComponents() {
       const atoms = await import('@system/lib/atoms')
 

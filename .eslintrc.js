@@ -137,25 +137,16 @@ module.exports = {
   },
   overrides: [
     {
-      files: [
-        '**/config/google-analytics.ts',
-        '**/config/logger.ts',
-        '**/scripts/**',
-        '**/__tests__/**',
-        '.eslintrc.js',
-        'babel.*',
-        'commitlint.*',
-        'jest.*',
-        'lint-staged.*',
-        'packages/api/**',
-        'packages/core/src/axios.ts',
-        'postcss.*',
-        'webpack.*',
-        '*.spec.ts',
-        '*.spec.tsx'
-      ],
+      files: ['**/*.js'],
+      parser: '@babel/eslint-parser',
+      parserOptions: {
+        ...PARSER_OPTIONS,
+        babelOptions,
+        requireConfigFile: false
+      },
       rules: {
-        'tree-shaking/no-side-effects-in-initialization': 0
+        '@typescript-eslint/explicit-module-boundary-types': 0,
+        '@typescript-eslint/no-var-requires': 0
       }
     },
     {
@@ -171,16 +162,9 @@ module.exports = {
       }
     },
     {
-      files: ['**/*.js'],
-      parser: '@babel/eslint-parser',
-      parserOptions: {
-        ...PARSER_OPTIONS,
-        babelOptions,
-        requireConfigFile: false
-      },
+      files: ['**/*.d.ts'],
       rules: {
-        '@typescript-eslint/explicit-module-boundary-types': 0,
-        '@typescript-eslint/no-var-requires': 0
+        'prettier/prettier': 0
       }
     },
     {
@@ -190,9 +174,21 @@ module.exports = {
       }
     },
     {
-      files: ['**/*.d.ts'],
+      files: [
+        '**/scripts/**',
+        '**/__tests__/**',
+        '.eslintrc.js',
+        'babel.*',
+        'commitlint.*',
+        'jest.*',
+        'lint-staged.*',
+        'postcss.*',
+        'webpack.*',
+        '*.spec.ts',
+        '*.spec.tsx'
+      ],
       rules: {
-        'prettier/prettier': 0
+        'tree-shaking/no-side-effects-in-initialization': 0
       }
     }
   ],

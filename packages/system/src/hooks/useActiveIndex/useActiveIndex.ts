@@ -1,3 +1,4 @@
+import type { NumberString } from '@flex-development/kustomzcore'
 import { useCallback, useEffect } from 'react'
 import type { UseNumberActions } from 'react-hanger/array/useNumber'
 import useNumber from 'react-hanger/array/useNumber'
@@ -29,16 +30,16 @@ export type UseActiveIndex = {
   /**
    * Returns true if {@param curr} is equal to the `active` state.
    *
-   * @param curr - Current index
+   * @param {number} curr - Current index
    */
   isActive(curr: number): boolean
 
   /**
    * Updates the active index state.
    *
-   * @param new_index - New index state
+   * @param {NumberString} curr - New index state
    */
-  setIndex: (curr: string | number) => void
+  setIndex: (curr: NumberString) => void
 }
 
 /**
@@ -47,11 +48,12 @@ export type UseActiveIndex = {
  *
  * @see https://github.com/kitze/react-hanger#usenumber
  *
- * @param index - Current active index
- * @param options - useNumber options
+ * @param {NumberString} [index] - Current active index
+ * @param {{lowerLimit, loop, step, upperLimit }} [options] - useNumber options
+ * @return {UseActiveIndex} Hook state
  */
 export const useActiveIndex = (
-  index: number | string = 0,
+  index: NumberString = 0,
   options: Parameters<typeof useNumber>[1] = {}
 ): UseActiveIndex => {
   // Get `useNumber` options and override lowerLimit settings
@@ -64,9 +66,10 @@ export const useActiveIndex = (
    * Helper function to convert {@param val} into a number if it's a string.
    * If the value is already a number, it will be returned.
    *
-   * @param val - Number or string containing number to convert
+   * @param {NumberString} val - Number or string containing number to convert
+   * @return {number} Parsed value
    */
-  const parse = (val: number | string) => {
+  const parse = (val: NumberString): number => {
     let parsed = val as number
 
     if (typeof val === 'string') {
@@ -86,9 +89,10 @@ export const useActiveIndex = (
   /**
    * Updates the active state.
    *
-   * @param new_index - New index state
+   * @param {NumberString} ni - New index state
+   * @return {void}
    */
-  const setIndex = (new_index: typeof index) => setValue(parseCB(new_index))
+  const setIndex = (ni: typeof index): void => setValue(parseCB(ni))
 
   // Callback version of `setIndex`
   const setIndexCB = useCallback(setIndex, [parseCB, setValue])
@@ -96,7 +100,8 @@ export const useActiveIndex = (
   /**
    * Returns true if {@param curr} is equal to the value of the active state.
    *
-   * @param curr - Current index
+   * @param {NumberString} curr - Current index
+   * @return {boolean} `true` if equal, `false` otherwise
    */
   const isActive = (curr: typeof index): boolean => {
     return parseCB(curr) === active

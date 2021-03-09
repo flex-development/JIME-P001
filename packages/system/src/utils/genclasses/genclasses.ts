@@ -1,5 +1,5 @@
 import { GRID_BREAKPOINT_KEYS } from '@system/config/constants'
-import type { UtilityClassConfig } from '@system/types'
+import type { GridBreakpointKey, UtilityClassConfig } from '@system/types'
 import { genclass } from '@system/utils/genclass'
 import isObject from 'lodash/isObject'
 
@@ -11,15 +11,16 @@ import isObject from 'lodash/isObject'
 /**
  * Returns an array of classes.
  *
- * @param prefix - Class name prefix
- * @param utilties - Object with utility class values for each breakpoint, or
- * single value (will be converted into object)
- * @param breakpoints - Array of grid breakpoint keys
+ * @param {string} prefix - Class name prefix
+ * @param {UtilityClassConfig} [utilities] - Object with utility class values
+ * for each breakpoint, or single value (will be converted into object)
+ * @param {GridBreakpointKey[]} [breakpoints] - Array of grid breakpoint keys
+ * @return {string[]} Array of classnames
  */
 const genclasses = (
   prefix: string,
   utilities: UtilityClassConfig = {},
-  breakpoints = GRID_BREAKPOINT_KEYS
+  breakpoints: GridBreakpointKey[] = GRID_BREAKPOINT_KEYS
 ): string[] => {
   utilities = isObject(utilities) ? utilities : { xs: utilities }
 

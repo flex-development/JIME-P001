@@ -1,4 +1,5 @@
 import type { OneOrMany } from '@flex-development/json/utils/types'
+import type { NumberString } from '@flex-development/kustomzcore'
 import type { TypesetProps } from '@storybook/components/dist/blocks/Typeset'
 import { Typeset } from '@storybook/components/dist/blocks/Typeset'
 import isArray from 'lodash/isArray'
@@ -15,7 +16,7 @@ export interface ThemeTypesetProps extends Omit<TypesetProps, 'fontWeight'> {
   text?: boolean
 }
 
-export const fontSizes: Record<number | string, string> = {
+export const fontSizes: Record<NumberString, string> = {
   12: '0.75rem',
   14: '0.875rem',
   16: '1rem',

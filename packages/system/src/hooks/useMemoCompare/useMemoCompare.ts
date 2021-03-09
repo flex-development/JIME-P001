@@ -9,6 +9,7 @@ import { useEffect, useMemo, useRef } from 'react'
  */
 
 export type MemoCompare<T = ANYTHING> = (v1: T, v2: T) => boolean
+export type MemoNext<T = ANYTHING> = T | (() => T)
 
 /**
  * Takes a custom compare function that receives the previous and new value.
@@ -22,12 +23,15 @@ export type MemoCompare<T = ANYTHING> = (v1: T, v2: T) => boolean
  * @see https://lodash.com/docs/4.17.15
  * @see https://usehooks.com/useMemoCompare
  *
- * @param next - Next data value or function that returns the next value
- * @param compare - Function to compare previous value to next value
+ * @template T - Data type
+ *
+ * @param {MemoNext<T>} next - Next value or function that returns next value
+ * @param {MemoCompare<T>} compare - Function to compare values
+ * @return {T} Old data reference if compare function return `true`
  */
 export function useMemoCompare<T = ANYTHING>(
-  next: T | (() => T),
-  compare: MemoCompare = isEqual
+  next: MemoNext<T>,
+  compare: MemoCompare<T> = isEqual
 ): T {
   // If next is a function, call it to get initial value
   const _next = isFunction(next) ? next() : next
@@ -37,7 +41,7 @@ export function useMemoCompare<T = ANYTHING>(
 
   // Pass prev and next value to compare function to determine equality
   const equal = useMemo<boolean>(() => {
-    return compare(previous.current, _next)
+    return compare(previous.current as T, _next)
   }, [compare, _next])
 
   // If not equal update previousRef to next value.

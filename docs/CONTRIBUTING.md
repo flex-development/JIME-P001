@@ -138,8 +138,8 @@ This project uses [ESLint][7] to lint JavaScript and TypeScript files.
 
 To review our linting guidelines, see our configuration files:
 
-- Configuration: [`.eslintrc.json`](../.eslintrc.json)`
-- Ignore Patterns: [`.eslintignore`](../.eslintignore)`
+- Configuration: [`.eslintrc.js`](../.eslintrc.js)
+- Ignore Patterns: [`.eslintignore`](../.eslintignore)
 
 ## Making Changes
 
@@ -153,15 +153,15 @@ the Contributing Guide for each package:
 
 ## Documentation
 
-- JavaScript & TypeScript: [JSDoc][8]
-- Sass: [SassDoc][9]
+- JavaScript & TypeScript: [JSDoc][8], linted with [`eslint-plugin-jsdoc`][9]
+- Sass: [SassDoc][10]
 
 Before making a pull request, be sure your code is well documented, as it will
 be part of your code review.
 
 ## Testing
 
-This project uses [Jest][10] as its test runner. To run the tests in this
+This project uses [Jest][11] as its test runner. To run the tests in this
 project, run `yarn test` from the project root.
 
 Husky is configured to run tests before every push. If a bug report concerning a
@@ -194,5 +194,6 @@ this project.
 [6]: https://prettier.io/
 [7]: https://eslint.org/
 [8]: https://jsdoc.app
-[9]: http://sassdoc.com/annotations/
-[10]: https://jestjs.io/
+[9]: https://github.com/gajus/eslint-plugin-jsdoc
+[10]: http://sassdoc.com/annotations/
+[11]: https://jestjs.io/

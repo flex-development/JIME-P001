@@ -18,7 +18,7 @@ class AssetService {
   /**
    * @property {string} IMAGE_DIR_PATH - Path to `/images` directory
    */
-  static IMAGE_DIR_PATH: string = '../../api/assets/images/_files'
+  static IMAGE_DIR_PATH: string = 'api/assets/images/_files'
 
   /**
    * Returns the filename extension.
@@ -39,7 +39,7 @@ class AssetService {
    * @throws {FeathersErrorJSON}
    */
   static image(filename: string): OrNever<Buffer> {
-    const $filename = join(__dirname, AssetService.IMAGE_DIR_PATH, filename)
+    const $filename = join(process.cwd(), AssetService.IMAGE_DIR_PATH, filename)
 
     try {
       return readFileSync($filename)

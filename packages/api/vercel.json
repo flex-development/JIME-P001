@@ -5,12 +5,6 @@
     },
     "api/assets/images/[filename].ts": {
       "includeFiles": "_files/**"
-    },
-    "lib/controllers/AssetsController.ts": {
-      "includeFiles": "../../api/assets/images/_files/**"
-    },
-    "lib/services/AssetService.ts": {
-      "includeFiles": "../../api/assets/images/_files/**"
     }
   },
   "github": {

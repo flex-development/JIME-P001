@@ -3,7 +3,6 @@ import { createError } from '@flex-development/kustomzcore'
 import { readFileSync } from 'fs'
 import { join } from 'path'
 import sharp from 'sharp'
-import vercel from '../config/vercel-env'
 
 /**
  * @file Implementation - AssetService
@@ -17,14 +16,9 @@ import vercel from '../config/vercel-env'
  */
 class AssetService {
   /**
-   * @property {boolean} dev - True if working in `development` environment
-   */
-  static DEV: boolean = vercel.env === 'development'
-
-  /**
    * @property {string} IMAGE_DIR_PATH - Path to `/images` directory
    */
-  static IMAGE_DIR_PATH: string = 'api/assets/images/_files'
+  static IMAGE_DIR_PATH: string = '../static/images'
 
   /**
    * Returns the filename extension.
@@ -45,8 +39,7 @@ class AssetService {
    * @throws {FeathersErrorJSON}
    */
   static image(filename: string): OrNever<Buffer> {
-    const $cwd = `${process.cwd()}${AssetService.DEV ? '' : '/packages/api'}`
-    const $filename = join($cwd, AssetService.IMAGE_DIR_PATH, filename)
+    const $filename = join(__dirname, AssetService.IMAGE_DIR_PATH, filename)
 
     try {
       return readFileSync($filename)
@@ -56,7 +49,7 @@ class AssetService {
       const data = {
         code,
         errno,
-        errors: { $cwd, $filename, filename },
+        errors: { $filename, filename },
         path,
         syscall
       }

@@ -1,4 +1,3 @@
-import type { OrPromise } from '@kustomzcore/types'
 import type { AnimatedProps } from '@react-spring/web'
 import { useSpring } from '@react-spring/web'
 import { IMAGE_PLACEHOLDER_URL } from '@system/config/constants'
@@ -107,11 +106,11 @@ export const PlaylistBar: FC<PlaylistBarProps> = props => {
    *
    * @async
    * @param {EventHandlers.Click.Button} event - click event
-   * @return {OrPromise<void>} Nothing if paused, empty promise if playing
+   * @return {Promise<void>} Nothing if paused, empty promise if playing
    */
   const onClickPlayback = async (
     event: EventHandlers.Click.Button
-  ): OrPromise<void> => {
+  ): Promise<void> => {
     event.preventDefault()
 
     if (isFunction(handlePlayback)) handlePlayback(event)
@@ -186,7 +185,9 @@ export const PlaylistBar: FC<PlaylistBarProps> = props => {
           aria-label='Toggle audio playback'
           className='playlist-bar-btn'
           disabled={!artworkReady || !isAudioReadyCB()}
-          onClick={async event => onClickPlaybackCB(event)}
+          onClick={async event => {
+            return onClickPlaybackCB(event as EventHandlers.Click.Button)
+          }}
           name='playback'
           value={!isAudioReadyCB() || audio_state.paused ? 'paused' : 'playing'}
         />

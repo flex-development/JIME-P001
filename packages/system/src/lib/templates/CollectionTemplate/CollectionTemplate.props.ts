@@ -1,4 +1,4 @@
-import type { GetCollectionResJSON, IProductListing } from '@kustomzcore/types'
+import type { CollectionListingData, IProductListing } from '@kustomzcore/types'
 import type { LinkProps } from '@system/lib/atoms/Link'
 import type { MainProps } from '@system/lib/atoms/Main'
 
@@ -11,7 +11,7 @@ export interface CollectionTemplateProps extends MainProps {
   /**
    * Collection listing object.
    */
-  collection: GetCollectionResJSON
+  collection: Partial<CollectionListingData>
 
   /**
    * Returns a `LinkProps` for the `ProductCard` link.

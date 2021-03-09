@@ -21,7 +21,7 @@ describe('CollectionTemplate', () => {
     const { getByText } = render(<Products {...Products.args} />)
     const { collection } = Products.args
 
-    expect(getByText(collection.title)).toBeInTheDocument()
+    expect(getByText(collection.title as string)).toBeInTheDocument()
   })
 
   it('renders the collection description', () => {

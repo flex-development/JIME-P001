@@ -11,12 +11,13 @@ import { serialize } from '@flex-development/json/utils/serialize'
 import type {
   GetCollectionResJSON,
   GetProductResJSON,
-  IProductListing
+  ProductListingData
 } from '@kustomzcore/types'
 import {
   ProductTemplate,
   ProductTemplateProps as TemplateProps
 } from '@kustomzdesign/lib/templates/ProductTemplate'
+import { pick } from 'lodash'
 import findIndex from 'lodash/findIndex'
 import type {
   GetServerSideProps,
@@ -96,7 +97,13 @@ export const getServerSideProps: GetServerSideProps<PageProps, Query> = async (
           href: c_product ? `/collections/${collection}` : '/products',
           title: c_product ? data_collection.title : 'Products'
         },
-        product: data as IProductListing,
+        product: pick(data, [
+          'body_html',
+          'handle',
+          'images',
+          'title',
+          'variants'
+        ]) as ProductListingData,
         reviews: []
       })
     }

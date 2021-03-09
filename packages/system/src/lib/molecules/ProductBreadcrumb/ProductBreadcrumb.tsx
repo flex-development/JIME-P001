@@ -17,7 +17,7 @@ import type { ProductBreadcrumbProps } from './ProductBreadcrumb.props'
  * Renders a `Box` component with the class `product-breadcrumb`.
  */
 export const ProductBreadcrumb: FC<ProductBreadcrumbProps> = props => {
-  const { collection, product, variant, ...rest } = props
+  const { collection, product = '', variant = '', ...rest } = props
 
   const sanitized = useSanitizedProps<'div', BoxProps>(
     rest,
@@ -40,4 +40,7 @@ export const ProductBreadcrumb: FC<ProductBreadcrumbProps> = props => {
 
 ProductBreadcrumb.displayName = 'ProductBreadcrumb'
 
-ProductBreadcrumb.defaultProps = {}
+ProductBreadcrumb.defaultProps = {
+  product: '',
+  variant: ''
+}

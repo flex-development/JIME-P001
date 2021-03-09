@@ -60,8 +60,6 @@ export const CheckoutLineItem: FC<CheckoutLineItemProps> & {
     'checkout-line-item': true
   })
 
-  console.debug(variant)
-
   // Update element ID
   sanitized['id'] = `line-item-${variant.id}`
 

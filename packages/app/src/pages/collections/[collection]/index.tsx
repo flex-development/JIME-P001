@@ -96,7 +96,7 @@ export const getServerSideProps: GetServerSideProps<PageProps, Params> = async (
       }),
       template: serialize<PageProps['template']>({
         collection: {
-          ...data,
+          body_html: data.body_html,
           title: !req.url?.includes('collections') ? 'Products' : data.title
         },
         products: data.products

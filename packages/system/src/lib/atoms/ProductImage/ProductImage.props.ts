@@ -1,7 +1,7 @@
 import type { AnyObject } from '@flex-development/json/utils/types'
 import type {
-  IProductListing,
-  IProductListingVariant
+  IProductListingVariant,
+  ProductListingData
 } from '@kustomzcore/types'
 import type { GlobalAttributes, Merge, TransientProps } from '@system/types'
 import type { ImageProps as NextImageProps } from 'next/image'
@@ -22,12 +22,12 @@ export type ProductImageProps = ProductImagePropsBase & {
   layout?: 'fill' | 'fixed' | 'intrinsic' | 'responsive'
 
   /**
-   * Shopify product listing data.
+   * Product listing data.
    */
-  product: IProductListing
+  product: Pick<ProductListingData, 'images' | 'title'>
 
   /**
-   * Shopify product listing variant data.
+   * Product variant listing object.
    */
   variant?: IProductListingVariant | AnyObject
 }

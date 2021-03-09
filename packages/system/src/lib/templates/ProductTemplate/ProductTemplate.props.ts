@@ -1,5 +1,4 @@
 import type { AnyObject, ANYTHING } from '@flex-development/json/utils/types'
-import type { IProductListing } from '@kustomzcore/types'
 import type { LinkProps } from '@system/lib/atoms/Link'
 import type { MainProps } from '@system/lib/atoms/Main'
 import type { AddToCartFormProps } from '@system/lib/molecules/AddToCartForm'
@@ -34,16 +33,16 @@ export interface ProductTemplateProps extends MainProps {
   handleSubmitReview?: (event: EventHandlers.Click.Button) => ANYTHING
 
   /**
-   * Shopify `IProductListing` object.
+   * Product listing data.
    */
-  product: IProductListing
+  product: AddToCartFormProps['product']
 
   /**
    * Array of product reviews for `product`.
    *
    * @default []
    */
-  reviews?: Array<AnyObject>
+  reviews?: AnyObject[]
 
   /**
    * Maximum number of product reviews to show in a group.

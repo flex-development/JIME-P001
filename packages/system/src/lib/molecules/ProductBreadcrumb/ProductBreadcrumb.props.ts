@@ -18,11 +18,15 @@ export interface ProductBreadcrumbProps extends BoxProps {
 
   /**
    * Title of parent product.
+   *
+   * @default ''
    */
-  product: IProductListing['title']
+  product?: IProductListing['title']
 
   /**
    * Product variant title.
+   *
+   * @default ''
    */
-  variant: IProductListingVariant['title']
+  variant?: IProductListingVariant['title']
 }

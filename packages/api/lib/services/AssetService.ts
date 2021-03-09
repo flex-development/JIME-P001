@@ -3,11 +3,14 @@ import { createError } from '@flex-development/kustomzcore'
 import { readFileSync } from 'fs'
 import { join } from 'path'
 import sharp from 'sharp'
+import vercel from '../config/vercel-env'
 
 /**
  * @file Implementation - AssetService
  * @module lib/services/AssetService
  */
+
+const DEV = vercel.env === 'development'
 
 /**
  * Handles interactions with static assets.
@@ -18,7 +21,7 @@ class AssetService {
   /**
    * @property {string} IMAGE_DIR_PATH - Path to `/images` directory
    */
-  static IMAGE_DIR_PATH: string = '../../api/assets/images/_files'
+  static IMAGE_DIR_PATH = `${DEV ? '../../api/assets/images/' : ''}_files`
 
   /**
    * Returns the filename extension.

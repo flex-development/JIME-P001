@@ -1,7 +1,7 @@
 import type { NumberString, OrNever } from '@flex-development/kustomzcore'
 import { createError } from '@flex-development/kustomzcore'
 import { readFileSync } from 'fs'
-import { join } from 'path'
+import { resolve } from 'path'
 import sharp from 'sharp'
 
 /**
@@ -39,7 +39,7 @@ class AssetService {
    * @throws {FeathersErrorJSON}
    */
   static image(filename: string): OrNever<Buffer> {
-    const $filename = join(__dirname, AssetService.IMAGE_DIR_PATH, filename)
+    const $filename = resolve(__dirname, AssetService.IMAGE_DIR_PATH, filename)
 
     try {
       return readFileSync($filename)

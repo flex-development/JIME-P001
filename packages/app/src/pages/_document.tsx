@@ -16,6 +16,8 @@ import NextDocument, { Html, Main } from 'next/document'
 export default class Document extends NextDocument<DocumentInitialProps> {
   /**
    * Renders the document.
+   *
+   * @return {JSX.Element} HTML page
    */
   render(): JSX.Element {
     return (

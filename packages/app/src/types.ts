@@ -37,6 +37,15 @@ export type AppComponent = NextComponentType<
 >
 
 /**
+ * Next.js page component passed as an initial App prop.
+ */
+export type AppPropsComponent = NextComponentType<
+  PageContext,
+  IAppInitialProps,
+  IAppInitialProps['pageProps']
+>
+
+/**
  * Collection page route parameters.
  */
 export interface CollectionPageParams extends ParsedUrlQuery {
@@ -68,11 +77,7 @@ export interface IAppInitialProps {
  * Props passed from Next.js data-fetching methods.
  */
 export interface IAppProps extends IAppInitialProps {
-  Component: NextComponentType<
-    PageContext,
-    IAppInitialProps,
-    IAppInitialProps['pageProps']
-  >
+  Component: AppPropsComponent
   router: Router
   __N_SSG?: boolean
   __N_SSP?: boolean
@@ -133,6 +138,11 @@ export interface IPagePropsProduct extends IPageProps {
 export interface IPagePropsSearch extends IPageProps {
   template: SearchTemplateProps
 }
+
+/**
+ * Error object if encountered during rendering.
+ */
+export type NextError = Error & { statusCode?: number }
 
 /**
  * Shape of incoming HTTP request objects.

@@ -1,5 +1,5 @@
 /**
- * @file Subdomain Entry Point - Hooks
+ * @file Entry Point - Hooks
  * @module hooks
  */
 

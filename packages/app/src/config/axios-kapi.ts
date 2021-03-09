@@ -9,10 +9,14 @@ import type { AxiosRequestConfig } from 'axios'
  */
 
 /**
- * Make requests to the Morena's Kustomz REST API. If passed,
- * {@param config.baseURL}  will be overriden.
+ * Make requests to the Morena's Kustomz REST API.
  *
- * @param config - Axios request config
+ * If defined, {@param config.baseURL}  will be overriden.
+ *
+ * @template T - Payload type
+ *
+ * @param {Omit<AxiosRequestConfig, 'baseURL'>} config - Axios request config
+ * @return {Promise<T>} Promise containing response payload
  */
 async function axiosKapi<T = ANYTHING>(
   config: Omit<AxiosRequestConfig, 'baseURL'> = {}

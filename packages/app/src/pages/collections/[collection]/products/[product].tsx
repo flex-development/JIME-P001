@@ -1,11 +1,11 @@
-import { SEO } from '@app/components/SEO'
 import kapi from '@app/config/axios-kapi'
 import type {
   IPagePropsProduct as PageProps,
+  NextIncomingMessage,
   NotFound,
   PageComponent,
-  ProductPageParams,
-  ProductPageUrlQuery
+  ProductPageParams as Params,
+  ProductPageUrlQuery as Query
 } from '@app/types'
 import { serialize } from '@flex-development/json/utils/serialize'
 import type {
@@ -13,9 +13,17 @@ import type {
   GetProductResJSON,
   IProductListing
 } from '@kustomzcore/types'
-import { ProductTemplate } from '@kustomzdesign/lib/templates/ProductTemplate'
+import {
+  ProductTemplate,
+  ProductTemplateProps as TemplateProps
+} from '@kustomzdesign/lib/templates/ProductTemplate'
 import findIndex from 'lodash/findIndex'
-import type { GetServerSideProps, GetServerSidePropsContext } from 'next'
+import type {
+  GetServerSideProps,
+  GetServerSidePropsContext as Context,
+  GetServerSidePropsResult
+} from 'next'
+import type { ReactElement } from 'react'
 
 /**
  * @file Page - Collection Product
@@ -25,16 +33,15 @@ import type { GetServerSideProps, GetServerSidePropsContext } from 'next'
 /**
  * Renders a collection product page.
  *
- * @param props - Page component props
- * @param props.seo - `SEO` component properties
- * @param props.template - `ProductTemplate` component properties
+ * @param {PageProps} props - Page component props
+ * @param {TemplateProps} props.template - Template component properties
+ * @return {ReactElement<TemplateProps>} Collection product page
  */
-const CollectionProduct: PageComponent<PageProps> = ({ seo, template }) => (
-  <>
-    <SEO {...seo} />
-    <ProductTemplate {...template} />
-  </>
-)
+const CollectionProduct: PageComponent<PageProps> = (
+  props: PageProps
+): ReactElement<TemplateProps> => {
+  return <ProductTemplate {...props.template} />
+}
 
 /**
  * Fetches the data required to display a product or collection product listing
@@ -45,17 +52,17 @@ const CollectionProduct: PageComponent<PageProps> = ({ seo, template }) => (
  * @see https://nextjs.org/docs/basic-features/data-fetching
  * @see https://shopify.dev/docs/admin-api/rest/reference/sales-channels
  *
- * @async
- * @param context - Server side page context
- * @param context.params - Route parameters if dynamic route
- * @param context.query - The query string
- * @param context.req - `HTTP` request object
+ * @param {Context<Params>} context - Server side page context
+ * @param {Query} context.query - Query parameters
+ * @param {NextIncomingMessage} context.req - `HTTP` request object
+ * @return {Promise<GetServerSidePropsResult<PageProps>>} Page props
+ * @throws {FeathersErrorJSON}
  */
-export const getServerSideProps: GetServerSideProps<
-  PageProps,
-  ProductPageUrlQuery
-> = async ({ query, req }: GetServerSidePropsContext<ProductPageParams>) => {
-  const { collection, product, sku } = query as ProductPageUrlQuery
+export const getServerSideProps: GetServerSideProps<PageProps, Query> = async (
+  context: Context<Params>
+): Promise<GetServerSidePropsResult<PageProps>> => {
+  const { query, req } = context
+  const { collection, product, sku } = query as Query
 
   let data: GetProductResJSON | NotFound = { notFound: true }
   let data_collection: GetCollectionResJSON | NotFound = { notFound: true }

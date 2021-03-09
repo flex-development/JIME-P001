@@ -72,7 +72,7 @@ module.exports = {
     'jsdoc/no-undefined-types': [
       1,
       {
-        definedTypes: ['FeathersErrorJSON', 'JSX']
+        definedTypes: ['FeathersErrorJSON', 'JSX', 'WebFont']
       }
     ],
     'jsdoc/require-hyphen-before-param-description': 1,
@@ -138,6 +138,8 @@ module.exports = {
   overrides: [
     {
       files: [
+        '**/config/google-analytics.ts',
+        '**/config/logger.ts',
         '**/scripts/**',
         '**/__tests__/**',
         '.eslintrc.js',

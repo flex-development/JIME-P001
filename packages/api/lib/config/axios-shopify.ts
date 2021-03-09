@@ -16,10 +16,11 @@ import type { AxiosRequestConfig } from 'axios'
  *
  * @see https://shopify.dev/docs/admin-api/rest/reference
  *
- * @template T
+ * @template T - Payload type
+ *
  * @param {AxiosRequestConfig} config - Axios request config
  * @param {boolean} menus - If menus is true, use alternate `baseURL`
- * @return {Promise<T>} Promise containing requested data
+ * @return {Promise<T>} Promise containing response payload
  * @throws {FeathersErrorJSON}
  */
 async function axiosShopify<T = ANYTHING>(

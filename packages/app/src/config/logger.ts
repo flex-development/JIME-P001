@@ -23,9 +23,9 @@ export const Logger = pino({
 
 /**
  * Returns a Pino child logger.
- * Every log will have a `route` key with the value of {@param route}.
  *
- * @param route - Next.js page or API route log was captured from
+ * @param {string} route - Next.js page or API route log was captured from
+ * @return {pino.Logger} Pino child logger instance
  */
 const log = (route: string): pino.Logger => Logger.child({ ...vercel, route })
 

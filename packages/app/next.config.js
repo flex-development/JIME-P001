@@ -1,3 +1,4 @@
+const { AnyObject } = require('@flex-development/json')
 const TapDoneWebpackPlugin = require('@flex-development/webpack-tap-done')
 const SentryWebpackPlugin = require('@sentry/webpack-plugin')
 const withSourceMaps = require('@zeit/next-source-maps')()
@@ -161,10 +162,10 @@ const config = {
    * @see https://github.com/vercel/next.js/tree/canary/examples/with-sentry
    *
    * @param {import('webpack').Configuration} config - Webpack config object
-   * @param {object} helpers - Next.js helpers
+   * @param {AnyObject} helpers - Helpers
    * @param {string} helpers.buildId - Unique identifier between builds
-   * @param {object} helpers.defaultLoaders - Default loaders used internally
-   * @param {object} helpers.defaultLoaders.babel - `babel-loader` config
+   * @param {AnyObject} helpers.defaultLoaders - Default loaders used internally
+   * @param {AnyObject} helpers.defaultLoaders.babel - `babel-loader` config
    * @param {boolean} helpers.dev - True if the compiling in development mode
    * @param {boolean} helpers.isServer - `true` for server-side compilation
    * @param {import('webpack')} helpers.webpack - Webpack
@@ -227,10 +228,11 @@ const config = {
 
     /**
      * Fixes `"TypeError: v is not a function"`.
+     *
      * @see https://github.com/pmndrs/react-spring/issues/1078
      * @see https://github.com/plouc/nivo/issues/1290#issuecomment-756264505
      */
-    config.module.rules.push({ test: /@react-spring/, sideEffects: true })
+    config.module.rules.push({ sideEffects: true, test: /@react-spring/ })
 
     // Report duplicate dependencies
     if (!dev) config.plugins.push(new DuplicatesPlugin({ verbose: true }))

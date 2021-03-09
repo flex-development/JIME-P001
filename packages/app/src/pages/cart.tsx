@@ -32,8 +32,7 @@ const Cart: PageComponent = (): ReactElement<AnyObject> => {
  *
  * @see https://nextjs.org/docs/basic-features/data-fetching
  *
- * @return {Promise<GetServerSidePropsResult<PageProps>>} Promise containing
- * object with page props and settings to server side render page
+@return {Promise<GetServerSidePropsResult<PageProps>>} Page props
  */
 export const getServerSideProps: GetServerSideProps<PageProps> = (): Promise<
   GetServerSidePropsResult<PageProps>

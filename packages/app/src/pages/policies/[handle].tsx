@@ -1,14 +1,22 @@
-import { SEO } from '@app/components/SEO'
 import kapi from '@app/config/axios-kapi'
 import type {
-  HandlePageParams,
+  HandlePageParams as Params,
   IPagePropsPolicy as PageProps,
+  NextIncomingMessage,
   NotFound,
   PageComponent
 } from '@app/types'
 import type { GetPolicyResJSON } from '@kustomzcore/types'
-import { PageTemplate } from '@kustomzdesign/lib/templates/PageTemplate'
-import type { GetServerSideProps, GetServerSidePropsContext } from 'next'
+import {
+  PageTemplate,
+  PageTemplateProps as TemplateProps
+} from '@kustomzdesign/lib/templates/PageTemplate'
+import type {
+  GetServerSideProps,
+  GetServerSidePropsContext as Context,
+  GetServerSidePropsResult
+} from 'next'
+import type { ReactElement } from 'react'
 
 /**
  * @file Store Policy Page
@@ -18,16 +26,15 @@ import type { GetServerSideProps, GetServerSidePropsContext } from 'next'
 /**
  * Renders a store policy page.
  *
- * @param props - Page component props
- * @param props.seo - `SEO` component properties
- * @param props.template - `PageTemplate` component properties
+ * @param {PageProps} props - Page component props
+ * @param {TemplateProps} props.template - `PageTemplate` component properties
+ * @return {ReactElement<TemplateProps>} Store policy page
  */
-const Policy: PageComponent<PageProps> = ({ seo, template }) => (
-  <>
-    <SEO {...seo} />
-    <PageTemplate {...template} />
-  </>
-)
+const Policy: PageComponent<PageProps> = (
+  props: PageProps
+): ReactElement<TemplateProps> => {
+  return <PageTemplate {...props.template} />
+}
 
 /**
  * Fetches the data required to render a store page using the `PageTemplate`
@@ -36,14 +43,15 @@ const Policy: PageComponent<PageProps> = ({ seo, template }) => (
  * @see https://nextjs.org/docs/basic-features/data-fetching
  *
  * @async
- * @param context - Server side page context
- * @param context.params - Route parameters if dynamic route
- * @param context.req - `HTTP` request object
+ * @param {Context<Params>} context - Server side page context
+ * @param {Params} context.params - Route parameters if dynamic route
+ * @param {NextIncomingMessage} context.req - `HTTP` request object
+ * @return {Promise<GetServerSidePropsResult<PageProps>>} Page props
+ * @throws {FeathersErrorJSON}
  */
-export const getServerSideProps: GetServerSideProps<
-  PageProps,
-  HandlePageParams
-> = async (context: GetServerSidePropsContext<HandlePageParams>) => {
+export const getServerSideProps: GetServerSideProps<PageProps, Params> = async (
+  context: Context<Params>
+): Promise<GetServerSidePropsResult<PageProps>> => {
   let data: GetPolicyResJSON | NotFound = { notFound: true }
 
   try {

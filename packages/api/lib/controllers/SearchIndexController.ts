@@ -1,8 +1,8 @@
 import type { AnyObject } from '@flex-development/json'
 import type { OrNever } from '@flex-development/kustomzcore'
-import Service from '@flex-development/kustomzcore/services/SearchIndexService'
 import type { VercelResponse as VRes } from '@vercel/node'
-import type { APIRequest as AReq } from '../../lib/types'
+import Service from '../services/SearchIndexService'
+import type { APIRequest as AReq } from '../types'
 
 /**
  * @file Implementation - Controller - SearchIndexService

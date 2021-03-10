@@ -1,6 +1,6 @@
 import type { ApiError as AlgoliaError } from '@algolia/transporter'
 import type { FeathersErrorJSON } from '@feathersjs/errors'
-import type { ANYTHING } from '@flex-development/json'
+import type { AnyObject, ANYTHING } from '@flex-development/json'
 import type {
   FindCollectionsQuery,
   FindPagesQuery,
@@ -10,7 +10,9 @@ import type {
   GetImageAssetQuery,
   GetPlaylistQuery,
   GetProductQuery,
-  GetSearchIndexResourceQuery
+  GetSearchIndexResourceQuery,
+  OrNever,
+  OrPromise
 } from '@flex-development/kustomzcore'
 import type { VercelRequest } from '@vercel/node'
 import type { Logger } from 'pino'
@@ -126,5 +128,39 @@ export interface GetPolicyReq extends APIRequest {
 export interface GetProductReq extends APIRequest {
   query: GetProductQuery
 }
+
+/**
+ * Search index names.
+ */
+export type SearchIndexName =
+  | 'collections'
+  | 'menus'
+  | 'pages'
+  | 'policies'
+  | 'products'
+
+/**
+ * Function to populate search index.
+ */
+export type SearchIndexObjectsFN<TObject = AnyObject> = {
+  (): OrNever<OrPromise<TObject[]>>
+}
+
+/**
+ * Shopify resources that have a `metafield` property.
+ */
+export type ShopifyResourceWithMetafield = 'collections' | 'pages' | 'products'
+
+// Algolia types
+export type {
+  Hit,
+  SearchOptions,
+  Settings as SearchIndexSettings
+} from '@algolia/client-search'
+export type {
+  ApiError as AlgoliaError,
+  RequestOptions
+} from '@algolia/transporter'
+export type { SearchIndex } from 'algoliasearch'
 
 /* eslint-disable prettier/prettier */

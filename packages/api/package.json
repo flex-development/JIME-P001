@@ -26,8 +26,14 @@
     "vercel-build": "yarn vercel-prepare; lerna link"
   },
   "dependencies": {
+    "@algolia/client-search": "latest",
     "@flex-development/kustomzcore": "*",
+    "@types/jsonwebtoken": "latest",
     "@types/urijs": "latest",
+    "@vercel/node": "latest",
+    "algoliasearch": "latest",
+    "jsonwebtoken": "latest",
+    "string-strip-html": "latest",
     "urijs": "latest"
   },
   "devDependencies": {

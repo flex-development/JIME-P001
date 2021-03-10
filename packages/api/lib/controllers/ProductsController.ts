@@ -2,12 +2,12 @@ import type {
   GetProductQuery as GetQuery,
   OrNever
 } from '@flex-development/kustomzcore'
-import Service from '@flex-development/kustomzcore/services/ProductService'
 import type { VercelResponse as Res } from '@vercel/node'
+import Service from '../services/ProductService'
 import type {
   FindProductsReq as FindReq,
   GetProductReq as GetReq
-} from '../../lib/types'
+} from '../types'
 import SearchIndexController from './SearchIndexController'
 
 /**

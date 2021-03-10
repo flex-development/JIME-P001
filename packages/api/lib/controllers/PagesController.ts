@@ -3,13 +3,10 @@ import type {
   IPage,
   OrNever
 } from '@flex-development/kustomzcore'
-import Service from '@flex-development/kustomzcore/services/PageService'
-import SEO from '@flex-development/kustomzcore/services/SEOService'
 import type { VercelResponse as Res } from '@vercel/node'
-import type {
-  FindPagesReq as FindReq,
-  GetPageReq as GetReq
-} from '../../lib/types'
+import Service from '../services/PageService'
+import SEO from '../services/SEOService'
+import type { FindPagesReq as FindReq, GetPageReq as GetReq } from '../types'
 import SearchIndexController from './SearchIndexController'
 
 /**

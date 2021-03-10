@@ -18,7 +18,6 @@ Serverless REST API for Morenas's Kustomz, an online cannabis accessory store.
 
 ## 🚧 Usage
 
-[Assets](#assets)  
 [Collections](#collections)  
 [Layout](#layout)  
 [Menus](#menus)  
@@ -33,8 +32,10 @@ Serverless REST API for Morenas's Kustomz, an online cannabis accessory store.
 
 ## Built With
 
-- [KAPI Library][1] - API Library
-- [Vercel][2] - Hosting platform for serverless functions
+- [Algolia][1] - Site Search & Discovery powered by AI
+- [Shopify Admin REST API][2] - Shopify REST API
+- [Vercel][3] - Hosting platform for serverless functions
 
-[1]: ../api/README.md
-[2]: https://vercel.com/docs/serverless-functions/introduction
+[1]: https://www.algolia.com/
+[2]: https://shopify.dev/docs/admin-api/rest/reference
+[3]: https://vercel.com/docs/serverless-functions/introduction

@@ -1,8 +1,8 @@
-import Service from '@flex-development/kustomzcore/services/PolicyService'
+import Service from '../services/PolicyService'
 import type {
   FindPoliciesReq as FindReq,
   GetPolicyReq as GetReq
-} from '../../lib/types'
+} from '../types'
 import SearchIndexController from './SearchIndexController'
 
 /**

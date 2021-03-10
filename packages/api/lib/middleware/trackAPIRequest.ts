@@ -2,7 +2,7 @@ import ga from '@flex-development/kustomzcore/config/google-analytics'
 import vercel from '@flex-development/kustomzcore/config/vercel-env'
 import type { PageViewParam } from 'ga-measurement-protocol'
 import type { IncomingHttpHeaders } from 'http'
-import type { APIRequest } from '../../lib/types'
+import type { APIRequest } from '../types'
 
 /**
  * @file Implementation - trackAPIRequest

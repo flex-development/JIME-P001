@@ -1,8 +1,5 @@
-import Service from '@flex-development/kustomzcore/services/MenuService'
-import type {
-  FindMenusReq as FindReq,
-  GetMenuReq as GetReq
-} from '../../lib/types'
+import Service from '../services/MenuService'
+import type { FindMenusReq as FindReq, GetMenuReq as GetReq } from '../types'
 import SearchIndexController from './SearchIndexController'
 
 /**

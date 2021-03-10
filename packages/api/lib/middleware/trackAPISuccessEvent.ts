@@ -5,7 +5,7 @@ import ga, {
 import vercel from '@flex-development/kustomzcore/config/vercel-env'
 import type { Method } from 'axios'
 import type { EventParam } from 'ga-measurement-protocol'
-import type { APIRequest } from '../../lib/types'
+import type { APIRequest } from '../types'
 
 /**
  * @file Implementation - trackAPISuccessEvent

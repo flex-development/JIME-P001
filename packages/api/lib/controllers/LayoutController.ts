@@ -1,9 +1,9 @@
-import Menus from '@flex-development/kustomzcore/services/MenuService'
-import Metafields from '@flex-development/kustomzcore/services/MetafieldService'
-import Playlists from '@flex-development/kustomzcore/services/PlaylistService'
-import SEO from '@flex-development/kustomzcore/services/SEOService'
 import type { VercelResponse as Res } from '@vercel/node'
-import type { APIRequest as Req } from '../../lib/types'
+import Menus from '../services/MenuService'
+import Metafields from '../services/MetafieldService'
+import Playlists from '../services/PlaylistService'
+import SEO from '../services/SEOService'
+import type { APIRequest as Req } from '../types'
 
 /**
  * @file Implementation - LayoutController

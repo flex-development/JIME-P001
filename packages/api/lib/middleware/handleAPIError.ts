@@ -1,8 +1,8 @@
 import type { AnyObject } from '@flex-development/json'
-import ErrorService from '@flex-development/kustomzcore/services/ErrorService'
 import type { VercelResponse } from '@vercel/node'
 import pick from 'lodash/pick'
-import type { APIError, APIRequest } from '../../lib/types'
+import ErrorHandling from '../services/ErrorService'
+import type { APIError, APIRequest } from '../types'
 
 /**
  * @file Implementation - handleAPIError
@@ -29,7 +29,7 @@ async function handleAPIError<
   Res extends VercelResponse = VercelResponse
 >(req: Req, res: Res, err: APIError, data: AnyObject = {}): Promise<Res> {
   // Convert into `FeathersErrorJSON` object
-  const error = ErrorService.format(err, {
+  const error = ErrorHandling.format(err, {
     ...data,
     req: pick(req, ['headers', 'query', 'url'])
   })
@@ -38,7 +38,7 @@ async function handleAPIError<
   req.logger.error({ error })
 
   // Track error with Google Analytics
-  await ErrorService.track(error, {
+  await ErrorHandling.track(error, {
     method: req.method.toUpperCase(),
     path: req.path,
     ua: error.data.req.headers['user-agent']

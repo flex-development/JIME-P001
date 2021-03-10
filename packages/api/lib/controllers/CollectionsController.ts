@@ -1,8 +1,8 @@
-import Service from '@flex-development/kustomzcore/services/CollectionService'
+import Service from '../services/CollectionService'
 import type {
   FindCollectionsReq as FindReq,
   GetCollectionReq as GetReq
-} from '../../lib/types'
+} from '../types'
 import SearchIndexController from './SearchIndexController'
 
 /**

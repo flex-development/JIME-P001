@@ -1,7 +1,7 @@
 import type { GetPlaylistQuery } from '@flex-development/kustomzcore'
-import Service from '@flex-development/kustomzcore/services/PlaylistService'
 import type { VercelResponse as Res } from '@vercel/node'
-import type { GetPlaylistReq as Req } from '../../lib/types'
+import Service from '../services/PlaylistService'
+import type { GetPlaylistReq as Req } from '../types'
 
 /**
  * @file Implementation - PlaylistController

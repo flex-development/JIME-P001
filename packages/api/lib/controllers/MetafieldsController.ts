@@ -1,7 +1,7 @@
 import type { GetGlobalMetafieldsQuery } from '@flex-development/kustomzcore'
-import Service from '@flex-development/kustomzcore/services/MetafieldService'
 import type { VercelResponse as Res } from '@vercel/node'
-import type { GetGlobalMetafieldsReq as Req } from '../../lib/types'
+import Service from '../services/MetafieldService'
+import type { GetGlobalMetafieldsReq as Req } from '../types'
 
 /**
  * @file Implementation - MetafieldsController

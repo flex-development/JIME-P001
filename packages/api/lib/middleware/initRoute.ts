@@ -1,6 +1,6 @@
 import createLogger from '@flex-development/kustomzcore/config/logger'
 import URI from 'urijs'
-import type { APIRequest } from '../../lib/types'
+import type { APIRequest } from '../types'
 
 /**
  * @file Implementation - initRoute

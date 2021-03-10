@@ -8,5 +8,5 @@
   },
   "exclude": ["node_modules"],
   "extends": "../../tsconfig.json",
-  "include": ["api", "lib"]
+  "include": ["api", "api/.lib"]
 }

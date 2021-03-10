@@ -1,8 +1,8 @@
 import type { FindSearchIndexResourceQuery } from '@flex-development/kustomzcore'
 import type { VercelResponse as Res } from '@vercel/node'
-import MenusController from '../../lib/controllers/MenusController'
-import routeWrapper from '../../lib/middleware/routeWrapper'
-import type { FindMenusReq as Req } from '../../lib/types'
+import MenusController from '../.lib/controllers/MenusController'
+import routeWrapper from '../.lib/middleware/routeWrapper'
+import type { FindMenusReq as Req } from '../.lib/types'
 
 /**
  * @file API Endpoint - Find Menus

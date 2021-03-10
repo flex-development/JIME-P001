@@ -35,7 +35,6 @@
     "@types/nanoid": "latest",
     "@types/pino": "latest",
     "@types/sharp": "latest",
-    "@types/turndown": "latest",
     "@types/urijs": "latest",
     "algoliasearch": "latest",
     "debug": "latest",
@@ -48,7 +47,6 @@
     "sharp": "latest",
     "string-strip-html": "latest",
     "tslib": "latest",
-    "turndown": "latest",
     "urijs": "latest"
   },
   "devDependencies": {

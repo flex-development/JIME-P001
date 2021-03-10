@@ -1,8 +1,8 @@
 import type { FindCollectionsQuery } from '@flex-development/kustomzcore'
 import type { VercelResponse as Res } from '@vercel/node'
-import CollectionsController from '../../lib/controllers/CollectionsController'
-import routeWrapper from '../../lib/middleware/routeWrapper'
-import type { FindCollectionsReq as Req } from '../../lib/types'
+import CollectionsController from '../.lib/controllers/CollectionsController'
+import routeWrapper from '../.lib/middleware/routeWrapper'
+import type { FindCollectionsReq as Req } from '../.lib/types'
 
 /**
  * @file API Endpoint - Find Collections

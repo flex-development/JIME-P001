@@ -1,28 +1,46 @@
 {
-  "functions": {
-    "api/*.ts": {
-      "memory": 3008
-    },
-    "api/assets/images/[filename].ts": {
-      "includeFiles": "../../../lib/static/images/**"
-    }
-  },
   "github": {
     "autoAlias": true,
     "enabled": true,
     "silent": false
   },
+  "functions": {
+    "api/*.ts": {
+      "memory": 3008
+    },
+    "api/assets/images/[filename].ts": {
+      "includeFiles": "../../.lib/static/images/**"
+    }
+  },
+  "redirects": [
+    {
+      "source": "/repo",
+      "destination": "https://github.com/flex-development/JIME-P001",
+      "permanent": true
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "/api"
+    },
+    {
+      "source": "/:path*",
+      "destination": "/api/:path*"
+    }
+  ],
   "headers": [
     {
+      "source": "/api/assets/(.*)",
       "headers": [
         {
           "key": "Cache-Control",
           "value": "public, max-age=31536000, must-revalidate"
         }
-      ],
-      "source": "/api/assets/(.*)"
+      ]
     },
     {
+      "source": "/(.*)",
       "headers": [
         {
           "key": "Access-Control-Allow-Credentials",
@@ -36,25 +54,7 @@
           "key": "Cache-Control",
           "value": "s-maxage=1, stale-while-revalidate"
         }
-      ],
-      "source": "/(.*)"
-    }
-  ],
-  "redirects": [
-    {
-      "destination": "https://github.com/flex-development/JIME-P001",
-      "permanent": true,
-      "source": "/repo"
-    }
-  ],
-  "rewrites": [
-    {
-      "destination": "/api",
-      "source": "/"
-    },
-    {
-      "destination": "/api/:path*",
-      "source": "/:path*"
+      ]
     }
   ]
 }

@@ -1,8 +1,8 @@
 import type { GetPlaylistQuery } from '@flex-development/kustomzcore'
 import type { VercelResponse as Res } from '@vercel/node'
-import PlaylistController from '../lib/controllers/PlaylistController'
-import routeWrapper from '../lib/middleware/routeWrapper'
-import type { GetPlaylistReq as Req } from '../lib/types'
+import PlaylistController from './.lib/controllers/PlaylistController'
+import routeWrapper from './.lib/middleware/routeWrapper'
+import type { GetPlaylistReq as Req } from './.lib/types'
 
 /**
  * @file API Endpoint - Get Store Playlist Data

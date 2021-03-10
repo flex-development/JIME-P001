@@ -1,8 +1,8 @@
 import type { FindPagesQuery } from '@flex-development/kustomzcore'
 import type { VercelResponse as Res } from '@vercel/node'
-import PagesController from '../../lib/controllers/PagesController'
-import routeWrapper from '../../lib/middleware/routeWrapper'
-import type { FindPagesReq as Req } from '../../lib/types'
+import PagesController from '../.lib/controllers/PagesController'
+import routeWrapper from '../.lib/middleware/routeWrapper'
+import type { FindPagesReq as Req } from '../.lib/types'
 
 /**
  * @file API Endpoint - Find Pages

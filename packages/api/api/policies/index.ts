@@ -1,8 +1,8 @@
 import type { FindSearchIndexResourceQuery } from '@flex-development/kustomzcore'
 import type { VercelResponse as Res } from '@vercel/node'
-import PoliciesController from '../../lib/controllers/PoliciesController'
-import routeWrapper from '../../lib/middleware/routeWrapper'
-import type { FindPoliciesReq as Req } from '../../lib/types'
+import PoliciesController from '../.lib/controllers/PoliciesController'
+import routeWrapper from '../.lib/middleware/routeWrapper'
+import type { FindPoliciesReq as Req } from '../.lib/types'
 
 /**
  * @file API Endpoint - Find Policies

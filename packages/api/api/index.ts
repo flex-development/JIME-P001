@@ -1,7 +1,7 @@
 import type { VercelResponse as Res } from '@vercel/node'
-import docs from '../lib/config/openapi.json'
-import routeWrapper from '../lib/middleware/routeWrapper'
-import type { APIRequest as Req } from '../lib/types'
+import docs from './.lib/config/openapi.json'
+import routeWrapper from './.lib/middleware/routeWrapper'
+import type { APIRequest as Req } from './.lib/types'
 
 /**
  * @file Handler - API Root

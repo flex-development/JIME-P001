@@ -1,8 +1,8 @@
 import type { GetGlobalMetafieldsQuery } from '@flex-development/kustomzcore'
 import type { VercelResponse as Res } from '@vercel/node'
-import MetafieldsController from '../../lib/controllers/MetafieldsController'
-import routeWrapper from '../../lib/middleware/routeWrapper'
-import type { GetGlobalMetafieldsReq as Req } from '../../lib/types'
+import MetafieldsController from '../.lib/controllers/MetafieldsController'
+import routeWrapper from '../.lib/middleware/routeWrapper'
+import type { GetGlobalMetafieldsReq as Req } from '../.lib/types'
 
 /**
  * @file API Endpoint - Get Global Metafields

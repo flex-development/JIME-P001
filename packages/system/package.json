@@ -71,6 +71,7 @@
     "yup": "latest"
   },
   "devDependencies": {
+    "@flex-development/kustomzcore": "*",
     "@flex-development/webpack-tap-done": "latest",
     "@mdx-js/react": "latest",
     "@storybook/addon-a11y": "latest",

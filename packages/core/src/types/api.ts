@@ -1,5 +1,9 @@
 import type { Hit, SearchOptions } from '@algolia/client-search'
-import type { AnyObject, PartialOr } from '@flex-development/json/utils/types'
+import type { ApiError as AlgoliaError } from '@algolia/transporter'
+import type { FeathersErrorJSON } from '@feathersjs/errors'
+import type { AnyObject, ANYTHING, PartialOr } from '@flex-development/json'
+import type { VercelRequest } from '@vercel/node'
+import type { Logger } from 'pino'
 import type {
   Playlist,
   PlaylistAttributes,
@@ -17,12 +21,28 @@ import type {
   ShopifyMenuLink
 } from './shopify'
 import type { SEOData } from './storefront'
-import type { NumberString } from './utils'
+import type { NumberString, OrNever, OrPromise } from './utils'
 
 /**
  * @file Type Definitions - API
  * @module types/api
  */
+
+/**
+ * Shape of API error objects (with or without formatting).
+ */
+export type APIError = Error | AlgoliaError | FeathersErrorJSON
+
+/**
+ * Shape of the API `req` object.
+ */
+export interface APIRequest extends VercelRequest {
+  logger: Logger
+  method: string
+  path: string
+  query: Record<string, ANYTHING>
+  url: string
+}
 
 /**
  * JSON body expected by the `/reviews` endpoint when sending a `POST` request.
@@ -214,11 +234,21 @@ export type GetLayoutDataResJSON = {
 export type GetMenuResJSON = PartialOr<ShopifyMenu>
 
 /**
+ * Shape of JSON responses from the `/pages/[handle]` endpoint.
+ */
+export type GetPageResJSON = PartialOr<ResourceWithSEO<IPage>>
+
+/**
  * Query parameters accepted by the `/playlist` endpoint.
  */
 export type GetPlaylistQuery = {
   fields?: GetSearchIndexResourceQuery['fields']
 }
+
+/**
+ * Shape of JSON responses from the `/policies/[handle]` endpoint.
+ */
+export type GetPolicyResJSON = PartialOr<ResourceWithSEO<IPolicy>>
 
 /**
  * Shape of JSON responses from the `/playlist` endpoint.
@@ -228,16 +258,6 @@ export type GetPlaylistResJSON = {
   id: Playlist['id']
   tracks: SongAttributes[]
 }
-
-/**
- * Shape of JSON responses from the `/pages/[handle]` endpoint.
- */
-export type GetPageResJSON = PartialOr<ResourceWithSEO<IPage>>
-
-/**
- * Shape of JSON responses from the `/policies/[handle]` endpoint.
- */
-export type GetPolicyResJSON = PartialOr<ResourceWithSEO<IPolicy>>
 
 /**
  * Query parameters accepted by the `/products/[handle]` endpoint.
@@ -274,3 +294,39 @@ export type PaginationSearchOptions = Pick<SearchOptions, PaginationParameter>
  * Any object with `SEOData`.
  */
 export type ResourceWithSEO<R = AnyObject> = R & { seo: SEOData }
+
+/**
+ * Search index names.
+ */
+export type SearchIndexName =
+  | 'collections'
+  | 'menus'
+  | 'pages'
+  | 'policies'
+  | 'products'
+
+/**
+ * Function to populate search index.
+ */
+export type SearchIndexObjectsFN<TObject = AnyObject> = {
+  (): OrNever<OrPromise<TObject[]>>
+}
+
+/**
+ * Shopify resources that have a `metafield` property.
+ */
+export type ShopifyResourceWithMetafield = 'collections' | 'pages' | 'products'
+
+// Algolia types
+export type {
+  Hit,
+  SearchOptions,
+  Settings as SearchIndexSettings
+} from '@algolia/client-search'
+export type {
+  ApiError as AlgoliaError,
+  RequestOptions
+} from '@algolia/transporter'
+export type { SearchIndex } from 'algoliasearch'
+
+/* eslint-disable prettier/prettier */

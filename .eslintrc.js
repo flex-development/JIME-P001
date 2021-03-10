@@ -177,8 +177,8 @@ module.exports = {
       files: [
         '**/scripts/**',
         '**/__tests__/**',
-        '.eslintrc.js',
-        'babel.*',
+        '**/.eslintrc.js',
+        '**/babel.*',
         'commitlint.*',
         'jest.*',
         'lint-staged.*',

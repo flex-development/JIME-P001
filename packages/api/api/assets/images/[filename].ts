@@ -3,9 +3,9 @@ import type {
   NumberString
 } from '@flex-development/kustomzcore'
 import type { VercelResponse as Res } from '@vercel/node'
-import AssetsController from '../../.lib/controllers/AssetsController'
-import routeWrapper from '../../.lib/middleware/routeWrapper'
-import type { GetImageAssetReq as Req } from '../../.lib/types'
+import Controller from '../../../lib/controllers/AssetsController'
+import routeWrapper from '../../../lib/middleware/routeWrapper'
+import type { GetImageAssetReq as Req } from '../../../lib/types'
 
 /**
  * @file API Endpoint - Get Image Asset
@@ -27,6 +27,6 @@ import type { GetImageAssetReq as Req } from '../../.lib/types'
  */
 export default async (req: Req, res: Res): Promise<Res | void> => {
   return routeWrapper<Req, Res>(req, res, async (req, res) => {
-    return AssetsController.getImage(req, res)
+    return Controller.getImage(req, res)
   })
 }

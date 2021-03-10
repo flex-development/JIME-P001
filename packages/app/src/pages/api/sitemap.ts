@@ -1,7 +1,7 @@
-import kapi from '@app/config/axios-kapi'
-import ga from '@app/config/google-analytics'
-import log from '@app/config/logger'
-import vercel from '@app/config/vercel-env'
+import kapi from '@kustomzcore/config/axios-kapi'
+import ga from '@kustomzcore/config/google-analytics'
+import log from '@kustomzcore/config/logger'
+import vercel from '@kustomzcore/config/vercel-env'
 import type {
   GetCollectionResJSON,
   GetPageResJSON,

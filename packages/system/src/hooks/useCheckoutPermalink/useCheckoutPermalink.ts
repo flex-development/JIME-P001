@@ -1,5 +1,5 @@
 import type { NumberString } from '@flex-development/kustomzcore'
-import { CHECKOUT_BASE_URL } from '@kustomzcore/constants'
+import { CHECKOUT_BASE_URL } from '@kustomzcore/config/constants'
 import type {
   CheckoutLineItemInput,
   CheckoutPermalinkInput,

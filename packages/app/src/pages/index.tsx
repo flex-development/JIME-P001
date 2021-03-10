@@ -1,5 +1,5 @@
-import kapi from '@app/config/axios-kapi'
 import type { IPagePropsIndex as PageProps, PageComponent } from '@app/types'
+import kapi from '@kustomzcore/config/axios-kapi'
 import type { GetPageResJSON, GetProductResJSON } from '@kustomzcore/types'
 import objectFromArray from '@kustomzcore/utils/objectFromArray'
 import {

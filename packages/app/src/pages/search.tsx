@@ -1,11 +1,11 @@
-import kapi from '@app/config/axios-kapi'
 import type {
   IPagePropsSearch as PageProps,
   NextIncomingMessage,
   PageComponent,
   SearchPageUrlQuery as Query
 } from '@app/types'
-import { EMPTY_SPACE } from '@kustomzcore/constants'
+import kapi from '@kustomzcore/config/axios-kapi'
+import { EMPTY_SPACE } from '@kustomzcore/config/constants'
 import type { GetProductResJSON } from '@kustomzcore/types'
 import {
   SearchTemplate,

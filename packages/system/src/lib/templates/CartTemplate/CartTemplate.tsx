@@ -1,4 +1,4 @@
-import { CHECKOUT_BASE_URL } from '@kustomzcore/constants'
+import { CHECKOUT_BASE_URL } from '@kustomzcore/config/constants'
 import type { CheckoutLineItemInput } from '@kustomzcore/types'
 import { useCartContext } from '@system/hooks/useCart'
 import { useSanitizedProps } from '@system/hooks/useSanitizedProps'

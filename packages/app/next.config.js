@@ -185,7 +185,10 @@ const config = {
       '@babel': '@babel',
       '@commitlint': false,
       '@flex-development/json': '@flex-development/json/dist',
-      '@kustomzcore': '@flex-development/kustomzcore/dist',
+      '@kustomzcore': path.join(
+        __dirname,
+        'node_modules/@flex-development/kustomzcore'
+      ),
       '@kustomzdesign': '@flex-development/kustomzdesign/dist',
       '@mdx-js/react': '@mdx-js/react/dist/esm',
       '@sentry/browser': '@sentry/browser/esm',
@@ -254,8 +257,8 @@ const config = {
     // Add plugin to hook into end of Webpack build cycle
     config.plugins.push(new TapDoneWebpackPlugin(tapDone))
 
-    // Analyze Webpack bundle output
-    if (!VERCEL && !dev) {
+    // Analyze Webpack bundle output (local production only)
+    if (!VERCEL_PARSED && !dev) {
       const reportFilenameClient = './analyze/client.html'
       const reportFilenameServer = '../analyze/server.html'
 

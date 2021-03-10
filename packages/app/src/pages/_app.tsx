@@ -1,7 +1,4 @@
 import { Layout } from '@app/components/Layout'
-import kapi from '@app/config/axios-kapi'
-import ga from '@app/config/google-analytics'
-import vercel from '@app/config/vercel-env'
 import '@app/styles/index.scss'
 import type {
   AppComponent,
@@ -10,14 +7,17 @@ import type {
   IAppProps,
   IPageProps
 } from '@app/types'
-import { CART_PKEY } from '@kustomzcore/constants'
+import kapi from '@kustomzcore/config/axios-kapi'
+import { CART_PKEY } from '@kustomzcore/config/constants'
+import ga from '@kustomzcore/config/google-analytics'
+import vercel from '@kustomzcore/config/vercel-env'
 import type {
   CheckoutLineItemInput,
   GetLayoutDataResJSON
 } from '@kustomzcore/types'
 import type { UseCart as CartContextState } from '@kustomzdesign/hooks/useCart'
 import '@kustomzdesign/kustomzdesign.css'
-import { CartContextProvider } from '@kustomzdesign/providers/CartContextProvider'
+import { CartContextProvider } from '@kustomzdesign/providers'
 import type { PageViewParam } from 'ga-measurement-protocol'
 import type { IncomingHttpHeaders, IncomingMessage } from 'http'
 import type { NextPageContext } from 'next'

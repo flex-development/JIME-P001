@@ -1,4 +1,3 @@
-import kapi from '@app/config/axios-kapi'
 import type {
   HandlePageParams as Params,
   IPagePropsPolicy as PageProps,
@@ -6,6 +5,8 @@ import type {
   NotFound,
   PageComponent
 } from '@app/types'
+import toJSX from '@app/utils/toJSX'
+import kapi from '@kustomzcore/config/axios-kapi'
 import type { GetPolicyResJSON } from '@kustomzcore/types'
 import {
   PageTemplate,
@@ -59,16 +60,16 @@ export const getServerSideProps: GetServerSideProps<PageProps, Params> = async (
       params: { fields: 'body,seo' },
       url: `/policies/${context.params?.handle}`
     })
+
+    return {
+      props: {
+        seo: data.seo as NonNullable<typeof data.seo>,
+        template: { body: await toJSX(data.body) }
+      }
+    }
   } catch (error) {
     if (error.code === 404) return data as NotFound
     throw error
-  }
-
-  return {
-    props: {
-      seo: data.seo as NonNullable<typeof data.seo>,
-      template: { body: data.body }
-    }
   }
 }
 

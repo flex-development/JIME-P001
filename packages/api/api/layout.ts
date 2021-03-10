@@ -1,7 +1,7 @@
 import type { VercelResponse as Res } from '@vercel/node'
-import LayoutController from './.lib/controllers/LayoutController'
-import routeWrapper from './.lib/middleware/routeWrapper'
-import type { APIRequest as Req } from './.lib/types'
+import LayoutController from '../lib/controllers/LayoutController'
+import routeWrapper from '../lib/middleware/routeWrapper'
+import type { APIRequest as Req } from '../lib/types'
 
 /**
  * @file API Endpoint - Get Storefront Layout Data

@@ -1,4 +1,3 @@
-import kapi from '@app/config/axios-kapi'
 import type {
   IPagePropsProduct as PageProps,
   NextIncomingMessage,
@@ -8,6 +7,7 @@ import type {
   ProductPageUrlQuery as Query
 } from '@app/types'
 import { serialize } from '@flex-development/json/utils/serialize'
+import kapi from '@kustomzcore/config/axios-kapi'
 import type {
   GetCollectionResJSON,
   GetProductResJSON,

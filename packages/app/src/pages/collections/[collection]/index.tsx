@@ -1,4 +1,3 @@
-import kapi from '@app/config/axios-kapi'
 import type {
   CollectionPageParams as Params,
   IPagePropsCollection as PageProps,
@@ -7,6 +6,7 @@ import type {
   PageComponent
 } from '@app/types'
 import { serialize } from '@flex-development/json/utils/serialize'
+import kapi from '@kustomzcore/config/axios-kapi'
 import type { GetCollectionResJSON, IProductListing } from '@kustomzcore/types'
 import type { LinkProps } from '@kustomzdesign/lib/atoms/Link'
 import {

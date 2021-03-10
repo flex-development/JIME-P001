@@ -3,6 +3,6 @@
  * @module utils
  */
 
-export default {}
+export { default as toJSX } from './toJSX'
 
 /* eslint-disable prettier/prettier */

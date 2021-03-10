@@ -1,5 +1,5 @@
 import type { AnyObject } from '@flex-development/json/utils/types'
-import { EMPTY_SPACE } from '@kustomzcore/constants'
+import { EMPTY_SPACE } from '@kustomzcore/config/constants'
 import {
   GRID_BREAKPOINT_KEYS,
   UTILITY_PROP_ALIASES as ALIASES

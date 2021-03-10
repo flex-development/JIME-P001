@@ -1,12 +1,10 @@
 {
   "compilerOptions": {
-    "importHelpers": true,
-    "lib": ["esnext"],
     "module": "commonjs",
     "paths": {},
     "target": "es6"
   },
   "exclude": ["node_modules"],
   "extends": "../../tsconfig.json",
-  "include": ["api", "api/.lib"]
+  "include": ["__tests__", "api", "lib"]
 }

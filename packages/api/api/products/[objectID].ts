@@ -1,8 +1,8 @@
 import type { GetProductQuery } from '@flex-development/kustomzcore'
 import type { VercelResponse as Res } from '@vercel/node'
-import ProductsController from '../.lib/controllers/ProductsController'
-import routeWrapper from '../.lib/middleware/routeWrapper'
-import type { GetProductReq as Req } from '../.lib/types'
+import ProductsController from '../../lib/controllers/ProductsController'
+import routeWrapper from '../../lib/middleware/routeWrapper'
+import type { GetProductReq as Req } from '../../lib/types'
 
 /**
  * @file API Endpoint - Get Product By Handle

@@ -9,11 +9,12 @@ module.exports = {
   ...rootConfig,
   parserOptions: {
     ...rootConfig.parserOptions,
-    project: ['./tsconfig.json', './tsconfig.prod.json']
+    project: ['./tsconfig.json', './tsconfig.prod.json'],
+    tsconfigRootDir: __dirname
   },
   overrides: rootConfig.overrides.concat([
     {
-      files: ['./src/axios.ts'],
+      files: ['src/config/**'],
       rules: {
         'tree-shaking/no-side-effects-in-initialization': 0
       }

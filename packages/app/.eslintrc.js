@@ -13,12 +13,7 @@ module.exports = {
   },
   overrides: rootConfig.overrides.concat([
     {
-      files: [
-        'next.config.js',
-        'robots-txt.config.js',
-        'src/config/google-analytics.ts',
-        'src/config/logger.ts'
-      ],
+      files: ['next.config.js', 'robots-txt.config.js'],
       rules: {
         'tree-shaking/no-side-effects-in-initialization': 0
       }

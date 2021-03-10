@@ -41,6 +41,7 @@
     "@types/pino": "latest",
     "axios": "latest",
     "axios-rate-limit": "latest",
+    "ga-measurement-protocol": "latest",
     "lodash": "latest",
     "nanoid": "latest",
     "pino": "latest",
@@ -49,69 +50,29 @@
     "tslib": "latest"
   },
   "devDependencies": {
-    "@algolia/client-search": "latest",
-    "@types/jsonwebtoken": "latest",
-    "@types/sharp": "latest",
-    "@vercel/node": "latest",
-    "algoliasearch": "latest",
-    "ga-measurement-protocol": "latest",
-    "sharp": "latest",
-    "string-strip-html": "latest"
+    "@algolia/client-search": "latest"
   },
   "peerDependencies": {
-    "@algolia/client-search": "latest",
-    "@types/jsonwebtoken": "latest",
-    "@types/sharp": "latest",
-    "@vercel/node": "latest",
-    "algoliasearch": "latest",
-    "ga-measurement-protocol": "latest",
-    "sharp": "latest",
-    "string-strip-html": "latest"
+    "@algolia/client-search": "latest"
   },
   "peerDependenciesMeta": {
     "@algolia/client-search": {
       "optional": true
-    },
-    "@types/jsonwebtoken": {
-      "optional": true
-    },
-    "@types/sharp": {
-      "optional": true
-    },
-    "@vercel/node": {
-      "optional": true
-    },
-    "algoliasearch": {
-      "optional": true
-    },
-    "ga-measurement-protocol": {
-      "optional": true
-    },
-    "sharp": {
-      "optional": true
-    },
-    "string-strip-html": {
-      "optional": true
     }
   },
   "env": [
-    "ALGOLIA_API_KEY",
-    "ALGOLIA_APP_ID",
-    "APPLE_AUTHKEY_MUSICKIT",
-    "APPLE_AUTHKEY_MUSICKIT_KEY_ID",
-    "APPLE_TEAM_ID",
+    "API_URL",
     "GA_TRACKING_ID",
-    "KAPI_URL",
     "NODE_ENV",
     "NPM_RC",
     "SHOPIFY_API_KEY",
     "SHOPIFY_API_VERSION",
     "SHOPIFY_DOMAIN",
     "SHOPIFY_PASSWORD",
+    "VERCEL",
     "VERCEL_ENV",
     "VERCEL_GIT_COMMIT_REF",
-    "VERCEL_GIT_COMMIT_SHA",
-    "VERCEL_URL"
+    "VERCEL_GIT_COMMIT_SHA"
   ],
   "sideEffects": false
 }

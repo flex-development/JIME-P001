@@ -16,7 +16,7 @@ const ga = new GA(GA_TRACKING_ID || '', axios, '1', true)
 // Identifies a particular user, device, or browser instance
 ga.setClientId(nanoid())
 
-// Disable tracking in non-Vercel environments
+// Disable tracking
 if (!(JSON.parse(VERCEL || '0') && VERCEL_ENV !== 'development')) ga.disable()
 
 export const GA_CATEGORIES = {

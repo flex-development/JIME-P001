@@ -9,7 +9,7 @@
       "memory": 3008
     },
     "api/assets/images/[filename].ts": {
-      "includeFiles": "../../.lib/static/images/**"
+      "includeFiles": "../../.lib/**"
     }
   },
   "redirects": [

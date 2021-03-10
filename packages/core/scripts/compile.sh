@@ -9,5 +9,5 @@
 # 4. Fix node module paths
 rm -rf ./dist
 ttsc -p tsconfig.prod.json
-cp -r README.md package.json src/static ./dist
+cp README.md package.json ./dist
 node ../../scripts/js/fix-node-module-paths

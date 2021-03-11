@@ -34,13 +34,12 @@ export class InlineStylesHead extends Head {
    * @todo Only inline CSS files with the extension `.critical.css`
    */
   getCssLinks(): JSX.Element[] | null {
-    const dir = `.next/${process.env.TARGET_DIR}/static/css`
-    const resdir = resolve(process.cwd(), dir)
+    const dir = resolve(process.cwd(), '.next/static/css')
 
-    if (!existsSync(resdir)) return []
+    if (!existsSync(dir)) return []
 
-    return readdirSync(resdir).map(file => {
-      const $file = resolve(process.cwd(), dir, file)
+    return readdirSync(dir).map(file => {
+      const $file = resolve(dir, file)
       let __html = ''
 
       try {

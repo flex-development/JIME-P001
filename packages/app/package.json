@@ -33,7 +33,6 @@
   "dependencies": {
     "@flex-development/kustomzcore": "*",
     "@flex-development/kustomzdesign": "*",
-    "@flex-development/webpack-tap-done": "latest",
     "@mdx-js/react": "latest",
     "@sentry/browser": "6.2.0",
     "@sentry/integrations": "6.2.0",

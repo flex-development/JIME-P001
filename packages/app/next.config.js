@@ -1,5 +1,4 @@
 const { AnyObject } = require('@flex-development/json')
-const TapDoneWebpackPlugin = require('@flex-development/webpack-tap-done')
 const SentryWebpackPlugin = require('@sentry/webpack-plugin')
 const withSourceMaps = require('@zeit/next-source-maps')()
 const { DuplicatesPlugin } = require('inspectpack/plugin')
@@ -8,7 +7,6 @@ const merge = require('lodash').merge
 const transpileModules = require('next-transpile-modules')
 const path = require('path')
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
-const copyCSSAssets = require('./scripts/js/copy-css-assets')
 const SITE_URL = require('./scripts/js/get-site-url')()
 const vercel = require('./vercel.json')
 
@@ -52,7 +50,6 @@ const config = {
     SENTRY_RELEASE,
     SITE_NAME,
     SITE_URL,
-    TARGET_DIR: copyCSSAssets.TARGET_DIR,
     TYPEKIT_ID,
     VERCEL: VERCEL_PARSED,
     VERCEL_ENV: ENV,
@@ -239,23 +236,6 @@ const config = {
 
     // Report duplicate dependencies
     if (!dev) config.plugins.push(new DuplicatesPlugin({ verbose: true }))
-
-    /**
-     * Callback function to hook to end of Weback build cycle.
-     *
-     * In non-dev environments, CSS assets from the client will copied to the
-     * server's static CSS directory. This allows us to inline styles via
-     * `InlineStylesHead` component w/o disabling built-in CSS support.
-     *
-     * @async
-     * @return {void}
-     */
-    const tapDone = async () => {
-      if (!dev && !isServer) await copyCSSAssets()
-    }
-
-    // Add plugin to hook into end of Webpack build cycle
-    config.plugins.push(new TapDoneWebpackPlugin(tapDone))
 
     // Analyze Webpack bundle output (local production only)
     if (!VERCEL_PARSED && !dev) {

@@ -8,7 +8,9 @@
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "forceConsistentCasingInFileNames": true,
+    "importHelpers": true,
     "isolatedModules": true,
+    "lib": ["esnext"],
     "module": "esnext",
     "moduleResolution": "node",
     "noEmit": true,
@@ -19,14 +21,13 @@
     "noUnusedParameters": false,
     "paths": {
       "@app/*": ["packages/app/src/*"],
-      "@flex-development/json": [
-        "node_modules/@flex-development/json/dist/index.d.ts"
-      ],
       "@flex-development/json/*": [
         "node_modules/@flex-development/json/dist/*"
       ],
       "@kapi/*": ["packages/api/lib/*"],
-      "@kustomzcore/*": ["node_modules/@flex-development/kustomzcore/dist/*"],
+      "@kustomzcore/*": [
+        "packages/app/node_modules/@flex-development/kustomzcore/*"
+      ],
       "@kustomzdesign/*": [
         "node_modules/@flex-development/kustomzdesign/dist/*"
       ],

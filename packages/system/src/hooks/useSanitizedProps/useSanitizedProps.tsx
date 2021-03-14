@@ -1,5 +1,5 @@
 import type { AnyObject } from '@flex-development/json/utils/types'
-import { EMPTY_SPACE as ES } from '@kustomzcore/constants'
+import { EMPTY_SPACE as ES } from '@kustomzcore/config/constants'
 import { useUtilityClasses } from '@system/hooks/useUtilityClasses'
 import type { JSXIEPropsOr } from '@system/types'
 import classnames from 'classnames'
@@ -26,9 +26,13 @@ import uniq from 'lodash/uniq'
  * - {@param props.$img} will be used to set a background image
  * - Keys specified in {@param keys} will be removed {@param props}
  *
- * @param props - Component properties
- * @param inject - Class dictionary or class string of additional CSS classes
- * @param keys - Array of keys to remove from {@param props}
+ * @template E - HTML element tag name
+ * @template P - Props shape
+ *
+ * @param {AnyObject} props - Component properties
+ * @param {string | ClassDictionary} [inject] - Additional CSS classes
+ * @param {string[]} [keys] - Array of keys to remove from {@param props}
+ * @return {P} Sanitized component properties
  */
 export function useSanitizedProps<
   E extends keyof JSX.IntrinsicElements = 'div',

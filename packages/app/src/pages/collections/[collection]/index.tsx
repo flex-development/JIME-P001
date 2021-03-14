@@ -1,17 +1,26 @@
-import { SEO } from '@app/components/SEO'
-import kapi from '@app/config/axios-kapi'
 import type {
-  CollectionPageParams,
+  CollectionPageParams as Params,
   IPagePropsCollection as PageProps,
+  NextIncomingMessage,
   NotFound,
   PageComponent
 } from '@app/types'
 import { serialize } from '@flex-development/json/utils/serialize'
-import type { GetCollectionResJSON } from '@kustomzcore/types'
-import { CollectionTemplate } from '@kustomzdesign/lib/templates/CollectionTemplate'
+import kapi from '@kustomzcore/config/axios-kapi'
+import type { GetCollectionResJSON, IProductListing } from '@kustomzcore/types'
+import type { LinkProps } from '@kustomzdesign/lib/atoms/Link'
+import {
+  CollectionTemplate,
+  CollectionTemplateProps as TemplateProps
+} from '@kustomzdesign/lib/templates/CollectionTemplate'
 import merge from 'lodash/merge'
-import type { GetServerSideProps, GetServerSidePropsContext } from 'next'
+import type {
+  GetServerSideProps,
+  GetServerSidePropsContext as Context,
+  GetServerSidePropsResult
+} from 'next'
 import { useRouter } from 'next/router'
+import type { ReactElement } from 'react'
 
 /**
  * @file Page - Product Collection
@@ -21,30 +30,31 @@ import { useRouter } from 'next/router'
 /**
  * Renders a product collection page.
  *
- * @param props - Page component props
- * @param props.seo - `SEO` component properties
- * @param props.template - `CollectionTemplate` component properties
+ * @param {PageProps} props - Page component props
+ * @param {TemplateProps} props.template - Template component properties
+ * @return {ReactElement<TemplateProps>} Product colletion page
  */
-const Collection: PageComponent<PageProps> = ({ seo, template }) => {
+const Collection: PageComponent<PageProps> = (
+  props: PageProps
+): ReactElement<TemplateProps> => {
+  const { template } = props
+
   // Get router instance to generate `LinkProps` for each collection product
   const { asPath, query } = useRouter()
 
   /**
    * Generates product `LinkProps` using the `handle` of the current collection.
    *
-   * @param p - Product listing object
-   * @return `LinkProps` for the product listing
+   * @param {IProductListing} p - Product listing object
+   * @return {LinkProps} `LinkProps` for the product listing
    */
-  const handleProductLink: PageProps['template']['handleProductLink'] = p => {
+  const handleProductLink = (p: IProductListing): LinkProps => {
     const base = !asPath.includes('collections') ? '/' : `${query.collection}/`
     return { href: `${base}products/${p.handle}` }
   }
 
   return (
-    <>
-      <SEO {...seo} />
-      <CollectionTemplate {...template} handleProductLink={handleProductLink} />
-    </>
+    <CollectionTemplate {...template} handleProductLink={handleProductLink} />
   )
 }
 
@@ -55,14 +65,16 @@ const Collection: PageComponent<PageProps> = ({ seo, template }) => {
  * @see https://nextjs.org/docs/basic-features/data-fetching
  * @see https://shopify.dev/docs/admin-api/rest/reference/sales-channels
  *
- * @param context - Server side page context
- * @param context.params - Route parameters if dynamic route
- * @param context.req - `HTTP` request object
+ * @async
+ * @param {Context<Params>} context - Server side page context
+ * @param {Params} context.params - Route parameters if dynamic route
+ * @param {NextIncomingMessage} context.req - `HTTP` request object
+ * @return {Promise<GetServerSidePropsResult<PageProps>>} Page props
+ * @throws {FeathersErrorJSON}
  */
-export const getServerSideProps: GetServerSideProps<
-  PageProps,
-  CollectionPageParams
-> = async (context: GetServerSidePropsContext<CollectionPageParams>) => {
+export const getServerSideProps: GetServerSideProps<PageProps, Params> = async (
+  context: Context<Params>
+): Promise<GetServerSidePropsResult<PageProps>> => {
   const { params, req } = context
 
   let data: GetCollectionResJSON | NotFound = { notFound: true }
@@ -84,9 +96,9 @@ export const getServerSideProps: GetServerSideProps<
       }),
       template: serialize<PageProps['template']>({
         collection: {
-          ...data,
+          body_html: data.body_html,
           title: !req.url?.includes('collections') ? 'Products' : data.title
-        } as PageProps['template']['collection'],
+        },
         products: data.products
       })
     }

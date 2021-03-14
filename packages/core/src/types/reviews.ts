@@ -19,8 +19,8 @@ export type JudgeMeCustomFormAnswer = {
  */
 export type JudgeMeReview = {
   body: string
-  curated: string
   created_at: string
+  curated: JudgeMeReviewCuratedStatus
   featured: boolean
   hidden: boolean
   id: number
@@ -33,6 +33,11 @@ export type JudgeMeReview = {
   updated_at: string
   verified: string
 }
+
+/**
+ * Possible values for the `curated` property.
+ */
+export type JudgeMeReviewCuratedStatus = 'curated' | 'not-yet'
 
 /**
  * Query parameters accepeted by the Judge.me "Reviews Index" endpoint.
@@ -171,6 +176,11 @@ export type JudgeMeReviewPicture = {
   hidden: boolean
   urls: Record<'compact' | 'huge' | 'original' | 'small', string>
 }
+
+/**
+ * Possible values for the `verified` property.
+ */
+export type JudgeMeReviewVerificationStatus = 'buyer' | 'nothing'
 
 /**
  * Product review rating values.

@@ -1,4 +1,7 @@
-import type { IProductListingVariant } from '@kustomzcore/types'
+import type {
+  CheckoutLineItemInput,
+  IProductListingVariant
+} from '@kustomzcore/types'
 import { useCartContext } from '@system/hooks/useCart'
 import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
 import { Box } from '@system/lib/atoms/Box'
@@ -7,7 +10,6 @@ import { Heading } from '@system/lib/atoms/Heading'
 import type { MainProps } from '@system/lib/atoms/Main'
 import { Main } from '@system/lib/atoms/Main'
 import { Section } from '@system/lib/atoms/Section'
-import type { AddToCartFormProps } from '@system/lib/molecules/AddToCartForm'
 import { AddToCartForm } from '@system/lib/molecules/AddToCartForm'
 import { Carousel } from '@system/lib/molecules/Carousel'
 import { ProductBreadcrumb } from '@system/lib/molecules/ProductBreadcrumb'
@@ -62,12 +64,16 @@ export const ProductTemplate: TC<ProductTemplateProps> = props => {
    * If `props.handleAddToCart` is defined, it will be called before updated the
    * line items state.
    *
-   * @param item - New checkout line item
-   * @param e - `click` event from `<button>` element
+   * @param {CheckoutLineItemInput} item - New checkout line item
+   * @param {EventHandlers.Click.Button} event - `click` event
    */
-  const _handleAddToCart: AddToCartFormProps['handleSubmit'] = (item, e) => {
-    e.preventDefault()
-    if (isFunction(handleAddToCart)) handleAddToCart(item, e)
+  const _handleAddToCart = (
+    item: CheckoutLineItemInput,
+    event: EventHandlers.Click.Button
+  ) => {
+    event.preventDefault()
+
+    if (isFunction(handleAddToCart)) handleAddToCart(item, event)
     return cart.upsertItem(item)
   }
 
@@ -78,11 +84,12 @@ export const ProductTemplate: TC<ProductTemplateProps> = props => {
   ])
 
   /**
-   * Updates the selected product variant state.
+   * Updates the selected product variant.
    *
-   * @param id - ID of newly selected variant
+   * @param {number} id - ID of the variant to select
+   * @return {void}
    */
-  const handleVariant = (id: IProductListingVariant['id']) => {
+  const handleVariant = (id: IProductListingVariant['id']): void => {
     const new_variant = product.variants.find(v => v.id === id)
     if (new_variant) setVariant(new_variant)
   }

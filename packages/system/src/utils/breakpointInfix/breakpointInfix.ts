@@ -13,7 +13,8 @@ import type { GridBreakpointKey } from '@system/types'
  *
  * Possible breakpoints: `xs`, `sm`, `md`, `lg`, `xl`, `xxl`
  *
- * @param breakpoint - Breakpoint key
+ * @param {GridBreakpointKey} breakpoint - Breakpoint key
+ * @return {string} Empty string or `${breakpoint}:`
  */
 const breakpointInfix = (breakpoint: GridBreakpointKey): string => {
   return breakpoint !== 'xs' ? `${breakpoint}:` : ''

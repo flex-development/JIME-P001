@@ -13,7 +13,8 @@ const EXTENDS_CONFIG = [
   'plugin:@typescript-eslint/recommended',
   'plugin:react/recommended',
   'plugin:jsx-a11y/recommended',
-  'plugin:prettier/recommended'
+  'plugin:prettier/recommended',
+  'plugin:jsdoc/recommended'
 ]
 
 const PARSER_OPTIONS = {
@@ -33,15 +34,18 @@ module.exports = {
     node: true
   },
   extends: EXTENDS_CONFIG,
-  globals: {
-    loadCSS: true
-  },
+  globals: {},
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ...PARSER_OPTIONS,
     project: ['./tsconfig.json', './packages/**/tsconfig.json']
   },
-  plugins: ['@typescript-eslint/eslint-plugin', 'tree-shaking', 'react-hooks'],
+  plugins: [
+    '@typescript-eslint/eslint-plugin',
+    'jsdoc',
+    'tree-shaking',
+    'react-hooks'
+  ],
   rules: {
     '@typescript-eslint/ban-ts-ignore': 0,
     '@typescript-eslint/ban-types': 1,
@@ -57,10 +61,22 @@ module.exports = {
       }
     ],
     '@typescript-eslint/no-explicit-any': 1,
+    '@typescript-eslint/no-inferrable-types': 0,
     '@typescript-eslint/no-namespace': 0,
     '@typescript-eslint/no-use-before-define': 0,
     '@typescript-eslint/no-useless-constructor': 1,
     eqeqeq: 1,
+    'jsdoc/check-indentation': 1,
+    'jsdoc/check-line-alignment': 1,
+    'jsdoc/check-syntax': 1,
+    'jsdoc/no-undefined-types': [
+      1,
+      {
+        definedTypes: ['FeathersErrorJSON', 'JSX', 'WebFont']
+      }
+    ],
+    'jsdoc/require-hyphen-before-param-description': 1,
+    'jsdoc/require-throws': 1,
     'jsx-a11y/accessible-emoji': 0,
     'jsx-a11y/anchor-is-valid': [
       1,
@@ -121,21 +137,16 @@ module.exports = {
   },
   overrides: [
     {
-      files: [
-        '**/scripts/**',
-        '**/__tests__/**',
-        '.eslintrc.js',
-        'babel.*',
-        'commitlint.*',
-        'jest.*',
-        'lint-staged.*',
-        'postcss.*',
-        'webpack.*',
-        '*.spec.ts',
-        '*.spec.tsx'
-      ],
+      files: ['**/*.js'],
+      parser: '@babel/eslint-parser',
+      parserOptions: {
+        ...PARSER_OPTIONS,
+        babelOptions,
+        requireConfigFile: false
+      },
       rules: {
-        'tree-shaking/no-side-effects-in-initialization': 0
+        '@typescript-eslint/explicit-module-boundary-types': 0,
+        '@typescript-eslint/no-var-requires': 0
       }
     },
     {
@@ -151,18 +162,9 @@ module.exports = {
       }
     },
     {
-      files: ['**/*.js'],
-      parser: '@babel/eslint-parser',
-      parserOptions: {
-        ...PARSER_OPTIONS,
-        babelOptions,
-        requireConfigFile: false
-      },
+      files: ['**/*.d.ts'],
       rules: {
-        '@typescript-eslint/explicit-module-boundary-types': 0,
-        '@typescript-eslint/no-var-requires': 0,
-        'require-jsdoc': 1,
-        'valid-jsdoc': 0
+        'prettier/prettier': 0
       }
     },
     {
@@ -172,14 +174,46 @@ module.exports = {
       }
     },
     {
-      files: ['**/*.d.ts'],
+      files: [
+        '**/scripts/**',
+        '**/__tests__/**',
+        '**/.eslintrc.js',
+        '**/babel.*',
+        'commitlint.*',
+        'jest.*',
+        'lint-staged.*',
+        'postcss.*',
+        'webpack.*',
+        '*.spec.ts',
+        '*.spec.tsx'
+      ],
       rules: {
-        'prettier/prettier': 0
+        'tree-shaking/no-side-effects-in-initialization': 0
       }
     }
   ],
   root: true,
   settings: {
+    jsdoc: {
+      augmentsExtendsReplacesDocs: true,
+      implementsReplacesDocs: true,
+      mode: 'typescript',
+      overrideReplacesDocs: true,
+      structuredTags: {
+        param: {
+          required: ['name', 'type']
+        },
+        throws: {
+          name: 'namepath-defining',
+          required: ['type']
+        }
+      },
+      tagNamePreference: {
+        augments: 'extends',
+        constant: 'const',
+        returns: 'return'
+      }
+    },
     react: {
       version: 'detect'
     }

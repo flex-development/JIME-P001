@@ -4,6 +4,7 @@ import type {
 } from '@flex-development/json/utils/types'
 import type {
   ICheckoutLineItem,
+  ICollectionListing,
   IProductListing,
   IProductListingVariant
 } from './shopify'
@@ -33,7 +34,7 @@ export type CheckoutPermalinkQuery = Record<
  */
 export type CheckoutLineItemInput = {
   price: IProductListingVariant['price']
-  product: IProductListing
+  product: Omit<ProductListingData, 'body_html'>
   properties: AnyObject | null
   quantity: ICheckoutLineItem['quantity']
   variant_id: IProductListingVariant['id']
@@ -45,6 +46,22 @@ export type CheckoutLineItemInput = {
 export type CheckoutLineItemInputWithId = CheckoutLineItemInput & {
   id: CheckoutLineItemInput['variant_id']
 }
+
+/**
+ * Commonly used collection listing data.
+ */
+export type CollectionListingData = Pick<
+  ICollectionListing,
+  'body_html' | 'title'
+>
+
+/**
+ * Commonly used product listing data.
+ */
+export type ProductListingData = Pick<
+  IProductListing,
+  'body_html' | 'handle' | 'images' | 'title' | 'variants'
+>
 
 /**
  * Object representing SEO data.

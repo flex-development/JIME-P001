@@ -5,6 +5,7 @@
 
 export { default as handleAPIError } from './handleAPIError'
 export { default as initRoute } from './initRoute'
+export { default as routeWrapper } from './routeWrapper'
 export { default as trackAPIRequest } from './trackAPIRequest'
 export { default as trackAPISuccessEvent } from './trackAPISuccessEvent'
 

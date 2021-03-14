@@ -1,4 +1,5 @@
-import { CHECKOUT_BASE_URL } from '@kustomzcore/constants'
+import type { NumberString } from '@flex-development/kustomzcore'
+import { CHECKOUT_BASE_URL } from '@kustomzcore/config/constants'
 import type {
   CheckoutLineItemInput,
   CheckoutPermalinkInput
@@ -22,10 +23,38 @@ export type UseCart = UseCheckoutPermalink & {
   items_total: number
 }
 
+/**
+ * Array of initial items or a synchronous function that returns an array.
+ */
+export type UseCartInitialItems =
+  | CheckoutLineItemInput[]
+  | (() => CheckoutLineItemInput[])
+
+/**
+ * Returns an object containing the line items in the user's cart, functions to
+ * update the cart, and the total number of line items in the cart.
+ *
+ * The total number is calculated using the `quantity` field of each item.
+ *
+ * @param {UseCartInitialItems} [items] - Line items array or function
+ * @return {UseCart} Hook state
+ */
+export const useCart = (items: UseCartInitialItems = []): UseCart => {
+  // Get checkout URL using initial line items
+  const checkout = useCheckoutPermalink(isFunction(items) ? items() : items)
+
+  // Get number of line items in cart
+  const items_total = useMemo<number>(() => {
+    return getItemsTotal(checkout.items)
+  }, [checkout.items])
+
+  return { ...checkout, items_total }
+}
+
 export const CartContext = createContext<UseCart>({
   items: [],
   items_total: 0,
-  removeItem: (variant_id: number | string) => {
+  removeItem: (variant_id: NumberString) => {
     console.log({ 'CartContext.removeItem': variant_id })
   },
   setItems: (items: CheckoutPermalinkInput[]) => {
@@ -38,29 +67,9 @@ export const CartContext = createContext<UseCart>({
 })
 
 /**
- * Returns an object containing the line items in the user's cart, functions to
- * update the cart, and the total number of line items in the cart.
- *
- * The total number is calculated using the `quantity` field of each item.
- *
- * @param items - Current line items
- */
-export const useCart = (
-  items: CheckoutLineItemInput[] | (() => CheckoutLineItemInput[]) = []
-): UseCart => {
-  // Get checkout URL using initial line items
-  const checkout = useCheckoutPermalink(isFunction(items) ? items() : items)
-
-  // Get number of line items in cart
-  const items_total = useMemo<number>(() => {
-    return getItemsTotal(checkout.items)
-  }, [checkout.items])
-
-  return { ...checkout, items_total }
-}
-
-/**
  * Returns an object representing the shopping cart context state.
+ *
+ * @return {UseCart} Cart context
  */
 export const useCartContext = (): UseCart => {
   return useContext(CartContext)

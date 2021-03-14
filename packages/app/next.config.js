@@ -1,4 +1,4 @@
-const TapDoneWebpackPlugin = require('@flex-development/webpack-tap-done')
+const { AnyObject } = require('@flex-development/json')
 const SentryWebpackPlugin = require('@sentry/webpack-plugin')
 const withSourceMaps = require('@zeit/next-source-maps')()
 const { DuplicatesPlugin } = require('inspectpack/plugin')
@@ -7,7 +7,6 @@ const merge = require('lodash').merge
 const transpileModules = require('next-transpile-modules')
 const path = require('path')
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
-const copyCSSAssets = require('./scripts/js/copy-css-assets')
 const SITE_URL = require('./scripts/js/get-site-url')()
 const vercel = require('./vercel.json')
 
@@ -51,7 +50,6 @@ const config = {
     SENTRY_RELEASE,
     SITE_NAME,
     SITE_URL,
-    TARGET_DIR: copyCSSAssets.TARGET_DIR,
     TYPEKIT_ID,
     VERCEL: VERCEL_PARSED,
     VERCEL_ENV: ENV,
@@ -65,8 +63,10 @@ const config = {
    */
   experimental: {
     modern: true,
+    optimizeCss: true,
     optimizeFonts: true,
     optimizeImages: true,
+    pageEnv: true,
     plugins: true,
     scrollRestoration: true,
     workerThreads: true
@@ -79,6 +79,19 @@ const config = {
     excludeDefaultMomentLocales: true,
     webpack5: true
   },
+
+  /**
+   * Identifies an application version.
+   *
+   * When building the application locally, a random ID will be generated.
+   *
+   * In Vercel environments, however, the build ID will match the git SHA of the
+   * commit the latest deployment was triggered by. For organizational purposes,
+   * this value is also used when uploading release artifacts to Sentry.
+   *
+   * @return {string | null} Git commit SHA if building in Vercel environment
+   */
+  generateBuildId: () => (!isEmpty(SENTRY_RELEASE) ? SENTRY_RELEASE : null),
 
   /**
    * Returns the headers configuration.
@@ -161,10 +174,10 @@ const config = {
    * @see https://github.com/vercel/next.js/tree/canary/examples/with-sentry
    *
    * @param {import('webpack').Configuration} config - Webpack config object
-   * @param {object} helpers - Next.js helpers
+   * @param {AnyObject} helpers - Helpers
    * @param {string} helpers.buildId - Unique identifier between builds
-   * @param {object} helpers.defaultLoaders - Default loaders used internally
-   * @param {object} helpers.defaultLoaders.babel - `babel-loader` config
+   * @param {AnyObject} helpers.defaultLoaders - Default loaders used internally
+   * @param {AnyObject} helpers.defaultLoaders.babel - `babel-loader` config
    * @param {boolean} helpers.dev - True if the compiling in development mode
    * @param {boolean} helpers.isServer - `true` for server-side compilation
    * @param {import('webpack')} helpers.webpack - Webpack
@@ -184,7 +197,10 @@ const config = {
       '@babel': '@babel',
       '@commitlint': false,
       '@flex-development/json': '@flex-development/json/dist',
-      '@kustomzcore': '@flex-development/kustomzcore/dist',
+      '@kustomzcore': path.join(
+        __dirname,
+        'node_modules/@flex-development/kustomzcore'
+      ),
       '@kustomzdesign': '@flex-development/kustomzdesign/dist',
       '@mdx-js/react': '@mdx-js/react/dist/esm',
       '@sentry/browser': '@sentry/browser/esm',
@@ -227,33 +243,17 @@ const config = {
 
     /**
      * Fixes `"TypeError: v is not a function"`.
+     *
      * @see https://github.com/pmndrs/react-spring/issues/1078
      * @see https://github.com/plouc/nivo/issues/1290#issuecomment-756264505
      */
-    config.module.rules.push({ test: /@react-spring/, sideEffects: true })
+    config.module.rules.push({ sideEffects: true, test: /@react-spring/ })
 
     // Report duplicate dependencies
     if (!dev) config.plugins.push(new DuplicatesPlugin({ verbose: true }))
 
-    /**
-     * Callback function to hook to end of Weback build cycle.
-     *
-     * In non-dev environments, CSS assets from the client will copied to the
-     * server's static CSS directory. This allows us to inline styles via
-     * `InlineStylesHead` component w/o disabling built-in CSS support.
-     *
-     * @async
-     * @return {void}
-     */
-    const tapDone = async () => {
-      if (!dev && !isServer) await copyCSSAssets()
-    }
-
-    // Add plugin to hook into end of Webpack build cycle
-    config.plugins.push(new TapDoneWebpackPlugin(tapDone))
-
-    // Analyze Webpack bundle output
-    if (!VERCEL && !dev) {
+    // Analyze Webpack bundle output (local production only)
+    if (!VERCEL_PARSED && !dev) {
       const reportFilenameClient = './analyze/client.html'
       const reportFilenameServer = '../analyze/server.html'
 
@@ -268,7 +268,7 @@ const config = {
     }
 
     /**
-     * When all Sentry configuration enviorment variables are available, the
+     * When all Sentry configuration environment variables are available, the
      * {@module SentryWebpackPlugin} is added to the Webpack plugins config.
      *
      * This is an alternative to manually uploading source maps, and only

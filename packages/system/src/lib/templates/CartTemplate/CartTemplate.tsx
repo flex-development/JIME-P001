@@ -1,4 +1,5 @@
-import { CHECKOUT_BASE_URL } from '@kustomzcore/constants'
+import { CHECKOUT_BASE_URL } from '@kustomzcore/config/constants'
+import type { CheckoutLineItemInput } from '@kustomzcore/types'
 import { useCartContext } from '@system/hooks/useCart'
 import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
 import { Box } from '@system/lib/atoms/Box'
@@ -9,9 +10,8 @@ import { Main } from '@system/lib/atoms/Main'
 import { Paragraph } from '@system/lib/atoms/Paragraph'
 import { Section } from '@system/lib/atoms/Section'
 import { Span } from '@system/lib/atoms/Span'
-import type { CheckoutLineItemProps } from '@system/lib/molecules/CheckoutLineItem'
 import { CheckoutLineItem } from '@system/lib/molecules/CheckoutLineItem'
-import type { TC } from '@system/types'
+import type { EventHandlers, TC } from '@system/types'
 import { formatPrice } from '@system/utils/formatPrice'
 import { getSubtotal } from '@system/utils/getSubtotal'
 import isFunction from 'lodash/isFunction'
@@ -50,10 +50,12 @@ export const CartTemplate: TC<CartTemplateProps> = props => {
    * If `props.handleRemove` is defined, it will be called before updating the
    * line items state.
    *
-   * @param event - `click` event from `<button>` element
+   * @param {EventHandlers.Click.Button} event - `click` event
+   * @return {void}
    */
-  const _handleRemove: CheckoutLineItemProps['handleRemove'] = event => {
+  const _handleRemove = (event: EventHandlers.Click.Button): void => {
     event.preventDefault()
+
     if (isFunction(handleRemove)) handleRemove(event)
     return cart.removeItem(JSON.parse(event.target.value))
   }
@@ -67,12 +69,16 @@ export const CartTemplate: TC<CartTemplateProps> = props => {
    * If `props.handleUpdate` is defined, it will be called before updating the
    * line item.
    *
-   * @param data - Update checkout line item
-   * @param e - `change` event from `<input>` element
+   * @param {CheckoutLineItemInput} data - Updated checkout line item
+   * @param {EventHandlers.Change.Input} event - `change` event
    */
-  const _handleUpdate: CheckoutLineItemProps['handleUpdate'] = (data, e) => {
-    e.preventDefault()
-    if (isFunction(handleUpdate)) handleUpdate(data, e)
+  const _handleUpdate = (
+    data: CheckoutLineItemInput,
+    event: EventHandlers.Change.Input
+  ): void => {
+    event.preventDefault()
+
+    if (isFunction(handleUpdate)) handleUpdate(data, event)
     return cart.upsertItem(data)
   }
 

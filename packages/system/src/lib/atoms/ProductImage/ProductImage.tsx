@@ -7,7 +7,11 @@ import {
 import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
 import merge from 'lodash/merge'
 import omit from 'lodash/omit'
-import type { ImageLoader, ImageProps as NextImageProps } from 'next/image'
+import type {
+  ImageLoader,
+  ImageLoaderProps,
+  ImageProps as NextImageProps
+} from 'next/image'
 import NextImage from 'next/image'
 import type { FC } from 'react'
 import { useCallback, useMemo } from 'react'
@@ -63,11 +67,13 @@ export const ProductImage: FC<ProductImageProps> = props => {
   /**
    * Resolves product image URLs.
    *
-   * @param resolverProps - Image resolver props
-   * @param resolverProps.src - Image source URL
-   * @param resolverProps.width - Image width, or undefined
+   * @param {ImageLoaderProps} resolverProps - Image resolver props
+   * @param {string} [resolverProps.quality] - Image quality
+   * @param {string} resolverProps.src - Image source URL
+   * @param {number} resolverProps.width - Image width
+   * @return {string} Product image URL
    */
-  const loader: ImageLoader = ({ src, width }) => {
+  const loader: ImageLoader = ({ src, width }: ImageLoaderProps): string => {
     const size = width ? `${width}x${width}` : 'master'
     return getSizedImageUrl(src, size) || IMAGE_PLACEHOLDER_URL
   }

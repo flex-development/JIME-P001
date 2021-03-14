@@ -1,11 +1,11 @@
-import type { SearchOptions } from '@algolia/client-search'
-import type { AnyObject, PartialOr } from '@flex-development/json/utils/types'
+import type { Hit, SearchOptions } from '@algolia/client-search'
+import type { AnyObject, PartialOr } from '@flex-development/json'
 import type {
   Playlist,
   PlaylistAttributes,
   SongAttributes
 } from './apple-music'
-import type { JudgeMeReviewCreateParams } from './reviews'
+import type { JudgeMeReview, JudgeMeReviewCreateParams } from './reviews'
 import type {
   ICollectionListing,
   IMetafield,
@@ -17,6 +17,7 @@ import type {
   ShopifyMenuLink
 } from './shopify'
 import type { SEOData } from './storefront'
+import type { NumberString } from './utils'
 
 /**
  * @file Type Definitions - API
@@ -41,21 +42,8 @@ export type CreateReviewBody = Pick<
 /**
  * Query parameters accepted by the `/collections` endpoint.
  */
-export type FindCollectionsQuery = PaginationSearchOptions & {
+export interface FindCollectionsQuery extends FindSearchIndexResourceQuery {
   collection_id?: ICollectionListing['collection_id']
-  fields?: string
-  handle?: ICollectionListing['handle']
-  text?: SearchOptions['query']
-}
-
-/**
- * Query parameters accepted by the `/menus` endpoint.
- */
-export type FindMenusQuery = PaginationSearchOptions & {
-  fields?: string
-  handle?: ShopifyMenu['handle']
-  text?: SearchOptions['query']
-  title?: ShopifyMenu['title']
 }
 
 /**
@@ -76,7 +64,7 @@ export type FindMetafieldParams = {
    * Show only certain fields, specified by a comma-separated list of field
    * names.
    */
-  fields?: string
+  fields?: FindSearchIndexResourceQuery['fields']
 
   /**
    * Show metafields with given key.
@@ -121,39 +109,53 @@ export type FindMetafieldParams = {
 /**
  * Query parameters accepted by the `/pages` endpoint.
  */
-export type FindPagesQuery = PaginationSearchOptions & {
+export interface FindPagesQuery extends FindSearchIndexResourceQuery {
   author?: IPage['author']
-  fields?: string
-  handle?: IPage['handle']
   id?: IPage['id']
-  text?: SearchOptions['query']
-}
-
-/**
- * Query parameters accepted by the `/policies` endpoint.
- */
-export type FindPoliciesQuery = PaginationSearchOptions & {
-  fields?: string
-  handle?: IPolicy['handle']
-  text?: SearchOptions['query']
 }
 
 /**
  * Query parameters accepted by the `/products` endpoint.
  */
-export type FindProductsQuery = PaginationSearchOptions & {
-  fields?: string
-  handle?: IProductListing['handle']
+export interface FindProductsQuery extends FindSearchIndexResourceQuery {
   product_id?: IProductListing['product_id']
-  text?: SearchOptions['query']
 }
 
 /**
- * Query parameters accepted by the `/collections/[handle]` endpoint.
+ * Query parameters accepted by the `/reviews` endpoint.
  */
-export type GetCollectionQuery = {
+export interface FindReviewsQuery extends FindSearchIndexResourceQuery {
+  created_at?: JudgeMeReview['created_at']
+  curated?: JudgeMeReview['curated']
+  featured?: JudgeMeReview['featured']
+  hidden?: JudgeMeReview['hidden']
+  id?: JudgeMeReview['id']
+  ip_address?: JudgeMeReview['ip_address']
+  product_id?: JudgeMeReview['product_id']
+  reviewer_id?: JudgeMeReview['reviewer_id']
+  source?: JudgeMeReview['source']
+  updated_at?: JudgeMeReview['updated_at']
+  verified?: JudgeMeReview['verified']
+}
+
+/**
+ * Query parameters accepted by endpoints that handle search index resources.
+ */
+export interface FindSearchIndexResourceQuery extends PaginationSearchOptions {
+  /**
+   * Comma-separated list of property fields to show.
+   */
   fields?: string
-  handle: ICollectionListing['handle']
+
+  /**
+   * Find resource by search index object ID.
+   */
+  objectID?: Hit<AnyObject>['objectID']
+
+  /**
+   * Text to query search index.
+   */
+  text?: SearchOptions['query']
 }
 
 /**
@@ -169,17 +171,22 @@ export type GetCollectionResJSON = PartialOr<
 >
 
 /**
+ * Query parameters accepted by the `/metafields/globals` endpoint.
+ */
+export type GetGlobalMetafieldsQuery = Omit<FindMetafieldParams, 'namespace'>
+
+/**
  * Shape of JSON responses from the `/metafields/globals` endpoint.
  */
-export type GetGlobalMetafieldsResJSON = Record<string, IMetafield>
+export type GetGlobalMetafieldsResJSON = Record<string, PartialOr<IMetafield>>
 
 /**
  * Query parameters accepted by the `/assets/images/[filename]` endpoint.
  */
 export type GetImageAssetQuery = {
   filename: string
-  height?: number | string
-  width?: number | string
+  height?: NumberString
+  width?: NumberString
 }
 
 /**
@@ -191,6 +198,7 @@ export type GetLayoutDataResJSON = {
     title: string
   }
   playlist: GetPlaylistResJSON
+  seo: SEOData
   sidebar: {
     age: number
     img: string
@@ -201,17 +209,26 @@ export type GetLayoutDataResJSON = {
 }
 
 /**
- * Query parameters accepted by the `/menus/[handle]` endpoint.
- */
-export type GetMenuQuery = {
-  fields?: string
-  handle: ShopifyMenu['handle']
-}
-
-/**
  * Shape of JSON responses from the `/menus/[handle]` endpoint.
  */
 export type GetMenuResJSON = PartialOr<ShopifyMenu>
+
+/**
+ * Shape of JSON responses from the `/pages/[handle]` endpoint.
+ */
+export type GetPageResJSON = PartialOr<ResourceWithSEO<IPage>>
+
+/**
+ * Query parameters accepted by the `/playlist` endpoint.
+ */
+export type GetPlaylistQuery = {
+  fields?: GetSearchIndexResourceQuery['fields']
+}
+
+/**
+ * Shape of JSON responses from the `/policies/[handle]` endpoint.
+ */
+export type GetPolicyResJSON = PartialOr<ResourceWithSEO<IPolicy>>
 
 /**
  * Shape of JSON responses from the `/playlist` endpoint.
@@ -223,36 +240,9 @@ export type GetPlaylistResJSON = {
 }
 
 /**
- * Query parameters accepted by the `/pages/[handle]` endpoint.
- */
-export type GetPageQuery = {
-  fields?: string
-  handle: IPage['handle']
-}
-
-/**
- * Shape of JSON responses from the `/pages/[handle]` endpoint.
- */
-export type GetPageResJSON = PartialOr<ResourceWithSEO<IPage>>
-
-/**
- * Query parameters accepted by the `/policies/[handle]` endpoint.
- */
-export type GetPolicyQuery = {
-  fields?: string
-  handle: IPolicy['handle']
-}
-
-/**
- * Shape of JSON responses from the `/policies/[handle]` endpoint.
- */
-export type GetPolicyResJSON = PartialOr<ResourceWithSEO<IPolicy>>
-
-/**
  * Query parameters accepted by the `/products/[handle]` endpoint.
  */
-export type GetProductQuery = {
-  fields?: string
+export interface GetProductQuery extends GetSearchIndexResourceQuery {
   handle: IProductListing['handle']
   sku?: IProductListingVariant['sku']
 }
@@ -261,6 +251,14 @@ export type GetProductQuery = {
  * Shape of JSON responses from the `/products/[handle]` endpoint.
  */
 export type GetProductResJSON = PartialOr<ResourceWithSEO<IProductListing>>
+
+/**
+ * Query parameters accepted by endpoints that return one search index resource.
+ */
+export type GetSearchIndexResourceQuery = Pick<
+  FindSearchIndexResourceQuery,
+  'fields' | 'objectID'
+>
 
 /**
  * Names of Algolia pagination search parameters.

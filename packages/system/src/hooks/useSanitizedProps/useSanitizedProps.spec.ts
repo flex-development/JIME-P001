@@ -38,7 +38,7 @@ describe('useSanitizedProps', () => {
   })
 
   it('sets props.style.backgroundImage', () => {
-    const $img = 'assets/placeholder.webp'
+    const $img = 'assets/placeholder'
     const hook = renderHook(() => useSanitizedProps({ $img }))
 
     expect(hook.result.current).toMatchObject({

@@ -15,4 +15,4 @@ PID=$(lsof -ti:$PORT)
 if [[ $PID ]]; then
   kill $PID
 fi
-next dev -p $PORT
+dotenv -e .env.development.local -- next dev -p $PORT

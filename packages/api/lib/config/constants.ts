@@ -3,7 +3,7 @@ import type { SearchIndexName, SearchIndexSettings } from '../types'
 
 /**
  * @file Config - Constant Values
- * @module lib/config/constants
+ * @module config/constants
  */
 
 const { VERCEL_ENV: ENV, VERCEL_URL } = process.env
@@ -12,44 +12,8 @@ export const API_URL = `http${ENV === 'development' ? '' : 's'}://${VERCEL_URL}`
 
 export const DEFAULT_SEARCH_OPTIONS = {
   attributesToHighlight: [],
-  attributesToRetrieve: ['handle'],
+  attributesToRetrieve: ['objectID'],
   attributesToSnippet: []
-}
-
-export const DEFAULT_IMAGE_URL = `${API_URL}/assets/images/placeholder.webp`
-
-export const DEFAULT_SEO_IMAGE = `${API_URL}/assets/images/morena.webp`
-
-export const DEFAULT_SEO_IMAGE_DATA = {
-  height: 1920,
-  src: DEFAULT_SEO_IMAGE,
-  width: 1920
-}
-
-export const INDEX_SETTINGS: Record<
-  SearchIndexName,
-  SearchIndexSettings & { name: SearchIndexName }
-> = {
-  collection_listings: {
-    attributesForFaceting: ['collection_id', 'handle'],
-    name: 'collection_listings'
-  },
-  menus: {
-    attributesForFaceting: ['handle', 'title'],
-    name: 'menus'
-  },
-  pages: {
-    attributesForFaceting: ['author', 'handle', 'id', 'title'],
-    name: 'pages'
-  },
-  policies: {
-    attributesForFaceting: ['handle', 'title'],
-    name: 'policies'
-  },
-  product_listings: {
-    attributesForFaceting: ['handle', 'product_id', 'product_type', 'title'],
-    name: 'product_listings'
-  }
 }
 
 export const PAGINATION_PARAMS: PaginationParameter[] = [
@@ -58,3 +22,52 @@ export const PAGINATION_PARAMS: PaginationParameter[] = [
   'page',
   'offset'
 ]
+
+export const SEARCH_INDEX_SETTINGS: Record<
+  SearchIndexName,
+  SearchIndexSettings & { name: SearchIndexName }
+> = {
+  collections: {
+    attributesForFaceting: [
+      'filterOnly(collection_id)',
+      'filterOnly(handle)',
+      'filterOnly(objectID)'
+    ],
+    name: 'collections'
+  },
+  menus: {
+    attributesForFaceting: [
+      'filterOnly(handle)',
+      'filterOnly(objectID)',
+      'filterOnly(title)'
+    ],
+    name: 'menus'
+  },
+  pages: {
+    attributesForFaceting: [
+      'filterOnly(author)',
+      'filterOnly(handle)',
+      'filterOnly(id)',
+      'filterOnly(title)'
+    ],
+    name: 'pages'
+  },
+  policies: {
+    attributesForFaceting: [
+      'filterOnly(handle)',
+      'filterOnly(objectID)',
+      'filterOnly(title)'
+    ],
+    name: 'policies'
+  },
+  products: {
+    attributesForFaceting: [
+      'filterOnly(handle)',
+      'filterOnly(objectID)',
+      'filterOnly(product_id)',
+      'filterOnly(product_type)',
+      'filterOnly(title)'
+    ],
+    name: 'products'
+  }
+}

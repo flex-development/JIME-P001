@@ -90,7 +90,7 @@ module.exports = {
 
     const ATL_CACHE_DIRECTORY = 'node_modules/.cache/awesome-typescript-loader'
 
-    const CORE = '@flex-development/kustomzcore/dist'
+    const CORE = '@flex-development/kustomzcore'
     const JSON = '@flex-development/json/dist'
     const MDX_JS_REACT = '@mdx-js/react/dist/esm'
     const REACT_HANGER = 'react-hanger/esm'
@@ -101,7 +101,7 @@ module.exports = {
       resolve: {
         alias: {
           '@flex-development/json': path.join(__dirname, ROOT_NM, JSON),
-          '@kustomzcore': path.join(__dirname, ROOT_NM, CORE),
+          '@kustomzcore': path.join(__dirname, '../node_modules', CORE),
           '@mdx-js/react': path.join(__dirname, ROOT_NM, MDX_JS_REACT),
           '@system': path.join(__dirname, SRC),
           'react-hanger': path.join(__dirname, ROOT_NM, REACT_HANGER),

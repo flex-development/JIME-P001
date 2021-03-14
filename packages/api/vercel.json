@@ -7,9 +7,6 @@
   "functions": {
     "api/*.ts": {
       "memory": 3008
-    },
-    "api/assets/images/[filename].ts": {
-      "includeFiles": "_files/**"
     }
   },
   "redirects": [
@@ -25,20 +22,23 @@
       "destination": "/api"
     },
     {
+      "source": "/assets/morena",
+      "destination": "https://cdn.shopify.com/s/files/1/0470/4790/1339/files/morena.jpg"
+    },
+    {
+      "source": "/assets/placeholder",
+      "destination": "https://cdn.shopify.com/s/files/1/0470/4790/1339/files/placeholder.png"
+    },
+    {
+      "source": "/assets/:path*",
+      "destination": "https://cdn.shopify.com/s/files/:path*"
+    },
+    {
       "source": "/:path*",
       "destination": "/api/:path*"
     }
   ],
   "headers": [
-    {
-      "source": "/api/assets/(.*)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, must-revalidate"
-        }
-      ]
-    },
     {
       "source": "/(.*)",
       "headers": [

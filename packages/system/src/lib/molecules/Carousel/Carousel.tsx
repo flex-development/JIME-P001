@@ -35,7 +35,8 @@ export const Carousel: FC<CarouselProps> = props => {
   /**
    * Updates the active carousel item.
    *
-   * @param i - Index of active carousel item
+   * @param {number} i - Index of active carousel item
+   * @return {void}
    */
   const onClickItem = useCallback((i: number) => setIndex(i), [setIndex])
 

@@ -1,25 +1,31 @@
-import type { ANYTHING } from '@flex-development/json'
+import type { ApiError as AlgoliaError } from '@algolia/transporter'
+import type { FeathersErrorJSON } from '@feathersjs/errors'
+import type { AnyObject, ANYTHING } from '@flex-development/json'
 import type {
   FindCollectionsQuery,
-  FindMenusQuery,
-  FindMetafieldParams,
   FindPagesQuery,
-  FindPoliciesQuery,
   FindProductsQuery,
-  GetCollectionQuery,
+  FindSearchIndexResourceQuery,
+  GetGlobalMetafieldsQuery,
   GetImageAssetQuery,
-  GetMenuQuery,
-  GetPageQuery,
-  GetPolicyQuery,
-  GetProductQuery
+  GetPlaylistQuery,
+  GetProductQuery,
+  GetSearchIndexResourceQuery,
+  OrNever,
+  OrPromise
 } from '@flex-development/kustomzcore'
 import type { VercelRequest } from '@vercel/node'
 import type { Logger } from 'pino'
 
 /**
- * @file Type Declarations
- * @module types
+ * @file Type Definitions
+ * @module lib/types
  */
+
+/**
+ * Shape of API error objects (with or without formatting).
+ */
+export type APIError = Error | AlgoliaError | FeathersErrorJSON
 
 /**
  * Shape of the API `req` object.
@@ -43,7 +49,7 @@ export interface FindCollectionsReq extends APIRequest {
  * Shape of requests sent to the `/menus` endpoint.
  */
 export interface FindMenusReq extends APIRequest {
-  query: FindMenusQuery
+  query: FindSearchIndexResourceQuery
 }
 
 /**
@@ -57,7 +63,7 @@ export interface FindPagesReq extends APIRequest {
  * Shape of requests sent to the `/policies` endpoint.
  */
 export interface FindPoliciesReq extends APIRequest {
-  query: FindPoliciesQuery
+  query: FindSearchIndexResourceQuery
 }
 
 /**
@@ -71,42 +77,14 @@ export interface FindProductsReq extends APIRequest {
  * Shape of requests sent to the `/collections/[handle]` endpoint.
  */
 export interface GetCollectionReq extends APIRequest {
-  query: GetCollectionQuery
+  query: GetSearchIndexResourceQuery
 }
 
 /**
  * Shape of requests sent to the `/metafields/globals` endpoint.
  */
 export interface GetGlobalMetafieldsReq extends APIRequest {
-  query: Omit<FindMetafieldParams, 'namespace'>
-}
-
-/**
- * Shape of requests sent to the `/menus/[handle]` endpoint.
- */
-export interface GetMenuReq extends APIRequest {
-  query: GetMenuQuery
-}
-
-/**
- * Shape of requests sent to the `/pages/[handle]` endpoint.
- */
-export interface GetPageReq extends APIRequest {
-  query: GetPageQuery
-}
-
-/**
- * Shape of requests sent to the `/policies/[handle]` endpoint.
- */
-export interface GetPolicyReq extends APIRequest {
-  query: GetPolicyQuery
-}
-
-/**
- * Shape of requests sent to the `/products/[handle]` endpoint.
- */
-export interface GetProductReq extends APIRequest {
-  query: GetProductQuery
+  query: GetGlobalMetafieldsQuery
 }
 
 /**
@@ -117,14 +95,61 @@ export interface GetImageAssetReq extends APIRequest {
 }
 
 /**
+ * Shape of requests sent to the `/menus/[handle]` endpoint.
+ */
+export interface GetMenuReq extends APIRequest {
+  query: GetSearchIndexResourceQuery
+}
+
+/**
+ * Shape of requests sent to the `/pages/[handle]` endpoint.
+ */
+export interface GetPageReq extends APIRequest {
+  query: GetSearchIndexResourceQuery
+}
+
+/**
+ * Shape of requests sent to the `/playlist` endpoint.
+ */
+export interface GetPlaylistReq extends APIRequest {
+  query: GetPlaylistQuery
+}
+
+/**
+ * Shape of requests sent to the `/policies/[handle]` endpoint.
+ */
+export interface GetPolicyReq extends APIRequest {
+  query: GetSearchIndexResourceQuery
+}
+
+/**
+ * Shape of requests sent to the `/products/[handle]` endpoint.
+ */
+export interface GetProductReq extends APIRequest {
+  query: GetProductQuery
+}
+
+/**
  * Search index names.
  */
 export type SearchIndexName =
-  | 'collection_listings'
+  | 'collections'
   | 'menus'
   | 'pages'
   | 'policies'
-  | 'product_listings'
+  | 'products'
+
+/**
+ * Function to populate search index.
+ */
+export type SearchIndexObjectsFN<TObject = AnyObject> = {
+  (): OrNever<OrPromise<TObject[]>>
+}
+
+/**
+ * Shopify resources that have a `metafield` property.
+ */
+export type ShopifyResourceWithMetafield = 'collections' | 'pages' | 'products'
 
 // Algolia types
 export type {

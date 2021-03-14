@@ -1,10 +1,13 @@
-import { SEO } from '@app/components/SEO'
-import kapi from '@app/config/axios-kapi'
 import type { IPagePropsIndex as PageProps, PageComponent } from '@app/types'
+import kapi from '@kustomzcore/config/axios-kapi'
 import type { GetPageResJSON, GetProductResJSON } from '@kustomzcore/types'
 import objectFromArray from '@kustomzcore/utils/objectFromArray'
-import { IndexTemplate } from '@kustomzdesign/lib/templates/IndexTemplate'
-import type { GetServerSideProps } from 'next'
+import {
+  IndexTemplate,
+  IndexTemplateProps as TemplateProps
+} from '@kustomzdesign/lib/templates/IndexTemplate'
+import type { GetServerSideProps, GetServerSidePropsResult } from 'next'
+import type { ReactElement } from 'react'
 
 /**
  * @file Page - Home
@@ -14,16 +17,15 @@ import type { GetServerSideProps } from 'next'
 /**
  * Renders the homepage.
  *
- * @param props - Page component props
- * @param props.seo - `SEO` component properties
- * @param props.template - `IndexTemplate` component properties
+ * @param {PageProps} props - Page component props
+ * @param {TemplateProps} props.template - Template component properties
+ * @return {ReactElement<TemplateProps>} Homepage
  */
-const Home: PageComponent<PageProps> = ({ seo, template }) => (
-  <>
-    <SEO {...seo} />
-    <IndexTemplate {...template} />
-  </>
-)
+const Home: PageComponent<PageProps> = (
+  props: PageProps
+): ReactElement<TemplateProps> => {
+  return <IndexTemplate {...props.template} />
+}
 
 /**
  * Fetches the data required to render the homepage.
@@ -34,9 +36,12 @@ const Home: PageComponent<PageProps> = ({ seo, template }) => (
  * @see https://shopify.dev/docs/admin-api/rest/reference/online-store/page
  *
  * @async
- * @param context - Server side page context
+@return {Promise<GetServerSidePropsResult<PageProps>>} Page props
+ * @throws {FeathersErrorJSON}
  */
-export const getServerSideProps: GetServerSideProps<PageProps> = async () => {
+export const getServerSideProps: GetServerSideProps<PageProps> = async (): Promise<
+  GetServerSidePropsResult<PageProps>
+> => {
   // Initialize page data object
   let data: GetPageResJSON = {}
 

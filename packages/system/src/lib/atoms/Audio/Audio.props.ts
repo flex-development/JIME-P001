@@ -1,3 +1,4 @@
+import type { NumberString } from '@flex-development/kustomzcore'
 import type { ComponentPropsBase } from '@system/types'
 
 /**
@@ -32,7 +33,7 @@ export interface AudioProps extends ComponentPropsBase<'audio'> {
    * Sets the current playback position to the given time and seeks the media to
    * that position if the media is currently loaded.
    */
-  currentTime?: number | string
+  currentTime?: NumberString
 
   /**
    * If true, disable the capability of remote playback in devices that are
@@ -47,7 +48,7 @@ export interface AudioProps extends ComponentPropsBase<'audio'> {
    * Double-precision floating-point value that indicates the total length of
    * the audio track in seconds.
    */
-  duration?: number | string
+  duration?: NumberString
 
   /**
    * If true, the audio player will automatically seek back to the start upon

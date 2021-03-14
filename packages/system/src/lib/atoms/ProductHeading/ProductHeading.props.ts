@@ -1,3 +1,4 @@
+import type { NumberString } from '@flex-development/kustomzcore'
 import type { HeadingProps } from '@system/lib/atoms/Heading'
 
 /**
@@ -11,7 +12,7 @@ export interface ProductHeadingProps extends HeadingProps {
    *
    * @default 0
    */
-  price?: number | string
+  price?: NumberString
 
   /**
    * The title of the product or product variant.

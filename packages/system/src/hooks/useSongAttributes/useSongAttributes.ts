@@ -12,33 +12,54 @@ import { useCallback } from 'react'
  */
 
 export type UseSongAttributes = {
+  /**
+   * Index of active song.
+   */
   active: UseActiveIndex['active']
+
+  /**
+   * Returns true if {@param curr} is equal to the index of the active song.
+   */
   isActive: UseActiveIndex['isActive']
+
+  /**
+   * Skip to the next song.
+   */
   next: () => void
+
+  /**
+   * Go to the previous song.
+   */
   previous: () => void
+
+  /**
+   * Current song data or empty object.
+   */
   song: SongAttributes | AnyObject
 }
 
 /**
  * Returns an array of songs and functions to set the active song index.
  *
- * @param songs - Array of song attributes
- * @param curr - Current song index
+ * @param {SongAttributes[]} [songs] - Array of song attributes
+ * @param {number} [curr] - Current song index
+ * @return {UseSongAttributes} Hook state
  */
 export const useSongAttributes = (
   songs: SongAttributes[] = [],
-  curr = 0
+  curr: number = 0
 ): UseSongAttributes => {
   // Handle internal songs state
   const _songs = useMemoCompare<SongAttributes[]>(songs)
 
   /**
-   * Clamps {@param index} between 0 and the number of the songs in the songs
+   * Clamps {@param i} between 0 and the number of the songs in the songs
    * state array.
    *
-   * @param index - New active song index
+   * @param {number} i - New active song index
+   * @return {number} Formatted index
    */
-  const clampIndex = (index: number) => clamp(index, 0, _songs.length - 1)
+  const clampIndex = (i: number): number => clamp(i, 0, _songs.length - 1)
 
   /* Callback version of `clampIndex` */
   const clampIndexCB = useCallback(clampIndex, [_songs])
@@ -53,8 +74,10 @@ export const useSongAttributes = (
 
   /**
    * Increases the active index by 1.
+   *
+   * @return {void}
    */
-  const next = () => {
+  const next = (): void => {
     let new_active = active.active + 1
     new_active = new_active > _songs.length - 1 ? 0 : new_active
 
@@ -66,8 +89,10 @@ export const useSongAttributes = (
 
   /**
    * Reduces the active index by 1.
+   *
+   * @return {void}
    */
-  const previous = () => {
+  const previous = (): void => {
     let new_active = active.active - 1
     new_active = new_active < 0 ? _songs.length - 1 : new_active
 

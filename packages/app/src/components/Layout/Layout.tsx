@@ -7,18 +7,19 @@ import { Span } from '@kustomzdesign/lib/atoms/Span'
 import { SVG } from '@kustomzdesign/lib/atoms/SVG'
 import { Hero } from '@kustomzdesign/lib/organisms/Hero'
 import { PlaylistBar } from '@kustomzdesign/lib/organisms/PlaylistBar'
-import type { ShopHeaderProps } from '@kustomzdesign/lib/organisms/ShopHeader'
 import { ShopHeader } from '@kustomzdesign/lib/organisms/ShopHeader'
 import { Sidebar } from '@kustomzdesign/lib/organisms/Sidebar'
 import { GridBreakpoints } from '@kustomzdesign/types'
 import type { AnimatedProps } from '@react-spring/web'
+import merge from 'lodash/merge'
 import Head from 'next/head'
-import type { FC } from 'react'
+import type { FC, FormEvent } from 'react'
 import { useCallback, useEffect, useMemo } from 'react'
 import { useBoolean } from 'react-hanger/array/useBoolean'
 import useEvent from 'react-use/useEvent'
 import useMedia from 'react-use/useMedia'
 import UAParser from 'ua-parser-js'
+import { SEO } from '../SEO'
 
 /**
  * @file Implementation - Layout
@@ -50,16 +51,10 @@ export interface LayoutProps {
 /**
  * Renders the store layout and current page.
  *
- * @param props - Component properties
- * @param props.data - `Hero`, `PlaylistBar` and `Sidebar` data
- * @param props.data.hero - `Hero` component properties
- * @param props.data.playlist - Apple Music `Playlist` resource data
- * @param props.data.sidebar - `Sidebar` component properties
- * @param props.page - Next.js page component
- * @param props.pageProps - Props from Next.js data-fetching methods
- * @param props.ua - User Agent header or undefined
+ * @param {LayoutProps} props - Component properties
+ * @return {JSX.Element} Current page wrapped in store layout
  */
-export const Layout: FC<LayoutProps> = (props: LayoutProps) => {
+export const Layout: FC<LayoutProps> = (props: LayoutProps): JSX.Element => {
   const { data, page: Component, pageProps, ua } = props
 
   // Load Web Fonts
@@ -68,10 +63,10 @@ export const Layout: FC<LayoutProps> = (props: LayoutProps) => {
   /**
    * Redirects the user to the search page with their search {@param term}.
    *
-   * @param term - User search query
-   * @param event - `SearchBar` event
+   * @param {string} term - User search query
+   * @param {FormEvent} event - `SearchBar` event
    */
-  const handleSearch: ShopHeaderProps['handleSearch'] = (term, event) => {
+  const handleSearch = (term: string, event: FormEvent): void => {
     event.preventDefault()
     window.location.href = `/search?term=${term}`
   }
@@ -124,6 +119,10 @@ export const Layout: FC<LayoutProps> = (props: LayoutProps) => {
         />
       </Head>
 
+      {/* SEO */}
+      <SEO {...merge(data.seo, pageProps?.seo ?? {})} />
+
+      {/* View */}
       <Box className='layout' data-loading={!webfonts || !sready}>
         <ShopHeader
           handleSidebar={sidebar_a.toggle}

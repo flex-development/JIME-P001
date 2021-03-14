@@ -22,13 +22,15 @@ describe('ProductBreadcrumb', () => {
 
   it('displays the product title', () => {
     const { getByText } = render(<Default {...Default.args} />)
+    const { product } = Default.args
 
-    expect(getByText(Default.args.product)).toHaveClass('product-breadcrumb-p')
+    expect(getByText(product as string)).toHaveClass('product-breadcrumb-p')
   })
 
   it('displays the product variant title', () => {
     const { getByText } = render(<Default {...Default.args} />)
+    const { variant } = Default.args
 
-    expect(getByText(Default.args.variant)).toHaveClass('product-breadcrumb-v')
+    expect(getByText(variant as string)).toHaveClass('product-breadcrumb-v')
   })
 })

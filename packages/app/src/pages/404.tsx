@@ -1,11 +1,11 @@
 import { ErrorContent } from '@app/components/ErrorContent'
-import { SEO } from '@app/components/SEO'
 import type { IPageProps as PageProps, PageComponent } from '@app/types'
-import globalSEO from '@app/utils/globalSEO'
-import { ErrorTemplate } from '@kustomzdesign/lib/templates/ErrorTemplate'
-import merge from 'lodash/merge'
-import type { GetStaticProps } from 'next'
-import { Fragment } from 'react'
+import {
+  ErrorTemplate,
+  ErrorTemplateProps
+} from '@kustomzdesign/lib/templates/ErrorTemplate'
+import type { GetStaticProps, GetStaticPropsResult } from 'next'
+import type { ReactElement } from 'react'
 
 /**
  * @file Custom 404 page
@@ -17,19 +17,15 @@ import { Fragment } from 'react'
  *
  * @see https://nextjs.org/docs/advanced-features/custom-error-page#404-page
  *
- * @param props - Page component props
- * @param props.seo - `SEO` component properties
+ * @return {ReactElement<ErrorTemplateProps>} 404 page
  */
-const NotFound: PageComponent = ({ seo }) => (
-  <Fragment>
-    <SEO {...seo} />
-    <ErrorTemplate
-      code={404}
-      message="Sorry, the page you're looking for does not exist."
-    >
-      <ErrorContent />
-    </ErrorTemplate>
-  </Fragment>
+const NotFound: PageComponent = (): ReactElement<ErrorTemplateProps> => (
+  <ErrorTemplate
+    code={404}
+    message={`Sorry, the page you're looking for does not exist.`}
+  >
+    <ErrorContent />
+  </ErrorTemplate>
 )
 
 /**
@@ -37,13 +33,16 @@ const NotFound: PageComponent = ({ seo }) => (
  *
  * @see https://nextjs.org/docs/basic-features/data-fetching
  *
- * @async
+ * @return {Promise<GetStaticPropsResult<PageProps>>} Promise containing object
+ * with page props and settings to statically generate page
  */
-export const getStaticProps: GetStaticProps<PageProps> = async () => {
-  return {
-    props: { seo: merge(await globalSEO(), { title: 'Page Not Found' }) },
+export const getStaticProps: GetStaticProps<PageProps> = (): Promise<
+  GetStaticPropsResult<PageProps>
+> => {
+  return Promise.resolve({
+    props: { seo: { title: 'Page Not Found' } },
     revalidate: 1
-  }
+  })
 }
 
 export default NotFound

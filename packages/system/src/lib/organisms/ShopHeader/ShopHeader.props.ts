@@ -25,8 +25,6 @@ export interface ShopHeaderProps extends HeaderProps {
 
   /**
    * Sidebar button handler. Fires when the sidebar button is clicked.
-   *
-   * @param event - `click` event from sidebar button
    */
   handleSidebar?(event: EventHandlers.Click.Button): ANYTHING
 }

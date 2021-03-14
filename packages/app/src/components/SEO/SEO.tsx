@@ -13,8 +13,11 @@ import { useEffect, useRef } from 'react'
 
 /**
  * Injects elements into the `<head>` tag.
+ *
+ * @param {SEOData} props - Component properties
+ * @return {JSX.Element} `NextHead` component containing SEO html tags
  */
-export const SEO: FC<SEOData> = props => {
+export const SEO: FC<SEOData> = (props: SEOData): JSX.Element => {
   const {
     description = '',
     keywords = '',
@@ -38,9 +41,10 @@ export const SEO: FC<SEOData> = props => {
   /**
    * Formats the page SEO title.
    *
-   * @param title - Page title, null, or undefined
+   * @param {NullishString} [title] - Page title, null, or undefined
+   * @return {string} Formatted SEO title
    */
-  const getTitleWithSuffix = (title?: NullishString) => {
+  const getTitleWithSuffix = (title?: NullishString): string => {
     return title?.length ? `${title} | Morena's Kustomz` : `Morena's Kustomz`
   }
 

@@ -15,8 +15,8 @@ import useBoolean from 'react-hanger/array/useBoolean'
  * @module hooks/useTransformScaleX/impl
  */
 
-export type UseTransformScaleX<T extends AnyObject = AnyObject> = {
-  style: AnimatedProps<T>['style']['transform']
+export type UseTransformScaleX<P extends AnyObject = AnyObject> = {
+  style: AnimatedProps<P>['style']['transform']
   sx?: SpringValue<number>
   toggle: UseBooleanActions['toggle']
 }
@@ -27,6 +27,7 @@ export type UseTransformScaleXSpringProps = UseSpringProps<{
   sx: number
 }>
 
+/* eslint-disable-next-line tree-shaking/no-side-effects-in-initialization */
 export const UseTransformScaleXDefaults = Object.freeze({
   duration: 1000,
   intconfig: {
@@ -43,17 +44,18 @@ export const UseTransformScaleXDefaults = Object.freeze({
  * @see https://developer.mozilla.org/docs/Web/CSS/transform-function/scale()
  * @see https://www.react-spring.io/docs/hooks/api
  *
- * @param initialSX - Number representing the abscissa of the scaling vector
- * @param intconfig - Interpolator config
- * @param duration - Number of milliseconds the animation should run
- * @return Object containing current sx value, style object, and function to
- * toggle when animation runs
+ * @template P - Base props shape
+ *
+ * @param {number} initialSX - Abscissa of the scaling vector
+ * @param {number} duration - Number of milliseconds the animation should run
+ * @param {IC<number>} intconfig - Interpolator config
+ * @return {UseTransformScaleX<P>} Hook state
  */
-export function useTransformScaleX<T extends AnyObject = AnyObject>(
+export function useTransformScaleX<P extends AnyObject = AnyObject>(
   initialSX: number = UseTransformScaleXDefaults.sx,
   duration: number = UseTransformScaleXDefaults.duration,
   intconfig: IC<number> = UseTransformScaleXDefaults.intconfig
-): UseTransformScaleX<T> {
+): UseTransformScaleX<P> {
   // Control when the animation runs
   const [animating, { toggle }] = useBoolean(false)
 
@@ -68,7 +70,7 @@ export function useTransformScaleX<T extends AnyObject = AnyObject>(
   const style = { transform: sx?.to(intconfig)?.to(sx => `scale(${sx})`) }
 
   return {
-    style: useMemoCompare<UseTransformScaleX<T>['style']>(style),
+    style: useMemoCompare<UseTransformScaleX<P>['style']>(style),
     sx,
     toggle
   }

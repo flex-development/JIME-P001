@@ -1,3 +1,4 @@
+import type { NumberString } from '@flex-development/kustomzcore'
 import { sanitizeQuantity } from '@system/utils/sanitizeQuantity'
 import { useCallback } from 'react'
 import useNumber from 'react-hanger/array/useNumber'
@@ -19,17 +20,19 @@ export type UseQuantity = {
   /**
    * Updates the `quantity` state.
    *
-   * @param value - New quantity
+   * @param {NumberString} [value] - New quantity
+   * @return {void}
    */
-  updateQuantity(value?: number | string): void
+  updateQuantity(value?: NumberString): void
 }
 
 /**
  * Maintains product quantity state.
  *
- * @param initialQuantity - Initial product quantity
+ * @param {number} [initialQuantity] - Initial product quantity
+ * @return {UseQuantity} Hook state
  */
-export const useQuantity = (initialQuantity = 1): UseQuantity => {
+export const useQuantity = (initialQuantity: number = 1): UseQuantity => {
   // Sanitize initial quantity
   if (initialQuantity < 0) initialQuantity = 0
 
@@ -37,11 +40,12 @@ export const useQuantity = (initialQuantity = 1): UseQuantity => {
   const [quantity, { setValue }] = useNumber(initialQuantity, { lowerLimit: 0 })
 
   /**
-   * Updates the internal quantity state.
+   * Updates the quantity state.
    *
-   * @param value - New quantity
+   * @param {number} [val] - New quantity
+   * @return {void}
    */
-  const updateQuantity = (value?: number) => setValue(sanitizeQuantity(value))
+  const updateQuantity = (val?: number): void => setValue(sanitizeQuantity(val))
 
   // Return quanity and useQuantity actions
   return {

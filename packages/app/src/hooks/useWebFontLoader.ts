@@ -12,6 +12,9 @@ import { useBoolean } from 'react-hanger/array/useBoolean'
  * Use the Web Font Loader library.
  *
  * @see https://github.com/typekit/webfontloader
+ *
+ * @param {WebFont.Config} config - WebFont loader configuration
+ * @return {boolean} `true` if webfonts are loaded, `false` otherwise
  */
 export const useWebFontLoader = (config: WebFont.Config): boolean => {
   // Track Webfont loading state

@@ -1,5 +1,5 @@
 import type { AnyObject } from '@flex-development/json/utils/types'
-import { EMPTY_SPACE } from '@kustomzcore/constants'
+import { EMPTY_SPACE } from '@kustomzcore/config/constants'
 import {
   GRID_BREAKPOINT_KEYS,
   UTILITY_PROP_ALIASES as ALIASES
@@ -26,10 +26,10 @@ import { useMemo } from 'react'
  * If any transient utility props are defined on {@param props}, they will be
  * used to generate a string of utility classes.
  *
- * @param props - Component props
- * @param aliases - Object mapping prop names to class prefixes. Defaults to
- * global prop aliases object
- * @param breakpoints - Array of grid reakpoint keys to use instead of default
+ * @param {AnyObject} [props] - Component props
+ * @param {Record<string, string>} [aliases] - Props to class name map
+ * @param {GridBreakpointKey[]} [breakpoints] - Alternate grid breakpoint keys
+ * @return {string} Utility classes
  */
 export const useUtilityClasses = (
   props: AnyObject = {},

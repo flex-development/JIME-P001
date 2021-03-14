@@ -18,11 +18,10 @@ Serverless REST API for Morenas's Kustomz, an online cannabis accessory store.
 
 ## 🚧 Usage
 
-[Assets](#assets)  
 [Collections](#collections)  
 [Layout](#layout)  
-[Metafields](#metafields)  
 [Menus](#menus)  
+[Metafields](#metafields)  
 [Pages](#pages)  
 [Playlist](#playlist)  
 [Policies](#policies)  

@@ -104,14 +104,18 @@ export const PlaylistBar: FC<PlaylistBarProps> = props => {
   /**
    * Pauses or plays the current song.
    *
-   * @param event - `<button>` click event
+   * @async
+   * @param {EventHandlers.Click.Button} event - click event
+   * @return {Promise<void>} Nothing if paused, empty promise if playing
    */
-  const onClickPlayback = (event: EventHandlers.Click.Button) => {
+  const onClickPlayback = async (
+    event: EventHandlers.Click.Button
+  ): Promise<void> => {
     event.preventDefault()
 
     if (isFunction(handlePlayback)) handlePlayback(event)
 
-    if (event.target.value === 'paused') return audio_ref.current?.play()
+    if (event.target.value === 'paused') return await audio_ref.current?.play()
     return audio_ref.current?.pause()
   }
 
@@ -124,13 +128,14 @@ export const PlaylistBar: FC<PlaylistBarProps> = props => {
   /**
    * Handles skipping backward or forward in the playlist.
    *
-   * @param event - `<button>` click event
+   * @param {EventHandlers.Click.Button} e - `<button>` click event
+   * @return {void}
    */
-  const onClickSkip = (event: EventHandlers.Click.Button) => {
-    event.preventDefault()
+  const onClickSkip = (e: EventHandlers.Click.Button): void => {
+    e.preventDefault()
 
-    if (isFunction(handleSkip)) handleSkip(event)
-    return event.target.name === 'skip_previous' ? previous() : next()
+    if (isFunction(handleSkip)) handleSkip(e)
+    return e.target.name === 'skip_previous' ? previous() : next()
   }
 
   /* Callback version of `onClickSkip` */
@@ -180,7 +185,9 @@ export const PlaylistBar: FC<PlaylistBarProps> = props => {
           aria-label='Toggle audio playback'
           className='playlist-bar-btn'
           disabled={!artworkReady || !isAudioReadyCB()}
-          onClick={onClickPlaybackCB}
+          onClick={async event => {
+            return onClickPlaybackCB(event as EventHandlers.Click.Button)
+          }}
           name='playback'
           value={!isAudioReadyCB() || audio_state.paused ? 'paused' : 'playing'}
         />

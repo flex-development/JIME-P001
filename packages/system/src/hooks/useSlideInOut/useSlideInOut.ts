@@ -23,11 +23,14 @@ export type UseSlideInOut<E = HTMLElement> = {
  *
  * @see https://www.react-spring.io/docs/hooks/use-spring
  *
- * @param show - True if element should be shown
- * @return Object containing reference to HTML element, style object, and
- * functions to intertact with animation
+ * @template E - HTML element
+ *
+ * @param {boolean} show - True if element should be shown
+ * @return {UseSlideInOut<E>} Hook state
  */
-export function useSlideInOut<E = HTMLElement>(show = false): UseSlideInOut<E> {
+export function useSlideInOut<E = HTMLElement>(
+  show: boolean = false
+): UseSlideInOut<E> {
   // Get reference to HTML element
   const element = useRef<E>(null)
 

@@ -1,92 +1,52 @@
-import type { AnyObject, PartialOr } from '@flex-development/json'
+import type { AnyObject } from '@flex-development/json'
 import type {
-  FindMetafieldParams,
-  FindPagesQuery as Query,
+  FindPagesQuery,
+  FindSearchIndexResourceQuery,
   GetPageResJSON as TObject,
-  IMetafield,
   IPage,
-  SEOData,
-  ShopifyAPIResponses as SAR
+  OrNever
 } from '@flex-development/kustomzcore'
-import {
-  createError,
-  EMPTY_SPACE,
-  objectFromArray
-} from '@flex-development/kustomzcore'
+import { EMPTY_SPACE } from '@flex-development/kustomzcore/config/constants'
 import isEmpty from 'lodash/isEmpty'
 import join from 'lodash/join'
-import merge from 'lodash/merge'
 import uniq from 'lodash/uniq'
-import axiosShopify from '../config/axios-shopify'
-import { INDEX_SETTINGS } from '../config/constants'
+import { SEARCH_INDEX_SETTINGS } from '../config/constants'
 import ShopifyAPI from '../config/shopify-api'
-import type { SearchIndexName, SearchOptions } from '../types'
-import globalSEO from '../utils/globalSEO'
-import search from '../utils/search'
-import shopifySearchOptions from '../utils/shopifySearchOptions'
-import toJSX from '../utils/toJSX'
+import type { SearchOptions } from '../types'
+import Metafields from './MetafieldService'
+import SearchIndexService from './SearchIndexService'
+import SEO from './SEOService'
 
 /**
  * @file Implementation - Page Service
- * @module lib/services/PageService
+ * @module services/PageService
  */
 
-export default class PageService {
-  static api = ShopifyAPI.page
-  static index_name: SearchIndexName = INDEX_SETTINGS.pages.name
-
+/**
+ * Handles interactions with page resources.
+ *
+ * @class
+ * @extends SearchIndexService
+ */
+export default class PageService extends SearchIndexService<TObject> {
   /**
-   * Executes a page resource search.
-   *
-   * @async
-   * @param query - Search index query text
-   * @param options - Search index options
+   * Initializes a new Page service instance.
    */
-  static async find(
-    query = '',
-    options: SearchOptions = {}
-  ): Promise<TObject[]> {
-    const objects = await PageService.indexObjects()
-    return search(PageService.index_name, objects, query, options)
+  constructor() {
+    super(SEARCH_INDEX_SETTINGS.pages.name, 'handle', PageService.getObjects)
   }
 
   /**
-   * Retrieve a page by handle.
+   * Returns an array of augmented Shopify page objects to populate the search
+   * index.
    *
    * @async
-   * @param handle - Handle of page to retrieve
-   * @param fields - Specify fields to include for each object
+   * @return {Promise<TObject[]>} Promise containing initial index objects
    * @throws {FeathersErrorJSON}
    */
-  static async get(
-    handle: NonNullable<Query['handle']>,
-    fields?: Query['fields']
-  ): Promise<TObject> {
-    // Get search index options
-    const options = PageService.searchOptions({ fields, handle })
-
-    // Execute search
-    const results = await PageService.find('', options)
-
-    // Throw error if resource isn't found
-    if (!results.length) {
-      const data = { errors: { handle }, fields }
-      const message = `Page with handle "${handle}" not found`
-
-      throw createError(message, data, 404)
-    }
-
-    return results[0]
-  }
-
-  /**
-   * Returns an array of objects to populate the search index.
-   *
-   * @async
-   */
-  static async indexObjects(): Promise<TObject[]> {
+  static async getObjects(): OrNever<Promise<TObject[]>> {
     // Fetch page data from Shopify
-    let data = await PageService.api.list()
+    let data = await ShopifyAPI.page.list()
 
     // ! Remove API Menus page
     data = data.filter(data => data.handle !== 'api-menus')
@@ -96,17 +56,10 @@ export default class PageService {
 
     // Get objects to populate search index
     const objects: TObject[] | Promise<TObject>[] = data.map(async obj => {
-      // Keep objectID consistent with page ID
-      const $obj: AnyObject = { ...obj, objectID: obj.id }
-
-      // Parse MDX body content
-      $obj.body_html = await toJSX($obj.body_html)
+      const $obj: AnyObject = { ...obj }
 
       // Get metafields for each page
-      $obj.metafield = await PageService.metafields($obj.id)
-
-      // Get SEO data for each page
-      $obj.seo = await PageService.seo($obj as IPage)
+      $obj.metafield = await Metafields.fetch('pages', $obj.id)
 
       return $obj as TObject
     })
@@ -115,57 +68,57 @@ export default class PageService {
   }
 
   /**
-   * Returns an array of metafields for a page resource.
+   * Retrieve a page by handle.
    *
    * @async
-   * @param id - ID of page to get metafields for
-   * @param params - Query parameters
-   * @param params.created_at_max - Show metafields created before date
-   * @param params.created_at_min - Show metafields created after date
-   * @param params.fields - Comma-separated list of fields to show
-   * @param params.key - Show metafields with given key
-   * @param params.limit - Maximum number of results to show. Defaults to `250`
-   * @param params.namespace - Show metafields with given namespace
-   * @param params.updated_at_max - Show metafields updated before date
-   * @param params.updated_at_min - Show metafields updated after date
-   * @param params.value_type - Show metafields with a value_type of 'integer'
-   * or 'string'
+   * @param {string} objectID - Handle of page to retrieve
+   * @param {string} [fields] - Specify fields to include
+   * @return {Promise<TObject>} Promise containing page data
+   * @throws {FeathersErrorJSON}
    */
-  static async metafields(
-    id: IPage['id'],
-    params: FindMetafieldParams = {}
-  ): Promise<PartialOr<IMetafield>[]> {
-    const config: Parameters<typeof axiosShopify>[0] = {
-      method: 'get',
-      params,
-      url: `pages/${id}/metafields`
-    }
+  async get(
+    objectID: IPage['handle'],
+    fields?: FindSearchIndexResourceQuery['fields']
+  ): OrNever<Promise<TObject>> {
+    const data = await super.get(objectID, fields)
 
-    return (await axiosShopify<SAR.Metafields>(config)).metafields
+    if (SEO.includeSEO(fields)) data.seo = await SEO.page(data as IPage)
+
+    return data
   }
 
   /**
-   * Converts a page query object into an Algolia search options object.
+   * Converts a `FindPagesQuery` type object into an Algolia search options
+   * object.
    *
    * @see https://www.algolia.com/doc/api-reference/api-parameters/filters/
    *
-   * @param query - Page query from API request
-   * @param query.author - Filter pages by author
-   * @param query.fields - Comma-separated list of page fields to include
-   * @param query.handle - Find page by handle
-   * @param query.id - Find page by ID
+   * @param {FindPagesQuery} [query] - Query parameters object
+   * @param {string} [query.author] - Filter pages by author
+   * @param {string} [query.fields] - Comma-separated list of fields to include
+   * @param {number} [query.hitsPerPage] - Number of results per page
+   * @param {number} [query.id] - Find page by ID
+   * @param {number} [query.length] - Result limit (used only with offset)
+   * @param {string} [query.objectID] - Find resource by search index object ID
+   * @param {number} [query.offset] - Offset of the first result to return
+   * @param {number} [query.page] - Specify the page to retrieve
+   * @param {string} [query.text] - Text to search in index
+   * @return {SearchOptions} Algolia search options object
    */
-  static searchOptions(query: Query = {}): SearchOptions {
-    const { author, ...rest } = query
+  searchOptions(query: FindPagesQuery = {}): SearchOptions {
+    const { author, id, ...rest } = query
 
     // Get default search options
-    const options = shopifySearchOptions(rest)
+    const options = super.searchOptions(rest)
 
     // Initialize search filters array
     const filters: string[] = options.filters?.length ? [options.filters] : []
 
     // Add author filter
-    if (!isEmpty(author)) filters.push(`author = ${author}`)
+    if (!isEmpty(author)) filters.push(`author:${author}`)
+
+    // Add id filter
+    if (!isEmpty(id)) filters.push(`id:${id}`)
 
     // Add id to attributes
     const attributes = options.attributesToRetrieve?.concat(['id'])
@@ -175,35 +128,5 @@ export default class PageService {
       attributesToRetrieve: uniq(attributes),
       filters: join(filters, EMPTY_SPACE)
     }
-  }
-
-  /**
-   * Returns an object with SEO data for a page resource.
-   *
-   * @async
-   * @param page - Page resource data
-   */
-  static async seo(page: IPage | Promise<IPage>): Promise<SEOData> {
-    page = await page
-
-    // Get global SEO data
-    const global = await globalSEO()
-
-    // Get SEO from metafields
-    const {
-      description_tag = { value: '' } as IMetafield,
-      keywords: page_keywords = { value: '' } as IMetafield,
-      title_tag = { value: '' } as IMetafield
-    } = objectFromArray(page.metafield, 'key')
-
-    // Get array of page keywords
-    let keywords: string[] = (page_keywords?.value as string)?.split(',') ?? []
-    keywords = uniq(keywords.concat(global.keywords?.split(',') ?? []))
-
-    return merge(global, {
-      description: description_tag.value as string,
-      keywords: join(keywords, ','),
-      title: title_tag.value
-    })
   }
 }

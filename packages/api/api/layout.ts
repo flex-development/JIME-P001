@@ -1,61 +1,24 @@
-import { axios } from '@flex-development/kustomzcore'
 import type { VercelResponse as Res } from '@vercel/node'
-import { API_URL } from '../lib/config'
-import {
-  handleAPIError,
-  initRoute,
-  trackAPIRequest,
-  trackAPISuccessEvent
-} from '../lib/middleware'
-import MenuService from '../lib/services/MenuService'
+import LayoutController from '../lib/controllers/LayoutController'
+import routeWrapper from '../lib/middleware/routeWrapper'
 import type { APIRequest as Req } from '../lib/types'
-import { metafieldsGlobal } from '../lib/utils'
 
 /**
- * @file API Endpoint - Get `AppLayout` data
+ * @file API Endpoint - Get Storefront Layout Data
  * @module api/layout
  */
 
+/**
+ * Returns the storefront layout data.
+ *
+ * @async
+ * @param {Req} req - API request object
+ * @param {Res} res - Server response object
+ * @return {Promise<Res | void>} Promise containing server response object if
+ * an error is thrown, or empty promise if request completed successfully
+ */
 export default async (req: Req, res: Res): Promise<Res | void> => {
-  // Initialize API route
-  initRoute(req)
-
-  // Send `pageview` hit to Google Analytics
-  await trackAPIRequest(req)
-
-  try {
-    // Fetch global metafields to get profile snippet
-    const {
-      hero_subtitle: { value: hero_subtitle },
-      hero_title: { value: hero_title },
-      profile_age: { value: profile_age },
-      profile_img: { value: profile_img },
-      profile_location: { value: profile_location },
-      profile_mood: { value: profile_mood }
-    } = await metafieldsGlobal({ fields: 'key,value' })
-
-    // Get main menu data
-    const menu = await MenuService.get('main-menu', 'links')
-
-    // Get playlist data
-    const playlist = await axios({ url: `${API_URL}/playlist` })
-
-    res.json({
-      hero: { subtitle: hero_subtitle, title: hero_title },
-      playlist,
-      sidebar: {
-        age: JSON.parse(profile_age as string),
-        img: profile_img,
-        location: profile_location,
-        menu: menu.links,
-        mood: profile_mood
-      }
-    })
-  } catch (err) {
-    return handleAPIError(req, res, err)
-  }
-
-  // Send success `event` hit to Google Analytics
-  await trackAPISuccessEvent(req)
-  return res.end()
+  return routeWrapper<Req, Res>(req, res, async (req, res) => {
+    return LayoutController.getLayoutData(req, res)
+  })
 }

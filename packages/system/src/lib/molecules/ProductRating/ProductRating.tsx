@@ -38,9 +38,10 @@ export const ProductRating: FC<ProductRatingProps> = props => {
    * Updates the internal `rating` state and calls `props.handleRating` if
    * the function is defined.
    *
-   * @param event - change event from `<input>` element
+   * @param {EventHandlers.Change.Input} event - change event
+   * @return {void}
    */
-  const onChangeRating = (event: EventHandlers.Change.Input) => {
+  const onChangeRating = (event: EventHandlers.Change.Input): void => {
     event.preventDefault()
 
     setRating(JSON.parse(event.target.value))

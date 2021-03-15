@@ -1,6 +1,7 @@
+import ga from '@flex-development/kustomzcore/config/google-analytics'
+import vercel from '@flex-development/kustomzcore/config/vercel-env'
 import type { PageViewParam } from 'ga-measurement-protocol'
-import ga from '../config/google-analytics'
-import vercel from '../config/vercel-env'
+import type { IncomingHttpHeaders } from 'http'
 import type { APIRequest } from '../types'
 
 /**
@@ -11,11 +12,17 @@ import type { APIRequest } from '../types'
 /**
  * Sends a `pageview` hit to Google Analytics.
  *
- * @param req - API request object
- * @param req.headers - API request headers
- * @param req.url - API request URL
+ * @template Req - API request object
+ *
+ * @param {Req} req - API request object
+ * @param {IncomingHttpHeaders} req.headers - API request headers
+ * @param {string} req.url - API request URL
+ * @return {Promise<boolean>} Promise contaning `true` if event was tracked
+ * successfully, `false` otherwise
  */
-const trackAPIRequest = async (req: APIRequest): Promise<boolean> => {
+async function trackAPIRequest<Req extends APIRequest = APIRequest>(
+  req: Req
+): Promise<boolean> {
   const { headers, url } = req
 
   // Build initial `pageview` params object

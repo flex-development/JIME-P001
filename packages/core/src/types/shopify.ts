@@ -1,5 +1,7 @@
 import type {
   ICollectionListing,
+  ICollectionListingImage,
+  IImage,
   IMetafield,
   IPage,
   IPolicy as IShopifyPolicy,
@@ -10,6 +12,11 @@ import type {
  * @file Type Definitions - Shopify
  * @module types/shopify
  */
+
+/**
+ * Shape of a collection listing image.
+ */
+export type CollectionListingImage = ICollectionListingImage | IImage
 
 /**
  * Shopify `Policy` resource with properties missing from original type
@@ -63,7 +70,9 @@ export type {
   ICheckout,
   ICheckoutLineItem,
   ICollectionListing,
+  ICollectionListingImage,
   ICustomer,
+  IImage,
   IMetafield,
   IObjectMetafield,
   IPage,

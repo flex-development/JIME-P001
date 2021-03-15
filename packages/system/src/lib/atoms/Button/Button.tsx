@@ -45,9 +45,10 @@ export const Button: FREC<ButtonProps> = forwardRef((props, ref) => {
    * Calls `props.onClick` if defined and the function to toggle the scale
    * animation, if enabled.
    *
-   * @param event `click` event from `<button>` element
+   * @param {EventHandlers.Click.Button} event - `click` event
+   * @return {void}
    */
-  const onClick = (event: EventHandlers.Click.Button) => {
+  const onClick = (event: EventHandlers.Click.Button): void => {
     if (rest.onClick) rest.onClick(event)
     if ($scale) scalex.toggle()
   }

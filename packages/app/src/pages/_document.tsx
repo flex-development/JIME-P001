@@ -1,6 +1,6 @@
-import { InlineStylesHead, OptimizedNextScript } from '@app/components'
+import { OptimizedNextScript } from '@app/components'
 import type { DocumentInitialProps } from 'next/document'
-import NextDocument, { Html, Main } from 'next/document'
+import NextDocument, { Head, Html, Main } from 'next/document'
 
 /**
  * @file Custom Next.js Document
@@ -16,11 +16,13 @@ import NextDocument, { Html, Main } from 'next/document'
 export default class Document extends NextDocument<DocumentInitialProps> {
   /**
    * Renders the document.
+   *
+   * @return {JSX.Element} HTML page
    */
   render(): JSX.Element {
     return (
       <Html dir='ltr' lang='en'>
-        <InlineStylesHead>
+        <Head>
           {/* Set character encoding for the document */}
           <meta charSet='utf-8' />
 
@@ -124,7 +126,7 @@ export default class Document extends NextDocument<DocumentInitialProps> {
             https://web.dev/efficiently-load-third-party-javascript/#preconnect
           */}
           <link rel='preconnect' href={process.env.API_URL} />
-        </InlineStylesHead>
+        </Head>
         <body>
           <noscript>You need to enable JavaScript to view this site.</noscript>
 

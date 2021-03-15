@@ -1,10 +1,10 @@
 import { SEO } from '@app/components/SEO'
 import type { IPageProps as PageProps, PageComponent } from '@app/types'
-import globalSEO from '@app/utils/globalSEO'
+import type { AnyObject } from '@flex-development/json'
 import { useCartContext } from '@kustomzdesign/hooks/useCart'
 import { CartTemplate } from '@kustomzdesign/lib/templates/CartTemplate'
-import merge from 'lodash/merge'
-import type { GetServerSideProps } from 'next'
+import type { GetServerSideProps, GetServerSidePropsResult } from 'next'
+import type { ReactElement } from 'react'
 
 /**
  * @file Page - Shopping Cart
@@ -14,15 +14,14 @@ import type { GetServerSideProps } from 'next'
 /**
  * Renders a user's shopping cart.
  *
- * @param props - Page component props
- * @param props.seo - `SEO` component properties
+ * @return {ReactElement<AnyObject>} Cart page
  */
-const Cart: PageComponent = ({ seo }) => {
+const Cart: PageComponent = (): ReactElement<AnyObject> => {
   const { items_total } = useCartContext()
 
   return (
     <>
-      <SEO {...seo} title={`Cart (${items_total})`} />
+      <SEO title={`Cart (${items_total})`} />
       <CartTemplate />
     </>
   )
@@ -33,10 +32,12 @@ const Cart: PageComponent = ({ seo }) => {
  *
  * @see https://nextjs.org/docs/basic-features/data-fetching
  *
- * @async
+@return {Promise<GetServerSidePropsResult<PageProps>>} Page props
  */
-export const getServerSideProps: GetServerSideProps<PageProps> = async () => {
-  return { props: { seo: merge(await globalSEO(), { title: 'Cart (O)' }) } }
+export const getServerSideProps: GetServerSideProps<PageProps> = (): Promise<
+  GetServerSidePropsResult<PageProps>
+> => {
+  return Promise.resolve({ props: { seo: { title: 'Cart (O)' } } })
 }
 
 export default Cart

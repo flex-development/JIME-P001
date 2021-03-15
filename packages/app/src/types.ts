@@ -13,7 +13,11 @@ import type {
   ProductTemplateProps,
   SearchTemplateProps
 } from '@kustomzdesign/lib/templates'
-import type { NextComponentType, NextPageContext as PageContext } from 'next'
+import type {
+  GetServerSidePropsContext,
+  NextComponentType,
+  NextPageContext as PageContext
+} from 'next'
 import type { AppContext } from 'next/app'
 import type { Router } from 'next/dist/client/router'
 import type { ParsedUrlQuery } from 'querystring'
@@ -30,6 +34,15 @@ export type AppComponent = NextComponentType<
   AppContext,
   IAppInitialProps,
   IAppProps
+>
+
+/**
+ * Next.js page component passed as an initial App prop.
+ */
+export type AppPropsComponent = NextComponentType<
+  PageContext,
+  IAppInitialProps,
+  IAppInitialProps['pageProps']
 >
 
 /**
@@ -64,11 +77,7 @@ export interface IAppInitialProps {
  * Props passed from Next.js data-fetching methods.
  */
 export interface IAppProps extends IAppInitialProps {
-  Component: NextComponentType<
-    PageContext,
-    IAppInitialProps,
-    IAppInitialProps['pageProps']
-  >
+  Component: AppPropsComponent
   router: Router
   __N_SSG?: boolean
   __N_SSP?: boolean
@@ -129,6 +138,16 @@ export interface IPagePropsProduct extends IPageProps {
 export interface IPagePropsSearch extends IPageProps {
   template: SearchTemplateProps
 }
+
+/**
+ * Error object if encountered during rendering.
+ */
+export type NextError = Error & { statusCode?: number }
+
+/**
+ * Shape of incoming HTTP request objects.
+ */
+export type NextIncomingMessage = GetServerSidePropsContext['req']
 
 /**
  * Object indicating that the user should be redirected to the `/404` page.

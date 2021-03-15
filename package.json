@@ -67,6 +67,7 @@
     "eslint-config-prettier": "latest",
     "eslint-plugin-import": "latest",
     "eslint-plugin-jest": "latest",
+    "eslint-plugin-jsdoc": "latest",
     "eslint-plugin-jsx-a11y": "latest",
     "eslint-plugin-node": "latest",
     "eslint-plugin-prettier": "latest",
@@ -89,12 +90,12 @@
     "ts-jest": "next",
     "ts-node": "latest",
     "ttypescript": "latest",
-    "typescript": "4.2.0-beta",
+    "typescript": "4.3.0-dev.20210306",
     "yarn": "latest"
   },
   "resolutions": {
     "**/@storybook/core/**/webpack": "4.46.0",
-    "**/typescript": "4.2.0-beta"
+    "**/typescript": "4.3.0-dev.20210306"
   },
   "private": true,
   "workspaces": {

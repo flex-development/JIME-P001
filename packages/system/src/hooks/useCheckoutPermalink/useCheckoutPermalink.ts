@@ -1,4 +1,5 @@
-import { CHECKOUT_BASE_URL } from '@kustomzcore/constants'
+import type { NumberString } from '@flex-development/kustomzcore'
+import { CHECKOUT_BASE_URL } from '@kustomzcore/config/constants'
 import type {
   CheckoutLineItemInput,
   CheckoutPermalinkInput,
@@ -28,21 +29,21 @@ export type UseCheckoutPermalink = {
   /**
    * Removes a checkout line item.
    *
-   * @param id - ID of variant to remove
+   * @param {NumberString} id - ID of variant to remove
    */
-  removeItem: (id: number | string) => void
+  removeItem: (id: NumberString) => void
 
   /**
    * Updates the checkout line items state.
    *
-   * @param items - New checkout line items
+   * @param {CheckoutPermalinkInput[]} items - New checkout line items
    */
   setItems: (items: CheckoutPermalinkInput[]) => void
 
   /**
    * Adds or updates a checkout line item.
    *
-   * @param data - Line item to add
+   * @param {CheckoutPermalinkInput} data - Line item to add
    */
   upsertItem: (data: CheckoutPermalinkInput) => void
 
@@ -55,9 +56,8 @@ export type UseCheckoutPermalink = {
 /**
  * Create and update checkout URLs.
  *
- * @param inputs - Array of checkout line items
- * @return Checkout URL
- * @throws {FeathersErrorJSON} If store domain is invalid
+ * @param {CheckoutPermalinkInput[]} [inputs] - Array of checkout line items
+ * @return {UseCheckoutPermalink} Hook state
  */
 export const useCheckoutPermalink = (
   inputs: CheckoutPermalinkInput[] = []
@@ -76,9 +76,10 @@ export const useCheckoutPermalink = (
     /**
      * Adds an `id` property to each line item in {@param data}.
      *
-     * @param data - Array of line items
+     * @param {CheckoutPermalinkInput[]} data - Array of line items
+     * @return {CheckoutPermalinkInput[]} Normalized data array
      */
-    const normalize = (data: typeof _inputs) => {
+    const normalize = (data: typeof _inputs): typeof _inputs => {
       return data.map(input => ({ ...input, id: input.variant_id }))
     }
 
@@ -116,9 +117,10 @@ export const useCheckoutPermalink = (
    * Adds an items to the user's inputs. If a line item already exists, it's
    * quantity and properties will be updated.
    *
-   * @param data - Line item to add
+   * @param {CheckoutPermalinkInput} data - Line item to add
+   * @return {void}
    */
-  const upsertItem = (data: CheckoutPermalinkInput) => {
+  const upsertItem = (data: CheckoutPermalinkInput): void => {
     const variant = items.find(item => {
       return item.variant_id === data.variant_id
     })
@@ -137,9 +139,10 @@ export const useCheckoutPermalink = (
   /**
    * Removes an items from the user's cart.
    *
-   * @param id - ID of product variant to remove
+   * @param {NumberString} id - ID of product variant to remove
+   * @return {void}
    */
-  const removeItem = (id: number | string) => {
+  const removeItem = (id: NumberString): void => {
     return actions.removeById(typeof id === 'string' ? JSON.parse(id) : id)
   }
 
@@ -149,9 +152,10 @@ export const useCheckoutPermalink = (
   /**
    * Updates the checkout line items state.
    *
-   * @param items - New checkout line items
+   * @param {CheckoutPermalinkInput[]} items - New checkout line items
+   * @return {void}
    */
-  const setItems = (items: CheckoutPermalinkInput[]) => {
+  const setItems = (items: CheckoutPermalinkInput[]): void => {
     return actions.setValue(items)
   }
 

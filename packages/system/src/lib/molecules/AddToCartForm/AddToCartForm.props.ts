@@ -1,8 +1,8 @@
 import type { ANYTHING } from '@flex-development/json/utils/types'
 import type {
   CheckoutLineItemInput,
-  IProductListing,
-  IProductListingVariant
+  IProductListingVariant,
+  ProductListingData
 } from '@kustomzcore/types'
 import type { FormProps } from '@system/lib/atoms/Form'
 import type { EventHandlers } from '@system/types'
@@ -35,7 +35,7 @@ export interface AddToCartFormProps extends FormProps {
   handleVariant?(id: IProductListingVariant['id']): ANYTHING
 
   /**
-   * Shopify product listing resource.
+   * Product listing data.
    */
-  product: IProductListing
+  product: ProductListingData
 }

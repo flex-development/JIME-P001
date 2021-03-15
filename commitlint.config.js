@@ -1,4 +1,7 @@
 const { utils } = require('@commitlint/config-lerna-scopes')
+const { Rule, RuleConfigTuple } = require('@commitlint/types')
+const { AnyObject } = require('@flex-development/json')
+const { Record } = require('typescript')
 
 /**
  * @file Commitlint Configuration
@@ -8,20 +11,16 @@ const { utils } = require('@commitlint/config-lerna-scopes')
 
 module.exports = {
   /**
-   * If true, enable default ignore rules.
-   *
-   * @property {boolean} defaultIgnores
+   * @property {boolean} defaultIgnores - If true, enable default ignore rules
    */
   defaultIgnores: true,
 
   /**
-   * Resolveable ids to commitlint configurations to extend
+   * @property {Array<string>} extends - IDs of commitlint configurations
    *
    * @see https://www.conventionalcommits.org/
    * @see https://www.npmjs.com/package/@commitlint/config-conventional
    * @see https://www.npmjs.com/package/@commitlint/config-lerna-scopes
-   *
-   * @property {Array<string>} extends
    */
   extends: [
     '@commitlint/config-conventional',
@@ -29,9 +28,7 @@ module.exports = {
   ],
 
   /**
-   * Resolveable id to package, from node_modules, which formats the output.
-   *
-   * @property {string} formatter
+   * @property {string} formatter - Name of formatter package
    */
   formatter: '@commitlint/format',
 
@@ -46,11 +43,9 @@ module.exports = {
   ignores: [commit => commit.startsWith('wip:')],
 
   /**
-   * Rules to check against.
+   * @property {Record<string, Rule>} rules - Rules to check against
    *
    * @see https://commitlint.js.org/#/reference-rules
-   *
-   * @property {Record<string, Rule>} rules
    */
   rules: {
     /**
@@ -64,8 +59,8 @@ module.exports = {
      * Valid scopes include the name of each package (not including scope), as
      * well as `deps` and `release`.
      *
-     * @param {object} ctx - Commitlint context
-     * @return {Rule} Scope rules
+     * @param {AnyObject} ctx - Environment context
+     * @return {Promise<RuleConfigTuple>} Scope rules
      */
     'scope-enum': async ctx => [
       2,

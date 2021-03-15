@@ -1,7 +1,7 @@
 {
   "name": "@flex-development/kapi",
   "version": "1.0.0",
-  "description": "Morena's Kustomz REST API",
+  "description": "Morena's Kustomz Serverless REST API",
   "keywords": [],
   "homepage": "https://github.com/flex-development/JIME-P001",
   "bugs": {
@@ -17,7 +17,7 @@
   "repository": {
     "type": "git",
     "url": "ssh://git@github.com/flex-development/JIME-P001.git",
-    "directory": "packages/kapi"
+    "directory": "packages/api"
   },
   "scripts": {
     "test": "BABEL_ENV=jest jest --detectOpenHandles --passWithNoTests",
@@ -26,29 +26,14 @@
     "vercel-build": "yarn vercel-prepare; lerna link"
   },
   "dependencies": {
+    "@algolia/client-search": "latest",
     "@flex-development/kustomzcore": "*",
-    "@types/algoliasearch": "latest",
-    "@types/debug": "latest",
-    "@types/feathersjs__errors": "latest",
     "@types/jsonwebtoken": "latest",
-    "@types/lodash": "latest",
-    "@types/nanoid": "latest",
-    "@types/pino": "latest",
-    "@types/sharp": "latest",
-    "@types/turndown": "latest",
     "@types/urijs": "latest",
+    "@vercel/node": "latest",
     "algoliasearch": "latest",
-    "debug": "latest",
-    "ga-measurement-protocol": "latest",
     "jsonwebtoken": "latest",
-    "lodash": "latest",
-    "nanoid": "latest",
-    "pino": "latest",
-    "pino-pretty": "latest",
-    "sharp": "latest",
     "string-strip-html": "latest",
-    "tslib": "latest",
-    "turndown": "latest",
     "urijs": "latest"
   },
   "devDependencies": {

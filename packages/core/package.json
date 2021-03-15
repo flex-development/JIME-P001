@@ -21,52 +21,58 @@
   },
   "publishConfig": {
     "access": "public",
-    "directory": "./",
+    "directory": "./dist",
     "registry": "https://npm.pkg.github.com"
   },
-  "source": "src/index.ts",
-  "main": "dist/index.js",
-  "module": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "files": [
-    "dist",
-    "README.md",
-    "package.json"
-  ],
+  "main": "index.js",
+  "module": "index.js",
+  "types": "index.d.ts",
   "scripts": {
-    "precompile": "rm -rf ./dist",
-    "compile": "ttsc -p tsconfig.prod.json",
-    "postcompile": "node ../../scripts/js/fix-node-module-paths"
+    "test": "BABEL_ENV=jest jest --detectOpenHandles --passWithNoTests",
+    "test:quiet": "yarn test || true",
+    "compile": "bash ./scripts/compile.sh"
   },
   "dependencies": {
     "@feathersjs/errors": "pre",
     "@flex-development/json": "^1.0.5",
     "@types/apple-music-api": "latest",
+    "@types/feathersjs__errors": "latest",
+    "@types/lodash": "latest",
+    "@types/pino": "latest",
     "axios": "latest",
     "axios-rate-limit": "latest",
+    "ga-measurement-protocol": "latest",
     "lodash": "latest",
-    "shopify-api-node": "latest"
+    "nanoid": "latest",
+    "pino": "latest",
+    "pino-pretty": "latest",
+    "shopify-api-node": "latest",
+    "tslib": "latest"
   },
   "devDependencies": {
-    "@algolia/client-search": "latest",
-    "@types/feathersjs__errors": "latest",
-    "@types/lodash": "latest"
+    "@algolia/client-search": "latest"
   },
   "peerDependencies": {
-    "@algolia/client-search": "latest",
-    "@types/feathersjs__errors": "latest",
-    "@types/lodash": "latest"
+    "@algolia/client-search": "latest"
   },
   "peerDependenciesMeta": {
     "@algolia/client-search": {
       "optional": true
-    },
-    "@types/feathersjs__errors": {
-      "optional": true
-    },
-    "@types/lodash": {
-      "optional": true
     }
   },
+  "env": [
+    "API_URL",
+    "GA_TRACKING_ID",
+    "NODE_ENV",
+    "NPM_RC",
+    "SHOPIFY_API_KEY",
+    "SHOPIFY_API_VERSION",
+    "SHOPIFY_DOMAIN",
+    "SHOPIFY_PASSWORD",
+    "VERCEL",
+    "VERCEL_ENV",
+    "VERCEL_GIT_COMMIT_REF",
+    "VERCEL_GIT_COMMIT_SHA"
+  ],
   "sideEffects": false
 }

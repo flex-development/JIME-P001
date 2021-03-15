@@ -14,7 +14,8 @@ import type { ANYTHING } from '@flex-development/json/utils/types'
  * - `value` isn't a number or a string containing a number
  * - `value` is less than 0 after being parsed with `JSON.parse`
  *
- * @param value - Quantity value to sanitize
+ * @param {ANYTHING} [value] - Quantity value to sanitize
+ * @return {number} Product quanity
  */
 const sanitizeQuantity = (value?: ANYTHING): number => {
   // Check if value is a boolean

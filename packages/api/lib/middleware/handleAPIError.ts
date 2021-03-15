@@ -1,12 +1,8 @@
-import type { FeathersErrorJSON } from '@feathersjs/errors'
 import type { AnyObject } from '@flex-development/json'
-import type { VercelResponse as Res } from '@vercel/node'
-import merge from 'lodash/merge'
+import type { VercelResponse } from '@vercel/node'
 import pick from 'lodash/pick'
-import ga from '../config/google-analytics'
-import vercel from '../config/vercel-env'
-import type { AlgoliaError, APIRequest as Req } from '../types'
-import formatError from '../utils/formatError'
+import ErrorHandling from '../services/ErrorService'
+import type { APIError, APIRequest } from '../types'
 
 /**
  * @file Implementation - handleAPIError
@@ -16,56 +12,40 @@ import formatError from '../utils/formatError'
 /**
  * Handles an API request error.
  *
- * An error `event` hit will be sent to Google Analytics. Responses will be
- * tracked under the "Error Response" category, and labeled with the error
- * message.
+ * Errors will be logged and tracked with Google Analytics.
+ *
+ * @template Req - API request object
+ * @template Res - Server response object
  *
  * @async
- * @param req - API request object
- * @param res - API response object
- * @param err - API request error
- * @param data - Additional error data
+ * @param {Req} req - API request object
+ * @param {Res} res - Server response object
+ * @param {APIError} err - Request error object
+ * @param {AnyObject} [data] - Additional error data
+ * @return {Promise<Res>} Promise containing server response object
  */
-const handleAPIError = async (
-  req: Req,
-  res: Res,
-  err: Error | AlgoliaError | FeathersErrorJSON,
-  data: AnyObject = {}
-): Promise<Res> => {
-  // Get error data
-  const $data = merge((err as FeathersErrorJSON)?.data ?? {}, {
-    ...data,
-    created_at: new Date().valueOf(),
-    req: pick(req, [
-      'headers.authorization',
-      'headers.host',
-      'headers.user-agent',
-      'query',
-      'url'
-    ]),
-    vercel: vercel.env !== 'development' ? vercel : undefined
-  })
-
+async function handleAPIError<
+  Req extends APIRequest = APIRequest,
+  Res extends VercelResponse = VercelResponse
+>(req: Req, res: Res, err: APIError, data: AnyObject = {}): Promise<Res> {
   // Convert into `FeathersErrorJSON` object
-  const error = formatError(err, $data)
+  const error = ErrorHandling.format(err, {
+    ...data,
+    req: pick(req, ['headers', 'query', 'url'])
+  })
 
   // Log error
   req.logger.error({ error })
 
-  // Track and report errors
-  await ga.event({
-    error: JSON.stringify(error),
-    eventAction: error.name,
-    eventCategory: 'Error Response',
-    eventLabel: error.message,
-    eventValue: error.code,
+  // Track error with Google Analytics
+  await ErrorHandling.track(error, {
     method: req.method.toUpperCase(),
     path: req.path,
     ua: error.data.req.headers['user-agent']
   })
 
   // Return error response
-  return res.status(error.code).json(error)
+  return res.status(error.code).json(error) as Res
 }
 
 export default handleAPIError

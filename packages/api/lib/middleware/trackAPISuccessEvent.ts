@@ -1,6 +1,10 @@
+import type { AnyObject } from '@flex-development/json'
+import ga, {
+  GA_CATEGORIES
+} from '@flex-development/kustomzcore/config/google-analytics'
+import vercel from '@flex-development/kustomzcore/config/vercel-env'
+import type { Method } from 'axios'
 import type { EventParam } from 'ga-measurement-protocol'
-import ga from '../config/google-analytics'
-import vercel from '../config/vercel-env'
 import type { APIRequest } from '../types'
 
 /**
@@ -14,15 +18,22 @@ import type { APIRequest } from '../types'
  * Responses will be tracked under the "Success Response" category, and labeled
  * with the request method and path.
  *
- * @param req - API request object
- * @param status [200] - HTTP response status code
+ * @template Req - API request object
+ *
+ * @param {Req} req - API request object
+ * @param {Method} req.method - HTTP request method
+ * @param {string} req.path - Path segement of request URL
+ * @param {AnyObject} req.query - Query parameters
+ * @param {number} [status]  - HTTP response status code. Defaults to `200`
+ * @return {Promise<boolean>} Promise contaning `true` if event was tracked
+ * successfully, `false` otherwise
  */
-const trackAPISuccessEvent = async (
-  req: APIRequest,
-  status = 200
-): Promise<boolean> => {
+async function trackAPISuccessEvent<Req extends APIRequest = APIRequest>(
+  req: Req,
+  status: number = 200
+): Promise<boolean> {
   // Build `event` params object
-  const param = {
+  const param: EventParam = {
     eventAction: (() => {
       switch (status) {
         case 201:
@@ -47,7 +58,7 @@ const trackAPISuccessEvent = async (
           return 'OK'
       }
     })(),
-    eventCategory: 'Success Response',
+    eventCategory: GA_CATEGORIES.responses.success,
     eventLabel: `${req.method.toUpperCase()} ${req.path}`,
     eventValue: status,
     method: req.method.toUpperCase(),
@@ -56,7 +67,7 @@ const trackAPISuccessEvent = async (
   }
 
   // Send `event` hit to Google Analytics
-  return await ga.event({ ...param, ...vercel } as EventParam)
+  return await ga.event({ ...param, ...vercel })
 }
 
 export default trackAPISuccessEvent

@@ -11,7 +11,8 @@ import type { ProductCardProps } from '@system/lib/molecules/ProductCard'
 /**
  * Returns an array of `ProductCard` data.
  *
- * @param products - Array of product listings or `ProductCard` props
+ * @param {IProductListing[] | ProductCardProps[]} [products] - Product data
+ * @return {ProductCardProps[]} Array of `ProductCard` component properties
  */
 export const useProductCards = (
   products: IProductListing[] | ProductCardProps[] = []

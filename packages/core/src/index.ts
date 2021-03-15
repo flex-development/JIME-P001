@@ -3,8 +3,7 @@
  * @author Lexus Drumgold <https://github.com/lexusdrumgold>
  */
 
-export { axios, default as Axios, RateLimitedAxios } from './axios'
-export * from './constants'
+export * from './config'
 export * from './types'
 export * from './utils'
 

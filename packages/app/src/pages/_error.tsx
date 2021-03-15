@@ -1,16 +1,23 @@
 import { ErrorContent } from '@app/components/ErrorContent'
 import { SEO } from '@app/components/SEO'
-import ga from '@app/config/google-analytics'
-import log from '@app/config/logger'
-import vercel from '@app/config/vercel-env'
-import type { IPagePropsError as PageProps } from '@app/types'
+import type { IPagePropsError as PageProps, NextError } from '@app/types'
+import type { FeathersErrorJSON } from '@feathersjs/errors'
+import type { AnyObject } from '@flex-development/json'
 import { serialize } from '@flex-development/json/utils/serialize'
+import ga from '@kustomzcore/config/google-analytics'
+import log from '@kustomzcore/config/logger'
+import vercel from '@kustomzcore/config/vercel-env'
 import createError from '@kustomzcore/utils/createError'
-import { ErrorTemplate } from '@kustomzdesign/lib/templates/ErrorTemplate'
+import {
+  ErrorTemplate,
+  ErrorTemplateProps
+} from '@kustomzdesign/lib/templates/ErrorTemplate'
+import type { IncomingMessage } from 'http'
 import merge from 'lodash/merge'
 import pick from 'lodash/pick'
-import type { NextPage } from 'next'
-import { Fragment, useEffect } from 'react'
+import type { NextPage, NextPageContext as Context } from 'next'
+import type { ReactElement } from 'react'
+import { useEffect } from 'react'
 
 /**
  * @file Page - Server Error
@@ -18,39 +25,44 @@ import { Fragment, useEffect } from 'react'
  */
 
 /**
- * Renders a server error page.
+ * Renders the server error page.
  *
  * @see https://nextjs.org/docs/advanced-features/custom-error-page
  *
- * @param props - Page component props
- * @param props.error - `FeathersErrorJSON` error object
+ * @param {PageProps} props - Page component props
+ * @param {FeathersErrorJSON} props.error - `FeathersErrorJSON` error object
+ * @return {ReactElement<ErrorTemplateProps>} 404 page
  */
-const ServerError: NextPage<PageProps> = ({ error }) => {
+const ServerError: NextPage<PageProps> = (
+  props: PageProps
+): ReactElement<AnyObject> => {
+  const { error } = props
+
   useEffect(() => console.error({ ServerError: error }))
 
   return (
-    <Fragment>
+    <>
       <SEO title='Server Error' />
       <ErrorTemplate code={error.code} message={error.message}>
         <ErrorContent />
       </ErrorTemplate>
-    </Fragment>
+    </>
   )
 }
 
 /**
- * Sanitizes {@param context.err} before being displayed on the `Error` page.
+ * Sanitizes {@param ctx.err} before being displayed on the `Error` page.
  *
- * @param context - Next.js page context
- * @param context.asPath - URL shown in browser, including the query
- * @param context.err - Error thrown during the rendering, if any
- * @param context.pathname - Current route; the path of the page in `/pages`
- * @param context.query - Query string section of URL parsed as an object
- * @param context.req - `HTTP` request object (server only)
- * @param context.res - HTTP response object (server only)
+ * @param {Context} ctx - Next.js page context
+ * @param {string} [ctx.asPath] - URL shown in browser, including the query
+ * @param {NextError} [ctx.err] - Error thrown, if any
+ * @param {string} ctx.pathname - Path of the page in `/pages`
+ * @param {AnyObject} ctx.query - Query segment of URL as an object
+ * @param {IncomingMessage} [ctx.req] - `HTTP` request object (server only)
+ * @return {Promise<PageProps>} Promise containig `ServerError` page props
  */
-ServerError.getInitialProps = async (context): Promise<PageProps> => {
-  const { asPath, err, pathname, query, req } = context
+ServerError.getInitialProps = async (ctx: Context): Promise<PageProps> => {
+  const { asPath, err, pathname, query, req } = ctx
 
   // Get error data
   const data = merge(pick(req, ['headers', 'method', 'url']), {

@@ -8,6 +8,9 @@ import useBoolean from 'react-hanger/array/useBoolean'
  */
 
 export type UseRewindSpring<N1, N2> = {
+  /**
+   * Spring value.
+   */
   value: SpringValue<N1 | N2> | undefined
 }
 
@@ -15,13 +18,14 @@ export type UseRewindSpring<N1, N2> = {
  * Animates the values between {@param from} and {@param to}. When
  * {@param to} is reached, the animation will be reversed.
  *
- * @param from - Initial start value
- * @param to - Initial end value,
- * @param preset - Key from React Spring spring config preset object
+ * @param {number} [from] - Initial start value
+ * @param {number} [to] - Initial end value,
+ * @param {keyof typeof config} preset - React Spring spring preset key
+ * @return {UseRewindSpring<number, number>} Hook state
  */
 export const useRewindSpring = (
-  from = 0,
-  to = 1,
+  from: number = 0,
+  to: number = 1,
   preset: keyof typeof config = 'molasses'
 ): UseRewindSpring<typeof from, typeof to> => {
   // Track when animation should reverse

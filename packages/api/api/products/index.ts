@@ -1,11 +1,7 @@
+import type { FindProductsQuery } from '@flex-development/kustomzcore'
 import type { VercelResponse as Res } from '@vercel/node'
-import {
-  handleAPIError,
-  initRoute,
-  trackAPIRequest,
-  trackAPISuccessEvent
-} from '../../lib/middleware'
-import Service from '../../lib/services/ProductService'
+import ProductsController from '../../lib/controllers/ProductsController'
+import routeWrapper from '../../lib/middleware/routeWrapper'
 import type { FindProductsReq as Req } from '../../lib/types'
 
 /**
@@ -16,35 +12,23 @@ import type { FindProductsReq as Req } from '../../lib/types'
 /**
  * Returns an array of product listing resource objects.
  *
- * @param req - API request object
- * @param req.query - Request query parameters
- * @param req.query.fields - Specify fields to include
- * @param req.query.handle - Find product by handle
- * @param req.query.hitsPerPage - Number of hits per page
- * @param req.query.length - Number of hits to retrieve (used only with offset)
- * @param req.query.offset - Specify the offset of the first hit to return
- * @param req.query.page - Specify the page to retrieve
- * @param req.query.product_id - Find product by ID
- * @param req.query.text - Search query text
- * @param res - API response object
+ * @async
+ * @param {Req} req - API request object
+ * @param {FindProductsQuery} [req.query] - Query parameters object
+ * @param {string} [req.query.fields] - List of fields to include
+ * @param {number} [req.query.hitsPerPage] - Number of results per page
+ * @param {number} [req.query.length] - Result limit (used only with offset)
+ * @param {string} [req.query.objectID] - Find product listing by handle
+ * @param {number} [req.query.offset] - Offset of the first result to return
+ * @param {number} [req.query.page] - Specify the page to retrieve
+ * @param {string} [req.query.product_id] - Find product listing by ID
+ * @param {string} [req.query.text] - Text to search in index
+ * @param {Res} res - Server response object
+ * @return {Promise<Res | void>} Promise containing server response object if an
+ * error is thrown, or empty promise if request completed successfully
  */
 export default async (req: Req, res: Res): Promise<Res | void> => {
-  // Initialize API route
-  initRoute(req)
-
-  // Send `pageview` hit to Google Analytics
-  await trackAPIRequest(req)
-
-  // Convert query into search options object
-  const options = Service.searchOptions(req.query)
-
-  try {
-    res.json(await Service.find(req.query.text, options))
-  } catch (err) {
-    return handleAPIError(req, res, err)
-  }
-
-  // Send success `event` hit to Google Analytics
-  await trackAPISuccessEvent(req)
-  return res.end()
+  return routeWrapper<Req, Res>(req, res, async (req, res) => {
+    return new ProductsController().find(req, res)
+  })
 }

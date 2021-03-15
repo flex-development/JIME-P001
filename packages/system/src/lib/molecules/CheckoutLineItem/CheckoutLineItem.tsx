@@ -60,17 +60,16 @@ export const CheckoutLineItem: FC<CheckoutLineItemProps> & {
     'checkout-line-item': true
   })
 
-  console.debug(variant)
-
   // Update element ID
   sanitized['id'] = `line-item-${variant.id}`
 
   /**
    * Updates the number of line items to purchase.
    *
-   * @param event - `change` event from `<input>` element
+   * @param {EventHandlers.Change.Input} event - `change` event
+   * @return {void}
    */
-  const onChangeQuantity = (event: EventHandlers.Change.Input) => {
+  const onChangeQuantity = (event: EventHandlers.Change.Input): void => {
     let quantity = JSON.parse(event.target.value)
     quantity = quantity < 1 ? 1 : quantity
 
@@ -90,9 +89,10 @@ export const CheckoutLineItem: FC<CheckoutLineItemProps> & {
   /**
    * Wrapper function around `props.handleRemove`.
    *
-   * @param event - `click` event from `<button>` element
+   * @param {EventHandlers.Click.Button} event - `click` event
+   * @return {void}
    */
-  const onClickRemove = (event: EventHandlers.Click.Button) => {
+  const onClickRemove = (event: EventHandlers.Click.Button): void => {
     return handleRemove(event)
   }
 

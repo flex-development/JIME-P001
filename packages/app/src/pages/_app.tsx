@@ -1,20 +1,26 @@
 import { Layout } from '@app/components/Layout'
-import kapi from '@app/config/axios-kapi'
-import ga from '@app/config/google-analytics'
-import vercel from '@app/config/vercel-env'
 import '@app/styles/index.scss'
-import type { AppComponent, IAppProps } from '@app/types'
-import { CART_PKEY } from '@kustomzcore/constants'
+import type {
+  AppComponent,
+  AppPropsComponent,
+  IAppInitialProps,
+  IAppProps,
+  IPageProps
+} from '@app/types'
+import kapi from '@kustomzcore/config/axios-kapi'
+import { CART_PKEY } from '@kustomzcore/config/constants'
+import ga from '@kustomzcore/config/google-analytics'
+import vercel from '@kustomzcore/config/vercel-env'
 import type {
   CheckoutLineItemInput,
   GetLayoutDataResJSON
 } from '@kustomzcore/types'
+import type { UseCart as CartContextState } from '@kustomzdesign/hooks/useCart'
 import '@kustomzdesign/kustomzdesign.css'
-import {
-  CartContextProvider,
-  CartContextProviderProps
-} from '@kustomzdesign/providers/CartContextProvider'
+import { CartContextProvider } from '@kustomzdesign/providers'
 import type { PageViewParam } from 'ga-measurement-protocol'
+import type { IncomingHttpHeaders, IncomingMessage } from 'http'
+import type { NextPageContext } from 'next'
 import type { AppContext, NextWebVitalsMetric as Metric } from 'next/app'
 import NextApp from 'next/app'
 import { useCallback, useRef } from 'react'
@@ -33,12 +39,13 @@ import useLocalStorage from 'react-use/useLocalStorage'
  *
  * - `CartContextProvider`
  *
- * @param props - Component props
- * @param props.Component - Current page component
- * @param props.addthis - True if AddThis script should be rendered
- * @param props.layout - Data to populate `Layout` component
- * @param props.pageProps - Page component props from data fetching methods
- * @param props.ua - User-Agent header, or an empty string
+ * @param {IAppProps} props - Component props
+ * @param {AppPropsComponent} props.Component - Current page component
+ * @param {boolean} props.addthis - True if AddThis script should be rendered
+ * @param {GetLayoutDataResJSON} props.layout -  `Layout` component data
+ * @param {IPageProps} props.pageProps - Page component props
+ * @param {string} [props.ua] - User-Agent header, or an empty string
+ * @return {JSX.Element} Application wrapped in `CartContextProvider` component
  */
 const App: AppComponent = (props: IAppProps) => {
   const { Component, addthis, layout, pageProps, ua } = props
@@ -50,10 +57,11 @@ const App: AppComponent = (props: IAppProps) => {
   /**
    * Updates the line items state and persists the items to local storage.
    *
-   * @param cart - `CartContextProvider` state
-   * @param cart.items - Checkout line items
+   * @param {CartContextState} cart - `CartContextProvider` state
+   * @param {CheckoutLineItemInput[]} cart.items - Checkout line items
+   * @return {Promise<void>} Empty promise if cart updates successfully
    */
-  const persistCart: CartContextProviderProps['persist'] = async cart => {
+  const persistCart = async (cart: CartContextState): Promise<void> => {
     if (typeof window !== 'undefined') return setItems(cart.items)
   }
 
@@ -78,15 +86,15 @@ const App: AppComponent = (props: IAppProps) => {
  * Fetches the store layout data and sends a `pageview` hit to Google Analytics.
  *
  * @async
- * @param actx - Next.js app context
- * @param actx.ctx - Next.js page context
- * @param actx.ctx.asPath - Actual path including query
- * @param actx.ctx.err - Error object if encountered during rendering
- * @param actx.ctx.pathname - Path section of `URL`
- * @param actx.ctx.req - `HTTP` request object
- * @param actx.ctx.res - `HTTP` response object
+ * @param {AppContext} actx - Next.js app context
+ * @param {NextPageContext} actx.ctx - Next.js page context
+ * @param {string} [actx.ctx.asPath] - Actual path including query
+ * @param {string} actx.ctx.pathname - Path segment of `URL`
+ * @param {IncomingMessage} actx.ctx.req - `HTTP` request object
+ * @param {IncomingHttpHeaders} actx.ctx.req.headers - Incoming request headers
+ * @return {Promise<IAppInitialProps>} Promise containing initial app props
  */
-App.getInitialProps = async (actx: AppContext) => {
+App.getInitialProps = async (actx: AppContext): Promise<IAppInitialProps> => {
   const { pathname, req } = actx.ctx
 
   // Calls page's `getInitialProps` and fills `appProps.pageProps`
@@ -122,12 +130,13 @@ App.getInitialProps = async (actx: AppContext) => {
  * @see https://nextjs.org/blog/next-9-4#integrated-web-vitals-reporting
  * @see https://nextjs.org/docs/advanced-features/measuring-performance
  *
- * @param metric - Web metric object
- * @param metric.id - Unique identifier in the context of the current page load
- * @param metric.label - Type of metric, `custom` or `web-vital`
- * @param metric.name - Metric name
- * @param metric.startTime - First recorded timestamp of the performance entry
- * @param metric.value - Duration of performance entry
+ * @param {Metric} metric - Web metric object
+ * @param {string} metric.id - Unique ID; in context of the current page load
+ * @param {string} metric.label - Type of metric, `custom` or `web-vital`
+ * @param {string} metric.name - Metric name
+ * @param {number} metric.startTime - First recorded timestamp of entry
+ * @param {number} metric.value - Duration of entry
+ * @return {Promise<void>} Empty promise if event is tracked succesfully
  */
 export const reportWebVitals = async (metric: Metric): Promise<void> => {
   const { id, label, name, value } = metric

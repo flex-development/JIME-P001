@@ -109,6 +109,9 @@
 
 # Husky
 [alias]
+  # Force push commits without running `pre-push` hook
+  fpnv = "!f() { git push --force --no-verify; }; f"
+
   # Push commits without running `pre-push` hook
   pnv = "!f() { git push --no-verify; }; f"
 

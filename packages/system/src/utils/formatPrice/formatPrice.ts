@@ -1,3 +1,5 @@
+import type { NumberString } from '@flex-development/kustomzcore'
+
 /**
  * @file Implementation - formatPrice
  * @module utils/formatPrice/impl
@@ -11,12 +13,12 @@ type IntlNumberFormatOptionsCurrency = Pick<
 /**
  * Converts {@param value} to a string in money format.
  *
- * @param value - Number to convert
- * @param options - Number format options
- * @return Value in money format
+ * @param {NumberString} value - Number to convert
+ * @param {Partial<IntlNumberFormatOptionsCurrency>} [options] - Format options
+ * @return {string} Formatted money string
  */
 const formatPrice = (
-  value: number | string,
+  value: NumberString,
   options: Partial<IntlNumberFormatOptionsCurrency> = {
     currency: 'USD',
     style: 'currency'

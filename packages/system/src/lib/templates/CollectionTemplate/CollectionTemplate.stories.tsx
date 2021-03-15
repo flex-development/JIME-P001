@@ -1,6 +1,4 @@
-import type { ICollectionListing } from '@kustomzcore/types'
-import collections from '@tests/system/__mocks__/data/collection-listings.mock.json'
-import { PRODUCTS } from '@tests/system/__mocks__/utils'
+import { COLLECTIONS, PRODUCTS } from '@tests/system/__mocks__/utils'
 import { CollectionTemplate } from './CollectionTemplate'
 import type { CollectionTemplateProps } from './CollectionTemplate.props'
 
@@ -28,6 +26,6 @@ export const Products: FCS<CollectionTemplateProps> = args => (
 
 Products.args = {
   ...CollectionTemplate?.defaultProps,
-  collection: (collections[0] as unknown) as ICollectionListing,
+  collection: COLLECTIONS[0],
   products: PRODUCTS
 }

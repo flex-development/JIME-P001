@@ -8,7 +8,8 @@ import type { AnyObject } from '@flex-development/json/utils/types'
 /**
  * Generates a complete artwork URL for an Apple Music Media item.
  *
- * @param song - Song data
+ * @param {AnyObject} [song] - Song data
+ * @return {string} Song artwork URL
  */
 const getSongArtworkURL = (song: AnyObject = {}): string => {
   // If no song data, return empty string

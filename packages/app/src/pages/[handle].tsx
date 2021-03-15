@@ -57,7 +57,7 @@ export const getServerSideProps: GetServerSideProps<PageProps, Params> = async (
 
   try {
     data = await kapi<GetPageResJSON>({
-      params: { fields: 'body_html,seo' },
+      params: { fields: 'body_html,metafield,seo' },
       url: `/pages/${context.params?.handle}`
     })
 

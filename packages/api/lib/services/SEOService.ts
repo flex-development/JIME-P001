@@ -1,10 +1,11 @@
 import type {
-  ICollectionListing,
+  CollectionListingImage as CollectionImage,
+  GetCollectionResJSON as Collection,
+  GetPageResJSON as Page,
+  GetPolicyResJSON as Policy,
+  GetProductResJSON as Product,
   IObjectMetafield,
-  IPage,
-  IPolicy,
   IProductImage,
-  IProductListing,
   IProductListingVariant,
   OrNever,
   OrPromise,
@@ -47,43 +48,49 @@ class SEOService {
    * Returns an object with SEO data for a collection listing resource.
    *
    * @async
-   * @param {OrPromise<ICollectionListing>} listing - Collecting listing data
-   * @param {IProductListing[]} [products] - Products in collection
+   * @param {OrPromise<Collection>} listing - Collecting listing data
+   * @param {Product[]} [products] - Product listings in collection
    * @return {Promise<SEOData>} Promise containing SEO data
    * @throws {FeathersErrorJSON}
    */
   static async collection(
-    listing: OrPromise<ICollectionListing>,
-    products: IProductListing[] = []
+    listing: OrPromise<Collection>,
+    products: Product[] = []
   ): OrNever<Promise<SEOData>> {
-    listing = await listing
+    const {
+      body_html = '',
+      default_product_image,
+      image: cimage,
+      title = ''
+    } = await listing
 
     // Get global SEO data
     const global = await SEOService.global()
 
     // Get collection image
-    const image = listing.image || listing.default_product_image || {}
+    const image = (cimage || default_product_image || {}) as CollectionImage
 
     // Initialize keywords array
     let keywords: string[] = [...(global.keywords?.split(',') ?? [])]
 
     // Build keywords from product tags
     products.forEach(product => {
-      keywords = keywords.concat(product.tags.trim().split(','))
+      const tags_array = (product.tags ?? '').split(',')
+      keywords = keywords.concat(SEOService.formatKeywords(...tags_array))
     })
 
     return merge(global, {
-      description: stripHtml(listing.body_html).result.trim(),
+      description: stripHtml(body_html.trim()).result,
       keywords: SEOService.formatKeywords(...keywords),
       og: {
-        image: image.src,
-        'image:alt': isEmpty(image) ? image.alt : image.alt || '',
-        'image:height': isEmpty(image) ? image.height : image.height || null,
-        'image:secure_url': image.src,
-        'image:width': isEmpty(image) ? image.width : image.width || null
+        image: image.src ?? null,
+        'image:alt': image?.alt ?? null,
+        'image:height': image?.height ?? null,
+        'image:secure_url': image.src ?? null,
+        'image:width': image?.width ?? null
       },
-      title: `Collections - ${listing.title}`,
-      twitter: { image: image.src }
+      title: `Collections - ${title}`,
+      twitter: { image: image.src ?? null }
     })
   }
 
@@ -153,33 +160,29 @@ class SEOService {
    * Returns an object with SEO data for a page resource.
    *
    * @async
-   * @param {OrPromise<IPage>} page - Page data
+   * @param {OrPromise<Page>} page - Page data
    * @return {Promise<SEOData>} Promise containing SEO data
    * @throws {FeathersErrorJSON}
    */
-  static async page(page: OrPromise<IPage>): OrNever<Promise<SEOData>> {
-    page = await page
+  static async page(page: OrPromise<Page>): OrNever<Promise<SEOData>> {
+    const { metafield = [] } = await page
 
     // Get global SEO data
     const global = await SEOService.global()
 
     // Get SEO from metafields
-    const {
-      description_tag: { value: description_tag = '' },
-      keywords: { value: page_keywords = '' },
-      title_tag: { value: title_tag = '' }
-    } = ofa<IObjectMetafield>(page.metafield, 'key')
+    const seo_meta = ofa<IObjectMetafield>(metafield, 'key')
 
     // Get array of page keywords
     const keywords: string[] = [
       ...(global.keywords?.split(',') ?? []),
-      ...((page_keywords as string)?.split(',') ?? [])
+      ...(((seo_meta?.keywords?.value as string) ?? '').split(',') ?? [])
     ]
 
     return merge(global, {
-      description: description_tag as string,
+      description: seo_meta.description_tag?.value ?? null,
       keywords: SEOService.formatKeywords(...keywords),
-      title: title_tag
+      title: seo_meta.title_tag?.value ?? null
     })
   }
 
@@ -187,29 +190,30 @@ class SEOService {
    * Returns an object with SEO data for a policy resource.
    *
    * @async
-   * @param {OrPromise<IPolicy>} policy - Policy data
+   * @param {OrPromise<Policy>} policy - Policy data
    * @return {Promise<SEOData>} Promise containing SEO data
    * @throws {FeathersErrorJSON}
    */
-  static async policy(policy: OrPromise<IPolicy>): OrNever<Promise<SEOData>> {
-    const { body, title } = await policy
+  static async policy(policy: OrPromise<Policy>): OrNever<Promise<SEOData>> {
+    const { title = '' } = await policy
 
-    const description = stripHtml(body).result
-
-    return merge(await SEOService.global(), { description, title })
+    return merge(await SEOService.global(), {
+      description: `${title} | Morena's Kustomz`,
+      title
+    })
   }
 
   /**
    * Returns an object with SEO data for a product listing resource.
    *
    * @async
-   * @param {OrPromise<IProductListing>} listing - Product listing data
+   * @param {OrPromise<Product>} listing - Product listing data
    * @param {string} [sku] - SKU of variant to generate SEO for
    * @return {Promise<SEOData>} Promise containing SEO data
    * @throws {FeathersErrorJSON}
    */
   static async product(
-    listing: OrPromise<IProductListing>,
+    listing: OrPromise<Product>,
     sku: IProductListingVariant['sku'] = ''
   ): OrNever<Promise<SEOData>> {
     listing = await listing
@@ -220,12 +224,12 @@ class SEOService {
       tags = '',
       title = '',
       variants = [],
-      vendor = ''
+      vendor = null
     } = listing
 
     // Initialize SEO object
     let seo: SEOData = {
-      description: stripHtml(body_html).result,
+      description: stripHtml(body_html.trim()).result,
       keywords: SEOService.formatKeywords(...tags.trim().split(',')),
       twitter: { card: 'summary' }
     }
@@ -243,29 +247,25 @@ class SEOService {
       const title_wv = `${title} - ${variant.title}`
 
       // Get product variant image
-      let variant_img = images.find(({ id }) => id === image_id)
+      let vimg = images.find(({ id }) => id === image_id)
 
-      if (!variant_img) {
+      if (!vimg) {
         const img = { ...SEOService.DEFAULT_IMAGE_PROPS, alt: title_wv }
-        variant_img = img as IProductImage
+        vimg = img as IProductImage
       }
 
       // Update SEO data
       seo = merge(seo, {
         og: {
-          image: variant_img.src,
-          'image:alt': variant_img.alt || null,
-          'image:height': variant_img.height,
-          'image:secure_url': variant_img.src,
-          'image:width': variant_img.width,
-          'product:availability': available ? `${available}` : null,
-          'product:brand': vendor || null,
-          'product:condition': 'new',
-          'product:price:amount': variant.price,
-          'product:price:currency': 'USD'
+          image: vimg?.src,
+          'image:alt': vimg.alt,
+          'image:height': vimg.height,
+          'image:secure_url': vimg.src,
+          'image:width': vimg.width,
+          'product:price:amount': variant.price
         },
-        title: title_wv,
-        twitter: { image: variant_img.src }
+        title: !isEmpty(sku) ? title_wv : title,
+        twitter: { image: vimg.src }
       })
     } else {
       const image = images[0] || SEOService.DEFAULT_IMAGE_PROPS
@@ -273,21 +273,22 @@ class SEOService {
       seo = merge(seo, {
         og: {
           image: image.src,
-          'image:alt': image.alt || null,
+          'image:alt': image.alt,
           'image:height': image.height,
           'image:secure_url': image.src,
-          'image:width': image.width,
-          'product:availability': 'true',
-          'product:brand': vendor || null,
-          'product:condition': 'new',
-          'product:price:currency': 'USD'
+          'image:width': image.width
         },
         title: title,
         twitter: { image: image.src }
       })
     }
 
-    return seo
+    return merge(seo, {
+      'product:availability': available ? `${available}` : null,
+      'product:brand': vendor,
+      'product:condition': 'new',
+      'product:price:currency': 'USD'
+    })
   }
 }
 

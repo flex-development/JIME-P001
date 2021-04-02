@@ -60,8 +60,8 @@ export function useSanitizedProps<
   sanitized.className = join(uniq(dstring.split(ES)), ES).trim()
 
   // Handle dangerouslySetInnerHTML
-  if ($html) {
-    sanitized.dangerouslySetInnerHTML = { __html: $html }
+  if ($html || rest.dangerouslySetInnerHTML) {
+    if ($html) sanitized.dangerouslySetInnerHTML = { __html: $html }
     _keys.push('children')
   }
 

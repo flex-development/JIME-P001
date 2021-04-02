@@ -1,6 +1,8 @@
 import { Option } from '../Option'
 import { Select } from './Select'
 import type { SelectProps } from './Select.props'
+import OPTIONS from './__tests__/__fixtures__/options'
+import PRODUCT_OPTIONS from './__tests__/__fixtures__/product-options'
 
 /**
  * @file Stories - Select
@@ -19,18 +21,13 @@ export default {
 export const Form: FCS<SelectProps> = args => <Select {...args} />
 
 Form.args = {
-  $options: [
-    {
-      label: 'Option 1',
-      value: 1
-    },
-    {
-      label: 'Option 2',
-      value: 2
-    },
-    {
-      label: 'Option 3',
-      value: 3
-    }
-  ]
+  $options: OPTIONS
+}
+
+export const ProductVariants: FCS<SelectProps> = args => <Select {...args} />
+
+ProductVariants.args = {
+  $options: PRODUCT_OPTIONS,
+  name: 'variant',
+  placeholder: 'Select a product variant'
 }

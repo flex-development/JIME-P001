@@ -1,4 +1,4 @@
-import type { IProductListing } from '@kustomzcore/types'
+import type { ProductListingData } from '@kustomzcore/types'
 import type { BoxProps } from '@system/lib/atoms/Box'
 import type { LinkProps } from '@system/lib/atoms/Link'
 
@@ -9,9 +9,9 @@ import type { LinkProps } from '@system/lib/atoms/Link'
 
 export interface ProductCardProps extends BoxProps {
   /**
-   * The `IProductListing` object.
+   * Product listing data.
    */
-  product: IProductListing
+  product: ProductListingData
 
   /**
    * Product `Link` component props.

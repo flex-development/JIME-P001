@@ -1,5 +1,5 @@
 import type { NumberString } from '@flex-development/kustomzcore'
-import { sanitizeQuantity } from '@system/utils/sanitizeQuantity'
+import sanitizeQuantity from '@system/utils/sanitizeQuantity'
 import { useCallback } from 'react'
 import useNumber from 'react-hanger/array/useNumber'
 

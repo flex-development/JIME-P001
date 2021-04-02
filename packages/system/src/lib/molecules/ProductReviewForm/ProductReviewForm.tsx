@@ -160,7 +160,7 @@ export const ProductReviewForm: FC<ProductReviewFormProps> & {
       </FormField>
 
       <Button
-        aria-label='Submit product review'
+        aria-label='Submit review'
         className='product-review-form-btn'
         disabled={
           !Object.keys(errors).length || Object.values(errors).includes(true)
@@ -181,4 +181,6 @@ ProductReviewForm.BODY_PLACEHOLDER =
 ProductReviewForm.SELECT_PLACEHOLDER = 'Select the variant you purchased'
 ProductReviewForm.TITLE_PLACEHOLDER = 'A smoke worthy product'
 
-ProductReviewForm.defaultProps = {}
+ProductReviewForm.defaultProps = {
+  description: 'To submit a review, use an email attached to a previous order.'
+}

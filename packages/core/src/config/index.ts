@@ -3,9 +3,9 @@
  * @module config
  */
 
-export { default as Axios, RateLimitedAxios, request } from './axios'
+export { default as axios, interceptors, request } from './axios'
+export type { RateLimitOptions } from './axios'
 export { default as axiosKapi } from './axios-kapi'
-export { default as axiosShopify } from './axios-shopify'
 export * from './constants'
 export { default as ga } from './google-analytics'
 export { default as createLogger } from './logger'

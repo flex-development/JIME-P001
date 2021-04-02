@@ -1,5 +1,7 @@
-import type { IProductListing } from '@kustomzcore/types'
-import { PRODUCTS, REVIEWS } from '@tests/system/__mocks__/utils'
+import ASH_TRAY from '@system/tests/fixtures/api/products/ash-tray'
+import KUSTOMZ from '@system/tests/fixtures/api/products/kustomz'
+import ROLLING_TRAY from '@system/tests/fixtures/api/products/rolling-tray'
+import REVIEWS from '@system/tests/fixtures/api/reviews'
 import { ProductTemplate } from './ProductTemplate'
 import type { ProductTemplateProps } from './ProductTemplate.props'
 
@@ -25,23 +27,19 @@ export const AshTray: FCS<ProductTemplateProps> = args => (
   <ProductTemplate {...args} />
 )
 
-const ashtray_p = PRODUCTS.find(p => p.handle === 'ash-tray') as IProductListing
-
 AshTray.args = {
   collection: {
     href: '/collections/all-products',
     target: '_blank',
     title: 'All Products'
   },
-  product: ashtray_p,
-  reviews: REVIEWS.filter(review => review.product_id === ashtray_p.product_id)
+  product: ASH_TRAY,
+  reviews: REVIEWS.filter(review => review.product_id === ASH_TRAY.product_id)
 }
 
 export const Kustomz: FCS<ProductTemplateProps> = args => (
   <ProductTemplate {...args} />
 )
-
-const kustomz_p = PRODUCTS.find(p => p.handle === 'kustomz') as IProductListing
 
 Kustomz.args = {
   collection: {
@@ -49,17 +47,13 @@ Kustomz.args = {
     target: '_blank',
     title: 'All Products'
   },
-  product: kustomz_p,
-  reviews: REVIEWS.filter(review => review.product_id === kustomz_p.product_id)
+  product: KUSTOMZ,
+  reviews: REVIEWS.filter(review => review.product_id === KUSTOMZ.product_id)
 }
 
 export const RollingTray: FCS<ProductTemplateProps> = args => (
   <ProductTemplate {...args} />
 )
-
-const rollingtray_p = PRODUCTS.find(
-  p => p.handle === 'rolling-tray'
-) as IProductListing
 
 RollingTray.args = {
   collection: {
@@ -67,8 +61,8 @@ RollingTray.args = {
     target: '_blank',
     title: 'All Products'
   },
-  product: rollingtray_p,
+  product: ROLLING_TRAY,
   reviews: REVIEWS.filter(review => {
-    return review.product_id === rollingtray_p.product_id
+    return review.product_id === ROLLING_TRAY.product_id
   })
 }

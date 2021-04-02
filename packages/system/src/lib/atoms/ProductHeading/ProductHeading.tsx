@@ -2,7 +2,7 @@ import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
 import type { HeadingProps } from '@system/lib/atoms/Heading'
 import { Heading } from '@system/lib/atoms/Heading'
 import { Span } from '@system/lib/atoms/Span'
-import { formatPrice } from '@system/utils/formatPrice'
+import formatPrice from '@system/utils/formatPrice'
 import type { FC } from 'react'
 import type { ProductHeadingProps } from './ProductHeading.props'
 

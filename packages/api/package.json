@@ -20,24 +20,28 @@
     "directory": "packages/api"
   },
   "scripts": {
-    "test": "BABEL_ENV=jest jest --detectOpenHandles --passWithNoTests",
-    "test:quiet": "yarn test || true",
+    "test": "bash ../../scripts/jest.sh",
     "vercel-prepare": "lerna run compile --scope @flex-development/kustomzcore",
     "vercel-build": "yarn vercel-prepare; lerna link"
   },
   "dependencies": {
-    "@algolia/client-search": "latest",
     "@flex-development/kustomzcore": "*",
-    "@types/jsonwebtoken": "latest",
     "@types/urijs": "latest",
-    "@vercel/node": "latest",
     "algoliasearch": "latest",
-    "jsonwebtoken": "latest",
     "string-strip-html": "latest",
     "urijs": "latest"
   },
   "devDependencies": {
-    "@vercel/node": "latest"
+    "@types/content-type": "latest",
+    "@types/etag": "latest",
+    "@types/jsonwebtoken": "latest",
+    "@vercel/node": "latest",
+    "@types/supertest": "latest",
+    "jsonwebtoken": "latest",
+    "mock-http": "latest",
+    "querystring": "latest",
+    "supertest": "latest",
+    "vercel-node-server": "next"
   },
   "required-env": [
     "ALGOLIA_API_KEY",
@@ -50,8 +54,8 @@
     "NPM_RC",
     "SHOPIFY_API_KEY",
     "SHOPIFY_API_VERSION",
-    "SHOPIFY_DOMAIN",
     "SHOPIFY_PASSWORD",
+    "SHOPIFY_SHOP_NAME",
     "VERCEL_ENV",
     "VERCEL_GIT_COMMIT_REF",
     "VERCEL_GIT_COMMIT_SHA",

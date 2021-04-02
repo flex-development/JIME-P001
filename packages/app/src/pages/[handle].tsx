@@ -7,7 +7,7 @@ import type {
 } from '@app/types'
 import toJSX from '@app/utils/toJSX'
 import kapi from '@kustomzcore/config/axios-kapi'
-import type { GetPageResJSON } from '@kustomzcore/types'
+import type { APIPayload } from '@kustomzcore/types'
 import {
   PageTemplate,
   PageTemplateProps as TemplateProps
@@ -48,15 +48,15 @@ const HandlePage: PageComponent<PageProps> = (
  * @param {Params} context.params - Route parameters if dynamic route
  * @param {NextIncomingMessage} context.req - `HTTP` request object
 @return {Promise<GetServerSidePropsResult<PageProps>>} Page props
- * @throws {FeathersErrorJSON}
+ * @throws {ErrorJSON}
  */
 export const getServerSideProps: GetServerSideProps<PageProps, Params> = async (
   context: Context<Params>
 ): Promise<GetServerSidePropsResult<PageProps>> => {
-  let data: GetPageResJSON | NotFound = { notFound: true }
+  let data: APIPayload.Page | NotFound = { notFound: true }
 
   try {
-    data = await kapi<GetPageResJSON>({
+    data = await kapi<APIPayload.Page>({
       params: { fields: 'body_html,metafield,seo' },
       url: `/pages/${context.params?.handle}`
     })

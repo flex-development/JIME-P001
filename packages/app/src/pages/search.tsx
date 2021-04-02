@@ -6,7 +6,7 @@ import type {
 } from '@app/types'
 import kapi from '@kustomzcore/config/axios-kapi'
 import { EMPTY_SPACE } from '@kustomzcore/config/constants'
-import type { GetProductResJSON } from '@kustomzcore/types'
+import type { ProductListingData } from '@kustomzcore/types'
 import {
   SearchTemplate,
   SearchTemplateProps as TemplateProps
@@ -58,14 +58,17 @@ export const getServerSideProps: GetServerSideProps<PageProps, Query> = async (
 
   // API request config
   const config: Parameters<typeof kapi>[0] = {
-    params: { text: isArray(term) ? join(term, EMPTY_SPACE) : term },
+    params: {
+      fields: 'body_html,handle,images,product_id,title,variants',
+      text: isArray(term) ? join(term, EMPTY_SPACE) : term
+    },
     url: 'products'
   }
 
   return {
     props: {
       seo: { title: term?.length ? `Search results for "${term}"` : 'Search' },
-      template: { results: await kapi<GetProductResJSON[]>(config) }
+      template: { results: await kapi<ProductListingData[]>(config) }
     }
   }
 }

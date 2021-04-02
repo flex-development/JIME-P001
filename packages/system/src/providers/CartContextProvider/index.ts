@@ -4,5 +4,6 @@
  */
 
 export * from './CartContextProvider'
+export * from './CartContextProvider.props'
 
 /* eslint-disable prettier/prettier */

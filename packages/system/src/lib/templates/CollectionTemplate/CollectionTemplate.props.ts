@@ -1,4 +1,7 @@
-import type { CollectionListingData, IProductListing } from '@kustomzcore/types'
+import type {
+  CollectionListingData,
+  ProductListingData
+} from '@kustomzcore/types'
 import type { LinkProps } from '@system/lib/atoms/Link'
 import type { MainProps } from '@system/lib/atoms/Main'
 
@@ -14,14 +17,14 @@ export interface CollectionTemplateProps extends MainProps {
   collection: Partial<CollectionListingData>
 
   /**
-   * Returns a `LinkProps` for the `ProductCard` link.
+   * Returns a `LinkProps` object for a product listing.
    */
-  handleProductLink?(product: IProductListing): LinkProps
+  handleProductLink?(product: ProductListingData): LinkProps
 
   /**
-   * Array of `IProductListing` objects that belong to the current collection.
+   * Array of product listings for the current collection.
    *
    * @default []
    */
-  products?: Array<IProductListing>
+  products?: ProductListingData[]
 }

@@ -11,11 +11,8 @@ import kapi from '@kustomzcore/config/axios-kapi'
 import { CART_PKEY } from '@kustomzcore/config/constants'
 import ga from '@kustomzcore/config/google-analytics'
 import vercel from '@kustomzcore/config/vercel-env'
-import type {
-  CheckoutLineItemInput,
-  GetLayoutDataResJSON
-} from '@kustomzcore/types'
-import type { UseCart as CartContextState } from '@kustomzdesign/hooks/useCart'
+import type { APIPayload, CheckoutLineItemInput } from '@kustomzcore/types'
+import type { UseCartContext } from '@kustomzdesign/hooks/useCartContext'
 import '@kustomzdesign/kustomzdesign.css'
 import { CartContextProvider } from '@kustomzdesign/providers'
 import type { PageViewParam } from 'ga-measurement-protocol'
@@ -42,7 +39,7 @@ import useLocalStorage from 'react-use/useLocalStorage'
  * @param {IAppProps} props - Component props
  * @param {AppPropsComponent} props.Component - Current page component
  * @param {boolean} props.addthis - True if AddThis script should be rendered
- * @param {GetLayoutDataResJSON} props.layout -  `Layout` component data
+ * @param {APIPayload.Layout} props.layout -  `Layout` component data
  * @param {IPageProps} props.pageProps - Page component props
  * @param {string} [props.ua] - User-Agent header, or an empty string
  * @return {JSX.Element} Application wrapped in `CartContextProvider` component
@@ -57,11 +54,11 @@ const App: AppComponent = (props: IAppProps) => {
   /**
    * Updates the line items state and persists the items to local storage.
    *
-   * @param {CartContextState} cart - `CartContextProvider` state
+   * @param {UseCartContext} cart - `CartContextProvider` state
    * @param {CheckoutLineItemInput[]} cart.items - Checkout line items
    * @return {Promise<void>} Empty promise if cart updates successfully
    */
-  const persistCart = async (cart: CartContextState): Promise<void> => {
+  const persistCart = async (cart: UseCartContext): Promise<void> => {
     if (typeof window !== 'undefined') return setItems(cart.items)
   }
 
@@ -101,7 +98,7 @@ App.getInitialProps = async (actx: AppContext): Promise<IAppInitialProps> => {
   const appProps = await NextApp.getInitialProps(actx)
 
   // Get layout data
-  const layout = await kapi<GetLayoutDataResJSON>({ url: 'layout' })
+  const layout = await kapi<APIPayload.Layout>({ url: 'layout' })
 
   // Get hostname
   const host = req?.headers.host ?? process.env.SITE_URL?.split('://')[1]

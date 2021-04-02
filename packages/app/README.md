@@ -28,8 +28,7 @@ Run `yarn dev:store` from the root of the repository.
 
 ### Production (Local)
 
-Run `yarn start` from this directory, or `yarn start:app` from the root of the
-repository.
+Run `yarn start` from this directory.
 
 ## Built With
 

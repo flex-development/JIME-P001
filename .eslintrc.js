@@ -72,7 +72,7 @@ module.exports = {
     'jsdoc/no-undefined-types': [
       1,
       {
-        definedTypes: ['FeathersErrorJSON', 'JSX', 'WebFont']
+        definedTypes: ['ErrorJSON', 'FeathersErrorJSON', 'JSX', 'WebFont']
       }
     ],
     'jsdoc/require-hyphen-before-param-description': 1,
@@ -128,7 +128,7 @@ module.exports = {
     'space-before-function-paren': [
       2,
       {
-        anonymous: 'never',
+        anonymous: 'always',
         asyncArrow: 'always',
         named: 'never'
       }
@@ -158,7 +158,7 @@ module.exports = {
       },
       extends: EXTENDS_CONFIG.splice(1, 0, 'plugin:jest/recommended'),
       rules: {
-        'jest/no-mocks-import': 0
+        'jest/no-disabled-tests': 0
       }
     },
     {
@@ -175,8 +175,9 @@ module.exports = {
     },
     {
       files: [
-        '**/scripts/**',
+        '**/__mocks__/**',
         '**/__tests__/**',
+        '**/scripts/**',
         '**/.eslintrc.js',
         '**/babel.*',
         'commitlint.*',

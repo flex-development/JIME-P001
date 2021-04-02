@@ -17,15 +17,18 @@ import type { CarouselProps } from './Carousel.props'
  * Renders a `Box` component with the class `carousel`.
  */
 export const Carousel: FC<CarouselProps> = props => {
-  const { children, chunk_max, position, ...rest } = props
+  const { children = [], chunk_max, max, position, ...rest } = props
 
   // Handle props and inject class
   const sanitized = useSanitizedProps<'div', BoxProps>(rest, 'carousel')
 
   // Get carousel items
-  const items = Children.toArray(children) as CarouselProps['children']
+  const items = Children.toArray(children) as ReactElement[]
   const chunk_items = chunk(items, chunk_max || 1)
-  const items_adaptor = (chunk_max ? chunk_items : items) as ReactElement[]
+
+  // Decide if chunked items array should be used and limit number of slides
+  let $items = (chunk_max ? chunk_items : items) as ReactElement[]
+  $items = $items.slice(0, max || $items.length)
 
   // Handle active carousel item index
   const { isActive, setIndex } = useActiveIndex(position, {
@@ -41,10 +44,10 @@ export const Carousel: FC<CarouselProps> = props => {
   const onClickItem = useCallback((i: number) => setIndex(i), [setIndex])
 
   return (
-    <Box {...sanitized}>
+    <Box {...sanitized} data-chunk-max={chunk_max}>
       <Box className='carousel-inner'>
         {(() => {
-          return items_adaptor.map((child: ReactElement, i: number) => (
+          return $items.map((child: ReactElement, i: number) => (
             <Box
               className={classnames('carousel-item', { active: isActive(i) })}
               key={`carousel-item-${i}`}
@@ -56,9 +59,9 @@ export const Carousel: FC<CarouselProps> = props => {
         })()}
       </Box>
 
-      {items_adaptor.length > 1 && (
+      {$items.length > 1 && (
         <Box className='carousel-indicators'>
-          {items_adaptor.map((child, i: number) => (
+          {$items.map((child, i: number) => (
             <Span
               aria-label='Carousel indicator'
               className={classnames('carousel-indicator', {

@@ -24,7 +24,7 @@ export type UseCheckoutPermalink = {
   /**
    * Checkout line items.
    */
-  items: Array<CheckoutLineItemInput>
+  items: CheckoutLineItemInput[]
 
   /**
    * Removes a checkout line item.

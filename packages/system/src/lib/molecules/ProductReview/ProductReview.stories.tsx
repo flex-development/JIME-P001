@@ -1,4 +1,4 @@
-import { REVIEWS } from '@tests/system/__mocks__/utils'
+import REVIEWS from '@system/tests/fixtures/api/reviews'
 import { ProductReview } from './ProductReview'
 import type { ProductReviewProps } from './ProductReview.props'
 

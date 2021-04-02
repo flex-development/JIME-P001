@@ -1,5 +1,5 @@
 import type { IProductImage } from '@kustomzcore/types'
-import type { GridBreakpointKey } from '@system/types'
+import type { Color, GridBreakpointKey } from '@system/types'
 
 /**
  * @file Config - Constant Values
@@ -15,6 +15,20 @@ export const API_URL = (() => {
 })()
 
 export const CHECK_INPUT_TYPES = ['checkbox', 'radio']
+
+export const COLORS: Color[] = [
+  'black',
+  'curr',
+  'danger',
+  'dark',
+  'ghost',
+  'gray',
+  'muted',
+  'light',
+  'primary',
+  'secondary',
+  'white'
+]
 
 export const CONTROL_INPUT_TYPES = [
   'email',

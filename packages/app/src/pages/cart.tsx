@@ -1,7 +1,7 @@
 import { SEO } from '@app/components/SEO'
 import type { IPageProps as PageProps, PageComponent } from '@app/types'
 import type { AnyObject } from '@flex-development/json'
-import { useCartContext } from '@kustomzdesign/hooks/useCart'
+import { useCartContext } from '@kustomzdesign/hooks/useCartContext'
 import { CartTemplate } from '@kustomzdesign/lib/templates/CartTemplate'
 import type { GetServerSideProps, GetServerSidePropsResult } from 'next'
 import type { ReactElement } from 'react'

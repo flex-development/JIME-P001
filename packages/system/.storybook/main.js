@@ -1,3 +1,4 @@
+const merge = require('lodash').merge
 const path = require('path')
 const { merge: mergeWebpack } = require('webpack-merge')
 const rootBabelOptions = require('../../../babel.config.json')
@@ -96,6 +97,13 @@ module.exports = {
     const REACT_HANGER = 'react-hanger/esm'
     const REACT_USE = 'react-use/esm'
     const SRC = '../src'
+    const TESTS = '../__tests__'
+
+    const MODULE_RESOLVER_ALIAS = {
+      '@system/tests/fixtures': `${TESTS.replace('../', './')}/__fixtures__`,
+      '@system/tests': TESTS.replace('../', './'),
+      '@system': SRC.replace('../', './')
+    }
 
     return mergeWebpack(config, {
       resolve: {
@@ -103,6 +111,8 @@ module.exports = {
           '@flex-development/json': path.join(__dirname, ROOT_NM, JSON),
           '@kustomzcore': path.join(__dirname, '../node_modules', CORE),
           '@mdx-js/react': path.join(__dirname, ROOT_NM, MDX_JS_REACT),
+          '@system/tests/fixtures': path.join(__dirname, TESTS, '__fixtures__'),
+          '@system/tests': path.join(__dirname, TESTS),
           '@system': path.join(__dirname, SRC),
           'react-hanger': path.join(__dirname, ROOT_NM, REACT_HANGER),
           'react-use': path.join(__dirname, ROOT_NM, REACT_USE)
@@ -112,27 +122,23 @@ module.exports = {
         rules: [
           {
             test: /\.(ts|tsx)$/,
-            include: [path.join(__dirname, SRC)],
+            include: [path.join(__dirname, SRC), path.join(__dirname, TESTS)],
             use: [
               {
                 loader: 'awesome-typescript-loader',
                 options: {
                   babelCore: '@babel/core',
-                  babelOptions: {
-                    ...rootBabelOptions,
+                  babelOptions: merge(rootBabelOptions, {
                     babelrc: false,
-                    plugins: rootBabelOptions.plugins.concat([
+                    plugins: [
                       [
                         'module-resolver',
                         {
-                          alias: {
-                            '@tests/system': './__tests__',
-                            '@system': './src'
-                          }
+                          alias: MODULE_RESOLVER_ALIAS
                         }
                       ]
-                    ])
-                  },
+                    ]
+                  }),
                   cacheDirectory: ATL_CACHE_DIRECTORY,
                   configFileName: TSCONFIG,
                   useBabel: true,

@@ -1,7 +1,6 @@
 import type { IPagePropsIndex as PageProps, PageComponent } from '@app/types'
 import kapi from '@kustomzcore/config/axios-kapi'
-import type { GetPageResJSON, GetProductResJSON } from '@kustomzcore/types'
-import objectFromArray from '@kustomzcore/utils/objectFromArray'
+import type { APIPayload } from '@kustomzcore/types'
 import {
   IndexTemplate,
   IndexTemplateProps as TemplateProps
@@ -36,17 +35,17 @@ const Home: PageComponent<PageProps> = (
  * @see https://shopify.dev/docs/admin-api/rest/reference/online-store/page
  *
  * @async
-@return {Promise<GetServerSidePropsResult<PageProps>>} Page props
- * @throws {FeathersErrorJSON}
+ * @return {Promise<GetServerSidePropsResult<PageProps>>} Page props
+ * @throws {ErrorJSON}
  */
 export const getServerSideProps: GetServerSideProps<PageProps> = async (): Promise<
   GetServerSidePropsResult<PageProps>
 > => {
   // Initialize page data object
-  let data: GetPageResJSON = {}
+  let data = {} as APIPayload.Page
 
   try {
-    data = await kapi<GetPageResJSON>({
+    data = await kapi<APIPayload.Page>({
       params: { fields: 'metafield,seo' },
       url: `/pages/index`
     })
@@ -56,34 +55,17 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async (): Promi
     throw error
   }
 
-  // Parse page metafields
-  const {
-    about_section_text,
-    about_section_title,
-    max_products,
-    max_reviews,
-    products_section_text,
-    products_section_title,
-    reviews_section_title
-  } = objectFromArray(data.metafield ?? [], 'key')
-
   // Get product listing data for product grid
-  const products = await kapi<GetProductResJSON[]>({
+  const products = await kapi<APIPayload.Product[]>({
     params: { fields: 'handle,images,seo,title,variants' },
     url: 'products'
   })
 
   // Get `IndexTemplate` props
   const template: PageProps['template'] = {
-    about_section_text: (about_section_text?.value as string) ?? '',
-    about_section_title: (about_section_title?.value as string) ?? '',
-    max_products: JSON.parse(`${max_products?.value ?? 0}`),
-    max_reviews: JSON.parse(`${max_reviews?.value ?? 0}`),
+    page: data,
     products: products as PageProps['template']['products'],
-    products_section_text: (products_section_text?.value as string) ?? '',
-    products_section_title: (products_section_title?.value as string) ?? '',
-    reviews: [],
-    reviews_section_title: (reviews_section_title?.value as string) ?? ''
+    reviews: []
   }
 
   return { props: { seo: data.seo as NonNullable<typeof data.seo>, template } }

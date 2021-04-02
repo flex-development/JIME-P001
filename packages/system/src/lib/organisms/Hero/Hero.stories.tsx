@@ -1,3 +1,4 @@
+import LAYOUT_DATA from '@system/tests/fixtures/api/layout'
 import { Hero } from './Hero'
 import type { HeroProps } from './Hero.props'
 
@@ -16,7 +17,4 @@ export default {
 
 export const Default: FCS<HeroProps> = args => <Hero {...args} />
 
-Default.args = {
-  subtitle: '♡ Kustom made stoner necessities ♡',
-  title: 'Morenas Kustomz'
-}
+Default.args = LAYOUT_DATA.hero

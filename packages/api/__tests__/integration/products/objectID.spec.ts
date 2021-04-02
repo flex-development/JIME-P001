@@ -1,0 +1,103 @@
+import type { APIQuery } from '@flex-development/kustomzcore/types'
+import { ErrorStatusCode } from '@flex-development/kustomzcore/types'
+import subject from '@kapi/endpoints/products/[objectID]'
+import '@kapi/mixins/ShopifyAPI'
+import NOT_FOUND_VALUE from '@kapi/tests/fixtures/not-found-value'
+import OBJECTS from '@kapi/tests/fixtures/shopify/products'
+import type { SuperTestSetup } from '@kapi/tests/utils'
+import { supertestSetup, testURLPath } from '@kapi/tests/utils'
+
+/**
+ * @file Integration Tests - /products/[objectID]
+ * @module api/tests/integration/products/objectID
+ */
+
+jest.deepUnmock('@flex-development/kustomzcore/config/vercel-env')
+jest.deepUnmock('@flex-development/kustomzcore/utils/createError')
+jest.deepUnmock('@flex-development/kustomzcore/utils/objectFromArray')
+
+jest.mock('@kapi/mixins/ShopifyAPI')
+
+let request = {} as SuperTestSetup['request']
+let server = {} as SuperTestSetup['server']
+
+describe('GET /products/[objectID]', () => {
+  const object = OBJECTS[OBJECTS.length - 1]
+  const objectID = object.handle
+
+  beforeAll(() => {
+    const helpers = supertestSetup(subject)
+
+    request = helpers.request
+    server = helpers.server
+  })
+
+  afterAll(() => {
+    server.close()
+  })
+
+  describe('/', () => {
+    describe('200 OK', () => {
+      it('json response containing product object', async () => {
+        // ! shouldn't have to do this
+        const query: APIQuery.Product.Get = { objectID }
+
+        const response = await request.get(testURLPath(query.objectID, query))
+        const eresponse = {
+          obj: { keys: 'objectID,product_id', keys_length: 2 },
+          status: 200
+        }
+
+        expect(response).toBeJSONResponse(eresponse)
+        expect(response.body.objectID).toBe(objectID)
+        expect(response.body.product_id).toBe(object.product_id)
+      })
+    })
+
+    describe(`${ErrorStatusCode.NotFound} NotFound`, () => {
+      it('json response containing error object', async () => {
+        const query: APIQuery.Product.Get = {
+          objectID: NOT_FOUND_VALUE.string
+        }
+
+        const response = await request.get(testURLPath(query.objectID, query))
+        const eresponse = { obj: true, status: ErrorStatusCode.NotFound }
+
+        expect(response).toBeJSONResponse(eresponse)
+        expect(response.body.message).toMatch(new RegExp(query.objectID))
+      })
+    })
+  })
+
+  describe('?fields', () => {
+    describe('200 OK', () => {
+      const fields = 'available,body_html,handle,images,seo,tags,title,variants'
+      const { sku } = object.variants[0]
+
+      const eresponse = {
+        obj: { keys: fields, keys_length: 10 },
+        status: 200
+      }
+
+      it(`=${fields}`, async () => {
+        const query = { fields: fields, objectID }
+
+        const response = await request.get(testURLPath(query.objectID, query))
+
+        expect(response).toBeJSONResponse(eresponse)
+      })
+
+      it(`=${fields}&sku=${sku}`, async () => {
+        const query = { fields: fields, objectID, sku }
+
+        const response = await request.get(testURLPath(query.objectID, query))
+        const eresponse = {
+          obj: { keys: fields, keys_length: 10 },
+          status: 200
+        }
+
+        expect(response).toBeJSONResponse(eresponse)
+      })
+    })
+  })
+})

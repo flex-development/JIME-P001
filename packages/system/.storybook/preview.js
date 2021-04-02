@@ -5,8 +5,9 @@ import prettier from '../../../.prettierrc.js'
 import { CartContextProvider } from '../src/providers'
 import '../src/scss/index.scss'
 import results from '../__tests__/results.json'
-import ITEMS from '../__tests__/__mocks__/data/checkout-line-items.mock.json'
+import { ITEMS } from '../__tests__/utils'
 import { Documentation } from './components'
+import formatAssertionResultNames from './config/formatAssertionResultNames'
 import { AdobeXDArtboards } from './config/viewports'
 
 /**
@@ -37,9 +38,14 @@ export const parameters = {
   viewport: { viewports: AdobeXDArtboards }
 }
 
+const testname = 'e2e|integration|unit'
+
 export const decorators = [
   // Add Jest output to stories
-  withTests({ results }),
+  withTests({
+    filesExt: `((.spec?)?(.tsx?)|(/__tests__/(${testname}).spec.tsx?))?$`,
+    results: formatAssertionResultNames(results)
+  }),
 
   // Receive console outputs as a console, warn and error in the actions panel
   (Story, context) => {

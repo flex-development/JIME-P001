@@ -8,13 +8,12 @@ import type { CheckoutLineItemProps } from '@system/lib/molecules/CheckoutLineIt
 
 export interface CartTemplateProps extends MainProps {
   /**
-   * `onClick` handler that's fired when the user clicks the "REMOVE" button.
+   * Fires when user clicks the "REMOVE" button on a `CheckoutLineItem`.
    */
   handleRemove?: CheckoutLineItemProps['handleRemove']
 
   /**
-   * `onChange` handler that's fired when the user updates the line item
-   * quantity.
+   * Fires when user updates the quantity of a `CheckoutLineItem`.
    */
   handleUpdate?: CheckoutLineItemProps['handleUpdate']
 }

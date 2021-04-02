@@ -45,8 +45,6 @@ export const CheckoutLineItem: FC<CheckoutLineItemProps> & {
 
   // Product listing variant
   const variant = useMemo<IProductListingVariant>(() => {
-    console.debug(data.product.variants, data.variant_id)
-
     return data.product.variants.find(({ id }) => {
       return id === data.variant_id
     }) as IProductListingVariant

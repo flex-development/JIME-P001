@@ -1,9 +1,9 @@
 {
   "compilerOptions": {
-    "module": "es6",
+    "module": "esnext",
     "target": "es6"
   },
   "exclude": ["node_modules"],
   "extends": "../../tsconfig.json",
-  "include": ["__tests__", "src"]
+  "include": ["__mocks__", "__tests__", "src", "jest.config.ts"]
 }

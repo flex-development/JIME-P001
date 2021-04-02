@@ -1,4 +1,4 @@
-import type { IProductListing } from '@kustomzcore/types'
+import type { ProductListingData } from '@kustomzcore/types'
 import type { MainProps } from '@system/lib/atoms/Main'
 
 /**
@@ -12,5 +12,5 @@ export interface SearchTemplateProps extends MainProps {
    *
    * @default []
    */
-  results?: Array<Partial<IProductListing>>
+  results?: ProductListingData[]
 }

@@ -1,5 +1,6 @@
-import type { IProductListing } from '@kustomzcore/types'
-import { PRODUCTS } from '@tests/system/__mocks__/utils'
+import ASH_TRAY from '@system/tests/fixtures/api/products/ash-tray'
+import KUSTOMZ from '@system/tests/fixtures/api/products/kustomz'
+import ROLLING_TRAY from '@system/tests/fixtures/api/products/rolling-tray'
 import { AddToCartForm } from './AddToCartForm'
 import type { AddToCartFormProps } from './AddToCartForm.props'
 
@@ -16,7 +17,7 @@ export default {
   },
   component: AddToCartForm,
   parameters: {
-    jest: ['AddToCartForm']
+    jest: ['AddToCartForm', 'Form']
   },
   title: 'Library/Molecules/AddToCartForm'
 }
@@ -26,7 +27,7 @@ export const AshTray: FCS<AddToCartFormProps> = args => (
 )
 
 AshTray.args = {
-  product: PRODUCTS.find(p => p.handle === 'ash-tray') as IProductListing
+  product: ASH_TRAY
 }
 
 export const Kustomz: FCS<AddToCartFormProps> = args => (
@@ -35,7 +36,7 @@ export const Kustomz: FCS<AddToCartFormProps> = args => (
 
 Kustomz.storyName = 'KUSTOMZ'
 Kustomz.args = {
-  product: PRODUCTS.find(p => p.handle === 'kustomz') as IProductListing
+  product: KUSTOMZ
 }
 
 export const RollingTray: FCS<AddToCartFormProps> = args => (
@@ -43,5 +44,5 @@ export const RollingTray: FCS<AddToCartFormProps> = args => (
 )
 
 RollingTray.args = {
-  product: PRODUCTS.find(p => p.handle === 'rolling-tray') as IProductListing
+  product: ROLLING_TRAY
 }

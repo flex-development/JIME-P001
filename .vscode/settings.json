@@ -1,0 +1,11 @@
+{
+  "vsicons.associations.folders": [
+    {
+      "extensions": [
+        "integration"
+      ],
+      "format": "svg",
+      "icon": "test"
+    }
+  ]
+}

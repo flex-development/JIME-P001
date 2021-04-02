@@ -191,7 +191,7 @@ export const AddToCartForm: FC<AddToCartFormProps> & {
             data-selected={selected.title}
             name='variant_id'
             onChange={onChangeVariantCB}
-            placeholder='Select an option'
+            placeholder={AddToCartForm.SELECT_PLACEHOLDER}
             value={selected.id}
           />
 
@@ -202,7 +202,7 @@ export const AddToCartForm: FC<AddToCartFormProps> & {
             label='Quantity'
           >
             <Input
-              aria-label='Product quantity'
+              aria-label={AddToCartForm.QUANTITY_LABEL}
               className='add-to-cart-form-control'
               min={0}
               onChange={onChangeQuantityCB}
@@ -220,7 +220,7 @@ export const AddToCartForm: FC<AddToCartFormProps> & {
           hidden={product.handle !== 'kustomz'}
           onChange={onChangePropertiesCB}
           name='kpd'
-          placeholder='Describe your kustom ash or rolling tray'
+          placeholder={AddToCartForm.TEXTAREA_PLACEHOLDER}
           value={item.properties?.kpd}
         />
 

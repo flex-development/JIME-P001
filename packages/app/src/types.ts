@@ -1,6 +1,6 @@
-import type { FeathersErrorJSON } from '@feathersjs/errors'
 import type {
-  GetLayoutDataResJSON,
+  APIPayload,
+  ErrorJSON,
   ICollectionListing,
   IProductListing,
   IProductListingVariant,
@@ -68,7 +68,7 @@ export interface HandlePageParams extends ParsedUrlQuery {
  */
 export interface IAppInitialProps {
   addthis: boolean
-  layout: GetLayoutDataResJSON
+  layout: APIPayload.Layout
   pageProps: IPageProps
   ua?: string
 }
@@ -101,7 +101,7 @@ export interface IPagePropsCollection extends IPageProps {
  * Props passed to the `Error` page.
  */
 export interface IPagePropsError {
-  error: FeathersErrorJSON
+  error: ErrorJSON
 }
 
 /**
@@ -138,11 +138,6 @@ export interface IPagePropsProduct extends IPageProps {
 export interface IPagePropsSearch extends IPageProps {
   template: SearchTemplateProps
 }
-
-/**
- * Error object if encountered during rendering.
- */
-export type NextError = Error & { statusCode?: number }
 
 /**
  * Shape of incoming HTTP request objects.

@@ -1,12 +1,12 @@
 import { ErrorContent } from '@app/components/ErrorContent'
 import { SEO } from '@app/components/SEO'
-import type { IPagePropsError as PageProps, NextError } from '@app/types'
-import type { FeathersErrorJSON } from '@feathersjs/errors'
+import type { IPagePropsError as PageProps } from '@app/types'
 import type { AnyObject } from '@flex-development/json'
 import { serialize } from '@flex-development/json/utils/serialize'
 import ga from '@kustomzcore/config/google-analytics'
 import log from '@kustomzcore/config/logger'
 import vercel from '@kustomzcore/config/vercel-env'
+import type { ErrorJSON, NextError } from '@kustomzcore/types'
 import createError from '@kustomzcore/utils/createError'
 import {
   ErrorTemplate,
@@ -30,7 +30,7 @@ import { useEffect } from 'react'
  * @see https://nextjs.org/docs/advanced-features/custom-error-page
  *
  * @param {PageProps} props - Page component props
- * @param {FeathersErrorJSON} props.error - `FeathersErrorJSON` error object
+ * @param {ErrorJSON} props.error - `ErrorJSON` error object
  * @return {ReactElement<ErrorTemplateProps>} 404 page
  */
 const ServerError: NextPage<PageProps> = (
@@ -71,7 +71,7 @@ ServerError.getInitialProps = async (ctx: Context): Promise<PageProps> => {
     query
   })
 
-  // Convert into `FeathersErrorJSON` error object
+  // Convert into `ErrorJSON` error object
   const error = createError(err || 'Unknown error.', data, err?.statusCode)
 
   // Report and log error if defined

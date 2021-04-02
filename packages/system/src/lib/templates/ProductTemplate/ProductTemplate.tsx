@@ -2,7 +2,7 @@ import type {
   CheckoutLineItemInput,
   IProductListingVariant
 } from '@kustomzcore/types'
-import { useCartContext } from '@system/hooks/useCart'
+import { useCartContext } from '@system/hooks/useCartContext'
 import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
 import { Box } from '@system/lib/atoms/Box'
 import { Button } from '@system/lib/atoms/Button'

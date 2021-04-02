@@ -13,6 +13,14 @@ module.exports = {
   },
   overrides: rootConfig.overrides.concat([
     {
+      files: ['**/__tests__/**'],
+      extends: [
+        'plugin:jest-dom/recommended',
+        'plugin:testing-library/recommended'
+      ],
+      plugins: ['jest-dom', 'testing-library']
+    },
+    {
       files: [
         'src/hooks/useSanitizedProps/useSanitizedProps.tsx',
         'src/lib/**/*.props.ts',
@@ -31,7 +39,11 @@ module.exports = {
       }
     },
     {
-      files: ['.storybook/config/viewports'],
+      files: [
+        '__tests__/__fixtures__/api/layout.ts',
+        '__tests__/__fixtures__/api/reviews.ts',
+        '.storybook/config/viewports.ts'
+      ],
       rules: {
         'sort-keys': 0
       }
@@ -39,7 +51,7 @@ module.exports = {
     {
       files: [
         'src/config/constants.ts',
-        'src/hooks/useCart/useCart.ts',
+        'src/hooks/useCartContext/useCartContext.ts',
         'src/lib/**/*.tsx',
         'src/schema/*.ts',
         '*.stories.tsx'

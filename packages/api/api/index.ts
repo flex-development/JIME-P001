@@ -15,9 +15,8 @@ import type { APIRequest as Req } from '../lib/types'
  * @async
  * @param {Req} req - API request object
  * @param {Res} res - Server response object
- * @return {Promise<Res | void>} Promise containing server response object if
- * an error is thrown, or empty promise if request completed successfully
+ * @return {Promise<void>} Empty promise
  */
-export default async (req: Req, res: Res): Promise<Res | void> => {
+export default async (req: Req, res: Res): Promise<void> => {
   return routeWrapper<Req, Res>(req, res, (req, res) => res.json(docs))
 }

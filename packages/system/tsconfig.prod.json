@@ -14,7 +14,13 @@
     "rootDir": "./src",
     "target": "es6"
   },
-  "exclude": ["**/*.stories.tsx", "**/*.spec.ts", "**/*.spec.tsx"],
+  "exclude": [
+    "**/__mocks__/**",
+    "**/__tests__/**",
+    "**/*.stories.tsx",
+    "**/*.spec.ts",
+    "**/*.spec.tsx"
+  ],
   "extends": "./tsconfig.app.json",
   "include": ["src"]
 }

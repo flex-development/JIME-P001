@@ -6,7 +6,7 @@ import {
 } from '@system/config/constants'
 import { useMemoCompare } from '@system/hooks/useMemoCompare'
 import type { GridBreakpointKey } from '@system/types'
-import { genclasses } from '@system/utils/genclasses'
+import genclasses from '@system/utils/genclasses'
 import classnames from 'classnames'
 import type { ClassDictionary } from 'classnames/types'
 import isPlainObject from 'lodash/isPlainObject'
@@ -79,8 +79,17 @@ export const useUtilityClasses = (
     delete dictionary.undefined
     delete dictionary['']
 
+    // Get unique dictionary keys
+    const uniqkeys = uniq(Object.keys(dictionary))
+
+    // Initialize new dictionary with unique keys
+    const udictionary: ClassDictionary = {}
+
+    // Populate dictionary
+    uniqkeys.forEach(key => (udictionary[key] = dictionary[key]))
+
     // Get dictionary as string
-    const dstring = classnames(dictionary, _props.className)
+    const dstring = classnames(udictionary, _props.className)
 
     // Return string containing unique class names
     return join(uniq(dstring.split(EMPTY_SPACE)), EMPTY_SPACE).trim()

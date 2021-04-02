@@ -1,6 +1,6 @@
-import { Input, Select, TextArea } from '@system/lib/atoms'
+import { Input, TextArea } from '@system/lib/atoms'
 import { Email as EmailInput } from '@system/lib/atoms/Input/Input.stories'
-import product_options from '@tests/system/__mocks__/data/product-options.mock.json'
+import { ProductVariants } from '@system/lib/atoms/Select/Select.stories'
 import { FormField } from './FormField'
 import type { FormFieldProps } from './FormField.props'
 
@@ -31,13 +31,7 @@ export const ProductVariant: FCS<FormFieldProps> = args => (
 )
 
 ProductVariant.args = {
-  children: (
-    <Select
-      $options={product_options}
-      name='variant'
-      placeholder='Select a product variant'
-    />
-  ),
+  children: <ProductVariants {...ProductVariants.args} />,
   'data-control': 'select',
   label: 'Product Variant'
 }

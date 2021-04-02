@@ -11,12 +11,13 @@ import type { EventHandlers } from '@system/types'
 export interface ProductReviewFormProps extends FormProps {
   /**
    * Form description.
+   *
+   * @default 'To submit a review, use an email attached to a previous order.'
    */
-  description: string
+  description?: string
 
   /**
-   * Form submission handler. This function will be fired when the user clicks
-   * the `submit` button.
+   * Form submission handler. Fires when user clicks the `submit` button.
    */
   handleSubmit?(req: AnyObject, event: EventHandlers.Click.Button): ANYTHING
 

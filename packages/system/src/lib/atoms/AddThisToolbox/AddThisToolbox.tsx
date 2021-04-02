@@ -14,6 +14,8 @@ import type { AddThisToolboxProps as Props } from './AddThisToolbox.props'
 /**
  * Displays AddThis website tools.
  *
+ * The type of toolbox displayed can be controlled by the `type` prop.
+ *
  * - https://www.addthis.com/
  */
 export const AddThisToolbox: FREC<Props> = forwardRef((props, ref) => {

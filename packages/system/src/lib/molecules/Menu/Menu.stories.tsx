@@ -1,5 +1,6 @@
 import { Menu } from './Menu'
 import type { MenuProps } from './Menu.props'
+import MENU_ITEMS_SIDEBAR from './__tests__/__fixtures__/menu-items-sidebar'
 
 /**
  * @file Stories - Menu
@@ -9,7 +10,7 @@ import type { MenuProps } from './Menu.props'
 export default {
   component: Menu,
   parameters: {
-    jest: ['Menu']
+    jest: ['Menu', 'Nav']
   },
   title: 'Library/Molecules/Menu'
 }
@@ -17,12 +18,6 @@ export default {
 export const Sidebar: FCS<MenuProps> = args => <Menu {...args} />
 
 Sidebar.args = {
-  $items: [
-    { title: 'Home' },
-    { title: 'Products' },
-    { title: 'About' },
-    { title: 'Send Message' },
-    { title: 'Instagram' }
-  ],
+  $items: MENU_ITEMS_SIDEBAR,
   className: 'sidebar-menu'
 }

@@ -1,4 +1,5 @@
 import type { AnyObject } from '@flex-development/json/utils/types'
+import type { MDXProviderComponents } from '@mdx-js/react'
 import { mdx as createMDXElement, MDXProvider } from '@mdx-js/react'
 import { DEFAULT_MDX_CODE } from '@system/config'
 import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
@@ -34,9 +35,15 @@ export const MDXContent: FC<MDXContentProps> = (props: MDXContentProps) => {
 
   useEffect(() => {
     /**
+     * Dynamically loads MDX components.
      *
+     * @see https://github.com/mdx-js/mdx/tree/main/packages/react
+     * @see https://mdxjs.com/table-of-components
+     *
+     * @return {Promise<MDXProviderComponents>} Promise containing MDXProvider
+     * component map
      */
-    async function loadComponents() {
+    async function loadComponents(): Promise<MDXProviderComponents> {
       const atoms = await import('@system/lib/atoms')
 
       const components: AnyObject = {

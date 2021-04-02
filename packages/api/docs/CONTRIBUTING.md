@@ -73,7 +73,7 @@ backend, it is also our content management system.
 
 - `SHOPIFY_API_KEY`
 - `SHOPIFY_API_VERSION`
-- `SHOPIFY_DOMAIN`
+- `SHOPIFY_SHOP_NAME`
 - `SHOPIFY_PASSWORD`
 
 ## Making Changes

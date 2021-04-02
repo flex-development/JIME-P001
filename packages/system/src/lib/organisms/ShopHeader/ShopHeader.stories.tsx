@@ -16,7 +16,7 @@ export default {
   },
   component: ShopHeader,
   parameters: {
-    jest: ['ShopHeader']
+    jest: ['ShopHeader', 'CartPreview', 'SearchBar']
   },
   title: 'Library/Organisms/ShopHeader'
 }

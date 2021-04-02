@@ -22,14 +22,10 @@ import type { CollectionTemplateProps } from './CollectionTemplate.props'
 export const CollectionTemplate: TC<CollectionTemplateProps> = props => {
   const {
     collection,
-    handleProductLink = () => {
-      console.log('TODO: CollectionTemplate.handleProductLink')
-      return { href: '#' }
-    },
+    handleProductLink = () => ({ href: '#' }),
     products = [],
     ...rest
   } = props
-  const { body_html, title } = collection
 
   const sanitized = useSanitizedProps<'main', MainProps>(
     rest,
@@ -39,8 +35,8 @@ export const CollectionTemplate: TC<CollectionTemplateProps> = props => {
   return (
     <Main {...sanitized} data-template={CollectionTemplate.template_id}>
       <Section id='template-header'>
-        <Heading className='template-heading'>{title}</Heading>
-        {body_html && <Paragraph>{body_html}</Paragraph>}
+        <Heading className='template-heading'>{collection.title}</Heading>
+        {collection.body_html && <Paragraph>{collection.body_html}</Paragraph>}
       </Section>
 
       <ProductGrid

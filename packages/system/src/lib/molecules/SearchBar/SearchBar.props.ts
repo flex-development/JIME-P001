@@ -10,8 +10,8 @@ import type { FormEvent } from 'react'
 
 export interface SearchBarProps extends FormProps {
   /**
-   * Form submission handler. Fires when the users submits the search form or
-   * clicks the search button.
+   * Form submission handler.
+   * Fires when user submits the search form using the "Enter" button.
    */
   handleSearch?(query: string, event: FormEvent): ANYTHING
 

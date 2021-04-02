@@ -1,4 +1,4 @@
-import { PRODUCTS } from '@tests/system/__mocks__/utils'
+import PRODUCTS from '@system/tests/fixtures/api/products'
 import { SearchTemplate } from './SearchTemplate'
 import type { SearchTemplateProps } from './SearchTemplate.props'
 

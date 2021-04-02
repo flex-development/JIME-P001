@@ -7,7 +7,7 @@ import clamp from 'lodash/clamp'
 import { useCallback } from 'react'
 
 /**
- * @file Use array of Apple Music song attributes
+ * @file Implementation - useSongAttributes
  * @module hooks/useSongAttributes/impl
  */
 
@@ -53,13 +53,17 @@ export const useSongAttributes = (
   const _songs = useMemoCompare<SongAttributes[]>(songs)
 
   /**
-   * Clamps {@param i} between 0 and the number of the songs in the songs
-   * state array.
+   * Clamps {@param index} between 0 and the number of the songs (minus 1 for
+   * zero-based indexing) in the songs state array.
    *
-   * @param {number} i - New active song index
+   * If {@param index} is out of range, `0` will be returned.
+   *
+   * @param {number} index - New active song index
    * @return {number} Formatted index
    */
-  const clampIndex = (i: number): number => clamp(i, 0, _songs.length - 1)
+  const clampIndex = (index: number): number => {
+    return clamp(index, 0, _songs.length - 1) === index ? index : 0
+  }
 
   /* Callback version of `clampIndex` */
   const clampIndexCB = useCallback(clampIndex, [_songs])

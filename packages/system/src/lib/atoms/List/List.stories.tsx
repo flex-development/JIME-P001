@@ -1,6 +1,8 @@
 import { Item } from '../Item'
 import { List } from './List'
 import type { ListProps } from './List.props'
+import NAMES from './__tests__/__fixtures__/names'
+import USERNAMES from './__tests__/__fixtures__/usernames'
 
 /**
  * @file Stories - List
@@ -19,74 +21,12 @@ export default {
 export const Ordered: FCS<ListProps> = args => <List {...args} />
 
 Ordered.args = {
-  $items: [
-    {
-      children: 'Chico McDonnell'
-    },
-    {
-      children: 'Rhetta Wiley'
-    },
-    {
-      children: 'Mordy Jadczak'
-    },
-    {
-      children: 'Shalne Menezes'
-    },
-    {
-      children: 'Lilly Tipping'
-    },
-    {
-      children: 'Cal Gilburt'
-    },
-    {
-      children: 'Alvan Greser'
-    },
-    {
-      children: 'Nickolas McGowran'
-    },
-    {
-      children: 'Annissa Wapplington'
-    },
-    {
-      children: 'Cinnamon Truin'
-    }
-  ],
+  $items: NAMES,
   is: 'ol'
 }
 
 export const Unordered: FCS<ListProps> = args => <List {...args} />
 
 Unordered.args = {
-  $items: [
-    {
-      children: 'ccornell0'
-    },
-    {
-      children: 'rorhtmann1'
-    },
-    {
-      children: 'gplaice2'
-    },
-    {
-      children: 'sfibbens3'
-    },
-    {
-      children: 'sbrunnen4'
-    },
-    {
-      children: 'rserle5'
-    },
-    {
-      children: 'tconti6'
-    },
-    {
-      children: 'ebanisch7'
-    },
-    {
-      children: 'pspurr8'
-    },
-    {
-      children: 'hbardwell9'
-    }
-  ]
+  $items: USERNAMES
 }

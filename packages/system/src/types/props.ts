@@ -258,7 +258,7 @@ export type TransientProps = TransientUtilityProps & {
    * String containing HTML markup. This value will be used to set the value of
    * `props.dangerouslySetInnerHTML.__html`.
    *
-   * If defined, `children` must be omitted.
+   * If defined, `children` will be omitted.
    *
    * - https://reactjs.org/docs/dom-elements.html#dangerouslysetinnerhtml
    */

@@ -1,3 +1,4 @@
+import PRODUCT from '@system/tests/fixtures/api/products/ash-tray'
 import { ProductBreadcrumb } from './ProductBreadcrumb'
 import type { ProductBreadcrumbProps } from './ProductBreadcrumb.props'
 
@@ -24,6 +25,6 @@ Default.args = {
     target: '_blank',
     title: 'All Products'
   },
-  product: 'Ash Tray',
-  variant: 'Funfetti'
+  product: PRODUCT.title,
+  variant: PRODUCT.variants[0].title
 }

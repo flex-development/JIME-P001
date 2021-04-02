@@ -1,6 +1,5 @@
-import type { IProductListing } from '@kustomzcore/types'
 import { ProductHeading } from '@system/lib'
-import { PRODUCTS } from '@tests/system/__mocks__/utils'
+import ASH_TRAY from '@system/tests/fixtures/api/products/ash-tray'
 import type { ProductHeadingProps } from './ProductHeading.props'
 
 /**
@@ -20,11 +19,7 @@ export const AshTray: FCS<ProductHeadingProps> = args => (
   <ProductHeading {...args} />
 )
 
-const ash_tray_data = PRODUCTS.find(
-  p => p.handle === 'ash-tray'
-) as IProductListing
-
 AshTray.args = {
-  price: ash_tray_data.variants[0].price,
-  title: ash_tray_data.title
+  price: ASH_TRAY.variants[0].price,
+  title: ASH_TRAY.title
 }

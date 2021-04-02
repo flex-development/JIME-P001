@@ -1,7 +1,8 @@
 import type { AnyObject, ANYTHING } from '@flex-development/json/utils/types'
-import type { LinkProps } from '@system/lib/atoms/Link'
 import type { MainProps } from '@system/lib/atoms/Main'
 import type { AddToCartFormProps } from '@system/lib/molecules/AddToCartForm'
+import type { CarouselProps } from '@system/lib/molecules/Carousel'
+import type { ProductBreadcrumbProps } from '@system/lib/molecules/ProductBreadcrumb'
 import type { EventHandlers } from '@system/types'
 
 /**
@@ -15,12 +16,12 @@ export interface ProductTemplateProps extends MainProps {
    *
    * @default 0
    */
-  active?: number
+  active?: AddToCartFormProps['active']
 
   /**
    * Title and link of the collection the `product` belongs to.
    */
-  collection: LinkProps
+  collection: ProductBreadcrumbProps['collection']
 
   /**
    * Fires when the user clicks the "Add to Cart" button.
@@ -49,5 +50,5 @@ export interface ProductTemplateProps extends MainProps {
    *
    * @default 2
    */
-  reviews_chunk_max?: number
+  reviews_chunk_max?: CarouselProps['chunk_max']
 }

@@ -2,12 +2,7 @@ import kapi from '@kustomzcore/config/axios-kapi'
 import ga from '@kustomzcore/config/google-analytics'
 import log from '@kustomzcore/config/logger'
 import vercel from '@kustomzcore/config/vercel-env'
-import type {
-  GetCollectionResJSON,
-  GetPageResJSON,
-  GetPolicyResJSON,
-  IProductListing
-} from '@kustomzcore/types'
+import type { APIPayload, IProductListing } from '@kustomzcore/types'
 import createError from '@kustomzcore/utils/createError'
 import type { PageViewParam } from 'ga-measurement-protocol'
 import sortBy from 'lodash/sortBy'
@@ -46,19 +41,19 @@ export default async (req: Req, res: Res): Promise<void> => {
 
   try {
     // Get online store pages
-    const pages = await kapi<GetPageResJSON[]>({ url: '/pages' })
+    const pages = await kapi<APIPayload.Page[]>({ url: '/pages' })
 
     // Add page slugs to slugs array
     pages.forEach(({ handle }) => slugs.push(handle as string))
 
     // Get store policies
-    const policies = await kapi<GetPolicyResJSON[]>({ url: '/policies' })
+    const policies = await kapi<APIPayload.Policy[]>({ url: '/policies' })
 
     // Add store policy slugs to slugs array
     policies.forEach(({ handle }) => slugs.push(handle as string))
 
     // Get product collections and products
-    const collections = await kapi<GetCollectionResJSON[]>({
+    const collections = await kapi<APIPayload.Collection[]>({
       params: { fields: 'handle,products' },
       url: '/collections'
     })
@@ -101,7 +96,7 @@ export default async (req: Req, res: Res): Promise<void> => {
     // Return sitemap output
     return res.end(xml)
   } catch (err) {
-    // Format error as `FeathersErrorJSON` object
+    // Format error as `ErrorJSON` object
     const error = createError(err, {
       errors: err?.className ? undefined : err,
       headers,

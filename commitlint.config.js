@@ -35,12 +35,28 @@ module.exports = {
   /**
    * Functions that return true if commitlint should ignore the given message.
    *
-   * If {@param commit} includes `wip:` the commit message will be ignored.
-   *
    * @param {string} commit - The commit message
-   * @return {boolean} True if message should be ignored
+   * @return {boolean} `true` if commitlint should ignore message
    */
-  ignores: [commit => commit.startsWith('wip:')],
+  ignores: [
+    /**
+     * Ignores commit messages that start with `wip:`.
+     *
+     * @param {string} commit - The commit message
+     * @return {boolean} True if message begins with `wip:`
+     */
+    commit => commit.startsWith('wip:'),
+
+    /**
+     * Ignores commit messages that include "GET /" after the type and/or scope.
+     *
+     * Used when testing endpoints from the `api` package.
+     *
+     * @param {string} commit - The commit message
+     * @return {boolean} True if message begins with 'wip:'
+     */
+    commit => commit.split(': ')[1].startsWith('GET /')
+  ],
 
   /**
    * @property {Record<string, Rule>} rules - Rules to check against

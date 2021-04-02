@@ -28,7 +28,7 @@
   "module": "index.js",
   "types": "index.d.ts",
   "scripts": {
-    "test": "BABEL_ENV=jest jest --detectOpenHandles --passWithNoTests",
+    "test": "bash ../../scripts/jest.sh",
     "test:quiet": "yarn test || true",
     "compile": "bash ./scripts/compile.sh"
   },
@@ -46,7 +46,6 @@
     "nanoid": "latest",
     "pino": "latest",
     "pino-pretty": "latest",
-    "shopify-api-node": "latest",
     "tslib": "latest"
   },
   "devDependencies": {
@@ -62,13 +61,10 @@
   },
   "env": [
     "API_URL",
+    "GA_ENABLED",
     "GA_TRACKING_ID",
     "NODE_ENV",
     "NPM_RC",
-    "SHOPIFY_API_KEY",
-    "SHOPIFY_API_VERSION",
-    "SHOPIFY_DOMAIN",
-    "SHOPIFY_PASSWORD",
     "VERCEL",
     "VERCEL_ENV",
     "VERCEL_GIT_COMMIT_REF",

@@ -1,10 +1,10 @@
 {
   "compilerOptions": {
     "module": "commonjs",
-    "paths": {},
     "target": "es6"
   },
   "exclude": ["node_modules"],
   "extends": "../../tsconfig.json",
-  "include": ["__tests__", "api", "lib"]
+  "files": ["jest.d.ts"],
+  "include": ["__mocks__", "__tests__", "api", "lib", "jest.config.ts"]
 }

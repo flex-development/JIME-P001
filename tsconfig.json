@@ -9,7 +9,6 @@
     "experimentalDecorators": true,
     "forceConsistentCasingInFileNames": true,
     "importHelpers": true,
-    "isolatedModules": true,
     "lib": ["esnext"],
     "module": "esnext",
     "moduleResolution": "node",
@@ -24,6 +23,9 @@
       "@flex-development/json/*": [
         "node_modules/@flex-development/json/dist/*"
       ],
+      "@kapi/endpoints/*": ["packages/api/api/*"],
+      "@kapi/tests/fixtures/*": ["packages/api/__tests__/__fixtures__/*"],
+      "@kapi/tests/*": ["packages/api/__tests__/*"],
       "@kapi/*": ["packages/api/lib/*"],
       "@kustomzcore/*": [
         "packages/app/node_modules/@flex-development/kustomzcore/*"
@@ -33,8 +35,9 @@
       ],
       "@mdx-js/react": ["node_modules/@mdx-js/react/dist/esm"],
       "@system": ["packages/system/src/index.ts"],
+      "@system/tests/fixtures/*": ["packages/system/__tests__/__fixtures__/*"],
+      "@system/tests/*": ["packages/system/__tests__/*"],
       "@system/*": ["packages/system/src/*"],
-      "@tests/system/*": ["packages/system/__tests__/*"],
       "react-hanger/*": ["node_modules/react-hanger/esm/*"],
       "react-use/*": ["node_modules/react-use/esm/*"]
     },

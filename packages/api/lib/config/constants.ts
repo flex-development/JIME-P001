@@ -10,12 +10,6 @@ const { VERCEL_ENV: ENV, VERCEL_URL } = process.env
 
 export const API_URL = `http${ENV === 'development' ? '' : 's'}://${VERCEL_URL}`
 
-export const DEFAULT_SEARCH_OPTIONS = {
-  attributesToHighlight: [],
-  attributesToRetrieve: ['objectID'],
-  attributesToSnippet: []
-}
-
 export const PAGINATION_PARAMS: PaginationParameter[] = [
   'hitsPerPage',
   'length',

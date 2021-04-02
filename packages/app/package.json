@@ -22,8 +22,7 @@
   "scripts": {
     "predev": "vc env pull .env.development.local --yes",
     "dev": "bash ./scripts/next-dev.sh",
-    "test": "BABEL_ENV=jest jest --detectOpenHandles --passWithNoTests",
-    "test:quiet": "yarn test || true",
+    "test": "bash ../../scripts/jest.sh",
     "build": "bash ./scripts/next-build.sh",
     "prevercel-build": "lerna run prepare; lerna link",
     "vercel-build": "yarn build && node ./scripts/js/delete-source-maps",
@@ -46,6 +45,7 @@
     "lodash-es": "latest",
     "next": "10.0.8-canary.14",
     "next-transpile-modules": "latest",
+    "querystring": "latest",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "sitemap": "latest",

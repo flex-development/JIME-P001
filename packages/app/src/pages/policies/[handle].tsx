@@ -7,7 +7,7 @@ import type {
 } from '@app/types'
 import toJSX from '@app/utils/toJSX'
 import kapi from '@kustomzcore/config/axios-kapi'
-import type { GetPolicyResJSON } from '@kustomzcore/types'
+import type { APIPayload } from '@kustomzcore/types'
 import {
   PageTemplate,
   PageTemplateProps as TemplateProps
@@ -48,15 +48,15 @@ const Policy: PageComponent<PageProps> = (
  * @param {Params} context.params - Route parameters if dynamic route
  * @param {NextIncomingMessage} context.req - `HTTP` request object
  * @return {Promise<GetServerSidePropsResult<PageProps>>} Page props
- * @throws {FeathersErrorJSON}
+ * @throws {ErrorJSON}
  */
 export const getServerSideProps: GetServerSideProps<PageProps, Params> = async (
   context: Context<Params>
 ): Promise<GetServerSidePropsResult<PageProps>> => {
-  let data: GetPolicyResJSON | NotFound = { notFound: true }
+  let data: APIPayload.Policy | NotFound = { notFound: true }
 
   try {
-    data = await kapi<GetPolicyResJSON>({
+    data = await kapi<APIPayload.Policy>({
       params: { fields: 'body,seo' },
       url: `/policies/${context.params?.handle}`
     })

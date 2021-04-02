@@ -1,9 +1,7 @@
-import type { IProductListing } from '@kustomzcore/types'
-import { ProductImage } from '@system/lib/atoms/ProductImage'
-import { ProductReview } from '@system/lib/molecules/ProductReview'
-import { PRODUCTS, REVIEWS } from '@tests/system/__mocks__/utils'
 import { Carousel } from './Carousel'
 import type { CarouselProps } from './Carousel.props'
+import PRODUCT_IMAGES from './__tests__/__fixtures__/product-image-components'
+import PRODUCT_REVIEWS from './__tests__/__fixtures__/product-review-components'
 
 /**
  * @file Stories - Carousel
@@ -16,31 +14,17 @@ export default {
   },
   component: Carousel,
   parameters: {
-    jest: ['Carousel', 'useActiveIndex']
+    jest: ['Carousel']
   },
   title: 'Library/Molecules/Carousel'
 }
 
-const product = PRODUCTS.find(p => p.handle === 'ash-tray') as IProductListing
-const { images, variants } = product
-
 export const ProductImages: FCS<CarouselProps> = args => {
-  return (
-    <Carousel {...args}>
-      {images.map(image => (
-        <ProductImage
-          $display='block'
-          key={image.id}
-          product={product}
-          variant={variants.find(({ image_id }) => image_id === image.id)}
-        />
-      ))}
-    </Carousel>
-  )
+  return <Carousel {...args} />
 }
 
 ProductImages.args = {
-  children: [],
+  children: PRODUCT_IMAGES,
   style: {
     maxHeight: '600px',
     maxWidth: '438px'
@@ -50,10 +34,8 @@ ProductImages.args = {
 export const ProductReviews: FCS<CarouselProps> = args => <Carousel {...args} />
 
 ProductReviews.args = {
-  children: REVIEWS.map(review => (
-    <ProductReview review={review} key={`review-${review.id}`} />
-  )),
-  position: REVIEWS.length - 3,
+  children: PRODUCT_REVIEWS,
+  position: PRODUCT_REVIEWS.length - 3,
   style: {
     maxWidth: '1362px'
   }

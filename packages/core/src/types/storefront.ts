@@ -1,9 +1,5 @@
+import type { AnyObject, NullishString } from '@flex-development/json'
 import type {
-  AnyObject,
-  NullishString
-} from '@flex-development/json/utils/types'
-import type {
-  ICheckoutLineItem,
   ICollectionListing,
   IProductListing,
   IProductListingVariant
@@ -25,8 +21,8 @@ export type CheckoutPermalinkInput =
  * Object representing a checkout permalink query object.
  */
 export type CheckoutPermalinkQuery = Record<
-  ICheckoutLineItem['variant_id'],
-  ICheckoutLineItem['quantity']
+  CheckoutLineItemInput['variant_id'],
+  CheckoutLineItemInput['quantity']
 >
 
 /**
@@ -34,9 +30,9 @@ export type CheckoutPermalinkQuery = Record<
  */
 export type CheckoutLineItemInput = {
   price: IProductListingVariant['price']
-  product: Omit<ProductListingData, 'body_html'>
+  product: Omit<ProductListingData, 'body_html' | 'product_id'>
   properties: AnyObject | null
-  quantity: ICheckoutLineItem['quantity']
+  quantity: number
   variant_id: IProductListingVariant['id']
 }
 
@@ -60,7 +56,7 @@ export type CollectionListingData = Pick<
  */
 export type ProductListingData = Pick<
   IProductListing,
-  'body_html' | 'handle' | 'images' | 'title' | 'variants'
+  'body_html' | 'handle' | 'images' | 'product_id' | 'title' | 'variants'
 >
 
 /**

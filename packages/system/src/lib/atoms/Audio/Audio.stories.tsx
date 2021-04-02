@@ -1,4 +1,4 @@
-import SONGS from '@tests/system/__mocks__/data/song-attributes.mock.json'
+import LAYOUT_DATA from '@system/tests/fixtures/api/layout'
 import { Audio } from './Audio'
 import type { AudioProps } from './Audio.props'
 
@@ -18,5 +18,5 @@ export default {
 export const Default: FCS<AudioProps> = args => <Audio {...args} />
 
 Default.args = {
-  src: SONGS[0].previews[0].url
+  src: LAYOUT_DATA.playlist.tracks[0].previews[0].url
 }

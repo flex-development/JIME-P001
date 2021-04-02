@@ -1,4 +1,5 @@
 import type { AnyObject } from '@flex-development/json/utils/types'
+import type { APIPayload } from '@kustomzcore/types'
 import type { MainProps } from '@system/lib/atoms/Main'
 import type { ProductGridProps } from '@system/lib/organisms/ProductGrid'
 
@@ -9,31 +10,19 @@ import type { ProductGridProps } from '@system/lib/organisms/ProductGrid'
 
 export interface IndexTemplateProps extends MainProps {
   /**
-   * Text to display in the "About" section.
+   * Index page data.
    *
-   */
-  about_section_text: string
-
-  /**
-   * "About" section title.
+   * Relevent metafields:
    *
-   * @default 'About Morena'
+   * - `about_section_text`
+   * - `about_section_title`, default: 'About Morena'
+   * - `max_products`, default: 12
+   * - `max_reviews`, default: 5
+   * - `products_section_text`
+   * - `products_section_title`, default: 'Products'
+   * - `reviews_section_title`, default: 'Reviews'
    */
-  about_section_title?: string
-
-  /**
-   * Maximum number of products to display in the "Products" section.
-   *
-   * @default 3
-   */
-  max_products?: number
-
-  /**
-   * Maximum number of review to display in the "Reviews" section.
-   *
-   * @default 5
-   */
-  max_reviews?: number
+  page: APIPayload.Page
 
   /**
    * Array of product listings or product card data.
@@ -43,29 +32,9 @@ export interface IndexTemplateProps extends MainProps {
   products?: ProductGridProps['products']
 
   /**
-   * Text to display in the "Products" section.
-   *
-   */
-  products_section_text?: string
-
-  /**
-   * "Products" section title.
-   *
-   * @default 'Products'
-   */
-  products_section_title?: string
-
-  /**
-   * Array of product review objects.
+   * Array of product reviews.
    *
    * @default []
    */
-  reviews?: Array<AnyObject>
-
-  /**
-   * "Reviews" section title.
-   *
-   * @default 'Reviews'
-   */
-  reviews_section_title?: string
+  reviews?: AnyObject[]
 }

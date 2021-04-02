@@ -1,4 +1,4 @@
-import { SONGS } from '@tests/system/__mocks__/utils'
+import LAYOUT_DATA from '@system/tests/fixtures/api/layout'
 import type { PlaylistBarProps } from '././PlaylistBar.props'
 import { PlaylistBar } from './PlaylistBar'
 
@@ -9,7 +9,7 @@ import { PlaylistBar } from './PlaylistBar'
 
 export default {
   args: {
-    songs: SONGS
+    songs: LAYOUT_DATA.playlist.tracks
   },
   component: PlaylistBar,
   parameters: {

@@ -565,7 +565,8 @@
             "type": "number"
           },
           "default_product_image": {
-            "$ref": "#/components/schema/Shopify.ICollectionListingImage"
+            "$ref": "#/components/schema/Shopify.IProductImage",
+            "nullable": true
           },
           "handle": {
             "type": "string"
@@ -575,7 +576,7 @@
           },
           "metafields": {
             "items": {
-              "$ref": "#/components/schema/Shopify.IObjectMetafield"
+              "$ref": "#/components/schema/Shopify.IMetafield"
             },
             "type": "array"
           },
@@ -608,25 +609,6 @@
           }
         },
         "required": ["collection_id", "objectID"],
-        "type": "object"
-      },
-      "Shopify.ICollectionListingImage": {
-        "additionalProperties": false,
-        "properties": {
-          "position": {
-            "type": "number"
-          },
-          "product_it": {
-            "type": "number"
-          },
-          "variant_ids": {
-            "items": {
-              "type": "number"
-            },
-            "type": "array"
-          }
-        },
-        "required": ["position", "product_it", "variant_ids"],
         "type": "object"
       },
       "Shopify.IImage": {
@@ -729,35 +711,6 @@
         "required": ["amount", "currency_code"],
         "type": "object"
       },
-      "Shopify.IObjectMetafield": {
-        "additionalProperties": false,
-        "properties": {
-          "description": {
-            "$ref": "#/components/schema/NullishString"
-          },
-          "key": {
-            "type": "string"
-          },
-          "namespace": {
-            "type": "string"
-          },
-          "value": {
-            "anyOf": [
-              {
-                "type": "number"
-              },
-              {
-                "type": "string"
-              }
-            ]
-          },
-          "value_type": {
-            "$ref": "#/components/schema/MetaFieldValueType"
-          }
-        },
-        "required": ["description", "key", "namespace", "value", "value_type"],
-        "type": "object"
-      },
       "Shopify.IPage": {
         "additionalProperties": false,
         "properties": {
@@ -778,7 +731,7 @@
           },
           "metafield": {
             "items": {
-              "$ref": "#/components/schema/Shopify.IObjectMetafield"
+              "$ref": "#/components/schema/Shopify.IMetafield"
             },
             "type": "array"
           },

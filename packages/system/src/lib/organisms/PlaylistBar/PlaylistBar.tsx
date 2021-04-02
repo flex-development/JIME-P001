@@ -13,7 +13,7 @@ import { Paragraph } from '@system/lib/atoms/Paragraph'
 import type { SectionProps } from '@system/lib/atoms/Section'
 import { Section } from '@system/lib/atoms/Section'
 import type { EventHandlers } from '@system/types'
-import { getSongArtworkURL } from '@system/utils/getSongArtworkURL'
+import getSongArtworkURL from '@system/utils/getSongArtworkURL'
 import isFunction from 'lodash/isFunction'
 import type { FC } from 'react'
 import { useCallback, useMemo } from 'react'
@@ -81,13 +81,18 @@ export const PlaylistBar: FC<PlaylistBarProps> = props => {
 
   /**
    * Returns true if audio is ready to play.
+   *
+   * @return {boolean} `true` if audio readyState is greater than 0
    */
-  const isAudioReady = () => {
+  const isAudioReady = (): boolean => {
     return (audio_ref.current?.readyState ?? -1) > 0
   }
 
   /* Callback version of `isAudioReady` */
   const isAudioReadyCB = useCallback(isAudioReady, [audio_ref])
+
+  // Button disabled state
+  const [isDisabled] = useBoolean(!artworkReady || !isAudioReadyCB())
 
   // Animate ready state
   const style = useSpring({
@@ -145,7 +150,7 @@ export const PlaylistBar: FC<PlaylistBarProps> = props => {
   useEvent('ended', next, audio_ref.current)
 
   return (
-    <Section {...sanitized}>
+    <Section {...sanitized} data-songs={songs.length}>
       <Box className='playlist-bar-col'>
         <Link
           className='playlist-bar-artwork'
@@ -176,15 +181,15 @@ export const PlaylistBar: FC<PlaylistBarProps> = props => {
           $variant='ghost'
           aria-label='Play previous song'
           className='playlist-bar-btn'
-          disabled={!artworkReady || !isAudioReadyCB()}
+          disabled={isDisabled || undefined}
           name='to-previous-song'
           onClick={onClickSkipCB}
         />
         <Button
           $variant='ghost'
-          aria-label='Toggle audio playback'
+          aria-label='Playback'
           className='playlist-bar-btn'
-          disabled={!artworkReady || !isAudioReadyCB()}
+          disabled={isDisabled || undefined}
           onClick={async event => {
             return onClickPlaybackCB(event as EventHandlers.Click.Button)
           }}
@@ -195,7 +200,7 @@ export const PlaylistBar: FC<PlaylistBarProps> = props => {
           $variant='ghost'
           aria-label='Play next song'
           className='playlist-bar-btn'
-          disabled={!artworkReady || !isAudioReadyCB()}
+          disabled={isDisabled || undefined}
           name='to-next-song'
           onClick={onClickSkipCB}
         />

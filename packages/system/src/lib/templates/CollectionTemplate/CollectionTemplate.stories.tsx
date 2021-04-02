@@ -1,4 +1,4 @@
-import { COLLECTIONS, PRODUCTS } from '@tests/system/__mocks__/utils'
+import COLLECTION from '@system/tests/fixtures/api/collections/all-products'
 import { CollectionTemplate } from './CollectionTemplate'
 import type { CollectionTemplateProps } from './CollectionTemplate.props'
 
@@ -20,12 +20,11 @@ export default {
   title: 'Library/Templates/CollectionTemplate'
 }
 
-export const Products: FCS<CollectionTemplateProps> = args => (
+export const AllProducts: FCS<CollectionTemplateProps> = args => (
   <CollectionTemplate {...args} />
 )
 
-Products.args = {
-  ...CollectionTemplate?.defaultProps,
-  collection: COLLECTIONS[0],
-  products: PRODUCTS
+AllProducts.args = {
+  collection: COLLECTION,
+  products: COLLECTION.products
 }

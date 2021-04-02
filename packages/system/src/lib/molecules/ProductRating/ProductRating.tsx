@@ -58,6 +58,7 @@ export const ProductRating: FC<ProductRatingProps> = props => {
     <Box {...sanitized} data-rating={rating} role='group'>
       {values.map(value => (
         <Input
+          aria-checked={value <= rating}
           aria-label={`Give a ${value} star rating`}
           className='product-rating-checkbox'
           defaultChecked={value <= rating}

@@ -1,4 +1,4 @@
-import { PRODUCTS } from '@tests/system/__mocks__/utils'
+import ASH_TRAY from '@system/tests/fixtures/api/products/ash-tray'
 import { ProductReviewForm } from './ProductReviewForm'
 import type { ProductReviewFormProps } from './ProductReviewForm.props'
 
@@ -20,16 +20,13 @@ export default {
   title: 'Library/Molecules/ProductReviewForm'
 }
 
-const ashtray_data = PRODUCTS.find(p => p.handle === 'ash-tray')
-
 export const AshTray: FCS<ProductReviewFormProps> = args => (
   <ProductReviewForm {...args} />
 )
 
 AshTray.args = {
-  description:
-    'To submit a review, you must use an email attached to a previously made order.',
-  id: `${ashtray_data?.product_id}`,
-  title: ashtray_data?.title as string,
-  variants: ashtray_data?.variants ?? []
+  description: ProductReviewForm.defaultProps?.description,
+  id: `${ASH_TRAY.product_id}`,
+  title: ASH_TRAY.title,
+  variants: ASH_TRAY.variants
 }

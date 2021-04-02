@@ -1,46 +1,28 @@
 import type { ANYTHING } from '@flex-development/json/utils/types'
-import type { UseCart, UseCartInitialItems } from '@system/hooks/useCart'
-import { CartContext, useCart } from '@system/hooks/useCart'
+import { CartContext } from '@system/hooks/useCartContext'
+import { useCheckoutPermalink } from '@system/hooks/useCheckoutPermalink'
 import { useMemoCompare } from '@system/hooks/useMemoCompare'
+import getItemsTotal from '@system/utils/getItemsTotal'
 import isFunction from 'lodash/isFunction'
 import type { FC } from 'react'
-import { ReactNode, useEffect } from 'react'
+import { ReactNode, useEffect, useMemo } from 'react'
+import type {
+  CartContextProviderProps,
+  CartInitialItems,
+  CartPersistFN
+} from './CartContextProvider.props'
 
 /**
- * @file Shopping Cart Context Provider
+ * @file Provider - Shopping Cart Context
  * @module providers/CartContextProvider/impl
  */
-
-export type CartContextProviderProps = {
-  /**
-   * Context consumers.
-   */
-  children?: ReactNode
-
-  /**
-   * Initial line items in user's cart.
-   */
-  items?: UseCartInitialItems
-
-  /**
-   * Optional function to persist the user's cart.
-   *
-   * The function will be passed the user's cart, and a boolean indicating if
-   * the component is being unmounted.
-   */
-  persist?: CartPersistFN
-}
-
-export type CartPersistFN = {
-  (cart: UseCart, unmount: boolean): ANYTHING
-}
 
 /**
  * Provider component for `CartContext`.
  *
  * @param {CartContextProviderProps} props - Component props
  * @param {ReactNode} [props.children] - Context consumers
- * @param {UseCartInitialItems} [props.items] - Initial items array or function
+ * @param {CartInitialItems} [props.items] - Initial items array or function
  * @param {CartPersistFN} [props.persist] - Function to persist the user's cart
  * @return {JSX.Element} Context consumer wrapped in provider component
  */
@@ -49,32 +31,40 @@ export const CartContextProvider: FC<CartContextProviderProps> = (
 ): JSX.Element => {
   const { children, items, persist } = props
 
-  // Get cart state and state memo
-  const cart = useCart(items)
-  const cart_m = useMemoCompare(cart)
+  // Get checkout URL using initial line items
+  const checkout = useCheckoutPermalink(isFunction(items) ? items() : items)
+
+  // Get number of line items in cart
+  const items_total = useMemo<number>(() => {
+    return getItemsTotal(checkout.items)
+  }, [checkout.items])
+
+  // Get cart memo state
+  const cart = useMemoCompare({ ...checkout, items_total })
 
   useEffect(() => {
     /**
-     * Wrapper around `props.persist`. If the function is defined, it will be
-     * called the current cart state and a boolean indicating if the component
-     * is being unmounted.
+     * Wrapper around `props.persist`.
+     *
+     * If the function is defined, it will be called with the current cart state
+     * and a boolean indicating if the component is being unmounted.
      *
      * @param {boolean} unmount - `true` if component being unmounted
      * @return {ANYTHING} Boolean or persist fn return value
      */
-    const _persist = (unmount: boolean): ANYTHING => {
-      if (isFunction(persist)) return (async () => persist(cart_m, unmount))()
+    const doPersist = (unmount: boolean): ANYTHING => {
+      if (isFunction(persist)) return (async () => persist(cart, unmount))()
       return unmount
     }
 
     // Handle cart state on every re-render
-    _persist(false)
+    doPersist(false)
 
     return () => {
       // Call persist function when component is being unmounted
-      _persist(true)
+      doPersist(true)
     }
-  }, [cart_m, persist])
+  }, [cart, persist])
 
-  return <CartContext.Provider value={cart_m}>{children}</CartContext.Provider>
+  return <CartContext.Provider value={cart}>{children}</CartContext.Provider>
 }

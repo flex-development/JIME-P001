@@ -1,6 +1,6 @@
 import type { AnyObject } from '@flex-development/json/utils/types'
-import { MDXProviderComponents } from '@mdx-js/react'
-import { BoxProps } from '@system/lib/atoms/Box'
+import type { MDXProviderComponents } from '@mdx-js/react'
+import type { BoxProps } from '@system/lib/atoms/Box'
 
 /**
  * @file Component Props - MDXContent
@@ -10,6 +10,8 @@ import { BoxProps } from '@system/lib/atoms/Box'
 export interface MDXContentProps extends Omit<BoxProps, 'children'> {
   /**
    * Code output from Babel or Buble code transformation.
+   *
+   * - https://github.com/flex-development/mdjsx
    */
   code?: string
 

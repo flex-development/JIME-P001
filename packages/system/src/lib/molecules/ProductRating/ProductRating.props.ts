@@ -21,7 +21,7 @@ export interface ProductRatingProps extends BoxProps {
   /**
    * Name of `<button>` elements.
    *
-   * @default rating
+   * @default 'rating'
    */
   name?: string
 

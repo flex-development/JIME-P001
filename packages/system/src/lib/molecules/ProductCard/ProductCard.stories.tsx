@@ -1,5 +1,5 @@
-import type { IProductListing } from '@kustomzcore/types'
-import { PRODUCTS } from '@tests/system/__mocks__/utils'
+import ASH_TRAY from '@system/tests/fixtures/api/products/ash-tray'
+import KUSTOMZ from '@system/tests/fixtures/api/products/kustomz'
 import { ProductCard } from './ProductCard'
 import type { ProductCardProps } from './ProductCard.props'
 
@@ -24,11 +24,11 @@ export default {
 export const AshTray: FCS<ProductCardProps> = args => <ProductCard {...args} />
 
 AshTray.args = {
-  product: PRODUCTS.find(p => p.handle === 'ash-tray') as IProductListing
+  product: ASH_TRAY
 }
 
 export const Kustomz: FCS<ProductCardProps> = args => <ProductCard {...args} />
 
 Kustomz.args = {
-  product: PRODUCTS.find(p => p.handle === 'kustomz') as IProductListing
+  product: KUSTOMZ
 }

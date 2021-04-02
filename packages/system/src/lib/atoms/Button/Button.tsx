@@ -27,7 +27,8 @@ export const Button: FREC<ButtonProps> = forwardRef((props, ref) => {
     {
       btn: true,
       [`btn-${$variant}`]: $variant,
-      'btn-fluid': $fluid
+      'btn-fluid': $fluid,
+      'btn-transform-scale': $scale
     }
   )
 

@@ -7,7 +7,7 @@ import type {
 } from '@app/types'
 import { serialize } from '@flex-development/json/utils/serialize'
 import kapi from '@kustomzcore/config/axios-kapi'
-import type { GetCollectionResJSON, IProductListing } from '@kustomzcore/types'
+import type { APIPayload, ProductListingData } from '@kustomzcore/types'
 import type { LinkProps } from '@kustomzdesign/lib/atoms/Link'
 import {
   CollectionTemplate,
@@ -45,10 +45,10 @@ const Collection: PageComponent<PageProps> = (
   /**
    * Generates product `LinkProps` using the `handle` of the current collection.
    *
-   * @param {IProductListing} p - Product listing object
+   * @param {ProductListingData} p - Product listing data
    * @return {LinkProps} `LinkProps` for the product listing
    */
-  const handleProductLink = (p: IProductListing): LinkProps => {
+  const handleProductLink = (p: ProductListingData): LinkProps => {
     const base = !asPath.includes('collections') ? '/' : `${query.collection}/`
     return { href: `${base}products/${p.handle}` }
   }
@@ -70,17 +70,17 @@ const Collection: PageComponent<PageProps> = (
  * @param {Params} context.params - Route parameters if dynamic route
  * @param {NextIncomingMessage} context.req - `HTTP` request object
  * @return {Promise<GetServerSidePropsResult<PageProps>>} Page props
- * @throws {FeathersErrorJSON}
+ * @throws {ErrorJSON}
  */
 export const getServerSideProps: GetServerSideProps<PageProps, Params> = async (
   context: Context<Params>
 ): Promise<GetServerSidePropsResult<PageProps>> => {
   const { params, req } = context
 
-  let data: GetCollectionResJSON | NotFound = { notFound: true }
+  let data: APIPayload.Collection | NotFound = { notFound: true }
 
   try {
-    data = await kapi<GetCollectionResJSON>({
+    data = await kapi<APIPayload.Collection>({
       params: { fields: 'body_html,products,seo,title' },
       url: `/collections/${params?.handle}`
     })

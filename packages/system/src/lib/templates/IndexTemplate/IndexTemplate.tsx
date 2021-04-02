@@ -1,3 +1,5 @@
+import type { IMetafield } from '@kustomzcore/types'
+import objectFromArray from '@kustomzcore/utils/objectFromArray'
 import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
 import { Heading } from '@system/lib/atoms/Heading'
 import type { MainProps } from '@system/lib/atoms/Main'
@@ -27,20 +29,19 @@ import type { IndexTemplateProps } from './IndexTemplate.props'
  * as well as the attribute `data-template='index'`.
  */
 export const IndexTemplate: TC<IndexTemplateProps> = props => {
-  const {
-    about_section_text,
-    about_section_title = 'About Morena',
-    max_products = 3,
-    max_reviews = 5,
-    reviews_section_title = 'Reviews',
-    products = [],
-    products_section_text,
-    products_section_title = 'Products',
-    reviews = [],
-    ...rest
-  } = props
+  const { page, products = [], reviews = [], ...rest } = props
 
   const sanitized = useSanitizedProps<'main', MainProps>(rest, 'index-template')
+
+  const {
+    about_section_text: { value: about_section_text },
+    about_section_title: { value: about_section_title = 'About Morena' },
+    max_products: { value: max_products = 3 },
+    max_reviews: { value: max_reviews = 5 },
+    products_section_text: { value: products_section_text },
+    products_section_title: { value: products_section_title = 'Products' },
+    reviews_section_title: { value: reviews_section_title = 'Reviews' }
+  } = objectFromArray<IMetafield>(page.metafield ?? [], 'key')
 
   return (
     <Main {...sanitized} data-template={IndexTemplate.template_id}>
@@ -58,7 +59,8 @@ export const IndexTemplate: TC<IndexTemplateProps> = props => {
         )}
         <ProductGrid
           className='index-template-grid'
-          products={products.slice(0, max_products)}
+          max={max_products as number}
+          products={products}
         />
       </Section>
 
@@ -71,8 +73,9 @@ export const IndexTemplate: TC<IndexTemplateProps> = props => {
           <Carousel
             className='index-template-carousel'
             id='product-review-carousel'
+            max={max_reviews as number}
           >
-            {reviews.slice(0, max_reviews).map(review => (
+            {reviews.map(review => (
               <ProductReview key={uniqueId('product-review')} review={review} />
             ))}
           </Carousel>
@@ -85,13 +88,8 @@ export const IndexTemplate: TC<IndexTemplateProps> = props => {
 IndexTemplate.displayName = 'IndexTemplate'
 
 IndexTemplate.defaultProps = {
-  about_section_title: 'About Morena',
-  max_products: 3,
-  max_reviews: 5,
   products: [],
-  products_section_title: 'Products',
-  reviews: [],
-  reviews_section_title: 'Reviews'
+  reviews: []
 }
 
 IndexTemplate.template_id = 'index'

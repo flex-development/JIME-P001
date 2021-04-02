@@ -1,6 +1,6 @@
 import type { ANYTHING } from '@flex-development/json/utils/types'
+import { CartPreviewProps } from '@system/lib/atoms/CartPreview'
 import { HeaderProps } from '@system/lib/atoms/Header'
-import { LinkProps } from '@system/lib/atoms/Link'
 import { SearchBarProps } from '@system/lib/molecules/SearchBar'
 import { EventHandlers } from '@system/types'
 
@@ -15,11 +15,10 @@ export interface ShopHeaderProps extends HeaderProps {
    *
    * @default '/cart'
    */
-  cart_url?: LinkProps['href']
+  cart_url?: CartPreviewProps['href']
 
   /**
-   * SearchBar handler. Fires when the users submits the search form or
-   * clicks the search button.
+   * Fires when user submits the search form using the "Enter" button.
    */
   handleSearch?: SearchBarProps['handleSearch']
 

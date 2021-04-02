@@ -15,12 +15,12 @@ export interface CheckoutLineItemProps extends BoxProps {
   data: CheckoutLineItemInput
 
   /**
-   * Function to fire when the user clicks the "REMOVE" button.
+   * Fires when user clicks the "REMOVE" button.
    */
   handleRemove?(event: EventHandlers.Click.Button): ANYTHING
 
   /**
-   * Function to fire when the user updates the line item quantity.
+   * Fires when user updates the line item quantity.
    */
   handleUpdate?(
     updates: CheckoutLineItemInput,

@@ -4,9 +4,12 @@ import type {
   ElementType,
   FC,
   ForwardRefExoticComponent,
+  PropsWithoutRef,
+  RefAttributes,
   SVGProps
 } from 'react'
 import type { ComponentPropsBase } from './props'
+import type { HTMLElements } from './utils'
 
 /**
  * @file Type Definitions - Components
@@ -33,8 +36,25 @@ export type AnimatedFREC<
 
 /**
  * `ForwardRefExoticComponent` type alias.
+ *
+ * @template P - Props type
  */
-export type FREC<T extends AnyObject = AnyObject> = ForwardRefExoticComponent<T>
+export type FREC<P extends AnyObject = AnyObject> = ForwardRefExoticComponent<P>
+
+/* eslint-disable prettier/prettier */
+
+/**
+ * Return type of `forwardRef`.
+ *
+ * @template P - Props type
+ * @template T - HTML tag name, i.e `div` or `button`
+ */
+export type ForwardRefReturn<
+  P extends AnyObject = AnyObject,
+  T extends keyof JSX.IntrinsicElements = 'div'
+> = FREC<PropsWithoutRef<P> & RefAttributes<HTMLElements[T]>>
+
+/* eslint-enable prettier/prettier */
 
 /**
  * Shopify Polaris Icon

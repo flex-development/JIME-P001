@@ -1,9 +1,14 @@
-import type { ANYTHING } from '@flex-development/json/dist/utils/types'
+import type { ANYTHING } from '@flex-development/json'
 
 /**
  * @file Type Definitions - Utilities
  * @module types/utils
  */
+
+/**
+ * Type representing an empty object.
+ */
+export type EmptyObject = Record<never, never>
 
 /**
  * Type representing a `number` or `string`.

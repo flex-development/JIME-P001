@@ -1,4 +1,3 @@
-import type { IProductListing } from '@kustomzcore/types'
 import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
 import { Heading } from '@system/lib/atoms/Heading'
 import type { MainProps } from '@system/lib/atoms/Main'
@@ -36,7 +35,7 @@ export const SearchTemplate: TC<SearchTemplateProps> = props => {
         </Heading>
       </Section>
 
-      <ProductGrid products={results as Array<IProductListing>} />
+      <ProductGrid products={results} />
     </Main>
   )
 }

@@ -36,9 +36,9 @@ Fluid.args = {
   children: 'Fluid button'
 }
 
-export const ScaleButton: FCS<ButtonProps> = args => <Button {...args} />
+export const Scale: FCS<ButtonProps> = args => <Button {...args} />
 
-ScaleButton.args = {
+Scale.args = {
   $scale: true,
   children: 'Click!'
 }

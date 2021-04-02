@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "checkJs": false,
+    "isolatedModules": true,
     "jsx": "preserve",
     "lib": ["dom", "dom.iterable", "esnext"],
     "module": "esnext",
@@ -9,5 +10,5 @@
   "exclude": ["node_modules"],
   "extends": "../../tsconfig.json",
   "files": ["next-env.d.ts"],
-  "include": ["__tests__", "src"]
+  "include": ["__tests__", "src", "jest.config.ts"]
 }

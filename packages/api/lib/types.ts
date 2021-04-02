@@ -1,16 +1,8 @@
 import type { ApiError as AlgoliaError } from '@algolia/transporter'
-import type { FeathersErrorJSON } from '@feathersjs/errors'
 import type { AnyObject, ANYTHING } from '@flex-development/json'
 import type {
-  FindCollectionsQuery,
-  FindPagesQuery,
-  FindProductsQuery,
-  FindSearchIndexResourceQuery,
-  GetGlobalMetafieldsQuery,
-  GetImageAssetQuery,
-  GetPlaylistQuery,
-  GetProductQuery,
-  GetSearchIndexResourceQuery,
+  APIQuery,
+  ErrorJSON,
   OrNever,
   OrPromise
 } from '@flex-development/kustomzcore'
@@ -25,7 +17,7 @@ import type { Logger } from 'pino'
 /**
  * Shape of API error objects (with or without formatting).
  */
-export type APIError = Error | AlgoliaError | FeathersErrorJSON
+export type APIError = Error | AlgoliaError | ErrorJSON
 
 /**
  * Shape of the API `req` object.
@@ -39,94 +31,77 @@ export interface APIRequest extends VercelRequest {
 }
 
 /**
- * Shape of requests sent to the `/collections` endpoint.
+ * Shape of requests handled by the `Collection` service.
  */
-export interface FindCollectionsReq extends APIRequest {
-  query: FindCollectionsQuery
+export namespace CollectionReq {
+  export interface Find extends APIRequest {
+    query: APIQuery.Collection.Find
+  }
+
+  export interface Get extends APIRequest {
+    query: APIQuery.Collection.Get
+  }
 }
 
 /**
- * Shape of requests sent to the `/menus` endpoint.
+ * Shape of requests handled by the `Menu` service.
  */
-export interface FindMenusReq extends APIRequest {
-  query: FindSearchIndexResourceQuery
+export namespace MenuReq {
+  export interface Find extends APIRequest {
+    query: APIQuery.Menu.Find
+  }
+
+  export interface Get extends APIRequest {
+    query: APIQuery.Menu.Get
+  }
 }
 
 /**
- * Shape of requests sent to the `/pages` endpoint.
+ * Shape of requests handled by the `Page` service.
  */
-export interface FindPagesReq extends APIRequest {
-  query: FindPagesQuery
+export namespace PageReq {
+  export interface Find extends APIRequest {
+    query: APIQuery.Page.Find
+  }
+
+  export interface Get extends APIRequest {
+    query: APIQuery.Page.Get
+  }
 }
 
 /**
- * Shape of requests sent to the `/policies` endpoint.
+ * Shape of requests handled by the `Playlist` service.
  */
-export interface FindPoliciesReq extends APIRequest {
-  query: FindSearchIndexResourceQuery
+export namespace PlaylistReq {
+  export interface Get extends APIRequest {
+    query: APIQuery.Playlist.Get
+  }
 }
 
 /**
- * Shape of requests sent to the `/products` endpoint.
+ * Shape of requests handled by the `Policie` service.
  */
-export interface FindProductsReq extends APIRequest {
-  query: FindProductsQuery
+export namespace PolicyReq {
+  export interface Find extends APIRequest {
+    query: APIQuery.Policy.Find
+  }
+
+  export interface Get extends APIRequest {
+    query: APIQuery.Policy.Get
+  }
 }
 
 /**
- * Shape of requests sent to the `/collections/[handle]` endpoint.
+ * Shape of requests handled by the `Product` service.
  */
-export interface GetCollectionReq extends APIRequest {
-  query: GetSearchIndexResourceQuery
-}
+export namespace ProductReq {
+  export interface Find extends APIRequest {
+    query: APIQuery.Product.Find
+  }
 
-/**
- * Shape of requests sent to the `/metafields/globals` endpoint.
- */
-export interface GetGlobalMetafieldsReq extends APIRequest {
-  query: GetGlobalMetafieldsQuery
-}
-
-/**
- * Shape of requests sent to the `/assets/images/[filename]` endpoint.
- */
-export interface GetImageAssetReq extends APIRequest {
-  query: GetImageAssetQuery
-}
-
-/**
- * Shape of requests sent to the `/menus/[handle]` endpoint.
- */
-export interface GetMenuReq extends APIRequest {
-  query: GetSearchIndexResourceQuery
-}
-
-/**
- * Shape of requests sent to the `/pages/[handle]` endpoint.
- */
-export interface GetPageReq extends APIRequest {
-  query: GetSearchIndexResourceQuery
-}
-
-/**
- * Shape of requests sent to the `/playlist` endpoint.
- */
-export interface GetPlaylistReq extends APIRequest {
-  query: GetPlaylistQuery
-}
-
-/**
- * Shape of requests sent to the `/policies/[handle]` endpoint.
- */
-export interface GetPolicyReq extends APIRequest {
-  query: GetSearchIndexResourceQuery
-}
-
-/**
- * Shape of requests sent to the `/products/[handle]` endpoint.
- */
-export interface GetProductReq extends APIRequest {
-  query: GetProductQuery
+  export interface Get extends APIRequest {
+    query: APIQuery.Product.Get
+  }
 }
 
 /**
@@ -138,6 +113,14 @@ export type SearchIndexName =
   | 'pages'
   | 'policies'
   | 'products'
+
+/**
+ * Search index object that can have additional properties appended to it after
+ * it retrieved from the search index.
+ */
+export type TObjectEnhanced<TObject = AnyObject> = TObject & {
+  [x: string]: ANYTHING
+}
 
 /**
  * Function to populate search index.

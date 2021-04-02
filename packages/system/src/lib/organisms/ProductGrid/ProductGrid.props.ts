@@ -1,4 +1,4 @@
-import type { IProductListing } from '@kustomzcore/types'
+import type { ProductListingData } from '@kustomzcore/types'
 import type { SectionProps } from '@system/lib/atoms/Section'
 import type { ProductCardProps } from '@system/lib/molecules/ProductCard'
 
@@ -9,9 +9,14 @@ import type { ProductCardProps } from '@system/lib/molecules/ProductCard'
 
 export interface ProductGridProps extends SectionProps {
   /**
+   * Maximum number of `ProductCard` components to display in grid.
+   */
+  max?: number
+
+  /**
    * Array of product listings or product card data.
    *
    * @default []
    */
-  products?: IProductListing[] | ProductCardProps[]
+  products?: ProductListingData[] | ProductCardProps[]
 }

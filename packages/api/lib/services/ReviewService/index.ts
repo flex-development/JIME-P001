@@ -76,7 +76,7 @@ export default class ReviewService extends SearchIndexService<TObject> {
    *
    * @async
    * @param {APIRequestBody.Review.POST} [data] - Data to create new review
-   * @param {string} data.body - Review body; [1,5000]
+   * @param {string} data.body - Review body; [1,500]
    * @param {string} data.email - Reviewer email
    * @param {NumberString} data.id - Product ID
    * @param {string} [data.ip_addr] - Reviewer's ip address

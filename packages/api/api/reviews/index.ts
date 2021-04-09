@@ -28,7 +28,7 @@ export type Req = ReviewReq.Create | ReviewReq.Find
  * @async
  * @param {Req} req - API request object
  * @param {APIRequestBody.Review.POST} [req.body] - Data to create new review
- * @param {string} [req.body.body] - Review body; [1,5000]
+ * @param {string} [req.body.body] - Review body; [1,500]
  * @param {string} [req.body.email] - Reviewer email
  * @param {NumberString} [req.body.id] - Product ID
  * @param {string} [req.body.ip_addr] - Reviewer's ip address

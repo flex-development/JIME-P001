@@ -47,7 +47,7 @@ const charlimit = (limit: number, type: 'max' | 'min' = 'max'): string => {
  */
 const constraints = {
   body: {
-    max: [5000, { message: charlimit(5000) }],
+    max: [500, { message: charlimit(500) }],
     min: [1, { message: charlimit(1, 'min') }]
   } as Record<string, Parameters<ZodString['max']>>,
   title: {
@@ -62,7 +62,7 @@ const constraints = {
  * @return {CustomErrorParams} Email error parameters
  */
 const EmailError = (output: ANYTHING): CustomErrorParams => ({
-  message: `Customer with email "${output}" does not exist`,
+  message: `Customer with email "${output}" not found`,
   params: { email: output }
 })
 
@@ -73,7 +73,7 @@ const EmailError = (output: ANYTHING): CustomErrorParams => ({
  * @return {CustomErrorParams} Product ID error parameters
  */
 const ProductError = (output: ANYTHING): CustomErrorParams => ({
-  message: `Product with id "${output}" does not exist`,
+  message: `Product with id "${output}" not found`,
   params: { id: output }
 })
 

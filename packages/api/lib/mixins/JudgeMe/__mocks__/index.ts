@@ -42,7 +42,7 @@ export default class MockJudgeMe extends Actual {
       if (!CUSTOMERS.find(customer => customer.email === data.email)) {
         issues.push({
           code: 'custom',
-          message: `Customer with email "${data.email}" does not exist`,
+          message: `Customer with email "${data.email}" not found`,
           params: { email: data.email },
           path: ['email']
         })
@@ -51,7 +51,7 @@ export default class MockJudgeMe extends Actual {
       if (!PRODUCTS.find(product => product.product_id === data.id)) {
         issues.push({
           code: 'custom',
-          message: `Product with id "${data.id}" does not exist`,
+          message: `Product with id "${data.id}" not found`,
           params: { id: data.id },
           path: ['id']
         })

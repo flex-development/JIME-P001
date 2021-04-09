@@ -51,25 +51,25 @@ describe('unit:models/CreateReviewDTO', () => {
         expect((await Subject.safeParseAsync(dto)).success).toBeTruthy()
       })
 
-      it('5000 characters', async () => {
+      it('500 characters', async () => {
         const dto: ICreateReviewDTO = {
           ...DTO,
-          body: faker.datatype.string(5000)
+          body: faker.datatype.string(500)
         }
 
         expect((await Subject.safeParseAsync(dto)).success).toBeTruthy()
       })
 
-      it('between 1 and 5000 characters', async () => {
+      it('between 1 and 500 characters', async () => {
         expect((await Subject.safeParseAsync(DTO)).success).toBeTruthy()
       })
     })
 
     describe('fail', () => {
-      it('greater than 5000 characters', async () => {
+      it('greater than 500 characters', async () => {
         const dto: ICreateReviewDTO = {
           ...DTO,
-          body: faker.datatype.string(5001)
+          body: faker.datatype.string(501)
         }
 
         const parsed = (await Subject.safeParseAsync(dto)) as ZodSafeParseError
@@ -80,7 +80,7 @@ describe('unit:models/CreateReviewDTO', () => {
 
         const issue = error.issues[0]
 
-        expect(issue.message).toMatch(new RegExp('5000 characters or fewer'))
+        expect(issue.message).toMatch(new RegExp('500 characters or fewer'))
         expect(issue.path[0]).toBe('body')
       })
 
@@ -126,7 +126,7 @@ describe('unit:models/CreateReviewDTO', () => {
       it('customer not found', async () => {
         const dto = { ...DTO, email: faker.internet.exampleEmail() }
 
-        const emessage = `Customer with email "${dto.email}" does not exist`
+        const emessage = `Customer with email "${dto.email}" not found`
         const eparams = { email: dto.email }
 
         const parsed = (await Subject.safeParseAsync(dto)) as ZodSafeParseError
@@ -161,7 +161,7 @@ describe('unit:models/CreateReviewDTO', () => {
       it('product not found', async () => {
         const dto = { ...DTO, id: faker.datatype.number(13) }
 
-        const emessage = `Product with id "${dto.id}" does not exist`
+        const emessage = `Product with id "${dto.id}" not found`
         const eparams = { id: dto.id }
 
         const parsed = (await Subject.safeParseAsync(dto)) as ZodSafeParseError

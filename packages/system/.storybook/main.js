@@ -108,8 +108,8 @@ module.exports = {
     return mergeWebpack(config, {
       resolve: {
         alias: {
-          '@flex-development/json': path.join(__dirname, ROOT_NM, JSON),
           '@core': path.join(__dirname, '../node_modules', CORE),
+          '@flex-development/json': path.join(__dirname, ROOT_NM, JSON),
           '@mdx-js/react': path.join(__dirname, ROOT_NM, MDX_JS_REACT),
           '@system/tests/fixtures': path.join(__dirname, TESTS, '__fixtures__'),
           '@system/tests': path.join(__dirname, TESTS),

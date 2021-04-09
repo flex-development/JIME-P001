@@ -6,8 +6,4 @@ import createError from '@flex-development/kustomzcore/utils/createError'
  * @see https://jestjs.io/docs/next/manual-mocks#mocking-node-modules
  */
 
-const mock = jest.fn(createError)
-
-jest.mock('@flex-development/kustomzcore/utils/createError', () => mock)
-
-export default mock
+export default jest.fn(createError)

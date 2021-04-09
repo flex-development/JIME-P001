@@ -1,4 +1,4 @@
-import type { IProductListingVariant } from '@kustomzcore/types'
+import type { IProductListingVariant } from '@core/types'
 import { getSizedImageUrl } from '@shopify/theme-images'
 import {
   IMAGE_PLACEHOLDER_URL,

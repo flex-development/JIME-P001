@@ -109,7 +109,7 @@ module.exports = {
       resolve: {
         alias: {
           '@flex-development/json': path.join(__dirname, ROOT_NM, JSON),
-          '@kustomzcore': path.join(__dirname, '../node_modules', CORE),
+          '@core': path.join(__dirname, '../node_modules', CORE),
           '@mdx-js/react': path.join(__dirname, ROOT_NM, MDX_JS_REACT),
           '@system/tests/fixtures': path.join(__dirname, TESTS, '__fixtures__'),
           '@system/tests': path.join(__dirname, TESTS),

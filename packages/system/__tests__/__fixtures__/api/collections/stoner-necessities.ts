@@ -1,4 +1,4 @@
-import type { APIPayload } from '@kustomzcore/types'
+import type { APIPayload } from '@core/types'
 import products from '../products'
 
 /**

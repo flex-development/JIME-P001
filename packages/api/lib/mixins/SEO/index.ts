@@ -12,6 +12,7 @@ import type {
 } from '@flex-development/kustomzcore'
 import ofa from '@flex-development/kustomzcore/utils/objectFromArray'
 import findIndex from 'lodash/findIndex'
+import isBoolean from 'lodash/isBoolean'
 import isEmpty from 'lodash/isEmpty'
 import join from 'lodash/join'
 import merge from 'lodash/merge'
@@ -33,15 +34,13 @@ import ShopifyAPI from '../ShopifyAPI'
 class SEO {
   /**
    * @property {object} DEFAULT_IMAGE_PROPS - Default SEO image properties
-   * @property {number} DEFAULT_IMAGE_PROPS.height - Image height
-   * @property {string} DEFAULT_IMAGE_PROPS.src - Image URL
-   * @property {number} DEFAULT_IMAGE_PROPS.width - Image width
    */
-  static DEFAULT_IMAGE_PROPS = {
-    height: 1920,
-    src: `${API_URL}assets/images/morena`,
-    width: 1920
-  }
+  static DEFAULT_IMAGE_PROPS = merge(ShopifyAPI.PLACEHOLDER_IMAGE, {
+    alt: "Morena's Kustomz avatar",
+    created_at: '',
+    src: `${API_URL}assets/morena`,
+    updated_at: ''
+  })
 
   /**
    * Returns an object with SEO data for a collection listing resource.
@@ -245,35 +244,34 @@ class SEO {
 
       // Get active product variant
       const variant = variants[active < 0 ? 0 : active]
-      const { available: va, image_id } = variant
+      const { available: vavailable, image_id } = variant
 
       // Get SEO title (parent product title and product variant title)
-      const title_wv = `${title} - ${variant.title}`
+      const titlevw = `${title} - ${variant.title}`
 
       // Get product variant image
-      let vimg = images.find(({ id }) => id === image_id)
+      const img = ShopifyAPI.getProductImage(image_id, images, { alt: titlevw })
 
-      if (!vimg) {
-        const img = { ...SEO.DEFAULT_IMAGE_PROPS, alt: title_wv }
-        vimg = img as IProductImage
-      }
+      // Update image alt text
+      if (img.src.includes('placeholder')) img.alt = `${img.alt} (Placeholder)`
 
       // Update SEO data
       seo = merge(seo, {
         og: {
-          image: vimg?.src,
-          'image:alt': vimg.alt || title_wv,
-          'image:height': vimg.height,
-          'image:secure_url': vimg.src,
-          'image:width': vimg.width,
+          image: img.src,
+          'image:alt': img.alt,
+          'image:height': img.height,
+          'image:secure_url': img.src,
+          'image:width': img.width,
           'product:price:amount': variant.price
         },
-        'product:availability': typeof va === 'boolean' ? `${va}` : null,
-        title: !isEmpty(sku) ? title_wv : title,
-        twitter: { image: vimg.src }
+        'product:availability': isBoolean(vavailable) ? `${vavailable}` : null,
+        title: !isEmpty(sku) ? titlevw : title,
+        twitter: { image: img.src }
       })
     } else {
-      const image = images[0] || SEO.DEFAULT_IMAGE_PROPS
+      const alt = `${title} (Placeholder)`
+      const image = images[0] || ShopifyAPI.getProductImage(-1, images, { alt })
 
       seo = merge(seo, {
         og: {
@@ -283,9 +281,8 @@ class SEO {
           'image:secure_url': image.src,
           'image:width': image.width
         },
-        'product:availability':
-          typeof available === 'boolean' ? `${available}` : null,
-        title: title,
+        'product:availability': isBoolean(available) ? `${available}` : null,
+        title,
         twitter: { image: image.src }
       })
     }

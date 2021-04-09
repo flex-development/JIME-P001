@@ -36,7 +36,7 @@ export default class PolicyService extends SearchIndexService<TObject> {
    * Returns an array of Shopify policy objects to populate the search index.
    *
    * @async
-   * @return {Promise<TObject[]>} Promise containing initial index objects
+   * @return {Promise<TObject[]>} Promise containing index objects
    */
   static async getObjects(): OrNever<Promise<TObject[]>> {
     return await ShopifyAPI.policies()

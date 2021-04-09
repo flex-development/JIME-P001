@@ -1,5 +1,5 @@
+import { EMPTY_SPACE as ES } from '@core/config/constants'
 import type { AnyObject } from '@flex-development/json/utils/types'
-import { EMPTY_SPACE as ES } from '@kustomzcore/config/constants'
 import { useUtilityClasses } from '@system/hooks/useUtilityClasses'
 import type { JSXIEPropsOr } from '@system/types'
 import classnames from 'classnames'

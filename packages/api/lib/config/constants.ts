@@ -17,6 +17,11 @@ export const PAGINATION_PARAMS: PaginationParameter[] = [
   'offset'
 ]
 
+/**
+ * Object mapping search index names to settings.
+ *
+ * - https://www.algolia.com/doc/api-reference/settings-api-parameters/
+ */
 export const SEARCH_INDEX_SETTINGS: Record<
   SearchIndexName,
   SearchIndexSettings & { name: SearchIndexName }
@@ -63,5 +68,19 @@ export const SEARCH_INDEX_SETTINGS: Record<
       'filterOnly(title)'
     ],
     name: 'products'
+  },
+  reviews: {
+    attributesForFaceting: [
+      'filterOnly(curated)',
+      'filterOnly(featured)',
+      'filterOnly(hidden)',
+      'filterOnly(id)',
+      'filterOnly(ip_address)',
+      'filterOnly(product_external_id)',
+      'filterOnly(reviewer.email)',
+      'filterOnly(reviewer.id)',
+      'filterOnly(source)'
+    ],
+    name: 'reviews'
   }
 }

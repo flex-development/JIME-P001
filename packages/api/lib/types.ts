@@ -2,6 +2,7 @@ import type { ApiError as AlgoliaError } from '@algolia/transporter'
 import type { AnyObject, ANYTHING } from '@flex-development/json'
 import type {
   APIQuery,
+  APIRequestBody,
   ErrorJSON,
   OrNever,
   OrPromise
@@ -17,7 +18,7 @@ import type { Logger } from 'pino'
 /**
  * Shape of API error objects (with or without formatting).
  */
-export type APIError = Error | AlgoliaError | ErrorJSON
+export type APIError = AlgoliaError | ErrorJSON | Error
 
 /**
  * Shape of the API `req` object.
@@ -105,6 +106,23 @@ export namespace ProductReq {
 }
 
 /**
+ * Shape of requests handled by the `Review` service.
+ */
+export namespace ReviewReq {
+  export interface Create extends APIRequest {
+    body: APIRequestBody.Review.POST
+  }
+
+  export interface Find extends APIRequest {
+    query: APIQuery.Review.Find
+  }
+
+  export interface Get extends APIRequest {
+    query: APIQuery.Review.Get
+  }
+}
+
+/**
  * Search index names.
  */
 export type SearchIndexName =
@@ -113,6 +131,7 @@ export type SearchIndexName =
   | 'pages'
   | 'policies'
   | 'products'
+  | 'reviews'
 
 /**
  * Search index object that can have additional properties appended to it after

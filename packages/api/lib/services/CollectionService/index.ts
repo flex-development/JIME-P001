@@ -42,7 +42,7 @@ export default class CollectionService extends SearchIndexService<TObject> {
    * populate the search index.
    *
    * @async
-   * @return {Promise<TObject[]>} Promise containing initial index objects
+   * @return {Promise<TObject[]>} Promise containing index objects
    * @throws {ErrorJSON}
    */
   static async getObjects(): OrNever<Promise<TObject[]>> {
@@ -89,7 +89,7 @@ export default class CollectionService extends SearchIndexService<TObject> {
   }
 
   /**
-   * Converts a `Collections` service query object into an Algolia search
+   * Converts a `Collection` service query object into an Algolia search
    * options object.
    *
    * @see https://www.algolia.com/doc/api-reference/api-parameters/filters/

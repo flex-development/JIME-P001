@@ -48,14 +48,18 @@ module.exports = {
     commit => commit.startsWith('wip:'),
 
     /**
-     * Ignores commit messages that include "GET /" after the type and/or scope.
+     * Ignores commit messages that start with the phrase "GET /" or "POST /"
+     * after the type and/or scope.
      *
      * Used when testing endpoints from the `api` package.
      *
      * @param {string} commit - The commit message
      * @return {boolean} True if message begins with 'wip:'
      */
-    commit => commit.split(': ')[1].startsWith('GET /')
+    commit => {
+      const start = commit.split(': ')[1]
+      return start.startsWith('GET /') || start.startsWith('POST /')
+    }
   ],
 
   /**

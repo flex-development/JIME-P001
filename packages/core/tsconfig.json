@@ -5,5 +5,11 @@
   },
   "exclude": ["node_modules"],
   "extends": "../../tsconfig.json",
-  "include": ["__mocks__", "__tests__", "src", "jest.config.ts"]
+  "include": [
+    "../../typings",
+    "__mocks__",
+    "__tests__",
+    "src",
+    "jest.config.ts"
+  ]
 }

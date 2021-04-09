@@ -5,7 +5,11 @@ import type {
   PlaylistAttributes as AppleMusicPlaylistAttributes,
   SongAttributes
 } from './apple-music'
-import type { JudgeMeReview, JudgeMeReviewCreateParams } from './reviews'
+import type {
+  JudgeMeReview,
+  JudgeMeReviewCreateDataDTO,
+  JudgeMeReviewer
+} from './reviews'
 import type {
   ICollectionListing,
   IMenu,
@@ -15,7 +19,7 @@ import type {
   IPolicy,
   IProductListing,
   IProductListingVariant
-} from './shopify'
+} from './shopify-rest-admin-api'
 import type { SEOData } from './storefront'
 import type { NumberString } from './utils'
 
@@ -76,6 +80,11 @@ export namespace APIPayload {
     product_id: IProductListing['product_id']
     seo?: SEOData
   }
+
+  export interface Review extends Partial<TObject.Review> {
+    id: JudgeMeReview['id']
+    objectID: JudgeMeReview['id']
+  }
 }
 
 /**
@@ -134,18 +143,19 @@ export namespace APIQuery {
 
   export namespace Review {
     export interface Find extends SearchIndex {
-      created_at?: JudgeMeReview['created_at']
       curated?: JudgeMeReview['curated']
       featured?: JudgeMeReview['featured']
       hidden?: JudgeMeReview['hidden']
       id?: JudgeMeReview['id']
       ip_address?: JudgeMeReview['ip_address']
-      product_id?: JudgeMeReview['product_id']
-      reviewer_id?: JudgeMeReview['reviewer_id']
+      product_id?: JudgeMeReview['product_external_id']
+      rating?: JudgeMeReview['rating']
+      reviewer_email?: JudgeMeReviewer['email']
+      reviewer_id?: JudgeMeReviewer['id']
       source?: JudgeMeReview['source']
-      updated_at?: JudgeMeReview['updated_at']
-      verified?: JudgeMeReview['verified']
     }
+
+    export type Get = SearchIndexObject
   }
 
   export interface SearchIndex extends PaginationSearchOptions {
@@ -180,18 +190,8 @@ export namespace APIQuery {
  * Shape of API request bodies.
  */
 export namespace APIRequestBody {
-  export namespace Reviews {
-    export type POST = Pick<
-      JudgeMeReviewCreateParams,
-      | 'body'
-      | 'email'
-      | 'id'
-      | 'ip_addr'
-      | 'picture_keys'
-      | 'picture_urls'
-      | 'rating'
-      | 'title'
-    >
+  export namespace Review {
+    export type POST = JudgeMeReviewCreateDataDTO
   }
 }
 

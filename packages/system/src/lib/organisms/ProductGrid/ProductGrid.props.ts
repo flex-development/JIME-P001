@@ -1,4 +1,4 @@
-import type { ProductListingData } from '@kustomzcore/types'
+import type { ProductListingData } from '@core/types'
 import type { SectionProps } from '@system/lib/atoms/Section'
 import type { ProductCardProps } from '@system/lib/molecules/ProductCard'
 

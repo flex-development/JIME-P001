@@ -20,6 +20,8 @@
     "noUnusedParameters": false,
     "paths": {
       "@app/*": ["packages/app/src/*"],
+      "@core/*": ["packages/app/node_modules/@flex-development/kustomzcore/*"],
+      "@design/*": ["node_modules/@flex-development/kustomzdesign/dist/*"],
       "@flex-development/json/*": [
         "node_modules/@flex-development/json/dist/*"
       ],
@@ -27,17 +29,14 @@
       "@kapi/tests/fixtures/*": ["packages/api/__tests__/__fixtures__/*"],
       "@kapi/tests/*": ["packages/api/__tests__/*"],
       "@kapi/*": ["packages/api/lib/*"],
-      "@kustomzcore/*": [
-        "packages/app/node_modules/@flex-development/kustomzcore/*"
-      ],
-      "@kustomzdesign/*": [
-        "node_modules/@flex-development/kustomzdesign/dist/*"
-      ],
+      "@kustomzcore/tests/*": ["packages/core/__tests__/*"],
+      "@kustomzcore/*": ["packages/core/src/*"],
       "@mdx-js/react": ["node_modules/@mdx-js/react/dist/esm"],
       "@system": ["packages/system/src/index.ts"],
       "@system/tests/fixtures/*": ["packages/system/__tests__/__fixtures__/*"],
       "@system/tests/*": ["packages/system/__tests__/*"],
       "@system/*": ["packages/system/src/*"],
+      "@tests/*": ["__tests__/*"],
       "react-hanger/*": ["node_modules/react-hanger/esm/*"],
       "react-use/*": ["node_modules/react-use/esm/*"]
     },

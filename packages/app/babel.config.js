@@ -16,8 +16,8 @@ module.exports = api => ({
         alias: {
           '@app': './src',
           '@flex-development/json': '@flex-development/json/dist',
-          '@kustomzcore': '@flex-development/kustomzcore',
-          '@kustomzdesign': '@flex-development/kustomzdesign/dist',
+          '@core': '@flex-development/kustomzcore',
+          '@design': '@flex-development/kustomzdesign/dist',
           '@mdx-js/react': '@mdx-js/react/dist/esm',
           'react-hanger': 'react-hanger/esm',
           'react-use': 'react-use/esm'

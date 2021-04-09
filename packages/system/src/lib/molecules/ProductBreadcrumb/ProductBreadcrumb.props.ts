@@ -1,7 +1,4 @@
-import type {
-  IProductListing,
-  IProductListingVariant
-} from '@kustomzcore/types'
+import type { IProductListing, IProductListingVariant } from '@core/types'
 import type { BoxProps } from '@system/lib/atoms/Box'
 import type { LinkProps } from '@system/lib/atoms/Link'
 

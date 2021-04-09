@@ -222,7 +222,7 @@ class SearchIndexService<TObject extends AnyObject = AnyObject> {
       return (await this.index.search<TObject>(query || '', options)).hits
     } catch (err) {
       const data = { index_name: this.index_name, options, query }
-      const error = ErrorHandling.formatError(err, data)
+      const error = ErrorHandling.formatAPIError(err, data)
 
       const { search_index_404 } = error.data
 

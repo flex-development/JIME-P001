@@ -1,7 +1,4 @@
-import type {
-  CheckoutLineItemInput,
-  IProductListingVariant
-} from '@kustomzcore/types'
+import type { CheckoutLineItemInput, IProductListingVariant } from '@core/types'
 import { useCartContext } from '@system/hooks/useCartContext'
 import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
 import { Box } from '@system/lib/atoms/Box'

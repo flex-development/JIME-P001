@@ -3,11 +3,11 @@ import type {
   NullishString,
   PartialOr
 } from '@flex-development/json'
-import { NumberString } from '../utils'
+import { NumberString } from './utils'
 
 /**
  * @file Type Definitions - Shopify REST Admin API (v2021-01)
- * @module types/shopify/rest-admin-api
+ * @module types/shopify-rest-admin-api
  * @see https://shopify.dev/docs/admin-api/rest/reference
  */
 
@@ -148,6 +148,12 @@ export interface ICustomer {
   accepts_marketing: boolean
 
   /**
+   * The date and time (ISO 8601 format) the customer's marketing material
+   * settings were modified.
+   */
+  accepts_marketing_updated_at: string
+
+  /**
    * Shopify Admin GraphQL id for the customer.
    */
   admin_graphql_api_id: string
@@ -248,7 +254,7 @@ export interface ICustomer {
    *
    * A customer can have up to 250 tags. Each tag can have up to 255 characters.
    */
-  tags: string
+  tags: NullishString
 
   /**
    * Whether the customer is exempt from paying taxes on their order.
@@ -257,6 +263,12 @@ export interface ICustomer {
    * If `false`, then taxes will be applied at checkout.
    */
   tax_exempt: boolean
+
+  /**
+   * Whether the customer is exempt from paying specific taxes on their order.
+   * Canadian taxes only.
+   */
+  tax_exemptions: string[]
 
   /**
    * The total amount of money that the customer has spent across their order
@@ -350,7 +362,7 @@ export interface ICustomerAddress {
   /**
    * An additional field for the customer's mailing address.
    */
-  address2?: string
+  address2?: NullishString
 
   /**
    * The customer's city, town, or village.
@@ -1206,13 +1218,17 @@ export type ProductVariantInventoryPolicy = 'deny' | 'continue'
 export type ProductVariantWeightUnit = 'g' | 'kg' | 'lb' | 'oz'
 
 /**
- * Shopify API responses.
+ * Shopify image sizes mapped to dimensions.
  */
-export namespace ShopifyAPIResponses {
-  export type CollectionListing = { collection_listings: ICollectionListing[] }
-  export type Menus = { menus: IMenu[] }
-  export type Metafields = { metafields: IMetafield[] }
-  export type Pages = { pages: IPage[] }
-  export type Policies = { policies: IPolicy[] }
-  export type ProductListing = { product_listings: IProductListing[] }
+export enum ShopifyImageSize {
+  BIG = '1024x1024',
+  COMPACT = '160x160',
+  HUGE = '2048x2048',
+  GRANDE = '600x600',
+  ICON = '32x32',
+  LARGE = '480x480',
+  MEDIUM = '240x240',
+  ORIGINAL = 'master',
+  PICO = '16x16',
+  THUMB = '50x50'
 }

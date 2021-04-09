@@ -1,4 +1,4 @@
-import type { IProductImage } from '@kustomzcore/types'
+import type { IProductImage } from '@core/types'
 import type { Color, GridBreakpointKey } from '@system/types'
 
 /**
@@ -61,13 +61,13 @@ export const IMAGE_PLACEHOLDER_URL = `${API_URL}/assets/placeholder`
 
 export const PRODUCT_IMAGE_DEFAULT: IProductImage = {
   alt: '',
-  created_at: new Date().toUTCString(),
+  created_at: new Date().toISOString(),
   height: 2048,
   id: -1,
   position: -1,
   product_id: -1,
   src: IMAGE_PLACEHOLDER_URL,
-  updated_at: new Date().toUTCString(),
+  updated_at: new Date().toISOString(),
   variant_ids: [],
   width: 2048
 }

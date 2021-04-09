@@ -1,4 +1,4 @@
-import type { ProductListingData } from '@kustomzcore/types'
+import type { ProductListingData } from '@core/types'
 import ASH_TRAY from './ash-tray'
 import KUSTOMZ from './kustomz'
 import ROLLING_TRAY from './rolling-tray'

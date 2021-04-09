@@ -1,4 +1,4 @@
-import type { ProductListingData } from '@kustomzcore/types'
+import type { ProductListingData } from '@core/types'
 
 /**
  * @file Global Test Fixture - KAPI - /products/rolling-tray

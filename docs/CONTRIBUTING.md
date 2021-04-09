@@ -165,7 +165,8 @@ This project uses [Jest][11] as its test runner. To run the tests in this
 project, run `yarn test` from the project root.
 
 Husky is configured to run tests before every push. If a bug report concerning a
-failed test is needed, you'll be able to push your code even if a test fails.
+failed test is needed, use the command `git pnv` to push your code without
+running the Husky `pre-push` hook.
 
 ## Getting Help
 

@@ -1,10 +1,10 @@
 import type { IPagePropsIndex as PageProps, PageComponent } from '@app/types'
-import kapi from '@kustomzcore/config/axios-kapi'
-import type { APIPayload } from '@kustomzcore/types'
+import kapi from '@core/config/axios-kapi'
+import type { APIPayload } from '@core/types'
 import {
   IndexTemplate,
   IndexTemplateProps as TemplateProps
-} from '@kustomzdesign/lib/templates/IndexTemplate'
+} from '@design/lib/templates/IndexTemplate'
 import type { GetServerSideProps, GetServerSidePropsResult } from 'next'
 import type { ReactElement } from 'react'
 

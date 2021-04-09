@@ -1,4 +1,4 @@
-import type { IProductListingVariant } from '@kustomzcore/types'
+import type { IProductListingVariant } from '@core/types'
 import { fireEvent, render, screen } from '@testing-library/react'
 import User from '@testing-library/user-event'
 import { stripHtml } from 'string-strip-html'

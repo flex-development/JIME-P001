@@ -1,4 +1,4 @@
-import type { ProductListingData } from '@kustomzcore/types'
+import type { ProductListingData } from '@core/types'
 import { render, screen } from '@testing-library/react'
 import { Default } from '../ProductGrid.stories'
 

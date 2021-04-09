@@ -46,7 +46,8 @@
     "nanoid": "latest",
     "pino": "latest",
     "pino-pretty": "latest",
-    "tslib": "latest"
+    "tslib": "latest",
+    "zod": "3.0.0-alpha.33"
   },
   "devDependencies": {
     "@algolia/client-search": "latest"

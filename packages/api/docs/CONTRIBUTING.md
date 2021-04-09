@@ -58,15 +58,24 @@ requests, success responses, and errors.
 - `VERCEL_GIT_COMMIT_REF`
 - `VERCEL_GIT_COMMIT_SHA`
 
+## Judge.me Product Reviews
+
+[Judge.me Product Reviews][6] is a web app that helps e-commerce stores collect
+and display product and store reviews and other user-generated content.
+
+**Environment Variables**
+
+- `JUDGEME_API_TOKEN`
+
 ### Opsgenie
 
-[Opsgenie][6] is an on-call and alert management service for software projects.
+[Opsgenie][7] is an on-call and alert management service for software projects.
 
-Its primary use is to [dispatch alerts from GitHub][7].
+Its primary use is to [dispatch alerts from GitHub][8].
 
 ### Shopify
 
-[Shopify][8] is an eCommerce platform. Aside from functioning as our commerce
+[Shopify][9] is an e-commerce platform. Aside from functioning as our commerce
 backend, it is also our content management system.
 
 **Environment Variables**
@@ -82,7 +91,7 @@ backend, it is also our content management system.
 
 Directory: `api`
 
-For more information, see the [Vercel Serverless Functions][9] documentation.
+For more information, see the [Vercel Serverless Functions][10] documentation.
 
 ### Config
 
@@ -109,15 +118,16 @@ Directory: `lib/utils`
 Directory: `__tests__`  
 Command: `yarn test`
 
-For more information, see the [root package Contributing Guide][10].
+For more information, see the [root package Contributing Guide][11].
 
 [1]: https://github.com/vercel/vercel/discussions/5294#discussioncomment-269338
 [2]: https://www.algolia.com/
 [3]: https://developer.apple.com/documentation/applemusicapi/
 [4]: https://analytics.google.com/analytics/web/
 [5]: https://developers.google.com/analytics/devguides/collection/protocol/v1
-[6]: https://www.atlassian.com/software/opsgenie
-[7]: https://docs.opsgenie.com/docs/github-integration
-[8]: https://www.shopify.com/
-[9]: https://vercel.com/docs/serverless-functions/introduction
-[10]: ../../../docs/CONTRIBUTING.md#testing
+[6]: https://judge.me/
+[7]: https://www.atlassian.com/software/opsgenie
+[8]: https://docs.opsgenie.com/docs/github-integration
+[9]: https://www.shopify.com/
+[10]: https://vercel.com/docs/serverless-functions/introduction
+[11]: ../../../docs/CONTRIBUTING.md#testing

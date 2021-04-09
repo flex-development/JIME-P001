@@ -1,5 +1,5 @@
-import type { IMetafield } from '@kustomzcore/types'
-import objectFromArray from '@kustomzcore/utils/objectFromArray'
+import type { IMetafield } from '@core/types'
+import objectFromArray from '@core/utils/objectFromArray'
 import PAGE from '@system/tests/fixtures/api/pages'
 
 /**

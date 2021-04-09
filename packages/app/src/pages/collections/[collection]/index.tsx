@@ -5,14 +5,14 @@ import type {
   NotFound,
   PageComponent
 } from '@app/types'
-import { serialize } from '@flex-development/json/utils/serialize'
-import kapi from '@kustomzcore/config/axios-kapi'
-import type { APIPayload, ProductListingData } from '@kustomzcore/types'
-import type { LinkProps } from '@kustomzdesign/lib/atoms/Link'
+import kapi from '@core/config/axios-kapi'
+import type { APIPayload, ProductListingData } from '@core/types'
+import type { LinkProps } from '@design/lib/atoms/Link'
 import {
   CollectionTemplate,
   CollectionTemplateProps as TemplateProps
-} from '@kustomzdesign/lib/templates/CollectionTemplate'
+} from '@design/lib/templates/CollectionTemplate'
+import { serialize } from '@flex-development/json/utils/serialize'
 import merge from 'lodash/merge'
 import type {
   GetServerSideProps,

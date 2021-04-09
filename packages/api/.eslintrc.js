@@ -9,7 +9,7 @@ module.exports = {
   ...rootConfig,
   parserOptions: {
     ...rootConfig.parserOptions,
-    project: ['./tsconfig.json', './tsconfig.prod.json']
+    project: ['./tsconfig.json', './tsconfig.test.json']
   },
   overrides: rootConfig.overrides.concat([
     {

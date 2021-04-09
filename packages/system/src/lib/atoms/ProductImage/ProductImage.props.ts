@@ -1,8 +1,5 @@
+import type { IProductListingVariant, ProductListingData } from '@core/types'
 import type { AnyObject } from '@flex-development/json/utils/types'
-import type {
-  IProductListingVariant,
-  ProductListingData
-} from '@kustomzcore/types'
 import type { GlobalAttributes, Merge, TransientProps } from '@system/types'
 import type { ImageProps as NextImageProps } from 'next/image'
 

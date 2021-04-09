@@ -1,10 +1,10 @@
-import type { NumberString } from '@flex-development/kustomzcore'
-import { CHECKOUT_BASE_URL } from '@kustomzcore/config/constants'
+import { CHECKOUT_BASE_URL } from '@core/config/constants'
 import type {
   CheckoutLineItemInput,
   CheckoutPermalinkInput,
   CheckoutPermalinkQuery
-} from '@kustomzcore/types'
+} from '@core/types'
+import type { NumberString } from '@flex-development/kustomzcore'
 import { useMemoCompare } from '@system/hooks/useMemoCompare'
 import omit from 'lodash/omit'
 import qs from 'querystring'

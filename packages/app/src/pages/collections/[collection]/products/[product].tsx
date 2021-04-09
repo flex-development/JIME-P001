@@ -6,13 +6,13 @@ import type {
   ProductPageParams as Params,
   ProductPageUrlQuery as Query
 } from '@app/types'
-import { serialize } from '@flex-development/json/utils/serialize'
-import kapi from '@kustomzcore/config/axios-kapi'
-import type { APIPayload, ProductListingData } from '@kustomzcore/types'
+import kapi from '@core/config/axios-kapi'
+import type { APIPayload, ProductListingData } from '@core/types'
 import {
   ProductTemplate,
   ProductTemplateProps as TemplateProps
-} from '@kustomzdesign/lib/templates/ProductTemplate'
+} from '@design/lib/templates/ProductTemplate'
+import { serialize } from '@flex-development/json/utils/serialize'
 import { pick } from 'lodash'
 import findIndex from 'lodash/findIndex'
 import type {

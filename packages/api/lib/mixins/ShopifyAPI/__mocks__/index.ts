@@ -1,4 +1,5 @@
 import type { IProductListingQuery } from '@flex-development/kustomzcore/types'
+import CUSTOMERS from '@kapi/tests/fixtures/shopify/customers'
 import PAGES from '@kapi/tests/fixtures/shopify/pages'
 import POLICIES from '@kapi/tests/fixtures/shopify/policies'
 import PRODUCTS from '@kapi/tests/fixtures/shopify/products'
@@ -17,8 +18,11 @@ const COLLECTION_PRODUCTS = {
   [`${COLLECTIONS[1].collection_id}`]: []
 }
 
-export default class MockShopifyAPI {
+const Actual = jest.requireActual('..').default
+export default class MockShopifyAPI extends Actual {
   static collectionListings = jest.fn(async () => COLLECTIONS)
+  static customers = jest.fn(async () => CUSTOMERS)
+  static getProductImage = jest.fn(Actual.getProductImage)
   static menus = jest.fn(async () => MENUS.menus)
   static metafield = jest.fn(async () => [])
   static metafieldGlobals = jest.fn(async () => MG_OBJ)

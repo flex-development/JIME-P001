@@ -1,4 +1,4 @@
-import type { CheckoutLineItemInput } from '@kustomzcore/types'
+import type { CheckoutLineItemInput } from '@core/types'
 import omit from 'lodash/omit'
 import PRODUCT_LISTING_DATA_ASH_TRAY from './api/products/ash-tray'
 import PRODUCT_LISTING_DATA_KUSTOMZ from './api/products/kustomz'

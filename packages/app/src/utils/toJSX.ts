@@ -1,4 +1,4 @@
-import { request } from '@kustomzcore/config/axios'
+import { request } from '@core/config/axios'
 import TurndownService from 'turndown'
 
 /**

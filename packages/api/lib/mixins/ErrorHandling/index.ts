@@ -2,11 +2,13 @@ import type { AnyObject } from '@flex-development/json'
 import type { ErrorJSON } from '@flex-development/kustomzcore'
 import ga from '@flex-development/kustomzcore/config/google-analytics'
 import vercel from '@flex-development/kustomzcore/config/vercel-env'
+import { ErrorStatusCode } from '@flex-development/kustomzcore/types/errors'
 import createError from '@flex-development/kustomzcore/utils/createError'
 import type { VercelResponse } from '@vercel/node'
 import type { EventParam } from 'ga-measurement-protocol'
 import merge from 'lodash/merge'
 import pick from 'lodash/pick'
+import { ZodError } from 'zod'
 import type { AlgoliaError, APIError, APIRequest } from '../../types'
 
 /**
@@ -24,31 +26,70 @@ import type { AlgoliaError, APIError, APIRequest } from '../../types'
  */
 class ErrorHandling {
   /**
-   * Converts {@param error} into a `ErrorJSON` object.
+   * Converts {@param error} into an `ErrorJSON` object.
    *
    * @param {APIError} error - Error object
    * @param {AnyObject} [data] - Additional error data
    * @return {ErrorJSON} Error object
    */
-  static formatError(error: APIError, data: AnyObject = {}): ErrorJSON {
+  static formatAPIError(error: APIError, data: AnyObject = {}): ErrorJSON {
     const { env } = vercel
-
-    // Cast error
-    const $error: AlgoliaError = error as AlgoliaError
-
-    // Get error details
-    const { status, transporterStackTrace } = error as AlgoliaError
 
     // Get error data
     const $data: AnyObject = merge((error as ErrorJSON)?.data ?? {}, {
       ...data,
       created_at: env !== 'development' ? new Date().valueOf() : undefined,
       search_index_404: ErrorHandling.searchIndex404(error) || undefined,
-      transporterStackTrace,
+      transporterStackTrace: (error as AlgoliaError).transporterStackTrace,
       vercel: env !== 'development' ? vercel : undefined
     })
 
-    return createError($error, $data, status)
+    return createError(error, $data, (error as AlgoliaError).status)
+  }
+
+  /**
+   * Converts {@param zerror} into an `ErrorJSON` object.
+   *
+   * @see https://github.com/colinhacks/zod/blob/alpha/ERROR_HANDLING.md
+   *
+   * @param {ZodError} [zerror] - Zod validation error
+   * @param {AnyObject} [data] - Additional error data
+   * @param {boolean} [group] - Group validation errors. Defaults to `true`
+   * @return {ErrorJSON} Error object
+   */
+  static formatValidationError(
+    zerror: ZodError = new ZodError([]),
+    data: AnyObject = {},
+    group: boolean = true
+  ): ErrorJSON {
+    const status = ErrorStatusCode.BadRequest
+
+    if (!zerror.issues.length) {
+      const message = `Unknown validation error${group ? 's' : ''}.`
+      return createError(message, data, status)
+    }
+
+    let $data: AnyObject = {}
+    let message = ''
+
+    if (group) {
+      const fields = Object.keys(zerror.flatten().fieldErrors).sort()
+
+      message = `Validation errors: [${fields}]`
+      $data = { ...data, errors: zerror.issues }
+    } else {
+      const issue = zerror.issues[0]
+
+      message = issue.message
+      $data = { ...data, errors: issue }
+    }
+
+    const error = createError(message, $data, status)
+
+    delete error.data.name
+    delete error.data.stack
+
+    return error
   }
 
   /**
@@ -71,7 +112,7 @@ class ErrorHandling {
     Res extends VercelResponse = VercelResponse
   >(req: Req, res: Res, err: APIError, data: AnyObject = {}): Promise<void> {
     // Convert into `ErrorJSON` object
-    const error = ErrorHandling.formatError(err, {
+    const error = ErrorHandling.formatAPIError(err, {
       ...data,
       req: pick(req, ['headers', 'query', 'url'])
     })

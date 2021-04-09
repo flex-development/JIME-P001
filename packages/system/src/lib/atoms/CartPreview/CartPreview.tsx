@@ -1,4 +1,4 @@
-import { EMPTY_SPACE } from '@kustomzcore/config/constants'
+import { EMPTY_SPACE } from '@core/config/constants'
 import { useSpring } from '@react-spring/web'
 import { useCartContext, useSanitizedProps } from '@system/hooks'
 import type { LinkProps } from '@system/lib/atoms/Link'

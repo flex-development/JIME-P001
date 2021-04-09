@@ -197,11 +197,11 @@ const config = {
       '@babel': '@babel',
       '@commitlint': false,
       '@flex-development/json': '@flex-development/json/dist',
-      '@kustomzcore': path.join(
+      '@core': path.join(
         __dirname,
         'node_modules/@flex-development/kustomzcore'
       ),
-      '@kustomzdesign': '@flex-development/kustomzdesign/dist',
+      '@design': '@flex-development/kustomzdesign/dist',
       '@mdx-js/react': '@mdx-js/react/dist/esm',
       '@sentry/browser': '@sentry/browser/esm',
       '@sentry/node': '@sentry/node/esm',

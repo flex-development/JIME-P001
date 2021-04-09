@@ -5,6 +5,13 @@
   },
   "exclude": ["node_modules"],
   "extends": "../../tsconfig.json",
-  "files": ["jest.d.ts"],
-  "include": ["__mocks__", "__tests__", "api", "lib", "jest.config.ts"]
+  "include": [
+    "../../typings",
+    "__mocks__",
+    "__tests__",
+    "api",
+    "lib",
+    "typings",
+    "jest.config.ts"
+  ]
 }

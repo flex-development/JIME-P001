@@ -8,7 +8,7 @@ export * from './api'
 export * from './apple-music'
 export * from './errors'
 export * from './reviews'
-export * from './shopify'
+export * from './shopify-rest-admin-api'
 export * from './storefront'
 export * from './utils'
 

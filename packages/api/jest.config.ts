@@ -15,7 +15,6 @@ const config: Config.InitialOptions = {
   displayName: pkg.name.split('@flex-development/')[1],
   globals: {
     'ts-jest': {
-      babelConfig: '<rootDir>/babel.config.json',
       tsconfig: `${ROOT}/tsconfig.test.json`
     }
   },

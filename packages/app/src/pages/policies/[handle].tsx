@@ -6,12 +6,12 @@ import type {
   PageComponent
 } from '@app/types'
 import toJSX from '@app/utils/toJSX'
-import kapi from '@kustomzcore/config/axios-kapi'
-import type { APIPayload } from '@kustomzcore/types'
+import kapi from '@core/config/axios-kapi'
+import type { APIPayload } from '@core/types'
 import {
   PageTemplate,
   PageTemplateProps as TemplateProps
-} from '@kustomzdesign/lib/templates/PageTemplate'
+} from '@design/lib/templates/PageTemplate'
 import type {
   GetServerSideProps,
   GetServerSidePropsContext as Context,

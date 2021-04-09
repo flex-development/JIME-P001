@@ -1,6 +1,7 @@
 import { request } from '@flex-development/kustomzcore/config/axios'
 import type { ErrorJSON } from '@flex-development/kustomzcore/types'
 import ofa from '@flex-development/kustomzcore/utils/objectFromArray'
+import PRODUCT from '@kapi/tests/fixtures/shopify/products/ash-tray'
 import { ShopifyResourceWithMetafield } from '@kapi/types'
 import Subject from '..'
 import AXIOS_ERROR from './__fixtures__/axios-error'
@@ -19,6 +20,10 @@ const spyRequest = jest.spyOn(Subject, 'request')
 
 describe('unit:lib/mixins/ShopifyAPI', () => {
   describe('.collectionListings', () => {
+    beforeAll(() => {
+      spyRequest.mockReturnValue(Promise.resolve({}))
+    })
+
     it('calls .request with correct url and default params.limit', async () => {
       await Subject.collectionListings()
 
@@ -30,7 +35,46 @@ describe('unit:lib/mixins/ShopifyAPI', () => {
     })
   })
 
+  describe('.customers', () => {
+    beforeAll(() => {
+      spyRequest.mockReturnValue(Promise.resolve({}))
+    })
+
+    it('calls .request with correct url and default params.limit', async () => {
+      await Subject.customers()
+
+      expect(spyRequest).toBeCalledTimes(1)
+      expect(spyRequest).toBeCalledWith({
+        params: { limit: 250 },
+        url: 'customers'
+      })
+    })
+  })
+
+  describe('.getProductImage', () => {
+    it('returns placeholder image', () => {
+      const image = Subject.getProductImage(null, [])
+
+      expect(image.alt).toBe('Placeholder image')
+      expect(image.src).toMatch(/placeholder/)
+    })
+
+    it('returns product image', () => {
+      const { images, variants } = PRODUCT
+      const { image_id } = variants[1]
+
+      const image = Subject.getProductImage(image_id, images)
+      const expected = images.find(image => image.id === image_id)
+
+      expect(image).toMatchObject(expected || {})
+    })
+  })
+
   describe('.menus', () => {
+    beforeAll(() => {
+      spyRequest.mockReturnValue(Promise.resolve({}))
+    })
+
     it('calls .request with empty config', async () => {
       await Subject.menus()
 
@@ -40,6 +84,10 @@ describe('unit:lib/mixins/ShopifyAPI', () => {
   })
 
   describe('.metafield', () => {
+    beforeAll(() => {
+      spyRequest.mockReturnValue(Promise.resolve({}))
+    })
+
     it('uses request config for shop', async () => {
       await Subject.metafield()
 
@@ -99,6 +147,10 @@ describe('unit:lib/mixins/ShopifyAPI', () => {
   })
 
   describe('.pages', () => {
+    beforeAll(() => {
+      spyRequest.mockReturnValue(Promise.resolve({}))
+    })
+
     it('calls .request with correct url and default params.limit', async () => {
       await Subject.pages()
 
@@ -111,6 +163,10 @@ describe('unit:lib/mixins/ShopifyAPI', () => {
   })
 
   describe('.policies', () => {
+    beforeAll(() => {
+      spyRequest.mockReturnValue(Promise.resolve({}))
+    })
+
     it('calls .request with correct url', async () => {
       await Subject.policies()
 
@@ -120,6 +176,10 @@ describe('unit:lib/mixins/ShopifyAPI', () => {
   })
 
   describe('.productListings', () => {
+    beforeAll(() => {
+      spyRequest.mockReturnValue(Promise.resolve({}))
+    })
+
     it('calls .request with correct url and default params.limit', async () => {
       await Subject.productListings()
 
@@ -132,6 +192,10 @@ describe('unit:lib/mixins/ShopifyAPI', () => {
   })
 
   describe('.request', () => {
+    beforeAll(() => {
+      spyRequest.mockRestore()
+    })
+
     it('calls axios client', async () => {
       await Subject.request()
 
@@ -147,7 +211,7 @@ describe('unit:lib/mixins/ShopifyAPI', () => {
           username: process.env.SHOPIFY_API_KEY
         },
         baseURL: Subject.BASE_URL,
-        method: 'get',
+        method: 'GET',
         url: '/undefined.json'
       }
 

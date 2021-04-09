@@ -1,4 +1,4 @@
-import type { CheckoutLineItemInput } from '@kustomzcore/types'
+import type { CheckoutLineItemInput } from '@core/types'
 
 /**
  * @file Implementation - getSubtotal

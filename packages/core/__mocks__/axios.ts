@@ -1,4 +1,4 @@
-import type axios from 'axios'
+import axios from 'axios'
 
 /**
  * @file Mock - axios
@@ -7,4 +7,16 @@ import type axios from 'axios'
  * @see https://github.com/axios/axios
  */
 
-export default jest.createMockFromModule<typeof axios>('axios')
+export default (() => {
+  const mockAxios = (jest.fn() as unknown) as typeof axios
+  const mockInterceptor = { eject: jest.fn(), use: jest.fn() }
+
+  mockAxios.create = jest.fn()
+
+  mockAxios.interceptors = {
+    request: mockInterceptor,
+    response: mockInterceptor
+  }
+
+  return mockAxios
+})()

@@ -39,7 +39,10 @@ describe('GET /policies/[objectID]', () => {
   describe('/', () => {
     describe('200 OK', () => {
       it('json response containing policy object', async () => {
-        const response = await request.get(testURLPath(objectID))
+        // ! shouldn't have to do this
+        const query: APIQuery.Policy.Get = { objectID }
+
+        const response = await request.get(testURLPath(query.objectID, query))
         const eresponse = {
           obj: { keys: 'objectID', keys_length: 1 },
           status: 200

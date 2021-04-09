@@ -1,6 +1,6 @@
+import { CHECKOUT_BASE_URL } from '@core/config/constants'
+import type { CheckoutPermalinkInput } from '@core/types'
 import type { NumberString } from '@flex-development/kustomzcore'
-import { CHECKOUT_BASE_URL } from '@kustomzcore/config/constants'
-import type { CheckoutPermalinkInput } from '@kustomzcore/types'
 import type { UseCheckoutPermalink } from '@system/hooks/useCheckoutPermalink'
 import { createContext, useContext } from 'react'
 

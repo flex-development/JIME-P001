@@ -32,7 +32,7 @@ export default class MenuService extends SearchIndexService<TObject> {
    * the search index.
    *
    * @async
-   * @return {Promise<TObject[]>} Promise containing initial index objects
+   * @return {Promise<TObject[]>} Promise containing index objects
    * @throws {ErrorJSON}
    */
   static async getObjects(): OrNever<Promise<TObject[]>> {

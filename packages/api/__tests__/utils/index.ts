@@ -1,6 +1,7 @@
 import type { AnyObject } from '@flex-development/json'
-import type { OrPromise } from '@flex-development/kustomzcore'
-import type { APIRequest as APIReq } from '@kapi/types'
+import type { NumberString, OrPromise } from '@flex-development/kustomzcore'
+import ALGOLIA from '@kapi/config/algolia'
+import type { APIRequest as APIReq, SearchIndexName } from '@kapi/types'
 import type {
   VercelApiHandler as Handler,
   VercelRequest as VercelReq,
@@ -26,6 +27,19 @@ export type SuperTestSubject<Req extends APIReq | VercelReq = APIReq> = {
 }
 
 /**
+ * Clears a `test` environment search index.
+ *
+ * @param {SearchIndexName} name - Name of search index to clear
+ * @return {Promise<void>} Empty promise when complete
+ */
+export const cleanupSearchIndex = async (
+  name: SearchIndexName
+): Promise<void> => {
+  const index = ALGOLIA.initIndex(`test_${name}`)
+  await index.clearObjects().wait()
+}
+
+/**
  * Returns a setup object for integration tests using `supertest`.
  *
  * @see https://github.com/visionmedia/supertest
@@ -45,18 +59,18 @@ export function supertestSetup<Req extends APIReq | VercelReq = APIReq>(
 /**
  * Generates a URL path with optional query parameters.
  *
- * @param {Query | AnyObject | string} [pathOrQuery] - URL path or query params
+ * @param {Query | AnyObject | NumberString} [pq] - URL path or query params
  * @param {Query | AnyObject} [query] - Query parameters
  * @return {string} Test URL path with stringified query params
  */
 export const testURLPath = (
-  pathOrQuery?: Query | AnyObject | string,
+  pq?: Query | AnyObject | NumberString,
   query?: Query | AnyObject
 ): string => {
-  if (!pathOrQuery || typeof pathOrQuery === 'string') {
+  if (!pq || typeof pq === 'number' || typeof pq === 'string') {
     const querystring = query ? `?${qs.stringify(query)}` : ''
-    return `/${pathOrQuery || ''}${querystring}`
+    return `/${pq || ''}${querystring}`
   }
 
-  return `/?${qs.stringify(merge(pathOrQuery, query))}`
+  return `/?${qs.stringify(merge(pq, query))}`
 }

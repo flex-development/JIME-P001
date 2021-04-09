@@ -1,6 +1,7 @@
 import type { FeathersErrorJSON } from '@feathersjs/errors'
-import type { AnyObject } from '@flex-development/json'
+import type { AnyObject, ANYTHING } from '@flex-development/json'
 import type { AxiosRequestConfig } from 'axios'
+import type { ZodError } from 'zod'
 
 /**
  * @file Type Definitions - Errors
@@ -59,7 +60,7 @@ export interface ErrorJSON extends FeathersErrorJSON {
   className: ErrorClassName
   code: ErrorStatusCode
   data: AnyObject
-  errors?: AnyObject
+  errors?: AnyObject | ANYTHING[]
   name: keyof typeof ErrorStatusCode
 }
 
@@ -91,6 +92,22 @@ export enum ErrorStatusCode {
  */
 export type NextError = Error & { statusCode?: number }
 
+/**
+ * Error response from `.safeParse`.
+ */
+export type ZodSafeParseError<T = ANYTHING> = {
+  success: false
+  error: ZodError<T>
+}
+
+/**
+ * Sucess response from `.safeParse`.
+ */
+export type ZodSafeParseSuccess<D = ANYTHING> = {
+  success: true
+  data: D
+}
+
 // 3P error models
 export type {
   DynamicError,
@@ -98,5 +115,7 @@ export type {
   FeathersErrorJSON
 } from '@feathersjs/errors'
 export type { AxiosError } from 'axios'
+export { ZodIssueCode } from 'zod'
+export type { ZodIssue } from 'zod'
 
 /* eslint-disable prettier/prettier */

@@ -4,13 +4,13 @@ import type {
   PageComponent,
   SearchPageUrlQuery as Query
 } from '@app/types'
-import kapi from '@kustomzcore/config/axios-kapi'
-import { EMPTY_SPACE } from '@kustomzcore/config/constants'
-import type { ProductListingData } from '@kustomzcore/types'
+import kapi from '@core/config/axios-kapi'
+import { EMPTY_SPACE } from '@core/config/constants'
+import type { ProductListingData } from '@core/types'
 import {
   SearchTemplate,
   SearchTemplateProps as TemplateProps
-} from '@kustomzdesign/lib/templates/SearchTemplate'
+} from '@design/lib/templates/SearchTemplate'
 import isArray from 'lodash/isArray'
 import join from 'lodash/join'
 import type {

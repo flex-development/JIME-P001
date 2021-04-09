@@ -1,4 +1,5 @@
-import type { ICustomer, IProductListing } from './shopify'
+import type { NullishNumber, NullishString } from '@flex-development/json'
+import type { ICustomer, IProductListing } from './shopify-rest-admin-api'
 
 /**
  * @file Types Definitions - Reviews
@@ -15,6 +16,16 @@ export type JudgeMeCustomFormAnswer = {
 }
 
 /**
+ * Error response objects from the Judge.me API.
+ */
+export namespace JudgeMeErrorRes {
+  export type GeneralError = { error: string }
+  export interface Unauthorized extends GeneralError {
+    error: 'Failed to authenticate. Shop domain or Api Token is wrong'
+  }
+}
+
+/**
  * Object representing a Judge.me review.
  */
 export type JudgeMeReview = {
@@ -24,20 +35,115 @@ export type JudgeMeReview = {
   featured: boolean
   hidden: boolean
   id: number
-  ip_address: string
+  ip_address: NullishString
   pictures: JudgeMeReviewPicture[]
-  product_id: number
-  reviewer_id: number
-  source: string
-  title: string
+  product_external_id: IProductListing['product_id']
+  product_handle: IProductListing['handle']
+  product_title: IProductListing['title']
+  rating: ReviewRating
+  reviewer: JudgeMeReviewer
+  source: JudgeMeReviewSource
+  title: NullishString
   updated_at: string
-  verified: string
+  verified: JudgeMeReviewVerifiedStatus
+}
+
+/**
+ * JSON body expected by the Judge.me "Reviews Create" endpoint.
+ *
+ * @see https://judge.me/api/docs/v1#!#reviews-reviewcreate
+ */
+export type JudgeMeReviewCreateData = {
+  /**
+   * Review body. Maximum `5000` characters.
+   *
+   * Defaults if blank:
+   *
+   * - Product: Product description
+   * - Shop: "Judge.me Shop Reviews"
+   */
+  body?: NullishString
+
+  /**
+   * Object containing custom form answers for new review.
+   */
+  cf_answers?: Record<string, JudgeMeCustomFormAnswer>
+
+  /**
+   * Reviewer email.
+   */
+  email: ICustomer['email']
+
+  /**
+   * ID of product being reviewed.
+   * Leave this blank if the review is for shop (shop level review).
+   */
+  id?: IProductListing['product_id']
+
+  /**
+   * Reviewer's ip address.
+   */
+  ip_addr?: string
+
+  /**
+   * Reviewer name.
+   */
+  name?: string
+
+  /**
+   * Pictures url for review.
+   */
+  picture_urls?: Record<string, string>
+
+  /**
+   * Review platform.
+   */
+  platform?: 'shopify'
+
+  /**
+   * Review rating. Should be a value between 1 and 5.
+   *
+   * @default 5
+   */
+  rating?: ReviewRating
+
+  /**
+   * Review title. Maximum `100` characters.
+   */
+  title?: JudgeMeReview['title']
+
+  /**
+   * Shop domain without http/https protocol.
+   */
+  url: string
+}
+
+/**
+ * `JudgeMeReviewCreateData` without authentication parameters, or parameters
+ * needed to identify product listing resources.
+ */
+export type JudgeMeReviewCreateDataDTO = Omit<
+  JudgeMeReviewCreateData,
+  'body' | 'cf_answers' | 'id' | 'name' | 'picture_urls' | 'platform' | 'url'
+> & { body: string; id: IProductListing['product_id'] | string }
+
+/**
+ * Shape of success response from the Judge.me "Reviews Create" endpoint.
+ *
+ * @see https://judge.me/api/docs/v1#!#reviews-reviewcreate
+ */
+export type JudgeMeReviewCreateRes = {
+  message: string
 }
 
 /**
  * Possible values for the `curated` property.
  */
-export type JudgeMeReviewCuratedStatus = 'curated' | 'not-yet'
+export enum JudgeMeReviewCuratedStatus {
+  CURATED = 'curated',
+  NOT_YET = 'not-yet',
+  SPAM = 'spam'
+}
 
 /**
  * Query parameters accepeted by the Judge.me "Reviews Index" endpoint.
@@ -56,30 +162,44 @@ export type JudgeMeReviewIndexParams = {
   page?: number
 
   /**
-   * Number of reviews per page.
+   * Number of reviews per page. Maximum `10`.
+   *
+   * @default 10
    */
   per_page?: number
 
   /**
-   * Query reviews by product. Must be Judge.me `product_id`.
+   * Filter reviews by product ID.
    */
-  product_id?: JudgeMeReview['product_id']
+  product_id?: JudgeMeReview['product_external_id']
 
   /**
-   * Query reviews by rating. Should be a value between 1 and 5.
+   * Filter reviews by rating.
+   *
+   * Validations:
+   *
+   * - Should be between 1 and 5
    */
   rating?: ReviewRating
 
   /**
-   * Query reviews by reviewer.
+   * Filter reviews by reviewer.
    */
-  reviewer_id?: JudgeMeReview['reviewer_id']
+  reviewer_id?: JudgeMeReviewer['id']
 
   /**
    * Shop domain without http/https protocol.
    */
   shop_domain: string
 }
+
+/**
+ * `JudgeMeReviewIndexParams` without authentication parameters.
+ */
+export type JudgeMeReviewIndexParamsNoAuth = Omit<
+  JudgeMeReviewIndexParams,
+  'api_token' | 'shop_domain'
+>
 
 /**
  * Shape of success response from the Judge.me "Reviews Index" endpoint.
@@ -93,83 +213,6 @@ export type JudgeMeReviewIndexRes = {
 }
 
 /**
- * Query parameters accepeted by the Judge.me "Review Create" endpoint.
- *
- * @see https://judge.me/api/docs/v1#!#reviews-reviewcreate
- */
-export type JudgeMeReviewCreateParams = {
-  /**
-   * Review body.
-   */
-  body: string
-
-  /**
-   * Object containing custom form answers for new review.
-   */
-  cf_answers?: Record<string, JudgeMeCustomFormAnswer>
-
-  /**
-   * Reviewer email.
-   */
-  email: ICustomer['verified_email']
-
-  /**
-   * ID of product being reviewed.
-   * Leave this blank if the review is for shop (shop level review).
-   */
-  id?: IProductListing['product_id']
-
-  /**
-   * Reviewer's ip address.
-   */
-  ip_addr?: string
-
-  /**
-   * Reviewer name.
-   */
-  name: string
-
-  /**
-   * Pictures for review.
-   */
-  picture_keys?: Record<string, string>
-
-  /**
-   * Pictures url for review.
-   */
-  picture_urls?: Record<string, string>
-
-  /**
-   * Review platform.
-   */
-  platform: 'shopify'
-
-  /**
-   * Review rating. Should be a value between 1 and 5.
-   */
-  rating: ReviewRating
-
-  /**
-   * Review title.
-   */
-  title?: JudgeMeReview['title']
-
-  /**
-   * Shop domain without http/https protocol.
-   */
-  url: string
-}
-
-/**
- * Shape of success response from the Judge.me "Reviews Create" endpoint.
- *
- * @see https://judge.me/api/docs/v1#!#reviews-reviewcreate
- */
-export type JudgeMeReviewCreateRes = {
-  message: string
-}
-
-/**
  * Object representing a Judge.me review photo.
  */
 export type JudgeMeReviewPicture = {
@@ -178,9 +221,36 @@ export type JudgeMeReviewPicture = {
 }
 
 /**
+ * Types of review sources.
+ */
+export enum JudgeMeReviewSource {
+  ADMIN = 'admin',
+  IMPORTED = 'imported',
+  WEB = 'web'
+}
+
+/**
  * Possible values for the `verified` property.
  */
-export type JudgeMeReviewVerificationStatus = 'buyer' | 'nothing'
+export enum JudgeMeReviewVerifiedStatus {
+  BUYER = 'buyer',
+  NOTHING = 'nothing'
+}
+
+/**
+ * Object representing a Judge.me reviewer.
+ */
+export type JudgeMeReviewer = {
+  accepts_marketing: ICustomer['accepts_marketing']
+  email: ICustomer['email']
+  external_id: NullishNumber
+  id: ICustomer['id']
+  name: ICustomer['default_address']['name']
+  phone: ICustomer['default_address']['phone']
+  source_email: ICustomer['email'] | null
+  tags: ICustomer['tags'][]
+  unsubscribed_at: NullishString
+}
 
 /**
  * Product review rating values.

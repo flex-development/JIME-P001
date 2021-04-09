@@ -6,10 +6,10 @@ import createLogger from '@flex-development/kustomzcore/config/logger'
  * @see https://jestjs.io/docs/next/manual-mocks#mocking-node-modules
  */
 
-const actual = jest.requireActual('@flex-development/kustomzcore/config/logger')
+const moduleName = '@flex-development/kustomzcore/config/logger'
 
-const mock = jest.fn(createLogger).mockReturnValue({
-  ...actual.default(),
+export default jest.fn(createLogger).mockReturnValue({
+  ...jest.requireActual(moduleName).default(),
   debug: jest.fn(),
   error: jest.fn(),
   fatal: jest.fn(),
@@ -17,7 +17,3 @@ const mock = jest.fn(createLogger).mockReturnValue({
   trace: jest.fn(),
   warn: jest.fn()
 })
-
-jest.mock('@flex-development/kustomzcore/config/logger', () => mock)
-
-export default mock

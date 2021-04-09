@@ -14,7 +14,7 @@ module.exports = {
   },
   overrides: rootConfig.overrides.concat([
     {
-      files: ['src/config/**'],
+      files: ['src/config/**', 'src/models/CreateReviewDTO/index.ts'],
       rules: {
         'tree-shaking/no-side-effects-in-initialization': 0
       }

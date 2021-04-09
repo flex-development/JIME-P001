@@ -1,5 +1,5 @@
+import type { SEOData } from '@core/types'
 import type { NullishString } from '@flex-development/json/utils/types'
-import type { SEOData } from '@kustomzcore/types'
 import NextHead from 'next/head'
 import { useRouter } from 'next/router'
 import type { FC } from 'react'

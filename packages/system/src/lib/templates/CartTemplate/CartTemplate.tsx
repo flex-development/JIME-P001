@@ -1,5 +1,5 @@
-import { CHECKOUT_BASE_URL } from '@kustomzcore/config/constants'
-import type { CheckoutLineItemInput } from '@kustomzcore/types'
+import { CHECKOUT_BASE_URL } from '@core/config/constants'
+import type { CheckoutLineItemInput } from '@core/types'
 import { useCartContext } from '@system/hooks/useCartContext'
 import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
 import { Box } from '@system/lib/atoms/Box'

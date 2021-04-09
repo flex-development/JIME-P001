@@ -1,5 +1,5 @@
+import type { APIPayload } from '@core/types'
 import type { AnyObject } from '@flex-development/json/utils/types'
-import type { APIPayload } from '@kustomzcore/types'
 import type { MainProps } from '@system/lib/atoms/Main'
 import type { ProductGridProps } from '@system/lib/organisms/ProductGrid'
 

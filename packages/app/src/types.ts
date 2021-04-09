@@ -5,14 +5,14 @@ import type {
   IProductListing,
   IProductListingVariant,
   SEOData
-} from '@kustomzcore/types'
+} from '@core/types'
 import type {
   CollectionTemplateProps,
   IndexTemplateProps,
   PageTemplateProps,
   ProductTemplateProps,
   SearchTemplateProps
-} from '@kustomzdesign/lib/templates'
+} from '@design/lib/templates'
 import type {
   GetServerSidePropsContext,
   NextComponentType,

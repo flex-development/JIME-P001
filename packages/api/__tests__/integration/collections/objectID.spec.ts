@@ -39,7 +39,10 @@ describe('GET /collections/[objectID]', () => {
   describe('/', () => {
     describe('200 OK', () => {
       it('json response containing collection object', async () => {
-        const response = await request.get(testURLPath(objectID))
+        // ! shouldn't have to do this
+        const query: APIQuery.Collection.Get = { objectID }
+
+        const response = await request.get(testURLPath(query.objectID, query))
         const eresponse = {
           obj: { keys: 'collection_id,objectID', keys_length: 2 },
           status: 200

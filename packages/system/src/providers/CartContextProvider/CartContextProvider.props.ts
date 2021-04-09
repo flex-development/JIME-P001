@@ -1,5 +1,5 @@
+import type { CheckoutLineItemInput } from '@core/types'
 import type { ANYTHING } from '@flex-development/json/utils/types'
-import type { CheckoutLineItemInput } from '@kustomzcore/types'
 import type { UseCartContext } from '@system/hooks/useCartContext'
 import { ReactNode } from 'react'
 

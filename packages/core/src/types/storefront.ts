@@ -3,7 +3,7 @@ import type {
   ICollectionListing,
   IProductListing,
   IProductListingVariant
-} from './shopify'
+} from './shopify-rest-admin-api'
 
 /**
  * @file Type Definitions - Storefront

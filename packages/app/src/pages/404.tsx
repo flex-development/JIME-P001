@@ -3,7 +3,7 @@ import type { IPageProps as PageProps, PageComponent } from '@app/types'
 import {
   ErrorTemplate,
   ErrorTemplateProps
-} from '@kustomzdesign/lib/templates/ErrorTemplate'
+} from '@design/lib/templates/ErrorTemplate'
 import type { GetStaticProps, GetStaticPropsResult } from 'next'
 import type { ReactElement } from 'react'
 

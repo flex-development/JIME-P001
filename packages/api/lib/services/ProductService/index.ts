@@ -42,7 +42,7 @@ export default class ProductService extends SearchIndexService<TObject> {
    * populate the search index.
    *
    * @async
-   * @return {Promise<TObject[]>} Promise containing initial index objects
+   * @return {Promise<TObject[]>} Promise containing index objects
    */
   static async getObjects(): OrNever<Promise<TObject[]>> {
     // Fetch product listings data from Shopify

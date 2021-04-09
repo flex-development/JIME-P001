@@ -39,7 +39,10 @@ describe('GET /pages/[objectID]', () => {
   describe('/', () => {
     describe('200 OK', () => {
       it('json response containing page object', async () => {
-        const response = await request.get(testURLPath(objectID))
+        // ! shouldn't have to do this
+        const query: APIQuery.Page.Get = { objectID }
+
+        const response = await request.get(testURLPath(query.objectID, query))
         const eresponse = {
           obj: { keys: 'id,objectID', keys_length: 2 },
           status: 200

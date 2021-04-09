@@ -1,4 +1,4 @@
-import { useMemoCompare } from '@kustomzdesign/hooks/useMemoCompare'
+import { useMemoCompare } from '@design/hooks/useMemoCompare'
 import isFunction from 'lodash/isFunction'
 import { useCallback, useEffect } from 'react'
 import { useBoolean } from 'react-hanger/array/useBoolean'

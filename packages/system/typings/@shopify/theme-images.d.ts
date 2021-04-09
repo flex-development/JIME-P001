@@ -1,5 +1,8 @@
-// Type definitions for @shopify/theme-images
-// Definitions by: Lexus Drumgold <https://github.com/lexusdrumgold>
+/**
+ * @file Type Definitions - @shopify/theme-images
+ * @see https://github.com/Shopify/theme-scripts
+ * @author Lexus Drumgold <https://github.com/lexusdrumgold>
+ */
 
 declare module '@shopify/theme-images' {
   /**

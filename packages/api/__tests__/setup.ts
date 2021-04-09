@@ -1,6 +1,8 @@
+import * as matcherscore from '@tests/matchers'
 import { config } from 'dotenv'
 import path from 'path'
 import 'regenerator-runtime'
+import vercelconfig from '../vercel.json'
 import * as matchers from './matchers'
 
 /**
@@ -12,8 +14,8 @@ import * as matchers from './matchers'
 // Set test environment variables
 config({ path: path.join(__dirname, '..', '.env.test.local') })
 
-// Async callbacks must be invoked within 10 seconds
-jest.setTimeout(10000)
+// Match test timeout to max execution duration of serverless functions
+jest.setTimeout(vercelconfig.functions['api/*.ts'].maxDuration * 1000)
 
 // Add custom matchers
-expect.extend(matchers)
+expect.extend({ ...matcherscore, ...matchers })

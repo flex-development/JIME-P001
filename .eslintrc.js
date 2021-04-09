@@ -164,6 +164,7 @@ module.exports = {
     {
       files: ['**/*.d.ts'],
       rules: {
+        '@typescript-eslint/triple-slash-reference': 0,
         'prettier/prettier': 0
       }
     },

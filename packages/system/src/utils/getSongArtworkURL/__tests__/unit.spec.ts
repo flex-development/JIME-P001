@@ -1,4 +1,4 @@
-import type { SongAttributes } from '@kustomzcore/types'
+import type { SongAttributes } from '@core/types'
 import LAYOUT_DATA from '@system/tests/fixtures/api/layout'
 import getSongArtworkURL from '..'
 

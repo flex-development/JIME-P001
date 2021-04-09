@@ -4,6 +4,10 @@ import type {
   ICollectionListing,
   ICollectionListingQuery,
   ICollectionListingResFind,
+  ICustomer,
+  ICustomerQuery,
+  ICustomerResFind,
+  IImage,
   IMenu,
   IMetafield,
   IMetafieldQuery,
@@ -12,14 +16,16 @@ import type {
   IPageQuery,
   IPolicy,
   IPolicyResFind,
+  IProductImage,
   IProductListing,
   IProductListingQuery,
   IProductListingResFind,
+  IProductListingVariant,
   OrNever,
   PagePublishedStatus
 } from '@flex-development/kustomzcore'
 import axios, {
-  interceptors,
+  interceptors as interceptorsDefault,
   request
 } from '@flex-development/kustomzcore/config/axios'
 import createError from '@flex-development/kustomzcore/utils/createError'
@@ -27,6 +33,8 @@ import ofa from '@flex-development/kustomzcore/utils/objectFromArray'
 import onFulfilled from '@flex-development/kustomzcore/utils/onFulfilled'
 import onRejected from '@flex-development/kustomzcore/utils/onRejected'
 import type { AxiosRequestConfig } from 'axios'
+import merge from 'lodash/merge'
+import { API_URL } from '../../config/constants'
 import type { ShopifyResourceWithMetafield } from '../../types'
 import MENUS_FIXTURE from './__tests__/__fixtures__/menus'
 
@@ -46,6 +54,19 @@ export default class ShopifyAPI {
    * @property {string} NAME - Shop name
    */
   static NAME: string = process.env.SHOPIFY_SHOP_NAME || ''
+
+  /**
+   * @property {IImage} PLACEHOLDER_IMAGE - Default placeholder image properties
+   */
+  static PLACEHOLDER_IMAGE: IImage = {
+    alt: 'Placeholder image',
+    created_at: new Date().toISOString(),
+    height: 1920,
+    id: -1,
+    src: `${API_URL}assets/placeholder`,
+    updated_at: new Date().toISOString(),
+    width: 1920
+  }
 
   /**
    * @property {string} URL - Shop domain
@@ -79,6 +100,58 @@ export default class ShopifyAPI {
     })
 
     return res.collection_listings
+  }
+
+  /**
+   * Returns an array of `ICustomer` objects.
+   *
+   * @async
+   * @param {ICustomerQuery} [params] - Query parameters
+   * @param {string} [params.created_at_max] - Customers created before date
+   * @param {string} [params.created_at_min] - Customers created after date
+   * @param {string} [params.fields] - Comma-separated list of fields to show
+   * @param {string} [params.ids] - Comma-separated list of customer IDs
+   * @param {number} [params.limit] - Number of results to retrieve; [50,250]
+   * @param {number} [params.since_id] - Results after specified customer ID
+   * @param {string} [params.updated_at_max] - Customers modified before date
+   * @param {string} [params.updated_at_min] - Customers modified after date
+   * @return {Promise<PartialOr<ICustomer>[]>} Promise containing customers
+   */
+  static async customers(
+    params: ICustomerQuery = {}
+  ): OrNever<Promise<PartialOr<ICustomer>[]>> {
+    const res = await ShopifyAPI.request<ICustomerResFind>({
+      params: { ...params, limit: params.limit ?? 250 },
+      url: 'customers'
+    })
+
+    return res.customers
+  }
+
+  /**
+   * Searches {@param images} for the image with the id {@param image_id}.
+   * If the image isn't found, placeholder image data will be returned.
+   *
+   * @param {number} image_id - ID of image to search for
+   * @param {IImage[] | IProductImage[]} images - Array of images
+   * @param {Partial<IImage>} [overrides] - Image overrides
+   * @return {IImage | IProductImage} Image data
+   */
+  static getProductImage(
+    image_id: IProductListingVariant['image_id'],
+    images: IImage[] | IProductImage[] = [],
+    overrides: Partial<IImage> = {}
+  ): IImage | IProductImage {
+    // Search for image
+    let image = images.find(image => image.id === image_id)
+
+    // Copy data or use placeholder image if image isn't found
+    image = image ? Object.assign({}, image) : ShopifyAPI.PLACEHOLDER_IMAGE
+
+    // Apply overrides
+    image = merge(image, overrides)
+
+    return image
   }
 
   /**
@@ -160,7 +233,7 @@ export default class ShopifyAPI {
    * @throws {ErrorJSON}
    */
   static onRejected(error: AxiosError): void {
-    if (!error.response) throw onRejected(error)
+    if (!error.response || !error.response.data.errors) throw onRejected(error)
 
     const { data, status } = error.response
 
@@ -210,9 +283,7 @@ export default class ShopifyAPI {
    * @return {Promise<IPolicy[]>} Promise containing policies
    */
   static async policies(): OrNever<Promise<IPolicy[]>> {
-    const res = await ShopifyAPI.request<IPolicyResFind>({
-      url: 'policies'
-    })
+    const res = await ShopifyAPI.request<IPolicyResFind>({ url: 'policies' })
 
     return res.policies
   }
@@ -269,7 +340,7 @@ export default class ShopifyAPI {
         username: process.env.SHOPIFY_API_KEY
       },
       baseURL: menus ? `https://${ShopifyAPI.URL}` : ShopifyAPI.BASE_URL,
-      method: 'get',
+      method: 'GET',
       url: menus ? '/pages/api-menus' : `/${config.url}.json`
     } as typeof config
 
@@ -278,7 +349,10 @@ export default class ShopifyAPI {
 }
 
 /** @see https://github.com/axios/axios#interceptors  */
-axios.interceptors.response.eject(interceptors)
+axios.interceptors.response.eject(interceptorsDefault)
 
 // ! Replace response interceptors
-axios.interceptors.response.use(onFulfilled, ShopifyAPI.onRejected)
+export const interceptors = axios.interceptors.response.use(
+  onFulfilled,
+  ShopifyAPI.onRejected
+)

@@ -1,4 +1,4 @@
-import type { APIPayload } from '@kustomzcore/types'
+import type { APIPayload } from '@core/types'
 import ALL_PRODUCTS from './all-products'
 import CLOTHING from './clothing'
 import STONER_NECESSITIES from './stoner-necessities'

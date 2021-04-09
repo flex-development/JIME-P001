@@ -1,4 +1,4 @@
-import type { CheckoutLineItemInput } from '@kustomzcore/types'
+import type { CheckoutLineItemInput } from '@core/types'
 import CHECKOUT_LINE_ITEMS from '@system/tests/fixtures/checkout-line-items'
 import { renderWithCartContextProvider } from '@system/tests/utils'
 import getItemsTotal from '@system/utils/getItemsTotal'

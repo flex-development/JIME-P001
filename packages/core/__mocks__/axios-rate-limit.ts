@@ -1,5 +1,3 @@
-import rateLimit from 'axios-rate-limit'
-
 /**
  * @file Mock - axios-rate-limit
  * @module mocks/axios-rate-limit
@@ -7,8 +5,4 @@ import rateLimit from 'axios-rate-limit'
  * @see https://github.com/aishek/axios-rate-limit
  */
 
-const mockRateLimit = jest.fn(rateLimit)
-
-jest.mock('axios-rate-limit', () => () => mockRateLimit)
-
-export default mockRateLimit
+export default jest.fn(() => jest.fn())

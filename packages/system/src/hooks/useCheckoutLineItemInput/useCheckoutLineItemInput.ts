@@ -1,5 +1,5 @@
+import type { CheckoutLineItemInput, IProductListing } from '@core/types'
 import type { AnyObject } from '@flex-development/json/utils/types'
-import type { CheckoutLineItemInput, IProductListing } from '@kustomzcore/types'
 import type { UseQuantity } from '@system/hooks/useQuantity'
 import { useQuantity } from '@system/hooks/useQuantity'
 import { useSetState } from 'react-hanger'

@@ -1,3 +1,4 @@
+import * as matchers from '@tests/matchers'
 import { config } from 'dotenv'
 import path from 'path'
 import 'regenerator-runtime'
@@ -13,3 +14,6 @@ config({ path: path.join(__dirname, '..', '.env.test.local') })
 
 // Async callbacks must be invoked within 10 seconds
 jest.setTimeout(10000)
+
+// Add custom matchers
+expect.extend(matchers)

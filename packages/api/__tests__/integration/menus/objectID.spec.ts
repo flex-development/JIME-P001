@@ -40,7 +40,10 @@ describe('GET /menus/[objectID]', () => {
   describe('/', () => {
     describe('200 OK', () => {
       it('json response containing menu object', async () => {
-        const response = await request.get(testURLPath(objectID))
+        // ! shouldn't have to do this
+        const query: APIQuery.Menu.Get = { objectID }
+
+        const response = await request.get(testURLPath(query.objectID, query))
         const eresponse = {
           obj: { keys: 'objectID', keys_length: 1 },
           status: 200

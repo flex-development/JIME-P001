@@ -1,5 +1,5 @@
+import type { SongAttributes } from '@core/types'
 import type { AnyObject } from '@flex-development/json/utils/types'
-import type { SongAttributes } from '@kustomzcore/types'
 import type { UseActiveIndex } from '@system/hooks/useActiveIndex'
 import { useActiveIndex } from '@system/hooks/useActiveIndex'
 import { useMemoCompare } from '@system/hooks/useMemoCompare'

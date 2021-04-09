@@ -1,4 +1,4 @@
-import { CHECKOUT_BASE_URL } from '@kustomzcore/config/constants'
+import { CHECKOUT_BASE_URL } from '@core/config/constants'
 import LINE_ITEMS from '@system/tests/fixtures/checkout-line-items'
 import { renderHook } from '@testing-library/react-hooks'
 import { useCheckoutPermalink } from '../useCheckoutPermalink'

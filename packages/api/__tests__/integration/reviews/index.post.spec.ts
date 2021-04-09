@@ -76,8 +76,8 @@ describe('POST /reviews', () => {
       describe('body', () => {
         const property = 'body'
 
-        it('greater than 5000 characters', async () => {
-          const bdata = { ...data, body: faker.datatype.string(5001) }
+        it('greater than 500 characters', async () => {
+          const bdata = { ...data, body: faker.datatype.string(501) }
 
           const response = await request.post(testURLPath()).send(bdata)
 

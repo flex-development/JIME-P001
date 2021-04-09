@@ -55,7 +55,7 @@ export type JudgeMeReview = {
  */
 export type JudgeMeReviewCreateData = {
   /**
-   * Review body. Maximum `5000` characters.
+   * Review body. Maximum `500` characters.
    *
    * Defaults if blank:
    *

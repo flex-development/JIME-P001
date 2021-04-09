@@ -1,14 +1,10 @@
-import type { AnyObject } from '@flex-development/json'
 import { request } from '@flex-development/kustomzcore/config/axios'
 import type {
   ErrorJSON,
   JudgeMeReviewCreateDataDTO as ICreateReviewDTO
 } from '@flex-development/kustomzcore/types'
-import { ErrorStatusCode } from '@flex-development/kustomzcore/types'
-import NOT_FOUND_VALUE from '@kapi/tests/fixtures/not-found-value'
 import CUSTOMERS from '@kapi/tests/fixtures/shopify/customers'
 import PRODUCT from '@kapi/tests/fixtures/shopify/products/ash-tray'
-import faker from 'faker'
 import Subject from '..'
 import AXIOS_ERROR from './__fixtures__/axios-error'
 
@@ -21,7 +17,6 @@ jest.mock('../../ShopifyAPI')
 jest.unmock('@flex-development/kustomzcore/utils/createError')
 
 const mockRequest = request as jest.MockedFunction<typeof request>
-
 const spyRequest = jest.spyOn(Subject, 'request')
 
 describe('unit:lib/mixins/JudgeMe', () => {
@@ -48,44 +43,6 @@ describe('unit:lib/mixins/JudgeMe', () => {
       await Subject.create({ ...DATA, foo: '' } as ICreateReviewDTO)
 
       expect(spyRequest.mock.calls[0][0]?.data).toMatchObject(DATA)
-    })
-
-    describe('throws error', () => {
-      it('product listing not found', async () => {
-        const data = { ...DATA, id: NOT_FOUND_VALUE.number }
-
-        const empattern = `listing with product_id "${data.id}" does not exist`
-        let ejson = {} as ErrorJSON
-
-        try {
-          await Subject.create(data)
-        } catch (err) {
-          ejson = err
-        }
-
-        expect(ejson.code).toBe(ErrorStatusCode.NotFound)
-        expect(ejson.data).toMatchObject(data)
-        expect((ejson.errors as AnyObject)?.id).toBe(data.id)
-        expect(ejson.message).toMatch(new RegExp(empattern))
-      })
-
-      it('reviewer is not existing customer', async () => {
-        const email = faker.internet.email()
-        const data = { ...DATA, email }
-
-        let ejson = {} as ErrorJSON
-
-        try {
-          await Subject.create(data)
-        } catch (err) {
-          ejson = err
-        }
-
-        expect(ejson.code).toBe(ErrorStatusCode.NotFound)
-        expect(ejson.data).toMatchObject(data)
-        expect((ejson.errors as AnyObject)?.email).toBe(email)
-        expect(ejson.message).toMatch(new RegExp(`"${email}" does not exist`))
-      })
     })
   })
 

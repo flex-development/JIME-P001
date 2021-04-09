@@ -1,3 +1,4 @@
+import type { ANYTHING } from '@flex-development/json'
 import type { ZodString } from 'zod'
 import {
   nativeEnum,
@@ -8,7 +9,15 @@ import {
   string,
   union
 } from 'zod'
-import { ReviewRating } from '../../types/reviews'
+import { request } from '../../config/axios'
+import type {
+  APIPayload,
+  CustomErrorParams,
+  ICustomer,
+  ICustomerResFind,
+  NumberString
+} from '../../types'
+import { ReviewRating } from '../../types'
 
 /**
  * @file Implementation - CreateReviewDTO
@@ -46,10 +55,75 @@ const constraints = {
   } as Record<'max', Parameters<ZodString['max']>>
 }
 
+/**
+ * Returns an email error object.
+ *
+ * @param {ANYTHING} output - Email validation output
+ * @return {CustomErrorParams} Email error parameters
+ */
+const EmailError = (output: ANYTHING): CustomErrorParams => ({
+  message: `Customer with email "${output}" does not exist`,
+  params: { email: output }
+})
+
+/**
+ * Returns a product ID error object.
+ *
+ * @param {ANYTHING} output - Product ID validation output
+ * @return {CustomErrorParams} Product ID error parameters
+ */
+const ProductError = (output: ANYTHING): CustomErrorParams => ({
+  message: `Product with id "${output}" does not exist`,
+  params: { id: output }
+})
+
+/**
+ * Checks if {@param email} belongs to an existing customer.
+ *
+ * @async
+ * @param {string} email - Email to validate
+ * @return {Promise<boolean>} Promise containing `true` if customer email
+ */
+const refineEmail = async (email: ICustomer['email']): Promise<boolean> => {
+  // Request customers from Shopify API
+  const { customers } = await request<ICustomerResFind>({
+    auth: {
+      password: process.env.SHOPIFY_PASSWORD || '',
+      username: process.env.SHOPIFY_API_KEY || ''
+    },
+    baseURL: `https://${process.env.SHOPIFY_DOMAIN}`,
+    method: 'GET',
+    url: '/customers.json'
+  })
+
+  return !!customers.find(customer => customer.email === email)
+}
+
+/**
+ * Checks if {@param id} is a product ID.
+ *
+ * @async
+ * @param {NumberString} id - Email to validate
+ * @return {Promise<boolean>} Promise containing `true` product ID
+ */
+const refineID = async (id: NumberString): Promise<boolean> => {
+  // Request product listings from KAPI
+  const products = await request<APIPayload.Product[]>({
+    baseURL: 'https://kapi.flexdevelopment.vercel.app',
+    method: 'GET',
+    url: '/products'
+  })
+
+  // Parse ID
+  const $id = typeof id === 'string' ? JSON.parse(id) : id
+
+  return !!products.find(product => product.product_id === $id)
+}
+
 const CreateReviewDTO = object({
   body: STRING.max(...constraints.body.max).min(...constraints.body.min),
-  email: STRING.email(),
-  id: union([NUMBER.positive(), STRING.refine(v => JSON.parse(`${v || -1}`))]),
+  email: STRING.email().refine(refineEmail, EmailError),
+  id: union([NUMBER.positive(), STRING]).refine(refineID, ProductError),
   ip_addr: optional(STRING),
   rating: optional(nativeEnum(ReviewRating)),
   title: optional(nullable(STRING.max(...constraints.title.max)))

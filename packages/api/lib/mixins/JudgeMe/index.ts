@@ -84,31 +84,9 @@ export default class JudgeMe {
 
     // Parse and validate data
     try {
-      dto = CRDTO.parse(dto)
+      dto = await CRDTO.parseAsync(dto)
     } catch (zerror) {
       throw ErrorHandling.formatValidationError(zerror, dto)
-    }
-
-    // Search for existing customer with same email as reviewer
-    const customers = await ShopifyAPI.customers()
-
-    // Throw 404 error if reviewer is not an existing customer
-    if (!customers.find(customer => customer.email === dto.email)) {
-      const message = `Customer with email "${dto.email}" does not exist`
-
-      throw createError(message, { ...dto, errors: { email: dto.email } }, 404)
-    }
-
-    // Check if product listing exists if submitting product review
-    const listings = await ShopifyAPI.productListings()
-    const listing = listings.find(listing => listing.product_id === dto.id)
-
-    // Throw 404 error if product listing isn't found
-    if (!listing) {
-      const { id } = dto
-      const message = `Product listing with product_id "${id}" does not exist`
-
-      throw createError(message, { ...dto, errors: { id } }, 404)
     }
 
     /**
@@ -117,6 +95,10 @@ export default class JudgeMe {
      *
      * When time allows, this issue will be investigated further.
      */
+    // Get product listing
+    // const listings = await ShopifyAPI.productListings()
+    // const listing = listings.find(listing => listing.product_id === dto.id)
+
     // if (listing.images.length) {
     //   // Create product image map
     //   const picture_urls = { '0': listing.images[0].src.split('?')[0] }

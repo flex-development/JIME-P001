@@ -5,7 +5,7 @@ import {
   JudgeMeReviewSource as Source
 } from '@flex-development/kustomzcore/types'
 import subject from '@kapi/endpoints/reviews'
-import '@kapi/mixins/ShopifyAPI'
+import '@kapi/mixins/JudgeMe'
 import { LIMIT_0, LIMIT_1001 } from '@kapi/tests/fixtures/bad-request-value'
 import { OBJECTS } from '@kapi/tests/fixtures/judgeme/reviews'
 import NOT_FOUND_VALUE from '@kapi/tests/fixtures/not-found-value'

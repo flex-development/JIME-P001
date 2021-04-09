@@ -66,10 +66,9 @@
     "@react-spring/web": "9.0.0-rc.3",
     "@shopify/theme-images": "latest",
     "classnames": "latest",
-    "formik": "latest",
     "react-hanger": "latest",
-    "react-use": "latest",
-    "yup": "latest"
+    "react-hook-form": "latest",
+    "react-use": "latest"
   },
   "devDependencies": {
     "@flex-development/kustomzcore": "*",
@@ -92,7 +91,6 @@
     "@types/mdx-js__react": "latest",
     "@types/react": "latest",
     "@types/react-dom": "latest",
-    "@types/yup": "latest",
     "@whitespace/storybook-addon-html": "latest",
     "babel-loader": "latest",
     "css-loader": "latest",
@@ -122,7 +120,6 @@
     "@types/mdx-js__react": "latest",
     "@types/react": "latest",
     "@types/react-dom": "latest",
-    "@types/yup": "latest",
     "querystring": "latest",
     "next": ">=10.0.8-canary.9",
     "react": "^17.0.1",
@@ -143,9 +140,6 @@
       "optional": true
     },
     "@types/react-dom": {
-      "optional": true
-    },
-    "@types/yup": {
       "optional": true
     },
     "sass": {

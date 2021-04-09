@@ -1,7 +1,7 @@
 import type { APIRequestBody } from '@flex-development/kustomzcore/types'
 import { ErrorStatusCode } from '@flex-development/kustomzcore/types'
 import subject from '@kapi/endpoints/reviews'
-import '@kapi/mixins/ShopifyAPI'
+import '@kapi/mixins/JudgeMe'
 import { OBJECTS } from '@kapi/tests/fixtures/judgeme/reviews'
 import NOT_FOUND_VALUE from '@kapi/tests/fixtures/not-found-value'
 import type { SuperTestSetup } from '@kapi/tests/utils'
@@ -55,6 +55,24 @@ describe('POST /reviews', () => {
     describe(`${ErrorStatusCode.BadRequest} BadRequest`, () => {
       const eresponse = { obj: true, status: ErrorStatusCode.BadRequest }
 
+      it('email', async () => {
+        const bdata = { ...data, email: faker.internet.exampleEmail() }
+
+        const response = await request.post(testURLPath()).send(bdata)
+
+        expect(response).toBeJSONResponse(eresponse)
+        expect(response.body.errors[0].params.email).toBe(bdata.email)
+      })
+
+      it('id', async () => {
+        const bdata = { ...data, id: NOT_FOUND_VALUE.number }
+
+        const response = await request.post(testURLPath()).send(bdata)
+
+        expect(response).toBeJSONResponse(eresponse)
+        expect(response.body.errors[0].params.id).toBe(bdata.id)
+      })
+
       describe('body', () => {
         const property = 'body'
 
@@ -84,54 +102,6 @@ describe('POST /reviews', () => {
           expect(response).toBeJSONResponse(eresponse)
           expect(response.body.errors[0].path[0]).toBe(property)
         })
-      })
-
-      describe('email', () => {
-        const property = 'email'
-
-        it('invalid email', async () => {
-          const bdata = { ...data, email: '' }
-
-          const response = await request.post(testURLPath()).send(bdata)
-
-          expect(response).toBeJSONResponse(eresponse)
-          expect(response.body.errors[0].path[0]).toBe(property)
-        })
-
-        it('undefined', async () => {
-          const bdata = omit(data, [property])
-
-          const response = await request.post(testURLPath()).send(bdata)
-
-          expect(response).toBeJSONResponse(eresponse)
-          expect(response.body.errors[0].path[0]).toBe(property)
-        })
-      })
-
-      describe('id', () => {
-        const property = 'id'
-
-        it('undefined', async () => {
-          const bdata = omit(data, [property])
-
-          const response = await request.post(testURLPath()).send(bdata)
-
-          expect(response).toBeJSONResponse(eresponse)
-          expect(response.body.errors[0].path[0]).toBe(property)
-        })
-      })
-    })
-
-    describe(`${ErrorStatusCode.NotFound} NotFound`, () => {
-      const eresponse = { obj: true, status: ErrorStatusCode.NotFound }
-
-      it('id', async () => {
-        const bdata = { ...data, id: NOT_FOUND_VALUE.number }
-
-        const response = await request.post(testURLPath()).send(bdata)
-
-        expect(response).toBeJSONResponse(eresponse)
-        expect(response.body.errors.id).toBe(bdata.id)
       })
     })
   })

@@ -1,8 +1,14 @@
+import { OBJECT } from '@kapi/tests/fixtures/judgeme/reviews'
+import CUSTOMERS from '@kapi/tests/fixtures/shopify/customers'
+import PRODUCTS from '@kapi/tests/fixtures/shopify/products'
+import { request } from '@kustomzcore/config/axios'
 import type {
+  CustomErrorParams,
   JudgeMeReviewCreateDataDTO as ICreateReviewDTO,
   ZodSafeParseError
 } from '@kustomzcore/types'
 import { ReviewRating } from '@kustomzcore/types/reviews'
+import type { AxiosRequestConfig } from 'axios'
 import faker from 'faker'
 import Subject from '..'
 
@@ -11,43 +17,64 @@ import Subject from '..'
  * @module models/CreateReviewDTO/tests/unit
  */
 
+jest.mock('@kustomzcore/config/axios')
+
+const mockRequest = request as jest.MockedFunction<typeof request>
+
 describe('unit:models/CreateReviewDTO', () => {
   const body = '👍🏾 👍🏾 👍🏾'
-  const email = faker.internet.exampleEmail()
-  const id = faker.datatype.number(13)
+  const email = OBJECT.reviewer.email
+  const id = PRODUCTS[0].product_id
 
   const DTO: ICreateReviewDTO = { body, email, id }
 
+  beforeAll(() => {
+    mockRequest.mockImplementation(async ({ url }: AxiosRequestConfig) => {
+      if (url === '/customers.json') return { customers: CUSTOMERS }
+
+      if (url === '/products') {
+        return PRODUCTS.map(p => ({
+          objectID: p.handle,
+          product_id: p.product_id
+        }))
+      }
+
+      return null
+    })
+  })
+
   describe('#body', () => {
     describe('pass', () => {
-      it('1 character', () => {
+      it('1 character', async () => {
         const dto: ICreateReviewDTO = { ...DTO, body: faker.datatype.string(1) }
 
-        expect(Subject.safeParse(dto).success).toBeTruthy()
+        expect((await Subject.safeParseAsync(dto)).success).toBeTruthy()
       })
 
-      it('5000 characters', () => {
+      it('5000 characters', async () => {
         const dto: ICreateReviewDTO = {
           ...DTO,
           body: faker.datatype.string(5000)
         }
 
-        expect(Subject.safeParse(dto).success).toBeTruthy()
+        expect((await Subject.safeParseAsync(dto)).success).toBeTruthy()
       })
 
-      it('between 1 and 5000 characters', () => {
-        expect(Subject.safeParse(DTO).success).toBeTruthy()
+      it('between 1 and 5000 characters', async () => {
+        expect((await Subject.safeParseAsync(DTO)).success).toBeTruthy()
       })
     })
 
     describe('fail', () => {
-      it('greater than 5000 characters', () => {
+      it('greater than 5000 characters', async () => {
         const dto: ICreateReviewDTO = {
           ...DTO,
           body: faker.datatype.string(5001)
         }
 
-        const { error, success } = Subject.safeParse(dto) as ZodSafeParseError
+        const parsed = (await Subject.safeParseAsync(dto)) as ZodSafeParseError
+        const { error, success } = parsed
+
         expect(error).toBeDefined()
         expect(success).toBeFalsy()
 
@@ -57,10 +84,12 @@ describe('unit:models/CreateReviewDTO', () => {
         expect(issue.path[0]).toBe('body')
       })
 
-      it('less than 1 character', () => {
+      it('less than 1 character', async () => {
         const dto: ICreateReviewDTO = { ...DTO, body: faker.datatype.string(0) }
 
-        const { error, success } = Subject.safeParse(dto) as ZodSafeParseError
+        const parsed = (await Subject.safeParseAsync(dto)) as ZodSafeParseError
+        const { error, success } = parsed
+
         expect(error).toBeDefined()
         expect(success).toBeFalsy()
 
@@ -70,10 +99,12 @@ describe('unit:models/CreateReviewDTO', () => {
         expect(issue.path[0]).toBe('body')
       })
 
-      it('undefined', () => {
+      it('undefined', async () => {
         const dto = { ...DTO, body: undefined }
 
-        const { error, success } = Subject.safeParse(dto) as ZodSafeParseError
+        const parsed = (await Subject.safeParseAsync(dto)) as ZodSafeParseError
+        const { error, success } = parsed
+
         expect(error).toBeDefined()
         expect(success).toBeFalsy()
 
@@ -86,46 +117,63 @@ describe('unit:models/CreateReviewDTO', () => {
 
   describe('#email', () => {
     describe('pass', () => {
-      it('valid email address', () => {
-        expect(Subject.safeParse(DTO).success).toBeTruthy()
+      it('valid email address', async () => {
+        expect((await Subject.safeParseAsync(DTO)).success).toBeTruthy()
       })
     })
 
     describe('fail', () => {
-      it('invalid email address', () => {
-        const dto = { ...DTO, email: '' }
+      it('customer not found', async () => {
+        const dto = { ...DTO, email: faker.internet.exampleEmail() }
 
-        const { error, success } = Subject.safeParse(dto) as ZodSafeParseError
+        const emessage = `Customer with email "${dto.email}" does not exist`
+        const eparams = { email: dto.email }
+
+        const parsed = (await Subject.safeParseAsync(dto)) as ZodSafeParseError
+        const { error, success } = parsed
 
         expect(error).toBeDefined()
         expect(success).toBeFalsy()
+
+        const issue = error.issues[0]
+
+        expect(issue.message).toBe(emessage)
+        expect((issue as CustomErrorParams).params).toMatchObject(eparams)
+        expect(issue.path[0]).toBe('email')
       })
     })
   })
 
   describe('#id', () => {
     describe('pass', () => {
-      it('number', () => {
-        expect(Subject.safeParse(DTO).success).toBeTruthy()
+      it('number', async () => {
+        expect((await Subject.safeParseAsync(DTO)).success).toBeTruthy()
       })
 
-      it('string', () => {
+      it('string', async () => {
         const dto = { ...DTO, id: `${DTO.id}` }
 
-        expect(Subject.safeParse(dto).success).toBeTruthy()
+        expect((await Subject.safeParseAsync(dto)).success).toBeTruthy()
       })
     })
 
     describe('fail', () => {
-      it('invalid type', () => {
-        const dto = ({ ...DTO, id: undefined } as unknown) as ICreateReviewDTO
+      it('product not found', async () => {
+        const dto = { ...DTO, id: faker.datatype.number(13) }
 
-        const { error, success } = Subject.safeParse(dto) as ZodSafeParseError
+        const emessage = `Product with id "${dto.id}" does not exist`
+        const eparams = { id: dto.id }
+
+        const parsed = (await Subject.safeParseAsync(dto)) as ZodSafeParseError
+        const { error, success } = parsed
+
         expect(error).toBeDefined()
         expect(success).toBeFalsy()
 
         const issue = error.issues[0]
 
+        expect(issue.message).toBe(emessage)
+        expect((issue as CustomErrorParams).params).toMatchObject(eparams)
         expect(issue.path[0]).toBe('id')
       })
     })
@@ -133,24 +181,26 @@ describe('unit:models/CreateReviewDTO', () => {
 
   describe('#ip_addr', () => {
     describe('pass', () => {
-      it('string', () => {
+      it('string', async () => {
         const dto: ICreateReviewDTO = { ...DTO, ip_addr: faker.internet.ip() }
 
-        expect(Subject.safeParse(dto).success).toBeTruthy()
+        expect((await Subject.safeParseAsync(dto)).success).toBeTruthy()
       })
 
-      it('undefined', () => {
+      it('undefined', async () => {
         const dto: ICreateReviewDTO = { ...DTO, ip_addr: undefined }
 
-        expect(Subject.safeParse(dto).success).toBeTruthy()
+        expect((await Subject.safeParseAsync(dto)).success).toBeTruthy()
       })
     })
 
     describe('fail', () => {
-      it('invalid type', () => {
+      it('invalid type', async () => {
         const dto = ({ ...DTO, ip_addr: -1 } as unknown) as ICreateReviewDTO
 
-        const { error, success } = Subject.safeParse(dto) as ZodSafeParseError
+        const parsed = (await Subject.safeParseAsync(dto)) as ZodSafeParseError
+        const { error, success } = parsed
+
         expect(error).toBeDefined()
         expect(success).toBeFalsy()
 
@@ -163,24 +213,26 @@ describe('unit:models/CreateReviewDTO', () => {
 
   describe('#rating', () => {
     describe('pass', () => {
-      it('between 1 and 5', () => {
+      it('between 1 and 5', async () => {
         const dto: ICreateReviewDTO = { ...DTO, rating: ReviewRating.THREE }
 
-        expect(Subject.safeParse(dto).success).toBeTruthy()
+        expect((await Subject.safeParseAsync(dto)).success).toBeTruthy()
       })
 
-      it('undefined', () => {
+      it('undefined', async () => {
         const dto: ICreateReviewDTO = { ...DTO, rating: undefined }
 
-        expect(Subject.safeParse(dto).success).toBeTruthy()
+        expect((await Subject.safeParseAsync(dto)).success).toBeTruthy()
       })
     })
 
     describe('fail', () => {
-      it('out of range', () => {
+      it('out of range', async () => {
         const dto: ICreateReviewDTO = { ...DTO, rating: 0 }
 
-        const { error, success } = Subject.safeParse(dto) as ZodSafeParseError
+        const parsed = (await Subject.safeParseAsync(dto)) as ZodSafeParseError
+        const { error, success } = parsed
+
         expect(error).toBeDefined()
         expect(success).toBeFalsy()
 
@@ -193,54 +245,55 @@ describe('unit:models/CreateReviewDTO', () => {
 
   describe('#title', () => {
     describe('pass', () => {
-      it('0 characters', () => {
+      it('0 characters', async () => {
         const dto: ICreateReviewDTO = {
           ...DTO,
           title: faker.datatype.string(0)
         }
 
-        expect(Subject.safeParse(dto).success).toBeTruthy()
+        expect((await Subject.safeParseAsync(dto)).success).toBeTruthy()
       })
 
-      it('100 characters', () => {
+      it('100 characters', async () => {
         const dto: ICreateReviewDTO = {
           ...DTO,
           title: faker.datatype.string(100)
         }
 
-        expect(Subject.safeParse(dto).success).toBeTruthy()
+        expect((await Subject.safeParseAsync(dto)).success).toBeTruthy()
       })
 
-      it('between 0 and 100 characters', () => {
+      it('between 0 and 100 characters', async () => {
         const dto: ICreateReviewDTO = {
           ...DTO,
           title: faker.datatype.string(DTO.body.length)
         }
 
-        expect(Subject.safeParse(dto).success).toBeTruthy()
+        expect((await Subject.safeParseAsync(dto)).success).toBeTruthy()
       })
 
-      it('null', () => {
+      it('null', async () => {
         const dto: ICreateReviewDTO = { ...DTO, title: null }
 
-        expect(Subject.safeParse(dto).success).toBeTruthy()
+        expect((await Subject.safeParseAsync(dto)).success).toBeTruthy()
       })
 
-      it('undefined', () => {
+      it('undefined', async () => {
         const dto: ICreateReviewDTO = { ...DTO, title: undefined }
 
-        expect(Subject.safeParse(dto).success).toBeTruthy()
+        expect((await Subject.safeParseAsync(dto)).success).toBeTruthy()
       })
     })
 
     describe('fail', () => {
-      it('greater than 100 characters', () => {
+      it('greater than 100 characters', async () => {
         const dto: ICreateReviewDTO = {
           ...DTO,
           title: faker.datatype.string(101)
         }
 
-        const { error, success } = Subject.safeParse(dto) as ZodSafeParseError
+        const parsed = (await Subject.safeParseAsync(dto)) as ZodSafeParseError
+        const { error, success } = parsed
 
         expect(error).toBeDefined()
         expect(success).toBeFalsy()

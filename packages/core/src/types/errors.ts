@@ -116,6 +116,6 @@ export type {
 } from '@feathersjs/errors'
 export type { AxiosError } from 'axios'
 export { ZodIssueCode } from 'zod'
-export type { ZodIssue } from 'zod'
+export type { CustomErrorParams, ZodIssue } from 'zod'
 
 /* eslint-disable prettier/prettier */

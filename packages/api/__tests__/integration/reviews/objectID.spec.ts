@@ -1,7 +1,7 @@
 import type { APIQuery } from '@flex-development/kustomzcore/types'
 import { ErrorStatusCode } from '@flex-development/kustomzcore/types'
 import subject from '@kapi/endpoints/reviews/[objectID]'
-import '@kapi/mixins/ShopifyAPI'
+import '@kapi/mixins/JudgeMe'
 import { OBJECTS } from '@kapi/tests/fixtures/judgeme/reviews'
 import NOT_FOUND_VALUE from '@kapi/tests/fixtures/not-found-value'
 import type { SuperTestSetup } from '@kapi/tests/utils'

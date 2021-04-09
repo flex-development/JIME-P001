@@ -1,15 +1,22 @@
+import type JudgeMe from '@kapi/mixins/JudgeMe'
+import { REVIEWS } from '@kapi/tests/fixtures/judgeme/reviews'
+import CUSTOMERS from '@kapi/tests/fixtures/shopify/customers'
+import PRODUCTS from '@kapi/tests/fixtures/shopify/products'
+import CRDTO from '@kustomzcore/models/CreateReviewDTO'
+import type { ZodIssue } from '@kustomzcore/types/errors'
 import type {
   JudgeMeReviewCreateDataDTO as ICreateReviewDTO,
   JudgeMeReviewIndexParamsNoAuth as IndexParams,
   JudgeMeReviewIndexRes as IndexRes
-} from '@flex-development/kustomzcore'
-import { ReviewRating } from '@flex-development/kustomzcore'
-import type JudgeMe from '@kapi/mixins/JudgeMe'
-import { REVIEWS } from '@kapi/tests/fixtures/judgeme/reviews'
+} from '@kustomzcore/types/reviews'
+import { ReviewRating } from '@kustomzcore/types/reviews'
 import type { AxiosRequestConfig } from 'axios'
 import chunk from 'lodash/chunk'
 import clamp from 'lodash/clamp'
 import isNumber from 'lodash/isNumber'
+import { ZodError } from 'zod'
+import ErrorHandling from '../../ErrorHandling'
+import '../../ShopifyAPI'
 
 /**
  * @file Mock - JudgeMe
@@ -18,6 +25,7 @@ import isNumber from 'lodash/isNumber'
  */
 
 jest.mock('../../ShopifyAPI')
+
 jest.unmock('@flex-development/kustomzcore/utils/createError')
 
 type RequireActual = { default: typeof JudgeMe }
@@ -26,8 +34,34 @@ const { default: Actual } = jest.requireActual<RequireActual>('..')
 
 export default class MockJudgeMe extends Actual {
   static create = jest.fn(async (data: ICreateReviewDTO) => {
-    await Actual.create(data)
-    return MockJudgeMe.request({ data, method: 'post' })
+    try {
+      const parsed = await CRDTO.parseAsync(data)
+
+      const issues: ZodIssue[] = []
+
+      if (!CUSTOMERS.find(customer => customer.email === data.email)) {
+        issues.push({
+          code: 'custom',
+          message: `Customer with email "${data.email}" does not exist`,
+          params: { email: data.email },
+          path: ['email']
+        })
+      }
+
+      if (!PRODUCTS.find(product => product.product_id === data.id)) {
+        issues.push({
+          code: 'custom',
+          message: `Product with id "${data.id}" does not exist`,
+          params: { id: data.id },
+          path: ['id']
+        })
+      }
+
+      if (issues.length) throw new ZodError(issues)
+      return parsed
+    } catch (zerror) {
+      throw ErrorHandling.formatValidationError(zerror, data)
+    }
   })
 
   static index = jest.fn(async (params: IndexParams) => {

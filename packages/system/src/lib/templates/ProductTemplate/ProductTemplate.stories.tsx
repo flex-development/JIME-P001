@@ -1,7 +1,7 @@
+import { OBJECTS as REVIEWS } from '@kapi/tests/fixtures/judgeme/reviews'
 import ASH_TRAY from '@system/tests/fixtures/api/products/ash-tray'
 import KUSTOMZ from '@system/tests/fixtures/api/products/kustomz'
 import ROLLING_TRAY from '@system/tests/fixtures/api/products/rolling-tray'
-import REVIEWS from '@system/tests/fixtures/api/reviews'
 import { ProductTemplate } from './ProductTemplate'
 import type { ProductTemplateProps } from './ProductTemplate.props'
 
@@ -34,7 +34,7 @@ AshTray.args = {
     title: 'All Products'
   },
   product: ASH_TRAY,
-  reviews: REVIEWS.filter(review => review.product_id === ASH_TRAY.product_id)
+  reviews: REVIEWS.filter(r => r.product_external_id === ASH_TRAY.product_id)
 }
 
 export const Kustomz: FCS<ProductTemplateProps> = args => (
@@ -48,7 +48,7 @@ Kustomz.args = {
     title: 'All Products'
   },
   product: KUSTOMZ,
-  reviews: REVIEWS.filter(review => review.product_id === KUSTOMZ.product_id)
+  reviews: REVIEWS.filter(r => r.product_external_id === KUSTOMZ.product_id)
 }
 
 export const RollingTray: FCS<ProductTemplateProps> = args => (
@@ -62,7 +62,7 @@ RollingTray.args = {
     title: 'All Products'
   },
   product: ROLLING_TRAY,
-  reviews: REVIEWS.filter(review => {
-    return review.product_id === ROLLING_TRAY.product_id
+  reviews: REVIEWS.filter(r => {
+    return r.product_external_id === ROLLING_TRAY.product_id
   })
 }

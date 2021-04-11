@@ -36,9 +36,7 @@ PRODUCT REVIEW FORM
 
   &-title {
     @include breakpoint-up(sm) {
-      @include flex-spread;
-
-      flex-direction: row;
+      @include flex(center, space-between, row);
     }
 
     @include flex-column;

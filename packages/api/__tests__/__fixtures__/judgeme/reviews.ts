@@ -16,33 +16,35 @@ export const PER_PAGE = 10
 
 // ! Need at least one stable review object. Faker data always changes
 export const OBJECT: JudgeMeReview = Object.freeze({
-  body: 'Tenetur est voluptatum impedit iure et magni quam',
-  created_at: '2092-09-07T21:08:25.296Z',
+  body:
+    'Church-key glossier sint intelligentsia tumblr, pour-over paleo kogi tousled excepteur magna banh mi af. Blue bottle pickled gluten-free, waistcoat adaptogen cupidatat veniam man braid edison bulb eiusmod 8-bit retro. Wayfarers meditation pork belly keffiyeh, raw denim lumbersexual direct trade glossier hammock fam. Veniam man braid edison bulb eiusmod 8-bit retro. Raw denim lumbersexual direct trade glossier hammock fam, blue bottle pickled gluten-free. Stet clita ka gubergren, no sea takimata.',
+  created_at: '2021-04-04T01:47:57+00:00',
   curated: Curated.CURATED,
   featured: false,
   // ! Only published reviews allowed in search index
   hidden: false,
-  id: 29216,
+  id: 190656479,
   ip_address: null,
   pictures: [],
   product_external_id: 6147082092699,
   product_handle: 'ash-tray',
   product_title: 'Ash Tray',
-  rating: 5,
+  rating: 4,
   reviewer: {
     accepts_marketing: false,
-    email: 'egnition_sample_20@egnition.com',
-    external_id: null,
-    id: 4259526541467,
-    name: 'Conan Anderson',
-    phone: '+37061234567',
-    source_email: 'egnition_sample_20@egnition.com',
-    tags: ['egnition-sample-data', 'VIP'],
+    email: 'egnition_sample_12@egnition.com',
+    external_id: 693875703881,
+    id: 29224904,
+    name: 'Len Stark',
+    phone: '+18094545832',
+    source_email: 'egnition_sample_12@egnition.com',
+    tags: ['egnition-sample-data'],
     unsubscribed_at: null
   },
-  source: Source.IMPORTED,
-  title: null,
-  updated_at: '2065-10-13T04:04:08.107Z',
+  source: Source.WEB,
+  title:
+    'Lorem ipsum dolor sit amet, consetetur elitr, sed diam eirmod tempor labore et dolore magna aliquyam',
+  updated_at: '2021-04-04T01:50:04+00:00',
   verified: Verified.NOTHING
 })
 

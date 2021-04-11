@@ -214,7 +214,7 @@ export type GridRowsTemplate = 1 | 2 | 3 | 4 | 5 | 6 | 'none'
 /**
  * Keys of opacity values used in theme.
  */
-export type Opacity = 0 | 25 | 50 | 75 | 100 | 'disabled'
+export type Opacity = 0 | 15 | 25 | 50 | 75 | 100 | 'disabled'
 
 /**
  * Size keys.

@@ -47,11 +47,9 @@ PRODUCT TEMPLATE
         margin-top: $space-48;
       }
 
-      @include flex-spread;
+      @include flex(center, space-between);
 
       @include margin-y($space-24);
-
-      display: flex;
     }
   }
 }

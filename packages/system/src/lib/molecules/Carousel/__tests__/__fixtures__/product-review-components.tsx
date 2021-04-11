@@ -1,5 +1,5 @@
+import { OBJECTS as REVIEWS } from '@kapi/tests/fixtures/judgeme/reviews'
 import { ProductReview } from '@system/lib/molecules/ProductReview'
-import REVIEWS from '@system/tests/fixtures/api/reviews'
 
 /**
  * @file Test Fixture - ProductReview component array

@@ -1,8 +1,9 @@
-import type { AnyObject, ANYTHING } from '@flex-development/json/utils/types'
+import type { ANYTHING } from '@flex-development/json/utils/types'
 import type { MainProps } from '@system/lib/atoms/Main'
 import type { AddToCartFormProps } from '@system/lib/molecules/AddToCartForm'
 import type { CarouselProps } from '@system/lib/molecules/Carousel'
 import type { ProductBreadcrumbProps } from '@system/lib/molecules/ProductBreadcrumb'
+import type { ProductReviewProps } from '@system/lib/molecules/ProductReview'
 import type { EventHandlers } from '@system/types'
 
 /**
@@ -43,7 +44,7 @@ export interface ProductTemplateProps extends MainProps {
    *
    * @default []
    */
-  reviews?: AnyObject[]
+  reviews?: ProductReviewProps['review'][]
 
   /**
    * Maximum number of product reviews to show in a group.

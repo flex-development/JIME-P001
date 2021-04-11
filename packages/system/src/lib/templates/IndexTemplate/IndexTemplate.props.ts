@@ -1,6 +1,6 @@
 import type { APIPayload } from '@core/types'
-import type { AnyObject } from '@flex-development/json/utils/types'
 import type { MainProps } from '@system/lib/atoms/Main'
+import type { ProductReviewProps } from '@system/lib/molecules/ProductReview'
 import type { ProductGridProps } from '@system/lib/organisms/ProductGrid'
 
 /**
@@ -36,5 +36,5 @@ export interface IndexTemplateProps extends MainProps {
    *
    * @default []
    */
-  reviews?: AnyObject[]
+  reviews?: ProductReviewProps['review'][]
 }

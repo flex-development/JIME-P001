@@ -1,3 +1,4 @@
+import type { RenderResult } from '@testing-library/react'
 import { render, screen } from '@testing-library/react'
 import { Default } from '../ProductReview.stories'
 
@@ -8,30 +9,87 @@ import { Default } from '../ProductReview.stories'
  */
 
 describe('unit:ProductReview', () => {
+  const {
+    body,
+    created_at,
+    id,
+    product_handle,
+    product_title,
+    rating,
+    title
+  } = Default.args.review
+
+  const reviewer = { name: 'Test' }
+
+  let view = {} as RenderResult
+
+  beforeEach(() => {
+    view = render(<Default review={{ ...Default.args.review, reviewer }} />)
+  })
+
   describe('html', () => {
     it('renders with class "product-review"', () => {
-      const { container } = render(<Default {...Default.args} />)
+      expect(view.container.firstChild).toHaveClass('product-review')
+    })
 
-      expect(container.firstChild).toHaveClass('product-review')
+    it(`renders with id "product-review-${id}"`, () => {
+      const eid = `product-review-${id}`
+
+      expect(view.container.firstChild).toHaveAttribute('id', eid)
     })
   })
 
   describe('props', () => {
     describe('review', () => {
-      it('renders review body', () => {
-        render(<Default {...Default.args} />)
-
-        const { body } = Default.args.review
-
-        expect(screen.getByText(body)).toHaveClass('product-review-body')
+      it('renders body', () => {
+        expect(screen.getByText(body)).toBeInTheDocument()
       })
 
-      it('renders review title', () => {
-        render(<Default {...Default.args} />)
+      it('renders formatted created_at', () => {
+        const f_created_at = new Date(created_at).toLocaleDateString('en-US')
 
-        const { title } = Default.args.review
+        expect(screen.getByText(new RegExp(f_created_at))).toBeInTheDocument()
+      })
 
-        expect(screen.getByText(title)).toHaveClass('product-review-title')
+      it('renders link to product', () => {
+        const element = screen.getByRole('link', { name: /view product/i })
+
+        expect(element).toBeInTheDocument()
+        expect(element).toHaveAttribute('href', `/products/${product_handle}`)
+        expect(element).toHaveTextContent(product_title)
+      })
+
+      it('renders rating', () => {
+        const element = view.container.firstChild?.firstChild
+
+        expect(element).toHaveAttribute('data-rating', `${rating}`)
+      })
+
+      describe('reviewer', () => {
+        it('renders reviewer initials', () => {
+          const eclass = 'product-review-reviewer-initials'
+
+          expect(screen.getByText(reviewer.name[0])).toHaveClass(eclass)
+        })
+
+        it('renders reviewer name', () => {
+          expect(screen.getByText(reviewer.name)).toBeInTheDocument()
+        })
+      })
+
+      describe('title', () => {
+        it('renders title', () => {
+          expect(screen.getByText(title as string)).toBeInTheDocument()
+        })
+
+        it('renders id as title if review.title is nullish', () => {
+          const review = { ...Default.args.review, title: null }
+          const eclass = 'product-review-header-title'
+
+          render(<Default review={review} />)
+
+          expect(screen.getByText(new RegExp(`${id}`))).toHaveClass(eclass)
+        })
       })
     })
   })

@@ -1,10 +1,10 @@
-import { getSizedImageUrl } from '@shopify/theme-images'
-import { IMAGE_PLACEHOLDER_URL } from '@system/config/constants'
+import { EMPTY_SPACE } from '@core/config/constants'
 import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
 import { Box, BoxProps } from '@system/lib/atoms/Box'
-import { Image } from '@system/lib/atoms/Image'
 import { Link } from '@system/lib/atoms/Link'
 import { Paragraph } from '@system/lib/atoms/Paragraph'
+import { Span } from '@system/lib/atoms/Span'
+import { ProductRating } from '@system/lib/molecules/ProductRating'
 import type { FC } from 'react'
 import type { ProductReviewProps } from './ProductReview.props'
 
@@ -24,33 +24,62 @@ export const ProductReview: FC<ProductReviewProps> = props => {
 
   const {
     body,
+    created_at,
     id,
-    product_image_url: src,
+    product_handle,
     product_title,
-    product_url,
+    rating,
+    reviewer: { name },
     title
   } = review
 
   const sanitized = useSanitizedProps<'div', BoxProps>(rest, 'product-review')
-
-  const url = getSizedImageUrl(src, '1024x1024') || IMAGE_PLACEHOLDER_URL
-  const url_2x = getSizedImageUrl(src, '2048x2048') || IMAGE_PLACEHOLDER_URL
+  const has_title = !!title && title.length
 
   return (
-    <Box {...sanitized} id={`product-review-${id}`}>
-      <Box className='product-review-col'>
-        <Link href={product_url} target='_blank'>
-          <Image
-            alt={product_title}
-            className='product-review-img'
-            src={url}
-            srcSet={`${url} ${url_2x} 2x`}
-          />
+    <Box
+      {...sanitized}
+      id={`product-review-${id}`}
+      data-product={product_handle}
+    >
+      <ProductRating
+        aria-label='Product rating'
+        className='product-review-rating'
+        rating={rating}
+      />
+
+      <Paragraph
+        className='product-review-header'
+        data-has-title={has_title || undefined}
+      >
+        <Link
+          aria-label='View product'
+          className='product-review-header-product'
+          href={`/products/${product_handle}`}
+        >
+          {product_title}
         </Link>
-      </Box>
-      <Box className='product-review-col'>
-        <Paragraph className='product-review-title'>{title}</Paragraph>
-        <Paragraph className='product-review-body'>{body}</Paragraph>
+
+        <Span className='product-review-header-divider'>/</Span>
+        <Span className='product-review-header-title'>{title || id}</Span>
+      </Paragraph>
+
+      <Paragraph className='product-review-body'>{body}</Paragraph>
+
+      <Box className='product-review-footer'>
+        <Box className='product-review-reviewer'>
+          <Span className='product-review-reviewer-initials'>
+            {((): string => {
+              const { 0: fname = '', 1: lname = '' } = name.split(EMPTY_SPACE)
+              return `${fname[0] || ''}${lname[0] || ''}`.toUpperCase()
+            })()}
+          </Span>
+          <Span className='product-review-reviewer-name'>{name}</Span>
+        </Box>
+
+        <Paragraph className='product-review-date'>
+          {new Date(created_at).toLocaleDateString('en-US')}
+        </Paragraph>
       </Box>
     </Box>
   )

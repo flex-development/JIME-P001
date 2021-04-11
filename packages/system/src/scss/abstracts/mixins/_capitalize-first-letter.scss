@@ -1,0 +1,13 @@
+/// ----------------------------------------------------------------------------
+/// @name capitalize-first-letter
+/// @group mixins
+/// ----------------------------------------------------------------------------
+
+/// Capitalizes the first letter of a text element.
+@mixin capitalize-first-letter {
+  &::first-letter {
+    text-transform: capitalize;
+  }
+
+  @content;
+}

@@ -1,5 +1,13 @@
+import kapi from '@core/config/axios-kapi'
 import CreateReviewDTO from '@core/models/CreateReviewDTO'
-import type { JudgeMeReviewCreateDataDTO as ReviewDTO } from '@core/types'
+import type {
+  JudgeMeReviewCreateDataDTO as ReviewDTO,
+  NumberString,
+  OrNever
+} from '@core/types'
+import type { ErrorJSON } from '@core/types/errors'
+import { ReviewRating } from '@core/types/reviews'
+import type { AnyObject } from '@flex-development/json/utils/types'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
 import { Box } from '@system/lib/atoms/Box'
@@ -9,11 +17,16 @@ import { Form } from '@system/lib/atoms/Form'
 import { Heading } from '@system/lib/atoms/Heading'
 import { Input } from '@system/lib/atoms/Input'
 import { Label } from '@system/lib/atoms/Label'
+import { Paragraph } from '@system/lib/atoms/Paragraph'
 import { Span } from '@system/lib/atoms/Span'
 import { TextArea } from '@system/lib/atoms/TextArea'
 import { FormField } from '@system/lib/molecules/FormField'
 import { ProductRating } from '@system/lib/molecules/ProductRating'
+import isFunction from 'lodash/isFunction'
+import ip from 'public-ip'
 import type { BaseSyntheticEvent, FC } from 'react'
+import { useCallback } from 'react'
+import useSetState from 'react-hanger/array/useSetState'
 import { useForm } from 'react-hook-form'
 import type { HReview, ProductReviewFormProps } from './ProductReviewForm.props'
 
@@ -48,7 +61,14 @@ export const ProductReviewForm: FC<ProductReviewFormProps> & {
 
   // Handle form state
   const {
-    formState: { errors, isValid = false, isSubmitSuccessful },
+    formState: {
+      errors,
+      isDirty,
+      isSubmitSuccessful,
+      isSubmitting,
+      isValid,
+      submitCount
+    },
     handleSubmit,
     register
   } = useForm<ReviewDTO>({
@@ -57,7 +77,54 @@ export const ProductReviewForm: FC<ProductReviewFormProps> & {
     resolver: zodResolver(CreateReviewDTO)
   })
 
-  const onSubmit = handleSubmit((data, event) => handler(data, event))
+  // Handle submission error state
+  const [ejson, setError] = useSetState<ErrorJSON | AnyObject>({})
+
+  // Disable form submission
+  const disabled = !(isDirty && isValid) || isSubmitting || submitCount === 1
+
+  /**
+   * Sends a product review to the Kustomz API (KAPI).
+   *
+   * @async
+   * @param {ReviewDTO} data - Product review data
+   * @param {string} data.body - Review body; [1,500]
+   * @param {string} data.email - Reviewer email
+   * @param {NumberString} data.id - Product ID
+   * @param {ReviewRating} [data.rating] - Review rating; [1,5]
+   * @param {string} [data.title] - Review title; [0,100]
+   * @param {BaseSyntheticEvent} [event] - Form event
+   * @return {Promise<ReviewDTO>} Product review data
+   * @throws {ErrorJSON}
+   */
+  const onValid = async (
+    data: ReviewDTO,
+    event?: BaseSyntheticEvent
+  ): OrNever<Promise<typeof data>> => {
+    const NENV = (process.env.NODE_ENV || 'development').toLowerCase()
+    const VENV = (process.env.VERCEL_ENV || 'development').toLowerCase()
+
+    let review = {} as ReviewDTO
+
+    try {
+      if (NENV === 'development' || VENV === 'development' || NENV === 'test') {
+        review = { ...data, ip_addr: await ip.v4() }
+      } else {
+        review = await kapi({ data, method: 'post', url: '/reviews' })
+      }
+
+      if (isFunction(handler)) await handler(review, event)
+    } catch (error) {
+      setError(error)
+    }
+
+    return review
+  }
+
+  /* Callback version of `onValid` */
+  const onValidCB = useCallback(onValid, [handler, setError])
+
+  const onSubmit = handleSubmit(onValidCB)
 
   return (
     <Form {...sanitized} id={`product-review-form-${id}`} onSubmit={onSubmit}>
@@ -73,7 +140,13 @@ export const ProductReviewForm: FC<ProductReviewFormProps> & {
             data-type='email'
             label='Email address'
           >
-            <Input {...register('email')} name='email' required type='email' />
+            <Input
+              {...register('email')}
+              aria-label='email'
+              name='email'
+              required
+              type='email'
+            />
           </FormField>
           <Label className='product-review-form-field-label'>
             {errors.email?.message}
@@ -84,6 +157,7 @@ export const ProductReviewForm: FC<ProductReviewFormProps> & {
           <FormField data-control='input' data-type='text' label='Review Title'>
             <Input
               {...register('title')}
+              aria-label='title'
               name='title'
               placeholder={ProductReviewForm.TITLE_PLACEHOLDER}
             />
@@ -97,6 +171,7 @@ export const ProductReviewForm: FC<ProductReviewFormProps> & {
           <FormField data-control='textarea' label='Review Body'>
             <TextArea
               {...register('body')}
+              aria-label='body'
               name='body'
               placeholder={ProductReviewForm.BODY_PLACEHOLDER}
               required
@@ -109,17 +184,24 @@ export const ProductReviewForm: FC<ProductReviewFormProps> & {
       </Box>
 
       <Box className='product-review-form-footer'>
-        <ProductRating className='product-review-form-rating' name='rating' />
+        <Box>
+          <ProductRating className='product-review-form-rating' name='rating' />
 
-        <Button
-          aria-label='Submit review'
-          className='product-review-form-btn'
-          disabled={!isValid || isSubmitSuccessful}
-          onClick={onSubmit}
-          type='submit'
-        >
-          Submit Review
-        </Button>
+          <Button
+            aria-label='Submit review'
+            className='product-review-form-btn'
+            data-submit-successful={isSubmitSuccessful}
+            disabled={disabled}
+            onClick={onSubmit}
+            type='submit'
+          >
+            Submit Review
+          </Button>
+        </Box>
+
+        <Paragraph className='product-review-form-error-message'>
+          {ejson.message}
+        </Paragraph>
       </Box>
     </Form>
   )

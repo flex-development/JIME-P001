@@ -101,6 +101,7 @@
     "next": "10.0.8-canary.14",
     "postcss-loader": "4.2.0",
     "postcss-scss": "latest",
+    "public-ip": "latest",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-is": "17.0.1",
@@ -167,7 +168,8 @@
     "SHOPIFY_API_KEY",
     "SKIP_PREPARE",
     "STORYBOOK_PORT",
-    "STORYBOOK_STATIC_DIR"
+    "STORYBOOK_STATIC_DIR",
+    "VERCEL_ENV"
   ],
   "sideEffects": [
     "*.css",

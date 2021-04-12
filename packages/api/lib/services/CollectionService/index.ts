@@ -104,6 +104,7 @@ export default class CollectionService extends SearchIndexService<TObject> {
    * @param {number} [query.offset] - Offset of the first result to return
    * @param {number} [query.page] - Specify the page to retrieve
    * @param {string} [query.text] - Text to search in index
+   * @param {string} [query.userToken] - User identifier
    * @return {SearchOptions} Algolia search options object
    */
   searchOptions(query: APIQuery.Collection.Find = {}): SearchOptions {

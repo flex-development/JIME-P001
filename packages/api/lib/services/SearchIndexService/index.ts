@@ -8,6 +8,7 @@ import { EMPTY_SPACE } from '@flex-development/kustomzcore/config/constants'
 import createError from '@flex-development/kustomzcore/utils/createError'
 import isEmpty from 'lodash/isEmpty'
 import join from 'lodash/join'
+import merge from 'lodash/merge'
 import omit from 'lodash/omit'
 import pick from 'lodash/pick'
 import ALGOLIA from '../../config/algolia'
@@ -158,18 +159,20 @@ class SearchIndexService<TObject extends AnyObject = AnyObject> {
    * @async
    * @param {NumberString} objectID - Search index object ID
    * @param {string} [fields] - Specify fields to include for each object
+   * @param {SearchOptions} [options] - Additional search options
    * @return {Promise<TObject>} Promise containing search index resource
    * @throws {ErrorJSON}
    */
   async get(
     objectID: Hit<TObject>['objectID'],
-    fields?: APIQuery.SearchIndexObject['fields']
+    fields?: APIQuery.SearchIndexObject['fields'],
+    options: SearchOptions = {}
   ): OrNever<Promise<TObject>> {
     // Get search index options
-    const options = this.searchOptions({ fields, objectID })
+    const $options = merge(this.searchOptions({ fields, objectID }), options)
 
     // Execute search
-    const results = await this.search('', options)
+    const results = await this.search('', $options)
 
     // Throw error if resource isn't found
     if (!results.length) {
@@ -245,6 +248,7 @@ class SearchIndexService<TObject extends AnyObject = AnyObject> {
    * @param {number} [query.offset] - Offset of the first result to return
    * @param {number} [query.page] - Specify the page to retrieve
    * @param {string} [query.text] - Text to search in index
+   * @param {string} [query.userToken] - User identifier
    * @return {SearchOptions} Algolia search options object
    */
   searchOptions(query: APIQuery.SearchIndex = {}): SearchOptions {
@@ -266,7 +270,7 @@ class SearchIndexService<TObject extends AnyObject = AnyObject> {
 
     return {
       ...SearchIndexService.DSO,
-      ...pick(rest, PAGINATION_PARAMS),
+      ...pick(rest, [...PAGINATION_PARAMS, 'userToken']),
       attributesToRetrieve,
       filters: join(filters, EMPTY_SPACE),
       length: rest.length || limit,

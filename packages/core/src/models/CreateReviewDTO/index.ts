@@ -61,7 +61,7 @@ const constraints = {
  * @param {ANYTHING} output - Email validation output
  * @return {CustomErrorParams} Email error parameters
  */
-const EmailError = (output: ANYTHING): CustomErrorParams => ({
+export const EmailError = (output: ANYTHING): CustomErrorParams => ({
   message: `Customer with email "${output}" not found`,
   params: { email: output }
 })
@@ -72,7 +72,7 @@ const EmailError = (output: ANYTHING): CustomErrorParams => ({
  * @param {ANYTHING} output - Product ID validation output
  * @return {CustomErrorParams} Product ID error parameters
  */
-const ProductError = (output: ANYTHING): CustomErrorParams => ({
+export const ProductError = (output: ANYTHING): CustomErrorParams => ({
   message: `Product with id "${output}" not found`,
   params: { id: output }
 })

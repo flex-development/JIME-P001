@@ -12,6 +12,7 @@ import type {
 } from './reviews'
 import type {
   ICollectionListing,
+  ICustomer,
   IMenu,
   IMenuLink,
   IMetafield,
@@ -101,6 +102,29 @@ export namespace APIQuery {
     }
   }
 
+  export namespace Customer {
+    export interface Find extends SearchIndex {
+      accepts_marketing?: ICustomer['accepts_marketing']
+      email?: ICustomer['email']
+      first_name?: ICustomer['first_name']
+      id?: ICustomer['id']
+      last_name?: ICustomer['last_name']
+      last_order_id?: ICustomer['last_order_id']
+      last_order_name?: ICustomer['last_order_name']
+      moil?: ICustomer['marketing_opt_in_level']
+      orders_count?: ICustomer['orders_count']
+      phone?: ICustomer['phone']
+      state?: ICustomer['state']
+      total_spent?: ICustomer['total_spent']
+      verified_email?: ICustomer['verified_email']
+    }
+
+    export interface Get extends SearchIndexObject {
+      objectID: ICustomer['id']
+      userToken: NonNullable<SearchIndex['userToken']>
+    }
+  }
+
   export namespace Menu {
     export type Find = SearchIndex
 
@@ -155,7 +179,9 @@ export namespace APIQuery {
       source?: JudgeMeReview['source']
     }
 
-    export type Get = SearchIndexObject
+    export interface Get extends SearchIndexObject {
+      objectID: JudgeMeReview['id']
+    }
   }
 
   export interface SearchIndex extends PaginationSearchOptions {
@@ -178,6 +204,14 @@ export namespace APIQuery {
      * Text to query search index.
      */
     text?: SearchOptions['query']
+
+    /**
+     * A user identifier.
+     *
+     * Format: alpha numeric string [a-zA-Z0-9_-]
+     * Length: between 1 and 64 characters.
+     */
+    userToken?: SearchOptions['userToken']
   }
 
   export type SearchIndexObject = {
@@ -213,6 +247,8 @@ export namespace TObject {
     metafield: IMetafield[]
     products: IProductListing[]
   }
+
+  export type Customer = ICustomer
 
   export type Menu = IMenu
 

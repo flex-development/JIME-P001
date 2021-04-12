@@ -120,6 +120,7 @@ export default class ProductService extends SearchIndexService<TObject> {
    * @param {number} [query.page] - Specify the page to retrieve
    * @param {string} [query.product_id] - Find product listing by ID
    * @param {string} [query.text] - Text to search in index
+   * @param {string} [query.userToken] - User identifier
    * @return {SearchOptions} Algolia search options object
    */
   searchOptions(query: APIQuery.Product.Find = {}): SearchOptions {

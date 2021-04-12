@@ -5,6 +5,7 @@ import type {
   ReviewRating
 } from '@flex-development/kustomzcore'
 import type { VercelResponse as Res } from '@vercel/node'
+import type { IncomingHttpHeaders } from 'http'
 import routeWrapper from '../../lib/middleware/routeWrapper'
 import ReviewService from '../../lib/services/ReviewService'
 import type { ReviewReq } from '../../lib/types'
@@ -34,6 +35,7 @@ export type Req = ReviewReq.Create | ReviewReq.Find
  * @param {string} [req.body.ip_addr] - Reviewer's ip address
  * @param {ReviewRating} [req.body.rating] - Review rating; [1,5]
  * @param {string} [req.body.title] - Review title; [0,100]
+ * @param {IncomingHttpHeaders} req.headers - Incoming request headers
  * @param {APIQuery.Review.Find} [req.query] - Query parameters
  * @param {string} [req.query.curated] - Filter by curation status
  * @param {boolean} [req.query.featured] - Filter by featured reviews
@@ -56,7 +58,9 @@ export type Req = ReviewReq.Create | ReviewReq.Find
  * @param {Res} res - Server response object
  * @return {Promise<void>} Empty promise
  */
-const next = async ({ body, method, query }: Req, res: Res): Promise<void> => {
+const next = async (req: Req, res: Res): Promise<void> => {
+  const { body, headers, method, query } = req
+
   // Initialize API service
   const service = new ReviewService()
 
@@ -64,7 +68,7 @@ const next = async ({ body, method, query }: Req, res: Res): Promise<void> => {
   const POST = method.toUpperCase() === 'POST'
 
   // Get service method and arguments based on HTTP request method
-  const args = POST ? body : query
+  const args = POST ? { ...body, ip_addr: headers['x-forwarded-for'] } : query
   const smethod = POST ? 'create' : 'find'
 
   res.status(POST ? 201 : 200).json(await service[smethod](args))

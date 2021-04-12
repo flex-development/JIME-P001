@@ -8,6 +8,7 @@ import type { SuperTestSetup } from '@kapi/tests/utils'
 import { supertestSetup, testURLPath } from '@kapi/tests/utils'
 import faker from 'faker'
 import omit from 'lodash/omit'
+import pick from 'lodash/pick'
 
 /**
  * @file Integration Tests - POST /reviews
@@ -48,7 +49,7 @@ describe('POST /reviews', () => {
         const response = await request.post(testURLPath()).send(data)
 
         expect(response).toBeJSONResponse({ status: 201 })
-        expect(response.body).toMatchObject(data)
+        expect(pick(response.body, Object.keys(data))).toMatchObject(data)
       })
     })
 

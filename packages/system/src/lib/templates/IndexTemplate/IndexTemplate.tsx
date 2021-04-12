@@ -22,9 +22,6 @@ import type { IndexTemplateProps } from './IndexTemplate.props'
  * Displays a quick blurb about the shop owner, a product grid, and a product
  * review carousel.
  *
- * **Currently, the product reviews section in only visible in `development`
- * environments**.
- *
  * Renders a `Main` component with the classes `template` and `index-template`,
  * as well as the attribute `data-template='index'`.
  */
@@ -64,8 +61,7 @@ export const IndexTemplate: TC<IndexTemplateProps> = props => {
         />
       </Section>
 
-      {/* ONLY SHOW PRODUCT REVIEWS SECTION IN DEVELOPMENT */}
-      {process.env.NODE_ENV === 'development' && reviews.length !== 0 && (
+      {reviews.length !== 0 && (
         <Section $content id='reviews'>
           <Heading $size={2} className='template-heading'>
             {reviews_section_title}

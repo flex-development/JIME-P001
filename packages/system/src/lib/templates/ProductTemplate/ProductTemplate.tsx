@@ -115,32 +115,30 @@ export const ProductTemplate: TC<ProductTemplateProps> = props => {
         product={product}
       />
 
-      {process.env.NODE_ENV === 'development' && (
-        <Section className='product-template-reviews' id='reviews'>
-          <Box className='product-template-reviews-header'>
-            <Heading $size={2}>Reviews</Heading>
-            <Button
-              $scale
-              aria-label='Submit product review'
-              name='submit-review'
-              onClick={handleSubmitReviewCB}
-              type='submit'
-            >
-              Submit Review
-            </Button>
-          </Box>
-
-          <Carousel
-            chunk_max={reviews_chunk_max}
-            className='product-template-carousel'
-            id='product-review-carousel'
+      <Section className='product-template-reviews' id='reviews'>
+        <Box className='product-template-reviews-header'>
+          <Heading $size={2}>Reviews</Heading>
+          <Button
+            $scale
+            aria-label='Submit product review'
+            name='submit-review'
+            onClick={handleSubmitReviewCB}
+            type='submit'
           >
-            {reviews.map((review, i: number) => (
-              <ProductReview key={`product-review-${i}`} review={review} />
-            ))}
-          </Carousel>
-        </Section>
-      )}
+            Submit Review
+          </Button>
+        </Box>
+
+        <Carousel
+          chunk_max={reviews_chunk_max}
+          className='product-template-carousel'
+          id='product-review-carousel'
+        >
+          {reviews.map((review, i: number) => (
+            <ProductReview key={`product-review-${i}`} review={review} />
+          ))}
+        </Carousel>
+      </Section>
     </Main>
   )
 }

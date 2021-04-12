@@ -10,6 +10,7 @@ import type { CheckoutLineItemProps } from './CheckoutLineItem.props'
 export default {
   args: {
     style: {
+      height: 'unset',
       maxWidth: '1362px'
     }
   },

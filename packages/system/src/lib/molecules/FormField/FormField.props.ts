@@ -1,5 +1,6 @@
 import { BoxProps } from '@system/lib/atoms/Box'
 import { InputProps } from '@system/lib/atoms/Input'
+import { LabelProps } from '@system/lib/atoms/Label'
 
 /**
  * @file Component Props - FormField
@@ -22,4 +23,9 @@ export interface FormFieldProps extends BoxProps {
    * `Label` component text.
    */
   label: string
+
+  /**
+   * If `true`, render an asterisk (`*`) next to the form label text.
+   */
+  required?: LabelProps['required']
 }

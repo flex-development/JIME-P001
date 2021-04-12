@@ -22,4 +22,9 @@ export interface LabelProps extends ComponentPropsBase<'label'> {
    * instead.
    */
   htmlFor?: string
+
+  /**
+   * If `true`, render an asterisk (`*`) next to the label text.
+   */
+  required?: boolean
 }

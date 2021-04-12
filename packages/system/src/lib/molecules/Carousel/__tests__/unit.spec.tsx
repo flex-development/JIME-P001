@@ -69,7 +69,7 @@ describe('unit:Carousel', () => {
 
         const view = render(<ProductReviews {...ProductReviews.args} />)
 
-        expect(view.getByText(review.title as string)).toBeInTheDocument()
+        expect(view.getByText(review.body)).toBeInTheDocument()
       })
     })
   })

@@ -1,40 +1,43 @@
-import type { IProductListing } from '@core/types'
-import type { AnyObject, ANYTHING } from '@flex-development/json/utils/types'
+import type {
+  IProductListing,
+  JudgeMeReviewCreateDataDTO as ReviewDTO,
+  ProductListingData
+} from '@core/types'
+import type { ANYTHING } from '@flex-development/json/utils/types'
 import type { FormProps } from '@system/lib/atoms/Form'
-import type { EventHandlers } from '@system/types'
+import type { BaseSyntheticEvent } from 'react'
+import type { FieldErrors, UnpackNestedValue } from 'react-hook-form'
 
 /**
  * @file Component Props - ProductReviewForm
  * @module lib/molecules/ProductReviewForm/props
  */
 
-export interface ProductReviewFormProps extends FormProps {
+export interface ProductReviewFormProps extends Omit<FormProps, 'id'> {
   /**
-   * Form description.
-   *
-   * @default 'To submit a review, use an email attached to a previous order.'
+   * Form submission handler. Fires when user clicks "Submit Review".
    */
-  description?: string
-
-  /**
-   * Form submission handler. Fires when user clicks the `submit` button.
-   */
-  handleSubmit?(req: AnyObject, event: EventHandlers.Click.Button): ANYTHING
+  handler?: Handler
 
   /**
    * The ID of the product the user is submitting a review for.
    */
-  id: string
+  id: ProductListingData['product_id'] | string
 
   /**
    * The title of the product the user is submitting a review for.
    */
   title: IProductListing['title']
+}
 
-  /**
-   * Product variants.
-   *
-   * @default []
-   */
-  variants: IProductListing['variants']
+/**
+ * Form values or errors object.
+ */
+export type HReview = UnpackNestedValue<ReviewDTO> | FieldErrors<ReviewDTO>
+
+/**
+ * Form submission handler. Fires when user clicks "Submit Review".
+ */
+export type Handler = {
+  (hreview: HReview, event?: BaseSyntheticEvent): ANYTHING
 }

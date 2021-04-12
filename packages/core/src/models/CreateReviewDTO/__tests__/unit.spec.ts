@@ -30,12 +30,18 @@ describe('unit:models/CreateReviewDTO', () => {
 
   beforeAll(() => {
     mockRequest.mockImplementation(async ({ url }: AxiosRequestConfig) => {
-      if (url === '/customers.json') return { customers: CUSTOMERS }
+      if (url === '/customers') {
+        return CUSTOMERS.map(({ email, id }) => ({
+          email,
+          id,
+          objectID: `${id}`
+        }))
+      }
 
       if (url === '/products') {
-        return PRODUCTS.map(p => ({
-          objectID: p.handle,
-          product_id: p.product_id
+        return PRODUCTS.map(({ handle, product_id }) => ({
+          objectID: handle,
+          product_id
         }))
       }
 

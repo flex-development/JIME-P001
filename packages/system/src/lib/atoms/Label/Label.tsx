@@ -1,5 +1,6 @@
 import { a } from '@react-spring/web'
 import { useSanitizedProps } from '@system/hooks/useSanitizedProps'
+import { Span } from '@system/lib/atoms/Span'
 import type { AnimatedFREC, FREC } from '@system/types'
 import { forwardRef } from 'react'
 import type { LabelProps } from './Label.props'
@@ -16,11 +17,20 @@ import type { LabelProps } from './Label.props'
  * - https://developer.mozilla.org/docs/Web/API/HTMLLabelElement
  */
 export const Label: FREC<LabelProps> = forwardRef((props, ref) => {
-  const { $form, htmlFor, ...rest } = props
+  const { $form, children, htmlFor, required, ...rest } = props
 
   const sanitized = useSanitizedProps<'label'>(rest, { 'form-label': $form })
 
-  return <label {...sanitized} htmlFor={htmlFor} ref={ref} />
+  return (
+    <label
+      {...sanitized}
+      data-required={required || undefined}
+      htmlFor={htmlFor}
+      ref={ref}
+    >
+      {required ? [children, <Span key='required'>*</Span>] : children}
+    </label>
+  )
 })
 
 Label.displayName = 'Label'

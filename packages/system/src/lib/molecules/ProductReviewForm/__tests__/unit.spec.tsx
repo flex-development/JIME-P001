@@ -17,16 +17,6 @@ describe('unit:ProductReviewForm', () => {
   })
 
   describe('props', () => {
-    describe('description', () => {
-      it('renders', () => {
-        render(<AshTray {...AshTray.args} />)
-
-        const text = AshTray.args.description as string
-
-        expect(screen.getByText(text)).toHaveClass('product-review-form-text')
-      })
-    })
-
     describe('id', () => {
       it('renders with attribute `id`', () => {
         const { container } = render(<AshTray {...AshTray.args} />)
@@ -42,16 +32,6 @@ describe('unit:ProductReviewForm', () => {
         render(<AshTray {...AshTray.args} />)
 
         expect(screen.getByText(AshTray.args.title)).toBeInTheDocument()
-      })
-    })
-
-    describe('variants', () => {
-      it('renders as <select name="variant"> options', () => {
-        render(<AshTray {...AshTray.args} />)
-
-        const options = screen.queryAllByRole('option')
-
-        expect(options.length).toBe(AshTray.args.variants.length)
       })
     })
   })

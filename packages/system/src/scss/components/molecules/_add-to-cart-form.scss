@@ -31,8 +31,9 @@ ADD TO CART FORM
       flex-direction: row;
     }
 
-    @include flex(center, space-between, column-reverse);
+    @include flex(center, space-between);
 
+    flex-direction: column-reverse;
     margin-top: $space-24;
   }
 

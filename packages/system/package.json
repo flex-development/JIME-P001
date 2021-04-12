@@ -63,6 +63,7 @@
     "prepare": "bash ./scripts/prepare.sh"
   },
   "dependencies": {
+    "@hookform/resolvers": "latest",
     "@react-spring/web": "9.0.0-rc.3",
     "@shopify/theme-images": "latest",
     "classnames": "latest",
@@ -163,6 +164,7 @@
     "DEBUG",
     "DEBUG_COLORS",
     "NODE_ENV",
+    "SHOPIFY_API_KEY",
     "SKIP_PREPARE",
     "STORYBOOK_PORT",
     "STORYBOOK_STATIC_DIR"

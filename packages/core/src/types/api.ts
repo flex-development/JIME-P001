@@ -42,6 +42,12 @@ export namespace APIPayload {
     seo?: SEOData
   }
 
+  export interface Customer extends Partial<TObject.Customer> {
+    email: ICustomer['email']
+    id: ICustomer['id']
+    objectID: ICustomer['id']
+  }
+
   export type Layout = {
     hero: { subtitle: string; title: string }
     playlist: Playlist

@@ -14,7 +14,6 @@ import type {
   APIPayload,
   CustomErrorParams,
   ICustomer,
-  ICustomerResFind,
   NumberString
 } from '../../types'
 import { ReviewRating } from '../../types'
@@ -81,19 +80,16 @@ export const ProductError = (output: ANYTHING): CustomErrorParams => ({
  * Checks if {@param email} belongs to an existing customer.
  *
  * @async
- * @param {string} email - Email to validate
+ * @param {string} [email] - Email to validate
  * @return {Promise<boolean>} Promise containing `true` if customer email
  */
 const refineEmail = async (email: ICustomer['email']): Promise<boolean> => {
-  // Request customers from Shopify API
-  const { customers } = await request<ICustomerResFind>({
-    auth: {
-      password: process.env.SHOPIFY_PASSWORD || '',
-      username: process.env.SHOPIFY_API_KEY || ''
-    },
-    baseURL: `https://${process.env.SHOPIFY_DOMAIN}`,
+  // Request customers from KAPI
+  const customers = await request<APIPayload.Customer[]>({
+    baseURL: 'https://kapi.flexdevelopment.vercel.app',
     method: 'GET',
-    url: '/customers.json'
+    params: { userToken: process.env.SHOPIFY_API_KEY },
+    url: '/customers'
   })
 
   return !!customers.find(customer => customer.email === email)
@@ -103,7 +99,7 @@ const refineEmail = async (email: ICustomer['email']): Promise<boolean> => {
  * Checks if {@param id} is a product ID.
  *
  * @async
- * @param {NumberString} id - Email to validate
+ * @param {NumberString} id - Product ID to validate
  * @return {Promise<boolean>} Promise containing `true` product ID
  */
 const refineID = async (id: NumberString): Promise<boolean> => {

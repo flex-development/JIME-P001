@@ -10,9 +10,9 @@ import type { AsideProps } from './Aside.props'
  */
 
 /**
- * Renders an `<audio>` element.
+ * Renders an `<aside>` element.
  *
- * - https://developer.mozilla.org/docs/Web/HTML/Element/audio
+ * - https://developer.mozilla.org/docs/Web/HTML/Element/aside
  * - https://developer.mozilla.org/docs/Web/API/HTMLAsideElement
  */
 export const Aside: FREC<AsideProps> = forwardRef((props, ref) => {

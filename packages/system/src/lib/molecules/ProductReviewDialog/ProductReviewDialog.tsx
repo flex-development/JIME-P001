@@ -6,6 +6,7 @@ import { Dialog } from '@system/lib/atoms/Dialog'
 import { ProductReviewForm } from '@system/lib/molecules/ProductReviewForm'
 import isFunction from 'lodash/isFunction'
 import type { FC } from 'react'
+import { useEffect } from 'react'
 import useBoolean from 'react-hanger/array/useBoolean'
 import type { ProductReviewDialogProps } from './ProductReviewDialog.props'
 
@@ -20,14 +21,19 @@ import type { ProductReviewDialogProps } from './ProductReviewDialog.props'
  * Renders a `Dialog` component with the class `product-review-dialog`.
  */
 export const ProductReviewDialog: FC<ProductReviewDialogProps> = props => {
-  const { form, ...rest } = props
+  const { onClose, form, ...rest } = props
 
   const sanitized = useSanitizedProps<'dialog', DialogProps>(rest, {
     'product-review-dialog': true
   })
 
   // Handle dialog visibility
-  const [open, { setFalse: close }] = useBoolean(rest.open || false)
+  const [open, openActions] = useBoolean(rest.open || false)
+
+  // Watch for changes to visibility state (open dialog only)
+  useEffect(() => {
+    if (rest.open) openActions.setValue(rest.open)
+  }, [rest.open, openActions])
 
   return (
     <Dialog {...sanitized} id={`product-review-dialog-${form.id}`} open={open}>
@@ -37,14 +43,17 @@ export const ProductReviewDialog: FC<ProductReviewDialogProps> = props => {
           aria-label='Close dialog'
           className='product-review-dialog-btn'
           name='close-dialog'
-          onClick={close}
+          onClick={event => {
+            if (isFunction(onClose)) onClose(event)
+            openActions.setFalse()
+          }}
         />
 
         <ProductReviewForm
           {...form}
           handler={async (review, event) => {
             if (isFunction(form.handler)) await form.handler(review, event)
-            close()
+            openActions.setFalse()
           }}
           method='dialog'
         />

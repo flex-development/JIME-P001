@@ -1,3 +1,4 @@
+import type { ButtonProps } from '@system/lib/atoms/Button'
 import type { DialogProps } from '@system/lib/atoms/Dialog'
 import type { ProductReviewFormProps } from '@system/lib/molecules/ProductReviewForm'
 
@@ -7,6 +8,11 @@ import type { ProductReviewFormProps } from '@system/lib/molecules/ProductReview
  */
 
 export interface ProductReviewDialogProps extends DialogProps {
+  /**
+   * Fires when the close button is clicked.
+   */
+  onClose?: ButtonProps['onClick']
+
   /**
    * `ProductReviewForm` component properties.
    *

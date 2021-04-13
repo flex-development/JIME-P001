@@ -23,7 +23,7 @@ FORM FIELDS
     border: $input-border-width solid $input-border-color;
     font-size: $input-font-size;
     min-height: $input-height;
-    padding: $input-padding-y $input-padding-x;
+    padding: rem(6) $input-padding-x;
     transition: $input-transition;
 
     .form-field {

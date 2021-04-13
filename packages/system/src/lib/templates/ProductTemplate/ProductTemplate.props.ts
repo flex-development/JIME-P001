@@ -1,10 +1,8 @@
-import type { ANYTHING } from '@flex-development/json/utils/types'
 import type { MainProps } from '@system/lib/atoms/Main'
 import type { AddToCartFormProps } from '@system/lib/molecules/AddToCartForm'
 import type { CarouselProps } from '@system/lib/molecules/Carousel'
 import type { ProductBreadcrumbProps } from '@system/lib/molecules/ProductBreadcrumb'
 import type { ProductReviewProps } from '@system/lib/molecules/ProductReview'
-import type { EventHandlers } from '@system/types'
 
 /**
  * @file Component Props - ProductTemplate
@@ -28,11 +26,6 @@ export interface ProductTemplateProps extends MainProps {
    * Fires when the user clicks the "Add to Cart" button.
    */
   handleAddToCart?: AddToCartFormProps['handleSubmit']
-
-  /**
-   * Fires when the user clicks the "Submit Review" button.
-   */
-  handleSubmitReview?: (event: EventHandlers.Click.Button) => ANYTHING
 
   /**
    * Product listing data.

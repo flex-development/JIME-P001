@@ -11,6 +11,8 @@ PRODUCT REVIEW DIALOG
     @include fluid-width;
 
     background-color: rgba($dark, $opacity-50);
+    top: $space-0;
+    z-index: $zindex-modal;
   }
 
   &:not([open]) {

@@ -1,5 +1,6 @@
 import type { RenderResult } from '@testing-library/react'
-import { render } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
+import User from '@testing-library/user-event'
 import { AshTray } from '../ProductReviewDialog.stories'
 
 /**
@@ -9,10 +10,12 @@ import { AshTray } from '../ProductReviewDialog.stories'
  */
 
 describe('unit:ProductReviewDialog', () => {
+  const onClose = jest.fn()
+
   let view = {} as RenderResult
 
   beforeEach(() => {
-    view = render(<AshTray {...AshTray.args} />)
+    view = render(<AshTray {...AshTray.args} onClose={onClose} />)
   })
 
   describe('html', () => {
@@ -20,6 +23,19 @@ describe('unit:ProductReviewDialog', () => {
       const eclass = 'product-review-dialog'
 
       expect(view.container.firstChild).toHaveClass(eclass)
+    })
+  })
+
+  describe('callbacks', () => {
+    it('calls onClose', () => {
+      // Get close button
+      const button = screen.getByRole('button', { name: /close dialog/i })
+
+      // ! Simulate user clicking close button
+      User.click(button)
+
+      expect(onClose).toBeCalledTimes(1)
+      expect(onClose.mock.calls[0][0].target).toBe(button)
     })
   })
 })

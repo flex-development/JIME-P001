@@ -1,7 +1,7 @@
 {
   "github": {
     "autoAlias": true,
-    "enabled": false,
+    "enabled": true,
     "silent": false
   },
   "redirects": [

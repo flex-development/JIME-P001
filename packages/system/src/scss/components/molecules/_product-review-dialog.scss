@@ -3,10 +3,14 @@ PRODUCT REVIEW DIALOG
 ----------------------------------------------------------------------------- */
 
 .product-review-dialog {
+  @include padding-y($space-48);
+
   border: none;
 
   &[open] {
-    @include flex(center, center);
+    @include flex(flex-start, center);
+
+    @include fluid-height;
 
     @include fluid-width;
 
@@ -48,7 +52,7 @@ PRODUCT REVIEW DIALOG
   }
 
   &-content {
-    @include flex(stretch, center, column);
+    @include flex(stretch, flex-start, column);
 
     @include breakpoint-up(md) {
       width: 60%;
@@ -60,7 +64,9 @@ PRODUCT REVIEW DIALOG
 
     background-color: $light;
     border-radius: $space-12;
+    max-height: 95%;
     max-width: 100%;
+    overflow-y: scroll;
     padding: $space-24 $space-0;
     width: 85%;
 

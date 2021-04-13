@@ -54,6 +54,6 @@ PRODUCT TEMPLATE
   }
 
   .product-review-dialog {
-    @include fluid-height;
+    position: fixed;
   }
 }

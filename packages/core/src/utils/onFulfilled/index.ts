@@ -16,7 +16,7 @@ import type { AxiosResponse } from 'axios'
 const onFulfilled = (
   response: AxiosResponse<ANYTHING>
 ): ANYTHING | AxiosResponse<ANYTHING> => {
-  return response.data
+  return response.data || response
 }
 
 export default onFulfilled

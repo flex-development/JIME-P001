@@ -1,3 +1,4 @@
+import { REVIEW_FIELDS } from '@app/config/constants'
 import type {
   IPagePropsProduct as PageProps,
   NextIncomingMessage,
@@ -61,6 +62,8 @@ export const getServerSideProps: GetServerSideProps<PageProps, Query> = async (
   const { query, req } = context
   const { collection, product, sku } = query as Query
 
+  const cproduct = req.url?.includes(`/collections/${collection}/products/`)
+
   let data: APIPayload.Product | NotFound = { notFound: true }
   let data_collection: APIPayload.Collection | NotFound = { notFound: true }
 
@@ -82,8 +85,6 @@ export const getServerSideProps: GetServerSideProps<PageProps, Query> = async (
     throw error
   }
 
-  const c_product = req.url?.includes(`/collections/${collection}/products/`)
-
   return {
     props: {
       seo: data.seo as NonNullable<typeof data.seo>,
@@ -93,17 +94,24 @@ export const getServerSideProps: GetServerSideProps<PageProps, Query> = async (
           data.variants?.find(variant => variant.sku === sku)
         ),
         collection: {
-          href: c_product ? `/collections/${collection}` : '/products',
-          title: c_product ? data_collection.title : 'Products'
+          href: cproduct ? `/collections/${collection}` : '/products',
+          title: cproduct ? data_collection.title : 'Products'
         },
-        product: pick(data, [
-          'body_html',
-          'handle',
-          'images',
-          'title',
-          'variants'
-        ]) as ProductListingData,
-        reviews: []
+        product: (() => {
+          const product = pick(data, [
+            'body_html',
+            'images',
+            'product_id',
+            'title',
+            'variants'
+          ])
+
+          return { ...product, handle: data.objectID } as ProductListingData
+        })(),
+        reviews: await kapi<PageProps['template']['reviews']>({
+          params: { fields: REVIEW_FIELDS, product_id: data.product_id },
+          url: '/reviews'
+        })
       })
     }
   }

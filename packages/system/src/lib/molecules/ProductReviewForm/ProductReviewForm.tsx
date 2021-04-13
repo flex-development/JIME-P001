@@ -28,7 +28,7 @@ import type { BaseSyntheticEvent, FC } from 'react'
 import { useCallback } from 'react'
 import useSetState from 'react-hanger/array/useSetState'
 import { useForm } from 'react-hook-form'
-import type { HReview, ProductReviewFormProps } from './ProductReviewForm.props'
+import type { ProductReviewFormProps } from './ProductReviewForm.props'
 
 /**
  * @file Implementation - ProductReviewForm
@@ -44,15 +44,7 @@ export const ProductReviewForm: FC<ProductReviewFormProps> & {
   BODY_PLACEHOLDER: string
   TITLE_PLACEHOLDER: string
 } = props => {
-  const {
-    handler = (hreview: HReview, event?: BaseSyntheticEvent) => {
-      event?.preventDefault()
-      console.log('TODO: ProductReviewForm.handler', hreview)
-    },
-    id,
-    title,
-    ...rest
-  } = props
+  const { handler, id, title, ...rest } = props
 
   const sanitized = useSanitizedProps<'form', FormProps>(
     rest,

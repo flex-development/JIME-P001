@@ -10,7 +10,7 @@ import type { DialogProps } from './Dialog.props'
  */
 
 /**
- * Renders an `<dialog>` element.
+ * Renders a `<dialog>` element.
  *
  * - https://developer.mozilla.org/docs/Web/HTML/Element/dialog
  * - https://developer.mozilla.org/docs/Web/API/HTMLDialogElement

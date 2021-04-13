@@ -6,7 +6,7 @@ import type {
 import type { ANYTHING } from '@flex-development/json/utils/types'
 import type { FormProps } from '@system/lib/atoms/Form'
 import type { BaseSyntheticEvent } from 'react'
-import type { FieldErrors, UnpackNestedValue } from 'react-hook-form'
+import type { UnpackNestedValue } from 'react-hook-form'
 
 /**
  * @file Component Props - ProductReviewForm
@@ -16,6 +16,9 @@ import type { FieldErrors, UnpackNestedValue } from 'react-hook-form'
 export interface ProductReviewFormProps extends Omit<FormProps, 'id'> {
   /**
    * Form submission handler. Fires when user clicks "Submit Review".
+   *
+   * If the review is submitted successfully, the handler will be passed the new
+   * review data and form event.
    */
   handler?: Handler
 
@@ -31,9 +34,9 @@ export interface ProductReviewFormProps extends Omit<FormProps, 'id'> {
 }
 
 /**
- * Form values or errors object.
+ * Form values.
  */
-export type HReview = UnpackNestedValue<ReviewDTO> | FieldErrors<ReviewDTO>
+export type HReview = UnpackNestedValue<ReviewDTO>
 
 /**
  * Form submission handler. Fires when user clicks "Submit Review".

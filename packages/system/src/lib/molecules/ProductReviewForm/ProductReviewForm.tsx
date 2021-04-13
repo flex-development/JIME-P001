@@ -93,13 +93,10 @@ export const ProductReviewForm: FC<ProductReviewFormProps> & {
     data: ReviewDTO,
     event?: BaseSyntheticEvent
   ): OrNever<Promise<typeof data>> => {
-    const NENV = (process.env.NODE_ENV || 'development').toLowerCase()
-    const VENV = (process.env.VERCEL_ENV || 'development').toLowerCase()
-
     let review = {} as ReviewDTO
 
     try {
-      if (NENV === 'development' || VENV === 'development' || NENV === 'test') {
+      if (JSON.parse(`${process.env.MOCK_POST_REVIEW || 'true'}`)) {
         review = { ...data, ip_addr: await ip.v4() }
       } else {
         review = await kapi({ data, method: 'post', url: '/reviews' })

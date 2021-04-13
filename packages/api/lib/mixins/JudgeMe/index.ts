@@ -49,6 +49,12 @@ export default class JudgeMe {
   static BASE_URL: string = 'https://judge.me/api/v1/reviews'
 
   /**
+   * @property {boolean} PR - If `false`, do NOT request the Judge.me API when
+   * creating reviews. Data will be only be validated, then returned.
+   */
+  static PR: boolean = !JSON.parse(`${process.env.MOCK_POST_REVIEW || 'true'}`)
+
+  /**
    * @property {string} SHOP_DOMAIN - Shop domain without http/https protocol
    */
   static SHOP_DOMAIN: string = ShopifyAPI.URL.replace('https://', '')
@@ -60,33 +66,33 @@ export default class JudgeMe {
    * ! bodies are required. Review titles are still optional.
    *
    * @async
-   * @param {ICreateReviewDTO} data - JSON body
-   * @param {string} data.body - Review body; [1,500]
-   * @param {string} data.email - Reviewer email
-   * @param {NumberString} data.id - Product ID
-   * @param {string} [data.ip_addr] - Reviewer's ip address
-   * @param {ReviewRating} [data.rating] - Review rating; [1,5]
-   * @param {string} [data.title] - Review title; [0,100]
+   * @param {ICreateReviewDTO} dto - JSON body
+   * @param {string} dto.body - Review body; [1,500]
+   * @param {string} dto.email - Reviewer email
+   * @param {NumberString} dto.id - Product ID
+   * @param {string} [dto.ip_addr] - Reviewer's ip address
+   * @param {ReviewRating} [dto.rating] - Review rating; [1,5]
+   * @param {string} [dto.title] - Review title; [0,100]
    * @return {Promise<ICreateReviewDTO>} Promise containing validated data
    * @throws {ErrorJSON}
    */
   static async create(
-    data: ICreateReviewDTO
+    dto: ICreateReviewDTO
   ): OrNever<Promise<ICreateReviewDTO>> {
     // Copy incoming data
-    let dto: ICreateReviewDTO = Object.assign({}, data)
+    let data: ICreateReviewDTO = Object.assign({}, dto)
 
     // Remove ip address if empty string
-    if (!dto.ip_addr?.trim().length) delete dto.ip_addr
+    if (!data.ip_addr?.trim().length) delete data.ip_addr
 
     // Remove title if empty string
-    if (!dto.title?.trim().length) delete dto.title
+    if (!data.title?.trim().length) delete data.title
 
     // Parse and validate data
     try {
-      dto = await CRDTO.parseAsync(dto)
+      data = await CRDTO.parseAsync(data)
     } catch (zerror) {
-      throw ErrorHandling.formatValidationError(zerror, dto)
+      throw ErrorHandling.formatValidationError(zerror, data)
     }
 
     /**
@@ -97,21 +103,21 @@ export default class JudgeMe {
      */
     // Get product listing
     // const listings = await ShopifyAPI.productListings()
-    // const listing = listings.find(listing => listing.product_id === dto.id)
+    // const listing = listings.find(listing => listing.product_id === data.id)
 
     // if (listing.images.length) {
     //   // Create product image map
     //   const picture_urls = { '0': listing.images[0].src.split('?')[0] }
 
     //   // Add picture urls to review
-    //   dto = merge(dto, { picture_urls })
+    //   data = merge(data, { picture_urls })
     // }
 
     // Create review
-    await JudgeMe.request<CreateRes>({ data: dto, method: 'post' })
+    if (JudgeMe.PR) await JudgeMe.request<CreateRes>({ data, method: 'post' })
 
     // Return validated data
-    return dto
+    return data
   }
 
   /**

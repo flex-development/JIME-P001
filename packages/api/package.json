@@ -52,6 +52,7 @@
     "APPLE_TEAM_ID",
     "GA_TRACKING_ID",
     "JUDGEME_API_TOKEN",
+    "MOCK_POST_REVIEW",
     "NODE_ENV",
     "NPM_RC",
     "SHOPIFY_API_KEY",

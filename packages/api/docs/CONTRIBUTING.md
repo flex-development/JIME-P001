@@ -66,6 +66,7 @@ and display product and store reviews and other user-generated content.
 **Environment Variables**
 
 - `JUDGEME_API_TOKEN`
+- `MOCK_POST_REVIEW`
 
 ### Opsgenie
 

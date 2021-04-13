@@ -6,14 +6,6 @@ import type { Color, GridBreakpointKey } from '@system/types'
  * @module config/constants
  */
 
-export const API_URL = (() => {
-  if (process.env.NODE_ENV?.toLowerCase() === 'production') {
-    return 'https://api.morenaskustomz.com'
-  }
-
-  return 'https://kapi.flexdevelopment.vercel.app'
-})()
-
 export const CHECK_INPUT_TYPES = ['checkbox', 'radio']
 
 export const COLORS: Color[] = [
@@ -57,7 +49,7 @@ export const GRID_COLUMN_UTILITY_CLASS = 'col'
 
 export const GRID_ROW_UTILITY_CLASS = 'row'
 
-export const IMAGE_PLACEHOLDER_URL = `${API_URL}/assets/placeholder`
+export const IMAGE_PLACEHOLDER_URL = `${process.env.API_URL}/assets/placeholder`
 
 export const PRODUCT_IMAGE_DEFAULT: IProductImage = {
   alt: '',

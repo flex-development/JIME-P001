@@ -9,7 +9,7 @@ import {
   string,
   union
 } from 'zod'
-import { request } from '../../config/axios'
+import kapi from '../../config/axios-kapi'
 import type {
   APIPayload,
   CustomErrorParams,
@@ -85,8 +85,7 @@ export const ProductError = (output: ANYTHING): CustomErrorParams => ({
  */
 const refineEmail = async (email: ICustomer['email']): Promise<boolean> => {
   // Request customers from KAPI
-  const customers = await request<APIPayload.Customer[]>({
-    baseURL: 'https://kapi.flexdevelopment.vercel.app',
+  const customers = await kapi<APIPayload.Customer[]>({
     method: 'GET',
     params: { userToken: process.env.SHOPIFY_API_KEY },
     url: '/customers'
@@ -104,8 +103,7 @@ const refineEmail = async (email: ICustomer['email']): Promise<boolean> => {
  */
 const refineID = async (id: NumberString): Promise<boolean> => {
   // Request product listings from KAPI
-  const products = await request<APIPayload.Product[]>({
-    baseURL: 'https://kapi.flexdevelopment.vercel.app',
+  const products = await kapi<APIPayload.Product[]>({
     method: 'GET',
     url: '/products'
   })

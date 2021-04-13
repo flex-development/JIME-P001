@@ -1,14 +1,14 @@
 import { OBJECT } from '@kapi/tests/fixtures/judgeme/reviews'
 import CUSTOMERS from '@kapi/tests/fixtures/shopify/customers'
 import PRODUCTS from '@kapi/tests/fixtures/shopify/products'
-import { request } from '@kustomzcore/config/axios'
+import kapi from '@kustomzcore/config/axios-kapi'
 import type {
   CustomErrorParams,
   JudgeMeReviewCreateDataDTO as ICreateReviewDTO,
   ZodSafeParseError
 } from '@kustomzcore/types'
 import { ReviewRating } from '@kustomzcore/types/reviews'
-import type { AxiosRequestConfig } from 'axios'
+import type { AxiosRequestConfig as Config } from 'axios'
 import faker from 'faker'
 import Subject from '..'
 
@@ -17,9 +17,9 @@ import Subject from '..'
  * @module models/CreateReviewDTO/tests/unit
  */
 
-jest.mock('@kustomzcore/config/axios')
+jest.mock('@kustomzcore/config/axios-kapi')
 
-const mockRequest = request as jest.MockedFunction<typeof request>
+const mockKAPI = kapi as jest.MockedFunction<typeof kapi>
 
 describe('unit:models/CreateReviewDTO', () => {
   const body = '👍🏾 👍🏾 👍🏾'
@@ -29,8 +29,8 @@ describe('unit:models/CreateReviewDTO', () => {
   const DTO: ICreateReviewDTO = { body, email, id }
 
   beforeAll(() => {
-    mockRequest.mockImplementation(async ({ url }: AxiosRequestConfig) => {
-      if (url === '/customers') {
+    mockKAPI.mockImplementation(async (config?: Omit<Config, 'baseURL'>) => {
+      if (config?.url === '/customers') {
         return CUSTOMERS.map(({ email, id }) => ({
           email,
           id,
@@ -38,7 +38,7 @@ describe('unit:models/CreateReviewDTO', () => {
         }))
       }
 
-      if (url === '/products') {
+      if (config?.url === '/products') {
         return PRODUCTS.map(({ handle, product_id }) => ({
           objectID: handle,
           product_id

@@ -1,4 +1,4 @@
-import REVIEWS from '@system/tests/fixtures/api/reviews'
+import { OBJECTS as REVIEWS } from '@kapi/tests/fixtures/judgeme/reviews'
 import { render, screen } from '@testing-library/react'
 import { Carousel } from '../Carousel'
 import { ProductImages, ProductReviews } from '../Carousel.stories'
@@ -69,7 +69,7 @@ describe('unit:Carousel', () => {
 
         const view = render(<ProductReviews {...ProductReviews.args} />)
 
-        expect(view.getByText(review.title)).toBeInTheDocument()
+        expect(view.getByText(review.body)).toBeInTheDocument()
       })
     })
   })

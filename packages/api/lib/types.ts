@@ -1,3 +1,4 @@
+import type { SearchOptions } from '@algolia/client-search'
 import type { ApiError as AlgoliaError } from '@algolia/transporter'
 import type { AnyObject, ANYTHING } from '@flex-development/json'
 import type {
@@ -41,6 +42,19 @@ export namespace CollectionReq {
 
   export interface Get extends APIRequest {
     query: APIQuery.Collection.Get
+  }
+}
+
+/**
+ * Shape of requests handled by the `Customer` service.
+ */
+export namespace CustomerReq {
+  export interface Find extends APIRequest {
+    query: APIQuery.Customer.Find
+  }
+
+  export interface Get extends APIRequest {
+    query: APIQuery.Customer.Get
   }
 }
 
@@ -127,6 +141,7 @@ export namespace ReviewReq {
  */
 export type SearchIndexName =
   | 'collections'
+  | 'customers'
   | 'menus'
   | 'pages'
   | 'policies'
@@ -152,6 +167,13 @@ export type SearchIndexObjectsFN<TObject = AnyObject> = {
  * Shopify resources that have a `metafield` property.
  */
 export type ShopifyResourceWithMetafield = 'collections' | 'pages' | 'products'
+
+/**
+ * Algolia search options with mandatory `userToken` property.
+ */
+export type SearchOptionsA = Omit<SearchOptions, 'userToken'> & {
+  userToken: NonNullable<SearchOptions['userToken']>
+}
 
 // Algolia types
 export type {

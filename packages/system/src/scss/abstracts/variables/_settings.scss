@@ -209,6 +209,7 @@ $bg-sizes: auto, contain, cover;
 // -----------------------------------------------------------------------------
 
 $opacity-0: 0;
+$opacity-15: 0.15;
 $opacity-25: 0.25;
 $opacity-50: 0.5;
 $opacity-75: 0.75;
@@ -586,7 +587,7 @@ $input-focus-bg: $input-bg;
 $input-focus-border-color: $input-border-color;
 $input-focus-color: $input-color;
 $input-focus-width: $btn-focus-width;
-$input-focus-box-shadow: 0 0 $space-24 $btn-focus-width $btn-focus-color;
+$input-focus-box-shadow: null;
 $input-focus-font-weight: $font-weight-semibold;
 
 $input-plaintext-bg-color: $primary;
@@ -623,7 +624,7 @@ $form-label-margin-bottom: $space-8;
 $form-label-font-size: $font-size-sm;
 $form-label-font-style: null;
 $form-label-font-weight: $font-weight-semibold;
-$form-label-color: $secondary;
+$form-label-color: $dark;
 
 $form-control-border: $input-border-width solid $input-border-color;
 

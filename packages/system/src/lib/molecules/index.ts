@@ -14,6 +14,7 @@ export * from './ProductBreadcrumb'
 export * from './ProductCard'
 export * from './ProductRating'
 export * from './ProductReview'
+export * from './ProductReviewDialog'
 export * from './ProductReviewForm'
 export * from './SearchBar'
 

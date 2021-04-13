@@ -1,0 +1,15 @@
+/* -----------------------------------------------------------------------------
+LABELS
+----------------------------------------------------------------------------- */
+
+label[data-required] > span {
+  color: $secondary;
+}
+
+.form-label {
+  color: $form-label-color;
+  font-size: $form-label-font-size;
+  font-style: $form-label-font-style;
+  font-weight: $form-label-font-weight;
+  text-transform: uppercase;
+}

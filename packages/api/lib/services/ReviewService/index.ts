@@ -122,6 +122,7 @@ export default class ReviewService extends SearchIndexService<TObject> {
    * @param {string} [query.reviewer_id] - Filter by review ID
    * @param {string} [query.source] - Filter by review creation source
    * @param {string} [query.text] - Text to search in index
+   * @param {string} [query.userToken] - User identifier
    * @return {SearchOptions} Algolia search options object
    */
   searchOptions(query: APIQuery.Review.Find = {}): SearchOptions {

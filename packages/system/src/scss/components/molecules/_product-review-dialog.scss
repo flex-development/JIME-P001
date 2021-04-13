@@ -1,0 +1,77 @@
+/* -----------------------------------------------------------------------------
+PRODUCT REVIEW DIALOG
+----------------------------------------------------------------------------- */
+
+.product-review-dialog {
+  @include padding-y($space-48);
+
+  border: none;
+
+  &[open] {
+    @include flex(flex-start, center);
+
+    @include fluid-height;
+
+    @include fluid-width;
+
+    background-color: rgba($dark, $opacity-50);
+    top: $space-0;
+    z-index: $zindex-modal;
+  }
+
+  &:not([open]) {
+    display: none;
+  }
+
+  &-btn {
+    $fill: rgba($dark, $opacity-50);
+    $icon-width: em($space-24);
+
+    $icon: icon-url(
+      mobile-cancel-major,
+      $fill,
+      $fill,
+      1px,
+      $icon-width,
+      $icon-width
+    );
+
+    @include bkg-img($icon, contain, center);
+
+    @include breakpoint-up(sm) {
+      margin-right: $space-24;
+    }
+
+    @include height($icon-width, $icon-width, $icon-width);
+
+    @include width($icon-width, $icon-width, $icon-width);
+
+    align-self: flex-end;
+    margin-top: $space-12;
+    margin-right: $space-24;
+  }
+
+  &-content {
+    @include flex(stretch, flex-start, column);
+
+    @include breakpoint-up(md) {
+      width: 60%;
+    }
+
+    @include breakpoint-up(lg) {
+      width: 40%;
+    }
+
+    background-color: $light;
+    border-radius: $space-12;
+    max-height: 95%;
+    max-width: 100%;
+    overflow-y: scroll;
+    padding: $space-24 $space-0;
+    width: 85%;
+
+    .product-review-form {
+      padding-top: $space-32;
+    }
+  }
+}

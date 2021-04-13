@@ -1,3 +1,4 @@
+import { REVIEW_FIELDS } from '@app/config/constants'
 import type { IPagePropsIndex as PageProps, PageComponent } from '@app/types'
 import kapi from '@core/config/axios-kapi'
 import type { APIPayload } from '@core/types'
@@ -65,7 +66,10 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async (): Promi
   const template: PageProps['template'] = {
     page: data,
     products: products as PageProps['template']['products'],
-    reviews: []
+    reviews: await kapi<PageProps['template']['reviews']>({
+      params: { featured: true, fields: REVIEW_FIELDS },
+      url: '/reviews'
+    })
   }
 
   return { props: { seo: data.seo as NonNullable<typeof data.seo>, template } }

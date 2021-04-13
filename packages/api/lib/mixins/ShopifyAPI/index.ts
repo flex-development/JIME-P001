@@ -51,6 +51,11 @@ import MENUS_FIXTURE from './__tests__/__fixtures__/menus'
  */
 export default class ShopifyAPI {
   /**
+   * @property {string} API_KEY - Shopify API key
+   */
+  static API_KEY: string = process.env.SHOPIFY_API_KEY || ''
+
+  /**
    * @property {string} NAME - Shop name
    */
   static NAME: string = process.env.SHOPIFY_SHOP_NAME || ''
@@ -337,7 +342,7 @@ export default class ShopifyAPI {
       ...config,
       auth: {
         password: process.env.SHOPIFY_PASSWORD,
-        username: process.env.SHOPIFY_API_KEY
+        username: ShopifyAPI.API_KEY
       },
       baseURL: menus ? `https://${ShopifyAPI.URL}` : ShopifyAPI.BASE_URL,
       method: 'GET',

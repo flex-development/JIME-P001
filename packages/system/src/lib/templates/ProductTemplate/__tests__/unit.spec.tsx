@@ -15,8 +15,4 @@ describe('unit:ProductTemplate', () => {
       expect(container.firstChild).toHaveClass('product-template')
     })
   })
-
-  describe('callbacks', () => {
-    it.todo('calls handleSubmitReview')
-  })
 })

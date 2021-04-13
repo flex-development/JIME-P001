@@ -46,6 +46,7 @@
   "required-env": [
     "ALGOLIA_API_KEY",
     "ALGOLIA_APP_ID",
+    "API_URL",
     "APPLE_AUTHKEY_MUSICKIT",
     "APPLE_AUTHKEY_MUSICKIT_KEY_ID",
     "APPLE_TEAM_ID",

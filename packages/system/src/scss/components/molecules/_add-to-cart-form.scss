@@ -22,9 +22,7 @@ ADD TO CART FORM
     padding-top: $space-32;
 
     .at-share-btn-elements {
-      @include flex-spread;
-
-      display: flex;
+      @include flex(center, space-between);
     }
   }
 
@@ -33,9 +31,8 @@ ADD TO CART FORM
       flex-direction: row;
     }
 
-    @include flex-spread;
+    @include flex(center, space-between);
 
-    display: flex;
     flex-direction: column-reverse;
     margin-top: $space-24;
   }
@@ -76,9 +73,7 @@ ADD TO CART FORM
 
   &-controls {
     @include breakpoint-up(sm) {
-      @include flex-spread;
-
-      flex-direction: row;
+      @include flex(center, space-between, row);
     }
 
     @include flex-column;

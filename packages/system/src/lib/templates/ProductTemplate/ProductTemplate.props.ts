@@ -1,9 +1,8 @@
-import type { AnyObject, ANYTHING } from '@flex-development/json/utils/types'
 import type { MainProps } from '@system/lib/atoms/Main'
 import type { AddToCartFormProps } from '@system/lib/molecules/AddToCartForm'
 import type { CarouselProps } from '@system/lib/molecules/Carousel'
 import type { ProductBreadcrumbProps } from '@system/lib/molecules/ProductBreadcrumb'
-import type { EventHandlers } from '@system/types'
+import type { ProductReviewProps } from '@system/lib/molecules/ProductReview'
 
 /**
  * @file Component Props - ProductTemplate
@@ -29,11 +28,6 @@ export interface ProductTemplateProps extends MainProps {
   handleAddToCart?: AddToCartFormProps['handleSubmit']
 
   /**
-   * Fires when the user clicks the "Submit Review" button.
-   */
-  handleSubmitReview?: (event: EventHandlers.Click.Button) => ANYTHING
-
-  /**
    * Product listing data.
    */
   product: AddToCartFormProps['product']
@@ -43,7 +37,7 @@ export interface ProductTemplateProps extends MainProps {
    *
    * @default []
    */
-  reviews?: AnyObject[]
+  reviews?: ProductReviewProps['review'][]
 
   /**
    * Maximum number of product reviews to show in a group.

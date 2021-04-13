@@ -1,5 +1,5 @@
 /**
- * @file Subdomain Components - App
+ * @file Entry Point - Components
  * @module components
  */
 

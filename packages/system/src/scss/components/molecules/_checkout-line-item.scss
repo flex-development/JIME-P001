@@ -21,9 +21,7 @@ CHECKOUT LINE ITEM
     }
 
     &[data-kpd='true'] {
-      &::first-letter {
-        text-transform: capitalize;
-      }
+      @include capitalize-first-letter;
     }
   }
 
@@ -57,9 +55,7 @@ CHECKOUT LINE ITEM
 
   &-form {
     @include breakpoint-up(md) {
-      @include flex-spread;
-
-      flex-direction: row;
+      @include flex(center, space-between, row);
     }
 
     @include flex-column;

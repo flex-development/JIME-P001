@@ -35,11 +35,10 @@ PRODUCT CARDS
   }
 
   &-footer {
-    @include flex-spread;
+    @include flex(center, space-between);
 
     background-color: $product-card-footer-bg;
     border-top: $product-card-border-width solid $product-card-border-color;
-    display: flex;
     padding: $product-card-footer-padding-y $product-card-footer-padding-x;
 
     > div {

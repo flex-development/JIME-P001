@@ -7,22 +7,23 @@ FORM FIELDS
 
   &-label {
     @include breakpoint-up(md) {
-      font-size: $font-size-xs;
+      font-size: $font-size-sm;
     }
 
     display: inline-block;
-    margin-top: $space-4;
+    font-weight: $font-weight-semibold;
+    margin-bottom: $space-4;
   }
 
   &[data-control='input'][data-type='number'] {
-    @include flex(center, space-between, row-reverse, inline-flex);
+    @include flex(center, space-between, row, inline-flex);
 
     @include fluid-width;
 
     border: $input-border-width solid $input-border-color;
     font-size: $input-font-size;
     min-height: $input-height;
-    padding: $input-padding-y $input-padding-x;
+    padding: rem(6) $input-padding-x;
     transition: $input-transition;
 
     .form-field {
@@ -36,6 +37,11 @@ FORM FIELDS
 
       &-label {
         margin-top: $space-0;
+      }
+
+      &-control > *,
+      &-label {
+        color: $secondary;
       }
     }
 

@@ -34,6 +34,24 @@ export const SEARCH_INDEX_SETTINGS: Record<
     ],
     name: 'collections'
   },
+  customers: {
+    attributesForFaceting: [
+      'filterOnly(accepts_marketing)',
+      'filterOnly(email)',
+      'filterOnly(first_name)',
+      'filterOnly(id)',
+      'filterOnly(last_name)',
+      'filterOnly(last_order_id)',
+      'filterOnly(last_order_name)',
+      'filterOnly(marketing_opt_in_level)',
+      'filterOnly(orders_count)',
+      'filterOnly(phone)',
+      'filterOnly(state)',
+      'filterOnly(total_spent)',
+      'filterOnly(verified_email)'
+    ],
+    name: 'customers'
+  },
   menus: {
     attributesForFaceting: [
       'filterOnly(handle)',

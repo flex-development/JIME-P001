@@ -92,14 +92,18 @@ module.exports = {
     const ATL_CACHE_DIRECTORY = 'node_modules/.cache/awesome-typescript-loader'
 
     const CORE = '@flex-development/kustomzcore'
+
     const JSON = '@flex-development/json/dist'
     const MDX_JS_REACT = '@mdx-js/react/dist/esm'
     const REACT_HANGER = 'react-hanger/esm'
     const REACT_USE = 'react-use/esm'
     const SRC = '../src'
     const TESTS = '../__tests__'
+    const TESTSK = '../../api/__tests__'
 
     const MODULE_RESOLVER_ALIAS = {
+      '@kapi/tests/fixtures': `${TESTSK.replace('../../', '../')}/__fixtures__`,
+      '@kapi/tests': TESTSK.replace('../../', '../'),
       '@system/tests/fixtures': `${TESTS.replace('../', './')}/__fixtures__`,
       '@system/tests': TESTS.replace('../', './'),
       '@system': SRC.replace('../', './')
@@ -110,6 +114,11 @@ module.exports = {
         alias: {
           '@core': path.join(__dirname, '../node_modules', CORE),
           '@flex-development/json': path.join(__dirname, ROOT_NM, JSON),
+          '@kapi/tests/fixtures': path.join(
+            __dirname,
+            `${TESTSK}/__fixtures__`
+          ),
+          '@kapi/tests': path.join(__dirname, TESTSK),
           '@mdx-js/react': path.join(__dirname, ROOT_NM, MDX_JS_REACT),
           '@system/tests/fixtures': path.join(__dirname, TESTS, '__fixtures__'),
           '@system/tests': path.join(__dirname, TESTS),

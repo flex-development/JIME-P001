@@ -123,7 +123,7 @@ FORMS
 
 textarea.form-control {
   @include breakpoint-up(md) {
-    @include height($space-120);
+    @include height(rem($space-16 * 11));
   }
 
   @include height(rem(208));
@@ -134,14 +134,6 @@ textarea.form-control {
   &::placeholder {
     font-weight: $input-focus-font-weight;
   }
-}
-
-.form-label {
-  color: $form-label-color;
-  font-size: $form-label-font-size;
-  font-style: $form-label-font-style;
-  font-weight: $form-label-font-weight;
-  text-transform: uppercase;
 }
 
 .form-select {
@@ -176,7 +168,6 @@ textarea.form-control {
   line-height: $form-select-line-height;
   padding-left: rem(6);
   text-transform: uppercase;
-  vertical-align: middle;
 }
 
 .form-option {

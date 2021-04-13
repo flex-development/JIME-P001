@@ -1,9 +1,6 @@
+import CRDTO from '@flex-development/kustomzcore/models/CreateReviewDTO'
 import type JudgeMe from '@kapi/mixins/JudgeMe'
 import { REVIEWS } from '@kapi/tests/fixtures/judgeme/reviews'
-import CUSTOMERS from '@kapi/tests/fixtures/shopify/customers'
-import PRODUCTS from '@kapi/tests/fixtures/shopify/products'
-import CRDTO from '@kustomzcore/models/CreateReviewDTO'
-import type { ZodIssue } from '@kustomzcore/types/errors'
 import type {
   JudgeMeReviewCreateDataDTO as ICreateReviewDTO,
   JudgeMeReviewIndexParamsNoAuth as IndexParams,
@@ -14,7 +11,6 @@ import type { AxiosRequestConfig } from 'axios'
 import chunk from 'lodash/chunk'
 import clamp from 'lodash/clamp'
 import isNumber from 'lodash/isNumber'
-import { ZodError } from 'zod'
 import ErrorHandling from '../../ErrorHandling'
 import '../../ShopifyAPI'
 
@@ -35,30 +31,7 @@ const { default: Actual } = jest.requireActual<RequireActual>('..')
 export default class MockJudgeMe extends Actual {
   static create = jest.fn(async (data: ICreateReviewDTO) => {
     try {
-      const parsed = await CRDTO.parseAsync(data)
-
-      const issues: ZodIssue[] = []
-
-      if (!CUSTOMERS.find(customer => customer.email === data.email)) {
-        issues.push({
-          code: 'custom',
-          message: `Customer with email "${data.email}" not found`,
-          params: { email: data.email },
-          path: ['email']
-        })
-      }
-
-      if (!PRODUCTS.find(product => product.product_id === data.id)) {
-        issues.push({
-          code: 'custom',
-          message: `Product with id "${data.id}" not found`,
-          params: { id: data.id },
-          path: ['id']
-        })
-      }
-
-      if (issues.length) throw new ZodError(issues)
-      return parsed
+      return await CRDTO.parseAsync(data)
     } catch (zerror) {
       throw ErrorHandling.formatValidationError(zerror, data)
     }

@@ -25,8 +25,6 @@ export const AshTray: FCS<ProductReviewFormProps> = args => (
 )
 
 AshTray.args = {
-  description: ProductReviewForm.defaultProps?.description,
-  id: `${ASH_TRAY.product_id}`,
-  title: ASH_TRAY.title,
-  variants: ASH_TRAY.variants
+  id: ASH_TRAY.product_id,
+  title: ASH_TRAY.title
 }

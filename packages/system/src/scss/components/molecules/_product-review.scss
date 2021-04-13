@@ -2,73 +2,102 @@
 PRODUCT REVIEWS
 ----------------------------------------------------------------------------- */
 
+$product-review-border: $border-width-light solid rgba($dark, $opacity-15);
+
 .product-review {
-  @include breakpoint-up(sm) {
-    column-gap: $space-36;
-    grid-template-columns: map-get($grid-template-columns, 12);
-    padding-bottom: $space-0;
-    row-gap: $space-0;
-  }
+  @include flex-column;
 
-  @include make-grid(1, 0, null, 24);
-
-  border: $border-width-thick solid $border-color;
-  padding-bottom: $space-36;
+  border: $product-review-border;
+  padding: $space-48;
 
   &-body {
-    @include breakpoint-up(md) {
-      font-size: $font-size-sm;
-    }
+    @include capitalize-first-letter;
 
+    color: $dark;
+    font-weight: $font-weight-normal;
+  }
+
+  &-date {
+    color: rgba($dark, $opacity-50);
+  }
+
+  &-footer {
+    @include flex(center, space-between);
+
+    $spacer: $space-24;
+
+    border-top: $product-review-border;
     font-size: $font-size-sm;
-    margin-bottom: $space-0;
+    margin-top: $spacer;
+    padding-top: $spacer;
   }
 
-  &-col {
-    &:first-of-type {
-      @include breakpoint-up(sm) {
-        @include make-grid-col(4);
-      }
+  &-header {
+    @include margin-y($space-12);
 
-      @include breakpoint-up(lg) {
-        @include make-grid-col(3);
-      }
+    font-size: $font-size-lg;
+    font-weight: $font-weight-semibold;
+
+    &-divider {
+      @include margin-x($space-4);
     }
 
-    &:last-of-type {
-      @include breakpoint-up(sm) {
-        @include make-grid-col(8);
-
-        @include padding-x($space-0, $space-36);
-      }
-
-      @include breakpoint-up(lg) {
-        @include make-grid-col(9);
-      }
-
-      @include padding-x($space-16);
-
-      justify-content: center;
+    &-product {
+      text-transform: uppercase;
     }
 
-    @include make-grid-col;
+    &-title {
+      @include capitalize-first-letter;
+
+      color: $primary;
+      margin-bottom: $space-0;
+    }
   }
 
-  &-img {
-    @include fluid-img;
+  &-rating {
+    .product-rating-checkbox {
+      $icon-width: $space-24;
+      $icon: icon-url(star, $muted, null, null, $icon-width);
+
+      @include bkg-img($icon, contain, center);
+
+      @include height($icon-width, $icon-width, $icon-width);
+
+      @include width($icon-width, $icon-width, $icon-width);
+
+      pointer-events: none;
+    }
   }
 
-  &-title {
-    color: $primary;
-    font-size: $font-size-xl;
-    font-weight: $font-weight-bold;
-    margin-bottom: $space-12 / 2;
+  &-reviewer {
+    @include flex(center, center);
+
+    &-divider {
+      color: $dark;
+    }
+
+    &-initials {
+      @include draw-circle($space-32 !important);
+
+      @include flex(center, center, inline-flex);
+
+      background-color: $primary;
+      color: $light;
+      font-weight: $font-weight-bold;
+    }
+
+    &-name {
+      margin-left: $space-12;
+    }
   }
 
   &-body,
-  &-title {
-    &::first-letter {
-      text-transform: capitalize;
-    }
+  &-date {
+    margin-bottom: $space-0;
+  }
+
+  &-date,
+  &-reviewer-name {
+    font-weight: $font-weight-medium;
   }
 }

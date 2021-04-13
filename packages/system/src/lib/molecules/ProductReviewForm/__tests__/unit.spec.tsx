@@ -1,3 +1,4 @@
+import type { RenderResult } from '@testing-library/react'
 import { render, screen } from '@testing-library/react'
 import { AshTray } from '../ProductReviewForm.stories'
 
@@ -8,50 +9,32 @@ import { AshTray } from '../ProductReviewForm.stories'
  */
 
 describe('unit:ProductReviewForm', () => {
+  const handler = jest.fn()
+
+  let view = {} as RenderResult
+
+  beforeEach(() => {
+    view = render(<AshTray {...AshTray.args} handler={handler} />)
+  })
+
   describe('html', () => {
     it('renders with class "product-review-form"', () => {
-      const { container } = render(<AshTray {...AshTray.args} />)
-
-      expect(container.firstChild).toHaveClass('product-review-form')
+      expect(view.container.firstChild).toHaveClass('product-review-form')
     })
   })
 
   describe('props', () => {
-    describe('description', () => {
-      it('renders', () => {
-        render(<AshTray {...AshTray.args} />)
-
-        const text = AshTray.args.description as string
-
-        expect(screen.getByText(text)).toHaveClass('product-review-form-text')
-      })
-    })
-
     describe('id', () => {
       it('renders with attribute `id`', () => {
-        const { container } = render(<AshTray {...AshTray.args} />)
-
         const id = `product-review-form-${AshTray.args.id}`
 
-        expect(container.firstChild).toHaveAttribute('id', id)
+        expect(view.container.firstChild).toHaveAttribute('id', id)
       })
     })
 
     describe('title', () => {
       it('renders product title', () => {
-        render(<AshTray {...AshTray.args} />)
-
         expect(screen.getByText(AshTray.args.title)).toBeInTheDocument()
-      })
-    })
-
-    describe('variants', () => {
-      it('renders as <select name="variant"> options', () => {
-        render(<AshTray {...AshTray.args} />)
-
-        const options = screen.queryAllByRole('option')
-
-        expect(options.length).toBe(AshTray.args.variants.length)
       })
     })
   })

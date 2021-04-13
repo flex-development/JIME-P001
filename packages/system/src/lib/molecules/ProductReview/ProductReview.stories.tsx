@@ -1,4 +1,4 @@
-import REVIEWS from '@system/tests/fixtures/api/reviews'
+import { OBJECT as REVIEW } from '@kapi/tests/fixtures/judgeme/reviews'
 import { ProductReview } from './ProductReview'
 import type { ProductReviewProps } from './ProductReview.props'
 
@@ -8,11 +8,7 @@ import type { ProductReviewProps } from './ProductReview.props'
  */
 
 export default {
-  args: {
-    style: {
-      maxWidth: '1362px'
-    }
-  },
+  args: { style: { height: 'unset', maxWidth: '1362px' } },
   component: ProductReview,
   parameters: {
     jest: ['ProductReview']
@@ -25,5 +21,5 @@ export const Default: FCS<ProductReviewProps> = args => (
 )
 
 Default.args = {
-  review: REVIEWS[0]
+  review: REVIEW
 }

@@ -11,9 +11,11 @@ import { AddToCartForm } from '@system/lib/molecules/AddToCartForm'
 import { Carousel } from '@system/lib/molecules/Carousel'
 import { ProductBreadcrumb } from '@system/lib/molecules/ProductBreadcrumb'
 import { ProductReview } from '@system/lib/molecules/ProductReview'
+import { ProductReviewDialog } from '@system/lib/molecules/ProductReviewDialog'
 import type { EventHandlers, TC } from '@system/types'
 import isFunction from 'lodash/isFunction'
 import { useCallback, useState } from 'react'
+import useBoolean from 'react-hanger/array/useBoolean'
 import type { ProductTemplateProps } from './ProductTemplate.props'
 
 /**
@@ -33,10 +35,6 @@ export const ProductTemplate: TC<ProductTemplateProps> = props => {
     active = 0,
     collection,
     handleAddToCart,
-    handleSubmitReview = (event: EventHandlers.Click.Button) => {
-      event.preventDefault()
-      console.log('TODO: ProductTemplate.handleSubmitReview')
-    },
     product,
     reviews = [],
     reviews_chunk_max,
@@ -54,6 +52,9 @@ export const ProductTemplate: TC<ProductTemplateProps> = props => {
   // Selected variant
   const initial_index = active < 0 ? 0 : active
   const [variant, setVariant] = useState(product.variants[initial_index])
+
+  // ProductReviewDialog state
+  const [dialog, dialogActions] = useBoolean(false)
 
   /**
    * Adds a product variant to the user's cart.
@@ -94,13 +95,18 @@ export const ProductTemplate: TC<ProductTemplateProps> = props => {
   // Callback version of `handleVariant`
   const handleVariantCB = useCallback(handleVariant, [product.variants])
 
-  // Callback version of `handleSubmitReview`
-  const handleSubmitReviewCB = useCallback(handleSubmitReview, [
-    handleSubmitReview
-  ])
-
   return (
     <Main {...sanitized} data-template={ProductTemplate.template_id}>
+      <ProductReviewDialog
+        onClose={() => dialogActions.setFalse()}
+        form={{
+          handler: dialogActions.setFalse,
+          id: product.product_id,
+          title: product.title
+        }}
+        open={dialog}
+      />
+
       <ProductBreadcrumb
         className='product-template-breadcrumb'
         collection={collection}
@@ -115,32 +121,29 @@ export const ProductTemplate: TC<ProductTemplateProps> = props => {
         product={product}
       />
 
-      {process.env.NODE_ENV === 'development' && (
-        <Section className='product-template-reviews' id='reviews'>
-          <Box className='product-template-reviews-header'>
-            <Heading $size={2}>Reviews</Heading>
-            <Button
-              $scale
-              aria-label='Submit product review'
-              name='submit-review'
-              onClick={handleSubmitReviewCB}
-              type='submit'
-            >
-              Submit Review
-            </Button>
-          </Box>
-
-          <Carousel
-            chunk_max={reviews_chunk_max}
-            className='product-template-carousel'
-            id='product-review-carousel'
+      <Section className='product-template-reviews' id='reviews'>
+        <Box className='product-template-reviews-header'>
+          <Heading $size={2}>Reviews</Heading>
+          <Button
+            aria-label='Submit product review'
+            name='submit-review'
+            onClick={dialogActions.setTrue}
+            type='submit'
           >
-            {reviews.map((review, i: number) => (
-              <ProductReview key={`product-review-${i}`} review={review} />
-            ))}
-          </Carousel>
-        </Section>
-      )}
+            Submit Review
+          </Button>
+        </Box>
+
+        <Carousel
+          chunk_max={reviews_chunk_max}
+          className='product-template-carousel'
+          id='product-review-carousel'
+        >
+          {reviews.map((review, i: number) => (
+            <ProductReview key={`product-review-${i}`} review={review} />
+          ))}
+        </Carousel>
+      </Section>
     </Main>
   )
 }

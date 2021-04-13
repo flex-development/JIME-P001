@@ -5,9 +5,7 @@ PRODUCT REVIEW FORM
 .product-review-form {
   @include flex(stretch, center, column);
 
-  @include padding-x($input-padding-x);
-
-  @include padding-y($space-24);
+  padding: $space-60 $space-24;
 
   &-btn {
     @include breakpoint-up(sm) {
@@ -18,48 +16,95 @@ PRODUCT REVIEW FORM
 
     @include fluid-width;
 
+    @include no-breaking;
+
     font-size: $font-size-sm;
     font-weight: $font-weight-bold;
-    margin-top: $space-12;
+
+    &:disabled[data-submit-successful='false'] {
+      @include opacity(1);
+
+      background-color: rgba($dark, $opacity-50);
+    }
+  }
+
+  &-error-message {
+    color: $secondary;
+    font-weight: $font-weight-semibold;
+    margin-top: $space-24;
+    text-transform: uppercase;
+
+    &:empty {
+      display: none;
+    }
+  }
+
+  &-field {
+    margin-bottom: $space-24;
+
+    textarea.form-control {
+      @include breakpoint-down(md) {
+        @include height(24rem);
+      }
+    }
+
+    &-label {
+      color: $secondary;
+      font-size: $font-size-xs;
+      font-weight: $font-weight-semibold;
+      text-transform: uppercase;
+    }
+  }
+
+  &-fields {
+    @include breakpoint-up(sm) {
+      margin-bottom: $space-12;
+    }
+
+    margin-bottom: $space-0;
+    margin-top: $space-24;
+
+    .product-review-form-field:last-of-type {
+      margin-bottom: $space-0;
+    }
+  }
+
+  &-footer {
+    > div {
+      @include breakpoint-up(sm) {
+        @include flex(center, space-between, row);
+      }
+
+      @include flex(center, center, column);
+    }
   }
 
   &-rating {
-    justify-content: space-between;
-  }
-
-  &-text {
-    @include margin-y($space-12);
-
-    color: rgba($light, 0.75);
-    font-weight: $font-weight-medium;
+    @include breakpoint-down(sm) {
+      justify-content: center;
+      margin-bottom: $space-20;
+    }
   }
 
   &-title {
     @include breakpoint-up(sm) {
-      @include flex-spread;
-
-      flex-direction: row;
+      @include flex(center, space-between, row);
     }
 
     @include flex-column;
 
+    font-size: $font-size-xl;
     margin-bottom: $space-0;
     text-transform: uppercase;
 
-    &-product-details {
-      span {
-        &:first-of-type {
-          color: $primary;
-        }
+    span {
+      &:first-of-type {
+        color: $primary;
+      }
 
-        &:last-of-type {
-          color: $secondary;
-        }
+      &:last-of-type {
+        color: $secondary;
       }
     }
-  }
-
-  .form-field {
-    margin-bottom: $space-36;
   }
 }

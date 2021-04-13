@@ -1,6 +1,6 @@
+import { OBJECTS as REVIEWS } from '@kapi/tests/fixtures/judgeme/reviews'
 import PAGE from '@system/tests/fixtures/api/pages'
 import PRODUCTS from '@system/tests/fixtures/api/products'
-import REVIEWS from '@system/tests/fixtures/api/reviews'
 import { IndexTemplate } from './IndexTemplate'
 import type { IndexTemplateProps } from './IndexTemplate.props'
 

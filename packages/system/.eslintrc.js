@@ -41,7 +41,6 @@ module.exports = {
     {
       files: [
         '__tests__/__fixtures__/api/layout.ts',
-        '__tests__/__fixtures__/api/reviews.ts',
         '.storybook/config/viewports.ts'
       ],
       rules: {

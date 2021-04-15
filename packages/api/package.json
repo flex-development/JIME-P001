@@ -29,7 +29,8 @@
     "@types/urijs": "latest",
     "algoliasearch": "latest",
     "string-strip-html": "latest",
-    "urijs": "latest"
+    "urijs": "latest",
+    "yaml": "latest"
   },
   "devDependencies": {
     "@types/content-type": "latest",

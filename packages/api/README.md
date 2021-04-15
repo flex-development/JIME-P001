@@ -14,28 +14,91 @@ Morena's Kustomz Serverless REST API
 
 ## Getting Started
 
-Serverless REST API for Morenas's Kustomz, an online cannabis accessory store.
+Serverless REST API for Morena's Kustomz, an online cannabis accessory store.
 
-## 🚧 Usage
+## Usage
 
-[Collections](#collections)  
-[Layout](#layout)  
-[Menus](#menus)  
-[Metafields](#metafields)  
-[Pages](#pages)  
-[Playlist](#playlist)  
-[Policies](#policies)  
-[Products](#products)  
-[Reviews](#reviews)
+**Base URL**: [`https://kapi.flexdevlopment.vercel.app`][1]
 
-**TODO**: Update documentation.
+- [Documentation][1] follows OpenAPI Specification v3.0.3 standards.
+
+### Authenticated Endpoints
+
+Endpoints that require a valid `userToken` (Shopify API token) query.
+
+#### Customers
+
+Retrieve information about shop customers.
+
+- `GET /customers`
+- `GET /customers/[objectID]`
+
+### Open Endpoints
+
+Endpoints that don't require authentication.
+
+#### Collections
+
+Retrieve information about product collections.
+
+- `GET /collections`
+- `GET /collections/[objectID]`
+
+#### Layout
+
+Fetch the data used to render the storefront `Layout` component.
+
+- `GET /layout`
+
+#### Menus
+
+Retrieve information about shop menus.
+
+- `GET /menus`
+- `GET /menus/[objectID]`
+
+#### Pages
+
+Retrieve information about online store pages.
+
+- `GET /pages`
+- `GET /pages/[objectID]`
+
+#### Playlist
+
+Fetch the storefront's Apple Music playlist data.
+
+- `GET /playlist`
+
+#### Policies
+
+Retrieve information about store policies.
+
+- `GET /policies`
+- `GET /policies/[objectID]`
+
+#### Products
+
+Retrieve information about store products.
+
+- `GET /products`
+- `GET /products/[objectID]`
+
+#### Reviews
+
+Create and list product reviews.
+
+- `GET /reviews`
+- `GET /reviews/[objectID]`
+- `POST /reviews`
 
 ## Built With
 
-- [Algolia][1] - Site Search & Discovery powered by AI
-- [Shopify Admin REST API][2] - Shopify REST API
-- [Vercel][3] - Hosting platform for serverless functions
+- [Algolia][2] - Site Search & Discovery powered by AI
+- [Shopify Admin REST API][3] - Shopify REST API
+- [Vercel][4] - Hosting platform for serverless functions
 
-[1]: https://www.algolia.com/
-[2]: https://shopify.dev/docs/admin-api/rest/reference
-[3]: https://vercel.com/docs/serverless-functions/introduction
+[1]: https://kapi.flexdevlopment.vercel.app
+[2]: https://www.algolia.com/
+[3]: https://shopify.dev/docs/admin-api/rest/reference
+[4]: https://vercel.com/docs/serverless-functions/introduction

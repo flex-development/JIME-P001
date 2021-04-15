@@ -10,7 +10,7 @@ import type { ReviewReq } from '../../lib/types'
  */
 
 /**
- * Retrieve a product review resource by ID.
+ * Retrieve a product review by ID.
  *
  * @async
  * @param {ReviewReq.Get} req - API request object

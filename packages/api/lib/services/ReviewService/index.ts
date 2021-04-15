@@ -2,6 +2,8 @@ import type {
   APIQuery,
   APIRequestBody,
   JudgeMeReviewCreateDataDTO as ICreateReviewDTO,
+  JudgeMeReviewCuratedStatus as ReviewCuratedStatus,
+  JudgeMeReviewSource as ReviewSource,
   NumberString,
   OrNever,
   ReviewRating,
@@ -78,7 +80,7 @@ export default class ReviewService extends SearchIndexService<TObject> {
    * @param {APIRequestBody.Review.POST} [data] - Data to create new review
    * @param {string} data.body - Review body; [1,500]
    * @param {string} data.email - Reviewer email
-   * @param {NumberString} data.id - Product ID
+   * @param {NumberString} data.id - ID of product being reviewed
    * @param {string} [data.ip_addr] - Reviewer's ip address
    * @param {ReviewRating} [data.rating] - Review rating; [1,5]
    * @param {string} [data.title] - Review title; [0,100]
@@ -104,13 +106,13 @@ export default class ReviewService extends SearchIndexService<TObject> {
    * @see https://www.algolia.com/doc/api-reference/api-parameters/filters/
    *
    * @param {APIQuery.Review.Find} [query] - Query parameters
-   * @param {string} [query.curated] - Filter by curation status
+   * @param {ReviewCuratedStatus} [query.curated] - Filter by curation status
    * @param {boolean} [query.featured] - Filter by featured reviews
    * @param {string} [query.fields] - Comma-separated list of fields to include
    * @param {boolean} [query.hidden] - Filter by hidden / published reviews
    * @param {number} [query.hitsPerPage] - Number of results per page
    * @param {number} [query.id] - Find review by ID
-   * @param {string} [query.ip_address] - Filter by review IP address
+   * @param {string} [query.ip_address] - Filter by reviewer IP address
    * @param {number} [query.length] - Result limit (used only with offset)
    * @param {number} [query.limit] - Number of hits to retrieve
    * @param {string} [query.objectID] - Find resource by search index objectID
@@ -118,9 +120,9 @@ export default class ReviewService extends SearchIndexService<TObject> {
    * @param {number} [query.page] - Specify the page to retrieve
    * @param {number} [query.product_id] - Filter by product listing
    * @param {ReviewRating} [query.rating] - Filter by review rating
-   * @param {string} [query.reviewer_email] - Filter by review email address
-   * @param {string} [query.reviewer_id] - Filter by review ID
-   * @param {string} [query.source] - Filter by review creation source
+   * @param {string} [query.reviewer_email] - Filter by reviewer email address
+   * @param {number} [query.reviewer_id] - Filter by reviewer ID
+   * @param {ReviewSource} [query.source] - Filter by review creation source
    * @param {string} [query.text] - Text to search in index
    * @param {string} [query.userToken] - User identifier
    * @return {SearchOptions} Algolia search options object

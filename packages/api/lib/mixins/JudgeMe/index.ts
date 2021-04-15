@@ -69,7 +69,7 @@ export default class JudgeMe {
    * @param {ICreateReviewDTO} dto - JSON body
    * @param {string} dto.body - Review body; [1,500]
    * @param {string} dto.email - Reviewer email
-   * @param {NumberString} dto.id - Product ID
+   * @param {NumberString} dto.id - ID of product being reviewed
    * @param {string} [dto.ip_addr] - Reviewer's ip address
    * @param {ReviewRating} [dto.rating] - Review rating; [1,5]
    * @param {string} [dto.title] - Review title; [0,100]

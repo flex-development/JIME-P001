@@ -24,8 +24,8 @@ import type { CustomerReq } from '../../lib/types'
  * @async
  * @param {CustomerReq.Find} req - API request object
  * @param {APIQuery.Customer.Find} req.query - Query parameters
- * @param {boolean} [req.query.accepts_marketing] - Filter by customers who have
- * consented to receive marketing material via email
+ * @param {boolean} [req.query.accepts_marketing] - Filter by marketing material
+ * subscription
  * @param {string} [req.query.email] - Find customer by email address
  * @param {string} [req.query.fields] - List of fields to include
  * @param {string} [req.query.first_name] - Filter by first name

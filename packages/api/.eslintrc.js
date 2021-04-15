@@ -13,7 +13,10 @@ module.exports = {
   },
   overrides: rootConfig.overrides.concat([
     {
-      files: ['lib/mixins/ShopifyAPI/__tests__/__fixtures__/menus.ts'],
+      files: [
+        'lib/config/docs/**',
+        'lib/mixins/ShopifyAPI/__tests__/__fixtures__/menus.ts'
+      ],
       rules: {
         'sort-keys': 0
       }

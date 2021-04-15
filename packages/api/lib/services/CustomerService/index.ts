@@ -101,8 +101,8 @@ export default class CustomerService extends SearchIndexService<TObject> {
    * @see https://www.algolia.com/doc/api-reference/api-parameters/filters/
    *
    * @param {APIQuery.Customer.Find} [query] - Query parameters
-   * @param {boolean} [query.accepts_marketing] - Filter by customers who have
-   * consented to receive marketing material via email
+   * @param {boolean} [query.accepts_marketing] - Filter by marketing material
+   * subscription
    * @param {string} [query.email] - Find customer by email address
    * @param {string} [query.fields] - Comma-separated list of fields to include
    * @param {string} [query.first_name] - Filter by first name

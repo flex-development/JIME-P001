@@ -149,6 +149,10 @@ export namespace APIQuery {
     }
   }
 
+  export namespace Playlist {
+    export type Get = SearchIndexObject
+  }
+
   export namespace Policy {
     export type Find = SearchIndex
 
@@ -157,9 +161,6 @@ export namespace APIQuery {
     }
   }
 
-  export namespace Playlist {
-    export type Get = SearchIndexObject
-  }
   export namespace Product {
     export interface Find extends SearchIndex {
       product_id?: IProductListing['product_id']

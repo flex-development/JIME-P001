@@ -24,11 +24,11 @@ import { NumberString } from './utils'
  * - `alpha-asc`: Alphabetically, in ascending order (A - Z)
  * - `alpha-desc`: Alphabetically, in descending order (Z - A)
  * - `best-selling`: By best-selling products
- * - `created`: By date created, in ascending order (oldest - newest)
- * - `created-desc`: By date created, in descending order (newest - oldest)
+ * - `created`: Date created, in ascending order (oldest - newest)
+ * - `created-desc`: Date created, in descending order (newest - oldest)
  * - `manual`: Order created by the shop owner
- * - `price-asc`: By price, in ascending order (lowest - highest)
- * - `price-desc`: By price, in descending order (highest - lowest)
+ * - `price-asc`: Price, in ascending order (lowest - highest)
+ * - `price-desc`: Price, in descending order (highest - lowest)
  */
 export type CollectionListingSortOrder =
   | 'alpha-asc'
@@ -42,7 +42,7 @@ export type CollectionListingSortOrder =
 
 /**
  * The marketing subscription opt-in level (as described by the M3AAWG best
- * practices guideline) that the customer gave when they consented to receive
+ * practices guideline) the customer gave when they consented to receive
  * marketing material by email.
  */
 export type CustomerMarketingOptInLevel =
@@ -56,10 +56,10 @@ export type CustomerMarketingOptInLevel =
  *
  * Possible values:
  *
- * - `declined`: Customer declined the email invite to create an account
- * - `disabled`: Customer doesn't have an active account
- * - `enabled`: Customer has created an account
- * - `invited`: Customer has received an email invite to create an account
+ * - `declined`: Customer declined email invite to create account
+ * - `disabled`: Customer doesn't have active account
+ * - `enabled`: Customer created account
+ * - `invited`: Customer received email invite to create account
  */
 export type CustomerState = 'declined' | 'disabled' | 'enabled' | 'invited'
 
@@ -70,7 +70,7 @@ export type CustomerState = 'declined' | 'disabled' | 'enabled' | 'invited'
  */
 export interface ICollectionListing {
   /**
-   * The description of the collection, complete with HTML formatting.
+   * Description of the collection, complete with HTML formatting.
    */
   readonly body_html: string
 
@@ -80,38 +80,38 @@ export interface ICollectionListing {
   readonly collection_id: number
 
   /**
-   * The default product image for a collection.
+   * Default product image for collection.
    */
   readonly default_product_image: IProductImage | null
 
   /**
-   * A human-friendly unique string for the Collection automatically generated
+   * Human-friendly unique string for the collection automatically generated
    * from its title.
    */
   readonly handle: string
 
   /**
-   * The image for a collection.
+   * Collection display image.
    */
   readonly image: IImage | null
 
   /**
-   * The date and time when the collection was published in ISO_8601 format.
+   * Date and time collection was published (ISO 8601 format).
    */
   readonly published_at: string
 
   /**
-   * The order in which products in the collection appear.
+   * Order in which products in the collection appear.
    */
   readonly sort_order: CollectionListingSortOrder
 
   /**
-   * The name of the collection.
+   * Name of collection.
    */
   readonly title: string
 
   /**
-   * The date and time when the collection was last modified in ISO_8601 format.
+   * Date and time collection was last modified (ISO 8601 format).
    */
   readonly updated_at: string
 }
@@ -136,156 +136,95 @@ export type ICollectionListingResFind = {
 }
 
 /**
- * Information about a shop customer including their contact details, their
- * order history, and whether they've agreed to receive email marketing.
+ * Address a customer has entered.
  *
- * - https://shopify.dev/docs/admin-api/rest/reference/customers/customer
+ * - https://shopify.dev/docs/admin-api/rest/reference/customers/customer-address
  */
-export interface ICustomer {
+export interface ICustomerAddress {
   /**
-   * Whether the customer has consented to receive marketing material via email.
+   * Customer's mailing address.
    */
-  accepts_marketing: boolean
+  address1: string
 
   /**
-   * The date and time (ISO 8601 format) the customer's marketing material
-   * settings were modified.
+   * Additional field for the customer's mailing address.
    */
-  accepts_marketing_updated_at: string
+  address2?: NullishString
 
   /**
-   * Shopify Admin GraphQL id for the customer.
+   * Customer's city, town, or village.
    */
-  admin_graphql_api_id: string
+  city: string
 
   /**
-   * A list of the ten most recently updated addresses for the customer.
+   * Customer's company.
    */
-  addresses: ICustomerAddress[]
+  company: NullishString
 
   /**
-   * The date and time (ISO 8601 format) when the customer was created.
+   * Customer's country.
    */
-  created_at: string
+  country: string
 
   /**
-   * The three-letter code (ISO 4217 format) for the currency that the customer
-   * used when they paid for their last order.
-   *
-   * Defaults to the shop currency.
-   *
-   * Returns the shop currency for test orders.
+   * Two-letter country code corresponding to customer's country.
    */
-  currency: string
+  readonly country_code: string
 
   /**
-   * The default address for the customer.
+   * Customer's normalized country name.
    */
-  default_address: ICustomerAddress
+  country_name: string
 
   /**
-   * The unique email address of the customer.
+   * Unique identifier for the customer.
    */
-  email: string
+  customer_id: number
 
   /**
-   * The customer's first name.
+   * Boolean indicating if this is the customer's default address.
+   */
+  default: boolean
+
+  /**
+   * Customer's first name.
    */
   first_name: string
 
   /**
-   * A unique identifier for the customer.
+   * Unique identifier for the customer's address.
    */
   id: number
 
   /**
-   * The customer's last name.
+   * Customer's last name.
    */
   last_name: string
 
   /**
-   * The ID of the customer's last order.
+   * Customer's first and last name.
    */
-  readonly last_order_id: NullishNumber
+  name: string
 
   /**
-   * The name of the customer's last order.
-   *
-   * This is directly related to the `name` field on the Order resource.
+   * Customer's phone number at this address.
    */
-  readonly last_order_name: NullishString
+  phone: NullishString
 
   /**
-   * The marketing subscription opt-in level (as described by the M3AAWG best
-   * practices guideline) that the customer gave when they consented to receive
-   * marketing material by email.
+   * Customer's region name. Typically a province, a state, or a prefecture.
    */
-  marketing_opt_in_level: CustomerMarketingOptInLevel
+  province: string
 
   /**
-   * A unique identifier for the customer that's used with Multipass login.
+   * Two-letter code for the customer’s region.
    */
-  multipass_identifier: NullishNumber
+  readonly province_code: NullishString
 
   /**
-   * A note about the customer.
+   * Customer's postal code, also known as zip, postcode, Eircode, etc.
    */
-  note: NullishString
-
-  /**
-   * The number of orders associated with this customer.
-   */
-  readonly orders_count: number
-
-  /**
-   * The unique phone number (E.164 format) for this customer. Attempting to
-   * assign the same phone number to multiple customers returns an error.
-   */
-  phone: string
-
-  /**
-   * The state of the customer's account with a shop.
-   */
-  readonly state: CustomerState
-
-  /**
-   * Tags that the shop owner has attached to the customer, formatted as a
-   * string of comma-separated values.
-   *
-   * A customer can have up to 250 tags. Each tag can have up to 255 characters.
-   */
-  tags: NullishString
-
-  /**
-   * Whether the customer is exempt from paying taxes on their order.
-   *
-   * If `true`, then taxes won't be applied to an order at checkout.
-   * If `false`, then taxes will be applied at checkout.
-   */
-  tax_exempt: boolean
-
-  /**
-   * Whether the customer is exempt from paying specific taxes on their order.
-   * Canadian taxes only.
-   */
-  tax_exemptions: string[]
-
-  /**
-   * The total amount of money that the customer has spent across their order
-   * history. NOT prefixed with a "$" sign.
-   */
-  readonly total_spent: string
-
-  /**
-   * The date and time (ISO 8601 format) when the customer information was last
-   * updated.
-   */
-  readonly updated_at: string
-
-  /**
-   * Whether the customer has verified their email address.
-   */
-  readonly verified_email: boolean
+  zip: string
 }
 
 /**
@@ -349,95 +288,154 @@ export type ICustomerQuery = {
 export type ICustomerResFind = { customers: PartialOr<ICustomer>[] }
 
 /**
- * Address a customer has entered.
+ * Information about a shop customer including their contact details, their
+ * order history, and whether they've agreed to receive email marketing.
  *
- * - https://shopify.dev/docs/admin-api/rest/reference/customers/customer-address
+ * - https://shopify.dev/docs/admin-api/rest/reference/customers/customer
  */
-export interface ICustomerAddress {
+export interface ICustomer {
   /**
-   * The customer's mailing address.
+   * If customer has consented to marketing material via email.
    */
-  address1: string
+  accepts_marketing: boolean
 
   /**
-   * An additional field for the customer's mailing address.
+   * Date and time the customer's marketing material settings were modified (ISO
+   * 8601 format).
    */
-  address2?: NullishString
+  accepts_marketing_updated_at: string
 
   /**
-   * The customer's city, town, or village.
+   * Shopify Admin GraphQL ID for the customer.
    */
-  city: string
+  admin_graphql_api_id: string
 
   /**
-   * The customer’s company.
+   * List of the ten most recently updated addresses for the customer.
    */
-  company: NullishString
+  addresses: ICustomerAddress[]
 
   /**
-   * The customer's country.
+   * Date and time when the customer was created (ISO 8601 format).
    */
-  country: string
+  created_at: string
 
   /**
-   * The two-letter country code corresponding to the customer's country.
+   * Three-letter code (ISO 4217 format) for the currency the customer used when
+   * they paid for their last order.
+   *
+   * Defaults to the shop currency.
+   *
+   * Returns the shop currency for test orders.
    */
-  readonly country_code: string
+  currency: string
 
   /**
-   * The customer’s normalized country name.
+   * Default address for the customer.
    */
-  country_name: string
+  default_address: ICustomerAddress
 
   /**
-   * A unique identifier for the customer.
+   * Unique email address of the customer.
    */
-  customer_id: number
+  email: string
 
   /**
-   * Boolean indicating if this is the customer's default address.
-   */
-  default: boolean
-
-  /**
-   * The customer’s first name.
+   * Customer's first name.
    */
   first_name: string
 
   /**
-   * A unique identifier for the customer's address.
+   * Unique identifier for the customer.
    */
   id: number
 
   /**
-   * The customer’s last name.
+   * Customer's last name.
    */
   last_name: string
 
   /**
-   * The customer’s first and last name.
+   * ID of the customer's last order.
    */
-  name: string
+  readonly last_order_id: NullishNumber
 
   /**
-   * The customer’s phone number at this address.
+   * Name of the customer's last order.
+   *
+   * Directly related to the `name` field on the Order resource.
    */
-  phone: NullishString
+  readonly last_order_name: NullishString
 
   /**
-   * The customer’s region name. Typically a province, a state, or a prefecture.
+   * Marketing subscription opt-in level (as described by the M3AAWG best
+   * practices guideline) the customer gave when they consented to receive
+   * marketing material by email.
    */
-  province: string
+  marketing_opt_in_level: CustomerMarketingOptInLevel
 
   /**
-   * The two-letter code for the customer’s region.
+   * Unique identifier for the customer that's used with Multipass login.
    */
-  readonly province_code: NullishString
+  multipass_identifier: NullishNumber
 
   /**
-   * The customer’s postal code, also known as zip, postcode, Eircode, etc.
+   * Note about the customer.
    */
-  zip: string
+  note: NullishString
+
+  /**
+   * Number of orders associated with this customer.
+   */
+  readonly orders_count: number
+
+  /**
+   * Unique phone number (E.164 format) for this customer. Attempting to
+   * assign the same phone number to multiple customers returns an error.
+   */
+  phone: string
+
+  /**
+   * State of the customer's account with a shop.
+   */
+  readonly state: CustomerState
+
+  /**
+   * Tags the shop owner has attached to the customer, formatted as a
+   * string of comma-separated values.
+   *
+   * A customer can have up to 250 tags. Each tag can have up to 255 characters.
+   */
+  tags: NullishString
+
+  /**
+   * Whether customer is exempt from paying taxes on their order.
+   *
+   * - `false`: taxes will be applied at checkout
+   * - `true`: taxes won't be applied to an order at checkout
+   */
+  tax_exempt: boolean
+
+  /**
+   * Canadian tax exemption codes.
+   */
+  tax_exemptions: string[]
+
+  /**
+   * Total amount of money customer has spent across their order history.
+   * NOT prefixed with a "$" sign.
+   */
+  readonly total_spent: string
+
+  /**
+   * Date and time customer was last modified (ISO 8601 format).
+   */
+  readonly updated_at: string
+
+  /**
+   * Boolean indicating if customer has verified their email address.
+   */
+  readonly verified_email: boolean
 }
 
 /**
@@ -450,9 +448,9 @@ export interface IImage {
   alt?: NullishString
 
   /**
-   * The date and time (ISO 8601 format) when the image created.
+   * Date and time image was created (ISO 8601 format).
    */
-  created_at: string
+  readonly created_at: string
 
   /**
    * Image height.
@@ -460,19 +458,19 @@ export interface IImage {
   height: number
 
   /**
-   * A unique identifier for the image.
+   * Unique identifier for the image.
    */
-  id: number
+  readonly id: number
 
   /**
-   * Shopify image URL.
+   * Image URL.
    */
-  src: string
+  readonly src: string
 
   /**
-   * The date and time (ISO 8601 format) when the image was last updated.
+   * Date and time image was last modified (ISO 8601 format).
    */
-  updated_at: string
+  readonly updated_at: string
 
   /**
    * Image width.
@@ -481,13 +479,12 @@ export interface IImage {
 }
 
 /**
- * Object representing a Shopify menu.
+ * Object representing a Shopify menu link.
  */
-export type IMenu = {
-  handle: string
-  levels: number
-  links: IMenuLink[]
-  title: string
+export type IMenuLink = {
+  readonly href: string
+  readonly links: IMenuLink[]
+  readonly title: string
 }
 
 /**
@@ -496,83 +493,13 @@ export type IMenu = {
 export type IMenuResFind = { menus: IMenu[] }
 
 /**
- * Object representing a Shopify menu link.
+ * Object representing a Shopify menu.
  */
-export type IMenuLink = {
-  href: string
-  links: IMenuLink[]
-  title: string
-}
-
-/**
- * Additional information about Admin API resources.
- *
- * - https://shopify.dev/docs/admin-api/rest/reference/metafield
- */
-export interface IMetafield {
-  /**
-   * Shopify Admin GraphQL id for the metafield.
-   */
-  readonly admin_graphql_api_id: string
-
-  /**
-   * The date and time (ISO 8601 format) when the metafield was created.
-   */
-  readonly created_at: string
-
-  /**
-   * A description of the information that the metafield contains.
-   */
-  readonly description: NullishString
-
-  /**
-   * The unique ID of the metafield.
-   */
-  readonly id: number
-
-  /**
-   * The name of the metafield. Between 3 and 50 characters.
-   */
-  readonly key: string
-
-  /**
-   * A container for a set of metafields. Between 2 and 20 characters.
-   */
-  readonly namespace: string
-
-  /**
-   * The unique ID of the resource that the metafield is attached to.
-   */
-  owner_id: number
-
-  /**
-   * The type of resource that the metafield is attached to.
-   */
-  owner_resource: MetaFieldOwnerResource
-
-  /**
-   * The date and time (ISO 8601 format) when the metafield was last updated.
-   */
-  readonly updated_at: string
-
-  /**
-   * The information to be stored as metadata.
-   *
-   * Maximum length: 512 characters when metafield namespace is equal to `tags`
-   * and key is equal to `alt`.
-   *
-   * The maximum length of `value` depends on `value_type`:
-   *
-   * - `integer`: 100,000 characters
-   * - `json_string`: 100,000 characters
-   * - `string`: 5,000,000 characters
-   */
-  readonly value: NumberString
-
-  /**
-   * The metafield's information type.
-   */
-  readonly value_type: MetaFieldValueType
+export type IMenu = {
+  readonly handle: string
+  readonly levels: number
+  readonly links: IMenuLink[]
+  readonly title: string
 }
 
 /**
@@ -645,74 +572,74 @@ export type IMetafieldQuery = {
 export type IMetafieldResFind = { metafields: PartialOr<IMetafield>[] }
 
 /**
- * Online store page.
+ * Additional information about Admin API resources.
  *
- * - https://shopify.dev/docs/admin-api/rest/reference/online-store/page
+ * - https://shopify.dev/docs/admin-api/rest/reference/metafield
  */
-export interface IPage {
+export interface IMetafield {
   /**
-   * Shopify Admin GraphQL id for the page.
+   * Shopify Admin GraphQL ID for the metafield.
    */
-  admin_graphql_api_id: string
+  readonly admin_graphql_api_id: string
 
   /**
-   * The name of the person who created the page.
-   */
-  author: NullishString
-
-  /**
-   * The text content of the page, complete with HTML markup.
-   */
-  body_html: string
-
-  /**
-   * The date and time (ISO 8601 format) when the page was created.
+   * Date and time the metafield was created (ISO 8601 format).
    */
   readonly created_at: string
 
   /**
-   * A unique, human-friendly string for the page, generated automatically from
-   * its title.
+   * Description of the information the metafield contains.
    */
-  handle: string
+  readonly description: NullishString
 
   /**
-   * The unique numeric identifier for the page.
+   * Unique ID of the metafield.
    */
   readonly id: number
 
   /**
-   * The date and time (ISO 8601 format) when the page was published.
-   *
-   * Returns `null` when the page is hidden.
+   * Name of the metafield. Between 3 and 50 characters.
    */
-  published_at: NullishString
+  readonly key: string
 
   /**
-   * The ID of the shop to which the page belongs.
+   * Name of a set of metafields. Between 2 and 20 characters.
    */
-  readonly shop_id: number
+  readonly namespace: string
 
   /**
-   * The suffix of the Liquid template being used.
-   *
-   * For example, if the value is `contact`, then the page is using the
-   * `page.contact.liquid` template.
-   *
-   * If the value is an empty string, then the page is using the default
-   * `page.liquid` template.
+   * Unique ID of the resource the metafield is attached to.
    */
-  template_suffix: NullishString
+  owner_id: number
 
   /**
-   * The page's title.
+   * Type of resource the metafield is attached to.
    */
-  title: string
+  owner_resource: MetaFieldOwnerResource
 
   /**
-   * The date and time (ISO 8601 format) when the page was last updated.
+   * Date and time the metafield was last modified (ISO 8601 format).
    */
   readonly updated_at: string
+
+  /**
+   * Information to be stored as metadata.
+   *
+   * Maximum length: 512 characters when metafield namespace is equal to `tags`
+   * and key is equal to `alt`.
+   *
+   * The maximum length of `value` depends on `value_type`:
+   *
+   * - `integer`: 100,000 characters
+   * - `json_string`: 100,000 characters
+   * - `string`: 5,000,000 characters
+   */
+  readonly value: NumberString
+
+  /**
+   * Metafield's information type.
+   */
+  readonly value_type: MetaFieldValueType
 }
 
 /**
@@ -807,40 +734,74 @@ export type IPageQuery = {
 export type IPageResFind = { pages: PartialOr<IPage>[] }
 
 /**
- * Store policy.
+ * Online store page.
  *
- * - https://shopify.dev/docs/admin-api/rest/reference/store-properties/policy
+ * - https://shopify.dev/docs/admin-api/rest/reference/online-store/page
  */
-export interface IPolicy {
+export interface IPage {
   /**
-   * A description of the policy.
+   * Shopify Admin GraphQL ID for the page.
    */
-  body: string
+  readonly admin_graphql_api_id: string
 
   /**
-   * The date and time (ISO 8601 format) when the policy was created.
+   * Name of the person who created the page.
    */
-  created_at: string
+  readonly author: NullishString
 
   /**
-   * A unique identifer for the policy used to build the policy's URL.
+   * Text content of the page, complete with HTML markup.
    */
-  handle: string
+  readonly body_html: string
 
   /**
-   * The name of the policy.
+   * Date and time page was created (ISO 8601 format).
    */
-  title: string
+  readonly created_at: string
 
   /**
-   * The date and time (ISO 8601 format) when the policy was last modified.
+   * Unique, human-friendly string for the page, generated automatically from
+   * its title.
    */
-  updated_at: string
+  readonly handle: string
 
   /**
-   * The public URL of the policy.
+   * Unique numeric identifier for the page.
    */
-  url: string
+  readonly id: number
+
+  /**
+   * Date and time page was published (ISO 8601 format).
+   *
+   * Returns `null` when the page is hidden.
+   */
+  readonly published_at: NullishString
+
+  /**
+   * ID of the shop to which the page belongs.
+   */
+  readonly shop_id: number
+
+  /**
+   * Suffix of the Liquid template being used.
+   *
+   * For example, if the value is `contact`, then the page is using the
+   * `page.contact.liquid` template.
+   *
+   * If the value is an empty string, then the page is using the default
+   * `page.liquid` template.
+   */
+  readonly template_suffix: NullishString
+
+  /**
+   * Page's title.
+   */
+  readonly title: string
+
+  /**
+   * Date and time page was last modified (ISO 8601 format).
+   */
+  readonly updated_at: string
 }
 
 /**
@@ -849,17 +810,53 @@ export interface IPolicy {
 export type IPolicyResFind = { policies: IPolicy[] }
 
 /**
+ * Store policy.
+ *
+ * - https://shopify.dev/docs/admin-api/rest/reference/store-properties/policy
+ */
+export interface IPolicy {
+  /**
+   * Description of the policy.
+   */
+  body: string
+
+  /**
+   * Date and time policy was created (ISO 8601 format).
+   */
+  created_at: string
+
+  /**
+   * Unique identifer for the policy used to build the policy's URL.
+   */
+  handle: string
+
+  /**
+   * Name of the policy.
+   */
+  title: string
+
+  /**
+   * Date and time policy was last modified (ISO 8601 format).
+   */
+  updated_at: string
+
+  /**
+   * Public URL of the policy.
+   */
+  url: string
+}
+
+/**
  * Product (listing) image.
  */
 export interface IProductImage extends IImage {
   /**
-   * Shopify Admin GraphQL id for the product image.
+   * Shopify Admin GraphQL ID for the product image.
    */
   admin_graphql_api_id?: string
 
   /**
-   * The order of the product image in the list of product images.
-   * 1 is the first position.
+   * Order of the product image in the list of product images from 1.
    */
   position: number
 
@@ -872,6 +869,187 @@ export interface IProductImage extends IImage {
    * List of product variant IDs associated with this image.
    */
   variant_ids: IProductListingVariant['id'][]
+}
+
+/**
+ * Query parameters accepeted by the `/product_listings` endpoint.
+ */
+export type IProductListingQuery = {
+  /**
+   * Filter by products belonging to a particular collection.
+   */
+  collection_id?: ICollectionListing['collection_id']
+
+  /**
+   * Filter by product handle.
+   */
+  handle?: IProductListing['handle']
+
+  /**
+   * Number of results to retrieve. Defaults to `50`, maximum `250`.
+   *
+   * @default 50
+   */
+  limit?: number
+
+  /**
+   * A comma-separated list of product ids.
+   */
+  product_ids?: string
+
+  /**
+   * Filter by product listings last updated after a certain date and time
+   * (formatted in ISO 8601).
+   */
+  updated_at_min?: IProductListing['updated_at']
+}
+
+/**
+ * Response from the `/product_listings` endpoint.
+ */
+export type IProductListingResFind = {
+  product_listings: IProductListing[]
+}
+
+/**
+ * Product option associated with a `IProductListingVariant` resource.
+ */
+export interface IProductListingVariantOptionValue {
+  /**
+   * Name of product option.
+   */
+  name: IProductOption['name']
+
+  /**
+   * Unique identifier for the product option.
+   */
+  option_id: IProductOption['id']
+
+  /**
+   * Product option value the variant represents.
+   */
+  value: string
+}
+
+/**
+ * Product variant published to a sales channel.
+ */
+export interface IProductListingVariant {
+  /**
+   * Boolean indicating if the product variant is in-stock.
+   */
+  available: boolean
+
+  /**
+   * Barcode, UPC or ISBN number for the product.
+   */
+  barcode: string
+
+  /**
+   * Competitor's price for the same item.
+   */
+  compare_at_price: NullishString
+
+  /**
+   * Date and time the product variant was created (ISO 8601 format).
+   */
+  created_at: string
+
+  /**
+   * Price of the product variant, formatted as a money string.
+   */
+  formatted_price: string
+
+  /**
+   * Service which is handling fulfillment.
+   */
+  fulfillment_service: string
+
+  /**
+   * Weight of the product variant in grams.
+   */
+  grams: number
+
+  /**
+   * Unique numeric identifier for the product variant.
+   */
+  id: number
+
+  /**
+   * ID of the product image associated with this variant.
+   */
+  image_id: NullishNumber
+
+  /**
+   * Specifies whether or not Shopify tracks the number of items in stock for
+   * this product variant.
+   */
+  inventory_management: string
+
+  /**
+   * Specifies whether or not customers are allowed to place an order for a
+   * product variant when it's out of stock.
+   */
+  inventory_policy: ProductVariantInventoryPolicy
+
+  /**
+   * The number of items in stock for this product variant.
+   */
+  readonly inventory_quantity: number
+
+  /**
+   * Product options associated with this product variant.
+   */
+  option_values: IProductListingVariantOptionValue[]
+
+  /**
+   * Order of the product variant in the list of product variants.
+   * 1 is the first position.
+   */
+  position: number
+
+  /**
+   * Price of the product variant.
+   */
+  price: string
+
+  /**
+   * Specifies whether or not a customer needs to provide a shipping address
+   * when placing an order for this product variant.
+   */
+  requires_shipping: boolean
+
+  /**
+   * Unique identifier for the product in the shop.
+   */
+  sku: string
+
+  /**
+   * Specifies whether or not a tax is charged when the product variant is sold.
+   */
+  taxable: boolean
+
+  /**
+   * The title of the product variant.
+   */
+  title: string
+
+  /**
+   * The date and time when the product variant was last modified in ISO_8601
+   * format.
+   */
+  updated_at: string
+
+  /**
+   * The weight of the product variant in the unit system specified with
+   * `weight_unit`.
+   */
+  weight: number
+
+  /**
+   * The unit system the product variant's weight is measure in.
+   */
+  weight_unit: ProductVariantWeightUnit
 }
 
 /**
@@ -913,7 +1091,7 @@ export interface IProductListing {
   readonly options: IProductOption[]
 
   /**
-   * The unique identifer of the product this listing is for.
+   * Unique identifer of the product this listing is for.
    * The primary key for this resource.
    */
   readonly product_id: number
@@ -959,187 +1137,6 @@ export interface IProductListing {
    * The name of the vendor of the product.
    */
   readonly vendor: string
-}
-
-/**
- * Query parameters accepeted by the `/product_listings` endpoint.
- */
-export type IProductListingQuery = {
-  /**
-   * Filter by products belonging to a particular collection.
-   */
-  collection_id?: ICollectionListing['collection_id']
-
-  /**
-   * Filter by product handle.
-   */
-  handle?: IProductListing['handle']
-
-  /**
-   * Number of results to retrieve. Defaults to `50`, maximum `250`.
-   *
-   * @default 50
-   */
-  limit?: number
-
-  /**
-   * A comma-separated list of product ids.
-   */
-  product_ids?: string
-
-  /**
-   * Filter by product listings last updated after a certain date and time
-   * (formatted in ISO 8601).
-   */
-  updated_at_min?: IProductListing['updated_at']
-}
-
-/**
- * Response from the `/product_listings` endpoint.
- */
-export type IProductListingResFind = {
-  product_listings: IProductListing[]
-}
-
-/**
- * Product variant published to a sales channel.
- */
-export interface IProductListingVariant {
-  /**
-   * Boolean indicating if the product variant is in-stock.
-   */
-  available: boolean
-
-  /**
-   * The barcode, UPC or ISBN number for the product.
-   */
-  barcode: string
-
-  /**
-   * The competitor's price for the same item.
-   */
-  compare_at_price: NullishString
-
-  /**
-   * The date and time when the product variant was created in ISO_8601 format.
-   */
-  created_at: string
-
-  /**
-   * The price of the product variant, formatted as a money string.
-   */
-  formatted_price: string
-
-  /**
-   * Service which is handling fulfillment.
-   */
-  fulfillment_service: string
-
-  /**
-   * The weight of the product variant in grams.
-   */
-  grams: number
-
-  /**
-   * The unique numeric identifier for the product variant.
-   */
-  id: number
-
-  /**
-   * ID of the product image associated with this variant.
-   */
-  image_id: NullishNumber
-
-  /**
-   * Specifies whether or not Shopify tracks the number of items in stock for
-   * this product variant.
-   */
-  inventory_management: string
-
-  /**
-   * Specifies whether or not customers are allowed to place an order for a
-   * product variant when it's out of stock.
-   */
-  inventory_policy: ProductVariantInventoryPolicy
-
-  /**
-   * The number of items in stock for this product variant.
-   */
-  readonly inventory_quantity: number
-
-  /**
-   * Product options associated with this product variant.
-   */
-  option_values: IProductListingVariantOptionValue[]
-
-  /**
-   * The order of the product variant in the list of product variants.
-   * 1 is the first position.
-   */
-  position: number
-
-  /**
-   * The price of the product variant.
-   */
-  price: string
-
-  /**
-   * Specifies whether or not a customer needs to provide a shipping address
-   * when placing an order for this product variant.
-   */
-  requires_shipping: boolean
-
-  /**
-   * A unique identifier for the product in the shop.
-   */
-  sku: string
-
-  /**
-   * Specifies whether or not a tax is charged when the product variant is sold.
-   */
-  taxable: boolean
-
-  /**
-   * The title of the product variant.
-   */
-  title: string
-
-  /**
-   * The date and time when the product variant was last modified in ISO_8601
-   * format.
-   */
-  updated_at: string
-
-  /**
-   * The weight of the product variant in the unit system specified with
-   * `weight_unit`.
-   */
-  weight: number
-
-  /**
-   * The unit system that the product variant's weight is measure in.
-   */
-  weight_unit: ProductVariantWeightUnit
-}
-
-/**
- * Product option associated with a `IProductListingVariant` resource.
- */
-export interface IProductListingVariantOptionValue {
-  /**
-   * Name of product option.
-   */
-  name: IProductOption['name']
-
-  /**
-   * Unique identifier for the product option.
-   */
-  option_id: IProductOption['id']
-
-  /**
-   * Product option value the variant represents.
-   */
-  value: string
 }
 
 /**
@@ -1210,7 +1207,7 @@ export enum PagePublishedStatus {
  * Specifies whether or not customers are allowed to place an order for a
  * product variant when it's out of stock.
  */
-export type ProductVariantInventoryPolicy = 'deny' | 'continue'
+export type ProductVariantInventoryPolicy = 'continue' | 'deny'
 
 /**
  * The unit system a `IProductListingVariant` resource's weight is measured in.

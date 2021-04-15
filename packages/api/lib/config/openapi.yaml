@@ -248,8 +248,11 @@ paths:
                 '$ref': '#/components/schemas/APIPayload.Customer'
         '400':
           '$ref': '#/components/schemas/Errors.BadRequest'
+<<<<<<< HEAD
         '401':
           '$ref': '#/components/schemas/Errors.NotAuthenticated'
+=======
+>>>>>>> docs(kapi): openapi spec
         '500':
           '$ref': '#/components/schemas/Errors.GeneralError'
         '502':

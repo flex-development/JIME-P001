@@ -6,7 +6,6 @@
   },
   "functions": {
     "api/*.ts": {
-      "includeFiles": "../lib/config/openapi.yaml",
       "maxDuration": 30,
       "memory": 3008
     }

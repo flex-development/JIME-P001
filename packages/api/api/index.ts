@@ -1,7 +1,5 @@
 import type { VercelResponse as Res } from '@vercel/node'
-import { readFileSync } from 'fs'
-import { join } from 'path'
-import { parse } from 'yaml'
+import docs from '../lib/config/openapi.json'
 import routeWrapper from '../lib/middleware/routeWrapper'
 import type { APIRequest as Req } from '../lib/types'
 
@@ -20,9 +18,7 @@ import type { APIRequest as Req } from '../lib/types'
  * @return {void} Nothing
  */
 const next = (req: Req, res: Res): void => {
-  const docspath = join(__dirname, '..', 'lib/config/openapi.yaml')
-
-  res.json(parse(readFileSync(docspath, 'utf-8')))
+  res.json(docs)
   return
 }
 

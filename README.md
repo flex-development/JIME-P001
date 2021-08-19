@@ -32,9 +32,9 @@ package, see below:
 
 ### Production URLs
 
-- **Next.js Storefront**: [`https://morenaskustomz.com`][1]
-- **Serverless API**: [`https://api.morenaskustomz.com`][2]
-- **Storybook Design System**: [`https://design.morenaskustomz.com`][3]
+- **Next.js Storefront**: [`https://morenaskustomz.flexdevelopment.vercel.app`][1]
+- **Serverless API**: [`https://kapi.flexdevelopment.vercel.app`][2]
+- **Storybook Design System**: [`https://kustomzdesign.flexdevelopment.vercel.app`][3]
 
 ### `next` branch URLs
 
@@ -59,17 +59,17 @@ Morena's Kustomz was designed using [Adobe XD][7].
 - [TypeScript][13] - Typed JavaScript
 - [Vercel][14] - Hosting platform for static sites and serverless functions
 
-[1]: https://morenaskustomz.com
-[2]: https://api.morenaskustomz.com
-[3]: https://design.morenaskustomz.com
-[4]: https://morenaskustomz-git-next.flexdevelopment.vercel.app/
-[5]: https://kapi-git-next.flexdevelopment.vercel.app/
-[6]: https://kustomzdesign-git-next.flexdevelopment.vercel.app/
+[1]: https://morenaskustomz.flexdevelopment.vercel.app
+[2]: https://kapi.flexdevelopment.vercel.app
+[3]: https://kustomzdesign.flexdevelopment.vercel.app
+[4]: https://morenaskustomz-git-next.flexdevelopment.vercel.app
+[5]: https://kapi-git-next.flexdevelopment.vercel.app
+[6]: https://kustomzdesign-git-next.flexdevelopment.vercel.app
 [7]: https://www.adobe.com/products/xd
-[8]: https://xd.adobe.com/view/da3f8f74-1e09-49d1-9d4b-493cebb875a9-8f6c/
+[8]: https://xd.adobe.com/view/da3f8f74-1e09-49d1-9d4b-493cebb875a9-8f6c
 [9]: https://xd.adobe.com/view/1dff0391-4710-4fd5-9320-f3051861aec6-48ac/grid
-[10]: https://nextjs.org/
-[11]: https://www.shopify.com/
-[12]: https://storybook.js.org/
-[13]: https://www.typescriptlang.org/
-[14]: https://vercel.com/
+[10]: https://nextjs.org
+[11]: https://www.shopify.com
+[12]: https://storybook.js.org
+[13]: https://www.typescriptlang.org
+[14]: https://vercel.com
